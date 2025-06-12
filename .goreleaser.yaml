@@ -8,6 +8,11 @@ builds:
     flags:
       - -mod=vendor
       - -v
+    ldflags:
+      - -X github.com/hostinger/api-cli/utils/version.Build={{ .ShortCommit }}
+      - -X github.com/hostinger/api-cli/utils/version.Major={{ .Major }}
+      - -X github.com/hostinger/api-cli/utils/version.Minor={{ .Minor }}
+      - -X github.com/hostinger/api-cli/utils/version.Patch={{ .Patch }}
     goos:
       - windows
       - darwin

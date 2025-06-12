@@ -44,6 +44,7 @@ func init() {
 	})
 
 	RootCmd.AddCommand(vps.GroupCmd)
+	RootCmd.AddCommand(VersionCmd)
 }
 
 func initConfig() {
