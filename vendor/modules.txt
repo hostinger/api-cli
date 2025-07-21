@@ -47,8 +47,8 @@ github.com/lithammer/fuzzysearch/fuzzy
 # github.com/mattn/go-runewidth v0.0.16
 ## explicit; go 1.9
 github.com/mattn/go-runewidth
-# github.com/oapi-codegen/oapi-codegen/v2 v2.4.1
-## explicit; go 1.21.0
+# github.com/oapi-codegen/oapi-codegen/v2 v2.5.0
+## explicit; go 1.22.5
 github.com/oapi-codegen/oapi-codegen/v2/pkg/securityprovider
 # github.com/oapi-codegen/runtime v1.1.1
 ## explicit; go 1.20
