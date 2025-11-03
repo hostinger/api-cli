@@ -5,7 +5,7 @@ go 1.24.4
 require (
 	github.com/aquasecurity/table v1.11.0
 	github.com/liamg/tml v0.7.0
-	github.com/oapi-codegen/oapi-codegen/v2 v2.5.0
+	github.com/oapi-codegen/oapi-codegen/v2 v2.5.1
 	github.com/oapi-codegen/runtime v1.1.2
 	github.com/pterm/pterm v0.12.82
 	github.com/spf13/cobra v1.10.1
