@@ -35,11 +35,10 @@
         }
     },
 
-    // Preserve global host configurations within the container: git, codex-extension.
+    // Preserve the packages configurations within the container on a host volume: git, codex-extension.
     "mounts": [
         "source=codex-session,target=/home/vscode/.codex,type=volume",
-        "source=${localEnv:USERPROFILE}${localEnv:HOME}/.gitconfig,target=/tmp/gitconfig,type=bind,consistency=cached",
-        "source=${localEnv:USERPROFILE}${localEnv:HOME}/.git-credential,target=/tmp/git-credential,type=bind,consistency=cached"
+        "source=gitconfig,target=/home/vscode/.gitconfig-volume,type=volume"
     ],
 
     // Use 'postCreateCommand' to run commands after the container is created.

@@ -60,7 +60,7 @@ Each tarball is created under `dist/` with the pattern `hapi-<tag>-<os>-<arch>.t
 
 You can also build a single target manually if you prefer:
 ```bash
-# a binary for you device
+# a binary for your device
 go build -ldflags="-s -w" -o hapi main.go
 ```
 

@@ -69,69 +69,69 @@ tasks:
     deps: [ensure]
     cmds:
       - mkdir -p ${DIST_DIR}/windows-386
-      - GOOS=windows GOARCH=386 go build -ldflags="${LDFLAGS}" -o ${DIST_DIR}/windows-386/${BINARY} main.go
+      - GOOS=windows GOARCH=386 go build -ldflags="${LDFLAGS}" -o ${DIST_DIR}/windows-386/${BINARY}.exe main.go
 
   build.windows-amd64:
     desc: Build Windows amd64 binary.
     deps: [ensure]
     cmds:
       - mkdir -p ${DIST_DIR}/windows-amd64
-      - GOOS=windows GOARCH=amd64 go build -ldflags="${LDFLAGS}" -o ${DIST_DIR}/windows-amd64/${BINARY} main.go
+      - GOOS=windows GOARCH=amd64 go build -ldflags="${LDFLAGS}" -o ${DIST_DIR}/windows-amd64/${BINARY}.exe main.go
 
   build.windows-arm64:
     desc: Build Windows arm64 binary.
     deps: [ensure]
     cmds:
       - mkdir -p ${DIST_DIR}/windows-arm64
-      - GOOS=windows GOARCH=arm64 go build -ldflags="${LDFLAGS}" -o ${DIST_DIR}/windows-arm64/${BINARY} main.go
+      - GOOS=windows GOARCH=arm64 go build -ldflags="${LDFLAGS}" -o ${DIST_DIR}/windows-arm64/${BINARY}.exe main.go
 
   package.linux-amd64:
     desc: Package the Linux amd64 binary into a tarball.
     deps: [build.linux-amd64]
     cmds:
-      - sh -c 'version=$(git describe --tags --abbrev=0); tar czf ${DIST_DIR}/${BINARY}-$version-linux-amd64.tar.gz -C ${DIST_DIR}/linux-amd64 ${BINARY}'
+      - sh -c 'version=$(git describe --tags --abbrev=0 2>/dev/null || git rev-parse --short HEAD); tar czf ${DIST_DIR}/${BINARY}-$version-linux-amd64.tar.gz -C ${DIST_DIR}/linux-amd64 ${BINARY}'
 
   package.linux-arm64:
     desc: Package the Linux arm64 binary into a tarball.
     deps: [build.linux-arm64]
     cmds:
-      - sh -c 'version=$(git describe --tags --abbrev=0); tar czf ${DIST_DIR}/${BINARY}-$version-linux-arm64.tar.gz -C ${DIST_DIR}/linux-arm64 ${BINARY}'
+      - sh -c 'version=$(git describe --tags --abbrev=0 2>/dev/null || git rev-parse --short HEAD); tar czf ${DIST_DIR}/${BINARY}-$version-linux-arm64.tar.gz -C ${DIST_DIR}/linux-arm64 ${BINARY}'
 
   package.darwin-arm64:
     desc: Package the macOS arm64 binary into a tarball.
     deps: [build.darwin-arm64]
     cmds:
-      - sh -c 'version=$(git describe --tags --abbrev=0); tar czf ${DIST_DIR}/${BINARY}-$version-darwin-arm64.tar.gz -C ${DIST_DIR}/darwin-arm64 ${BINARY}'
+      - sh -c 'version=$(git describe --tags --abbrev=0 2>/dev/null || git rev-parse --short HEAD); tar czf ${DIST_DIR}/${BINARY}-$version-darwin-arm64.tar.gz -C ${DIST_DIR}/darwin-arm64 ${BINARY}'
 
   package.darwin-amd64:
     desc: Package the macOS amd64 binary into a tarball.
     deps: [build.darwin-amd64]
     cmds:
-      - sh -c 'version=$(git describe --tags --abbrev=0); tar czf ${DIST_DIR}/${BINARY}-$version-darwin-amd64.tar.gz -C ${DIST_DIR}/darwin-amd64 ${BINARY}'
+      - sh -c 'version=$(git describe --tags --abbrev=0 2>/dev/null || git rev-parse --short HEAD); tar czf ${DIST_DIR}/${BINARY}-$version-darwin-amd64.tar.gz -C ${DIST_DIR}/darwin-amd64 ${BINARY}'
 
   package.linux-386:
     desc: Package the Linux 386 binary into a tarball.
     deps: [build.linux-386]
     cmds:
-      - sh -c 'version=$(git describe --tags --abbrev=0); tar czf ${DIST_DIR}/${BINARY}-$version-linux-386.tar.gz -C ${DIST_DIR}/linux-386 ${BINARY}'
+      - sh -c 'version=$(git describe --tags --abbrev=0 2>/dev/null || git rev-parse --short HEAD); tar czf ${DIST_DIR}/${BINARY}-$version-linux-386.tar.gz -C ${DIST_DIR}/linux-386 ${BINARY}'
 
   package.windows-386:
     desc: Package the Windows 386 binary into a tarball.
     deps: [build.windows-386]
     cmds:
-      - sh -c 'version=$(git describe --tags --abbrev=0); tar czf ${DIST_DIR}/${BINARY}-$version-windows-386.tar.gz -C ${DIST_DIR}/windows-386 ${BINARY}'
+      - sh -c 'version=$(git describe --tags --abbrev=0 2>/dev/null || git rev-parse --short HEAD); tar czf ${DIST_DIR}/${BINARY}-$version-windows-386.tar.gz -C ${DIST_DIR}/windows-386 ${BINARY}'
 
   package.windows-amd64:
     desc: Package the Windows amd64 binary into a tarball.
     deps: [build.windows-amd64]
     cmds:
-      - sh -c 'version=$(git describe --tags --abbrev=0); tar czf ${DIST_DIR}/${BINARY}-$version-windows-amd64.tar.gz -C ${DIST_DIR}/windows-amd64 ${BINARY}'
+      - sh -c 'version=$(git describe --tags --abbrev=0 2>/dev/null || git rev-parse --short HEAD); tar czf ${DIST_DIR}/${BINARY}-$version-windows-amd64.tar.gz -C ${DIST_DIR}/windows-amd64 ${BINARY}'
 
   package.windows-arm64:
     desc: Package the Windows arm64 binary into a tarball.
     deps: [build.windows-arm64]
     cmds:
-      - sh -c 'version=$(git describe --tags --abbrev=0); tar czf ${DIST_DIR}/${BINARY}-$version-windows-arm64.tar.gz -C ${DIST_DIR}/windows-arm64 ${BINARY}'
+      - sh -c 'version=$(git describe --tags --abbrev=0 2>/dev/null || git rev-parse --short HEAD); tar czf ${DIST_DIR}/${BINARY}-$version-windows-arm64.tar.gz -C ${DIST_DIR}/windows-arm64 ${BINARY}'
 
   packages:
     desc: Package every platform bundle.
@@ -149,7 +149,7 @@ tasks:
     desc: Create SHA256 checksums for every release tarball.
     deps: [packages]
     cmds:
-      - sh -c 'version=$(git describe --tags --abbrev=0); cd ${DIST_DIR}; sha256sum ${BINARY}-$version-*.tar.gz > ${BINARY}-$version-checksums.sha256'
+      - sh -c 'version=$(git describe --tags --abbrev=0 2>/dev/null || git rev-parse --short HEAD); cd ${DIST_DIR}; sha256sum ${BINARY}-$version-*.tar.gz > ${BINARY}-$version-checksums.sha256'
 
   release:
     desc: Build and package every target used for releases.
