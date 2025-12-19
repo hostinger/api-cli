@@ -1,0 +1,50 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/go .
+{
+    "name": "Go",
+    // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+    "image": "mcr.microsoft.com/devcontainers/go:2-1.25-trixie",
+
+    // Features to add to the dev container. More info: https://containers.dev/features.
+    "features": {
+        "ghcr.io/devcontainers/features/go:1": {},
+        "ghcr.io/guiyomh/features/golangci-lint:0": {},
+        "ghcr.io/guiyomh/features/goreleaser:0": {}
+    },
+
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    // "forwardPorts": [],
+
+    // Configure tool-specific properties.
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "openai.chatgpt",
+                "golang.Go"
+            ],
+            "settings": {
+                // Slightly different dark theme to highlight the DevContainer
+                "workbench.colorTheme": "Default Dark Modern",
+                "workbench.colorCustomizations": {
+                    "statusBar.background": "#005f73",
+                    "statusBar.noFolderBackground": "#005f73",
+                    "statusBar.debuggingBackground": "#9b2226",
+                    "statusBar.foreground": "#ffffff"
+                }
+            }
+        }
+    },
+
+    // Preserve global host configurations within the container: git, codex-extension.
+    "mounts": [
+        "source=codex-session,target=/home/vscode/.codex,type=volume",
+        "source=${localEnv:USERPROFILE}${localEnv:HOME}/.gitconfig,target=/tmp/gitconfig,type=bind,consistency=cached",
+        "source=${localEnv:USERPROFILE}${localEnv:HOME}/.git-credential,target=/tmp/git-credential,type=bind,consistency=cached"
+    ],
+
+    // Use 'postCreateCommand' to run commands after the container is created.
+    "postCreateCommand": "./.devcontainer/setup.sh",
+
+    // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+    "remoteUser": "vscode"
+}

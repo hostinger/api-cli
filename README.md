@@ -45,6 +45,28 @@ hapi vps vm list
 
 See the [full reference documentation](https://github.com/hostinger/api-cli/blob/main/docs/hapi.md) for information about each available command.
 
+# Building from source
+
+If you need to compile `hapi` yourself, the repository ships with a `Taskfile.yml` that automates downloading dependencies, cross-building every supported platform, packaging the binaries, and generating release-style checksums.
+
+Inside the repository, install [`Task CLI`](https://taskfile.dev) or use the [devcontainer](https://containers.dev) terminal, then run:
+
+```bash
+task clean           # remove previous artifacts
+task release         # builds linux/darwin/windows binaries and tarballs + checksums
+task install         # detects GOOS/GOARCH, builds native binary under dist/host/<os>-<arch>/
+```
+
+Each tarball is created under `dist/` with the pattern `hapi-<tag>-<os>-<arch>.tar.gz`, and the native host binary lands at `dist/host/<os>-<arch>/hapi`.
+
+You can also build a single target manually if you prefer:
+
+```bash
+GOOS=linux GOARCH=arm64 go build -ldflags="-s -w" -o hapi main.go
+```
+
+Finally, copy the resulting binary into your `$PATH` or package it for the target device.
+
 # Enabling shell auto-completion (optional)
 
 `hapi` has auto-complete support. This makes it easier to use the CLI and improves user experience by completing command
