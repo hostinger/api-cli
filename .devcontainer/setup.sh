@@ -22,7 +22,7 @@ touch ${HOME}/.gitconfig-volume/config
 ln -fs ${HOME}/.gitconfig-volume/config ${HOME}/.gitconfig
 sudo chown -R ${UID}:${UID} ${HOME}/.gitconfig
 
-mkdir -p ${HOME}/.gitconfig-volume/.git-credentials
+touch ${HOME}/.gitconfig-volume/.git-credentials
 ln -fs ${HOME}/.gitconfig-volume/.git-credentials ${HOME}/.git-credentials
 sudo chown -R ${UID}:${UID} ${HOME}/.git-credentials
 

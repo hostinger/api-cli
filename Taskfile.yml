@@ -119,19 +119,19 @@ tasks:
     desc: Package the Windows 386 binary into a tarball.
     deps: [build.windows-386]
     cmds:
-      - sh -c 'version=$(git describe --tags --abbrev=0 2>/dev/null || git rev-parse --short HEAD); tar czf ${DIST_DIR}/${BINARY}-$version-windows-386.tar.gz -C ${DIST_DIR}/windows-386 ${BINARY}'
+      - sh -c 'version=$(git describe --tags --abbrev=0 2>/dev/null || git rev-parse --short HEAD); tar czf ${DIST_DIR}/${BINARY}-$version-windows-386.tar.gz -C ${DIST_DIR}/windows-386 ${BINARY}.exe'
 
   package.windows-amd64:
     desc: Package the Windows amd64 binary into a tarball.
     deps: [build.windows-amd64]
     cmds:
-      - sh -c 'version=$(git describe --tags --abbrev=0 2>/dev/null || git rev-parse --short HEAD); tar czf ${DIST_DIR}/${BINARY}-$version-windows-amd64.tar.gz -C ${DIST_DIR}/windows-amd64 ${BINARY}'
+      - sh -c 'version=$(git describe --tags --abbrev=0 2>/dev/null || git rev-parse --short HEAD); tar czf ${DIST_DIR}/${BINARY}-$version-windows-amd64.tar.gz -C ${DIST_DIR}/windows-amd64 ${BINARY}.exe'
 
   package.windows-arm64:
     desc: Package the Windows arm64 binary into a tarball.
     deps: [build.windows-arm64]
     cmds:
-      - sh -c 'version=$(git describe --tags --abbrev=0 2>/dev/null || git rev-parse --short HEAD); tar czf ${DIST_DIR}/${BINARY}-$version-windows-arm64.tar.gz -C ${DIST_DIR}/windows-arm64 ${BINARY}'
+      - sh -c 'version=$(git describe --tags --abbrev=0 2>/dev/null || git rev-parse --short HEAD); tar czf ${DIST_DIR}/${BINARY}-$version-windows-arm64.tar.gz -C ${DIST_DIR}/windows-arm64 ${BINARY}.exe'
 
   packages:
     desc: Package every platform bundle.
