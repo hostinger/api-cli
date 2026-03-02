@@ -15,6 +15,9 @@ github.com/apapsch/go-jsonmerge/v2
 # github.com/aquasecurity/table v1.11.0
 ## explicit; go 1.18
 github.com/aquasecurity/table
+# github.com/clipperhouse/uax29/v2 v2.7.0
+## explicit; go 1.18
+github.com/clipperhouse/uax29/v2/graphemes
 # github.com/containerd/console v1.0.5
 ## explicit; go 1.13
 github.com/containerd/console
@@ -32,7 +35,7 @@ github.com/go-viper/mapstructure/v2/internal/errors
 # github.com/google/uuid v1.6.0
 ## explicit
 github.com/google/uuid
-# github.com/gookit/color v1.5.4
+# github.com/gookit/color v1.6.0
 ## explicit; go 1.18
 github.com/gookit/color
 # github.com/inconshreveable/mousetrap v1.1.0
@@ -44,8 +47,8 @@ github.com/liamg/tml
 # github.com/lithammer/fuzzysearch v1.1.8
 ## explicit; go 1.15
 github.com/lithammer/fuzzysearch/fuzzy
-# github.com/mattn/go-runewidth v0.0.16
-## explicit; go 1.9
+# github.com/mattn/go-runewidth v0.0.20
+## explicit; go 1.20
 github.com/mattn/go-runewidth
 # github.com/oapi-codegen/oapi-codegen/v2 v2.5.1
 ## explicit; go 1.22.5
@@ -61,13 +64,10 @@ github.com/pelletier/go-toml/v2/internal/characters
 github.com/pelletier/go-toml/v2/internal/danger
 github.com/pelletier/go-toml/v2/internal/tracker
 github.com/pelletier/go-toml/v2/unstable
-# github.com/pterm/pterm v0.12.82
-## explicit; go 1.23.0
+# github.com/pterm/pterm v0.12.83
+## explicit; go 1.24.0
 github.com/pterm/pterm
 github.com/pterm/pterm/internal
-# github.com/rivo/uniseg v0.4.7
-## explicit; go 1.18
-github.com/rivo/uniseg
 # github.com/rogpeppe/go-internal v1.12.0
 ## explicit; go 1.20
 # github.com/russross/blackfriday/v2 v2.1.0
@@ -116,16 +116,16 @@ github.com/xo/terminfo
 go.yaml.in/yaml/v3
 # golang.org/x/exp v0.0.0-20230811145659-89c5cff77bcb
 ## explicit; go 1.20
-# golang.org/x/sys v0.33.0
-## explicit; go 1.23.0
+# golang.org/x/sys v0.41.0
+## explicit; go 1.24.0
 golang.org/x/sys/plan9
 golang.org/x/sys/unix
 golang.org/x/sys/windows
-# golang.org/x/term v0.32.0
-## explicit; go 1.23.0
+# golang.org/x/term v0.40.0
+## explicit; go 1.24.0
 golang.org/x/term
-# golang.org/x/text v0.28.0
-## explicit; go 1.23.0
+# golang.org/x/text v0.34.0
+## explicit; go 1.24.0
 golang.org/x/text/cases
 golang.org/x/text/encoding
 golang.org/x/text/encoding/internal
