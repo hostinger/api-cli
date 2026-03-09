@@ -38,7 +38,7 @@ github.com/gookit/color
 # github.com/inconshreveable/mousetrap v1.1.0
 ## explicit; go 1.18
 github.com/inconshreveable/mousetrap
-# github.com/liamg/tml v0.7.0
+# github.com/liamg/tml v0.7.1
 ## explicit; go 1.20
 github.com/liamg/tml
 # github.com/lithammer/fuzzysearch v1.1.8
