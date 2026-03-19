@@ -69,6 +69,9 @@ type BindStyledParameterOptions struct {
 	// When set to "byte" and the destination is []byte, the value is
 	// base64-decoded rather than treated as a generic slice.
 	Format string
+	// AllowReserved, when true, indicates that the parameter value may
+	// contain RFC 3986 reserved characters without percent-encoding.
+	AllowReserved bool
 }
 
 // BindStyledParameterWithOptions binds a parameter as described in the Path Parameters
@@ -152,8 +155,16 @@ func BindStyledParameterWithOptions(style string, paramName string, value string
 		return bindSplitPartsToDestinationArray(parts, dest)
 	}
 
-	// Try to bind the remaining types as a base type.
-	return BindStringToObject(value, dest)
+	// For primitive types, we still need to strip style prefixes (e.g. label's
+	// leading "." or matrix's ";paramName=") before binding.
+	parts, err := splitStyledParameter(style, opts.Explode, false, paramName, value)
+	if err != nil {
+		return fmt.Errorf("error splitting parameter '%s': %w", paramName, err)
+	}
+	if len(parts) != 1 {
+		return fmt.Errorf("parameter '%s': expected single value, got %d parts", paramName, len(parts))
+	}
+	return BindStringToObject(parts[0], dest)
 }
 
 // This is a complex set of operations, but each given parameter style can be
@@ -346,6 +357,9 @@ type BindQueryParameterOptions struct {
 	// When set to "byte" and the destination is []byte, the value is
 	// base64-decoded rather than treated as a generic slice.
 	Format string
+	// AllowReserved, when true, indicates that the parameter value may
+	// contain RFC 3986 reserved characters without percent-encoding.
+	AllowReserved bool
 }
 
 // BindQueryParameterWithOptions works like BindQueryParameter with additional options.
@@ -508,7 +522,7 @@ func BindQueryParameterWithOptions(style string, explode bool, required bool, pa
 			} else {
 				err = bindSplitPartsToDestinationArray(parts, output)
 			}
-		case reflect.Struct:
+		case reflect.Struct, reflect.Map:
 			// Some struct types (e.g. types.Date, time.Time) are scalar values
 			// that should be bound from a single string, not decomposed as
 			// key-value objects. Detect these via the Binder and
@@ -551,7 +565,7 @@ func BindQueryParameterWithOptions(style string, explode bool, required bool, pa
 		if !explode {
 			return errors.New("deepObjects must be exploded")
 		}
-		return UnmarshalDeepObject(dest, paramName, queryParams)
+		return unmarshalDeepObject(dest, paramName, queryParams, required)
 	case "spaceDelimited", "pipeDelimited":
 		return fmt.Errorf("query arguments of style '%s' aren't yet supported", style)
 	default:

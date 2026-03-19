@@ -127,6 +127,10 @@ func makeFieldOrValue(paths [][]string, values []string) fieldOrValue {
 }
 
 func UnmarshalDeepObject(dst interface{}, paramName string, params url.Values) error {
+	return unmarshalDeepObject(dst, paramName, params, false)
+}
+
+func unmarshalDeepObject(dst interface{}, paramName string, params url.Values, required bool) error {
 	// Params are all the query args, so we need those that look like
 	// "paramName["...
 	var fieldNames []string
@@ -146,6 +150,14 @@ func UnmarshalDeepObject(dst interface{}, paramName string, params url.Values) e
 					fieldValues = append(fieldValues, value)
 				}
 			}
+		}
+	}
+
+	if len(fieldNames) == 0 {
+		if required {
+			return fmt.Errorf("query parameter '%s' is required", paramName)
+		} else {
+			return nil
 		}
 	}
 
