@@ -7,11 +7,10 @@ import (
 var GroupCmd = &cobra.Command{
 	Use:   "backups",
 	Short: "VM backup management",
-	Long:  `Safeguard your data by managing backups. You can list available backups, restore a virtual machine from a backup, or delete backups as needed.`,
+	Long:  `Safeguard your data by managing backups. You can list available backups or restore a virtual machine from a backup.`,
 }
 
 func init() {
 	GroupCmd.AddCommand(ListCmd)
 	GroupCmd.AddCommand(RestoreCmd)
-	GroupCmd.AddCommand(DeleteCmd)
 }

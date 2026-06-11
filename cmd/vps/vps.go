@@ -4,6 +4,7 @@ import (
 	"github.com/hostinger/api-cli/cmd/vps/actions"
 	"github.com/hostinger/api-cli/cmd/vps/backups"
 	"github.com/hostinger/api-cli/cmd/vps/data_centers"
+	"github.com/hostinger/api-cli/cmd/vps/docker"
 	"github.com/hostinger/api-cli/cmd/vps/firewall"
 	"github.com/hostinger/api-cli/cmd/vps/monarx"
 	"github.com/hostinger/api-cli/cmd/vps/post_install_scripts"
@@ -26,6 +27,7 @@ func init() {
 	GroupCmd.AddCommand(actions.GroupCmd)
 	GroupCmd.AddCommand(backups.GroupCmd)
 	GroupCmd.AddCommand(data_centers.GroupCmd)
+	GroupCmd.AddCommand(docker.GroupCmd)
 	GroupCmd.AddCommand(firewall.GroupCmd)
 	GroupCmd.AddCommand(ptr.GroupCmd)
 	GroupCmd.AddCommand(monarx.GroupCmd)

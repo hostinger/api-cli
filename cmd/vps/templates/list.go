@@ -13,7 +13,7 @@ var ListCmd = &cobra.Command{
 	Short: "Get template list",
 	Long:  `This endpoint retrieves a list of available OS templates for virtual machines.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().VPSGetTemplateListV1WithResponse(context.TODO())
+		r, err := api.Request().VPSGetTemplatesV1WithResponse(context.TODO())
 		if err != nil {
 			log.Fatal(err)
 		}

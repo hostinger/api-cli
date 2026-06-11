@@ -4,16 +4,17 @@ Create PTR record
 
 ### Synopsis
 
-This endpoint creates or updates a PTR (Pointer) record for a specified virtual machine.
+This endpoint creates or updates a PTR (Pointer) record for a specified IP address of a virtual machine.
 
 ```
-hapi vps ptr create <virtual machine ID> [flags]
+hapi vps ptr create <virtual machine ID> <IP address ID> [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for create
+      --domain string   Pointer record domain
+  -h, --help            help for create
 ```
 
 ### Options inherited from parent commands

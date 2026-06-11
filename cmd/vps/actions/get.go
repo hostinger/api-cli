@@ -16,7 +16,7 @@ var GetCmd = &cobra.Command{
 This endpoint allows you to view detailed information about a particular action, including the action name, timestamp, and status.`,
 	Args: cobra.MatchAll(cobra.ExactArgs(2)),
 	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().VPSGetActionV1WithResponse(context.TODO(), utils.StringToInt(args[0]), utils.StringToInt(args[1]))
+		r, err := api.Request().VPSGetActionDetailsV1WithResponse(context.TODO(), utils.StringToInt(args[0]), utils.StringToInt(args[1]))
 		if err != nil {
 			log.Fatal(err)
 		}

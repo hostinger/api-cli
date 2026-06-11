@@ -15,7 +15,7 @@ var GetCmd = &cobra.Command{
 	Long:  `This endpoint retrieves detailed information about a specified virtual machine.`,
 	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
 	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().VPSGetVirtualMachineV1WithResponse(context.TODO(), utils.StringToInt(args[0]))
+		r, err := api.Request().VPSGetVirtualMachineDetailsV1WithResponse(context.TODO(), utils.StringToInt(args[0]))
 		if err != nil {
 			log.Fatal(err)
 		}

@@ -18,7 +18,7 @@ or modifying the machine. This endpoint allows you to view the history of these 
 action, such as the action name, timestamp, and status.`,
 	Args: cobra.MatchAll(cobra.ExactArgs(1)),
 	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().VPSGetActionListV1WithResponse(context.TODO(), utils.StringToInt(args[0]), listRequestParameters(cmd))
+		r, err := api.Request().VPSGetActionsV1WithResponse(context.TODO(), utils.StringToInt(args[0]), listRequestParameters(cmd))
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -31,10 +31,10 @@ func init() {
 	ListCmd.Flags().IntP("page", "", 1, "Page number")
 }
 
-func listRequestParameters(cmd *cobra.Command) *client.VPSGetActionListV1Params {
+func listRequestParameters(cmd *cobra.Command) *client.VPSGetActionsV1Params {
 	pageId, _ := cmd.Flags().GetInt("page")
 
-	return &client.VPSGetActionListV1Params{
+	return &client.VPSGetActionsV1Params{
 		Page: utils.IntPtrOrNil(pageId),
 	}
 }

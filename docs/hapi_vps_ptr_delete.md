@@ -4,12 +4,12 @@ Delete PTR record
 
 ### Synopsis
 
-This endpoint deletes a PTR (Pointer) record for a specified virtual machine.
+This endpoint deletes a PTR (Pointer) record for a specified IP address of a virtual machine.
 
 Once deleted, reverse DNS lookups to the virtual machine's IP address will no longer return the previously configured hostname.
 
 ```
-hapi vps ptr delete <virtual machine ID> [flags]
+hapi vps ptr delete <virtual machine ID> <IP address ID> [flags]
 ```
 
 ### Options
