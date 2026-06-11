@@ -15,7 +15,7 @@ var ListCmd = &cobra.Command{
 	Short: "Get post-install script list",
 	Long:  `This endpoint retrieves a list of post-install scripts associated with your account.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().VPSGetPostInstallScriptListV1WithResponse(context.TODO(), listRequestParameters(cmd))
+		r, err := api.Request().VPSGetPostInstallScriptsV1WithResponse(context.TODO(), listRequestParameters(cmd))
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -28,10 +28,10 @@ func init() {
 	ListCmd.Flags().IntP("page", "", 1, "Page number")
 }
 
-func listRequestParameters(cmd *cobra.Command) *client.VPSGetPostInstallScriptListV1Params {
+func listRequestParameters(cmd *cobra.Command) *client.VPSGetPostInstallScriptsV1Params {
 	pageId, _ := cmd.Flags().GetInt("page")
 
-	return &client.VPSGetPostInstallScriptListV1Params{
+	return &client.VPSGetPostInstallScriptsV1Params{
 		Page: utils.IntPtrOrNil(pageId),
 	}
 }

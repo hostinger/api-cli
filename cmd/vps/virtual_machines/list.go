@@ -13,7 +13,7 @@ var ListCmd = &cobra.Command{
 	Short: "Get virtual machine list",
 	Long:  `This endpoint retrieves a list of all available virtual machines.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().VPSGetVirtualMachineListV1WithResponse(context.TODO())
+		r, err := api.Request().VPSGetVirtualMachinesV1WithResponse(context.TODO())
 		if err != nil {
 			log.Fatal(err)
 		}

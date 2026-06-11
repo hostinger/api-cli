@@ -1,13 +1,13 @@
-## hapi vps backups delete
+## hapi vps docker delete
 
-Delete backup
+Delete Docker project
 
 ### Synopsis
 
-This endpoint deletes a specified backup for a virtual machine.
+This endpoint stops and deletes a specified Docker Compose project on a virtual machine.
 
 ```
-hapi vps backups delete <virtual machine ID> <backup ID> [flags]
+hapi vps docker delete <virtual machine ID> <project name> [flags]
 ```
 
 ### Options
@@ -25,5 +25,5 @@ hapi vps backups delete <virtual machine ID> <backup ID> [flags]
 
 ### SEE ALSO
 
-* [hapi vps backups](hapi_vps_backups.md)	 - VM backup management
+* [hapi vps docker](hapi_vps_docker.md)	 - Docker project management
 

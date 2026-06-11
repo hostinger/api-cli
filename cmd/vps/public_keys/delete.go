@@ -17,7 +17,7 @@ var DeleteCmd = &cobra.Command{
 Deleting public key from account does not remove it from virtual machine`,
 	Args: cobra.MatchAll(cobra.ExactArgs(1)),
 	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().VPSDeleteAPublicKeyV1WithResponse(context.TODO(), utils.StringToInt(args[0]))
+		r, err := api.Request().VPSDeletePublicKeyV1WithResponse(context.TODO(), utils.StringToInt(args[0]))
 		if err != nil {
 			log.Fatal(err)
 		}

@@ -26,5 +26,5 @@ hapi vps vm set-panel-password <virtual machine ID> [flags]
 
 ### SEE ALSO
 
-* [hapi vps vm](hapi_vps_vm.md)	 - A brief description of your command
+* [hapi vps vm](hapi_vps_vm.md)	 - Virtual machine management
 

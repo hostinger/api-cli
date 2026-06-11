@@ -15,7 +15,7 @@ var GetCmd = &cobra.Command{
 	Long:  `This endpoint retrieves details of a specific OS template for virtual machines.`,
 	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
 	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().VPSGetTemplateV1WithResponse(context.TODO(), utils.StringToInt(args[0]))
+		r, err := api.Request().VPSGetTemplateDetailsV1WithResponse(context.TODO(), utils.StringToInt(args[0]))
 		if err != nil {
 			log.Fatal(err)
 		}

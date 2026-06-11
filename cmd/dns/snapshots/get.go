@@ -1,4 +1,4 @@
-package backups
+package snapshots
 
 import (
 	"context"
@@ -9,13 +9,13 @@ import (
 	"log"
 )
 
-var DeleteCmd = &cobra.Command{
-	Use:   "delete <virtual machine ID> <backup ID>",
-	Short: "Delete backup",
-	Long:  `This endpoint deletes a specified backup for a virtual machine.`,
+var GetCmd = &cobra.Command{
+	Use:   "get <domain> <snapshot ID>",
+	Short: "Get DNS snapshot",
+	Long:  `This endpoint retrieves a specific DNS zone snapshot for a domain, including its zone records.`,
 	Args:  cobra.MatchAll(cobra.ExactArgs(2)),
 	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().VPSDeleteBackupV1WithResponse(context.TODO(), utils.StringToInt(args[0]), utils.StringToInt(args[1]))
+		r, err := api.Request().DNSGetDNSSnapshotV1WithResponse(context.TODO(), args[0], utils.StringToInt(args[1]))
 		if err != nil {
 			log.Fatal(err)
 		}

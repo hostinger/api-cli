@@ -15,7 +15,7 @@ var ListCmd = &cobra.Command{
 	Short: "Get public key list",
 	Long:  `This endpoint retrieves a list of public keys associated with your account.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().VPSGetPublicKeyListV1WithResponse(context.TODO(), listRequestParameters(cmd))
+		r, err := api.Request().VPSGetPublicKeysV1WithResponse(context.TODO(), listRequestParameters(cmd))
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -28,10 +28,10 @@ func init() {
 	ListCmd.Flags().IntP("page", "", 1, "Page number")
 }
 
-func listRequestParameters(cmd *cobra.Command) *client.VPSGetPublicKeyListV1Params {
+func listRequestParameters(cmd *cobra.Command) *client.VPSGetPublicKeysV1Params {
 	pageId, _ := cmd.Flags().GetInt("page")
 
-	return &client.VPSGetPublicKeyListV1Params{
+	return &client.VPSGetPublicKeysV1Params{
 		Page: utils.IntPtrOrNil(pageId),
 	}
 }

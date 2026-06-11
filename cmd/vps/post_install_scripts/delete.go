@@ -15,7 +15,7 @@ var DeleteCmd = &cobra.Command{
 	Long:  `This endpoint deletes a post-install script from your account.`,
 	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
 	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().VPSDeleteAPostInstallScriptV1WithResponse(context.TODO(), utils.StringToInt(args[0]))
+		r, err := api.Request().VPSDeletePostInstallScriptV1WithResponse(context.TODO(), utils.StringToInt(args[0]))
 		if err != nil {
 			log.Fatal(err)
 		}

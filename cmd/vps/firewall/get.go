@@ -15,7 +15,7 @@ var GetCmd = &cobra.Command{
 	Long:  `This endpoint retrieves firewall by its ID and rules associated with it.`,
 	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
 	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().VPSGetFirewallV1WithResponse(context.TODO(), utils.StringToInt(args[0]))
+		r, err := api.Request().VPSGetFirewallDetailsV1WithResponse(context.TODO(), utils.StringToInt(args[0]))
 		if err != nil {
 			log.Fatal(err)
 		}

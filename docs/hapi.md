@@ -12,5 +12,8 @@ Hostinger API Command Line Interface
 
 ### SEE ALSO
 
+* [hapi billing](hapi_billing.md)	 - Billing management
+* [hapi dns](hapi_dns.md)	 - DNS management
+* [hapi version](hapi_version.md)	 - Show the current version
 * [hapi vps](hapi_vps.md)	 - VPS management
 

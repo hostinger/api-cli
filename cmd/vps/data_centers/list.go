@@ -13,7 +13,7 @@ var ListCmd = &cobra.Command{
 	Short: "Get data center list",
 	Long:  `This endpoint retrieves a list of all data centers available.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().VPSGetDataCentersListV1WithResponse(context.TODO())
+		r, err := api.Request().VPSGetDataCenterListV1WithResponse(context.TODO())
 		if err != nil {
 			log.Fatal(err)
 		}
