@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Repo checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Bump version and push tag
         id: bump
@@ -22,8 +24,18 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           release_branches: main
 
-      - name: Release tag
-        uses: ncipollo/release-action@v1
+      - name: Install Go
+        uses: actions/setup-go@v4
         with:
-          tag: ${{ steps.bump.outputs.new_tag }}
-          generateReleaseNotes: true
+          go-version: 1.24.x
+
+      - name: Run GoReleaser
+        if: steps.bump.outputs.new_tag != ''
+        uses: goreleaser/goreleaser-action@v6
+        with:
+          distribution: goreleaser
+          version: "~> v2"
+          args: release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GORELEASER_CURRENT_TAG: ${{ steps.bump.outputs.new_tag }}
