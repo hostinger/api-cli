@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - ".github/**"
 
 permissions:
   contents: write
@@ -23,6 +25,10 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           release_branches: main
+
+      - name: Fetch tags
+        if: steps.bump.outputs.new_tag != ''
+        run: git fetch --force --tags
 
       - name: Install Go
         uses: actions/setup-go@v4
