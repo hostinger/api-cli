@@ -4,10 +4,12 @@ Delete payment method
 
 ### Synopsis
 
-This endpoint deletes a payment method. Deleted payment methods can no longer be used for placing new orders.
+Delete a payment method from your account.
+
+Use this endpoint to remove unused payment methods from user accounts.
 
 ```
-hapi billing payment-methods delete <payment method ID> [flags]
+hapi billing payment-methods delete <payment-method-id> [flags]
 ```
 
 ### Options
@@ -25,5 +27,5 @@ hapi billing payment-methods delete <payment method ID> [flags]
 
 ### SEE ALSO
 
-* [hapi billing payment-methods](hapi_billing_payment-methods.md)	 - Payment method management
+* [hapi billing payment-methods](hapi_billing_payment-methods.md)	 - Payment methods commands
 

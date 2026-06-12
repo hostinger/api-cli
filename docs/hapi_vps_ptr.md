@@ -1,10 +1,6 @@
 ## hapi vps ptr
 
-PTR records management
-
-### Synopsis
-
-Manage reverse DNS settings by creating or deleting PTR records for your virtual machines, ensuring that IP addresses correctly resolve to hostnames.
+PTR records commands
 
 ### Options
 
@@ -21,7 +17,7 @@ Manage reverse DNS settings by creating or deleting PTR records for your virtual
 
 ### SEE ALSO
 
-* [hapi vps](hapi_vps.md)	 - VPS management
+* [hapi vps](hapi_vps.md)	 - VPS commands
 * [hapi vps ptr create](hapi_vps_ptr_create.md)	 - Create PTR record
 * [hapi vps ptr delete](hapi_vps_ptr_delete.md)	 - Delete PTR record
 

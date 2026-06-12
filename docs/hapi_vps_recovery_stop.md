@@ -4,11 +4,14 @@ Stop recovery mode
 
 ### Synopsis
 
-This endpoint stops the recovery mode for a specified virtual machine. 
+Stop recovery mode for a specified virtual machine.
+
 If virtual machine is not in recovery mode, this operation will fail.
 
+Use this endpoint to exit system rescue mode and return VPS to normal operation.
+
 ```
-hapi vps recovery stop <virtual machine ID> [flags]
+hapi vps recovery stop <virtual-machine-id> [flags]
 ```
 
 ### Options
@@ -26,5 +29,5 @@ hapi vps recovery stop <virtual machine ID> [flags]
 
 ### SEE ALSO
 
-* [hapi vps recovery](hapi_vps_recovery.md)	 - Recovery mode management
+* [hapi vps recovery](hapi_vps_recovery.md)	 - Recovery commands
 

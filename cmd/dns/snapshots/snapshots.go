@@ -6,12 +6,11 @@ import (
 
 var GroupCmd = &cobra.Command{
 	Use:   "snapshots",
-	Short: "DNS zone snapshot management",
-	Long:  ``,
+	Short: "Snapshot commands",
 }
 
 func init() {
-	GroupCmd.AddCommand(ListCmd)
 	GroupCmd.AddCommand(GetCmd)
+	GroupCmd.AddCommand(ListCmd)
 	GroupCmd.AddCommand(RestoreCmd)
 }

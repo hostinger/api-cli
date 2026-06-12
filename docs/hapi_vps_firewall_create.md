@@ -4,7 +4,9 @@ Create new firewall
 
 ### Synopsis
 
-This endpoint creates a new firewall.
+Create a new firewall.
+
+Use this endpoint to set up new firewall configurations for VPS security.
 
 ```
 hapi vps firewall create [flags]
@@ -14,7 +16,7 @@ hapi vps firewall create [flags]
 
 ```
   -h, --help          help for create
-      --name string   Firewall name
+      --name string   
 ```
 
 ### Options inherited from parent commands
@@ -26,5 +28,5 @@ hapi vps firewall create [flags]
 
 ### SEE ALSO
 
-* [hapi vps firewall](hapi_vps_firewall.md)	 - Firewall management
+* [hapi vps firewall](hapi_vps_firewall.md)	 - Firewall commands
 

@@ -1,0 +1,667 @@
+{
+  "DNS_deleteDNSRecordsV1": {
+    "command": "hapi dns records delete",
+    "method": "DELETE",
+    "path": "/api/dns/v1/zones/{domain}"
+  },
+  "DNS_getDNSRecordsV1": {
+    "command": "hapi dns records list",
+    "method": "GET",
+    "path": "/api/dns/v1/zones/{domain}"
+  },
+  "DNS_getDNSSnapshotListV1": {
+    "command": "hapi dns snapshots list",
+    "method": "GET",
+    "path": "/api/dns/v1/snapshots/{domain}"
+  },
+  "DNS_getDNSSnapshotV1": {
+    "command": "hapi dns snapshots get",
+    "method": "GET",
+    "path": "/api/dns/v1/snapshots/{domain}/{snapshotId}"
+  },
+  "DNS_resetDNSRecordsV1": {
+    "command": "hapi dns records reset",
+    "method": "POST",
+    "path": "/api/dns/v1/zones/{domain}/reset"
+  },
+  "DNS_restoreDNSSnapshotV1": {
+    "command": "hapi dns snapshots restore",
+    "method": "POST",
+    "path": "/api/dns/v1/snapshots/{domain}/{snapshotId}/restore"
+  },
+  "DNS_updateDNSRecordsV1": {
+    "command": "hapi dns records update",
+    "method": "PUT",
+    "path": "/api/dns/v1/zones/{domain}"
+  },
+  "DNS_validateDNSRecordsV1": {
+    "command": "hapi dns records validate",
+    "method": "POST",
+    "path": "/api/dns/v1/zones/{domain}/validate"
+  },
+  "VPS_activateFirewallV1": {
+    "command": "hapi vps firewall activate",
+    "method": "POST",
+    "path": "/api/vps/v1/firewall/{firewallId}/activate/{virtualMachineId}"
+  },
+  "VPS_attachPublicKeyV1": {
+    "command": "hapi vps public-keys attach",
+    "method": "POST",
+    "path": "/api/vps/v1/public-keys/attach/{virtualMachineId}"
+  },
+  "VPS_createFirewallRuleV1": {
+    "command": "hapi vps firewall create-rule",
+    "method": "POST",
+    "path": "/api/vps/v1/firewall/{firewallId}/rules"
+  },
+  "VPS_createNewFirewallV1": {
+    "command": "hapi vps firewall create",
+    "method": "POST",
+    "path": "/api/vps/v1/firewall"
+  },
+  "VPS_createNewProjectV1": {
+    "command": "hapi vps docker create",
+    "method": "POST",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/docker"
+  },
+  "VPS_createPTRRecordV1": {
+    "command": "hapi vps ptr create",
+    "method": "POST",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/ptr/{ipAddressId}"
+  },
+  "VPS_createPostInstallScriptV1": {
+    "command": "hapi vps post-install-scripts create",
+    "method": "POST",
+    "path": "/api/vps/v1/post-install-scripts"
+  },
+  "VPS_createPublicKeyV1": {
+    "command": "hapi vps public-keys create",
+    "method": "POST",
+    "path": "/api/vps/v1/public-keys"
+  },
+  "VPS_createSnapshotV1": {
+    "command": "hapi vps snapshots create",
+    "method": "POST",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/snapshot"
+  },
+  "VPS_deactivateFirewallV1": {
+    "command": "hapi vps firewall deactivate",
+    "method": "POST",
+    "path": "/api/vps/v1/firewall/{firewallId}/deactivate/{virtualMachineId}"
+  },
+  "VPS_deleteFirewallRuleV1": {
+    "command": "hapi vps firewall delete-rule",
+    "method": "DELETE",
+    "path": "/api/vps/v1/firewall/{firewallId}/rules/{ruleId}"
+  },
+  "VPS_deleteFirewallV1": {
+    "command": "hapi vps firewall delete",
+    "method": "DELETE",
+    "path": "/api/vps/v1/firewall/{firewallId}"
+  },
+  "VPS_deletePTRRecordV1": {
+    "command": "hapi vps ptr delete",
+    "method": "DELETE",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/ptr/{ipAddressId}"
+  },
+  "VPS_deletePostInstallScriptV1": {
+    "command": "hapi vps post-install-scripts delete",
+    "method": "DELETE",
+    "path": "/api/vps/v1/post-install-scripts/{postInstallScriptId}"
+  },
+  "VPS_deleteProjectV1": {
+    "command": "hapi vps docker delete",
+    "method": "DELETE",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/docker/{projectName}/down"
+  },
+  "VPS_deletePublicKeyV1": {
+    "command": "hapi vps public-keys delete",
+    "method": "DELETE",
+    "path": "/api/vps/v1/public-keys/{publicKeyId}"
+  },
+  "VPS_deleteSnapshotV1": {
+    "command": "hapi vps snapshots delete",
+    "method": "DELETE",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/snapshot"
+  },
+  "VPS_getActionDetailsV1": {
+    "command": "hapi vps actions get",
+    "method": "GET",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/actions/{actionId}"
+  },
+  "VPS_getActionsV1": {
+    "command": "hapi vps actions list",
+    "method": "GET",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/actions"
+  },
+  "VPS_getAttachedPublicKeysV1": {
+    "command": "hapi vps virtual-machines attached-public-keys",
+    "method": "GET",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/public-keys"
+  },
+  "VPS_getBackupsV1": {
+    "command": "hapi vps backups list",
+    "method": "GET",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/backups"
+  },
+  "VPS_getDataCenterListV1": {
+    "command": "hapi vps data-centers list",
+    "method": "GET",
+    "path": "/api/vps/v1/data-centers"
+  },
+  "VPS_getFirewallDetailsV1": {
+    "command": "hapi vps firewall get",
+    "method": "GET",
+    "path": "/api/vps/v1/firewall/{firewallId}"
+  },
+  "VPS_getFirewallListV1": {
+    "command": "hapi vps firewall list",
+    "method": "GET",
+    "path": "/api/vps/v1/firewall"
+  },
+  "VPS_getMetricsV1": {
+    "command": "hapi vps virtual-machines metrics",
+    "method": "GET",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/metrics"
+  },
+  "VPS_getPostInstallScriptV1": {
+    "command": "hapi vps post-install-scripts get",
+    "method": "GET",
+    "path": "/api/vps/v1/post-install-scripts/{postInstallScriptId}"
+  },
+  "VPS_getPostInstallScriptsV1": {
+    "command": "hapi vps post-install-scripts list",
+    "method": "GET",
+    "path": "/api/vps/v1/post-install-scripts"
+  },
+  "VPS_getProjectContainersV1": {
+    "command": "hapi vps docker containers",
+    "method": "GET",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/docker/{projectName}/containers"
+  },
+  "VPS_getProjectContentsV1": {
+    "command": "hapi vps docker get",
+    "method": "GET",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/docker/{projectName}"
+  },
+  "VPS_getProjectListV1": {
+    "command": "hapi vps docker list",
+    "method": "GET",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/docker"
+  },
+  "VPS_getProjectLogsV1": {
+    "command": "hapi vps docker logs",
+    "method": "GET",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/docker/{projectName}/logs"
+  },
+  "VPS_getPublicKeysV1": {
+    "command": "hapi vps public-keys list",
+    "method": "GET",
+    "path": "/api/vps/v1/public-keys"
+  },
+  "VPS_getScanMetricsV1": {
+    "command": "hapi vps monarx scan-metrics",
+    "method": "GET",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/monarx"
+  },
+  "VPS_getSnapshotV1": {
+    "command": "hapi vps snapshots get",
+    "method": "GET",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/snapshot"
+  },
+  "VPS_getTemplateDetailsV1": {
+    "command": "hapi vps templates get",
+    "method": "GET",
+    "path": "/api/vps/v1/templates/{templateId}"
+  },
+  "VPS_getTemplatesV1": {
+    "command": "hapi vps templates list",
+    "method": "GET",
+    "path": "/api/vps/v1/templates"
+  },
+  "VPS_getVirtualMachineDetailsV1": {
+    "command": "hapi vps virtual-machines get",
+    "method": "GET",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}"
+  },
+  "VPS_getVirtualMachinesV1": {
+    "command": "hapi vps virtual-machines list",
+    "method": "GET",
+    "path": "/api/vps/v1/virtual-machines"
+  },
+  "VPS_installMonarxV1": {
+    "command": "hapi vps monarx install",
+    "method": "POST",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/monarx"
+  },
+  "VPS_purchaseNewVirtualMachineV1": {
+    "command": "hapi vps virtual-machines purchase",
+    "method": "POST",
+    "path": "/api/vps/v1/virtual-machines"
+  },
+  "VPS_recreateVirtualMachineV1": {
+    "command": "hapi vps virtual-machines recreate",
+    "method": "POST",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/recreate"
+  },
+  "VPS_resetHostnameV1": {
+    "command": "hapi vps virtual-machines reset-hostname",
+    "method": "DELETE",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/hostname"
+  },
+  "VPS_restartProjectV1": {
+    "command": "hapi vps docker restart",
+    "method": "POST",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/docker/{projectName}/restart"
+  },
+  "VPS_restartVirtualMachineV1": {
+    "command": "hapi vps virtual-machines restart",
+    "method": "POST",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/restart"
+  },
+  "VPS_restoreBackupV1": {
+    "command": "hapi vps backups restore",
+    "method": "POST",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/backups/{backupId}/restore"
+  },
+  "VPS_restoreSnapshotV1": {
+    "command": "hapi vps snapshots restore",
+    "method": "POST",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/snapshot/restore"
+  },
+  "VPS_setHostnameV1": {
+    "command": "hapi vps virtual-machines set-hostname",
+    "method": "PUT",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/hostname"
+  },
+  "VPS_setNameserversV1": {
+    "command": "hapi vps virtual-machines set-nameservers",
+    "method": "PUT",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/nameservers"
+  },
+  "VPS_setPanelPasswordV1": {
+    "command": "hapi vps virtual-machines set-panel-password",
+    "method": "PUT",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/panel-password"
+  },
+  "VPS_setRootPasswordV1": {
+    "command": "hapi vps virtual-machines set-root-password",
+    "method": "PUT",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/root-password"
+  },
+  "VPS_setupPurchasedVirtualMachineV1": {
+    "command": "hapi vps virtual-machines setup",
+    "method": "POST",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/setup"
+  },
+  "VPS_startProjectV1": {
+    "command": "hapi vps docker start",
+    "method": "POST",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/docker/{projectName}/start"
+  },
+  "VPS_startRecoveryModeV1": {
+    "command": "hapi vps recovery start",
+    "method": "POST",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/recovery"
+  },
+  "VPS_startVirtualMachineV1": {
+    "command": "hapi vps virtual-machines start",
+    "method": "POST",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/start"
+  },
+  "VPS_stopProjectV1": {
+    "command": "hapi vps docker stop",
+    "method": "POST",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/docker/{projectName}/stop"
+  },
+  "VPS_stopRecoveryModeV1": {
+    "command": "hapi vps recovery stop",
+    "method": "DELETE",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/recovery"
+  },
+  "VPS_stopVirtualMachineV1": {
+    "command": "hapi vps virtual-machines stop",
+    "method": "POST",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/stop"
+  },
+  "VPS_syncFirewallV1": {
+    "command": "hapi vps firewall sync",
+    "method": "POST",
+    "path": "/api/vps/v1/firewall/{firewallId}/sync/{virtualMachineId}"
+  },
+  "VPS_uninstallMonarxV1": {
+    "command": "hapi vps monarx uninstall",
+    "method": "DELETE",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/monarx"
+  },
+  "VPS_updateFirewallRuleV1": {
+    "command": "hapi vps firewall update-rule",
+    "method": "PUT",
+    "path": "/api/vps/v1/firewall/{firewallId}/rules/{ruleId}"
+  },
+  "VPS_updatePostInstallScriptV1": {
+    "command": "hapi vps post-install-scripts update",
+    "method": "PUT",
+    "path": "/api/vps/v1/post-install-scripts/{postInstallScriptId}"
+  },
+  "VPS_updateProjectV1": {
+    "command": "hapi vps docker update",
+    "method": "POST",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/docker/{projectName}/update"
+  },
+  "billing_deletePaymentMethodV1": {
+    "command": "hapi billing payment-methods delete",
+    "method": "DELETE",
+    "path": "/api/billing/v1/payment-methods/{paymentMethodId}"
+  },
+  "billing_disableAutoRenewalV1": {
+    "command": "hapi billing subscriptions disable-auto-renewal",
+    "method": "DELETE",
+    "path": "/api/billing/v1/subscriptions/{subscriptionId}/auto-renewal/disable"
+  },
+  "billing_enableAutoRenewalV1": {
+    "command": "hapi billing subscriptions enable-auto-renewal",
+    "method": "PATCH",
+    "path": "/api/billing/v1/subscriptions/{subscriptionId}/auto-renewal/enable"
+  },
+  "billing_getCatalogItemListV1": {
+    "command": "hapi billing catalog list",
+    "method": "GET",
+    "path": "/api/billing/v1/catalog"
+  },
+  "billing_getPaymentMethodListV1": {
+    "command": "hapi billing payment-methods list",
+    "method": "GET",
+    "path": "/api/billing/v1/payment-methods"
+  },
+  "billing_getSubscriptionListV1": {
+    "command": "hapi billing subscriptions list",
+    "method": "GET",
+    "path": "/api/billing/v1/subscriptions"
+  },
+  "billing_setDefaultPaymentMethodV1": {
+    "command": "hapi billing payment-methods set-default",
+    "method": "POST",
+    "path": "/api/billing/v1/payment-methods/{paymentMethodId}"
+  },
+  "domains_checkDomainAvailabilityV1": {
+    "command": "hapi domains availability check",
+    "method": "POST",
+    "path": "/api/domains/v1/availability"
+  },
+  "domains_createDomainForwardingV1": {
+    "command": "hapi domains forwarding create",
+    "method": "POST",
+    "path": "/api/domains/v1/forwarding"
+  },
+  "domains_createWHOISProfileV1": {
+    "command": "hapi domains whois create",
+    "method": "POST",
+    "path": "/api/domains/v1/whois"
+  },
+  "domains_deleteDomainForwardingV1": {
+    "command": "hapi domains forwarding delete",
+    "method": "DELETE",
+    "path": "/api/domains/v1/forwarding/{domain}"
+  },
+  "domains_deleteWHOISProfileV1": {
+    "command": "hapi domains whois delete",
+    "method": "DELETE",
+    "path": "/api/domains/v1/whois/{whoisId}"
+  },
+  "domains_disableDomainLockV1": {
+    "command": "hapi domains portfolio disable-lock",
+    "method": "DELETE",
+    "path": "/api/domains/v1/portfolio/{domain}/domain-lock"
+  },
+  "domains_disablePrivacyProtectionV1": {
+    "command": "hapi domains portfolio disable-privacy-protection",
+    "method": "DELETE",
+    "path": "/api/domains/v1/portfolio/{domain}/privacy-protection"
+  },
+  "domains_enableDomainLockV1": {
+    "command": "hapi domains portfolio enable-lock",
+    "method": "PUT",
+    "path": "/api/domains/v1/portfolio/{domain}/domain-lock"
+  },
+  "domains_enablePrivacyProtectionV1": {
+    "command": "hapi domains portfolio enable-privacy-protection",
+    "method": "PUT",
+    "path": "/api/domains/v1/portfolio/{domain}/privacy-protection"
+  },
+  "domains_getDomainDetailsV1": {
+    "command": "hapi domains portfolio get",
+    "method": "GET",
+    "path": "/api/domains/v1/portfolio/{domain}"
+  },
+  "domains_getDomainForwardingV1": {
+    "command": "hapi domains forwarding get",
+    "method": "GET",
+    "path": "/api/domains/v1/forwarding/{domain}"
+  },
+  "domains_getDomainListV1": {
+    "command": "hapi domains portfolio list",
+    "method": "GET",
+    "path": "/api/domains/v1/portfolio"
+  },
+  "domains_getWHOISProfileListV1": {
+    "command": "hapi domains whois list",
+    "method": "GET",
+    "path": "/api/domains/v1/whois"
+  },
+  "domains_getWHOISProfileUsageV1": {
+    "command": "hapi domains whois usage",
+    "method": "GET",
+    "path": "/api/domains/v1/whois/{whoisId}/usage"
+  },
+  "domains_getWHOISProfileV1": {
+    "command": "hapi domains whois get",
+    "method": "GET",
+    "path": "/api/domains/v1/whois/{whoisId}"
+  },
+  "domains_purchaseNewDomainV1": {
+    "command": "hapi domains portfolio purchase",
+    "method": "POST",
+    "path": "/api/domains/v1/portfolio"
+  },
+  "domains_updateDomainNameserversV1": {
+    "command": "hapi domains portfolio update-nameservers",
+    "method": "PUT",
+    "path": "/api/domains/v1/portfolio/{domain}/nameservers"
+  },
+  "ecommerce_createStoreV1": {
+    "command": "hapi ecommerce stores create",
+    "method": "POST",
+    "path": "/api/ecommerce/v1/stores"
+  },
+  "ecommerce_getStoresV1": {
+    "command": "hapi ecommerce stores list",
+    "method": "GET",
+    "path": "/api/ecommerce/v1/stores"
+  },
+  "horizons_createWebsiteV1": {
+    "command": "hapi horizons websites create",
+    "method": "POST",
+    "path": "/api/horizons/v1/websites"
+  },
+  "horizons_getWebsiteV1": {
+    "command": "hapi horizons websites get",
+    "method": "GET",
+    "path": "/api/horizons/v1/websites/{websiteId}"
+  },
+  "hosting_changeDatabasePasswordV1": {
+    "command": "hapi hosting databases change-password",
+    "method": "PATCH",
+    "path": "/api/hosting/v1/accounts/{username}/databases/{name}/change-password"
+  },
+  "hosting_createAccountDatabaseV1": {
+    "command": "hapi hosting databases create",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/databases"
+  },
+  "hosting_createNodeJSBuildFromArchiveV1": {
+    "command": "hapi hosting nodejs create-build-from-archive",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/from-archive"
+  },
+  "hosting_createWebsiteParkedDomainV1": {
+    "command": "hapi hosting domains create-website-parked",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/parked-domains"
+  },
+  "hosting_createWebsiteSubdomainV1": {
+    "command": "hapi hosting domains create-website-subdomain",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/subdomains"
+  },
+  "hosting_createWebsiteV1": {
+    "command": "hapi hosting websites create",
+    "method": "POST",
+    "path": "/api/hosting/v1/websites"
+  },
+  "hosting_deleteAccountDatabaseV1": {
+    "command": "hapi hosting databases delete",
+    "method": "DELETE",
+    "path": "/api/hosting/v1/accounts/{username}/databases/{name}"
+  },
+  "hosting_deleteWebsiteParkedDomainV1": {
+    "command": "hapi hosting domains delete-website-parked",
+    "method": "DELETE",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/parked-domains/{parkedDomain}"
+  },
+  "hosting_deleteWebsiteSubdomainV1": {
+    "command": "hapi hosting domains delete-website-subdomain",
+    "method": "DELETE",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/subdomains/{subdomain}"
+  },
+  "hosting_generateAFreeSubdomainV1": {
+    "command": "hapi hosting domains generate-free-subdomain",
+    "method": "POST",
+    "path": "/api/hosting/v1/domains/free-subdomains"
+  },
+  "hosting_getNodeJSBuildLogsV1": {
+    "command": "hapi hosting nodejs build-logs",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/{uuid}/logs"
+  },
+  "hosting_getPhpMyAdminLinkV1": {
+    "command": "hapi hosting databases phpmyadmin-link",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/databases/{name}/phpmyadmin-link"
+  },
+  "hosting_installWordPressV1": {
+    "command": "hapi hosting wordpress install",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/installations"
+  },
+  "hosting_listAccountDatabasesV1": {
+    "command": "hapi hosting databases list",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/databases"
+  },
+  "hosting_listAvailableDatacentersV1": {
+    "command": "hapi hosting datacenters list",
+    "method": "GET",
+    "path": "/api/hosting/v1/datacenters"
+  },
+  "hosting_listNodeJSBuildsV1": {
+    "command": "hapi hosting nodejs list-builds",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds"
+  },
+  "hosting_listOrdersV1": {
+    "command": "hapi hosting orders list",
+    "method": "GET",
+    "path": "/api/hosting/v1/orders"
+  },
+  "hosting_listWebsiteParkedDomainsV1": {
+    "command": "hapi hosting domains list-website-parked",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/parked-domains"
+  },
+  "hosting_listWebsiteSubdomainsV1": {
+    "command": "hapi hosting domains list-website-subdomains",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/subdomains"
+  },
+  "hosting_listWebsitesV1": {
+    "command": "hapi hosting websites list",
+    "method": "GET",
+    "path": "/api/hosting/v1/websites"
+  },
+  "hosting_listWordPressInstallationsV1": {
+    "command": "hapi hosting wordpress list-installations",
+    "method": "GET",
+    "path": "/api/hosting/v1/wordpress/installations"
+  },
+  "hosting_repairDatabaseV1": {
+    "command": "hapi hosting databases repair",
+    "method": "PATCH",
+    "path": "/api/hosting/v1/accounts/{username}/databases/{name}/repair"
+  },
+  "hosting_verifyDomainOwnershipV1": {
+    "command": "hapi hosting domains verify-ownership",
+    "method": "POST",
+    "path": "/api/hosting/v1/domains/verify-ownership"
+  },
+  "reach_createANewContactSegmentV1": {
+    "command": "hapi reach segments create",
+    "method": "POST",
+    "path": "/api/reach/v1/segmentation/segments"
+  },
+  "reach_createANewContactV1": {
+    "command": "hapi reach contacts create",
+    "method": "POST",
+    "path": "/api/reach/v1/contacts"
+  },
+  "reach_createNewContactsV1": {
+    "command": "hapi reach contacts create-bulk",
+    "method": "POST",
+    "path": "/api/reach/v1/profiles/{profileUuid}/contacts"
+  },
+  "reach_deleteAContactV1": {
+    "command": "hapi reach contacts delete",
+    "method": "DELETE",
+    "path": "/api/reach/v1/contacts/{uuid}"
+  },
+  "reach_getSegmentDetailsV1": {
+    "command": "hapi reach segments get",
+    "method": "GET",
+    "path": "/api/reach/v1/segmentation/segments/{segmentUuid}"
+  },
+  "reach_listContactGroupsV1": {
+    "command": "hapi reach contacts list-groups",
+    "method": "GET",
+    "path": "/api/reach/v1/contacts/groups"
+  },
+  "reach_listContactsV1": {
+    "command": "hapi reach contacts list",
+    "method": "GET",
+    "path": "/api/reach/v1/contacts"
+  },
+  "reach_listProfileSegmentContactsV1": {
+    "command": "hapi reach segments list-profile-contacts",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}/contacts"
+  },
+  "reach_listProfilesV1": {
+    "command": "hapi reach profiles list",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles"
+  },
+  "reach_listSegmentContactsV1": {
+    "command": "hapi reach segments list-contacts",
+    "method": "GET",
+    "path": "/api/reach/v1/segmentation/segments/{segmentUuid}/contacts"
+  },
+  "reach_listSegmentsV1": {
+    "command": "hapi reach segments list",
+    "method": "GET",
+    "path": "/api/reach/v1/segmentation/segments"
+  },
+  "v2_getDomainVerificationsDIRECT": {
+    "command": "hapi domains verifications direct",
+    "method": "GET",
+    "path": "/api/v2/direct/verifications/active"
+  }
+}

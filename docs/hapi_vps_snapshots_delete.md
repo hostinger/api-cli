@@ -4,10 +4,12 @@ Delete snapshot
 
 ### Synopsis
 
-This endpoint deletes a snapshot of a specified virtual machine.
+Delete a snapshot of a specified virtual machine.
+
+Use this endpoint to remove VPS snapshots.
 
 ```
-hapi vps snapshots delete <virtual machine ID> [flags]
+hapi vps snapshots delete <virtual-machine-id> [flags]
 ```
 
 ### Options
@@ -25,5 +27,5 @@ hapi vps snapshots delete <virtual machine ID> [flags]
 
 ### SEE ALSO
 
-* [hapi vps snapshots](hapi_vps_snapshots.md)	 - Snapshot management
+* [hapi vps snapshots](hapi_vps_snapshots.md)	 - Snapshots commands
 

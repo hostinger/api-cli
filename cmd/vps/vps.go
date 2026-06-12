@@ -14,13 +14,13 @@ import (
 	"github.com/hostinger/api-cli/cmd/vps/snapshots"
 	"github.com/hostinger/api-cli/cmd/vps/templates"
 	"github.com/hostinger/api-cli/cmd/vps/virtual_machines"
+
 	"github.com/spf13/cobra"
 )
 
 var GroupCmd = &cobra.Command{
 	Use:   "vps",
-	Short: "VPS management",
-	Long:  ``,
+	Short: "VPS commands",
 }
 
 func init() {
@@ -29,12 +29,12 @@ func init() {
 	GroupCmd.AddCommand(data_centers.GroupCmd)
 	GroupCmd.AddCommand(docker.GroupCmd)
 	GroupCmd.AddCommand(firewall.GroupCmd)
-	GroupCmd.AddCommand(ptr.GroupCmd)
 	GroupCmd.AddCommand(monarx.GroupCmd)
 	GroupCmd.AddCommand(post_install_scripts.GroupCmd)
+	GroupCmd.AddCommand(ptr.GroupCmd)
 	GroupCmd.AddCommand(public_keys.GroupCmd)
 	GroupCmd.AddCommand(recovery.GroupCmd)
 	GroupCmd.AddCommand(snapshots.GroupCmd)
-	GroupCmd.AddCommand(virtual_machines.GroupCmd)
 	GroupCmd.AddCommand(templates.GroupCmd)
+	GroupCmd.AddCommand(virtual_machines.GroupCmd)
 }

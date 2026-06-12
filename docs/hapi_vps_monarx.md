@@ -1,10 +1,6 @@
 ## hapi vps monarx
 
-Malware scanner
-
-### Synopsis
-
-Monitor your virtual machines’ security using the Monarx malware scanner. Retrieve scan metrics or install/uninstall the scanner to help protect against malware threats.
+Malware scanner commands
 
 ### Options
 
@@ -21,8 +17,8 @@ Monitor your virtual machines’ security using the Monarx malware scanner. Retr
 
 ### SEE ALSO
 
-* [hapi vps](hapi_vps.md)	 - VPS management
-* [hapi vps monarx install](hapi_vps_monarx_install.md)	 - Install malware scanner
-* [hapi vps monarx metrics](hapi_vps_monarx_metrics.md)	 - Get scan metrics
-* [hapi vps monarx uninstall](hapi_vps_monarx_uninstall.md)	 - Uninstall malware scanner
+* [hapi vps](hapi_vps.md)	 - VPS commands
+* [hapi vps monarx install](hapi_vps_monarx_install.md)	 - Install Monarx
+* [hapi vps monarx scan-metrics](hapi_vps_monarx_scan-metrics.md)	 - Get scan metrics
+* [hapi vps monarx uninstall](hapi_vps_monarx_uninstall.md)	 - Uninstall Monarx
 

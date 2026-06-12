@@ -4,10 +4,12 @@ Get snapshot
 
 ### Synopsis
 
-This endpoint retrieves a snapshot for a specified virtual machine.
+Retrieve snapshot for a specified virtual machine.
+
+Use this endpoint to view current VPS snapshot information.
 
 ```
-hapi vps snapshots get <virtual machine ID> [flags]
+hapi vps snapshots get <virtual-machine-id> [flags]
 ```
 
 ### Options
@@ -25,5 +27,5 @@ hapi vps snapshots get <virtual machine ID> [flags]
 
 ### SEE ALSO
 
-* [hapi vps snapshots](hapi_vps_snapshots.md)	 - Snapshot management
+* [hapi vps snapshots](hapi_vps_snapshots.md)	 - Snapshots commands
 

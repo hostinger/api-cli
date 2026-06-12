@@ -1,6 +1,6 @@
 ## hapi dns snapshots
 
-DNS zone snapshot management
+Snapshot commands
 
 ### Options
 
@@ -17,7 +17,7 @@ DNS zone snapshot management
 
 ### SEE ALSO
 
-* [hapi dns](hapi_dns.md)	 - DNS management
+* [hapi dns](hapi_dns.md)	 - DNS commands
 * [hapi dns snapshots get](hapi_dns_snapshots_get.md)	 - Get DNS snapshot
 * [hapi dns snapshots list](hapi_dns_snapshots_list.md)	 - Get DNS snapshot list
 * [hapi dns snapshots restore](hapi_dns_snapshots_restore.md)	 - Restore DNS snapshot

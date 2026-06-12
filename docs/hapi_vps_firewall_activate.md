@@ -4,12 +4,14 @@ Activate firewall
 
 ### Synopsis
 
-This endpoint activates a firewall for a specified virtual machine.
+Activate a firewall for a specified virtual machine.
 
 Only one firewall can be active for a virtual machine at a time.
 
+Use this endpoint to apply firewall rules to VPS instances.
+
 ```
-hapi vps firewall activate <firewall ID> <virtual machine ID>  [flags]
+hapi vps firewall activate <firewall-id> <virtual-machine-id> [flags]
 ```
 
 ### Options
@@ -27,5 +29,5 @@ hapi vps firewall activate <firewall ID> <virtual machine ID>  [flags]
 
 ### SEE ALSO
 
-* [hapi vps firewall](hapi_vps_firewall.md)	 - Firewall management
+* [hapi vps firewall](hapi_vps_firewall.md)	 - Firewall commands
 

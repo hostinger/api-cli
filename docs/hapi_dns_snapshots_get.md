@@ -4,10 +4,12 @@ Get DNS snapshot
 
 ### Synopsis
 
-This endpoint retrieves a specific DNS zone snapshot for a domain, including its zone records.
+Retrieve particular DNS snapshot with contents of DNS zone records.
+
+Use this endpoint to view historical DNS configurations for domains.
 
 ```
-hapi dns snapshots get <domain> <snapshot ID> [flags]
+hapi dns snapshots get <domain> <snapshot-id> [flags]
 ```
 
 ### Options
@@ -25,5 +27,5 @@ hapi dns snapshots get <domain> <snapshot ID> [flags]
 
 ### SEE ALSO
 
-* [hapi dns snapshots](hapi_dns_snapshots.md)	 - DNS zone snapshot management
+* [hapi dns snapshots](hapi_dns_snapshots.md)	 - Snapshot commands
 

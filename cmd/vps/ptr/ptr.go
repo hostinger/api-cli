@@ -6,8 +6,7 @@ import (
 
 var GroupCmd = &cobra.Command{
 	Use:   "ptr",
-	Short: "PTR records management",
-	Long:  `Manage reverse DNS settings by creating or deleting PTR records for your virtual machines, ensuring that IP addresses correctly resolve to hostnames.`,
+	Short: "PTR records commands",
 }
 
 func init() {

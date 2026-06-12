@@ -4,7 +4,9 @@ Reset DNS records
 
 ### Synopsis
 
-This endpoint resets DNS zone records to the default state for a specific domain.
+Reset DNS zone to the default records.
+
+Use this endpoint to restore domain DNS to original configuration.
 
 ```
 hapi dns records reset <domain> [flags]
@@ -13,10 +15,10 @@ hapi dns records reset <domain> [flags]
 ### Options
 
 ```
-  -h, --help                                   help for reset
-      --reset-email-records                    Determines if email records should be reset
-      --sync                                   Determines if operation should be run synchronously
-      --whitelisted-record-types stringArray   Record types to not reset (repeatable)
+  -h, --help                               help for reset
+      --reset-email-records                Determines if email records should be reset (default true)
+      --sync                               Determines if operation should be run synchronously (default true)
+      --whitelisted-record-types strings   Specifies which record types to not reset
 ```
 
 ### Options inherited from parent commands
@@ -28,5 +30,5 @@ hapi dns records reset <domain> [flags]
 
 ### SEE ALSO
 
-* [hapi dns records](hapi_dns_records.md)	 - DNS zone record management
+* [hapi dns records](hapi_dns_records.md)	 - Zone commands
 

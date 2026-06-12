@@ -4,7 +4,12 @@ Validate DNS records
 
 ### Synopsis
 
-This endpoint validates DNS records prior to updating them, without applying any changes.
+Validate DNS records prior to update for the selected domain.
+
+If the validation is successful, the response will contain `200 Success` code.
+If there is validation error, the response will fail with `422 Validation error` code.
+
+Use this endpoint to verify DNS record validity before applying changes.
 
 ```
 hapi dns records validate <domain> [flags]
@@ -13,12 +18,11 @@ hapi dns records validate <domain> [flags]
 ### Options
 
 ```
-      --content stringArray   Content of the record (repeatable to assign multiple records to the name)
-  -h, --help                  help for validate
-      --name string           Name of the record (use @ for wildcard name)
-      --overwrite             Replace records matching name and type instead of appending
-      --ttl int               TTL (Time-To-Live) of the record
-      --type string           Type of the record (one of: A, AAAA, ALIAS, CAA, CNAME, MX, NS, SOA, SRV, TXT)
+  -h, --help             help for validate
+      --overwrite true   If true, resource records (RRs) matching name and type will be deleted and new RRs will be created,
+                         otherwise resource records' ttl's are updated and new records are appended.
+                         If no matching RRs are found, they are created. (default true)
+      --zone string       (JSON)
 ```
 
 ### Options inherited from parent commands
@@ -30,5 +34,5 @@ hapi dns records validate <domain> [flags]
 
 ### SEE ALSO
 
-* [hapi dns records](hapi_dns_records.md)	 - DNS zone record management
+* [hapi dns records](hapi_dns_records.md)	 - Zone commands
 

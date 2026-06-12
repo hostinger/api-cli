@@ -1,10 +1,12 @@
 ## hapi vps templates list
 
-Get template list
+Get templates
 
 ### Synopsis
 
-This endpoint retrieves a list of available OS templates for virtual machines.
+Retrieve available OS templates for virtual machines.
+
+Use this endpoint to view operating system options before creating or recreating VPS instances.
 
 ```
 hapi vps templates list [flags]
@@ -25,5 +27,5 @@ hapi vps templates list [flags]
 
 ### SEE ALSO
 
-* [hapi vps templates](hapi_vps_templates.md)	 - OS Templates
+* [hapi vps templates](hapi_vps_templates.md)	 - OS Templates commands
 

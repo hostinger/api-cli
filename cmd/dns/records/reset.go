@@ -1,21 +1,27 @@
 package records
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
+	"log"
+
 	"github.com/hostinger/api-cli/api"
-	"github.com/hostinger/api-cli/client"
 	"github.com/hostinger/api-cli/output"
 	"github.com/spf13/cobra"
-	"log"
 )
 
 var ResetCmd = &cobra.Command{
 	Use:   "reset <domain>",
 	Short: "Reset DNS records",
-	Long:  `This endpoint resets DNS zone records to the default state for a specific domain.`,
+	Long:  "Reset DNS zone to the default records.\n\nUse this endpoint to restore domain DNS to original configuration.",
 	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
 	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().DNSResetDNSRecordsV1WithResponse(context.TODO(), args[0], zoneResetRequest(cmd))
+		payload, err := json.Marshal(resetBody(cmd))
+		if err != nil {
+			log.Fatal(err)
+		}
+		r, err := api.Request().DNSResetDNSRecordsV1WithBodyWithResponse(context.TODO(), args[0], "application/json", bytes.NewReader(payload))
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -25,28 +31,24 @@ var ResetCmd = &cobra.Command{
 }
 
 func init() {
-	ResetCmd.Flags().BoolP("reset-email-records", "", false, "Determines if email records should be reset")
-	ResetCmd.Flags().BoolP("sync", "", false, "Determines if operation should be run synchronously")
-	ResetCmd.Flags().StringArrayP("whitelisted-record-types", "", []string{}, "Record types to not reset (repeatable)")
+	ResetCmd.Flags().BoolP("reset-email-records", "", true, "Determines if email records should be reset")
+	ResetCmd.Flags().BoolP("sync", "", true, "Determines if operation should be run synchronously")
+	ResetCmd.Flags().StringSliceP("whitelisted-record-types", "", nil, "Specifies which record types to not reset")
 }
 
-func zoneResetRequest(cmd *cobra.Command) client.DNSResetDNSRecordsV1JSONRequestBody {
-	body := client.DNSResetDNSRecordsV1JSONRequestBody{}
-
+func resetBody(cmd *cobra.Command) map[string]any {
+	body := map[string]any{}
 	if cmd.Flags().Changed("reset-email-records") {
-		resetEmailRecords, _ := cmd.Flags().GetBool("reset-email-records")
-		body.ResetEmailRecords = &resetEmailRecords
+		v, _ := cmd.Flags().GetBool("reset-email-records")
+		body["reset_email_records"] = v
 	}
-
 	if cmd.Flags().Changed("sync") {
-		sync, _ := cmd.Flags().GetBool("sync")
-		body.Sync = &sync
+		v, _ := cmd.Flags().GetBool("sync")
+		body["sync"] = v
 	}
-
 	if cmd.Flags().Changed("whitelisted-record-types") {
-		whitelistedRecordTypes, _ := cmd.Flags().GetStringArray("whitelisted-record-types")
-		body.WhitelistedRecordTypes = &whitelistedRecordTypes
+		v, _ := cmd.Flags().GetStringSlice("whitelisted-record-types")
+		body["whitelisted_record_types"] = v
 	}
-
 	return body
 }

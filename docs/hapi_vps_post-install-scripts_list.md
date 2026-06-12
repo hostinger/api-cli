@@ -1,10 +1,12 @@
 ## hapi vps post-install-scripts list
 
-Get post-install script list
+Get post-install scripts
 
 ### Synopsis
 
-This endpoint retrieves a list of post-install scripts associated with your account.
+Retrieve post-install scripts associated with your account.
+
+Use this endpoint to view available automation scripts for VPS deployment.
 
 ```
 hapi vps post-install-scripts list [flags]
@@ -14,7 +16,7 @@ hapi vps post-install-scripts list [flags]
 
 ```
   -h, --help       help for list
-      --page int   Page number (default 1)
+      --page int   Page number
 ```
 
 ### Options inherited from parent commands
@@ -26,5 +28,5 @@ hapi vps post-install-scripts list [flags]
 
 ### SEE ALSO
 
-* [hapi vps post-install-scripts](hapi_vps_post-install-scripts.md)	 - Post-install script management
+* [hapi vps post-install-scripts](hapi_vps_post-install-scripts.md)	 - Post-install scripts commands
 

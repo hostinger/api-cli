@@ -1,11 +1,6 @@
 ## hapi vps snapshots
 
-Snapshot management
-
-### Synopsis
-
-Create, restore, or delete snapshots that capture the state of your virtual machines at a given point, 
-allowing you to quickly recover or test changes without affecting current operations.
+Snapshots commands
 
 ### Options
 
@@ -22,7 +17,7 @@ allowing you to quickly recover or test changes without affecting current operat
 
 ### SEE ALSO
 
-* [hapi vps](hapi_vps.md)	 - VPS management
+* [hapi vps](hapi_vps.md)	 - VPS commands
 * [hapi vps snapshots create](hapi_vps_snapshots_create.md)	 - Create snapshot
 * [hapi vps snapshots delete](hapi_vps_snapshots_delete.md)	 - Delete snapshot
 * [hapi vps snapshots get](hapi_vps_snapshots_get.md)	 - Get snapshot

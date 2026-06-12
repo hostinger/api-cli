@@ -1,22 +1,28 @@
 package ptr
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
+	"log"
+
 	"github.com/hostinger/api-cli/api"
-	"github.com/hostinger/api-cli/client"
 	"github.com/hostinger/api-cli/output"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
-	"log"
 )
 
 var CreateCmd = &cobra.Command{
-	Use:   "create <virtual machine ID> <IP address ID>",
+	Use:   "create <virtual-machine-id> <ip-address-id>",
 	Short: "Create PTR record",
-	Long:  `This endpoint creates or updates a PTR (Pointer) record for a specified IP address of a virtual machine.`,
+	Long:  "Create or update a PTR (Pointer) record for a specified virtual machine.\n\nUse this endpoint to configure reverse DNS lookup for VPS IP addresses.",
 	Args:  cobra.MatchAll(cobra.ExactArgs(2)),
 	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().VPSCreatePTRRecordV1WithResponse(context.TODO(), utils.StringToInt(args[0]), utils.StringToInt(args[1]), ptrCreateRequest(cmd))
+		payload, err := json.Marshal(createBody(cmd))
+		if err != nil {
+			log.Fatal(err)
+		}
+		r, err := api.Request().VPSCreatePTRRecordV1WithBodyWithResponse(context.TODO(), utils.StringToInt(args[0]), utils.StringToInt(args[1]), "application/json", bytes.NewReader(payload))
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -27,14 +33,12 @@ var CreateCmd = &cobra.Command{
 
 func init() {
 	CreateCmd.Flags().StringP("domain", "", "", "Pointer record domain")
-
 	CreateCmd.MarkFlagRequired("domain")
 }
 
-func ptrCreateRequest(cmd *cobra.Command) client.VPSCreatePTRRecordV1JSONRequestBody {
-	domain, _ := cmd.Flags().GetString("domain")
-
-	return client.VPSCreatePTRRecordV1JSONRequestBody{
-		Domain: domain,
-	}
+func createBody(cmd *cobra.Command) map[string]any {
+	body := map[string]any{}
+	domainVal, _ := cmd.Flags().GetString("domain")
+	body["domain"] = domainVal
+	return body
 }

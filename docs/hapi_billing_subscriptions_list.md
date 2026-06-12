@@ -4,7 +4,9 @@ Get subscription list
 
 ### Synopsis
 
-This endpoint retrieves a list of all subscriptions associated with your account.
+Retrieve a list of all subscriptions associated with your account.
+
+Use this endpoint to monitor active services and billing status.
 
 ```
 hapi billing subscriptions list [flags]
@@ -25,5 +27,5 @@ hapi billing subscriptions list [flags]
 
 ### SEE ALSO
 
-* [hapi billing subscriptions](hapi_billing_subscriptions.md)	 - Subscription management
+* [hapi billing subscriptions](hapi_billing_subscriptions.md)	 - Subscriptions commands
 

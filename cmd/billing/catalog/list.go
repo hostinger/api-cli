@@ -2,22 +2,22 @@ package catalog
 
 import (
 	"context"
+	"log"
+
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/client"
 	"github.com/hostinger/api-cli/output"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
-	"log"
 )
 
 var ListCmd = &cobra.Command{
 	Use:   "list",
 	Short: "Get catalog item list",
-	Long: `This endpoint retrieves a list of available catalog items that can be ordered.
-
-Prices in the response are displayed in cents.`,
+	Long:  "Retrieve catalog items available for order.\n\nPrices in catalog items is displayed as cents (without floating point),\ne.g: float `17.99` is displayed as integer `1799`.\n\nUse this endpoint to view available services and pricing before placing orders.",
 	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().BillingGetCatalogItemListV1WithResponse(context.TODO(), catalogListRequestParameters(cmd))
+		utils.EnumCheck(cmd, "category", []string{"DOMAIN", "VPS"})
+		r, err := api.Request().BillingGetCatalogItemListV1WithResponse(context.TODO(), listParams(cmd))
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -28,21 +28,19 @@ Prices in the response are displayed in cents.`,
 
 func init() {
 	ListCmd.Flags().StringP("category", "", "", "Filter catalog items by category (one of: DOMAIN, VPS)")
-	ListCmd.Flags().StringP("name", "", "", "Filter catalog items by name. Use * for wildcard search, e.g. .COM* to find .com domain")
+	ListCmd.Flags().StringP("name", "", "", "Filter catalog items by name. Use `*` for wildcard search, e.g. `.COM*` to find .com domain")
 }
 
-func catalogListRequestParameters(cmd *cobra.Command) *client.BillingGetCatalogItemListV1Params {
-	category, _ := cmd.Flags().GetString("category")
-	name, _ := cmd.Flags().GetString("name")
-
-	params := &client.BillingGetCatalogItemListV1Params{
-		Name: utils.StringPtrOrNil(name),
+func listParams(cmd *cobra.Command) *client.BillingGetCatalogItemListV1Params {
+	params := &client.BillingGetCatalogItemListV1Params{}
+	if cmd.Flags().Changed("category") {
+		v, _ := cmd.Flags().GetString("category")
+		e := client.BillingGetCatalogItemListV1ParamsCategory(v)
+		params.Category = &e
 	}
-
-	if category != "" {
-		c := client.BillingGetCatalogItemListV1ParamsCategory(category)
-		params.Category = &c
+	if cmd.Flags().Changed("name") {
+		v, _ := cmd.Flags().GetString("name")
+		params.Name = &v
 	}
-
 	return params
 }

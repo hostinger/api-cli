@@ -4,7 +4,9 @@ Get data center list
 
 ### Synopsis
 
-This endpoint retrieves a list of all data centers available.
+Retrieve all available data centers.
+
+Use this endpoint to view location options before deploying VPS instances.
 
 ```
 hapi vps data-centers list [flags]
@@ -25,5 +27,5 @@ hapi vps data-centers list [flags]
 
 ### SEE ALSO
 
-* [hapi vps data-centers](hapi_vps_data-centers.md)	 - Data center information
+* [hapi vps data-centers](hapi_vps_data-centers.md)	 - Data centers commands
 

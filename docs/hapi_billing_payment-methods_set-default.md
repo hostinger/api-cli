@@ -4,10 +4,12 @@ Set default payment method
 
 ### Synopsis
 
-This endpoint sets a specified payment method as the default. The default payment method is used automatically for new orders.
+Set the default payment method for your account.
+
+Use this endpoint to configure the primary payment method for future orders.
 
 ```
-hapi billing payment-methods set-default <payment method ID> [flags]
+hapi billing payment-methods set-default <payment-method-id> [flags]
 ```
 
 ### Options
@@ -25,5 +27,5 @@ hapi billing payment-methods set-default <payment method ID> [flags]
 
 ### SEE ALSO
 
-* [hapi billing payment-methods](hapi_billing_payment-methods.md)	 - Payment method management
+* [hapi billing payment-methods](hapi_billing_payment-methods.md)	 - Payment methods commands
 

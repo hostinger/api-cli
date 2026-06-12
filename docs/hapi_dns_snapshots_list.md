@@ -4,7 +4,9 @@ Get DNS snapshot list
 
 ### Synopsis
 
-This endpoint retrieves a list of DNS zone snapshots for a specific domain.
+Retrieve DNS snapshots for a domain.
+
+Use this endpoint to view available DNS backup points for restoration.
 
 ```
 hapi dns snapshots list <domain> [flags]
@@ -25,5 +27,5 @@ hapi dns snapshots list <domain> [flags]
 
 ### SEE ALSO
 
-* [hapi dns snapshots](hapi_dns_snapshots.md)	 - DNS zone snapshot management
+* [hapi dns snapshots](hapi_dns_snapshots.md)	 - Snapshot commands
 

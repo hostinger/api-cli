@@ -1,10 +1,12 @@
 ## hapi vps public-keys create
 
-Create new public key
+Create public key
 
 ### Synopsis
 
-This endpoint allows you to add a new public key to your account, which can then be attached to virtual machine instances for secure access.
+Add a new public key to your account.
+
+Use this endpoint to register SSH keys for VPS authentication.
 
 ```
 hapi vps public-keys create [flags]
@@ -13,10 +15,9 @@ hapi vps public-keys create [flags]
 ### Options
 
 ```
-  -h, --help              help for create
-      --ids stringArray   Public key ID list
-      --key string        Public key content
-      --name string       Public key name
+  -h, --help          help for create
+      --key string    
+      --name string   
 ```
 
 ### Options inherited from parent commands
@@ -28,5 +29,5 @@ hapi vps public-keys create [flags]
 
 ### SEE ALSO
 
-* [hapi vps public-keys](hapi_vps_public-keys.md)	 - Public key management
+* [hapi vps public-keys](hapi_vps_public-keys.md)	 - Public Keys commands
 

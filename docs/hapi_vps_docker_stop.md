@@ -1,13 +1,18 @@
 ## hapi vps docker stop
 
-Stop Docker project
+Stop project
 
 ### Synopsis
 
-This endpoint stops a specified Docker Compose project on a virtual machine.
+Stops all running services in a Docker Compose project while preserving
+container configurations and data volumes.
+
+This operation gracefully shuts down containers in reverse dependency order. 
+
+Use this to temporarily halt a project without removing data or configurations.
 
 ```
-hapi vps docker stop <virtual machine ID> <project name> [flags]
+hapi vps docker stop <virtual-machine-id> <project-name> [flags]
 ```
 
 ### Options
@@ -25,5 +30,5 @@ hapi vps docker stop <virtual machine ID> <project name> [flags]
 
 ### SEE ALSO
 
-* [hapi vps docker](hapi_vps_docker.md)	 - Docker project management
+* [hapi vps docker](hapi_vps_docker.md)	 - Docker Manager commands
 

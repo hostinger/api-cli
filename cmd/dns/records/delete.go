@@ -1,22 +1,28 @@
 package records
 
 import (
+	"bytes"
 	"context"
-	"github.com/hostinger/api-cli/api"
-	"github.com/hostinger/api-cli/client"
-	"github.com/hostinger/api-cli/output"
-	"github.com/spf13/cobra"
+	"encoding/json"
 	"log"
-	"strings"
+
+	"github.com/hostinger/api-cli/api"
+	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/utils"
+	"github.com/spf13/cobra"
 )
 
 var DeleteCmd = &cobra.Command{
 	Use:   "delete <domain>",
 	Short: "Delete DNS records",
-	Long:  `This endpoint deletes DNS zone records for a specific domain, filtered by record name and type.`,
+	Long:  "Delete DNS records for the selected domain.\n\nTo filter which records to delete, add the `name` of the record and `type` to the filter. \nMultiple filters can be provided with single request.\n\nIf you have multiple records with the same name and type, and you want to delete only part of them,\nrefer to the `Update zone records` endpoint.\n\nUse this endpoint to remove specific DNS records from domains.",
 	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
 	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().DNSDeleteDNSRecordsV1WithResponse(context.TODO(), args[0], zoneDeleteRequest(cmd))
+		payload, err := json.Marshal(deleteBody(cmd))
+		if err != nil {
+			log.Fatal(err)
+		}
+		r, err := api.Request().DNSDeleteDNSRecordsV1WithBodyWithResponse(context.TODO(), args[0], "application/json", bytes.NewReader(payload))
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -26,30 +32,13 @@ var DeleteCmd = &cobra.Command{
 }
 
 func init() {
-	DeleteCmd.Flags().StringArrayP("filter", "", []string{}, "Record to delete in format <name>:<type> (repeatable). Type one of: A, AAAA, ALIAS, CAA, CNAME, MX, NS, SOA, SRV, TXT")
-
-	DeleteCmd.MarkFlagRequired("filter")
+	DeleteCmd.Flags().StringP("filters", "", "", "Filter records for deletion (JSON)")
+	DeleteCmd.MarkFlagRequired("filters")
 }
 
-func zoneDeleteRequest(cmd *cobra.Command) client.DNSDeleteDNSRecordsV1JSONRequestBody {
-	filterFlags, _ := cmd.Flags().GetStringArray("filter")
-
-	body := client.DNSDeleteDNSRecordsV1JSONRequestBody{}
-
-	for _, filter := range filterFlags {
-		parts := strings.SplitN(filter, ":", 2)
-		if len(parts) != 2 {
-			log.Fatalf("invalid --filter %q, expected format <name>:<type>", filter)
-		}
-
-		body.Filters = append(body.Filters, struct {
-			Name string                                    `json:"name"`
-			Type client.DNSV1ZoneDestroyRequestFiltersType `json:"type"`
-		}{
-			Name: parts[0],
-			Type: client.DNSV1ZoneDestroyRequestFiltersType(parts[1]),
-		})
-	}
-
+func deleteBody(cmd *cobra.Command) map[string]any {
+	body := map[string]any{}
+	filtersVal, _ := cmd.Flags().GetString("filters")
+	body["filters"] = utils.JSONValue(filtersVal, "filters")
 	return body
 }

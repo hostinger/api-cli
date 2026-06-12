@@ -1,13 +1,19 @@
 ## hapi vps docker update
 
-Update Docker project
+Update project
 
 ### Synopsis
 
-This endpoint updates a specified Docker Compose project on a virtual machine, pulling the latest images and recreating the containers.
+Updates a Docker Compose project by pulling the latest image versions and
+recreating containers with new configurations.
+
+This operation preserves data volumes while applying changes from the compose file. 
+
+Use this to deploy application updates, apply configuration changes, or
+refresh container images to their latest versions.
 
 ```
-hapi vps docker update <virtual machine ID> <project name> [flags]
+hapi vps docker update <virtual-machine-id> <project-name> [flags]
 ```
 
 ### Options
@@ -25,5 +31,5 @@ hapi vps docker update <virtual machine ID> <project name> [flags]
 
 ### SEE ALSO
 
-* [hapi vps docker](hapi_vps_docker.md)	 - Docker project management
+* [hapi vps docker](hapi_vps_docker.md)	 - Docker Manager commands
 

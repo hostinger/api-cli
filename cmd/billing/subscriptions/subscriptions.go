@@ -6,12 +6,11 @@ import (
 
 var GroupCmd = &cobra.Command{
 	Use:   "subscriptions",
-	Short: "Subscription management",
-	Long:  ``,
+	Short: "Subscriptions commands",
 }
 
 func init() {
-	GroupCmd.AddCommand(ListCmd)
-	GroupCmd.AddCommand(EnableAutoRenewalCmd)
 	GroupCmd.AddCommand(DisableAutoRenewalCmd)
+	GroupCmd.AddCommand(EnableAutoRenewalCmd)
+	GroupCmd.AddCommand(ListCmd)
 }

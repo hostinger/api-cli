@@ -1,13 +1,18 @@
 ## hapi vps docker containers
 
-Get Docker project containers
+Get project containers
 
 ### Synopsis
 
-This endpoint retrieves the containers of a specified Docker Compose project on a virtual machine.
+Retrieves a list of all containers belonging to a specific Docker Compose project on the virtual machine. 
+
+This endpoint returns detailed information about each container including
+their current status, port mappings, and runtime configuration.
+
+Use this to monitor the health and state of all services within your Docker Compose project.
 
 ```
-hapi vps docker containers <virtual machine ID> <project name> [flags]
+hapi vps docker containers <virtual-machine-id> <project-name> [flags]
 ```
 
 ### Options
@@ -25,5 +30,5 @@ hapi vps docker containers <virtual machine ID> <project name> [flags]
 
 ### SEE ALSO
 
-* [hapi vps docker](hapi_vps_docker.md)	 - Docker project management
+* [hapi vps docker](hapi_vps_docker.md)	 - Docker Manager commands
 

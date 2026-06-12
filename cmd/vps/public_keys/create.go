@@ -1,20 +1,26 @@
 package public_keys
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
+	"log"
+
 	"github.com/hostinger/api-cli/api"
-	"github.com/hostinger/api-cli/client"
 	"github.com/hostinger/api-cli/output"
 	"github.com/spf13/cobra"
-	"log"
 )
 
 var CreateCmd = &cobra.Command{
 	Use:   "create",
-	Short: "Create new public key",
-	Long:  `This endpoint allows you to add a new public key to your account, which can then be attached to virtual machine instances for secure access.`,
+	Short: "Create public key",
+	Long:  "Add a new public key to your account.\n\nUse this endpoint to register SSH keys for VPS authentication.",
 	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().VPSCreatePublicKeyV1WithResponse(context.TODO(), publicKeyCreateRequest(cmd, args))
+		payload, err := json.Marshal(createBody(cmd))
+		if err != nil {
+			log.Fatal(err)
+		}
+		r, err := api.Request().VPSCreatePublicKeyV1WithBodyWithResponse(context.TODO(), "application/json", bytes.NewReader(payload))
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -24,19 +30,17 @@ var CreateCmd = &cobra.Command{
 }
 
 func init() {
-	CreateCmd.Flags().StringP("name", "", "", "Public key name")
-	CreateCmd.Flags().StringP("key", "", "", "Public key content")
-
-	CreateCmd.MarkFlagRequired("name")
+	CreateCmd.Flags().StringP("key", "", "", "")
+	CreateCmd.Flags().StringP("name", "", "", "")
 	CreateCmd.MarkFlagRequired("key")
+	CreateCmd.MarkFlagRequired("name")
 }
 
-func publicKeyCreateRequest(cmd *cobra.Command, args []string) client.VPSCreatePublicKeyV1JSONRequestBody {
-	name, _ := cmd.Flags().GetString("name")
-	key, _ := cmd.Flags().GetString("key")
-
-	return client.VPSCreatePublicKeyV1JSONRequestBody{
-		Name: name,
-		Key:  key,
-	}
+func createBody(cmd *cobra.Command) map[string]any {
+	body := map[string]any{}
+	keyVal, _ := cmd.Flags().GetString("key")
+	body["key"] = keyVal
+	nameVal, _ := cmd.Flags().GetString("name")
+	body["name"] = nameVal
+	return body
 }

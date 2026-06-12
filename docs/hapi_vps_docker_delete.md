@@ -1,13 +1,18 @@
 ## hapi vps docker delete
 
-Delete Docker project
+Delete project
 
 ### Synopsis
 
-This endpoint stops and deletes a specified Docker Compose project on a virtual machine.
+Completely removes a Docker Compose project from the virtual machine, stopping all containers and cleaning up 
+associated resources including networks, volumes, and images. 
+
+This operation is irreversible and will delete all project data. 
+
+Use this when you want to permanently remove a project and free up system resources.
 
 ```
-hapi vps docker delete <virtual machine ID> <project name> [flags]
+hapi vps docker delete <virtual-machine-id> <project-name> [flags]
 ```
 
 ### Options
@@ -25,5 +30,5 @@ hapi vps docker delete <virtual machine ID> <project name> [flags]
 
 ### SEE ALSO
 
-* [hapi vps docker](hapi_vps_docker.md)	 - Docker project management
+* [hapi vps docker](hapi_vps_docker.md)	 - Docker Manager commands
 

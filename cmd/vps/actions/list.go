@@ -2,23 +2,22 @@ package actions
 
 import (
 	"context"
+	"log"
+
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/client"
 	"github.com/hostinger/api-cli/output"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
-	"log"
 )
 
 var ListCmd = &cobra.Command{
-	Use:   "list <virtual machine ID>",
-	Short: "Get action list",
-	Long: `Actions are operations or events that have been executed on the virtual machine, such as starting, stopping, 
-or modifying the machine. This endpoint allows you to view the history of these actions, providing details about each 
-action, such as the action name, timestamp, and status.`,
-	Args: cobra.MatchAll(cobra.ExactArgs(1)),
+	Use:   "list <virtual-machine-id>",
+	Short: "Get actions",
+	Long:  "Retrieve actions performed on a specified virtual machine.\n\nActions are operations or events that have been executed on the virtual\nmachine, such as starting, stopping, or modifying the machine. This endpoint\nallows you to view the history of these actions, providing details about\neach action, such as the action name, timestamp, and status.\n\nUse this endpoint to view VPS operation history and troubleshoot issues.",
+	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
 	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().VPSGetActionsV1WithResponse(context.TODO(), utils.StringToInt(args[0]), listRequestParameters(cmd))
+		r, err := api.Request().VPSGetActionsV1WithResponse(context.TODO(), utils.StringToInt(args[0]), listParams(cmd))
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -28,13 +27,14 @@ action, such as the action name, timestamp, and status.`,
 }
 
 func init() {
-	ListCmd.Flags().IntP("page", "", 1, "Page number")
+	ListCmd.Flags().IntP("page", "", 0, "Page number")
 }
 
-func listRequestParameters(cmd *cobra.Command) *client.VPSGetActionsV1Params {
-	pageId, _ := cmd.Flags().GetInt("page")
-
-	return &client.VPSGetActionsV1Params{
-		Page: utils.IntPtrOrNil(pageId),
+func listParams(cmd *cobra.Command) *client.VPSGetActionsV1Params {
+	params := &client.VPSGetActionsV1Params{}
+	if cmd.Flags().Changed("page") {
+		v, _ := cmd.Flags().GetInt("page")
+		params.Page = &v
 	}
+	return params
 }

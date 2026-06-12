@@ -4,6 +4,11 @@ import (
 	"fmt"
 	"github.com/hostinger/api-cli/cmd/billing"
 	"github.com/hostinger/api-cli/cmd/dns"
+	"github.com/hostinger/api-cli/cmd/domains"
+	"github.com/hostinger/api-cli/cmd/ecommerce"
+	"github.com/hostinger/api-cli/cmd/horizons"
+	"github.com/hostinger/api-cli/cmd/hosting"
+	"github.com/hostinger/api-cli/cmd/reach"
 	"github.com/hostinger/api-cli/cmd/vps"
 	"os"
 
@@ -47,6 +52,11 @@ func init() {
 
 	RootCmd.AddCommand(billing.GroupCmd)
 	RootCmd.AddCommand(dns.GroupCmd)
+	RootCmd.AddCommand(domains.GroupCmd)
+	RootCmd.AddCommand(ecommerce.GroupCmd)
+	RootCmd.AddCommand(horizons.GroupCmd)
+	RootCmd.AddCommand(hosting.GroupCmd)
+	RootCmd.AddCommand(reach.GroupCmd)
 	RootCmd.AddCommand(vps.GroupCmd)
 	RootCmd.AddCommand(VersionCmd)
 }

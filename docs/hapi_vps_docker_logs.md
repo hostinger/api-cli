@@ -1,13 +1,19 @@
 ## hapi vps docker logs
 
-Get Docker project logs
+Get project logs
 
 ### Synopsis
 
-This endpoint retrieves the logs of a specified Docker Compose project on a virtual machine.
+Retrieves aggregated log entries from all services within a Docker Compose project. 
+
+This endpoint returns recent log output from each container, organized by service name with timestamps. 
+The response contains the last 300 log entries across all services. 
+
+Use this for debugging, monitoring application behavior, and
+troubleshooting issues across your entire project stack.
 
 ```
-hapi vps docker logs <virtual machine ID> <project name> [flags]
+hapi vps docker logs <virtual-machine-id> <project-name> [flags]
 ```
 
 ### Options
@@ -25,5 +31,5 @@ hapi vps docker logs <virtual machine ID> <project name> [flags]
 
 ### SEE ALSO
 
-* [hapi vps docker](hapi_vps_docker.md)	 - Docker project management
+* [hapi vps docker](hapi_vps_docker.md)	 - Docker Manager commands
 

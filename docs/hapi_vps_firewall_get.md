@@ -1,13 +1,15 @@
 ## hapi vps firewall get
 
-Get firewall
+Get firewall details
 
 ### Synopsis
 
-This endpoint retrieves firewall by its ID and rules associated with it.
+Retrieve firewall by its ID and rules associated with it.
+
+Use this endpoint to view specific firewall configuration and rules.
 
 ```
-hapi vps firewall get <firewall ID> [flags]
+hapi vps firewall get <firewall-id> [flags]
 ```
 
 ### Options
@@ -25,5 +27,5 @@ hapi vps firewall get <firewall ID> [flags]
 
 ### SEE ALSO
 
-* [hapi vps firewall](hapi_vps_firewall.md)	 - Firewall management
+* [hapi vps firewall](hapi_vps_firewall.md)	 - Firewall commands
 

@@ -6,8 +6,7 @@ import (
 
 var GroupCmd = &cobra.Command{
 	Use:   "catalog",
-	Short: "Catalog management",
-	Long:  ``,
+	Short: "Catalog commands",
 }
 
 func init() {

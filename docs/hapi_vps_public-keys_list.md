@@ -1,10 +1,12 @@
 ## hapi vps public-keys list
 
-Get public key list
+Get public keys
 
 ### Synopsis
 
-This endpoint retrieves a list of public keys associated with your account.
+Retrieve public keys associated with your account.
+
+Use this endpoint to view available SSH keys for VPS authentication.
 
 ```
 hapi vps public-keys list [flags]
@@ -14,7 +16,7 @@ hapi vps public-keys list [flags]
 
 ```
   -h, --help       help for list
-      --page int   Page number (default 1)
+      --page int   Page number
 ```
 
 ### Options inherited from parent commands
@@ -26,5 +28,5 @@ hapi vps public-keys list [flags]
 
 ### SEE ALSO
 
-* [hapi vps public-keys](hapi_vps_public-keys.md)	 - Public key management
+* [hapi vps public-keys](hapi_vps_public-keys.md)	 - Public Keys commands
 

@@ -1,10 +1,6 @@
 ## hapi vps actions
 
-VM actions information
-
-### Synopsis
-
-Track and review operations performed on your virtual machines. These endpoints provide details about specific actions—such as start, stop, or restart—including timestamps and statuses.
+Actions commands
 
 ### Options
 
@@ -21,7 +17,7 @@ Track and review operations performed on your virtual machines. These endpoints 
 
 ### SEE ALSO
 
-* [hapi vps](hapi_vps.md)	 - VPS management
-* [hapi vps actions get](hapi_vps_actions_get.md)	 - Get action
-* [hapi vps actions list](hapi_vps_actions_list.md)	 - Get action list
+* [hapi vps](hapi_vps.md)	 - VPS commands
+* [hapi vps actions get](hapi_vps_actions_get.md)	 - Get action details
+* [hapi vps actions list](hapi_vps_actions_list.md)	 - Get actions
 

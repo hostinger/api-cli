@@ -4,12 +4,14 @@ Delete public key
 
 ### Synopsis
 
-This endpoint deletes a public key from your account.
+Delete a public key from your account. 
 
-Deleting public key from account does not remove it from virtual machine
+**Deleting public key from account does not remove it from virtual machine** 
+       
+Use this endpoint to remove unused SSH keys from account.
 
 ```
-hapi vps public-keys delete <public key ID> [flags]
+hapi vps public-keys delete <public-key-id> [flags]
 ```
 
 ### Options
@@ -27,5 +29,5 @@ hapi vps public-keys delete <public key ID> [flags]
 
 ### SEE ALSO
 
-* [hapi vps public-keys](hapi_vps_public-keys.md)	 - Public key management
+* [hapi vps public-keys](hapi_vps_public-keys.md)	 - Public Keys commands
 

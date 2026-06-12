@@ -4,10 +4,12 @@ Update DNS records
 
 ### Synopsis
 
-This endpoint updates DNS records for the selected domain.
+Update DNS records for the selected domain.
 
-Using `overwrite = true` in the request will replace existing records matching the name and type with the provided
-records. When `false`, provided records are appended and existing records' TTLs are updated.
+Using `overwrite = true` will replace existing records with the provided ones. 
+Otherwise existing records will be updated and new records will be added.
+
+Use this endpoint to modify domain DNS configuration.
 
 ```
 hapi dns records update <domain> [flags]
@@ -16,12 +18,11 @@ hapi dns records update <domain> [flags]
 ### Options
 
 ```
-      --content stringArray   Content of the record (repeatable to assign multiple records to the name)
-  -h, --help                  help for update
-      --name string           Name of the record (use @ for wildcard name)
-      --overwrite             Replace records matching name and type instead of appending
-      --ttl int               TTL (Time-To-Live) of the record
-      --type string           Type of the record (one of: A, AAAA, ALIAS, CAA, CNAME, MX, NS, SOA, SRV, TXT)
+  -h, --help             help for update
+      --overwrite true   If true, resource records (RRs) matching name and type will be deleted and new RRs will be created,
+                         otherwise resource records' ttl's are updated and new records are appended.
+                         If no matching RRs are found, they are created. (default true)
+      --zone string       (JSON)
 ```
 
 ### Options inherited from parent commands
@@ -33,5 +34,5 @@ hapi dns records update <domain> [flags]
 
 ### SEE ALSO
 
-* [hapi dns records](hapi_dns_records.md)	 - DNS zone record management
+* [hapi dns records](hapi_dns_records.md)	 - Zone commands
 

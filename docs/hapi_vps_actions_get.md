@@ -1,14 +1,15 @@
 ## hapi vps actions get
 
-Get action
+Get action details
 
 ### Synopsis
 
-This endpoint retrieves details of a specific action performed on a specified virtual machine.
-This endpoint allows you to view detailed information about a particular action, including the action name, timestamp, and status.
+Retrieve detailed information about a specific action performed on a specified virtual machine.
+
+Use this endpoint to monitor specific VPS operation status and details.
 
 ```
-hapi vps actions get <virtual machine ID> <action ID> [flags]
+hapi vps actions get <virtual-machine-id> <action-id> [flags]
 ```
 
 ### Options
@@ -26,5 +27,5 @@ hapi vps actions get <virtual machine ID> <action ID> [flags]
 
 ### SEE ALSO
 
-* [hapi vps actions](hapi_vps_actions.md)	 - VM actions information
+* [hapi vps actions](hapi_vps_actions.md)	 - Actions commands
 

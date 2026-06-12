@@ -2,21 +2,22 @@ package virtual_machines
 
 import (
 	"context"
+	"log"
+
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/client"
 	"github.com/hostinger/api-cli/output"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
-	"log"
 )
 
-var GetMetricsCmd = &cobra.Command{
-	Use:   "metrics <virtual machine ID>",
+var MetricsCmd = &cobra.Command{
+	Use:   "metrics <virtual-machine-id>",
 	Short: "Get metrics",
-	Long:  `This endpoint retrieves the historical metrics for a specified virtual machine.`,
+	Long:  "Retrieve historical metrics for a specified virtual machine.\n\nIt includes the following metrics: \n- CPU usage\n- Memory usage\n- Disk usage\n- Network usage\n- Uptime\n\nUse this endpoint to monitor VPS performance and resource utilization over time.",
 	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
 	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().VPSGetMetricsV1WithResponse(context.TODO(), utils.StringToInt(args[0]), metricsRequestParameters(cmd))
+		r, err := api.Request().VPSGetMetricsV1WithResponse(context.TODO(), utils.StringToInt(args[0]), metricsParams(cmd))
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -26,19 +27,17 @@ var GetMetricsCmd = &cobra.Command{
 }
 
 func init() {
-	GetMetricsCmd.Flags().StringP("date-from", "f", "", "Date from")
-	GetMetricsCmd.Flags().StringP("date-to", "t", "", "Date to")
-
-	GetMetricsCmd.MarkFlagRequired("date-from")
-	GetMetricsCmd.MarkFlagRequired("date-to")
+	MetricsCmd.Flags().StringP("date-from", "", "", "")
+	MetricsCmd.Flags().StringP("date-to", "", "", "")
+	MetricsCmd.MarkFlagRequired("date-from")
+	MetricsCmd.MarkFlagRequired("date-to")
 }
 
-func metricsRequestParameters(cmd *cobra.Command) *client.VPSGetMetricsV1Params {
-	dateFrom, _ := cmd.Flags().GetString("date-from")
-	dateTo, _ := cmd.Flags().GetString("date-to")
-
-	return &client.VPSGetMetricsV1Params{
-		DateFrom: utils.StringToTime(dateFrom),
-		DateTo:   utils.StringToTime(dateTo),
-	}
+func metricsParams(cmd *cobra.Command) *client.VPSGetMetricsV1Params {
+	params := &client.VPSGetMetricsV1Params{}
+	dateFromVal, _ := cmd.Flags().GetString("date-from")
+	params.DateFrom = utils.StringToTime(dateFromVal)
+	dateToVal, _ := cmd.Flags().GetString("date-to")
+	params.DateTo = utils.StringToTime(dateToVal)
+	return params
 }

@@ -6,8 +6,7 @@ import (
 
 var GroupCmd = &cobra.Command{
 	Use:   "data-centers",
-	Short: "Data center information",
-	Long:  `Access information on available data centers, including location details, so you can choose the optimal region for deploying your virtual machines.`,
+	Short: "Data centers commands",
 }
 
 func init() {

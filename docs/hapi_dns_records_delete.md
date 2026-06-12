@@ -4,7 +4,15 @@ Delete DNS records
 
 ### Synopsis
 
-This endpoint deletes DNS zone records for a specific domain, filtered by record name and type.
+Delete DNS records for the selected domain.
+
+To filter which records to delete, add the `name` of the record and `type` to the filter. 
+Multiple filters can be provided with single request.
+
+If you have multiple records with the same name and type, and you want to delete only part of them,
+refer to the `Update zone records` endpoint.
+
+Use this endpoint to remove specific DNS records from domains.
 
 ```
 hapi dns records delete <domain> [flags]
@@ -13,8 +21,8 @@ hapi dns records delete <domain> [flags]
 ### Options
 
 ```
-      --filter stringArray   Record to delete in format <name>:<type> (repeatable). Type one of: A, AAAA, ALIAS, CAA, CNAME, MX, NS, SOA, SRV, TXT
-  -h, --help                 help for delete
+      --filters string   Filter records for deletion (JSON)
+  -h, --help             help for delete
 ```
 
 ### Options inherited from parent commands
@@ -26,5 +34,5 @@ hapi dns records delete <domain> [flags]
 
 ### SEE ALSO
 
-* [hapi dns records](hapi_dns_records.md)	 - DNS zone record management
+* [hapi dns records](hapi_dns_records.md)	 - Zone commands
 

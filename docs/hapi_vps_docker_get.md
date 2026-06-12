@@ -1,13 +1,18 @@
 ## hapi vps docker get
 
-Get Docker project contents
+Get project contents
 
 ### Synopsis
 
-This endpoint retrieves the contents of a specified Docker Compose project on a virtual machine.
+Retrieves the complete project information including the docker-compose.yml
+file contents, project metadata, and current deployment status.
+
+This endpoint provides the full configuration and state details of a specific Docker Compose project. 
+
+Use this to inspect project settings, review the compose file, or check the overall project health.
 
 ```
-hapi vps docker get <virtual machine ID> <project name> [flags]
+hapi vps docker get <virtual-machine-id> <project-name> [flags]
 ```
 
 ### Options
@@ -25,5 +30,5 @@ hapi vps docker get <virtual machine ID> <project name> [flags]
 
 ### SEE ALSO
 
-* [hapi vps docker](hapi_vps_docker.md)	 - Docker project management
+* [hapi vps docker](hapi_vps_docker.md)	 - Docker Manager commands
 

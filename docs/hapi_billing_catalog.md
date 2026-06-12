@@ -1,6 +1,6 @@
 ## hapi billing catalog
 
-Catalog management
+Catalog commands
 
 ### Options
 
@@ -17,6 +17,6 @@ Catalog management
 
 ### SEE ALSO
 
-* [hapi billing](hapi_billing.md)	 - Billing management
+* [hapi billing](hapi_billing.md)	 - Billing commands
 * [hapi billing catalog list](hapi_billing_catalog_list.md)	 - Get catalog item list
 

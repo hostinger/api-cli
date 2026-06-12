@@ -4,9 +4,12 @@ Get catalog item list
 
 ### Synopsis
 
-This endpoint retrieves a list of available catalog items that can be ordered.
+Retrieve catalog items available for order.
 
-Prices in the response are displayed in cents.
+Prices in catalog items is displayed as cents (without floating point),
+e.g: float `17.99` is displayed as integer `1799`.
+
+Use this endpoint to view available services and pricing before placing orders.
 
 ```
 hapi billing catalog list [flags]
@@ -17,7 +20,7 @@ hapi billing catalog list [flags]
 ```
       --category string   Filter catalog items by category (one of: DOMAIN, VPS)
   -h, --help              help for list
-      --name string       Filter catalog items by name. Use * for wildcard search, e.g. .COM* to find .com domain
+      --name *            Filter catalog items by name. Use * for wildcard search, e.g. `.COM*` to find .com domain
 ```
 
 ### Options inherited from parent commands
@@ -29,5 +32,5 @@ hapi billing catalog list [flags]
 
 ### SEE ALSO
 
-* [hapi billing catalog](hapi_billing_catalog.md)	 - Catalog management
+* [hapi billing catalog](hapi_billing_catalog.md)	 - Catalog commands
 

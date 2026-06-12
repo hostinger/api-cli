@@ -1,13 +1,17 @@
 ## hapi vps docker start
 
-Start Docker project
+Start project
 
 ### Synopsis
 
-This endpoint starts a specified Docker Compose project on a virtual machine.
+Starts all services in a Docker Compose project that are currently stopped. 
+
+This operation brings up containers in the correct dependency order as defined in the compose file. 
+
+Use this to resume a project that was previously stopped or to start services after a system reboot.
 
 ```
-hapi vps docker start <virtual machine ID> <project name> [flags]
+hapi vps docker start <virtual-machine-id> <project-name> [flags]
 ```
 
 ### Options
@@ -25,5 +29,5 @@ hapi vps docker start <virtual machine ID> <project name> [flags]
 
 ### SEE ALSO
 
-* [hapi vps docker](hapi_vps_docker.md)	 - Docker project management
+* [hapi vps docker](hapi_vps_docker.md)	 - Docker Manager commands
 

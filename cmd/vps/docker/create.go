@@ -1,22 +1,28 @@
 package docker
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
+	"log"
+
 	"github.com/hostinger/api-cli/api"
-	"github.com/hostinger/api-cli/client"
 	"github.com/hostinger/api-cli/output"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
-	"log"
 )
 
 var CreateCmd = &cobra.Command{
-	Use:   "create <virtual machine ID>",
-	Short: "Create Docker project",
-	Long:  `This endpoint creates and starts a new Docker Compose project on a specified virtual machine.`,
+	Use:   "create <virtual-machine-id>",
+	Short: "Create new project",
+	Long:  "Deploy new project from docker-compose.yaml contents or download contents from URL. \n\nURL can be Github repository url in format https://github.com/[user]/[repo]\nand it will be automatically resolved to docker-compose.yaml file in\nmaster branch. Any other URL provided must return docker-compose.yaml\nfile contents.\n\nIf project with the same name already exists, existing project will be replaced.",
 	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
 	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().VPSCreateNewProjectV1WithResponse(context.TODO(), utils.StringToInt(args[0]), projectCreateRequest(cmd))
+		payload, err := json.Marshal(createBody(cmd))
+		if err != nil {
+			log.Fatal(err)
+		}
+		r, err := api.Request().VPSCreateNewProjectV1WithBodyWithResponse(context.TODO(), utils.StringToInt(args[0]), "application/json", bytes.NewReader(payload))
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -26,22 +32,22 @@ var CreateCmd = &cobra.Command{
 }
 
 func init() {
-	CreateCmd.Flags().StringP("project-name", "", "", "Docker Compose project name (alphanumeric characters, dashes and underscores only)")
-	CreateCmd.Flags().StringP("content", "", "", "URL to a docker-compose.yaml file, a GitHub repository, or raw YAML content of the compose file")
+	CreateCmd.Flags().StringP("content", "", "", "URL pointing to docker-compose.yaml file, Github repository or raw YAML content of the compose file")
 	CreateCmd.Flags().StringP("environment", "", "", "Project environment variables")
-
-	CreateCmd.MarkFlagRequired("project-name")
+	CreateCmd.Flags().StringP("project-name", "", "", "Docker Compose project name using alphanumeric characters, dashes, and underscores only")
 	CreateCmd.MarkFlagRequired("content")
+	CreateCmd.MarkFlagRequired("project-name")
 }
 
-func projectCreateRequest(cmd *cobra.Command) client.VPSCreateNewProjectV1JSONRequestBody {
-	projectName, _ := cmd.Flags().GetString("project-name")
-	content, _ := cmd.Flags().GetString("content")
-	environment, _ := cmd.Flags().GetString("environment")
-
-	return client.VPSCreateNewProjectV1JSONRequestBody{
-		ProjectName: projectName,
-		Content:     content,
-		Environment: utils.StringPtrOrNil(environment),
+func createBody(cmd *cobra.Command) map[string]any {
+	body := map[string]any{}
+	contentVal, _ := cmd.Flags().GetString("content")
+	body["content"] = contentVal
+	if cmd.Flags().Changed("environment") {
+		v, _ := cmd.Flags().GetString("environment")
+		body["environment"] = v
 	}
+	projectNameVal, _ := cmd.Flags().GetString("project-name")
+	body["project_name"] = projectNameVal
+	return body
 }

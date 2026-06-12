@@ -4,12 +4,14 @@ Delete firewall
 
 ### Synopsis
 
-This endpoint deletes a specified firewall.
+Delete a specified firewall.
 
 Any virtual machine that has this firewall activated will automatically have it deactivated.
 
+Use this endpoint to remove unused firewall configurations.
+
 ```
-hapi vps firewall delete <firewall ID> [flags]
+hapi vps firewall delete <firewall-id> [flags]
 ```
 
 ### Options
@@ -27,5 +29,5 @@ hapi vps firewall delete <firewall ID> [flags]
 
 ### SEE ALSO
 
-* [hapi vps firewall](hapi_vps_firewall.md)	 - Firewall management
+* [hapi vps firewall](hapi_vps_firewall.md)	 - Firewall commands
 

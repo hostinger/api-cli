@@ -1,12 +1,6 @@
 ## hapi vps post-install-scripts
 
-Post-install script management
-
-### Synopsis
-
-This category allows you to create, update, delete, and retrieve scripts that can be used for automated 
-tasks after the operating system installation. 
-Use case includes setting up software, configuring settings, or running custom commands.
+Post-install scripts commands
 
 ### Options
 
@@ -23,9 +17,10 @@ Use case includes setting up software, configuring settings, or running custom c
 
 ### SEE ALSO
 
-* [hapi vps](hapi_vps.md)	 - VPS management
-* [hapi vps post-install-scripts create](hapi_vps_post-install-scripts_create.md)	 - Create new post-install script
+* [hapi vps](hapi_vps.md)	 - VPS commands
+* [hapi vps post-install-scripts create](hapi_vps_post-install-scripts_create.md)	 - Create post-install script
 * [hapi vps post-install-scripts delete](hapi_vps_post-install-scripts_delete.md)	 - Delete post-install script
 * [hapi vps post-install-scripts get](hapi_vps_post-install-scripts_get.md)	 - Get post-install script
-* [hapi vps post-install-scripts list](hapi_vps_post-install-scripts_list.md)	 - Get post-install script list
+* [hapi vps post-install-scripts list](hapi_vps_post-install-scripts_list.md)	 - Get post-install scripts
+* [hapi vps post-install-scripts update](hapi_vps_post-install-scripts_update.md)	 - Update post-install script
 

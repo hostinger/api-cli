@@ -4,10 +4,12 @@ Get post-install script
 
 ### Synopsis
 
-This endpoint retrieves post-install script by its ID.
+Retrieve post-install script by its ID.
+
+Use this endpoint to view specific automation script details.
 
 ```
-hapi vps post-install-scripts get <post-install script ID> [flags]
+hapi vps post-install-scripts get <post-install-script-id> [flags]
 ```
 
 ### Options
@@ -25,5 +27,5 @@ hapi vps post-install-scripts get <post-install script ID> [flags]
 
 ### SEE ALSO
 
-* [hapi vps post-install-scripts](hapi_vps_post-install-scripts.md)	 - Post-install script management
+* [hapi vps post-install-scripts](hapi_vps_post-install-scripts.md)	 - Post-install scripts commands
 

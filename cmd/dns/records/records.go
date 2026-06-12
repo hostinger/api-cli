@@ -6,14 +6,13 @@ import (
 
 var GroupCmd = &cobra.Command{
 	Use:   "records",
-	Short: "DNS zone record management",
-	Long:  ``,
+	Short: "Zone commands",
 }
 
 func init() {
-	GroupCmd.AddCommand(ListCmd)
-	GroupCmd.AddCommand(UpdateCmd)
 	GroupCmd.AddCommand(DeleteCmd)
+	GroupCmd.AddCommand(ListCmd)
 	GroupCmd.AddCommand(ResetCmd)
+	GroupCmd.AddCommand(UpdateCmd)
 	GroupCmd.AddCommand(ValidateCmd)
 }

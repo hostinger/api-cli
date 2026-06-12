@@ -1,15 +1,17 @@
 ## hapi vps firewall sync
 
-Sync firewall rules
+Sync firewall
 
 ### Synopsis
 
-This endpoint syncs a firewall for a specified virtual machine.
+Sync a firewall for a specified virtual machine.
 
-Firewall can loose sync with virtual machine if the firewall has new rules added, removed or updated.
+Firewall can lose sync with virtual machine if the firewall has new rules added, removed or updated.
+
+Use this endpoint to apply updated firewall rules to VPS instances.
 
 ```
-hapi vps firewall sync <firewall ID> <virtual machine ID> [flags]
+hapi vps firewall sync <firewall-id> <virtual-machine-id> [flags]
 ```
 
 ### Options
@@ -27,5 +29,5 @@ hapi vps firewall sync <firewall ID> <virtual machine ID> [flags]
 
 ### SEE ALSO
 
-* [hapi vps firewall](hapi_vps_firewall.md)	 - Firewall management
+* [hapi vps firewall](hapi_vps_firewall.md)	 - Firewall commands
 

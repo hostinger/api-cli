@@ -4,10 +4,12 @@ Create PTR record
 
 ### Synopsis
 
-This endpoint creates or updates a PTR (Pointer) record for a specified IP address of a virtual machine.
+Create or update a PTR (Pointer) record for a specified virtual machine.
+
+Use this endpoint to configure reverse DNS lookup for VPS IP addresses.
 
 ```
-hapi vps ptr create <virtual machine ID> <IP address ID> [flags]
+hapi vps ptr create <virtual-machine-id> <ip-address-id> [flags]
 ```
 
 ### Options
@@ -26,5 +28,5 @@ hapi vps ptr create <virtual machine ID> <IP address ID> [flags]
 
 ### SEE ALSO
 
-* [hapi vps ptr](hapi_vps_ptr.md)	 - PTR records management
+* [hapi vps ptr](hapi_vps_ptr.md)	 - PTR records commands
 

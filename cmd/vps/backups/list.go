@@ -2,21 +2,22 @@ package backups
 
 import (
 	"context"
+	"log"
+
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/client"
 	"github.com/hostinger/api-cli/output"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
-	"log"
 )
 
 var ListCmd = &cobra.Command{
-	Use:   "list <virtual machine ID>",
-	Short: "Get backup list",
-	Long:  `This endpoint retrieves a list of backups for a specified virtual machine.`,
+	Use:   "list <virtual-machine-id>",
+	Short: "Get backups",
+	Long:  "Retrieve backups for a specified virtual machine.\n\nUse this endpoint to view available backup points for VPS data recovery.",
 	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
 	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().VPSGetBackupsV1WithResponse(context.TODO(), utils.StringToInt(args[0]), backupListRequestParameters(cmd))
+		r, err := api.Request().VPSGetBackupsV1WithResponse(context.TODO(), utils.StringToInt(args[0]), listParams(cmd))
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -26,13 +27,14 @@ var ListCmd = &cobra.Command{
 }
 
 func init() {
-	ListCmd.Flags().IntP("page", "", 1, "Page number")
+	ListCmd.Flags().IntP("page", "", 0, "Page number")
 }
 
-func backupListRequestParameters(cmd *cobra.Command) *client.VPSGetBackupsV1Params {
-	pageId, _ := cmd.Flags().GetInt("page")
-
-	return &client.VPSGetBackupsV1Params{
-		Page: utils.IntPtrOrNil(pageId),
+func listParams(cmd *cobra.Command) *client.VPSGetBackupsV1Params {
+	params := &client.VPSGetBackupsV1Params{}
+	if cmd.Flags().Changed("page") {
+		v, _ := cmd.Flags().GetInt("page")
+		params.Page = &v
 	}
+	return params
 }

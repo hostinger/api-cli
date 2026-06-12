@@ -6,19 +6,18 @@ import (
 
 var GroupCmd = &cobra.Command{
 	Use:   "docker",
-	Short: "Docker project management",
-	Long:  `Manage Docker Compose projects on a virtual machine. You can list projects, inspect their contents, containers and logs, and create, update, delete, start, stop or restart them.`,
+	Short: "Docker Manager commands",
 }
 
 func init() {
-	GroupCmd.AddCommand(ListCmd)
-	GroupCmd.AddCommand(GetCmd)
 	GroupCmd.AddCommand(ContainersCmd)
-	GroupCmd.AddCommand(LogsCmd)
 	GroupCmd.AddCommand(CreateCmd)
-	GroupCmd.AddCommand(UpdateCmd)
 	GroupCmd.AddCommand(DeleteCmd)
+	GroupCmd.AddCommand(GetCmd)
+	GroupCmd.AddCommand(ListCmd)
+	GroupCmd.AddCommand(LogsCmd)
+	GroupCmd.AddCommand(RestartCmd)
 	GroupCmd.AddCommand(StartCmd)
 	GroupCmd.AddCommand(StopCmd)
-	GroupCmd.AddCommand(RestartCmd)
+	GroupCmd.AddCommand(UpdateCmd)
 }

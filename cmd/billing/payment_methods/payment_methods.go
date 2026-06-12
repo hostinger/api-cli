@@ -6,12 +6,11 @@ import (
 
 var GroupCmd = &cobra.Command{
 	Use:   "payment-methods",
-	Short: "Payment method management",
-	Long:  ``,
+	Short: "Payment methods commands",
 }
 
 func init() {
-	GroupCmd.AddCommand(ListCmd)
 	GroupCmd.AddCommand(DeleteCmd)
+	GroupCmd.AddCommand(ListCmd)
 	GroupCmd.AddCommand(SetDefaultCmd)
 }

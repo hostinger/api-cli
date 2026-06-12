@@ -1,13 +1,15 @@
 ## hapi vps templates get
 
-Get template
+Get template details
 
 ### Synopsis
 
-This endpoint retrieves details of a specific OS template for virtual machines.
+Retrieve detailed information about a specific OS template for virtual machines.
+
+Use this endpoint to view specific template specifications before deployment.
 
 ```
-hapi vps templates get <template ID> [flags]
+hapi vps templates get <template-id> [flags]
 ```
 
 ### Options
@@ -25,5 +27,5 @@ hapi vps templates get <template ID> [flags]
 
 ### SEE ALSO
 
-* [hapi vps templates](hapi_vps_templates.md)	 - OS Templates
+* [hapi vps templates](hapi_vps_templates.md)	 - OS Templates commands
 

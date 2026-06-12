@@ -1,13 +1,15 @@
 ## hapi billing subscriptions enable-auto-renewal
 
-Enable subscription auto-renewal
+Enable auto-renewal
 
 ### Synopsis
 
-This endpoint enables auto-renewal for a subscription, so the associated service is renewed automatically.
+Enable auto-renewal for a subscription.
+
+Use this endpoint when enable auto-renewal for a subscription.
 
 ```
-hapi billing subscriptions enable-auto-renewal <subscription ID> [flags]
+hapi billing subscriptions enable-auto-renewal <subscription-id> [flags]
 ```
 
 ### Options
@@ -25,5 +27,5 @@ hapi billing subscriptions enable-auto-renewal <subscription ID> [flags]
 
 ### SEE ALSO
 
-* [hapi billing subscriptions](hapi_billing_subscriptions.md)	 - Subscription management
+* [hapi billing subscriptions](hapi_billing_subscriptions.md)	 - Subscriptions commands
 

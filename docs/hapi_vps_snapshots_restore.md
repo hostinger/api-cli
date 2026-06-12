@@ -4,12 +4,15 @@ Restore snapshot
 
 ### Synopsis
 
-This endpoint restores a specified virtual machine to a previous state using a snapshot. Restoring from a 
-snapshot allows users to revert the virtual machine to that state, which is useful for system recovery, 
-undoing changes, or testing.
+Restore a specified virtual machine to a previous state using a snapshot.
+
+Restoring from a snapshot allows users to revert the virtual machine to that state,
+which is useful for system recovery, undoing changes, or testing.
+
+Use this endpoint to revert VPS instances to previous saved states.
 
 ```
-hapi vps snapshots restore <virtual machine ID> [flags]
+hapi vps snapshots restore <virtual-machine-id> [flags]
 ```
 
 ### Options
@@ -27,5 +30,5 @@ hapi vps snapshots restore <virtual machine ID> [flags]
 
 ### SEE ALSO
 
-* [hapi vps snapshots](hapi_vps_snapshots.md)	 - Snapshot management
+* [hapi vps snapshots](hapi_vps_snapshots.md)	 - Snapshots commands
 

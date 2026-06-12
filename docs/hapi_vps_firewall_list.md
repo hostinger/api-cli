@@ -4,7 +4,9 @@ Get firewall list
 
 ### Synopsis
 
-This endpoint retrieves a list of all firewalls available.
+Retrieve all available firewalls.
+
+Use this endpoint to view existing firewall configurations.
 
 ```
 hapi vps firewall list [flags]
@@ -14,7 +16,7 @@ hapi vps firewall list [flags]
 
 ```
   -h, --help       help for list
-      --page int   Page number (default 1)
+      --page int   Page number
 ```
 
 ### Options inherited from parent commands
@@ -26,5 +28,5 @@ hapi vps firewall list [flags]
 
 ### SEE ALSO
 
-* [hapi vps firewall](hapi_vps_firewall.md)	 - Firewall management
+* [hapi vps firewall](hapi_vps_firewall.md)	 - Firewall commands
 

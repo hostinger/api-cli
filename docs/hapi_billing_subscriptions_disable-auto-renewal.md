@@ -1,13 +1,15 @@
 ## hapi billing subscriptions disable-auto-renewal
 
-Disable subscription auto-renewal
+Disable auto-renewal
 
 ### Synopsis
 
-This endpoint disables auto-renewal for a subscription, which stops any further auto-renewal of the associated service.
+Disable auto-renewal for a subscription.
+
+Use this endpoint when disable auto-renewal for a subscription.
 
 ```
-hapi billing subscriptions disable-auto-renewal <subscription ID> [flags]
+hapi billing subscriptions disable-auto-renewal <subscription-id> [flags]
 ```
 
 ### Options
@@ -25,5 +27,5 @@ hapi billing subscriptions disable-auto-renewal <subscription ID> [flags]
 
 ### SEE ALSO
 
-* [hapi billing subscriptions](hapi_billing_subscriptions.md)	 - Subscription management
+* [hapi billing subscriptions](hapi_billing_subscriptions.md)	 - Subscriptions commands
 

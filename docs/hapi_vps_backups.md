@@ -1,10 +1,6 @@
 ## hapi vps backups
 
-VM backup management
-
-### Synopsis
-
-Safeguard your data by managing backups. You can list available backups or restore a virtual machine from a backup.
+Backups commands
 
 ### Options
 
@@ -21,7 +17,7 @@ Safeguard your data by managing backups. You can list available backups or resto
 
 ### SEE ALSO
 
-* [hapi vps](hapi_vps.md)	 - VPS management
-* [hapi vps backups list](hapi_vps_backups_list.md)	 - Get backup list
+* [hapi vps](hapi_vps.md)	 - VPS commands
+* [hapi vps backups list](hapi_vps_backups_list.md)	 - Get backups
 * [hapi vps backups restore](hapi_vps_backups_restore.md)	 - Restore backup
 

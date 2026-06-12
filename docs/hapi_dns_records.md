@@ -1,6 +1,6 @@
 ## hapi dns records
 
-DNS zone record management
+Zone commands
 
 ### Options
 
@@ -17,7 +17,7 @@ DNS zone record management
 
 ### SEE ALSO
 
-* [hapi dns](hapi_dns.md)	 - DNS management
+* [hapi dns](hapi_dns.md)	 - DNS commands
 * [hapi dns records delete](hapi_dns_records_delete.md)	 - Delete DNS records
 * [hapi dns records list](hapi_dns_records_list.md)	 - Get DNS records
 * [hapi dns records reset](hapi_dns_records_reset.md)	 - Reset DNS records

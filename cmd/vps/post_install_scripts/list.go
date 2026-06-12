@@ -2,20 +2,20 @@ package post_install_scripts
 
 import (
 	"context"
+	"log"
+
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/client"
 	"github.com/hostinger/api-cli/output"
-	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
-	"log"
 )
 
 var ListCmd = &cobra.Command{
 	Use:   "list",
-	Short: "Get post-install script list",
-	Long:  `This endpoint retrieves a list of post-install scripts associated with your account.`,
+	Short: "Get post-install scripts",
+	Long:  "Retrieve post-install scripts associated with your account.\n\nUse this endpoint to view available automation scripts for VPS deployment.",
 	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().VPSGetPostInstallScriptsV1WithResponse(context.TODO(), listRequestParameters(cmd))
+		r, err := api.Request().VPSGetPostInstallScriptsV1WithResponse(context.TODO(), listParams(cmd))
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -25,13 +25,14 @@ var ListCmd = &cobra.Command{
 }
 
 func init() {
-	ListCmd.Flags().IntP("page", "", 1, "Page number")
+	ListCmd.Flags().IntP("page", "", 0, "Page number")
 }
 
-func listRequestParameters(cmd *cobra.Command) *client.VPSGetPostInstallScriptsV1Params {
-	pageId, _ := cmd.Flags().GetInt("page")
-
-	return &client.VPSGetPostInstallScriptsV1Params{
-		Page: utils.IntPtrOrNil(pageId),
+func listParams(cmd *cobra.Command) *client.VPSGetPostInstallScriptsV1Params {
+	params := &client.VPSGetPostInstallScriptsV1Params{}
+	if cmd.Flags().Changed("page") {
+		v, _ := cmd.Flags().GetInt("page")
+		params.Page = &v
 	}
+	return params
 }

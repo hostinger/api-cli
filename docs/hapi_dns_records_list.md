@@ -4,7 +4,9 @@ Get DNS records
 
 ### Synopsis
 
-This endpoint retrieves DNS zone records for a specific domain.
+Retrieve DNS zone records for a specific domain.
+
+Use this endpoint to view current DNS configuration for domain management.
 
 ```
 hapi dns records list <domain> [flags]
@@ -25,5 +27,5 @@ hapi dns records list <domain> [flags]
 
 ### SEE ALSO
 
-* [hapi dns records](hapi_dns_records.md)	 - DNS zone record management
+* [hapi dns records](hapi_dns_records.md)	 - Zone commands
 

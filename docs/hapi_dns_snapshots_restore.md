@@ -4,10 +4,12 @@ Restore DNS snapshot
 
 ### Synopsis
 
-This endpoint restores DNS zone records of a domain to a specific snapshot.
+Restore DNS zone to the selected snapshot.
+
+Use this endpoint to revert domain DNS to a previous configuration.
 
 ```
-hapi dns snapshots restore <domain> <snapshot ID> [flags]
+hapi dns snapshots restore <domain> <snapshot-id> [flags]
 ```
 
 ### Options
@@ -25,5 +27,5 @@ hapi dns snapshots restore <domain> <snapshot ID> [flags]
 
 ### SEE ALSO
 
-* [hapi dns snapshots](hapi_dns_snapshots.md)	 - DNS zone snapshot management
+* [hapi dns snapshots](hapi_dns_snapshots.md)	 - Snapshot commands
 

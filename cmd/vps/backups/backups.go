@@ -6,8 +6,7 @@ import (
 
 var GroupCmd = &cobra.Command{
 	Use:   "backups",
-	Short: "VM backup management",
-	Long:  `Safeguard your data by managing backups. You can list available backups or restore a virtual machine from a backup.`,
+	Short: "Backups commands",
 }
 
 func init() {

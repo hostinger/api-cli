@@ -6,11 +6,10 @@ import (
 
 var GroupCmd = &cobra.Command{
 	Use:   "templates",
-	Short: "OS Templates",
-	Long:  `Retrieve details of operating system templates or list all available templates to choose the right configuration when deploying or recreating virtual machines.`,
+	Short: "OS Templates commands",
 }
 
 func init() {
-	GroupCmd.AddCommand(ListCmd)
 	GroupCmd.AddCommand(GetCmd)
+	GroupCmd.AddCommand(ListCmd)
 }

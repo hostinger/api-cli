@@ -4,15 +4,19 @@ Create snapshot
 
 ### Synopsis
 
-This endpoint creates a snapshot of a specified virtual machine. A snapshot captures the state and data of 
-the virtual machine at a specific point in time, allowing users to restore the virtual machine to that state if needed. 
-This operation is useful for backup purposes, system recovery, and testing changes without affecting the current state
-of the virtual machine.
+Create a snapshot of a specified virtual machine.
 
-Creating new snapshot will overwrite the existing snapshot!
+A snapshot captures the state and data of the virtual machine at a specific point in time, 
+allowing users to restore the virtual machine to that state if needed. 
+This operation is useful for backup purposes, system recovery, 
+and testing changes without affecting the current state of the virtual machine.
+
+**Creating new snapshot will overwrite the existing snapshot!**
+
+Use this endpoint to capture VPS state for backup and recovery purposes.
 
 ```
-hapi vps snapshots create <virtual machine ID> [flags]
+hapi vps snapshots create <virtual-machine-id> [flags]
 ```
 
 ### Options
@@ -30,5 +34,5 @@ hapi vps snapshots create <virtual machine ID> [flags]
 
 ### SEE ALSO
 
-* [hapi vps snapshots](hapi_vps_snapshots.md)	 - Snapshot management
+* [hapi vps snapshots](hapi_vps_snapshots.md)	 - Snapshots commands
 

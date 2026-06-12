@@ -4,13 +4,16 @@ Restore backup
 
 ### Synopsis
 
-This endpoint restores a backup for a specified virtual machine.
+Restore a backup for a specified virtual machine.
+
 The system will then initiate the restore process, which may take some time depending on the size of the backup.
 
-All data on the virtual machine will be overwritten with the data from the backup.
+**All data on the virtual machine will be overwritten with the data from the backup.**
+
+Use this endpoint to recover VPS data from backup points.
 
 ```
-hapi vps backups restore <virtual machine ID> <backup ID> [flags]
+hapi vps backups restore <virtual-machine-id> <backup-id> [flags]
 ```
 
 ### Options
@@ -28,5 +31,5 @@ hapi vps backups restore <virtual machine ID> <backup ID> [flags]
 
 ### SEE ALSO
 
-* [hapi vps backups](hapi_vps_backups.md)	 - VM backup management
+* [hapi vps backups](hapi_vps_backups.md)	 - Backups commands
 

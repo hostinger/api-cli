@@ -1,13 +1,17 @@
 ## hapi vps monarx uninstall
 
-Uninstall malware scanner
+Uninstall Monarx
 
 ### Synopsis
 
-This endpoint uninstalls the Monarx malware scanner on a specified virtual machine. If Monarx is not installed, the request will still be processed without any effect.
+Uninstall the Monarx malware scanner on a specified virtual machine.
+
+If Monarx is not installed, the request will still be processed without any effect.
+
+Use this endpoint to remove malware scanner from VPS instances.
 
 ```
-hapi vps monarx uninstall <virtual machine ID> [flags]
+hapi vps monarx uninstall <virtual-machine-id> [flags]
 ```
 
 ### Options
@@ -25,5 +29,5 @@ hapi vps monarx uninstall <virtual machine ID> [flags]
 
 ### SEE ALSO
 
-* [hapi vps monarx](hapi_vps_monarx.md)	 - Malware scanner
+* [hapi vps monarx](hapi_vps_monarx.md)	 - Malware scanner commands
 

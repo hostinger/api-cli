@@ -1,20 +1,22 @@
 ## hapi vps backups list
 
-Get backup list
+Get backups
 
 ### Synopsis
 
-This endpoint retrieves a list of backups for a specified virtual machine.
+Retrieve backups for a specified virtual machine.
+
+Use this endpoint to view available backup points for VPS data recovery.
 
 ```
-hapi vps backups list <virtual machine ID> [flags]
+hapi vps backups list <virtual-machine-id> [flags]
 ```
 
 ### Options
 
 ```
   -h, --help       help for list
-      --page int   Page number (default 1)
+      --page int   Page number
 ```
 
 ### Options inherited from parent commands
@@ -26,5 +28,5 @@ hapi vps backups list <virtual machine ID> [flags]
 
 ### SEE ALSO
 
-* [hapi vps backups](hapi_vps_backups.md)	 - VM backup management
+* [hapi vps backups](hapi_vps_backups.md)	 - Backups commands
 

@@ -4,10 +4,12 @@ Deactivate firewall
 
 ### Synopsis
 
-This endpoint deactivates a firewall for a specified virtual machine.
+Deactivate a firewall for a specified virtual machine.
+
+Use this endpoint to remove firewall protection from VPS instances.
 
 ```
-hapi vps firewall deactivate <firewall ID> <virtual machine ID>  [flags]
+hapi vps firewall deactivate <firewall-id> <virtual-machine-id> [flags]
 ```
 
 ### Options
@@ -25,5 +27,5 @@ hapi vps firewall deactivate <firewall ID> <virtual machine ID>  [flags]
 
 ### SEE ALSO
 
-* [hapi vps firewall](hapi_vps_firewall.md)	 - Firewall management
+* [hapi vps firewall](hapi_vps_firewall.md)	 - Firewall commands
 

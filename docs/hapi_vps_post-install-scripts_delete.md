@@ -4,10 +4,12 @@ Delete post-install script
 
 ### Synopsis
 
-This endpoint deletes a post-install script from your account.
+Delete a post-install script from your account.
+       
+Use this endpoint to remove unused automation scripts.
 
 ```
-hapi vps post-install-scripts delete <post-install script ID> [flags]
+hapi vps post-install-scripts delete <post-install-script-id> [flags]
 ```
 
 ### Options
@@ -25,5 +27,5 @@ hapi vps post-install-scripts delete <post-install script ID> [flags]
 
 ### SEE ALSO
 
-* [hapi vps post-install-scripts](hapi_vps_post-install-scripts.md)	 - Post-install script management
+* [hapi vps post-install-scripts](hapi_vps_post-install-scripts.md)	 - Post-install scripts commands
 

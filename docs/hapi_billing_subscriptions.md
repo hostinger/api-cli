@@ -1,6 +1,6 @@
 ## hapi billing subscriptions
 
-Subscription management
+Subscriptions commands
 
 ### Options
 
@@ -17,8 +17,8 @@ Subscription management
 
 ### SEE ALSO
 
-* [hapi billing](hapi_billing.md)	 - Billing management
-* [hapi billing subscriptions disable-auto-renewal](hapi_billing_subscriptions_disable-auto-renewal.md)	 - Disable subscription auto-renewal
-* [hapi billing subscriptions enable-auto-renewal](hapi_billing_subscriptions_enable-auto-renewal.md)	 - Enable subscription auto-renewal
+* [hapi billing](hapi_billing.md)	 - Billing commands
+* [hapi billing subscriptions disable-auto-renewal](hapi_billing_subscriptions_disable-auto-renewal.md)	 - Disable auto-renewal
+* [hapi billing subscriptions enable-auto-renewal](hapi_billing_subscriptions_enable-auto-renewal.md)	 - Enable auto-renewal
 * [hapi billing subscriptions list](hapi_billing_subscriptions_list.md)	 - Get subscription list
 

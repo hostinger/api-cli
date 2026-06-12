@@ -2,20 +2,20 @@ package firewall
 
 import (
 	"context"
+	"log"
+
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/client"
 	"github.com/hostinger/api-cli/output"
-	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
-	"log"
 )
 
 var ListCmd = &cobra.Command{
 	Use:   "list",
 	Short: "Get firewall list",
-	Long:  `This endpoint retrieves a list of all firewalls available.`,
+	Long:  "Retrieve all available firewalls.\n\nUse this endpoint to view existing firewall configurations.",
 	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().VPSGetFirewallListV1WithResponse(context.TODO(), firewallListRequestParameters(cmd))
+		r, err := api.Request().VPSGetFirewallListV1WithResponse(context.TODO(), listParams(cmd))
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -25,13 +25,14 @@ var ListCmd = &cobra.Command{
 }
 
 func init() {
-	ListCmd.Flags().IntP("page", "", 1, "Page number")
+	ListCmd.Flags().IntP("page", "", 0, "Page number")
 }
 
-func firewallListRequestParameters(cmd *cobra.Command) *client.VPSGetFirewallListV1Params {
-	pageId, _ := cmd.Flags().GetInt("page")
-
-	return &client.VPSGetFirewallListV1Params{
-		Page: utils.IntPtrOrNil(pageId),
+func listParams(cmd *cobra.Command) *client.VPSGetFirewallListV1Params {
+	params := &client.VPSGetFirewallListV1Params{}
+	if cmd.Flags().Changed("page") {
+		v, _ := cmd.Flags().GetInt("page")
+		params.Page = &v
 	}
+	return params
 }

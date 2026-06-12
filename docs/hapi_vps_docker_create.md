@@ -1,22 +1,29 @@
 ## hapi vps docker create
 
-Create Docker project
+Create new project
 
 ### Synopsis
 
-This endpoint creates and starts a new Docker Compose project on a specified virtual machine.
+Deploy new project from docker-compose.yaml contents or download contents from URL. 
+
+URL can be Github repository url in format https://github.com/[user]/[repo]
+and it will be automatically resolved to docker-compose.yaml file in
+master branch. Any other URL provided must return docker-compose.yaml
+file contents.
+
+If project with the same name already exists, existing project will be replaced.
 
 ```
-hapi vps docker create <virtual machine ID> [flags]
+hapi vps docker create <virtual-machine-id> [flags]
 ```
 
 ### Options
 
 ```
-      --content string        URL to a docker-compose.yaml file, a GitHub repository, or raw YAML content of the compose file
+      --content string        URL pointing to docker-compose.yaml file, Github repository or raw YAML content of the compose file
       --environment string    Project environment variables
   -h, --help                  help for create
-      --project-name string   Docker Compose project name (alphanumeric characters, dashes and underscores only)
+      --project-name string   Docker Compose project name using alphanumeric characters, dashes, and underscores only
 ```
 
 ### Options inherited from parent commands
@@ -28,5 +35,5 @@ hapi vps docker create <virtual machine ID> [flags]
 
 ### SEE ALSO
 
-* [hapi vps docker](hapi_vps_docker.md)	 - Docker project management
+* [hapi vps docker](hapi_vps_docker.md)	 - Docker Manager commands
 

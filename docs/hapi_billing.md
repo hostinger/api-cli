@@ -1,6 +1,6 @@
 ## hapi billing
 
-Billing management
+Billing commands
 
 ### Options
 
@@ -18,7 +18,7 @@ Billing management
 ### SEE ALSO
 
 * [hapi](hapi.md)	 - Hostinger API Command Line Interface
-* [hapi billing catalog](hapi_billing_catalog.md)	 - Catalog management
-* [hapi billing payment-methods](hapi_billing_payment-methods.md)	 - Payment method management
-* [hapi billing subscriptions](hapi_billing_subscriptions.md)	 - Subscription management
+* [hapi billing catalog](hapi_billing_catalog.md)	 - Catalog commands
+* [hapi billing payment-methods](hapi_billing_payment-methods.md)	 - Payment methods commands
+* [hapi billing subscriptions](hapi_billing_subscriptions.md)	 - Subscriptions commands
 

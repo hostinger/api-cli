@@ -1,10 +1,6 @@
 ## hapi vps recovery
 
-Recovery mode management
-
-### Synopsis
-
-Initiate or stop recovery mode to perform system rescue operations. This category enables you to boot a virtual machine into a state suitable for repairing file systems or recovering data.
+Recovery commands
 
 ### Options
 
@@ -21,7 +17,7 @@ Initiate or stop recovery mode to perform system rescue operations. This categor
 
 ### SEE ALSO
 
-* [hapi vps](hapi_vps.md)	 - VPS management
+* [hapi vps](hapi_vps.md)	 - VPS commands
 * [hapi vps recovery start](hapi_vps_recovery_start.md)	 - Start recovery mode
 * [hapi vps recovery stop](hapi_vps_recovery_stop.md)	 - Stop recovery mode
 

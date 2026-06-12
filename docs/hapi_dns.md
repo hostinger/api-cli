@@ -1,6 +1,6 @@
 ## hapi dns
 
-DNS management
+DNS commands
 
 ### Options
 
@@ -18,6 +18,6 @@ DNS management
 ### SEE ALSO
 
 * [hapi](hapi.md)	 - Hostinger API Command Line Interface
-* [hapi dns records](hapi_dns_records.md)	 - DNS zone record management
-* [hapi dns snapshots](hapi_dns_snapshots.md)	 - DNS zone snapshot management
+* [hapi dns records](hapi_dns_records.md)	 - Zone commands
+* [hapi dns snapshots](hapi_dns_snapshots.md)	 - Snapshot commands
 

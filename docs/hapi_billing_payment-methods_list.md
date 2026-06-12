@@ -4,7 +4,12 @@ Get payment method list
 
 ### Synopsis
 
-This endpoint retrieves a list of available payment methods that can be used for placing new orders.
+Retrieve available payment methods that can be used for placing new orders.
+
+If you want to add new payment method,
+please use [hPanel](https://hpanel.hostinger.com/billing/payment-methods).
+
+Use this endpoint to view available payment options before creating orders.
 
 ```
 hapi billing payment-methods list [flags]
@@ -25,5 +30,5 @@ hapi billing payment-methods list [flags]
 
 ### SEE ALSO
 
-* [hapi billing payment-methods](hapi_billing_payment-methods.md)	 - Payment method management
+* [hapi billing payment-methods](hapi_billing_payment-methods.md)	 - Payment methods commands
 

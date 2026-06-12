@@ -1,10 +1,6 @@
 ## hapi vps data-centers
 
-Data center information
-
-### Synopsis
-
-Access information on available data centers, including location details, so you can choose the optimal region for deploying your virtual machines.
+Data centers commands
 
 ### Options
 
@@ -21,6 +17,6 @@ Access information on available data centers, including location details, so you
 
 ### SEE ALSO
 
-* [hapi vps](hapi_vps.md)	 - VPS management
+* [hapi vps](hapi_vps.md)	 - VPS commands
 * [hapi vps data-centers list](hapi_vps_data-centers_list.md)	 - Get data center list
 
