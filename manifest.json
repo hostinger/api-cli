@@ -469,15 +469,40 @@
     "method": "PUT",
     "path": "/api/domains/v1/portfolio/{domain}/nameservers"
   },
+  "ecommerce_createDigitalProductV1": {
+    "command": "hapi ecommerce products create-digital",
+    "method": "POST",
+    "path": "/api/ecommerce/v1/stores/{store_id}/products/digital"
+  },
+  "ecommerce_createPhysicalProductV1": {
+    "command": "hapi ecommerce products create-physical",
+    "method": "POST",
+    "path": "/api/ecommerce/v1/stores/{store_id}/products/physical"
+  },
   "ecommerce_createStoreV1": {
     "command": "hapi ecommerce stores create",
     "method": "POST",
     "path": "/api/ecommerce/v1/stores"
   },
+  "ecommerce_deleteStoreV1": {
+    "command": "hapi ecommerce stores delete",
+    "method": "DELETE",
+    "path": "/api/ecommerce/v1/stores/{store_id}"
+  },
+  "ecommerce_enableManualPaymentMethodV1": {
+    "command": "hapi ecommerce payments enable-manual-method",
+    "method": "POST",
+    "path": "/api/ecommerce/v1/stores/{store_id}/payment-methods/manual"
+  },
   "ecommerce_getStoresV1": {
     "command": "hapi ecommerce stores list",
     "method": "GET",
     "path": "/api/ecommerce/v1/stores"
+  },
+  "ecommerce_setStoreShippingV1": {
+    "command": "hapi ecommerce shipping set-store",
+    "method": "POST",
+    "path": "/api/ecommerce/v1/stores/{store_id}/shipping"
   },
   "horizons_createWebsiteV1": {
     "command": "hapi horizons websites create",

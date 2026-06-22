@@ -19,5 +19,6 @@ Stores commands
 
 * [hapi ecommerce](hapi_ecommerce.md)	 - Ecommerce commands
 * [hapi ecommerce stores create](hapi_ecommerce_stores_create.md)	 - Create store
+* [hapi ecommerce stores delete](hapi_ecommerce_stores_delete.md)	 - Delete store
 * [hapi ecommerce stores list](hapi_ecommerce_stores_list.md)	 - Get stores
 

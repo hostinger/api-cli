@@ -415,6 +415,24 @@ func (e DomainsV1WHOISStoreRequestEntityType) Valid() bool {
 	}
 }
 
+// Defines values for EcommerceV1ProductProductCreationResourceProductType.
+const (
+	Digital  EcommerceV1ProductProductCreationResourceProductType = "digital"
+	Physical EcommerceV1ProductProductCreationResourceProductType = "physical"
+)
+
+// Valid indicates whether the value is a known member of the EcommerceV1ProductProductCreationResourceProductType enum.
+func (e EcommerceV1ProductProductCreationResourceProductType) Valid() bool {
+	switch e {
+	case Digital:
+		return true
+	case Physical:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for EcommerceV1StoreStoreCreationResourceSalesChannelType.
 const (
 	EcommerceV1StoreStoreCreationResourceSalesChannelTypeBuilder   EcommerceV1StoreStoreCreationResourceSalesChannelType = "builder"
@@ -2035,6 +2053,114 @@ type DomainsV1WHOISStoreRequest struct {
 // DomainsV1WHOISStoreRequestEntityType Legal entity type
 type DomainsV1WHOISStoreRequestEntityType string
 
+// EcommerceV1PaymentEnableManualPaymentRequest defines model for Ecommerce.V1.Payment.EnableManualPaymentRequest.
+type EcommerceV1PaymentEnableManualPaymentRequest struct {
+	// Title Optional display name shown to customers at checkout.
+	Title *string `json:"title,omitempty"`
+}
+
+// EcommerceV1PaymentManualPaymentResource defines model for Ecommerce.V1.Payment.ManualPaymentResource.
+type EcommerceV1PaymentManualPaymentResource struct {
+	// AdminUrl Admin UI deep-link to manage payment settings.
+	AdminUrl      *string `json:"admin_url,omitempty"`
+	PaymentMethod *struct {
+		// Id Store payment provider ID.
+		Id *string `json:"id,omitempty"`
+
+		// IsEnabled Whether the payment method is shown at checkout.
+		IsEnabled *bool `json:"is_enabled,omitempty"`
+
+		// ProviderId The payment provider identifier.
+		ProviderId *string `json:"provider_id,omitempty"`
+
+		// Title Display name shown to customers at checkout.
+		Title *string `json:"title,omitempty"`
+	} `json:"payment_method,omitempty"`
+}
+
+// EcommerceV1ProductCreateDigitalProductRequest defines model for Ecommerce.V1.Product.CreateDigitalProductRequest.
+type EcommerceV1ProductCreateDigitalProductRequest struct {
+	// Currency ISO 4217 currency code. Defaults to the store's default currency when omitted.
+	Currency *string `json:"currency,omitempty"`
+
+	// Description The product description.
+	Description *string `json:"description,omitempty"`
+
+	// DownloadUrl Optional external download link delivered to the customer after purchase.
+	DownloadUrl *string `json:"download_url,omitempty"`
+
+	// Name The product name.
+	Name string `json:"name"`
+
+	// Price Price in the smallest currency unit (e.g. cents). Must be positive.
+	Price int `json:"price"`
+}
+
+// EcommerceV1ProductCreatePhysicalProductRequest defines model for Ecommerce.V1.Product.CreatePhysicalProductRequest.
+type EcommerceV1ProductCreatePhysicalProductRequest struct {
+	// Currency ISO 4217 currency code. Defaults to the store's default currency when omitted.
+	Currency *string `json:"currency,omitempty"`
+
+	// Description The product description.
+	Description *string `json:"description,omitempty"`
+
+	// Name The product name.
+	Name string `json:"name"`
+
+	// Price Price in the smallest currency unit (e.g. cents). Must be positive.
+	Price int `json:"price"`
+}
+
+// EcommerceV1ProductProductCreationResource defines model for Ecommerce.V1.Product.ProductCreationResource.
+type EcommerceV1ProductProductCreationResource struct {
+	// AdminUrl Admin UI deep-link to manage the product.
+	AdminUrl *string `json:"admin_url,omitempty"`
+	Product  *struct {
+		// CurrencyCode Currency the product is priced in (ISO 4217, lowercase).
+		CurrencyCode *string `json:"currency_code,omitempty"`
+
+		// Id Product ID.
+		Id *string `json:"id,omitempty"`
+
+		// Price Price in the smallest currency unit (e.g. cents).
+		Price *int `json:"price,omitempty"`
+
+		// Status Product status.
+		Status *string `json:"status,omitempty"`
+
+		// Title Product name.
+		Title *string `json:"title,omitempty"`
+
+		// Type Product type.
+		Type *EcommerceV1ProductProductCreationResourceProductType `json:"type,omitempty"`
+	} `json:"product,omitempty"`
+}
+
+// EcommerceV1ProductProductCreationResourceProductType Product type.
+type EcommerceV1ProductProductCreationResourceProductType string
+
+// EcommerceV1ShippingSetShippingRequest defines model for Ecommerce.V1.Shipping.SetShippingRequest.
+type EcommerceV1ShippingSetShippingRequest struct {
+	// Price Flat shipping rate in the smallest currency unit (e.g. cents). Use 0 for free shipping.
+	Price int `json:"price"`
+}
+
+// EcommerceV1ShippingShippingResource defines model for Ecommerce.V1.Shipping.ShippingResource.
+type EcommerceV1ShippingShippingResource struct {
+	// AdminUrl Admin UI deep-link to manage shipping settings.
+	AdminUrl       *string `json:"admin_url,omitempty"`
+	ShippingOption *struct {
+		// Amount Flat shipping rate in the smallest currency unit (e.g. cents).
+		Amount *int `json:"amount,omitempty"`
+
+		// CurrencyCode Currency code the rate is charged in (ISO 4217, lowercase).
+		CurrencyCode *string `json:"currency_code,omitempty"`
+
+		// Id Shipping option ID.
+		Id *string `json:"id,omitempty"`
+	} `json:"shipping_option,omitempty"`
+}
+
 // EcommerceV1StoreStoreCollection Array of [`Ecommerce.V1.Store.StoreResource`](#model/ecommercev1storestoreresource)
 type EcommerceV1StoreStoreCollection = []EcommerceV1StoreStoreResource
 
@@ -2073,6 +2199,15 @@ type EcommerceV1StoreStoreCreationResource struct {
 
 // EcommerceV1StoreStoreCreationResourceSalesChannelType Sales channel type
 type EcommerceV1StoreStoreCreationResourceSalesChannelType string
+
+// EcommerceV1StoreStoreDeleteResource defines model for Ecommerce.V1.Store.StoreDeleteResource.
+type EcommerceV1StoreStoreDeleteResource struct {
+	// Id The ID of the deleted store.
+	Id *string `json:"id,omitempty"`
+
+	// IsDeleted Always true when the store was soft-deleted.
+	IsDeleted *bool `json:"is_deleted,omitempty"`
+}
 
 // EcommerceV1StoreStoreRequest defines model for Ecommerce.V1.Store.StoreRequest.
 type EcommerceV1StoreStoreRequest struct {
@@ -3782,6 +3917,18 @@ type DomainsCreateWHOISProfileV1JSONRequestBody = DomainsV1WHOISStoreRequest
 // EcommerceCreateStoreV1JSONRequestBody defines body for EcommerceCreateStoreV1 for application/json ContentType.
 type EcommerceCreateStoreV1JSONRequestBody = EcommerceV1StoreStoreRequest
 
+// EcommerceEnableManualPaymentMethodV1JSONRequestBody defines body for EcommerceEnableManualPaymentMethodV1 for application/json ContentType.
+type EcommerceEnableManualPaymentMethodV1JSONRequestBody = EcommerceV1PaymentEnableManualPaymentRequest
+
+// EcommerceCreateDigitalProductV1JSONRequestBody defines body for EcommerceCreateDigitalProductV1 for application/json ContentType.
+type EcommerceCreateDigitalProductV1JSONRequestBody = EcommerceV1ProductCreateDigitalProductRequest
+
+// EcommerceCreatePhysicalProductV1JSONRequestBody defines body for EcommerceCreatePhysicalProductV1 for application/json ContentType.
+type EcommerceCreatePhysicalProductV1JSONRequestBody = EcommerceV1ProductCreatePhysicalProductRequest
+
+// EcommerceSetStoreShippingV1JSONRequestBody defines body for EcommerceSetStoreShippingV1 for application/json ContentType.
+type EcommerceSetStoreShippingV1JSONRequestBody = EcommerceV1ShippingSetShippingRequest
+
 // HorizonsCreateWebsiteV1JSONRequestBody defines body for HorizonsCreateWebsiteV1 for application/json ContentType.
 type HorizonsCreateWebsiteV1JSONRequestBody = HorizonsV1WebsitesCreateWebsiteRequest
 
@@ -4560,6 +4707,29 @@ type ClientInterface interface {
 	EcommerceCreateStoreV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	EcommerceCreateStoreV1(ctx context.Context, body EcommerceCreateStoreV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceDeleteStoreV1 request
+	EcommerceDeleteStoreV1(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceEnableManualPaymentMethodV1WithBody request with any body
+	EcommerceEnableManualPaymentMethodV1WithBody(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	EcommerceEnableManualPaymentMethodV1(ctx context.Context, storeId string, body EcommerceEnableManualPaymentMethodV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceCreateDigitalProductV1WithBody request with any body
+	EcommerceCreateDigitalProductV1WithBody(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	EcommerceCreateDigitalProductV1(ctx context.Context, storeId string, body EcommerceCreateDigitalProductV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceCreatePhysicalProductV1WithBody request with any body
+	EcommerceCreatePhysicalProductV1WithBody(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	EcommerceCreatePhysicalProductV1(ctx context.Context, storeId string, body EcommerceCreatePhysicalProductV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceSetStoreShippingV1WithBody request with any body
+	EcommerceSetStoreShippingV1WithBody(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	EcommerceSetStoreShippingV1(ctx context.Context, storeId string, body EcommerceSetStoreShippingV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HorizonsCreateWebsiteV1WithBody request with any body
 	HorizonsCreateWebsiteV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -5437,6 +5607,114 @@ func (c *Client) EcommerceCreateStoreV1WithBody(ctx context.Context, contentType
 
 func (c *Client) EcommerceCreateStoreV1(ctx context.Context, body EcommerceCreateStoreV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewEcommerceCreateStoreV1Request(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) EcommerceDeleteStoreV1(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceDeleteStoreV1Request(c.Server, storeId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) EcommerceEnableManualPaymentMethodV1WithBody(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceEnableManualPaymentMethodV1RequestWithBody(c.Server, storeId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) EcommerceEnableManualPaymentMethodV1(ctx context.Context, storeId string, body EcommerceEnableManualPaymentMethodV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceEnableManualPaymentMethodV1Request(c.Server, storeId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) EcommerceCreateDigitalProductV1WithBody(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceCreateDigitalProductV1RequestWithBody(c.Server, storeId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) EcommerceCreateDigitalProductV1(ctx context.Context, storeId string, body EcommerceCreateDigitalProductV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceCreateDigitalProductV1Request(c.Server, storeId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) EcommerceCreatePhysicalProductV1WithBody(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceCreatePhysicalProductV1RequestWithBody(c.Server, storeId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) EcommerceCreatePhysicalProductV1(ctx context.Context, storeId string, body EcommerceCreatePhysicalProductV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceCreatePhysicalProductV1Request(c.Server, storeId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) EcommerceSetStoreShippingV1WithBody(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceSetStoreShippingV1RequestWithBody(c.Server, storeId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) EcommerceSetStoreShippingV1(ctx context.Context, storeId string, body EcommerceSetStoreShippingV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceSetStoreShippingV1Request(c.Server, storeId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -8292,6 +8570,228 @@ func NewEcommerceCreateStoreV1RequestWithBody(server string, contentType string,
 	}
 
 	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewEcommerceDeleteStoreV1Request generates requests for EcommerceDeleteStoreV1
+func NewEcommerceDeleteStoreV1Request(server string, storeId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewEcommerceEnableManualPaymentMethodV1Request calls the generic EcommerceEnableManualPaymentMethodV1 builder with application/json body
+func NewEcommerceEnableManualPaymentMethodV1Request(server string, storeId string, body EcommerceEnableManualPaymentMethodV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewEcommerceEnableManualPaymentMethodV1RequestWithBody(server, storeId, "application/json", bodyReader)
+}
+
+// NewEcommerceEnableManualPaymentMethodV1RequestWithBody generates requests for EcommerceEnableManualPaymentMethodV1 with any type of body
+func NewEcommerceEnableManualPaymentMethodV1RequestWithBody(server string, storeId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/payment-methods/manual", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewEcommerceCreateDigitalProductV1Request calls the generic EcommerceCreateDigitalProductV1 builder with application/json body
+func NewEcommerceCreateDigitalProductV1Request(server string, storeId string, body EcommerceCreateDigitalProductV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewEcommerceCreateDigitalProductV1RequestWithBody(server, storeId, "application/json", bodyReader)
+}
+
+// NewEcommerceCreateDigitalProductV1RequestWithBody generates requests for EcommerceCreateDigitalProductV1 with any type of body
+func NewEcommerceCreateDigitalProductV1RequestWithBody(server string, storeId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/products/digital", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewEcommerceCreatePhysicalProductV1Request calls the generic EcommerceCreatePhysicalProductV1 builder with application/json body
+func NewEcommerceCreatePhysicalProductV1Request(server string, storeId string, body EcommerceCreatePhysicalProductV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewEcommerceCreatePhysicalProductV1RequestWithBody(server, storeId, "application/json", bodyReader)
+}
+
+// NewEcommerceCreatePhysicalProductV1RequestWithBody generates requests for EcommerceCreatePhysicalProductV1 with any type of body
+func NewEcommerceCreatePhysicalProductV1RequestWithBody(server string, storeId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/products/physical", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewEcommerceSetStoreShippingV1Request calls the generic EcommerceSetStoreShippingV1 builder with application/json body
+func NewEcommerceSetStoreShippingV1Request(server string, storeId string, body EcommerceSetStoreShippingV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewEcommerceSetStoreShippingV1RequestWithBody(server, storeId, "application/json", bodyReader)
+}
+
+// NewEcommerceSetStoreShippingV1RequestWithBody generates requests for EcommerceSetStoreShippingV1 with any type of body
+func NewEcommerceSetStoreShippingV1RequestWithBody(server string, storeId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/shipping", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -12994,6 +13494,29 @@ type ClientWithResponsesInterface interface {
 
 	EcommerceCreateStoreV1WithResponse(ctx context.Context, body EcommerceCreateStoreV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceCreateStoreV1Response, error)
 
+	// EcommerceDeleteStoreV1WithResponse request
+	EcommerceDeleteStoreV1WithResponse(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*EcommerceDeleteStoreV1Response, error)
+
+	// EcommerceEnableManualPaymentMethodV1WithBodyWithResponse request with any body
+	EcommerceEnableManualPaymentMethodV1WithBodyWithResponse(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceEnableManualPaymentMethodV1Response, error)
+
+	EcommerceEnableManualPaymentMethodV1WithResponse(ctx context.Context, storeId string, body EcommerceEnableManualPaymentMethodV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceEnableManualPaymentMethodV1Response, error)
+
+	// EcommerceCreateDigitalProductV1WithBodyWithResponse request with any body
+	EcommerceCreateDigitalProductV1WithBodyWithResponse(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceCreateDigitalProductV1Response, error)
+
+	EcommerceCreateDigitalProductV1WithResponse(ctx context.Context, storeId string, body EcommerceCreateDigitalProductV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceCreateDigitalProductV1Response, error)
+
+	// EcommerceCreatePhysicalProductV1WithBodyWithResponse request with any body
+	EcommerceCreatePhysicalProductV1WithBodyWithResponse(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceCreatePhysicalProductV1Response, error)
+
+	EcommerceCreatePhysicalProductV1WithResponse(ctx context.Context, storeId string, body EcommerceCreatePhysicalProductV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceCreatePhysicalProductV1Response, error)
+
+	// EcommerceSetStoreShippingV1WithBodyWithResponse request with any body
+	EcommerceSetStoreShippingV1WithBodyWithResponse(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceSetStoreShippingV1Response, error)
+
+	EcommerceSetStoreShippingV1WithResponse(ctx context.Context, storeId string, body EcommerceSetStoreShippingV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceSetStoreShippingV1Response, error)
+
 	// HorizonsCreateWebsiteV1WithBodyWithResponse request with any body
 	HorizonsCreateWebsiteV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HorizonsCreateWebsiteV1Response, error)
 
@@ -14448,6 +14971,170 @@ func (r EcommerceCreateStoreV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r EcommerceCreateStoreV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type EcommerceDeleteStoreV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *EcommerceV1StoreStoreDeleteResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceDeleteStoreV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceDeleteStoreV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceDeleteStoreV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type EcommerceEnableManualPaymentMethodV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON201      *EcommerceV1PaymentManualPaymentResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceEnableManualPaymentMethodV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceEnableManualPaymentMethodV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceEnableManualPaymentMethodV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type EcommerceCreateDigitalProductV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON201      *EcommerceV1ProductProductCreationResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceCreateDigitalProductV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceCreateDigitalProductV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceCreateDigitalProductV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type EcommerceCreatePhysicalProductV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON201      *EcommerceV1ProductProductCreationResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceCreatePhysicalProductV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceCreatePhysicalProductV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceCreatePhysicalProductV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type EcommerceSetStoreShippingV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *EcommerceV1ShippingShippingResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceSetStoreShippingV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceSetStoreShippingV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceSetStoreShippingV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -18107,6 +18794,83 @@ func (c *ClientWithResponses) EcommerceCreateStoreV1WithResponse(ctx context.Con
 	return ParseEcommerceCreateStoreV1Response(rsp)
 }
 
+// EcommerceDeleteStoreV1WithResponse request returning *EcommerceDeleteStoreV1Response
+func (c *ClientWithResponses) EcommerceDeleteStoreV1WithResponse(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*EcommerceDeleteStoreV1Response, error) {
+	rsp, err := c.EcommerceDeleteStoreV1(ctx, storeId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceDeleteStoreV1Response(rsp)
+}
+
+// EcommerceEnableManualPaymentMethodV1WithBodyWithResponse request with arbitrary body returning *EcommerceEnableManualPaymentMethodV1Response
+func (c *ClientWithResponses) EcommerceEnableManualPaymentMethodV1WithBodyWithResponse(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceEnableManualPaymentMethodV1Response, error) {
+	rsp, err := c.EcommerceEnableManualPaymentMethodV1WithBody(ctx, storeId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceEnableManualPaymentMethodV1Response(rsp)
+}
+
+func (c *ClientWithResponses) EcommerceEnableManualPaymentMethodV1WithResponse(ctx context.Context, storeId string, body EcommerceEnableManualPaymentMethodV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceEnableManualPaymentMethodV1Response, error) {
+	rsp, err := c.EcommerceEnableManualPaymentMethodV1(ctx, storeId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceEnableManualPaymentMethodV1Response(rsp)
+}
+
+// EcommerceCreateDigitalProductV1WithBodyWithResponse request with arbitrary body returning *EcommerceCreateDigitalProductV1Response
+func (c *ClientWithResponses) EcommerceCreateDigitalProductV1WithBodyWithResponse(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceCreateDigitalProductV1Response, error) {
+	rsp, err := c.EcommerceCreateDigitalProductV1WithBody(ctx, storeId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceCreateDigitalProductV1Response(rsp)
+}
+
+func (c *ClientWithResponses) EcommerceCreateDigitalProductV1WithResponse(ctx context.Context, storeId string, body EcommerceCreateDigitalProductV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceCreateDigitalProductV1Response, error) {
+	rsp, err := c.EcommerceCreateDigitalProductV1(ctx, storeId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceCreateDigitalProductV1Response(rsp)
+}
+
+// EcommerceCreatePhysicalProductV1WithBodyWithResponse request with arbitrary body returning *EcommerceCreatePhysicalProductV1Response
+func (c *ClientWithResponses) EcommerceCreatePhysicalProductV1WithBodyWithResponse(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceCreatePhysicalProductV1Response, error) {
+	rsp, err := c.EcommerceCreatePhysicalProductV1WithBody(ctx, storeId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceCreatePhysicalProductV1Response(rsp)
+}
+
+func (c *ClientWithResponses) EcommerceCreatePhysicalProductV1WithResponse(ctx context.Context, storeId string, body EcommerceCreatePhysicalProductV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceCreatePhysicalProductV1Response, error) {
+	rsp, err := c.EcommerceCreatePhysicalProductV1(ctx, storeId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceCreatePhysicalProductV1Response(rsp)
+}
+
+// EcommerceSetStoreShippingV1WithBodyWithResponse request with arbitrary body returning *EcommerceSetStoreShippingV1Response
+func (c *ClientWithResponses) EcommerceSetStoreShippingV1WithBodyWithResponse(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceSetStoreShippingV1Response, error) {
+	rsp, err := c.EcommerceSetStoreShippingV1WithBody(ctx, storeId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceSetStoreShippingV1Response(rsp)
+}
+
+func (c *ClientWithResponses) EcommerceSetStoreShippingV1WithResponse(ctx context.Context, storeId string, body EcommerceSetStoreShippingV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceSetStoreShippingV1Response, error) {
+	rsp, err := c.EcommerceSetStoreShippingV1(ctx, storeId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceSetStoreShippingV1Response(rsp)
+}
+
 // HorizonsCreateWebsiteV1WithBodyWithResponse request with arbitrary body returning *HorizonsCreateWebsiteV1Response
 func (c *ClientWithResponses) HorizonsCreateWebsiteV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HorizonsCreateWebsiteV1Response, error) {
 	rsp, err := c.HorizonsCreateWebsiteV1WithBody(ctx, contentType, body, reqEditors...)
@@ -20645,6 +21409,234 @@ func ParseEcommerceCreateStoreV1Response(rsp *http.Response) (*EcommerceCreateSt
 			return nil, err
 		}
 		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceDeleteStoreV1Response parses an HTTP response from a EcommerceDeleteStoreV1WithResponse call
+func ParseEcommerceDeleteStoreV1Response(rsp *http.Response) (*EcommerceDeleteStoreV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceDeleteStoreV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest EcommerceV1StoreStoreDeleteResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceEnableManualPaymentMethodV1Response parses an HTTP response from a EcommerceEnableManualPaymentMethodV1WithResponse call
+func ParseEcommerceEnableManualPaymentMethodV1Response(rsp *http.Response) (*EcommerceEnableManualPaymentMethodV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceEnableManualPaymentMethodV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest EcommerceV1PaymentManualPaymentResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceCreateDigitalProductV1Response parses an HTTP response from a EcommerceCreateDigitalProductV1WithResponse call
+func ParseEcommerceCreateDigitalProductV1Response(rsp *http.Response) (*EcommerceCreateDigitalProductV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceCreateDigitalProductV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest EcommerceV1ProductProductCreationResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceCreatePhysicalProductV1Response parses an HTTP response from a EcommerceCreatePhysicalProductV1WithResponse call
+func ParseEcommerceCreatePhysicalProductV1Response(rsp *http.Response) (*EcommerceCreatePhysicalProductV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceCreatePhysicalProductV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest EcommerceV1ProductProductCreationResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceSetStoreShippingV1Response parses an HTTP response from a EcommerceSetStoreShippingV1WithResponse call
+func ParseEcommerceSetStoreShippingV1Response(rsp *http.Response) (*EcommerceSetStoreShippingV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceSetStoreShippingV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest EcommerceV1ShippingShippingResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
 		var dest CommonResponseUnauthorizedResponse
