@@ -649,6 +649,11 @@
     "method": "DELETE",
     "path": "/api/reach/v1/contacts/{uuid}"
   },
+  "reach_getProfileDomainDNSStatusV1": {
+    "command": "hapi reach profiles domain-dns-status",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/domains/dns-status"
+  },
   "reach_getSegmentDetailsV1": {
     "command": "hapi reach segments get",
     "method": "GET",

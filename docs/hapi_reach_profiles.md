@@ -18,5 +18,6 @@ Profiles commands
 ### SEE ALSO
 
 * [hapi reach](hapi_reach.md)	 - Reach commands
+* [hapi reach profiles domain-dns-status](hapi_reach_profiles_domain-dns-status.md)	 - Get profile domain DNS status
 * [hapi reach profiles list](hapi_reach_profiles_list.md)	 - List Profiles
 

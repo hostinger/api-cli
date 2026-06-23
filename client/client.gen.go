@@ -2846,6 +2846,29 @@ type ReachV1ContactsStoreRequest struct {
 	Surname *string `json:"surname,omitempty"`
 }
 
+// ReachV1ProfilesDomainsDnsRecordStatus defines model for Reach.V1.Profiles.Domains.DnsRecordStatus.
+type ReachV1ProfilesDomainsDnsRecordStatus struct {
+	Actual *[]struct {
+		Type  *string `json:"type,omitempty"`
+		Value *string `json:"value,omitempty"`
+	} `json:"actual,omitempty"`
+	IsValid   *bool `json:"is_valid,omitempty"`
+	Suggested *[]struct {
+		Name  *string `json:"name,omitempty"`
+		Type  *string `json:"type,omitempty"`
+		Value *string `json:"value,omitempty"`
+	} `json:"suggested,omitempty"`
+}
+
+// ReachV1ProfilesDomainsDnsStatusResource defines model for Reach.V1.Profiles.Domains.DnsStatusResource.
+type ReachV1ProfilesDomainsDnsStatusResource struct {
+	Dkim   *ReachV1ProfilesDomainsDnsRecordStatus `json:"dkim,omitempty"`
+	Dmarc  *ReachV1ProfilesDomainsDnsRecordStatus `json:"dmarc,omitempty"`
+	Domain *string                                `json:"domain,omitempty"`
+	Mx     *ReachV1ProfilesDomainsDnsRecordStatus `json:"mx,omitempty"`
+	Spf    *ReachV1ProfilesDomainsDnsRecordStatus `json:"spf,omitempty"`
+}
+
 // ReachV1ProfilesProfileCollection Array of [`Reach.V1.Profiles.ProfileResource`](#model/reachv1profilesprofileresource)
 type ReachV1ProfilesProfileCollection = []ReachV1ProfilesProfileResource
 
@@ -4846,6 +4869,9 @@ type ClientInterface interface {
 
 	ReachCreateNewContactsV1(ctx context.Context, profileUuid ProfileUuid, body ReachCreateNewContactsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ReachGetProfileDomainDNSStatusV1 request
+	ReachGetProfileDomainDNSStatusV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ReachListProfileSegmentContactsV1 request
 	ReachListProfileSegmentContactsV1(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, params *ReachListProfileSegmentContactsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -6219,6 +6245,18 @@ func (c *Client) ReachCreateNewContactsV1WithBody(ctx context.Context, profileUu
 
 func (c *Client) ReachCreateNewContactsV1(ctx context.Context, profileUuid ProfileUuid, body ReachCreateNewContactsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReachCreateNewContactsV1Request(c.Server, profileUuid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ReachGetProfileDomainDNSStatusV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachGetProfileDomainDNSStatusV1Request(c.Server, profileUuid)
 	if err != nil {
 		return nil, err
 	}
@@ -10464,6 +10502,40 @@ func NewReachCreateNewContactsV1RequestWithBody(server string, profileUuid Profi
 	return req, nil
 }
 
+// NewReachGetProfileDomainDNSStatusV1Request generates requests for ReachGetProfileDomainDNSStatusV1
+func NewReachGetProfileDomainDNSStatusV1Request(server string, profileUuid ProfileUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/domains/dns-status", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewReachListProfileSegmentContactsV1Request generates requests for ReachListProfileSegmentContactsV1
 func NewReachListProfileSegmentContactsV1Request(server string, profileUuid ProfileUuid, segmentUuid SegmentUuid, params *ReachListProfileSegmentContactsV1Params) (*http.Request, error) {
 	var err error
@@ -13632,6 +13704,9 @@ type ClientWithResponsesInterface interface {
 
 	ReachCreateNewContactsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachCreateNewContactsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachCreateNewContactsV1Response, error)
 
+	// ReachGetProfileDomainDNSStatusV1WithResponse request
+	ReachGetProfileDomainDNSStatusV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachGetProfileDomainDNSStatusV1Response, error)
+
 	// ReachListProfileSegmentContactsV1WithResponse request
 	ReachListProfileSegmentContactsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, params *ReachListProfileSegmentContactsV1Params, reqEditors ...RequestEditorFn) (*ReachListProfileSegmentContactsV1Response, error)
 
@@ -16159,6 +16234,38 @@ func (r ReachCreateNewContactsV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r ReachCreateNewContactsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachGetProfileDomainDNSStatusV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *ReachV1ProfilesDomainsDnsStatusResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachGetProfileDomainDNSStatusV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachGetProfileDomainDNSStatusV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachGetProfileDomainDNSStatusV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -19236,6 +19343,15 @@ func (c *ClientWithResponses) ReachCreateNewContactsV1WithResponse(ctx context.C
 		return nil, err
 	}
 	return ParseReachCreateNewContactsV1Response(rsp)
+}
+
+// ReachGetProfileDomainDNSStatusV1WithResponse request returning *ReachGetProfileDomainDNSStatusV1Response
+func (c *ClientWithResponses) ReachGetProfileDomainDNSStatusV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachGetProfileDomainDNSStatusV1Response, error) {
+	rsp, err := c.ReachGetProfileDomainDNSStatusV1(ctx, profileUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachGetProfileDomainDNSStatusV1Response(rsp)
 }
 
 // ReachListProfileSegmentContactsV1WithResponse request returning *ReachListProfileSegmentContactsV1Response
@@ -22995,6 +23111,46 @@ func ParseReachCreateNewContactsV1Response(rsp *http.Response) (*ReachCreateNewC
 			return nil, err
 		}
 		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachGetProfileDomainDNSStatusV1Response parses an HTTP response from a ReachGetProfileDomainDNSStatusV1WithResponse call
+func ParseReachGetProfileDomainDNSStatusV1Response(rsp *http.Response) (*ReachGetProfileDomainDNSStatusV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachGetProfileDomainDNSStatusV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1ProfilesDomainsDnsStatusResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse
