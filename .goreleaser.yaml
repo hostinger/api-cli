@@ -1,5 +1,13 @@
 project_name: hapi
 version: 2
+
+before:
+  hooks:
+    - mkdir -p completions
+    - sh -c 'go run . completion bash > completions/hapi.bash'
+    - sh -c 'go run . completion zsh  > completions/hapi.zsh'
+    - sh -c 'go run . completion fish > completions/hapi.fish'
+
 builds:
   - main: ./main.go
     env:
@@ -20,7 +28,8 @@ builds:
 
 archives:
   - name_template: "hapi-{{ .Version }}-{{ .Os }}-{{ .Arch }}"
-    files: [a-workaround-to-include-only-the-binary*]
+    files:
+      - completions/*
     wrap_in_directory: false
 
 source:
@@ -41,6 +50,21 @@ release:
   github:
     owner: hostinger
     name: api-cli
+
+brews:
+  - repository:
+      owner: hostinger
+      name: homebrew-tap
+    directory: Formula
+    homepage: "https://www.hostinger.com"
+    description: "Hostinger API CLI"
+    license: "MIT"
+    install: |
+      bin.install "hapi"
+    extra_install: |
+      bash_completion.install "completions/hapi.bash" => "hapi"
+      zsh_completion.install  "completions/hapi.zsh"  => "_hapi"
+      fish_completion.install "completions/hapi.fish"
 
 changelog:
   disable: false

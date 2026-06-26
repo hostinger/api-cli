@@ -10,6 +10,17 @@
 
 ## Installation
 
+### Homebrew (macOS & Linux)
+
+```sh
+brew install hostinger/tap/hapi
+```
+
+Upgrade with `brew upgrade hapi`. Shell tab-completion (bash/zsh/fish) is installed
+automatically.
+
+### Binary download
+
 Download the binary for your platform from the
 [releases page](https://github.com/hostinger/api-cli/releases).
 
