@@ -1,12 +1,12 @@
-project_name: hapi
+project_name: hostinger
 version: 2
 
 before:
   hooks:
     - mkdir -p completions
-    - sh -c 'go run . completion bash > completions/hapi.bash'
-    - sh -c 'go run . completion zsh  > completions/hapi.zsh'
-    - sh -c 'go run . completion fish > completions/hapi.fish'
+    - sh -c 'go run . completion bash > completions/hostinger.bash'
+    - sh -c 'go run . completion zsh  > completions/hostinger.zsh'
+    - sh -c 'go run . completion fish > completions/hostinger.fish'
 
 builds:
   - main: ./main.go
@@ -27,24 +27,24 @@ builds:
       - linux
 
 archives:
-  - name_template: "hapi-{{ .Version }}-{{ .Os }}-{{ .Arch }}"
+  - name_template: "hostinger-{{ .Version }}-{{ .Os }}-{{ .Arch }}"
     files:
       - completions/*
     wrap_in_directory: false
 
 source:
   enabled: true
-  name_template: 'hapi-{{ .Version }}-source'
+  name_template: 'hostinger-{{ .Version }}-source'
 
 checksum:
-  name_template: "hapi-{{ .Version }}-checksums.sha256"
+  name_template: "hostinger-{{ .Version }}-checksums.sha256"
 
 #dockers:
 #  - dockerfile: Dockerfile.goreleaser
 #    image_templates:
-#      - "hostinger/hapi:latest"
-#      - "hostinger/hapi:{{ .Major }}-latest"
-#      - "hostinger/hapi:{{ .Version }}"
+#      - "hostinger/hostinger:latest"
+#      - "hostinger/hostinger:{{ .Major }}-latest"
+#      - "hostinger/hostinger:{{ .Version }}"
 
 release:
   github:
@@ -60,11 +60,11 @@ brews:
     description: "Hostinger API CLI"
     license: "MIT"
     install: |
-      bin.install "hapi"
+      bin.install "hostinger"
     extra_install: |
-      bash_completion.install "completions/hapi.bash" => "hapi"
-      zsh_completion.install  "completions/hapi.zsh"  => "_hapi"
-      fish_completion.install "completions/hapi.fish"
+      bash_completion.install "completions/hostinger.bash" => "hostinger"
+      zsh_completion.install  "completions/hostinger.zsh"  => "_hostinger"
+      fish_completion.install "completions/hostinger.fish"
 
 changelog:
   disable: false

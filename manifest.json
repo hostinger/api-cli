@@ -1,696 +1,696 @@
 {
   "DNS_deleteDNSRecordsV1": {
-    "command": "hapi dns records delete",
+    "command": "hostinger dns records delete",
     "method": "DELETE",
     "path": "/api/dns/v1/zones/{domain}"
   },
   "DNS_getDNSRecordsV1": {
-    "command": "hapi dns records list",
+    "command": "hostinger dns records list",
     "method": "GET",
     "path": "/api/dns/v1/zones/{domain}"
   },
   "DNS_getDNSSnapshotListV1": {
-    "command": "hapi dns snapshots list",
+    "command": "hostinger dns snapshots list",
     "method": "GET",
     "path": "/api/dns/v1/snapshots/{domain}"
   },
   "DNS_getDNSSnapshotV1": {
-    "command": "hapi dns snapshots get",
+    "command": "hostinger dns snapshots get",
     "method": "GET",
     "path": "/api/dns/v1/snapshots/{domain}/{snapshotId}"
   },
   "DNS_resetDNSRecordsV1": {
-    "command": "hapi dns records reset",
+    "command": "hostinger dns records reset",
     "method": "POST",
     "path": "/api/dns/v1/zones/{domain}/reset"
   },
   "DNS_restoreDNSSnapshotV1": {
-    "command": "hapi dns snapshots restore",
+    "command": "hostinger dns snapshots restore",
     "method": "POST",
     "path": "/api/dns/v1/snapshots/{domain}/{snapshotId}/restore"
   },
   "DNS_updateDNSRecordsV1": {
-    "command": "hapi dns records update",
+    "command": "hostinger dns records update",
     "method": "PUT",
     "path": "/api/dns/v1/zones/{domain}"
   },
   "DNS_validateDNSRecordsV1": {
-    "command": "hapi dns records validate",
+    "command": "hostinger dns records validate",
     "method": "POST",
     "path": "/api/dns/v1/zones/{domain}/validate"
   },
   "VPS_activateFirewallV1": {
-    "command": "hapi vps firewall activate",
+    "command": "hostinger vps firewall activate",
     "method": "POST",
     "path": "/api/vps/v1/firewall/{firewallId}/activate/{virtualMachineId}"
   },
   "VPS_attachPublicKeyV1": {
-    "command": "hapi vps public-keys attach",
+    "command": "hostinger vps public-keys attach",
     "method": "POST",
     "path": "/api/vps/v1/public-keys/attach/{virtualMachineId}"
   },
   "VPS_createFirewallRuleV1": {
-    "command": "hapi vps firewall create-rule",
+    "command": "hostinger vps firewall create-rule",
     "method": "POST",
     "path": "/api/vps/v1/firewall/{firewallId}/rules"
   },
   "VPS_createNewFirewallV1": {
-    "command": "hapi vps firewall create",
+    "command": "hostinger vps firewall create",
     "method": "POST",
     "path": "/api/vps/v1/firewall"
   },
   "VPS_createNewProjectV1": {
-    "command": "hapi vps docker create",
+    "command": "hostinger vps docker create",
     "method": "POST",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/docker"
   },
   "VPS_createPTRRecordV1": {
-    "command": "hapi vps ptr create",
+    "command": "hostinger vps ptr create",
     "method": "POST",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/ptr/{ipAddressId}"
   },
   "VPS_createPostInstallScriptV1": {
-    "command": "hapi vps post-install-scripts create",
+    "command": "hostinger vps post-install-scripts create",
     "method": "POST",
     "path": "/api/vps/v1/post-install-scripts"
   },
   "VPS_createPublicKeyV1": {
-    "command": "hapi vps public-keys create",
+    "command": "hostinger vps public-keys create",
     "method": "POST",
     "path": "/api/vps/v1/public-keys"
   },
   "VPS_createSnapshotV1": {
-    "command": "hapi vps snapshots create",
+    "command": "hostinger vps snapshots create",
     "method": "POST",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/snapshot"
   },
   "VPS_deactivateFirewallV1": {
-    "command": "hapi vps firewall deactivate",
+    "command": "hostinger vps firewall deactivate",
     "method": "POST",
     "path": "/api/vps/v1/firewall/{firewallId}/deactivate/{virtualMachineId}"
   },
   "VPS_deleteFirewallRuleV1": {
-    "command": "hapi vps firewall delete-rule",
+    "command": "hostinger vps firewall delete-rule",
     "method": "DELETE",
     "path": "/api/vps/v1/firewall/{firewallId}/rules/{ruleId}"
   },
   "VPS_deleteFirewallV1": {
-    "command": "hapi vps firewall delete",
+    "command": "hostinger vps firewall delete",
     "method": "DELETE",
     "path": "/api/vps/v1/firewall/{firewallId}"
   },
   "VPS_deletePTRRecordV1": {
-    "command": "hapi vps ptr delete",
+    "command": "hostinger vps ptr delete",
     "method": "DELETE",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/ptr/{ipAddressId}"
   },
   "VPS_deletePostInstallScriptV1": {
-    "command": "hapi vps post-install-scripts delete",
+    "command": "hostinger vps post-install-scripts delete",
     "method": "DELETE",
     "path": "/api/vps/v1/post-install-scripts/{postInstallScriptId}"
   },
   "VPS_deleteProjectV1": {
-    "command": "hapi vps docker delete",
+    "command": "hostinger vps docker delete",
     "method": "DELETE",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/docker/{projectName}/down"
   },
   "VPS_deletePublicKeyV1": {
-    "command": "hapi vps public-keys delete",
+    "command": "hostinger vps public-keys delete",
     "method": "DELETE",
     "path": "/api/vps/v1/public-keys/{publicKeyId}"
   },
   "VPS_deleteSnapshotV1": {
-    "command": "hapi vps snapshots delete",
+    "command": "hostinger vps snapshots delete",
     "method": "DELETE",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/snapshot"
   },
   "VPS_getActionDetailsV1": {
-    "command": "hapi vps actions get",
+    "command": "hostinger vps actions get",
     "method": "GET",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/actions/{actionId}"
   },
   "VPS_getActionsV1": {
-    "command": "hapi vps actions list",
+    "command": "hostinger vps actions list",
     "method": "GET",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/actions"
   },
   "VPS_getAttachedPublicKeysV1": {
-    "command": "hapi vps virtual-machines attached-public-keys",
+    "command": "hostinger vps virtual-machines attached-public-keys",
     "method": "GET",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/public-keys"
   },
   "VPS_getBackupsV1": {
-    "command": "hapi vps backups list",
+    "command": "hostinger vps backups list",
     "method": "GET",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/backups"
   },
   "VPS_getDataCenterListV1": {
-    "command": "hapi vps data-centers list",
+    "command": "hostinger vps data-centers list",
     "method": "GET",
     "path": "/api/vps/v1/data-centers"
   },
   "VPS_getFirewallDetailsV1": {
-    "command": "hapi vps firewall get",
+    "command": "hostinger vps firewall get",
     "method": "GET",
     "path": "/api/vps/v1/firewall/{firewallId}"
   },
   "VPS_getFirewallListV1": {
-    "command": "hapi vps firewall list",
+    "command": "hostinger vps firewall list",
     "method": "GET",
     "path": "/api/vps/v1/firewall"
   },
   "VPS_getMetricsV1": {
-    "command": "hapi vps virtual-machines metrics",
+    "command": "hostinger vps virtual-machines metrics",
     "method": "GET",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/metrics"
   },
   "VPS_getPostInstallScriptV1": {
-    "command": "hapi vps post-install-scripts get",
+    "command": "hostinger vps post-install-scripts get",
     "method": "GET",
     "path": "/api/vps/v1/post-install-scripts/{postInstallScriptId}"
   },
   "VPS_getPostInstallScriptsV1": {
-    "command": "hapi vps post-install-scripts list",
+    "command": "hostinger vps post-install-scripts list",
     "method": "GET",
     "path": "/api/vps/v1/post-install-scripts"
   },
   "VPS_getProjectContainersV1": {
-    "command": "hapi vps docker containers",
+    "command": "hostinger vps docker containers",
     "method": "GET",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/docker/{projectName}/containers"
   },
   "VPS_getProjectContentsV1": {
-    "command": "hapi vps docker get",
+    "command": "hostinger vps docker get",
     "method": "GET",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/docker/{projectName}"
   },
   "VPS_getProjectListV1": {
-    "command": "hapi vps docker list",
+    "command": "hostinger vps docker list",
     "method": "GET",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/docker"
   },
   "VPS_getProjectLogsV1": {
-    "command": "hapi vps docker logs",
+    "command": "hostinger vps docker logs",
     "method": "GET",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/docker/{projectName}/logs"
   },
   "VPS_getPublicKeysV1": {
-    "command": "hapi vps public-keys list",
+    "command": "hostinger vps public-keys list",
     "method": "GET",
     "path": "/api/vps/v1/public-keys"
   },
   "VPS_getScanMetricsV1": {
-    "command": "hapi vps monarx scan-metrics",
+    "command": "hostinger vps monarx scan-metrics",
     "method": "GET",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/monarx"
   },
   "VPS_getSnapshotV1": {
-    "command": "hapi vps snapshots get",
+    "command": "hostinger vps snapshots get",
     "method": "GET",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/snapshot"
   },
   "VPS_getTemplateDetailsV1": {
-    "command": "hapi vps templates get",
+    "command": "hostinger vps templates get",
     "method": "GET",
     "path": "/api/vps/v1/templates/{templateId}"
   },
   "VPS_getTemplatesV1": {
-    "command": "hapi vps templates list",
+    "command": "hostinger vps templates list",
     "method": "GET",
     "path": "/api/vps/v1/templates"
   },
   "VPS_getVirtualMachineDetailsV1": {
-    "command": "hapi vps virtual-machines get",
+    "command": "hostinger vps virtual-machines get",
     "method": "GET",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}"
   },
   "VPS_getVirtualMachinesV1": {
-    "command": "hapi vps virtual-machines list",
+    "command": "hostinger vps virtual-machines list",
     "method": "GET",
     "path": "/api/vps/v1/virtual-machines"
   },
   "VPS_installMonarxV1": {
-    "command": "hapi vps monarx install",
+    "command": "hostinger vps monarx install",
     "method": "POST",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/monarx"
   },
   "VPS_purchaseNewVirtualMachineV1": {
-    "command": "hapi vps virtual-machines purchase",
+    "command": "hostinger vps virtual-machines purchase",
     "method": "POST",
     "path": "/api/vps/v1/virtual-machines"
   },
   "VPS_recreateVirtualMachineV1": {
-    "command": "hapi vps virtual-machines recreate",
+    "command": "hostinger vps virtual-machines recreate",
     "method": "POST",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/recreate"
   },
   "VPS_resetHostnameV1": {
-    "command": "hapi vps virtual-machines reset-hostname",
+    "command": "hostinger vps virtual-machines reset-hostname",
     "method": "DELETE",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/hostname"
   },
   "VPS_restartProjectV1": {
-    "command": "hapi vps docker restart",
+    "command": "hostinger vps docker restart",
     "method": "POST",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/docker/{projectName}/restart"
   },
   "VPS_restartVirtualMachineV1": {
-    "command": "hapi vps virtual-machines restart",
+    "command": "hostinger vps virtual-machines restart",
     "method": "POST",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/restart"
   },
   "VPS_restoreBackupV1": {
-    "command": "hapi vps backups restore",
+    "command": "hostinger vps backups restore",
     "method": "POST",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/backups/{backupId}/restore"
   },
   "VPS_restoreSnapshotV1": {
-    "command": "hapi vps snapshots restore",
+    "command": "hostinger vps snapshots restore",
     "method": "POST",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/snapshot/restore"
   },
   "VPS_setHostnameV1": {
-    "command": "hapi vps virtual-machines set-hostname",
+    "command": "hostinger vps virtual-machines set-hostname",
     "method": "PUT",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/hostname"
   },
   "VPS_setNameserversV1": {
-    "command": "hapi vps virtual-machines set-nameservers",
+    "command": "hostinger vps virtual-machines set-nameservers",
     "method": "PUT",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/nameservers"
   },
   "VPS_setPanelPasswordV1": {
-    "command": "hapi vps virtual-machines set-panel-password",
+    "command": "hostinger vps virtual-machines set-panel-password",
     "method": "PUT",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/panel-password"
   },
   "VPS_setRootPasswordV1": {
-    "command": "hapi vps virtual-machines set-root-password",
+    "command": "hostinger vps virtual-machines set-root-password",
     "method": "PUT",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/root-password"
   },
   "VPS_setupPurchasedVirtualMachineV1": {
-    "command": "hapi vps virtual-machines setup",
+    "command": "hostinger vps virtual-machines setup",
     "method": "POST",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/setup"
   },
   "VPS_startProjectV1": {
-    "command": "hapi vps docker start",
+    "command": "hostinger vps docker start",
     "method": "POST",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/docker/{projectName}/start"
   },
   "VPS_startRecoveryModeV1": {
-    "command": "hapi vps recovery start",
+    "command": "hostinger vps recovery start",
     "method": "POST",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/recovery"
   },
   "VPS_startVirtualMachineV1": {
-    "command": "hapi vps virtual-machines start",
+    "command": "hostinger vps virtual-machines start",
     "method": "POST",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/start"
   },
   "VPS_stopProjectV1": {
-    "command": "hapi vps docker stop",
+    "command": "hostinger vps docker stop",
     "method": "POST",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/docker/{projectName}/stop"
   },
   "VPS_stopRecoveryModeV1": {
-    "command": "hapi vps recovery stop",
+    "command": "hostinger vps recovery stop",
     "method": "DELETE",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/recovery"
   },
   "VPS_stopVirtualMachineV1": {
-    "command": "hapi vps virtual-machines stop",
+    "command": "hostinger vps virtual-machines stop",
     "method": "POST",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/stop"
   },
   "VPS_syncFirewallV1": {
-    "command": "hapi vps firewall sync",
+    "command": "hostinger vps firewall sync",
     "method": "POST",
     "path": "/api/vps/v1/firewall/{firewallId}/sync/{virtualMachineId}"
   },
   "VPS_uninstallMonarxV1": {
-    "command": "hapi vps monarx uninstall",
+    "command": "hostinger vps monarx uninstall",
     "method": "DELETE",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/monarx"
   },
   "VPS_updateFirewallRuleV1": {
-    "command": "hapi vps firewall update-rule",
+    "command": "hostinger vps firewall update-rule",
     "method": "PUT",
     "path": "/api/vps/v1/firewall/{firewallId}/rules/{ruleId}"
   },
   "VPS_updatePostInstallScriptV1": {
-    "command": "hapi vps post-install-scripts update",
+    "command": "hostinger vps post-install-scripts update",
     "method": "PUT",
     "path": "/api/vps/v1/post-install-scripts/{postInstallScriptId}"
   },
   "VPS_updateProjectV1": {
-    "command": "hapi vps docker update",
+    "command": "hostinger vps docker update",
     "method": "POST",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/docker/{projectName}/update"
   },
   "billing_deletePaymentMethodV1": {
-    "command": "hapi billing payment-methods delete",
+    "command": "hostinger billing payment-methods delete",
     "method": "DELETE",
     "path": "/api/billing/v1/payment-methods/{paymentMethodId}"
   },
   "billing_disableAutoRenewalV1": {
-    "command": "hapi billing subscriptions disable-auto-renewal",
+    "command": "hostinger billing subscriptions disable-auto-renewal",
     "method": "DELETE",
     "path": "/api/billing/v1/subscriptions/{subscriptionId}/auto-renewal/disable"
   },
   "billing_enableAutoRenewalV1": {
-    "command": "hapi billing subscriptions enable-auto-renewal",
+    "command": "hostinger billing subscriptions enable-auto-renewal",
     "method": "PATCH",
     "path": "/api/billing/v1/subscriptions/{subscriptionId}/auto-renewal/enable"
   },
   "billing_getCatalogItemListV1": {
-    "command": "hapi billing catalog list",
+    "command": "hostinger billing catalog list",
     "method": "GET",
     "path": "/api/billing/v1/catalog"
   },
   "billing_getPaymentMethodListV1": {
-    "command": "hapi billing payment-methods list",
+    "command": "hostinger billing payment-methods list",
     "method": "GET",
     "path": "/api/billing/v1/payment-methods"
   },
   "billing_getSubscriptionListV1": {
-    "command": "hapi billing subscriptions list",
+    "command": "hostinger billing subscriptions list",
     "method": "GET",
     "path": "/api/billing/v1/subscriptions"
   },
   "billing_setDefaultPaymentMethodV1": {
-    "command": "hapi billing payment-methods set-default",
+    "command": "hostinger billing payment-methods set-default",
     "method": "POST",
     "path": "/api/billing/v1/payment-methods/{paymentMethodId}"
   },
   "domains_checkDomainAvailabilityV1": {
-    "command": "hapi domains availability check",
+    "command": "hostinger domains availability check",
     "method": "POST",
     "path": "/api/domains/v1/availability"
   },
   "domains_createDomainForwardingV1": {
-    "command": "hapi domains forwarding create",
+    "command": "hostinger domains forwarding create",
     "method": "POST",
     "path": "/api/domains/v1/forwarding"
   },
   "domains_createWHOISProfileV1": {
-    "command": "hapi domains whois create",
+    "command": "hostinger domains whois create",
     "method": "POST",
     "path": "/api/domains/v1/whois"
   },
   "domains_deleteDomainForwardingV1": {
-    "command": "hapi domains forwarding delete",
+    "command": "hostinger domains forwarding delete",
     "method": "DELETE",
     "path": "/api/domains/v1/forwarding/{domain}"
   },
   "domains_deleteWHOISProfileV1": {
-    "command": "hapi domains whois delete",
+    "command": "hostinger domains whois delete",
     "method": "DELETE",
     "path": "/api/domains/v1/whois/{whoisId}"
   },
   "domains_disableDomainLockV1": {
-    "command": "hapi domains portfolio disable-lock",
+    "command": "hostinger domains portfolio disable-lock",
     "method": "DELETE",
     "path": "/api/domains/v1/portfolio/{domain}/domain-lock"
   },
   "domains_disablePrivacyProtectionV1": {
-    "command": "hapi domains portfolio disable-privacy-protection",
+    "command": "hostinger domains portfolio disable-privacy-protection",
     "method": "DELETE",
     "path": "/api/domains/v1/portfolio/{domain}/privacy-protection"
   },
   "domains_enableDomainLockV1": {
-    "command": "hapi domains portfolio enable-lock",
+    "command": "hostinger domains portfolio enable-lock",
     "method": "PUT",
     "path": "/api/domains/v1/portfolio/{domain}/domain-lock"
   },
   "domains_enablePrivacyProtectionV1": {
-    "command": "hapi domains portfolio enable-privacy-protection",
+    "command": "hostinger domains portfolio enable-privacy-protection",
     "method": "PUT",
     "path": "/api/domains/v1/portfolio/{domain}/privacy-protection"
   },
   "domains_getDomainDetailsV1": {
-    "command": "hapi domains portfolio get",
+    "command": "hostinger domains portfolio get",
     "method": "GET",
     "path": "/api/domains/v1/portfolio/{domain}"
   },
   "domains_getDomainForwardingV1": {
-    "command": "hapi domains forwarding get",
+    "command": "hostinger domains forwarding get",
     "method": "GET",
     "path": "/api/domains/v1/forwarding/{domain}"
   },
   "domains_getDomainListV1": {
-    "command": "hapi domains portfolio list",
+    "command": "hostinger domains portfolio list",
     "method": "GET",
     "path": "/api/domains/v1/portfolio"
   },
   "domains_getWHOISProfileListV1": {
-    "command": "hapi domains whois list",
+    "command": "hostinger domains whois list",
     "method": "GET",
     "path": "/api/domains/v1/whois"
   },
   "domains_getWHOISProfileUsageV1": {
-    "command": "hapi domains whois usage",
+    "command": "hostinger domains whois usage",
     "method": "GET",
     "path": "/api/domains/v1/whois/{whoisId}/usage"
   },
   "domains_getWHOISProfileV1": {
-    "command": "hapi domains whois get",
+    "command": "hostinger domains whois get",
     "method": "GET",
     "path": "/api/domains/v1/whois/{whoisId}"
   },
   "domains_purchaseNewDomainV1": {
-    "command": "hapi domains portfolio purchase",
+    "command": "hostinger domains portfolio purchase",
     "method": "POST",
     "path": "/api/domains/v1/portfolio"
   },
   "domains_updateDomainNameserversV1": {
-    "command": "hapi domains portfolio update-nameservers",
+    "command": "hostinger domains portfolio update-nameservers",
     "method": "PUT",
     "path": "/api/domains/v1/portfolio/{domain}/nameservers"
   },
   "ecommerce_createDigitalProductV1": {
-    "command": "hapi ecommerce products create-digital",
+    "command": "hostinger ecommerce products create-digital",
     "method": "POST",
     "path": "/api/ecommerce/v1/stores/{store_id}/products/digital"
   },
   "ecommerce_createPhysicalProductV1": {
-    "command": "hapi ecommerce products create-physical",
+    "command": "hostinger ecommerce products create-physical",
     "method": "POST",
     "path": "/api/ecommerce/v1/stores/{store_id}/products/physical"
   },
   "ecommerce_createStoreV1": {
-    "command": "hapi ecommerce stores create",
+    "command": "hostinger ecommerce stores create",
     "method": "POST",
     "path": "/api/ecommerce/v1/stores"
   },
   "ecommerce_deleteStoreV1": {
-    "command": "hapi ecommerce stores delete",
+    "command": "hostinger ecommerce stores delete",
     "method": "DELETE",
     "path": "/api/ecommerce/v1/stores/{store_id}"
   },
   "ecommerce_enableManualPaymentMethodV1": {
-    "command": "hapi ecommerce payments enable-manual-method",
+    "command": "hostinger ecommerce payments enable-manual-method",
     "method": "POST",
     "path": "/api/ecommerce/v1/stores/{store_id}/payment-methods/manual"
   },
   "ecommerce_getStoresV1": {
-    "command": "hapi ecommerce stores list",
+    "command": "hostinger ecommerce stores list",
     "method": "GET",
     "path": "/api/ecommerce/v1/stores"
   },
   "ecommerce_setStoreShippingV1": {
-    "command": "hapi ecommerce shipping set-store",
+    "command": "hostinger ecommerce shipping set-store",
     "method": "POST",
     "path": "/api/ecommerce/v1/stores/{store_id}/shipping"
   },
   "horizons_createWebsiteV1": {
-    "command": "hapi horizons websites create",
+    "command": "hostinger horizons websites create",
     "method": "POST",
     "path": "/api/horizons/v1/websites"
   },
   "horizons_getWebsiteV1": {
-    "command": "hapi horizons websites get",
+    "command": "hostinger horizons websites get",
     "method": "GET",
     "path": "/api/horizons/v1/websites/{websiteId}"
   },
   "hosting_changeDatabasePasswordV1": {
-    "command": "hapi hosting databases change-password",
+    "command": "hostinger hosting databases change-password",
     "method": "PATCH",
     "path": "/api/hosting/v1/accounts/{username}/databases/{name}/change-password"
   },
   "hosting_createAccountDatabaseV1": {
-    "command": "hapi hosting databases create",
+    "command": "hostinger hosting databases create",
     "method": "POST",
     "path": "/api/hosting/v1/accounts/{username}/databases"
   },
   "hosting_createNodeJSBuildFromArchiveV1": {
-    "command": "hapi hosting nodejs create-build-from-archive",
+    "command": "hostinger hosting nodejs create-build-from-archive",
     "method": "POST",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/from-archive"
   },
   "hosting_createWebsiteParkedDomainV1": {
-    "command": "hapi hosting domains create-website-parked",
+    "command": "hostinger hosting domains create-website-parked",
     "method": "POST",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/parked-domains"
   },
   "hosting_createWebsiteSubdomainV1": {
-    "command": "hapi hosting domains create-website-subdomain",
+    "command": "hostinger hosting domains create-website-subdomain",
     "method": "POST",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/subdomains"
   },
   "hosting_createWebsiteV1": {
-    "command": "hapi hosting websites create",
+    "command": "hostinger hosting websites create",
     "method": "POST",
     "path": "/api/hosting/v1/websites"
   },
   "hosting_deleteAccountDatabaseV1": {
-    "command": "hapi hosting databases delete",
+    "command": "hostinger hosting databases delete",
     "method": "DELETE",
     "path": "/api/hosting/v1/accounts/{username}/databases/{name}"
   },
   "hosting_deleteWebsiteParkedDomainV1": {
-    "command": "hapi hosting domains delete-website-parked",
+    "command": "hostinger hosting domains delete-website-parked",
     "method": "DELETE",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/parked-domains/{parkedDomain}"
   },
   "hosting_deleteWebsiteSubdomainV1": {
-    "command": "hapi hosting domains delete-website-subdomain",
+    "command": "hostinger hosting domains delete-website-subdomain",
     "method": "DELETE",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/subdomains/{subdomain}"
   },
   "hosting_generateAFreeSubdomainV1": {
-    "command": "hapi hosting domains generate-free-subdomain",
+    "command": "hostinger hosting domains generate-free-subdomain",
     "method": "POST",
     "path": "/api/hosting/v1/domains/free-subdomains"
   },
   "hosting_getNodeJSBuildLogsV1": {
-    "command": "hapi hosting nodejs build-logs",
+    "command": "hostinger hosting nodejs build-logs",
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/{uuid}/logs"
   },
   "hosting_getPhpMyAdminLinkV1": {
-    "command": "hapi hosting databases phpmyadmin-link",
+    "command": "hostinger hosting databases phpmyadmin-link",
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/databases/{name}/phpmyadmin-link"
   },
   "hosting_installWordPressV1": {
-    "command": "hapi hosting wordpress install",
+    "command": "hostinger hosting wordpress install",
     "method": "POST",
     "path": "/api/hosting/v1/accounts/{username}/wordpress/installations"
   },
   "hosting_listAccountDatabasesV1": {
-    "command": "hapi hosting databases list",
+    "command": "hostinger hosting databases list",
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/databases"
   },
   "hosting_listAvailableDatacentersV1": {
-    "command": "hapi hosting datacenters list",
+    "command": "hostinger hosting datacenters list",
     "method": "GET",
     "path": "/api/hosting/v1/datacenters"
   },
   "hosting_listNodeJSBuildsV1": {
-    "command": "hapi hosting nodejs list-builds",
+    "command": "hostinger hosting nodejs list-builds",
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds"
   },
   "hosting_listOrdersV1": {
-    "command": "hapi hosting orders list",
+    "command": "hostinger hosting orders list",
     "method": "GET",
     "path": "/api/hosting/v1/orders"
   },
   "hosting_listWebsiteParkedDomainsV1": {
-    "command": "hapi hosting domains list-website-parked",
+    "command": "hostinger hosting domains list-website-parked",
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/parked-domains"
   },
   "hosting_listWebsiteSubdomainsV1": {
-    "command": "hapi hosting domains list-website-subdomains",
+    "command": "hostinger hosting domains list-website-subdomains",
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/subdomains"
   },
   "hosting_listWebsitesV1": {
-    "command": "hapi hosting websites list",
+    "command": "hostinger hosting websites list",
     "method": "GET",
     "path": "/api/hosting/v1/websites"
   },
   "hosting_listWordPressInstallationsV1": {
-    "command": "hapi hosting wordpress list-installations",
+    "command": "hostinger hosting wordpress list-installations",
     "method": "GET",
     "path": "/api/hosting/v1/wordpress/installations"
   },
   "hosting_repairDatabaseV1": {
-    "command": "hapi hosting databases repair",
+    "command": "hostinger hosting databases repair",
     "method": "PATCH",
     "path": "/api/hosting/v1/accounts/{username}/databases/{name}/repair"
   },
   "hosting_verifyDomainOwnershipV1": {
-    "command": "hapi hosting domains verify-ownership",
+    "command": "hostinger hosting domains verify-ownership",
     "method": "POST",
     "path": "/api/hosting/v1/domains/verify-ownership"
   },
   "reach_createANewContactSegmentV1": {
-    "command": "hapi reach segments create",
+    "command": "hostinger reach segments create",
     "method": "POST",
     "path": "/api/reach/v1/segmentation/segments"
   },
   "reach_createANewContactV1": {
-    "command": "hapi reach contacts create",
+    "command": "hostinger reach contacts create",
     "method": "POST",
     "path": "/api/reach/v1/contacts"
   },
   "reach_createNewContactsV1": {
-    "command": "hapi reach contacts create-bulk",
+    "command": "hostinger reach contacts create-bulk",
     "method": "POST",
     "path": "/api/reach/v1/profiles/{profileUuid}/contacts"
   },
   "reach_deleteAContactV1": {
-    "command": "hapi reach contacts delete",
+    "command": "hostinger reach contacts delete",
     "method": "DELETE",
     "path": "/api/reach/v1/contacts/{uuid}"
   },
   "reach_getProfileDomainDNSStatusV1": {
-    "command": "hapi reach profiles domain-dns-status",
+    "command": "hostinger reach profiles domain-dns-status",
     "method": "GET",
     "path": "/api/reach/v1/profiles/{profileUuid}/domains/dns-status"
   },
   "reach_getSegmentDetailsV1": {
-    "command": "hapi reach segments get",
+    "command": "hostinger reach segments get",
     "method": "GET",
     "path": "/api/reach/v1/segmentation/segments/{segmentUuid}"
   },
   "reach_listContactGroupsV1": {
-    "command": "hapi reach contacts list-groups",
+    "command": "hostinger reach contacts list-groups",
     "method": "GET",
     "path": "/api/reach/v1/contacts/groups"
   },
   "reach_listContactsV1": {
-    "command": "hapi reach contacts list",
+    "command": "hostinger reach contacts list",
     "method": "GET",
     "path": "/api/reach/v1/contacts"
   },
   "reach_listProfileSegmentContactsV1": {
-    "command": "hapi reach segments list-profile-contacts",
+    "command": "hostinger reach segments list-profile-contacts",
     "method": "GET",
     "path": "/api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}/contacts"
   },
   "reach_listProfilesV1": {
-    "command": "hapi reach profiles list",
+    "command": "hostinger reach profiles list",
     "method": "GET",
     "path": "/api/reach/v1/profiles"
   },
   "reach_listSegmentContactsV1": {
-    "command": "hapi reach segments list-contacts",
+    "command": "hostinger reach segments list-contacts",
     "method": "GET",
     "path": "/api/reach/v1/segmentation/segments/{segmentUuid}/contacts"
   },
   "reach_listSegmentsV1": {
-    "command": "hapi reach segments list",
+    "command": "hostinger reach segments list",
     "method": "GET",
     "path": "/api/reach/v1/segmentation/segments"
   },
   "v2_getDomainVerificationsDIRECT": {
-    "command": "hapi domains verifications direct",
+    "command": "hostinger domains verifications direct",
     "method": "GET",
     "path": "/api/v2/direct/verifications/active"
   }

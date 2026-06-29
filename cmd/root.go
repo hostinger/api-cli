@@ -12,6 +12,7 @@ import (
 	"github.com/hostinger/api-cli/cmd/vps"
 	"os"
 
+	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -24,7 +25,7 @@ var (
 )
 
 var RootCmd = &cobra.Command{
-	Use:   "hapi",
+	Use:   "hostinger",
 	Short: "Hostinger API Command Line Interface",
 	Long:  ``,
 }
@@ -43,7 +44,7 @@ func init() {
 
 	RootCmd.DisableAutoGenTag = true
 
-	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "Config file (default is $HOME/.hapi.yaml)")
+	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "Config file (default is $HOME/.hostinger.yaml)")
 	RootCmd.PersistentFlags().StringVar(&OutputFormat, "format", "", "Output format type (json|table|tree), default: table")
 
 	RootCmd.RegisterFlagCompletionFunc("format", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
@@ -68,13 +69,14 @@ func initConfig() {
 		home, err := os.UserHomeDir()
 		cobra.CheckErr(err)
 
-		viper.AddConfigPath(home)
+		path, _ := utils.MigrateLegacyConfig(home, os.Stderr)
+		viper.SetConfigFile(path)
 		viper.SetConfigType("yaml")
-		viper.SetConfigName(".hapi")
 	}
 
-	viper.SetEnvPrefix("hapi")
+	viper.SetEnvPrefix("hostinger")
 	viper.AutomaticEnv() // read in environment variables that match
+	utils.BindLegacyEnv(os.Stderr)
 	if err := viper.ReadInConfig(); err == nil {
 		fmt.Fprintln(os.Stderr, "Using config file:", viper.ConfigFileUsed())
 	}

@@ -1,8 +1,8 @@
 # Enabling shell auto-completion
 
-`hapi` has auto-complete support. This makes it easier to use the CLI and improves user experience by completing command
-names by clicking TAB key. For example if you type `hapi vps dat<TAB>` with auto-completion enabled, shell will automatically append
-rest of the command: `hapi vps data-centers`.
+`hostinger` has auto-complete support. This makes it easier to use the CLI and improves user experience by completing command
+names by clicking TAB key. For example if you type `hostinger vps dat<TAB>` with auto-completion enabled, shell will automatically append
+rest of the command: `hostinger vps data-centers`.
 
 Auto-completion can be generated for multiple shells. The currently supported shells are:
 - Bash
@@ -15,11 +15,11 @@ After adding shell auto-completion, remember to refresh your shell profile by lo
 ## Bash
 ### Linux:
 ```bash
-hapi completion bash > /etc/bash_completion.d/hapi
+hostinger completion bash > /etc/bash_completion.d/hostinger
 ````
 ### macOS:
 ```bash
-myapp completion bash > /usr/local/etc/bash_completion.d/hapi
+hostinger completion bash > /usr/local/etc/bash_completion.d/hostinger
 ```
 
 ## Zsh
@@ -30,25 +30,25 @@ echo "autoload -U compinit; compinit" >> ~/.zshrc
 
 To load completions for each session, execute once:
 ```bash
-hapi completion zsh > "${fpath[1]}/_hapi"
+hostinger completion zsh > "${fpath[1]}/_hostinger"
 ```
 You will need to start a new shell for this setup to take effect.
 
 ## Fish
 ```bash
-hapi completion fish | source
+hostinger completion fish | source
 ```
 To load completions for each session, execute once:
 ```bash
-hapi completion fish > ~/.config/fish/completions/hapi.fish
+hostinger completion fish > ~/.config/fish/completions/hostinger.fish
 ```
 
 ## PowerShell
 ```powershell
-hapi completion powershell | Out-String | Invoke-Expression
+hostinger completion powershell | Out-String | Invoke-Expression
 ```
 To load completions for every new session, run:
 ```powershell
-hapi completion powershell > hapi.ps1
+hostinger completion powershell > hostinger.ps1
 ```
 and source this file from your PowerShell profile.
