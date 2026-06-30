@@ -2282,6 +2282,39 @@ type HorizonsV1WebsitesWebsiteUrlResource struct {
 	WebsiteUrl string `json:"website_url"`
 }
 
+// HostingV1CronJobsCreateCronJobRequest defines model for Hosting.V1.CronJobs.CreateCronJobRequest.
+type HostingV1CronJobsCreateCronJobRequest struct {
+	// Command Command to execute on the schedule.
+	Command string `json:"command"`
+
+	// Time Cron schedule expression (for example "0 2 * * *" runs daily at 02:00).
+	Time string `json:"time"`
+}
+
+// HostingV1CronJobsCronJobCollection Array of [`Hosting.V1.CronJobs.CronJobResource`](#model/hostingv1cronjobscronjobresource)
+type HostingV1CronJobsCronJobCollection = []HostingV1CronJobsCronJobResource
+
+// HostingV1CronJobsCronJobOutputResource defines model for Hosting.V1.CronJobs.CronJobOutputResource.
+type HostingV1CronJobsCronJobOutputResource struct {
+	// Output Output captured from the last cron job execution. Empty when the cron job has not run yet.
+	Output string `json:"output"`
+}
+
+// HostingV1CronJobsCronJobResource defines model for Hosting.V1.CronJobs.CronJobResource.
+type HostingV1CronJobsCronJobResource struct {
+	// Command Command executed on the schedule.
+	Command *string `json:"command,omitempty"`
+
+	// Time Cron schedule expression.
+	Time *string `json:"time,omitempty"`
+
+	// Uid Unique identifier of the cron job. Use it to delete the cron job or fetch its output.
+	Uid *string `json:"uid,omitempty"`
+
+	// Username Username of the account that owns the cron job.
+	Username *string `json:"username,omitempty"`
+}
+
 // HostingV1DatabasesChangeDatabasePasswordRequest defines model for Hosting.V1.Databases.ChangeDatabasePasswordRequest.
 type HostingV1DatabasesChangeDatabasePasswordRequest struct {
 	// Password New database user password.
@@ -3589,6 +3622,9 @@ type BuildUuidPath = openapi_types.UUID
 // Category defines model for category.
 type Category string
 
+// CronJobUidPath defines model for cron_job_uid_path.
+type CronJobUidPath = string
+
 // DatabaseIsAssigned defines model for database_is_assigned.
 type DatabaseIsAssigned = bool
 
@@ -3989,6 +4025,9 @@ type EcommerceSetStoreShippingV1JSONRequestBody = EcommerceV1ShippingSetShipping
 
 // HorizonsCreateWebsiteV1JSONRequestBody defines body for HorizonsCreateWebsiteV1 for application/json ContentType.
 type HorizonsCreateWebsiteV1JSONRequestBody = HorizonsV1WebsitesCreateWebsiteRequest
+
+// HostingCreateAccountCronJobV1JSONRequestBody defines body for HostingCreateAccountCronJobV1 for application/json ContentType.
+type HostingCreateAccountCronJobV1JSONRequestBody = HostingV1CronJobsCreateCronJobRequest
 
 // HostingCreateAccountDatabaseV1JSONRequestBody defines body for HostingCreateAccountDatabaseV1 for application/json ContentType.
 type HostingCreateAccountDatabaseV1JSONRequestBody = HostingV1DatabasesCreateDatabaseRequest
@@ -4799,6 +4838,20 @@ type ClientInterface interface {
 
 	// HorizonsGetWebsiteV1 request
 	HorizonsGetWebsiteV1(ctx context.Context, websiteId WebsiteIdPath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingListAccountCronJobsV1 request
+	HostingListAccountCronJobsV1(ctx context.Context, username UsernamePath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingCreateAccountCronJobV1WithBody request with any body
+	HostingCreateAccountCronJobV1WithBody(ctx context.Context, username UsernamePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	HostingCreateAccountCronJobV1(ctx context.Context, username UsernamePath, body HostingCreateAccountCronJobV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingDeleteAccountCronJobV1 request
+	HostingDeleteAccountCronJobV1(ctx context.Context, username UsernamePath, uid CronJobUidPath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingGetCronJobOutputV1 request
+	HostingGetCronJobOutputV1(ctx context.Context, username UsernamePath, uid CronJobUidPath, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingListAccountDatabasesV1 request
 	HostingListAccountDatabasesV1(ctx context.Context, username UsernamePath, params *HostingListAccountDatabasesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -5826,6 +5879,66 @@ func (c *Client) HorizonsCreateWebsiteV1(ctx context.Context, body HorizonsCreat
 
 func (c *Client) HorizonsGetWebsiteV1(ctx context.Context, websiteId WebsiteIdPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHorizonsGetWebsiteV1Request(c.Server, websiteId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingListAccountCronJobsV1(ctx context.Context, username UsernamePath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingListAccountCronJobsV1Request(c.Server, username)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingCreateAccountCronJobV1WithBody(ctx context.Context, username UsernamePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingCreateAccountCronJobV1RequestWithBody(c.Server, username, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingCreateAccountCronJobV1(ctx context.Context, username UsernamePath, body HostingCreateAccountCronJobV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingCreateAccountCronJobV1Request(c.Server, username, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingDeleteAccountCronJobV1(ctx context.Context, username UsernamePath, uid CronJobUidPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingDeleteAccountCronJobV1Request(c.Server, username, uid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingGetCronJobOutputV1(ctx context.Context, username UsernamePath, uid CronJobUidPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingGetCronJobOutputV1Request(c.Server, username, uid)
 	if err != nil {
 		return nil, err
 	}
@@ -9003,6 +9116,169 @@ func NewHorizonsGetWebsiteV1Request(server string, websiteId WebsiteIdPath) (*ht
 	}
 
 	operationPath := fmt.Sprintf("/api/horizons/v1/websites/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingListAccountCronJobsV1Request generates requests for HostingListAccountCronJobsV1
+func NewHostingListAccountCronJobsV1Request(server string, username UsernamePath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/cron-jobs", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingCreateAccountCronJobV1Request calls the generic HostingCreateAccountCronJobV1 builder with application/json body
+func NewHostingCreateAccountCronJobV1Request(server string, username UsernamePath, body HostingCreateAccountCronJobV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingCreateAccountCronJobV1RequestWithBody(server, username, "application/json", bodyReader)
+}
+
+// NewHostingCreateAccountCronJobV1RequestWithBody generates requests for HostingCreateAccountCronJobV1 with any type of body
+func NewHostingCreateAccountCronJobV1RequestWithBody(server string, username UsernamePath, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/cron-jobs", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingDeleteAccountCronJobV1Request generates requests for HostingDeleteAccountCronJobV1
+func NewHostingDeleteAccountCronJobV1Request(server string, username UsernamePath, uid CronJobUidPath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "uid", uid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/cron-jobs/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingGetCronJobOutputV1Request generates requests for HostingGetCronJobOutputV1
+func NewHostingGetCronJobOutputV1Request(server string, username UsernamePath, uid CronJobUidPath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "uid", uid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/cron-jobs/%s/output", pathParam0, pathParam1)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -13873,6 +14149,20 @@ type ClientWithResponsesInterface interface {
 	// HorizonsGetWebsiteV1WithResponse request
 	HorizonsGetWebsiteV1WithResponse(ctx context.Context, websiteId WebsiteIdPath, reqEditors ...RequestEditorFn) (*HorizonsGetWebsiteV1Response, error)
 
+	// HostingListAccountCronJobsV1WithResponse request
+	HostingListAccountCronJobsV1WithResponse(ctx context.Context, username UsernamePath, reqEditors ...RequestEditorFn) (*HostingListAccountCronJobsV1Response, error)
+
+	// HostingCreateAccountCronJobV1WithBodyWithResponse request with any body
+	HostingCreateAccountCronJobV1WithBodyWithResponse(ctx context.Context, username UsernamePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingCreateAccountCronJobV1Response, error)
+
+	HostingCreateAccountCronJobV1WithResponse(ctx context.Context, username UsernamePath, body HostingCreateAccountCronJobV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingCreateAccountCronJobV1Response, error)
+
+	// HostingDeleteAccountCronJobV1WithResponse request
+	HostingDeleteAccountCronJobV1WithResponse(ctx context.Context, username UsernamePath, uid CronJobUidPath, reqEditors ...RequestEditorFn) (*HostingDeleteAccountCronJobV1Response, error)
+
+	// HostingGetCronJobOutputV1WithResponse request
+	HostingGetCronJobOutputV1WithResponse(ctx context.Context, username UsernamePath, uid CronJobUidPath, reqEditors ...RequestEditorFn) (*HostingGetCronJobOutputV1Response, error)
+
 	// HostingListAccountDatabasesV1WithResponse request
 	HostingListAccountDatabasesV1WithResponse(ctx context.Context, username UsernamePath, params *HostingListAccountDatabasesV1Params, reqEditors ...RequestEditorFn) (*HostingListAccountDatabasesV1Response, error)
 
@@ -15562,6 +15852,135 @@ func (r HorizonsGetWebsiteV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HorizonsGetWebsiteV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingListAccountCronJobsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *HostingV1CronJobsCronJobCollection
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingListAccountCronJobsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingListAccountCronJobsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingListAccountCronJobsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingCreateAccountCronJobV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *HostingV1CronJobsCronJobResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingCreateAccountCronJobV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingCreateAccountCronJobV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingCreateAccountCronJobV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingDeleteAccountCronJobV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingDeleteAccountCronJobV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingDeleteAccountCronJobV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingDeleteAccountCronJobV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingGetCronJobOutputV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *HostingV1CronJobsCronJobOutputResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingGetCronJobOutputV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingGetCronJobOutputV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingGetCronJobOutputV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -19388,6 +19807,50 @@ func (c *ClientWithResponses) HorizonsGetWebsiteV1WithResponse(ctx context.Conte
 	return ParseHorizonsGetWebsiteV1Response(rsp)
 }
 
+// HostingListAccountCronJobsV1WithResponse request returning *HostingListAccountCronJobsV1Response
+func (c *ClientWithResponses) HostingListAccountCronJobsV1WithResponse(ctx context.Context, username UsernamePath, reqEditors ...RequestEditorFn) (*HostingListAccountCronJobsV1Response, error) {
+	rsp, err := c.HostingListAccountCronJobsV1(ctx, username, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingListAccountCronJobsV1Response(rsp)
+}
+
+// HostingCreateAccountCronJobV1WithBodyWithResponse request with arbitrary body returning *HostingCreateAccountCronJobV1Response
+func (c *ClientWithResponses) HostingCreateAccountCronJobV1WithBodyWithResponse(ctx context.Context, username UsernamePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingCreateAccountCronJobV1Response, error) {
+	rsp, err := c.HostingCreateAccountCronJobV1WithBody(ctx, username, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingCreateAccountCronJobV1Response(rsp)
+}
+
+func (c *ClientWithResponses) HostingCreateAccountCronJobV1WithResponse(ctx context.Context, username UsernamePath, body HostingCreateAccountCronJobV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingCreateAccountCronJobV1Response, error) {
+	rsp, err := c.HostingCreateAccountCronJobV1(ctx, username, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingCreateAccountCronJobV1Response(rsp)
+}
+
+// HostingDeleteAccountCronJobV1WithResponse request returning *HostingDeleteAccountCronJobV1Response
+func (c *ClientWithResponses) HostingDeleteAccountCronJobV1WithResponse(ctx context.Context, username UsernamePath, uid CronJobUidPath, reqEditors ...RequestEditorFn) (*HostingDeleteAccountCronJobV1Response, error) {
+	rsp, err := c.HostingDeleteAccountCronJobV1(ctx, username, uid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingDeleteAccountCronJobV1Response(rsp)
+}
+
+// HostingGetCronJobOutputV1WithResponse request returning *HostingGetCronJobOutputV1Response
+func (c *ClientWithResponses) HostingGetCronJobOutputV1WithResponse(ctx context.Context, username UsernamePath, uid CronJobUidPath, reqEditors ...RequestEditorFn) (*HostingGetCronJobOutputV1Response, error) {
+	rsp, err := c.HostingGetCronJobOutputV1(ctx, username, uid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingGetCronJobOutputV1Response(rsp)
+}
+
 // HostingListAccountDatabasesV1WithResponse request returning *HostingListAccountDatabasesV1Response
 func (c *ClientWithResponses) HostingListAccountDatabasesV1WithResponse(ctx context.Context, username UsernamePath, params *HostingListAccountDatabasesV1Params, reqEditors ...RequestEditorFn) (*HostingListAccountDatabasesV1Response, error) {
 	rsp, err := c.HostingListAccountDatabasesV1(ctx, username, params, reqEditors...)
@@ -22262,6 +22725,173 @@ func ParseHorizonsGetWebsiteV1Response(rsp *http.Response) (*HorizonsGetWebsiteV
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest HorizonsV1WebsitesWebsiteUrlResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingListAccountCronJobsV1Response parses an HTTP response from a HostingListAccountCronJobsV1WithResponse call
+func ParseHostingListAccountCronJobsV1Response(rsp *http.Response) (*HostingListAccountCronJobsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingListAccountCronJobsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1CronJobsCronJobCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingCreateAccountCronJobV1Response parses an HTTP response from a HostingCreateAccountCronJobV1WithResponse call
+func ParseHostingCreateAccountCronJobV1Response(rsp *http.Response) (*HostingCreateAccountCronJobV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingCreateAccountCronJobV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1CronJobsCronJobResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingDeleteAccountCronJobV1Response parses an HTTP response from a HostingDeleteAccountCronJobV1WithResponse call
+func ParseHostingDeleteAccountCronJobV1Response(rsp *http.Response) (*HostingDeleteAccountCronJobV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingDeleteAccountCronJobV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingGetCronJobOutputV1Response parses an HTTP response from a HostingGetCronJobOutputV1WithResponse call
+func ParseHostingGetCronJobOutputV1Response(rsp *http.Response) (*HostingGetCronJobOutputV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingGetCronJobOutputV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1CronJobsCronJobOutputResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

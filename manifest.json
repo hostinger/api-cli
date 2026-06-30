@@ -519,6 +519,11 @@
     "method": "PATCH",
     "path": "/api/hosting/v1/accounts/{username}/databases/{name}/change-password"
   },
+  "hosting_createAccountCronJobV1": {
+    "command": "hostinger hosting cron-jobs create",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/cron-jobs"
+  },
   "hosting_createAccountDatabaseRemoteConnectionV1": {
     "command": "hostinger hosting databases create-remote-connection",
     "method": "POST",
@@ -549,6 +554,11 @@
     "method": "POST",
     "path": "/api/hosting/v1/websites"
   },
+  "hosting_deleteAccountCronJobV1": {
+    "command": "hostinger hosting cron-jobs delete",
+    "method": "DELETE",
+    "path": "/api/hosting/v1/accounts/{username}/cron-jobs/{uid}"
+  },
   "hosting_deleteAccountDatabaseRemoteConnectionV1": {
     "command": "hostinger hosting databases delete-remote-connection",
     "method": "DELETE",
@@ -574,6 +584,11 @@
     "method": "POST",
     "path": "/api/hosting/v1/domains/free-subdomains"
   },
+  "hosting_getCronJobOutputV1": {
+    "command": "hostinger hosting cron-jobs output",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/cron-jobs/{uid}/output"
+  },
   "hosting_getNodeJSBuildLogsV1": {
     "command": "hostinger hosting nodejs build-logs",
     "method": "GET",
@@ -588,6 +603,11 @@
     "command": "hostinger hosting wordpress install",
     "method": "POST",
     "path": "/api/hosting/v1/accounts/{username}/wordpress/installations"
+  },
+  "hosting_listAccountCronJobsV1": {
+    "command": "hostinger hosting cron-jobs list",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/cron-jobs"
   },
   "hosting_listAccountDatabaseRemoteConnectionsV1": {
     "command": "hostinger hosting databases list-remote-connections",
