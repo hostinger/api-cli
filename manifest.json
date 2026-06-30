@@ -519,6 +519,11 @@
     "method": "PATCH",
     "path": "/api/hosting/v1/accounts/{username}/databases/{name}/change-password"
   },
+  "hosting_createAccountDatabaseRemoteConnectionV1": {
+    "command": "hostinger hosting databases create-remote-connection",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/databases/{name}/remote-connections"
+  },
   "hosting_createAccountDatabaseV1": {
     "command": "hostinger hosting databases create",
     "method": "POST",
@@ -543,6 +548,11 @@
     "command": "hostinger hosting websites create",
     "method": "POST",
     "path": "/api/hosting/v1/websites"
+  },
+  "hosting_deleteAccountDatabaseRemoteConnectionV1": {
+    "command": "hostinger hosting databases delete-remote-connection",
+    "method": "DELETE",
+    "path": "/api/hosting/v1/accounts/{username}/databases/{name}/remote-connections"
   },
   "hosting_deleteAccountDatabaseV1": {
     "command": "hostinger hosting databases delete",
@@ -578,6 +588,11 @@
     "command": "hostinger hosting wordpress install",
     "method": "POST",
     "path": "/api/hosting/v1/accounts/{username}/wordpress/installations"
+  },
+  "hosting_listAccountDatabaseRemoteConnectionsV1": {
+    "command": "hostinger hosting databases list-remote-connections",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/databases/remote-connections"
   },
   "hosting_listAccountDatabasesV1": {
     "command": "hostinger hosting databases list",

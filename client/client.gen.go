@@ -2339,6 +2339,27 @@ type HostingV1DatabasesPhpMyAdminLinkResource struct {
 	Link string `json:"link"`
 }
 
+// HostingV1DatabasesRemoteConnectionsCreateRemoteConnectionRequest defines model for Hosting.V1.Databases.RemoteConnections.CreateRemoteConnectionRequest.
+type HostingV1DatabasesRemoteConnectionsCreateRemoteConnectionRequest struct {
+	// Ip Remote host to allow: an IPv4/IPv6 address, or "%" for any host.
+	Ip string `json:"ip"`
+}
+
+// HostingV1DatabasesRemoteConnectionsRemoteConnectionCollection Array of [`Hosting.V1.Databases.RemoteConnections.RemoteConnectionResource`](#model/hostingv1databasesremoteconnectionsremoteconnectionresource)
+type HostingV1DatabasesRemoteConnectionsRemoteConnectionCollection = []HostingV1DatabasesRemoteConnectionsRemoteConnectionResource
+
+// HostingV1DatabasesRemoteConnectionsRemoteConnectionResource defines model for Hosting.V1.Databases.RemoteConnections.RemoteConnectionResource.
+type HostingV1DatabasesRemoteConnectionsRemoteConnectionResource struct {
+	// DatabaseName Full name of the database the rule applies to.
+	DatabaseName *string `json:"database_name,omitempty"`
+
+	// DatabaseUser Database user the rule applies to.
+	DatabaseUser *string `json:"database_user,omitempty"`
+
+	// Ip Allowed remote host: an IPv4/IPv6 address, or "%" for any host.
+	Ip *string `json:"ip,omitempty"`
+}
+
 // HostingV1DatacenterCoordinatesResource defines model for Hosting.V1.Datacenter.CoordinatesResource.
 type HostingV1DatacenterCoordinatesResource struct {
 	// Latitude Latitude coordinate
@@ -3754,6 +3775,20 @@ type HostingListAccountDatabasesV1Params struct {
 	Search *DatabaseSearch `form:"search,omitempty" json:"search,omitempty"`
 }
 
+// HostingListAccountDatabaseRemoteConnectionsV1Params defines parameters for HostingListAccountDatabaseRemoteConnectionsV1.
+type HostingListAccountDatabaseRemoteConnectionsV1Params struct {
+	// Domain Filter remote connections by the domain the database is assigned to.
+	// Rules for databases not assigned to any domain are always included.
+	Domain *string `form:"domain,omitempty" json:"domain,omitempty"`
+}
+
+// HostingDeleteAccountDatabaseRemoteConnectionV1Params defines parameters for HostingDeleteAccountDatabaseRemoteConnectionV1.
+type HostingDeleteAccountDatabaseRemoteConnectionV1Params struct {
+	// Ip Remote host to revoke: the IPv4/IPv6 address, or "%",
+	// exactly as returned by the list remote connections endpoint.
+	Ip string `form:"ip" json:"ip"`
+}
+
 // HostingListNodeJSBuildsV1Params defines parameters for HostingListNodeJSBuildsV1.
 type HostingListNodeJSBuildsV1Params struct {
 	// Page Page number
@@ -3960,6 +3995,9 @@ type HostingCreateAccountDatabaseV1JSONRequestBody = HostingV1DatabasesCreateDat
 
 // HostingChangeDatabasePasswordV1JSONRequestBody defines body for HostingChangeDatabasePasswordV1 for application/json ContentType.
 type HostingChangeDatabasePasswordV1JSONRequestBody = HostingV1DatabasesChangeDatabasePasswordRequest
+
+// HostingCreateAccountDatabaseRemoteConnectionV1JSONRequestBody defines body for HostingCreateAccountDatabaseRemoteConnectionV1 for application/json ContentType.
+type HostingCreateAccountDatabaseRemoteConnectionV1JSONRequestBody = HostingV1DatabasesRemoteConnectionsCreateRemoteConnectionRequest
 
 // HostingCreateNodeJSBuildFromArchiveV1JSONRequestBody defines body for HostingCreateNodeJSBuildFromArchiveV1 for application/json ContentType.
 type HostingCreateNodeJSBuildFromArchiveV1JSONRequestBody = HostingV1NodeJsCreateFromArchiveRequest
@@ -4770,6 +4808,9 @@ type ClientInterface interface {
 
 	HostingCreateAccountDatabaseV1(ctx context.Context, username UsernamePath, body HostingCreateAccountDatabaseV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// HostingListAccountDatabaseRemoteConnectionsV1 request
+	HostingListAccountDatabaseRemoteConnectionsV1(ctx context.Context, username UsernamePath, params *HostingListAccountDatabaseRemoteConnectionsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// HostingDeleteAccountDatabaseV1 request
 	HostingDeleteAccountDatabaseV1(ctx context.Context, username UsernamePath, name DatabaseNamePath, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -4780,6 +4821,14 @@ type ClientInterface interface {
 
 	// HostingGetPhpMyAdminLinkV1 request
 	HostingGetPhpMyAdminLinkV1(ctx context.Context, username UsernamePath, name DatabaseNamePath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingDeleteAccountDatabaseRemoteConnectionV1 request
+	HostingDeleteAccountDatabaseRemoteConnectionV1(ctx context.Context, username UsernamePath, name DatabaseNamePath, params *HostingDeleteAccountDatabaseRemoteConnectionV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingCreateAccountDatabaseRemoteConnectionV1WithBody request with any body
+	HostingCreateAccountDatabaseRemoteConnectionV1WithBody(ctx context.Context, username UsernamePath, name DatabaseNamePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	HostingCreateAccountDatabaseRemoteConnectionV1(ctx context.Context, username UsernamePath, name DatabaseNamePath, body HostingCreateAccountDatabaseRemoteConnectionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingRepairDatabaseV1 request
 	HostingRepairDatabaseV1(ctx context.Context, username UsernamePath, name DatabaseNamePath, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -5823,6 +5872,18 @@ func (c *Client) HostingCreateAccountDatabaseV1(ctx context.Context, username Us
 	return c.Client.Do(req)
 }
 
+func (c *Client) HostingListAccountDatabaseRemoteConnectionsV1(ctx context.Context, username UsernamePath, params *HostingListAccountDatabaseRemoteConnectionsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingListAccountDatabaseRemoteConnectionsV1Request(c.Server, username, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) HostingDeleteAccountDatabaseV1(ctx context.Context, username UsernamePath, name DatabaseNamePath, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingDeleteAccountDatabaseV1Request(c.Server, username, name)
 	if err != nil {
@@ -5861,6 +5922,42 @@ func (c *Client) HostingChangeDatabasePasswordV1(ctx context.Context, username U
 
 func (c *Client) HostingGetPhpMyAdminLinkV1(ctx context.Context, username UsernamePath, name DatabaseNamePath, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingGetPhpMyAdminLinkV1Request(c.Server, username, name)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingDeleteAccountDatabaseRemoteConnectionV1(ctx context.Context, username UsernamePath, name DatabaseNamePath, params *HostingDeleteAccountDatabaseRemoteConnectionV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingDeleteAccountDatabaseRemoteConnectionV1Request(c.Server, username, name, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingCreateAccountDatabaseRemoteConnectionV1WithBody(ctx context.Context, username UsernamePath, name DatabaseNamePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingCreateAccountDatabaseRemoteConnectionV1RequestWithBody(c.Server, username, name, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingCreateAccountDatabaseRemoteConnectionV1(ctx context.Context, username UsernamePath, name DatabaseNamePath, body HostingCreateAccountDatabaseRemoteConnectionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingCreateAccountDatabaseRemoteConnectionV1Request(c.Server, username, name, body)
 	if err != nil {
 		return nil, err
 	}
@@ -9079,6 +9176,67 @@ func NewHostingCreateAccountDatabaseV1RequestWithBody(server string, username Us
 	return req, nil
 }
 
+// NewHostingListAccountDatabaseRemoteConnectionsV1Request generates requests for HostingListAccountDatabaseRemoteConnectionsV1
+func NewHostingListAccountDatabaseRemoteConnectionsV1Request(server string, username UsernamePath, params *HostingListAccountDatabaseRemoteConnectionsV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/databases/remote-connections", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Domain != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "domain", *params.Domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewHostingDeleteAccountDatabaseV1Request generates requests for HostingDeleteAccountDatabaseV1
 func NewHostingDeleteAccountDatabaseV1Request(server string, username UsernamePath, name DatabaseNamePath) (*http.Request, error) {
 	var err error
@@ -9211,6 +9369,124 @@ func NewHostingGetPhpMyAdminLinkV1Request(server string, username UsernamePath, 
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewHostingDeleteAccountDatabaseRemoteConnectionV1Request generates requests for HostingDeleteAccountDatabaseRemoteConnectionV1
+func NewHostingDeleteAccountDatabaseRemoteConnectionV1Request(server string, username UsernamePath, name DatabaseNamePath, params *HostingDeleteAccountDatabaseRemoteConnectionV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "name", name, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/databases/%s/remote-connections", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "ip", params.Ip, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+			return nil, err
+		} else {
+			for _, qp := range strings.Split(queryFrag, "&") {
+				rawQueryFragments = append(rawQueryFragments, qp)
+			}
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingCreateAccountDatabaseRemoteConnectionV1Request calls the generic HostingCreateAccountDatabaseRemoteConnectionV1 builder with application/json body
+func NewHostingCreateAccountDatabaseRemoteConnectionV1Request(server string, username UsernamePath, name DatabaseNamePath, body HostingCreateAccountDatabaseRemoteConnectionV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingCreateAccountDatabaseRemoteConnectionV1RequestWithBody(server, username, name, "application/json", bodyReader)
+}
+
+// NewHostingCreateAccountDatabaseRemoteConnectionV1RequestWithBody generates requests for HostingCreateAccountDatabaseRemoteConnectionV1 with any type of body
+func NewHostingCreateAccountDatabaseRemoteConnectionV1RequestWithBody(server string, username UsernamePath, name DatabaseNamePath, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "name", name, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/databases/%s/remote-connections", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -13605,6 +13881,9 @@ type ClientWithResponsesInterface interface {
 
 	HostingCreateAccountDatabaseV1WithResponse(ctx context.Context, username UsernamePath, body HostingCreateAccountDatabaseV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingCreateAccountDatabaseV1Response, error)
 
+	// HostingListAccountDatabaseRemoteConnectionsV1WithResponse request
+	HostingListAccountDatabaseRemoteConnectionsV1WithResponse(ctx context.Context, username UsernamePath, params *HostingListAccountDatabaseRemoteConnectionsV1Params, reqEditors ...RequestEditorFn) (*HostingListAccountDatabaseRemoteConnectionsV1Response, error)
+
 	// HostingDeleteAccountDatabaseV1WithResponse request
 	HostingDeleteAccountDatabaseV1WithResponse(ctx context.Context, username UsernamePath, name DatabaseNamePath, reqEditors ...RequestEditorFn) (*HostingDeleteAccountDatabaseV1Response, error)
 
@@ -13615,6 +13894,14 @@ type ClientWithResponsesInterface interface {
 
 	// HostingGetPhpMyAdminLinkV1WithResponse request
 	HostingGetPhpMyAdminLinkV1WithResponse(ctx context.Context, username UsernamePath, name DatabaseNamePath, reqEditors ...RequestEditorFn) (*HostingGetPhpMyAdminLinkV1Response, error)
+
+	// HostingDeleteAccountDatabaseRemoteConnectionV1WithResponse request
+	HostingDeleteAccountDatabaseRemoteConnectionV1WithResponse(ctx context.Context, username UsernamePath, name DatabaseNamePath, params *HostingDeleteAccountDatabaseRemoteConnectionV1Params, reqEditors ...RequestEditorFn) (*HostingDeleteAccountDatabaseRemoteConnectionV1Response, error)
+
+	// HostingCreateAccountDatabaseRemoteConnectionV1WithBodyWithResponse request with any body
+	HostingCreateAccountDatabaseRemoteConnectionV1WithBodyWithResponse(ctx context.Context, username UsernamePath, name DatabaseNamePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingCreateAccountDatabaseRemoteConnectionV1Response, error)
+
+	HostingCreateAccountDatabaseRemoteConnectionV1WithResponse(ctx context.Context, username UsernamePath, name DatabaseNamePath, body HostingCreateAccountDatabaseRemoteConnectionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingCreateAccountDatabaseRemoteConnectionV1Response, error)
 
 	// HostingRepairDatabaseV1WithResponse request
 	HostingRepairDatabaseV1WithResponse(ctx context.Context, username UsernamePath, name DatabaseNamePath, reqEditors ...RequestEditorFn) (*HostingRepairDatabaseV1Response, error)
@@ -15350,6 +15637,38 @@ func (r HostingCreateAccountDatabaseV1Response) ContentType() string {
 	return ""
 }
 
+type HostingListAccountDatabaseRemoteConnectionsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *HostingV1DatabasesRemoteConnectionsRemoteConnectionCollection
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingListAccountDatabaseRemoteConnectionsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingListAccountDatabaseRemoteConnectionsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingListAccountDatabaseRemoteConnectionsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type HostingDeleteAccountDatabaseV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -15441,6 +15760,71 @@ func (r HostingGetPhpMyAdminLinkV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingGetPhpMyAdminLinkV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingDeleteAccountDatabaseRemoteConnectionV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingDeleteAccountDatabaseRemoteConnectionV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingDeleteAccountDatabaseRemoteConnectionV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingDeleteAccountDatabaseRemoteConnectionV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingCreateAccountDatabaseRemoteConnectionV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingCreateAccountDatabaseRemoteConnectionV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingCreateAccountDatabaseRemoteConnectionV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingCreateAccountDatabaseRemoteConnectionV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -19030,6 +19414,15 @@ func (c *ClientWithResponses) HostingCreateAccountDatabaseV1WithResponse(ctx con
 	return ParseHostingCreateAccountDatabaseV1Response(rsp)
 }
 
+// HostingListAccountDatabaseRemoteConnectionsV1WithResponse request returning *HostingListAccountDatabaseRemoteConnectionsV1Response
+func (c *ClientWithResponses) HostingListAccountDatabaseRemoteConnectionsV1WithResponse(ctx context.Context, username UsernamePath, params *HostingListAccountDatabaseRemoteConnectionsV1Params, reqEditors ...RequestEditorFn) (*HostingListAccountDatabaseRemoteConnectionsV1Response, error) {
+	rsp, err := c.HostingListAccountDatabaseRemoteConnectionsV1(ctx, username, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingListAccountDatabaseRemoteConnectionsV1Response(rsp)
+}
+
 // HostingDeleteAccountDatabaseV1WithResponse request returning *HostingDeleteAccountDatabaseV1Response
 func (c *ClientWithResponses) HostingDeleteAccountDatabaseV1WithResponse(ctx context.Context, username UsernamePath, name DatabaseNamePath, reqEditors ...RequestEditorFn) (*HostingDeleteAccountDatabaseV1Response, error) {
 	rsp, err := c.HostingDeleteAccountDatabaseV1(ctx, username, name, reqEditors...)
@@ -19063,6 +19456,32 @@ func (c *ClientWithResponses) HostingGetPhpMyAdminLinkV1WithResponse(ctx context
 		return nil, err
 	}
 	return ParseHostingGetPhpMyAdminLinkV1Response(rsp)
+}
+
+// HostingDeleteAccountDatabaseRemoteConnectionV1WithResponse request returning *HostingDeleteAccountDatabaseRemoteConnectionV1Response
+func (c *ClientWithResponses) HostingDeleteAccountDatabaseRemoteConnectionV1WithResponse(ctx context.Context, username UsernamePath, name DatabaseNamePath, params *HostingDeleteAccountDatabaseRemoteConnectionV1Params, reqEditors ...RequestEditorFn) (*HostingDeleteAccountDatabaseRemoteConnectionV1Response, error) {
+	rsp, err := c.HostingDeleteAccountDatabaseRemoteConnectionV1(ctx, username, name, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingDeleteAccountDatabaseRemoteConnectionV1Response(rsp)
+}
+
+// HostingCreateAccountDatabaseRemoteConnectionV1WithBodyWithResponse request with arbitrary body returning *HostingCreateAccountDatabaseRemoteConnectionV1Response
+func (c *ClientWithResponses) HostingCreateAccountDatabaseRemoteConnectionV1WithBodyWithResponse(ctx context.Context, username UsernamePath, name DatabaseNamePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingCreateAccountDatabaseRemoteConnectionV1Response, error) {
+	rsp, err := c.HostingCreateAccountDatabaseRemoteConnectionV1WithBody(ctx, username, name, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingCreateAccountDatabaseRemoteConnectionV1Response(rsp)
+}
+
+func (c *ClientWithResponses) HostingCreateAccountDatabaseRemoteConnectionV1WithResponse(ctx context.Context, username UsernamePath, name DatabaseNamePath, body HostingCreateAccountDatabaseRemoteConnectionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingCreateAccountDatabaseRemoteConnectionV1Response, error) {
+	rsp, err := c.HostingCreateAccountDatabaseRemoteConnectionV1(ctx, username, name, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingCreateAccountDatabaseRemoteConnectionV1Response(rsp)
 }
 
 // HostingRepairDatabaseV1WithResponse request returning *HostingRepairDatabaseV1Response
@@ -21958,6 +22377,46 @@ func ParseHostingCreateAccountDatabaseV1Response(rsp *http.Response) (*HostingCr
 	return response, nil
 }
 
+// ParseHostingListAccountDatabaseRemoteConnectionsV1Response parses an HTTP response from a HostingListAccountDatabaseRemoteConnectionsV1WithResponse call
+func ParseHostingListAccountDatabaseRemoteConnectionsV1Response(rsp *http.Response) (*HostingListAccountDatabaseRemoteConnectionsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingListAccountDatabaseRemoteConnectionsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1DatabasesRemoteConnectionsRemoteConnectionCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseHostingDeleteAccountDatabaseV1Response parses an HTTP response from a HostingDeleteAccountDatabaseV1WithResponse call
 func ParseHostingDeleteAccountDatabaseV1Response(rsp *http.Response) (*HostingDeleteAccountDatabaseV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -22072,6 +22531,93 @@ func ParseHostingGetPhpMyAdminLinkV1Response(rsp *http.Response) (*HostingGetPhp
 			return nil, err
 		}
 		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingDeleteAccountDatabaseRemoteConnectionV1Response parses an HTTP response from a HostingDeleteAccountDatabaseRemoteConnectionV1WithResponse call
+func ParseHostingDeleteAccountDatabaseRemoteConnectionV1Response(rsp *http.Response) (*HostingDeleteAccountDatabaseRemoteConnectionV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingDeleteAccountDatabaseRemoteConnectionV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingCreateAccountDatabaseRemoteConnectionV1Response parses an HTTP response from a HostingCreateAccountDatabaseRemoteConnectionV1WithResponse call
+func ParseHostingCreateAccountDatabaseRemoteConnectionV1Response(rsp *http.Response) (*HostingCreateAccountDatabaseRemoteConnectionV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingCreateAccountDatabaseRemoteConnectionV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse

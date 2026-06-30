@@ -12,8 +12,11 @@ var GroupCmd = &cobra.Command{
 func init() {
 	GroupCmd.AddCommand(ChangePasswordCmd)
 	GroupCmd.AddCommand(CreateCmd)
+	GroupCmd.AddCommand(CreateRemoteConnectionCmd)
 	GroupCmd.AddCommand(DeleteCmd)
+	GroupCmd.AddCommand(DeleteRemoteConnectionCmd)
 	GroupCmd.AddCommand(ListCmd)
+	GroupCmd.AddCommand(ListRemoteConnectionsCmd)
 	GroupCmd.AddCommand(PhpmyadminLinkCmd)
 	GroupCmd.AddCommand(RepairCmd)
 }
