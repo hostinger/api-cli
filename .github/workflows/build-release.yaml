@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get GitHub token
-        uses: actions/create-github-app-token@v1
+        uses: actions/create-github-app-token@v3
         id: get_token
         with:
           app-id: ${{ secrets.HOSTINGERBOT_APP_ID }}
