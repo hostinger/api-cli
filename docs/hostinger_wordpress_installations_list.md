@@ -1,4 +1,4 @@
-## hostinger hosting wordpress list-installations
+## hostinger wordpress installations list
 
 List WordPress installations
 
@@ -15,14 +15,14 @@ Each installation includes a `valid` flag and, when invalid, a
 `validationError` describing why.
 
 ```
-hostinger hosting wordpress list-installations [flags]
+hostinger wordpress installations list [flags]
 ```
 
 ### Options
 
 ```
       --domain string      Filter by domain name (exact match)
-  -h, --help               help for list-installations
+  -h, --help               help for list
       --ownership string   Filter by ownership type. Defaults to "owned". Use "all" to include both owned and managed installations. (one of: owned, managed, all)
       --username string    Filter by specific username
 ```
@@ -36,5 +36,5 @@ hostinger hosting wordpress list-installations [flags]
 
 ### SEE ALSO
 
-* [hostinger hosting wordpress](hostinger_hosting_wordpress.md)	 - Wordpress commands
+* [hostinger wordpress installations](hostinger_wordpress_installations.md)	 - Installations commands
 

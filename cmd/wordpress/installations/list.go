@@ -1,4 +1,4 @@
-package wordpress
+package installations
 
 import (
 	"context"
@@ -11,13 +11,13 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var ListInstallationsCmd = &cobra.Command{
-	Use:   "list-installations",
+var ListCmd = &cobra.Command{
+	Use:   "list",
 	Short: "List WordPress installations",
 	Long:  "List WordPress installations accessible to the authenticated client.\n\nUse this endpoint to discover existing WordPress installations and to poll\nfor installation status after calling the install endpoint. When a newly\nrequested installation appears in this list, WordPress is ready. Filter by\nusername and domain to narrow results to a specific website.\n\nEach installation includes a `valid` flag and, when invalid, a\n`validationError` describing why.",
 	Run: func(cmd *cobra.Command, args []string) {
 		utils.EnumCheck(cmd, "ownership", []string{"owned", "managed", "all"})
-		r, err := api.Request().HostingListWordPressInstallationsV1WithResponse(context.TODO(), listInstallationsParams(cmd))
+		r, err := api.Request().HostingListWordPressInstallationsV1WithResponse(context.TODO(), listParams(cmd))
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -27,12 +27,12 @@ var ListInstallationsCmd = &cobra.Command{
 }
 
 func init() {
-	ListInstallationsCmd.Flags().StringP("username", "", "", "Filter by specific username")
-	ListInstallationsCmd.Flags().StringP("domain", "", "", "Filter by domain name (exact match)")
-	ListInstallationsCmd.Flags().StringP("ownership", "", "", "Filter by ownership type. Defaults to \"owned\". Use \"all\" to include both owned and managed installations. (one of: owned, managed, all)")
+	ListCmd.Flags().StringP("username", "", "", "Filter by specific username")
+	ListCmd.Flags().StringP("domain", "", "", "Filter by domain name (exact match)")
+	ListCmd.Flags().StringP("ownership", "", "", "Filter by ownership type. Defaults to \"owned\". Use \"all\" to include both owned and managed installations. (one of: owned, managed, all)")
 }
 
-func listInstallationsParams(cmd *cobra.Command) *client.HostingListWordPressInstallationsV1Params {
+func listParams(cmd *cobra.Command) *client.HostingListWordPressInstallationsV1Params {
 	params := &client.HostingListWordPressInstallationsV1Params{}
 	if cmd.Flags().Changed("username") {
 		v, _ := cmd.Flags().GetString("username")

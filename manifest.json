@@ -599,8 +599,18 @@
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/databases/{name}/phpmyadmin-link"
   },
+  "hosting_installWordPressPluginsV1": {
+    "command": "hostinger wordpress plugins install",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/plugins/install"
+  },
+  "hosting_installWordPressThemeV1": {
+    "command": "hostinger wordpress themes install",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/themes/install"
+  },
   "hosting_installWordPressV1": {
-    "command": "hostinger hosting wordpress install",
+    "command": "hostinger wordpress installations install",
     "method": "POST",
     "path": "/api/hosting/v1/accounts/{username}/wordpress/installations"
   },
@@ -650,7 +660,7 @@
     "path": "/api/hosting/v1/websites"
   },
   "hosting_listWordPressInstallationsV1": {
-    "command": "hostinger hosting wordpress list-installations",
+    "command": "hostinger wordpress installations list",
     "method": "GET",
     "path": "/api/hosting/v1/wordpress/installations"
   },

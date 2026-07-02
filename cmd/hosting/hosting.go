@@ -8,7 +8,6 @@ import (
 	"github.com/hostinger/api-cli/cmd/hosting/nodejs"
 	"github.com/hostinger/api-cli/cmd/hosting/orders"
 	"github.com/hostinger/api-cli/cmd/hosting/websites"
-	"github.com/hostinger/api-cli/cmd/hosting/wordpress"
 
 	"github.com/spf13/cobra"
 )
@@ -26,5 +25,4 @@ func init() {
 	GroupCmd.AddCommand(nodejs.GroupCmd)
 	GroupCmd.AddCommand(orders.GroupCmd)
 	GroupCmd.AddCommand(websites.GroupCmd)
-	GroupCmd.AddCommand(wordpress.GroupCmd)
 }

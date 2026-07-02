@@ -10,6 +10,7 @@ import (
 	"github.com/hostinger/api-cli/cmd/hosting"
 	"github.com/hostinger/api-cli/cmd/reach"
 	"github.com/hostinger/api-cli/cmd/vps"
+	"github.com/hostinger/api-cli/cmd/wordpress"
 	"os"
 
 	"github.com/hostinger/api-cli/utils"
@@ -59,6 +60,7 @@ func init() {
 	RootCmd.AddCommand(hosting.GroupCmd)
 	RootCmd.AddCommand(reach.GroupCmd)
 	RootCmd.AddCommand(vps.GroupCmd)
+	RootCmd.AddCommand(wordpress.GroupCmd)
 	RootCmd.AddCommand(VersionCmd)
 }
 

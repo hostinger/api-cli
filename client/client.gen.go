@@ -709,27 +709,6 @@ func (e HostingV1WebsitesWebsiteResourceVhostType) Valid() bool {
 	}
 }
 
-// Defines values for HostingV1WordpressInstallWordpressRequestAutoUpdates.
-const (
-	HostingV1WordpressInstallWordpressRequestAutoUpdatesAll   HostingV1WordpressInstallWordpressRequestAutoUpdates = "all"
-	HostingV1WordpressInstallWordpressRequestAutoUpdatesMinor HostingV1WordpressInstallWordpressRequestAutoUpdates = "minor"
-	HostingV1WordpressInstallWordpressRequestAutoUpdatesNone  HostingV1WordpressInstallWordpressRequestAutoUpdates = "none"
-)
-
-// Valid indicates whether the value is a known member of the HostingV1WordpressInstallWordpressRequestAutoUpdates enum.
-func (e HostingV1WordpressInstallWordpressRequestAutoUpdates) Valid() bool {
-	switch e {
-	case HostingV1WordpressInstallWordpressRequestAutoUpdatesAll:
-		return true
-	case HostingV1WordpressInstallWordpressRequestAutoUpdatesMinor:
-		return true
-	case HostingV1WordpressInstallWordpressRequestAutoUpdatesNone:
-		return true
-	default:
-		return false
-	}
-}
-
 // Defines values for ReachV1ContactsContactResourceSource.
 const (
 	ReachV1ContactsContactResourceSourceImport ReachV1ContactsContactResourceSource = "import"
@@ -1345,6 +1324,57 @@ func (e VPSV1VirtualMachineVirtualMachineResourceState) Valid() bool {
 	case VPSV1VirtualMachineVirtualMachineResourceStateSuspending:
 		return true
 	case VPSV1VirtualMachineVirtualMachineResourceStateUnsuspending:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for WordPressV1InstallationsInstallWordPressRequestAutoUpdates.
+const (
+	WordPressV1InstallationsInstallWordPressRequestAutoUpdatesAll   WordPressV1InstallationsInstallWordPressRequestAutoUpdates = "all"
+	WordPressV1InstallationsInstallWordPressRequestAutoUpdatesMinor WordPressV1InstallationsInstallWordPressRequestAutoUpdates = "minor"
+	WordPressV1InstallationsInstallWordPressRequestAutoUpdatesNone  WordPressV1InstallationsInstallWordPressRequestAutoUpdates = "none"
+)
+
+// Valid indicates whether the value is a known member of the WordPressV1InstallationsInstallWordPressRequestAutoUpdates enum.
+func (e WordPressV1InstallationsInstallWordPressRequestAutoUpdates) Valid() bool {
+	switch e {
+	case WordPressV1InstallationsInstallWordPressRequestAutoUpdatesAll:
+		return true
+	case WordPressV1InstallationsInstallWordPressRequestAutoUpdatesMinor:
+		return true
+	case WordPressV1InstallationsInstallWordPressRequestAutoUpdatesNone:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for WordPressV1ThemesInstallThemeRequestFont.
+const (
+	Creative     WordPressV1ThemesInstallThemeRequestFont = "creative"
+	Default      WordPressV1ThemesInstallThemeRequestFont = "default"
+	Dynamic      WordPressV1ThemesInstallThemeRequestFont = "dynamic"
+	Elegant      WordPressV1ThemesInstallThemeRequestFont = "elegant"
+	Modern       WordPressV1ThemesInstallThemeRequestFont = "modern"
+	Professional WordPressV1ThemesInstallThemeRequestFont = "professional"
+)
+
+// Valid indicates whether the value is a known member of the WordPressV1ThemesInstallThemeRequestFont enum.
+func (e WordPressV1ThemesInstallThemeRequestFont) Valid() bool {
+	switch e {
+	case Creative:
+		return true
+	case Default:
+		return true
+	case Dynamic:
+		return true
+	case Elegant:
+		return true
+	case Modern:
+		return true
+	case Professional:
 		return true
 	default:
 		return false
@@ -2702,91 +2732,6 @@ type HostingV1WebsitesWebsiteResource struct {
 // HostingV1WebsitesWebsiteResourceVhostType Virtual host type
 type HostingV1WebsitesWebsiteResourceVhostType string
 
-// HostingV1WordpressInstallWordpressRequest defines model for Hosting.V1.Wordpress.InstallWordpressRequest.
-type HostingV1WordpressInstallWordpressRequest struct {
-	// AutoUpdates WordPress core auto-update policy
-	AutoUpdates *HostingV1WordpressInstallWordpressRequestAutoUpdates `json:"auto_updates,omitempty"`
-
-	// Credentials WordPress admin credentials
-	Credentials struct {
-		Email string `json:"email"`
-
-		// Login WordPress admin username
-		Login    string `json:"login"`
-		Password string `json:"password"`
-	} `json:"credentials"`
-
-	// Database Optional. If the named database already exists, it will be used for this WordPress install. Otherwise a new database is created with a generated name and random credentials.
-	Database *struct {
-		// Name Database name (username prefix added if missing)
-		Name     *string `json:"name,omitempty"`
-		Password *string `json:"password,omitempty"`
-	} `json:"database,omitempty"`
-
-	// Directory Relative directory to install WordPress into. Defaults to the website root when omitted.
-	Directory *string `json:"directory,omitempty"`
-
-	// Domain Domain of the existing website where WordPress will be installed
-	Domain string `json:"domain"`
-
-	// Language WordPress locale. Defaults to en_US when omitted.
-	Language *string `json:"language,omitempty"`
-
-	// Overwrite When false (default), does not replace an existing installation. If WordPress is already installed on the domain/path, the async install job fails unless true.
-	Overwrite *bool `json:"overwrite,omitempty"`
-
-	// SiteTitle Title of the WordPress site
-	SiteTitle string `json:"site_title"`
-
-	// Version WordPress core version to install. If omitted, the latest core version compatible with the account vhost PHP version is selected.
-	Version *string `json:"version,omitempty"`
-}
-
-// HostingV1WordpressInstallWordpressRequestAutoUpdates WordPress core auto-update policy
-type HostingV1WordpressInstallWordpressRequestAutoUpdates string
-
-// HostingV1WordpressWordpressInstallationCollection Array of [`Hosting.V1.Wordpress.WordpressInstallationResource`](#model/hostingv1wordpresswordpressinstallationresource)
-type HostingV1WordpressWordpressInstallationCollection = []HostingV1WordpressWordpressInstallationResource
-
-// HostingV1WordpressWordpressInstallationResource defines model for Hosting.V1.Wordpress.WordpressInstallationResource.
-type HostingV1WordpressWordpressInstallationResource struct {
-	// CreatedAt Installation creation timestamp
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-
-	// Directory Installation directory
-	Directory *string `json:"directory,omitempty"`
-
-	// Domain Domain the installation belongs to
-	Domain *string `json:"domain,omitempty"`
-
-	// Email WordPress admin email
-	Email *string `json:"email,omitempty"`
-
-	// Id WordPress installation (software) id
-	Id *string `json:"id,omitempty"`
-
-	// IsValid Whether the installation is considered valid
-	IsValid *bool `json:"is_valid,omitempty"`
-
-	// Language WordPress locale
-	Language *string `json:"language,omitempty"`
-
-	// Login WordPress admin username
-	Login *string `json:"login,omitempty"`
-
-	// SiteTitle WordPress site title
-	SiteTitle *string `json:"site_title,omitempty"`
-
-	// Url WordPress site URL
-	Url *string `json:"url,omitempty"`
-
-	// Username Hosting account username
-	Username *string `json:"username,omitempty"`
-
-	// ValidationError Reason the installation is invalid, if any
-	ValidationError *string `json:"validation_error,omitempty"`
-}
-
 // ReachV1ContactsContactCollection Array of [`Reach.V1.Contacts.ContactResource`](#model/reachv1contactscontactresource)
 type ReachV1ContactsContactCollection = []ReachV1ContactsContactResource
 
@@ -3610,6 +3555,115 @@ type VPSV1VirtualMachineVirtualMachineResource_Template struct {
 	union json.RawMessage
 }
 
+// WordPressV1InstallationsInstallWordPressRequest defines model for WordPress.V1.Installations.InstallWordPressRequest.
+type WordPressV1InstallationsInstallWordPressRequest struct {
+	// AutoUpdates WordPress core auto-update policy
+	AutoUpdates *WordPressV1InstallationsInstallWordPressRequestAutoUpdates `json:"auto_updates,omitempty"`
+
+	// Credentials WordPress admin credentials
+	Credentials struct {
+		Email string `json:"email"`
+
+		// Login WordPress admin username
+		Login    string `json:"login"`
+		Password string `json:"password"`
+	} `json:"credentials"`
+
+	// Database Optional. If the named database already exists, it will be used for this WordPress install. Otherwise a new database is created with a generated name and random credentials.
+	Database *struct {
+		// Name Database name (username prefix added if missing)
+		Name     *string `json:"name,omitempty"`
+		Password *string `json:"password,omitempty"`
+	} `json:"database,omitempty"`
+
+	// Directory Relative directory to install WordPress into. Defaults to the website root when omitted.
+	Directory *string `json:"directory,omitempty"`
+
+	// Domain Domain of the existing website where WordPress will be installed
+	Domain string `json:"domain"`
+
+	// Language WordPress locale. Defaults to en_US when omitted.
+	Language *string `json:"language,omitempty"`
+
+	// Overwrite When false (default), does not replace an existing installation. If WordPress is already installed on the domain/path, the async install job fails unless true.
+	Overwrite *bool `json:"overwrite,omitempty"`
+
+	// SiteTitle Title of the WordPress site
+	SiteTitle string `json:"site_title"`
+
+	// Version WordPress core version to install. If omitted, the latest core version compatible with the account vhost PHP version is selected.
+	Version *string `json:"version,omitempty"`
+}
+
+// WordPressV1InstallationsInstallWordPressRequestAutoUpdates WordPress core auto-update policy
+type WordPressV1InstallationsInstallWordPressRequestAutoUpdates string
+
+// WordPressV1InstallationsWordPressInstallationCollection Array of [`WordPress.V1.Installations.WordPressInstallationResource`](#model/wordpressv1installationswordpressinstallationresource)
+type WordPressV1InstallationsWordPressInstallationCollection = []WordPressV1InstallationsWordPressInstallationResource
+
+// WordPressV1InstallationsWordPressInstallationResource defines model for WordPress.V1.Installations.WordPressInstallationResource.
+type WordPressV1InstallationsWordPressInstallationResource struct {
+	// CreatedAt Installation creation timestamp
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Directory Installation directory
+	Directory *string `json:"directory,omitempty"`
+
+	// Domain Domain the installation belongs to
+	Domain *string `json:"domain,omitempty"`
+
+	// Email WordPress admin email
+	Email *string `json:"email,omitempty"`
+
+	// Id WordPress installation (software) id
+	Id *string `json:"id,omitempty"`
+
+	// IsValid Whether the installation is considered valid
+	IsValid *bool `json:"is_valid,omitempty"`
+
+	// Language WordPress locale
+	Language *string `json:"language,omitempty"`
+
+	// Login WordPress admin username
+	Login *string `json:"login,omitempty"`
+
+	// SiteTitle WordPress site title
+	SiteTitle *string `json:"site_title,omitempty"`
+
+	// Url WordPress site URL
+	Url *string `json:"url,omitempty"`
+
+	// Username Hosting account username
+	Username *string `json:"username,omitempty"`
+
+	// ValidationError Reason the installation is invalid, if any
+	ValidationError *string `json:"validation_error,omitempty"`
+}
+
+// WordPressV1PluginsInstallPluginsRequest defines model for WordPress.V1.Plugins.InstallPluginsRequest.
+type WordPressV1PluginsInstallPluginsRequest struct {
+	// Plugins Plugin slugs to install. Use GET /api/hosting/v1/wordpress/plugins to discover available slugs.
+	Plugins []string `json:"plugins"`
+}
+
+// WordPressV1ThemesInstallThemeRequest defines model for WordPress.V1.Themes.InstallThemeRequest.
+type WordPressV1ThemesInstallThemeRequest struct {
+	// Font Font identifier. Only applied when the theme is a Hostinger theme; the default is used when omitted.
+	Font *WordPressV1ThemesInstallThemeRequestFont `json:"font,omitempty"`
+
+	// Layout Layout identifier. Only applied when the theme is a Hostinger theme; the default is used when omitted.
+	Layout *string `json:"layout,omitempty"`
+
+	// Palette Palette identifier. Only applied when the theme is a Hostinger theme; the default is used when omitted.
+	Palette *string `json:"palette,omitempty"`
+
+	// Theme Slug of the theme to install. Hostinger theme slugs (hostinger-blog, hostinger-affiliate-theme, hostinger-ai-theme) trigger the custom installer and forward the optional palette/layout/font fields; any other WordPress theme slug uses the standard installer and ignores those fields.
+	Theme string `json:"theme"`
+}
+
+// WordPressV1ThemesInstallThemeRequestFont Font identifier. Only applied when the theme is a Hostinger theme; the default is used when omitted.
+type WordPressV1ThemesInstallThemeRequestFont string
+
 // ActionId defines model for actionId.
 type ActionId = int
 
@@ -3696,6 +3750,9 @@ type SegmentUuid = string
 
 // SnapshotId defines model for snapshotId.
 type SnapshotId = int
+
+// SoftwarePath defines model for software_path.
+type SoftwarePath = string
 
 // Statuses defines model for statuses.
 type Statuses = []string
@@ -4048,7 +4105,13 @@ type HostingCreateWebsiteParkedDomainV1JSONRequestBody = HostingV1DomainsCreateP
 type HostingCreateWebsiteSubdomainV1JSONRequestBody = HostingV1DomainsCreateSubdomainRequest
 
 // HostingInstallWordPressV1JSONRequestBody defines body for HostingInstallWordPressV1 for application/json ContentType.
-type HostingInstallWordPressV1JSONRequestBody = HostingV1WordpressInstallWordpressRequest
+type HostingInstallWordPressV1JSONRequestBody = WordPressV1InstallationsInstallWordPressRequest
+
+// HostingInstallWordPressPluginsV1JSONRequestBody defines body for HostingInstallWordPressPluginsV1 for application/json ContentType.
+type HostingInstallWordPressPluginsV1JSONRequestBody = WordPressV1PluginsInstallPluginsRequest
+
+// HostingInstallWordPressThemeV1JSONRequestBody defines body for HostingInstallWordPressThemeV1 for application/json ContentType.
+type HostingInstallWordPressThemeV1JSONRequestBody = WordPressV1ThemesInstallThemeRequest
 
 // HostingVerifyDomainOwnershipV1JSONRequestBody defines body for HostingVerifyDomainOwnershipV1 for application/json ContentType.
 type HostingVerifyDomainOwnershipV1JSONRequestBody = HostingV1DomainsVerifyOwnershipRequest
@@ -4923,6 +4986,16 @@ type ClientInterface interface {
 	HostingInstallWordPressV1WithBody(ctx context.Context, username UsernamePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	HostingInstallWordPressV1(ctx context.Context, username UsernamePath, body HostingInstallWordPressV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingInstallWordPressPluginsV1WithBody request with any body
+	HostingInstallWordPressPluginsV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	HostingInstallWordPressPluginsV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingInstallWordPressPluginsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingInstallWordPressThemeV1WithBody request with any body
+	HostingInstallWordPressThemeV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	HostingInstallWordPressThemeV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingInstallWordPressThemeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingListAvailableDatacentersV1 request
 	HostingListAvailableDatacentersV1(ctx context.Context, params *HostingListAvailableDatacentersV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -6251,6 +6324,54 @@ func (c *Client) HostingInstallWordPressV1WithBody(ctx context.Context, username
 
 func (c *Client) HostingInstallWordPressV1(ctx context.Context, username UsernamePath, body HostingInstallWordPressV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingInstallWordPressV1Request(c.Server, username, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingInstallWordPressPluginsV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingInstallWordPressPluginsV1RequestWithBody(c.Server, username, software, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingInstallWordPressPluginsV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingInstallWordPressPluginsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingInstallWordPressPluginsV1Request(c.Server, username, software, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingInstallWordPressThemeV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingInstallWordPressThemeV1RequestWithBody(c.Server, username, software, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingInstallWordPressThemeV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingInstallWordPressThemeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingInstallWordPressThemeV1Request(c.Server, username, software, body)
 	if err != nil {
 		return nil, err
 	}
@@ -10362,6 +10483,114 @@ func NewHostingInstallWordPressV1RequestWithBody(server string, username Usernam
 	return req, nil
 }
 
+// NewHostingInstallWordPressPluginsV1Request calls the generic HostingInstallWordPressPluginsV1 builder with application/json body
+func NewHostingInstallWordPressPluginsV1Request(server string, username UsernamePath, software SoftwarePath, body HostingInstallWordPressPluginsV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingInstallWordPressPluginsV1RequestWithBody(server, username, software, "application/json", bodyReader)
+}
+
+// NewHostingInstallWordPressPluginsV1RequestWithBody generates requests for HostingInstallWordPressPluginsV1 with any type of body
+func NewHostingInstallWordPressPluginsV1RequestWithBody(server string, username UsernamePath, software SoftwarePath, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/plugins/install", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingInstallWordPressThemeV1Request calls the generic HostingInstallWordPressThemeV1 builder with application/json body
+func NewHostingInstallWordPressThemeV1Request(server string, username UsernamePath, software SoftwarePath, body HostingInstallWordPressThemeV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingInstallWordPressThemeV1RequestWithBody(server, username, software, "application/json", bodyReader)
+}
+
+// NewHostingInstallWordPressThemeV1RequestWithBody generates requests for HostingInstallWordPressThemeV1 with any type of body
+func NewHostingInstallWordPressThemeV1RequestWithBody(server string, username UsernamePath, software SoftwarePath, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/themes/install", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewHostingListAvailableDatacentersV1Request generates requests for HostingListAvailableDatacentersV1
 func NewHostingListAvailableDatacentersV1Request(server string, params *HostingListAvailableDatacentersV1Params) (*http.Request, error) {
 	var err error
@@ -14234,6 +14463,16 @@ type ClientWithResponsesInterface interface {
 
 	HostingInstallWordPressV1WithResponse(ctx context.Context, username UsernamePath, body HostingInstallWordPressV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingInstallWordPressV1Response, error)
 
+	// HostingInstallWordPressPluginsV1WithBodyWithResponse request with any body
+	HostingInstallWordPressPluginsV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingInstallWordPressPluginsV1Response, error)
+
+	HostingInstallWordPressPluginsV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingInstallWordPressPluginsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingInstallWordPressPluginsV1Response, error)
+
+	// HostingInstallWordPressThemeV1WithBodyWithResponse request with any body
+	HostingInstallWordPressThemeV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingInstallWordPressThemeV1Response, error)
+
+	HostingInstallWordPressThemeV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingInstallWordPressThemeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingInstallWordPressThemeV1Response, error)
+
 	// HostingListAvailableDatacentersV1WithResponse request
 	HostingListAvailableDatacentersV1WithResponse(ctx context.Context, params *HostingListAvailableDatacentersV1Params, reqEditors ...RequestEditorFn) (*HostingListAvailableDatacentersV1Response, error)
 
@@ -16611,6 +16850,72 @@ func (r HostingInstallWordPressV1Response) ContentType() string {
 	return ""
 }
 
+type HostingInstallWordPressPluginsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingInstallWordPressPluginsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingInstallWordPressPluginsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingInstallWordPressPluginsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingInstallWordPressThemeV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingInstallWordPressThemeV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingInstallWordPressThemeV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingInstallWordPressThemeV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type HostingListAvailableDatacentersV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -16816,7 +17121,7 @@ func (r HostingCreateWebsiteV1Response) ContentType() string {
 type HostingListWordPressInstallationsV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *HostingV1WordpressWordpressInstallationCollection
+	JSON200      *WordPressV1InstallationsWordPressInstallationCollection
 	JSON401      *CommonResponseUnauthorizedResponse
 	JSON500      *CommonResponseErrorResponse
 }
@@ -20076,6 +20381,40 @@ func (c *ClientWithResponses) HostingInstallWordPressV1WithResponse(ctx context.
 		return nil, err
 	}
 	return ParseHostingInstallWordPressV1Response(rsp)
+}
+
+// HostingInstallWordPressPluginsV1WithBodyWithResponse request with arbitrary body returning *HostingInstallWordPressPluginsV1Response
+func (c *ClientWithResponses) HostingInstallWordPressPluginsV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingInstallWordPressPluginsV1Response, error) {
+	rsp, err := c.HostingInstallWordPressPluginsV1WithBody(ctx, username, software, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingInstallWordPressPluginsV1Response(rsp)
+}
+
+func (c *ClientWithResponses) HostingInstallWordPressPluginsV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingInstallWordPressPluginsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingInstallWordPressPluginsV1Response, error) {
+	rsp, err := c.HostingInstallWordPressPluginsV1(ctx, username, software, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingInstallWordPressPluginsV1Response(rsp)
+}
+
+// HostingInstallWordPressThemeV1WithBodyWithResponse request with arbitrary body returning *HostingInstallWordPressThemeV1Response
+func (c *ClientWithResponses) HostingInstallWordPressThemeV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingInstallWordPressThemeV1Response, error) {
+	rsp, err := c.HostingInstallWordPressThemeV1WithBody(ctx, username, software, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingInstallWordPressThemeV1Response(rsp)
+}
+
+func (c *ClientWithResponses) HostingInstallWordPressThemeV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingInstallWordPressThemeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingInstallWordPressThemeV1Response, error) {
+	rsp, err := c.HostingInstallWordPressThemeV1(ctx, username, software, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingInstallWordPressThemeV1Response(rsp)
 }
 
 // HostingListAvailableDatacentersV1WithResponse request returning *HostingListAvailableDatacentersV1Response
@@ -23740,6 +24079,100 @@ func ParseHostingInstallWordPressV1Response(rsp *http.Response) (*HostingInstall
 	return response, nil
 }
 
+// ParseHostingInstallWordPressPluginsV1Response parses an HTTP response from a HostingInstallWordPressPluginsV1WithResponse call
+func ParseHostingInstallWordPressPluginsV1Response(rsp *http.Response) (*HostingInstallWordPressPluginsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingInstallWordPressPluginsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingInstallWordPressThemeV1Response parses an HTTP response from a HostingInstallWordPressThemeV1WithResponse call
+func ParseHostingInstallWordPressThemeV1Response(rsp *http.Response) (*HostingInstallWordPressThemeV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingInstallWordPressThemeV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseHostingListAvailableDatacentersV1Response parses an HTTP response from a HostingListAvailableDatacentersV1WithResponse call
 func ParseHostingListAvailableDatacentersV1Response(rsp *http.Response) (*HostingListAvailableDatacentersV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -24017,7 +24450,7 @@ func ParseHostingListWordPressInstallationsV1Response(rsp *http.Response) (*Host
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest HostingV1WordpressWordpressInstallationCollection
+		var dest WordPressV1InstallationsWordPressInstallationCollection
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

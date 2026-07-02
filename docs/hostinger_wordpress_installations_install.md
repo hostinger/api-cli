@@ -1,4 +1,4 @@
-## hostinger hosting wordpress install
+## hostinger wordpress installations install
 
 Install WordPress
 
@@ -22,7 +22,7 @@ by username and domain to track progress. When the installation appears in
 that list, WordPress is ready.
 
 ```
-hostinger hosting wordpress install <username> [flags]
+hostinger wordpress installations install <username> [flags]
 ```
 
 ### Options
@@ -49,5 +49,5 @@ hostinger hosting wordpress install <username> [flags]
 
 ### SEE ALSO
 
-* [hostinger hosting wordpress](hostinger_hosting_wordpress.md)	 - Wordpress commands
+* [hostinger wordpress installations](hostinger_wordpress_installations.md)	 - Installations commands
 

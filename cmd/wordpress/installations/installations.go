@@ -1,15 +1,15 @@
-package wordpress
+package installations
 
 import (
 	"github.com/spf13/cobra"
 )
 
 var GroupCmd = &cobra.Command{
-	Use:   "wordpress",
-	Short: "Wordpress commands",
+	Use:   "installations",
+	Short: "Installations commands",
 }
 
 func init() {
 	GroupCmd.AddCommand(InstallCmd)
-	GroupCmd.AddCommand(ListInstallationsCmd)
+	GroupCmd.AddCommand(ListCmd)
 }
