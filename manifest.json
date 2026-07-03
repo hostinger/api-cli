@@ -514,10 +514,25 @@
     "method": "GET",
     "path": "/api/horizons/v1/websites/{websiteId}"
   },
+  "hosting_activateWordPressPluginV1": {
+    "command": "hostinger wordpress plugins activate",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/plugins/activate"
+  },
+  "hosting_activateWordPressThemeV1": {
+    "command": "hostinger wordpress themes activate",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/themes/activate"
+  },
   "hosting_changeDatabasePasswordV1": {
     "command": "hostinger hosting databases change-password",
     "method": "PATCH",
     "path": "/api/hosting/v1/accounts/{username}/databases/{name}/change-password"
+  },
+  "hosting_checkIfWooCommerceIsInstalledV1": {
+    "command": "hostinger wordpress plugins check-if-woo-commerce-is-installed",
+    "method": "GET",
+    "path": "/api/hosting/v1/wordpress/plugins/is-woocommerce-installed"
   },
   "hosting_createAccountCronJobV1": {
     "command": "hostinger hosting cron-jobs create",
@@ -553,6 +568,11 @@
     "command": "hostinger hosting websites create",
     "method": "POST",
     "path": "/api/hosting/v1/websites"
+  },
+  "hosting_deactivateWordPressPluginV1": {
+    "command": "hostinger wordpress plugins deactivate",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/plugins/deactivate"
   },
   "hosting_deleteAccountCronJobV1": {
     "command": "hostinger hosting cron-jobs delete",
@@ -634,6 +654,21 @@
     "method": "GET",
     "path": "/api/hosting/v1/datacenters"
   },
+  "hosting_listAvailableWordPressPluginsV1": {
+    "command": "hostinger wordpress plugins list",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/plugins/available"
+  },
+  "hosting_listInstalledWordPressPluginsV1": {
+    "command": "hostinger wordpress plugins list-installed",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/plugins"
+  },
+  "hosting_listInstalledWordPressThemesV1": {
+    "command": "hostinger wordpress themes list-installed",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/themes"
+  },
   "hosting_listNodeJSBuildsV1": {
     "command": "hostinger hosting nodejs list-builds",
     "method": "GET",
@@ -643,6 +678,11 @@
     "command": "hostinger hosting orders list",
     "method": "GET",
     "path": "/api/hosting/v1/orders"
+  },
+  "hosting_listSuggestedWordPressPluginsV1": {
+    "command": "hostinger wordpress plugins list-suggested",
+    "method": "GET",
+    "path": "/api/hosting/v1/wordpress/plugins/suggested"
   },
   "hosting_listWebsiteParkedDomainsV1": {
     "command": "hostinger hosting domains list-website-parked",
@@ -664,10 +704,45 @@
     "method": "GET",
     "path": "/api/hosting/v1/wordpress/installations"
   },
+  "hosting_listWordPressThemesV1": {
+    "command": "hostinger wordpress themes list",
+    "method": "GET",
+    "path": "/api/hosting/v1/wordpress/themes"
+  },
   "hosting_repairDatabaseV1": {
     "command": "hostinger hosting databases repair",
     "method": "PATCH",
     "path": "/api/hosting/v1/accounts/{username}/databases/{name}/repair"
+  },
+  "hosting_searchWordPressPluginsV1": {
+    "command": "hostinger wordpress plugins search",
+    "method": "GET",
+    "path": "/api/hosting/v1/wordpress/plugins"
+  },
+  "hosting_uninstallWordPressPluginsV1": {
+    "command": "hostinger wordpress plugins uninstall",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/plugins/uninstall"
+  },
+  "hosting_uninstallWordPressThemesV1": {
+    "command": "hostinger wordpress themes uninstall",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/themes/uninstall"
+  },
+  "hosting_updateHostingerWordPressPluginV1": {
+    "command": "hostinger wordpress plugins update-hostinger",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/plugins/hostinger/update"
+  },
+  "hosting_updateWordPressPluginsV1": {
+    "command": "hostinger wordpress plugins update",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/plugins/update"
+  },
+  "hosting_updateWordPressThemesV1": {
+    "command": "hostinger wordpress themes update",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/themes/update"
   },
   "hosting_verifyDomainOwnershipV1": {
     "command": "hostinger hosting domains verify-ownership",

@@ -10,5 +10,10 @@ var GroupCmd = &cobra.Command{
 }
 
 func init() {
+	GroupCmd.AddCommand(ActivateCmd)
 	GroupCmd.AddCommand(InstallCmd)
+	GroupCmd.AddCommand(ListCmd)
+	GroupCmd.AddCommand(ListInstalledCmd)
+	GroupCmd.AddCommand(UninstallCmd)
+	GroupCmd.AddCommand(UpdateCmd)
 }

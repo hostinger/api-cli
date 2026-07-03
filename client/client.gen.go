@@ -1351,30 +1351,126 @@ func (e WordPressV1InstallationsInstallWordPressRequestAutoUpdates) Valid() bool
 	}
 }
 
+// Defines values for WordPressV1PluginsInstalledPluginResourceStatus.
+const (
+	WordPressV1PluginsInstalledPluginResourceStatusActive   WordPressV1PluginsInstalledPluginResourceStatus = "active"
+	WordPressV1PluginsInstalledPluginResourceStatusInactive WordPressV1PluginsInstalledPluginResourceStatus = "inactive"
+)
+
+// Valid indicates whether the value is a known member of the WordPressV1PluginsInstalledPluginResourceStatus enum.
+func (e WordPressV1PluginsInstalledPluginResourceStatus) Valid() bool {
+	switch e {
+	case WordPressV1PluginsInstalledPluginResourceStatusActive:
+		return true
+	case WordPressV1PluginsInstalledPluginResourceStatusInactive:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for WordPressV1PluginsSuggestedPluginGroupResourceWebsiteType.
+const (
+	WordPressV1PluginsSuggestedPluginGroupResourceWebsiteTypeAffiliateMarketing WordPressV1PluginsSuggestedPluginGroupResourceWebsiteType = "affiliate-marketing"
+	WordPressV1PluginsSuggestedPluginGroupResourceWebsiteTypeBlog               WordPressV1PluginsSuggestedPluginGroupResourceWebsiteType = "blog"
+	WordPressV1PluginsSuggestedPluginGroupResourceWebsiteTypeBusiness           WordPressV1PluginsSuggestedPluginGroupResourceWebsiteType = "business"
+	WordPressV1PluginsSuggestedPluginGroupResourceWebsiteTypeDefault            WordPressV1PluginsSuggestedPluginGroupResourceWebsiteType = "default"
+	WordPressV1PluginsSuggestedPluginGroupResourceWebsiteTypeOnlineStore        WordPressV1PluginsSuggestedPluginGroupResourceWebsiteType = "online-store"
+	WordPressV1PluginsSuggestedPluginGroupResourceWebsiteTypeOther              WordPressV1PluginsSuggestedPluginGroupResourceWebsiteType = "other"
+	WordPressV1PluginsSuggestedPluginGroupResourceWebsiteTypePortfolio          WordPressV1PluginsSuggestedPluginGroupResourceWebsiteType = "portfolio"
+)
+
+// Valid indicates whether the value is a known member of the WordPressV1PluginsSuggestedPluginGroupResourceWebsiteType enum.
+func (e WordPressV1PluginsSuggestedPluginGroupResourceWebsiteType) Valid() bool {
+	switch e {
+	case WordPressV1PluginsSuggestedPluginGroupResourceWebsiteTypeAffiliateMarketing:
+		return true
+	case WordPressV1PluginsSuggestedPluginGroupResourceWebsiteTypeBlog:
+		return true
+	case WordPressV1PluginsSuggestedPluginGroupResourceWebsiteTypeBusiness:
+		return true
+	case WordPressV1PluginsSuggestedPluginGroupResourceWebsiteTypeDefault:
+		return true
+	case WordPressV1PluginsSuggestedPluginGroupResourceWebsiteTypeOnlineStore:
+		return true
+	case WordPressV1PluginsSuggestedPluginGroupResourceWebsiteTypeOther:
+		return true
+	case WordPressV1PluginsSuggestedPluginGroupResourceWebsiteTypePortfolio:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for WordPressV1PluginsUpdateHostingerPluginRequestSlug.
+const (
+	Hostinger                WordPressV1PluginsUpdateHostingerPluginRequestSlug = "hostinger"
+	HostingerAffiliatePlugin WordPressV1PluginsUpdateHostingerPluginRequestSlug = "hostinger-affiliate-plugin"
+	HostingerAiAssistant     WordPressV1PluginsUpdateHostingerPluginRequestSlug = "hostinger-ai-assistant"
+	HostingerEasyOnboarding  WordPressV1PluginsUpdateHostingerPluginRequestSlug = "hostinger-easy-onboarding"
+	HostingerReach           WordPressV1PluginsUpdateHostingerPluginRequestSlug = "hostinger-reach"
+)
+
+// Valid indicates whether the value is a known member of the WordPressV1PluginsUpdateHostingerPluginRequestSlug enum.
+func (e WordPressV1PluginsUpdateHostingerPluginRequestSlug) Valid() bool {
+	switch e {
+	case Hostinger:
+		return true
+	case HostingerAffiliatePlugin:
+		return true
+	case HostingerAiAssistant:
+		return true
+	case HostingerEasyOnboarding:
+		return true
+	case HostingerReach:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for WordPressV1ThemesInstallThemeRequestFont.
 const (
-	Creative     WordPressV1ThemesInstallThemeRequestFont = "creative"
-	Default      WordPressV1ThemesInstallThemeRequestFont = "default"
-	Dynamic      WordPressV1ThemesInstallThemeRequestFont = "dynamic"
-	Elegant      WordPressV1ThemesInstallThemeRequestFont = "elegant"
-	Modern       WordPressV1ThemesInstallThemeRequestFont = "modern"
-	Professional WordPressV1ThemesInstallThemeRequestFont = "professional"
+	WordPressV1ThemesInstallThemeRequestFontCreative     WordPressV1ThemesInstallThemeRequestFont = "creative"
+	WordPressV1ThemesInstallThemeRequestFontDefault      WordPressV1ThemesInstallThemeRequestFont = "default"
+	WordPressV1ThemesInstallThemeRequestFontDynamic      WordPressV1ThemesInstallThemeRequestFont = "dynamic"
+	WordPressV1ThemesInstallThemeRequestFontElegant      WordPressV1ThemesInstallThemeRequestFont = "elegant"
+	WordPressV1ThemesInstallThemeRequestFontModern       WordPressV1ThemesInstallThemeRequestFont = "modern"
+	WordPressV1ThemesInstallThemeRequestFontProfessional WordPressV1ThemesInstallThemeRequestFont = "professional"
 )
 
 // Valid indicates whether the value is a known member of the WordPressV1ThemesInstallThemeRequestFont enum.
 func (e WordPressV1ThemesInstallThemeRequestFont) Valid() bool {
 	switch e {
-	case Creative:
+	case WordPressV1ThemesInstallThemeRequestFontCreative:
 		return true
-	case Default:
+	case WordPressV1ThemesInstallThemeRequestFontDefault:
 		return true
-	case Dynamic:
+	case WordPressV1ThemesInstallThemeRequestFontDynamic:
 		return true
-	case Elegant:
+	case WordPressV1ThemesInstallThemeRequestFontElegant:
 		return true
-	case Modern:
+	case WordPressV1ThemesInstallThemeRequestFontModern:
 		return true
-	case Professional:
+	case WordPressV1ThemesInstallThemeRequestFontProfessional:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for WordPressV1ThemesInstalledThemeResourceStatus.
+const (
+	WordPressV1ThemesInstalledThemeResourceStatusActive   WordPressV1ThemesInstalledThemeResourceStatus = "active"
+	WordPressV1ThemesInstalledThemeResourceStatusInactive WordPressV1ThemesInstalledThemeResourceStatus = "inactive"
+)
+
+// Valid indicates whether the value is a known member of the WordPressV1ThemesInstalledThemeResourceStatus enum.
+func (e WordPressV1ThemesInstalledThemeResourceStatus) Valid() bool {
+	switch e {
+	case WordPressV1ThemesInstalledThemeResourceStatusActive:
+		return true
+	case WordPressV1ThemesInstalledThemeResourceStatusInactive:
 		return true
 	default:
 		return false
@@ -1453,6 +1549,21 @@ func (e HostingListNodeJSBuildsV1ParamsStates) Valid() bool {
 	case Pending:
 		return true
 	case Running:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingListInstalledWordPressPluginsV1ParamsCategory.
+const (
+	Cache HostingListInstalledWordPressPluginsV1ParamsCategory = "cache"
+)
+
+// Valid indicates whether the value is a known member of the HostingListInstalledWordPressPluginsV1ParamsCategory enum.
+func (e HostingListInstalledWordPressPluginsV1ParamsCategory) Valid() bool {
+	switch e {
+	case Cache:
 		return true
 	default:
 		return false
@@ -3555,6 +3666,24 @@ type VPSV1VirtualMachineVirtualMachineResource_Template struct {
 	union json.RawMessage
 }
 
+// WordPressV1CommonVulnerabilityResource defines model for WordPress.V1.Common.VulnerabilityResource.
+type WordPressV1CommonVulnerabilityResource struct {
+	// AffectedIn Version in which the vulnerability was introduced or is present
+	AffectedIn *string `json:"affected_in,omitempty"`
+
+	// Description Details about the vulnerability
+	Description *string `json:"description,omitempty"`
+
+	// DirectUrl Link to the vulnerability advisory
+	DirectUrl *string `json:"direct_url,omitempty"`
+
+	// FixedIn Version in which the vulnerability was fixed
+	FixedIn *string `json:"fixed_in,omitempty"`
+
+	// Title Short title of the vulnerability
+	Title *string `json:"title,omitempty"`
+}
+
 // WordPressV1InstallationsInstallWordPressRequest defines model for WordPress.V1.Installations.InstallWordPressRequest.
 type WordPressV1InstallationsInstallWordPressRequest struct {
 	// AutoUpdates WordPress core auto-update policy
@@ -3640,10 +3769,190 @@ type WordPressV1InstallationsWordPressInstallationResource struct {
 	ValidationError *string `json:"validation_error,omitempty"`
 }
 
+// WordPressV1PluginsActivatePluginRequest defines model for WordPress.V1.Plugins.ActivatePluginRequest.
+type WordPressV1PluginsActivatePluginRequest struct {
+	// Plugin Slug of the installed plugin to activate.
+	Plugin string `json:"plugin"`
+}
+
+// WordPressV1PluginsAvailablePluginCollection Array of [`WordPress.V1.Plugins.AvailablePluginResource`](#model/wordpressv1pluginsavailablepluginresource)
+type WordPressV1PluginsAvailablePluginCollection = []WordPressV1PluginsAvailablePluginResource
+
+// WordPressV1PluginsAvailablePluginResource defines model for WordPress.V1.Plugins.AvailablePluginResource.
+type WordPressV1PluginsAvailablePluginResource struct {
+	// Description Short plugin description
+	Description *string `json:"description,omitempty"`
+
+	// IsPlanUpgradeNeeded Whether a hosting plan upgrade is required to use the plugin
+	IsPlanUpgradeNeeded *bool `json:"is_plan_upgrade_needed,omitempty"`
+
+	// Link Link to the plugin page on WordPress.org
+	Link *string `json:"link,omitempty"`
+
+	// OnboardingDescriptionSlug Translation slug for the onboarding description
+	OnboardingDescriptionSlug *string `json:"onboarding_description_slug,omitempty"`
+
+	// RecommendedDescriptionSlug Translation slug for the recommended description
+	RecommendedDescriptionSlug *string `json:"recommended_description_slug,omitempty"`
+
+	// RequiredPhpVersion Minimum PHP version required by the plugin
+	RequiredPhpVersion *string `json:"required_php_version,omitempty"`
+
+	// RequiredWordpressVersion Minimum WordPress version required by the plugin
+	RequiredWordpressVersion *string `json:"required_wordpress_version,omitempty"`
+
+	// Slug Plugin slug used when installing the plugin
+	Slug *string `json:"slug,omitempty"`
+
+	// Title Human readable plugin name
+	Title *string `json:"title,omitempty"`
+
+	// Version Latest available plugin version
+	Version *string `json:"version,omitempty"`
+}
+
+// WordPressV1PluginsDeactivatePluginRequest defines model for WordPress.V1.Plugins.DeactivatePluginRequest.
+type WordPressV1PluginsDeactivatePluginRequest struct {
+	// Plugin Slug of the installed plugin to deactivate.
+	Plugin string `json:"plugin"`
+}
+
 // WordPressV1PluginsInstallPluginsRequest defines model for WordPress.V1.Plugins.InstallPluginsRequest.
 type WordPressV1PluginsInstallPluginsRequest struct {
 	// Plugins Plugin slugs to install. Use GET /api/hosting/v1/wordpress/plugins to discover available slugs.
 	Plugins []string `json:"plugins"`
+}
+
+// WordPressV1PluginsInstalledPluginCollection Array of [`WordPress.V1.Plugins.InstalledPluginResource`](#model/wordpressv1pluginsinstalledpluginresource)
+type WordPressV1PluginsInstalledPluginCollection = []WordPressV1PluginsInstalledPluginResource
+
+// WordPressV1PluginsInstalledPluginResource defines model for WordPress.V1.Plugins.InstalledPluginResource.
+type WordPressV1PluginsInstalledPluginResource struct {
+	// Name Plugin slug
+	Name *string `json:"name,omitempty"`
+
+	// Status Whether the plugin is active or inactive
+	Status *WordPressV1PluginsInstalledPluginResourceStatus `json:"status,omitempty"`
+
+	// Title Human readable plugin name
+	Title *string `json:"title,omitempty"`
+
+	// Update Available update version, or "none" when up to date
+	Update *string `json:"update,omitempty"`
+
+	// Version Installed plugin version
+	Version *string `json:"version,omitempty"`
+
+	// Vulnerabilities Known vulnerabilities affecting the installed version
+	Vulnerabilities *[]WordPressV1CommonVulnerabilityResource `json:"vulnerabilities,omitempty"`
+}
+
+// WordPressV1PluginsInstalledPluginResourceStatus Whether the plugin is active or inactive
+type WordPressV1PluginsInstalledPluginResourceStatus string
+
+// WordPressV1PluginsPluginCollection Array of [`WordPress.V1.Plugins.PluginResource`](#model/wordpressv1pluginspluginresource)
+type WordPressV1PluginsPluginCollection = []WordPressV1PluginsPluginResource
+
+// WordPressV1PluginsPluginResource defines model for WordPress.V1.Plugins.PluginResource.
+type WordPressV1PluginsPluginResource struct {
+	// Description Short plugin description
+	Description *string `json:"description,omitempty"`
+
+	// Icons Plugin icon URLs keyed by resolution
+	Icons *struct {
+		N1x *string `json:"1x,omitempty"`
+		N2x *string `json:"2x,omitempty"`
+	} `json:"icons,omitempty"`
+
+	// Slug Plugin slug used when installing the plugin
+	Slug *string `json:"slug,omitempty"`
+
+	// Title Human readable plugin name
+	Title *string `json:"title,omitempty"`
+}
+
+// WordPressV1PluginsSuggestedPluginGroupCollection Array of [`WordPress.V1.Plugins.SuggestedPluginGroupResource`](#model/wordpressv1pluginssuggestedplugingroupresource)
+type WordPressV1PluginsSuggestedPluginGroupCollection = []WordPressV1PluginsSuggestedPluginGroupResource
+
+// WordPressV1PluginsSuggestedPluginGroupResource defines model for WordPress.V1.Plugins.SuggestedPluginGroupResource.
+type WordPressV1PluginsSuggestedPluginGroupResource struct {
+	// Plugins Plugins suggested for the website type
+	Plugins *[]WordPressV1PluginsSuggestedPluginResource `json:"plugins,omitempty"`
+
+	// WebsiteType Website type the suggested plugins are grouped by
+	WebsiteType *WordPressV1PluginsSuggestedPluginGroupResourceWebsiteType `json:"website_type,omitempty"`
+}
+
+// WordPressV1PluginsSuggestedPluginGroupResourceWebsiteType Website type the suggested plugins are grouped by
+type WordPressV1PluginsSuggestedPluginGroupResourceWebsiteType string
+
+// WordPressV1PluginsSuggestedPluginResource defines model for WordPress.V1.Plugins.SuggestedPluginResource.
+type WordPressV1PluginsSuggestedPluginResource struct {
+	// Description Short plugin description
+	Description *string `json:"description,omitempty"`
+
+	// IsPlanUpgradeNeeded Whether a hosting plan upgrade is required to use the plugin
+	IsPlanUpgradeNeeded *bool `json:"is_plan_upgrade_needed,omitempty"`
+
+	// IsPreselected Whether the plugin is preselected during onboarding
+	IsPreselected *bool `json:"is_preselected,omitempty"`
+
+	// Link Link to the plugin page on WordPress.org
+	Link *string `json:"link,omitempty"`
+
+	// OnboardingDescriptionSlug Translation slug for the onboarding description
+	OnboardingDescriptionSlug *string `json:"onboarding_description_slug,omitempty"`
+
+	// RecommendedDescriptionSlug Translation slug for the recommended description
+	RecommendedDescriptionSlug *string `json:"recommended_description_slug,omitempty"`
+
+	// RequiredPhpVersion Minimum PHP version required by the plugin
+	RequiredPhpVersion *string `json:"required_php_version,omitempty"`
+
+	// RequiredWordpressVersion Minimum WordPress version required by the plugin
+	RequiredWordpressVersion *string `json:"required_wordpress_version,omitempty"`
+
+	// Slug Plugin slug used when installing the plugin
+	Slug *string `json:"slug,omitempty"`
+
+	// Title Human readable plugin name
+	Title *string `json:"title,omitempty"`
+
+	// Version Latest available plugin version
+	Version *string `json:"version,omitempty"`
+}
+
+// WordPressV1PluginsUninstallPluginsRequest defines model for WordPress.V1.Plugins.UninstallPluginsRequest.
+type WordPressV1PluginsUninstallPluginsRequest struct {
+	// Plugins Slugs of the installed plugins to uninstall.
+	Plugins []string `json:"plugins"`
+}
+
+// WordPressV1PluginsUpdateHostingerPluginRequest defines model for WordPress.V1.Plugins.UpdateHostingerPluginRequest.
+type WordPressV1PluginsUpdateHostingerPluginRequest struct {
+	// Slug Slug of the Hostinger plugin to update to its latest version.
+	Slug WordPressV1PluginsUpdateHostingerPluginRequestSlug `json:"slug"`
+}
+
+// WordPressV1PluginsUpdateHostingerPluginRequestSlug Slug of the Hostinger plugin to update to its latest version.
+type WordPressV1PluginsUpdateHostingerPluginRequestSlug string
+
+// WordPressV1PluginsUpdatePluginsRequest defines model for WordPress.V1.Plugins.UpdatePluginsRequest.
+type WordPressV1PluginsUpdatePluginsRequest struct {
+	// Plugins Slugs of the installed plugins to update to their latest version.
+	Plugins []string `json:"plugins"`
+}
+
+// WordPressV1PluginsWoocommerceInstalledResource defines model for WordPress.V1.Plugins.WoocommerceInstalledResource.
+type WordPressV1PluginsWoocommerceInstalledResource struct {
+	// IsInstalled Whether WooCommerce is installed on any WordPress installation of the domain
+	IsInstalled *bool `json:"is_installed,omitempty"`
+}
+
+// WordPressV1ThemesActivateThemeRequest defines model for WordPress.V1.Themes.ActivateThemeRequest.
+type WordPressV1ThemesActivateThemeRequest struct {
+	// Theme Slug of the installed theme to activate.
+	Theme string `json:"theme"`
 }
 
 // WordPressV1ThemesInstallThemeRequest defines model for WordPress.V1.Themes.InstallThemeRequest.
@@ -3663,6 +3972,75 @@ type WordPressV1ThemesInstallThemeRequest struct {
 
 // WordPressV1ThemesInstallThemeRequestFont Font identifier. Only applied when the theme is a Hostinger theme; the default is used when omitted.
 type WordPressV1ThemesInstallThemeRequestFont string
+
+// WordPressV1ThemesInstalledThemeCollection Array of [`WordPress.V1.Themes.InstalledThemeResource`](#model/wordpressv1themesinstalledthemeresource)
+type WordPressV1ThemesInstalledThemeCollection = []WordPressV1ThemesInstalledThemeResource
+
+// WordPressV1ThemesInstalledThemeResource defines model for WordPress.V1.Themes.InstalledThemeResource.
+type WordPressV1ThemesInstalledThemeResource struct {
+	// Name Theme slug
+	Name *string `json:"name,omitempty"`
+
+	// Status Whether the theme is active or inactive
+	Status *WordPressV1ThemesInstalledThemeResourceStatus `json:"status,omitempty"`
+
+	// Title Human readable theme name
+	Title *string `json:"title,omitempty"`
+
+	// Update Available update version, or "none" when up to date
+	Update *string `json:"update,omitempty"`
+
+	// Version Installed theme version
+	Version *string `json:"version,omitempty"`
+
+	// Vulnerabilities Known vulnerabilities affecting the installed version
+	Vulnerabilities *[]WordPressV1CommonVulnerabilityResource `json:"vulnerabilities,omitempty"`
+}
+
+// WordPressV1ThemesInstalledThemeResourceStatus Whether the theme is active or inactive
+type WordPressV1ThemesInstalledThemeResourceStatus string
+
+// WordPressV1ThemesThemeCollection Array of [`WordPress.V1.Themes.ThemeResource`](#model/wordpressv1themesthemeresource)
+type WordPressV1ThemesThemeCollection = []WordPressV1ThemesThemeResource
+
+// WordPressV1ThemesThemeResource defines model for WordPress.V1.Themes.ThemeResource.
+type WordPressV1ThemesThemeResource struct {
+	// Description Short theme description
+	Description *string `json:"description,omitempty"`
+
+	// FeaturedImageUrl URL of the theme preview thumbnail
+	FeaturedImageUrl *string `json:"featured_image_url,omitempty"`
+
+	// FullImageUrl URL of the full-size theme preview image
+	FullImageUrl *string `json:"full_image_url,omitempty"`
+
+	// IsPlanUpgradeNeeded Whether a hosting plan upgrade is required to use the theme
+	IsPlanUpgradeNeeded *bool `json:"is_plan_upgrade_needed,omitempty"`
+
+	// LogoUrl URL of the theme logo
+	LogoUrl *string `json:"logo_url,omitempty"`
+
+	// Slug Theme slug used when installing the theme
+	Slug *string `json:"slug,omitempty"`
+
+	// Title Human readable theme name
+	Title *string `json:"title,omitempty"`
+
+	// Url Link to the theme page on WordPress.org
+	Url *string `json:"url,omitempty"`
+}
+
+// WordPressV1ThemesUninstallThemesRequest defines model for WordPress.V1.Themes.UninstallThemesRequest.
+type WordPressV1ThemesUninstallThemesRequest struct {
+	// Themes Slugs of the installed themes to uninstall.
+	Themes []string `json:"themes"`
+}
+
+// WordPressV1ThemesUpdateThemesRequest defines model for WordPress.V1.Themes.UpdateThemesRequest.
+type WordPressV1ThemesUpdateThemesRequest struct {
+	// Themes Slugs of the installed themes to update to their latest version.
+	Themes []string `json:"themes"`
+}
 
 // ActionId defines model for actionId.
 type ActionId = int
@@ -3903,6 +4281,15 @@ type HostingGetNodeJSBuildLogsV1Params struct {
 	FromLine *int `form:"from_line,omitempty" json:"from_line,omitempty"`
 }
 
+// HostingListInstalledWordPressPluginsV1Params defines parameters for HostingListInstalledWordPressPluginsV1.
+type HostingListInstalledWordPressPluginsV1Params struct {
+	// Category Filter installed plugins by category.
+	Category *HostingListInstalledWordPressPluginsV1ParamsCategory `form:"category,omitempty" json:"category,omitempty"`
+}
+
+// HostingListInstalledWordPressPluginsV1ParamsCategory defines parameters for HostingListInstalledWordPressPluginsV1.
+type HostingListInstalledWordPressPluginsV1ParamsCategory string
+
 // HostingListAvailableDatacentersV1Params defines parameters for HostingListAvailableDatacentersV1.
 type HostingListAvailableDatacentersV1Params struct {
 	// OrderId Order ID
@@ -3962,6 +4349,33 @@ type HostingListWordPressInstallationsV1Params struct {
 
 // HostingListWordPressInstallationsV1ParamsOwnership defines parameters for HostingListWordPressInstallationsV1.
 type HostingListWordPressInstallationsV1ParamsOwnership string
+
+// HostingSearchWordPressPluginsV1Params defines parameters for HostingSearchWordPressPluginsV1.
+type HostingSearchWordPressPluginsV1Params struct {
+	// Search Search term to match against plugin names. Minimum 3 characters.
+	Search string `form:"search" json:"search"`
+}
+
+// HostingCheckIfWooCommerceIsInstalledV1Params defines parameters for HostingCheckIfWooCommerceIsInstalledV1.
+type HostingCheckIfWooCommerceIsInstalledV1Params struct {
+	// Domain Filter by domain name (exact match)
+	Domain *DomainFilter `form:"domain,omitempty" json:"domain,omitempty"`
+}
+
+// HostingListSuggestedWordPressPluginsV1Params defines parameters for HostingListSuggestedWordPressPluginsV1.
+type HostingListSuggestedWordPressPluginsV1Params struct {
+	// OrderId Optionally scope suggestions to a specific order.
+	OrderId *int `form:"order_id,omitempty" json:"order_id,omitempty"`
+}
+
+// HostingListWordPressThemesV1Params defines parameters for HostingListWordPressThemesV1.
+type HostingListWordPressThemesV1Params struct {
+	// OrderId Optionally scope themes to a specific order.
+	OrderId *int `form:"order_id,omitempty" json:"order_id,omitempty"`
+
+	// Search Search term to match against theme names.
+	Search *string `form:"search,omitempty" json:"search,omitempty"`
+}
 
 // ReachListContactsV1Params defines parameters for ReachListContactsV1.
 type ReachListContactsV1Params struct {
@@ -4107,11 +4521,35 @@ type HostingCreateWebsiteSubdomainV1JSONRequestBody = HostingV1DomainsCreateSubd
 // HostingInstallWordPressV1JSONRequestBody defines body for HostingInstallWordPressV1 for application/json ContentType.
 type HostingInstallWordPressV1JSONRequestBody = WordPressV1InstallationsInstallWordPressRequest
 
+// HostingActivateWordPressPluginV1JSONRequestBody defines body for HostingActivateWordPressPluginV1 for application/json ContentType.
+type HostingActivateWordPressPluginV1JSONRequestBody = WordPressV1PluginsActivatePluginRequest
+
+// HostingDeactivateWordPressPluginV1JSONRequestBody defines body for HostingDeactivateWordPressPluginV1 for application/json ContentType.
+type HostingDeactivateWordPressPluginV1JSONRequestBody = WordPressV1PluginsDeactivatePluginRequest
+
+// HostingUpdateHostingerWordPressPluginV1JSONRequestBody defines body for HostingUpdateHostingerWordPressPluginV1 for application/json ContentType.
+type HostingUpdateHostingerWordPressPluginV1JSONRequestBody = WordPressV1PluginsUpdateHostingerPluginRequest
+
 // HostingInstallWordPressPluginsV1JSONRequestBody defines body for HostingInstallWordPressPluginsV1 for application/json ContentType.
 type HostingInstallWordPressPluginsV1JSONRequestBody = WordPressV1PluginsInstallPluginsRequest
 
+// HostingUninstallWordPressPluginsV1JSONRequestBody defines body for HostingUninstallWordPressPluginsV1 for application/json ContentType.
+type HostingUninstallWordPressPluginsV1JSONRequestBody = WordPressV1PluginsUninstallPluginsRequest
+
+// HostingUpdateWordPressPluginsV1JSONRequestBody defines body for HostingUpdateWordPressPluginsV1 for application/json ContentType.
+type HostingUpdateWordPressPluginsV1JSONRequestBody = WordPressV1PluginsUpdatePluginsRequest
+
+// HostingActivateWordPressThemeV1JSONRequestBody defines body for HostingActivateWordPressThemeV1 for application/json ContentType.
+type HostingActivateWordPressThemeV1JSONRequestBody = WordPressV1ThemesActivateThemeRequest
+
 // HostingInstallWordPressThemeV1JSONRequestBody defines body for HostingInstallWordPressThemeV1 for application/json ContentType.
 type HostingInstallWordPressThemeV1JSONRequestBody = WordPressV1ThemesInstallThemeRequest
+
+// HostingUninstallWordPressThemesV1JSONRequestBody defines body for HostingUninstallWordPressThemesV1 for application/json ContentType.
+type HostingUninstallWordPressThemesV1JSONRequestBody = WordPressV1ThemesUninstallThemesRequest
+
+// HostingUpdateWordPressThemesV1JSONRequestBody defines body for HostingUpdateWordPressThemesV1 for application/json ContentType.
+type HostingUpdateWordPressThemesV1JSONRequestBody = WordPressV1ThemesUpdateThemesRequest
 
 // HostingVerifyDomainOwnershipV1JSONRequestBody defines body for HostingVerifyDomainOwnershipV1 for application/json ContentType.
 type HostingVerifyDomainOwnershipV1JSONRequestBody = HostingV1DomainsVerifyOwnershipRequest
@@ -4987,15 +5425,64 @@ type ClientInterface interface {
 
 	HostingInstallWordPressV1(ctx context.Context, username UsernamePath, body HostingInstallWordPressV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// HostingListInstalledWordPressPluginsV1 request
+	HostingListInstalledWordPressPluginsV1(ctx context.Context, username UsernamePath, software SoftwarePath, params *HostingListInstalledWordPressPluginsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingActivateWordPressPluginV1WithBody request with any body
+	HostingActivateWordPressPluginV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	HostingActivateWordPressPluginV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingActivateWordPressPluginV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingListAvailableWordPressPluginsV1 request
+	HostingListAvailableWordPressPluginsV1(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingDeactivateWordPressPluginV1WithBody request with any body
+	HostingDeactivateWordPressPluginV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	HostingDeactivateWordPressPluginV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingDeactivateWordPressPluginV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingUpdateHostingerWordPressPluginV1WithBody request with any body
+	HostingUpdateHostingerWordPressPluginV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	HostingUpdateHostingerWordPressPluginV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUpdateHostingerWordPressPluginV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// HostingInstallWordPressPluginsV1WithBody request with any body
 	HostingInstallWordPressPluginsV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	HostingInstallWordPressPluginsV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingInstallWordPressPluginsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// HostingUninstallWordPressPluginsV1WithBody request with any body
+	HostingUninstallWordPressPluginsV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	HostingUninstallWordPressPluginsV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUninstallWordPressPluginsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingUpdateWordPressPluginsV1WithBody request with any body
+	HostingUpdateWordPressPluginsV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	HostingUpdateWordPressPluginsV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUpdateWordPressPluginsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingListInstalledWordPressThemesV1 request
+	HostingListInstalledWordPressThemesV1(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingActivateWordPressThemeV1WithBody request with any body
+	HostingActivateWordPressThemeV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	HostingActivateWordPressThemeV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingActivateWordPressThemeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// HostingInstallWordPressThemeV1WithBody request with any body
 	HostingInstallWordPressThemeV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	HostingInstallWordPressThemeV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingInstallWordPressThemeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingUninstallWordPressThemesV1WithBody request with any body
+	HostingUninstallWordPressThemesV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	HostingUninstallWordPressThemesV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUninstallWordPressThemesV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingUpdateWordPressThemesV1WithBody request with any body
+	HostingUpdateWordPressThemesV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	HostingUpdateWordPressThemesV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUpdateWordPressThemesV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingListAvailableDatacentersV1 request
 	HostingListAvailableDatacentersV1(ctx context.Context, params *HostingListAvailableDatacentersV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -5021,6 +5508,18 @@ type ClientInterface interface {
 
 	// HostingListWordPressInstallationsV1 request
 	HostingListWordPressInstallationsV1(ctx context.Context, params *HostingListWordPressInstallationsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingSearchWordPressPluginsV1 request
+	HostingSearchWordPressPluginsV1(ctx context.Context, params *HostingSearchWordPressPluginsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingCheckIfWooCommerceIsInstalledV1 request
+	HostingCheckIfWooCommerceIsInstalledV1(ctx context.Context, params *HostingCheckIfWooCommerceIsInstalledV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingListSuggestedWordPressPluginsV1 request
+	HostingListSuggestedWordPressPluginsV1(ctx context.Context, params *HostingListSuggestedWordPressPluginsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingListWordPressThemesV1 request
+	HostingListWordPressThemesV1(ctx context.Context, params *HostingListWordPressThemesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReachListContactsV1 request
 	ReachListContactsV1(ctx context.Context, params *ReachListContactsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -6334,6 +6833,102 @@ func (c *Client) HostingInstallWordPressV1(ctx context.Context, username Usernam
 	return c.Client.Do(req)
 }
 
+func (c *Client) HostingListInstalledWordPressPluginsV1(ctx context.Context, username UsernamePath, software SoftwarePath, params *HostingListInstalledWordPressPluginsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingListInstalledWordPressPluginsV1Request(c.Server, username, software, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingActivateWordPressPluginV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingActivateWordPressPluginV1RequestWithBody(c.Server, username, software, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingActivateWordPressPluginV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingActivateWordPressPluginV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingActivateWordPressPluginV1Request(c.Server, username, software, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingListAvailableWordPressPluginsV1(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingListAvailableWordPressPluginsV1Request(c.Server, username, software)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingDeactivateWordPressPluginV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingDeactivateWordPressPluginV1RequestWithBody(c.Server, username, software, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingDeactivateWordPressPluginV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingDeactivateWordPressPluginV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingDeactivateWordPressPluginV1Request(c.Server, username, software, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingUpdateHostingerWordPressPluginV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingUpdateHostingerWordPressPluginV1RequestWithBody(c.Server, username, software, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingUpdateHostingerWordPressPluginV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUpdateHostingerWordPressPluginV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingUpdateHostingerWordPressPluginV1Request(c.Server, username, software, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) HostingInstallWordPressPluginsV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingInstallWordPressPluginsV1RequestWithBody(c.Server, username, software, contentType, body)
 	if err != nil {
@@ -6358,6 +6953,90 @@ func (c *Client) HostingInstallWordPressPluginsV1(ctx context.Context, username 
 	return c.Client.Do(req)
 }
 
+func (c *Client) HostingUninstallWordPressPluginsV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingUninstallWordPressPluginsV1RequestWithBody(c.Server, username, software, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingUninstallWordPressPluginsV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUninstallWordPressPluginsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingUninstallWordPressPluginsV1Request(c.Server, username, software, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingUpdateWordPressPluginsV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingUpdateWordPressPluginsV1RequestWithBody(c.Server, username, software, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingUpdateWordPressPluginsV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUpdateWordPressPluginsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingUpdateWordPressPluginsV1Request(c.Server, username, software, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingListInstalledWordPressThemesV1(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingListInstalledWordPressThemesV1Request(c.Server, username, software)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingActivateWordPressThemeV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingActivateWordPressThemeV1RequestWithBody(c.Server, username, software, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingActivateWordPressThemeV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingActivateWordPressThemeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingActivateWordPressThemeV1Request(c.Server, username, software, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) HostingInstallWordPressThemeV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingInstallWordPressThemeV1RequestWithBody(c.Server, username, software, contentType, body)
 	if err != nil {
@@ -6372,6 +7051,54 @@ func (c *Client) HostingInstallWordPressThemeV1WithBody(ctx context.Context, use
 
 func (c *Client) HostingInstallWordPressThemeV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingInstallWordPressThemeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingInstallWordPressThemeV1Request(c.Server, username, software, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingUninstallWordPressThemesV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingUninstallWordPressThemesV1RequestWithBody(c.Server, username, software, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingUninstallWordPressThemesV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUninstallWordPressThemesV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingUninstallWordPressThemesV1Request(c.Server, username, software, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingUpdateWordPressThemesV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingUpdateWordPressThemesV1RequestWithBody(c.Server, username, software, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingUpdateWordPressThemesV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUpdateWordPressThemesV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingUpdateWordPressThemesV1Request(c.Server, username, software, body)
 	if err != nil {
 		return nil, err
 	}
@@ -6480,6 +7207,54 @@ func (c *Client) HostingCreateWebsiteV1(ctx context.Context, body HostingCreateW
 
 func (c *Client) HostingListWordPressInstallationsV1(ctx context.Context, params *HostingListWordPressInstallationsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingListWordPressInstallationsV1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingSearchWordPressPluginsV1(ctx context.Context, params *HostingSearchWordPressPluginsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingSearchWordPressPluginsV1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingCheckIfWooCommerceIsInstalledV1(ctx context.Context, params *HostingCheckIfWooCommerceIsInstalledV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingCheckIfWooCommerceIsInstalledV1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingListSuggestedWordPressPluginsV1(ctx context.Context, params *HostingListSuggestedWordPressPluginsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingListSuggestedWordPressPluginsV1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingListWordPressThemesV1(ctx context.Context, params *HostingListWordPressThemesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingListWordPressThemesV1Request(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -10483,6 +11258,277 @@ func NewHostingInstallWordPressV1RequestWithBody(server string, username Usernam
 	return req, nil
 }
 
+// NewHostingListInstalledWordPressPluginsV1Request generates requests for HostingListInstalledWordPressPluginsV1
+func NewHostingListInstalledWordPressPluginsV1Request(server string, username UsernamePath, software SoftwarePath, params *HostingListInstalledWordPressPluginsV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/plugins", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Category != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "category", *params.Category, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingActivateWordPressPluginV1Request calls the generic HostingActivateWordPressPluginV1 builder with application/json body
+func NewHostingActivateWordPressPluginV1Request(server string, username UsernamePath, software SoftwarePath, body HostingActivateWordPressPluginV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingActivateWordPressPluginV1RequestWithBody(server, username, software, "application/json", bodyReader)
+}
+
+// NewHostingActivateWordPressPluginV1RequestWithBody generates requests for HostingActivateWordPressPluginV1 with any type of body
+func NewHostingActivateWordPressPluginV1RequestWithBody(server string, username UsernamePath, software SoftwarePath, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/plugins/activate", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingListAvailableWordPressPluginsV1Request generates requests for HostingListAvailableWordPressPluginsV1
+func NewHostingListAvailableWordPressPluginsV1Request(server string, username UsernamePath, software SoftwarePath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/plugins/available", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingDeactivateWordPressPluginV1Request calls the generic HostingDeactivateWordPressPluginV1 builder with application/json body
+func NewHostingDeactivateWordPressPluginV1Request(server string, username UsernamePath, software SoftwarePath, body HostingDeactivateWordPressPluginV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingDeactivateWordPressPluginV1RequestWithBody(server, username, software, "application/json", bodyReader)
+}
+
+// NewHostingDeactivateWordPressPluginV1RequestWithBody generates requests for HostingDeactivateWordPressPluginV1 with any type of body
+func NewHostingDeactivateWordPressPluginV1RequestWithBody(server string, username UsernamePath, software SoftwarePath, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/plugins/deactivate", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingUpdateHostingerWordPressPluginV1Request calls the generic HostingUpdateHostingerWordPressPluginV1 builder with application/json body
+func NewHostingUpdateHostingerWordPressPluginV1Request(server string, username UsernamePath, software SoftwarePath, body HostingUpdateHostingerWordPressPluginV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingUpdateHostingerWordPressPluginV1RequestWithBody(server, username, software, "application/json", bodyReader)
+}
+
+// NewHostingUpdateHostingerWordPressPluginV1RequestWithBody generates requests for HostingUpdateHostingerWordPressPluginV1 with any type of body
+func NewHostingUpdateHostingerWordPressPluginV1RequestWithBody(server string, username UsernamePath, software SoftwarePath, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/plugins/hostinger/update", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewHostingInstallWordPressPluginsV1Request calls the generic HostingInstallWordPressPluginsV1 builder with application/json body
 func NewHostingInstallWordPressPluginsV1Request(server string, username UsernamePath, software SoftwarePath, body HostingInstallWordPressPluginsV1JSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
@@ -10537,6 +11583,209 @@ func NewHostingInstallWordPressPluginsV1RequestWithBody(server string, username 
 	return req, nil
 }
 
+// NewHostingUninstallWordPressPluginsV1Request calls the generic HostingUninstallWordPressPluginsV1 builder with application/json body
+func NewHostingUninstallWordPressPluginsV1Request(server string, username UsernamePath, software SoftwarePath, body HostingUninstallWordPressPluginsV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingUninstallWordPressPluginsV1RequestWithBody(server, username, software, "application/json", bodyReader)
+}
+
+// NewHostingUninstallWordPressPluginsV1RequestWithBody generates requests for HostingUninstallWordPressPluginsV1 with any type of body
+func NewHostingUninstallWordPressPluginsV1RequestWithBody(server string, username UsernamePath, software SoftwarePath, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/plugins/uninstall", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingUpdateWordPressPluginsV1Request calls the generic HostingUpdateWordPressPluginsV1 builder with application/json body
+func NewHostingUpdateWordPressPluginsV1Request(server string, username UsernamePath, software SoftwarePath, body HostingUpdateWordPressPluginsV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingUpdateWordPressPluginsV1RequestWithBody(server, username, software, "application/json", bodyReader)
+}
+
+// NewHostingUpdateWordPressPluginsV1RequestWithBody generates requests for HostingUpdateWordPressPluginsV1 with any type of body
+func NewHostingUpdateWordPressPluginsV1RequestWithBody(server string, username UsernamePath, software SoftwarePath, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/plugins/update", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingListInstalledWordPressThemesV1Request generates requests for HostingListInstalledWordPressThemesV1
+func NewHostingListInstalledWordPressThemesV1Request(server string, username UsernamePath, software SoftwarePath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/themes", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingActivateWordPressThemeV1Request calls the generic HostingActivateWordPressThemeV1 builder with application/json body
+func NewHostingActivateWordPressThemeV1Request(server string, username UsernamePath, software SoftwarePath, body HostingActivateWordPressThemeV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingActivateWordPressThemeV1RequestWithBody(server, username, software, "application/json", bodyReader)
+}
+
+// NewHostingActivateWordPressThemeV1RequestWithBody generates requests for HostingActivateWordPressThemeV1 with any type of body
+func NewHostingActivateWordPressThemeV1RequestWithBody(server string, username UsernamePath, software SoftwarePath, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/themes/activate", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewHostingInstallWordPressThemeV1Request calls the generic HostingInstallWordPressThemeV1 builder with application/json body
 func NewHostingInstallWordPressThemeV1Request(server string, username UsernamePath, software SoftwarePath, body HostingInstallWordPressThemeV1JSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
@@ -10572,6 +11821,114 @@ func NewHostingInstallWordPressThemeV1RequestWithBody(server string, username Us
 	}
 
 	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/themes/install", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingUninstallWordPressThemesV1Request calls the generic HostingUninstallWordPressThemesV1 builder with application/json body
+func NewHostingUninstallWordPressThemesV1Request(server string, username UsernamePath, software SoftwarePath, body HostingUninstallWordPressThemesV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingUninstallWordPressThemesV1RequestWithBody(server, username, software, "application/json", bodyReader)
+}
+
+// NewHostingUninstallWordPressThemesV1RequestWithBody generates requests for HostingUninstallWordPressThemesV1 with any type of body
+func NewHostingUninstallWordPressThemesV1RequestWithBody(server string, username UsernamePath, software SoftwarePath, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/themes/uninstall", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingUpdateWordPressThemesV1Request calls the generic HostingUpdateWordPressThemesV1 builder with application/json body
+func NewHostingUpdateWordPressThemesV1Request(server string, username UsernamePath, software SoftwarePath, body HostingUpdateWordPressThemesV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingUpdateWordPressThemesV1RequestWithBody(server, username, software, "application/json", bodyReader)
+}
+
+// NewHostingUpdateWordPressThemesV1RequestWithBody generates requests for HostingUpdateWordPressThemesV1 with any type of body
+func NewHostingUpdateWordPressThemesV1RequestWithBody(server string, username UsernamePath, software SoftwarePath, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/themes/update", pathParam0, pathParam1)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -11007,6 +12364,230 @@ func NewHostingListWordPressInstallationsV1Request(server string, params *Hostin
 		if params.Ownership != nil {
 
 			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "ownership", *params.Ownership, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingSearchWordPressPluginsV1Request generates requests for HostingSearchWordPressPluginsV1
+func NewHostingSearchWordPressPluginsV1Request(server string, params *HostingSearchWordPressPluginsV1Params) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/wordpress/plugins")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "search", params.Search, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+			return nil, err
+		} else {
+			for _, qp := range strings.Split(queryFrag, "&") {
+				rawQueryFragments = append(rawQueryFragments, qp)
+			}
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingCheckIfWooCommerceIsInstalledV1Request generates requests for HostingCheckIfWooCommerceIsInstalledV1
+func NewHostingCheckIfWooCommerceIsInstalledV1Request(server string, params *HostingCheckIfWooCommerceIsInstalledV1Params) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/wordpress/plugins/is-woocommerce-installed")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Domain != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "domain", *params.Domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingListSuggestedWordPressPluginsV1Request generates requests for HostingListSuggestedWordPressPluginsV1
+func NewHostingListSuggestedWordPressPluginsV1Request(server string, params *HostingListSuggestedWordPressPluginsV1Params) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/wordpress/plugins/suggested")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.OrderId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "order_id", *params.OrderId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingListWordPressThemesV1Request generates requests for HostingListWordPressThemesV1
+func NewHostingListWordPressThemesV1Request(server string, params *HostingListWordPressThemesV1Params) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/wordpress/themes")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.OrderId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "order_id", *params.OrderId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Search != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "search", *params.Search, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
 				for _, qp := range strings.Split(queryFrag, "&") {
@@ -14463,15 +16044,64 @@ type ClientWithResponsesInterface interface {
 
 	HostingInstallWordPressV1WithResponse(ctx context.Context, username UsernamePath, body HostingInstallWordPressV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingInstallWordPressV1Response, error)
 
+	// HostingListInstalledWordPressPluginsV1WithResponse request
+	HostingListInstalledWordPressPluginsV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, params *HostingListInstalledWordPressPluginsV1Params, reqEditors ...RequestEditorFn) (*HostingListInstalledWordPressPluginsV1Response, error)
+
+	// HostingActivateWordPressPluginV1WithBodyWithResponse request with any body
+	HostingActivateWordPressPluginV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingActivateWordPressPluginV1Response, error)
+
+	HostingActivateWordPressPluginV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingActivateWordPressPluginV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingActivateWordPressPluginV1Response, error)
+
+	// HostingListAvailableWordPressPluginsV1WithResponse request
+	HostingListAvailableWordPressPluginsV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*HostingListAvailableWordPressPluginsV1Response, error)
+
+	// HostingDeactivateWordPressPluginV1WithBodyWithResponse request with any body
+	HostingDeactivateWordPressPluginV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingDeactivateWordPressPluginV1Response, error)
+
+	HostingDeactivateWordPressPluginV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingDeactivateWordPressPluginV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingDeactivateWordPressPluginV1Response, error)
+
+	// HostingUpdateHostingerWordPressPluginV1WithBodyWithResponse request with any body
+	HostingUpdateHostingerWordPressPluginV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingUpdateHostingerWordPressPluginV1Response, error)
+
+	HostingUpdateHostingerWordPressPluginV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUpdateHostingerWordPressPluginV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUpdateHostingerWordPressPluginV1Response, error)
+
 	// HostingInstallWordPressPluginsV1WithBodyWithResponse request with any body
 	HostingInstallWordPressPluginsV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingInstallWordPressPluginsV1Response, error)
 
 	HostingInstallWordPressPluginsV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingInstallWordPressPluginsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingInstallWordPressPluginsV1Response, error)
 
+	// HostingUninstallWordPressPluginsV1WithBodyWithResponse request with any body
+	HostingUninstallWordPressPluginsV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingUninstallWordPressPluginsV1Response, error)
+
+	HostingUninstallWordPressPluginsV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUninstallWordPressPluginsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUninstallWordPressPluginsV1Response, error)
+
+	// HostingUpdateWordPressPluginsV1WithBodyWithResponse request with any body
+	HostingUpdateWordPressPluginsV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingUpdateWordPressPluginsV1Response, error)
+
+	HostingUpdateWordPressPluginsV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUpdateWordPressPluginsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUpdateWordPressPluginsV1Response, error)
+
+	// HostingListInstalledWordPressThemesV1WithResponse request
+	HostingListInstalledWordPressThemesV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*HostingListInstalledWordPressThemesV1Response, error)
+
+	// HostingActivateWordPressThemeV1WithBodyWithResponse request with any body
+	HostingActivateWordPressThemeV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingActivateWordPressThemeV1Response, error)
+
+	HostingActivateWordPressThemeV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingActivateWordPressThemeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingActivateWordPressThemeV1Response, error)
+
 	// HostingInstallWordPressThemeV1WithBodyWithResponse request with any body
 	HostingInstallWordPressThemeV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingInstallWordPressThemeV1Response, error)
 
 	HostingInstallWordPressThemeV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingInstallWordPressThemeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingInstallWordPressThemeV1Response, error)
+
+	// HostingUninstallWordPressThemesV1WithBodyWithResponse request with any body
+	HostingUninstallWordPressThemesV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingUninstallWordPressThemesV1Response, error)
+
+	HostingUninstallWordPressThemesV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUninstallWordPressThemesV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUninstallWordPressThemesV1Response, error)
+
+	// HostingUpdateWordPressThemesV1WithBodyWithResponse request with any body
+	HostingUpdateWordPressThemesV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingUpdateWordPressThemesV1Response, error)
+
+	HostingUpdateWordPressThemesV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUpdateWordPressThemesV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUpdateWordPressThemesV1Response, error)
 
 	// HostingListAvailableDatacentersV1WithResponse request
 	HostingListAvailableDatacentersV1WithResponse(ctx context.Context, params *HostingListAvailableDatacentersV1Params, reqEditors ...RequestEditorFn) (*HostingListAvailableDatacentersV1Response, error)
@@ -14497,6 +16127,18 @@ type ClientWithResponsesInterface interface {
 
 	// HostingListWordPressInstallationsV1WithResponse request
 	HostingListWordPressInstallationsV1WithResponse(ctx context.Context, params *HostingListWordPressInstallationsV1Params, reqEditors ...RequestEditorFn) (*HostingListWordPressInstallationsV1Response, error)
+
+	// HostingSearchWordPressPluginsV1WithResponse request
+	HostingSearchWordPressPluginsV1WithResponse(ctx context.Context, params *HostingSearchWordPressPluginsV1Params, reqEditors ...RequestEditorFn) (*HostingSearchWordPressPluginsV1Response, error)
+
+	// HostingCheckIfWooCommerceIsInstalledV1WithResponse request
+	HostingCheckIfWooCommerceIsInstalledV1WithResponse(ctx context.Context, params *HostingCheckIfWooCommerceIsInstalledV1Params, reqEditors ...RequestEditorFn) (*HostingCheckIfWooCommerceIsInstalledV1Response, error)
+
+	// HostingListSuggestedWordPressPluginsV1WithResponse request
+	HostingListSuggestedWordPressPluginsV1WithResponse(ctx context.Context, params *HostingListSuggestedWordPressPluginsV1Params, reqEditors ...RequestEditorFn) (*HostingListSuggestedWordPressPluginsV1Response, error)
+
+	// HostingListWordPressThemesV1WithResponse request
+	HostingListWordPressThemesV1WithResponse(ctx context.Context, params *HostingListWordPressThemesV1Params, reqEditors ...RequestEditorFn) (*HostingListWordPressThemesV1Response, error)
 
 	// ReachListContactsV1WithResponse request
 	ReachListContactsV1WithResponse(ctx context.Context, params *ReachListContactsV1Params, reqEditors ...RequestEditorFn) (*ReachListContactsV1Response, error)
@@ -16850,6 +18492,169 @@ func (r HostingInstallWordPressV1Response) ContentType() string {
 	return ""
 }
 
+type HostingListInstalledWordPressPluginsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *WordPressV1PluginsInstalledPluginCollection
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingListInstalledWordPressPluginsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingListInstalledWordPressPluginsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingListInstalledWordPressPluginsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingActivateWordPressPluginV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingActivateWordPressPluginV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingActivateWordPressPluginV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingActivateWordPressPluginV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingListAvailableWordPressPluginsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *WordPressV1PluginsAvailablePluginCollection
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingListAvailableWordPressPluginsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingListAvailableWordPressPluginsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingListAvailableWordPressPluginsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingDeactivateWordPressPluginV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingDeactivateWordPressPluginV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingDeactivateWordPressPluginV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingDeactivateWordPressPluginV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingUpdateHostingerWordPressPluginV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingUpdateHostingerWordPressPluginV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingUpdateHostingerWordPressPluginV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingUpdateHostingerWordPressPluginV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type HostingInstallWordPressPluginsV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -16883,6 +18688,137 @@ func (r HostingInstallWordPressPluginsV1Response) ContentType() string {
 	return ""
 }
 
+type HostingUninstallWordPressPluginsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingUninstallWordPressPluginsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingUninstallWordPressPluginsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingUninstallWordPressPluginsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingUpdateWordPressPluginsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingUpdateWordPressPluginsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingUpdateWordPressPluginsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingUpdateWordPressPluginsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingListInstalledWordPressThemesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *WordPressV1ThemesInstalledThemeCollection
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingListInstalledWordPressThemesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingListInstalledWordPressThemesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingListInstalledWordPressThemesV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingActivateWordPressThemeV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingActivateWordPressThemeV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingActivateWordPressThemeV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingActivateWordPressThemeV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type HostingInstallWordPressThemeV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -16910,6 +18846,72 @@ func (r HostingInstallWordPressThemeV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingInstallWordPressThemeV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingUninstallWordPressThemesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingUninstallWordPressThemesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingUninstallWordPressThemesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingUninstallWordPressThemesV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingUpdateWordPressThemesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingUpdateWordPressThemesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingUpdateWordPressThemesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingUpdateWordPressThemesV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -17144,6 +19146,134 @@ func (r HostingListWordPressInstallationsV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingListWordPressInstallationsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingSearchWordPressPluginsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *WordPressV1PluginsPluginCollection
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingSearchWordPressPluginsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingSearchWordPressPluginsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingSearchWordPressPluginsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingCheckIfWooCommerceIsInstalledV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *WordPressV1PluginsWoocommerceInstalledResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingCheckIfWooCommerceIsInstalledV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingCheckIfWooCommerceIsInstalledV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingCheckIfWooCommerceIsInstalledV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingListSuggestedWordPressPluginsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *WordPressV1PluginsSuggestedPluginGroupCollection
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingListSuggestedWordPressPluginsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingListSuggestedWordPressPluginsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingListSuggestedWordPressPluginsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingListWordPressThemesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *WordPressV1ThemesThemeCollection
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingListWordPressThemesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingListWordPressThemesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingListWordPressThemesV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -20383,6 +22513,75 @@ func (c *ClientWithResponses) HostingInstallWordPressV1WithResponse(ctx context.
 	return ParseHostingInstallWordPressV1Response(rsp)
 }
 
+// HostingListInstalledWordPressPluginsV1WithResponse request returning *HostingListInstalledWordPressPluginsV1Response
+func (c *ClientWithResponses) HostingListInstalledWordPressPluginsV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, params *HostingListInstalledWordPressPluginsV1Params, reqEditors ...RequestEditorFn) (*HostingListInstalledWordPressPluginsV1Response, error) {
+	rsp, err := c.HostingListInstalledWordPressPluginsV1(ctx, username, software, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingListInstalledWordPressPluginsV1Response(rsp)
+}
+
+// HostingActivateWordPressPluginV1WithBodyWithResponse request with arbitrary body returning *HostingActivateWordPressPluginV1Response
+func (c *ClientWithResponses) HostingActivateWordPressPluginV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingActivateWordPressPluginV1Response, error) {
+	rsp, err := c.HostingActivateWordPressPluginV1WithBody(ctx, username, software, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingActivateWordPressPluginV1Response(rsp)
+}
+
+func (c *ClientWithResponses) HostingActivateWordPressPluginV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingActivateWordPressPluginV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingActivateWordPressPluginV1Response, error) {
+	rsp, err := c.HostingActivateWordPressPluginV1(ctx, username, software, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingActivateWordPressPluginV1Response(rsp)
+}
+
+// HostingListAvailableWordPressPluginsV1WithResponse request returning *HostingListAvailableWordPressPluginsV1Response
+func (c *ClientWithResponses) HostingListAvailableWordPressPluginsV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*HostingListAvailableWordPressPluginsV1Response, error) {
+	rsp, err := c.HostingListAvailableWordPressPluginsV1(ctx, username, software, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingListAvailableWordPressPluginsV1Response(rsp)
+}
+
+// HostingDeactivateWordPressPluginV1WithBodyWithResponse request with arbitrary body returning *HostingDeactivateWordPressPluginV1Response
+func (c *ClientWithResponses) HostingDeactivateWordPressPluginV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingDeactivateWordPressPluginV1Response, error) {
+	rsp, err := c.HostingDeactivateWordPressPluginV1WithBody(ctx, username, software, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingDeactivateWordPressPluginV1Response(rsp)
+}
+
+func (c *ClientWithResponses) HostingDeactivateWordPressPluginV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingDeactivateWordPressPluginV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingDeactivateWordPressPluginV1Response, error) {
+	rsp, err := c.HostingDeactivateWordPressPluginV1(ctx, username, software, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingDeactivateWordPressPluginV1Response(rsp)
+}
+
+// HostingUpdateHostingerWordPressPluginV1WithBodyWithResponse request with arbitrary body returning *HostingUpdateHostingerWordPressPluginV1Response
+func (c *ClientWithResponses) HostingUpdateHostingerWordPressPluginV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingUpdateHostingerWordPressPluginV1Response, error) {
+	rsp, err := c.HostingUpdateHostingerWordPressPluginV1WithBody(ctx, username, software, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingUpdateHostingerWordPressPluginV1Response(rsp)
+}
+
+func (c *ClientWithResponses) HostingUpdateHostingerWordPressPluginV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUpdateHostingerWordPressPluginV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUpdateHostingerWordPressPluginV1Response, error) {
+	rsp, err := c.HostingUpdateHostingerWordPressPluginV1(ctx, username, software, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingUpdateHostingerWordPressPluginV1Response(rsp)
+}
+
 // HostingInstallWordPressPluginsV1WithBodyWithResponse request with arbitrary body returning *HostingInstallWordPressPluginsV1Response
 func (c *ClientWithResponses) HostingInstallWordPressPluginsV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingInstallWordPressPluginsV1Response, error) {
 	rsp, err := c.HostingInstallWordPressPluginsV1WithBody(ctx, username, software, contentType, body, reqEditors...)
@@ -20400,6 +22599,66 @@ func (c *ClientWithResponses) HostingInstallWordPressPluginsV1WithResponse(ctx c
 	return ParseHostingInstallWordPressPluginsV1Response(rsp)
 }
 
+// HostingUninstallWordPressPluginsV1WithBodyWithResponse request with arbitrary body returning *HostingUninstallWordPressPluginsV1Response
+func (c *ClientWithResponses) HostingUninstallWordPressPluginsV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingUninstallWordPressPluginsV1Response, error) {
+	rsp, err := c.HostingUninstallWordPressPluginsV1WithBody(ctx, username, software, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingUninstallWordPressPluginsV1Response(rsp)
+}
+
+func (c *ClientWithResponses) HostingUninstallWordPressPluginsV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUninstallWordPressPluginsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUninstallWordPressPluginsV1Response, error) {
+	rsp, err := c.HostingUninstallWordPressPluginsV1(ctx, username, software, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingUninstallWordPressPluginsV1Response(rsp)
+}
+
+// HostingUpdateWordPressPluginsV1WithBodyWithResponse request with arbitrary body returning *HostingUpdateWordPressPluginsV1Response
+func (c *ClientWithResponses) HostingUpdateWordPressPluginsV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingUpdateWordPressPluginsV1Response, error) {
+	rsp, err := c.HostingUpdateWordPressPluginsV1WithBody(ctx, username, software, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingUpdateWordPressPluginsV1Response(rsp)
+}
+
+func (c *ClientWithResponses) HostingUpdateWordPressPluginsV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUpdateWordPressPluginsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUpdateWordPressPluginsV1Response, error) {
+	rsp, err := c.HostingUpdateWordPressPluginsV1(ctx, username, software, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingUpdateWordPressPluginsV1Response(rsp)
+}
+
+// HostingListInstalledWordPressThemesV1WithResponse request returning *HostingListInstalledWordPressThemesV1Response
+func (c *ClientWithResponses) HostingListInstalledWordPressThemesV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*HostingListInstalledWordPressThemesV1Response, error) {
+	rsp, err := c.HostingListInstalledWordPressThemesV1(ctx, username, software, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingListInstalledWordPressThemesV1Response(rsp)
+}
+
+// HostingActivateWordPressThemeV1WithBodyWithResponse request with arbitrary body returning *HostingActivateWordPressThemeV1Response
+func (c *ClientWithResponses) HostingActivateWordPressThemeV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingActivateWordPressThemeV1Response, error) {
+	rsp, err := c.HostingActivateWordPressThemeV1WithBody(ctx, username, software, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingActivateWordPressThemeV1Response(rsp)
+}
+
+func (c *ClientWithResponses) HostingActivateWordPressThemeV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingActivateWordPressThemeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingActivateWordPressThemeV1Response, error) {
+	rsp, err := c.HostingActivateWordPressThemeV1(ctx, username, software, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingActivateWordPressThemeV1Response(rsp)
+}
+
 // HostingInstallWordPressThemeV1WithBodyWithResponse request with arbitrary body returning *HostingInstallWordPressThemeV1Response
 func (c *ClientWithResponses) HostingInstallWordPressThemeV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingInstallWordPressThemeV1Response, error) {
 	rsp, err := c.HostingInstallWordPressThemeV1WithBody(ctx, username, software, contentType, body, reqEditors...)
@@ -20415,6 +22674,40 @@ func (c *ClientWithResponses) HostingInstallWordPressThemeV1WithResponse(ctx con
 		return nil, err
 	}
 	return ParseHostingInstallWordPressThemeV1Response(rsp)
+}
+
+// HostingUninstallWordPressThemesV1WithBodyWithResponse request with arbitrary body returning *HostingUninstallWordPressThemesV1Response
+func (c *ClientWithResponses) HostingUninstallWordPressThemesV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingUninstallWordPressThemesV1Response, error) {
+	rsp, err := c.HostingUninstallWordPressThemesV1WithBody(ctx, username, software, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingUninstallWordPressThemesV1Response(rsp)
+}
+
+func (c *ClientWithResponses) HostingUninstallWordPressThemesV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUninstallWordPressThemesV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUninstallWordPressThemesV1Response, error) {
+	rsp, err := c.HostingUninstallWordPressThemesV1(ctx, username, software, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingUninstallWordPressThemesV1Response(rsp)
+}
+
+// HostingUpdateWordPressThemesV1WithBodyWithResponse request with arbitrary body returning *HostingUpdateWordPressThemesV1Response
+func (c *ClientWithResponses) HostingUpdateWordPressThemesV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingUpdateWordPressThemesV1Response, error) {
+	rsp, err := c.HostingUpdateWordPressThemesV1WithBody(ctx, username, software, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingUpdateWordPressThemesV1Response(rsp)
+}
+
+func (c *ClientWithResponses) HostingUpdateWordPressThemesV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUpdateWordPressThemesV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUpdateWordPressThemesV1Response, error) {
+	rsp, err := c.HostingUpdateWordPressThemesV1(ctx, username, software, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingUpdateWordPressThemesV1Response(rsp)
 }
 
 // HostingListAvailableDatacentersV1WithResponse request returning *HostingListAvailableDatacentersV1Response
@@ -20494,6 +22787,42 @@ func (c *ClientWithResponses) HostingListWordPressInstallationsV1WithResponse(ct
 		return nil, err
 	}
 	return ParseHostingListWordPressInstallationsV1Response(rsp)
+}
+
+// HostingSearchWordPressPluginsV1WithResponse request returning *HostingSearchWordPressPluginsV1Response
+func (c *ClientWithResponses) HostingSearchWordPressPluginsV1WithResponse(ctx context.Context, params *HostingSearchWordPressPluginsV1Params, reqEditors ...RequestEditorFn) (*HostingSearchWordPressPluginsV1Response, error) {
+	rsp, err := c.HostingSearchWordPressPluginsV1(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingSearchWordPressPluginsV1Response(rsp)
+}
+
+// HostingCheckIfWooCommerceIsInstalledV1WithResponse request returning *HostingCheckIfWooCommerceIsInstalledV1Response
+func (c *ClientWithResponses) HostingCheckIfWooCommerceIsInstalledV1WithResponse(ctx context.Context, params *HostingCheckIfWooCommerceIsInstalledV1Params, reqEditors ...RequestEditorFn) (*HostingCheckIfWooCommerceIsInstalledV1Response, error) {
+	rsp, err := c.HostingCheckIfWooCommerceIsInstalledV1(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingCheckIfWooCommerceIsInstalledV1Response(rsp)
+}
+
+// HostingListSuggestedWordPressPluginsV1WithResponse request returning *HostingListSuggestedWordPressPluginsV1Response
+func (c *ClientWithResponses) HostingListSuggestedWordPressPluginsV1WithResponse(ctx context.Context, params *HostingListSuggestedWordPressPluginsV1Params, reqEditors ...RequestEditorFn) (*HostingListSuggestedWordPressPluginsV1Response, error) {
+	rsp, err := c.HostingListSuggestedWordPressPluginsV1(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingListSuggestedWordPressPluginsV1Response(rsp)
+}
+
+// HostingListWordPressThemesV1WithResponse request returning *HostingListWordPressThemesV1Response
+func (c *ClientWithResponses) HostingListWordPressThemesV1WithResponse(ctx context.Context, params *HostingListWordPressThemesV1Params, reqEditors ...RequestEditorFn) (*HostingListWordPressThemesV1Response, error) {
+	rsp, err := c.HostingListWordPressThemesV1(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingListWordPressThemesV1Response(rsp)
 }
 
 // ReachListContactsV1WithResponse request returning *ReachListContactsV1Response
@@ -24079,6 +26408,227 @@ func ParseHostingInstallWordPressV1Response(rsp *http.Response) (*HostingInstall
 	return response, nil
 }
 
+// ParseHostingListInstalledWordPressPluginsV1Response parses an HTTP response from a HostingListInstalledWordPressPluginsV1WithResponse call
+func ParseHostingListInstalledWordPressPluginsV1Response(rsp *http.Response) (*HostingListInstalledWordPressPluginsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingListInstalledWordPressPluginsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest WordPressV1PluginsInstalledPluginCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingActivateWordPressPluginV1Response parses an HTTP response from a HostingActivateWordPressPluginV1WithResponse call
+func ParseHostingActivateWordPressPluginV1Response(rsp *http.Response) (*HostingActivateWordPressPluginV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingActivateWordPressPluginV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingListAvailableWordPressPluginsV1Response parses an HTTP response from a HostingListAvailableWordPressPluginsV1WithResponse call
+func ParseHostingListAvailableWordPressPluginsV1Response(rsp *http.Response) (*HostingListAvailableWordPressPluginsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingListAvailableWordPressPluginsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest WordPressV1PluginsAvailablePluginCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingDeactivateWordPressPluginV1Response parses an HTTP response from a HostingDeactivateWordPressPluginV1WithResponse call
+func ParseHostingDeactivateWordPressPluginV1Response(rsp *http.Response) (*HostingDeactivateWordPressPluginV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingDeactivateWordPressPluginV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingUpdateHostingerWordPressPluginV1Response parses an HTTP response from a HostingUpdateHostingerWordPressPluginV1WithResponse call
+func ParseHostingUpdateHostingerWordPressPluginV1Response(rsp *http.Response) (*HostingUpdateHostingerWordPressPluginV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingUpdateHostingerWordPressPluginV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseHostingInstallWordPressPluginsV1Response parses an HTTP response from a HostingInstallWordPressPluginsV1WithResponse call
 func ParseHostingInstallWordPressPluginsV1Response(rsp *http.Response) (*HostingInstallWordPressPluginsV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -24126,6 +26676,187 @@ func ParseHostingInstallWordPressPluginsV1Response(rsp *http.Response) (*Hosting
 	return response, nil
 }
 
+// ParseHostingUninstallWordPressPluginsV1Response parses an HTTP response from a HostingUninstallWordPressPluginsV1WithResponse call
+func ParseHostingUninstallWordPressPluginsV1Response(rsp *http.Response) (*HostingUninstallWordPressPluginsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingUninstallWordPressPluginsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingUpdateWordPressPluginsV1Response parses an HTTP response from a HostingUpdateWordPressPluginsV1WithResponse call
+func ParseHostingUpdateWordPressPluginsV1Response(rsp *http.Response) (*HostingUpdateWordPressPluginsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingUpdateWordPressPluginsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingListInstalledWordPressThemesV1Response parses an HTTP response from a HostingListInstalledWordPressThemesV1WithResponse call
+func ParseHostingListInstalledWordPressThemesV1Response(rsp *http.Response) (*HostingListInstalledWordPressThemesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingListInstalledWordPressThemesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest WordPressV1ThemesInstalledThemeCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingActivateWordPressThemeV1Response parses an HTTP response from a HostingActivateWordPressThemeV1WithResponse call
+func ParseHostingActivateWordPressThemeV1Response(rsp *http.Response) (*HostingActivateWordPressThemeV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingActivateWordPressThemeV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseHostingInstallWordPressThemeV1Response parses an HTTP response from a HostingInstallWordPressThemeV1WithResponse call
 func ParseHostingInstallWordPressThemeV1Response(rsp *http.Response) (*HostingInstallWordPressThemeV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -24135,6 +26866,100 @@ func ParseHostingInstallWordPressThemeV1Response(rsp *http.Response) (*HostingIn
 	}
 
 	response := &HostingInstallWordPressThemeV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingUninstallWordPressThemesV1Response parses an HTTP response from a HostingUninstallWordPressThemesV1WithResponse call
+func ParseHostingUninstallWordPressThemesV1Response(rsp *http.Response) (*HostingUninstallWordPressThemesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingUninstallWordPressThemesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingUpdateWordPressThemesV1Response parses an HTTP response from a HostingUpdateWordPressThemesV1WithResponse call
+func ParseHostingUpdateWordPressThemesV1Response(rsp *http.Response) (*HostingUpdateWordPressThemesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingUpdateWordPressThemesV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -24451,6 +27276,166 @@ func ParseHostingListWordPressInstallationsV1Response(rsp *http.Response) (*Host
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest WordPressV1InstallationsWordPressInstallationCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingSearchWordPressPluginsV1Response parses an HTTP response from a HostingSearchWordPressPluginsV1WithResponse call
+func ParseHostingSearchWordPressPluginsV1Response(rsp *http.Response) (*HostingSearchWordPressPluginsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingSearchWordPressPluginsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest WordPressV1PluginsPluginCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingCheckIfWooCommerceIsInstalledV1Response parses an HTTP response from a HostingCheckIfWooCommerceIsInstalledV1WithResponse call
+func ParseHostingCheckIfWooCommerceIsInstalledV1Response(rsp *http.Response) (*HostingCheckIfWooCommerceIsInstalledV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingCheckIfWooCommerceIsInstalledV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest WordPressV1PluginsWoocommerceInstalledResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingListSuggestedWordPressPluginsV1Response parses an HTTP response from a HostingListSuggestedWordPressPluginsV1WithResponse call
+func ParseHostingListSuggestedWordPressPluginsV1Response(rsp *http.Response) (*HostingListSuggestedWordPressPluginsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingListSuggestedWordPressPluginsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest WordPressV1PluginsSuggestedPluginGroupCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingListWordPressThemesV1Response parses an HTTP response from a HostingListWordPressThemesV1WithResponse call
+func ParseHostingListWordPressThemesV1Response(rsp *http.Response) (*HostingListWordPressThemesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingListWordPressThemesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest WordPressV1ThemesThemeCollection
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
