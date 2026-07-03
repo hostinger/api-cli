@@ -469,7 +469,7 @@
     "method": "PUT",
     "path": "/api/domains/v1/portfolio/{domain}/nameservers"
   },
-  "ecommerce_createACustomSalesChannelV1": {
+  "ecommerce_createCustomSalesChannelV1": {
     "command": "hostinger ecommerce sales-channels create-custom",
     "method": "POST",
     "path": "/api/ecommerce/v1/stores/{store_id}/sales-channels"
@@ -504,6 +504,11 @@
     "method": "GET",
     "path": "/api/ecommerce/v1/miscellaneous/custom-storefront-instructions"
   },
+  "ecommerce_getStoreMetadataV1": {
+    "command": "hostinger ecommerce stores metadata",
+    "method": "GET",
+    "path": "/api/ecommerce/v1/stores/{store_id}/metadata"
+  },
   "ecommerce_getStoresV1": {
     "command": "hostinger ecommerce stores list",
     "method": "GET",
@@ -518,6 +523,11 @@
     "command": "hostinger ecommerce shipping set-store",
     "method": "POST",
     "path": "/api/ecommerce/v1/stores/{store_id}/shipping"
+  },
+  "ecommerce_updateSalesChannelV1": {
+    "command": "hostinger ecommerce sales-channels update",
+    "method": "PATCH",
+    "path": "/api/ecommerce/v1/stores/{store_id}/sales-channels/{sales_channel_id}"
   },
   "horizons_createWebsiteV1": {
     "command": "hostinger horizons websites create",

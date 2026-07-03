@@ -493,6 +493,36 @@ func (e EcommerceV1SalesChannelSalesChannelListResourceSalesChannelsType) Valid(
 	}
 }
 
+// Defines values for EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelType.
+const (
+	EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelTypeBuilder   EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelType = "builder"
+	EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelTypeCustom    EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelType = "custom"
+	EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelTypeHorizons  EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelType = "horizons"
+	EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelTypeQuickLink EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelType = "quick-link"
+	EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelTypeTiktok    EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelType = "tiktok"
+	EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelTypeWordpress EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelType = "wordpress"
+)
+
+// Valid indicates whether the value is a known member of the EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelType enum.
+func (e EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelType) Valid() bool {
+	switch e {
+	case EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelTypeBuilder:
+		return true
+	case EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelTypeCustom:
+		return true
+	case EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelTypeHorizons:
+		return true
+	case EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelTypeQuickLink:
+		return true
+	case EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelTypeTiktok:
+		return true
+	case EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelTypeWordpress:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for EcommerceV1SalesChannelStoreRequestType.
 const (
 	EcommerceV1SalesChannelStoreRequestTypeCustom EcommerceV1SalesChannelStoreRequestType = "custom"
@@ -1311,16 +1341,16 @@ func (e VPSV1FirewallRulesStoreRequestProtocol) Valid() bool {
 
 // Defines values for VPSV1FirewallRulesStoreRequestSource.
 const (
-	VPSV1FirewallRulesStoreRequestSourceAny    VPSV1FirewallRulesStoreRequestSource = "any"
-	VPSV1FirewallRulesStoreRequestSourceCustom VPSV1FirewallRulesStoreRequestSource = "custom"
+	Any    VPSV1FirewallRulesStoreRequestSource = "any"
+	Custom VPSV1FirewallRulesStoreRequestSource = "custom"
 )
 
 // Valid indicates whether the value is a known member of the VPSV1FirewallRulesStoreRequestSource enum.
 func (e VPSV1FirewallRulesStoreRequestSource) Valid() bool {
 	switch e {
-	case VPSV1FirewallRulesStoreRequestSourceAny:
+	case Any:
 		return true
-	case VPSV1FirewallRulesStoreRequestSourceCustom:
+	case Custom:
 		return true
 	default:
 		return false
@@ -2420,6 +2450,35 @@ type EcommerceV1SalesChannelSalesChannelListResource struct {
 // EcommerceV1SalesChannelSalesChannelListResourceSalesChannelsType Sales channel type
 type EcommerceV1SalesChannelSalesChannelListResourceSalesChannelsType string
 
+// EcommerceV1SalesChannelSalesChannelUpdateResource defines model for Ecommerce.V1.SalesChannel.SalesChannelUpdateResource.
+type EcommerceV1SalesChannelSalesChannelUpdateResource struct {
+	SalesChannel *struct {
+		// Domain Public address where the custom sales channel lives.
+		Domain *string `json:"domain,omitempty"`
+
+		// ExternalId External identifier for the sales channel.
+		ExternalId *string `json:"external_id,omitempty"`
+
+		// Id Sales channel ID
+		Id *string `json:"id,omitempty"`
+
+		// IsActive Whether the sales channel is active.
+		IsActive *bool `json:"is_active,omitempty"`
+
+		// IsPrimary Whether this is the primary sales channel.
+		IsPrimary *bool `json:"is_primary,omitempty"`
+
+		// Name Merchant-facing custom name.
+		Name *string `json:"name,omitempty"`
+
+		// Type Sales channel type
+		Type *EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelType `json:"type,omitempty"`
+	} `json:"sales_channel,omitempty"`
+}
+
+// EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelType Sales channel type
+type EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelType string
+
 // EcommerceV1SalesChannelStoreRequest defines model for Ecommerce.V1.SalesChannel.StoreRequest.
 type EcommerceV1SalesChannelStoreRequest struct {
 	// Name Merchant-facing custom name shown in the sales channels list.
@@ -2434,6 +2493,15 @@ type EcommerceV1SalesChannelStoreRequest struct {
 
 // EcommerceV1SalesChannelStoreRequestType Sales channel type. Only "custom" channels can be created via the API.
 type EcommerceV1SalesChannelStoreRequestType string
+
+// EcommerceV1SalesChannelUpdateRequest defines model for Ecommerce.V1.SalesChannel.UpdateRequest.
+type EcommerceV1SalesChannelUpdateRequest struct {
+	// Name Merchant-facing custom name shown in the sales channels list. Pass null to clear it.
+	Name *string `json:"name,omitempty"`
+
+	// Url Public address where the custom sales channel lives. Pass null to clear it.
+	Url *string `json:"url,omitempty"`
+}
 
 // EcommerceV1ShippingSetShippingRequest defines model for Ecommerce.V1.Shipping.SetShippingRequest.
 type EcommerceV1ShippingSetShippingRequest struct {
@@ -2503,6 +2571,33 @@ type EcommerceV1StoreStoreDeleteResource struct {
 
 	// IsDeleted Always true when the store was soft-deleted.
 	IsDeleted *bool `json:"is_deleted,omitempty"`
+}
+
+// EcommerceV1StoreStoreMetadataResource defines model for Ecommerce.V1.Store.StoreMetadataResource.
+type EcommerceV1StoreStoreMetadataResource struct {
+	Metadata *struct {
+		// DefaultCurrency The store's default currency, or null when unset.
+		DefaultCurrency *struct {
+			Code          *string  `json:"code,omitempty"`
+			DecimalDigits *int     `json:"decimal_digits,omitempty"`
+			MinAmount     *float32 `json:"min_amount,omitempty"`
+			Name          *string  `json:"name,omitempty"`
+			NamePlural    *string  `json:"name_plural,omitempty"`
+			Rounding      *float32 `json:"rounding,omitempty"`
+			Symbol        *string  `json:"symbol,omitempty"`
+			SymbolNative  *string  `json:"symbol_native,omitempty"`
+			Template      *string  `json:"template,omitempty"`
+		} `json:"default_currency,omitempty"`
+
+		// DefaultCurrencyCode The default currency code of the store.
+		DefaultCurrencyCode *string `json:"default_currency_code,omitempty"`
+
+		// HasPaymentMethods Whether the store has at least one payment method connected.
+		HasPaymentMethods *bool `json:"has_payment_methods,omitempty"`
+
+		// HasShipping Whether the store has at least one shipping option configured.
+		HasShipping *bool `json:"has_shipping,omitempty"`
+	} `json:"metadata,omitempty"`
 }
 
 // EcommerceV1StoreStoreRequest defines model for Ecommerce.V1.Store.StoreRequest.
@@ -4733,8 +4828,11 @@ type EcommerceCreateDigitalProductV1JSONRequestBody = EcommerceV1ProductCreateDi
 // EcommerceCreatePhysicalProductV1JSONRequestBody defines body for EcommerceCreatePhysicalProductV1 for application/json ContentType.
 type EcommerceCreatePhysicalProductV1JSONRequestBody = EcommerceV1ProductCreatePhysicalProductRequest
 
-// EcommerceCreateACustomSalesChannelV1JSONRequestBody defines body for EcommerceCreateACustomSalesChannelV1 for application/json ContentType.
-type EcommerceCreateACustomSalesChannelV1JSONRequestBody = EcommerceV1SalesChannelStoreRequest
+// EcommerceCreateCustomSalesChannelV1JSONRequestBody defines body for EcommerceCreateCustomSalesChannelV1 for application/json ContentType.
+type EcommerceCreateCustomSalesChannelV1JSONRequestBody = EcommerceV1SalesChannelStoreRequest
+
+// EcommerceUpdateSalesChannelV1JSONRequestBody defines body for EcommerceUpdateSalesChannelV1 for application/json ContentType.
+type EcommerceUpdateSalesChannelV1JSONRequestBody = EcommerceV1SalesChannelUpdateRequest
 
 // EcommerceSetStoreShippingV1JSONRequestBody defines body for EcommerceSetStoreShippingV1 for application/json ContentType.
 type EcommerceSetStoreShippingV1JSONRequestBody = EcommerceV1ShippingSetShippingRequest
@@ -5631,6 +5729,9 @@ type ClientInterface interface {
 	// EcommerceDeleteStoreV1 request
 	EcommerceDeleteStoreV1(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// EcommerceGetStoreMetadataV1 request
+	EcommerceGetStoreMetadataV1(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// EcommerceEnableManualPaymentMethodV1WithBody request with any body
 	EcommerceEnableManualPaymentMethodV1WithBody(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -5649,10 +5750,15 @@ type ClientInterface interface {
 	// EcommerceListSalesChannelsV1 request
 	EcommerceListSalesChannelsV1(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// EcommerceCreateACustomSalesChannelV1WithBody request with any body
-	EcommerceCreateACustomSalesChannelV1WithBody(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// EcommerceCreateCustomSalesChannelV1WithBody request with any body
+	EcommerceCreateCustomSalesChannelV1WithBody(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	EcommerceCreateACustomSalesChannelV1(ctx context.Context, storeId string, body EcommerceCreateACustomSalesChannelV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	EcommerceCreateCustomSalesChannelV1(ctx context.Context, storeId string, body EcommerceCreateCustomSalesChannelV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceUpdateSalesChannelV1WithBody request with any body
+	EcommerceUpdateSalesChannelV1WithBody(ctx context.Context, storeId string, salesChannelId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	EcommerceUpdateSalesChannelV1(ctx context.Context, storeId string, salesChannelId string, body EcommerceUpdateSalesChannelV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// EcommerceSetStoreShippingV1WithBody request with any body
 	EcommerceSetStoreShippingV1WithBody(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -6692,6 +6798,18 @@ func (c *Client) EcommerceDeleteStoreV1(ctx context.Context, storeId string, req
 	return c.Client.Do(req)
 }
 
+func (c *Client) EcommerceGetStoreMetadataV1(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceGetStoreMetadataV1Request(c.Server, storeId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) EcommerceEnableManualPaymentMethodV1WithBody(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewEcommerceEnableManualPaymentMethodV1RequestWithBody(c.Server, storeId, contentType, body)
 	if err != nil {
@@ -6776,8 +6894,8 @@ func (c *Client) EcommerceListSalesChannelsV1(ctx context.Context, storeId strin
 	return c.Client.Do(req)
 }
 
-func (c *Client) EcommerceCreateACustomSalesChannelV1WithBody(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewEcommerceCreateACustomSalesChannelV1RequestWithBody(c.Server, storeId, contentType, body)
+func (c *Client) EcommerceCreateCustomSalesChannelV1WithBody(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceCreateCustomSalesChannelV1RequestWithBody(c.Server, storeId, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -6788,8 +6906,32 @@ func (c *Client) EcommerceCreateACustomSalesChannelV1WithBody(ctx context.Contex
 	return c.Client.Do(req)
 }
 
-func (c *Client) EcommerceCreateACustomSalesChannelV1(ctx context.Context, storeId string, body EcommerceCreateACustomSalesChannelV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewEcommerceCreateACustomSalesChannelV1Request(c.Server, storeId, body)
+func (c *Client) EcommerceCreateCustomSalesChannelV1(ctx context.Context, storeId string, body EcommerceCreateCustomSalesChannelV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceCreateCustomSalesChannelV1Request(c.Server, storeId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) EcommerceUpdateSalesChannelV1WithBody(ctx context.Context, storeId string, salesChannelId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceUpdateSalesChannelV1RequestWithBody(c.Server, storeId, salesChannelId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) EcommerceUpdateSalesChannelV1(ctx context.Context, storeId string, salesChannelId string, body EcommerceUpdateSalesChannelV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceUpdateSalesChannelV1Request(c.Server, storeId, salesChannelId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -10301,6 +10443,40 @@ func NewEcommerceDeleteStoreV1Request(server string, storeId string) (*http.Requ
 	return req, nil
 }
 
+// NewEcommerceGetStoreMetadataV1Request generates requests for EcommerceGetStoreMetadataV1
+func NewEcommerceGetStoreMetadataV1Request(server string, storeId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/metadata", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewEcommerceEnableManualPaymentMethodV1Request calls the generic EcommerceEnableManualPaymentMethodV1 builder with application/json body
 func NewEcommerceEnableManualPaymentMethodV1Request(server string, storeId string, body EcommerceEnableManualPaymentMethodV1JSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
@@ -10476,19 +10652,19 @@ func NewEcommerceListSalesChannelsV1Request(server string, storeId string) (*htt
 	return req, nil
 }
 
-// NewEcommerceCreateACustomSalesChannelV1Request calls the generic EcommerceCreateACustomSalesChannelV1 builder with application/json body
-func NewEcommerceCreateACustomSalesChannelV1Request(server string, storeId string, body EcommerceCreateACustomSalesChannelV1JSONRequestBody) (*http.Request, error) {
+// NewEcommerceCreateCustomSalesChannelV1Request calls the generic EcommerceCreateCustomSalesChannelV1 builder with application/json body
+func NewEcommerceCreateCustomSalesChannelV1Request(server string, storeId string, body EcommerceCreateCustomSalesChannelV1JSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewEcommerceCreateACustomSalesChannelV1RequestWithBody(server, storeId, "application/json", bodyReader)
+	return NewEcommerceCreateCustomSalesChannelV1RequestWithBody(server, storeId, "application/json", bodyReader)
 }
 
-// NewEcommerceCreateACustomSalesChannelV1RequestWithBody generates requests for EcommerceCreateACustomSalesChannelV1 with any type of body
-func NewEcommerceCreateACustomSalesChannelV1RequestWithBody(server string, storeId string, contentType string, body io.Reader) (*http.Request, error) {
+// NewEcommerceCreateCustomSalesChannelV1RequestWithBody generates requests for EcommerceCreateCustomSalesChannelV1 with any type of body
+func NewEcommerceCreateCustomSalesChannelV1RequestWithBody(server string, storeId string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -10514,6 +10690,60 @@ func NewEcommerceCreateACustomSalesChannelV1RequestWithBody(server string, store
 	}
 
 	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewEcommerceUpdateSalesChannelV1Request calls the generic EcommerceUpdateSalesChannelV1 builder with application/json body
+func NewEcommerceUpdateSalesChannelV1Request(server string, storeId string, salesChannelId string, body EcommerceUpdateSalesChannelV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewEcommerceUpdateSalesChannelV1RequestWithBody(server, storeId, salesChannelId, "application/json", bodyReader)
+}
+
+// NewEcommerceUpdateSalesChannelV1RequestWithBody generates requests for EcommerceUpdateSalesChannelV1 with any type of body
+func NewEcommerceUpdateSalesChannelV1RequestWithBody(server string, storeId string, salesChannelId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "sales_channel_id", salesChannelId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/sales-channels/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -16834,6 +17064,9 @@ type ClientWithResponsesInterface interface {
 	// EcommerceDeleteStoreV1WithResponse request
 	EcommerceDeleteStoreV1WithResponse(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*EcommerceDeleteStoreV1Response, error)
 
+	// EcommerceGetStoreMetadataV1WithResponse request
+	EcommerceGetStoreMetadataV1WithResponse(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*EcommerceGetStoreMetadataV1Response, error)
+
 	// EcommerceEnableManualPaymentMethodV1WithBodyWithResponse request with any body
 	EcommerceEnableManualPaymentMethodV1WithBodyWithResponse(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceEnableManualPaymentMethodV1Response, error)
 
@@ -16852,10 +17085,15 @@ type ClientWithResponsesInterface interface {
 	// EcommerceListSalesChannelsV1WithResponse request
 	EcommerceListSalesChannelsV1WithResponse(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*EcommerceListSalesChannelsV1Response, error)
 
-	// EcommerceCreateACustomSalesChannelV1WithBodyWithResponse request with any body
-	EcommerceCreateACustomSalesChannelV1WithBodyWithResponse(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceCreateACustomSalesChannelV1Response, error)
+	// EcommerceCreateCustomSalesChannelV1WithBodyWithResponse request with any body
+	EcommerceCreateCustomSalesChannelV1WithBodyWithResponse(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceCreateCustomSalesChannelV1Response, error)
 
-	EcommerceCreateACustomSalesChannelV1WithResponse(ctx context.Context, storeId string, body EcommerceCreateACustomSalesChannelV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceCreateACustomSalesChannelV1Response, error)
+	EcommerceCreateCustomSalesChannelV1WithResponse(ctx context.Context, storeId string, body EcommerceCreateCustomSalesChannelV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceCreateCustomSalesChannelV1Response, error)
+
+	// EcommerceUpdateSalesChannelV1WithBodyWithResponse request with any body
+	EcommerceUpdateSalesChannelV1WithBodyWithResponse(ctx context.Context, storeId string, salesChannelId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceUpdateSalesChannelV1Response, error)
+
+	EcommerceUpdateSalesChannelV1WithResponse(ctx context.Context, storeId string, salesChannelId string, body EcommerceUpdateSalesChannelV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceUpdateSalesChannelV1Response, error)
 
 	// EcommerceSetStoreShippingV1WithBodyWithResponse request with any body
 	EcommerceSetStoreShippingV1WithBodyWithResponse(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceSetStoreShippingV1Response, error)
@@ -18509,6 +18747,38 @@ func (r EcommerceDeleteStoreV1Response) ContentType() string {
 	return ""
 }
 
+type EcommerceGetStoreMetadataV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *EcommerceV1StoreStoreMetadataResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceGetStoreMetadataV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceGetStoreMetadataV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceGetStoreMetadataV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type EcommerceEnableManualPaymentMethodV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -18640,7 +18910,7 @@ func (r EcommerceListSalesChannelsV1Response) ContentType() string {
 	return ""
 }
 
-type EcommerceCreateACustomSalesChannelV1Response struct {
+type EcommerceCreateCustomSalesChannelV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON201      *EcommerceV1SalesChannelSalesChannelCreationResource
@@ -18650,7 +18920,7 @@ type EcommerceCreateACustomSalesChannelV1Response struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r EcommerceCreateACustomSalesChannelV1Response) Status() string {
+func (r EcommerceCreateCustomSalesChannelV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -18658,7 +18928,7 @@ func (r EcommerceCreateACustomSalesChannelV1Response) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r EcommerceCreateACustomSalesChannelV1Response) StatusCode() int {
+func (r EcommerceCreateCustomSalesChannelV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -18666,7 +18936,40 @@ func (r EcommerceCreateACustomSalesChannelV1Response) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r EcommerceCreateACustomSalesChannelV1Response) ContentType() string {
+func (r EcommerceCreateCustomSalesChannelV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type EcommerceUpdateSalesChannelV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *EcommerceV1SalesChannelSalesChannelUpdateResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceUpdateSalesChannelV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceUpdateSalesChannelV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceUpdateSalesChannelV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -23384,6 +23687,15 @@ func (c *ClientWithResponses) EcommerceDeleteStoreV1WithResponse(ctx context.Con
 	return ParseEcommerceDeleteStoreV1Response(rsp)
 }
 
+// EcommerceGetStoreMetadataV1WithResponse request returning *EcommerceGetStoreMetadataV1Response
+func (c *ClientWithResponses) EcommerceGetStoreMetadataV1WithResponse(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*EcommerceGetStoreMetadataV1Response, error) {
+	rsp, err := c.EcommerceGetStoreMetadataV1(ctx, storeId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceGetStoreMetadataV1Response(rsp)
+}
+
 // EcommerceEnableManualPaymentMethodV1WithBodyWithResponse request with arbitrary body returning *EcommerceEnableManualPaymentMethodV1Response
 func (c *ClientWithResponses) EcommerceEnableManualPaymentMethodV1WithBodyWithResponse(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceEnableManualPaymentMethodV1Response, error) {
 	rsp, err := c.EcommerceEnableManualPaymentMethodV1WithBody(ctx, storeId, contentType, body, reqEditors...)
@@ -23444,21 +23756,38 @@ func (c *ClientWithResponses) EcommerceListSalesChannelsV1WithResponse(ctx conte
 	return ParseEcommerceListSalesChannelsV1Response(rsp)
 }
 
-// EcommerceCreateACustomSalesChannelV1WithBodyWithResponse request with arbitrary body returning *EcommerceCreateACustomSalesChannelV1Response
-func (c *ClientWithResponses) EcommerceCreateACustomSalesChannelV1WithBodyWithResponse(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceCreateACustomSalesChannelV1Response, error) {
-	rsp, err := c.EcommerceCreateACustomSalesChannelV1WithBody(ctx, storeId, contentType, body, reqEditors...)
+// EcommerceCreateCustomSalesChannelV1WithBodyWithResponse request with arbitrary body returning *EcommerceCreateCustomSalesChannelV1Response
+func (c *ClientWithResponses) EcommerceCreateCustomSalesChannelV1WithBodyWithResponse(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceCreateCustomSalesChannelV1Response, error) {
+	rsp, err := c.EcommerceCreateCustomSalesChannelV1WithBody(ctx, storeId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseEcommerceCreateACustomSalesChannelV1Response(rsp)
+	return ParseEcommerceCreateCustomSalesChannelV1Response(rsp)
 }
 
-func (c *ClientWithResponses) EcommerceCreateACustomSalesChannelV1WithResponse(ctx context.Context, storeId string, body EcommerceCreateACustomSalesChannelV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceCreateACustomSalesChannelV1Response, error) {
-	rsp, err := c.EcommerceCreateACustomSalesChannelV1(ctx, storeId, body, reqEditors...)
+func (c *ClientWithResponses) EcommerceCreateCustomSalesChannelV1WithResponse(ctx context.Context, storeId string, body EcommerceCreateCustomSalesChannelV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceCreateCustomSalesChannelV1Response, error) {
+	rsp, err := c.EcommerceCreateCustomSalesChannelV1(ctx, storeId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseEcommerceCreateACustomSalesChannelV1Response(rsp)
+	return ParseEcommerceCreateCustomSalesChannelV1Response(rsp)
+}
+
+// EcommerceUpdateSalesChannelV1WithBodyWithResponse request with arbitrary body returning *EcommerceUpdateSalesChannelV1Response
+func (c *ClientWithResponses) EcommerceUpdateSalesChannelV1WithBodyWithResponse(ctx context.Context, storeId string, salesChannelId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceUpdateSalesChannelV1Response, error) {
+	rsp, err := c.EcommerceUpdateSalesChannelV1WithBody(ctx, storeId, salesChannelId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceUpdateSalesChannelV1Response(rsp)
+}
+
+func (c *ClientWithResponses) EcommerceUpdateSalesChannelV1WithResponse(ctx context.Context, storeId string, salesChannelId string, body EcommerceUpdateSalesChannelV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceUpdateSalesChannelV1Response, error) {
+	rsp, err := c.EcommerceUpdateSalesChannelV1(ctx, storeId, salesChannelId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceUpdateSalesChannelV1Response(rsp)
 }
 
 // EcommerceSetStoreShippingV1WithBodyWithResponse request with arbitrary body returning *EcommerceSetStoreShippingV1Response
@@ -26522,6 +26851,46 @@ func ParseEcommerceDeleteStoreV1Response(rsp *http.Response) (*EcommerceDeleteSt
 	return response, nil
 }
 
+// ParseEcommerceGetStoreMetadataV1Response parses an HTTP response from a EcommerceGetStoreMetadataV1WithResponse call
+func ParseEcommerceGetStoreMetadataV1Response(rsp *http.Response) (*EcommerceGetStoreMetadataV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceGetStoreMetadataV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest EcommerceV1StoreStoreMetadataResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseEcommerceEnableManualPaymentMethodV1Response parses an HTTP response from a EcommerceEnableManualPaymentMethodV1WithResponse call
 func ParseEcommerceEnableManualPaymentMethodV1Response(rsp *http.Response) (*EcommerceEnableManualPaymentMethodV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -26703,15 +27072,15 @@ func ParseEcommerceListSalesChannelsV1Response(rsp *http.Response) (*EcommerceLi
 	return response, nil
 }
 
-// ParseEcommerceCreateACustomSalesChannelV1Response parses an HTTP response from a EcommerceCreateACustomSalesChannelV1WithResponse call
-func ParseEcommerceCreateACustomSalesChannelV1Response(rsp *http.Response) (*EcommerceCreateACustomSalesChannelV1Response, error) {
+// ParseEcommerceCreateCustomSalesChannelV1Response parses an HTTP response from a EcommerceCreateCustomSalesChannelV1WithResponse call
+func ParseEcommerceCreateCustomSalesChannelV1Response(rsp *http.Response) (*EcommerceCreateCustomSalesChannelV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &EcommerceCreateACustomSalesChannelV1Response{
+	response := &EcommerceCreateCustomSalesChannelV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -26723,6 +27092,53 @@ func ParseEcommerceCreateACustomSalesChannelV1Response(rsp *http.Response) (*Eco
 			return nil, err
 		}
 		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceUpdateSalesChannelV1Response parses an HTTP response from a EcommerceUpdateSalesChannelV1WithResponse call
+func ParseEcommerceUpdateSalesChannelV1Response(rsp *http.Response) (*EcommerceUpdateSalesChannelV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceUpdateSalesChannelV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest EcommerceV1SalesChannelSalesChannelUpdateResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
 		var dest CommonResponseUnauthorizedResponse

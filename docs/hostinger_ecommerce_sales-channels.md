@@ -18,6 +18,7 @@ Sales channels commands
 ### SEE ALSO
 
 * [hostinger ecommerce](hostinger_ecommerce.md)	 - Ecommerce commands
-* [hostinger ecommerce sales-channels create-custom](hostinger_ecommerce_sales-channels_create-custom.md)	 - Create a custom sales channel
+* [hostinger ecommerce sales-channels create-custom](hostinger_ecommerce_sales-channels_create-custom.md)	 - Create custom sales channel
 * [hostinger ecommerce sales-channels list](hostinger_ecommerce_sales-channels_list.md)	 - List sales channels
+* [hostinger ecommerce sales-channels update](hostinger_ecommerce_sales-channels_update.md)	 - Update sales channel
 

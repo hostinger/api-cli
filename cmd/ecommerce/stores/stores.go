@@ -13,4 +13,5 @@ func init() {
 	GroupCmd.AddCommand(CreateCmd)
 	GroupCmd.AddCommand(DeleteCmd)
 	GroupCmd.AddCommand(ListCmd)
+	GroupCmd.AddCommand(MetadataCmd)
 }

@@ -14,7 +14,7 @@ import (
 
 var CreateCustomCmd = &cobra.Command{
 	Use:   "create-custom <store_id>",
-	Short: "Create a custom sales channel",
+	Short: "Create custom sales channel",
 	Long:  "Create a custom sales channel for a store. Build your own frontend and keep your catalog,\norders, shipping and payments in sync through the Ecommerce API.",
 	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
 	Run: func(cmd *cobra.Command, args []string) {
@@ -23,7 +23,7 @@ var CreateCustomCmd = &cobra.Command{
 		if err != nil {
 			log.Fatal(err)
 		}
-		r, err := api.Request().EcommerceCreateACustomSalesChannelV1WithBodyWithResponse(context.TODO(), args[0], "application/json", bytes.NewReader(payload))
+		r, err := api.Request().EcommerceCreateCustomSalesChannelV1WithBodyWithResponse(context.TODO(), args[0], "application/json", bytes.NewReader(payload))
 		if err != nil {
 			log.Fatal(err)
 		}

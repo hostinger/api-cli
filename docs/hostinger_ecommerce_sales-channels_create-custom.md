@@ -1,6 +1,6 @@
 ## hostinger ecommerce sales-channels create-custom
 
-Create a custom sales channel
+Create custom sales channel
 
 ### Synopsis
 
