@@ -469,6 +469,11 @@
     "method": "PUT",
     "path": "/api/domains/v1/portfolio/{domain}/nameservers"
   },
+  "ecommerce_createACustomSalesChannelV1": {
+    "command": "hostinger ecommerce sales-channels create-custom",
+    "method": "POST",
+    "path": "/api/ecommerce/v1/stores/{store_id}/sales-channels"
+  },
   "ecommerce_createDigitalProductV1": {
     "command": "hostinger ecommerce products create-digital",
     "method": "POST",
@@ -494,10 +499,20 @@
     "method": "POST",
     "path": "/api/ecommerce/v1/stores/{store_id}/payment-methods/manual"
   },
+  "ecommerce_getCustomStorefrontSetupInstructionsV1": {
+    "command": "hostinger ecommerce miscellaneous custom-storefront-setup-instructions",
+    "method": "GET",
+    "path": "/api/ecommerce/v1/miscellaneous/custom-storefront-instructions"
+  },
   "ecommerce_getStoresV1": {
     "command": "hostinger ecommerce stores list",
     "method": "GET",
     "path": "/api/ecommerce/v1/stores"
+  },
+  "ecommerce_listSalesChannelsV1": {
+    "command": "hostinger ecommerce sales-channels list",
+    "method": "GET",
+    "path": "/api/ecommerce/v1/stores/{store_id}/sales-channels"
   },
   "ecommerce_setStoreShippingV1": {
     "command": "hostinger ecommerce shipping set-store",
