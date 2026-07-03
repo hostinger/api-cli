@@ -2950,6 +2950,93 @@ type HostingV1OrdersPlanResource struct {
 	Name *string `json:"name,omitempty"`
 }
 
+// HostingV1PhpPhpDetailsResource defines model for Hosting.V1.Php.PhpDetailsResource.
+type HostingV1PhpPhpDetailsResource struct {
+	// ConflictingExtensions Groups of extensions that conflict with each other
+	ConflictingExtensions *[][]string `json:"conflicting_extensions,omitempty"`
+
+	// Extensions PHP extensions keyed by extension name
+	Extensions *map[string]interface{} `json:"extensions,omitempty"`
+
+	// Options PHP options keyed by option name
+	Options *map[string]HostingV1PhpPhpOptionResource `json:"options,omitempty"`
+
+	// PhpVersion Current PHP version name
+	PhpVersion *string `json:"php_version,omitempty"`
+
+	// PhpVersionFull Full PHP version name
+	PhpVersionFull *string                          `json:"php_version_full,omitempty"`
+	PhpVersions    *HostingV1PhpPhpVersionsResource `json:"php_versions,omitempty"`
+}
+
+// HostingV1PhpPhpInfoResource defines model for Hosting.V1.Php.PhpInfoResource.
+type HostingV1PhpPhpInfoResource struct {
+	// Info HTML string containing the full phpinfo page
+	Info *string `json:"info,omitempty"`
+}
+
+// HostingV1PhpPhpOptionResource defines model for Hosting.V1.Php.PhpOptionResource.
+type HostingV1PhpPhpOptionResource struct {
+	// Comment Human-readable description
+	Comment *string `json:"comment,omitempty"`
+
+	// Default Default value
+	Default *string `json:"default,omitempty"`
+
+	// Max Maximum value allowed by the account hosting plan, when applicable
+	Max *string `json:"max,omitempty"`
+
+	// Range Allowed value range or limits, when applicable
+	Range *string `json:"range,omitempty"`
+
+	// Type Declared option type (e.g. bool, string)
+	Type *string `json:"type,omitempty"`
+
+	// Value Current value for this website
+	Value *string `json:"value,omitempty"`
+}
+
+// HostingV1PhpPhpVersionsResource defines model for Hosting.V1.Php.PhpVersionsResource.
+type HostingV1PhpPhpVersionsResource struct {
+	// Supported Key-value pairs of supported versions
+	Supported *map[string]interface{} `json:"supported,omitempty"`
+
+	// Unsupported Key-value pairs of unsupported versions
+	Unsupported *map[string]interface{} `json:"unsupported,omitempty"`
+}
+
+// HostingV1PhpUpdatePhpExtensionsRequest defines model for Hosting.V1.Php.UpdatePhpExtensionsRequest.
+type HostingV1PhpUpdatePhpExtensionsRequest struct {
+	// Disable PHP extensions to disable.
+	Disable *[]string `json:"disable,omitempty"`
+
+	// Enable PHP extensions to enable.
+	Enable *[]string `json:"enable,omitempty"`
+}
+
+// HostingV1PhpUpdatePhpOptionsRequest defines model for Hosting.V1.Php.UpdatePhpOptionsRequest.
+type HostingV1PhpUpdatePhpOptionsRequest struct {
+	// Options Map of PHP options to update, keyed by option name. Only include options you want to change.
+	Options map[string]HostingV1PhpUpdatePhpOptionsRequest_Options_AdditionalProperties `json:"options"`
+}
+
+// HostingV1PhpUpdatePhpOptionsRequestOptions0 defines model for .
+type HostingV1PhpUpdatePhpOptionsRequestOptions0 = string
+
+// HostingV1PhpUpdatePhpOptionsRequestOptions1 defines model for .
+type HostingV1PhpUpdatePhpOptionsRequestOptions1 = int
+
+// HostingV1PhpUpdatePhpOptionsRequest_Options_AdditionalProperties defines model for Hosting.V1.Php.UpdatePhpOptionsRequest.options.AdditionalProperties.
+type HostingV1PhpUpdatePhpOptionsRequest_Options_AdditionalProperties struct {
+	union json.RawMessage
+}
+
+// HostingV1PhpUpdatePhpVersionRequest defines model for Hosting.V1.Php.UpdatePhpVersionRequest.
+type HostingV1PhpUpdatePhpVersionRequest struct {
+	// Version PHP version to switch the website to.
+	Version string `json:"version"`
+}
+
 // HostingV1WebsitesCreateWebsiteRequest defines model for Hosting.V1.Websites.CreateWebsiteRequest.
 type HostingV1WebsitesCreateWebsiteRequest struct {
 	// DatacenterCode Datacenter code. This parameter is required when creating the first website on a new hosting plan.
@@ -4673,6 +4760,15 @@ type HostingCreateNodeJSBuildFromArchiveV1JSONRequestBody = HostingV1NodeJsCreat
 // HostingCreateWebsiteParkedDomainV1JSONRequestBody defines body for HostingCreateWebsiteParkedDomainV1 for application/json ContentType.
 type HostingCreateWebsiteParkedDomainV1JSONRequestBody = HostingV1DomainsCreateParkedDomainRequest
 
+// HostingUpdatePHPExtensionsV1JSONRequestBody defines body for HostingUpdatePHPExtensionsV1 for application/json ContentType.
+type HostingUpdatePHPExtensionsV1JSONRequestBody = HostingV1PhpUpdatePhpExtensionsRequest
+
+// HostingUpdatePHPOptionsV1JSONRequestBody defines body for HostingUpdatePHPOptionsV1 for application/json ContentType.
+type HostingUpdatePHPOptionsV1JSONRequestBody = HostingV1PhpUpdatePhpOptionsRequest
+
+// HostingUpdatePHPVersionV1JSONRequestBody defines body for HostingUpdatePHPVersionV1 for application/json ContentType.
+type HostingUpdatePHPVersionV1JSONRequestBody = HostingV1PhpUpdatePhpVersionRequest
+
 // HostingCreateWebsiteSubdomainV1JSONRequestBody defines body for HostingCreateWebsiteSubdomainV1 for application/json ContentType.
 type HostingCreateWebsiteSubdomainV1JSONRequestBody = HostingV1DomainsCreateSubdomainRequest
 
@@ -4846,6 +4942,68 @@ func (t HostingV1NodeJsBuildResource_Options) MarshalJSON() ([]byte, error) {
 }
 
 func (t *HostingV1NodeJsBuildResource_Options) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsHostingV1PhpUpdatePhpOptionsRequestOptions0 returns the union data inside the HostingV1PhpUpdatePhpOptionsRequest_Options_AdditionalProperties as a HostingV1PhpUpdatePhpOptionsRequestOptions0
+func (t HostingV1PhpUpdatePhpOptionsRequest_Options_AdditionalProperties) AsHostingV1PhpUpdatePhpOptionsRequestOptions0() (HostingV1PhpUpdatePhpOptionsRequestOptions0, error) {
+	var body HostingV1PhpUpdatePhpOptionsRequestOptions0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromHostingV1PhpUpdatePhpOptionsRequestOptions0 overwrites any union data inside the HostingV1PhpUpdatePhpOptionsRequest_Options_AdditionalProperties as the provided HostingV1PhpUpdatePhpOptionsRequestOptions0
+func (t *HostingV1PhpUpdatePhpOptionsRequest_Options_AdditionalProperties) FromHostingV1PhpUpdatePhpOptionsRequestOptions0(v HostingV1PhpUpdatePhpOptionsRequestOptions0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeHostingV1PhpUpdatePhpOptionsRequestOptions0 performs a merge with any union data inside the HostingV1PhpUpdatePhpOptionsRequest_Options_AdditionalProperties, using the provided HostingV1PhpUpdatePhpOptionsRequestOptions0
+func (t *HostingV1PhpUpdatePhpOptionsRequest_Options_AdditionalProperties) MergeHostingV1PhpUpdatePhpOptionsRequestOptions0(v HostingV1PhpUpdatePhpOptionsRequestOptions0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsHostingV1PhpUpdatePhpOptionsRequestOptions1 returns the union data inside the HostingV1PhpUpdatePhpOptionsRequest_Options_AdditionalProperties as a HostingV1PhpUpdatePhpOptionsRequestOptions1
+func (t HostingV1PhpUpdatePhpOptionsRequest_Options_AdditionalProperties) AsHostingV1PhpUpdatePhpOptionsRequestOptions1() (HostingV1PhpUpdatePhpOptionsRequestOptions1, error) {
+	var body HostingV1PhpUpdatePhpOptionsRequestOptions1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromHostingV1PhpUpdatePhpOptionsRequestOptions1 overwrites any union data inside the HostingV1PhpUpdatePhpOptionsRequest_Options_AdditionalProperties as the provided HostingV1PhpUpdatePhpOptionsRequestOptions1
+func (t *HostingV1PhpUpdatePhpOptionsRequest_Options_AdditionalProperties) FromHostingV1PhpUpdatePhpOptionsRequestOptions1(v HostingV1PhpUpdatePhpOptionsRequestOptions1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeHostingV1PhpUpdatePhpOptionsRequestOptions1 performs a merge with any union data inside the HostingV1PhpUpdatePhpOptionsRequest_Options_AdditionalProperties, using the provided HostingV1PhpUpdatePhpOptionsRequestOptions1
+func (t *HostingV1PhpUpdatePhpOptionsRequest_Options_AdditionalProperties) MergeHostingV1PhpUpdatePhpOptionsRequestOptions1(v HostingV1PhpUpdatePhpOptionsRequestOptions1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t HostingV1PhpUpdatePhpOptionsRequest_Options_AdditionalProperties) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *HostingV1PhpUpdatePhpOptionsRequest_Options_AdditionalProperties) UnmarshalJSON(b []byte) error {
 	err := t.union.UnmarshalJSON(b)
 	return err
 }
@@ -5577,6 +5735,30 @@ type ClientInterface interface {
 
 	// HostingDeleteWebsiteParkedDomainV1 request
 	HostingDeleteWebsiteParkedDomainV1(ctx context.Context, username UsernamePath, domain Domain, parkedDomain ParkedDomainPath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingGetPHPDetailsV1 request
+	HostingGetPHPDetailsV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingUpdatePHPExtensionsV1WithBody request with any body
+	HostingUpdatePHPExtensionsV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	HostingUpdatePHPExtensionsV1(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdatePHPExtensionsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingResetPHPExtensionsV1 request
+	HostingResetPHPExtensionsV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingUpdatePHPOptionsV1WithBody request with any body
+	HostingUpdatePHPOptionsV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	HostingUpdatePHPOptionsV1(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdatePHPOptionsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingGetPHPInfoV1 request
+	HostingGetPHPInfoV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingUpdatePHPVersionV1WithBody request with any body
+	HostingUpdatePHPVersionV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	HostingUpdatePHPVersionV1(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdatePHPVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingListWebsiteSubdomainsV1 request
 	HostingListWebsiteSubdomainsV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -6968,6 +7150,114 @@ func (c *Client) HostingCreateWebsiteParkedDomainV1(ctx context.Context, usernam
 
 func (c *Client) HostingDeleteWebsiteParkedDomainV1(ctx context.Context, username UsernamePath, domain Domain, parkedDomain ParkedDomainPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingDeleteWebsiteParkedDomainV1Request(c.Server, username, domain, parkedDomain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingGetPHPDetailsV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingGetPHPDetailsV1Request(c.Server, username, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingUpdatePHPExtensionsV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingUpdatePHPExtensionsV1RequestWithBody(c.Server, username, domain, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingUpdatePHPExtensionsV1(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdatePHPExtensionsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingUpdatePHPExtensionsV1Request(c.Server, username, domain, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingResetPHPExtensionsV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingResetPHPExtensionsV1Request(c.Server, username, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingUpdatePHPOptionsV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingUpdatePHPOptionsV1RequestWithBody(c.Server, username, domain, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingUpdatePHPOptionsV1(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdatePHPOptionsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingUpdatePHPOptionsV1Request(c.Server, username, domain, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingGetPHPInfoV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingGetPHPInfoV1Request(c.Server, username, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingUpdatePHPVersionV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingUpdatePHPVersionV1RequestWithBody(c.Server, username, domain, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingUpdatePHPVersionV1(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdatePHPVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingUpdatePHPVersionV1Request(c.Server, username, domain, body)
 	if err != nil {
 		return nil, err
 	}
@@ -11389,6 +11679,291 @@ func NewHostingDeleteWebsiteParkedDomainV1Request(server string, username Userna
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewHostingGetPHPDetailsV1Request generates requests for HostingGetPHPDetailsV1
+func NewHostingGetPHPDetailsV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/php/details", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingUpdatePHPExtensionsV1Request calls the generic HostingUpdatePHPExtensionsV1 builder with application/json body
+func NewHostingUpdatePHPExtensionsV1Request(server string, username UsernamePath, domain Domain, body HostingUpdatePHPExtensionsV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingUpdatePHPExtensionsV1RequestWithBody(server, username, domain, "application/json", bodyReader)
+}
+
+// NewHostingUpdatePHPExtensionsV1RequestWithBody generates requests for HostingUpdatePHPExtensionsV1 with any type of body
+func NewHostingUpdatePHPExtensionsV1RequestWithBody(server string, username UsernamePath, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/php/extensions", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingResetPHPExtensionsV1Request generates requests for HostingResetPHPExtensionsV1
+func NewHostingResetPHPExtensionsV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/php/extensions/reset", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingUpdatePHPOptionsV1Request calls the generic HostingUpdatePHPOptionsV1 builder with application/json body
+func NewHostingUpdatePHPOptionsV1Request(server string, username UsernamePath, domain Domain, body HostingUpdatePHPOptionsV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingUpdatePHPOptionsV1RequestWithBody(server, username, domain, "application/json", bodyReader)
+}
+
+// NewHostingUpdatePHPOptionsV1RequestWithBody generates requests for HostingUpdatePHPOptionsV1 with any type of body
+func NewHostingUpdatePHPOptionsV1RequestWithBody(server string, username UsernamePath, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/php/options", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingGetPHPInfoV1Request generates requests for HostingGetPHPInfoV1
+func NewHostingGetPHPInfoV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/php/php-info", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingUpdatePHPVersionV1Request calls the generic HostingUpdatePHPVersionV1 builder with application/json body
+func NewHostingUpdatePHPVersionV1Request(server string, username UsernamePath, domain Domain, body HostingUpdatePHPVersionV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingUpdatePHPVersionV1RequestWithBody(server, username, domain, "application/json", bodyReader)
+}
+
+// NewHostingUpdatePHPVersionV1RequestWithBody generates requests for HostingUpdatePHPVersionV1 with any type of body
+func NewHostingUpdatePHPVersionV1RequestWithBody(server string, username UsernamePath, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/php/version", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -16364,6 +16939,30 @@ type ClientWithResponsesInterface interface {
 	// HostingDeleteWebsiteParkedDomainV1WithResponse request
 	HostingDeleteWebsiteParkedDomainV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, parkedDomain ParkedDomainPath, reqEditors ...RequestEditorFn) (*HostingDeleteWebsiteParkedDomainV1Response, error)
 
+	// HostingGetPHPDetailsV1WithResponse request
+	HostingGetPHPDetailsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingGetPHPDetailsV1Response, error)
+
+	// HostingUpdatePHPExtensionsV1WithBodyWithResponse request with any body
+	HostingUpdatePHPExtensionsV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingUpdatePHPExtensionsV1Response, error)
+
+	HostingUpdatePHPExtensionsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdatePHPExtensionsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUpdatePHPExtensionsV1Response, error)
+
+	// HostingResetPHPExtensionsV1WithResponse request
+	HostingResetPHPExtensionsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingResetPHPExtensionsV1Response, error)
+
+	// HostingUpdatePHPOptionsV1WithBodyWithResponse request with any body
+	HostingUpdatePHPOptionsV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingUpdatePHPOptionsV1Response, error)
+
+	HostingUpdatePHPOptionsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdatePHPOptionsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUpdatePHPOptionsV1Response, error)
+
+	// HostingGetPHPInfoV1WithResponse request
+	HostingGetPHPInfoV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingGetPHPInfoV1Response, error)
+
+	// HostingUpdatePHPVersionV1WithBodyWithResponse request with any body
+	HostingUpdatePHPVersionV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingUpdatePHPVersionV1Response, error)
+
+	HostingUpdatePHPVersionV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdatePHPVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUpdatePHPVersionV1Response, error)
+
 	// HostingListWebsiteSubdomainsV1WithResponse request
 	HostingListWebsiteSubdomainsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingListWebsiteSubdomainsV1Response, error)
 
@@ -18789,6 +19388,201 @@ func (r HostingDeleteWebsiteParkedDomainV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingDeleteWebsiteParkedDomainV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingGetPHPDetailsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *HostingV1PhpPhpDetailsResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingGetPHPDetailsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingGetPHPDetailsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingGetPHPDetailsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingUpdatePHPExtensionsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingUpdatePHPExtensionsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingUpdatePHPExtensionsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingUpdatePHPExtensionsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingResetPHPExtensionsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingResetPHPExtensionsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingResetPHPExtensionsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingResetPHPExtensionsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingUpdatePHPOptionsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingUpdatePHPOptionsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingUpdatePHPOptionsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingUpdatePHPOptionsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingGetPHPInfoV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *HostingV1PhpPhpInfoResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingGetPHPInfoV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingGetPHPInfoV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingGetPHPInfoV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingUpdatePHPVersionV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingUpdatePHPVersionV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingUpdatePHPVersionV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingUpdatePHPVersionV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -22929,6 +23723,84 @@ func (c *ClientWithResponses) HostingDeleteWebsiteParkedDomainV1WithResponse(ctx
 	return ParseHostingDeleteWebsiteParkedDomainV1Response(rsp)
 }
 
+// HostingGetPHPDetailsV1WithResponse request returning *HostingGetPHPDetailsV1Response
+func (c *ClientWithResponses) HostingGetPHPDetailsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingGetPHPDetailsV1Response, error) {
+	rsp, err := c.HostingGetPHPDetailsV1(ctx, username, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingGetPHPDetailsV1Response(rsp)
+}
+
+// HostingUpdatePHPExtensionsV1WithBodyWithResponse request with arbitrary body returning *HostingUpdatePHPExtensionsV1Response
+func (c *ClientWithResponses) HostingUpdatePHPExtensionsV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingUpdatePHPExtensionsV1Response, error) {
+	rsp, err := c.HostingUpdatePHPExtensionsV1WithBody(ctx, username, domain, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingUpdatePHPExtensionsV1Response(rsp)
+}
+
+func (c *ClientWithResponses) HostingUpdatePHPExtensionsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdatePHPExtensionsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUpdatePHPExtensionsV1Response, error) {
+	rsp, err := c.HostingUpdatePHPExtensionsV1(ctx, username, domain, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingUpdatePHPExtensionsV1Response(rsp)
+}
+
+// HostingResetPHPExtensionsV1WithResponse request returning *HostingResetPHPExtensionsV1Response
+func (c *ClientWithResponses) HostingResetPHPExtensionsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingResetPHPExtensionsV1Response, error) {
+	rsp, err := c.HostingResetPHPExtensionsV1(ctx, username, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingResetPHPExtensionsV1Response(rsp)
+}
+
+// HostingUpdatePHPOptionsV1WithBodyWithResponse request with arbitrary body returning *HostingUpdatePHPOptionsV1Response
+func (c *ClientWithResponses) HostingUpdatePHPOptionsV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingUpdatePHPOptionsV1Response, error) {
+	rsp, err := c.HostingUpdatePHPOptionsV1WithBody(ctx, username, domain, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingUpdatePHPOptionsV1Response(rsp)
+}
+
+func (c *ClientWithResponses) HostingUpdatePHPOptionsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdatePHPOptionsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUpdatePHPOptionsV1Response, error) {
+	rsp, err := c.HostingUpdatePHPOptionsV1(ctx, username, domain, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingUpdatePHPOptionsV1Response(rsp)
+}
+
+// HostingGetPHPInfoV1WithResponse request returning *HostingGetPHPInfoV1Response
+func (c *ClientWithResponses) HostingGetPHPInfoV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingGetPHPInfoV1Response, error) {
+	rsp, err := c.HostingGetPHPInfoV1(ctx, username, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingGetPHPInfoV1Response(rsp)
+}
+
+// HostingUpdatePHPVersionV1WithBodyWithResponse request with arbitrary body returning *HostingUpdatePHPVersionV1Response
+func (c *ClientWithResponses) HostingUpdatePHPVersionV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingUpdatePHPVersionV1Response, error) {
+	rsp, err := c.HostingUpdatePHPVersionV1WithBody(ctx, username, domain, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingUpdatePHPVersionV1Response(rsp)
+}
+
+func (c *ClientWithResponses) HostingUpdatePHPVersionV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdatePHPVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUpdatePHPVersionV1Response, error) {
+	rsp, err := c.HostingUpdatePHPVersionV1(ctx, username, domain, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingUpdatePHPVersionV1Response(rsp)
+}
+
 // HostingListWebsiteSubdomainsV1WithResponse request returning *HostingListWebsiteSubdomainsV1Response
 func (c *ClientWithResponses) HostingListWebsiteSubdomainsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingListWebsiteSubdomainsV1Response, error) {
 	rsp, err := c.HostingListWebsiteSubdomainsV1(ctx, username, domain, reqEditors...)
@@ -26816,6 +27688,267 @@ func ParseHostingDeleteWebsiteParkedDomainV1Response(rsp *http.Response) (*Hosti
 			return nil, err
 		}
 		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingGetPHPDetailsV1Response parses an HTTP response from a HostingGetPHPDetailsV1WithResponse call
+func ParseHostingGetPHPDetailsV1Response(rsp *http.Response) (*HostingGetPHPDetailsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingGetPHPDetailsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1PhpPhpDetailsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingUpdatePHPExtensionsV1Response parses an HTTP response from a HostingUpdatePHPExtensionsV1WithResponse call
+func ParseHostingUpdatePHPExtensionsV1Response(rsp *http.Response) (*HostingUpdatePHPExtensionsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingUpdatePHPExtensionsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingResetPHPExtensionsV1Response parses an HTTP response from a HostingResetPHPExtensionsV1WithResponse call
+func ParseHostingResetPHPExtensionsV1Response(rsp *http.Response) (*HostingResetPHPExtensionsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingResetPHPExtensionsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingUpdatePHPOptionsV1Response parses an HTTP response from a HostingUpdatePHPOptionsV1WithResponse call
+func ParseHostingUpdatePHPOptionsV1Response(rsp *http.Response) (*HostingUpdatePHPOptionsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingUpdatePHPOptionsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingGetPHPInfoV1Response parses an HTTP response from a HostingGetPHPInfoV1WithResponse call
+func ParseHostingGetPHPInfoV1Response(rsp *http.Response) (*HostingGetPHPInfoV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingGetPHPInfoV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1PhpPhpInfoResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingUpdatePHPVersionV1Response parses an HTTP response from a HostingUpdatePHPVersionV1WithResponse call
+func ParseHostingUpdatePHPVersionV1Response(rsp *http.Response) (*HostingUpdatePHPVersionV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingUpdatePHPVersionV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse

@@ -24,5 +24,6 @@ Hosting commands
 * [hostinger hosting domains](hostinger_hosting_domains.md)	 - Domains commands
 * [hostinger hosting nodejs](hostinger_hosting_nodejs.md)	 - NodeJS commands
 * [hostinger hosting orders](hostinger_hosting_orders.md)	 - Orders commands
+* [hostinger hosting php](hostinger_hosting_php.md)	 - PHP commands
 * [hostinger hosting websites](hostinger_hosting_websites.md)	 - Websites commands
 

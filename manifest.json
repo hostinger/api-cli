@@ -629,6 +629,16 @@
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/{uuid}/logs"
   },
+  "hosting_getPHPDetailsV1": {
+    "command": "hostinger hosting php get",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/php/details"
+  },
+  "hosting_getPHPInfoV1": {
+    "command": "hostinger hosting php info",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/php/php-info"
+  },
   "hosting_getPhpMyAdminLinkV1": {
     "command": "hostinger hosting databases phpmyadmin-link",
     "method": "GET",
@@ -729,6 +739,11 @@
     "method": "PATCH",
     "path": "/api/hosting/v1/accounts/{username}/databases/{name}/repair"
   },
+  "hosting_resetPHPExtensionsV1": {
+    "command": "hostinger hosting php reset-extensions",
+    "method": "PATCH",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/php/extensions/reset"
+  },
   "hosting_searchWordPressPluginsV1": {
     "command": "hostinger wordpress plugins search",
     "method": "GET",
@@ -748,6 +763,21 @@
     "command": "hostinger wordpress plugins update-hostinger",
     "method": "POST",
     "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/plugins/hostinger/update"
+  },
+  "hosting_updatePHPExtensionsV1": {
+    "command": "hostinger hosting php update-extensions",
+    "method": "PATCH",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/php/extensions"
+  },
+  "hosting_updatePHPOptionsV1": {
+    "command": "hostinger hosting php update-options",
+    "method": "PATCH",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/php/options"
+  },
+  "hosting_updatePHPVersionV1": {
+    "command": "hostinger hosting php update-version",
+    "method": "PATCH",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/php/version"
   },
   "hosting_updateWordPressPluginsV1": {
     "command": "hostinger wordpress plugins update",
