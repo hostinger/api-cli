@@ -564,6 +564,11 @@
     "method": "POST",
     "path": "/api/hosting/v1/accounts/{username}/wordpress/installations/check-is-valid"
   },
+  "hosting_clearWebsiteCacheV1": {
+    "command": "hostinger hosting cache clear-website",
+    "method": "DELETE",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/cache/clear"
+  },
   "hosting_createAccountCronJobV1": {
     "command": "hostinger hosting cron-jobs create",
     "method": "POST",
@@ -643,6 +648,26 @@
     "command": "hostinger wordpress installations detect",
     "method": "POST",
     "path": "/api/hosting/v1/accounts/{username}/wordpress/installations/detect"
+  },
+  "hosting_disableCachelessModeV1": {
+    "command": "hostinger hosting cache disable-cacheless",
+    "method": "PATCH",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/cacheless-mode/disable"
+  },
+  "hosting_disableWebsiteCacheV1": {
+    "command": "hostinger hosting cache disable-website",
+    "method": "PATCH",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/cache/disable"
+  },
+  "hosting_enableCachelessModeV1": {
+    "command": "hostinger hosting cache enable-cacheless",
+    "method": "PATCH",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/cacheless-mode/enable"
+  },
+  "hosting_enableWebsiteCacheV1": {
+    "command": "hostinger hosting cache enable-website",
+    "method": "PATCH",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/cache/enable"
   },
   "hosting_generateAFreeSubdomainV1": {
     "command": "hostinger hosting domains generate-free-subdomain",

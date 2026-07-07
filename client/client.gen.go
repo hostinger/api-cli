@@ -4842,6 +4842,13 @@ type HostingDeleteAccountDatabaseRemoteConnectionV1Params struct {
 	Ip string `form:"ip" json:"ip"`
 }
 
+// HostingClearWebsiteCacheV1Params defines parameters for HostingClearWebsiteCacheV1.
+type HostingClearWebsiteCacheV1Params struct {
+	// Directory Directory of the website installation to clear, relative to the website root.
+	// Defaults to the website root.
+	Directory *string `form:"directory,omitempty" json:"directory,omitempty"`
+}
+
 // HostingListNodeJSBuildsV1Params defines parameters for HostingListNodeJSBuildsV1.
 type HostingListNodeJSBuildsV1Params struct {
 	// Page Page number
@@ -6091,6 +6098,21 @@ type ClientInterface interface {
 
 	// HostingRepairDatabaseV1 request
 	HostingRepairDatabaseV1(ctx context.Context, username UsernamePath, name DatabaseNamePath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingClearWebsiteCacheV1 request
+	HostingClearWebsiteCacheV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingClearWebsiteCacheV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingDisableWebsiteCacheV1 request
+	HostingDisableWebsiteCacheV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingEnableWebsiteCacheV1 request
+	HostingEnableWebsiteCacheV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingDisableCachelessModeV1 request
+	HostingDisableCachelessModeV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingEnableCachelessModeV1 request
+	HostingEnableCachelessModeV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingListNodeJSBuildsV1 request
 	HostingListNodeJSBuildsV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingListNodeJSBuildsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -7528,6 +7550,66 @@ func (c *Client) HostingCreateAccountDatabaseRemoteConnectionV1(ctx context.Cont
 
 func (c *Client) HostingRepairDatabaseV1(ctx context.Context, username UsernamePath, name DatabaseNamePath, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingRepairDatabaseV1Request(c.Server, username, name)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingClearWebsiteCacheV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingClearWebsiteCacheV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingClearWebsiteCacheV1Request(c.Server, username, domain, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingDisableWebsiteCacheV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingDisableWebsiteCacheV1Request(c.Server, username, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingEnableWebsiteCacheV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingEnableWebsiteCacheV1Request(c.Server, username, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingDisableCachelessModeV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingDisableCachelessModeV1Request(c.Server, username, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingEnableCachelessModeV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingEnableCachelessModeV1Request(c.Server, username, domain)
 	if err != nil {
 		return nil, err
 	}
@@ -12128,6 +12210,238 @@ func NewHostingRepairDatabaseV1Request(server string, username UsernamePath, nam
 	}
 
 	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/databases/%s/repair", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingClearWebsiteCacheV1Request generates requests for HostingClearWebsiteCacheV1
+func NewHostingClearWebsiteCacheV1Request(server string, username UsernamePath, domain Domain, params *HostingClearWebsiteCacheV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/cache/clear", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Directory != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "directory", *params.Directory, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingDisableWebsiteCacheV1Request generates requests for HostingDisableWebsiteCacheV1
+func NewHostingDisableWebsiteCacheV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/cache/disable", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingEnableWebsiteCacheV1Request generates requests for HostingEnableWebsiteCacheV1
+func NewHostingEnableWebsiteCacheV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/cache/enable", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingDisableCachelessModeV1Request generates requests for HostingDisableCachelessModeV1
+func NewHostingDisableCachelessModeV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/cacheless-mode/disable", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingEnableCachelessModeV1Request generates requests for HostingEnableCachelessModeV1
+func NewHostingEnableCachelessModeV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/cacheless-mode/enable", pathParam0, pathParam1)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -18498,6 +18812,21 @@ type ClientWithResponsesInterface interface {
 	// HostingRepairDatabaseV1WithResponse request
 	HostingRepairDatabaseV1WithResponse(ctx context.Context, username UsernamePath, name DatabaseNamePath, reqEditors ...RequestEditorFn) (*HostingRepairDatabaseV1Response, error)
 
+	// HostingClearWebsiteCacheV1WithResponse request
+	HostingClearWebsiteCacheV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingClearWebsiteCacheV1Params, reqEditors ...RequestEditorFn) (*HostingClearWebsiteCacheV1Response, error)
+
+	// HostingDisableWebsiteCacheV1WithResponse request
+	HostingDisableWebsiteCacheV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingDisableWebsiteCacheV1Response, error)
+
+	// HostingEnableWebsiteCacheV1WithResponse request
+	HostingEnableWebsiteCacheV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingEnableWebsiteCacheV1Response, error)
+
+	// HostingDisableCachelessModeV1WithResponse request
+	HostingDisableCachelessModeV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingDisableCachelessModeV1Response, error)
+
+	// HostingEnableCachelessModeV1WithResponse request
+	HostingEnableCachelessModeV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingEnableCachelessModeV1Response, error)
+
 	// HostingListNodeJSBuildsV1WithResponse request
 	HostingListNodeJSBuildsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingListNodeJSBuildsV1Params, reqEditors ...RequestEditorFn) (*HostingListNodeJSBuildsV1Response, error)
 
@@ -20895,6 +21224,166 @@ func (r HostingRepairDatabaseV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingRepairDatabaseV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingClearWebsiteCacheV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingClearWebsiteCacheV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingClearWebsiteCacheV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingClearWebsiteCacheV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingDisableWebsiteCacheV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingDisableWebsiteCacheV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingDisableWebsiteCacheV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingDisableWebsiteCacheV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingEnableWebsiteCacheV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingEnableWebsiteCacheV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingEnableWebsiteCacheV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingEnableWebsiteCacheV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingDisableCachelessModeV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingDisableCachelessModeV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingDisableCachelessModeV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingDisableCachelessModeV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingEnableCachelessModeV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingEnableCachelessModeV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingEnableCachelessModeV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingEnableCachelessModeV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -25903,6 +26392,51 @@ func (c *ClientWithResponses) HostingRepairDatabaseV1WithResponse(ctx context.Co
 	return ParseHostingRepairDatabaseV1Response(rsp)
 }
 
+// HostingClearWebsiteCacheV1WithResponse request returning *HostingClearWebsiteCacheV1Response
+func (c *ClientWithResponses) HostingClearWebsiteCacheV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingClearWebsiteCacheV1Params, reqEditors ...RequestEditorFn) (*HostingClearWebsiteCacheV1Response, error) {
+	rsp, err := c.HostingClearWebsiteCacheV1(ctx, username, domain, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingClearWebsiteCacheV1Response(rsp)
+}
+
+// HostingDisableWebsiteCacheV1WithResponse request returning *HostingDisableWebsiteCacheV1Response
+func (c *ClientWithResponses) HostingDisableWebsiteCacheV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingDisableWebsiteCacheV1Response, error) {
+	rsp, err := c.HostingDisableWebsiteCacheV1(ctx, username, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingDisableWebsiteCacheV1Response(rsp)
+}
+
+// HostingEnableWebsiteCacheV1WithResponse request returning *HostingEnableWebsiteCacheV1Response
+func (c *ClientWithResponses) HostingEnableWebsiteCacheV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingEnableWebsiteCacheV1Response, error) {
+	rsp, err := c.HostingEnableWebsiteCacheV1(ctx, username, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingEnableWebsiteCacheV1Response(rsp)
+}
+
+// HostingDisableCachelessModeV1WithResponse request returning *HostingDisableCachelessModeV1Response
+func (c *ClientWithResponses) HostingDisableCachelessModeV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingDisableCachelessModeV1Response, error) {
+	rsp, err := c.HostingDisableCachelessModeV1(ctx, username, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingDisableCachelessModeV1Response(rsp)
+}
+
+// HostingEnableCachelessModeV1WithResponse request returning *HostingEnableCachelessModeV1Response
+func (c *ClientWithResponses) HostingEnableCachelessModeV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingEnableCachelessModeV1Response, error) {
+	rsp, err := c.HostingEnableCachelessModeV1(ctx, username, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingEnableCachelessModeV1Response(rsp)
+}
+
 // HostingListNodeJSBuildsV1WithResponse request returning *HostingListNodeJSBuildsV1Response
 func (c *ClientWithResponses) HostingListNodeJSBuildsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingListNodeJSBuildsV1Params, reqEditors ...RequestEditorFn) (*HostingListNodeJSBuildsV1Response, error) {
 	rsp, err := c.HostingListNodeJSBuildsV1(ctx, username, domain, params, reqEditors...)
@@ -29934,6 +30468,206 @@ func ParseHostingRepairDatabaseV1Response(rsp *http.Response) (*HostingRepairDat
 	}
 
 	response := &HostingRepairDatabaseV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingClearWebsiteCacheV1Response parses an HTTP response from a HostingClearWebsiteCacheV1WithResponse call
+func ParseHostingClearWebsiteCacheV1Response(rsp *http.Response) (*HostingClearWebsiteCacheV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingClearWebsiteCacheV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingDisableWebsiteCacheV1Response parses an HTTP response from a HostingDisableWebsiteCacheV1WithResponse call
+func ParseHostingDisableWebsiteCacheV1Response(rsp *http.Response) (*HostingDisableWebsiteCacheV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingDisableWebsiteCacheV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingEnableWebsiteCacheV1Response parses an HTTP response from a HostingEnableWebsiteCacheV1WithResponse call
+func ParseHostingEnableWebsiteCacheV1Response(rsp *http.Response) (*HostingEnableWebsiteCacheV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingEnableWebsiteCacheV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingDisableCachelessModeV1Response parses an HTTP response from a HostingDisableCachelessModeV1WithResponse call
+func ParseHostingDisableCachelessModeV1Response(rsp *http.Response) (*HostingDisableCachelessModeV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingDisableCachelessModeV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingEnableCachelessModeV1Response parses an HTTP response from a HostingEnableCachelessModeV1WithResponse call
+func ParseHostingEnableCachelessModeV1Response(rsp *http.Response) (*HostingEnableCachelessModeV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingEnableCachelessModeV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
