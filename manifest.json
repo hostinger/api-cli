@@ -559,6 +559,11 @@
     "method": "GET",
     "path": "/api/hosting/v1/wordpress/plugins/is-woocommerce-installed"
   },
+  "hosting_checkIfWordPressInstallationsAreValidV1": {
+    "command": "hostinger wordpress installations check-if-are-valid",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/installations/check-is-valid"
+  },
   "hosting_createAccountCronJobV1": {
     "command": "hostinger hosting cron-jobs create",
     "method": "POST",
@@ -573,6 +578,11 @@
     "command": "hostinger hosting databases create",
     "method": "POST",
     "path": "/api/hosting/v1/accounts/{username}/databases"
+  },
+  "hosting_createLoginLinksV1": {
+    "command": "hostinger wordpress login create-links",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/login/links"
   },
   "hosting_createNodeJSBuildFromArchiveV1": {
     "command": "hostinger hosting nodejs create-build-from-archive",
@@ -624,6 +634,16 @@
     "method": "DELETE",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/subdomains/{subdomain}"
   },
+  "hosting_deleteWordPressInstallationV1": {
+    "command": "hostinger wordpress installations delete",
+    "method": "DELETE",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}"
+  },
+  "hosting_detectWordPressInstallationsV1": {
+    "command": "hostinger wordpress installations detect",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/installations/detect"
+  },
   "hosting_generateAFreeSubdomainV1": {
     "command": "hostinger hosting domains generate-free-subdomain",
     "method": "POST",
@@ -633,6 +653,11 @@
     "command": "hostinger hosting cron-jobs output",
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/cron-jobs/{uid}/output"
+  },
+  "hosting_getInstallationJWTTokenV1": {
+    "command": "hostinger wordpress installations jwt-token",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/jwt-token"
   },
   "hosting_getNodeJSBuildLogsV1": {
     "command": "hostinger hosting nodejs build-logs",
@@ -689,6 +714,11 @@
     "method": "GET",
     "path": "/api/hosting/v1/datacenters"
   },
+  "hosting_listAvailableWordPressCoreUpdatesV1": {
+    "command": "hostinger wordpress installations list-core-updates",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/updates"
+  },
   "hosting_listAvailableWordPressPluginsV1": {
     "command": "hostinger wordpress plugins list",
     "method": "GET",
@@ -744,6 +774,11 @@
     "method": "GET",
     "path": "/api/hosting/v1/wordpress/themes"
   },
+  "hosting_purgeLiteSpeedCacheV1": {
+    "command": "hostinger wordpress litespeed-cache purge-lite-speed",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/litespeed-cache/purge"
+  },
   "hosting_repairDatabaseV1": {
     "command": "hostinger hosting databases repair",
     "method": "PATCH",
@@ -758,6 +793,46 @@
     "command": "hostinger wordpress plugins search",
     "method": "GET",
     "path": "/api/hosting/v1/wordpress/plugins"
+  },
+  "hosting_setAIOptionStatusV1": {
+    "command": "hostinger wordpress ai-tools set-option-status",
+    "method": "PATCH",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/hostinger-plugins/ai-option/status"
+  },
+  "hosting_showAIOptionStatusV1": {
+    "command": "hostinger wordpress ai-tools show-option-status",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/hostinger-plugins/ai-option/status"
+  },
+  "hosting_showLiteSpeedCacheStatusV1": {
+    "command": "hostinger wordpress litespeed-cache show-lite-speed-status",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/litespeed-cache/status"
+  },
+  "hosting_showMaintenanceStatusV1": {
+    "command": "hostinger wordpress maintenance show-status",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/maintenance/status"
+  },
+  "hosting_showMemcachedObjectCacheStatusV1": {
+    "command": "hostinger wordpress object-cache show-memcached-status",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/memcached/status"
+  },
+  "hosting_showWordPressCoreVersionV1": {
+    "command": "hostinger wordpress installations show-core-version",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/version"
+  },
+  "hosting_toggleMaintenanceModeV1": {
+    "command": "hostinger wordpress maintenance toggle",
+    "method": "PATCH",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/maintenance/toggle"
+  },
+  "hosting_toggleMemcachedObjectCacheV1": {
+    "command": "hostinger wordpress object-cache toggle-memcached",
+    "method": "PATCH",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/memcached/toggle"
   },
   "hosting_uninstallWordPressPluginsV1": {
     "command": "hostinger wordpress plugins uninstall",
@@ -788,6 +863,11 @@
     "command": "hostinger hosting php update-version",
     "method": "PATCH",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/php/version"
+  },
+  "hosting_updateWordPressCoreV1": {
+    "command": "hostinger wordpress installations update-core",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/update"
   },
   "hosting_updateWordPressPluginsV1": {
     "command": "hostinger wordpress plugins update",

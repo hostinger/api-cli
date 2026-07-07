@@ -1435,6 +1435,24 @@ func (e VPSV1VirtualMachineVirtualMachineResourceState) Valid() bool {
 	}
 }
 
+// Defines values for WordPressV1HostingerPluginsUpdateAiOptionStatusRequestOption.
+const (
+	WordPressV1HostingerPluginsUpdateAiOptionStatusRequestOptionLlmstxt   WordPressV1HostingerPluginsUpdateAiOptionStatusRequestOption = "llmstxt"
+	WordPressV1HostingerPluginsUpdateAiOptionStatusRequestOptionWeb2agent WordPressV1HostingerPluginsUpdateAiOptionStatusRequestOption = "web2agent"
+)
+
+// Valid indicates whether the value is a known member of the WordPressV1HostingerPluginsUpdateAiOptionStatusRequestOption enum.
+func (e WordPressV1HostingerPluginsUpdateAiOptionStatusRequestOption) Valid() bool {
+	switch e {
+	case WordPressV1HostingerPluginsUpdateAiOptionStatusRequestOptionLlmstxt:
+		return true
+	case WordPressV1HostingerPluginsUpdateAiOptionStatusRequestOptionWeb2agent:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for WordPressV1InstallationsInstallWordPressRequestAutoUpdates.
 const (
 	WordPressV1InstallationsInstallWordPressRequestAutoUpdatesAll   WordPressV1InstallationsInstallWordPressRequestAutoUpdates = "all"
@@ -1450,6 +1468,60 @@ func (e WordPressV1InstallationsInstallWordPressRequestAutoUpdates) Valid() bool
 	case WordPressV1InstallationsInstallWordPressRequestAutoUpdatesMinor:
 		return true
 	case WordPressV1InstallationsInstallWordPressRequestAutoUpdatesNone:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for WordPressV1InstallationsUpdateResourceType.
+const (
+	Major WordPressV1InstallationsUpdateResourceType = "major"
+	Minor WordPressV1InstallationsUpdateResourceType = "minor"
+)
+
+// Valid indicates whether the value is a known member of the WordPressV1InstallationsUpdateResourceType enum.
+func (e WordPressV1InstallationsUpdateResourceType) Valid() bool {
+	switch e {
+	case Major:
+		return true
+	case Minor:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for WordPressV1MaintenanceMaintenanceStatusResourceStatus.
+const (
+	Disabled WordPressV1MaintenanceMaintenanceStatusResourceStatus = "disabled"
+	Enabled  WordPressV1MaintenanceMaintenanceStatusResourceStatus = "enabled"
+)
+
+// Valid indicates whether the value is a known member of the WordPressV1MaintenanceMaintenanceStatusResourceStatus enum.
+func (e WordPressV1MaintenanceMaintenanceStatusResourceStatus) Valid() bool {
+	switch e {
+	case Disabled:
+		return true
+	case Enabled:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for WordPressV1MemcachedMemcachedStatusResourceStatus.
+const (
+	WordPressV1MemcachedMemcachedStatusResourceStatusActive   WordPressV1MemcachedMemcachedStatusResourceStatus = "active"
+	WordPressV1MemcachedMemcachedStatusResourceStatusInactive WordPressV1MemcachedMemcachedStatusResourceStatus = "inactive"
+)
+
+// Valid indicates whether the value is a known member of the WordPressV1MemcachedMemcachedStatusResourceStatus enum.
+func (e WordPressV1MemcachedMemcachedStatusResourceStatus) Valid() bool {
+	switch e {
+	case WordPressV1MemcachedMemcachedStatusResourceStatusActive:
+		return true
+	case WordPressV1MemcachedMemcachedStatusResourceStatusInactive:
 		return true
 	default:
 		return false
@@ -1660,6 +1732,24 @@ func (e HostingListNodeJSBuildsV1ParamsStates) Valid() bool {
 	}
 }
 
+// Defines values for HostingShowAIOptionStatusV1ParamsOption.
+const (
+	HostingShowAIOptionStatusV1ParamsOptionLlmstxt   HostingShowAIOptionStatusV1ParamsOption = "llmstxt"
+	HostingShowAIOptionStatusV1ParamsOptionWeb2agent HostingShowAIOptionStatusV1ParamsOption = "web2agent"
+)
+
+// Valid indicates whether the value is a known member of the HostingShowAIOptionStatusV1ParamsOption enum.
+func (e HostingShowAIOptionStatusV1ParamsOption) Valid() bool {
+	switch e {
+	case HostingShowAIOptionStatusV1ParamsOptionLlmstxt:
+		return true
+	case HostingShowAIOptionStatusV1ParamsOptionWeb2agent:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for HostingListInstalledWordPressPluginsV1ParamsCategory.
 const (
 	Cache HostingListInstalledWordPressPluginsV1ParamsCategory = "cache"
@@ -1677,22 +1767,22 @@ func (e HostingListInstalledWordPressPluginsV1ParamsCategory) Valid() bool {
 
 // Defines values for HostingListOrdersV1ParamsStatuses.
 const (
-	Active    HostingListOrdersV1ParamsStatuses = "active"
-	Deleted   HostingListOrdersV1ParamsStatuses = "deleted"
-	Deleting  HostingListOrdersV1ParamsStatuses = "deleting"
-	Suspended HostingListOrdersV1ParamsStatuses = "suspended"
+	HostingListOrdersV1ParamsStatusesActive    HostingListOrdersV1ParamsStatuses = "active"
+	HostingListOrdersV1ParamsStatusesDeleted   HostingListOrdersV1ParamsStatuses = "deleted"
+	HostingListOrdersV1ParamsStatusesDeleting  HostingListOrdersV1ParamsStatuses = "deleting"
+	HostingListOrdersV1ParamsStatusesSuspended HostingListOrdersV1ParamsStatuses = "suspended"
 )
 
 // Valid indicates whether the value is a known member of the HostingListOrdersV1ParamsStatuses enum.
 func (e HostingListOrdersV1ParamsStatuses) Valid() bool {
 	switch e {
-	case Active:
+	case HostingListOrdersV1ParamsStatusesActive:
 		return true
-	case Deleted:
+	case HostingListOrdersV1ParamsStatusesDeleted:
 		return true
-	case Deleting:
+	case HostingListOrdersV1ParamsStatusesDeleting:
 		return true
-	case Suspended:
+	case HostingListOrdersV1ParamsStatusesSuspended:
 		return true
 	default:
 		return false
@@ -4021,6 +4111,59 @@ type WordPressV1CommonVulnerabilityResource struct {
 	Title *string `json:"title,omitempty"`
 }
 
+// WordPressV1HostingerPluginsAiOptionStatusResource defines model for WordPress.V1.HostingerPlugins.AiOptionStatusResource.
+type WordPressV1HostingerPluginsAiOptionStatusResource struct {
+	// IsLlmstxtEnabled Whether the llms.txt AI option is enabled.
+	// Present when the option is requested or when no specific option filter is provided.
+	IsLlmstxtEnabled *bool `json:"is_llmstxt_enabled,omitempty"`
+
+	// IsWeb2agentEnabled Whether the Web2Agent AI option is enabled.
+	// Present when the option is requested or when no specific option filter is provided.
+	IsWeb2agentEnabled *bool `json:"is_web2agent_enabled,omitempty"`
+}
+
+// WordPressV1HostingerPluginsUpdateAiOptionStatusRequest defines model for WordPress.V1.HostingerPlugins.UpdateAiOptionStatusRequest.
+type WordPressV1HostingerPluginsUpdateAiOptionStatusRequest struct {
+	// Enable Enable (true) or disable (false) the AI option.
+	Enable bool `json:"enable"`
+
+	// Option AI option name
+	Option WordPressV1HostingerPluginsUpdateAiOptionStatusRequestOption `json:"option"`
+}
+
+// WordPressV1HostingerPluginsUpdateAiOptionStatusRequestOption AI option name
+type WordPressV1HostingerPluginsUpdateAiOptionStatusRequestOption string
+
+// WordPressV1InstallationsCheckIsValidRequest defines model for WordPress.V1.Installations.CheckIsValidRequest.
+type WordPressV1InstallationsCheckIsValidRequest struct {
+	// Force Force fresh validation without cache. Preferable for troubleshooting purposes.
+	Force *bool `json:"force,omitempty"`
+
+	// SoftwareIds WordPress installation (software) identifiers to validate.
+	SoftwareIds []string `json:"software_ids"`
+}
+
+// WordPressV1InstallationsCheckIsValidResultCollection Array of [`WordPress.V1.Installations.CheckIsValidResultResource`](#model/wordpressv1installationscheckisvalidresultresource)
+type WordPressV1InstallationsCheckIsValidResultCollection = []WordPressV1InstallationsCheckIsValidResultResource
+
+// WordPressV1InstallationsCheckIsValidResultResource defines model for WordPress.V1.Installations.CheckIsValidResultResource.
+type WordPressV1InstallationsCheckIsValidResultResource struct {
+	// IsValid Whether the WordPress installation is valid and working correctly
+	IsValid *bool `json:"is_valid,omitempty"`
+
+	// SoftwareId WordPress installation (software) identifier
+	SoftwareId *string `json:"software_id,omitempty"`
+}
+
+// WordPressV1InstallationsDeleteInstallationRequest defines model for WordPress.V1.Installations.DeleteInstallationRequest.
+type WordPressV1InstallationsDeleteInstallationRequest struct {
+	// DeleteDatabase Delete the installation database.
+	DeleteDatabase *bool `json:"delete_database,omitempty"`
+
+	// DeleteFiles Delete installation files from disk.
+	DeleteFiles *bool `json:"delete_files,omitempty"`
+}
+
 // WordPressV1InstallationsInstallWordPressRequest defines model for WordPress.V1.Installations.InstallWordPressRequest.
 type WordPressV1InstallationsInstallWordPressRequest struct {
 	// AutoUpdates WordPress core auto-update policy
@@ -4064,6 +4207,57 @@ type WordPressV1InstallationsInstallWordPressRequest struct {
 // WordPressV1InstallationsInstallWordPressRequestAutoUpdates WordPress core auto-update policy
 type WordPressV1InstallationsInstallWordPressRequestAutoUpdates string
 
+// WordPressV1InstallationsJwtTokenResource defines model for WordPress.V1.Installations.JwtTokenResource.
+type WordPressV1InstallationsJwtTokenResource struct {
+	// ExpiresAt Date-time at which the token expires, or null when not provided
+	ExpiresAt *time.Time `json:"expires_at,omitempty"`
+
+	// ExpiresIn Token lifetime in seconds from the moment it was issued
+	ExpiresIn *int `json:"expires_in,omitempty"`
+
+	// McpUrl MCP (Model Context Protocol) endpoint URL for the WordPress installation, or null when not provided
+	McpUrl *string `json:"mcp_url,omitempty"`
+
+	// Token Signed JWT used to authenticate requests against the WordPress installation
+	Token *string `json:"token,omitempty"`
+}
+
+// WordPressV1InstallationsUpdateCollection Array of [`WordPress.V1.Installations.UpdateResource`](#model/wordpressv1installationsupdateresource)
+type WordPressV1InstallationsUpdateCollection = []WordPressV1InstallationsUpdateResource
+
+// WordPressV1InstallationsUpdateInstallationRequest defines model for WordPress.V1.Installations.UpdateInstallationRequest.
+type WordPressV1InstallationsUpdateInstallationRequest struct {
+	// Minor Update the minor version only.
+	Minor *bool `json:"minor,omitempty"`
+
+	// Version Update to a specific WordPress core version.
+	Version *string `json:"version,omitempty"`
+}
+
+// WordPressV1InstallationsUpdateResource defines model for WordPress.V1.Installations.UpdateResource.
+type WordPressV1InstallationsUpdateResource struct {
+	// Type Update type
+	Type *WordPressV1InstallationsUpdateResourceType `json:"type,omitempty"`
+
+	// Url Download URL for the update package
+	Url *string `json:"url,omitempty"`
+
+	// Version Available WordPress core version
+	Version *string `json:"version,omitempty"`
+}
+
+// WordPressV1InstallationsUpdateResourceType Update type
+type WordPressV1InstallationsUpdateResourceType string
+
+// WordPressV1InstallationsVersionResource defines model for WordPress.V1.Installations.VersionResource.
+type WordPressV1InstallationsVersionResource struct {
+	// Version Installed WordPress core version
+	Version *string `json:"version,omitempty"`
+
+	// Vulnerabilities Known vulnerabilities affecting the installed core version
+	Vulnerabilities *[]WordPressV1CommonVulnerabilityResource `json:"vulnerabilities,omitempty"`
+}
+
 // WordPressV1InstallationsWordPressInstallationCollection Array of [`WordPress.V1.Installations.WordPressInstallationResource`](#model/wordpressv1installationswordpressinstallationresource)
 type WordPressV1InstallationsWordPressInstallationCollection = []WordPressV1InstallationsWordPressInstallationResource
 
@@ -4104,6 +4298,57 @@ type WordPressV1InstallationsWordPressInstallationResource struct {
 
 	// ValidationError Reason the installation is invalid, if any
 	ValidationError *string `json:"validation_error,omitempty"`
+}
+
+// WordPressV1LitespeedLitespeedCacheStatusResource defines model for WordPress.V1.Litespeed.LitespeedCacheStatusResource.
+type WordPressV1LitespeedLitespeedCacheStatusResource struct {
+	// IsActive Whether the LiteSpeed Cache plugin is active on the WordPress installation
+	IsActive *bool `json:"is_active,omitempty"`
+
+	// IsInstalled Whether the LiteSpeed Cache plugin is installed on the WordPress installation
+	IsInstalled *bool `json:"is_installed,omitempty"`
+}
+
+// WordPressV1LoginLoginLinksResource defines model for WordPress.V1.Login.LoginLinksResource.
+type WordPressV1LoginLoginLinksResource struct {
+	// Default Default WordPress admin URL used when auto-login is unavailable
+	Default *string `json:"default,omitempty"`
+
+	// Fallback Fallback auto-login URL using the temporary Hostinger domain
+	Fallback *string `json:"fallback,omitempty"`
+
+	// Login Primary auto-login URL for the WordPress installation
+	Login *string `json:"login,omitempty"`
+}
+
+// WordPressV1MaintenanceMaintenanceStatusResource defines model for WordPress.V1.Maintenance.MaintenanceStatusResource.
+type WordPressV1MaintenanceMaintenanceStatusResource struct {
+	// Status Current maintenance mode status for the WordPress installation
+	Status *WordPressV1MaintenanceMaintenanceStatusResourceStatus `json:"status,omitempty"`
+}
+
+// WordPressV1MaintenanceMaintenanceStatusResourceStatus Current maintenance mode status for the WordPress installation
+type WordPressV1MaintenanceMaintenanceStatusResourceStatus string
+
+// WordPressV1MaintenanceToggleMaintenanceRequest defines model for WordPress.V1.Maintenance.ToggleMaintenanceRequest.
+type WordPressV1MaintenanceToggleMaintenanceRequest struct {
+	// Enabled Enable (true) or disable (false) maintenance mode for the WordPress installation.
+	Enabled bool `json:"enabled"`
+}
+
+// WordPressV1MemcachedMemcachedStatusResource defines model for WordPress.V1.Memcached.MemcachedStatusResource.
+type WordPressV1MemcachedMemcachedStatusResource struct {
+	// Status Current Memcached object cache status for the WordPress installation
+	Status *WordPressV1MemcachedMemcachedStatusResourceStatus `json:"status,omitempty"`
+}
+
+// WordPressV1MemcachedMemcachedStatusResourceStatus Current Memcached object cache status for the WordPress installation
+type WordPressV1MemcachedMemcachedStatusResourceStatus string
+
+// WordPressV1MemcachedToggleMemcachedRequest defines model for WordPress.V1.Memcached.ToggleMemcachedRequest.
+type WordPressV1MemcachedToggleMemcachedRequest struct {
+	// Enabled Activate (true) or deactivate (false) the Memcached object cache for the WordPress installation.
+	Enabled bool `json:"enabled"`
 }
 
 // WordPressV1PluginsActivatePluginRequest defines model for WordPress.V1.Plugins.ActivatePluginRequest.
@@ -4618,6 +4863,15 @@ type HostingGetNodeJSBuildLogsV1Params struct {
 	FromLine *int `form:"from_line,omitempty" json:"from_line,omitempty"`
 }
 
+// HostingShowAIOptionStatusV1Params defines parameters for HostingShowAIOptionStatusV1.
+type HostingShowAIOptionStatusV1Params struct {
+	// Option Filter the status by a single AI option.
+	Option *HostingShowAIOptionStatusV1ParamsOption `form:"option,omitempty" json:"option,omitempty"`
+}
+
+// HostingShowAIOptionStatusV1ParamsOption defines parameters for HostingShowAIOptionStatusV1.
+type HostingShowAIOptionStatusV1ParamsOption string
+
 // HostingListInstalledWordPressPluginsV1Params defines parameters for HostingListInstalledWordPressPluginsV1.
 type HostingListInstalledWordPressPluginsV1Params struct {
 	// Category Filter installed plugins by category.
@@ -4873,6 +5127,21 @@ type HostingCreateWebsiteSubdomainV1JSONRequestBody = HostingV1DomainsCreateSubd
 // HostingInstallWordPressV1JSONRequestBody defines body for HostingInstallWordPressV1 for application/json ContentType.
 type HostingInstallWordPressV1JSONRequestBody = WordPressV1InstallationsInstallWordPressRequest
 
+// HostingCheckIfWordPressInstallationsAreValidV1JSONRequestBody defines body for HostingCheckIfWordPressInstallationsAreValidV1 for application/json ContentType.
+type HostingCheckIfWordPressInstallationsAreValidV1JSONRequestBody = WordPressV1InstallationsCheckIsValidRequest
+
+// HostingDeleteWordPressInstallationV1JSONRequestBody defines body for HostingDeleteWordPressInstallationV1 for application/json ContentType.
+type HostingDeleteWordPressInstallationV1JSONRequestBody = WordPressV1InstallationsDeleteInstallationRequest
+
+// HostingSetAIOptionStatusV1JSONRequestBody defines body for HostingSetAIOptionStatusV1 for application/json ContentType.
+type HostingSetAIOptionStatusV1JSONRequestBody = WordPressV1HostingerPluginsUpdateAiOptionStatusRequest
+
+// HostingToggleMaintenanceModeV1JSONRequestBody defines body for HostingToggleMaintenanceModeV1 for application/json ContentType.
+type HostingToggleMaintenanceModeV1JSONRequestBody = WordPressV1MaintenanceToggleMaintenanceRequest
+
+// HostingToggleMemcachedObjectCacheV1JSONRequestBody defines body for HostingToggleMemcachedObjectCacheV1 for application/json ContentType.
+type HostingToggleMemcachedObjectCacheV1JSONRequestBody = WordPressV1MemcachedToggleMemcachedRequest
+
 // HostingActivateWordPressPluginV1JSONRequestBody defines body for HostingActivateWordPressPluginV1 for application/json ContentType.
 type HostingActivateWordPressPluginV1JSONRequestBody = WordPressV1PluginsActivatePluginRequest
 
@@ -4902,6 +5171,9 @@ type HostingUninstallWordPressThemesV1JSONRequestBody = WordPressV1ThemesUninsta
 
 // HostingUpdateWordPressThemesV1JSONRequestBody defines body for HostingUpdateWordPressThemesV1 for application/json ContentType.
 type HostingUpdateWordPressThemesV1JSONRequestBody = WordPressV1ThemesUpdateThemesRequest
+
+// HostingUpdateWordPressCoreV1JSONRequestBody defines body for HostingUpdateWordPressCoreV1 for application/json ContentType.
+type HostingUpdateWordPressCoreV1JSONRequestBody = WordPressV1InstallationsUpdateInstallationRequest
 
 // HostingVerifyDomainOwnershipV1JSONRequestBody defines body for HostingVerifyDomainOwnershipV1 for application/json ContentType.
 type HostingVerifyDomainOwnershipV1JSONRequestBody = HostingV1DomainsVerifyOwnershipRequest
@@ -5882,6 +6154,55 @@ type ClientInterface interface {
 
 	HostingInstallWordPressV1(ctx context.Context, username UsernamePath, body HostingInstallWordPressV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// HostingCheckIfWordPressInstallationsAreValidV1WithBody request with any body
+	HostingCheckIfWordPressInstallationsAreValidV1WithBody(ctx context.Context, username UsernamePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	HostingCheckIfWordPressInstallationsAreValidV1(ctx context.Context, username UsernamePath, body HostingCheckIfWordPressInstallationsAreValidV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingDetectWordPressInstallationsV1 request
+	HostingDetectWordPressInstallationsV1(ctx context.Context, username UsernamePath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingDeleteWordPressInstallationV1WithBody request with any body
+	HostingDeleteWordPressInstallationV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	HostingDeleteWordPressInstallationV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingDeleteWordPressInstallationV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingShowAIOptionStatusV1 request
+	HostingShowAIOptionStatusV1(ctx context.Context, username UsernamePath, software SoftwarePath, params *HostingShowAIOptionStatusV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingSetAIOptionStatusV1WithBody request with any body
+	HostingSetAIOptionStatusV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	HostingSetAIOptionStatusV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingSetAIOptionStatusV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingGetInstallationJWTTokenV1 request
+	HostingGetInstallationJWTTokenV1(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingPurgeLiteSpeedCacheV1 request
+	HostingPurgeLiteSpeedCacheV1(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingShowLiteSpeedCacheStatusV1 request
+	HostingShowLiteSpeedCacheStatusV1(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingCreateLoginLinksV1 request
+	HostingCreateLoginLinksV1(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingShowMaintenanceStatusV1 request
+	HostingShowMaintenanceStatusV1(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingToggleMaintenanceModeV1WithBody request with any body
+	HostingToggleMaintenanceModeV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	HostingToggleMaintenanceModeV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingToggleMaintenanceModeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingShowMemcachedObjectCacheStatusV1 request
+	HostingShowMemcachedObjectCacheStatusV1(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingToggleMemcachedObjectCacheV1WithBody request with any body
+	HostingToggleMemcachedObjectCacheV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	HostingToggleMemcachedObjectCacheV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingToggleMemcachedObjectCacheV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// HostingListInstalledWordPressPluginsV1 request
 	HostingListInstalledWordPressPluginsV1(ctx context.Context, username UsernamePath, software SoftwarePath, params *HostingListInstalledWordPressPluginsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -5940,6 +6261,17 @@ type ClientInterface interface {
 	HostingUpdateWordPressThemesV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	HostingUpdateWordPressThemesV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUpdateWordPressThemesV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingUpdateWordPressCoreV1WithBody request with any body
+	HostingUpdateWordPressCoreV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	HostingUpdateWordPressCoreV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUpdateWordPressCoreV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingListAvailableWordPressCoreUpdatesV1 request
+	HostingListAvailableWordPressCoreUpdatesV1(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingShowWordPressCoreVersionV1 request
+	HostingShowWordPressCoreVersionV1(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingListAvailableDatacentersV1 request
 	HostingListAvailableDatacentersV1(ctx context.Context, params *HostingListAvailableDatacentersV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -7482,6 +7814,222 @@ func (c *Client) HostingInstallWordPressV1(ctx context.Context, username Usernam
 	return c.Client.Do(req)
 }
 
+func (c *Client) HostingCheckIfWordPressInstallationsAreValidV1WithBody(ctx context.Context, username UsernamePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingCheckIfWordPressInstallationsAreValidV1RequestWithBody(c.Server, username, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingCheckIfWordPressInstallationsAreValidV1(ctx context.Context, username UsernamePath, body HostingCheckIfWordPressInstallationsAreValidV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingCheckIfWordPressInstallationsAreValidV1Request(c.Server, username, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingDetectWordPressInstallationsV1(ctx context.Context, username UsernamePath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingDetectWordPressInstallationsV1Request(c.Server, username)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingDeleteWordPressInstallationV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingDeleteWordPressInstallationV1RequestWithBody(c.Server, username, software, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingDeleteWordPressInstallationV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingDeleteWordPressInstallationV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingDeleteWordPressInstallationV1Request(c.Server, username, software, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingShowAIOptionStatusV1(ctx context.Context, username UsernamePath, software SoftwarePath, params *HostingShowAIOptionStatusV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingShowAIOptionStatusV1Request(c.Server, username, software, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingSetAIOptionStatusV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingSetAIOptionStatusV1RequestWithBody(c.Server, username, software, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingSetAIOptionStatusV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingSetAIOptionStatusV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingSetAIOptionStatusV1Request(c.Server, username, software, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingGetInstallationJWTTokenV1(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingGetInstallationJWTTokenV1Request(c.Server, username, software)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingPurgeLiteSpeedCacheV1(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingPurgeLiteSpeedCacheV1Request(c.Server, username, software)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingShowLiteSpeedCacheStatusV1(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingShowLiteSpeedCacheStatusV1Request(c.Server, username, software)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingCreateLoginLinksV1(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingCreateLoginLinksV1Request(c.Server, username, software)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingShowMaintenanceStatusV1(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingShowMaintenanceStatusV1Request(c.Server, username, software)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingToggleMaintenanceModeV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingToggleMaintenanceModeV1RequestWithBody(c.Server, username, software, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingToggleMaintenanceModeV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingToggleMaintenanceModeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingToggleMaintenanceModeV1Request(c.Server, username, software, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingShowMemcachedObjectCacheStatusV1(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingShowMemcachedObjectCacheStatusV1Request(c.Server, username, software)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingToggleMemcachedObjectCacheV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingToggleMemcachedObjectCacheV1RequestWithBody(c.Server, username, software, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingToggleMemcachedObjectCacheV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingToggleMemcachedObjectCacheV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingToggleMemcachedObjectCacheV1Request(c.Server, username, software, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) HostingListInstalledWordPressPluginsV1(ctx context.Context, username UsernamePath, software SoftwarePath, params *HostingListInstalledWordPressPluginsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingListInstalledWordPressPluginsV1Request(c.Server, username, software, params)
 	if err != nil {
@@ -7748,6 +8296,54 @@ func (c *Client) HostingUpdateWordPressThemesV1WithBody(ctx context.Context, use
 
 func (c *Client) HostingUpdateWordPressThemesV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUpdateWordPressThemesV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingUpdateWordPressThemesV1Request(c.Server, username, software, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingUpdateWordPressCoreV1WithBody(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingUpdateWordPressCoreV1RequestWithBody(c.Server, username, software, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingUpdateWordPressCoreV1(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUpdateWordPressCoreV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingUpdateWordPressCoreV1Request(c.Server, username, software, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingListAvailableWordPressCoreUpdatesV1(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingListAvailableWordPressCoreUpdatesV1Request(c.Server, username, software)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingShowWordPressCoreVersionV1(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingShowWordPressCoreVersionV1Request(c.Server, username, software)
 	if err != nil {
 		return nil, err
 	}
@@ -12388,6 +12984,617 @@ func NewHostingInstallWordPressV1RequestWithBody(server string, username Usernam
 	return req, nil
 }
 
+// NewHostingCheckIfWordPressInstallationsAreValidV1Request calls the generic HostingCheckIfWordPressInstallationsAreValidV1 builder with application/json body
+func NewHostingCheckIfWordPressInstallationsAreValidV1Request(server string, username UsernamePath, body HostingCheckIfWordPressInstallationsAreValidV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingCheckIfWordPressInstallationsAreValidV1RequestWithBody(server, username, "application/json", bodyReader)
+}
+
+// NewHostingCheckIfWordPressInstallationsAreValidV1RequestWithBody generates requests for HostingCheckIfWordPressInstallationsAreValidV1 with any type of body
+func NewHostingCheckIfWordPressInstallationsAreValidV1RequestWithBody(server string, username UsernamePath, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/installations/check-is-valid", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingDetectWordPressInstallationsV1Request generates requests for HostingDetectWordPressInstallationsV1
+func NewHostingDetectWordPressInstallationsV1Request(server string, username UsernamePath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/installations/detect", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingDeleteWordPressInstallationV1Request calls the generic HostingDeleteWordPressInstallationV1 builder with application/json body
+func NewHostingDeleteWordPressInstallationV1Request(server string, username UsernamePath, software SoftwarePath, body HostingDeleteWordPressInstallationV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingDeleteWordPressInstallationV1RequestWithBody(server, username, software, "application/json", bodyReader)
+}
+
+// NewHostingDeleteWordPressInstallationV1RequestWithBody generates requests for HostingDeleteWordPressInstallationV1 with any type of body
+func NewHostingDeleteWordPressInstallationV1RequestWithBody(server string, username UsernamePath, software SoftwarePath, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingShowAIOptionStatusV1Request generates requests for HostingShowAIOptionStatusV1
+func NewHostingShowAIOptionStatusV1Request(server string, username UsernamePath, software SoftwarePath, params *HostingShowAIOptionStatusV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/hostinger-plugins/ai-option/status", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Option != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "option", *params.Option, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingSetAIOptionStatusV1Request calls the generic HostingSetAIOptionStatusV1 builder with application/json body
+func NewHostingSetAIOptionStatusV1Request(server string, username UsernamePath, software SoftwarePath, body HostingSetAIOptionStatusV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingSetAIOptionStatusV1RequestWithBody(server, username, software, "application/json", bodyReader)
+}
+
+// NewHostingSetAIOptionStatusV1RequestWithBody generates requests for HostingSetAIOptionStatusV1 with any type of body
+func NewHostingSetAIOptionStatusV1RequestWithBody(server string, username UsernamePath, software SoftwarePath, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/hostinger-plugins/ai-option/status", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingGetInstallationJWTTokenV1Request generates requests for HostingGetInstallationJWTTokenV1
+func NewHostingGetInstallationJWTTokenV1Request(server string, username UsernamePath, software SoftwarePath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/jwt-token", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingPurgeLiteSpeedCacheV1Request generates requests for HostingPurgeLiteSpeedCacheV1
+func NewHostingPurgeLiteSpeedCacheV1Request(server string, username UsernamePath, software SoftwarePath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/litespeed-cache/purge", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingShowLiteSpeedCacheStatusV1Request generates requests for HostingShowLiteSpeedCacheStatusV1
+func NewHostingShowLiteSpeedCacheStatusV1Request(server string, username UsernamePath, software SoftwarePath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/litespeed-cache/status", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingCreateLoginLinksV1Request generates requests for HostingCreateLoginLinksV1
+func NewHostingCreateLoginLinksV1Request(server string, username UsernamePath, software SoftwarePath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/login/links", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingShowMaintenanceStatusV1Request generates requests for HostingShowMaintenanceStatusV1
+func NewHostingShowMaintenanceStatusV1Request(server string, username UsernamePath, software SoftwarePath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/maintenance/status", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingToggleMaintenanceModeV1Request calls the generic HostingToggleMaintenanceModeV1 builder with application/json body
+func NewHostingToggleMaintenanceModeV1Request(server string, username UsernamePath, software SoftwarePath, body HostingToggleMaintenanceModeV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingToggleMaintenanceModeV1RequestWithBody(server, username, software, "application/json", bodyReader)
+}
+
+// NewHostingToggleMaintenanceModeV1RequestWithBody generates requests for HostingToggleMaintenanceModeV1 with any type of body
+func NewHostingToggleMaintenanceModeV1RequestWithBody(server string, username UsernamePath, software SoftwarePath, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/maintenance/toggle", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingShowMemcachedObjectCacheStatusV1Request generates requests for HostingShowMemcachedObjectCacheStatusV1
+func NewHostingShowMemcachedObjectCacheStatusV1Request(server string, username UsernamePath, software SoftwarePath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/memcached/status", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingToggleMemcachedObjectCacheV1Request calls the generic HostingToggleMemcachedObjectCacheV1 builder with application/json body
+func NewHostingToggleMemcachedObjectCacheV1Request(server string, username UsernamePath, software SoftwarePath, body HostingToggleMemcachedObjectCacheV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingToggleMemcachedObjectCacheV1RequestWithBody(server, username, software, "application/json", bodyReader)
+}
+
+// NewHostingToggleMemcachedObjectCacheV1RequestWithBody generates requests for HostingToggleMemcachedObjectCacheV1 with any type of body
+func NewHostingToggleMemcachedObjectCacheV1RequestWithBody(server string, username UsernamePath, software SoftwarePath, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/memcached/toggle", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewHostingListInstalledWordPressPluginsV1Request generates requests for HostingListInstalledWordPressPluginsV1
 func NewHostingListInstalledWordPressPluginsV1Request(server string, username UsernamePath, software SoftwarePath, params *HostingListInstalledWordPressPluginsV1Params) (*http.Request, error) {
 	var err error
@@ -13074,6 +14281,142 @@ func NewHostingUpdateWordPressThemesV1RequestWithBody(server string, username Us
 	}
 
 	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingUpdateWordPressCoreV1Request calls the generic HostingUpdateWordPressCoreV1 builder with application/json body
+func NewHostingUpdateWordPressCoreV1Request(server string, username UsernamePath, software SoftwarePath, body HostingUpdateWordPressCoreV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingUpdateWordPressCoreV1RequestWithBody(server, username, software, "application/json", bodyReader)
+}
+
+// NewHostingUpdateWordPressCoreV1RequestWithBody generates requests for HostingUpdateWordPressCoreV1 with any type of body
+func NewHostingUpdateWordPressCoreV1RequestWithBody(server string, username UsernamePath, software SoftwarePath, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/update", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingListAvailableWordPressCoreUpdatesV1Request generates requests for HostingListAvailableWordPressCoreUpdatesV1
+func NewHostingListAvailableWordPressCoreUpdatesV1Request(server string, username UsernamePath, software SoftwarePath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/updates", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingShowWordPressCoreVersionV1Request generates requests for HostingShowWordPressCoreVersionV1
+func NewHostingShowWordPressCoreVersionV1Request(server string, username UsernamePath, software SoftwarePath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "software", software, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/wordpress/%s/version", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 
 	return req, nil
 }
@@ -17217,6 +18560,55 @@ type ClientWithResponsesInterface interface {
 
 	HostingInstallWordPressV1WithResponse(ctx context.Context, username UsernamePath, body HostingInstallWordPressV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingInstallWordPressV1Response, error)
 
+	// HostingCheckIfWordPressInstallationsAreValidV1WithBodyWithResponse request with any body
+	HostingCheckIfWordPressInstallationsAreValidV1WithBodyWithResponse(ctx context.Context, username UsernamePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingCheckIfWordPressInstallationsAreValidV1Response, error)
+
+	HostingCheckIfWordPressInstallationsAreValidV1WithResponse(ctx context.Context, username UsernamePath, body HostingCheckIfWordPressInstallationsAreValidV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingCheckIfWordPressInstallationsAreValidV1Response, error)
+
+	// HostingDetectWordPressInstallationsV1WithResponse request
+	HostingDetectWordPressInstallationsV1WithResponse(ctx context.Context, username UsernamePath, reqEditors ...RequestEditorFn) (*HostingDetectWordPressInstallationsV1Response, error)
+
+	// HostingDeleteWordPressInstallationV1WithBodyWithResponse request with any body
+	HostingDeleteWordPressInstallationV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingDeleteWordPressInstallationV1Response, error)
+
+	HostingDeleteWordPressInstallationV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingDeleteWordPressInstallationV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingDeleteWordPressInstallationV1Response, error)
+
+	// HostingShowAIOptionStatusV1WithResponse request
+	HostingShowAIOptionStatusV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, params *HostingShowAIOptionStatusV1Params, reqEditors ...RequestEditorFn) (*HostingShowAIOptionStatusV1Response, error)
+
+	// HostingSetAIOptionStatusV1WithBodyWithResponse request with any body
+	HostingSetAIOptionStatusV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingSetAIOptionStatusV1Response, error)
+
+	HostingSetAIOptionStatusV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingSetAIOptionStatusV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingSetAIOptionStatusV1Response, error)
+
+	// HostingGetInstallationJWTTokenV1WithResponse request
+	HostingGetInstallationJWTTokenV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*HostingGetInstallationJWTTokenV1Response, error)
+
+	// HostingPurgeLiteSpeedCacheV1WithResponse request
+	HostingPurgeLiteSpeedCacheV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*HostingPurgeLiteSpeedCacheV1Response, error)
+
+	// HostingShowLiteSpeedCacheStatusV1WithResponse request
+	HostingShowLiteSpeedCacheStatusV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*HostingShowLiteSpeedCacheStatusV1Response, error)
+
+	// HostingCreateLoginLinksV1WithResponse request
+	HostingCreateLoginLinksV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*HostingCreateLoginLinksV1Response, error)
+
+	// HostingShowMaintenanceStatusV1WithResponse request
+	HostingShowMaintenanceStatusV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*HostingShowMaintenanceStatusV1Response, error)
+
+	// HostingToggleMaintenanceModeV1WithBodyWithResponse request with any body
+	HostingToggleMaintenanceModeV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingToggleMaintenanceModeV1Response, error)
+
+	HostingToggleMaintenanceModeV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingToggleMaintenanceModeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingToggleMaintenanceModeV1Response, error)
+
+	// HostingShowMemcachedObjectCacheStatusV1WithResponse request
+	HostingShowMemcachedObjectCacheStatusV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*HostingShowMemcachedObjectCacheStatusV1Response, error)
+
+	// HostingToggleMemcachedObjectCacheV1WithBodyWithResponse request with any body
+	HostingToggleMemcachedObjectCacheV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingToggleMemcachedObjectCacheV1Response, error)
+
+	HostingToggleMemcachedObjectCacheV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingToggleMemcachedObjectCacheV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingToggleMemcachedObjectCacheV1Response, error)
+
 	// HostingListInstalledWordPressPluginsV1WithResponse request
 	HostingListInstalledWordPressPluginsV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, params *HostingListInstalledWordPressPluginsV1Params, reqEditors ...RequestEditorFn) (*HostingListInstalledWordPressPluginsV1Response, error)
 
@@ -17275,6 +18667,17 @@ type ClientWithResponsesInterface interface {
 	HostingUpdateWordPressThemesV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingUpdateWordPressThemesV1Response, error)
 
 	HostingUpdateWordPressThemesV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUpdateWordPressThemesV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUpdateWordPressThemesV1Response, error)
+
+	// HostingUpdateWordPressCoreV1WithBodyWithResponse request with any body
+	HostingUpdateWordPressCoreV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingUpdateWordPressCoreV1Response, error)
+
+	HostingUpdateWordPressCoreV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUpdateWordPressCoreV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUpdateWordPressCoreV1Response, error)
+
+	// HostingListAvailableWordPressCoreUpdatesV1WithResponse request
+	HostingListAvailableWordPressCoreUpdatesV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*HostingListAvailableWordPressCoreUpdatesV1Response, error)
+
+	// HostingShowWordPressCoreVersionV1WithResponse request
+	HostingShowWordPressCoreVersionV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*HostingShowWordPressCoreVersionV1Response, error)
 
 	// HostingListAvailableDatacentersV1WithResponse request
 	HostingListAvailableDatacentersV1WithResponse(ctx context.Context, params *HostingListAvailableDatacentersV1Params, reqEditors ...RequestEditorFn) (*HostingListAvailableDatacentersV1Response, error)
@@ -20022,6 +21425,427 @@ func (r HostingInstallWordPressV1Response) ContentType() string {
 	return ""
 }
 
+type HostingCheckIfWordPressInstallationsAreValidV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *WordPressV1InstallationsCheckIsValidResultCollection
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingCheckIfWordPressInstallationsAreValidV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingCheckIfWordPressInstallationsAreValidV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingCheckIfWordPressInstallationsAreValidV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingDetectWordPressInstallationsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingDetectWordPressInstallationsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingDetectWordPressInstallationsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingDetectWordPressInstallationsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingDeleteWordPressInstallationV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingDeleteWordPressInstallationV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingDeleteWordPressInstallationV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingDeleteWordPressInstallationV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingShowAIOptionStatusV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *WordPressV1HostingerPluginsAiOptionStatusResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingShowAIOptionStatusV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingShowAIOptionStatusV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingShowAIOptionStatusV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingSetAIOptionStatusV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingSetAIOptionStatusV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingSetAIOptionStatusV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingSetAIOptionStatusV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingGetInstallationJWTTokenV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *WordPressV1InstallationsJwtTokenResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingGetInstallationJWTTokenV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingGetInstallationJWTTokenV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingGetInstallationJWTTokenV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingPurgeLiteSpeedCacheV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingPurgeLiteSpeedCacheV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingPurgeLiteSpeedCacheV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingPurgeLiteSpeedCacheV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingShowLiteSpeedCacheStatusV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *WordPressV1LitespeedLitespeedCacheStatusResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingShowLiteSpeedCacheStatusV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingShowLiteSpeedCacheStatusV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingShowLiteSpeedCacheStatusV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingCreateLoginLinksV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *WordPressV1LoginLoginLinksResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingCreateLoginLinksV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingCreateLoginLinksV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingCreateLoginLinksV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingShowMaintenanceStatusV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *WordPressV1MaintenanceMaintenanceStatusResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingShowMaintenanceStatusV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingShowMaintenanceStatusV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingShowMaintenanceStatusV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingToggleMaintenanceModeV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingToggleMaintenanceModeV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingToggleMaintenanceModeV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingToggleMaintenanceModeV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingShowMemcachedObjectCacheStatusV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *WordPressV1MemcachedMemcachedStatusResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingShowMemcachedObjectCacheStatusV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingShowMemcachedObjectCacheStatusV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingShowMemcachedObjectCacheStatusV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingToggleMemcachedObjectCacheV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingToggleMemcachedObjectCacheV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingToggleMemcachedObjectCacheV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingToggleMemcachedObjectCacheV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type HostingListInstalledWordPressPluginsV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -20442,6 +22266,103 @@ func (r HostingUpdateWordPressThemesV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingUpdateWordPressThemesV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingUpdateWordPressCoreV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingUpdateWordPressCoreV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingUpdateWordPressCoreV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingUpdateWordPressCoreV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingListAvailableWordPressCoreUpdatesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *WordPressV1InstallationsUpdateCollection
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingListAvailableWordPressCoreUpdatesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingListAvailableWordPressCoreUpdatesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingListAvailableWordPressCoreUpdatesV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingShowWordPressCoreVersionV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *WordPressV1InstallationsVersionResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingShowWordPressCoreVersionV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingShowWordPressCoreVersionV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingShowWordPressCoreVersionV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -24182,6 +26103,163 @@ func (c *ClientWithResponses) HostingInstallWordPressV1WithResponse(ctx context.
 	return ParseHostingInstallWordPressV1Response(rsp)
 }
 
+// HostingCheckIfWordPressInstallationsAreValidV1WithBodyWithResponse request with arbitrary body returning *HostingCheckIfWordPressInstallationsAreValidV1Response
+func (c *ClientWithResponses) HostingCheckIfWordPressInstallationsAreValidV1WithBodyWithResponse(ctx context.Context, username UsernamePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingCheckIfWordPressInstallationsAreValidV1Response, error) {
+	rsp, err := c.HostingCheckIfWordPressInstallationsAreValidV1WithBody(ctx, username, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingCheckIfWordPressInstallationsAreValidV1Response(rsp)
+}
+
+func (c *ClientWithResponses) HostingCheckIfWordPressInstallationsAreValidV1WithResponse(ctx context.Context, username UsernamePath, body HostingCheckIfWordPressInstallationsAreValidV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingCheckIfWordPressInstallationsAreValidV1Response, error) {
+	rsp, err := c.HostingCheckIfWordPressInstallationsAreValidV1(ctx, username, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingCheckIfWordPressInstallationsAreValidV1Response(rsp)
+}
+
+// HostingDetectWordPressInstallationsV1WithResponse request returning *HostingDetectWordPressInstallationsV1Response
+func (c *ClientWithResponses) HostingDetectWordPressInstallationsV1WithResponse(ctx context.Context, username UsernamePath, reqEditors ...RequestEditorFn) (*HostingDetectWordPressInstallationsV1Response, error) {
+	rsp, err := c.HostingDetectWordPressInstallationsV1(ctx, username, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingDetectWordPressInstallationsV1Response(rsp)
+}
+
+// HostingDeleteWordPressInstallationV1WithBodyWithResponse request with arbitrary body returning *HostingDeleteWordPressInstallationV1Response
+func (c *ClientWithResponses) HostingDeleteWordPressInstallationV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingDeleteWordPressInstallationV1Response, error) {
+	rsp, err := c.HostingDeleteWordPressInstallationV1WithBody(ctx, username, software, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingDeleteWordPressInstallationV1Response(rsp)
+}
+
+func (c *ClientWithResponses) HostingDeleteWordPressInstallationV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingDeleteWordPressInstallationV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingDeleteWordPressInstallationV1Response, error) {
+	rsp, err := c.HostingDeleteWordPressInstallationV1(ctx, username, software, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingDeleteWordPressInstallationV1Response(rsp)
+}
+
+// HostingShowAIOptionStatusV1WithResponse request returning *HostingShowAIOptionStatusV1Response
+func (c *ClientWithResponses) HostingShowAIOptionStatusV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, params *HostingShowAIOptionStatusV1Params, reqEditors ...RequestEditorFn) (*HostingShowAIOptionStatusV1Response, error) {
+	rsp, err := c.HostingShowAIOptionStatusV1(ctx, username, software, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingShowAIOptionStatusV1Response(rsp)
+}
+
+// HostingSetAIOptionStatusV1WithBodyWithResponse request with arbitrary body returning *HostingSetAIOptionStatusV1Response
+func (c *ClientWithResponses) HostingSetAIOptionStatusV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingSetAIOptionStatusV1Response, error) {
+	rsp, err := c.HostingSetAIOptionStatusV1WithBody(ctx, username, software, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingSetAIOptionStatusV1Response(rsp)
+}
+
+func (c *ClientWithResponses) HostingSetAIOptionStatusV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingSetAIOptionStatusV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingSetAIOptionStatusV1Response, error) {
+	rsp, err := c.HostingSetAIOptionStatusV1(ctx, username, software, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingSetAIOptionStatusV1Response(rsp)
+}
+
+// HostingGetInstallationJWTTokenV1WithResponse request returning *HostingGetInstallationJWTTokenV1Response
+func (c *ClientWithResponses) HostingGetInstallationJWTTokenV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*HostingGetInstallationJWTTokenV1Response, error) {
+	rsp, err := c.HostingGetInstallationJWTTokenV1(ctx, username, software, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingGetInstallationJWTTokenV1Response(rsp)
+}
+
+// HostingPurgeLiteSpeedCacheV1WithResponse request returning *HostingPurgeLiteSpeedCacheV1Response
+func (c *ClientWithResponses) HostingPurgeLiteSpeedCacheV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*HostingPurgeLiteSpeedCacheV1Response, error) {
+	rsp, err := c.HostingPurgeLiteSpeedCacheV1(ctx, username, software, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingPurgeLiteSpeedCacheV1Response(rsp)
+}
+
+// HostingShowLiteSpeedCacheStatusV1WithResponse request returning *HostingShowLiteSpeedCacheStatusV1Response
+func (c *ClientWithResponses) HostingShowLiteSpeedCacheStatusV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*HostingShowLiteSpeedCacheStatusV1Response, error) {
+	rsp, err := c.HostingShowLiteSpeedCacheStatusV1(ctx, username, software, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingShowLiteSpeedCacheStatusV1Response(rsp)
+}
+
+// HostingCreateLoginLinksV1WithResponse request returning *HostingCreateLoginLinksV1Response
+func (c *ClientWithResponses) HostingCreateLoginLinksV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*HostingCreateLoginLinksV1Response, error) {
+	rsp, err := c.HostingCreateLoginLinksV1(ctx, username, software, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingCreateLoginLinksV1Response(rsp)
+}
+
+// HostingShowMaintenanceStatusV1WithResponse request returning *HostingShowMaintenanceStatusV1Response
+func (c *ClientWithResponses) HostingShowMaintenanceStatusV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*HostingShowMaintenanceStatusV1Response, error) {
+	rsp, err := c.HostingShowMaintenanceStatusV1(ctx, username, software, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingShowMaintenanceStatusV1Response(rsp)
+}
+
+// HostingToggleMaintenanceModeV1WithBodyWithResponse request with arbitrary body returning *HostingToggleMaintenanceModeV1Response
+func (c *ClientWithResponses) HostingToggleMaintenanceModeV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingToggleMaintenanceModeV1Response, error) {
+	rsp, err := c.HostingToggleMaintenanceModeV1WithBody(ctx, username, software, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingToggleMaintenanceModeV1Response(rsp)
+}
+
+func (c *ClientWithResponses) HostingToggleMaintenanceModeV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingToggleMaintenanceModeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingToggleMaintenanceModeV1Response, error) {
+	rsp, err := c.HostingToggleMaintenanceModeV1(ctx, username, software, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingToggleMaintenanceModeV1Response(rsp)
+}
+
+// HostingShowMemcachedObjectCacheStatusV1WithResponse request returning *HostingShowMemcachedObjectCacheStatusV1Response
+func (c *ClientWithResponses) HostingShowMemcachedObjectCacheStatusV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*HostingShowMemcachedObjectCacheStatusV1Response, error) {
+	rsp, err := c.HostingShowMemcachedObjectCacheStatusV1(ctx, username, software, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingShowMemcachedObjectCacheStatusV1Response(rsp)
+}
+
+// HostingToggleMemcachedObjectCacheV1WithBodyWithResponse request with arbitrary body returning *HostingToggleMemcachedObjectCacheV1Response
+func (c *ClientWithResponses) HostingToggleMemcachedObjectCacheV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingToggleMemcachedObjectCacheV1Response, error) {
+	rsp, err := c.HostingToggleMemcachedObjectCacheV1WithBody(ctx, username, software, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingToggleMemcachedObjectCacheV1Response(rsp)
+}
+
+func (c *ClientWithResponses) HostingToggleMemcachedObjectCacheV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingToggleMemcachedObjectCacheV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingToggleMemcachedObjectCacheV1Response, error) {
+	rsp, err := c.HostingToggleMemcachedObjectCacheV1(ctx, username, software, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingToggleMemcachedObjectCacheV1Response(rsp)
+}
+
 // HostingListInstalledWordPressPluginsV1WithResponse request returning *HostingListInstalledWordPressPluginsV1Response
 func (c *ClientWithResponses) HostingListInstalledWordPressPluginsV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, params *HostingListInstalledWordPressPluginsV1Params, reqEditors ...RequestEditorFn) (*HostingListInstalledWordPressPluginsV1Response, error) {
 	rsp, err := c.HostingListInstalledWordPressPluginsV1(ctx, username, software, params, reqEditors...)
@@ -24377,6 +26455,41 @@ func (c *ClientWithResponses) HostingUpdateWordPressThemesV1WithResponse(ctx con
 		return nil, err
 	}
 	return ParseHostingUpdateWordPressThemesV1Response(rsp)
+}
+
+// HostingUpdateWordPressCoreV1WithBodyWithResponse request with arbitrary body returning *HostingUpdateWordPressCoreV1Response
+func (c *ClientWithResponses) HostingUpdateWordPressCoreV1WithBodyWithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingUpdateWordPressCoreV1Response, error) {
+	rsp, err := c.HostingUpdateWordPressCoreV1WithBody(ctx, username, software, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingUpdateWordPressCoreV1Response(rsp)
+}
+
+func (c *ClientWithResponses) HostingUpdateWordPressCoreV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, body HostingUpdateWordPressCoreV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUpdateWordPressCoreV1Response, error) {
+	rsp, err := c.HostingUpdateWordPressCoreV1(ctx, username, software, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingUpdateWordPressCoreV1Response(rsp)
+}
+
+// HostingListAvailableWordPressCoreUpdatesV1WithResponse request returning *HostingListAvailableWordPressCoreUpdatesV1Response
+func (c *ClientWithResponses) HostingListAvailableWordPressCoreUpdatesV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*HostingListAvailableWordPressCoreUpdatesV1Response, error) {
+	rsp, err := c.HostingListAvailableWordPressCoreUpdatesV1(ctx, username, software, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingListAvailableWordPressCoreUpdatesV1Response(rsp)
+}
+
+// HostingShowWordPressCoreVersionV1WithResponse request returning *HostingShowWordPressCoreVersionV1Response
+func (c *ClientWithResponses) HostingShowWordPressCoreVersionV1WithResponse(ctx context.Context, username UsernamePath, software SoftwarePath, reqEditors ...RequestEditorFn) (*HostingShowWordPressCoreVersionV1Response, error) {
+	rsp, err := c.HostingShowWordPressCoreVersionV1(ctx, username, software, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingShowWordPressCoreVersionV1Response(rsp)
 }
 
 // HostingListAvailableDatacentersV1WithResponse request returning *HostingListAvailableDatacentersV1Response
@@ -28552,6 +30665,561 @@ func ParseHostingInstallWordPressV1Response(rsp *http.Response) (*HostingInstall
 	return response, nil
 }
 
+// ParseHostingCheckIfWordPressInstallationsAreValidV1Response parses an HTTP response from a HostingCheckIfWordPressInstallationsAreValidV1WithResponse call
+func ParseHostingCheckIfWordPressInstallationsAreValidV1Response(rsp *http.Response) (*HostingCheckIfWordPressInstallationsAreValidV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingCheckIfWordPressInstallationsAreValidV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest WordPressV1InstallationsCheckIsValidResultCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingDetectWordPressInstallationsV1Response parses an HTTP response from a HostingDetectWordPressInstallationsV1WithResponse call
+func ParseHostingDetectWordPressInstallationsV1Response(rsp *http.Response) (*HostingDetectWordPressInstallationsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingDetectWordPressInstallationsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingDeleteWordPressInstallationV1Response parses an HTTP response from a HostingDeleteWordPressInstallationV1WithResponse call
+func ParseHostingDeleteWordPressInstallationV1Response(rsp *http.Response) (*HostingDeleteWordPressInstallationV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingDeleteWordPressInstallationV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingShowAIOptionStatusV1Response parses an HTTP response from a HostingShowAIOptionStatusV1WithResponse call
+func ParseHostingShowAIOptionStatusV1Response(rsp *http.Response) (*HostingShowAIOptionStatusV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingShowAIOptionStatusV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest WordPressV1HostingerPluginsAiOptionStatusResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingSetAIOptionStatusV1Response parses an HTTP response from a HostingSetAIOptionStatusV1WithResponse call
+func ParseHostingSetAIOptionStatusV1Response(rsp *http.Response) (*HostingSetAIOptionStatusV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingSetAIOptionStatusV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingGetInstallationJWTTokenV1Response parses an HTTP response from a HostingGetInstallationJWTTokenV1WithResponse call
+func ParseHostingGetInstallationJWTTokenV1Response(rsp *http.Response) (*HostingGetInstallationJWTTokenV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingGetInstallationJWTTokenV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest WordPressV1InstallationsJwtTokenResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingPurgeLiteSpeedCacheV1Response parses an HTTP response from a HostingPurgeLiteSpeedCacheV1WithResponse call
+func ParseHostingPurgeLiteSpeedCacheV1Response(rsp *http.Response) (*HostingPurgeLiteSpeedCacheV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingPurgeLiteSpeedCacheV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingShowLiteSpeedCacheStatusV1Response parses an HTTP response from a HostingShowLiteSpeedCacheStatusV1WithResponse call
+func ParseHostingShowLiteSpeedCacheStatusV1Response(rsp *http.Response) (*HostingShowLiteSpeedCacheStatusV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingShowLiteSpeedCacheStatusV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest WordPressV1LitespeedLitespeedCacheStatusResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingCreateLoginLinksV1Response parses an HTTP response from a HostingCreateLoginLinksV1WithResponse call
+func ParseHostingCreateLoginLinksV1Response(rsp *http.Response) (*HostingCreateLoginLinksV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingCreateLoginLinksV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest WordPressV1LoginLoginLinksResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingShowMaintenanceStatusV1Response parses an HTTP response from a HostingShowMaintenanceStatusV1WithResponse call
+func ParseHostingShowMaintenanceStatusV1Response(rsp *http.Response) (*HostingShowMaintenanceStatusV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingShowMaintenanceStatusV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest WordPressV1MaintenanceMaintenanceStatusResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingToggleMaintenanceModeV1Response parses an HTTP response from a HostingToggleMaintenanceModeV1WithResponse call
+func ParseHostingToggleMaintenanceModeV1Response(rsp *http.Response) (*HostingToggleMaintenanceModeV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingToggleMaintenanceModeV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingShowMemcachedObjectCacheStatusV1Response parses an HTTP response from a HostingShowMemcachedObjectCacheStatusV1WithResponse call
+func ParseHostingShowMemcachedObjectCacheStatusV1Response(rsp *http.Response) (*HostingShowMemcachedObjectCacheStatusV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingShowMemcachedObjectCacheStatusV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest WordPressV1MemcachedMemcachedStatusResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingToggleMemcachedObjectCacheV1Response parses an HTTP response from a HostingToggleMemcachedObjectCacheV1WithResponse call
+func ParseHostingToggleMemcachedObjectCacheV1Response(rsp *http.Response) (*HostingToggleMemcachedObjectCacheV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingToggleMemcachedObjectCacheV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseHostingListInstalledWordPressPluginsV1Response parses an HTTP response from a HostingListInstalledWordPressPluginsV1WithResponse call
 func ParseHostingListInstalledWordPressPluginsV1Response(rsp *http.Response) (*HostingListInstalledWordPressPluginsV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -29129,6 +31797,133 @@ func ParseHostingUpdateWordPressThemesV1Response(rsp *http.Response) (*HostingUp
 			return nil, err
 		}
 		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingUpdateWordPressCoreV1Response parses an HTTP response from a HostingUpdateWordPressCoreV1WithResponse call
+func ParseHostingUpdateWordPressCoreV1Response(rsp *http.Response) (*HostingUpdateWordPressCoreV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingUpdateWordPressCoreV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingListAvailableWordPressCoreUpdatesV1Response parses an HTTP response from a HostingListAvailableWordPressCoreUpdatesV1WithResponse call
+func ParseHostingListAvailableWordPressCoreUpdatesV1Response(rsp *http.Response) (*HostingListAvailableWordPressCoreUpdatesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingListAvailableWordPressCoreUpdatesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest WordPressV1InstallationsUpdateCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingShowWordPressCoreVersionV1Response parses an HTTP response from a HostingShowWordPressCoreVersionV1WithResponse call
+func ParseHostingShowWordPressCoreVersionV1Response(rsp *http.Response) (*HostingShowWordPressCoreVersionV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingShowWordPressCoreVersionV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest WordPressV1InstallationsVersionResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse
