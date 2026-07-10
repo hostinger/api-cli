@@ -349,6 +349,61 @@
     "method": "POST",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/docker/{projectName}/update"
   },
+  "agency-hosting_buildAgencyPlanWebsiteNodeJSAssetsV1": {
+    "command": "hostinger agency-hosting websites build-plan-nodejs-assets",
+    "method": "POST",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/build-assets"
+  },
+  "agency-hosting_changeAgencyPlanWebsiteDomainV1": {
+    "command": "hostinger agency-hosting domains change-plan-website",
+    "method": "PUT",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/domains/{from_domain}"
+  },
+  "agency-hosting_deleteAgencyPlanWebsiteV1": {
+    "command": "hostinger agency-hosting websites delete-plan",
+    "method": "DELETE",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}"
+  },
+  "agency-hosting_getAgencyPlanWebsiteDetailsV1": {
+    "command": "hostinger agency-hosting websites plan",
+    "method": "GET",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}"
+  },
+  "agency-hosting_getAgencyPlanWebsiteSetupStatusV1": {
+    "command": "hostinger agency-hosting website-setups plan-status",
+    "method": "GET",
+    "path": "/api/agency-hosting/v1/orders/{order_id}/websites/setups/{setup_uuid}"
+  },
+  "agency-hosting_linkDomainToAgencyPlanWebsiteV1": {
+    "command": "hostinger agency-hosting domains link-to-plan-website",
+    "method": "POST",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/domains"
+  },
+  "agency-hosting_listAgencyPlanDomainsV1": {
+    "command": "hostinger agency-hosting domains list-plan",
+    "method": "GET",
+    "path": "/api/agency-hosting/v1/domains"
+  },
+  "agency-hosting_listAvailableDatacentersForAnAgencyPlanOrderV1": {
+    "command": "hostinger agency-hosting datacenters list-for-plan-order",
+    "method": "GET",
+    "path": "/api/agency-hosting/v1/orders/{order_id}/datacenters"
+  },
+  "agency-hosting_listRunningAgencyPlanWebsiteProcessesV1": {
+    "command": "hostinger agency-hosting websites list-running-plan-processes",
+    "method": "GET",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/processes"
+  },
+  "agency-hosting_provisionANewAgencyPlanWebsiteV1": {
+    "command": "hostinger agency-hosting website-setups provision-plan",
+    "method": "POST",
+    "path": "/api/agency-hosting/v1/orders/{order_id}/websites/setups"
+  },
+  "agency-hosting_unlinkDomainFromAgencyPlanWebsiteV1": {
+    "command": "hostinger agency-hosting domains unlink-from-plan-website",
+    "method": "DELETE",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/domains/{domain}"
+  },
   "billing_deletePaymentMethodV1": {
     "command": "hostinger billing payment-methods delete",
     "method": "DELETE",
@@ -649,26 +704,6 @@
     "method": "POST",
     "path": "/api/hosting/v1/accounts/{username}/wordpress/installations/detect"
   },
-  "hosting_disableCachelessModeV1": {
-    "command": "hostinger hosting cache disable-cacheless",
-    "method": "PATCH",
-    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/cacheless-mode/disable"
-  },
-  "hosting_disableWebsiteCacheV1": {
-    "command": "hostinger hosting cache disable-website",
-    "method": "PATCH",
-    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/cache/disable"
-  },
-  "hosting_enableCachelessModeV1": {
-    "command": "hostinger hosting cache enable-cacheless",
-    "method": "PATCH",
-    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/cacheless-mode/enable"
-  },
-  "hosting_enableWebsiteCacheV1": {
-    "command": "hostinger hosting cache enable-website",
-    "method": "PATCH",
-    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/cache/enable"
-  },
   "hosting_generateAFreeSubdomainV1": {
     "command": "hostinger hosting domains generate-free-subdomain",
     "method": "POST",
@@ -814,6 +849,11 @@
     "method": "PATCH",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/php/extensions/reset"
   },
+  "hosting_restartNode.jsApplicationV1": {
+    "command": "hostinger hosting nodejs restart-application",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/server/restart"
+  },
   "hosting_searchWordPressPluginsV1": {
     "command": "hostinger wordpress plugins search",
     "method": "GET",
@@ -849,6 +889,11 @@
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/version"
   },
+  "hosting_toggleCachelessModeV1": {
+    "command": "hostinger hosting cache toggle-cacheless",
+    "method": "PATCH",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/cacheless-mode/toggle"
+  },
   "hosting_toggleMaintenanceModeV1": {
     "command": "hostinger wordpress maintenance toggle",
     "method": "PATCH",
@@ -858,6 +903,11 @@
     "command": "hostinger wordpress object-cache toggle-memcached",
     "method": "PATCH",
     "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/memcached/toggle"
+  },
+  "hosting_toggleWebsiteCacheV1": {
+    "command": "hostinger hosting cache toggle-website",
+    "method": "PATCH",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/cache/toggle"
   },
   "hosting_uninstallWordPressPluginsV1": {
     "command": "hostinger wordpress plugins uninstall",

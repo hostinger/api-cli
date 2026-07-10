@@ -13,4 +13,5 @@ func init() {
 	GroupCmd.AddCommand(BuildLogsCmd)
 	GroupCmd.AddCommand(CreateBuildFromArchiveCmd)
 	GroupCmd.AddCommand(ListBuildsCmd)
+	GroupCmd.AddCommand(RestartApplicationCmd)
 }

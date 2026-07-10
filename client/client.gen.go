@@ -22,6 +22,81 @@ const (
 	ApiTokenScopes apiTokenContextKey = "apiToken.Scopes"
 )
 
+// Defines values for AgencyHostingV1SetupsCreateSetupRequestType.
+const (
+	AgencyHostingV1SetupsCreateSetupRequestTypeHorizons   AgencyHostingV1SetupsCreateSetupRequestType = "horizons"
+	AgencyHostingV1SetupsCreateSetupRequestTypeNodeStatic AgencyHostingV1SetupsCreateSetupRequestType = "node-static"
+)
+
+// Valid indicates whether the value is a known member of the AgencyHostingV1SetupsCreateSetupRequestType enum.
+func (e AgencyHostingV1SetupsCreateSetupRequestType) Valid() bool {
+	switch e {
+	case AgencyHostingV1SetupsCreateSetupRequestTypeHorizons:
+		return true
+	case AgencyHostingV1SetupsCreateSetupRequestTypeNodeStatic:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AgencyHostingV1SetupsWebsiteSetupStatusResourceStatus.
+const (
+	AgencyHostingV1SetupsWebsiteSetupStatusResourceStatusCompleted AgencyHostingV1SetupsWebsiteSetupStatusResourceStatus = "completed"
+	AgencyHostingV1SetupsWebsiteSetupStatusResourceStatusRunning   AgencyHostingV1SetupsWebsiteSetupStatusResourceStatus = "running"
+)
+
+// Valid indicates whether the value is a known member of the AgencyHostingV1SetupsWebsiteSetupStatusResourceStatus enum.
+func (e AgencyHostingV1SetupsWebsiteSetupStatusResourceStatus) Valid() bool {
+	switch e {
+	case AgencyHostingV1SetupsWebsiteSetupStatusResourceStatusCompleted:
+		return true
+	case AgencyHostingV1SetupsWebsiteSetupStatusResourceStatusRunning:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AgencyHostingV1WebsitesWebsiteProcessResourceStatus.
+const (
+	AgencyHostingV1WebsitesWebsiteProcessResourceStatusCompleted AgencyHostingV1WebsitesWebsiteProcessResourceStatus = "completed"
+	AgencyHostingV1WebsitesWebsiteProcessResourceStatusFailed    AgencyHostingV1WebsitesWebsiteProcessResourceStatus = "failed"
+	AgencyHostingV1WebsitesWebsiteProcessResourceStatusRunning   AgencyHostingV1WebsitesWebsiteProcessResourceStatus = "running"
+)
+
+// Valid indicates whether the value is a known member of the AgencyHostingV1WebsitesWebsiteProcessResourceStatus enum.
+func (e AgencyHostingV1WebsitesWebsiteProcessResourceStatus) Valid() bool {
+	switch e {
+	case AgencyHostingV1WebsitesWebsiteProcessResourceStatusCompleted:
+		return true
+	case AgencyHostingV1WebsitesWebsiteProcessResourceStatusFailed:
+		return true
+	case AgencyHostingV1WebsitesWebsiteProcessResourceStatusRunning:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AgencyHostingV1WebsitesWebsiteResourceState.
+const (
+	AgencyHostingV1WebsitesWebsiteResourceStateActive    AgencyHostingV1WebsitesWebsiteResourceState = "active"
+	AgencyHostingV1WebsitesWebsiteResourceStateSuspended AgencyHostingV1WebsitesWebsiteResourceState = "suspended"
+)
+
+// Valid indicates whether the value is a known member of the AgencyHostingV1WebsitesWebsiteResourceState enum.
+func (e AgencyHostingV1WebsitesWebsiteResourceState) Valid() bool {
+	switch e {
+	case AgencyHostingV1WebsitesWebsiteResourceStateActive:
+		return true
+	case AgencyHostingV1WebsitesWebsiteResourceStateSuspended:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for BillingV1CatalogCatalogItemPriceResourcePeriodUnit.
 const (
 	BillingV1CatalogCatalogItemPriceResourcePeriodUnitDay   BillingV1CatalogCatalogItemPriceResourcePeriodUnit = "day"
@@ -1341,16 +1416,16 @@ func (e VPSV1FirewallRulesStoreRequestProtocol) Valid() bool {
 
 // Defines values for VPSV1FirewallRulesStoreRequestSource.
 const (
-	Any    VPSV1FirewallRulesStoreRequestSource = "any"
-	Custom VPSV1FirewallRulesStoreRequestSource = "custom"
+	VPSV1FirewallRulesStoreRequestSourceAny    VPSV1FirewallRulesStoreRequestSource = "any"
+	VPSV1FirewallRulesStoreRequestSourceCustom VPSV1FirewallRulesStoreRequestSource = "custom"
 )
 
 // Valid indicates whether the value is a known member of the VPSV1FirewallRulesStoreRequestSource enum.
 func (e VPSV1FirewallRulesStoreRequestSource) Valid() bool {
 	switch e {
-	case Any:
+	case VPSV1FirewallRulesStoreRequestSourceAny:
 		return true
-	case Custom:
+	case VPSV1FirewallRulesStoreRequestSourceCustom:
 		return true
 	default:
 		return false
@@ -1710,22 +1785,22 @@ func (e BillingGetCatalogItemListV1ParamsCategory) Valid() bool {
 
 // Defines values for HostingListNodeJSBuildsV1ParamsStates.
 const (
-	Completed HostingListNodeJSBuildsV1ParamsStates = "completed"
-	Failed    HostingListNodeJSBuildsV1ParamsStates = "failed"
-	Pending   HostingListNodeJSBuildsV1ParamsStates = "pending"
-	Running   HostingListNodeJSBuildsV1ParamsStates = "running"
+	HostingListNodeJSBuildsV1ParamsStatesCompleted HostingListNodeJSBuildsV1ParamsStates = "completed"
+	HostingListNodeJSBuildsV1ParamsStatesFailed    HostingListNodeJSBuildsV1ParamsStates = "failed"
+	HostingListNodeJSBuildsV1ParamsStatesPending   HostingListNodeJSBuildsV1ParamsStates = "pending"
+	HostingListNodeJSBuildsV1ParamsStatesRunning   HostingListNodeJSBuildsV1ParamsStates = "running"
 )
 
 // Valid indicates whether the value is a known member of the HostingListNodeJSBuildsV1ParamsStates enum.
 func (e HostingListNodeJSBuildsV1ParamsStates) Valid() bool {
 	switch e {
-	case Completed:
+	case HostingListNodeJSBuildsV1ParamsStatesCompleted:
 		return true
-	case Failed:
+	case HostingListNodeJSBuildsV1ParamsStatesFailed:
 		return true
-	case Pending:
+	case HostingListNodeJSBuildsV1ParamsStatesPending:
 		return true
-	case Running:
+	case HostingListNodeJSBuildsV1ParamsStatesRunning:
 		return true
 	default:
 		return false
@@ -1826,6 +1901,430 @@ func (e ReachListContactsV1ParamsSubscriptionStatus) Valid() bool {
 	default:
 		return false
 	}
+}
+
+// AgencyHostingV1DatacentersCoordinatesResource defines model for AgencyHosting.V1.Datacenters.CoordinatesResource.
+type AgencyHostingV1DatacentersCoordinatesResource struct {
+	// Latitude Latitude coordinate
+	Latitude *float32 `json:"latitude,omitempty"`
+
+	// Longitude Longitude coordinate
+	Longitude *float32 `json:"longitude,omitempty"`
+}
+
+// AgencyHostingV1DatacentersDatacenterCollection Array of [`AgencyHosting.V1.Datacenters.DatacenterResource`](#model/agencyhostingv1datacentersdatacenterresource)
+type AgencyHostingV1DatacentersDatacenterCollection = []AgencyHostingV1DatacentersDatacenterResource
+
+// AgencyHostingV1DatacentersDatacenterResource defines model for AgencyHosting.V1.Datacenters.DatacenterResource.
+type AgencyHostingV1DatacentersDatacenterResource struct {
+	// Code Datacenter code
+	Code        string                                        `json:"code"`
+	Coordinates AgencyHostingV1DatacentersCoordinatesResource `json:"coordinates"`
+
+	// Country Datacenter country code
+	Country string `json:"country"`
+
+	// PingerUrl URL you can ping to measure round-trip latency to this datacenter. Compare the measured latency across datacenters to identify the nearest one (lowest ping) for your website. Null when no online server is currently available to measure against.
+	PingerUrl *string `json:"pinger_url"`
+
+	// Title Datacenter title
+	Title string `json:"title"`
+}
+
+// AgencyHostingV1DomainsChangeDomainRequest defines model for AgencyHosting.V1.Domains.ChangeDomainRequest.
+type AgencyHostingV1DomainsChangeDomainRequest struct {
+	// Domain New domain to assign to the website. Set to null to revert to the temporary domain.
+	Domain *string `json:"domain"`
+}
+
+// AgencyHostingV1DomainsDomainCollection Array of [`AgencyHosting.V1.Domains.DomainResource`](#model/agencyhostingv1domainsdomainresource)
+type AgencyHostingV1DomainsDomainCollection = []AgencyHostingV1DomainsDomainResource
+
+// AgencyHostingV1DomainsDomainResource defines model for AgencyHosting.V1.Domains.DomainResource.
+type AgencyHostingV1DomainsDomainResource struct {
+	// CreatedAt Creation date
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Fqdn Domain name
+	Fqdn *string `json:"fqdn,omitempty"`
+
+	// WebsiteUid Owner website UID
+	WebsiteUid *string `json:"website_uid,omitempty"`
+}
+
+// AgencyHostingV1DomainsLinkDomainRequest defines model for AgencyHosting.V1.Domains.LinkDomainRequest.
+type AgencyHostingV1DomainsLinkDomainRequest struct {
+	// Domain Fully qualified domain name to link to the website
+	Domain string `json:"domain"`
+}
+
+// AgencyHostingV1SetupsCreateSetupRequest Create a new Agency Plan website setup on the given order
+type AgencyHostingV1SetupsCreateSetupRequest struct {
+	// Clone Clone the new website from an existing website
+	Clone *struct {
+		WebsiteUid string `json:"website_uid"`
+	} `json:"clone,omitempty"`
+
+	// DatacenterCode Datacenter code where the website should be provisioned. Available codes depend on live capacity and are not a fixed set.
+	DatacenterCode string `json:"datacenter_code"`
+
+	// DeriveDomain Derive the domain from an existing vhost
+	DeriveDomain *struct {
+		FromVhost struct {
+			Username string `json:"username"`
+			Vhost    string `json:"vhost"`
+		} `json:"from_vhost"`
+	} `json:"derive_domain,omitempty"`
+
+	// Domain Primary domain to attach to the website. Omit or set to null to get a free auto-generated *.hostingersite.com subdomain instead.
+	Domain *string `json:"domain,omitempty"`
+
+	// Flavor Setup flavor: a specific WordPress version in the format `wp-<major>.<minor>` or `wp-<major>.<minor>.<patch>` (e.g. `wp-6.8.2`), or `php-fpm` for a plain PHP stack. Generic versions like `wp-latest` are not allowed.
+	Flavor string `json:"flavor"`
+
+	// Settings Website settings
+	Settings struct {
+		Php struct {
+			// Version PHP version
+			Version string `json:"version"`
+		} `json:"php"`
+	} `json:"settings"`
+
+	// Type Website type
+	Type *AgencyHostingV1SetupsCreateSetupRequestType `json:"type,omitempty"`
+
+	// Wordpress WordPress installation options
+	Wordpress *struct {
+		Admin struct {
+			Email    string `json:"email"`
+			Password string `json:"password"`
+			User     string `json:"user"`
+		} `json:"admin"`
+		Language string `json:"language"`
+		Title    string `json:"title"`
+	} `json:"wordpress,omitempty"`
+}
+
+// AgencyHostingV1SetupsCreateSetupRequestType Website type
+type AgencyHostingV1SetupsCreateSetupRequestType string
+
+// AgencyHostingV1SetupsWebsiteSetupResource defines model for AgencyHosting.V1.Setups.WebsiteSetupResource.
+type AgencyHostingV1SetupsWebsiteSetupResource struct {
+	// SetupUuid UUID tracking the asynchronous website setup process
+	SetupUuid *string `json:"setup_uuid,omitempty"`
+}
+
+// AgencyHostingV1SetupsWebsiteSetupStatusResource defines model for AgencyHosting.V1.Setups.WebsiteSetupStatusResource.
+type AgencyHostingV1SetupsWebsiteSetupStatusResource struct {
+	// Status Website setup status
+	Status *AgencyHostingV1SetupsWebsiteSetupStatusResourceStatus `json:"status,omitempty"`
+
+	// WebsiteUid UID of the website created by the setup, available once provisioning completes
+	WebsiteUid *string `json:"website_uid,omitempty"`
+}
+
+// AgencyHostingV1SetupsWebsiteSetupStatusResourceStatus Website setup status
+type AgencyHostingV1SetupsWebsiteSetupStatusResourceStatus string
+
+// AgencyHostingV1WebsitesBuildAssetsRequest Build Node.js assets from an already-uploaded archive
+type AgencyHostingV1WebsitesBuildAssetsRequest struct {
+	// ArchivePath Directory, relative to the website document root, where the uploaded site archive currently lives. Most commonly this is simply `public_html`.
+	ArchivePath string `json:"archive_path"`
+}
+
+// AgencyHostingV1WebsitesCustomSslCertResource defines model for AgencyHosting.V1.Websites.CustomSslCertResource.
+type AgencyHostingV1WebsitesCustomSslCertResource struct {
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	ExpiresAt *time.Time `json:"expires_at,omitempty"`
+
+	// IsExpired Is the SSL certificate expired
+	IsExpired *bool `json:"is_expired,omitempty"`
+}
+
+// AgencyHostingV1WebsitesSslCertResource defines model for AgencyHosting.V1.Websites.SslCertResource.
+type AgencyHostingV1WebsitesSslCertResource struct {
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	ExpiresAt *time.Time `json:"expires_at,omitempty"`
+
+	// Names SSL cert names
+	Names *[]string `json:"names,omitempty"`
+}
+
+// AgencyHostingV1WebsitesWebsiteDeletionResource defines model for AgencyHosting.V1.Websites.WebsiteDeletionResource.
+type AgencyHostingV1WebsitesWebsiteDeletionResource struct {
+	DeletedAt *time.Time `json:"deleted_at,omitempty"`
+
+	// IsCleanupScheduled Whether background cleanup has been scheduled
+	IsCleanupScheduled *bool `json:"is_cleanup_scheduled,omitempty"`
+
+	// Message Human-readable result message
+	Message *string `json:"message,omitempty"`
+
+	// Status Deletion status
+	Status *string `json:"status,omitempty"`
+
+	// WebsiteUid Deleted website UID
+	WebsiteUid *string `json:"website_uid,omitempty"`
+}
+
+// AgencyHostingV1WebsitesWebsiteDomainDetailsCollection Array of [`AgencyHosting.V1.Websites.WebsiteDomainDetailsResource`](#model/agencyhostingv1websiteswebsitedomaindetailsresource)
+type AgencyHostingV1WebsitesWebsiteDomainDetailsCollection = []AgencyHostingV1WebsitesWebsiteDomainDetailsResource
+
+// AgencyHostingV1WebsitesWebsiteDomainDetailsResource defines model for AgencyHosting.V1.Websites.WebsiteDomainDetailsResource.
+type AgencyHostingV1WebsitesWebsiteDomainDetailsResource struct {
+	CreatedAt     *time.Time                                                         `json:"created_at,omitempty"`
+	CustomSslCert *AgencyHostingV1WebsitesWebsiteDomainDetailsResource_CustomSslCert `json:"custom_ssl_cert,omitempty"`
+
+	// Fqdn Domain name
+	Fqdn *string `json:"fqdn,omitempty"`
+
+	// Ipv6 IPv6 address
+	Ipv6        *string   `json:"ipv6,omitempty"`
+	Nameservers *[]string `json:"nameservers,omitempty"`
+
+	// ParentFqdn Parent domain name if the domain is a subdomain
+	ParentFqdn *string                                                      `json:"parent_fqdn,omitempty"`
+	SslCert    *AgencyHostingV1WebsitesWebsiteDomainDetailsResource_SslCert `json:"ssl_cert,omitempty"`
+}
+
+// AgencyHostingV1WebsitesWebsiteDomainDetailsResource_CustomSslCert defines model for AgencyHostingV1WebsitesWebsiteDomainDetailsResource.CustomSslCert.
+type AgencyHostingV1WebsitesWebsiteDomainDetailsResource_CustomSslCert struct {
+	union json.RawMessage
+}
+
+// AgencyHostingV1WebsitesWebsiteDomainDetailsResource_SslCert defines model for AgencyHostingV1WebsitesWebsiteDomainDetailsResource.SslCert.
+type AgencyHostingV1WebsitesWebsiteDomainDetailsResource_SslCert struct {
+	union json.RawMessage
+}
+
+// AgencyHostingV1WebsitesWebsiteOrderPlanResource defines model for AgencyHosting.V1.Websites.WebsiteOrderPlanResource.
+type AgencyHostingV1WebsitesWebsiteOrderPlanResource struct {
+	// Name Plan name
+	Name *string `json:"name,omitempty"`
+
+	// Parameters Plan parameters
+	Parameters *struct {
+		// CpuCores CPU cores
+		CpuCores *int `json:"cpu_cores,omitempty"`
+
+		// DiskIopsQuota Disk IOPs quota
+		DiskIopsQuota *int `json:"disk_iops_quota,omitempty"`
+
+		// DiskQuotaBytes Disk quota in bytes
+		DiskQuotaBytes *int `json:"disk_quota_bytes,omitempty"`
+
+		// InodeQuota Inode quota
+		InodeQuota *int `json:"inode_quota,omitempty"`
+
+		// IsCdnAvailable Is CDN available
+		IsCdnAvailable *bool `json:"is_cdn_available,omitempty"`
+
+		// MaxDatabasesPerWebsite Maximum number of databases per website
+		MaxDatabasesPerWebsite *int `json:"max_databases_per_website,omitempty"`
+
+		// MemoryQuotaBytes Memory quota in bytes
+		MemoryQuotaBytes *int `json:"memory_quota_bytes,omitempty"`
+
+		// ProcessQuota Process quota
+		ProcessQuota *int `json:"process_quota,omitempty"`
+
+		// WebsiteQuota Website quota
+		WebsiteQuota *int `json:"website_quota,omitempty"`
+	} `json:"parameters,omitempty"`
+}
+
+// AgencyHostingV1WebsitesWebsiteOrderResource defines model for AgencyHosting.V1.Websites.WebsiteOrderResource.
+type AgencyHostingV1WebsitesWebsiteOrderResource struct {
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Id Order ID
+	Id   *int                                             `json:"id,omitempty"`
+	Plan *AgencyHostingV1WebsitesWebsiteOrderPlanResource `json:"plan,omitempty"`
+
+	// Status Order status
+	Status *string `json:"status,omitempty"`
+}
+
+// AgencyHostingV1WebsitesWebsitePhpSettingsResource defines model for AgencyHosting.V1.Websites.WebsitePhpSettingsResource.
+type AgencyHostingV1WebsitesWebsitePhpSettingsResource struct {
+	// Version PHP version
+	Version *string `json:"version,omitempty"`
+
+	// Workers Number of PHP workers
+	Workers *int `json:"workers,omitempty"`
+}
+
+// AgencyHostingV1WebsitesWebsitePreviewDomainResource defines model for AgencyHosting.V1.Websites.WebsitePreviewDomainResource.
+type AgencyHostingV1WebsitesWebsitePreviewDomainResource struct {
+	// CreatedAt Creation date
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Fqdn Preview domain name
+	Fqdn *string `json:"fqdn,omitempty"`
+}
+
+// AgencyHostingV1WebsitesWebsiteProcessCollection Array of [`AgencyHosting.V1.Websites.WebsiteProcessResource`](#model/agencyhostingv1websiteswebsiteprocessresource)
+type AgencyHostingV1WebsitesWebsiteProcessCollection = []AgencyHostingV1WebsitesWebsiteProcessResource
+
+// AgencyHostingV1WebsitesWebsiteProcessResource defines model for AgencyHosting.V1.Websites.WebsiteProcessResource.
+type AgencyHostingV1WebsitesWebsiteProcessResource struct {
+	// Id Process ID
+	Id *string `json:"id,omitempty"`
+
+	// Status Process status
+	Status *AgencyHostingV1WebsitesWebsiteProcessResourceStatus `json:"status,omitempty"`
+
+	// Type Process type
+	Type *string `json:"type,omitempty"`
+}
+
+// AgencyHostingV1WebsitesWebsiteProcessResourceStatus Process status
+type AgencyHostingV1WebsitesWebsiteProcessResourceStatus string
+
+// AgencyHostingV1WebsitesWebsiteRemoteAccessResource defines model for AgencyHosting.V1.Websites.WebsiteRemoteAccessResource.
+type AgencyHostingV1WebsitesWebsiteRemoteAccessResource struct {
+	// Mode Remote access mode
+	Mode *string                                            `json:"mode,omitempty"`
+	Sftp *AgencyHostingV1WebsitesWebsiteSftpDetailsResource `json:"sftp,omitempty"`
+	Ssh  *AgencyHostingV1WebsitesWebsiteSshDetailsResource  `json:"ssh,omitempty"`
+}
+
+// AgencyHostingV1WebsitesWebsiteResource defines model for AgencyHosting.V1.Websites.WebsiteResource.
+type AgencyHostingV1WebsitesWebsiteResource struct {
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Description Description
+	Description *string `json:"description,omitempty"`
+
+	// Domains Array of [`AgencyHosting.V1.Websites.WebsiteDomainDetailsResource`](#model/agencyhostingv1websiteswebsitedomaindetailsresource)
+	Domains *AgencyHostingV1WebsitesWebsiteDomainDetailsCollection `json:"domains,omitempty"`
+
+	// Flavor Setup flavor
+	Flavor *string `json:"flavor,omitempty"`
+
+	// Ipv4 IPv4 address
+	Ipv4          *string                                               `json:"ipv4,omitempty"`
+	Order         *AgencyHostingV1WebsitesWebsiteOrderResource          `json:"order,omitempty"`
+	PreviewDomain *AgencyHostingV1WebsitesWebsiteResource_PreviewDomain `json:"preview_domain,omitempty"`
+	RemoteAccess  *AgencyHostingV1WebsitesWebsiteRemoteAccessResource   `json:"remote_access,omitempty"`
+	Server        *AgencyHostingV1WebsitesWebsiteServerResource         `json:"server,omitempty"`
+	Settings      *AgencyHostingV1WebsitesWebsiteSettingsResource       `json:"settings,omitempty"`
+	StagingRoot   *AgencyHostingV1WebsitesWebsiteResource_StagingRoot   `json:"staging_root,omitempty"`
+
+	// State Website state
+	State *AgencyHostingV1WebsitesWebsiteResourceState `json:"state,omitempty"`
+
+	// Type Website type
+	Type *string `json:"type,omitempty"`
+
+	// Uid Website UID
+	Uid       *string                                           `json:"uid,omitempty"`
+	User      *AgencyHostingV1WebsitesWebsiteUserResource       `json:"user,omitempty"`
+	Wordpress *AgencyHostingV1WebsitesWebsiteResource_Wordpress `json:"wordpress,omitempty"`
+}
+
+// AgencyHostingV1WebsitesWebsiteResource_PreviewDomain defines model for AgencyHostingV1WebsitesWebsiteResource.PreviewDomain.
+type AgencyHostingV1WebsitesWebsiteResource_PreviewDomain struct {
+	union json.RawMessage
+}
+
+// AgencyHostingV1WebsitesWebsiteResource_StagingRoot defines model for AgencyHostingV1WebsitesWebsiteResource.StagingRoot.
+type AgencyHostingV1WebsitesWebsiteResource_StagingRoot struct {
+	union json.RawMessage
+}
+
+// AgencyHostingV1WebsitesWebsiteResourceState Website state
+type AgencyHostingV1WebsitesWebsiteResourceState string
+
+// AgencyHostingV1WebsitesWebsiteResource_Wordpress defines model for AgencyHostingV1WebsitesWebsiteResource.Wordpress.
+type AgencyHostingV1WebsitesWebsiteResource_Wordpress struct {
+	union json.RawMessage
+}
+
+// AgencyHostingV1WebsitesWebsiteServerResource defines model for AgencyHosting.V1.Websites.WebsiteServerResource.
+type AgencyHostingV1WebsitesWebsiteServerResource struct {
+	// CountryCode Country code
+	CountryCode *string `json:"country_code,omitempty"`
+
+	// Hostname Server hostname
+	Hostname *string `json:"hostname,omitempty"`
+}
+
+// AgencyHostingV1WebsitesWebsiteSettingsResource defines model for AgencyHosting.V1.Websites.WebsiteSettingsResource.
+type AgencyHostingV1WebsitesWebsiteSettingsResource struct {
+	// Php PHP settings
+	Php *AgencyHostingV1WebsitesWebsiteSettingsResource_Php `json:"php,omitempty"`
+}
+
+// AgencyHostingV1WebsitesWebsiteSettingsResource_Php PHP settings
+type AgencyHostingV1WebsitesWebsiteSettingsResource_Php struct {
+	union json.RawMessage
+}
+
+// AgencyHostingV1WebsitesWebsiteSftpDetailsResource defines model for AgencyHosting.V1.Websites.WebsiteSftpDetailsResource.
+type AgencyHostingV1WebsitesWebsiteSftpDetailsResource struct {
+	// Host SFTP host
+	Host *string `json:"host,omitempty"`
+
+	// IsEnabled Is SFTP access enabled
+	IsEnabled *bool `json:"is_enabled,omitempty"`
+
+	// Port SFTP port
+	Port *int `json:"port,omitempty"`
+
+	// Username SFTP username
+	Username *string `json:"username,omitempty"`
+}
+
+// AgencyHostingV1WebsitesWebsiteSshDetailsResource defines model for AgencyHosting.V1.Websites.WebsiteSshDetailsResource.
+type AgencyHostingV1WebsitesWebsiteSshDetailsResource struct {
+	// Host SSH host
+	Host *string `json:"host,omitempty"`
+
+	// IsEnabled Is SSH access enabled
+	IsEnabled *bool `json:"is_enabled,omitempty"`
+
+	// IsPasswordEnabled Is SSH password access enabled
+	IsPasswordEnabled *bool `json:"is_password_enabled,omitempty"`
+
+	// Port SSH port
+	Port *int `json:"port,omitempty"`
+
+	// Username SSH username
+	Username *string `json:"username,omitempty"`
+}
+
+// AgencyHostingV1WebsitesWebsiteStagingRootResource defines model for AgencyHosting.V1.Websites.WebsiteStagingRootResource.
+type AgencyHostingV1WebsitesWebsiteStagingRootResource struct {
+	// Uid UID of the website this is a staging environment of
+	Uid *string `json:"uid,omitempty"`
+}
+
+// AgencyHostingV1WebsitesWebsiteUserResource defines model for AgencyHosting.V1.Websites.WebsiteUserResource.
+type AgencyHostingV1WebsitesWebsiteUserResource struct {
+	// State User state
+	State *string `json:"state,omitempty"`
+
+	// Username System username
+	Username *string `json:"username,omitempty"`
+}
+
+// AgencyHostingV1WebsitesWordPressInstallResource defines model for AgencyHosting.V1.Websites.WordPressInstallResource.
+type AgencyHostingV1WebsitesWordPressInstallResource struct {
+	// CreatedAt Creation date
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Domain WordPress domain
+	Domain *string `json:"domain,omitempty"`
+
+	// IsConfigLocked WordPress configuration lock status
+	IsConfigLocked *bool `json:"is_config_locked,omitempty"`
+
+	// Language WordPress language
+	Language *string `json:"language,omitempty"`
+
+	// Title WordPress title
+	Title *string `json:"title,omitempty"`
 }
 
 // BillingV1CatalogCatalogItemCollection Array of [`Billing.V1.Catalog.CatalogItemResource`](#model/billingv1catalogcatalogitemresource)
@@ -2761,6 +3260,18 @@ type HorizonsV1WebsitesCreatedWebsiteResource struct {
 type HorizonsV1WebsitesWebsiteUrlResource struct {
 	// WebsiteUrl The website URL for the user to access their website in Hostinger Horizons interface
 	WebsiteUrl string `json:"website_url"`
+}
+
+// HostingV1CacheToggleCacheRequest defines model for Hosting.V1.Cache.ToggleCacheRequest.
+type HostingV1CacheToggleCacheRequest struct {
+	// Enabled Turn server-side caching on (true) or off (false) for the website.
+	Enabled bool `json:"enabled"`
+}
+
+// HostingV1CacheToggleCachelessModeRequest defines model for Hosting.V1.Cache.ToggleCachelessModeRequest.
+type HostingV1CacheToggleCachelessModeRequest struct {
+	// Enabled Turn development (cacheless) mode on (true) or off (false) for the website.
+	Enabled bool `json:"enabled"`
 }
 
 // HostingV1CronJobsCreateCronJobRequest defines model for Hosting.V1.CronJobs.CreateCronJobRequest.
@@ -4657,6 +5168,9 @@ type DomainFilter = string
 // FirewallId defines model for firewallId.
 type FirewallId = int
 
+// FromDomain defines model for from_domain.
+type FromDomain = string
+
 // GroupUuid defines model for group_uuid.
 type GroupUuid = string
 
@@ -4671,6 +5185,9 @@ type Name = string
 
 // OrderId defines model for order_id.
 type OrderId = int
+
+// OrderIdPath defines model for order_id_path.
+type OrderIdPath = int
 
 // OrderIdRequired defines model for order_id_required.
 type OrderIdRequired = int
@@ -4707,6 +5224,9 @@ type RuleId = int
 
 // SegmentUuid defines model for segmentUuid.
 type SegmentUuid = string
+
+// SetupUuid defines model for setup_uuid.
+type SetupUuid = openapi_types.UUID
 
 // SnapshotId defines model for snapshotId.
 type SnapshotId = int
@@ -4747,6 +5267,12 @@ type VirtualMachineId = int
 // WebsiteIdPath defines model for website_id_path.
 type WebsiteIdPath = string
 
+// WebsiteUid defines model for website_uid.
+type WebsiteUid = string
+
+// WebsiteUuids defines model for website_uuids.
+type WebsiteUuids = []string
+
 // WhoisId defines model for whoisId.
 type WhoisId = int
 
@@ -4785,6 +5311,18 @@ type CommonResponseUnprocessableContentResponse struct {
 
 // apiTokenContextKey is the context key for apiToken security scheme
 type apiTokenContextKey string
+
+// AgencyHostingListAgencyPlanDomainsV1Params defines parameters for AgencyHostingListAgencyPlanDomainsV1.
+type AgencyHostingListAgencyPlanDomainsV1Params struct {
+	// Page Page number
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+
+	// PerPage Number of items per page
+	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
+
+	// WebsiteUuids Filter by website UIDs
+	WebsiteUuids *WebsiteUuids `form:"website_uuids,omitempty" json:"website_uuids,omitempty"`
+}
 
 // BillingGetCatalogItemListV1Params defines parameters for BillingGetCatalogItemListV1.
 type BillingGetCatalogItemListV1Params struct {
@@ -5050,6 +5588,18 @@ type VPSGetAttachedPublicKeysV1Params struct {
 	Page *Page `form:"page,omitempty" json:"page,omitempty"`
 }
 
+// AgencyHostingProvisionANewAgencyPlanWebsiteV1JSONRequestBody defines body for AgencyHostingProvisionANewAgencyPlanWebsiteV1 for application/json ContentType.
+type AgencyHostingProvisionANewAgencyPlanWebsiteV1JSONRequestBody = AgencyHostingV1SetupsCreateSetupRequest
+
+// AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1JSONRequestBody defines body for AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1 for application/json ContentType.
+type AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1JSONRequestBody = AgencyHostingV1WebsitesBuildAssetsRequest
+
+// AgencyHostingLinkDomainToAgencyPlanWebsiteV1JSONRequestBody defines body for AgencyHostingLinkDomainToAgencyPlanWebsiteV1 for application/json ContentType.
+type AgencyHostingLinkDomainToAgencyPlanWebsiteV1JSONRequestBody = AgencyHostingV1DomainsLinkDomainRequest
+
+// AgencyHostingChangeAgencyPlanWebsiteDomainV1JSONRequestBody defines body for AgencyHostingChangeAgencyPlanWebsiteDomainV1 for application/json ContentType.
+type AgencyHostingChangeAgencyPlanWebsiteDomainV1JSONRequestBody = AgencyHostingV1DomainsChangeDomainRequest
+
 // DNSDeleteDNSRecordsV1JSONRequestBody defines body for DNSDeleteDNSRecordsV1 for application/json ContentType.
 type DNSDeleteDNSRecordsV1JSONRequestBody = DNSV1ZoneDestroyRequest
 
@@ -5112,6 +5662,12 @@ type HostingChangeDatabasePasswordV1JSONRequestBody = HostingV1DatabasesChangeDa
 
 // HostingCreateAccountDatabaseRemoteConnectionV1JSONRequestBody defines body for HostingCreateAccountDatabaseRemoteConnectionV1 for application/json ContentType.
 type HostingCreateAccountDatabaseRemoteConnectionV1JSONRequestBody = HostingV1DatabasesRemoteConnectionsCreateRemoteConnectionRequest
+
+// HostingToggleWebsiteCacheV1JSONRequestBody defines body for HostingToggleWebsiteCacheV1 for application/json ContentType.
+type HostingToggleWebsiteCacheV1JSONRequestBody = HostingV1CacheToggleCacheRequest
+
+// HostingToggleCachelessModeV1JSONRequestBody defines body for HostingToggleCachelessModeV1 for application/json ContentType.
+type HostingToggleCachelessModeV1JSONRequestBody = HostingV1CacheToggleCachelessModeRequest
 
 // HostingCreateNodeJSBuildFromArchiveV1JSONRequestBody defines body for HostingCreateNodeJSBuildFromArchiveV1 for application/json ContentType.
 type HostingCreateNodeJSBuildFromArchiveV1JSONRequestBody = HostingV1NodeJsCreateFromArchiveRequest
@@ -5250,6 +5806,222 @@ type VPSSetRootPasswordV1JSONRequestBody = VPSV1VirtualMachineRootPasswordUpdate
 
 // VPSSetupPurchasedVirtualMachineV1JSONRequestBody defines body for VPSSetupPurchasedVirtualMachineV1 for application/json ContentType.
 type VPSSetupPurchasedVirtualMachineV1JSONRequestBody = VPSV1VirtualMachineSetupRequest
+
+// AsAgencyHostingV1WebsitesCustomSslCertResource returns the union data inside the AgencyHostingV1WebsitesWebsiteDomainDetailsResource_CustomSslCert as a AgencyHostingV1WebsitesCustomSslCertResource
+func (t AgencyHostingV1WebsitesWebsiteDomainDetailsResource_CustomSslCert) AsAgencyHostingV1WebsitesCustomSslCertResource() (AgencyHostingV1WebsitesCustomSslCertResource, error) {
+	var body AgencyHostingV1WebsitesCustomSslCertResource
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromAgencyHostingV1WebsitesCustomSslCertResource overwrites any union data inside the AgencyHostingV1WebsitesWebsiteDomainDetailsResource_CustomSslCert as the provided AgencyHostingV1WebsitesCustomSslCertResource
+func (t *AgencyHostingV1WebsitesWebsiteDomainDetailsResource_CustomSslCert) FromAgencyHostingV1WebsitesCustomSslCertResource(v AgencyHostingV1WebsitesCustomSslCertResource) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeAgencyHostingV1WebsitesCustomSslCertResource performs a merge with any union data inside the AgencyHostingV1WebsitesWebsiteDomainDetailsResource_CustomSslCert, using the provided AgencyHostingV1WebsitesCustomSslCertResource
+func (t *AgencyHostingV1WebsitesWebsiteDomainDetailsResource_CustomSslCert) MergeAgencyHostingV1WebsitesCustomSslCertResource(v AgencyHostingV1WebsitesCustomSslCertResource) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t AgencyHostingV1WebsitesWebsiteDomainDetailsResource_CustomSslCert) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *AgencyHostingV1WebsitesWebsiteDomainDetailsResource_CustomSslCert) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsAgencyHostingV1WebsitesSslCertResource returns the union data inside the AgencyHostingV1WebsitesWebsiteDomainDetailsResource_SslCert as a AgencyHostingV1WebsitesSslCertResource
+func (t AgencyHostingV1WebsitesWebsiteDomainDetailsResource_SslCert) AsAgencyHostingV1WebsitesSslCertResource() (AgencyHostingV1WebsitesSslCertResource, error) {
+	var body AgencyHostingV1WebsitesSslCertResource
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromAgencyHostingV1WebsitesSslCertResource overwrites any union data inside the AgencyHostingV1WebsitesWebsiteDomainDetailsResource_SslCert as the provided AgencyHostingV1WebsitesSslCertResource
+func (t *AgencyHostingV1WebsitesWebsiteDomainDetailsResource_SslCert) FromAgencyHostingV1WebsitesSslCertResource(v AgencyHostingV1WebsitesSslCertResource) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeAgencyHostingV1WebsitesSslCertResource performs a merge with any union data inside the AgencyHostingV1WebsitesWebsiteDomainDetailsResource_SslCert, using the provided AgencyHostingV1WebsitesSslCertResource
+func (t *AgencyHostingV1WebsitesWebsiteDomainDetailsResource_SslCert) MergeAgencyHostingV1WebsitesSslCertResource(v AgencyHostingV1WebsitesSslCertResource) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t AgencyHostingV1WebsitesWebsiteDomainDetailsResource_SslCert) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *AgencyHostingV1WebsitesWebsiteDomainDetailsResource_SslCert) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsAgencyHostingV1WebsitesWebsitePreviewDomainResource returns the union data inside the AgencyHostingV1WebsitesWebsiteResource_PreviewDomain as a AgencyHostingV1WebsitesWebsitePreviewDomainResource
+func (t AgencyHostingV1WebsitesWebsiteResource_PreviewDomain) AsAgencyHostingV1WebsitesWebsitePreviewDomainResource() (AgencyHostingV1WebsitesWebsitePreviewDomainResource, error) {
+	var body AgencyHostingV1WebsitesWebsitePreviewDomainResource
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromAgencyHostingV1WebsitesWebsitePreviewDomainResource overwrites any union data inside the AgencyHostingV1WebsitesWebsiteResource_PreviewDomain as the provided AgencyHostingV1WebsitesWebsitePreviewDomainResource
+func (t *AgencyHostingV1WebsitesWebsiteResource_PreviewDomain) FromAgencyHostingV1WebsitesWebsitePreviewDomainResource(v AgencyHostingV1WebsitesWebsitePreviewDomainResource) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeAgencyHostingV1WebsitesWebsitePreviewDomainResource performs a merge with any union data inside the AgencyHostingV1WebsitesWebsiteResource_PreviewDomain, using the provided AgencyHostingV1WebsitesWebsitePreviewDomainResource
+func (t *AgencyHostingV1WebsitesWebsiteResource_PreviewDomain) MergeAgencyHostingV1WebsitesWebsitePreviewDomainResource(v AgencyHostingV1WebsitesWebsitePreviewDomainResource) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t AgencyHostingV1WebsitesWebsiteResource_PreviewDomain) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *AgencyHostingV1WebsitesWebsiteResource_PreviewDomain) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsAgencyHostingV1WebsitesWebsiteStagingRootResource returns the union data inside the AgencyHostingV1WebsitesWebsiteResource_StagingRoot as a AgencyHostingV1WebsitesWebsiteStagingRootResource
+func (t AgencyHostingV1WebsitesWebsiteResource_StagingRoot) AsAgencyHostingV1WebsitesWebsiteStagingRootResource() (AgencyHostingV1WebsitesWebsiteStagingRootResource, error) {
+	var body AgencyHostingV1WebsitesWebsiteStagingRootResource
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromAgencyHostingV1WebsitesWebsiteStagingRootResource overwrites any union data inside the AgencyHostingV1WebsitesWebsiteResource_StagingRoot as the provided AgencyHostingV1WebsitesWebsiteStagingRootResource
+func (t *AgencyHostingV1WebsitesWebsiteResource_StagingRoot) FromAgencyHostingV1WebsitesWebsiteStagingRootResource(v AgencyHostingV1WebsitesWebsiteStagingRootResource) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeAgencyHostingV1WebsitesWebsiteStagingRootResource performs a merge with any union data inside the AgencyHostingV1WebsitesWebsiteResource_StagingRoot, using the provided AgencyHostingV1WebsitesWebsiteStagingRootResource
+func (t *AgencyHostingV1WebsitesWebsiteResource_StagingRoot) MergeAgencyHostingV1WebsitesWebsiteStagingRootResource(v AgencyHostingV1WebsitesWebsiteStagingRootResource) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t AgencyHostingV1WebsitesWebsiteResource_StagingRoot) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *AgencyHostingV1WebsitesWebsiteResource_StagingRoot) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsAgencyHostingV1WebsitesWordPressInstallResource returns the union data inside the AgencyHostingV1WebsitesWebsiteResource_Wordpress as a AgencyHostingV1WebsitesWordPressInstallResource
+func (t AgencyHostingV1WebsitesWebsiteResource_Wordpress) AsAgencyHostingV1WebsitesWordPressInstallResource() (AgencyHostingV1WebsitesWordPressInstallResource, error) {
+	var body AgencyHostingV1WebsitesWordPressInstallResource
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromAgencyHostingV1WebsitesWordPressInstallResource overwrites any union data inside the AgencyHostingV1WebsitesWebsiteResource_Wordpress as the provided AgencyHostingV1WebsitesWordPressInstallResource
+func (t *AgencyHostingV1WebsitesWebsiteResource_Wordpress) FromAgencyHostingV1WebsitesWordPressInstallResource(v AgencyHostingV1WebsitesWordPressInstallResource) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeAgencyHostingV1WebsitesWordPressInstallResource performs a merge with any union data inside the AgencyHostingV1WebsitesWebsiteResource_Wordpress, using the provided AgencyHostingV1WebsitesWordPressInstallResource
+func (t *AgencyHostingV1WebsitesWebsiteResource_Wordpress) MergeAgencyHostingV1WebsitesWordPressInstallResource(v AgencyHostingV1WebsitesWordPressInstallResource) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t AgencyHostingV1WebsitesWebsiteResource_Wordpress) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *AgencyHostingV1WebsitesWebsiteResource_Wordpress) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsAgencyHostingV1WebsitesWebsitePhpSettingsResource returns the union data inside the AgencyHostingV1WebsitesWebsiteSettingsResource_Php as a AgencyHostingV1WebsitesWebsitePhpSettingsResource
+func (t AgencyHostingV1WebsitesWebsiteSettingsResource_Php) AsAgencyHostingV1WebsitesWebsitePhpSettingsResource() (AgencyHostingV1WebsitesWebsitePhpSettingsResource, error) {
+	var body AgencyHostingV1WebsitesWebsitePhpSettingsResource
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromAgencyHostingV1WebsitesWebsitePhpSettingsResource overwrites any union data inside the AgencyHostingV1WebsitesWebsiteSettingsResource_Php as the provided AgencyHostingV1WebsitesWebsitePhpSettingsResource
+func (t *AgencyHostingV1WebsitesWebsiteSettingsResource_Php) FromAgencyHostingV1WebsitesWebsitePhpSettingsResource(v AgencyHostingV1WebsitesWebsitePhpSettingsResource) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeAgencyHostingV1WebsitesWebsitePhpSettingsResource performs a merge with any union data inside the AgencyHostingV1WebsitesWebsiteSettingsResource_Php, using the provided AgencyHostingV1WebsitesWebsitePhpSettingsResource
+func (t *AgencyHostingV1WebsitesWebsiteSettingsResource_Php) MergeAgencyHostingV1WebsitesWebsitePhpSettingsResource(v AgencyHostingV1WebsitesWebsitePhpSettingsResource) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t AgencyHostingV1WebsitesWebsiteSettingsResource_Php) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *AgencyHostingV1WebsitesWebsiteSettingsResource_Php) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
 
 // AsHostingV1NodeJsSourceOptionsResource returns the union data inside the HostingV1NodeJsBuildOptionsResource_SourceOptions as a HostingV1NodeJsSourceOptionsResource
 func (t HostingV1NodeJsBuildOptionsResource_SourceOptions) AsHostingV1NodeJsSourceOptionsResource() (HostingV1NodeJsSourceOptionsResource, error) {
@@ -5880,6 +6652,47 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 
 // The interface specification for the client above.
 type ClientInterface interface {
+	// AgencyHostingListAgencyPlanDomainsV1 request
+	AgencyHostingListAgencyPlanDomainsV1(ctx context.Context, params *AgencyHostingListAgencyPlanDomainsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1 request
+	AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1(ctx context.Context, orderId OrderIdPath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingProvisionANewAgencyPlanWebsiteV1WithBody request with any body
+	AgencyHostingProvisionANewAgencyPlanWebsiteV1WithBody(ctx context.Context, orderId OrderIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	AgencyHostingProvisionANewAgencyPlanWebsiteV1(ctx context.Context, orderId OrderIdPath, body AgencyHostingProvisionANewAgencyPlanWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingGetAgencyPlanWebsiteSetupStatusV1 request
+	AgencyHostingGetAgencyPlanWebsiteSetupStatusV1(ctx context.Context, orderId OrderIdPath, setupUuid SetupUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingDeleteAgencyPlanWebsiteV1 request
+	AgencyHostingDeleteAgencyPlanWebsiteV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingGetAgencyPlanWebsiteDetailsV1 request
+	AgencyHostingGetAgencyPlanWebsiteDetailsV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithBody request with any body
+	AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBody request with any body
+	AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	AgencyHostingLinkDomainToAgencyPlanWebsiteV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingLinkDomainToAgencyPlanWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1 request
+	AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingChangeAgencyPlanWebsiteDomainV1WithBody request with any body
+	AgencyHostingChangeAgencyPlanWebsiteDomainV1WithBody(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	AgencyHostingChangeAgencyPlanWebsiteDomainV1(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, body AgencyHostingChangeAgencyPlanWebsiteDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingListRunningAgencyPlanWebsiteProcessesV1 request
+	AgencyHostingListRunningAgencyPlanWebsiteProcessesV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// BillingGetCatalogItemListV1 request
 	BillingGetCatalogItemListV1(ctx context.Context, params *BillingGetCatalogItemListV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -6102,17 +6915,15 @@ type ClientInterface interface {
 	// HostingClearWebsiteCacheV1 request
 	HostingClearWebsiteCacheV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingClearWebsiteCacheV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// HostingDisableWebsiteCacheV1 request
-	HostingDisableWebsiteCacheV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// HostingToggleWebsiteCacheV1WithBody request with any body
+	HostingToggleWebsiteCacheV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// HostingEnableWebsiteCacheV1 request
-	HostingEnableWebsiteCacheV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+	HostingToggleWebsiteCacheV1(ctx context.Context, username UsernamePath, domain Domain, body HostingToggleWebsiteCacheV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// HostingDisableCachelessModeV1 request
-	HostingDisableCachelessModeV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// HostingToggleCachelessModeV1WithBody request with any body
+	HostingToggleCachelessModeV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// HostingEnableCachelessModeV1 request
-	HostingEnableCachelessModeV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+	HostingToggleCachelessModeV1(ctx context.Context, username UsernamePath, domain Domain, body HostingToggleCachelessModeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingListNodeJSBuildsV1 request
 	HostingListNodeJSBuildsV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingListNodeJSBuildsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -6124,6 +6935,9 @@ type ClientInterface interface {
 
 	// HostingGetNodeJSBuildLogsV1 request
 	HostingGetNodeJSBuildLogsV1(ctx context.Context, username UsernamePath, domain Domain, uuid BuildUuidPath, params *HostingGetNodeJSBuildLogsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingRestartNodeJsApplicationV1 request
+	HostingRestartNodeJsApplicationV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingListWebsiteParkedDomainsV1 request
 	HostingListWebsiteParkedDomainsV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -6598,6 +7412,186 @@ type ClientInterface interface {
 
 	// VPSStopVirtualMachineV1 request
 	VPSStopVirtualMachineV1(ctx context.Context, virtualMachineId VirtualMachineId, reqEditors ...RequestEditorFn) (*http.Response, error)
+}
+
+func (c *Client) AgencyHostingListAgencyPlanDomainsV1(ctx context.Context, params *AgencyHostingListAgencyPlanDomainsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingListAgencyPlanDomainsV1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1(ctx context.Context, orderId OrderIdPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Request(c.Server, orderId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AgencyHostingProvisionANewAgencyPlanWebsiteV1WithBody(ctx context.Context, orderId OrderIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingProvisionANewAgencyPlanWebsiteV1RequestWithBody(c.Server, orderId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AgencyHostingProvisionANewAgencyPlanWebsiteV1(ctx context.Context, orderId OrderIdPath, body AgencyHostingProvisionANewAgencyPlanWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingProvisionANewAgencyPlanWebsiteV1Request(c.Server, orderId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AgencyHostingGetAgencyPlanWebsiteSetupStatusV1(ctx context.Context, orderId OrderIdPath, setupUuid SetupUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingGetAgencyPlanWebsiteSetupStatusV1Request(c.Server, orderId, setupUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AgencyHostingDeleteAgencyPlanWebsiteV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingDeleteAgencyPlanWebsiteV1Request(c.Server, websiteUid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AgencyHostingGetAgencyPlanWebsiteDetailsV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingGetAgencyPlanWebsiteDetailsV1Request(c.Server, websiteUid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1RequestWithBody(c.Server, websiteUid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Request(c.Server, websiteUid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingLinkDomainToAgencyPlanWebsiteV1RequestWithBody(c.Server, websiteUid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AgencyHostingLinkDomainToAgencyPlanWebsiteV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingLinkDomainToAgencyPlanWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingLinkDomainToAgencyPlanWebsiteV1Request(c.Server, websiteUid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Request(c.Server, websiteUid, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AgencyHostingChangeAgencyPlanWebsiteDomainV1WithBody(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingChangeAgencyPlanWebsiteDomainV1RequestWithBody(c.Server, websiteUid, fromDomain, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AgencyHostingChangeAgencyPlanWebsiteDomainV1(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, body AgencyHostingChangeAgencyPlanWebsiteDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingChangeAgencyPlanWebsiteDomainV1Request(c.Server, websiteUid, fromDomain, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AgencyHostingListRunningAgencyPlanWebsiteProcessesV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingListRunningAgencyPlanWebsiteProcessesV1Request(c.Server, websiteUid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
 }
 
 func (c *Client) BillingGetCatalogItemListV1(ctx context.Context, params *BillingGetCatalogItemListV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -7572,8 +8566,8 @@ func (c *Client) HostingClearWebsiteCacheV1(ctx context.Context, username Userna
 	return c.Client.Do(req)
 }
 
-func (c *Client) HostingDisableWebsiteCacheV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewHostingDisableWebsiteCacheV1Request(c.Server, username, domain)
+func (c *Client) HostingToggleWebsiteCacheV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingToggleWebsiteCacheV1RequestWithBody(c.Server, username, domain, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -7584,8 +8578,8 @@ func (c *Client) HostingDisableWebsiteCacheV1(ctx context.Context, username User
 	return c.Client.Do(req)
 }
 
-func (c *Client) HostingEnableWebsiteCacheV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewHostingEnableWebsiteCacheV1Request(c.Server, username, domain)
+func (c *Client) HostingToggleWebsiteCacheV1(ctx context.Context, username UsernamePath, domain Domain, body HostingToggleWebsiteCacheV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingToggleWebsiteCacheV1Request(c.Server, username, domain, body)
 	if err != nil {
 		return nil, err
 	}
@@ -7596,8 +8590,8 @@ func (c *Client) HostingEnableWebsiteCacheV1(ctx context.Context, username Usern
 	return c.Client.Do(req)
 }
 
-func (c *Client) HostingDisableCachelessModeV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewHostingDisableCachelessModeV1Request(c.Server, username, domain)
+func (c *Client) HostingToggleCachelessModeV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingToggleCachelessModeV1RequestWithBody(c.Server, username, domain, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -7608,8 +8602,8 @@ func (c *Client) HostingDisableCachelessModeV1(ctx context.Context, username Use
 	return c.Client.Do(req)
 }
 
-func (c *Client) HostingEnableCachelessModeV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewHostingEnableCachelessModeV1Request(c.Server, username, domain)
+func (c *Client) HostingToggleCachelessModeV1(ctx context.Context, username UsernamePath, domain Domain, body HostingToggleCachelessModeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingToggleCachelessModeV1Request(c.Server, username, domain, body)
 	if err != nil {
 		return nil, err
 	}
@@ -7658,6 +8652,18 @@ func (c *Client) HostingCreateNodeJSBuildFromArchiveV1(ctx context.Context, user
 
 func (c *Client) HostingGetNodeJSBuildLogsV1(ctx context.Context, username UsernamePath, domain Domain, uuid BuildUuidPath, params *HostingGetNodeJSBuildLogsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingGetNodeJSBuildLogsV1Request(c.Server, username, domain, uuid, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingRestartNodeJsApplicationV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingRestartNodeJsApplicationV1Request(c.Server, username, domain)
 	if err != nil {
 		return nil, err
 	}
@@ -9742,6 +10748,497 @@ func (c *Client) VPSStopVirtualMachineV1(ctx context.Context, virtualMachineId V
 		return nil, err
 	}
 	return c.Client.Do(req)
+}
+
+// NewAgencyHostingListAgencyPlanDomainsV1Request generates requests for AgencyHostingListAgencyPlanDomainsV1
+func NewAgencyHostingListAgencyPlanDomainsV1Request(server string, params *AgencyHostingListAgencyPlanDomainsV1Params) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/domains")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Page != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page", *params.Page, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PerPage != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "per_page", *params.PerPage, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.WebsiteUuids != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "website_uuids", *params.WebsiteUuids, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "array", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Request generates requests for AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1
+func NewAgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Request(server string, orderId OrderIdPath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "order_id", orderId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/orders/%s/datacenters", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAgencyHostingProvisionANewAgencyPlanWebsiteV1Request calls the generic AgencyHostingProvisionANewAgencyPlanWebsiteV1 builder with application/json body
+func NewAgencyHostingProvisionANewAgencyPlanWebsiteV1Request(server string, orderId OrderIdPath, body AgencyHostingProvisionANewAgencyPlanWebsiteV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewAgencyHostingProvisionANewAgencyPlanWebsiteV1RequestWithBody(server, orderId, "application/json", bodyReader)
+}
+
+// NewAgencyHostingProvisionANewAgencyPlanWebsiteV1RequestWithBody generates requests for AgencyHostingProvisionANewAgencyPlanWebsiteV1 with any type of body
+func NewAgencyHostingProvisionANewAgencyPlanWebsiteV1RequestWithBody(server string, orderId OrderIdPath, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "order_id", orderId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/orders/%s/websites/setups", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewAgencyHostingGetAgencyPlanWebsiteSetupStatusV1Request generates requests for AgencyHostingGetAgencyPlanWebsiteSetupStatusV1
+func NewAgencyHostingGetAgencyPlanWebsiteSetupStatusV1Request(server string, orderId OrderIdPath, setupUuid SetupUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "order_id", orderId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "setup_uuid", setupUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/orders/%s/websites/setups/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAgencyHostingDeleteAgencyPlanWebsiteV1Request generates requests for AgencyHostingDeleteAgencyPlanWebsiteV1
+func NewAgencyHostingDeleteAgencyPlanWebsiteV1Request(server string, websiteUid WebsiteUid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAgencyHostingGetAgencyPlanWebsiteDetailsV1Request generates requests for AgencyHostingGetAgencyPlanWebsiteDetailsV1
+func NewAgencyHostingGetAgencyPlanWebsiteDetailsV1Request(server string, websiteUid WebsiteUid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Request calls the generic AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1 builder with application/json body
+func NewAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Request(server string, websiteUid WebsiteUid, body AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1RequestWithBody(server, websiteUid, "application/json", bodyReader)
+}
+
+// NewAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1RequestWithBody generates requests for AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1 with any type of body
+func NewAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1RequestWithBody(server string, websiteUid WebsiteUid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/build-assets", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewAgencyHostingLinkDomainToAgencyPlanWebsiteV1Request calls the generic AgencyHostingLinkDomainToAgencyPlanWebsiteV1 builder with application/json body
+func NewAgencyHostingLinkDomainToAgencyPlanWebsiteV1Request(server string, websiteUid WebsiteUid, body AgencyHostingLinkDomainToAgencyPlanWebsiteV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewAgencyHostingLinkDomainToAgencyPlanWebsiteV1RequestWithBody(server, websiteUid, "application/json", bodyReader)
+}
+
+// NewAgencyHostingLinkDomainToAgencyPlanWebsiteV1RequestWithBody generates requests for AgencyHostingLinkDomainToAgencyPlanWebsiteV1 with any type of body
+func NewAgencyHostingLinkDomainToAgencyPlanWebsiteV1RequestWithBody(server string, websiteUid WebsiteUid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/domains", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewAgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Request generates requests for AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1
+func NewAgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Request(server string, websiteUid WebsiteUid, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/domains/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAgencyHostingChangeAgencyPlanWebsiteDomainV1Request calls the generic AgencyHostingChangeAgencyPlanWebsiteDomainV1 builder with application/json body
+func NewAgencyHostingChangeAgencyPlanWebsiteDomainV1Request(server string, websiteUid WebsiteUid, fromDomain FromDomain, body AgencyHostingChangeAgencyPlanWebsiteDomainV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewAgencyHostingChangeAgencyPlanWebsiteDomainV1RequestWithBody(server, websiteUid, fromDomain, "application/json", bodyReader)
+}
+
+// NewAgencyHostingChangeAgencyPlanWebsiteDomainV1RequestWithBody generates requests for AgencyHostingChangeAgencyPlanWebsiteDomainV1 with any type of body
+func NewAgencyHostingChangeAgencyPlanWebsiteDomainV1RequestWithBody(server string, websiteUid WebsiteUid, fromDomain FromDomain, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "from_domain", fromDomain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/domains/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewAgencyHostingListRunningAgencyPlanWebsiteProcessesV1Request generates requests for AgencyHostingListRunningAgencyPlanWebsiteProcessesV1
+func NewAgencyHostingListRunningAgencyPlanWebsiteProcessesV1Request(server string, websiteUid WebsiteUid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/processes", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
 }
 
 // NewBillingGetCatalogItemListV1Request generates requests for BillingGetCatalogItemListV1
@@ -12295,8 +13792,19 @@ func NewHostingClearWebsiteCacheV1Request(server string, username UsernamePath, 
 	return req, nil
 }
 
-// NewHostingDisableWebsiteCacheV1Request generates requests for HostingDisableWebsiteCacheV1
-func NewHostingDisableWebsiteCacheV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+// NewHostingToggleWebsiteCacheV1Request calls the generic HostingToggleWebsiteCacheV1 builder with application/json body
+func NewHostingToggleWebsiteCacheV1Request(server string, username UsernamePath, domain Domain, body HostingToggleWebsiteCacheV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingToggleWebsiteCacheV1RequestWithBody(server, username, domain, "application/json", bodyReader)
+}
+
+// NewHostingToggleWebsiteCacheV1RequestWithBody generates requests for HostingToggleWebsiteCacheV1 with any type of body
+func NewHostingToggleWebsiteCacheV1RequestWithBody(server string, username UsernamePath, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -12318,7 +13826,7 @@ func NewHostingDisableWebsiteCacheV1Request(server string, username UsernamePath
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/cache/disable", pathParam0, pathParam1)
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/cache/toggle", pathParam0, pathParam1)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -12328,57 +13836,29 @@ func NewHostingDisableWebsiteCacheV1Request(server string, username UsernamePath
 		return nil, err
 	}
 
-	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
 
-// NewHostingEnableWebsiteCacheV1Request generates requests for HostingEnableWebsiteCacheV1
-func NewHostingEnableWebsiteCacheV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+// NewHostingToggleCachelessModeV1Request calls the generic HostingToggleCachelessModeV1 builder with application/json body
+func NewHostingToggleCachelessModeV1Request(server string, username UsernamePath, domain Domain, body HostingToggleCachelessModeV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/cache/enable", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingToggleCachelessModeV1RequestWithBody(server, username, domain, "application/json", bodyReader)
 }
 
-// NewHostingDisableCachelessModeV1Request generates requests for HostingDisableCachelessModeV1
-func NewHostingDisableCachelessModeV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+// NewHostingToggleCachelessModeV1RequestWithBody generates requests for HostingToggleCachelessModeV1 with any type of body
+func NewHostingToggleCachelessModeV1RequestWithBody(server string, username UsernamePath, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -12400,7 +13880,7 @@ func NewHostingDisableCachelessModeV1Request(server string, username UsernamePat
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/cacheless-mode/disable", pathParam0, pathParam1)
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/cacheless-mode/toggle", pathParam0, pathParam1)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -12410,51 +13890,12 @@ func NewHostingDisableCachelessModeV1Request(server string, username UsernamePat
 		return nil, err
 	}
 
-	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
 
-	return req, nil
-}
-
-// NewHostingEnableCachelessModeV1Request generates requests for HostingEnableCachelessModeV1
-func NewHostingEnableCachelessModeV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/cacheless-mode/enable", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -12673,6 +14114,47 @@ func NewHostingGetNodeJSBuildLogsV1Request(server string, username UsernamePath,
 	}
 
 	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingRestartNodeJsApplicationV1Request generates requests for HostingRestartNodeJsApplicationV1
+func NewHostingRestartNodeJsApplicationV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/nodejs/server/restart", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -18593,6 +20075,47 @@ func WithBaseURL(baseURL string) ClientOption {
 
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
+	// AgencyHostingListAgencyPlanDomainsV1WithResponse request
+	AgencyHostingListAgencyPlanDomainsV1WithResponse(ctx context.Context, params *AgencyHostingListAgencyPlanDomainsV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListAgencyPlanDomainsV1Response, error)
+
+	// AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1WithResponse request
+	AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1WithResponse(ctx context.Context, orderId OrderIdPath, reqEditors ...RequestEditorFn) (*AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response, error)
+
+	// AgencyHostingProvisionANewAgencyPlanWebsiteV1WithBodyWithResponse request with any body
+	AgencyHostingProvisionANewAgencyPlanWebsiteV1WithBodyWithResponse(ctx context.Context, orderId OrderIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingProvisionANewAgencyPlanWebsiteV1Response, error)
+
+	AgencyHostingProvisionANewAgencyPlanWebsiteV1WithResponse(ctx context.Context, orderId OrderIdPath, body AgencyHostingProvisionANewAgencyPlanWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingProvisionANewAgencyPlanWebsiteV1Response, error)
+
+	// AgencyHostingGetAgencyPlanWebsiteSetupStatusV1WithResponse request
+	AgencyHostingGetAgencyPlanWebsiteSetupStatusV1WithResponse(ctx context.Context, orderId OrderIdPath, setupUuid SetupUuid, reqEditors ...RequestEditorFn) (*AgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response, error)
+
+	// AgencyHostingDeleteAgencyPlanWebsiteV1WithResponse request
+	AgencyHostingDeleteAgencyPlanWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingDeleteAgencyPlanWebsiteV1Response, error)
+
+	// AgencyHostingGetAgencyPlanWebsiteDetailsV1WithResponse request
+	AgencyHostingGetAgencyPlanWebsiteDetailsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingGetAgencyPlanWebsiteDetailsV1Response, error)
+
+	// AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithBodyWithResponse request with any body
+	AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response, error)
+
+	AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response, error)
+
+	// AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBodyWithResponse request with any body
+	AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response, error)
+
+	AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingLinkDomainToAgencyPlanWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response, error)
+
+	// AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1WithResponse request
+	AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response, error)
+
+	// AgencyHostingChangeAgencyPlanWebsiteDomainV1WithBodyWithResponse request with any body
+	AgencyHostingChangeAgencyPlanWebsiteDomainV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingChangeAgencyPlanWebsiteDomainV1Response, error)
+
+	AgencyHostingChangeAgencyPlanWebsiteDomainV1WithResponse(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, body AgencyHostingChangeAgencyPlanWebsiteDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingChangeAgencyPlanWebsiteDomainV1Response, error)
+
+	// AgencyHostingListRunningAgencyPlanWebsiteProcessesV1WithResponse request
+	AgencyHostingListRunningAgencyPlanWebsiteProcessesV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response, error)
+
 	// BillingGetCatalogItemListV1WithResponse request
 	BillingGetCatalogItemListV1WithResponse(ctx context.Context, params *BillingGetCatalogItemListV1Params, reqEditors ...RequestEditorFn) (*BillingGetCatalogItemListV1Response, error)
 
@@ -18815,17 +20338,15 @@ type ClientWithResponsesInterface interface {
 	// HostingClearWebsiteCacheV1WithResponse request
 	HostingClearWebsiteCacheV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingClearWebsiteCacheV1Params, reqEditors ...RequestEditorFn) (*HostingClearWebsiteCacheV1Response, error)
 
-	// HostingDisableWebsiteCacheV1WithResponse request
-	HostingDisableWebsiteCacheV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingDisableWebsiteCacheV1Response, error)
+	// HostingToggleWebsiteCacheV1WithBodyWithResponse request with any body
+	HostingToggleWebsiteCacheV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingToggleWebsiteCacheV1Response, error)
 
-	// HostingEnableWebsiteCacheV1WithResponse request
-	HostingEnableWebsiteCacheV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingEnableWebsiteCacheV1Response, error)
+	HostingToggleWebsiteCacheV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingToggleWebsiteCacheV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingToggleWebsiteCacheV1Response, error)
 
-	// HostingDisableCachelessModeV1WithResponse request
-	HostingDisableCachelessModeV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingDisableCachelessModeV1Response, error)
+	// HostingToggleCachelessModeV1WithBodyWithResponse request with any body
+	HostingToggleCachelessModeV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingToggleCachelessModeV1Response, error)
 
-	// HostingEnableCachelessModeV1WithResponse request
-	HostingEnableCachelessModeV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingEnableCachelessModeV1Response, error)
+	HostingToggleCachelessModeV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingToggleCachelessModeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingToggleCachelessModeV1Response, error)
 
 	// HostingListNodeJSBuildsV1WithResponse request
 	HostingListNodeJSBuildsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingListNodeJSBuildsV1Params, reqEditors ...RequestEditorFn) (*HostingListNodeJSBuildsV1Response, error)
@@ -18837,6 +20358,9 @@ type ClientWithResponsesInterface interface {
 
 	// HostingGetNodeJSBuildLogsV1WithResponse request
 	HostingGetNodeJSBuildLogsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, uuid BuildUuidPath, params *HostingGetNodeJSBuildLogsV1Params, reqEditors ...RequestEditorFn) (*HostingGetNodeJSBuildLogsV1Response, error)
+
+	// HostingRestartNodeJsApplicationV1WithResponse request
+	HostingRestartNodeJsApplicationV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingRestartNodeJsApplicationV1Response, error)
 
 	// HostingListWebsiteParkedDomainsV1WithResponse request
 	HostingListWebsiteParkedDomainsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingListWebsiteParkedDomainsV1Response, error)
@@ -19311,6 +20835,366 @@ type ClientWithResponsesInterface interface {
 
 	// VPSStopVirtualMachineV1WithResponse request
 	VPSStopVirtualMachineV1WithResponse(ctx context.Context, virtualMachineId VirtualMachineId, reqEditors ...RequestEditorFn) (*VPSStopVirtualMachineV1Response, error)
+}
+
+type AgencyHostingListAgencyPlanDomainsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *struct {
+		// Data Array of [`AgencyHosting.V1.Domains.DomainResource`](#model/agencyhostingv1domainsdomainresource)
+		Data *AgencyHostingV1DomainsDomainCollection `json:"data,omitempty"`
+		Meta *CommonSchemaPaginationMetaSchema       `json:"meta,omitempty"`
+	}
+	JSON401 *CommonResponseUnauthorizedResponse
+	JSON500 *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingListAgencyPlanDomainsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingListAgencyPlanDomainsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingListAgencyPlanDomainsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *AgencyHostingV1DatacentersDatacenterCollection
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingProvisionANewAgencyPlanWebsiteV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *AgencyHostingV1SetupsWebsiteSetupResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingProvisionANewAgencyPlanWebsiteV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingProvisionANewAgencyPlanWebsiteV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingProvisionANewAgencyPlanWebsiteV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *AgencyHostingV1SetupsWebsiteSetupStatusResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingDeleteAgencyPlanWebsiteV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *AgencyHostingV1WebsitesWebsiteDeletionResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingDeleteAgencyPlanWebsiteV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingDeleteAgencyPlanWebsiteV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingDeleteAgencyPlanWebsiteV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingGetAgencyPlanWebsiteDetailsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *AgencyHostingV1WebsitesWebsiteResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingGetAgencyPlanWebsiteDetailsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingGetAgencyPlanWebsiteDetailsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingGetAgencyPlanWebsiteDetailsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingChangeAgencyPlanWebsiteDomainV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingChangeAgencyPlanWebsiteDomainV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingChangeAgencyPlanWebsiteDomainV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingChangeAgencyPlanWebsiteDomainV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *AgencyHostingV1WebsitesWebsiteProcessCollection
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
 }
 
 type BillingGetCatalogItemListV1Response struct {
@@ -21262,16 +23146,17 @@ func (r HostingClearWebsiteCacheV1Response) ContentType() string {
 	return ""
 }
 
-type HostingDisableWebsiteCacheV1Response struct {
+type HostingToggleWebsiteCacheV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *CommonSuccessEmptyResource
 	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
 	JSON500      *CommonResponseErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r HostingDisableWebsiteCacheV1Response) Status() string {
+func (r HostingToggleWebsiteCacheV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21279,7 +23164,7 @@ func (r HostingDisableWebsiteCacheV1Response) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r HostingDisableWebsiteCacheV1Response) StatusCode() int {
+func (r HostingToggleWebsiteCacheV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -21287,23 +23172,24 @@ func (r HostingDisableWebsiteCacheV1Response) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r HostingDisableWebsiteCacheV1Response) ContentType() string {
+func (r HostingToggleWebsiteCacheV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type HostingEnableWebsiteCacheV1Response struct {
+type HostingToggleCachelessModeV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *CommonSuccessEmptyResource
 	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
 	JSON500      *CommonResponseErrorResponse
 }
 
 // Status returns HTTPResponse.Status
-func (r HostingEnableWebsiteCacheV1Response) Status() string {
+func (r HostingToggleCachelessModeV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21311,7 +23197,7 @@ func (r HostingEnableWebsiteCacheV1Response) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r HostingEnableWebsiteCacheV1Response) StatusCode() int {
+func (r HostingToggleCachelessModeV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -21319,71 +23205,7 @@ func (r HostingEnableWebsiteCacheV1Response) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r HostingEnableWebsiteCacheV1Response) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type HostingDisableCachelessModeV1Response struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *CommonSuccessEmptyResource
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON500      *CommonResponseErrorResponse
-}
-
-// Status returns HTTPResponse.Status
-func (r HostingDisableCachelessModeV1Response) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r HostingDisableCachelessModeV1Response) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r HostingDisableCachelessModeV1Response) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type HostingEnableCachelessModeV1Response struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *CommonSuccessEmptyResource
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON500      *CommonResponseErrorResponse
-}
-
-// Status returns HTTPResponse.Status
-func (r HostingEnableCachelessModeV1Response) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r HostingEnableCachelessModeV1Response) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r HostingEnableCachelessModeV1Response) ContentType() string {
+func (r HostingToggleCachelessModeV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -21486,6 +23308,38 @@ func (r HostingGetNodeJSBuildLogsV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingGetNodeJSBuildLogsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingRestartNodeJsApplicationV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingRestartNodeJsApplicationV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingRestartNodeJsApplicationV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingRestartNodeJsApplicationV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -25693,6 +27547,137 @@ func (r VPSStopVirtualMachineV1Response) ContentType() string {
 	return ""
 }
 
+// AgencyHostingListAgencyPlanDomainsV1WithResponse request returning *AgencyHostingListAgencyPlanDomainsV1Response
+func (c *ClientWithResponses) AgencyHostingListAgencyPlanDomainsV1WithResponse(ctx context.Context, params *AgencyHostingListAgencyPlanDomainsV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListAgencyPlanDomainsV1Response, error) {
+	rsp, err := c.AgencyHostingListAgencyPlanDomainsV1(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingListAgencyPlanDomainsV1Response(rsp)
+}
+
+// AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1WithResponse request returning *AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response
+func (c *ClientWithResponses) AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1WithResponse(ctx context.Context, orderId OrderIdPath, reqEditors ...RequestEditorFn) (*AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response, error) {
+	rsp, err := c.AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1(ctx, orderId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response(rsp)
+}
+
+// AgencyHostingProvisionANewAgencyPlanWebsiteV1WithBodyWithResponse request with arbitrary body returning *AgencyHostingProvisionANewAgencyPlanWebsiteV1Response
+func (c *ClientWithResponses) AgencyHostingProvisionANewAgencyPlanWebsiteV1WithBodyWithResponse(ctx context.Context, orderId OrderIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingProvisionANewAgencyPlanWebsiteV1Response, error) {
+	rsp, err := c.AgencyHostingProvisionANewAgencyPlanWebsiteV1WithBody(ctx, orderId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingProvisionANewAgencyPlanWebsiteV1Response(rsp)
+}
+
+func (c *ClientWithResponses) AgencyHostingProvisionANewAgencyPlanWebsiteV1WithResponse(ctx context.Context, orderId OrderIdPath, body AgencyHostingProvisionANewAgencyPlanWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingProvisionANewAgencyPlanWebsiteV1Response, error) {
+	rsp, err := c.AgencyHostingProvisionANewAgencyPlanWebsiteV1(ctx, orderId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingProvisionANewAgencyPlanWebsiteV1Response(rsp)
+}
+
+// AgencyHostingGetAgencyPlanWebsiteSetupStatusV1WithResponse request returning *AgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response
+func (c *ClientWithResponses) AgencyHostingGetAgencyPlanWebsiteSetupStatusV1WithResponse(ctx context.Context, orderId OrderIdPath, setupUuid SetupUuid, reqEditors ...RequestEditorFn) (*AgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response, error) {
+	rsp, err := c.AgencyHostingGetAgencyPlanWebsiteSetupStatusV1(ctx, orderId, setupUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response(rsp)
+}
+
+// AgencyHostingDeleteAgencyPlanWebsiteV1WithResponse request returning *AgencyHostingDeleteAgencyPlanWebsiteV1Response
+func (c *ClientWithResponses) AgencyHostingDeleteAgencyPlanWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingDeleteAgencyPlanWebsiteV1Response, error) {
+	rsp, err := c.AgencyHostingDeleteAgencyPlanWebsiteV1(ctx, websiteUid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingDeleteAgencyPlanWebsiteV1Response(rsp)
+}
+
+// AgencyHostingGetAgencyPlanWebsiteDetailsV1WithResponse request returning *AgencyHostingGetAgencyPlanWebsiteDetailsV1Response
+func (c *ClientWithResponses) AgencyHostingGetAgencyPlanWebsiteDetailsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingGetAgencyPlanWebsiteDetailsV1Response, error) {
+	rsp, err := c.AgencyHostingGetAgencyPlanWebsiteDetailsV1(ctx, websiteUid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingGetAgencyPlanWebsiteDetailsV1Response(rsp)
+}
+
+// AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithBodyWithResponse request with arbitrary body returning *AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response
+func (c *ClientWithResponses) AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response, error) {
+	rsp, err := c.AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithBody(ctx, websiteUid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response(rsp)
+}
+
+func (c *ClientWithResponses) AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response, error) {
+	rsp, err := c.AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1(ctx, websiteUid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response(rsp)
+}
+
+// AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBodyWithResponse request with arbitrary body returning *AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response
+func (c *ClientWithResponses) AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response, error) {
+	rsp, err := c.AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBody(ctx, websiteUid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingLinkDomainToAgencyPlanWebsiteV1Response(rsp)
+}
+
+func (c *ClientWithResponses) AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingLinkDomainToAgencyPlanWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response, error) {
+	rsp, err := c.AgencyHostingLinkDomainToAgencyPlanWebsiteV1(ctx, websiteUid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingLinkDomainToAgencyPlanWebsiteV1Response(rsp)
+}
+
+// AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1WithResponse request returning *AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response
+func (c *ClientWithResponses) AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response, error) {
+	rsp, err := c.AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1(ctx, websiteUid, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response(rsp)
+}
+
+// AgencyHostingChangeAgencyPlanWebsiteDomainV1WithBodyWithResponse request with arbitrary body returning *AgencyHostingChangeAgencyPlanWebsiteDomainV1Response
+func (c *ClientWithResponses) AgencyHostingChangeAgencyPlanWebsiteDomainV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingChangeAgencyPlanWebsiteDomainV1Response, error) {
+	rsp, err := c.AgencyHostingChangeAgencyPlanWebsiteDomainV1WithBody(ctx, websiteUid, fromDomain, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingChangeAgencyPlanWebsiteDomainV1Response(rsp)
+}
+
+func (c *ClientWithResponses) AgencyHostingChangeAgencyPlanWebsiteDomainV1WithResponse(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, body AgencyHostingChangeAgencyPlanWebsiteDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingChangeAgencyPlanWebsiteDomainV1Response, error) {
+	rsp, err := c.AgencyHostingChangeAgencyPlanWebsiteDomainV1(ctx, websiteUid, fromDomain, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingChangeAgencyPlanWebsiteDomainV1Response(rsp)
+}
+
+// AgencyHostingListRunningAgencyPlanWebsiteProcessesV1WithResponse request returning *AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response
+func (c *ClientWithResponses) AgencyHostingListRunningAgencyPlanWebsiteProcessesV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response, error) {
+	rsp, err := c.AgencyHostingListRunningAgencyPlanWebsiteProcessesV1(ctx, websiteUid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response(rsp)
+}
+
 // BillingGetCatalogItemListV1WithResponse request returning *BillingGetCatalogItemListV1Response
 func (c *ClientWithResponses) BillingGetCatalogItemListV1WithResponse(ctx context.Context, params *BillingGetCatalogItemListV1Params, reqEditors ...RequestEditorFn) (*BillingGetCatalogItemListV1Response, error) {
 	rsp, err := c.BillingGetCatalogItemListV1(ctx, params, reqEditors...)
@@ -26401,40 +28386,38 @@ func (c *ClientWithResponses) HostingClearWebsiteCacheV1WithResponse(ctx context
 	return ParseHostingClearWebsiteCacheV1Response(rsp)
 }
 
-// HostingDisableWebsiteCacheV1WithResponse request returning *HostingDisableWebsiteCacheV1Response
-func (c *ClientWithResponses) HostingDisableWebsiteCacheV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingDisableWebsiteCacheV1Response, error) {
-	rsp, err := c.HostingDisableWebsiteCacheV1(ctx, username, domain, reqEditors...)
+// HostingToggleWebsiteCacheV1WithBodyWithResponse request with arbitrary body returning *HostingToggleWebsiteCacheV1Response
+func (c *ClientWithResponses) HostingToggleWebsiteCacheV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingToggleWebsiteCacheV1Response, error) {
+	rsp, err := c.HostingToggleWebsiteCacheV1WithBody(ctx, username, domain, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseHostingDisableWebsiteCacheV1Response(rsp)
+	return ParseHostingToggleWebsiteCacheV1Response(rsp)
 }
 
-// HostingEnableWebsiteCacheV1WithResponse request returning *HostingEnableWebsiteCacheV1Response
-func (c *ClientWithResponses) HostingEnableWebsiteCacheV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingEnableWebsiteCacheV1Response, error) {
-	rsp, err := c.HostingEnableWebsiteCacheV1(ctx, username, domain, reqEditors...)
+func (c *ClientWithResponses) HostingToggleWebsiteCacheV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingToggleWebsiteCacheV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingToggleWebsiteCacheV1Response, error) {
+	rsp, err := c.HostingToggleWebsiteCacheV1(ctx, username, domain, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseHostingEnableWebsiteCacheV1Response(rsp)
+	return ParseHostingToggleWebsiteCacheV1Response(rsp)
 }
 
-// HostingDisableCachelessModeV1WithResponse request returning *HostingDisableCachelessModeV1Response
-func (c *ClientWithResponses) HostingDisableCachelessModeV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingDisableCachelessModeV1Response, error) {
-	rsp, err := c.HostingDisableCachelessModeV1(ctx, username, domain, reqEditors...)
+// HostingToggleCachelessModeV1WithBodyWithResponse request with arbitrary body returning *HostingToggleCachelessModeV1Response
+func (c *ClientWithResponses) HostingToggleCachelessModeV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingToggleCachelessModeV1Response, error) {
+	rsp, err := c.HostingToggleCachelessModeV1WithBody(ctx, username, domain, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseHostingDisableCachelessModeV1Response(rsp)
+	return ParseHostingToggleCachelessModeV1Response(rsp)
 }
 
-// HostingEnableCachelessModeV1WithResponse request returning *HostingEnableCachelessModeV1Response
-func (c *ClientWithResponses) HostingEnableCachelessModeV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingEnableCachelessModeV1Response, error) {
-	rsp, err := c.HostingEnableCachelessModeV1(ctx, username, domain, reqEditors...)
+func (c *ClientWithResponses) HostingToggleCachelessModeV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingToggleCachelessModeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingToggleCachelessModeV1Response, error) {
+	rsp, err := c.HostingToggleCachelessModeV1(ctx, username, domain, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseHostingEnableCachelessModeV1Response(rsp)
+	return ParseHostingToggleCachelessModeV1Response(rsp)
 }
 
 // HostingListNodeJSBuildsV1WithResponse request returning *HostingListNodeJSBuildsV1Response
@@ -26470,6 +28453,15 @@ func (c *ClientWithResponses) HostingGetNodeJSBuildLogsV1WithResponse(ctx contex
 		return nil, err
 	}
 	return ParseHostingGetNodeJSBuildLogsV1Response(rsp)
+}
+
+// HostingRestartNodeJsApplicationV1WithResponse request returning *HostingRestartNodeJsApplicationV1Response
+func (c *ClientWithResponses) HostingRestartNodeJsApplicationV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingRestartNodeJsApplicationV1Response, error) {
+	rsp, err := c.HostingRestartNodeJsApplicationV1(ctx, username, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingRestartNodeJsApplicationV1Response(rsp)
 }
 
 // HostingListWebsiteParkedDomainsV1WithResponse request returning *HostingListWebsiteParkedDomainsV1Response
@@ -27982,6 +29974,478 @@ func (c *ClientWithResponses) VPSStopVirtualMachineV1WithResponse(ctx context.Co
 		return nil, err
 	}
 	return ParseVPSStopVirtualMachineV1Response(rsp)
+}
+
+// ParseAgencyHostingListAgencyPlanDomainsV1Response parses an HTTP response from a AgencyHostingListAgencyPlanDomainsV1WithResponse call
+func ParseAgencyHostingListAgencyPlanDomainsV1Response(rsp *http.Response) (*AgencyHostingListAgencyPlanDomainsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingListAgencyPlanDomainsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			// Data Array of [`AgencyHosting.V1.Domains.DomainResource`](#model/agencyhostingv1domainsdomainresource)
+			Data *AgencyHostingV1DomainsDomainCollection `json:"data,omitempty"`
+			Meta *CommonSchemaPaginationMetaSchema       `json:"meta,omitempty"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response parses an HTTP response from a AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1WithResponse call
+func ParseAgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response(rsp *http.Response) (*AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AgencyHostingV1DatacentersDatacenterCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingProvisionANewAgencyPlanWebsiteV1Response parses an HTTP response from a AgencyHostingProvisionANewAgencyPlanWebsiteV1WithResponse call
+func ParseAgencyHostingProvisionANewAgencyPlanWebsiteV1Response(rsp *http.Response) (*AgencyHostingProvisionANewAgencyPlanWebsiteV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingProvisionANewAgencyPlanWebsiteV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AgencyHostingV1SetupsWebsiteSetupResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response parses an HTTP response from a AgencyHostingGetAgencyPlanWebsiteSetupStatusV1WithResponse call
+func ParseAgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response(rsp *http.Response) (*AgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AgencyHostingV1SetupsWebsiteSetupStatusResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingDeleteAgencyPlanWebsiteV1Response parses an HTTP response from a AgencyHostingDeleteAgencyPlanWebsiteV1WithResponse call
+func ParseAgencyHostingDeleteAgencyPlanWebsiteV1Response(rsp *http.Response) (*AgencyHostingDeleteAgencyPlanWebsiteV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingDeleteAgencyPlanWebsiteV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AgencyHostingV1WebsitesWebsiteDeletionResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingGetAgencyPlanWebsiteDetailsV1Response parses an HTTP response from a AgencyHostingGetAgencyPlanWebsiteDetailsV1WithResponse call
+func ParseAgencyHostingGetAgencyPlanWebsiteDetailsV1Response(rsp *http.Response) (*AgencyHostingGetAgencyPlanWebsiteDetailsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingGetAgencyPlanWebsiteDetailsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AgencyHostingV1WebsitesWebsiteResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response parses an HTTP response from a AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithResponse call
+func ParseAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response(rsp *http.Response) (*AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingLinkDomainToAgencyPlanWebsiteV1Response parses an HTTP response from a AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithResponse call
+func ParseAgencyHostingLinkDomainToAgencyPlanWebsiteV1Response(rsp *http.Response) (*AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response parses an HTTP response from a AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1WithResponse call
+func ParseAgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response(rsp *http.Response) (*AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingChangeAgencyPlanWebsiteDomainV1Response parses an HTTP response from a AgencyHostingChangeAgencyPlanWebsiteDomainV1WithResponse call
+func ParseAgencyHostingChangeAgencyPlanWebsiteDomainV1Response(rsp *http.Response) (*AgencyHostingChangeAgencyPlanWebsiteDomainV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingChangeAgencyPlanWebsiteDomainV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response parses an HTTP response from a AgencyHostingListRunningAgencyPlanWebsiteProcessesV1WithResponse call
+func ParseAgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response(rsp *http.Response) (*AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AgencyHostingV1WebsitesWebsiteProcessCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
 }
 
 // ParseBillingGetCatalogItemListV1Response parses an HTTP response from a BillingGetCatalogItemListV1WithResponse call
@@ -30539,15 +33003,15 @@ func ParseHostingClearWebsiteCacheV1Response(rsp *http.Response) (*HostingClearW
 	return response, nil
 }
 
-// ParseHostingDisableWebsiteCacheV1Response parses an HTTP response from a HostingDisableWebsiteCacheV1WithResponse call
-func ParseHostingDisableWebsiteCacheV1Response(rsp *http.Response) (*HostingDisableWebsiteCacheV1Response, error) {
+// ParseHostingToggleWebsiteCacheV1Response parses an HTTP response from a HostingToggleWebsiteCacheV1WithResponse call
+func ParseHostingToggleWebsiteCacheV1Response(rsp *http.Response) (*HostingToggleWebsiteCacheV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &HostingDisableWebsiteCacheV1Response{
+	response := &HostingToggleWebsiteCacheV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -30566,6 +33030,13 @@ func ParseHostingDisableWebsiteCacheV1Response(rsp *http.Response) (*HostingDisa
 			return nil, err
 		}
 		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse
@@ -30579,15 +33050,15 @@ func ParseHostingDisableWebsiteCacheV1Response(rsp *http.Response) (*HostingDisa
 	return response, nil
 }
 
-// ParseHostingEnableWebsiteCacheV1Response parses an HTTP response from a HostingEnableWebsiteCacheV1WithResponse call
-func ParseHostingEnableWebsiteCacheV1Response(rsp *http.Response) (*HostingEnableWebsiteCacheV1Response, error) {
+// ParseHostingToggleCachelessModeV1Response parses an HTTP response from a HostingToggleCachelessModeV1WithResponse call
+func ParseHostingToggleCachelessModeV1Response(rsp *http.Response) (*HostingToggleCachelessModeV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &HostingEnableWebsiteCacheV1Response{
+	response := &HostingToggleCachelessModeV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -30607,85 +33078,12 @@ func ParseHostingEnableWebsiteCacheV1Response(rsp *http.Response) (*HostingEnabl
 		}
 		response.JSON401 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest CommonResponseErrorResponse
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseHostingDisableCachelessModeV1Response parses an HTTP response from a HostingDisableCachelessModeV1WithResponse call
-func ParseHostingDisableCachelessModeV1Response(rsp *http.Response) (*HostingDisableCachelessModeV1Response, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &HostingDisableCachelessModeV1Response{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest CommonSuccessEmptyResource
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest CommonResponseUnauthorizedResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest CommonResponseErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseHostingEnableCachelessModeV1Response parses an HTTP response from a HostingEnableCachelessModeV1WithResponse call
-func ParseHostingEnableCachelessModeV1Response(rsp *http.Response) (*HostingEnableCachelessModeV1Response, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &HostingEnableCachelessModeV1Response{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest CommonSuccessEmptyResource
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest CommonResponseUnauthorizedResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
+		response.JSON422 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse
@@ -30824,6 +33222,46 @@ func ParseHostingGetNodeJSBuildLogsV1Response(rsp *http.Response) (*HostingGetNo
 			return nil, err
 		}
 		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingRestartNodeJsApplicationV1Response parses an HTTP response from a HostingRestartNodeJsApplicationV1WithResponse call
+func ParseHostingRestartNodeJsApplicationV1Response(rsp *http.Response) (*HostingRestartNodeJsApplicationV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingRestartNodeJsApplicationV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse

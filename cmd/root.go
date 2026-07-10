@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/hostinger/api-cli/cmd/agency_hosting"
 	"github.com/hostinger/api-cli/cmd/billing"
 	"github.com/hostinger/api-cli/cmd/dns"
 	"github.com/hostinger/api-cli/cmd/domains"
@@ -52,6 +53,7 @@ func init() {
 		return validFormats, cobra.ShellCompDirectiveNoFileComp
 	})
 
+	RootCmd.AddCommand(agency_hosting.GroupCmd)
 	RootCmd.AddCommand(billing.GroupCmd)
 	RootCmd.AddCommand(dns.GroupCmd)
 	RootCmd.AddCommand(domains.GroupCmd)

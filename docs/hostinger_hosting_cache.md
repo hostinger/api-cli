@@ -19,8 +19,6 @@ Cache commands
 
 * [hostinger hosting](hostinger_hosting.md)	 - Hosting commands
 * [hostinger hosting cache clear-website](hostinger_hosting_cache_clear-website.md)	 - Clear website cache
-* [hostinger hosting cache disable-cacheless](hostinger_hosting_cache_disable-cacheless.md)	 - Disable cacheless mode
-* [hostinger hosting cache disable-website](hostinger_hosting_cache_disable-website.md)	 - Disable website cache
-* [hostinger hosting cache enable-cacheless](hostinger_hosting_cache_enable-cacheless.md)	 - Enable cacheless mode
-* [hostinger hosting cache enable-website](hostinger_hosting_cache_enable-website.md)	 - Enable website cache
+* [hostinger hosting cache toggle-cacheless](hostinger_hosting_cache_toggle-cacheless.md)	 - Toggle cacheless mode
+* [hostinger hosting cache toggle-website](hostinger_hosting_cache_toggle-website.md)	 - Toggle website cache
 

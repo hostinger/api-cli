@@ -11,8 +11,6 @@ var GroupCmd = &cobra.Command{
 
 func init() {
 	GroupCmd.AddCommand(ClearWebsiteCmd)
-	GroupCmd.AddCommand(DisableCachelessCmd)
-	GroupCmd.AddCommand(DisableWebsiteCmd)
-	GroupCmd.AddCommand(EnableCachelessCmd)
-	GroupCmd.AddCommand(EnableWebsiteCmd)
+	GroupCmd.AddCommand(ToggleCachelessCmd)
+	GroupCmd.AddCommand(ToggleWebsiteCmd)
 }

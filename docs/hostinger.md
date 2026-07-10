@@ -12,6 +12,7 @@ Hostinger API Command Line Interface
 
 ### SEE ALSO
 
+* [hostinger agency-hosting](hostinger_agency-hosting.md)	 - Agency Hosting commands
 * [hostinger billing](hostinger_billing.md)	 - Billing commands
 * [hostinger dns](hostinger_dns.md)	 - DNS commands
 * [hostinger domains](hostinger_domains.md)	 - Domains commands
