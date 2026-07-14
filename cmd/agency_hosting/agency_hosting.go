@@ -3,6 +3,7 @@ package agency_hosting
 import (
 	"github.com/hostinger/api-cli/cmd/agency_hosting/datacenters"
 	"github.com/hostinger/api-cli/cmd/agency_hosting/domains"
+	"github.com/hostinger/api-cli/cmd/agency_hosting/files"
 	"github.com/hostinger/api-cli/cmd/agency_hosting/website_setups"
 	"github.com/hostinger/api-cli/cmd/agency_hosting/websites"
 
@@ -17,6 +18,7 @@ var GroupCmd = &cobra.Command{
 func init() {
 	GroupCmd.AddCommand(datacenters.GroupCmd)
 	GroupCmd.AddCommand(domains.GroupCmd)
+	GroupCmd.AddCommand(files.GroupCmd)
 	GroupCmd.AddCommand(website_setups.GroupCmd)
 	GroupCmd.AddCommand(websites.GroupCmd)
 }

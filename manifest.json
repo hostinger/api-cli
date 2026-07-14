@@ -374,6 +374,11 @@
     "method": "GET",
     "path": "/api/agency-hosting/v1/orders/{order_id}/websites/setups/{setup_uuid}"
   },
+  "agency-hosting_importAgencyPlanWebsiteFromArchiveV1": {
+    "command": "hostinger agency-hosting files import-plan-website-from-archive",
+    "method": "POST",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/files/import-archive"
+  },
   "agency-hosting_linkDomainToAgencyPlanWebsiteV1": {
     "command": "hostinger agency-hosting domains link-to-plan-website",
     "method": "POST",

@@ -1958,6 +1958,12 @@ type AgencyHostingV1DomainsLinkDomainRequest struct {
 	Domain string `json:"domain"`
 }
 
+// AgencyHostingV1FilesImportArchiveRequest Import a website from an already-uploaded archive
+type AgencyHostingV1FilesImportArchiveRequest struct {
+	// ArchiveName Archive filename (e.g., archive.zip). The file must already be uploaded to the website's .h5g/ directory.
+	ArchiveName string `json:"archive_name"`
+}
+
 // AgencyHostingV1SetupsCreateSetupRequest Create a new Agency Plan website setup on the given order
 type AgencyHostingV1SetupsCreateSetupRequest struct {
 	// Clone Clone the new website from an existing website
@@ -5600,6 +5606,9 @@ type AgencyHostingLinkDomainToAgencyPlanWebsiteV1JSONRequestBody = AgencyHosting
 // AgencyHostingChangeAgencyPlanWebsiteDomainV1JSONRequestBody defines body for AgencyHostingChangeAgencyPlanWebsiteDomainV1 for application/json ContentType.
 type AgencyHostingChangeAgencyPlanWebsiteDomainV1JSONRequestBody = AgencyHostingV1DomainsChangeDomainRequest
 
+// AgencyHostingImportAgencyPlanWebsiteFromArchiveV1JSONRequestBody defines body for AgencyHostingImportAgencyPlanWebsiteFromArchiveV1 for application/json ContentType.
+type AgencyHostingImportAgencyPlanWebsiteFromArchiveV1JSONRequestBody = AgencyHostingV1FilesImportArchiveRequest
+
 // DNSDeleteDNSRecordsV1JSONRequestBody defines body for DNSDeleteDNSRecordsV1 for application/json ContentType.
 type DNSDeleteDNSRecordsV1JSONRequestBody = DNSV1ZoneDestroyRequest
 
@@ -6690,6 +6699,11 @@ type ClientInterface interface {
 
 	AgencyHostingChangeAgencyPlanWebsiteDomainV1(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, body AgencyHostingChangeAgencyPlanWebsiteDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithBody request with any body
+	AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	AgencyHostingImportAgencyPlanWebsiteFromArchiveV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingImportAgencyPlanWebsiteFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// AgencyHostingListRunningAgencyPlanWebsiteProcessesV1 request
 	AgencyHostingListRunningAgencyPlanWebsiteProcessesV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -7572,6 +7586,30 @@ func (c *Client) AgencyHostingChangeAgencyPlanWebsiteDomainV1WithBody(ctx contex
 
 func (c *Client) AgencyHostingChangeAgencyPlanWebsiteDomainV1(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, body AgencyHostingChangeAgencyPlanWebsiteDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewAgencyHostingChangeAgencyPlanWebsiteDomainV1Request(c.Server, websiteUid, fromDomain, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingImportAgencyPlanWebsiteFromArchiveV1RequestWithBody(c.Server, websiteUid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AgencyHostingImportAgencyPlanWebsiteFromArchiveV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingImportAgencyPlanWebsiteFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingImportAgencyPlanWebsiteFromArchiveV1Request(c.Server, websiteUid, body)
 	if err != nil {
 		return nil, err
 	}
@@ -11198,6 +11236,53 @@ func NewAgencyHostingChangeAgencyPlanWebsiteDomainV1RequestWithBody(server strin
 	}
 
 	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewAgencyHostingImportAgencyPlanWebsiteFromArchiveV1Request calls the generic AgencyHostingImportAgencyPlanWebsiteFromArchiveV1 builder with application/json body
+func NewAgencyHostingImportAgencyPlanWebsiteFromArchiveV1Request(server string, websiteUid WebsiteUid, body AgencyHostingImportAgencyPlanWebsiteFromArchiveV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewAgencyHostingImportAgencyPlanWebsiteFromArchiveV1RequestWithBody(server, websiteUid, "application/json", bodyReader)
+}
+
+// NewAgencyHostingImportAgencyPlanWebsiteFromArchiveV1RequestWithBody generates requests for AgencyHostingImportAgencyPlanWebsiteFromArchiveV1 with any type of body
+func NewAgencyHostingImportAgencyPlanWebsiteFromArchiveV1RequestWithBody(server string, websiteUid WebsiteUid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/files/import-archive", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -20113,6 +20198,11 @@ type ClientWithResponsesInterface interface {
 
 	AgencyHostingChangeAgencyPlanWebsiteDomainV1WithResponse(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, body AgencyHostingChangeAgencyPlanWebsiteDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingChangeAgencyPlanWebsiteDomainV1Response, error)
 
+	// AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithBodyWithResponse request with any body
+	AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response, error)
+
+	AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingImportAgencyPlanWebsiteFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response, error)
+
 	// AgencyHostingListRunningAgencyPlanWebsiteProcessesV1WithResponse request
 	AgencyHostingListRunningAgencyPlanWebsiteProcessesV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response, error)
 
@@ -21159,6 +21249,39 @@ func (r AgencyHostingChangeAgencyPlanWebsiteDomainV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r AgencyHostingChangeAgencyPlanWebsiteDomainV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -27669,6 +27792,23 @@ func (c *ClientWithResponses) AgencyHostingChangeAgencyPlanWebsiteDomainV1WithRe
 	return ParseAgencyHostingChangeAgencyPlanWebsiteDomainV1Response(rsp)
 }
 
+// AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithBodyWithResponse request with arbitrary body returning *AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response
+func (c *ClientWithResponses) AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response, error) {
+	rsp, err := c.AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithBody(ctx, websiteUid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response(rsp)
+}
+
+func (c *ClientWithResponses) AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingImportAgencyPlanWebsiteFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response, error) {
+	rsp, err := c.AgencyHostingImportAgencyPlanWebsiteFromArchiveV1(ctx, websiteUid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response(rsp)
+}
+
 // AgencyHostingListRunningAgencyPlanWebsiteProcessesV1WithResponse request returning *AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response
 func (c *ClientWithResponses) AgencyHostingListRunningAgencyPlanWebsiteProcessesV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response, error) {
 	rsp, err := c.AgencyHostingListRunningAgencyPlanWebsiteProcessesV1(ctx, websiteUid, reqEditors...)
@@ -30370,6 +30510,53 @@ func ParseAgencyHostingChangeAgencyPlanWebsiteDomainV1Response(rsp *http.Respons
 	}
 
 	response := &AgencyHostingChangeAgencyPlanWebsiteDomainV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response parses an HTTP response from a AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithResponse call
+func ParseAgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response(rsp *http.Response) (*AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
