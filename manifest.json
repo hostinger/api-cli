@@ -699,6 +699,11 @@
     "method": "DELETE",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/subdomains/{subdomain}"
   },
+  "hosting_deleteWebsiteV1": {
+    "command": "hostinger hosting websites delete",
+    "method": "DELETE",
+    "path": "/api/hosting/v1/websites/{domain}"
+  },
   "hosting_deleteWordPressInstallationV1": {
     "command": "hostinger wordpress installations delete",
     "method": "DELETE",

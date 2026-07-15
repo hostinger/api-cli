@@ -19,5 +19,6 @@ Websites commands
 
 * [hostinger hosting](hostinger_hosting.md)	 - Hosting commands
 * [hostinger hosting websites create](hostinger_hosting_websites_create.md)	 - Create website
+* [hostinger hosting websites delete](hostinger_hosting_websites_delete.md)	 - Delete website
 * [hostinger hosting websites list](hostinger_hosting_websites_list.md)	 - List websites
 

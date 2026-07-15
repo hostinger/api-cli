@@ -865,6 +865,21 @@ func (e HostingV1NodeJsCreateFromArchiveRequestPackageManager) Valid() bool {
 	}
 }
 
+// Defines values for HostingV1WebsitesDeleteWebsiteRequestConfirm.
+const (
+	True HostingV1WebsitesDeleteWebsiteRequestConfirm = true
+)
+
+// Valid indicates whether the value is a known member of the HostingV1WebsitesDeleteWebsiteRequestConfirm enum.
+func (e HostingV1WebsitesDeleteWebsiteRequestConfirm) Valid() bool {
+	switch e {
+	case True:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for HostingV1WebsitesWebsiteResourceVhostType.
 const (
 	Addon     HostingV1WebsitesWebsiteResourceVhostType = "addon"
@@ -3751,6 +3766,15 @@ type HostingV1WebsitesCreateWebsiteRequest struct {
 	OrderId int `json:"order_id"`
 }
 
+// HostingV1WebsitesDeleteWebsiteRequest defines model for Hosting.V1.Websites.DeleteWebsiteRequest.
+type HostingV1WebsitesDeleteWebsiteRequest struct {
+	// Confirm Must be boolean true to confirm the permanent deletion of the website.
+	Confirm HostingV1WebsitesDeleteWebsiteRequestConfirm `json:"confirm"`
+}
+
+// HostingV1WebsitesDeleteWebsiteRequestConfirm Must be boolean true to confirm the permanent deletion of the website.
+type HostingV1WebsitesDeleteWebsiteRequestConfirm bool
+
 // HostingV1WebsitesWebsiteCollection Array of [`Hosting.V1.Websites.WebsiteResource`](#model/hostingv1websiteswebsiteresource)
 type HostingV1WebsitesWebsiteCollection = []HostingV1WebsitesWebsiteResource
 
@@ -5753,6 +5777,9 @@ type HostingVerifyDomainOwnershipV1JSONRequestBody = HostingV1DomainsVerifyOwner
 // HostingCreateWebsiteV1JSONRequestBody defines body for HostingCreateWebsiteV1 for application/json ContentType.
 type HostingCreateWebsiteV1JSONRequestBody = HostingV1WebsitesCreateWebsiteRequest
 
+// HostingDeleteWebsiteV1JSONRequestBody defines body for HostingDeleteWebsiteV1 for application/json ContentType.
+type HostingDeleteWebsiteV1JSONRequestBody = HostingV1WebsitesDeleteWebsiteRequest
+
 // ReachCreateANewContactV1JSONRequestBody defines body for ReachCreateANewContactV1 for application/json ContentType.
 type ReachCreateANewContactV1JSONRequestBody = ReachV1ContactsStoreRequest
 
@@ -7144,6 +7171,11 @@ type ClientInterface interface {
 	HostingCreateWebsiteV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	HostingCreateWebsiteV1(ctx context.Context, body HostingCreateWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingDeleteWebsiteV1WithBody request with any body
+	HostingDeleteWebsiteV1WithBody(ctx context.Context, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	HostingDeleteWebsiteV1(ctx context.Context, domain Domain, body HostingDeleteWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingListWordPressInstallationsV1 request
 	HostingListWordPressInstallationsV1(ctx context.Context, params *HostingListWordPressInstallationsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -9566,6 +9598,30 @@ func (c *Client) HostingCreateWebsiteV1WithBody(ctx context.Context, contentType
 
 func (c *Client) HostingCreateWebsiteV1(ctx context.Context, body HostingCreateWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingCreateWebsiteV1Request(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingDeleteWebsiteV1WithBody(ctx context.Context, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingDeleteWebsiteV1RequestWithBody(c.Server, domain, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingDeleteWebsiteV1(ctx context.Context, domain Domain, body HostingDeleteWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingDeleteWebsiteV1Request(c.Server, domain, body)
 	if err != nil {
 		return nil, err
 	}
@@ -16663,6 +16719,53 @@ func NewHostingCreateWebsiteV1RequestWithBody(server string, contentType string,
 	return req, nil
 }
 
+// NewHostingDeleteWebsiteV1Request calls the generic HostingDeleteWebsiteV1 builder with application/json body
+func NewHostingDeleteWebsiteV1Request(server string, domain Domain, body HostingDeleteWebsiteV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingDeleteWebsiteV1RequestWithBody(server, domain, "application/json", bodyReader)
+}
+
+// NewHostingDeleteWebsiteV1RequestWithBody generates requests for HostingDeleteWebsiteV1 with any type of body
+func NewHostingDeleteWebsiteV1RequestWithBody(server string, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/websites/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewHostingListWordPressInstallationsV1Request generates requests for HostingListWordPressInstallationsV1
 func NewHostingListWordPressInstallationsV1Request(server string, params *HostingListWordPressInstallationsV1Params) (*http.Request, error) {
 	var err error
@@ -20643,6 +20746,11 @@ type ClientWithResponsesInterface interface {
 	HostingCreateWebsiteV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingCreateWebsiteV1Response, error)
 
 	HostingCreateWebsiteV1WithResponse(ctx context.Context, body HostingCreateWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingCreateWebsiteV1Response, error)
+
+	// HostingDeleteWebsiteV1WithBodyWithResponse request with any body
+	HostingDeleteWebsiteV1WithBodyWithResponse(ctx context.Context, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingDeleteWebsiteV1Response, error)
+
+	HostingDeleteWebsiteV1WithResponse(ctx context.Context, domain Domain, body HostingDeleteWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingDeleteWebsiteV1Response, error)
 
 	// HostingListWordPressInstallationsV1WithResponse request
 	HostingListWordPressInstallationsV1WithResponse(ctx context.Context, params *HostingListWordPressInstallationsV1Params, reqEditors ...RequestEditorFn) (*HostingListWordPressInstallationsV1Response, error)
@@ -25037,6 +25145,39 @@ func (r HostingCreateWebsiteV1Response) ContentType() string {
 	return ""
 }
 
+type HostingDeleteWebsiteV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingDeleteWebsiteV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingDeleteWebsiteV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingDeleteWebsiteV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type HostingListWordPressInstallationsV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -29226,6 +29367,23 @@ func (c *ClientWithResponses) HostingCreateWebsiteV1WithResponse(ctx context.Con
 		return nil, err
 	}
 	return ParseHostingCreateWebsiteV1Response(rsp)
+}
+
+// HostingDeleteWebsiteV1WithBodyWithResponse request with arbitrary body returning *HostingDeleteWebsiteV1Response
+func (c *ClientWithResponses) HostingDeleteWebsiteV1WithBodyWithResponse(ctx context.Context, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingDeleteWebsiteV1Response, error) {
+	rsp, err := c.HostingDeleteWebsiteV1WithBody(ctx, domain, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingDeleteWebsiteV1Response(rsp)
+}
+
+func (c *ClientWithResponses) HostingDeleteWebsiteV1WithResponse(ctx context.Context, domain Domain, body HostingDeleteWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingDeleteWebsiteV1Response, error) {
+	rsp, err := c.HostingDeleteWebsiteV1(ctx, domain, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingDeleteWebsiteV1Response(rsp)
 }
 
 // HostingListWordPressInstallationsV1WithResponse request returning *HostingListWordPressInstallationsV1Response
@@ -35520,6 +35678,53 @@ func ParseHostingCreateWebsiteV1Response(rsp *http.Response) (*HostingCreateWebs
 	}
 
 	response := &HostingCreateWebsiteV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingDeleteWebsiteV1Response parses an HTTP response from a HostingDeleteWebsiteV1WithResponse call
+func ParseHostingDeleteWebsiteV1Response(rsp *http.Response) (*HostingDeleteWebsiteV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingDeleteWebsiteV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
