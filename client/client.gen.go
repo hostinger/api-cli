@@ -865,6 +865,33 @@ func (e HostingV1NodeJsCreateFromArchiveRequestPackageManager) Valid() bool {
 	}
 }
 
+// Defines values for HostingV1NodeJsVulnerabilityResourceSeverity.
+const (
+	HostingV1NodeJsVulnerabilityResourceSeverityCritical HostingV1NodeJsVulnerabilityResourceSeverity = "critical"
+	HostingV1NodeJsVulnerabilityResourceSeverityHigh     HostingV1NodeJsVulnerabilityResourceSeverity = "high"
+	HostingV1NodeJsVulnerabilityResourceSeverityLow      HostingV1NodeJsVulnerabilityResourceSeverity = "low"
+	HostingV1NodeJsVulnerabilityResourceSeverityModerate HostingV1NodeJsVulnerabilityResourceSeverity = "moderate"
+	HostingV1NodeJsVulnerabilityResourceSeverityUnknown  HostingV1NodeJsVulnerabilityResourceSeverity = "unknown"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1NodeJsVulnerabilityResourceSeverity enum.
+func (e HostingV1NodeJsVulnerabilityResourceSeverity) Valid() bool {
+	switch e {
+	case HostingV1NodeJsVulnerabilityResourceSeverityCritical:
+		return true
+	case HostingV1NodeJsVulnerabilityResourceSeverityHigh:
+		return true
+	case HostingV1NodeJsVulnerabilityResourceSeverityLow:
+		return true
+	case HostingV1NodeJsVulnerabilityResourceSeverityModerate:
+		return true
+	case HostingV1NodeJsVulnerabilityResourceSeverityUnknown:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for HostingV1WebsitesDeleteWebsiteRequestConfirm.
 const (
 	True HostingV1WebsitesDeleteWebsiteRequestConfirm = true
@@ -1800,22 +1827,49 @@ func (e BillingGetCatalogItemListV1ParamsCategory) Valid() bool {
 
 // Defines values for HostingListNodeJSBuildsV1ParamsStates.
 const (
-	HostingListNodeJSBuildsV1ParamsStatesCompleted HostingListNodeJSBuildsV1ParamsStates = "completed"
-	HostingListNodeJSBuildsV1ParamsStatesFailed    HostingListNodeJSBuildsV1ParamsStates = "failed"
-	HostingListNodeJSBuildsV1ParamsStatesPending   HostingListNodeJSBuildsV1ParamsStates = "pending"
-	HostingListNodeJSBuildsV1ParamsStatesRunning   HostingListNodeJSBuildsV1ParamsStates = "running"
+	Completed HostingListNodeJSBuildsV1ParamsStates = "completed"
+	Failed    HostingListNodeJSBuildsV1ParamsStates = "failed"
+	Pending   HostingListNodeJSBuildsV1ParamsStates = "pending"
+	Running   HostingListNodeJSBuildsV1ParamsStates = "running"
 )
 
 // Valid indicates whether the value is a known member of the HostingListNodeJSBuildsV1ParamsStates enum.
 func (e HostingListNodeJSBuildsV1ParamsStates) Valid() bool {
 	switch e {
-	case HostingListNodeJSBuildsV1ParamsStatesCompleted:
+	case Completed:
 		return true
-	case HostingListNodeJSBuildsV1ParamsStatesFailed:
+	case Failed:
 		return true
-	case HostingListNodeJSBuildsV1ParamsStatesPending:
+	case Pending:
 		return true
-	case HostingListNodeJSBuildsV1ParamsStatesRunning:
+	case Running:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingListNodeJsVulnerabilitiesV1ParamsSeverities.
+const (
+	Critical HostingListNodeJsVulnerabilitiesV1ParamsSeverities = "critical"
+	High     HostingListNodeJsVulnerabilitiesV1ParamsSeverities = "high"
+	Low      HostingListNodeJsVulnerabilitiesV1ParamsSeverities = "low"
+	Moderate HostingListNodeJsVulnerabilitiesV1ParamsSeverities = "moderate"
+	Unknown  HostingListNodeJsVulnerabilitiesV1ParamsSeverities = "unknown"
+)
+
+// Valid indicates whether the value is a known member of the HostingListNodeJsVulnerabilitiesV1ParamsSeverities enum.
+func (e HostingListNodeJsVulnerabilitiesV1ParamsSeverities) Valid() bool {
+	switch e {
+	case Critical:
+		return true
+	case High:
+		return true
+	case Low:
+		return true
+	case Moderate:
+		return true
+	case Unknown:
 		return true
 	default:
 		return false
@@ -3645,11 +3699,86 @@ type HostingV1NodeJsCreateFromArchiveRequestNodeVersion int
 // HostingV1NodeJsCreateFromArchiveRequestPackageManager Package manager override
 type HostingV1NodeJsCreateFromArchiveRequestPackageManager string
 
+// HostingV1NodeJsPatchResultResource defines model for Hosting.V1.NodeJs.PatchResultResource.
+type HostingV1NodeJsPatchResultResource struct {
+	// HeadBranch The branch created with the fix
+	HeadBranch *string `json:"head_branch,omitempty"`
+
+	// PatchedVulnerabilityIds List of vulnerability IDs that were patched in the pull request
+	PatchedVulnerabilityIds *[]string `json:"patched_vulnerability_ids,omitempty"`
+
+	// PrNumber GitHub pull request number
+	PrNumber *int `json:"pr_number,omitempty"`
+
+	// PrUrl URL to the created GitHub pull request
+	PrUrl *string `json:"pr_url,omitempty"`
+}
+
+// HostingV1NodeJsPatchVulnerabilitiesRequest defines model for Hosting.V1.NodeJs.PatchVulnerabilitiesRequest.
+type HostingV1NodeJsPatchVulnerabilitiesRequest struct {
+	// VulnerabilityIds List of vulnerability IDs to patch, as returned by the list vulnerabilities endpoint.
+	VulnerabilityIds []string `json:"vulnerability_ids"`
+}
+
 // HostingV1NodeJsSourceOptionsResource defines model for Hosting.V1.NodeJs.SourceOptionsResource.
 type HostingV1NodeJsSourceOptionsResource struct {
 	// ArchivePath Present if sourceType is "archive"
 	ArchivePath *string `json:"archive_path,omitempty"`
 }
+
+// HostingV1NodeJsVulnerabilityCollection Array of [`Hosting.V1.NodeJs.VulnerabilityResource`](#model/hostingv1nodejsvulnerabilityresource)
+type HostingV1NodeJsVulnerabilityCollection = []HostingV1NodeJsVulnerabilityResource
+
+// HostingV1NodeJsVulnerabilityResource defines model for Hosting.V1.NodeJs.VulnerabilityResource.
+type HostingV1NodeJsVulnerabilityResource struct {
+	// Cve CVE identifier, if available
+	Cve *string `json:"cve,omitempty"`
+
+	// CvssScore CVSS base score (0.0-10.0)
+	CvssScore *float32 `json:"cvss_score,omitempty"`
+
+	// Cwe CWE identifier describing the weakness type
+	Cwe *string `json:"cwe,omitempty"`
+
+	// Description Detailed description of the vulnerability
+	Description *string `json:"description,omitempty"`
+
+	// FixVersion Version that fixes the vulnerability, if known
+	FixVersion *string `json:"fix_version,omitempty"`
+
+	// InstalledVersion Version of the package currently installed
+	InstalledVersion *string `json:"installed_version,omitempty"`
+
+	// IsDirect Whether the package is a direct dependency
+	IsDirect *bool `json:"is_direct,omitempty"`
+
+	// IsPatchable Whether the vulnerability can be auto-patched without a major version bump
+	IsPatchable *bool `json:"is_patchable,omitempty"`
+
+	// IsPatchingInProgress Whether this vulnerability is included in a currently open patch pull request
+	IsPatchingInProgress *bool `json:"is_patching_in_progress,omitempty"`
+
+	// PackageName Name of the affected npm package
+	PackageName *string `json:"package_name,omitempty"`
+
+	// PublishedAt Date the vulnerability was published, in ISO 8601 format
+	PublishedAt *time.Time `json:"published_at,omitempty"`
+
+	// Severity Severity level of the vulnerability
+	Severity *HostingV1NodeJsVulnerabilityResourceSeverity `json:"severity,omitempty"`
+
+	// Title Short human-readable title of the vulnerability
+	Title *string `json:"title,omitempty"`
+
+	// Url URL to the vulnerability advisory
+	Url *string `json:"url,omitempty"`
+
+	// VulnerabilityId Unique vulnerability identifier (e.g. GHSA or CVE)
+	VulnerabilityId *string `json:"vulnerability_id,omitempty"`
+}
+
+// HostingV1NodeJsVulnerabilityResourceSeverity Severity level of the vulnerability
+type HostingV1NodeJsVulnerabilityResourceSeverity string
 
 // HostingV1OrdersOrderCollection Array of [`Hosting.V1.Orders.OrderResource`](#model/hostingv1ordersorderresource)
 type HostingV1OrdersOrderCollection = []HostingV1OrdersOrderResource
@@ -5450,6 +5579,15 @@ type HostingGetNodeJSBuildLogsV1Params struct {
 	FromLine *int `form:"from_line,omitempty" json:"from_line,omitempty"`
 }
 
+// HostingListNodeJsVulnerabilitiesV1Params defines parameters for HostingListNodeJsVulnerabilitiesV1.
+type HostingListNodeJsVulnerabilitiesV1Params struct {
+	// Severities Severities to filter by
+	Severities *[]HostingListNodeJsVulnerabilitiesV1ParamsSeverities `form:"severities,omitempty" json:"severities,omitempty"`
+}
+
+// HostingListNodeJsVulnerabilitiesV1ParamsSeverities defines parameters for HostingListNodeJsVulnerabilitiesV1.
+type HostingListNodeJsVulnerabilitiesV1ParamsSeverities string
+
 // HostingShowAIOptionStatusV1Params defines parameters for HostingShowAIOptionStatusV1.
 type HostingShowAIOptionStatusV1Params struct {
 	// Option Filter the status by a single AI option.
@@ -5716,6 +5854,9 @@ type HostingToggleCachelessModeV1JSONRequestBody = HostingV1CacheToggleCacheless
 
 // HostingCreateNodeJSBuildFromArchiveV1JSONRequestBody defines body for HostingCreateNodeJSBuildFromArchiveV1 for application/json ContentType.
 type HostingCreateNodeJSBuildFromArchiveV1JSONRequestBody = HostingV1NodeJsCreateFromArchiveRequest
+
+// HostingPatchNodeJsVulnerabilitiesV1JSONRequestBody defines body for HostingPatchNodeJsVulnerabilitiesV1 for application/json ContentType.
+type HostingPatchNodeJsVulnerabilitiesV1JSONRequestBody = HostingV1NodeJsPatchVulnerabilitiesRequest
 
 // HostingCreateWebsiteParkedDomainV1JSONRequestBody defines body for HostingCreateWebsiteParkedDomainV1 for application/json ContentType.
 type HostingCreateWebsiteParkedDomainV1JSONRequestBody = HostingV1DomainsCreateParkedDomainRequest
@@ -6994,6 +7135,14 @@ type ClientInterface interface {
 
 	// HostingRestartNodeJsApplicationV1 request
 	HostingRestartNodeJsApplicationV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingListNodeJsVulnerabilitiesV1 request
+	HostingListNodeJsVulnerabilitiesV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingListNodeJsVulnerabilitiesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingPatchNodeJsVulnerabilitiesV1WithBody request with any body
+	HostingPatchNodeJsVulnerabilitiesV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	HostingPatchNodeJsVulnerabilitiesV1(ctx context.Context, username UsernamePath, domain Domain, body HostingPatchNodeJsVulnerabilitiesV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingListWebsiteParkedDomainsV1 request
 	HostingListWebsiteParkedDomainsV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -8761,6 +8910,42 @@ func (c *Client) HostingGetNodeJSBuildLogsV1(ctx context.Context, username Usern
 
 func (c *Client) HostingRestartNodeJsApplicationV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingRestartNodeJsApplicationV1Request(c.Server, username, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingListNodeJsVulnerabilitiesV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingListNodeJsVulnerabilitiesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingListNodeJsVulnerabilitiesV1Request(c.Server, username, domain, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingPatchNodeJsVulnerabilitiesV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingPatchNodeJsVulnerabilitiesV1RequestWithBody(c.Server, username, domain, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) HostingPatchNodeJsVulnerabilitiesV1(ctx context.Context, username UsernamePath, domain Domain, body HostingPatchNodeJsVulnerabilitiesV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingPatchNodeJsVulnerabilitiesV1Request(c.Server, username, domain, body)
 	if err != nil {
 		return nil, err
 	}
@@ -14360,6 +14545,128 @@ func NewHostingRestartNodeJsApplicationV1Request(server string, username Usernam
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewHostingListNodeJsVulnerabilitiesV1Request generates requests for HostingListNodeJsVulnerabilitiesV1
+func NewHostingListNodeJsVulnerabilitiesV1Request(server string, username UsernamePath, domain Domain, params *HostingListNodeJsVulnerabilitiesV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/nodejs/vulnerabilities", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Severities != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "severities", *params.Severities, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "array", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingPatchNodeJsVulnerabilitiesV1Request calls the generic HostingPatchNodeJsVulnerabilitiesV1 builder with application/json body
+func NewHostingPatchNodeJsVulnerabilitiesV1Request(server string, username UsernamePath, domain Domain, body HostingPatchNodeJsVulnerabilitiesV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingPatchNodeJsVulnerabilitiesV1RequestWithBody(server, username, domain, "application/json", bodyReader)
+}
+
+// NewHostingPatchNodeJsVulnerabilitiesV1RequestWithBody generates requests for HostingPatchNodeJsVulnerabilitiesV1 with any type of body
+func NewHostingPatchNodeJsVulnerabilitiesV1RequestWithBody(server string, username UsernamePath, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/nodejs/vulnerabilities/patch", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -20619,6 +20926,14 @@ type ClientWithResponsesInterface interface {
 	// HostingRestartNodeJsApplicationV1WithResponse request
 	HostingRestartNodeJsApplicationV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingRestartNodeJsApplicationV1Response, error)
 
+	// HostingListNodeJsVulnerabilitiesV1WithResponse request
+	HostingListNodeJsVulnerabilitiesV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingListNodeJsVulnerabilitiesV1Params, reqEditors ...RequestEditorFn) (*HostingListNodeJsVulnerabilitiesV1Response, error)
+
+	// HostingPatchNodeJsVulnerabilitiesV1WithBodyWithResponse request with any body
+	HostingPatchNodeJsVulnerabilitiesV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingPatchNodeJsVulnerabilitiesV1Response, error)
+
+	HostingPatchNodeJsVulnerabilitiesV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingPatchNodeJsVulnerabilitiesV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingPatchNodeJsVulnerabilitiesV1Response, error)
+
 	// HostingListWebsiteParkedDomainsV1WithResponse request
 	HostingListWebsiteParkedDomainsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingListWebsiteParkedDomainsV1Response, error)
 
@@ -23667,6 +23982,71 @@ func (r HostingRestartNodeJsApplicationV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingRestartNodeJsApplicationV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingListNodeJsVulnerabilitiesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *HostingV1NodeJsVulnerabilityCollection
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingListNodeJsVulnerabilitiesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingListNodeJsVulnerabilitiesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingListNodeJsVulnerabilitiesV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingPatchNodeJsVulnerabilitiesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON201      *HostingV1NodeJsPatchResultResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingPatchNodeJsVulnerabilitiesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingPatchNodeJsVulnerabilitiesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingPatchNodeJsVulnerabilitiesV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -28850,6 +29230,32 @@ func (c *ClientWithResponses) HostingRestartNodeJsApplicationV1WithResponse(ctx 
 	return ParseHostingRestartNodeJsApplicationV1Response(rsp)
 }
 
+// HostingListNodeJsVulnerabilitiesV1WithResponse request returning *HostingListNodeJsVulnerabilitiesV1Response
+func (c *ClientWithResponses) HostingListNodeJsVulnerabilitiesV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingListNodeJsVulnerabilitiesV1Params, reqEditors ...RequestEditorFn) (*HostingListNodeJsVulnerabilitiesV1Response, error) {
+	rsp, err := c.HostingListNodeJsVulnerabilitiesV1(ctx, username, domain, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingListNodeJsVulnerabilitiesV1Response(rsp)
+}
+
+// HostingPatchNodeJsVulnerabilitiesV1WithBodyWithResponse request with arbitrary body returning *HostingPatchNodeJsVulnerabilitiesV1Response
+func (c *ClientWithResponses) HostingPatchNodeJsVulnerabilitiesV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingPatchNodeJsVulnerabilitiesV1Response, error) {
+	rsp, err := c.HostingPatchNodeJsVulnerabilitiesV1WithBody(ctx, username, domain, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingPatchNodeJsVulnerabilitiesV1Response(rsp)
+}
+
+func (c *ClientWithResponses) HostingPatchNodeJsVulnerabilitiesV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingPatchNodeJsVulnerabilitiesV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingPatchNodeJsVulnerabilitiesV1Response, error) {
+	rsp, err := c.HostingPatchNodeJsVulnerabilitiesV1(ctx, username, domain, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingPatchNodeJsVulnerabilitiesV1Response(rsp)
+}
+
 // HostingListWebsiteParkedDomainsV1WithResponse request returning *HostingListWebsiteParkedDomainsV1Response
 func (c *ClientWithResponses) HostingListWebsiteParkedDomainsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingListWebsiteParkedDomainsV1Response, error) {
 	rsp, err := c.HostingListWebsiteParkedDomainsV1(ctx, username, domain, reqEditors...)
@@ -33752,6 +34158,93 @@ func ParseHostingRestartNodeJsApplicationV1Response(rsp *http.Response) (*Hostin
 			return nil, err
 		}
 		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingListNodeJsVulnerabilitiesV1Response parses an HTTP response from a HostingListNodeJsVulnerabilitiesV1WithResponse call
+func ParseHostingListNodeJsVulnerabilitiesV1Response(rsp *http.Response) (*HostingListNodeJsVulnerabilitiesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingListNodeJsVulnerabilitiesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1NodeJsVulnerabilityCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingPatchNodeJsVulnerabilitiesV1Response parses an HTTP response from a HostingPatchNodeJsVulnerabilitiesV1WithResponse call
+func ParseHostingPatchNodeJsVulnerabilitiesV1Response(rsp *http.Response) (*HostingPatchNodeJsVulnerabilitiesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingPatchNodeJsVulnerabilitiesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest HostingV1NodeJsPatchResultResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse
