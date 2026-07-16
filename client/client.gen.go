@@ -2841,6 +2841,18 @@ type DomainsV1PortfolioPurchaseRequest struct {
 	PaymentMethodId *int `json:"payment_method_id,omitempty"`
 }
 
+// DomainsV1PortfolioRenewalRenewalInformationResource defines model for Domains.V1.Portfolio.Renewal.RenewalInformationResource.
+type DomainsV1PortfolioRenewalRenewalInformationResource struct {
+	// Domain Domain name
+	Domain *string `json:"domain,omitempty"`
+
+	// ExpiresAt Domain expiration date
+	ExpiresAt *time.Time `json:"expires_at,omitempty"`
+
+	// Status Domain status
+	Status *string `json:"status,omitempty"`
+}
+
 // DomainsV1PortfolioUpdateNameserversRequest defines model for Domains.V1.Portfolio.UpdateNameserversRequest.
 type DomainsV1PortfolioUpdateNameserversRequest struct {
 	// Ns1 First name server
@@ -6831,6 +6843,9 @@ type ClientInterface interface {
 	// DomainsEnablePrivacyProtectionV1 request
 	DomainsEnablePrivacyProtectionV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// DomainsGetDomainRenewalInformationV1 request
+	DomainsGetDomainRenewalInformationV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// DomainsGetWHOISProfileListV1 request
 	DomainsGetWHOISProfileListV1(ctx context.Context, params *DomainsGetWHOISProfileListV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -8074,6 +8089,18 @@ func (c *Client) DomainsDisablePrivacyProtectionV1(ctx context.Context, domain D
 
 func (c *Client) DomainsEnablePrivacyProtectionV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDomainsEnablePrivacyProtectionV1Request(c.Server, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DomainsGetDomainRenewalInformationV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsGetDomainRenewalInformationV1Request(c.Server, domain)
 	if err != nil {
 		return nil, err
 	}
@@ -12401,6 +12428,40 @@ func NewDomainsEnablePrivacyProtectionV1Request(server string, domain Domain) (*
 	}
 
 	req, err := http.NewRequest(http.MethodPut, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDomainsGetDomainRenewalInformationV1Request generates requests for DomainsGetDomainRenewalInformationV1
+func NewDomainsGetDomainRenewalInformationV1Request(server string, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/domains/v1/portfolio/%s/renewal", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -20406,6 +20467,9 @@ type ClientWithResponsesInterface interface {
 	// DomainsEnablePrivacyProtectionV1WithResponse request
 	DomainsEnablePrivacyProtectionV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*DomainsEnablePrivacyProtectionV1Response, error)
 
+	// DomainsGetDomainRenewalInformationV1WithResponse request
+	DomainsGetDomainRenewalInformationV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*DomainsGetDomainRenewalInformationV1Response, error)
+
 	// DomainsGetWHOISProfileListV1WithResponse request
 	DomainsGetWHOISProfileListV1WithResponse(ctx context.Context, params *DomainsGetWHOISProfileListV1Params, reqEditors ...RequestEditorFn) (*DomainsGetWHOISProfileListV1Response, error)
 
@@ -22294,6 +22358,38 @@ func (r DomainsEnablePrivacyProtectionV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r DomainsEnablePrivacyProtectionV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DomainsGetDomainRenewalInformationV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *DomainsV1PortfolioRenewalRenewalInformationResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r DomainsGetDomainRenewalInformationV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DomainsGetDomainRenewalInformationV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DomainsGetDomainRenewalInformationV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -28266,6 +28362,15 @@ func (c *ClientWithResponses) DomainsEnablePrivacyProtectionV1WithResponse(ctx c
 	return ParseDomainsEnablePrivacyProtectionV1Response(rsp)
 }
 
+// DomainsGetDomainRenewalInformationV1WithResponse request returning *DomainsGetDomainRenewalInformationV1Response
+func (c *ClientWithResponses) DomainsGetDomainRenewalInformationV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*DomainsGetDomainRenewalInformationV1Response, error) {
+	rsp, err := c.DomainsGetDomainRenewalInformationV1(ctx, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsGetDomainRenewalInformationV1Response(rsp)
+}
+
 // DomainsGetWHOISProfileListV1WithResponse request returning *DomainsGetWHOISProfileListV1Response
 func (c *ClientWithResponses) DomainsGetWHOISProfileListV1WithResponse(ctx context.Context, params *DomainsGetWHOISProfileListV1Params, reqEditors ...RequestEditorFn) (*DomainsGetWHOISProfileListV1Response, error) {
 	rsp, err := c.DomainsGetWHOISProfileListV1(ctx, params, reqEditors...)
@@ -31905,6 +32010,46 @@ func ParseDomainsEnablePrivacyProtectionV1Response(rsp *http.Response) (*Domains
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDomainsGetDomainRenewalInformationV1Response parses an HTTP response from a DomainsGetDomainRenewalInformationV1WithResponse call
+func ParseDomainsGetDomainRenewalInformationV1Response(rsp *http.Response) (*DomainsGetDomainRenewalInformationV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DomainsGetDomainRenewalInformationV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest DomainsV1PortfolioRenewalRenewalInformationResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

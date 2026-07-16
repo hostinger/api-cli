@@ -17,5 +17,6 @@ func init() {
 	GroupCmd.AddCommand(GetCmd)
 	GroupCmd.AddCommand(ListCmd)
 	GroupCmd.AddCommand(PurchaseCmd)
+	GroupCmd.AddCommand(RenewalInformationCmd)
 	GroupCmd.AddCommand(UpdateNameserversCmd)
 }

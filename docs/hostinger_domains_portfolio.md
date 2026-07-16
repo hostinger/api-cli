@@ -25,5 +25,6 @@ Portfolio commands
 * [hostinger domains portfolio get](hostinger_domains_portfolio_get.md)	 - Get domain details
 * [hostinger domains portfolio list](hostinger_domains_portfolio_list.md)	 - Get domain list
 * [hostinger domains portfolio purchase](hostinger_domains_portfolio_purchase.md)	 - Purchase new domain
+* [hostinger domains portfolio renewal-information](hostinger_domains_portfolio_renewal-information.md)	 - Get domain renewal information
 * [hostinger domains portfolio update-nameservers](hostinger_domains_portfolio_update-nameservers.md)	 - Update domain nameservers
 

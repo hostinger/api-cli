@@ -504,6 +504,11 @@
     "method": "GET",
     "path": "/api/domains/v1/portfolio"
   },
+  "domains_getDomainRenewalInformationV1": {
+    "command": "hostinger domains portfolio renewal-information",
+    "method": "GET",
+    "path": "/api/domains/v1/portfolio/{domain}/renewal"
+  },
   "domains_getWHOISProfileListV1": {
     "command": "hostinger domains whois list",
     "method": "GET",
