@@ -359,6 +359,11 @@
     "method": "PUT",
     "path": "/api/agency-hosting/v1/websites/{website_uid}/domains/{from_domain}"
   },
+  "agency-hosting_clearAgencyPlanWebsiteCacheV1": {
+    "command": "hostinger agency-hosting cache clear-plan-website",
+    "method": "DELETE",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/cache"
+  },
   "agency-hosting_createAgencyPlanWebsiteCronJobV1": {
     "command": "hostinger agency-hosting cron-jobs create-plan-website",
     "method": "POST",

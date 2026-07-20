@@ -1,6 +1,7 @@
 package agency_hosting
 
 import (
+	"github.com/hostinger/api-cli/cmd/agency_hosting/cache"
 	"github.com/hostinger/api-cli/cmd/agency_hosting/cron_jobs"
 	"github.com/hostinger/api-cli/cmd/agency_hosting/datacenters"
 	"github.com/hostinger/api-cli/cmd/agency_hosting/domains"
@@ -17,6 +18,7 @@ var GroupCmd = &cobra.Command{
 }
 
 func init() {
+	GroupCmd.AddCommand(cache.GroupCmd)
 	GroupCmd.AddCommand(cron_jobs.GroupCmd)
 	GroupCmd.AddCommand(datacenters.GroupCmd)
 	GroupCmd.AddCommand(domains.GroupCmd)
