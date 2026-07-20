@@ -18,6 +18,7 @@ Agency Hosting commands
 ### SEE ALSO
 
 * [hostinger](hostinger.md)	 - Hostinger API Command Line Interface
+* [hostinger agency-hosting cron-jobs](hostinger_agency-hosting_cron-jobs.md)	 - Cron Jobs commands
 * [hostinger agency-hosting datacenters](hostinger_agency-hosting_datacenters.md)	 - Datacenters commands
 * [hostinger agency-hosting domains](hostinger_agency-hosting_domains.md)	 - Domains commands
 * [hostinger agency-hosting files](hostinger_agency-hosting_files.md)	 - Files commands

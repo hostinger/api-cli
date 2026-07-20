@@ -359,6 +359,16 @@
     "method": "PUT",
     "path": "/api/agency-hosting/v1/websites/{website_uid}/domains/{from_domain}"
   },
+  "agency-hosting_createAgencyPlanWebsiteCronJobV1": {
+    "command": "hostinger agency-hosting cron-jobs create-plan-website",
+    "method": "POST",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/cron-jobs"
+  },
+  "agency-hosting_deleteAgencyPlanWebsiteCronJobV1": {
+    "command": "hostinger agency-hosting cron-jobs delete-plan-website",
+    "method": "DELETE",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/cron-jobs/{uuid}"
+  },
   "agency-hosting_deleteAgencyPlanWebsiteV1": {
     "command": "hostinger agency-hosting websites delete-plan",
     "method": "DELETE",
@@ -388,6 +398,11 @@
     "command": "hostinger agency-hosting domains list-plan",
     "method": "GET",
     "path": "/api/agency-hosting/v1/domains"
+  },
+  "agency-hosting_listAgencyPlanWebsiteCronJobsV1": {
+    "command": "hostinger agency-hosting cron-jobs list-plan-website",
+    "method": "GET",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/cron-jobs"
   },
   "agency-hosting_listAvailableDatacentersForAnAgencyPlanOrderV1": {
     "command": "hostinger agency-hosting datacenters list-for-plan-order",

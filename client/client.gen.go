@@ -2107,6 +2107,33 @@ type AgencyHostingV1WebsitesBuildAssetsRequest struct {
 	ArchivePath string `json:"archive_path"`
 }
 
+// AgencyHostingV1WebsitesCronJobsCreateCronJobRequest defines model for AgencyHosting.V1.Websites.CronJobs.CreateCronJobRequest.
+type AgencyHostingV1WebsitesCronJobsCreateCronJobRequest struct {
+	// Command Command to run on the schedule. Must not contain pipe (|) or redirection (<, >) characters.
+	Command string `json:"command"`
+
+	// Time Cron schedule expression (standard 5-field crontab syntax).
+	Time string `json:"time"`
+}
+
+// AgencyHostingV1WebsitesCronJobsCronJobCollection Array of [`AgencyHosting.V1.Websites.CronJobs.CronJobResource`](#model/agencyhostingv1websitescronjobscronjobresource)
+type AgencyHostingV1WebsitesCronJobsCronJobCollection = []AgencyHostingV1WebsitesCronJobsCronJobResource
+
+// AgencyHostingV1WebsitesCronJobsCronJobResource defines model for AgencyHosting.V1.Websites.CronJobs.CronJobResource.
+type AgencyHostingV1WebsitesCronJobsCronJobResource struct {
+	// Command Command executed on the configured schedule.
+	Command *string `json:"command,omitempty"`
+
+	// CreatedAt Cron job creation timestamp.
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Time Cron schedule expression.
+	Time *string `json:"time,omitempty"`
+
+	// Uuid Unique identifier of the cron job. Use it to delete the cron job.
+	Uuid *string `json:"uuid,omitempty"`
+}
+
 // AgencyHostingV1WebsitesCustomSslCertResource defines model for AgencyHosting.V1.Websites.CustomSslCertResource.
 type AgencyHostingV1WebsitesCustomSslCertResource struct {
 	CreatedAt *time.Time `json:"created_at,omitempty"`
@@ -5309,6 +5336,9 @@ type WordPressV1ThemesUpdateThemesRequest struct {
 // ActionId defines model for actionId.
 type ActionId = int
 
+// AgencyCronJobUuidPath defines model for agency_cron_job_uuid_path.
+type AgencyCronJobUuidPath = openapi_types.UUID
+
 // BackupId defines model for backupId.
 type BackupId = int
 
@@ -5493,6 +5523,15 @@ type AgencyHostingListAgencyPlanDomainsV1Params struct {
 
 	// WebsiteUuids Filter by website UIDs
 	WebsiteUuids *WebsiteUuids `form:"website_uuids,omitempty" json:"website_uuids,omitempty"`
+}
+
+// AgencyHostingListAgencyPlanWebsiteCronJobsV1Params defines parameters for AgencyHostingListAgencyPlanWebsiteCronJobsV1.
+type AgencyHostingListAgencyPlanWebsiteCronJobsV1Params struct {
+	// Page Page number
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+
+	// PerPage Number of items per page
+	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
 }
 
 // BillingGetCatalogItemListV1Params defines parameters for BillingGetCatalogItemListV1.
@@ -5773,6 +5812,9 @@ type AgencyHostingProvisionANewAgencyPlanWebsiteV1JSONRequestBody = AgencyHostin
 
 // AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1JSONRequestBody defines body for AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1 for application/json ContentType.
 type AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1JSONRequestBody = AgencyHostingV1WebsitesBuildAssetsRequest
+
+// AgencyHostingCreateAgencyPlanWebsiteCronJobV1JSONRequestBody defines body for AgencyHostingCreateAgencyPlanWebsiteCronJobV1 for application/json ContentType.
+type AgencyHostingCreateAgencyPlanWebsiteCronJobV1JSONRequestBody = AgencyHostingV1WebsitesCronJobsCreateCronJobRequest
 
 // AgencyHostingLinkDomainToAgencyPlanWebsiteV1JSONRequestBody defines body for AgencyHostingLinkDomainToAgencyPlanWebsiteV1 for application/json ContentType.
 type AgencyHostingLinkDomainToAgencyPlanWebsiteV1JSONRequestBody = AgencyHostingV1DomainsLinkDomainRequest
@@ -6866,6 +6908,17 @@ type ClientInterface interface {
 
 	AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// AgencyHostingListAgencyPlanWebsiteCronJobsV1 request
+	AgencyHostingListAgencyPlanWebsiteCronJobsV1(ctx context.Context, websiteUid WebsiteUid, params *AgencyHostingListAgencyPlanWebsiteCronJobsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithBody request with any body
+	AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	AgencyHostingCreateAgencyPlanWebsiteCronJobV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingCreateAgencyPlanWebsiteCronJobV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingDeleteAgencyPlanWebsiteCronJobV1 request
+	AgencyHostingDeleteAgencyPlanWebsiteCronJobV1(ctx context.Context, websiteUid WebsiteUid, uuid AgencyCronJobUuidPath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBody request with any body
 	AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -7722,6 +7775,54 @@ func (c *Client) AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithBody(ctx c
 
 func (c *Client) AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Request(c.Server, websiteUid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AgencyHostingListAgencyPlanWebsiteCronJobsV1(ctx context.Context, websiteUid WebsiteUid, params *AgencyHostingListAgencyPlanWebsiteCronJobsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingListAgencyPlanWebsiteCronJobsV1Request(c.Server, websiteUid, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingCreateAgencyPlanWebsiteCronJobV1RequestWithBody(c.Server, websiteUid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AgencyHostingCreateAgencyPlanWebsiteCronJobV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingCreateAgencyPlanWebsiteCronJobV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingCreateAgencyPlanWebsiteCronJobV1Request(c.Server, websiteUid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AgencyHostingDeleteAgencyPlanWebsiteCronJobV1(ctx context.Context, websiteUid WebsiteUid, uuid AgencyCronJobUuidPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingDeleteAgencyPlanWebsiteCronJobV1Request(c.Server, websiteUid, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -11367,6 +11468,167 @@ func NewAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1RequestWithBody(server 
 	}
 
 	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewAgencyHostingListAgencyPlanWebsiteCronJobsV1Request generates requests for AgencyHostingListAgencyPlanWebsiteCronJobsV1
+func NewAgencyHostingListAgencyPlanWebsiteCronJobsV1Request(server string, websiteUid WebsiteUid, params *AgencyHostingListAgencyPlanWebsiteCronJobsV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/cron-jobs", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Page != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page", *params.Page, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PerPage != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "per_page", *params.PerPage, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAgencyHostingCreateAgencyPlanWebsiteCronJobV1Request calls the generic AgencyHostingCreateAgencyPlanWebsiteCronJobV1 builder with application/json body
+func NewAgencyHostingCreateAgencyPlanWebsiteCronJobV1Request(server string, websiteUid WebsiteUid, body AgencyHostingCreateAgencyPlanWebsiteCronJobV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewAgencyHostingCreateAgencyPlanWebsiteCronJobV1RequestWithBody(server, websiteUid, "application/json", bodyReader)
+}
+
+// NewAgencyHostingCreateAgencyPlanWebsiteCronJobV1RequestWithBody generates requests for AgencyHostingCreateAgencyPlanWebsiteCronJobV1 with any type of body
+func NewAgencyHostingCreateAgencyPlanWebsiteCronJobV1RequestWithBody(server string, websiteUid WebsiteUid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/cron-jobs", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewAgencyHostingDeleteAgencyPlanWebsiteCronJobV1Request generates requests for AgencyHostingDeleteAgencyPlanWebsiteCronJobV1
+func NewAgencyHostingDeleteAgencyPlanWebsiteCronJobV1Request(server string, websiteUid WebsiteUid, uuid AgencyCronJobUuidPath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "uuid", uuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/cron-jobs/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 
 	return req, nil
 }
@@ -20656,6 +20918,17 @@ type ClientWithResponsesInterface interface {
 
 	AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response, error)
 
+	// AgencyHostingListAgencyPlanWebsiteCronJobsV1WithResponse request
+	AgencyHostingListAgencyPlanWebsiteCronJobsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, params *AgencyHostingListAgencyPlanWebsiteCronJobsV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListAgencyPlanWebsiteCronJobsV1Response, error)
+
+	// AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithBodyWithResponse request with any body
+	AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response, error)
+
+	AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingCreateAgencyPlanWebsiteCronJobV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response, error)
+
+	// AgencyHostingDeleteAgencyPlanWebsiteCronJobV1WithResponse request
+	AgencyHostingDeleteAgencyPlanWebsiteCronJobV1WithResponse(ctx context.Context, websiteUid WebsiteUid, uuid AgencyCronJobUuidPath, reqEditors ...RequestEditorFn) (*AgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response, error)
+
 	// AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBodyWithResponse request with any body
 	AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response, error)
 
@@ -21638,6 +21911,107 @@ func (r AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response) StatusCode() 
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingListAgencyPlanWebsiteCronJobsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *struct {
+		// Data Array of [`AgencyHosting.V1.Websites.CronJobs.CronJobResource`](#model/agencyhostingv1websitescronjobscronjobresource)
+		Data *AgencyHostingV1WebsitesCronJobsCronJobCollection `json:"data,omitempty"`
+		Meta *CommonSchemaPaginationMetaSchema                 `json:"meta,omitempty"`
+	}
+	JSON401 *CommonResponseUnauthorizedResponse
+	JSON500 *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingListAgencyPlanWebsiteCronJobsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingListAgencyPlanWebsiteCronJobsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingListAgencyPlanWebsiteCronJobsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *AgencyHostingV1WebsitesCronJobsCronJobResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -28366,6 +28740,41 @@ func (c *ClientWithResponses) AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1W
 	return ParseAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response(rsp)
 }
 
+// AgencyHostingListAgencyPlanWebsiteCronJobsV1WithResponse request returning *AgencyHostingListAgencyPlanWebsiteCronJobsV1Response
+func (c *ClientWithResponses) AgencyHostingListAgencyPlanWebsiteCronJobsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, params *AgencyHostingListAgencyPlanWebsiteCronJobsV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListAgencyPlanWebsiteCronJobsV1Response, error) {
+	rsp, err := c.AgencyHostingListAgencyPlanWebsiteCronJobsV1(ctx, websiteUid, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingListAgencyPlanWebsiteCronJobsV1Response(rsp)
+}
+
+// AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithBodyWithResponse request with arbitrary body returning *AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response
+func (c *ClientWithResponses) AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response, error) {
+	rsp, err := c.AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithBody(ctx, websiteUid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingCreateAgencyPlanWebsiteCronJobV1Response(rsp)
+}
+
+func (c *ClientWithResponses) AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingCreateAgencyPlanWebsiteCronJobV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response, error) {
+	rsp, err := c.AgencyHostingCreateAgencyPlanWebsiteCronJobV1(ctx, websiteUid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingCreateAgencyPlanWebsiteCronJobV1Response(rsp)
+}
+
+// AgencyHostingDeleteAgencyPlanWebsiteCronJobV1WithResponse request returning *AgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response
+func (c *ClientWithResponses) AgencyHostingDeleteAgencyPlanWebsiteCronJobV1WithResponse(ctx context.Context, websiteUid WebsiteUid, uuid AgencyCronJobUuidPath, reqEditors ...RequestEditorFn) (*AgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response, error) {
+	rsp, err := c.AgencyHostingDeleteAgencyPlanWebsiteCronJobV1(ctx, websiteUid, uuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response(rsp)
+}
+
 // AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBodyWithResponse request with arbitrary body returning *AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response
 func (c *ClientWithResponses) AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response, error) {
 	rsp, err := c.AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBody(ctx, websiteUid, contentType, body, reqEditors...)
@@ -31070,6 +31479,137 @@ func ParseAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response(rsp *http.Re
 			return nil, err
 		}
 		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingListAgencyPlanWebsiteCronJobsV1Response parses an HTTP response from a AgencyHostingListAgencyPlanWebsiteCronJobsV1WithResponse call
+func ParseAgencyHostingListAgencyPlanWebsiteCronJobsV1Response(rsp *http.Response) (*AgencyHostingListAgencyPlanWebsiteCronJobsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingListAgencyPlanWebsiteCronJobsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			// Data Array of [`AgencyHosting.V1.Websites.CronJobs.CronJobResource`](#model/agencyhostingv1websitescronjobscronjobresource)
+			Data *AgencyHostingV1WebsitesCronJobsCronJobCollection `json:"data,omitempty"`
+			Meta *CommonSchemaPaginationMetaSchema                 `json:"meta,omitempty"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingCreateAgencyPlanWebsiteCronJobV1Response parses an HTTP response from a AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithResponse call
+func ParseAgencyHostingCreateAgencyPlanWebsiteCronJobV1Response(rsp *http.Response) (*AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AgencyHostingV1WebsitesCronJobsCronJobResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response parses an HTTP response from a AgencyHostingDeleteAgencyPlanWebsiteCronJobV1WithResponse call
+func ParseAgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response(rsp *http.Response) (*AgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse
