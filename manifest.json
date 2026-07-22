@@ -369,10 +369,30 @@
     "method": "POST",
     "path": "/api/agency-hosting/v1/websites/{website_uid}/cron-jobs"
   },
+  "agency-hosting_createAgencyPlanWebsiteDatabaseUserV1": {
+    "command": "hostinger agency-hosting databases create-plan-website-user",
+    "method": "POST",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users"
+  },
+  "agency-hosting_createAgencyPlanWebsiteDatabaseV1": {
+    "command": "hostinger agency-hosting databases create-plan-website",
+    "method": "POST",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/databases"
+  },
   "agency-hosting_deleteAgencyPlanWebsiteCronJobV1": {
     "command": "hostinger agency-hosting cron-jobs delete-plan-website",
     "method": "DELETE",
     "path": "/api/agency-hosting/v1/websites/{website_uid}/cron-jobs/{uuid}"
+  },
+  "agency-hosting_deleteAgencyPlanWebsiteDatabaseUserV1": {
+    "command": "hostinger agency-hosting databases delete-plan-website-user",
+    "method": "DELETE",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users/{database_user_name}"
+  },
+  "agency-hosting_deleteAgencyPlanWebsiteDatabaseV1": {
+    "command": "hostinger agency-hosting databases delete-plan-website",
+    "method": "DELETE",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}"
   },
   "agency-hosting_deleteAgencyPlanWebsiteV1": {
     "command": "hostinger agency-hosting websites delete-plan",
@@ -408,6 +428,11 @@
     "command": "hostinger agency-hosting cron-jobs list-plan-website",
     "method": "GET",
     "path": "/api/agency-hosting/v1/websites/{website_uid}/cron-jobs"
+  },
+  "agency-hosting_listAgencyPlanWebsiteDatabasesV1": {
+    "command": "hostinger agency-hosting databases list-plan-website",
+    "method": "GET",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/databases"
   },
   "agency-hosting_listAvailableDatacentersForAnAgencyPlanOrderV1": {
     "command": "hostinger agency-hosting datacenters list-for-plan-order",
