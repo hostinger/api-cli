@@ -949,6 +949,24 @@ func (e HostingV1WebsitesWebsiteResourceVhostType) Valid() bool {
 	}
 }
 
+// Defines values for MailV1MailboxesMailboxResourceStatus.
+const (
+	MailV1MailboxesMailboxResourceStatusActive    MailV1MailboxesMailboxResourceStatus = "active"
+	MailV1MailboxesMailboxResourceStatusSuspended MailV1MailboxesMailboxResourceStatus = "suspended"
+)
+
+// Valid indicates whether the value is a known member of the MailV1MailboxesMailboxResourceStatus enum.
+func (e MailV1MailboxesMailboxResourceStatus) Valid() bool {
+	switch e {
+	case MailV1MailboxesMailboxResourceStatusActive:
+		return true
+	case MailV1MailboxesMailboxResourceStatusSuspended:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for MailV1OrdersOrderResourceStatus.
 const (
 	MailV1OrdersOrderResourceStatusActive       MailV1OrdersOrderResourceStatus = "active"
@@ -1293,22 +1311,22 @@ func (e VPSV1DockerManagerContainerPortResourceType) Valid() bool {
 
 // Defines values for VPSV1DockerManagerContainerResourceHealth.
 const (
-	Empty     VPSV1DockerManagerContainerResourceHealth = ""
-	Healthy   VPSV1DockerManagerContainerResourceHealth = "healthy"
-	Starting  VPSV1DockerManagerContainerResourceHealth = "starting"
-	Unhealthy VPSV1DockerManagerContainerResourceHealth = "unhealthy"
+	VPSV1DockerManagerContainerResourceHealthEmpty     VPSV1DockerManagerContainerResourceHealth = ""
+	VPSV1DockerManagerContainerResourceHealthHealthy   VPSV1DockerManagerContainerResourceHealth = "healthy"
+	VPSV1DockerManagerContainerResourceHealthStarting  VPSV1DockerManagerContainerResourceHealth = "starting"
+	VPSV1DockerManagerContainerResourceHealthUnhealthy VPSV1DockerManagerContainerResourceHealth = "unhealthy"
 )
 
 // Valid indicates whether the value is a known member of the VPSV1DockerManagerContainerResourceHealth enum.
 func (e VPSV1DockerManagerContainerResourceHealth) Valid() bool {
 	switch e {
-	case Empty:
+	case VPSV1DockerManagerContainerResourceHealthEmpty:
 		return true
-	case Healthy:
+	case VPSV1DockerManagerContainerResourceHealthHealthy:
 		return true
-	case Starting:
+	case VPSV1DockerManagerContainerResourceHealthStarting:
 		return true
-	case Unhealthy:
+	case VPSV1DockerManagerContainerResourceHealthUnhealthy:
 		return true
 	default:
 		return false
@@ -1828,6 +1846,24 @@ func (e Category) Valid() bool {
 	}
 }
 
+// Defines values for MailMailboxSort.
+const (
+	MailMailboxSortAddress      MailMailboxSort = "address"
+	MailMailboxSortMinusAddress MailMailboxSort = "-address"
+)
+
+// Valid indicates whether the value is a known member of the MailMailboxSort enum.
+func (e MailMailboxSort) Valid() bool {
+	switch e {
+	case MailMailboxSortAddress:
+		return true
+	case MailMailboxSortMinusAddress:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for MailOrderSort.
 const (
 	MailOrderSortCreatedAt      MailOrderSort = "created_at"
@@ -2077,6 +2113,24 @@ func (e MailGetMailOrderListV1ParamsSort) Valid() bool {
 	case MailGetMailOrderListV1ParamsSortMinusCreatedAt:
 		return true
 	case MailGetMailOrderListV1ParamsSortMinusExpiresAt:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for MailGetMailboxListV1ParamsSort.
+const (
+	MailGetMailboxListV1ParamsSortAddress      MailGetMailboxListV1ParamsSort = "address"
+	MailGetMailboxListV1ParamsSortMinusAddress MailGetMailboxListV1ParamsSort = "-address"
+)
+
+// Valid indicates whether the value is a known member of the MailGetMailboxListV1ParamsSort enum.
+func (e MailGetMailboxListV1ParamsSort) Valid() bool {
+	switch e {
+	case MailGetMailboxListV1ParamsSortAddress:
+		return true
+	case MailGetMailboxListV1ParamsSortMinusAddress:
 		return true
 	default:
 		return false
@@ -4195,6 +4249,72 @@ type HostingV1WebsitesWebsiteResource struct {
 // HostingV1WebsitesWebsiteResourceVhostType Virtual host type
 type HostingV1WebsitesWebsiteResourceVhostType string
 
+// MailV1MailboxesMailboxCollection Array of [`Mail.V1.Mailboxes.MailboxResource`](#model/mailv1mailboxesmailboxresource)
+type MailV1MailboxesMailboxCollection = []MailV1MailboxesMailboxResource
+
+// MailV1MailboxesMailboxCountsResource defines model for Mail.V1.Mailboxes.MailboxCountsResource.
+type MailV1MailboxesMailboxCountsResource struct {
+	// Aliases Number of attached aliases
+	Aliases *int `json:"aliases,omitempty"`
+
+	// Autoreplies Number of attached auto-replies
+	Autoreplies *int `json:"autoreplies,omitempty"`
+
+	// Forwarders Number of attached forwarders
+	Forwarders *int `json:"forwarders,omitempty"`
+}
+
+// MailV1MailboxesMailboxProtocolsResource defines model for Mail.V1.Mailboxes.MailboxProtocolsResource.
+type MailV1MailboxesMailboxProtocolsResource struct {
+	IsImapEnabled    *bool `json:"is_imap_enabled,omitempty"`
+	IsPop3Enabled    *bool `json:"is_pop3_enabled,omitempty"`
+	IsSmtpInEnabled  *bool `json:"is_smtp_in_enabled,omitempty"`
+	IsSmtpOutEnabled *bool `json:"is_smtp_out_enabled,omitempty"`
+}
+
+// MailV1MailboxesMailboxResource defines model for Mail.V1.Mailboxes.MailboxResource.
+type MailV1MailboxesMailboxResource struct {
+	// Address Email address of the mailbox
+	Address   *string                               `json:"address,omitempty"`
+	Counts    *MailV1MailboxesMailboxCountsResource `json:"counts,omitempty"`
+	CreatedAt *time.Time                            `json:"created_at,omitempty"`
+
+	// Id Mailbox resource ID
+	Id *string `json:"id,omitempty"`
+
+	// IsCatchall Whether the mailbox is the catch-all destination for its domain
+	IsCatchall *bool                                    `json:"is_catchall,omitempty"`
+	Protocols  *MailV1MailboxesMailboxProtocolsResource `json:"protocols,omitempty"`
+
+	// Status Mailbox status
+	Status *MailV1MailboxesMailboxResourceStatus `json:"status,omitempty"`
+
+	// StatusReason Reason the mailbox was suspended
+	StatusReason *string    `json:"status_reason,omitempty"`
+	UpdatedAt    *time.Time `json:"updated_at,omitempty"`
+
+	// Usage Periodically synced usage numbers (may lag behind live values)
+	Usage *MailV1MailboxesMailboxUsageResource `json:"usage,omitempty"`
+}
+
+// MailV1MailboxesMailboxResourceStatus Mailbox status
+type MailV1MailboxesMailboxResourceStatus string
+
+// MailV1MailboxesMailboxUsageResource Periodically synced usage numbers (may lag behind live values)
+type MailV1MailboxesMailboxUsageResource struct {
+	MessagesQuota *int `json:"messages_quota,omitempty"`
+	MessagesUsed  *int `json:"messages_used,omitempty"`
+
+	// StorageQuota Storage quota in kilobytes
+	StorageQuota *int `json:"storage_quota,omitempty"`
+
+	// StorageUsed Storage used in kilobytes
+	StorageUsed *int `json:"storage_used,omitempty"`
+
+	// SyncedAt When the usage numbers were last synced; null if never synced
+	SyncedAt *time.Time `json:"synced_at,omitempty"`
+}
+
 // MailV1OrdersOrderCollection Array of [`Mail.V1.Orders.OrderResource`](#model/mailv1ordersorderresource)
 type MailV1OrdersOrderCollection = []MailV1OrdersOrderResource
 
@@ -5664,8 +5784,17 @@ type IpAddressId = int
 // IsEnabled defines model for is_enabled.
 type IsEnabled = bool
 
+// MailMailboxSearch defines model for mail_mailbox_search.
+type MailMailboxSearch = string
+
+// MailMailboxSort defines model for mail_mailbox_sort.
+type MailMailboxSort string
+
 // MailOrderDomainFilter defines model for mail_order_domain_filter.
 type MailOrderDomainFilter = string
+
+// MailOrderIdPath defines model for mail_order_id_path.
+type MailOrderIdPath = string
 
 // MailOrderIsTrial defines model for mail_order_is_trial.
 type MailOrderIsTrial = bool
@@ -6062,6 +6191,24 @@ type MailGetMailOrderListV1ParamsStatus string
 
 // MailGetMailOrderListV1ParamsSort defines parameters for MailGetMailOrderListV1.
 type MailGetMailOrderListV1ParamsSort string
+
+// MailGetMailboxListV1Params defines parameters for MailGetMailboxListV1.
+type MailGetMailboxListV1Params struct {
+	// Search Filter mailboxes whose email address contains the given string
+	Search *MailMailboxSearch `form:"search,omitempty" json:"search,omitempty"`
+
+	// Sort Sort mailboxes by field. Prefix with `-` for descending order.
+	Sort *MailGetMailboxListV1ParamsSort `form:"sort,omitempty" json:"sort,omitempty"`
+
+	// Page Page number
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+
+	// PerPage Number of items per page
+	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
+}
+
+// MailGetMailboxListV1ParamsSort defines parameters for MailGetMailboxListV1.
+type MailGetMailboxListV1ParamsSort string
 
 // ReachListContactsV1Params defines parameters for ReachListContactsV1.
 type ReachListContactsV1Params struct {
@@ -7859,6 +8006,9 @@ type ClientInterface interface {
 
 	// MailGetMailOrderListV1 request
 	MailGetMailOrderListV1(ctx context.Context, params *MailGetMailOrderListV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// MailGetMailboxListV1 request
+	MailGetMailboxListV1(ctx context.Context, orderId MailOrderIdPath, params *MailGetMailboxListV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReachListContactsV1 request
 	ReachListContactsV1(ctx context.Context, params *ReachListContactsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -10614,6 +10764,18 @@ func (c *Client) HostingListWordPressThemesV1(ctx context.Context, params *Hosti
 
 func (c *Client) MailGetMailOrderListV1(ctx context.Context, params *MailGetMailOrderListV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewMailGetMailOrderListV1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) MailGetMailboxListV1(ctx context.Context, orderId MailOrderIdPath, params *MailGetMailboxListV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewMailGetMailboxListV1Request(c.Server, orderId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -18870,6 +19032,103 @@ func NewMailGetMailOrderListV1Request(server string, params *MailGetMailOrderLis
 	return req, nil
 }
 
+// NewMailGetMailboxListV1Request generates requests for MailGetMailboxListV1
+func NewMailGetMailboxListV1Request(server string, orderId MailOrderIdPath, params *MailGetMailboxListV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "orderId", orderId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/mail/v1/orders/%s/mailboxes", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Search != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "search", *params.Search, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Sort != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort", *params.Sort, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Page != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page", *params.Page, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PerPage != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "per_page", *params.PerPage, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewReachListContactsV1Request generates requests for ReachListContactsV1
 func NewReachListContactsV1Request(server string, params *ReachListContactsV1Params) (*http.Request, error) {
 	var err error
@@ -22629,6 +22888,9 @@ type ClientWithResponsesInterface interface {
 
 	// MailGetMailOrderListV1WithResponse request
 	MailGetMailOrderListV1WithResponse(ctx context.Context, params *MailGetMailOrderListV1Params, reqEditors ...RequestEditorFn) (*MailGetMailOrderListV1Response, error)
+
+	// MailGetMailboxListV1WithResponse request
+	MailGetMailboxListV1WithResponse(ctx context.Context, orderId MailOrderIdPath, params *MailGetMailboxListV1Params, reqEditors ...RequestEditorFn) (*MailGetMailboxListV1Response, error)
 
 	// ReachListContactsV1WithResponse request
 	ReachListContactsV1WithResponse(ctx context.Context, params *ReachListContactsV1Params, reqEditors ...RequestEditorFn) (*ReachListContactsV1Response, error)
@@ -27763,6 +28025,44 @@ func (r MailGetMailOrderListV1Response) ContentType() string {
 	return ""
 }
 
+type MailGetMailboxListV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *struct {
+		// Data Array of [`Mail.V1.Mailboxes.MailboxResource`](#model/mailv1mailboxesmailboxresource)
+		Data *MailV1MailboxesMailboxCollection `json:"data,omitempty"`
+		Meta *CommonSchemaPaginationMetaSchema `json:"meta,omitempty"`
+	}
+	JSON401 *CommonResponseUnauthorizedResponse
+	JSON404 *CommonResponseErrorResponse
+	JSON422 *CommonResponseErrorResponse
+	JSON500 *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r MailGetMailboxListV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r MailGetMailboxListV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r MailGetMailboxListV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type ReachListContactsV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -32047,6 +32347,15 @@ func (c *ClientWithResponses) MailGetMailOrderListV1WithResponse(ctx context.Con
 		return nil, err
 	}
 	return ParseMailGetMailOrderListV1Response(rsp)
+}
+
+// MailGetMailboxListV1WithResponse request returning *MailGetMailboxListV1Response
+func (c *ClientWithResponses) MailGetMailboxListV1WithResponse(ctx context.Context, orderId MailOrderIdPath, params *MailGetMailboxListV1Params, reqEditors ...RequestEditorFn) (*MailGetMailboxListV1Response, error) {
+	rsp, err := c.MailGetMailboxListV1(ctx, orderId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseMailGetMailboxListV1Response(rsp)
 }
 
 // ReachListContactsV1WithResponse request returning *ReachListContactsV1Response
@@ -39295,6 +39604,64 @@ func ParseMailGetMailOrderListV1Response(rsp *http.Response) (*MailGetMailOrderL
 			return nil, err
 		}
 		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseMailGetMailboxListV1Response parses an HTTP response from a MailGetMailboxListV1WithResponse call
+func ParseMailGetMailboxListV1Response(rsp *http.Response) (*MailGetMailboxListV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &MailGetMailboxListV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			// Data Array of [`Mail.V1.Mailboxes.MailboxResource`](#model/mailv1mailboxesmailboxresource)
+			Data *MailV1MailboxesMailboxCollection `json:"data,omitempty"`
+			Meta *CommonSchemaPaginationMetaSchema `json:"meta,omitempty"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
 		var dest CommonResponseErrorResponse

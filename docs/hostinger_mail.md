@@ -18,5 +18,6 @@ Mail commands
 ### SEE ALSO
 
 * [hostinger](hostinger.md)	 - Hostinger API Command Line Interface
+* [hostinger mail mailboxes](hostinger_mail_mailboxes.md)	 - Mailboxes commands
 * [hostinger mail orders](hostinger_mail_orders.md)	 - Orders commands
 

@@ -1054,6 +1054,11 @@
     "method": "GET",
     "path": "/api/mail/v1/orders"
   },
+  "mail_getMailboxListV1": {
+    "command": "hostinger mail mailboxes mailbox",
+    "method": "GET",
+    "path": "/api/mail/v1/orders/{orderId}/mailboxes"
+  },
   "reach_createANewContactSegmentV1": {
     "command": "hostinger reach segments create",
     "method": "POST",
