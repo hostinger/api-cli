@@ -454,6 +454,24 @@ func (e DomainsV1ForwardingStoreRequestRedirectType) Valid() bool {
 	}
 }
 
+// Defines values for DomainsV1ForwardingUpdateRequestRedirectType.
+const (
+	N301 DomainsV1ForwardingUpdateRequestRedirectType = "301"
+	N302 DomainsV1ForwardingUpdateRequestRedirectType = "302"
+)
+
+// Valid indicates whether the value is a known member of the DomainsV1ForwardingUpdateRequestRedirectType enum.
+func (e DomainsV1ForwardingUpdateRequestRedirectType) Valid() bool {
+	switch e {
+	case N301:
+		return true
+	case N302:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for DomainsV1WHOISProfileResourceEntityType.
 const (
 	DomainsV1WHOISProfileResourceEntityTypeIndividual   DomainsV1WHOISProfileResourceEntityType = "individual"
@@ -2999,6 +3017,18 @@ type DomainsV1ForwardingStoreRequest struct {
 
 // DomainsV1ForwardingStoreRequestRedirectType Redirect type
 type DomainsV1ForwardingStoreRequestRedirectType string
+
+// DomainsV1ForwardingUpdateRequest defines model for Domains.V1.Forwarding.UpdateRequest.
+type DomainsV1ForwardingUpdateRequest struct {
+	// RedirectType Redirect type
+	RedirectType DomainsV1ForwardingUpdateRequestRedirectType `json:"redirect_type"`
+
+	// RedirectUrl URL to forward domain to
+	RedirectUrl string `json:"redirect_url"`
+}
+
+// DomainsV1ForwardingUpdateRequestRedirectType Redirect type
+type DomainsV1ForwardingUpdateRequestRedirectType string
 
 // DomainsV1PortfolioPurchaseRequest defines model for Domains.V1.Portfolio.PurchaseRequest.
 type DomainsV1PortfolioPurchaseRequest struct {
@@ -6054,6 +6084,9 @@ type DomainsCheckDomainAvailabilityV1JSONRequestBody = DomainsV1AvailabilityAvai
 // DomainsCreateDomainForwardingV1JSONRequestBody defines body for DomainsCreateDomainForwardingV1 for application/json ContentType.
 type DomainsCreateDomainForwardingV1JSONRequestBody = DomainsV1ForwardingStoreRequest
 
+// DomainsUpdateDomainForwardingV1JSONRequestBody defines body for DomainsUpdateDomainForwardingV1 for application/json ContentType.
+type DomainsUpdateDomainForwardingV1JSONRequestBody = DomainsV1ForwardingUpdateRequest
+
 // DomainsPurchaseNewDomainV1JSONRequestBody defines body for DomainsPurchaseNewDomainV1 for application/json ContentType.
 type DomainsPurchaseNewDomainV1JSONRequestBody = DomainsV1PortfolioPurchaseRequest
 
@@ -7295,6 +7328,11 @@ type ClientInterface interface {
 	// DomainsGetDomainForwardingV1 request
 	DomainsGetDomainForwardingV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// DomainsUpdateDomainForwardingV1WithBody request with any body
+	DomainsUpdateDomainForwardingV1WithBody(ctx context.Context, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	DomainsUpdateDomainForwardingV1(ctx context.Context, domain Domain, body DomainsUpdateDomainForwardingV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// DomainsGetDomainListV1 request
 	DomainsGetDomainListV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -8520,6 +8558,30 @@ func (c *Client) DomainsDeleteDomainForwardingV1(ctx context.Context, domain Dom
 
 func (c *Client) DomainsGetDomainForwardingV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDomainsGetDomainForwardingV1Request(c.Server, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DomainsUpdateDomainForwardingV1WithBody(ctx context.Context, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsUpdateDomainForwardingV1RequestWithBody(c.Server, domain, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DomainsUpdateDomainForwardingV1(ctx context.Context, domain Domain, body DomainsUpdateDomainForwardingV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsUpdateDomainForwardingV1Request(c.Server, domain, body)
 	if err != nil {
 		return nil, err
 	}
@@ -12941,6 +13003,53 @@ func NewDomainsGetDomainForwardingV1Request(server string, domain Domain) (*http
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewDomainsUpdateDomainForwardingV1Request calls the generic DomainsUpdateDomainForwardingV1 builder with application/json body
+func NewDomainsUpdateDomainForwardingV1Request(server string, domain Domain, body DomainsUpdateDomainForwardingV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewDomainsUpdateDomainForwardingV1RequestWithBody(server, domain, "application/json", bodyReader)
+}
+
+// NewDomainsUpdateDomainForwardingV1RequestWithBody generates requests for DomainsUpdateDomainForwardingV1 with any type of body
+func NewDomainsUpdateDomainForwardingV1RequestWithBody(server string, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/domains/v1/forwarding/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -21483,6 +21592,11 @@ type ClientWithResponsesInterface interface {
 	// DomainsGetDomainForwardingV1WithResponse request
 	DomainsGetDomainForwardingV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*DomainsGetDomainForwardingV1Response, error)
 
+	// DomainsUpdateDomainForwardingV1WithBodyWithResponse request with any body
+	DomainsUpdateDomainForwardingV1WithBodyWithResponse(ctx context.Context, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DomainsUpdateDomainForwardingV1Response, error)
+
+	DomainsUpdateDomainForwardingV1WithResponse(ctx context.Context, domain Domain, body DomainsUpdateDomainForwardingV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsUpdateDomainForwardingV1Response, error)
+
 	// DomainsGetDomainListV1WithResponse request
 	DomainsGetDomainListV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*DomainsGetDomainListV1Response, error)
 
@@ -23288,6 +23402,39 @@ func (r DomainsGetDomainForwardingV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r DomainsGetDomainForwardingV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DomainsUpdateDomainForwardingV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *DomainsV1ForwardingForwardingResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r DomainsUpdateDomainForwardingV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DomainsUpdateDomainForwardingV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DomainsUpdateDomainForwardingV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -29608,6 +29755,23 @@ func (c *ClientWithResponses) DomainsGetDomainForwardingV1WithResponse(ctx conte
 	return ParseDomainsGetDomainForwardingV1Response(rsp)
 }
 
+// DomainsUpdateDomainForwardingV1WithBodyWithResponse request with arbitrary body returning *DomainsUpdateDomainForwardingV1Response
+func (c *ClientWithResponses) DomainsUpdateDomainForwardingV1WithBodyWithResponse(ctx context.Context, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DomainsUpdateDomainForwardingV1Response, error) {
+	rsp, err := c.DomainsUpdateDomainForwardingV1WithBody(ctx, domain, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsUpdateDomainForwardingV1Response(rsp)
+}
+
+func (c *ClientWithResponses) DomainsUpdateDomainForwardingV1WithResponse(ctx context.Context, domain Domain, body DomainsUpdateDomainForwardingV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsUpdateDomainForwardingV1Response, error) {
+	rsp, err := c.DomainsUpdateDomainForwardingV1(ctx, domain, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsUpdateDomainForwardingV1Response(rsp)
+}
+
 // DomainsGetDomainListV1WithResponse request returning *DomainsGetDomainListV1Response
 func (c *ClientWithResponses) DomainsGetDomainListV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*DomainsGetDomainListV1Response, error) {
 	rsp, err := c.DomainsGetDomainListV1(ctx, reqEditors...)
@@ -33227,6 +33391,53 @@ func ParseDomainsGetDomainForwardingV1Response(rsp *http.Response) (*DomainsGetD
 			return nil, err
 		}
 		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDomainsUpdateDomainForwardingV1Response parses an HTTP response from a DomainsUpdateDomainForwardingV1WithResponse call
+func ParseDomainsUpdateDomainForwardingV1Response(rsp *http.Response) (*DomainsUpdateDomainForwardingV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DomainsUpdateDomainForwardingV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest DomainsV1ForwardingForwardingResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse

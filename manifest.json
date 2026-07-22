@@ -549,6 +549,11 @@
     "method": "POST",
     "path": "/api/domains/v1/portfolio"
   },
+  "domains_updateDomainForwardingV1": {
+    "command": "hostinger domains forwarding update",
+    "method": "PUT",
+    "path": "/api/domains/v1/forwarding/{domain}"
+  },
   "domains_updateDomainNameserversV1": {
     "command": "hostinger domains portfolio update-nameservers",
     "method": "PUT",
