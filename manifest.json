@@ -509,6 +509,11 @@
     "method": "PUT",
     "path": "/api/domains/v1/portfolio/{domain}/privacy-protection"
   },
+  "domains_getDomainAuthorizationCodeV1": {
+    "command": "hostinger domains portfolio authorization-code",
+    "method": "GET",
+    "path": "/api/domains/v1/portfolio/{domain}/auth-code"
+  },
   "domains_getDomainDetailsV1": {
     "command": "hostinger domains portfolio get",
     "method": "GET",
@@ -528,6 +533,16 @@
     "command": "hostinger domains portfolio renewal-information",
     "method": "GET",
     "path": "/api/domains/v1/portfolio/{domain}/renewal"
+  },
+  "domains_getTransferListV1": {
+    "command": "hostinger domains transfer list",
+    "method": "GET",
+    "path": "/api/domains/v1/transfers"
+  },
+  "domains_getTransferV1": {
+    "command": "hostinger domains transfer get",
+    "method": "GET",
+    "path": "/api/domains/v1/transfers/{domain}"
   },
   "domains_getWHOISProfileListV1": {
     "command": "hostinger domains whois list",

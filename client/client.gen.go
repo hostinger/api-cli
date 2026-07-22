@@ -3030,6 +3030,12 @@ type DomainsV1ForwardingUpdateRequest struct {
 // DomainsV1ForwardingUpdateRequestRedirectType Redirect type
 type DomainsV1ForwardingUpdateRequestRedirectType string
 
+// DomainsV1PortfolioAuthCodeAuthCodeResource defines model for Domains.V1.Portfolio.AuthCode.AuthCodeResource.
+type DomainsV1PortfolioAuthCodeAuthCodeResource struct {
+	// AuthCode Domain authorization code used to transfer the domain to another registrar.
+	AuthCode *string `json:"auth_code,omitempty"`
+}
+
 // DomainsV1PortfolioPurchaseRequest defines model for Domains.V1.Portfolio.PurchaseRequest.
 type DomainsV1PortfolioPurchaseRequest struct {
 	// AdditionalDetails Additional registration data, possible values depends on TLD
@@ -3088,6 +3094,24 @@ type DomainsV1PortfolioUpdateNameserversRequest struct {
 
 	// Ns4 Fourth name server
 	Ns4 *string `json:"ns4,omitempty"`
+}
+
+// DomainsV1TransferTransferCollection Array of [`Domains.V1.Transfer.TransferResource`](#model/domainsv1transfertransferresource)
+type DomainsV1TransferTransferCollection = []DomainsV1TransferTransferResource
+
+// DomainsV1TransferTransferResource defines model for Domains.V1.Transfer.TransferResource.
+type DomainsV1TransferTransferResource struct {
+	// CompletedAt When the transfer completed
+	CompletedAt *time.Time `json:"completed_at,omitempty"`
+
+	// Domain Domain name
+	Domain *string `json:"domain,omitempty"`
+
+	// InitiatedAt When the transfer was initiated
+	InitiatedAt *time.Time `json:"initiated_at,omitempty"`
+
+	// Status Transfer status
+	Status *string `json:"status,omitempty"`
 }
 
 // DomainsV1WHOISProfileCollection Array of [`Domains.V1.WHOIS.ProfileResource`](#model/domainsv1whoisprofileresource)
@@ -7344,6 +7368,9 @@ type ClientInterface interface {
 	// DomainsGetDomainDetailsV1 request
 	DomainsGetDomainDetailsV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// DomainsGetDomainAuthorizationCodeV1 request
+	DomainsGetDomainAuthorizationCodeV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// DomainsDisableDomainLockV1 request
 	DomainsDisableDomainLockV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -7363,6 +7390,12 @@ type ClientInterface interface {
 
 	// DomainsGetDomainRenewalInformationV1 request
 	DomainsGetDomainRenewalInformationV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsGetTransferListV1 request
+	DomainsGetTransferListV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsGetTransferV1 request
+	DomainsGetTransferV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DomainsGetWHOISProfileListV1 request
 	DomainsGetWHOISProfileListV1(ctx context.Context, params *DomainsGetWHOISProfileListV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -8640,6 +8673,18 @@ func (c *Client) DomainsGetDomainDetailsV1(ctx context.Context, domain Domain, r
 	return c.Client.Do(req)
 }
 
+func (c *Client) DomainsGetDomainAuthorizationCodeV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsGetDomainAuthorizationCodeV1Request(c.Server, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) DomainsDisableDomainLockV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDomainsDisableDomainLockV1Request(c.Server, domain)
 	if err != nil {
@@ -8714,6 +8759,30 @@ func (c *Client) DomainsEnablePrivacyProtectionV1(ctx context.Context, domain Do
 
 func (c *Client) DomainsGetDomainRenewalInformationV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDomainsGetDomainRenewalInformationV1Request(c.Server, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DomainsGetTransferListV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsGetTransferListV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DomainsGetTransferV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsGetTransferV1Request(c.Server, domain)
 	if err != nil {
 		return nil, err
 	}
@@ -13155,6 +13224,40 @@ func NewDomainsGetDomainDetailsV1Request(server string, domain Domain) (*http.Re
 	return req, nil
 }
 
+// NewDomainsGetDomainAuthorizationCodeV1Request generates requests for DomainsGetDomainAuthorizationCodeV1
+func NewDomainsGetDomainAuthorizationCodeV1Request(server string, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/domains/v1/portfolio/%s/auth-code", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewDomainsDisableDomainLockV1Request generates requests for DomainsDisableDomainLockV1
 func NewDomainsDisableDomainLockV1Request(server string, domain Domain) (*http.Request, error) {
 	var err error
@@ -13355,6 +13458,67 @@ func NewDomainsGetDomainRenewalInformationV1Request(server string, domain Domain
 	}
 
 	operationPath := fmt.Sprintf("/api/domains/v1/portfolio/%s/renewal", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDomainsGetTransferListV1Request generates requests for DomainsGetTransferListV1
+func NewDomainsGetTransferListV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/domains/v1/transfers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDomainsGetTransferV1Request generates requests for DomainsGetTransferV1
+func NewDomainsGetTransferV1Request(server string, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/domains/v1/transfers/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -21608,6 +21772,9 @@ type ClientWithResponsesInterface interface {
 	// DomainsGetDomainDetailsV1WithResponse request
 	DomainsGetDomainDetailsV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*DomainsGetDomainDetailsV1Response, error)
 
+	// DomainsGetDomainAuthorizationCodeV1WithResponse request
+	DomainsGetDomainAuthorizationCodeV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*DomainsGetDomainAuthorizationCodeV1Response, error)
+
 	// DomainsDisableDomainLockV1WithResponse request
 	DomainsDisableDomainLockV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*DomainsDisableDomainLockV1Response, error)
 
@@ -21627,6 +21794,12 @@ type ClientWithResponsesInterface interface {
 
 	// DomainsGetDomainRenewalInformationV1WithResponse request
 	DomainsGetDomainRenewalInformationV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*DomainsGetDomainRenewalInformationV1Response, error)
+
+	// DomainsGetTransferListV1WithResponse request
+	DomainsGetTransferListV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*DomainsGetTransferListV1Response, error)
+
+	// DomainsGetTransferV1WithResponse request
+	DomainsGetTransferV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*DomainsGetTransferV1Response, error)
 
 	// DomainsGetWHOISProfileListV1WithResponse request
 	DomainsGetWHOISProfileListV1WithResponse(ctx context.Context, params *DomainsGetWHOISProfileListV1Params, reqEditors ...RequestEditorFn) (*DomainsGetWHOISProfileListV1Response, error)
@@ -23538,6 +23711,38 @@ func (r DomainsGetDomainDetailsV1Response) ContentType() string {
 	return ""
 }
 
+type DomainsGetDomainAuthorizationCodeV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *DomainsV1PortfolioAuthCodeAuthCodeResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r DomainsGetDomainAuthorizationCodeV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DomainsGetDomainAuthorizationCodeV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DomainsGetDomainAuthorizationCodeV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type DomainsDisableDomainLockV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -23725,6 +23930,70 @@ func (r DomainsGetDomainRenewalInformationV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r DomainsGetDomainRenewalInformationV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DomainsGetTransferListV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *DomainsV1TransferTransferCollection
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r DomainsGetTransferListV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DomainsGetTransferListV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DomainsGetTransferListV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DomainsGetTransferV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *DomainsV1TransferTransferResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r DomainsGetTransferV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DomainsGetTransferV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DomainsGetTransferV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -29807,6 +30076,15 @@ func (c *ClientWithResponses) DomainsGetDomainDetailsV1WithResponse(ctx context.
 	return ParseDomainsGetDomainDetailsV1Response(rsp)
 }
 
+// DomainsGetDomainAuthorizationCodeV1WithResponse request returning *DomainsGetDomainAuthorizationCodeV1Response
+func (c *ClientWithResponses) DomainsGetDomainAuthorizationCodeV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*DomainsGetDomainAuthorizationCodeV1Response, error) {
+	rsp, err := c.DomainsGetDomainAuthorizationCodeV1(ctx, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsGetDomainAuthorizationCodeV1Response(rsp)
+}
+
 // DomainsDisableDomainLockV1WithResponse request returning *DomainsDisableDomainLockV1Response
 func (c *ClientWithResponses) DomainsDisableDomainLockV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*DomainsDisableDomainLockV1Response, error) {
 	rsp, err := c.DomainsDisableDomainLockV1(ctx, domain, reqEditors...)
@@ -29867,6 +30145,24 @@ func (c *ClientWithResponses) DomainsGetDomainRenewalInformationV1WithResponse(c
 		return nil, err
 	}
 	return ParseDomainsGetDomainRenewalInformationV1Response(rsp)
+}
+
+// DomainsGetTransferListV1WithResponse request returning *DomainsGetTransferListV1Response
+func (c *ClientWithResponses) DomainsGetTransferListV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*DomainsGetTransferListV1Response, error) {
+	rsp, err := c.DomainsGetTransferListV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsGetTransferListV1Response(rsp)
+}
+
+// DomainsGetTransferV1WithResponse request returning *DomainsGetTransferV1Response
+func (c *ClientWithResponses) DomainsGetTransferV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*DomainsGetTransferV1Response, error) {
+	rsp, err := c.DomainsGetTransferV1(ctx, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsGetTransferV1Response(rsp)
 }
 
 // DomainsGetWHOISProfileListV1WithResponse request returning *DomainsGetWHOISProfileListV1Response
@@ -33578,6 +33874,46 @@ func ParseDomainsGetDomainDetailsV1Response(rsp *http.Response) (*DomainsGetDoma
 	return response, nil
 }
 
+// ParseDomainsGetDomainAuthorizationCodeV1Response parses an HTTP response from a DomainsGetDomainAuthorizationCodeV1WithResponse call
+func ParseDomainsGetDomainAuthorizationCodeV1Response(rsp *http.Response) (*DomainsGetDomainAuthorizationCodeV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DomainsGetDomainAuthorizationCodeV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest DomainsV1PortfolioAuthCodeAuthCodeResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseDomainsDisableDomainLockV1Response parses an HTTP response from a DomainsDisableDomainLockV1WithResponse call
 func ParseDomainsDisableDomainLockV1Response(rsp *http.Response) (*DomainsDisableDomainLockV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -33801,6 +34137,86 @@ func ParseDomainsGetDomainRenewalInformationV1Response(rsp *http.Response) (*Dom
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest DomainsV1PortfolioRenewalRenewalInformationResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDomainsGetTransferListV1Response parses an HTTP response from a DomainsGetTransferListV1WithResponse call
+func ParseDomainsGetTransferListV1Response(rsp *http.Response) (*DomainsGetTransferListV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DomainsGetTransferListV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest DomainsV1TransferTransferCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDomainsGetTransferV1Response parses an HTTP response from a DomainsGetTransferV1WithResponse call
+func ParseDomainsGetTransferV1Response(rsp *http.Response) (*DomainsGetTransferV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DomainsGetTransferV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest DomainsV1TransferTransferResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

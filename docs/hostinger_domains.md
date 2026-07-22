@@ -21,6 +21,7 @@ Domains commands
 * [hostinger domains availability](hostinger_domains_availability.md)	 - Availability commands
 * [hostinger domains forwarding](hostinger_domains_forwarding.md)	 - Forwarding commands
 * [hostinger domains portfolio](hostinger_domains_portfolio.md)	 - Portfolio commands
+* [hostinger domains transfer](hostinger_domains_transfer.md)	 - Transfer commands
 * [hostinger domains verifications](hostinger_domains_verifications.md)	 - Verifications commands
 * [hostinger domains whois](hostinger_domains_whois.md)	 - WHOIS commands
 
