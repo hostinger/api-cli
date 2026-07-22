@@ -19,6 +19,7 @@ Hostinger API Command Line Interface
 * [hostinger ecommerce](hostinger_ecommerce.md)	 - Ecommerce commands
 * [hostinger horizons](hostinger_horizons.md)	 - Horizons commands
 * [hostinger hosting](hostinger_hosting.md)	 - Hosting commands
+* [hostinger mail](hostinger_mail.md)	 - Mail commands
 * [hostinger reach](hostinger_reach.md)	 - Reach commands
 * [hostinger version](hostinger_version.md)	 - Show the current version
 * [hostinger vps](hostinger_vps.md)	 - VPS commands

@@ -9,6 +9,7 @@ import (
 	"github.com/hostinger/api-cli/cmd/ecommerce"
 	"github.com/hostinger/api-cli/cmd/horizons"
 	"github.com/hostinger/api-cli/cmd/hosting"
+	"github.com/hostinger/api-cli/cmd/mail"
 	"github.com/hostinger/api-cli/cmd/reach"
 	"github.com/hostinger/api-cli/cmd/vps"
 	"github.com/hostinger/api-cli/cmd/wordpress"
@@ -60,6 +61,7 @@ func init() {
 	RootCmd.AddCommand(ecommerce.GroupCmd)
 	RootCmd.AddCommand(horizons.GroupCmd)
 	RootCmd.AddCommand(hosting.GroupCmd)
+	RootCmd.AddCommand(mail.GroupCmd)
 	RootCmd.AddCommand(reach.GroupCmd)
 	RootCmd.AddCommand(vps.GroupCmd)
 	RootCmd.AddCommand(wordpress.GroupCmd)

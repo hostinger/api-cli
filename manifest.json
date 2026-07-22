@@ -1004,6 +1004,11 @@
     "method": "POST",
     "path": "/api/hosting/v1/domains/verify-ownership"
   },
+  "mail_getMailOrderListV1": {
+    "command": "hostinger mail orders list",
+    "method": "GET",
+    "path": "/api/mail/v1/orders"
+  },
   "reach_createANewContactSegmentV1": {
     "command": "hostinger reach segments create",
     "method": "POST",
