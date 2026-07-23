@@ -4394,6 +4394,15 @@ type MailV1OrdersOrderResource_Plan struct {
 // MailV1OrdersOrderResourceStatus Order status
 type MailV1OrdersOrderResourceStatus string
 
+// MailV1SchemaCreateMailboxRequestSchema defines model for Mail.V1.Schema.CreateMailboxRequestSchema.
+type MailV1SchemaCreateMailboxRequestSchema struct {
+	// LocalPart Local part of the mailbox address (the part before the @). The domain is taken from the order. Must start and end with a letter or digit; single dots, underscores and hyphens are allowed in between.
+	LocalPart string `json:"local_part"`
+
+	// Password Mailbox password. Minimum 8 characters with uppercase, lowercase, number and special character.
+	Password string `json:"password"`
+}
+
 // ReachV1ContactsContactCollection Array of [`Reach.V1.Contacts.ContactResource`](#model/reachv1contactscontactresource)
 type ReachV1ContactsContactCollection = []ReachV1ContactsContactResource
 
@@ -6483,6 +6492,9 @@ type HostingCreateWebsiteV1JSONRequestBody = HostingV1WebsitesCreateWebsiteReque
 // HostingDeleteWebsiteV1JSONRequestBody defines body for HostingDeleteWebsiteV1 for application/json ContentType.
 type HostingDeleteWebsiteV1JSONRequestBody = HostingV1WebsitesDeleteWebsiteRequest
 
+// MailCreateMailboxV1JSONRequestBody defines body for MailCreateMailboxV1 for application/json ContentType.
+type MailCreateMailboxV1JSONRequestBody = MailV1SchemaCreateMailboxRequestSchema
+
 // ReachCreateANewContactV1JSONRequestBody defines body for ReachCreateANewContactV1 for application/json ContentType.
 type ReachCreateANewContactV1JSONRequestBody = ReachV1ContactsStoreRequest
 
@@ -8035,6 +8047,11 @@ type ClientInterface interface {
 
 	// MailGetMailboxListV1 request
 	MailGetMailboxListV1(ctx context.Context, orderId MailOrderIdPath, params *MailGetMailboxListV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// MailCreateMailboxV1WithBody request with any body
+	MailCreateMailboxV1WithBody(ctx context.Context, orderId MailOrderIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	MailCreateMailboxV1(ctx context.Context, orderId MailOrderIdPath, body MailCreateMailboxV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReachListContactsV1 request
 	ReachListContactsV1(ctx context.Context, params *ReachListContactsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -10826,6 +10843,30 @@ func (c *Client) MailGetMailOrderListV1(ctx context.Context, params *MailGetMail
 
 func (c *Client) MailGetMailboxListV1(ctx context.Context, orderId MailOrderIdPath, params *MailGetMailboxListV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewMailGetMailboxListV1Request(c.Server, orderId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) MailCreateMailboxV1WithBody(ctx context.Context, orderId MailOrderIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewMailCreateMailboxV1RequestWithBody(c.Server, orderId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) MailCreateMailboxV1(ctx context.Context, orderId MailOrderIdPath, body MailCreateMailboxV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewMailCreateMailboxV1Request(c.Server, orderId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -19219,6 +19260,53 @@ func NewMailGetMailboxListV1Request(server string, orderId MailOrderIdPath, para
 	return req, nil
 }
 
+// NewMailCreateMailboxV1Request calls the generic MailCreateMailboxV1 builder with application/json body
+func NewMailCreateMailboxV1Request(server string, orderId MailOrderIdPath, body MailCreateMailboxV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewMailCreateMailboxV1RequestWithBody(server, orderId, "application/json", bodyReader)
+}
+
+// NewMailCreateMailboxV1RequestWithBody generates requests for MailCreateMailboxV1 with any type of body
+func NewMailCreateMailboxV1RequestWithBody(server string, orderId MailOrderIdPath, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "orderId", orderId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/mail/v1/orders/%s/mailboxes", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewReachListContactsV1Request generates requests for ReachListContactsV1
 func NewReachListContactsV1Request(server string, params *ReachListContactsV1Params) (*http.Request, error) {
 	var err error
@@ -22986,6 +23074,11 @@ type ClientWithResponsesInterface interface {
 
 	// MailGetMailboxListV1WithResponse request
 	MailGetMailboxListV1WithResponse(ctx context.Context, orderId MailOrderIdPath, params *MailGetMailboxListV1Params, reqEditors ...RequestEditorFn) (*MailGetMailboxListV1Response, error)
+
+	// MailCreateMailboxV1WithBodyWithResponse request with any body
+	MailCreateMailboxV1WithBodyWithResponse(ctx context.Context, orderId MailOrderIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*MailCreateMailboxV1Response, error)
+
+	MailCreateMailboxV1WithResponse(ctx context.Context, orderId MailOrderIdPath, body MailCreateMailboxV1JSONRequestBody, reqEditors ...RequestEditorFn) (*MailCreateMailboxV1Response, error)
 
 	// ReachListContactsV1WithResponse request
 	ReachListContactsV1WithResponse(ctx context.Context, params *ReachListContactsV1Params, reqEditors ...RequestEditorFn) (*ReachListContactsV1Response, error)
@@ -28191,6 +28284,41 @@ func (r MailGetMailboxListV1Response) ContentType() string {
 	return ""
 }
 
+type MailCreateMailboxV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON201      *MailV1MailboxesMailboxResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON404      *CommonResponseErrorResponse
+	JSON409      *CommonResponseErrorResponse
+	JSON422      *CommonResponseErrorResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r MailCreateMailboxV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r MailCreateMailboxV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r MailCreateMailboxV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type ReachListContactsV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -32501,6 +32629,23 @@ func (c *ClientWithResponses) MailGetMailboxListV1WithResponse(ctx context.Conte
 		return nil, err
 	}
 	return ParseMailGetMailboxListV1Response(rsp)
+}
+
+// MailCreateMailboxV1WithBodyWithResponse request with arbitrary body returning *MailCreateMailboxV1Response
+func (c *ClientWithResponses) MailCreateMailboxV1WithBodyWithResponse(ctx context.Context, orderId MailOrderIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*MailCreateMailboxV1Response, error) {
+	rsp, err := c.MailCreateMailboxV1WithBody(ctx, orderId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseMailCreateMailboxV1Response(rsp)
+}
+
+func (c *ClientWithResponses) MailCreateMailboxV1WithResponse(ctx context.Context, orderId MailOrderIdPath, body MailCreateMailboxV1JSONRequestBody, reqEditors ...RequestEditorFn) (*MailCreateMailboxV1Response, error) {
+	rsp, err := c.MailCreateMailboxV1(ctx, orderId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseMailCreateMailboxV1Response(rsp)
 }
 
 // ReachListContactsV1WithResponse request returning *ReachListContactsV1Response
@@ -39854,6 +39999,67 @@ func ParseMailGetMailboxListV1Response(rsp *http.Response) (*MailGetMailboxListV
 			return nil, err
 		}
 		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseMailCreateMailboxV1Response parses an HTTP response from a MailCreateMailboxV1WithResponse call
+func ParseMailCreateMailboxV1Response(rsp *http.Response) (*MailCreateMailboxV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &MailCreateMailboxV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest MailV1MailboxesMailboxResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
 		var dest CommonResponseErrorResponse

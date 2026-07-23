@@ -1054,6 +1054,11 @@
     "method": "POST",
     "path": "/api/hosting/v1/domains/verify-ownership"
   },
+  "mail_createMailboxV1": {
+    "command": "hostinger mail mailboxes create-mailbox",
+    "method": "POST",
+    "path": "/api/mail/v1/orders/{orderId}/mailboxes"
+  },
   "mail_getMailOrderListV1": {
     "command": "hostinger mail orders list",
     "method": "GET",
