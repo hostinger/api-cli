@@ -359,6 +359,11 @@
     "method": "PUT",
     "path": "/api/agency-hosting/v1/websites/{website_uid}/domains/{from_domain}"
   },
+  "agency-hosting_changeAgencyPlanWebsiteWordPressCoreVersionV1": {
+    "command": "hostinger agency-hosting wordpress change-plan-website-core-version",
+    "method": "PATCH",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/version"
+  },
   "agency-hosting_clearAgencyPlanWebsiteCacheV1": {
     "command": "hostinger agency-hosting cache clear-plan-website",
     "method": "DELETE",
@@ -409,6 +414,11 @@
     "method": "GET",
     "path": "/api/agency-hosting/v1/orders/{order_id}/websites/setups/{setup_uuid}"
   },
+  "agency-hosting_getAgencyPlanWebsiteWordPressSettingsV1": {
+    "command": "hostinger agency-hosting wordpress plan-website-settings",
+    "method": "GET",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/wordpress/settings"
+  },
   "agency-hosting_importAgencyPlanWebsiteFromArchiveV1": {
     "command": "hostinger agency-hosting files import-plan-website-from-archive",
     "method": "POST",
@@ -438,6 +448,11 @@
     "command": "hostinger agency-hosting datacenters list-for-plan-order",
     "method": "GET",
     "path": "/api/agency-hosting/v1/orders/{order_id}/datacenters"
+  },
+  "agency-hosting_listAvailableWordPressVersionsForAnAgencyPlanWebsiteV1": {
+    "command": "hostinger agency-hosting wordpress list-versions-for-plan-website",
+    "method": "GET",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/versions"
   },
   "agency-hosting_listRunningAgencyPlanWebsiteProcessesV1": {
     "command": "hostinger agency-hosting websites list-running-plan-processes",

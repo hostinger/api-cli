@@ -2663,6 +2663,36 @@ type AgencyHostingV1WebsitesWordPressInstallResource struct {
 	Title *string `json:"title,omitempty"`
 }
 
+// AgencyHostingV1WordPressChangeVersionRequest defines model for AgencyHosting.V1.WordPress.ChangeVersionRequest.
+type AgencyHostingV1WordPressChangeVersionRequest struct {
+	// Version Target WordPress core version to install. Must be one of the available versions.
+	Version string `json:"version"`
+}
+
+// AgencyHostingV1WordPressSettingsResource defines model for AgencyHosting.V1.WordPress.SettingsResource.
+type AgencyHostingV1WordPressSettingsResource struct {
+	// CoreVersion Currently installed WordPress core version, or null when it cannot be determined.
+	CoreVersion *string `json:"core_version,omitempty"`
+
+	// IsLiteSpeedCacheEnabled Whether the LiteSpeed Cache plugin is active.
+	IsLiteSpeedCacheEnabled *bool `json:"is_lite_speed_cache_enabled,omitempty"`
+
+	// IsMaintenanceModeEnabled Whether WordPress maintenance mode is currently enabled.
+	IsMaintenanceModeEnabled *bool `json:"is_maintenance_mode_enabled,omitempty"`
+
+	// IsObjectCacheEnabled Whether LiteSpeed object cache is enabled.
+	IsObjectCacheEnabled *bool `json:"is_object_cache_enabled,omitempty"`
+}
+
+// AgencyHostingV1WordPressVersionCollection Array of [`AgencyHosting.V1.WordPress.VersionResource`](#model/agencyhostingv1wordpressversionresource)
+type AgencyHostingV1WordPressVersionCollection = []AgencyHostingV1WordPressVersionResource
+
+// AgencyHostingV1WordPressVersionResource defines model for AgencyHosting.V1.WordPress.VersionResource.
+type AgencyHostingV1WordPressVersionResource struct {
+	// Version WordPress core version.
+	Version *string `json:"version,omitempty"`
+}
+
 // BillingV1CatalogCatalogItemCollection Array of [`Billing.V1.Catalog.CatalogItemResource`](#model/billingv1catalogcatalogitemresource)
 type BillingV1CatalogCatalogItemCollection = []BillingV1CatalogCatalogItemResource
 
@@ -6345,6 +6375,9 @@ type AgencyHostingChangeAgencyPlanWebsiteDomainV1JSONRequestBody = AgencyHosting
 // AgencyHostingImportAgencyPlanWebsiteFromArchiveV1JSONRequestBody defines body for AgencyHostingImportAgencyPlanWebsiteFromArchiveV1 for application/json ContentType.
 type AgencyHostingImportAgencyPlanWebsiteFromArchiveV1JSONRequestBody = AgencyHostingV1FilesImportArchiveRequest
 
+// AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1JSONRequestBody defines body for AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1 for application/json ContentType.
+type AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1JSONRequestBody = AgencyHostingV1WordPressChangeVersionRequest
+
 // BillingCreatePurchaseOrderV1JSONRequestBody defines body for BillingCreatePurchaseOrderV1 for application/json ContentType.
 type BillingCreatePurchaseOrderV1JSONRequestBody = BillingV1OrderPurchaseRequest
 
@@ -7566,6 +7599,17 @@ type ClientInterface interface {
 	// AgencyHostingListRunningAgencyPlanWebsiteProcessesV1 request
 	AgencyHostingListRunningAgencyPlanWebsiteProcessesV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1 request
+	AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithBody request with any body
+	AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1 request
+	AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// BillingGetCatalogItemListV1 request
 	BillingGetCatalogItemListV1(ctx context.Context, params *BillingGetCatalogItemListV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -8679,6 +8723,54 @@ func (c *Client) AgencyHostingImportAgencyPlanWebsiteFromArchiveV1(ctx context.C
 
 func (c *Client) AgencyHostingListRunningAgencyPlanWebsiteProcessesV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewAgencyHostingListRunningAgencyPlanWebsiteProcessesV1Request(c.Server, websiteUid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Request(c.Server, websiteUid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1RequestWithBody(c.Server, websiteUid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Request(c.Server, websiteUid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Request(c.Server, websiteUid)
 	if err != nil {
 		return nil, err
 	}
@@ -13064,6 +13156,121 @@ func NewAgencyHostingListRunningAgencyPlanWebsiteProcessesV1Request(server strin
 	}
 
 	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/processes", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Request generates requests for AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1
+func NewAgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Request(server string, websiteUid WebsiteUid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/wordpress/settings", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Request calls the generic AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1 builder with application/json body
+func NewAgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Request(server string, websiteUid WebsiteUid, body AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewAgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1RequestWithBody(server, websiteUid, "application/json", bodyReader)
+}
+
+// NewAgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1RequestWithBody generates requests for AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1 with any type of body
+func NewAgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1RequestWithBody(server string, websiteUid WebsiteUid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/wordpress/settings/version", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewAgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Request generates requests for AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1
+func NewAgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Request(server string, websiteUid WebsiteUid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/wordpress/settings/versions", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -22718,6 +22925,17 @@ type ClientWithResponsesInterface interface {
 	// AgencyHostingListRunningAgencyPlanWebsiteProcessesV1WithResponse request
 	AgencyHostingListRunningAgencyPlanWebsiteProcessesV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response, error)
 
+	// AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1WithResponse request
+	AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response, error)
+
+	// AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithBodyWithResponse request with any body
+	AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response, error)
+
+	AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response, error)
+
+	// AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1WithResponse request
+	AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response, error)
+
 	// BillingGetCatalogItemListV1WithResponse request
 	BillingGetCatalogItemListV1WithResponse(ctx context.Context, params *BillingGetCatalogItemListV1Params, reqEditors ...RequestEditorFn) (*BillingGetCatalogItemListV1Response, error)
 
@@ -24179,6 +24397,103 @@ func (r AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response) StatusCode
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *AgencyHostingV1WordPressSettingsResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *AgencyHostingV1WordPressVersionCollection
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -31259,6 +31574,41 @@ func (c *ClientWithResponses) AgencyHostingListRunningAgencyPlanWebsiteProcesses
 	return ParseAgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response(rsp)
 }
 
+// AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1WithResponse request returning *AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response
+func (c *ClientWithResponses) AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response, error) {
+	rsp, err := c.AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1(ctx, websiteUid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response(rsp)
+}
+
+// AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithBodyWithResponse request with arbitrary body returning *AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response
+func (c *ClientWithResponses) AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response, error) {
+	rsp, err := c.AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithBody(ctx, websiteUid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response(rsp)
+}
+
+func (c *ClientWithResponses) AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response, error) {
+	rsp, err := c.AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1(ctx, websiteUid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response(rsp)
+}
+
+// AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1WithResponse request returning *AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response
+func (c *ClientWithResponses) AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response, error) {
+	rsp, err := c.AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1(ctx, websiteUid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response(rsp)
+}
+
 // BillingGetCatalogItemListV1WithResponse request returning *BillingGetCatalogItemListV1Response
 func (c *ClientWithResponses) BillingGetCatalogItemListV1WithResponse(ctx context.Context, params *BillingGetCatalogItemListV1Params, reqEditors ...RequestEditorFn) (*BillingGetCatalogItemListV1Response, error) {
 	rsp, err := c.BillingGetCatalogItemListV1(ctx, params, reqEditors...)
@@ -34615,6 +34965,133 @@ func ParseAgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response(rsp *http
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest AgencyHostingV1WebsitesWebsiteProcessCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response parses an HTTP response from a AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1WithResponse call
+func ParseAgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response(rsp *http.Response) (*AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AgencyHostingV1WordPressSettingsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response parses an HTTP response from a AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithResponse call
+func ParseAgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response(rsp *http.Response) (*AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response parses an HTTP response from a AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1WithResponse call
+func ParseAgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response(rsp *http.Response) (*AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AgencyHostingV1WordPressVersionCollection
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

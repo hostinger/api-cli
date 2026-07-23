@@ -9,6 +9,7 @@ import (
 	"github.com/hostinger/api-cli/cmd/agency_hosting/files"
 	"github.com/hostinger/api-cli/cmd/agency_hosting/website_setups"
 	"github.com/hostinger/api-cli/cmd/agency_hosting/websites"
+	"github.com/hostinger/api-cli/cmd/agency_hosting/wordpress"
 
 	"github.com/spf13/cobra"
 )
@@ -27,4 +28,5 @@ func init() {
 	GroupCmd.AddCommand(files.GroupCmd)
 	GroupCmd.AddCommand(website_setups.GroupCmd)
 	GroupCmd.AddCommand(websites.GroupCmd)
+	GroupCmd.AddCommand(wordpress.GroupCmd)
 }

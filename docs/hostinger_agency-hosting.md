@@ -26,4 +26,5 @@ Agency Hosting commands
 * [hostinger agency-hosting files](hostinger_agency-hosting_files.md)	 - Files commands
 * [hostinger agency-hosting website-setups](hostinger_agency-hosting_website-setups.md)	 - Website Setups commands
 * [hostinger agency-hosting websites](hostinger_agency-hosting_websites.md)	 - Websites commands
+* [hostinger agency-hosting wordpress](hostinger_agency-hosting_wordpress.md)	 - WordPress commands
 
