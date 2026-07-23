@@ -19,6 +19,7 @@ Billing commands
 
 * [hostinger](hostinger.md)	 - Hostinger API Command Line Interface
 * [hostinger billing catalog](hostinger_billing_catalog.md)	 - Catalog commands
+* [hostinger billing orders](hostinger_billing_orders.md)	 - Orders commands
 * [hostinger billing payment-methods](hostinger_billing_payment-methods.md)	 - Payment methods commands
 * [hostinger billing subscriptions](hostinger_billing_subscriptions.md)	 - Subscriptions commands
 

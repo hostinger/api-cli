@@ -454,6 +454,11 @@
     "method": "DELETE",
     "path": "/api/agency-hosting/v1/websites/{website_uid}/domains/{domain}"
   },
+  "billing_createPurchaseOrderV1": {
+    "command": "hostinger billing orders create-purchase",
+    "method": "POST",
+    "path": "/api/billing/v1/orders"
+  },
   "billing_deletePaymentMethodV1": {
     "command": "hostinger billing payment-methods delete",
     "method": "DELETE",

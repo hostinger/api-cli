@@ -2755,6 +2755,24 @@ type BillingV1OrderOrderResource struct {
 // BillingV1OrderOrderResourceStatus defines model for BillingV1OrderOrderResource.Status.
 type BillingV1OrderOrderResourceStatus string
 
+// BillingV1OrderPurchaseRequest defines model for Billing.V1.Order.PurchaseRequest.
+type BillingV1OrderPurchaseRequest struct {
+	// Coupons Discount coupon codes
+	Coupons *[]interface{} `json:"coupons,omitempty"`
+
+	// Items Catalog price items to purchase
+	Items []struct {
+		// ItemId Catalog price item ID
+		ItemId string `json:"item_id"`
+
+		// Quantity Quantity to purchase
+		Quantity *int `json:"quantity,omitempty"`
+	} `json:"items"`
+
+	// PaymentMethodId Payment method ID, default will be used if not provided
+	PaymentMethodId *int `json:"payment_method_id,omitempty"`
+}
+
 // BillingV1OrderVirtualMachineOrderResource defines model for Billing.V1.Order.VirtualMachineOrderResource.
 type BillingV1OrderVirtualMachineOrderResource struct {
 	Order          *BillingV1OrderOrderResource               `json:"order,omitempty"`
@@ -6309,6 +6327,9 @@ type AgencyHostingChangeAgencyPlanWebsiteDomainV1JSONRequestBody = AgencyHosting
 // AgencyHostingImportAgencyPlanWebsiteFromArchiveV1JSONRequestBody defines body for AgencyHostingImportAgencyPlanWebsiteFromArchiveV1 for application/json ContentType.
 type AgencyHostingImportAgencyPlanWebsiteFromArchiveV1JSONRequestBody = AgencyHostingV1FilesImportArchiveRequest
 
+// BillingCreatePurchaseOrderV1JSONRequestBody defines body for BillingCreatePurchaseOrderV1 for application/json ContentType.
+type BillingCreatePurchaseOrderV1JSONRequestBody = BillingV1OrderPurchaseRequest
+
 // DNSDeleteDNSRecordsV1JSONRequestBody defines body for DNSDeleteDNSRecordsV1 for application/json ContentType.
 type DNSDeleteDNSRecordsV1JSONRequestBody = DNSV1ZoneDestroyRequest
 
@@ -7524,6 +7545,11 @@ type ClientInterface interface {
 	// BillingGetCatalogItemListV1 request
 	BillingGetCatalogItemListV1(ctx context.Context, params *BillingGetCatalogItemListV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// BillingCreatePurchaseOrderV1WithBody request with any body
+	BillingCreatePurchaseOrderV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	BillingCreatePurchaseOrderV1(ctx context.Context, body BillingCreatePurchaseOrderV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// BillingGetPaymentMethodListV1 request
 	BillingGetPaymentMethodListV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -8628,6 +8654,30 @@ func (c *Client) AgencyHostingListRunningAgencyPlanWebsiteProcessesV1(ctx contex
 
 func (c *Client) BillingGetCatalogItemListV1(ctx context.Context, params *BillingGetCatalogItemListV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewBillingGetCatalogItemListV1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) BillingCreatePurchaseOrderV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewBillingCreatePurchaseOrderV1RequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) BillingCreatePurchaseOrderV1(ctx context.Context, body BillingCreatePurchaseOrderV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewBillingCreatePurchaseOrderV1Request(c.Server, body)
 	if err != nil {
 		return nil, err
 	}
@@ -12996,6 +13046,46 @@ func NewBillingGetCatalogItemListV1Request(server string, params *BillingGetCata
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewBillingCreatePurchaseOrderV1Request calls the generic BillingCreatePurchaseOrderV1 builder with application/json body
+func NewBillingCreatePurchaseOrderV1Request(server string, body BillingCreatePurchaseOrderV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewBillingCreatePurchaseOrderV1RequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewBillingCreatePurchaseOrderV1RequestWithBody generates requests for BillingCreatePurchaseOrderV1 with any type of body
+func NewBillingCreatePurchaseOrderV1RequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/billing/v1/orders")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -22406,6 +22496,11 @@ type ClientWithResponsesInterface interface {
 	// BillingGetCatalogItemListV1WithResponse request
 	BillingGetCatalogItemListV1WithResponse(ctx context.Context, params *BillingGetCatalogItemListV1Params, reqEditors ...RequestEditorFn) (*BillingGetCatalogItemListV1Response, error)
 
+	// BillingCreatePurchaseOrderV1WithBodyWithResponse request with any body
+	BillingCreatePurchaseOrderV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*BillingCreatePurchaseOrderV1Response, error)
+
+	BillingCreatePurchaseOrderV1WithResponse(ctx context.Context, body BillingCreatePurchaseOrderV1JSONRequestBody, reqEditors ...RequestEditorFn) (*BillingCreatePurchaseOrderV1Response, error)
+
 	// BillingGetPaymentMethodListV1WithResponse request
 	BillingGetPaymentMethodListV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*BillingGetPaymentMethodListV1Response, error)
 
@@ -23878,6 +23973,39 @@ func (r BillingGetCatalogItemListV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r BillingGetCatalogItemListV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type BillingCreatePurchaseOrderV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *BillingV1OrderOrderResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON422      *CommonResponseUnprocessableContentResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r BillingCreatePurchaseOrderV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r BillingCreatePurchaseOrderV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r BillingCreatePurchaseOrderV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -30798,6 +30926,23 @@ func (c *ClientWithResponses) BillingGetCatalogItemListV1WithResponse(ctx contex
 	return ParseBillingGetCatalogItemListV1Response(rsp)
 }
 
+// BillingCreatePurchaseOrderV1WithBodyWithResponse request with arbitrary body returning *BillingCreatePurchaseOrderV1Response
+func (c *ClientWithResponses) BillingCreatePurchaseOrderV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*BillingCreatePurchaseOrderV1Response, error) {
+	rsp, err := c.BillingCreatePurchaseOrderV1WithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseBillingCreatePurchaseOrderV1Response(rsp)
+}
+
+func (c *ClientWithResponses) BillingCreatePurchaseOrderV1WithResponse(ctx context.Context, body BillingCreatePurchaseOrderV1JSONRequestBody, reqEditors ...RequestEditorFn) (*BillingCreatePurchaseOrderV1Response, error) {
+	rsp, err := c.BillingCreatePurchaseOrderV1(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseBillingCreatePurchaseOrderV1Response(rsp)
+}
+
 // BillingGetPaymentMethodListV1WithResponse request returning *BillingGetPaymentMethodListV1Response
 func (c *ClientWithResponses) BillingGetPaymentMethodListV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*BillingGetPaymentMethodListV1Response, error) {
 	rsp, err := c.BillingGetPaymentMethodListV1(ctx, reqEditors...)
@@ -34136,6 +34281,53 @@ func ParseBillingGetCatalogItemListV1Response(rsp *http.Response) (*BillingGetCa
 			return nil, err
 		}
 		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseBillingCreatePurchaseOrderV1Response parses an HTTP response from a BillingCreatePurchaseOrderV1WithResponse call
+func ParseBillingCreatePurchaseOrderV1Response(rsp *http.Response) (*BillingCreatePurchaseOrderV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &BillingCreatePurchaseOrderV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest BillingV1OrderOrderResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse
