@@ -1054,10 +1054,20 @@
     "method": "POST",
     "path": "/api/hosting/v1/domains/verify-ownership"
   },
+  "mail_changeMailboxPasswordV1": {
+    "command": "hostinger mail mailboxes change-mailbox-password",
+    "method": "PATCH",
+    "path": "/api/mail/v1/mailboxes/{mailboxId}/password"
+  },
   "mail_createMailboxV1": {
     "command": "hostinger mail mailboxes create-mailbox",
     "method": "POST",
     "path": "/api/mail/v1/orders/{orderId}/mailboxes"
+  },
+  "mail_deleteMailboxV1": {
+    "command": "hostinger mail mailboxes delete-mailbox",
+    "method": "DELETE",
+    "path": "/api/mail/v1/mailboxes/{mailboxId}"
   },
   "mail_getMailOrderListV1": {
     "command": "hostinger mail orders list",

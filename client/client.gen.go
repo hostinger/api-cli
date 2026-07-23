@@ -4394,6 +4394,12 @@ type MailV1OrdersOrderResource_Plan struct {
 // MailV1OrdersOrderResourceStatus Order status
 type MailV1OrdersOrderResourceStatus string
 
+// MailV1SchemaChangeMailboxPasswordRequestSchema defines model for Mail.V1.Schema.ChangeMailboxPasswordRequestSchema.
+type MailV1SchemaChangeMailboxPasswordRequestSchema struct {
+	// Password New mailbox password. Minimum 8 characters with uppercase, lowercase, number and special character; must not be a commonly used password.
+	Password string `json:"password"`
+}
+
 // MailV1SchemaCreateMailboxRequestSchema defines model for Mail.V1.Schema.CreateMailboxRequestSchema.
 type MailV1SchemaCreateMailboxRequestSchema struct {
 	// LocalPart Local part of the mailbox address (the part before the @). The domain is taken from the order. Must start and end with a letter or digit; single dots, underscores and hyphens are allowed in between.
@@ -5811,6 +5817,9 @@ type IpAddressId = int
 // IsEnabled defines model for is_enabled.
 type IsEnabled = bool
 
+// MailMailboxIdPath defines model for mail_mailbox_id_path.
+type MailMailboxIdPath = string
+
 // MailMailboxSearch defines model for mail_mailbox_search.
 type MailMailboxSearch = string
 
@@ -6491,6 +6500,9 @@ type HostingCreateWebsiteV1JSONRequestBody = HostingV1WebsitesCreateWebsiteReque
 
 // HostingDeleteWebsiteV1JSONRequestBody defines body for HostingDeleteWebsiteV1 for application/json ContentType.
 type HostingDeleteWebsiteV1JSONRequestBody = HostingV1WebsitesDeleteWebsiteRequest
+
+// MailChangeMailboxPasswordV1JSONRequestBody defines body for MailChangeMailboxPasswordV1 for application/json ContentType.
+type MailChangeMailboxPasswordV1JSONRequestBody = MailV1SchemaChangeMailboxPasswordRequestSchema
 
 // MailCreateMailboxV1JSONRequestBody defines body for MailCreateMailboxV1 for application/json ContentType.
 type MailCreateMailboxV1JSONRequestBody = MailV1SchemaCreateMailboxRequestSchema
@@ -8041,6 +8053,14 @@ type ClientInterface interface {
 
 	// HostingListWordPressThemesV1 request
 	HostingListWordPressThemesV1(ctx context.Context, params *HostingListWordPressThemesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// MailDeleteMailboxV1 request
+	MailDeleteMailboxV1(ctx context.Context, mailboxId MailMailboxIdPath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// MailChangeMailboxPasswordV1WithBody request with any body
+	MailChangeMailboxPasswordV1WithBody(ctx context.Context, mailboxId MailMailboxIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	MailChangeMailboxPasswordV1(ctx context.Context, mailboxId MailMailboxIdPath, body MailChangeMailboxPasswordV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// MailGetMailOrderListV1 request
 	MailGetMailOrderListV1(ctx context.Context, params *MailGetMailOrderListV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -10819,6 +10839,42 @@ func (c *Client) HostingListSuggestedWordPressPluginsV1(ctx context.Context, par
 
 func (c *Client) HostingListWordPressThemesV1(ctx context.Context, params *HostingListWordPressThemesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingListWordPressThemesV1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) MailDeleteMailboxV1(ctx context.Context, mailboxId MailMailboxIdPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewMailDeleteMailboxV1Request(c.Server, mailboxId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) MailChangeMailboxPasswordV1WithBody(ctx context.Context, mailboxId MailMailboxIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewMailChangeMailboxPasswordV1RequestWithBody(c.Server, mailboxId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) MailChangeMailboxPasswordV1(ctx context.Context, mailboxId MailMailboxIdPath, body MailChangeMailboxPasswordV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewMailChangeMailboxPasswordV1Request(c.Server, mailboxId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -19049,6 +19105,87 @@ func NewHostingListWordPressThemesV1Request(server string, params *HostingListWo
 	return req, nil
 }
 
+// NewMailDeleteMailboxV1Request generates requests for MailDeleteMailboxV1
+func NewMailDeleteMailboxV1Request(server string, mailboxId MailMailboxIdPath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "mailboxId", mailboxId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/mail/v1/mailboxes/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewMailChangeMailboxPasswordV1Request calls the generic MailChangeMailboxPasswordV1 builder with application/json body
+func NewMailChangeMailboxPasswordV1Request(server string, mailboxId MailMailboxIdPath, body MailChangeMailboxPasswordV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewMailChangeMailboxPasswordV1RequestWithBody(server, mailboxId, "application/json", bodyReader)
+}
+
+// NewMailChangeMailboxPasswordV1RequestWithBody generates requests for MailChangeMailboxPasswordV1 with any type of body
+func NewMailChangeMailboxPasswordV1RequestWithBody(server string, mailboxId MailMailboxIdPath, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "mailboxId", mailboxId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/mail/v1/mailboxes/%s/password", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewMailGetMailOrderListV1Request generates requests for MailGetMailOrderListV1
 func NewMailGetMailOrderListV1Request(server string, params *MailGetMailOrderListV1Params) (*http.Request, error) {
 	var err error
@@ -23068,6 +23205,14 @@ type ClientWithResponsesInterface interface {
 
 	// HostingListWordPressThemesV1WithResponse request
 	HostingListWordPressThemesV1WithResponse(ctx context.Context, params *HostingListWordPressThemesV1Params, reqEditors ...RequestEditorFn) (*HostingListWordPressThemesV1Response, error)
+
+	// MailDeleteMailboxV1WithResponse request
+	MailDeleteMailboxV1WithResponse(ctx context.Context, mailboxId MailMailboxIdPath, reqEditors ...RequestEditorFn) (*MailDeleteMailboxV1Response, error)
+
+	// MailChangeMailboxPasswordV1WithBodyWithResponse request with any body
+	MailChangeMailboxPasswordV1WithBodyWithResponse(ctx context.Context, mailboxId MailMailboxIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*MailChangeMailboxPasswordV1Response, error)
+
+	MailChangeMailboxPasswordV1WithResponse(ctx context.Context, mailboxId MailMailboxIdPath, body MailChangeMailboxPasswordV1JSONRequestBody, reqEditors ...RequestEditorFn) (*MailChangeMailboxPasswordV1Response, error)
 
 	// MailGetMailOrderListV1WithResponse request
 	MailGetMailOrderListV1WithResponse(ctx context.Context, params *MailGetMailOrderListV1Params, reqEditors ...RequestEditorFn) (*MailGetMailOrderListV1Response, error)
@@ -28209,6 +28354,75 @@ func (r HostingListWordPressThemesV1Response) ContentType() string {
 	return ""
 }
 
+type MailDeleteMailboxV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON404      *CommonResponseErrorResponse
+	JSON409      *CommonResponseErrorResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r MailDeleteMailboxV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r MailDeleteMailboxV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r MailDeleteMailboxV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type MailChangeMailboxPasswordV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *CommonSuccessEmptyResource
+	JSON400      *CommonResponseErrorResponse
+	JSON401      *CommonResponseUnauthorizedResponse
+	JSON404      *CommonResponseErrorResponse
+	JSON422      *CommonResponseErrorResponse
+	JSON500      *CommonResponseErrorResponse
+}
+
+// Status returns HTTPResponse.Status
+func (r MailChangeMailboxPasswordV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r MailChangeMailboxPasswordV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r MailChangeMailboxPasswordV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type MailGetMailOrderListV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -32611,6 +32825,32 @@ func (c *ClientWithResponses) HostingListWordPressThemesV1WithResponse(ctx conte
 		return nil, err
 	}
 	return ParseHostingListWordPressThemesV1Response(rsp)
+}
+
+// MailDeleteMailboxV1WithResponse request returning *MailDeleteMailboxV1Response
+func (c *ClientWithResponses) MailDeleteMailboxV1WithResponse(ctx context.Context, mailboxId MailMailboxIdPath, reqEditors ...RequestEditorFn) (*MailDeleteMailboxV1Response, error) {
+	rsp, err := c.MailDeleteMailboxV1(ctx, mailboxId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseMailDeleteMailboxV1Response(rsp)
+}
+
+// MailChangeMailboxPasswordV1WithBodyWithResponse request with arbitrary body returning *MailChangeMailboxPasswordV1Response
+func (c *ClientWithResponses) MailChangeMailboxPasswordV1WithBodyWithResponse(ctx context.Context, mailboxId MailMailboxIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*MailChangeMailboxPasswordV1Response, error) {
+	rsp, err := c.MailChangeMailboxPasswordV1WithBody(ctx, mailboxId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseMailChangeMailboxPasswordV1Response(rsp)
+}
+
+func (c *ClientWithResponses) MailChangeMailboxPasswordV1WithResponse(ctx context.Context, mailboxId MailMailboxIdPath, body MailChangeMailboxPasswordV1JSONRequestBody, reqEditors ...RequestEditorFn) (*MailChangeMailboxPasswordV1Response, error) {
+	rsp, err := c.MailChangeMailboxPasswordV1(ctx, mailboxId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseMailChangeMailboxPasswordV1Response(rsp)
 }
 
 // MailGetMailOrderListV1WithResponse request returning *MailGetMailOrderListV1Response
@@ -39897,6 +40137,121 @@ func ParseHostingListWordPressThemesV1Response(rsp *http.Response) (*HostingList
 			return nil, err
 		}
 		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseMailDeleteMailboxV1Response parses an HTTP response from a MailDeleteMailboxV1WithResponse call
+func ParseMailDeleteMailboxV1Response(rsp *http.Response) (*MailDeleteMailboxV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &MailDeleteMailboxV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseMailChangeMailboxPasswordV1Response parses an HTTP response from a MailChangeMailboxPasswordV1WithResponse call
+func ParseMailChangeMailboxPasswordV1Response(rsp *http.Response) (*MailChangeMailboxPasswordV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &MailChangeMailboxPasswordV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse
