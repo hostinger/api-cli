@@ -18,5 +18,6 @@ Orders commands
 ### SEE ALSO
 
 * [hostinger mail](hostinger_mail.md)	 - Mail commands
-* [hostinger mail orders list](hostinger_mail_orders_list.md)	 - Get mail order list
+* [hostinger mail orders list](hostinger_mail_orders_list.md)	 - List orders
+* [hostinger mail orders plan](hostinger_mail_orders_plan.md)	 - Get order plan
 

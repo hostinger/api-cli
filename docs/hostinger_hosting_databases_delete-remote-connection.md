@@ -1,6 +1,6 @@
 ## hostinger hosting databases delete-remote-connection
 
-Delete account database remote connection
+Delete database remote connection
 
 ### Synopsis
 

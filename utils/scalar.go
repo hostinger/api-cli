@@ -3,6 +3,8 @@ package utils
 import (
 	"strconv"
 	"time"
+
+	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 func StringPtrOrNil(s string) *string {
@@ -49,4 +51,19 @@ func StringToTime(dateStr string) time.Time {
 	}
 
 	return t
+}
+
+func StringToDate(dateStr string) openapi_types.Date {
+	t, err := time.Parse(openapi_types.DateFormat, dateStr)
+	if err != nil {
+		panic(err)
+	}
+
+	return openapi_types.Date{Time: t}
+}
+
+// StringToEmail keeps format:email query params converting through utils like
+// every other formatted kind, so generated commands need no extra import.
+func StringToEmail(email string) openapi_types.Email {
+	return openapi_types.Email(email)
 }

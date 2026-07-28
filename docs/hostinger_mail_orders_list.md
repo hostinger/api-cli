@@ -1,6 +1,6 @@
 ## hostinger mail orders list
 
-Get mail order list
+List orders
 
 ### Synopsis
 

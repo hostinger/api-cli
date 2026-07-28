@@ -1,6 +1,6 @@
 ## hostinger hosting databases list-remote-connections
 
-List account database remote connections
+List database remote connections
 
 ### Synopsis
 

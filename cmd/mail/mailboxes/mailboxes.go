@@ -13,5 +13,5 @@ func init() {
 	GroupCmd.AddCommand(ChangeMailboxPasswordCmd)
 	GroupCmd.AddCommand(CreateMailboxCmd)
 	GroupCmd.AddCommand(DeleteMailboxCmd)
-	GroupCmd.AddCommand(MailboxCmd)
+	GroupCmd.AddCommand(ListCmd)
 }

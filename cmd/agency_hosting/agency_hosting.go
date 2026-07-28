@@ -7,6 +7,7 @@ import (
 	"github.com/hostinger/api-cli/cmd/agency_hosting/datacenters"
 	"github.com/hostinger/api-cli/cmd/agency_hosting/domains"
 	"github.com/hostinger/api-cli/cmd/agency_hosting/files"
+	"github.com/hostinger/api-cli/cmd/agency_hosting/orders"
 	"github.com/hostinger/api-cli/cmd/agency_hosting/website_setups"
 	"github.com/hostinger/api-cli/cmd/agency_hosting/websites"
 	"github.com/hostinger/api-cli/cmd/agency_hosting/wordpress"
@@ -26,6 +27,7 @@ func init() {
 	GroupCmd.AddCommand(datacenters.GroupCmd)
 	GroupCmd.AddCommand(domains.GroupCmd)
 	GroupCmd.AddCommand(files.GroupCmd)
+	GroupCmd.AddCommand(orders.GroupCmd)
 	GroupCmd.AddCommand(website_setups.GroupCmd)
 	GroupCmd.AddCommand(websites.GroupCmd)
 	GroupCmd.AddCommand(wordpress.GroupCmd)

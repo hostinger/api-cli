@@ -13,12 +13,12 @@ import (
 
 var ListCmd = &cobra.Command{
 	Use:   "list",
-	Short: "Get mail order list",
+	Short: "List orders",
 	Long:  "Retrieve a paginated list of mail orders associated with your account.\n\nUse this endpoint to monitor your mail services, including their status,\nplan, attached domain, and expiration details.",
 	Run: func(cmd *cobra.Command, args []string) {
 		utils.EnumCheck(cmd, "status", []string{"pending_setup", "active", "suspended"})
 		utils.EnumCheck(cmd, "sort", []string{"created_at", "-created_at", "expires_at", "-expires_at"})
-		r, err := api.Request().MailGetMailOrderListV1WithResponse(context.TODO(), listParams(cmd))
+		r, err := api.Request().MailListOrdersV1WithResponse(context.TODO(), listParams(cmd))
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -36,15 +36,15 @@ func init() {
 	ListCmd.Flags().IntP("per-page", "", 25, "Number of items per page")
 }
 
-func listParams(cmd *cobra.Command) *client.MailGetMailOrderListV1Params {
-	params := &client.MailGetMailOrderListV1Params{}
+func listParams(cmd *cobra.Command) *client.MailListOrdersV1Params {
+	params := &client.MailListOrdersV1Params{}
 	if cmd.Flags().Changed("domain") {
 		v, _ := cmd.Flags().GetString("domain")
 		params.Domain = &v
 	}
 	if cmd.Flags().Changed("status") {
 		v, _ := cmd.Flags().GetString("status")
-		e := client.MailGetMailOrderListV1ParamsStatus(v)
+		e := client.MailListOrdersV1ParamsStatus(v)
 		params.Status = &e
 	}
 	if cmd.Flags().Changed("is-trial") {
@@ -53,7 +53,7 @@ func listParams(cmd *cobra.Command) *client.MailGetMailOrderListV1Params {
 	}
 	if cmd.Flags().Changed("sort") {
 		v, _ := cmd.Flags().GetString("sort")
-		e := client.MailGetMailOrderListV1ParamsSort(v)
+		e := client.MailListOrdersV1ParamsSort(v)
 		params.Sort = &e
 	}
 	if cmd.Flags().Changed("page") {

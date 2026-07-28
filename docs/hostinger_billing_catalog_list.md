@@ -18,7 +18,7 @@ hostinger billing catalog list [flags]
 ### Options
 
 ```
-      --category string   Filter catalog items by category (one of: DOMAIN, VPS)
+      --category string   Filter catalog items by category (one of: DOMAIN, VPS, EMAIL)
   -h, --help              help for list
       --name *            Filter catalog items by name. Use * for wildcard search, e.g. `.COM*` to find .com domain
 ```

@@ -434,6 +434,11 @@
     "method": "GET",
     "path": "/api/agency-hosting/v1/domains"
   },
+  "agency-hosting_listAgencyPlanOrdersV1": {
+    "command": "hostinger agency-hosting orders list-plan",
+    "method": "GET",
+    "path": "/api/agency-hosting/v1/orders"
+  },
   "agency-hosting_listAgencyPlanWebsiteCronJobsV1": {
     "command": "hostinger agency-hosting cron-jobs list-plan-website",
     "method": "GET",
@@ -724,15 +729,15 @@
     "method": "POST",
     "path": "/api/hosting/v1/accounts/{username}/cron-jobs"
   },
-  "hosting_createAccountDatabaseRemoteConnectionV1": {
-    "command": "hostinger hosting databases create-remote-connection",
-    "method": "POST",
-    "path": "/api/hosting/v1/accounts/{username}/databases/{name}/remote-connections"
-  },
   "hosting_createAccountDatabaseV1": {
     "command": "hostinger hosting databases create",
     "method": "POST",
     "path": "/api/hosting/v1/accounts/{username}/databases"
+  },
+  "hosting_createDatabaseRemoteConnectionV1": {
+    "command": "hostinger hosting databases create-remote-connection",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/databases/{name}/remote-connections"
   },
   "hosting_createLoginLinksV1": {
     "command": "hostinger wordpress login create-links",
@@ -769,15 +774,15 @@
     "method": "DELETE",
     "path": "/api/hosting/v1/accounts/{username}/cron-jobs/{uid}"
   },
-  "hosting_deleteAccountDatabaseRemoteConnectionV1": {
-    "command": "hostinger hosting databases delete-remote-connection",
-    "method": "DELETE",
-    "path": "/api/hosting/v1/accounts/{username}/databases/{name}/remote-connections"
-  },
   "hosting_deleteAccountDatabaseV1": {
     "command": "hostinger hosting databases delete",
     "method": "DELETE",
     "path": "/api/hosting/v1/accounts/{username}/databases/{name}"
+  },
+  "hosting_deleteDatabaseRemoteConnectionV1": {
+    "command": "hostinger hosting databases delete-remote-connection",
+    "method": "DELETE",
+    "path": "/api/hosting/v1/accounts/{username}/databases/{name}/remote-connections"
   },
   "hosting_deleteWebsiteParkedDomainV1": {
     "command": "hostinger hosting domains delete-website-parked",
@@ -859,11 +864,6 @@
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/cron-jobs"
   },
-  "hosting_listAccountDatabaseRemoteConnectionsV1": {
-    "command": "hostinger hosting databases list-remote-connections",
-    "method": "GET",
-    "path": "/api/hosting/v1/accounts/{username}/databases/remote-connections"
-  },
   "hosting_listAccountDatabasesV1": {
     "command": "hostinger hosting databases list",
     "method": "GET",
@@ -883,6 +883,11 @@
     "command": "hostinger wordpress plugins list",
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/plugins/available"
+  },
+  "hosting_listDatabaseRemoteConnectionsV1": {
+    "command": "hostinger hosting databases list-remote-connections",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/databases/remote-connections"
   },
   "hosting_listInstalledWordPressPluginsV1": {
     "command": "hostinger wordpress plugins list-installed",
@@ -1074,25 +1079,190 @@
     "method": "PATCH",
     "path": "/api/mail/v1/mailboxes/{mailboxId}/password"
   },
+  "mail_createAPITokenV1": {
+    "command": "hostinger mail api-tokens create",
+    "method": "POST",
+    "path": "/api/mail/v1/orders/{orderId}/api-tokens"
+  },
+  "mail_createAliasV1": {
+    "command": "hostinger mail aliases create-alias",
+    "method": "POST",
+    "path": "/api/mail/v1/mailboxes/{mailboxId}/aliases"
+  },
+  "mail_createAutoreplyV1": {
+    "command": "hostinger mail autoreplies create",
+    "method": "POST",
+    "path": "/api/mail/v1/mailboxes/{mailboxId}/autoreplies"
+  },
+  "mail_createCatchAllV1": {
+    "command": "hostinger mail catchalls create-catch-all",
+    "method": "POST",
+    "path": "/api/mail/v1/mailboxes/{mailboxId}/catchalls"
+  },
+  "mail_createForwarderV1": {
+    "command": "hostinger mail forwarders create",
+    "method": "POST",
+    "path": "/api/mail/v1/mailboxes/{mailboxId}/forwarders"
+  },
   "mail_createMailboxV1": {
     "command": "hostinger mail mailboxes create-mailbox",
     "method": "POST",
     "path": "/api/mail/v1/orders/{orderId}/mailboxes"
+  },
+  "mail_createWebhookV1": {
+    "command": "hostinger mail webhooks create",
+    "method": "POST",
+    "path": "/api/mail/v1/mailboxes/{mailboxId}/webhooks"
+  },
+  "mail_deleteAliasV1": {
+    "command": "hostinger mail aliases delete-alias",
+    "method": "DELETE",
+    "path": "/api/mail/v1/aliases/{aliasId}"
+  },
+  "mail_deleteAutoreplyV1": {
+    "command": "hostinger mail autoreplies delete",
+    "method": "DELETE",
+    "path": "/api/mail/v1/autoreplies/{autoreplyId}"
+  },
+  "mail_deleteCatchAllV1": {
+    "command": "hostinger mail catchalls delete-catch-all",
+    "method": "DELETE",
+    "path": "/api/mail/v1/catchalls/{catchallId}"
+  },
+  "mail_deleteForwarderV1": {
+    "command": "hostinger mail forwarders delete",
+    "method": "DELETE",
+    "path": "/api/mail/v1/forwarders/{forwarderId}"
   },
   "mail_deleteMailboxV1": {
     "command": "hostinger mail mailboxes delete-mailbox",
     "method": "DELETE",
     "path": "/api/mail/v1/mailboxes/{mailboxId}"
   },
-  "mail_getMailOrderListV1": {
+  "mail_deleteWebhookV1": {
+    "command": "hostinger mail webhooks delete",
+    "method": "DELETE",
+    "path": "/api/mail/v1/webhooks/{webhookId}"
+  },
+  "mail_getOrderPlanV1": {
+    "command": "hostinger mail orders plan",
+    "method": "GET",
+    "path": "/api/mail/v1/orders/{orderId}/plan"
+  },
+  "mail_getWebhookV1": {
+    "command": "hostinger mail webhooks get",
+    "method": "GET",
+    "path": "/api/mail/v1/webhooks/{webhookId}"
+  },
+  "mail_listAPITokensV1": {
+    "command": "hostinger mail api-tokens list",
+    "method": "GET",
+    "path": "/api/mail/v1/api-tokens"
+  },
+  "mail_listAccessLogsV1": {
+    "command": "hostinger mail logs list-access",
+    "method": "GET",
+    "path": "/api/mail/v1/orders/{orderId}/logs/access"
+  },
+  "mail_listActionLogsV1": {
+    "command": "hostinger mail logs list-action",
+    "method": "GET",
+    "path": "/api/mail/v1/orders/{orderId}/logs/action"
+  },
+  "mail_listAliasesV1": {
+    "command": "hostinger mail aliases list",
+    "method": "GET",
+    "path": "/api/mail/v1/orders/{orderId}/aliases"
+  },
+  "mail_listAutorepliesV1": {
+    "command": "hostinger mail autoreplies list",
+    "method": "GET",
+    "path": "/api/mail/v1/orders/{orderId}/autoreplies"
+  },
+  "mail_listCatchAllsV1": {
+    "command": "hostinger mail catchalls list-catch-alls",
+    "method": "GET",
+    "path": "/api/mail/v1/orders/{orderId}/catchalls"
+  },
+  "mail_listForwardersV1": {
+    "command": "hostinger mail forwarders list",
+    "method": "GET",
+    "path": "/api/mail/v1/orders/{orderId}/forwarders"
+  },
+  "mail_listInboundLogsV1": {
+    "command": "hostinger mail logs list-inbound",
+    "method": "GET",
+    "path": "/api/mail/v1/orders/{orderId}/logs/inbound"
+  },
+  "mail_listMailboxActionLogsV1": {
+    "command": "hostinger mail logs list-mailbox-action",
+    "method": "GET",
+    "path": "/api/mail/v1/orders/{orderId}/logs/mailbox-actions"
+  },
+  "mail_listMailboxesV1": {
+    "command": "hostinger mail mailboxes list",
+    "method": "GET",
+    "path": "/api/mail/v1/orders/{orderId}/mailboxes"
+  },
+  "mail_listOrdersV1": {
     "command": "hostinger mail orders list",
     "method": "GET",
     "path": "/api/mail/v1/orders"
   },
-  "mail_getMailboxListV1": {
-    "command": "hostinger mail mailboxes mailbox",
+  "mail_listOutboundLogsV1": {
+    "command": "hostinger mail logs list-outbound",
     "method": "GET",
-    "path": "/api/mail/v1/orders/{orderId}/mailboxes"
+    "path": "/api/mail/v1/orders/{orderId}/logs/outbound"
+  },
+  "mail_listWebhookDeliveryLogsV1": {
+    "command": "hostinger mail webhooks list-delivery-logs",
+    "method": "GET",
+    "path": "/api/mail/v1/orders/{orderId}/webhooks/delivery-logs"
+  },
+  "mail_listWebhooksV1": {
+    "command": "hostinger mail webhooks list",
+    "method": "GET",
+    "path": "/api/mail/v1/orders/{orderId}/webhooks"
+  },
+  "mail_regenerateWebhookSecretV1": {
+    "command": "hostinger mail webhooks regenerate-secret",
+    "method": "POST",
+    "path": "/api/mail/v1/webhooks/{webhookId}/regenerate-secret"
+  },
+  "mail_resendCatchAllConfirmationV1": {
+    "command": "hostinger mail catchalls resend-catch-all-confirmation",
+    "method": "POST",
+    "path": "/api/mail/v1/catchalls/{catchallId}/confirmation/resend"
+  },
+  "mail_resendForwarderConfirmationV1": {
+    "command": "hostinger mail forwarders resend-confirmation",
+    "method": "POST",
+    "path": "/api/mail/v1/forwarders/{forwarderId}/confirmation/resend"
+  },
+  "mail_revokeAPITokenV1": {
+    "command": "hostinger mail api-tokens revoke",
+    "method": "DELETE",
+    "path": "/api/mail/v1/api-tokens/{tokenId}"
+  },
+  "mail_testWebhookV1": {
+    "command": "hostinger mail webhooks test",
+    "method": "POST",
+    "path": "/api/mail/v1/webhooks/{webhookId}/test"
+  },
+  "mail_updateAutoreplyV1": {
+    "command": "hostinger mail autoreplies update",
+    "method": "PUT",
+    "path": "/api/mail/v1/autoreplies/{autoreplyId}"
+  },
+  "mail_updateForwarderKeepCopySettingV1": {
+    "command": "hostinger mail forwarders update-keep-copy-setting",
+    "method": "PATCH",
+    "path": "/api/mail/v1/forwarders/{forwarderId}/keep-copy"
+  },
+  "mail_updateWebhookV1": {
+    "command": "hostinger mail webhooks update",
+    "method": "PATCH",
+    "path": "/api/mail/v1/webhooks/{webhookId}"
   },
   "reach_createANewContactSegmentV1": {
     "command": "hostinger reach segments create",

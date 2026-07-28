@@ -21,5 +21,5 @@ Mailboxes commands
 * [hostinger mail mailboxes change-mailbox-password](hostinger_mail_mailboxes_change-mailbox-password.md)	 - Change mailbox password
 * [hostinger mail mailboxes create-mailbox](hostinger_mail_mailboxes_create-mailbox.md)	 - Create mailbox
 * [hostinger mail mailboxes delete-mailbox](hostinger_mail_mailboxes_delete-mailbox.md)	 - Delete mailbox
-* [hostinger mail mailboxes mailbox](hostinger_mail_mailboxes_mailbox.md)	 - Get mailbox list
+* [hostinger mail mailboxes list](hostinger_mail_mailboxes_list.md)	 - List mailboxes
 

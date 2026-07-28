@@ -1,6 +1,6 @@
 ## hostinger hosting databases create-remote-connection
 
-Create account database remote connection
+Create database remote connection
 
 ### Synopsis
 

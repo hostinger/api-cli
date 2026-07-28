@@ -1,6 +1,6 @@
-## hostinger mail mailboxes mailbox
+## hostinger mail mailboxes list
 
-Get mailbox list
+List mailboxes
 
 ### Synopsis
 
@@ -11,13 +11,13 @@ their status, enabled protocols, attached resource counts, and
 periodically synced usage numbers (usage may lag behind live values).
 
 ```
-hostinger mail mailboxes mailbox <order-id> [flags]
+hostinger mail mailboxes list <order-id> [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help            help for mailbox
+  -h, --help            help for list
       --page int        Page number
       --per-page int    Number of items per page (default 25)
       --search string   Filter mailboxes whose email address contains the given string
