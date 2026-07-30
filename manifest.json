@@ -509,6 +509,11 @@
     "method": "GET",
     "path": "/api/billing/v1/subscriptions"
   },
+  "billing_renewSubscriptionV1": {
+    "command": "hostinger billing subscriptions renew",
+    "method": "POST",
+    "path": "/api/billing/v1/subscriptions/{subscriptionId}/renew"
+  },
   "billing_setDefaultPaymentMethodV1": {
     "command": "hostinger billing payment-methods set-default",
     "method": "POST",

@@ -3696,6 +3696,17 @@ type BillingV1PaymentMethodPaymentMethodResource struct {
 	PaymentMethod *string `json:"payment_method,omitempty"`
 }
 
+// BillingV1SubscriptionRenewalRenewRequest defines model for Billing.V1.Subscription.Renewal.RenewRequest.
+type BillingV1SubscriptionRenewalRenewRequest struct {
+	// Coupons Discount coupon codes
+	Coupons *[]interface{} `json:"coupons,omitempty"`
+
+	// PaymentMethodId Payment method ID, default will be used if not provided
+	//
+	// Example: 1327362
+	PaymentMethodId *int `json:"payment_method_id,omitempty"`
+}
+
 // BillingV1SubscriptionSubscriptionCollection Array of [`Billing.V1.Subscription.SubscriptionResource`](#model/billingv1subscriptionsubscriptionresource)
 type BillingV1SubscriptionSubscriptionCollection = []BillingV1SubscriptionSubscriptionResource
 
@@ -9904,6 +9915,9 @@ type AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1JSONRequestBody =
 // BillingCreatePurchaseOrderV1JSONRequestBody defines body for BillingCreatePurchaseOrderV1 for application/json ContentType.
 type BillingCreatePurchaseOrderV1JSONRequestBody = BillingV1OrderPurchaseRequest
 
+// BillingRenewSubscriptionV1JSONRequestBody defines body for BillingRenewSubscriptionV1 for application/json ContentType.
+type BillingRenewSubscriptionV1JSONRequestBody = BillingV1SubscriptionRenewalRenewRequest
+
 // DNSDeleteDNSRecordsV1JSONRequestBody defines body for DNSDeleteDNSRecordsV1 for application/json ContentType.
 type DNSDeleteDNSRecordsV1JSONRequestBody = DNSV1ZoneDestroyRequest
 
@@ -11594,6 +11608,42 @@ type ClientInterface interface {
 	//
 	// Corresponds with PATCH /api/billing/v1/subscriptions/{subscriptionId}/auto-renewal/enable (the `BillingEnableAutoRenewalV1` operationId).
 	BillingEnableAutoRenewalV1(ctx context.Context, subscriptionId SubscriptionId, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// BillingRenewSubscriptionV1WithBody Renew subscription
+	//
+	// Create a renewal order for an existing Hostinger subscription.
+	//
+	// This endpoint places a renewal order for a single subscription, leveraging
+	// the existing billing infrastructure. Use the
+	// [subscriptions endpoint](#tag/billing-subscriptions) to look up the
+	// `subscriptionId` values available for renewal.
+	//
+	// If no payment method is provided, your default payment method will be used automatically.
+	//
+	// Use this endpoint to renew any subscription available in your account.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/billing/v1/subscriptions/{subscriptionId}/renew (the `BillingRenewSubscriptionV1` operationId).
+	BillingRenewSubscriptionV1WithBody(ctx context.Context, subscriptionId SubscriptionId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// BillingRenewSubscriptionV1 Renew subscription
+	//
+	// Create a renewal order for an existing Hostinger subscription.
+	//
+	// This endpoint places a renewal order for a single subscription, leveraging
+	// the existing billing infrastructure. Use the
+	// [subscriptions endpoint](#tag/billing-subscriptions) to look up the
+	// `subscriptionId` values available for renewal.
+	//
+	// If no payment method is provided, your default payment method will be used automatically.
+	//
+	// Use this endpoint to renew any subscription available in your account.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/billing/v1/subscriptions/{subscriptionId}/renew (the `BillingRenewSubscriptionV1` operationId).
+	BillingRenewSubscriptionV1(ctx context.Context, subscriptionId SubscriptionId, body BillingRenewSubscriptionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DNSGetDNSSnapshotListV1 Get DNS snapshot list
 	//
@@ -16377,6 +16427,62 @@ func (c *Client) BillingDisableAutoRenewalV1(ctx context.Context, subscriptionId
 // Corresponds with PATCH /api/billing/v1/subscriptions/{subscriptionId}/auto-renewal/enable (the `BillingEnableAutoRenewalV1` operationId).
 func (c *Client) BillingEnableAutoRenewalV1(ctx context.Context, subscriptionId SubscriptionId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewBillingEnableAutoRenewalV1Request(c.Server, subscriptionId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// BillingRenewSubscriptionV1WithBody Renew subscription
+//
+// Create a renewal order for an existing Hostinger subscription.
+//
+// This endpoint places a renewal order for a single subscription, leveraging
+// the existing billing infrastructure. Use the
+// [subscriptions endpoint](#tag/billing-subscriptions) to look up the
+// `subscriptionId` values available for renewal.
+//
+// If no payment method is provided, your default payment method will be used automatically.
+//
+// Use this endpoint to renew any subscription available in your account.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/billing/v1/subscriptions/{subscriptionId}/renew (the `BillingRenewSubscriptionV1` operationId).
+func (c *Client) BillingRenewSubscriptionV1WithBody(ctx context.Context, subscriptionId SubscriptionId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewBillingRenewSubscriptionV1RequestWithBody(c.Server, subscriptionId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// BillingRenewSubscriptionV1 Renew subscription
+//
+// Create a renewal order for an existing Hostinger subscription.
+//
+// This endpoint places a renewal order for a single subscription, leveraging
+// the existing billing infrastructure. Use the
+// [subscriptions endpoint](#tag/billing-subscriptions) to look up the
+// `subscriptionId` values available for renewal.
+//
+// If no payment method is provided, your default payment method will be used automatically.
+//
+// Use this endpoint to renew any subscription available in your account.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/billing/v1/subscriptions/{subscriptionId}/renew (the `BillingRenewSubscriptionV1` operationId).
+func (c *Client) BillingRenewSubscriptionV1(ctx context.Context, subscriptionId SubscriptionId, body BillingRenewSubscriptionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewBillingRenewSubscriptionV1Request(c.Server, subscriptionId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -24875,6 +24981,53 @@ func NewBillingEnableAutoRenewalV1Request(server string, subscriptionId Subscrip
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewBillingRenewSubscriptionV1Request calls the generic BillingRenewSubscriptionV1 builder with application/json body
+func NewBillingRenewSubscriptionV1Request(server string, subscriptionId SubscriptionId, body BillingRenewSubscriptionV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewBillingRenewSubscriptionV1RequestWithBody(server, subscriptionId, "application/json", bodyReader)
+}
+
+// NewBillingRenewSubscriptionV1RequestWithBody constructs an http.Request for the BillingRenewSubscriptionV1 method, with any body, and a specified content type
+func NewBillingRenewSubscriptionV1RequestWithBody(server string, subscriptionId SubscriptionId, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "subscriptionId", subscriptionId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/billing/v1/subscriptions/%s/renew", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -36780,6 +36933,42 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with PATCH /api/billing/v1/subscriptions/{subscriptionId}/auto-renewal/enable (the `BillingEnableAutoRenewalV1` operationId).
 	BillingEnableAutoRenewalV1WithResponse(ctx context.Context, subscriptionId SubscriptionId, reqEditors ...RequestEditorFn) (*BillingEnableAutoRenewalV1Response, error)
 
+	// BillingRenewSubscriptionV1WithBodyWithResponse Renew subscription
+	//
+	// Create a renewal order for an existing Hostinger subscription.
+	//
+	// This endpoint places a renewal order for a single subscription, leveraging
+	// the existing billing infrastructure. Use the
+	// [subscriptions endpoint](#tag/billing-subscriptions) to look up the
+	// `subscriptionId` values available for renewal.
+	//
+	// If no payment method is provided, your default payment method will be used automatically.
+	//
+	// Use this endpoint to renew any subscription available in your account.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/billing/v1/subscriptions/{subscriptionId}/renew (the `BillingRenewSubscriptionV1` operationId).
+	BillingRenewSubscriptionV1WithBodyWithResponse(ctx context.Context, subscriptionId SubscriptionId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*BillingRenewSubscriptionV1Response, error)
+
+	// BillingRenewSubscriptionV1WithResponse Renew subscription
+	//
+	// Create a renewal order for an existing Hostinger subscription.
+	//
+	// This endpoint places a renewal order for a single subscription, leveraging
+	// the existing billing infrastructure. Use the
+	// [subscriptions endpoint](#tag/billing-subscriptions) to look up the
+	// `subscriptionId` values available for renewal.
+	//
+	// If no payment method is provided, your default payment method will be used automatically.
+	//
+	// Use this endpoint to renew any subscription available in your account.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/billing/v1/subscriptions/{subscriptionId}/renew (the `BillingRenewSubscriptionV1` operationId).
+	BillingRenewSubscriptionV1WithResponse(ctx context.Context, subscriptionId SubscriptionId, body BillingRenewSubscriptionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*BillingRenewSubscriptionV1Response, error)
+
 	// DNSGetDNSSnapshotListV1WithResponse Get DNS snapshot list
 	//
 	// Retrieve DNS snapshots for a domain.
@@ -42866,6 +43055,68 @@ func (r BillingEnableAutoRenewalV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r BillingEnableAutoRenewalV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type BillingRenewSubscriptionV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *BillingV1OrderOrderResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r BillingRenewSubscriptionV1Response) GetJSON200() *BillingV1OrderOrderResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r BillingRenewSubscriptionV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r BillingRenewSubscriptionV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r BillingRenewSubscriptionV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r BillingRenewSubscriptionV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r BillingRenewSubscriptionV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r BillingRenewSubscriptionV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r BillingRenewSubscriptionV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -57936,6 +58187,54 @@ func (c *ClientWithResponses) BillingEnableAutoRenewalV1WithResponse(ctx context
 	return ParseBillingEnableAutoRenewalV1Response(rsp)
 }
 
+// BillingRenewSubscriptionV1WithBodyWithResponse Renew subscription
+//
+// Create a renewal order for an existing Hostinger subscription.
+//
+// This endpoint places a renewal order for a single subscription, leveraging
+// the existing billing infrastructure. Use the
+// [subscriptions endpoint](#tag/billing-subscriptions) to look up the
+// `subscriptionId` values available for renewal.
+//
+// If no payment method is provided, your default payment method will be used automatically.
+//
+// Use this endpoint to renew any subscription available in your account.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/billing/v1/subscriptions/{subscriptionId}/renew (the `BillingRenewSubscriptionV1` operationId).
+func (c *ClientWithResponses) BillingRenewSubscriptionV1WithBodyWithResponse(ctx context.Context, subscriptionId SubscriptionId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*BillingRenewSubscriptionV1Response, error) {
+	rsp, err := c.BillingRenewSubscriptionV1WithBody(ctx, subscriptionId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseBillingRenewSubscriptionV1Response(rsp)
+}
+
+// BillingRenewSubscriptionV1WithResponse Renew subscription
+//
+// Create a renewal order for an existing Hostinger subscription.
+//
+// This endpoint places a renewal order for a single subscription, leveraging
+// the existing billing infrastructure. Use the
+// [subscriptions endpoint](#tag/billing-subscriptions) to look up the
+// `subscriptionId` values available for renewal.
+//
+// If no payment method is provided, your default payment method will be used automatically.
+//
+// Use this endpoint to renew any subscription available in your account.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/billing/v1/subscriptions/{subscriptionId}/renew (the `BillingRenewSubscriptionV1` operationId).
+func (c *ClientWithResponses) BillingRenewSubscriptionV1WithResponse(ctx context.Context, subscriptionId SubscriptionId, body BillingRenewSubscriptionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*BillingRenewSubscriptionV1Response, error) {
+	rsp, err := c.BillingRenewSubscriptionV1(ctx, subscriptionId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseBillingRenewSubscriptionV1Response(rsp)
+}
+
 // DNSGetDNSSnapshotListV1WithResponse Get DNS snapshot list
 //
 // Retrieve DNS snapshots for a domain.
@@ -65392,6 +65691,53 @@ func ParseBillingEnableAutoRenewalV1Response(rsp *http.Response) (*BillingEnable
 			return nil, err
 		}
 		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseBillingRenewSubscriptionV1Response parses an HTTP response from a BillingRenewSubscriptionV1WithResponse call
+func ParseBillingRenewSubscriptionV1Response(rsp *http.Response) (*BillingRenewSubscriptionV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &BillingRenewSubscriptionV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest BillingV1OrderOrderResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse

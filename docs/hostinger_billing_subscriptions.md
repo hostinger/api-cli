@@ -21,4 +21,5 @@ Subscriptions commands
 * [hostinger billing subscriptions disable-auto-renewal](hostinger_billing_subscriptions_disable-auto-renewal.md)	 - Disable auto-renewal
 * [hostinger billing subscriptions enable-auto-renewal](hostinger_billing_subscriptions_enable-auto-renewal.md)	 - Enable auto-renewal
 * [hostinger billing subscriptions list](hostinger_billing_subscriptions_list.md)	 - Get subscription list
+* [hostinger billing subscriptions renew](hostinger_billing_subscriptions_renew.md)	 - Renew subscription
 

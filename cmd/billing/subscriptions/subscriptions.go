@@ -13,4 +13,5 @@ func init() {
 	GroupCmd.AddCommand(DisableAutoRenewalCmd)
 	GroupCmd.AddCommand(EnableAutoRenewalCmd)
 	GroupCmd.AddCommand(ListCmd)
+	GroupCmd.AddCommand(RenewCmd)
 }
