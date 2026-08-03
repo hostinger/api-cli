@@ -619,6 +619,16 @@
     "method": "POST",
     "path": "/api/domains/v1/portfolio"
   },
+  "domains_setWHOISProfileAsDefaultV1": {
+    "command": "hostinger domains whois set-as-default",
+    "method": "PATCH",
+    "path": "/api/domains/v1/whois/default/{whoisId}"
+  },
+  "domains_unsetDefaultWHOISProfileV1": {
+    "command": "hostinger domains whois unset-default",
+    "method": "DELETE",
+    "path": "/api/domains/v1/whois/default/{whoisId}"
+  },
   "domains_updateDomainForwardingV1": {
     "command": "hostinger domains forwarding update",
     "method": "PUT",

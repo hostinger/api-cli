@@ -12089,6 +12089,28 @@ type ClientInterface interface {
 	// Corresponds with POST /api/domains/v1/whois (the `DomainsCreateWHOISProfileV1` operationId).
 	DomainsCreateWHOISProfileV1(ctx context.Context, body DomainsCreateWHOISProfileV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// DomainsUnsetDefaultWHOISProfileV1 Unset default WHOIS profile
+	//
+	// Unset WHOIS contact profile as default.
+	//
+	// The profile itself is kept, it is only no longer pre-selected for its TLD.
+	//
+	// Use this endpoint to stop reusing contact information for new registrations.
+	//
+	// Corresponds with DELETE /api/domains/v1/whois/default/{whoisId} (the `DomainsUnsetDefaultWHOISProfileV1` operationId).
+	DomainsUnsetDefaultWHOISProfileV1(ctx context.Context, whoisId WhoisId, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsSetWHOISProfileAsDefaultV1 Set WHOIS profile as default
+	//
+	// Set WHOIS contact profile as default.
+	//
+	// The default profile is pre-selected for the TLD it belongs to when registering new domains.
+	//
+	// Use this endpoint to avoid picking contact information for every registration.
+	//
+	// Corresponds with PATCH /api/domains/v1/whois/default/{whoisId} (the `DomainsSetWHOISProfileAsDefaultV1` operationId).
+	DomainsSetWHOISProfileAsDefaultV1(ctx context.Context, whoisId WhoisId, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// DomainsDeleteWHOISProfileV1 Delete WHOIS profile
 	//
 	// Delete WHOIS contact profile.
@@ -15512,6 +15534,9 @@ type ClientInterface interface {
 	//
 	// If the virtual machine is already stopped, the request will still be processed without any effect.
 	//
+	// This is a compute-only power state change and does not affect billing. To stop future charges,
+	// disable auto-renewal on the owning subscription.
+	//
 	// Use this endpoint to power off running VPS instances.
 	//
 	// Corresponds with POST /api/vps/v1/virtual-machines/{virtualMachineId}/stop (the `VPSStopVirtualMachineV1` operationId).
@@ -17297,6 +17322,48 @@ func (c *Client) DomainsCreateWHOISProfileV1WithBody(ctx context.Context, conten
 // Corresponds with POST /api/domains/v1/whois (the `DomainsCreateWHOISProfileV1` operationId).
 func (c *Client) DomainsCreateWHOISProfileV1(ctx context.Context, body DomainsCreateWHOISProfileV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDomainsCreateWHOISProfileV1Request(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsUnsetDefaultWHOISProfileV1 Unset default WHOIS profile
+//
+// Unset WHOIS contact profile as default.
+//
+// The profile itself is kept, it is only no longer pre-selected for its TLD.
+//
+// Use this endpoint to stop reusing contact information for new registrations.
+//
+// Corresponds with DELETE /api/domains/v1/whois/default/{whoisId} (the `DomainsUnsetDefaultWHOISProfileV1` operationId).
+func (c *Client) DomainsUnsetDefaultWHOISProfileV1(ctx context.Context, whoisId WhoisId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsUnsetDefaultWHOISProfileV1Request(c.Server, whoisId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsSetWHOISProfileAsDefaultV1 Set WHOIS profile as default
+//
+// Set WHOIS contact profile as default.
+//
+// The default profile is pre-selected for the TLD it belongs to when registering new domains.
+//
+// Use this endpoint to avoid picking contact information for every registration.
+//
+// Corresponds with PATCH /api/domains/v1/whois/default/{whoisId} (the `DomainsSetWHOISProfileAsDefaultV1` operationId).
+func (c *Client) DomainsSetWHOISProfileAsDefaultV1(ctx context.Context, whoisId WhoisId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsSetWHOISProfileAsDefaultV1Request(c.Server, whoisId)
 	if err != nil {
 		return nil, err
 	}
@@ -23497,6 +23564,9 @@ func (c *Client) VPSStartVirtualMachineV1(ctx context.Context, virtualMachineId 
 //
 // If the virtual machine is already stopped, the request will still be processed without any effect.
 //
+// This is a compute-only power state change and does not affect billing. To stop future charges,
+// disable auto-renewal on the owning subscription.
+//
 // Use this endpoint to power off running VPS instances.
 //
 // Corresponds with POST /api/vps/v1/virtual-machines/{virtualMachineId}/stop (the `VPSStopVirtualMachineV1` operationId).
@@ -26068,6 +26138,74 @@ func NewDomainsCreateWHOISProfileV1RequestWithBody(server string, contentType st
 	}
 
 	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDomainsUnsetDefaultWHOISProfileV1Request constructs an http.Request for the DomainsUnsetDefaultWHOISProfileV1 method
+func NewDomainsUnsetDefaultWHOISProfileV1Request(server string, whoisId WhoisId) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "whoisId", whoisId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/domains/v1/whois/default/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDomainsSetWHOISProfileAsDefaultV1Request constructs an http.Request for the DomainsSetWHOISProfileAsDefaultV1 method
+func NewDomainsSetWHOISProfileAsDefaultV1Request(server string, whoisId WhoisId) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "whoisId", whoisId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/domains/v1/whois/default/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 
 	return req, nil
 }
@@ -37447,6 +37585,32 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /api/domains/v1/whois (the `DomainsCreateWHOISProfileV1` operationId).
 	DomainsCreateWHOISProfileV1WithResponse(ctx context.Context, body DomainsCreateWHOISProfileV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsCreateWHOISProfileV1Response, error)
 
+	// DomainsUnsetDefaultWHOISProfileV1WithResponse Unset default WHOIS profile
+	//
+	// Unset WHOIS contact profile as default.
+	//
+	// The profile itself is kept, it is only no longer pre-selected for its TLD.
+	//
+	// Use this endpoint to stop reusing contact information for new registrations.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/domains/v1/whois/default/{whoisId} (the `DomainsUnsetDefaultWHOISProfileV1` operationId).
+	DomainsUnsetDefaultWHOISProfileV1WithResponse(ctx context.Context, whoisId WhoisId, reqEditors ...RequestEditorFn) (*DomainsUnsetDefaultWHOISProfileV1Response, error)
+
+	// DomainsSetWHOISProfileAsDefaultV1WithResponse Set WHOIS profile as default
+	//
+	// Set WHOIS contact profile as default.
+	//
+	// The default profile is pre-selected for the TLD it belongs to when registering new domains.
+	//
+	// Use this endpoint to avoid picking contact information for every registration.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/domains/v1/whois/default/{whoisId} (the `DomainsSetWHOISProfileAsDefaultV1` operationId).
+	DomainsSetWHOISProfileAsDefaultV1WithResponse(ctx context.Context, whoisId WhoisId, reqEditors ...RequestEditorFn) (*DomainsSetWHOISProfileAsDefaultV1Response, error)
+
 	// DomainsDeleteWHOISProfileV1WithResponse Delete WHOIS profile
 	//
 	// Delete WHOIS contact profile.
@@ -41136,6 +41300,9 @@ type ClientWithResponsesInterface interface {
 	//
 	// If the virtual machine is already stopped, the request will still be processed without any effect.
 	//
+	// This is a compute-only power state change and does not affect billing. To stop future charges,
+	// disable auto-renewal on the owning subscription.
+	//
 	// Use this endpoint to power off running VPS instances.
 	//
 	// Returns a wrapper object for the known response body format(s).
@@ -44672,6 +44839,116 @@ func (r DomainsCreateWHOISProfileV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r DomainsCreateWHOISProfileV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DomainsUnsetDefaultWHOISProfileV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r DomainsUnsetDefaultWHOISProfileV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DomainsUnsetDefaultWHOISProfileV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DomainsUnsetDefaultWHOISProfileV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DomainsUnsetDefaultWHOISProfileV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DomainsUnsetDefaultWHOISProfileV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DomainsUnsetDefaultWHOISProfileV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DomainsUnsetDefaultWHOISProfileV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DomainsSetWHOISProfileAsDefaultV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r DomainsSetWHOISProfileAsDefaultV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DomainsSetWHOISProfileAsDefaultV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DomainsSetWHOISProfileAsDefaultV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DomainsSetWHOISProfileAsDefaultV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DomainsSetWHOISProfileAsDefaultV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DomainsSetWHOISProfileAsDefaultV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DomainsSetWHOISProfileAsDefaultV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -58935,6 +59212,44 @@ func (c *ClientWithResponses) DomainsCreateWHOISProfileV1WithResponse(ctx contex
 	return ParseDomainsCreateWHOISProfileV1Response(rsp)
 }
 
+// DomainsUnsetDefaultWHOISProfileV1WithResponse Unset default WHOIS profile
+//
+// Unset WHOIS contact profile as default.
+//
+// The profile itself is kept, it is only no longer pre-selected for its TLD.
+//
+// Use this endpoint to stop reusing contact information for new registrations.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/domains/v1/whois/default/{whoisId} (the `DomainsUnsetDefaultWHOISProfileV1` operationId).
+func (c *ClientWithResponses) DomainsUnsetDefaultWHOISProfileV1WithResponse(ctx context.Context, whoisId WhoisId, reqEditors ...RequestEditorFn) (*DomainsUnsetDefaultWHOISProfileV1Response, error) {
+	rsp, err := c.DomainsUnsetDefaultWHOISProfileV1(ctx, whoisId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsUnsetDefaultWHOISProfileV1Response(rsp)
+}
+
+// DomainsSetWHOISProfileAsDefaultV1WithResponse Set WHOIS profile as default
+//
+// Set WHOIS contact profile as default.
+//
+// The default profile is pre-selected for the TLD it belongs to when registering new domains.
+//
+// Use this endpoint to avoid picking contact information for every registration.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/domains/v1/whois/default/{whoisId} (the `DomainsSetWHOISProfileAsDefaultV1` operationId).
+func (c *ClientWithResponses) DomainsSetWHOISProfileAsDefaultV1WithResponse(ctx context.Context, whoisId WhoisId, reqEditors ...RequestEditorFn) (*DomainsSetWHOISProfileAsDefaultV1Response, error) {
+	rsp, err := c.DomainsSetWHOISProfileAsDefaultV1(ctx, whoisId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsSetWHOISProfileAsDefaultV1Response(rsp)
+}
+
 // DomainsDeleteWHOISProfileV1WithResponse Delete WHOIS profile
 //
 // Delete WHOIS contact profile.
@@ -64285,6 +64600,9 @@ func (c *ClientWithResponses) VPSStartVirtualMachineV1WithResponse(ctx context.C
 //
 // If the virtual machine is already stopped, the request will still be processed without any effect.
 //
+// This is a compute-only power state change and does not affect billing. To stop future charges,
+// disable auto-renewal on the owning subscription.
+//
 // Use this endpoint to power off running VPS instances.
 //
 // Returns a wrapper object for the known response body format(s).
@@ -66888,6 +67206,86 @@ func ParseDomainsCreateWHOISProfileV1Response(rsp *http.Response) (*DomainsCreat
 			return nil, err
 		}
 		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDomainsUnsetDefaultWHOISProfileV1Response parses an HTTP response from a DomainsUnsetDefaultWHOISProfileV1WithResponse call
+func ParseDomainsUnsetDefaultWHOISProfileV1Response(rsp *http.Response) (*DomainsUnsetDefaultWHOISProfileV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DomainsUnsetDefaultWHOISProfileV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDomainsSetWHOISProfileAsDefaultV1Response parses an HTTP response from a DomainsSetWHOISProfileAsDefaultV1WithResponse call
+func ParseDomainsSetWHOISProfileAsDefaultV1Response(rsp *http.Response) (*DomainsSetWHOISProfileAsDefaultV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DomainsSetWHOISProfileAsDefaultV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse

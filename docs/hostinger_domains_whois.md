@@ -22,5 +22,7 @@ WHOIS commands
 * [hostinger domains whois delete](hostinger_domains_whois_delete.md)	 - Delete WHOIS profile
 * [hostinger domains whois get](hostinger_domains_whois_get.md)	 - Get WHOIS profile
 * [hostinger domains whois list](hostinger_domains_whois_list.md)	 - Get WHOIS profile list
+* [hostinger domains whois set-as-default](hostinger_domains_whois_set-as-default.md)	 - Set WHOIS profile as default
+* [hostinger domains whois unset-default](hostinger_domains_whois_unset-default.md)	 - Unset default WHOIS profile
 * [hostinger domains whois usage](hostinger_domains_whois_usage.md)	 - Get WHOIS profile usage
 

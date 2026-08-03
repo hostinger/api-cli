@@ -13,7 +13,7 @@ import (
 var StopCmd = &cobra.Command{
 	Use:   "stop <virtual-machine-id>",
 	Short: "Stop virtual machine",
-	Long:  "Stop a specified virtual machine.\n\nIf the virtual machine is already stopped, the request will still be processed without any effect.\n\nUse this endpoint to power off running VPS instances.",
+	Long:  "Stop a specified virtual machine.\n\nIf the virtual machine is already stopped, the request will still be processed without any effect.\n\nThis is a compute-only power state change and does not affect billing. To stop future charges,\ndisable auto-renewal on the owning subscription.\n\nUse this endpoint to power off running VPS instances.",
 	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
 	Run: func(cmd *cobra.Command, args []string) {
 		r, err := api.Request().VPSStopVirtualMachineV1WithResponse(context.TODO(), utils.StringToInt(args[0]))

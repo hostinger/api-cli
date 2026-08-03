@@ -14,5 +14,7 @@ func init() {
 	GroupCmd.AddCommand(DeleteCmd)
 	GroupCmd.AddCommand(GetCmd)
 	GroupCmd.AddCommand(ListCmd)
+	GroupCmd.AddCommand(SetAsDefaultCmd)
+	GroupCmd.AddCommand(UnsetDefaultCmd)
 	GroupCmd.AddCommand(UsageCmd)
 }
