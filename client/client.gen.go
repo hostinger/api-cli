@@ -468,6 +468,51 @@ func (e DomainsV1ForwardingUpdateRequestRedirectType) Valid() bool {
 	}
 }
 
+// Defines values for DomainsV1IRTPVerificationResourceStatus.
+const (
+	DomainsV1IRTPVerificationResourceStatusCanceled  DomainsV1IRTPVerificationResourceStatus = "canceled"
+	DomainsV1IRTPVerificationResourceStatusCompleted DomainsV1IRTPVerificationResourceStatus = "completed"
+	DomainsV1IRTPVerificationResourceStatusPending   DomainsV1IRTPVerificationResourceStatus = "pending"
+)
+
+// Valid indicates whether the value is a known member of the DomainsV1IRTPVerificationResourceStatus enum.
+func (e DomainsV1IRTPVerificationResourceStatus) Valid() bool {
+	switch e {
+	case DomainsV1IRTPVerificationResourceStatusCanceled:
+		return true
+	case DomainsV1IRTPVerificationResourceStatusCompleted:
+		return true
+	case DomainsV1IRTPVerificationResourceStatusPending:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for DomainsV1WHOISChangeUpdateRequestChangeFor.
+const (
+	Admin   DomainsV1WHOISChangeUpdateRequestChangeFor = "admin"
+	Billing DomainsV1WHOISChangeUpdateRequestChangeFor = "billing"
+	Owner   DomainsV1WHOISChangeUpdateRequestChangeFor = "owner"
+	Tech    DomainsV1WHOISChangeUpdateRequestChangeFor = "tech"
+)
+
+// Valid indicates whether the value is a known member of the DomainsV1WHOISChangeUpdateRequestChangeFor enum.
+func (e DomainsV1WHOISChangeUpdateRequestChangeFor) Valid() bool {
+	switch e {
+	case Admin:
+		return true
+	case Billing:
+		return true
+	case Owner:
+		return true
+	case Tech:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for DomainsV1WHOISProfileResourceEntityType.
 const (
 	DomainsV1WHOISProfileResourceEntityTypeIndividual   DomainsV1WHOISProfileResourceEntityType = "individual"
@@ -4233,6 +4278,49 @@ type DomainsV1ForwardingUpdateRequest struct {
 // Example: 301
 type DomainsV1ForwardingUpdateRequestRedirectType string
 
+// DomainsV1IRTPVerificationResource defines model for Domains.V1.IRTP.VerificationResource.
+type DomainsV1IRTPVerificationResource struct {
+	// Domain Domain name
+	//
+	// Example: mydomain.tld
+	Domain *string `json:"domain,omitempty"`
+
+	// ExpiresAt When the verification auto-cancels if unconfirmed
+	//
+	// Example: 2026-03-24T08:07:49Z
+	ExpiresAt *time.Time `json:"expires_at,omitempty"`
+
+	// NewConfirmedAt When the new registrant confirmed the change
+	//
+	// Example: 2026-03-19T08:07:49Z
+	NewConfirmedAt *time.Time `json:"new_confirmed_at,omitempty"`
+
+	// NewWhoisProfileEmail Email the new registrant confirmation was sent to
+	//
+	// Example: new-registrant@example.com
+	NewWhoisProfileEmail *string `json:"new_whois_profile_email,omitempty"`
+
+	// OldConfirmedAt When the old registrant confirmed the change
+	//
+	// Example: 2026-03-19T08:07:49Z
+	OldConfirmedAt *time.Time `json:"old_confirmed_at,omitempty"`
+
+	// OldWhoisProfileEmail Email the old registrant confirmation was sent to
+	//
+	// Example: old-registrant@example.com
+	OldWhoisProfileEmail *string `json:"old_whois_profile_email,omitempty"`
+
+	// Status IRTP verification status
+	//
+	// Example: pending
+	Status *DomainsV1IRTPVerificationResourceStatus `json:"status,omitempty"`
+}
+
+// DomainsV1IRTPVerificationResourceStatus IRTP verification status
+//
+// Example: pending
+type DomainsV1IRTPVerificationResourceStatus string
+
 // DomainsV1PortfolioAuthCodeAuthCodeResource defines model for Domains.V1.Portfolio.AuthCode.AuthCodeResource.
 type DomainsV1PortfolioAuthCodeAuthCodeResource struct {
 	// AuthCode Domain authorization code used to transfer the domain to another registrar.
@@ -4354,6 +4442,27 @@ type DomainsV1TransferTransferResource struct {
 	// Example: Completed
 	Status *string `json:"status,omitempty"`
 }
+
+// DomainsV1WHOISChangeUpdateRequest defines model for Domains.V1.WHOIS.Change.UpdateRequest.
+type DomainsV1WHOISChangeUpdateRequest struct {
+	// ChangeFor Contact roles to repoint to the new WHOIS profile
+	//
+	// Example: ["owner","admin"]
+	ChangeFor []DomainsV1WHOISChangeUpdateRequestChangeFor `json:"change_for"`
+
+	// Domain Domain name
+	//
+	// Example: mydomain.tld
+	Domain string `json:"domain"`
+
+	// NewWhoisId WHOIS profile ID to assign to the domain
+	//
+	// Example: 131502
+	NewWhoisId int `json:"new_whois_id"`
+}
+
+// DomainsV1WHOISChangeUpdateRequestChangeFor defines model for DomainsV1WHOISChangeUpdateRequest.ChangeFor.
+type DomainsV1WHOISChangeUpdateRequestChangeFor string
 
 // DomainsV1WHOISProfileCollection Array of [`Domains.V1.WHOIS.ProfileResource`](#model/domainsv1whoisprofileresource)
 type DomainsV1WHOISProfileCollection = []DomainsV1WHOISProfileResource
@@ -9948,6 +10057,9 @@ type DomainsUpdateDomainNameserversV1JSONRequestBody = DomainsV1PortfolioUpdateN
 // DomainsCreateWHOISProfileV1JSONRequestBody defines body for DomainsCreateWHOISProfileV1 for application/json ContentType.
 type DomainsCreateWHOISProfileV1JSONRequestBody = DomainsV1WHOISStoreRequest
 
+// DomainsChangeWHOISProfileForDomainV1JSONRequestBody defines body for DomainsChangeWHOISProfileForDomainV1 for application/json ContentType.
+type DomainsChangeWHOISProfileForDomainV1JSONRequestBody = DomainsV1WHOISChangeUpdateRequest
+
 // EcommerceCreateStoreV1JSONRequestBody defines body for EcommerceCreateStoreV1 for application/json ContentType.
 type EcommerceCreateStoreV1JSONRequestBody = EcommerceV1StoreStoreRequest
 
@@ -11889,6 +12001,27 @@ type ClientInterface interface {
 	// Corresponds with PUT /api/domains/v1/forwarding/{domain} (the `DomainsUpdateDomainForwardingV1` operationId).
 	DomainsUpdateDomainForwardingV1(ctx context.Context, domain Domain, body DomainsUpdateDomainForwardingV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// DomainsCancelPendingIRTPVerificationV1 Cancel pending IRTP verification
+	//
+	// Cancel a pending IRTP verification.
+	//
+	// Use this endpoint to back out of a WHOIS change that is stuck waiting on registrant confirmation,
+	// for example when the confirmation email cannot be received, without waiting out the 5-day expiry.
+	//
+	// Corresponds with DELETE /api/domains/v1/irtp/{domain} (the `DomainsCancelPendingIRTPVerificationV1` operationId).
+	DomainsCancelPendingIRTPVerificationV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsGetPendingIRTPVerificationV1 Get pending IRTP verification
+	//
+	// Retrieve a pending IRTP verification for a domain.
+	//
+	// Both the old and new registrant must confirm it before the WHOIS change takes effect.
+	//
+	// Use this endpoint to check the status of a WHOIS change awaiting registrant confirmation.
+	//
+	// Corresponds with GET /api/domains/v1/irtp/{domain} (the `DomainsGetPendingIRTPVerificationV1` operationId).
+	DomainsGetPendingIRTPVerificationV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// DomainsGetDomainListV1 Get domain list
 	//
 	// Retrieve all domains associated with your account.
@@ -12089,6 +12222,44 @@ type ClientInterface interface {
 	// Corresponds with POST /api/domains/v1/whois (the `DomainsCreateWHOISProfileV1` operationId).
 	DomainsCreateWHOISProfileV1(ctx context.Context, body DomainsCreateWHOISProfileV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// DomainsChangeWHOISProfileForDomainV1WithBody Change WHOIS profile for domain
+	//
+	// Change WHOIS contact profile for a domain.
+	//
+	// Repoints the given contact roles to a new WHOIS profile and submits the change to the registry.
+	// The profile currently assigned to those roles is resolved automatically;
+	// the request fails if the given roles are not all on the same profile today.
+	//
+	// Changing transfer sensitive fields on the owner contact starts an IRTP verification.
+	//
+	// The change is processed asynchronously.
+	//
+	// Use this endpoint to move a registered domain onto different contact information.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PUT /api/domains/v1/whois/change (the `DomainsChangeWHOISProfileForDomainV1` operationId).
+	DomainsChangeWHOISProfileForDomainV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsChangeWHOISProfileForDomainV1 Change WHOIS profile for domain
+	//
+	// Change WHOIS contact profile for a domain.
+	//
+	// Repoints the given contact roles to a new WHOIS profile and submits the change to the registry.
+	// The profile currently assigned to those roles is resolved automatically;
+	// the request fails if the given roles are not all on the same profile today.
+	//
+	// Changing transfer sensitive fields on the owner contact starts an IRTP verification.
+	//
+	// The change is processed asynchronously.
+	//
+	// Use this endpoint to move a registered domain onto different contact information.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PUT /api/domains/v1/whois/change (the `DomainsChangeWHOISProfileForDomainV1` operationId).
+	DomainsChangeWHOISProfileForDomainV1(ctx context.Context, body DomainsChangeWHOISProfileForDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// DomainsUnsetDefaultWHOISProfileV1 Unset default WHOIS profile
 	//
 	// Unset WHOIS contact profile as default.
@@ -12108,7 +12279,7 @@ type ClientInterface interface {
 	//
 	// Use this endpoint to avoid picking contact information for every registration.
 	//
-	// Corresponds with PATCH /api/domains/v1/whois/default/{whoisId} (the `DomainsSetWHOISProfileAsDefaultV1` operationId).
+	// Corresponds with PUT /api/domains/v1/whois/default/{whoisId} (the `DomainsSetWHOISProfileAsDefaultV1` operationId).
 	DomainsSetWHOISProfileAsDefaultV1(ctx context.Context, whoisId WhoisId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DomainsDeleteWHOISProfileV1 Delete WHOIS profile
@@ -16962,6 +17133,47 @@ func (c *Client) DomainsUpdateDomainForwardingV1(ctx context.Context, domain Dom
 	return c.Client.Do(req)
 }
 
+// DomainsCancelPendingIRTPVerificationV1 Cancel pending IRTP verification
+//
+// Cancel a pending IRTP verification.
+//
+// Use this endpoint to back out of a WHOIS change that is stuck waiting on registrant confirmation,
+// for example when the confirmation email cannot be received, without waiting out the 5-day expiry.
+//
+// Corresponds with DELETE /api/domains/v1/irtp/{domain} (the `DomainsCancelPendingIRTPVerificationV1` operationId).
+func (c *Client) DomainsCancelPendingIRTPVerificationV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsCancelPendingIRTPVerificationV1Request(c.Server, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsGetPendingIRTPVerificationV1 Get pending IRTP verification
+//
+// Retrieve a pending IRTP verification for a domain.
+//
+// Both the old and new registrant must confirm it before the WHOIS change takes effect.
+//
+// Use this endpoint to check the status of a WHOIS change awaiting registrant confirmation.
+//
+// Corresponds with GET /api/domains/v1/irtp/{domain} (the `DomainsGetPendingIRTPVerificationV1` operationId).
+func (c *Client) DomainsGetPendingIRTPVerificationV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsGetPendingIRTPVerificationV1Request(c.Server, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // DomainsGetDomainListV1 Get domain list
 //
 // Retrieve all domains associated with your account.
@@ -17332,6 +17544,64 @@ func (c *Client) DomainsCreateWHOISProfileV1(ctx context.Context, body DomainsCr
 	return c.Client.Do(req)
 }
 
+// DomainsChangeWHOISProfileForDomainV1WithBody Change WHOIS profile for domain
+//
+// Change WHOIS contact profile for a domain.
+//
+// Repoints the given contact roles to a new WHOIS profile and submits the change to the registry.
+// The profile currently assigned to those roles is resolved automatically;
+// the request fails if the given roles are not all on the same profile today.
+//
+// Changing transfer sensitive fields on the owner contact starts an IRTP verification.
+//
+// The change is processed asynchronously.
+//
+// Use this endpoint to move a registered domain onto different contact information.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PUT /api/domains/v1/whois/change (the `DomainsChangeWHOISProfileForDomainV1` operationId).
+func (c *Client) DomainsChangeWHOISProfileForDomainV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsChangeWHOISProfileForDomainV1RequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsChangeWHOISProfileForDomainV1 Change WHOIS profile for domain
+//
+// Change WHOIS contact profile for a domain.
+//
+// Repoints the given contact roles to a new WHOIS profile and submits the change to the registry.
+// The profile currently assigned to those roles is resolved automatically;
+// the request fails if the given roles are not all on the same profile today.
+//
+// Changing transfer sensitive fields on the owner contact starts an IRTP verification.
+//
+// The change is processed asynchronously.
+//
+// Use this endpoint to move a registered domain onto different contact information.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PUT /api/domains/v1/whois/change (the `DomainsChangeWHOISProfileForDomainV1` operationId).
+func (c *Client) DomainsChangeWHOISProfileForDomainV1(ctx context.Context, body DomainsChangeWHOISProfileForDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsChangeWHOISProfileForDomainV1Request(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // DomainsUnsetDefaultWHOISProfileV1 Unset default WHOIS profile
 //
 // Unset WHOIS contact profile as default.
@@ -17361,7 +17631,7 @@ func (c *Client) DomainsUnsetDefaultWHOISProfileV1(ctx context.Context, whoisId 
 //
 // Use this endpoint to avoid picking contact information for every registration.
 //
-// Corresponds with PATCH /api/domains/v1/whois/default/{whoisId} (the `DomainsSetWHOISProfileAsDefaultV1` operationId).
+// Corresponds with PUT /api/domains/v1/whois/default/{whoisId} (the `DomainsSetWHOISProfileAsDefaultV1` operationId).
 func (c *Client) DomainsSetWHOISProfileAsDefaultV1(ctx context.Context, whoisId WhoisId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDomainsSetWHOISProfileAsDefaultV1Request(c.Server, whoisId)
 	if err != nil {
@@ -25635,6 +25905,74 @@ func NewDomainsUpdateDomainForwardingV1RequestWithBody(server string, domain Dom
 	return req, nil
 }
 
+// NewDomainsCancelPendingIRTPVerificationV1Request constructs an http.Request for the DomainsCancelPendingIRTPVerificationV1 method
+func NewDomainsCancelPendingIRTPVerificationV1Request(server string, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/domains/v1/irtp/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDomainsGetPendingIRTPVerificationV1Request constructs an http.Request for the DomainsGetPendingIRTPVerificationV1 method
+func NewDomainsGetPendingIRTPVerificationV1Request(server string, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/domains/v1/irtp/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewDomainsGetDomainListV1Request constructs an http.Request for the DomainsGetDomainListV1 method
 func NewDomainsGetDomainListV1Request(server string) (*http.Request, error) {
 	var err error
@@ -26142,6 +26480,46 @@ func NewDomainsCreateWHOISProfileV1RequestWithBody(server string, contentType st
 	return req, nil
 }
 
+// NewDomainsChangeWHOISProfileForDomainV1Request calls the generic DomainsChangeWHOISProfileForDomainV1 builder with application/json body
+func NewDomainsChangeWHOISProfileForDomainV1Request(server string, body DomainsChangeWHOISProfileForDomainV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewDomainsChangeWHOISProfileForDomainV1RequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewDomainsChangeWHOISProfileForDomainV1RequestWithBody constructs an http.Request for the DomainsChangeWHOISProfileForDomainV1 method, with any body, and a specified content type
+func NewDomainsChangeWHOISProfileForDomainV1RequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/domains/v1/whois/change")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewDomainsUnsetDefaultWHOISProfileV1Request constructs an http.Request for the DomainsUnsetDefaultWHOISProfileV1 method
 func NewDomainsUnsetDefaultWHOISProfileV1Request(server string, whoisId WhoisId) (*http.Request, error) {
 	var err error
@@ -26202,7 +26580,7 @@ func NewDomainsSetWHOISProfileAsDefaultV1Request(server string, whoisId WhoisId)
 		return nil, err
 	}
 
-	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -37363,6 +37741,31 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with PUT /api/domains/v1/forwarding/{domain} (the `DomainsUpdateDomainForwardingV1` operationId).
 	DomainsUpdateDomainForwardingV1WithResponse(ctx context.Context, domain Domain, body DomainsUpdateDomainForwardingV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsUpdateDomainForwardingV1Response, error)
 
+	// DomainsCancelPendingIRTPVerificationV1WithResponse Cancel pending IRTP verification
+	//
+	// Cancel a pending IRTP verification.
+	//
+	// Use this endpoint to back out of a WHOIS change that is stuck waiting on registrant confirmation,
+	// for example when the confirmation email cannot be received, without waiting out the 5-day expiry.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/domains/v1/irtp/{domain} (the `DomainsCancelPendingIRTPVerificationV1` operationId).
+	DomainsCancelPendingIRTPVerificationV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*DomainsCancelPendingIRTPVerificationV1Response, error)
+
+	// DomainsGetPendingIRTPVerificationV1WithResponse Get pending IRTP verification
+	//
+	// Retrieve a pending IRTP verification for a domain.
+	//
+	// Both the old and new registrant must confirm it before the WHOIS change takes effect.
+	//
+	// Use this endpoint to check the status of a WHOIS change awaiting registrant confirmation.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/domains/v1/irtp/{domain} (the `DomainsGetPendingIRTPVerificationV1` operationId).
+	DomainsGetPendingIRTPVerificationV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*DomainsGetPendingIRTPVerificationV1Response, error)
+
 	// DomainsGetDomainListV1WithResponse Get domain list
 	//
 	// Retrieve all domains associated with your account.
@@ -37585,6 +37988,44 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /api/domains/v1/whois (the `DomainsCreateWHOISProfileV1` operationId).
 	DomainsCreateWHOISProfileV1WithResponse(ctx context.Context, body DomainsCreateWHOISProfileV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsCreateWHOISProfileV1Response, error)
 
+	// DomainsChangeWHOISProfileForDomainV1WithBodyWithResponse Change WHOIS profile for domain
+	//
+	// Change WHOIS contact profile for a domain.
+	//
+	// Repoints the given contact roles to a new WHOIS profile and submits the change to the registry.
+	// The profile currently assigned to those roles is resolved automatically;
+	// the request fails if the given roles are not all on the same profile today.
+	//
+	// Changing transfer sensitive fields on the owner contact starts an IRTP verification.
+	//
+	// The change is processed asynchronously.
+	//
+	// Use this endpoint to move a registered domain onto different contact information.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/domains/v1/whois/change (the `DomainsChangeWHOISProfileForDomainV1` operationId).
+	DomainsChangeWHOISProfileForDomainV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DomainsChangeWHOISProfileForDomainV1Response, error)
+
+	// DomainsChangeWHOISProfileForDomainV1WithResponse Change WHOIS profile for domain
+	//
+	// Change WHOIS contact profile for a domain.
+	//
+	// Repoints the given contact roles to a new WHOIS profile and submits the change to the registry.
+	// The profile currently assigned to those roles is resolved automatically;
+	// the request fails if the given roles are not all on the same profile today.
+	//
+	// Changing transfer sensitive fields on the owner contact starts an IRTP verification.
+	//
+	// The change is processed asynchronously.
+	//
+	// Use this endpoint to move a registered domain onto different contact information.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/domains/v1/whois/change (the `DomainsChangeWHOISProfileForDomainV1` operationId).
+	DomainsChangeWHOISProfileForDomainV1WithResponse(ctx context.Context, body DomainsChangeWHOISProfileForDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsChangeWHOISProfileForDomainV1Response, error)
+
 	// DomainsUnsetDefaultWHOISProfileV1WithResponse Unset default WHOIS profile
 	//
 	// Unset WHOIS contact profile as default.
@@ -37608,7 +38049,7 @@ type ClientWithResponsesInterface interface {
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with PATCH /api/domains/v1/whois/default/{whoisId} (the `DomainsSetWHOISProfileAsDefaultV1` operationId).
+	// Corresponds with PUT /api/domains/v1/whois/default/{whoisId} (the `DomainsSetWHOISProfileAsDefaultV1` operationId).
 	DomainsSetWHOISProfileAsDefaultV1WithResponse(ctx context.Context, whoisId WhoisId, reqEditors ...RequestEditorFn) (*DomainsSetWHOISProfileAsDefaultV1Response, error)
 
 	// DomainsDeleteWHOISProfileV1WithResponse Delete WHOIS profile
@@ -44054,6 +44495,116 @@ func (r DomainsUpdateDomainForwardingV1Response) ContentType() string {
 	return ""
 }
 
+type DomainsCancelPendingIRTPVerificationV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r DomainsCancelPendingIRTPVerificationV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DomainsCancelPendingIRTPVerificationV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DomainsCancelPendingIRTPVerificationV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DomainsCancelPendingIRTPVerificationV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DomainsCancelPendingIRTPVerificationV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DomainsCancelPendingIRTPVerificationV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DomainsCancelPendingIRTPVerificationV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DomainsGetPendingIRTPVerificationV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *DomainsV1IRTPVerificationResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r DomainsGetPendingIRTPVerificationV1Response) GetJSON200() *DomainsV1IRTPVerificationResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DomainsGetPendingIRTPVerificationV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DomainsGetPendingIRTPVerificationV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DomainsGetPendingIRTPVerificationV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DomainsGetPendingIRTPVerificationV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DomainsGetPendingIRTPVerificationV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DomainsGetPendingIRTPVerificationV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type DomainsGetDomainListV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -44839,6 +45390,68 @@ func (r DomainsCreateWHOISProfileV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r DomainsCreateWHOISProfileV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DomainsChangeWHOISProfileForDomainV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r DomainsChangeWHOISProfileForDomainV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DomainsChangeWHOISProfileForDomainV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r DomainsChangeWHOISProfileForDomainV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DomainsChangeWHOISProfileForDomainV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DomainsChangeWHOISProfileForDomainV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DomainsChangeWHOISProfileForDomainV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DomainsChangeWHOISProfileForDomainV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DomainsChangeWHOISProfileForDomainV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -58888,6 +59501,43 @@ func (c *ClientWithResponses) DomainsUpdateDomainForwardingV1WithResponse(ctx co
 	return ParseDomainsUpdateDomainForwardingV1Response(rsp)
 }
 
+// DomainsCancelPendingIRTPVerificationV1WithResponse Cancel pending IRTP verification
+//
+// Cancel a pending IRTP verification.
+//
+// Use this endpoint to back out of a WHOIS change that is stuck waiting on registrant confirmation,
+// for example when the confirmation email cannot be received, without waiting out the 5-day expiry.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/domains/v1/irtp/{domain} (the `DomainsCancelPendingIRTPVerificationV1` operationId).
+func (c *ClientWithResponses) DomainsCancelPendingIRTPVerificationV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*DomainsCancelPendingIRTPVerificationV1Response, error) {
+	rsp, err := c.DomainsCancelPendingIRTPVerificationV1(ctx, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsCancelPendingIRTPVerificationV1Response(rsp)
+}
+
+// DomainsGetPendingIRTPVerificationV1WithResponse Get pending IRTP verification
+//
+// Retrieve a pending IRTP verification for a domain.
+//
+// Both the old and new registrant must confirm it before the WHOIS change takes effect.
+//
+// Use this endpoint to check the status of a WHOIS change awaiting registrant confirmation.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/domains/v1/irtp/{domain} (the `DomainsGetPendingIRTPVerificationV1` operationId).
+func (c *ClientWithResponses) DomainsGetPendingIRTPVerificationV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*DomainsGetPendingIRTPVerificationV1Response, error) {
+	rsp, err := c.DomainsGetPendingIRTPVerificationV1(ctx, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsGetPendingIRTPVerificationV1Response(rsp)
+}
+
 // DomainsGetDomainListV1WithResponse Get domain list
 //
 // Retrieve all domains associated with your account.
@@ -59212,6 +59862,56 @@ func (c *ClientWithResponses) DomainsCreateWHOISProfileV1WithResponse(ctx contex
 	return ParseDomainsCreateWHOISProfileV1Response(rsp)
 }
 
+// DomainsChangeWHOISProfileForDomainV1WithBodyWithResponse Change WHOIS profile for domain
+//
+// Change WHOIS contact profile for a domain.
+//
+// Repoints the given contact roles to a new WHOIS profile and submits the change to the registry.
+// The profile currently assigned to those roles is resolved automatically;
+// the request fails if the given roles are not all on the same profile today.
+//
+// Changing transfer sensitive fields on the owner contact starts an IRTP verification.
+//
+// The change is processed asynchronously.
+//
+// Use this endpoint to move a registered domain onto different contact information.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/domains/v1/whois/change (the `DomainsChangeWHOISProfileForDomainV1` operationId).
+func (c *ClientWithResponses) DomainsChangeWHOISProfileForDomainV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DomainsChangeWHOISProfileForDomainV1Response, error) {
+	rsp, err := c.DomainsChangeWHOISProfileForDomainV1WithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsChangeWHOISProfileForDomainV1Response(rsp)
+}
+
+// DomainsChangeWHOISProfileForDomainV1WithResponse Change WHOIS profile for domain
+//
+// Change WHOIS contact profile for a domain.
+//
+// Repoints the given contact roles to a new WHOIS profile and submits the change to the registry.
+// The profile currently assigned to those roles is resolved automatically;
+// the request fails if the given roles are not all on the same profile today.
+//
+// Changing transfer sensitive fields on the owner contact starts an IRTP verification.
+//
+// The change is processed asynchronously.
+//
+// Use this endpoint to move a registered domain onto different contact information.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/domains/v1/whois/change (the `DomainsChangeWHOISProfileForDomainV1` operationId).
+func (c *ClientWithResponses) DomainsChangeWHOISProfileForDomainV1WithResponse(ctx context.Context, body DomainsChangeWHOISProfileForDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsChangeWHOISProfileForDomainV1Response, error) {
+	rsp, err := c.DomainsChangeWHOISProfileForDomainV1(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsChangeWHOISProfileForDomainV1Response(rsp)
+}
+
 // DomainsUnsetDefaultWHOISProfileV1WithResponse Unset default WHOIS profile
 //
 // Unset WHOIS contact profile as default.
@@ -59241,7 +59941,7 @@ func (c *ClientWithResponses) DomainsUnsetDefaultWHOISProfileV1WithResponse(ctx 
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with PATCH /api/domains/v1/whois/default/{whoisId} (the `DomainsSetWHOISProfileAsDefaultV1` operationId).
+// Corresponds with PUT /api/domains/v1/whois/default/{whoisId} (the `DomainsSetWHOISProfileAsDefaultV1` operationId).
 func (c *ClientWithResponses) DomainsSetWHOISProfileAsDefaultV1WithResponse(ctx context.Context, whoisId WhoisId, reqEditors ...RequestEditorFn) (*DomainsSetWHOISProfileAsDefaultV1Response, error) {
 	rsp, err := c.DomainsSetWHOISProfileAsDefaultV1(ctx, whoisId, reqEditors...)
 	if err != nil {
@@ -66638,6 +67338,86 @@ func ParseDomainsUpdateDomainForwardingV1Response(rsp *http.Response) (*DomainsU
 	return response, nil
 }
 
+// ParseDomainsCancelPendingIRTPVerificationV1Response parses an HTTP response from a DomainsCancelPendingIRTPVerificationV1WithResponse call
+func ParseDomainsCancelPendingIRTPVerificationV1Response(rsp *http.Response) (*DomainsCancelPendingIRTPVerificationV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DomainsCancelPendingIRTPVerificationV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDomainsGetPendingIRTPVerificationV1Response parses an HTTP response from a DomainsGetPendingIRTPVerificationV1WithResponse call
+func ParseDomainsGetPendingIRTPVerificationV1Response(rsp *http.Response) (*DomainsGetPendingIRTPVerificationV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DomainsGetPendingIRTPVerificationV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest DomainsV1IRTPVerificationResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseDomainsGetDomainListV1Response parses an HTTP response from a DomainsGetDomainListV1WithResponse call
 func ParseDomainsGetDomainListV1Response(rsp *http.Response) (*DomainsGetDomainListV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -67188,6 +67968,53 @@ func ParseDomainsCreateWHOISProfileV1Response(rsp *http.Response) (*DomainsCreat
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest DomainsV1WHOISProfileResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDomainsChangeWHOISProfileForDomainV1Response parses an HTTP response from a DomainsChangeWHOISProfileForDomainV1WithResponse call
+func ParseDomainsChangeWHOISProfileForDomainV1Response(rsp *http.Response) (*DomainsChangeWHOISProfileForDomainV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DomainsChangeWHOISProfileForDomainV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

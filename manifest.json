@@ -519,6 +519,16 @@
     "method": "POST",
     "path": "/api/billing/v1/payment-methods/{paymentMethodId}"
   },
+  "domains_cancelPendingIRTPVerificationV1": {
+    "command": "hostinger domains whois cancel-pending-irtp-verification",
+    "method": "DELETE",
+    "path": "/api/domains/v1/irtp/{domain}"
+  },
+  "domains_changeWHOISProfileForDomainV1": {
+    "command": "hostinger domains whois change-for",
+    "method": "PUT",
+    "path": "/api/domains/v1/whois/change"
+  },
   "domains_checkDomainAvailabilityV1": {
     "command": "hostinger domains availability check",
     "method": "POST",
@@ -589,6 +599,11 @@
     "method": "GET",
     "path": "/api/domains/v1/portfolio/{domain}/renewal"
   },
+  "domains_getPendingIRTPVerificationV1": {
+    "command": "hostinger domains whois pending-irtp-verification",
+    "method": "GET",
+    "path": "/api/domains/v1/irtp/{domain}"
+  },
   "domains_getTransferListV1": {
     "command": "hostinger domains transfer list",
     "method": "GET",
@@ -621,7 +636,7 @@
   },
   "domains_setWHOISProfileAsDefaultV1": {
     "command": "hostinger domains whois set-as-default",
-    "method": "PATCH",
+    "method": "PUT",
     "path": "/api/domains/v1/whois/default/{whoisId}"
   },
   "domains_unsetDefaultWHOISProfileV1": {
