@@ -86,7 +86,7 @@ func StyleParamWithOptions(style string, explode bool, paramName string, value i
 
 	// Things may be passed in by pointer, we need to dereference, so return
 	// error on nil.
-	if t.Kind() == reflect.Ptr {
+	if t.Kind() == reflect.Pointer {
 		if v.IsNil() {
 			return "", fmt.Errorf("value is a nil pointer")
 		}
@@ -304,7 +304,7 @@ func styleStruct(style string, explode bool, paramName string, paramLocation Par
 		f := v.Field(i)
 
 		// Unset optional fields will be nil pointers, skip over those.
-		if f.Type().Kind() == reflect.Ptr && f.IsNil() {
+		if f.Type().Kind() == reflect.Pointer && f.IsNil() {
 			continue
 		}
 		str, err := primitiveToString(f.Interface())
@@ -491,6 +491,15 @@ func primitiveToString(value interface{}) (string, error) {
 	default:
 		v, ok := value.(fmt.Stringer)
 		if !ok {
+			if kind == reflect.Struct || kind == reflect.Map {
+				// A nested object inside a styled parameter: OpenAPI
+				// style-based serialization is only defined for primitives,
+				// arrays and flat objects, so there is no wire format we
+				// could produce here.
+				return "", fmt.Errorf(
+					"cannot serialize nested object of type %s: style-based parameter serialization ('style'/'schema') is only defined for primitives, arrays, and flat objects; declare the parameter with 'content: application/json' instead, or map the schema to a Go type implementing fmt.Stringer",
+					reflect.TypeOf(value).String())
+			}
 			return "", fmt.Errorf("unsupported type %s", reflect.TypeOf(value).String())
 		}
 
@@ -516,10 +525,7 @@ func escapeParameterName(name string, paramLocation ParamLocation) string {
 func escapeParameterString(value string, paramLocation ParamLocation, allowReserved bool) string {
 	switch paramLocation {
 	case ParamLocationQuery:
-		if allowReserved {
-			return escapeQueryAllowReserved(value)
-		}
-		return url.QueryEscape(value)
+		return DefaultQueryEncoder.EscapeQueryValue(value, allowReserved)
 	case ParamLocationPath:
 		return url.PathEscape(value)
 	default:
