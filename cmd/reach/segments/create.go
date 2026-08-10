@@ -15,7 +15,7 @@ import (
 var CreateCmd = &cobra.Command{
 	Use:   "create",
 	Short: "Create a new contact segment",
-	Long:  "Create a new contact segment.\n\nThis endpoint allows creating a new contact segment that can be used to organize contacts.\nThe segment can be configured with specific criteria like email, name, subscription status, etc.",
+	Long:  "Create a new contact segment.\n\nThis endpoint allows creating a new contact segment that can be used to organize contacts.\nThe segment can be configured with specific criteria like email, name, subscription status, etc.\n\n**Deprecated.** This endpoint cannot target a profile, so it always falls back to\nthe client's default profile and cannot create segments in any other profile. Use\n`POST /api/reach/v1/profiles/{profileUuid}/segmentation/segments` instead.",
 	Run: func(cmd *cobra.Command, args []string) {
 		utils.EnumCheck(cmd, "logic", []string{"AND", "OR"})
 		payload, err := json.Marshal(createBody(cmd))

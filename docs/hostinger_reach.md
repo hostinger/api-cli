@@ -18,7 +18,9 @@ Reach commands
 ### SEE ALSO
 
 * [hostinger](hostinger.md)	 - Hostinger API Command Line Interface
+* [hostinger reach contact-fields](hostinger_reach_contact-fields.md)	 - Contact Fields commands
 * [hostinger reach contacts](hostinger_reach_contacts.md)	 - Contacts commands
 * [hostinger reach profiles](hostinger_reach_profiles.md)	 - Profiles commands
 * [hostinger reach segments](hostinger_reach_segments.md)	 - Segments commands
+* [hostinger reach tags](hostinger_reach_tags.md)	 - Tags commands
 

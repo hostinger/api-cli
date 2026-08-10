@@ -9,6 +9,10 @@ Retrieve contacts associated with a specific segment.
 This endpoint allows you to fetch and filter contacts that belong to a particular segment,
 identified by its UUID.
 
+**Deprecated.** This endpoint cannot target a profile, so it always falls back to
+the client's default profile and cannot read segments of any other profile. Use
+`GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}/contacts` instead.
+
 ```
 hostinger reach segments list-contacts <segment-uuid> [flags]
 ```

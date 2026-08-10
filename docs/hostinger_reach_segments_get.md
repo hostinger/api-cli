@@ -9,6 +9,10 @@ Get details of a specific segment.
 This endpoint retrieves information about a single segment identified by UUID.
 Segments are used to organize and group contacts based on specific criteria.
 
+**Deprecated.** This endpoint cannot target a profile, so it always falls back to
+the client's default profile and cannot read segments of any other profile. Use
+`GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}` instead.
+
 ```
 hostinger reach segments get <segment-uuid> [flags]
 ```

@@ -9,6 +9,10 @@ Create a new contact segment.
 This endpoint allows creating a new contact segment that can be used to organize contacts.
 The segment can be configured with specific criteria like email, name, subscription status, etc.
 
+**Deprecated.** This endpoint cannot target a profile, so it always falls back to
+the client's default profile and cannot create segments in any other profile. Use
+`POST /api/reach/v1/profiles/{profileUuid}/segmentation/segments` instead.
+
 ```
 hostinger reach segments create [flags]
 ```

@@ -20,6 +20,7 @@ Domains commands
 * [hostinger](hostinger.md)	 - Hostinger API Command Line Interface
 * [hostinger domains availability](hostinger_domains_availability.md)	 - Availability commands
 * [hostinger domains forwarding](hostinger_domains_forwarding.md)	 - Forwarding commands
+* [hostinger domains move](hostinger_domains_move.md)	 - Move commands
 * [hostinger domains portfolio](hostinger_domains_portfolio.md)	 - Portfolio commands
 * [hostinger domains transfer](hostinger_domains_transfer.md)	 - Transfer commands
 * [hostinger domains verifications](hostinger_domains_verifications.md)	 - Verifications commands

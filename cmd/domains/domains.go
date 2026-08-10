@@ -3,6 +3,7 @@ package domains
 import (
 	"github.com/hostinger/api-cli/cmd/domains/availability"
 	"github.com/hostinger/api-cli/cmd/domains/forwarding"
+	"github.com/hostinger/api-cli/cmd/domains/move"
 	"github.com/hostinger/api-cli/cmd/domains/portfolio"
 	"github.com/hostinger/api-cli/cmd/domains/transfer"
 	"github.com/hostinger/api-cli/cmd/domains/verifications"
@@ -19,6 +20,7 @@ var GroupCmd = &cobra.Command{
 func init() {
 	GroupCmd.AddCommand(availability.GroupCmd)
 	GroupCmd.AddCommand(forwarding.GroupCmd)
+	GroupCmd.AddCommand(move.GroupCmd)
 	GroupCmd.AddCommand(portfolio.GroupCmd)
 	GroupCmd.AddCommand(transfer.GroupCmd)
 	GroupCmd.AddCommand(verifications.GroupCmd)

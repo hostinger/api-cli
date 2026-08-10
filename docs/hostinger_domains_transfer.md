@@ -18,6 +18,7 @@ Transfer commands
 ### SEE ALSO
 
 * [hostinger domains](hostinger_domains.md)	 - Domains commands
+* [hostinger domains transfer claim-free](hostinger_domains_transfer_claim-free.md)	 - Claim free domain transfer
 * [hostinger domains transfer get](hostinger_domains_transfer_get.md)	 - Get transfer
 * [hostinger domains transfer list](hostinger_domains_transfer_list.md)	 - Get transfer list
 

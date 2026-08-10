@@ -8,6 +8,10 @@ Delete a contact with the specified UUID.
 
 This endpoint permanently removes a contact from the email marketing system.
 
+**Deprecated.** This endpoint cannot target a profile, so it always falls back to the
+client's default profile and cannot delete contacts of any other profile. Use
+`DELETE /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid}` instead.
+
 ```
 hostinger reach contacts delete <uuid> [flags]
 ```

@@ -489,6 +489,63 @@ func (e DomainsV1IRTPVerificationResourceStatus) Valid() bool {
 	}
 }
 
+// Defines values for DomainsV1MoveMoveResourceStatus.
+const (
+	DomainsV1MoveMoveResourceStatusActivating DomainsV1MoveMoveResourceStatus = "activating"
+	DomainsV1MoveMoveResourceStatusCompleted  DomainsV1MoveMoveResourceStatus = "completed"
+	DomainsV1MoveMoveResourceStatusInitiated  DomainsV1MoveMoveResourceStatus = "initiated"
+)
+
+// Valid indicates whether the value is a known member of the DomainsV1MoveMoveResourceStatus enum.
+func (e DomainsV1MoveMoveResourceStatus) Valid() bool {
+	switch e {
+	case DomainsV1MoveMoveResourceStatusActivating:
+		return true
+	case DomainsV1MoveMoveResourceStatusCompleted:
+		return true
+	case DomainsV1MoveMoveResourceStatusInitiated:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for DomainsV1PortfolioClaimResourceStatus.
+const (
+	DomainsV1PortfolioClaimResourceStatusActive              DomainsV1PortfolioClaimResourceStatus = "active"
+	DomainsV1PortfolioClaimResourceStatusDeleted             DomainsV1PortfolioClaimResourceStatus = "deleted"
+	DomainsV1PortfolioClaimResourceStatusExpired             DomainsV1PortfolioClaimResourceStatus = "expired"
+	DomainsV1PortfolioClaimResourceStatusFailed              DomainsV1PortfolioClaimResourceStatus = "failed"
+	DomainsV1PortfolioClaimResourceStatusPendingSetup        DomainsV1PortfolioClaimResourceStatus = "pending_setup"
+	DomainsV1PortfolioClaimResourceStatusPendingVerification DomainsV1PortfolioClaimResourceStatus = "pending_verification"
+	DomainsV1PortfolioClaimResourceStatusRequested           DomainsV1PortfolioClaimResourceStatus = "requested"
+	DomainsV1PortfolioClaimResourceStatusSuspended           DomainsV1PortfolioClaimResourceStatus = "suspended"
+)
+
+// Valid indicates whether the value is a known member of the DomainsV1PortfolioClaimResourceStatus enum.
+func (e DomainsV1PortfolioClaimResourceStatus) Valid() bool {
+	switch e {
+	case DomainsV1PortfolioClaimResourceStatusActive:
+		return true
+	case DomainsV1PortfolioClaimResourceStatusDeleted:
+		return true
+	case DomainsV1PortfolioClaimResourceStatusExpired:
+		return true
+	case DomainsV1PortfolioClaimResourceStatusFailed:
+		return true
+	case DomainsV1PortfolioClaimResourceStatusPendingSetup:
+		return true
+	case DomainsV1PortfolioClaimResourceStatusPendingVerification:
+		return true
+	case DomainsV1PortfolioClaimResourceStatusRequested:
+		return true
+	case DomainsV1PortfolioClaimResourceStatusSuspended:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for DomainsV1WHOISChangeUpdateRequestChangeFor.
 const (
 	Admin   DomainsV1WHOISChangeUpdateRequestChangeFor = "admin"
@@ -719,13 +776,13 @@ func (e EcommerceV1StoreStoreRequestSalesChannelType) Valid() bool {
 
 // Defines values for HorizonsV1WebsitesCreateWebsiteRequestMessageType.
 const (
-	Text HorizonsV1WebsitesCreateWebsiteRequestMessageType = "text"
+	HorizonsV1WebsitesCreateWebsiteRequestMessageTypeText HorizonsV1WebsitesCreateWebsiteRequestMessageType = "text"
 )
 
 // Valid indicates whether the value is a known member of the HorizonsV1WebsitesCreateWebsiteRequestMessageType enum.
 func (e HorizonsV1WebsitesCreateWebsiteRequestMessageType) Valid() bool {
 	switch e {
-	case Text:
+	case HorizonsV1WebsitesCreateWebsiteRequestMessageTypeText:
 		return true
 	default:
 		return false
@@ -1296,16 +1353,85 @@ func (e MailV1WebhooksWebhookSecretResourceStatus) Valid() bool {
 	}
 }
 
+// Defines values for ReachV1ContactsContactDetailsResourceSource.
+const (
+	ReachV1ContactsContactDetailsResourceSourceApi      ReachV1ContactsContactDetailsResourceSource = "api"
+	ReachV1ContactsContactDetailsResourceSourceCheckout ReachV1ContactsContactDetailsResourceSource = "checkout"
+	ReachV1ContactsContactDetailsResourceSourceForm     ReachV1ContactsContactDetailsResourceSource = "form"
+	ReachV1ContactsContactDetailsResourceSourceHorizons ReachV1ContactsContactDetailsResourceSource = "horizons"
+	ReachV1ContactsContactDetailsResourceSourceImport   ReachV1ContactsContactDetailsResourceSource = "import"
+	ReachV1ContactsContactDetailsResourceSourceManual   ReachV1ContactsContactDetailsResourceSource = "manual"
+	ReachV1ContactsContactDetailsResourceSourceSync     ReachV1ContactsContactDetailsResourceSource = "sync"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1ContactsContactDetailsResourceSource enum.
+func (e ReachV1ContactsContactDetailsResourceSource) Valid() bool {
+	switch e {
+	case ReachV1ContactsContactDetailsResourceSourceApi:
+		return true
+	case ReachV1ContactsContactDetailsResourceSourceCheckout:
+		return true
+	case ReachV1ContactsContactDetailsResourceSourceForm:
+		return true
+	case ReachV1ContactsContactDetailsResourceSourceHorizons:
+		return true
+	case ReachV1ContactsContactDetailsResourceSourceImport:
+		return true
+	case ReachV1ContactsContactDetailsResourceSourceManual:
+		return true
+	case ReachV1ContactsContactDetailsResourceSourceSync:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1ContactsContactDetailsResourceSubscriptionStatus.
+const (
+	ReachV1ContactsContactDetailsResourceSubscriptionStatusConfirmed    ReachV1ContactsContactDetailsResourceSubscriptionStatus = "confirmed"
+	ReachV1ContactsContactDetailsResourceSubscriptionStatusPending      ReachV1ContactsContactDetailsResourceSubscriptionStatus = "pending"
+	ReachV1ContactsContactDetailsResourceSubscriptionStatusSubscribed   ReachV1ContactsContactDetailsResourceSubscriptionStatus = "subscribed"
+	ReachV1ContactsContactDetailsResourceSubscriptionStatusUnsubscribed ReachV1ContactsContactDetailsResourceSubscriptionStatus = "unsubscribed"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1ContactsContactDetailsResourceSubscriptionStatus enum.
+func (e ReachV1ContactsContactDetailsResourceSubscriptionStatus) Valid() bool {
+	switch e {
+	case ReachV1ContactsContactDetailsResourceSubscriptionStatusConfirmed:
+		return true
+	case ReachV1ContactsContactDetailsResourceSubscriptionStatusPending:
+		return true
+	case ReachV1ContactsContactDetailsResourceSubscriptionStatusSubscribed:
+		return true
+	case ReachV1ContactsContactDetailsResourceSubscriptionStatusUnsubscribed:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for ReachV1ContactsContactResourceSource.
 const (
-	ReachV1ContactsContactResourceSourceImport ReachV1ContactsContactResourceSource = "import"
-	ReachV1ContactsContactResourceSourceManual ReachV1ContactsContactResourceSource = "manual"
-	ReachV1ContactsContactResourceSourceSync   ReachV1ContactsContactResourceSource = "sync"
+	ReachV1ContactsContactResourceSourceApi      ReachV1ContactsContactResourceSource = "api"
+	ReachV1ContactsContactResourceSourceCheckout ReachV1ContactsContactResourceSource = "checkout"
+	ReachV1ContactsContactResourceSourceForm     ReachV1ContactsContactResourceSource = "form"
+	ReachV1ContactsContactResourceSourceHorizons ReachV1ContactsContactResourceSource = "horizons"
+	ReachV1ContactsContactResourceSourceImport   ReachV1ContactsContactResourceSource = "import"
+	ReachV1ContactsContactResourceSourceManual   ReachV1ContactsContactResourceSource = "manual"
+	ReachV1ContactsContactResourceSourceSync     ReachV1ContactsContactResourceSource = "sync"
 )
 
 // Valid indicates whether the value is a known member of the ReachV1ContactsContactResourceSource enum.
 func (e ReachV1ContactsContactResourceSource) Valid() bool {
 	switch e {
+	case ReachV1ContactsContactResourceSourceApi:
+		return true
+	case ReachV1ContactsContactResourceSourceCheckout:
+		return true
+	case ReachV1ContactsContactResourceSourceForm:
+		return true
+	case ReachV1ContactsContactResourceSourceHorizons:
+		return true
 	case ReachV1ContactsContactResourceSourceImport:
 		return true
 	case ReachV1ContactsContactResourceSourceManual:
@@ -1319,6 +1445,8 @@ func (e ReachV1ContactsContactResourceSource) Valid() bool {
 
 // Defines values for ReachV1ContactsContactResourceSubscriptionStatus.
 const (
+	ReachV1ContactsContactResourceSubscriptionStatusConfirmed    ReachV1ContactsContactResourceSubscriptionStatus = "confirmed"
+	ReachV1ContactsContactResourceSubscriptionStatusPending      ReachV1ContactsContactResourceSubscriptionStatus = "pending"
 	ReachV1ContactsContactResourceSubscriptionStatusSubscribed   ReachV1ContactsContactResourceSubscriptionStatus = "subscribed"
 	ReachV1ContactsContactResourceSubscriptionStatusUnsubscribed ReachV1ContactsContactResourceSubscriptionStatus = "unsubscribed"
 )
@@ -1326,6 +1454,10 @@ const (
 // Valid indicates whether the value is a known member of the ReachV1ContactsContactResourceSubscriptionStatus enum.
 func (e ReachV1ContactsContactResourceSubscriptionStatus) Valid() bool {
 	switch e {
+	case ReachV1ContactsContactResourceSubscriptionStatusConfirmed:
+		return true
+	case ReachV1ContactsContactResourceSubscriptionStatusPending:
+		return true
 	case ReachV1ContactsContactResourceSubscriptionStatusSubscribed:
 		return true
 	case ReachV1ContactsContactResourceSubscriptionStatusUnsubscribed:
@@ -1335,16 +1467,406 @@ func (e ReachV1ContactsContactResourceSubscriptionStatus) Valid() bool {
 	}
 }
 
+// Defines values for ReachV1ContactsFieldsContactFieldResourceType.
+const (
+	ReachV1ContactsFieldsContactFieldResourceTypeDate         ReachV1ContactsFieldsContactFieldResourceType = "date"
+	ReachV1ContactsFieldsContactFieldResourceTypeMultiChoice  ReachV1ContactsFieldsContactFieldResourceType = "multi_choice"
+	ReachV1ContactsFieldsContactFieldResourceTypeNumber       ReachV1ContactsFieldsContactFieldResourceType = "number"
+	ReachV1ContactsFieldsContactFieldResourceTypeSingleChoice ReachV1ContactsFieldsContactFieldResourceType = "single_choice"
+	ReachV1ContactsFieldsContactFieldResourceTypeText         ReachV1ContactsFieldsContactFieldResourceType = "text"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1ContactsFieldsContactFieldResourceType enum.
+func (e ReachV1ContactsFieldsContactFieldResourceType) Valid() bool {
+	switch e {
+	case ReachV1ContactsFieldsContactFieldResourceTypeDate:
+		return true
+	case ReachV1ContactsFieldsContactFieldResourceTypeMultiChoice:
+		return true
+	case ReachV1ContactsFieldsContactFieldResourceTypeNumber:
+		return true
+	case ReachV1ContactsFieldsContactFieldResourceTypeSingleChoice:
+		return true
+	case ReachV1ContactsFieldsContactFieldResourceTypeText:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1ContactsFieldsContactFieldValueResourceType.
+const (
+	ReachV1ContactsFieldsContactFieldValueResourceTypeDate         ReachV1ContactsFieldsContactFieldValueResourceType = "date"
+	ReachV1ContactsFieldsContactFieldValueResourceTypeMultiChoice  ReachV1ContactsFieldsContactFieldValueResourceType = "multi_choice"
+	ReachV1ContactsFieldsContactFieldValueResourceTypeNumber       ReachV1ContactsFieldsContactFieldValueResourceType = "number"
+	ReachV1ContactsFieldsContactFieldValueResourceTypeSingleChoice ReachV1ContactsFieldsContactFieldValueResourceType = "single_choice"
+	ReachV1ContactsFieldsContactFieldValueResourceTypeText         ReachV1ContactsFieldsContactFieldValueResourceType = "text"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1ContactsFieldsContactFieldValueResourceType enum.
+func (e ReachV1ContactsFieldsContactFieldValueResourceType) Valid() bool {
+	switch e {
+	case ReachV1ContactsFieldsContactFieldValueResourceTypeDate:
+		return true
+	case ReachV1ContactsFieldsContactFieldValueResourceTypeMultiChoice:
+		return true
+	case ReachV1ContactsFieldsContactFieldValueResourceTypeNumber:
+		return true
+	case ReachV1ContactsFieldsContactFieldValueResourceTypeSingleChoice:
+		return true
+	case ReachV1ContactsFieldsContactFieldValueResourceTypeText:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1ContactsFieldsStoreRequestType.
+const (
+	ReachV1ContactsFieldsStoreRequestTypeDate         ReachV1ContactsFieldsStoreRequestType = "date"
+	ReachV1ContactsFieldsStoreRequestTypeMultiChoice  ReachV1ContactsFieldsStoreRequestType = "multi_choice"
+	ReachV1ContactsFieldsStoreRequestTypeNumber       ReachV1ContactsFieldsStoreRequestType = "number"
+	ReachV1ContactsFieldsStoreRequestTypeSingleChoice ReachV1ContactsFieldsStoreRequestType = "single_choice"
+	ReachV1ContactsFieldsStoreRequestTypeText         ReachV1ContactsFieldsStoreRequestType = "text"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1ContactsFieldsStoreRequestType enum.
+func (e ReachV1ContactsFieldsStoreRequestType) Valid() bool {
+	switch e {
+	case ReachV1ContactsFieldsStoreRequestTypeDate:
+		return true
+	case ReachV1ContactsFieldsStoreRequestTypeMultiChoice:
+		return true
+	case ReachV1ContactsFieldsStoreRequestTypeNumber:
+		return true
+	case ReachV1ContactsFieldsStoreRequestTypeSingleChoice:
+		return true
+	case ReachV1ContactsFieldsStoreRequestTypeText:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1ContactsProfileContactResourceSource.
+const (
+	ReachV1ContactsProfileContactResourceSourceApi      ReachV1ContactsProfileContactResourceSource = "api"
+	ReachV1ContactsProfileContactResourceSourceCheckout ReachV1ContactsProfileContactResourceSource = "checkout"
+	ReachV1ContactsProfileContactResourceSourceForm     ReachV1ContactsProfileContactResourceSource = "form"
+	ReachV1ContactsProfileContactResourceSourceHorizons ReachV1ContactsProfileContactResourceSource = "horizons"
+	ReachV1ContactsProfileContactResourceSourceImport   ReachV1ContactsProfileContactResourceSource = "import"
+	ReachV1ContactsProfileContactResourceSourceManual   ReachV1ContactsProfileContactResourceSource = "manual"
+	ReachV1ContactsProfileContactResourceSourceSync     ReachV1ContactsProfileContactResourceSource = "sync"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1ContactsProfileContactResourceSource enum.
+func (e ReachV1ContactsProfileContactResourceSource) Valid() bool {
+	switch e {
+	case ReachV1ContactsProfileContactResourceSourceApi:
+		return true
+	case ReachV1ContactsProfileContactResourceSourceCheckout:
+		return true
+	case ReachV1ContactsProfileContactResourceSourceForm:
+		return true
+	case ReachV1ContactsProfileContactResourceSourceHorizons:
+		return true
+	case ReachV1ContactsProfileContactResourceSourceImport:
+		return true
+	case ReachV1ContactsProfileContactResourceSourceManual:
+		return true
+	case ReachV1ContactsProfileContactResourceSourceSync:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1ContactsProfileContactResourceSubscriptionStatus.
+const (
+	ReachV1ContactsProfileContactResourceSubscriptionStatusConfirmed    ReachV1ContactsProfileContactResourceSubscriptionStatus = "confirmed"
+	ReachV1ContactsProfileContactResourceSubscriptionStatusPending      ReachV1ContactsProfileContactResourceSubscriptionStatus = "pending"
+	ReachV1ContactsProfileContactResourceSubscriptionStatusSubscribed   ReachV1ContactsProfileContactResourceSubscriptionStatus = "subscribed"
+	ReachV1ContactsProfileContactResourceSubscriptionStatusUnsubscribed ReachV1ContactsProfileContactResourceSubscriptionStatus = "unsubscribed"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1ContactsProfileContactResourceSubscriptionStatus enum.
+func (e ReachV1ContactsProfileContactResourceSubscriptionStatus) Valid() bool {
+	switch e {
+	case ReachV1ContactsProfileContactResourceSubscriptionStatusConfirmed:
+		return true
+	case ReachV1ContactsProfileContactResourceSubscriptionStatusPending:
+		return true
+	case ReachV1ContactsProfileContactResourceSubscriptionStatusSubscribed:
+		return true
+	case ReachV1ContactsProfileContactResourceSubscriptionStatusUnsubscribed:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1ContactsProfileContactUpdateResourceSubscriptionStatus.
+const (
+	ReachV1ContactsProfileContactUpdateResourceSubscriptionStatusConfirmed    ReachV1ContactsProfileContactUpdateResourceSubscriptionStatus = "confirmed"
+	ReachV1ContactsProfileContactUpdateResourceSubscriptionStatusPending      ReachV1ContactsProfileContactUpdateResourceSubscriptionStatus = "pending"
+	ReachV1ContactsProfileContactUpdateResourceSubscriptionStatusSubscribed   ReachV1ContactsProfileContactUpdateResourceSubscriptionStatus = "subscribed"
+	ReachV1ContactsProfileContactUpdateResourceSubscriptionStatusUnsubscribed ReachV1ContactsProfileContactUpdateResourceSubscriptionStatus = "unsubscribed"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1ContactsProfileContactUpdateResourceSubscriptionStatus enum.
+func (e ReachV1ContactsProfileContactUpdateResourceSubscriptionStatus) Valid() bool {
+	switch e {
+	case ReachV1ContactsProfileContactUpdateResourceSubscriptionStatusConfirmed:
+		return true
+	case ReachV1ContactsProfileContactUpdateResourceSubscriptionStatusPending:
+		return true
+	case ReachV1ContactsProfileContactUpdateResourceSubscriptionStatusSubscribed:
+		return true
+	case ReachV1ContactsProfileContactUpdateResourceSubscriptionStatusUnsubscribed:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator.
+const (
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorBounced           ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "bounced"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorClicked           ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "clicked"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorContains          ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "contains"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorDelivered         ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "delivered"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorDropped           ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "dropped"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorEquals            ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "equals"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorExists            ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "exists"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorGte               ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "gte"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorLte               ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "lte"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorNotBounced        ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "not_bounced"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorNotClicked        ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "not_clicked"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorNotContains       ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "not_contains"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorNotDelivered      ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "not_delivered"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorNotDropped        ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "not_dropped"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorNotEquals         ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "not_equals"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorNotOpened         ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "not_opened"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorNotProcessed      ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "not_processed"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorNotSoftBounced    ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "not_soft_bounced"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorNotUnsubscribed   ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "not_unsubscribed"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorNotWithinLastDays ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "not_within_last_days"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorOlderThanDays     ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "older_than_days"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorOpened            ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "opened"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorProcessed         ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "processed"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorSoftBounced       ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "soft_bounced"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorUnsubscribed      ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "unsubscribed"
+	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorWithinLastDays    ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "within_last_days"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator enum.
+func (e ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator) Valid() bool {
+	switch e {
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorBounced:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorClicked:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorContains:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorDelivered:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorDropped:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorEquals:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorExists:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorGte:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorLte:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorNotBounced:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorNotClicked:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorNotContains:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorNotDelivered:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorNotDropped:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorNotEquals:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorNotOpened:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorNotProcessed:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorNotSoftBounced:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorNotUnsubscribed:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorNotWithinLastDays:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorOlderThanDays:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorOpened:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorProcessed:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorSoftBounced:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorUnsubscribed:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorWithinLastDays:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1ContactsSegmentsProfileStoreRequestLogic.
+const (
+	ReachV1ContactsSegmentsProfileStoreRequestLogicAND ReachV1ContactsSegmentsProfileStoreRequestLogic = "AND"
+	ReachV1ContactsSegmentsProfileStoreRequestLogicOR  ReachV1ContactsSegmentsProfileStoreRequestLogic = "OR"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1ContactsSegmentsProfileStoreRequestLogic enum.
+func (e ReachV1ContactsSegmentsProfileStoreRequestLogic) Valid() bool {
+	switch e {
+	case ReachV1ContactsSegmentsProfileStoreRequestLogicAND:
+		return true
+	case ReachV1ContactsSegmentsProfileStoreRequestLogicOR:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator.
+const (
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorBounced           ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "bounced"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorClicked           ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "clicked"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorContains          ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "contains"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorDelivered         ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "delivered"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorDropped           ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "dropped"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorEquals            ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "equals"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorExists            ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "exists"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorGte               ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "gte"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorLte               ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "lte"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorNotBounced        ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "not_bounced"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorNotClicked        ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "not_clicked"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorNotContains       ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "not_contains"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorNotDelivered      ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "not_delivered"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorNotDropped        ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "not_dropped"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorNotEquals         ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "not_equals"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorNotOpened         ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "not_opened"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorNotProcessed      ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "not_processed"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorNotSoftBounced    ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "not_soft_bounced"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorNotUnsubscribed   ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "not_unsubscribed"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorNotWithinLastDays ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "not_within_last_days"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorOlderThanDays     ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "older_than_days"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorOpened            ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "opened"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorProcessed         ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "processed"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorSoftBounced       ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "soft_bounced"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorUnsubscribed      ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "unsubscribed"
+	ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorWithinLastDays    ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator = "within_last_days"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator enum.
+func (e ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator) Valid() bool {
+	switch e {
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorBounced:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorClicked:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorContains:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorDelivered:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorDropped:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorEquals:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorExists:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorGte:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorLte:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorNotBounced:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorNotClicked:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorNotContains:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorNotDelivered:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorNotDropped:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorNotEquals:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorNotOpened:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorNotProcessed:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorNotSoftBounced:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorNotUnsubscribed:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorNotWithinLastDays:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorOlderThanDays:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorOpened:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorProcessed:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorSoftBounced:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorUnsubscribed:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperatorWithinLastDays:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1ContactsSegmentsProfileUpdateRequestLogic.
+const (
+	ReachV1ContactsSegmentsProfileUpdateRequestLogicAND ReachV1ContactsSegmentsProfileUpdateRequestLogic = "AND"
+	ReachV1ContactsSegmentsProfileUpdateRequestLogicOR  ReachV1ContactsSegmentsProfileUpdateRequestLogic = "OR"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1ContactsSegmentsProfileUpdateRequestLogic enum.
+func (e ReachV1ContactsSegmentsProfileUpdateRequestLogic) Valid() bool {
+	switch e {
+	case ReachV1ContactsSegmentsProfileUpdateRequestLogicAND:
+		return true
+	case ReachV1ContactsSegmentsProfileUpdateRequestLogicOR:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for ReachV1ContactsSegmentsSegmentationContactResourceSource.
 const (
-	ReachV1ContactsSegmentsSegmentationContactResourceSourceImport ReachV1ContactsSegmentsSegmentationContactResourceSource = "import"
-	ReachV1ContactsSegmentsSegmentationContactResourceSourceManual ReachV1ContactsSegmentsSegmentationContactResourceSource = "manual"
-	ReachV1ContactsSegmentsSegmentationContactResourceSourceSync   ReachV1ContactsSegmentsSegmentationContactResourceSource = "sync"
+	ReachV1ContactsSegmentsSegmentationContactResourceSourceApi      ReachV1ContactsSegmentsSegmentationContactResourceSource = "api"
+	ReachV1ContactsSegmentsSegmentationContactResourceSourceCheckout ReachV1ContactsSegmentsSegmentationContactResourceSource = "checkout"
+	ReachV1ContactsSegmentsSegmentationContactResourceSourceForm     ReachV1ContactsSegmentsSegmentationContactResourceSource = "form"
+	ReachV1ContactsSegmentsSegmentationContactResourceSourceHorizons ReachV1ContactsSegmentsSegmentationContactResourceSource = "horizons"
+	ReachV1ContactsSegmentsSegmentationContactResourceSourceImport   ReachV1ContactsSegmentsSegmentationContactResourceSource = "import"
+	ReachV1ContactsSegmentsSegmentationContactResourceSourceManual   ReachV1ContactsSegmentsSegmentationContactResourceSource = "manual"
+	ReachV1ContactsSegmentsSegmentationContactResourceSourceSync     ReachV1ContactsSegmentsSegmentationContactResourceSource = "sync"
 )
 
 // Valid indicates whether the value is a known member of the ReachV1ContactsSegmentsSegmentationContactResourceSource enum.
 func (e ReachV1ContactsSegmentsSegmentationContactResourceSource) Valid() bool {
 	switch e {
+	case ReachV1ContactsSegmentsSegmentationContactResourceSourceApi:
+		return true
+	case ReachV1ContactsSegmentsSegmentationContactResourceSourceCheckout:
+		return true
+	case ReachV1ContactsSegmentsSegmentationContactResourceSourceForm:
+		return true
+	case ReachV1ContactsSegmentsSegmentationContactResourceSourceHorizons:
+		return true
 	case ReachV1ContactsSegmentsSegmentationContactResourceSourceImport:
 		return true
 	case ReachV1ContactsSegmentsSegmentationContactResourceSourceManual:
@@ -1358,6 +1880,8 @@ func (e ReachV1ContactsSegmentsSegmentationContactResourceSource) Valid() bool {
 
 // Defines values for ReachV1ContactsSegmentsSegmentationContactResourceSubscriptionStatus.
 const (
+	ReachV1ContactsSegmentsSegmentationContactResourceSubscriptionStatusConfirmed    ReachV1ContactsSegmentsSegmentationContactResourceSubscriptionStatus = "confirmed"
+	ReachV1ContactsSegmentsSegmentationContactResourceSubscriptionStatusPending      ReachV1ContactsSegmentsSegmentationContactResourceSubscriptionStatus = "pending"
 	ReachV1ContactsSegmentsSegmentationContactResourceSubscriptionStatusSubscribed   ReachV1ContactsSegmentsSegmentationContactResourceSubscriptionStatus = "subscribed"
 	ReachV1ContactsSegmentsSegmentationContactResourceSubscriptionStatusUnsubscribed ReachV1ContactsSegmentsSegmentationContactResourceSubscriptionStatus = "unsubscribed"
 )
@@ -1365,6 +1889,10 @@ const (
 // Valid indicates whether the value is a known member of the ReachV1ContactsSegmentsSegmentationContactResourceSubscriptionStatus enum.
 func (e ReachV1ContactsSegmentsSegmentationContactResourceSubscriptionStatus) Valid() bool {
 	switch e {
+	case ReachV1ContactsSegmentsSegmentationContactResourceSubscriptionStatusConfirmed:
+		return true
+	case ReachV1ContactsSegmentsSegmentationContactResourceSubscriptionStatusPending:
+		return true
 	case ReachV1ContactsSegmentsSegmentationContactResourceSubscriptionStatusSubscribed:
 		return true
 	case ReachV1ContactsSegmentsSegmentationContactResourceSubscriptionStatusUnsubscribed:
@@ -1465,11 +1993,13 @@ const (
 	ReachV1ContactsSegmentsStoreRequestConditionsOperatorNotEquals         ReachV1ContactsSegmentsStoreRequestConditionsOperator = "not_equals"
 	ReachV1ContactsSegmentsStoreRequestConditionsOperatorNotOpened         ReachV1ContactsSegmentsStoreRequestConditionsOperator = "not_opened"
 	ReachV1ContactsSegmentsStoreRequestConditionsOperatorNotProcessed      ReachV1ContactsSegmentsStoreRequestConditionsOperator = "not_processed"
+	ReachV1ContactsSegmentsStoreRequestConditionsOperatorNotSoftBounced    ReachV1ContactsSegmentsStoreRequestConditionsOperator = "not_soft_bounced"
 	ReachV1ContactsSegmentsStoreRequestConditionsOperatorNotUnsubscribed   ReachV1ContactsSegmentsStoreRequestConditionsOperator = "not_unsubscribed"
 	ReachV1ContactsSegmentsStoreRequestConditionsOperatorNotWithinLastDays ReachV1ContactsSegmentsStoreRequestConditionsOperator = "not_within_last_days"
 	ReachV1ContactsSegmentsStoreRequestConditionsOperatorOlderThanDays     ReachV1ContactsSegmentsStoreRequestConditionsOperator = "older_than_days"
 	ReachV1ContactsSegmentsStoreRequestConditionsOperatorOpened            ReachV1ContactsSegmentsStoreRequestConditionsOperator = "opened"
 	ReachV1ContactsSegmentsStoreRequestConditionsOperatorProcessed         ReachV1ContactsSegmentsStoreRequestConditionsOperator = "processed"
+	ReachV1ContactsSegmentsStoreRequestConditionsOperatorSoftBounced       ReachV1ContactsSegmentsStoreRequestConditionsOperator = "soft_bounced"
 	ReachV1ContactsSegmentsStoreRequestConditionsOperatorUnsubscribed      ReachV1ContactsSegmentsStoreRequestConditionsOperator = "unsubscribed"
 	ReachV1ContactsSegmentsStoreRequestConditionsOperatorWithinLastDays    ReachV1ContactsSegmentsStoreRequestConditionsOperator = "within_last_days"
 )
@@ -1511,6 +2041,8 @@ func (e ReachV1ContactsSegmentsStoreRequestConditionsOperator) Valid() bool {
 		return true
 	case ReachV1ContactsSegmentsStoreRequestConditionsOperatorNotProcessed:
 		return true
+	case ReachV1ContactsSegmentsStoreRequestConditionsOperatorNotSoftBounced:
+		return true
 	case ReachV1ContactsSegmentsStoreRequestConditionsOperatorNotUnsubscribed:
 		return true
 	case ReachV1ContactsSegmentsStoreRequestConditionsOperatorNotWithinLastDays:
@@ -1520,6 +2052,8 @@ func (e ReachV1ContactsSegmentsStoreRequestConditionsOperator) Valid() bool {
 	case ReachV1ContactsSegmentsStoreRequestConditionsOperatorOpened:
 		return true
 	case ReachV1ContactsSegmentsStoreRequestConditionsOperatorProcessed:
+		return true
+	case ReachV1ContactsSegmentsStoreRequestConditionsOperatorSoftBounced:
 		return true
 	case ReachV1ContactsSegmentsStoreRequestConditionsOperatorUnsubscribed:
 		return true
@@ -1532,16 +2066,58 @@ func (e ReachV1ContactsSegmentsStoreRequestConditionsOperator) Valid() bool {
 
 // Defines values for ReachV1ContactsSegmentsStoreRequestLogic.
 const (
-	AND ReachV1ContactsSegmentsStoreRequestLogic = "AND"
-	OR  ReachV1ContactsSegmentsStoreRequestLogic = "OR"
+	ReachV1ContactsSegmentsStoreRequestLogicAND ReachV1ContactsSegmentsStoreRequestLogic = "AND"
+	ReachV1ContactsSegmentsStoreRequestLogicOR  ReachV1ContactsSegmentsStoreRequestLogic = "OR"
 )
 
 // Valid indicates whether the value is a known member of the ReachV1ContactsSegmentsStoreRequestLogic enum.
 func (e ReachV1ContactsSegmentsStoreRequestLogic) Valid() bool {
 	switch e {
-	case AND:
+	case ReachV1ContactsSegmentsStoreRequestLogicAND:
 		return true
-	case OR:
+	case ReachV1ContactsSegmentsStoreRequestLogicOR:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1ContactsTagsTagResourceType.
+const (
+	ReachV1ContactsTagsTagResourceTypeCustom ReachV1ContactsTagsTagResourceType = "custom"
+	ReachV1ContactsTagsTagResourceTypeForm   ReachV1ContactsTagsTagResourceType = "form"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1ContactsTagsTagResourceType enum.
+func (e ReachV1ContactsTagsTagResourceType) Valid() bool {
+	switch e {
+	case ReachV1ContactsTagsTagResourceTypeCustom:
+		return true
+	case ReachV1ContactsTagsTagResourceTypeForm:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1ContactsUpdateRequestSubscriptionStatus.
+const (
+	ReachV1ContactsUpdateRequestSubscriptionStatusConfirmed    ReachV1ContactsUpdateRequestSubscriptionStatus = "confirmed"
+	ReachV1ContactsUpdateRequestSubscriptionStatusPending      ReachV1ContactsUpdateRequestSubscriptionStatus = "pending"
+	ReachV1ContactsUpdateRequestSubscriptionStatusSubscribed   ReachV1ContactsUpdateRequestSubscriptionStatus = "subscribed"
+	ReachV1ContactsUpdateRequestSubscriptionStatusUnsubscribed ReachV1ContactsUpdateRequestSubscriptionStatus = "unsubscribed"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1ContactsUpdateRequestSubscriptionStatus enum.
+func (e ReachV1ContactsUpdateRequestSubscriptionStatus) Valid() bool {
+	switch e {
+	case ReachV1ContactsUpdateRequestSubscriptionStatusConfirmed:
+		return true
+	case ReachV1ContactsUpdateRequestSubscriptionStatusPending:
+		return true
+	case ReachV1ContactsUpdateRequestSubscriptionStatusSubscribed:
+		return true
+	case ReachV1ContactsUpdateRequestSubscriptionStatusUnsubscribed:
 		return true
 	default:
 		return false
@@ -2157,6 +2733,24 @@ func (e Category) Valid() bool {
 	}
 }
 
+// Defines values for CountType.
+const (
+	CountTypeAll        CountType = "all"
+	CountTypeSubscribed CountType = "subscribed"
+)
+
+// Valid indicates whether the value is a known member of the CountType enum.
+func (e CountType) Valid() bool {
+	switch e {
+	case CountTypeAll:
+		return true
+	case CountTypeSubscribed:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for MailAccessLogProtocol.
 const (
 	MailAccessLogProtocolImap MailAccessLogProtocol = "imap"
@@ -2315,6 +2909,8 @@ func (e MailWebhookStatus) Valid() bool {
 
 // Defines values for SubscriptionStatus.
 const (
+	SubscriptionStatusConfirmed    SubscriptionStatus = "confirmed"
+	SubscriptionStatusPending      SubscriptionStatus = "pending"
 	SubscriptionStatusSubscribed   SubscriptionStatus = "subscribed"
 	SubscriptionStatusUnsubscribed SubscriptionStatus = "unsubscribed"
 )
@@ -2322,6 +2918,10 @@ const (
 // Valid indicates whether the value is a known member of the SubscriptionStatus enum.
 func (e SubscriptionStatus) Valid() bool {
 	switch e {
+	case SubscriptionStatusConfirmed:
+		return true
+	case SubscriptionStatusPending:
+		return true
 	case SubscriptionStatusSubscribed:
 		return true
 	case SubscriptionStatusUnsubscribed:
@@ -2693,6 +3293,8 @@ func (e MailListWebhooksV1ParamsStatus) Valid() bool {
 
 // Defines values for ReachListContactsV1ParamsSubscriptionStatus.
 const (
+	ReachListContactsV1ParamsSubscriptionStatusConfirmed    ReachListContactsV1ParamsSubscriptionStatus = "confirmed"
+	ReachListContactsV1ParamsSubscriptionStatusPending      ReachListContactsV1ParamsSubscriptionStatus = "pending"
 	ReachListContactsV1ParamsSubscriptionStatusSubscribed   ReachListContactsV1ParamsSubscriptionStatus = "subscribed"
 	ReachListContactsV1ParamsSubscriptionStatusUnsubscribed ReachListContactsV1ParamsSubscriptionStatus = "unsubscribed"
 )
@@ -2700,9 +3302,55 @@ const (
 // Valid indicates whether the value is a known member of the ReachListContactsV1ParamsSubscriptionStatus enum.
 func (e ReachListContactsV1ParamsSubscriptionStatus) Valid() bool {
 	switch e {
+	case ReachListContactsV1ParamsSubscriptionStatusConfirmed:
+		return true
+	case ReachListContactsV1ParamsSubscriptionStatusPending:
+		return true
 	case ReachListContactsV1ParamsSubscriptionStatusSubscribed:
 		return true
 	case ReachListContactsV1ParamsSubscriptionStatusUnsubscribed:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachListProfileContactsV1ParamsSubscriptionStatus.
+const (
+	ReachListProfileContactsV1ParamsSubscriptionStatusConfirmed    ReachListProfileContactsV1ParamsSubscriptionStatus = "confirmed"
+	ReachListProfileContactsV1ParamsSubscriptionStatusPending      ReachListProfileContactsV1ParamsSubscriptionStatus = "pending"
+	ReachListProfileContactsV1ParamsSubscriptionStatusSubscribed   ReachListProfileContactsV1ParamsSubscriptionStatus = "subscribed"
+	ReachListProfileContactsV1ParamsSubscriptionStatusUnsubscribed ReachListProfileContactsV1ParamsSubscriptionStatus = "unsubscribed"
+)
+
+// Valid indicates whether the value is a known member of the ReachListProfileContactsV1ParamsSubscriptionStatus enum.
+func (e ReachListProfileContactsV1ParamsSubscriptionStatus) Valid() bool {
+	switch e {
+	case ReachListProfileContactsV1ParamsSubscriptionStatusConfirmed:
+		return true
+	case ReachListProfileContactsV1ParamsSubscriptionStatusPending:
+		return true
+	case ReachListProfileContactsV1ParamsSubscriptionStatusSubscribed:
+		return true
+	case ReachListProfileContactsV1ParamsSubscriptionStatusUnsubscribed:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachListProfileSegmentsV1ParamsCountType.
+const (
+	ReachListProfileSegmentsV1ParamsCountTypeAll        ReachListProfileSegmentsV1ParamsCountType = "all"
+	ReachListProfileSegmentsV1ParamsCountTypeSubscribed ReachListProfileSegmentsV1ParamsCountType = "subscribed"
+)
+
+// Valid indicates whether the value is a known member of the ReachListProfileSegmentsV1ParamsCountType enum.
+func (e ReachListProfileSegmentsV1ParamsCountType) Valid() bool {
+	switch e {
+	case ReachListProfileSegmentsV1ParamsCountTypeAll:
+		return true
+	case ReachListProfileSegmentsV1ParamsCountTypeSubscribed:
 		return true
 	default:
 		return false
@@ -4321,6 +4969,67 @@ type DomainsV1IRTPVerificationResource struct {
 // Example: pending
 type DomainsV1IRTPVerificationResourceStatus string
 
+// DomainsV1MoveIncomingUpdateRequest defines model for Domains.V1.Move.Incoming.UpdateRequest.
+type DomainsV1MoveIncomingUpdateRequest struct {
+	// DomainContacts WHOIS profiles of the accepting account. Only the contact types required by the TLD are applied, but all four IDs must be provided.
+	DomainContacts struct {
+		// AdminId Administrative contact WHOIS record ID
+		//
+		// Example: 114698
+		AdminId int `json:"admin_id"`
+
+		// BillingId Billing contact WHOIS record ID
+		//
+		// Example: 154698
+		BillingId int `json:"billing_id"`
+
+		// OwnerId Owner contact WHOIS record ID
+		//
+		// Example: 614698
+		OwnerId int `json:"owner_id"`
+
+		// TechId Technical contact WHOIS record ID
+		//
+		// Example: 524248
+		TechId int `json:"tech_id"`
+	} `json:"domain_contacts"`
+}
+
+// DomainsV1MoveMoveCollection Array of [`Domains.V1.Move.MoveResource`](#model/domainsv1movemoveresource)
+type DomainsV1MoveMoveCollection = []DomainsV1MoveMoveResource
+
+// DomainsV1MoveMoveResource defines model for Domains.V1.Move.MoveResource.
+type DomainsV1MoveMoveResource struct {
+	// CreatedAt Example: 2026-08-04T10:00:00Z
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Domain Domain name
+	//
+	// Example: mydomain.tld
+	Domain *string `json:"domain,omitempty"`
+
+	// Status Status of the move
+	//
+	// Example: initiated
+	Status *DomainsV1MoveMoveResourceStatus `json:"status,omitempty"`
+
+	// UpdatedAt Example: 2026-08-04T10:00:00Z
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+}
+
+// DomainsV1MoveMoveResourceStatus Status of the move
+//
+// Example: initiated
+type DomainsV1MoveMoveResourceStatus string
+
+// DomainsV1MoveOutgoingStoreRequest defines model for Domains.V1.Move.Outgoing.StoreRequest.
+type DomainsV1MoveOutgoingStoreRequest struct {
+	// NewCustomerEmail Email address of the Hostinger account receiving the domain
+	//
+	// Example: new-owner@example.com
+	NewCustomerEmail string `json:"new_customer_email"`
+}
+
 // DomainsV1PortfolioAuthCodeAuthCodeResource defines model for Domains.V1.Portfolio.AuthCode.AuthCodeResource.
 type DomainsV1PortfolioAuthCodeAuthCodeResource struct {
 	// AuthCode Domain authorization code used to transfer the domain to another registrar.
@@ -4328,6 +5037,61 @@ type DomainsV1PortfolioAuthCodeAuthCodeResource struct {
 	// Example: RN0000
 	AuthCode *string `json:"auth_code,omitempty"`
 }
+
+// DomainsV1PortfolioClaimRequest defines model for Domains.V1.Portfolio.ClaimRequest.
+type DomainsV1PortfolioClaimRequest struct {
+	// AdditionalDetails Additional registration data, possible values depends on TLD
+	AdditionalDetails *map[string]interface{} `json:"additional_details,omitempty"`
+
+	// Domain Domain name
+	//
+	// Example: my-new-domain.tld
+	Domain string `json:"domain"`
+
+	// DomainContacts Domain contact information
+	DomainContacts *struct {
+		// AdminId Administrative contact WHOIS record ID
+		//
+		// Example: 546123
+		AdminId *int `json:"admin_id,omitempty"`
+
+		// BillingId Billing contact WHOIS record ID
+		//
+		// Example: 741288
+		BillingId *int `json:"billing_id,omitempty"`
+
+		// OwnerId Owner contact WHOIS record ID
+		//
+		// Example: 741288
+		OwnerId *int `json:"owner_id,omitempty"`
+
+		// TechId Technical contact WHOIS record ID
+		//
+		// Example: 741288
+		TechId *int `json:"tech_id,omitempty"`
+	} `json:"domain_contacts,omitempty"`
+}
+
+// DomainsV1PortfolioClaimResource defines model for Domains.V1.Portfolio.ClaimResource.
+type DomainsV1PortfolioClaimResource struct {
+	// CreatedAt Example: 2026-08-05T10:14:22Z
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Domain Domain name
+	//
+	// Example: mydomain.tld
+	Domain *string `json:"domain,omitempty"`
+
+	// Status Domain status
+	//
+	// Example: active
+	Status *DomainsV1PortfolioClaimResourceStatus `json:"status,omitempty"`
+}
+
+// DomainsV1PortfolioClaimResourceStatus Domain status
+//
+// Example: active
+type DomainsV1PortfolioClaimResourceStatus string
 
 // DomainsV1PortfolioPurchaseRequest defines model for Domains.V1.Portfolio.PurchaseRequest.
 type DomainsV1PortfolioPurchaseRequest struct {
@@ -4415,6 +5179,47 @@ type DomainsV1PortfolioUpdateNameserversRequest struct {
 	//
 	// Example: ns4.some-nameserver.tld
 	Ns4 *string `json:"ns4,omitempty"`
+}
+
+// DomainsV1TransferClaimRequest defines model for Domains.V1.Transfer.ClaimRequest.
+type DomainsV1TransferClaimRequest struct {
+	// AuthCode Authorization code from the current registrar
+	//
+	// Example: Auth123Code456
+	AuthCode string `json:"auth_code"`
+
+	// Domain Domain name
+	//
+	// Example: my-new-domain.tld
+	Domain string `json:"domain"`
+
+	// DomainContacts Domain contact information
+	DomainContacts *struct {
+		// AdminId Administrative contact WHOIS record ID
+		//
+		// Example: 546123
+		AdminId *int `json:"admin_id,omitempty"`
+
+		// BillingId Billing contact WHOIS record ID
+		//
+		// Example: 741288
+		BillingId *int `json:"billing_id,omitempty"`
+
+		// OwnerId Owner contact WHOIS record ID
+		//
+		// Example: 741288
+		OwnerId *int `json:"owner_id,omitempty"`
+
+		// TechId Technical contact WHOIS record ID
+		//
+		// Example: 741288
+		TechId *int `json:"tech_id,omitempty"`
+	} `json:"domain_contacts,omitempty"`
+
+	// ShouldKeepNs Keep the existing nameservers of the domain
+	//
+	// Example: true
+	ShouldKeepNs *bool `json:"should_keep_ns,omitempty"`
 }
 
 // DomainsV1TransferTransferCollection Array of [`Domains.V1.Transfer.TransferResource`](#model/domainsv1transfertransferresource)
@@ -7117,8 +7922,84 @@ type MailV1WebhooksWebhookTestResultResource struct {
 	IsSuccessful *bool `json:"is_successful,omitempty"`
 }
 
+// ReachV1ContactsBulkStoreRequest Create many contacts in one call
+type ReachV1ContactsBulkStoreRequest struct {
+	Contacts []struct {
+		// Email Example: john.doe@example.com
+		Email string `json:"email"`
+
+		// Name Example: John
+		Name *string `json:"name,omitempty"`
+
+		// Phone Phone number in E.164 format (leading "+" then 7-15 digits)
+		//
+		// Example: +14155552671
+		Phone *string `json:"phone,omitempty"`
+
+		// Surname Example: Doe
+		Surname *string `json:"surname,omitempty"`
+	} `json:"contacts"`
+
+	// Note Note applied to every created contact
+	//
+	// Example: Imported from CRM
+	Note *string `json:"note,omitempty"`
+
+	// TagUuids Existing tags to attach to every created contact
+	TagUuids *[]string `json:"tag_uuids,omitempty"`
+}
+
 // ReachV1ContactsContactCollection Array of [`Reach.V1.Contacts.ContactResource`](#model/reachv1contactscontactresource)
 type ReachV1ContactsContactCollection = []ReachV1ContactsContactResource
+
+// ReachV1ContactsContactDetailsResource defines model for Reach.V1.Contacts.ContactDetailsResource.
+type ReachV1ContactsContactDetailsResource struct {
+	// CreatedAt Example: 2022-12-01T00:00:00Z
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Domain Example: example.com
+	Domain *string `json:"domain,omitempty"`
+
+	// Email Example: john.doe@example.com
+	Email *string `json:"email,omitempty"`
+
+	// Fields Custom field values held by this contact
+	Fields *[]ReachV1ContactsFieldsContactFieldValueResource `json:"fields,omitempty"`
+
+	// Name Example: John
+	Name *string `json:"name,omitempty"`
+
+	// Note Example: VIP customer
+	Note *string `json:"note,omitempty"`
+
+	// Phone Example: +14155552671
+	Phone *string `json:"phone,omitempty"`
+
+	// Source Example: api
+	Source *ReachV1ContactsContactDetailsResourceSource `json:"source,omitempty"`
+
+	// SubscribedAt Example: 2023-01-01T00:00:00Z
+	SubscribedAt *time.Time `json:"subscribed_at,omitempty"`
+
+	// SubscriptionStatus Example: subscribed
+	SubscriptionStatus *ReachV1ContactsContactDetailsResourceSubscriptionStatus `json:"subscription_status,omitempty"`
+
+	// Surname Example: Doe
+	Surname *string                           `json:"surname,omitempty"`
+	Tags    *[]ReachV1ContactsTagsTagResource `json:"tags,omitempty"`
+
+	// UnsubscribedAt Example: 2023-06-15T00:00:00Z
+	UnsubscribedAt *time.Time `json:"unsubscribed_at,omitempty"`
+
+	// Uuid Example: 550e8400-e29b-41d4-a716-446655440000
+	Uuid *string `json:"uuid,omitempty"`
+}
+
+// ReachV1ContactsContactDetailsResourceSource Example: api
+type ReachV1ContactsContactDetailsResourceSource string
+
+// ReachV1ContactsContactDetailsResourceSubscriptionStatus Example: subscribed
+type ReachV1ContactsContactDetailsResourceSubscriptionStatus string
 
 // ReachV1ContactsContactResource defines model for Reach.V1.Contacts.ContactResource.
 type ReachV1ContactsContactResource struct {
@@ -7153,6 +8034,107 @@ type ReachV1ContactsContactResourceSource string
 // ReachV1ContactsContactResourceSubscriptionStatus Example: subscribed
 type ReachV1ContactsContactResourceSubscriptionStatus string
 
+// ReachV1ContactsFieldsContactFieldCollection Array of [`Reach.V1.Contacts.Fields.ContactFieldResource`](#model/reachv1contactsfieldscontactfieldresource)
+type ReachV1ContactsFieldsContactFieldCollection = []ReachV1ContactsFieldsContactFieldResource
+
+// ReachV1ContactsFieldsContactFieldOptionResource defines model for Reach.V1.Contacts.Fields.ContactFieldOptionResource.
+type ReachV1ContactsFieldsContactFieldOptionResource struct {
+	// Label Example: Gold
+	Label *string `json:"label,omitempty"`
+
+	// SortOrder Example: 0
+	SortOrder *int `json:"sort_order,omitempty"`
+
+	// Uuid Example: 550e8400-e29b-41d4-a716-446655440000
+	Uuid *string `json:"uuid,omitempty"`
+}
+
+// ReachV1ContactsFieldsContactFieldResource defines model for Reach.V1.Contacts.Fields.ContactFieldResource.
+type ReachV1ContactsFieldsContactFieldResource struct {
+	// CreatedAt Example: 2025-02-27T11:54:22Z
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Label Example: Job title
+	Label *string `json:"label,omitempty"`
+
+	// Options Available choices. Always empty for the scalar field types.
+	Options *[]ReachV1ContactsFieldsContactFieldOptionResource `json:"options,omitempty"`
+
+	// Slug Derived from the label on creation and immutable afterwards
+	//
+	// Example: job_title
+	Slug *string `json:"slug,omitempty"`
+
+	// Type Example: text
+	Type *ReachV1ContactsFieldsContactFieldResourceType `json:"type,omitempty"`
+
+	// Uuid Example: 550e8400-e29b-41d4-a716-446655440000
+	Uuid *string `json:"uuid,omitempty"`
+}
+
+// ReachV1ContactsFieldsContactFieldResourceType Example: text
+type ReachV1ContactsFieldsContactFieldResourceType string
+
+// ReachV1ContactsFieldsContactFieldValueResource A custom contact field together with the value held by one contact
+type ReachV1ContactsFieldsContactFieldValueResource struct {
+	// Label Example: Job title
+	Label *string `json:"label,omitempty"`
+
+	// Options Every option the field offers, not only the selected ones
+	Options *[]ReachV1ContactsFieldsContactFieldOptionResource `json:"options,omitempty"`
+
+	// SelectedOptionUuids Chosen options for the choice field types, empty for the scalar types
+	SelectedOptionUuids *[]string `json:"selected_option_uuids,omitempty"`
+
+	// Slug Example: job_title
+	Slug *string `json:"slug,omitempty"`
+
+	// Type Example: text
+	Type *ReachV1ContactsFieldsContactFieldValueResourceType `json:"type,omitempty"`
+
+	// Uuid Example: 550e8400-e29b-41d4-a716-446655440000
+	Uuid *string `json:"uuid,omitempty"`
+
+	// Value Set for the scalar field types, null for the choice types
+	//
+	// Example: Developer
+	Value *string `json:"value,omitempty"`
+}
+
+// ReachV1ContactsFieldsContactFieldValueResourceType Example: text
+type ReachV1ContactsFieldsContactFieldValueResourceType string
+
+// ReachV1ContactsFieldsStoreRequest Define a custom contact field for the profile
+type ReachV1ContactsFieldsStoreRequest struct {
+	// Label Example: Job title
+	Label string `json:"label"`
+
+	// Options Required for single_choice and multi_choice, ignored for the scalar types. Labels must be unique regardless of casing.
+	Options *[]string `json:"options,omitempty"`
+
+	// Type Immutable once the field exists
+	//
+	// Example: text
+	Type ReachV1ContactsFieldsStoreRequestType `json:"type"`
+}
+
+// ReachV1ContactsFieldsStoreRequestType Immutable once the field exists
+//
+// Example: text
+type ReachV1ContactsFieldsStoreRequestType string
+
+// ReachV1ContactsFieldsUpdateRequest Rename a custom contact field and, for the choice types, replace its option set. The field type and slug are immutable.
+type ReachV1ContactsFieldsUpdateRequest struct {
+	// Label Example: Job title
+	Label string `json:"label"`
+
+	// Options Replaces the option set when provided. Entries carrying a uuid are kept and relabelled, entries without one are created, and any existing option missing from the list is deleted along with the values contacts hold for it.
+	Options *[]struct {
+		Label string  `json:"label"`
+		Uuid  *string `json:"uuid,omitempty"`
+	} `json:"options,omitempty"`
+}
+
 // ReachV1ContactsGroupsContactGroupCollection Array of [`Reach.V1.Contacts.Groups.ContactGroupResource`](#model/reachv1contactsgroupscontactgroupresource)
 type ReachV1ContactsGroupsContactGroupCollection = []ReachV1ContactsGroupsContactGroupResource
 
@@ -7165,6 +8147,78 @@ type ReachV1ContactsGroupsContactGroupResource struct {
 	Uuid *string `json:"uuid,omitempty"`
 }
 
+// ReachV1ContactsProfileContactCollection Array of [`Reach.V1.Contacts.ProfileContactResource`](#model/reachv1contactsprofilecontactresource)
+type ReachV1ContactsProfileContactCollection = []ReachV1ContactsProfileContactResource
+
+// ReachV1ContactsProfileContactResource defines model for Reach.V1.Contacts.ProfileContactResource.
+type ReachV1ContactsProfileContactResource struct {
+	// Email Example: john.doe@example.com
+	Email *string `json:"email,omitempty"`
+
+	// Name Example: John
+	Name *string `json:"name,omitempty"`
+
+	// Note Example: VIP customer
+	Note *string `json:"note,omitempty"`
+
+	// Phone Example: +14155552671
+	Phone *string `json:"phone,omitempty"`
+
+	// Source Example: api
+	Source *ReachV1ContactsProfileContactResourceSource `json:"source,omitempty"`
+
+	// SubscribedAt Example: 2023-01-01T00:00:00Z
+	SubscribedAt *time.Time `json:"subscribed_at,omitempty"`
+
+	// SubscriptionStatus Example: subscribed
+	SubscriptionStatus *ReachV1ContactsProfileContactResourceSubscriptionStatus `json:"subscription_status,omitempty"`
+
+	// Surname Example: Doe
+	Surname *string `json:"surname,omitempty"`
+
+	// UnsubscribedAt Example: 2023-06-15T00:00:00Z
+	UnsubscribedAt *time.Time `json:"unsubscribed_at,omitempty"`
+
+	// Uuid Example: 550e8400-e29b-41d4-a716-446655440000
+	Uuid *string `json:"uuid,omitempty"`
+}
+
+// ReachV1ContactsProfileContactResourceSource Example: api
+type ReachV1ContactsProfileContactResourceSource string
+
+// ReachV1ContactsProfileContactResourceSubscriptionStatus Example: subscribed
+type ReachV1ContactsProfileContactResourceSubscriptionStatus string
+
+// ReachV1ContactsProfileContactUpdateResource defines model for Reach.V1.Contacts.ProfileContactUpdateResource.
+type ReachV1ContactsProfileContactUpdateResource struct {
+	// Email Example: john.doe@example.com
+	Email *string `json:"email,omitempty"`
+
+	// Name Example: John
+	Name *string `json:"name,omitempty"`
+
+	// Phone Example: +14155552671
+	Phone *string `json:"phone,omitempty"`
+
+	// SubscribedAt Example: 2023-01-01T00:00:00Z
+	SubscribedAt *time.Time `json:"subscribed_at,omitempty"`
+
+	// SubscriptionStatus Example: subscribed
+	SubscriptionStatus *ReachV1ContactsProfileContactUpdateResourceSubscriptionStatus `json:"subscription_status,omitempty"`
+
+	// Surname Example: Doe
+	Surname *string `json:"surname,omitempty"`
+
+	// UnsubscribedAt Example: 2023-06-15T00:00:00Z
+	UnsubscribedAt *time.Time `json:"unsubscribed_at,omitempty"`
+
+	// Uuid Example: 550e8400-e29b-41d4-a716-446655440000
+	Uuid *string `json:"uuid,omitempty"`
+}
+
+// ReachV1ContactsProfileContactUpdateResourceSubscriptionStatus Example: subscribed
+type ReachV1ContactsProfileContactUpdateResourceSubscriptionStatus string
+
 // ReachV1ContactsSegmentsContactSegmentCollection Array of [`Reach.V1.Contacts.Segments.ContactSegmentResource`](#model/reachv1contactssegmentscontactsegmentresource)
 type ReachV1ContactsSegmentsContactSegmentCollection = []ReachV1ContactsSegmentsContactSegmentResource
 
@@ -7174,6 +8228,127 @@ type ReachV1ContactsSegmentsContactSegmentResource struct {
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 
 	// Name Example: Newsletter Subscribers
+	Name *string `json:"name,omitempty"`
+
+	// UpdatedAt Example: 2025-02-27T11:54:22Z
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+
+	// Uuid Example: 550e8400-e29b-41d4-a716-446655440000
+	Uuid *string `json:"uuid,omitempty"`
+}
+
+// ReachV1ContactsSegmentsProfileStoreRequest Create a segment from a set of conditions
+type ReachV1ContactsSegmentsProfileStoreRequest struct {
+	// Conditions Conditions a contact must satisfy to fall into the segment
+	Conditions []struct {
+		// Attribute A built-in contact attribute, or `cf:{fieldUuid}` to target a custom
+		// contact field. Custom fields are addressed by field UUID; their slug
+		// is not accepted.
+		//
+		// Built-in attributes: `email`, `note`, `domain`, `source`,
+		// `opt_in_method`, `subscription_status`, `subscribed_at`,
+		// `unsubscribed_at`, `created_at`, `tag`, `campaigns`, `processed`,
+		// `opened`, `clicked`, `delivered`, `bounced`, `soft_bounced`,
+		// `dropped`.
+		//
+		// Which operators are accepted depends on the attribute.
+		//
+		// Example: email
+		Attribute string `json:"attribute"`
+
+		// Operator Example: equals
+		Operator ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator `json:"operator"`
+
+		// Value Always a string, including for numeric and date comparisons
+		//
+		// Example: example@example.com
+		Value string `json:"value"`
+	} `json:"conditions"`
+
+	// Logic How to combine multiple conditions
+	//
+	// Example: AND
+	Logic ReachV1ContactsSegmentsProfileStoreRequestLogic `json:"logic"`
+
+	// Name Example: VIP Customers
+	Name string `json:"name"`
+}
+
+// ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator Example: equals
+type ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator string
+
+// ReachV1ContactsSegmentsProfileStoreRequestLogic How to combine multiple conditions
+//
+// Example: AND
+type ReachV1ContactsSegmentsProfileStoreRequestLogic string
+
+// ReachV1ContactsSegmentsProfileUpdateRequest Rename a segment and/or replace the conditions that define it
+type ReachV1ContactsSegmentsProfileUpdateRequest struct {
+	// Conditions Replaces the existing conditions entirely. Omit to keep the current ones.
+	Conditions *[]struct {
+		// Attribute A built-in contact attribute, or `cf:{fieldUuid}` to target a custom
+		// contact field. Custom fields are addressed by field UUID; their slug
+		// is not accepted.
+		//
+		// Built-in attributes: `email`, `note`, `domain`, `source`,
+		// `opt_in_method`, `subscription_status`, `subscribed_at`,
+		// `unsubscribed_at`, `created_at`, `tag`, `campaigns`, `processed`,
+		// `opened`, `clicked`, `delivered`, `bounced`, `soft_bounced`,
+		// `dropped`.
+		//
+		// Which operators are accepted depends on the attribute.
+		//
+		// Example: email
+		Attribute string `json:"attribute"`
+
+		// Operator Example: equals
+		Operator ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator `json:"operator"`
+
+		// Value Always a string, including for numeric and date comparisons
+		//
+		// Example: example@example.com
+		Value string `json:"value"`
+	} `json:"conditions,omitempty"`
+
+	// Logic How to combine multiple conditions. Required when conditions are given.
+	//
+	// Example: AND
+	Logic *ReachV1ContactsSegmentsProfileUpdateRequestLogic `json:"logic,omitempty"`
+
+	// Name Example: VIP Customers
+	Name string `json:"name"`
+}
+
+// ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator Example: equals
+type ReachV1ContactsSegmentsProfileUpdateRequestConditionsOperator string
+
+// ReachV1ContactsSegmentsProfileUpdateRequestLogic How to combine multiple conditions. Required when conditions are given.
+//
+// Example: AND
+type ReachV1ContactsSegmentsProfileUpdateRequestLogic string
+
+// ReachV1ContactsSegmentsSegmentContactsCountResource defines model for Reach.V1.Contacts.Segments.SegmentContactsCountResource.
+type ReachV1ContactsSegmentsSegmentContactsCountResource struct {
+	// Count Contacts currently matching the segment conditions
+	//
+	// Example: 150
+	Count *int `json:"count,omitempty"`
+}
+
+// ReachV1ContactsSegmentsSegmentListItemCollection Array of [`Reach.V1.Contacts.Segments.SegmentListItemResource`](#model/reachv1contactssegmentssegmentlistitemresource)
+type ReachV1ContactsSegmentsSegmentListItemCollection = []ReachV1ContactsSegmentsSegmentListItemResource
+
+// ReachV1ContactsSegmentsSegmentListItemResource defines model for Reach.V1.Contacts.Segments.SegmentListItemResource.
+type ReachV1ContactsSegmentsSegmentListItemResource struct {
+	// ContactsCount Contacts currently matching the segment conditions
+	//
+	// Example: 150
+	ContactsCount *int `json:"contacts_count,omitempty"`
+
+	// CreatedAt Example: 2025-02-27T11:54:22Z
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Name Example: VIP Customers
 	Name *string `json:"name,omitempty"`
 
 	// UpdatedAt Example: 2025-02-27T11:54:22Z
@@ -7294,6 +8469,90 @@ type ReachV1ContactsStoreRequest struct {
 	// Surname Example: Doe
 	Surname *string `json:"surname,omitempty"`
 }
+
+// ReachV1ContactsTagsManageContactsRequest Contacts to assign to, or remove from, a tag
+type ReachV1ContactsTagsManageContactsRequest struct {
+	// AllContacts Apply to every contact in the profile
+	AllContacts *bool `json:"all_contacts,omitempty"`
+
+	// ContactUuids Contacts to apply the change to. Required unless all_contacts is true.
+	ContactUuids *[]string `json:"contact_uuids,omitempty"`
+}
+
+// ReachV1ContactsTagsStoreRequest Names to create. Names that already exist in the profile are returned as they are.
+type ReachV1ContactsTagsStoreRequest struct {
+	// Names Example: ["Newsletter","VIP","Promo"]
+	Names []string `json:"names"`
+}
+
+// ReachV1ContactsTagsTagCollection Array of [`Reach.V1.Contacts.Tags.TagResource`](#model/reachv1contactstagstagresource)
+type ReachV1ContactsTagsTagCollection = []ReachV1ContactsTagsTagResource
+
+// ReachV1ContactsTagsTagResource defines model for Reach.V1.Contacts.Tags.TagResource.
+type ReachV1ContactsTagsTagResource struct {
+	// CreatedAt Example: 2025-02-27T11:54:22Z
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Type How the tag came about. `custom` covers the tags you create yourself, `form` covers the ones Reach creates for its forms.
+	//
+	// Example: custom
+	Type *ReachV1ContactsTagsTagResourceType `json:"type,omitempty"`
+
+	// Uuid Example: 550e8400-e29b-41d4-a716-446655440000
+	Uuid *string `json:"uuid,omitempty"`
+
+	// Value Example: Newsletter
+	Value *string `json:"value,omitempty"`
+}
+
+// ReachV1ContactsTagsTagResourceType How the tag came about. `custom` covers the tags you create yourself, `form` covers the ones Reach creates for its forms.
+//
+// Example: custom
+type ReachV1ContactsTagsTagResourceType string
+
+// ReachV1ContactsTagsUpdateRequest Rename a tag
+type ReachV1ContactsTagsUpdateRequest struct {
+	// Value New tag name
+	//
+	// Example: Newsletter
+	Value string `json:"value"`
+}
+
+// ReachV1ContactsUpdateRequest Fields to change on a contact. Omitted properties are left untouched.
+type ReachV1ContactsUpdateRequest struct {
+	// Email Example: john.doe@example.com
+	Email *string `json:"email,omitempty"`
+
+	// Fields Set custom field values. Omit to leave untouched, send an empty array to clear them all.
+	Fields *[]struct {
+		// SelectedOptionUuids For the choice field types
+		SelectedOptionUuids *[]string `json:"selected_option_uuids,omitempty"`
+		Uuid                string    `json:"uuid"`
+
+		// Value For the scalar field types
+		Value *string `json:"value,omitempty"`
+	} `json:"fields,omitempty"`
+
+	// Name Example: John
+	Name *string `json:"name,omitempty"`
+
+	// Note Example: VIP customer
+	Note *string `json:"note,omitempty"`
+
+	// Phone Phone number in E.164 format (leading "+" then 7-15 digits)
+	//
+	// Example: +14155552671
+	Phone *string `json:"phone,omitempty"`
+
+	// SubscriptionStatus Example: subscribed
+	SubscriptionStatus *ReachV1ContactsUpdateRequestSubscriptionStatus `json:"subscription_status,omitempty"`
+
+	// Surname Example: Doe
+	Surname *string `json:"surname,omitempty"`
+}
+
+// ReachV1ContactsUpdateRequestSubscriptionStatus Example: subscribed
+type ReachV1ContactsUpdateRequestSubscriptionStatus string
 
 // ReachV1ProfilesDomainsDnsRecordStatus defines model for Reach.V1.Profiles.Domains.DnsRecordStatus.
 type ReachV1ProfilesDomainsDnsRecordStatus struct {
@@ -9142,6 +10401,12 @@ type BuildUuidPath = openapi_types.UUID
 // Category Example: VPS
 type Category string
 
+// ContactUuid Example: 550e8400-e29b-41d4-a716-446655440000
+type ContactUuid = openapi_types.UUID
+
+// CountType Example: all
+type CountType string
+
 // CronJobUidPath Example: cron_abc123
 type CronJobUidPath = string
 
@@ -9160,8 +10425,14 @@ type Domain = string
 // DomainFilter Example: example.com
 type DomainFilter = string
 
+// FieldUuid Example: 550e8400-e29b-41d4-a716-446655440000
+type FieldUuid = openapi_types.UUID
+
 // FirewallId Example: 9449049
 type FirewallId = int
+
+// ForceSync Example: true
+type ForceSync = bool
 
 // FromDomain Example: old.example.com
 type FromDomain = string
@@ -9301,6 +10572,9 @@ type PublicKeyId = int
 // RuleId Example: 8941182
 type RuleId = int
 
+// Search Example: john.doe@example.com
+type Search = string
+
 // SegmentUuid Example: 550e8400-e09b-41d4-a716-400055000000
 type SegmentUuid = string
 
@@ -9324,6 +10598,9 @@ type SubscriptionId = string
 
 // SubscriptionStatus Example: subscribed
 type SubscriptionStatus string
+
+// TagUuid Example: 550e8400-e29b-41d4-a716-446655440000
+type TagUuid = openapi_types.UUID
 
 // TemplateId Example: 2868928
 type TemplateId = int
@@ -9453,6 +10730,12 @@ type BillingGetCatalogItemListV1Params struct {
 
 // BillingGetCatalogItemListV1ParamsCategory defines parameters for BillingGetCatalogItemListV1.
 type BillingGetCatalogItemListV1ParamsCategory string
+
+// DomainsGetIncomingDomainMoveV1Params defines parameters for DomainsGetIncomingDomainMoveV1.
+type DomainsGetIncomingDomainMoveV1Params struct {
+	// ForceSync Re-check the move against the registry before responding. Only has an effect while the move is in the `activating` status.
+	ForceSync *ForceSync `form:"force_sync,omitempty" json:"force_sync,omitempty"`
+}
 
 // DomainsGetWHOISProfileListV1Params defines parameters for DomainsGetWHOISProfileListV1.
 type DomainsGetWHOISProfileListV1Params struct {
@@ -9934,6 +11217,42 @@ type ReachListContactsV1Params struct {
 // ReachListContactsV1ParamsSubscriptionStatus defines parameters for ReachListContactsV1.
 type ReachListContactsV1ParamsSubscriptionStatus string
 
+// ReachListProfileContactsV1Params defines parameters for ReachListProfileContactsV1.
+type ReachListProfileContactsV1Params struct {
+	// SubscriptionStatus Filter contacts by subscription status
+	SubscriptionStatus *ReachListProfileContactsV1ParamsSubscriptionStatus `form:"subscription_status,omitempty" json:"subscription_status,omitempty"`
+
+	// TagUuid Filter contacts by tag UUID
+	TagUuid *TagUuid `form:"tag_uuid,omitempty" json:"tag_uuid,omitempty"`
+
+	// Search Search contacts by email
+	Search *Search `form:"search,omitempty" json:"search,omitempty"`
+
+	// Page Page number
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+
+	// PerPage Number of items per page
+	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
+}
+
+// ReachListProfileContactsV1ParamsSubscriptionStatus defines parameters for ReachListProfileContactsV1.
+type ReachListProfileContactsV1ParamsSubscriptionStatus string
+
+// ReachListProfileSegmentsV1Params defines parameters for ReachListProfileSegmentsV1.
+type ReachListProfileSegmentsV1Params struct {
+	// CountType Which matching contacts to count for each segment
+	CountType *ReachListProfileSegmentsV1ParamsCountType `form:"count_type,omitempty" json:"count_type,omitempty"`
+
+	// Page Page number
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+
+	// PerPage Number of items per page
+	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
+}
+
+// ReachListProfileSegmentsV1ParamsCountType defines parameters for ReachListProfileSegmentsV1.
+type ReachListProfileSegmentsV1ParamsCountType string
+
 // ReachListProfileSegmentContactsV1Params defines parameters for ReachListProfileSegmentContactsV1.
 type ReachListProfileSegmentContactsV1Params struct {
 	// Page Page number
@@ -10048,11 +11367,23 @@ type DomainsCreateDomainForwardingV1JSONRequestBody = DomainsV1ForwardingStoreRe
 // DomainsUpdateDomainForwardingV1JSONRequestBody defines body for DomainsUpdateDomainForwardingV1 for application/json ContentType.
 type DomainsUpdateDomainForwardingV1JSONRequestBody = DomainsV1ForwardingUpdateRequest
 
+// DomainsAcceptIncomingDomainMoveV1JSONRequestBody defines body for DomainsAcceptIncomingDomainMoveV1 for application/json ContentType.
+type DomainsAcceptIncomingDomainMoveV1JSONRequestBody = DomainsV1MoveIncomingUpdateRequest
+
+// DomainsStartOutgoingDomainMoveV1JSONRequestBody defines body for DomainsStartOutgoingDomainMoveV1 for application/json ContentType.
+type DomainsStartOutgoingDomainMoveV1JSONRequestBody = DomainsV1MoveOutgoingStoreRequest
+
 // DomainsPurchaseNewDomainV1JSONRequestBody defines body for DomainsPurchaseNewDomainV1 for application/json ContentType.
 type DomainsPurchaseNewDomainV1JSONRequestBody = DomainsV1PortfolioPurchaseRequest
 
+// DomainsClaimFreeDomainV1JSONRequestBody defines body for DomainsClaimFreeDomainV1 for application/json ContentType.
+type DomainsClaimFreeDomainV1JSONRequestBody = DomainsV1PortfolioClaimRequest
+
 // DomainsUpdateDomainNameserversV1JSONRequestBody defines body for DomainsUpdateDomainNameserversV1 for application/json ContentType.
 type DomainsUpdateDomainNameserversV1JSONRequestBody = DomainsV1PortfolioUpdateNameserversRequest
+
+// DomainsClaimFreeDomainTransferV1JSONRequestBody defines body for DomainsClaimFreeDomainTransferV1 for application/json ContentType.
+type DomainsClaimFreeDomainTransferV1JSONRequestBody = DomainsV1TransferClaimRequest
 
 // DomainsCreateWHOISProfileV1JSONRequestBody defines body for DomainsCreateWHOISProfileV1 for application/json ContentType.
 type DomainsCreateWHOISProfileV1JSONRequestBody = DomainsV1WHOISStoreRequest
@@ -10221,7 +11552,39 @@ type ReachCreateANewContactV1JSONRequestBody = ReachV1ContactsStoreRequest
 // ReachCreateNewContactsV1JSONRequestBody defines body for ReachCreateNewContactsV1 for application/json ContentType.
 type ReachCreateNewContactsV1JSONRequestBody = ReachV1ContactsStoreRequest
 
+// ReachCreateContactsInBulkV1JSONRequestBody defines body for ReachCreateContactsInBulkV1 for application/json ContentType.
+type ReachCreateContactsInBulkV1JSONRequestBody = ReachV1ContactsBulkStoreRequest
+
+// ReachCreateAContactFieldV1JSONRequestBody defines body for ReachCreateAContactFieldV1 for application/json ContentType.
+type ReachCreateAContactFieldV1JSONRequestBody = ReachV1ContactsFieldsStoreRequest
+
+// ReachUpdateAContactFieldV1JSONRequestBody defines body for ReachUpdateAContactFieldV1 for application/json ContentType.
+type ReachUpdateAContactFieldV1JSONRequestBody = ReachV1ContactsFieldsUpdateRequest
+
+// ReachUpdateAContactV1JSONRequestBody defines body for ReachUpdateAContactV1 for application/json ContentType.
+type ReachUpdateAContactV1JSONRequestBody = ReachV1ContactsUpdateRequest
+
+// ReachCreateAProfileSegmentV1JSONRequestBody defines body for ReachCreateAProfileSegmentV1 for application/json ContentType.
+type ReachCreateAProfileSegmentV1JSONRequestBody = ReachV1ContactsSegmentsProfileStoreRequest
+
+// ReachUpdateAProfileSegmentV1JSONRequestBody defines body for ReachUpdateAProfileSegmentV1 for application/json ContentType.
+type ReachUpdateAProfileSegmentV1JSONRequestBody = ReachV1ContactsSegmentsProfileUpdateRequest
+
+// ReachCreateOrFindTagsV1JSONRequestBody defines body for ReachCreateOrFindTagsV1 for application/json ContentType.
+type ReachCreateOrFindTagsV1JSONRequestBody = ReachV1ContactsTagsStoreRequest
+
+// ReachRenameATagV1JSONRequestBody defines body for ReachRenameATagV1 for application/json ContentType.
+type ReachRenameATagV1JSONRequestBody = ReachV1ContactsTagsUpdateRequest
+
+// ReachRemoveContactsFromATagV1JSONRequestBody defines body for ReachRemoveContactsFromATagV1 for application/json ContentType.
+type ReachRemoveContactsFromATagV1JSONRequestBody = ReachV1ContactsTagsManageContactsRequest
+
+// ReachAssignContactsToATagV1JSONRequestBody defines body for ReachAssignContactsToATagV1 for application/json ContentType.
+type ReachAssignContactsToATagV1JSONRequestBody = ReachV1ContactsTagsManageContactsRequest
+
 // ReachCreateANewContactSegmentV1JSONRequestBody defines body for ReachCreateANewContactSegmentV1 for application/json ContentType.
+//
+// Deprecated: this type has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 type ReachCreateANewContactSegmentV1JSONRequestBody = ReachV1ContactsSegmentsStoreRequest
 
 // V2GetDomainVerificationsDIRECTJSONRequestBody defines body for V2GetDomainVerificationsDIRECT for application/json ContentType.
@@ -12022,6 +13385,160 @@ type ClientInterface interface {
 	// Corresponds with GET /api/domains/v1/irtp/{domain} (the `DomainsGetPendingIRTPVerificationV1` operationId).
 	DomainsGetPendingIRTPVerificationV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// DomainsGetIncomingDomainMoveListV1 Get incoming domain move list
+	//
+	// Retrieve all domains other Hostinger accounts are moving to your account.
+	//
+	// Moves of every status are returned, including the ones which already completed.
+	//
+	// Use this endpoint to find domains waiting for you to accept them.
+	//
+	// Corresponds with GET /api/domains/v1/move/incoming (the `DomainsGetIncomingDomainMoveListV1` operationId).
+	DomainsGetIncomingDomainMoveListV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsRejectIncomingDomainMoveV1 Reject incoming domain move
+	//
+	// Reject an incoming move for a specified domain.
+	//
+	// The domain stays in the account which initiated the move.
+	// Moves you have already accepted cannot be rejected anymore.
+	//
+	// Use this endpoint to decline a domain you do not want to take over.
+	//
+	// Corresponds with DELETE /api/domains/v1/move/incoming/{domain} (the `DomainsRejectIncomingDomainMoveV1` operationId).
+	DomainsRejectIncomingDomainMoveV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsGetIncomingDomainMoveV1 Get incoming domain move
+	//
+	// Retrieve the incoming move for a specified domain.
+	//
+	// Returns 404 when no account is moving this domain to you.
+	//
+	// Use this endpoint to check whether a domain addressed to you is still waiting to be accepted.
+	//
+	// Corresponds with GET /api/domains/v1/move/incoming/{domain} (the `DomainsGetIncomingDomainMoveV1` operationId).
+	DomainsGetIncomingDomainMoveV1(ctx context.Context, domain Domain, params *DomainsGetIncomingDomainMoveV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsAcceptIncomingDomainMoveV1WithBody Accept incoming domain move
+	//
+	// Accept an incoming move for a specified domain.
+	//
+	// The provided WHOIS profiles become the contacts of the domain, so they must belong
+	// to your account and satisfy the requirements of the TLD. Only the contact types the
+	// domain actually uses are applied, but all four profile IDs have to be provided.
+	//
+	// The move has to still be waiting for your decision, already accepted moves
+	// cannot be accepted again.
+	//
+	// Accepting does not complete the move. A confirmation email is sent to the email address of
+	// the new owner contact, and the domain changes hands only after the change is confirmed from it.
+	// Until then the move stays in the `activating` status, which can be followed with the
+	// [incoming move endpoint](#tag/domains-move).
+	//
+	// Use this endpoint to take ownership of a domain offered to you.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PUT /api/domains/v1/move/incoming/{domain} (the `DomainsAcceptIncomingDomainMoveV1` operationId).
+	DomainsAcceptIncomingDomainMoveV1WithBody(ctx context.Context, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsAcceptIncomingDomainMoveV1 Accept incoming domain move
+	//
+	// Accept an incoming move for a specified domain.
+	//
+	// The provided WHOIS profiles become the contacts of the domain, so they must belong
+	// to your account and satisfy the requirements of the TLD. Only the contact types the
+	// domain actually uses are applied, but all four profile IDs have to be provided.
+	//
+	// The move has to still be waiting for your decision, already accepted moves
+	// cannot be accepted again.
+	//
+	// Accepting does not complete the move. A confirmation email is sent to the email address of
+	// the new owner contact, and the domain changes hands only after the change is confirmed from it.
+	// Until then the move stays in the `activating` status, which can be followed with the
+	// [incoming move endpoint](#tag/domains-move).
+	//
+	// Use this endpoint to take ownership of a domain offered to you.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PUT /api/domains/v1/move/incoming/{domain} (the `DomainsAcceptIncomingDomainMoveV1` operationId).
+	DomainsAcceptIncomingDomainMoveV1(ctx context.Context, domain Domain, body DomainsAcceptIncomingDomainMoveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsGetOutgoingDomainMoveListV1 Get outgoing domain move list
+	//
+	// Retrieve all domains you are moving to other Hostinger accounts.
+	//
+	// Only moves which have not completed yet are returned.
+	//
+	// Use this endpoint to track moves you have initiated and the accounts they are addressed to.
+	//
+	// Corresponds with GET /api/domains/v1/move/outgoing (the `DomainsGetOutgoingDomainMoveListV1` operationId).
+	DomainsGetOutgoingDomainMoveListV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsCancelOutgoingDomainMoveV1 Cancel outgoing domain move
+	//
+	// Cancel an outgoing move for a specified domain.
+	//
+	// The move can only be cancelled while the receiving account has not accepted it yet.
+	// The domain stays in your account.
+	//
+	// Use this endpoint to withdraw a move you no longer want to complete.
+	//
+	// Corresponds with DELETE /api/domains/v1/move/outgoing/{domain} (the `DomainsCancelOutgoingDomainMoveV1` operationId).
+	DomainsCancelOutgoingDomainMoveV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsGetOutgoingDomainMoveV1 Get outgoing domain move
+	//
+	// Retrieve the outgoing move for a specified domain.
+	//
+	// Returns 404 when the domain has no move in progress.
+	//
+	// Use this endpoint to track the status of a move you have initiated for a single domain.
+	//
+	// Corresponds with GET /api/domains/v1/move/outgoing/{domain} (the `DomainsGetOutgoingDomainMoveV1` operationId).
+	DomainsGetOutgoingDomainMoveV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsStartOutgoingDomainMoveV1WithBody Start outgoing domain move
+	//
+	// Initiate a move of a specified domain to another Hostinger account.
+	//
+	// The receiving account has to already exist and accept the move before the domain changes hands.
+	//
+	// The domain must be active. The subscription it belongs to is resolved automatically,
+	// and the request is rejected with a 404 status code when the domain has no domain
+	// subscription of its own.
+	//
+	// Domains protected by premium protection require an additional verification step,
+	// such requests are rejected with a 428 status code.
+	//
+	// Use this endpoint to hand a domain over to another Hostinger user.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/domains/v1/move/outgoing/{domain} (the `DomainsStartOutgoingDomainMoveV1` operationId).
+	DomainsStartOutgoingDomainMoveV1WithBody(ctx context.Context, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsStartOutgoingDomainMoveV1 Start outgoing domain move
+	//
+	// Initiate a move of a specified domain to another Hostinger account.
+	//
+	// The receiving account has to already exist and accept the move before the domain changes hands.
+	//
+	// The domain must be active. The subscription it belongs to is resolved automatically,
+	// and the request is rejected with a 404 status code when the domain has no domain
+	// subscription of its own.
+	//
+	// Domains protected by premium protection require an additional verification step,
+	// such requests are rejected with a 428 status code.
+	//
+	// Use this endpoint to hand a domain over to another Hostinger user.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/domains/v1/move/outgoing/{domain} (the `DomainsStartOutgoingDomainMoveV1` operationId).
+	DomainsStartOutgoingDomainMoveV1(ctx context.Context, domain Domain, body DomainsStartOutgoingDomainMoveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// DomainsGetDomainListV1 Get domain list
 	//
 	// Retrieve all domains associated with your account.
@@ -12070,6 +13587,56 @@ type ClientInterface interface {
 	//
 	// Corresponds with POST /api/domains/v1/portfolio (the `DomainsPurchaseNewDomainV1` operationId).
 	DomainsPurchaseNewDomainV1(ctx context.Context, body DomainsPurchaseNewDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsClaimFreeDomainV1WithBody Claim free domain
+	//
+	// Claim a free domain available on your account and register it.
+	//
+	// Unlike purchasing a domain, this consumes a free domain you already have,
+	// so no payment method is required.
+	//
+	// A successful response means the domain is registered. If registration fails, login to
+	// [hPanel](https://hpanel.hostinger.com/) and check domain registration status.
+	//
+	// If no WHOIS information is provided, default contact information for that TLD will be used.
+	// Before making request, ensure WHOIS information for desired TLD exists in your account.
+	//
+	// Some TLDs require `additional_details` to be provided and these will be validated before claiming.
+	//
+	// Requests which cannot be fulfilled are rejected with an error code in the response body,
+	// for example `2037` when no free domain is available.
+	//
+	// Use this endpoint to register a domain using a free domain from your account.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/domains/v1/portfolio/claim (the `DomainsClaimFreeDomainV1` operationId).
+	DomainsClaimFreeDomainV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsClaimFreeDomainV1 Claim free domain
+	//
+	// Claim a free domain available on your account and register it.
+	//
+	// Unlike purchasing a domain, this consumes a free domain you already have,
+	// so no payment method is required.
+	//
+	// A successful response means the domain is registered. If registration fails, login to
+	// [hPanel](https://hpanel.hostinger.com/) and check domain registration status.
+	//
+	// If no WHOIS information is provided, default contact information for that TLD will be used.
+	// Before making request, ensure WHOIS information for desired TLD exists in your account.
+	//
+	// Some TLDs require `additional_details` to be provided and these will be validated before claiming.
+	//
+	// Requests which cannot be fulfilled are rejected with an error code in the response body,
+	// for example `2037` when no free domain is available.
+	//
+	// Use this endpoint to register a domain using a free domain from your account.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/domains/v1/portfolio/claim (the `DomainsClaimFreeDomainV1` operationId).
+	DomainsClaimFreeDomainV1(ctx context.Context, body DomainsClaimFreeDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DomainsGetDomainDetailsV1 Get domain details
 	//
@@ -12181,6 +13748,58 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/domains/v1/transfers (the `DomainsGetTransferListV1` operationId).
 	DomainsGetTransferListV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsClaimFreeDomainTransferV1WithBody Claim free domain transfer
+	//
+	// Claim a free domain transfer available on your account and start the transfer.
+	//
+	// Unlike purchasing a transfer, this consumes a free domain transfer you already have,
+	// so no payment method is required.
+	//
+	// Before making request, unlock the domain at the current registrar and get its authorization
+	// code. The transfer is validated first, so domains which cannot be transferred are rejected
+	// before the free domain transfer is consumed.
+	//
+	// A successful response means the transfer has been started. Completion depends on the current
+	// registrar and can be followed with the [transfer list endpoint](#tag/domains-transfer).
+	//
+	// If no WHOIS information is provided, default contact information for that TLD will be used.
+	// Before making request, ensure WHOIS information for desired TLD exists in your account.
+	//
+	// Requests which cannot be fulfilled are rejected with an error code in the response body.
+	//
+	// Use this endpoint to transfer a domain using a free domain transfer from your account.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/domains/v1/transfers/claim (the `DomainsClaimFreeDomainTransferV1` operationId).
+	DomainsClaimFreeDomainTransferV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsClaimFreeDomainTransferV1 Claim free domain transfer
+	//
+	// Claim a free domain transfer available on your account and start the transfer.
+	//
+	// Unlike purchasing a transfer, this consumes a free domain transfer you already have,
+	// so no payment method is required.
+	//
+	// Before making request, unlock the domain at the current registrar and get its authorization
+	// code. The transfer is validated first, so domains which cannot be transferred are rejected
+	// before the free domain transfer is consumed.
+	//
+	// A successful response means the transfer has been started. Completion depends on the current
+	// registrar and can be followed with the [transfer list endpoint](#tag/domains-transfer).
+	//
+	// If no WHOIS information is provided, default contact information for that TLD will be used.
+	// Before making request, ensure WHOIS information for desired TLD exists in your account.
+	//
+	// Requests which cannot be fulfilled are rejected with an error code in the response body.
+	//
+	// Use this endpoint to transfer a domain using a free domain transfer from your account.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/domains/v1/transfers/claim (the `DomainsClaimFreeDomainTransferV1` operationId).
+	DomainsClaimFreeDomainTransferV1(ctx context.Context, body DomainsClaimFreeDomainTransferV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DomainsGetTransferV1 Get transfer
 	//
@@ -14538,7 +16157,14 @@ type ClientInterface interface {
 	// This endpoint returns a paginated list of contacts with their basic information.
 	// You can filter contacts by group UUID and subscription status.
 	//
+	// **Deprecated.** This endpoint cannot target a profile, so it always falls back to the
+	// client's default profile and cannot list contacts of any other profile. Use
+	// `GET /api/reach/v1/profiles/{profileUuid}/contacts` instead, which also replaces the
+	// group filter with a tag filter.
+	//
 	// Corresponds with GET /api/reach/v1/contacts (the `ReachListContactsV1` operationId).
+	//
+	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	ReachListContactsV1(ctx context.Context, params *ReachListContactsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReachCreateANewContactV1WithBody Create a new contact
@@ -14590,7 +16216,13 @@ type ClientInterface interface {
 	//
 	// This endpoint permanently removes a contact from the email marketing system.
 	//
+	// **Deprecated.** This endpoint cannot target a profile, so it always falls back to the
+	// client's default profile and cannot delete contacts of any other profile. Use
+	// `DELETE /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid}` instead.
+	//
 	// Corresponds with DELETE /api/reach/v1/contacts/{uuid} (the `ReachDeleteAContactV1` operationId).
+	//
+	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	ReachDeleteAContactV1(ctx context.Context, uuid Uuid, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReachListProfilesV1 List Profiles
@@ -14599,6 +16231,17 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/reach/v1/profiles (the `ReachListProfilesV1` operationId).
 	ReachListProfilesV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachListProfileContactsV1 List profile contacts
+	//
+	// Get a paginated list of contacts belonging to a profile.
+	//
+	// Contacts can be filtered by subscription status, by tag, and by an email search term.
+	// The `meta.total` field of the response is the number of contacts matching the filters,
+	// so calling this endpoint without filters gives the profile's total contact count.
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/contacts (the `ReachListProfileContactsV1` operationId).
+	ReachListProfileContactsV1(ctx context.Context, profileUuid ProfileUuid, params *ReachListProfileContactsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReachCreateNewContactsV1WithBody Create new contacts
 	//
@@ -14628,6 +16271,154 @@ type ClientInterface interface {
 	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/contacts (the `ReachCreateNewContactsV1` operationId).
 	ReachCreateNewContactsV1(ctx context.Context, profileUuid ProfileUuid, body ReachCreateNewContactsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ReachCreateContactsInBulkV1WithBody Create contacts in bulk
+	//
+	// Create many contacts in a profile in a single call.
+	//
+	// The contacts are imported in the background, so a success response means the import was
+	// accepted rather than finished. Contacts whose email already exists in the profile are
+	// left as they are. If double opt-in is enabled, new contacts start off pending and are
+	// sent a confirmation email.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/contacts/bulk (the `ReachCreateContactsInBulkV1` operationId).
+	ReachCreateContactsInBulkV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachCreateContactsInBulkV1 Create contacts in bulk
+	//
+	// Create many contacts in a profile in a single call.
+	//
+	// The contacts are imported in the background, so a success response means the import was
+	// accepted rather than finished. Contacts whose email already exists in the profile are
+	// left as they are. If double opt-in is enabled, new contacts start off pending and are
+	// sent a confirmation email.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/contacts/bulk (the `ReachCreateContactsInBulkV1` operationId).
+	ReachCreateContactsInBulkV1(ctx context.Context, profileUuid ProfileUuid, body ReachCreateContactsInBulkV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachListContactFieldsV1 List contact fields
+	//
+	// Get the custom contact fields defined in a profile.
+	//
+	// Custom fields let you store your own attributes on contacts. The returned uuids are what
+	// you pass to the contact update endpoint to set values, and choice fields also list the
+	// options available to pick from.
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/contacts/fields (the `ReachListContactFieldsV1` operationId).
+	ReachListContactFieldsV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachCreateAContactFieldV1WithBody Create a contact field
+	//
+	// Define a new custom contact field in a profile.
+	//
+	// The `slug` is derived from the label and, like the field type, cannot be changed later.
+	// Use the returned uuid to set values on contacts.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/contacts/fields (the `ReachCreateAContactFieldV1` operationId).
+	ReachCreateAContactFieldV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachCreateAContactFieldV1 Create a contact field
+	//
+	// Define a new custom contact field in a profile.
+	//
+	// The `slug` is derived from the label and, like the field type, cannot be changed later.
+	// Use the returned uuid to set values on contacts.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/contacts/fields (the `ReachCreateAContactFieldV1` operationId).
+	ReachCreateAContactFieldV1(ctx context.Context, profileUuid ProfileUuid, body ReachCreateAContactFieldV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachDeleteAContactFieldV1 Delete a contact field
+	//
+	// Delete a custom contact field.
+	//
+	// Every value contacts hold for the field is deleted with it, and for the choice types so
+	// are its options. The contacts themselves are not affected.
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/contacts/fields/{fieldUuid} (the `ReachDeleteAContactFieldV1` operationId).
+	ReachDeleteAContactFieldV1(ctx context.Context, profileUuid ProfileUuid, fieldUuid FieldUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachUpdateAContactFieldV1WithBody Update a contact field
+	//
+	// Rename a custom contact field and, for the choice types, replace its option set.
+	//
+	// Options carrying a uuid are kept and relabelled, options without one are created, and any
+	// existing option left out of the list is deleted along with the values contacts hold for
+	// it. The field type and slug cannot be changed.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/contacts/fields/{fieldUuid} (the `ReachUpdateAContactFieldV1` operationId).
+	ReachUpdateAContactFieldV1WithBody(ctx context.Context, profileUuid ProfileUuid, fieldUuid FieldUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachUpdateAContactFieldV1 Update a contact field
+	//
+	// Rename a custom contact field and, for the choice types, replace its option set.
+	//
+	// Options carrying a uuid are kept and relabelled, options without one are created, and any
+	// existing option left out of the list is deleted along with the values contacts hold for
+	// it. The field type and slug cannot be changed.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/contacts/fields/{fieldUuid} (the `ReachUpdateAContactFieldV1` operationId).
+	ReachUpdateAContactFieldV1(ctx context.Context, profileUuid ProfileUuid, fieldUuid FieldUuid, body ReachUpdateAContactFieldV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachDeleteAProfileContactV1 Delete a profile contact
+	//
+	// Permanently delete a contact from a profile.
+	//
+	// The contact is removed together with its custom field values and tag assignments.
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid} (the `ReachDeleteAProfileContactV1` operationId).
+	ReachDeleteAProfileContactV1(ctx context.Context, profileUuid ProfileUuid, contactUuid ContactUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachGetContactDetailsV1 Get contact details
+	//
+	// Get the full details of a single contact.
+	//
+	// Alongside the contact's own attributes this returns the tags assigned to it and the
+	// values it holds for the profile's custom contact fields.
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid} (the `ReachGetContactDetailsV1` operationId).
+	ReachGetContactDetailsV1(ctx context.Context, profileUuid ProfileUuid, contactUuid ContactUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachUpdateAContactV1WithBody Update a contact
+	//
+	// Update a contact's attributes and custom field values.
+	//
+	// Only the properties present in the request body are changed, so a partial body is enough
+	// to change a single attribute. Sending a property as `null` clears it.
+	//
+	// The response carries the contact's core attributes. Read back its tags, custom field
+	// values, source and note with `GET /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid}`.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid} (the `ReachUpdateAContactV1` operationId).
+	ReachUpdateAContactV1WithBody(ctx context.Context, profileUuid ProfileUuid, contactUuid ContactUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachUpdateAContactV1 Update a contact
+	//
+	// Update a contact's attributes and custom field values.
+	//
+	// Only the properties present in the request body are changed, so a partial body is enough
+	// to change a single attribute. Sending a property as `null` clears it.
+	//
+	// The response carries the contact's core attributes. Read back its tags, custom field
+	// values, source and note with `GET /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid}`.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid} (the `ReachUpdateAContactV1` operationId).
+	ReachUpdateAContactV1(ctx context.Context, profileUuid ProfileUuid, contactUuid ContactUuid, body ReachUpdateAContactV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ReachGetProfileDomainDNSStatusV1 Get profile domain DNS status
 	//
 	// Retrieve the DNS configuration status for a profile's domain.
@@ -14637,6 +16428,86 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/domains/dns-status (the `ReachGetProfileDomainDNSStatusV1` operationId).
 	ReachGetProfileDomainDNSStatusV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachListProfileSegmentsV1 List profile segments
+	//
+	// Get a paginated list of the segments defined in a profile.
+	//
+	// Each entry carries the number of contacts currently matching it, which is recalculated on
+	// read rather than stored. Use `count_type` to count either every matching contact or only
+	// the subscribed ones.
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments (the `ReachListProfileSegmentsV1` operationId).
+	ReachListProfileSegmentsV1(ctx context.Context, profileUuid ProfileUuid, params *ReachListProfileSegmentsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachCreateAProfileSegmentV1WithBody Create a profile segment
+	//
+	// Create a segment in a profile.
+	//
+	// A segment is a saved set of conditions rather than a fixed list, so its membership changes
+	// as contacts change. Creating one does not modify any contact.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/segmentation/segments (the `ReachCreateAProfileSegmentV1` operationId).
+	ReachCreateAProfileSegmentV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachCreateAProfileSegmentV1 Create a profile segment
+	//
+	// Create a segment in a profile.
+	//
+	// A segment is a saved set of conditions rather than a fixed list, so its membership changes
+	// as contacts change. Creating one does not modify any contact.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/segmentation/segments (the `ReachCreateAProfileSegmentV1` operationId).
+	ReachCreateAProfileSegmentV1(ctx context.Context, profileUuid ProfileUuid, body ReachCreateAProfileSegmentV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachDeleteAProfileSegmentV1 Delete a profile segment
+	//
+	// Delete a segment.
+	//
+	// Only the segment definition is removed. The contacts that matched it are left untouched.
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid} (the `ReachDeleteAProfileSegmentV1` operationId).
+	ReachDeleteAProfileSegmentV1(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachGetProfileSegmentDetailsV1 Get profile segment details
+	//
+	// Get a single segment of a profile, including the conditions that define it.
+	//
+	// To retrieve the contacts currently matching those conditions, use the segment contacts
+	// endpoint instead.
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid} (the `ReachGetProfileSegmentDetailsV1` operationId).
+	ReachGetProfileSegmentDetailsV1(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachUpdateAProfileSegmentV1WithBody Update a profile segment
+	//
+	// Rename a segment and/or replace the conditions that define it.
+	//
+	// `name` is always required. Omit `conditions` to rename without touching the conditions;
+	// supply them and they replace the existing set entirely rather than being merged into it.
+	// Contacts are never modified, but which of them match the segment can change immediately.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PUT /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid} (the `ReachUpdateAProfileSegmentV1` operationId).
+	ReachUpdateAProfileSegmentV1WithBody(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachUpdateAProfileSegmentV1 Update a profile segment
+	//
+	// Rename a segment and/or replace the conditions that define it.
+	//
+	// `name` is always required. Omit `conditions` to rename without touching the conditions;
+	// supply them and they replace the existing set entirely rather than being merged into it.
+	// Contacts are never modified, but which of them match the segment can change immediately.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PUT /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid} (the `ReachUpdateAProfileSegmentV1` operationId).
+	ReachUpdateAProfileSegmentV1(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, body ReachUpdateAProfileSegmentV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReachListProfileSegmentContactsV1 List profile segment contacts
 	//
@@ -14648,13 +16519,170 @@ type ClientInterface interface {
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}/contacts (the `ReachListProfileSegmentContactsV1` operationId).
 	ReachListProfileSegmentContactsV1(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, params *ReachListProfileSegmentContactsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ReachCountProfileSegmentContactsV1 Count profile segment contacts
+	//
+	// Count the contacts currently matching a segment without listing them.
+	//
+	// Cheaper than paging through the segment contacts endpoint when only the size is needed.
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}/count (the `ReachCountProfileSegmentContactsV1` operationId).
+	ReachCountProfileSegmentContactsV1(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachListProfileTagsV1 List profile tags
+	//
+	// Get all tags defined in a profile.
+	//
+	// Tags are the way contacts are grouped in Reach, and can be used to filter the contact
+	// list or to build segments.
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/tags (the `ReachListProfileTagsV1` operationId).
+	ReachListProfileTagsV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachCreateOrFindTagsV1WithBody Create or find tags
+	//
+	// Create tags in a profile.
+	//
+	// Names that already exist in the profile are not duplicated: the existing tag is returned
+	// instead, so the call is safe to repeat. Every tag in the request is returned, whether it
+	// was created now or already existed.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/tags (the `ReachCreateOrFindTagsV1` operationId).
+	ReachCreateOrFindTagsV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachCreateOrFindTagsV1 Create or find tags
+	//
+	// Create tags in a profile.
+	//
+	// Names that already exist in the profile are not duplicated: the existing tag is returned
+	// instead, so the call is safe to repeat. Every tag in the request is returned, whether it
+	// was created now or already existed.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/tags (the `ReachCreateOrFindTagsV1` operationId).
+	ReachCreateOrFindTagsV1(ctx context.Context, profileUuid ProfileUuid, body ReachCreateOrFindTagsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachDeleteATagV1 Delete a tag
+	//
+	// Delete a tag and remove it from every contact carrying it.
+	//
+	// The contacts themselves are not deleted. This is idempotent: deleting a tag that does not
+	// exist in the profile still succeeds.
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid} (the `ReachDeleteATagV1` operationId).
+	ReachDeleteATagV1(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachRenameATagV1WithBody Rename a tag
+	//
+	// Rename a tag.
+	//
+	// The contacts assigned to the tag are unaffected. Names are unique within a profile, so
+	// renaming a tag to a name that is already taken is rejected.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid} (the `ReachRenameATagV1` operationId).
+	ReachRenameATagV1WithBody(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachRenameATagV1 Rename a tag
+	//
+	// Rename a tag.
+	//
+	// The contacts assigned to the tag are unaffected. Names are unique within a profile, so
+	// renaming a tag to a name that is already taken is rejected.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid} (the `ReachRenameATagV1` operationId).
+	ReachRenameATagV1(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, body ReachRenameATagV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachRemoveContactsFromATagV1WithBody Remove contacts from a tag
+	//
+	// Remove a tag from many contacts at once.
+	//
+	// Pass `contact_uuids` to target specific contacts, or `all_contacts` to target every contact
+	// in the profile. The work is queued, so a success response means it was accepted rather than
+	// finished. The tag itself and the contacts are not deleted.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts (the `ReachRemoveContactsFromATagV1` operationId).
+	ReachRemoveContactsFromATagV1WithBody(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachRemoveContactsFromATagV1 Remove contacts from a tag
+	//
+	// Remove a tag from many contacts at once.
+	//
+	// Pass `contact_uuids` to target specific contacts, or `all_contacts` to target every contact
+	// in the profile. The work is queued, so a success response means it was accepted rather than
+	// finished. The tag itself and the contacts are not deleted.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts (the `ReachRemoveContactsFromATagV1` operationId).
+	ReachRemoveContactsFromATagV1(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, body ReachRemoveContactsFromATagV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachAssignContactsToATagV1WithBody Assign contacts to a tag
+	//
+	// Assign a tag to many contacts at once.
+	//
+	// Pass `contact_uuids` to target specific contacts, or `all_contacts` to target every contact
+	// in the profile. The work is queued, so a success response means it was accepted rather than
+	// finished. Contacts that already carry the tag are left alone.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts (the `ReachAssignContactsToATagV1` operationId).
+	ReachAssignContactsToATagV1WithBody(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachAssignContactsToATagV1 Assign contacts to a tag
+	//
+	// Assign a tag to many contacts at once.
+	//
+	// Pass `contact_uuids` to target specific contacts, or `all_contacts` to target every contact
+	// in the profile. The work is queued, so a success response means it was accepted rather than
+	// finished. Contacts that already carry the tag are left alone.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts (the `ReachAssignContactsToATagV1` operationId).
+	ReachAssignContactsToATagV1(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, body ReachAssignContactsToATagV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachRemoveAContactFromATagV1 Remove a contact from a tag
+	//
+	// Remove a tag from a single contact.
+	//
+	// Unlike the bulk endpoint this is applied immediately rather than queued. Neither the tag
+	// nor the contact is deleted.
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts/{contactUuid} (the `ReachRemoveAContactFromATagV1` operationId).
+	ReachRemoveAContactFromATagV1(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, contactUuid ContactUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachAssignAContactToATagV1 Assign a contact to a tag
+	//
+	// Assign a tag to a single contact.
+	//
+	// Unlike the bulk endpoint this is applied immediately rather than queued. Assigning a tag
+	// the contact already carries succeeds without duplicating it.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts/{contactUuid} (the `ReachAssignAContactToATagV1` operationId).
+	ReachAssignAContactToATagV1(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, contactUuid ContactUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ReachListSegmentsV1 List segments
 	//
 	// Get a list of all contact segments.
 	//
 	// This endpoint returns a list of contact segments that can be used to organize contacts.
 	//
+	// **Deprecated.** This endpoint cannot target a profile, so it always falls back to
+	// the client's default profile and cannot list the segments of any other profile. Use
+	// `GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments` instead.
+	//
 	// Corresponds with GET /api/reach/v1/segmentation/segments (the `ReachListSegmentsV1` operationId).
+	//
+	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	ReachListSegmentsV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReachCreateANewContactSegmentV1WithBody Create a new contact segment
@@ -14664,9 +16692,15 @@ type ClientInterface interface {
 	// This endpoint allows creating a new contact segment that can be used to organize contacts.
 	// The segment can be configured with specific criteria like email, name, subscription status, etc.
 	//
+	// **Deprecated.** This endpoint cannot target a profile, so it always falls back to
+	// the client's default profile and cannot create segments in any other profile. Use
+	// `POST /api/reach/v1/profiles/{profileUuid}/segmentation/segments` instead.
+	//
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /api/reach/v1/segmentation/segments (the `ReachCreateANewContactSegmentV1` operationId).
+	//
+	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	ReachCreateANewContactSegmentV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReachCreateANewContactSegmentV1 Create a new contact segment
@@ -14676,9 +16710,15 @@ type ClientInterface interface {
 	// This endpoint allows creating a new contact segment that can be used to organize contacts.
 	// The segment can be configured with specific criteria like email, name, subscription status, etc.
 	//
+	// **Deprecated.** This endpoint cannot target a profile, so it always falls back to
+	// the client's default profile and cannot create segments in any other profile. Use
+	// `POST /api/reach/v1/profiles/{profileUuid}/segmentation/segments` instead.
+	//
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /api/reach/v1/segmentation/segments (the `ReachCreateANewContactSegmentV1` operationId).
+	//
+	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	ReachCreateANewContactSegmentV1(ctx context.Context, body ReachCreateANewContactSegmentV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReachGetSegmentDetailsV1 Get segment details
@@ -14688,7 +16728,13 @@ type ClientInterface interface {
 	// This endpoint retrieves information about a single segment identified by UUID.
 	// Segments are used to organize and group contacts based on specific criteria.
 	//
+	// **Deprecated.** This endpoint cannot target a profile, so it always falls back to
+	// the client's default profile and cannot read segments of any other profile. Use
+	// `GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}` instead.
+	//
 	// Corresponds with GET /api/reach/v1/segmentation/segments/{segmentUuid} (the `ReachGetSegmentDetailsV1` operationId).
+	//
+	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	ReachGetSegmentDetailsV1(ctx context.Context, segmentUuid SegmentUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReachListSegmentContactsV1 List segment contacts
@@ -14698,7 +16744,13 @@ type ClientInterface interface {
 	// This endpoint allows you to fetch and filter contacts that belong to a particular segment,
 	// identified by its UUID.
 	//
+	// **Deprecated.** This endpoint cannot target a profile, so it always falls back to
+	// the client's default profile and cannot read segments of any other profile. Use
+	// `GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}/contacts` instead.
+	//
 	// Corresponds with GET /api/reach/v1/segmentation/segments/{segmentUuid}/contacts (the `ReachListSegmentContactsV1` operationId).
+	//
+	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	ReachListSegmentContactsV1(ctx context.Context, segmentUuid SegmentUuid, params *ReachListSegmentContactsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// V2GetDomainVerificationsDIRECTWithBody Get domain verifications
@@ -17174,6 +19226,260 @@ func (c *Client) DomainsGetPendingIRTPVerificationV1(ctx context.Context, domain
 	return c.Client.Do(req)
 }
 
+// DomainsGetIncomingDomainMoveListV1 Get incoming domain move list
+//
+// Retrieve all domains other Hostinger accounts are moving to your account.
+//
+// Moves of every status are returned, including the ones which already completed.
+//
+// Use this endpoint to find domains waiting for you to accept them.
+//
+// Corresponds with GET /api/domains/v1/move/incoming (the `DomainsGetIncomingDomainMoveListV1` operationId).
+func (c *Client) DomainsGetIncomingDomainMoveListV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsGetIncomingDomainMoveListV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsRejectIncomingDomainMoveV1 Reject incoming domain move
+//
+// Reject an incoming move for a specified domain.
+//
+// The domain stays in the account which initiated the move.
+// Moves you have already accepted cannot be rejected anymore.
+//
+// Use this endpoint to decline a domain you do not want to take over.
+//
+// Corresponds with DELETE /api/domains/v1/move/incoming/{domain} (the `DomainsRejectIncomingDomainMoveV1` operationId).
+func (c *Client) DomainsRejectIncomingDomainMoveV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsRejectIncomingDomainMoveV1Request(c.Server, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsGetIncomingDomainMoveV1 Get incoming domain move
+//
+// Retrieve the incoming move for a specified domain.
+//
+// Returns 404 when no account is moving this domain to you.
+//
+// Use this endpoint to check whether a domain addressed to you is still waiting to be accepted.
+//
+// Corresponds with GET /api/domains/v1/move/incoming/{domain} (the `DomainsGetIncomingDomainMoveV1` operationId).
+func (c *Client) DomainsGetIncomingDomainMoveV1(ctx context.Context, domain Domain, params *DomainsGetIncomingDomainMoveV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsGetIncomingDomainMoveV1Request(c.Server, domain, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsAcceptIncomingDomainMoveV1WithBody Accept incoming domain move
+//
+// Accept an incoming move for a specified domain.
+//
+// The provided WHOIS profiles become the contacts of the domain, so they must belong
+// to your account and satisfy the requirements of the TLD. Only the contact types the
+// domain actually uses are applied, but all four profile IDs have to be provided.
+//
+// The move has to still be waiting for your decision, already accepted moves
+// cannot be accepted again.
+//
+// Accepting does not complete the move. A confirmation email is sent to the email address of
+// the new owner contact, and the domain changes hands only after the change is confirmed from it.
+// Until then the move stays in the `activating` status, which can be followed with the
+// [incoming move endpoint](#tag/domains-move).
+//
+// Use this endpoint to take ownership of a domain offered to you.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PUT /api/domains/v1/move/incoming/{domain} (the `DomainsAcceptIncomingDomainMoveV1` operationId).
+func (c *Client) DomainsAcceptIncomingDomainMoveV1WithBody(ctx context.Context, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsAcceptIncomingDomainMoveV1RequestWithBody(c.Server, domain, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsAcceptIncomingDomainMoveV1 Accept incoming domain move
+//
+// Accept an incoming move for a specified domain.
+//
+// The provided WHOIS profiles become the contacts of the domain, so they must belong
+// to your account and satisfy the requirements of the TLD. Only the contact types the
+// domain actually uses are applied, but all four profile IDs have to be provided.
+//
+// The move has to still be waiting for your decision, already accepted moves
+// cannot be accepted again.
+//
+// Accepting does not complete the move. A confirmation email is sent to the email address of
+// the new owner contact, and the domain changes hands only after the change is confirmed from it.
+// Until then the move stays in the `activating` status, which can be followed with the
+// [incoming move endpoint](#tag/domains-move).
+//
+// Use this endpoint to take ownership of a domain offered to you.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PUT /api/domains/v1/move/incoming/{domain} (the `DomainsAcceptIncomingDomainMoveV1` operationId).
+func (c *Client) DomainsAcceptIncomingDomainMoveV1(ctx context.Context, domain Domain, body DomainsAcceptIncomingDomainMoveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsAcceptIncomingDomainMoveV1Request(c.Server, domain, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsGetOutgoingDomainMoveListV1 Get outgoing domain move list
+//
+// Retrieve all domains you are moving to other Hostinger accounts.
+//
+// Only moves which have not completed yet are returned.
+//
+// Use this endpoint to track moves you have initiated and the accounts they are addressed to.
+//
+// Corresponds with GET /api/domains/v1/move/outgoing (the `DomainsGetOutgoingDomainMoveListV1` operationId).
+func (c *Client) DomainsGetOutgoingDomainMoveListV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsGetOutgoingDomainMoveListV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsCancelOutgoingDomainMoveV1 Cancel outgoing domain move
+//
+// Cancel an outgoing move for a specified domain.
+//
+// The move can only be cancelled while the receiving account has not accepted it yet.
+// The domain stays in your account.
+//
+// Use this endpoint to withdraw a move you no longer want to complete.
+//
+// Corresponds with DELETE /api/domains/v1/move/outgoing/{domain} (the `DomainsCancelOutgoingDomainMoveV1` operationId).
+func (c *Client) DomainsCancelOutgoingDomainMoveV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsCancelOutgoingDomainMoveV1Request(c.Server, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsGetOutgoingDomainMoveV1 Get outgoing domain move
+//
+// Retrieve the outgoing move for a specified domain.
+//
+// Returns 404 when the domain has no move in progress.
+//
+// Use this endpoint to track the status of a move you have initiated for a single domain.
+//
+// Corresponds with GET /api/domains/v1/move/outgoing/{domain} (the `DomainsGetOutgoingDomainMoveV1` operationId).
+func (c *Client) DomainsGetOutgoingDomainMoveV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsGetOutgoingDomainMoveV1Request(c.Server, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsStartOutgoingDomainMoveV1WithBody Start outgoing domain move
+//
+// Initiate a move of a specified domain to another Hostinger account.
+//
+// The receiving account has to already exist and accept the move before the domain changes hands.
+//
+// The domain must be active. The subscription it belongs to is resolved automatically,
+// and the request is rejected with a 404 status code when the domain has no domain
+// subscription of its own.
+//
+// Domains protected by premium protection require an additional verification step,
+// such requests are rejected with a 428 status code.
+//
+// Use this endpoint to hand a domain over to another Hostinger user.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/domains/v1/move/outgoing/{domain} (the `DomainsStartOutgoingDomainMoveV1` operationId).
+func (c *Client) DomainsStartOutgoingDomainMoveV1WithBody(ctx context.Context, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsStartOutgoingDomainMoveV1RequestWithBody(c.Server, domain, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsStartOutgoingDomainMoveV1 Start outgoing domain move
+//
+// Initiate a move of a specified domain to another Hostinger account.
+//
+// The receiving account has to already exist and accept the move before the domain changes hands.
+//
+// The domain must be active. The subscription it belongs to is resolved automatically,
+// and the request is rejected with a 404 status code when the domain has no domain
+// subscription of its own.
+//
+// Domains protected by premium protection require an additional verification step,
+// such requests are rejected with a 428 status code.
+//
+// Use this endpoint to hand a domain over to another Hostinger user.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/domains/v1/move/outgoing/{domain} (the `DomainsStartOutgoingDomainMoveV1` operationId).
+func (c *Client) DomainsStartOutgoingDomainMoveV1(ctx context.Context, domain Domain, body DomainsStartOutgoingDomainMoveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsStartOutgoingDomainMoveV1Request(c.Server, domain, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // DomainsGetDomainListV1 Get domain list
 //
 // Retrieve all domains associated with your account.
@@ -17243,6 +19549,76 @@ func (c *Client) DomainsPurchaseNewDomainV1WithBody(ctx context.Context, content
 // Corresponds with POST /api/domains/v1/portfolio (the `DomainsPurchaseNewDomainV1` operationId).
 func (c *Client) DomainsPurchaseNewDomainV1(ctx context.Context, body DomainsPurchaseNewDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDomainsPurchaseNewDomainV1Request(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsClaimFreeDomainV1WithBody Claim free domain
+//
+// Claim a free domain available on your account and register it.
+//
+// Unlike purchasing a domain, this consumes a free domain you already have,
+// so no payment method is required.
+//
+// A successful response means the domain is registered. If registration fails, login to
+// [hPanel](https://hpanel.hostinger.com/) and check domain registration status.
+//
+// If no WHOIS information is provided, default contact information for that TLD will be used.
+// Before making request, ensure WHOIS information for desired TLD exists in your account.
+//
+// Some TLDs require `additional_details` to be provided and these will be validated before claiming.
+//
+// Requests which cannot be fulfilled are rejected with an error code in the response body,
+// for example `2037` when no free domain is available.
+//
+// Use this endpoint to register a domain using a free domain from your account.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/domains/v1/portfolio/claim (the `DomainsClaimFreeDomainV1` operationId).
+func (c *Client) DomainsClaimFreeDomainV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsClaimFreeDomainV1RequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsClaimFreeDomainV1 Claim free domain
+//
+// Claim a free domain available on your account and register it.
+//
+// Unlike purchasing a domain, this consumes a free domain you already have,
+// so no payment method is required.
+//
+// A successful response means the domain is registered. If registration fails, login to
+// [hPanel](https://hpanel.hostinger.com/) and check domain registration status.
+//
+// If no WHOIS information is provided, default contact information for that TLD will be used.
+// Before making request, ensure WHOIS information for desired TLD exists in your account.
+//
+// Some TLDs require `additional_details` to be provided and these will be validated before claiming.
+//
+// Requests which cannot be fulfilled are rejected with an error code in the response body,
+// for example `2037` when no free domain is available.
+//
+// Use this endpoint to register a domain using a free domain from your account.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/domains/v1/portfolio/claim (the `DomainsClaimFreeDomainV1` operationId).
+func (c *Client) DomainsClaimFreeDomainV1(ctx context.Context, body DomainsClaimFreeDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsClaimFreeDomainV1Request(c.Server, body)
 	if err != nil {
 		return nil, err
 	}
@@ -17454,6 +19830,78 @@ func (c *Client) DomainsGetDomainRenewalInformationV1(ctx context.Context, domai
 // Corresponds with GET /api/domains/v1/transfers (the `DomainsGetTransferListV1` operationId).
 func (c *Client) DomainsGetTransferListV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDomainsGetTransferListV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsClaimFreeDomainTransferV1WithBody Claim free domain transfer
+//
+// Claim a free domain transfer available on your account and start the transfer.
+//
+// Unlike purchasing a transfer, this consumes a free domain transfer you already have,
+// so no payment method is required.
+//
+// Before making request, unlock the domain at the current registrar and get its authorization
+// code. The transfer is validated first, so domains which cannot be transferred are rejected
+// before the free domain transfer is consumed.
+//
+// A successful response means the transfer has been started. Completion depends on the current
+// registrar and can be followed with the [transfer list endpoint](#tag/domains-transfer).
+//
+// If no WHOIS information is provided, default contact information for that TLD will be used.
+// Before making request, ensure WHOIS information for desired TLD exists in your account.
+//
+// Requests which cannot be fulfilled are rejected with an error code in the response body.
+//
+// Use this endpoint to transfer a domain using a free domain transfer from your account.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/domains/v1/transfers/claim (the `DomainsClaimFreeDomainTransferV1` operationId).
+func (c *Client) DomainsClaimFreeDomainTransferV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsClaimFreeDomainTransferV1RequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsClaimFreeDomainTransferV1 Claim free domain transfer
+//
+// Claim a free domain transfer available on your account and start the transfer.
+//
+// Unlike purchasing a transfer, this consumes a free domain transfer you already have,
+// so no payment method is required.
+//
+// Before making request, unlock the domain at the current registrar and get its authorization
+// code. The transfer is validated first, so domains which cannot be transferred are rejected
+// before the free domain transfer is consumed.
+//
+// A successful response means the transfer has been started. Completion depends on the current
+// registrar and can be followed with the [transfer list endpoint](#tag/domains-transfer).
+//
+// If no WHOIS information is provided, default contact information for that TLD will be used.
+// Before making request, ensure WHOIS information for desired TLD exists in your account.
+//
+// Requests which cannot be fulfilled are rejected with an error code in the response body.
+//
+// Use this endpoint to transfer a domain using a free domain transfer from your account.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/domains/v1/transfers/claim (the `DomainsClaimFreeDomainTransferV1` operationId).
+func (c *Client) DomainsClaimFreeDomainTransferV1(ctx context.Context, body DomainsClaimFreeDomainTransferV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsClaimFreeDomainTransferV1Request(c.Server, body)
 	if err != nil {
 		return nil, err
 	}
@@ -21720,7 +24168,13 @@ func (c *Client) MailTestWebhookV1(ctx context.Context, webhookId MailWebhookIdP
 // This endpoint returns a paginated list of contacts with their basic information.
 // You can filter contacts by group UUID and subscription status.
 //
+// **Deprecated.** This endpoint cannot target a profile, so it always falls back to the
+// client's default profile and cannot list contacts of any other profile. Use
+// `GET /api/reach/v1/profiles/{profileUuid}/contacts` instead, which also replaces the
+// group filter with a tag filter.
+//
 // Corresponds with GET /api/reach/v1/contacts (the `ReachListContactsV1` operationId).
+// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 func (c *Client) ReachListContactsV1(ctx context.Context, params *ReachListContactsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReachListContactsV1Request(c.Server, params)
 	if err != nil {
@@ -21809,7 +24263,12 @@ func (c *Client) ReachListContactGroupsV1(ctx context.Context, reqEditors ...Req
 //
 // This endpoint permanently removes a contact from the email marketing system.
 //
+// **Deprecated.** This endpoint cannot target a profile, so it always falls back to the
+// client's default profile and cannot delete contacts of any other profile. Use
+// `DELETE /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid}` instead.
+//
 // Corresponds with DELETE /api/reach/v1/contacts/{uuid} (the `ReachDeleteAContactV1` operationId).
+// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 func (c *Client) ReachDeleteAContactV1(ctx context.Context, uuid Uuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReachDeleteAContactV1Request(c.Server, uuid)
 	if err != nil {
@@ -21829,6 +24288,27 @@ func (c *Client) ReachDeleteAContactV1(ctx context.Context, uuid Uuid, reqEditor
 // Corresponds with GET /api/reach/v1/profiles (the `ReachListProfilesV1` operationId).
 func (c *Client) ReachListProfilesV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReachListProfilesV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachListProfileContactsV1 List profile contacts
+//
+// Get a paginated list of contacts belonging to a profile.
+//
+// Contacts can be filtered by subscription status, by tag, and by an email search term.
+// The `meta.total` field of the response is the number of contacts matching the filters,
+// so calling this endpoint without filters gives the profile's total contact count.
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/contacts (the `ReachListProfileContactsV1` operationId).
+func (c *Client) ReachListProfileContactsV1(ctx context.Context, profileUuid ProfileUuid, params *ReachListProfileContactsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachListProfileContactsV1Request(c.Server, profileUuid, params)
 	if err != nil {
 		return nil, err
 	}
@@ -21887,6 +24367,274 @@ func (c *Client) ReachCreateNewContactsV1(ctx context.Context, profileUuid Profi
 	return c.Client.Do(req)
 }
 
+// ReachCreateContactsInBulkV1WithBody Create contacts in bulk
+//
+// Create many contacts in a profile in a single call.
+//
+// The contacts are imported in the background, so a success response means the import was
+// accepted rather than finished. Contacts whose email already exists in the profile are
+// left as they are. If double opt-in is enabled, new contacts start off pending and are
+// sent a confirmation email.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/contacts/bulk (the `ReachCreateContactsInBulkV1` operationId).
+func (c *Client) ReachCreateContactsInBulkV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachCreateContactsInBulkV1RequestWithBody(c.Server, profileUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachCreateContactsInBulkV1 Create contacts in bulk
+//
+// Create many contacts in a profile in a single call.
+//
+// The contacts are imported in the background, so a success response means the import was
+// accepted rather than finished. Contacts whose email already exists in the profile are
+// left as they are. If double opt-in is enabled, new contacts start off pending and are
+// sent a confirmation email.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/contacts/bulk (the `ReachCreateContactsInBulkV1` operationId).
+func (c *Client) ReachCreateContactsInBulkV1(ctx context.Context, profileUuid ProfileUuid, body ReachCreateContactsInBulkV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachCreateContactsInBulkV1Request(c.Server, profileUuid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachListContactFieldsV1 List contact fields
+//
+// Get the custom contact fields defined in a profile.
+//
+// Custom fields let you store your own attributes on contacts. The returned uuids are what
+// you pass to the contact update endpoint to set values, and choice fields also list the
+// options available to pick from.
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/contacts/fields (the `ReachListContactFieldsV1` operationId).
+func (c *Client) ReachListContactFieldsV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachListContactFieldsV1Request(c.Server, profileUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachCreateAContactFieldV1WithBody Create a contact field
+//
+// Define a new custom contact field in a profile.
+//
+// The `slug` is derived from the label and, like the field type, cannot be changed later.
+// Use the returned uuid to set values on contacts.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/contacts/fields (the `ReachCreateAContactFieldV1` operationId).
+func (c *Client) ReachCreateAContactFieldV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachCreateAContactFieldV1RequestWithBody(c.Server, profileUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachCreateAContactFieldV1 Create a contact field
+//
+// Define a new custom contact field in a profile.
+//
+// The `slug` is derived from the label and, like the field type, cannot be changed later.
+// Use the returned uuid to set values on contacts.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/contacts/fields (the `ReachCreateAContactFieldV1` operationId).
+func (c *Client) ReachCreateAContactFieldV1(ctx context.Context, profileUuid ProfileUuid, body ReachCreateAContactFieldV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachCreateAContactFieldV1Request(c.Server, profileUuid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachDeleteAContactFieldV1 Delete a contact field
+//
+// Delete a custom contact field.
+//
+// Every value contacts hold for the field is deleted with it, and for the choice types so
+// are its options. The contacts themselves are not affected.
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/contacts/fields/{fieldUuid} (the `ReachDeleteAContactFieldV1` operationId).
+func (c *Client) ReachDeleteAContactFieldV1(ctx context.Context, profileUuid ProfileUuid, fieldUuid FieldUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachDeleteAContactFieldV1Request(c.Server, profileUuid, fieldUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachUpdateAContactFieldV1WithBody Update a contact field
+//
+// Rename a custom contact field and, for the choice types, replace its option set.
+//
+// Options carrying a uuid are kept and relabelled, options without one are created, and any
+// existing option left out of the list is deleted along with the values contacts hold for
+// it. The field type and slug cannot be changed.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/contacts/fields/{fieldUuid} (the `ReachUpdateAContactFieldV1` operationId).
+func (c *Client) ReachUpdateAContactFieldV1WithBody(ctx context.Context, profileUuid ProfileUuid, fieldUuid FieldUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachUpdateAContactFieldV1RequestWithBody(c.Server, profileUuid, fieldUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachUpdateAContactFieldV1 Update a contact field
+//
+// Rename a custom contact field and, for the choice types, replace its option set.
+//
+// Options carrying a uuid are kept and relabelled, options without one are created, and any
+// existing option left out of the list is deleted along with the values contacts hold for
+// it. The field type and slug cannot be changed.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/contacts/fields/{fieldUuid} (the `ReachUpdateAContactFieldV1` operationId).
+func (c *Client) ReachUpdateAContactFieldV1(ctx context.Context, profileUuid ProfileUuid, fieldUuid FieldUuid, body ReachUpdateAContactFieldV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachUpdateAContactFieldV1Request(c.Server, profileUuid, fieldUuid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachDeleteAProfileContactV1 Delete a profile contact
+//
+// Permanently delete a contact from a profile.
+//
+// The contact is removed together with its custom field values and tag assignments.
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid} (the `ReachDeleteAProfileContactV1` operationId).
+func (c *Client) ReachDeleteAProfileContactV1(ctx context.Context, profileUuid ProfileUuid, contactUuid ContactUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachDeleteAProfileContactV1Request(c.Server, profileUuid, contactUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachGetContactDetailsV1 Get contact details
+//
+// Get the full details of a single contact.
+//
+// Alongside the contact's own attributes this returns the tags assigned to it and the
+// values it holds for the profile's custom contact fields.
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid} (the `ReachGetContactDetailsV1` operationId).
+func (c *Client) ReachGetContactDetailsV1(ctx context.Context, profileUuid ProfileUuid, contactUuid ContactUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachGetContactDetailsV1Request(c.Server, profileUuid, contactUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachUpdateAContactV1WithBody Update a contact
+//
+// Update a contact's attributes and custom field values.
+//
+// Only the properties present in the request body are changed, so a partial body is enough
+// to change a single attribute. Sending a property as `null` clears it.
+//
+// The response carries the contact's core attributes. Read back its tags, custom field
+// values, source and note with `GET /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid}`.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid} (the `ReachUpdateAContactV1` operationId).
+func (c *Client) ReachUpdateAContactV1WithBody(ctx context.Context, profileUuid ProfileUuid, contactUuid ContactUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachUpdateAContactV1RequestWithBody(c.Server, profileUuid, contactUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachUpdateAContactV1 Update a contact
+//
+// Update a contact's attributes and custom field values.
+//
+// Only the properties present in the request body are changed, so a partial body is enough
+// to change a single attribute. Sending a property as `null` clears it.
+//
+// The response carries the contact's core attributes. Read back its tags, custom field
+// values, source and note with `GET /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid}`.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid} (the `ReachUpdateAContactV1` operationId).
+func (c *Client) ReachUpdateAContactV1(ctx context.Context, profileUuid ProfileUuid, contactUuid ContactUuid, body ReachUpdateAContactV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachUpdateAContactV1Request(c.Server, profileUuid, contactUuid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // ReachGetProfileDomainDNSStatusV1 Get profile domain DNS status
 //
 // Retrieve the DNS configuration status for a profile's domain.
@@ -21897,6 +24645,156 @@ func (c *Client) ReachCreateNewContactsV1(ctx context.Context, profileUuid Profi
 // Corresponds with GET /api/reach/v1/profiles/{profileUuid}/domains/dns-status (the `ReachGetProfileDomainDNSStatusV1` operationId).
 func (c *Client) ReachGetProfileDomainDNSStatusV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReachGetProfileDomainDNSStatusV1Request(c.Server, profileUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachListProfileSegmentsV1 List profile segments
+//
+// Get a paginated list of the segments defined in a profile.
+//
+// Each entry carries the number of contacts currently matching it, which is recalculated on
+// read rather than stored. Use `count_type` to count either every matching contact or only
+// the subscribed ones.
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments (the `ReachListProfileSegmentsV1` operationId).
+func (c *Client) ReachListProfileSegmentsV1(ctx context.Context, profileUuid ProfileUuid, params *ReachListProfileSegmentsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachListProfileSegmentsV1Request(c.Server, profileUuid, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachCreateAProfileSegmentV1WithBody Create a profile segment
+//
+// Create a segment in a profile.
+//
+// A segment is a saved set of conditions rather than a fixed list, so its membership changes
+// as contacts change. Creating one does not modify any contact.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/segmentation/segments (the `ReachCreateAProfileSegmentV1` operationId).
+func (c *Client) ReachCreateAProfileSegmentV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachCreateAProfileSegmentV1RequestWithBody(c.Server, profileUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachCreateAProfileSegmentV1 Create a profile segment
+//
+// Create a segment in a profile.
+//
+// A segment is a saved set of conditions rather than a fixed list, so its membership changes
+// as contacts change. Creating one does not modify any contact.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/segmentation/segments (the `ReachCreateAProfileSegmentV1` operationId).
+func (c *Client) ReachCreateAProfileSegmentV1(ctx context.Context, profileUuid ProfileUuid, body ReachCreateAProfileSegmentV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachCreateAProfileSegmentV1Request(c.Server, profileUuid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachDeleteAProfileSegmentV1 Delete a profile segment
+//
+// Delete a segment.
+//
+// Only the segment definition is removed. The contacts that matched it are left untouched.
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid} (the `ReachDeleteAProfileSegmentV1` operationId).
+func (c *Client) ReachDeleteAProfileSegmentV1(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachDeleteAProfileSegmentV1Request(c.Server, profileUuid, segmentUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachGetProfileSegmentDetailsV1 Get profile segment details
+//
+// Get a single segment of a profile, including the conditions that define it.
+//
+// To retrieve the contacts currently matching those conditions, use the segment contacts
+// endpoint instead.
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid} (the `ReachGetProfileSegmentDetailsV1` operationId).
+func (c *Client) ReachGetProfileSegmentDetailsV1(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachGetProfileSegmentDetailsV1Request(c.Server, profileUuid, segmentUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachUpdateAProfileSegmentV1WithBody Update a profile segment
+//
+// Rename a segment and/or replace the conditions that define it.
+//
+// `name` is always required. Omit `conditions` to rename without touching the conditions;
+// supply them and they replace the existing set entirely rather than being merged into it.
+// Contacts are never modified, but which of them match the segment can change immediately.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PUT /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid} (the `ReachUpdateAProfileSegmentV1` operationId).
+func (c *Client) ReachUpdateAProfileSegmentV1WithBody(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachUpdateAProfileSegmentV1RequestWithBody(c.Server, profileUuid, segmentUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachUpdateAProfileSegmentV1 Update a profile segment
+//
+// Rename a segment and/or replace the conditions that define it.
+//
+// `name` is always required. Omit `conditions` to rename without touching the conditions;
+// supply them and they replace the existing set entirely rather than being merged into it.
+// Contacts are never modified, but which of them match the segment can change immediately.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PUT /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid} (the `ReachUpdateAProfileSegmentV1` operationId).
+func (c *Client) ReachUpdateAProfileSegmentV1(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, body ReachUpdateAProfileSegmentV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachUpdateAProfileSegmentV1Request(c.Server, profileUuid, segmentUuid, body)
 	if err != nil {
 		return nil, err
 	}
@@ -21927,13 +24825,299 @@ func (c *Client) ReachListProfileSegmentContactsV1(ctx context.Context, profileU
 	return c.Client.Do(req)
 }
 
+// ReachCountProfileSegmentContactsV1 Count profile segment contacts
+//
+// Count the contacts currently matching a segment without listing them.
+//
+// Cheaper than paging through the segment contacts endpoint when only the size is needed.
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}/count (the `ReachCountProfileSegmentContactsV1` operationId).
+func (c *Client) ReachCountProfileSegmentContactsV1(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachCountProfileSegmentContactsV1Request(c.Server, profileUuid, segmentUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachListProfileTagsV1 List profile tags
+//
+// Get all tags defined in a profile.
+//
+// Tags are the way contacts are grouped in Reach, and can be used to filter the contact
+// list or to build segments.
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/tags (the `ReachListProfileTagsV1` operationId).
+func (c *Client) ReachListProfileTagsV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachListProfileTagsV1Request(c.Server, profileUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachCreateOrFindTagsV1WithBody Create or find tags
+//
+// Create tags in a profile.
+//
+// Names that already exist in the profile are not duplicated: the existing tag is returned
+// instead, so the call is safe to repeat. Every tag in the request is returned, whether it
+// was created now or already existed.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/tags (the `ReachCreateOrFindTagsV1` operationId).
+func (c *Client) ReachCreateOrFindTagsV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachCreateOrFindTagsV1RequestWithBody(c.Server, profileUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachCreateOrFindTagsV1 Create or find tags
+//
+// Create tags in a profile.
+//
+// Names that already exist in the profile are not duplicated: the existing tag is returned
+// instead, so the call is safe to repeat. Every tag in the request is returned, whether it
+// was created now or already existed.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/tags (the `ReachCreateOrFindTagsV1` operationId).
+func (c *Client) ReachCreateOrFindTagsV1(ctx context.Context, profileUuid ProfileUuid, body ReachCreateOrFindTagsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachCreateOrFindTagsV1Request(c.Server, profileUuid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachDeleteATagV1 Delete a tag
+//
+// Delete a tag and remove it from every contact carrying it.
+//
+// The contacts themselves are not deleted. This is idempotent: deleting a tag that does not
+// exist in the profile still succeeds.
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid} (the `ReachDeleteATagV1` operationId).
+func (c *Client) ReachDeleteATagV1(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachDeleteATagV1Request(c.Server, profileUuid, tagUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachRenameATagV1WithBody Rename a tag
+//
+// Rename a tag.
+//
+// The contacts assigned to the tag are unaffected. Names are unique within a profile, so
+// renaming a tag to a name that is already taken is rejected.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid} (the `ReachRenameATagV1` operationId).
+func (c *Client) ReachRenameATagV1WithBody(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachRenameATagV1RequestWithBody(c.Server, profileUuid, tagUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachRenameATagV1 Rename a tag
+//
+// Rename a tag.
+//
+// The contacts assigned to the tag are unaffected. Names are unique within a profile, so
+// renaming a tag to a name that is already taken is rejected.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid} (the `ReachRenameATagV1` operationId).
+func (c *Client) ReachRenameATagV1(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, body ReachRenameATagV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachRenameATagV1Request(c.Server, profileUuid, tagUuid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachRemoveContactsFromATagV1WithBody Remove contacts from a tag
+//
+// Remove a tag from many contacts at once.
+//
+// Pass `contact_uuids` to target specific contacts, or `all_contacts` to target every contact
+// in the profile. The work is queued, so a success response means it was accepted rather than
+// finished. The tag itself and the contacts are not deleted.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts (the `ReachRemoveContactsFromATagV1` operationId).
+func (c *Client) ReachRemoveContactsFromATagV1WithBody(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachRemoveContactsFromATagV1RequestWithBody(c.Server, profileUuid, tagUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachRemoveContactsFromATagV1 Remove contacts from a tag
+//
+// Remove a tag from many contacts at once.
+//
+// Pass `contact_uuids` to target specific contacts, or `all_contacts` to target every contact
+// in the profile. The work is queued, so a success response means it was accepted rather than
+// finished. The tag itself and the contacts are not deleted.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts (the `ReachRemoveContactsFromATagV1` operationId).
+func (c *Client) ReachRemoveContactsFromATagV1(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, body ReachRemoveContactsFromATagV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachRemoveContactsFromATagV1Request(c.Server, profileUuid, tagUuid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachAssignContactsToATagV1WithBody Assign contacts to a tag
+//
+// Assign a tag to many contacts at once.
+//
+// Pass `contact_uuids` to target specific contacts, or `all_contacts` to target every contact
+// in the profile. The work is queued, so a success response means it was accepted rather than
+// finished. Contacts that already carry the tag are left alone.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts (the `ReachAssignContactsToATagV1` operationId).
+func (c *Client) ReachAssignContactsToATagV1WithBody(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachAssignContactsToATagV1RequestWithBody(c.Server, profileUuid, tagUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachAssignContactsToATagV1 Assign contacts to a tag
+//
+// Assign a tag to many contacts at once.
+//
+// Pass `contact_uuids` to target specific contacts, or `all_contacts` to target every contact
+// in the profile. The work is queued, so a success response means it was accepted rather than
+// finished. Contacts that already carry the tag are left alone.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts (the `ReachAssignContactsToATagV1` operationId).
+func (c *Client) ReachAssignContactsToATagV1(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, body ReachAssignContactsToATagV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachAssignContactsToATagV1Request(c.Server, profileUuid, tagUuid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachRemoveAContactFromATagV1 Remove a contact from a tag
+//
+// Remove a tag from a single contact.
+//
+// Unlike the bulk endpoint this is applied immediately rather than queued. Neither the tag
+// nor the contact is deleted.
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts/{contactUuid} (the `ReachRemoveAContactFromATagV1` operationId).
+func (c *Client) ReachRemoveAContactFromATagV1(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, contactUuid ContactUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachRemoveAContactFromATagV1Request(c.Server, profileUuid, tagUuid, contactUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachAssignAContactToATagV1 Assign a contact to a tag
+//
+// Assign a tag to a single contact.
+//
+// Unlike the bulk endpoint this is applied immediately rather than queued. Assigning a tag
+// the contact already carries succeeds without duplicating it.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts/{contactUuid} (the `ReachAssignAContactToATagV1` operationId).
+func (c *Client) ReachAssignAContactToATagV1(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, contactUuid ContactUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachAssignAContactToATagV1Request(c.Server, profileUuid, tagUuid, contactUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // ReachListSegmentsV1 List segments
 //
 // Get a list of all contact segments.
 //
 // This endpoint returns a list of contact segments that can be used to organize contacts.
 //
+// **Deprecated.** This endpoint cannot target a profile, so it always falls back to
+// the client's default profile and cannot list the segments of any other profile. Use
+// `GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments` instead.
+//
 // Corresponds with GET /api/reach/v1/segmentation/segments (the `ReachListSegmentsV1` operationId).
+// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 func (c *Client) ReachListSegmentsV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReachListSegmentsV1Request(c.Server)
 	if err != nil {
@@ -21953,9 +25137,14 @@ func (c *Client) ReachListSegmentsV1(ctx context.Context, reqEditors ...RequestE
 // This endpoint allows creating a new contact segment that can be used to organize contacts.
 // The segment can be configured with specific criteria like email, name, subscription status, etc.
 //
+// **Deprecated.** This endpoint cannot target a profile, so it always falls back to
+// the client's default profile and cannot create segments in any other profile. Use
+// `POST /api/reach/v1/profiles/{profileUuid}/segmentation/segments` instead.
+//
 // Takes any type of body and a specified content type.
 //
 // Corresponds with POST /api/reach/v1/segmentation/segments (the `ReachCreateANewContactSegmentV1` operationId).
+// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 func (c *Client) ReachCreateANewContactSegmentV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReachCreateANewContactSegmentV1RequestWithBody(c.Server, contentType, body)
 	if err != nil {
@@ -21975,9 +25164,14 @@ func (c *Client) ReachCreateANewContactSegmentV1WithBody(ctx context.Context, co
 // This endpoint allows creating a new contact segment that can be used to organize contacts.
 // The segment can be configured with specific criteria like email, name, subscription status, etc.
 //
+// **Deprecated.** This endpoint cannot target a profile, so it always falls back to
+// the client's default profile and cannot create segments in any other profile. Use
+// `POST /api/reach/v1/profiles/{profileUuid}/segmentation/segments` instead.
+//
 // Takes a body of the `application/json` content type.
 //
 // Corresponds with POST /api/reach/v1/segmentation/segments (the `ReachCreateANewContactSegmentV1` operationId).
+// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 func (c *Client) ReachCreateANewContactSegmentV1(ctx context.Context, body ReachCreateANewContactSegmentV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReachCreateANewContactSegmentV1Request(c.Server, body)
 	if err != nil {
@@ -21997,7 +25191,12 @@ func (c *Client) ReachCreateANewContactSegmentV1(ctx context.Context, body Reach
 // This endpoint retrieves information about a single segment identified by UUID.
 // Segments are used to organize and group contacts based on specific criteria.
 //
+// **Deprecated.** This endpoint cannot target a profile, so it always falls back to
+// the client's default profile and cannot read segments of any other profile. Use
+// `GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}` instead.
+//
 // Corresponds with GET /api/reach/v1/segmentation/segments/{segmentUuid} (the `ReachGetSegmentDetailsV1` operationId).
+// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 func (c *Client) ReachGetSegmentDetailsV1(ctx context.Context, segmentUuid SegmentUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReachGetSegmentDetailsV1Request(c.Server, segmentUuid)
 	if err != nil {
@@ -22017,7 +25216,12 @@ func (c *Client) ReachGetSegmentDetailsV1(ctx context.Context, segmentUuid Segme
 // This endpoint allows you to fetch and filter contacts that belong to a particular segment,
 // identified by its UUID.
 //
+// **Deprecated.** This endpoint cannot target a profile, so it always falls back to
+// the client's default profile and cannot read segments of any other profile. Use
+// `GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}/contacts` instead.
+//
 // Corresponds with GET /api/reach/v1/segmentation/segments/{segmentUuid}/contacts (the `ReachListSegmentContactsV1` operationId).
+// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 func (c *Client) ReachListSegmentContactsV1(ctx context.Context, segmentUuid SegmentUuid, params *ReachListSegmentContactsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReachListSegmentContactsV1Request(c.Server, segmentUuid, params)
 	if err != nil {
@@ -25973,6 +29177,317 @@ func NewDomainsGetPendingIRTPVerificationV1Request(server string, domain Domain)
 	return req, nil
 }
 
+// NewDomainsGetIncomingDomainMoveListV1Request constructs an http.Request for the DomainsGetIncomingDomainMoveListV1 method
+func NewDomainsGetIncomingDomainMoveListV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/domains/v1/move/incoming")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDomainsRejectIncomingDomainMoveV1Request constructs an http.Request for the DomainsRejectIncomingDomainMoveV1 method
+func NewDomainsRejectIncomingDomainMoveV1Request(server string, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/domains/v1/move/incoming/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDomainsGetIncomingDomainMoveV1Request constructs an http.Request for the DomainsGetIncomingDomainMoveV1 method
+func NewDomainsGetIncomingDomainMoveV1Request(server string, domain Domain, params *DomainsGetIncomingDomainMoveV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/domains/v1/move/incoming/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.ForceSync != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "force_sync", *params.ForceSync, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "boolean", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDomainsAcceptIncomingDomainMoveV1Request calls the generic DomainsAcceptIncomingDomainMoveV1 builder with application/json body
+func NewDomainsAcceptIncomingDomainMoveV1Request(server string, domain Domain, body DomainsAcceptIncomingDomainMoveV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewDomainsAcceptIncomingDomainMoveV1RequestWithBody(server, domain, "application/json", bodyReader)
+}
+
+// NewDomainsAcceptIncomingDomainMoveV1RequestWithBody constructs an http.Request for the DomainsAcceptIncomingDomainMoveV1 method, with any body, and a specified content type
+func NewDomainsAcceptIncomingDomainMoveV1RequestWithBody(server string, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/domains/v1/move/incoming/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDomainsGetOutgoingDomainMoveListV1Request constructs an http.Request for the DomainsGetOutgoingDomainMoveListV1 method
+func NewDomainsGetOutgoingDomainMoveListV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/domains/v1/move/outgoing")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDomainsCancelOutgoingDomainMoveV1Request constructs an http.Request for the DomainsCancelOutgoingDomainMoveV1 method
+func NewDomainsCancelOutgoingDomainMoveV1Request(server string, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/domains/v1/move/outgoing/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDomainsGetOutgoingDomainMoveV1Request constructs an http.Request for the DomainsGetOutgoingDomainMoveV1 method
+func NewDomainsGetOutgoingDomainMoveV1Request(server string, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/domains/v1/move/outgoing/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDomainsStartOutgoingDomainMoveV1Request calls the generic DomainsStartOutgoingDomainMoveV1 builder with application/json body
+func NewDomainsStartOutgoingDomainMoveV1Request(server string, domain Domain, body DomainsStartOutgoingDomainMoveV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewDomainsStartOutgoingDomainMoveV1RequestWithBody(server, domain, "application/json", bodyReader)
+}
+
+// NewDomainsStartOutgoingDomainMoveV1RequestWithBody constructs an http.Request for the DomainsStartOutgoingDomainMoveV1 method, with any body, and a specified content type
+func NewDomainsStartOutgoingDomainMoveV1RequestWithBody(server string, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/domains/v1/move/outgoing/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewDomainsGetDomainListV1Request constructs an http.Request for the DomainsGetDomainListV1 method
 func NewDomainsGetDomainListV1Request(server string) (*http.Request, error) {
 	var err error
@@ -26021,6 +29536,46 @@ func NewDomainsPurchaseNewDomainV1RequestWithBody(server string, contentType str
 	}
 
 	operationPath := fmt.Sprintf("/api/domains/v1/portfolio")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDomainsClaimFreeDomainV1Request calls the generic DomainsClaimFreeDomainV1 builder with application/json body
+func NewDomainsClaimFreeDomainV1Request(server string, body DomainsClaimFreeDomainV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewDomainsClaimFreeDomainV1RequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewDomainsClaimFreeDomainV1RequestWithBody constructs an http.Request for the DomainsClaimFreeDomainV1 method, with any body, and a specified content type
+func NewDomainsClaimFreeDomainV1RequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/domains/v1/portfolio/claim")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -26348,6 +29903,46 @@ func NewDomainsGetTransferListV1Request(server string) (*http.Request, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewDomainsClaimFreeDomainTransferV1Request calls the generic DomainsClaimFreeDomainTransferV1 builder with application/json body
+func NewDomainsClaimFreeDomainTransferV1Request(server string, body DomainsClaimFreeDomainTransferV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewDomainsClaimFreeDomainTransferV1RequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewDomainsClaimFreeDomainTransferV1RequestWithBody constructs an http.Request for the DomainsClaimFreeDomainTransferV1 method, with any body, and a specified content type
+func NewDomainsClaimFreeDomainTransferV1RequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/domains/v1/transfers/claim")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -33924,6 +37519,115 @@ func NewReachListProfilesV1Request(server string) (*http.Request, error) {
 	return req, nil
 }
 
+// NewReachListProfileContactsV1Request constructs an http.Request for the ReachListProfileContactsV1 method
+func NewReachListProfileContactsV1Request(server string, profileUuid ProfileUuid, params *ReachListProfileContactsV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/contacts", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.SubscriptionStatus != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "subscription_status", *params.SubscriptionStatus, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.TagUuid != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "tag_uuid", *params.TagUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: "uuid"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Search != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "search", *params.Search, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Page != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page", *params.Page, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PerPage != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "per_page", *params.PerPage, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewReachCreateNewContactsV1Request calls the generic ReachCreateNewContactsV1 builder with application/json body
 func NewReachCreateNewContactsV1Request(server string, profileUuid ProfileUuid, body ReachCreateNewContactsV1JSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
@@ -33971,6 +37675,365 @@ func NewReachCreateNewContactsV1RequestWithBody(server string, profileUuid Profi
 	return req, nil
 }
 
+// NewReachCreateContactsInBulkV1Request calls the generic ReachCreateContactsInBulkV1 builder with application/json body
+func NewReachCreateContactsInBulkV1Request(server string, profileUuid ProfileUuid, body ReachCreateContactsInBulkV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachCreateContactsInBulkV1RequestWithBody(server, profileUuid, "application/json", bodyReader)
+}
+
+// NewReachCreateContactsInBulkV1RequestWithBody constructs an http.Request for the ReachCreateContactsInBulkV1 method, with any body, and a specified content type
+func NewReachCreateContactsInBulkV1RequestWithBody(server string, profileUuid ProfileUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/contacts/bulk", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewReachListContactFieldsV1Request constructs an http.Request for the ReachListContactFieldsV1 method
+func NewReachListContactFieldsV1Request(server string, profileUuid ProfileUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/contacts/fields", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachCreateAContactFieldV1Request calls the generic ReachCreateAContactFieldV1 builder with application/json body
+func NewReachCreateAContactFieldV1Request(server string, profileUuid ProfileUuid, body ReachCreateAContactFieldV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachCreateAContactFieldV1RequestWithBody(server, profileUuid, "application/json", bodyReader)
+}
+
+// NewReachCreateAContactFieldV1RequestWithBody constructs an http.Request for the ReachCreateAContactFieldV1 method, with any body, and a specified content type
+func NewReachCreateAContactFieldV1RequestWithBody(server string, profileUuid ProfileUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/contacts/fields", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewReachDeleteAContactFieldV1Request constructs an http.Request for the ReachDeleteAContactFieldV1 method
+func NewReachDeleteAContactFieldV1Request(server string, profileUuid ProfileUuid, fieldUuid FieldUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "fieldUuid", fieldUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/contacts/fields/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachUpdateAContactFieldV1Request calls the generic ReachUpdateAContactFieldV1 builder with application/json body
+func NewReachUpdateAContactFieldV1Request(server string, profileUuid ProfileUuid, fieldUuid FieldUuid, body ReachUpdateAContactFieldV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachUpdateAContactFieldV1RequestWithBody(server, profileUuid, fieldUuid, "application/json", bodyReader)
+}
+
+// NewReachUpdateAContactFieldV1RequestWithBody constructs an http.Request for the ReachUpdateAContactFieldV1 method, with any body, and a specified content type
+func NewReachUpdateAContactFieldV1RequestWithBody(server string, profileUuid ProfileUuid, fieldUuid FieldUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "fieldUuid", fieldUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/contacts/fields/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewReachDeleteAProfileContactV1Request constructs an http.Request for the ReachDeleteAProfileContactV1 method
+func NewReachDeleteAProfileContactV1Request(server string, profileUuid ProfileUuid, contactUuid ContactUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "contactUuid", contactUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/contacts/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachGetContactDetailsV1Request constructs an http.Request for the ReachGetContactDetailsV1 method
+func NewReachGetContactDetailsV1Request(server string, profileUuid ProfileUuid, contactUuid ContactUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "contactUuid", contactUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/contacts/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachUpdateAContactV1Request calls the generic ReachUpdateAContactV1 builder with application/json body
+func NewReachUpdateAContactV1Request(server string, profileUuid ProfileUuid, contactUuid ContactUuid, body ReachUpdateAContactV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachUpdateAContactV1RequestWithBody(server, profileUuid, contactUuid, "application/json", bodyReader)
+}
+
+// NewReachUpdateAContactV1RequestWithBody constructs an http.Request for the ReachUpdateAContactV1 method, with any body, and a specified content type
+func NewReachUpdateAContactV1RequestWithBody(server string, profileUuid ProfileUuid, contactUuid ContactUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "contactUuid", contactUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/contacts/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewReachGetProfileDomainDNSStatusV1Request constructs an http.Request for the ReachGetProfileDomainDNSStatusV1 method
 func NewReachGetProfileDomainDNSStatusV1Request(server string, profileUuid ProfileUuid) (*http.Request, error) {
 	var err error
@@ -34001,6 +38064,274 @@ func NewReachGetProfileDomainDNSStatusV1Request(server string, profileUuid Profi
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewReachListProfileSegmentsV1Request constructs an http.Request for the ReachListProfileSegmentsV1 method
+func NewReachListProfileSegmentsV1Request(server string, profileUuid ProfileUuid, params *ReachListProfileSegmentsV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/segmentation/segments", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.CountType != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "count_type", *params.CountType, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Page != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page", *params.Page, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PerPage != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "per_page", *params.PerPage, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachCreateAProfileSegmentV1Request calls the generic ReachCreateAProfileSegmentV1 builder with application/json body
+func NewReachCreateAProfileSegmentV1Request(server string, profileUuid ProfileUuid, body ReachCreateAProfileSegmentV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachCreateAProfileSegmentV1RequestWithBody(server, profileUuid, "application/json", bodyReader)
+}
+
+// NewReachCreateAProfileSegmentV1RequestWithBody constructs an http.Request for the ReachCreateAProfileSegmentV1 method, with any body, and a specified content type
+func NewReachCreateAProfileSegmentV1RequestWithBody(server string, profileUuid ProfileUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/segmentation/segments", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewReachDeleteAProfileSegmentV1Request constructs an http.Request for the ReachDeleteAProfileSegmentV1 method
+func NewReachDeleteAProfileSegmentV1Request(server string, profileUuid ProfileUuid, segmentUuid SegmentUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "segmentUuid", segmentUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/segmentation/segments/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachGetProfileSegmentDetailsV1Request constructs an http.Request for the ReachGetProfileSegmentDetailsV1 method
+func NewReachGetProfileSegmentDetailsV1Request(server string, profileUuid ProfileUuid, segmentUuid SegmentUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "segmentUuid", segmentUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/segmentation/segments/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachUpdateAProfileSegmentV1Request calls the generic ReachUpdateAProfileSegmentV1 builder with application/json body
+func NewReachUpdateAProfileSegmentV1Request(server string, profileUuid ProfileUuid, segmentUuid SegmentUuid, body ReachUpdateAProfileSegmentV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachUpdateAProfileSegmentV1RequestWithBody(server, profileUuid, segmentUuid, "application/json", bodyReader)
+}
+
+// NewReachUpdateAProfileSegmentV1RequestWithBody constructs an http.Request for the ReachUpdateAProfileSegmentV1 method, with any body, and a specified content type
+func NewReachUpdateAProfileSegmentV1RequestWithBody(server string, profileUuid ProfileUuid, segmentUuid SegmentUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "segmentUuid", segmentUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/segmentation/segments/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -34078,6 +38409,427 @@ func NewReachListProfileSegmentContactsV1Request(server string, profileUuid Prof
 	}
 
 	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachCountProfileSegmentContactsV1Request constructs an http.Request for the ReachCountProfileSegmentContactsV1 method
+func NewReachCountProfileSegmentContactsV1Request(server string, profileUuid ProfileUuid, segmentUuid SegmentUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "segmentUuid", segmentUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/segmentation/segments/%s/count", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachListProfileTagsV1Request constructs an http.Request for the ReachListProfileTagsV1 method
+func NewReachListProfileTagsV1Request(server string, profileUuid ProfileUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/tags", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachCreateOrFindTagsV1Request calls the generic ReachCreateOrFindTagsV1 builder with application/json body
+func NewReachCreateOrFindTagsV1Request(server string, profileUuid ProfileUuid, body ReachCreateOrFindTagsV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachCreateOrFindTagsV1RequestWithBody(server, profileUuid, "application/json", bodyReader)
+}
+
+// NewReachCreateOrFindTagsV1RequestWithBody constructs an http.Request for the ReachCreateOrFindTagsV1 method, with any body, and a specified content type
+func NewReachCreateOrFindTagsV1RequestWithBody(server string, profileUuid ProfileUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/tags", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewReachDeleteATagV1Request constructs an http.Request for the ReachDeleteATagV1 method
+func NewReachDeleteATagV1Request(server string, profileUuid ProfileUuid, tagUuid TagUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "tagUuid", tagUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/tags/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachRenameATagV1Request calls the generic ReachRenameATagV1 builder with application/json body
+func NewReachRenameATagV1Request(server string, profileUuid ProfileUuid, tagUuid TagUuid, body ReachRenameATagV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachRenameATagV1RequestWithBody(server, profileUuid, tagUuid, "application/json", bodyReader)
+}
+
+// NewReachRenameATagV1RequestWithBody constructs an http.Request for the ReachRenameATagV1 method, with any body, and a specified content type
+func NewReachRenameATagV1RequestWithBody(server string, profileUuid ProfileUuid, tagUuid TagUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "tagUuid", tagUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/tags/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewReachRemoveContactsFromATagV1Request calls the generic ReachRemoveContactsFromATagV1 builder with application/json body
+func NewReachRemoveContactsFromATagV1Request(server string, profileUuid ProfileUuid, tagUuid TagUuid, body ReachRemoveContactsFromATagV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachRemoveContactsFromATagV1RequestWithBody(server, profileUuid, tagUuid, "application/json", bodyReader)
+}
+
+// NewReachRemoveContactsFromATagV1RequestWithBody constructs an http.Request for the ReachRemoveContactsFromATagV1 method, with any body, and a specified content type
+func NewReachRemoveContactsFromATagV1RequestWithBody(server string, profileUuid ProfileUuid, tagUuid TagUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "tagUuid", tagUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/tags/%s/contacts", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewReachAssignContactsToATagV1Request calls the generic ReachAssignContactsToATagV1 builder with application/json body
+func NewReachAssignContactsToATagV1Request(server string, profileUuid ProfileUuid, tagUuid TagUuid, body ReachAssignContactsToATagV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachAssignContactsToATagV1RequestWithBody(server, profileUuid, tagUuid, "application/json", bodyReader)
+}
+
+// NewReachAssignContactsToATagV1RequestWithBody constructs an http.Request for the ReachAssignContactsToATagV1 method, with any body, and a specified content type
+func NewReachAssignContactsToATagV1RequestWithBody(server string, profileUuid ProfileUuid, tagUuid TagUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "tagUuid", tagUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/tags/%s/contacts", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewReachRemoveAContactFromATagV1Request constructs an http.Request for the ReachRemoveAContactFromATagV1 method
+func NewReachRemoveAContactFromATagV1Request(server string, profileUuid ProfileUuid, tagUuid TagUuid, contactUuid ContactUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "tagUuid", tagUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam2 string
+
+	pathParam2, err = runtime.StyleParamWithOptions("simple", false, "contactUuid", contactUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/tags/%s/contacts/%s", pathParam0, pathParam1, pathParam2)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachAssignAContactToATagV1Request constructs an http.Request for the ReachAssignAContactToATagV1 method
+func NewReachAssignAContactToATagV1Request(server string, profileUuid ProfileUuid, tagUuid TagUuid, contactUuid ContactUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "tagUuid", tagUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam2 string
+
+	pathParam2, err = runtime.StyleParamWithOptions("simple", false, "contactUuid", contactUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/tags/%s/contacts/%s", pathParam0, pathParam1, pathParam2)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -37766,6 +42518,172 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /api/domains/v1/irtp/{domain} (the `DomainsGetPendingIRTPVerificationV1` operationId).
 	DomainsGetPendingIRTPVerificationV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*DomainsGetPendingIRTPVerificationV1Response, error)
 
+	// DomainsGetIncomingDomainMoveListV1WithResponse Get incoming domain move list
+	//
+	// Retrieve all domains other Hostinger accounts are moving to your account.
+	//
+	// Moves of every status are returned, including the ones which already completed.
+	//
+	// Use this endpoint to find domains waiting for you to accept them.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/domains/v1/move/incoming (the `DomainsGetIncomingDomainMoveListV1` operationId).
+	DomainsGetIncomingDomainMoveListV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*DomainsGetIncomingDomainMoveListV1Response, error)
+
+	// DomainsRejectIncomingDomainMoveV1WithResponse Reject incoming domain move
+	//
+	// Reject an incoming move for a specified domain.
+	//
+	// The domain stays in the account which initiated the move.
+	// Moves you have already accepted cannot be rejected anymore.
+	//
+	// Use this endpoint to decline a domain you do not want to take over.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/domains/v1/move/incoming/{domain} (the `DomainsRejectIncomingDomainMoveV1` operationId).
+	DomainsRejectIncomingDomainMoveV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*DomainsRejectIncomingDomainMoveV1Response, error)
+
+	// DomainsGetIncomingDomainMoveV1WithResponse Get incoming domain move
+	//
+	// Retrieve the incoming move for a specified domain.
+	//
+	// Returns 404 when no account is moving this domain to you.
+	//
+	// Use this endpoint to check whether a domain addressed to you is still waiting to be accepted.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/domains/v1/move/incoming/{domain} (the `DomainsGetIncomingDomainMoveV1` operationId).
+	DomainsGetIncomingDomainMoveV1WithResponse(ctx context.Context, domain Domain, params *DomainsGetIncomingDomainMoveV1Params, reqEditors ...RequestEditorFn) (*DomainsGetIncomingDomainMoveV1Response, error)
+
+	// DomainsAcceptIncomingDomainMoveV1WithBodyWithResponse Accept incoming domain move
+	//
+	// Accept an incoming move for a specified domain.
+	//
+	// The provided WHOIS profiles become the contacts of the domain, so they must belong
+	// to your account and satisfy the requirements of the TLD. Only the contact types the
+	// domain actually uses are applied, but all four profile IDs have to be provided.
+	//
+	// The move has to still be waiting for your decision, already accepted moves
+	// cannot be accepted again.
+	//
+	// Accepting does not complete the move. A confirmation email is sent to the email address of
+	// the new owner contact, and the domain changes hands only after the change is confirmed from it.
+	// Until then the move stays in the `activating` status, which can be followed with the
+	// [incoming move endpoint](#tag/domains-move).
+	//
+	// Use this endpoint to take ownership of a domain offered to you.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/domains/v1/move/incoming/{domain} (the `DomainsAcceptIncomingDomainMoveV1` operationId).
+	DomainsAcceptIncomingDomainMoveV1WithBodyWithResponse(ctx context.Context, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DomainsAcceptIncomingDomainMoveV1Response, error)
+
+	// DomainsAcceptIncomingDomainMoveV1WithResponse Accept incoming domain move
+	//
+	// Accept an incoming move for a specified domain.
+	//
+	// The provided WHOIS profiles become the contacts of the domain, so they must belong
+	// to your account and satisfy the requirements of the TLD. Only the contact types the
+	// domain actually uses are applied, but all four profile IDs have to be provided.
+	//
+	// The move has to still be waiting for your decision, already accepted moves
+	// cannot be accepted again.
+	//
+	// Accepting does not complete the move. A confirmation email is sent to the email address of
+	// the new owner contact, and the domain changes hands only after the change is confirmed from it.
+	// Until then the move stays in the `activating` status, which can be followed with the
+	// [incoming move endpoint](#tag/domains-move).
+	//
+	// Use this endpoint to take ownership of a domain offered to you.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/domains/v1/move/incoming/{domain} (the `DomainsAcceptIncomingDomainMoveV1` operationId).
+	DomainsAcceptIncomingDomainMoveV1WithResponse(ctx context.Context, domain Domain, body DomainsAcceptIncomingDomainMoveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsAcceptIncomingDomainMoveV1Response, error)
+
+	// DomainsGetOutgoingDomainMoveListV1WithResponse Get outgoing domain move list
+	//
+	// Retrieve all domains you are moving to other Hostinger accounts.
+	//
+	// Only moves which have not completed yet are returned.
+	//
+	// Use this endpoint to track moves you have initiated and the accounts they are addressed to.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/domains/v1/move/outgoing (the `DomainsGetOutgoingDomainMoveListV1` operationId).
+	DomainsGetOutgoingDomainMoveListV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*DomainsGetOutgoingDomainMoveListV1Response, error)
+
+	// DomainsCancelOutgoingDomainMoveV1WithResponse Cancel outgoing domain move
+	//
+	// Cancel an outgoing move for a specified domain.
+	//
+	// The move can only be cancelled while the receiving account has not accepted it yet.
+	// The domain stays in your account.
+	//
+	// Use this endpoint to withdraw a move you no longer want to complete.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/domains/v1/move/outgoing/{domain} (the `DomainsCancelOutgoingDomainMoveV1` operationId).
+	DomainsCancelOutgoingDomainMoveV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*DomainsCancelOutgoingDomainMoveV1Response, error)
+
+	// DomainsGetOutgoingDomainMoveV1WithResponse Get outgoing domain move
+	//
+	// Retrieve the outgoing move for a specified domain.
+	//
+	// Returns 404 when the domain has no move in progress.
+	//
+	// Use this endpoint to track the status of a move you have initiated for a single domain.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/domains/v1/move/outgoing/{domain} (the `DomainsGetOutgoingDomainMoveV1` operationId).
+	DomainsGetOutgoingDomainMoveV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*DomainsGetOutgoingDomainMoveV1Response, error)
+
+	// DomainsStartOutgoingDomainMoveV1WithBodyWithResponse Start outgoing domain move
+	//
+	// Initiate a move of a specified domain to another Hostinger account.
+	//
+	// The receiving account has to already exist and accept the move before the domain changes hands.
+	//
+	// The domain must be active. The subscription it belongs to is resolved automatically,
+	// and the request is rejected with a 404 status code when the domain has no domain
+	// subscription of its own.
+	//
+	// Domains protected by premium protection require an additional verification step,
+	// such requests are rejected with a 428 status code.
+	//
+	// Use this endpoint to hand a domain over to another Hostinger user.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/domains/v1/move/outgoing/{domain} (the `DomainsStartOutgoingDomainMoveV1` operationId).
+	DomainsStartOutgoingDomainMoveV1WithBodyWithResponse(ctx context.Context, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DomainsStartOutgoingDomainMoveV1Response, error)
+
+	// DomainsStartOutgoingDomainMoveV1WithResponse Start outgoing domain move
+	//
+	// Initiate a move of a specified domain to another Hostinger account.
+	//
+	// The receiving account has to already exist and accept the move before the domain changes hands.
+	//
+	// The domain must be active. The subscription it belongs to is resolved automatically,
+	// and the request is rejected with a 404 status code when the domain has no domain
+	// subscription of its own.
+	//
+	// Domains protected by premium protection require an additional verification step,
+	// such requests are rejected with a 428 status code.
+	//
+	// Use this endpoint to hand a domain over to another Hostinger user.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/domains/v1/move/outgoing/{domain} (the `DomainsStartOutgoingDomainMoveV1` operationId).
+	DomainsStartOutgoingDomainMoveV1WithResponse(ctx context.Context, domain Domain, body DomainsStartOutgoingDomainMoveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsStartOutgoingDomainMoveV1Response, error)
+
 	// DomainsGetDomainListV1WithResponse Get domain list
 	//
 	// Retrieve all domains associated with your account.
@@ -37816,6 +42734,56 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with POST /api/domains/v1/portfolio (the `DomainsPurchaseNewDomainV1` operationId).
 	DomainsPurchaseNewDomainV1WithResponse(ctx context.Context, body DomainsPurchaseNewDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsPurchaseNewDomainV1Response, error)
+
+	// DomainsClaimFreeDomainV1WithBodyWithResponse Claim free domain
+	//
+	// Claim a free domain available on your account and register it.
+	//
+	// Unlike purchasing a domain, this consumes a free domain you already have,
+	// so no payment method is required.
+	//
+	// A successful response means the domain is registered. If registration fails, login to
+	// [hPanel](https://hpanel.hostinger.com/) and check domain registration status.
+	//
+	// If no WHOIS information is provided, default contact information for that TLD will be used.
+	// Before making request, ensure WHOIS information for desired TLD exists in your account.
+	//
+	// Some TLDs require `additional_details` to be provided and these will be validated before claiming.
+	//
+	// Requests which cannot be fulfilled are rejected with an error code in the response body,
+	// for example `2037` when no free domain is available.
+	//
+	// Use this endpoint to register a domain using a free domain from your account.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/domains/v1/portfolio/claim (the `DomainsClaimFreeDomainV1` operationId).
+	DomainsClaimFreeDomainV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DomainsClaimFreeDomainV1Response, error)
+
+	// DomainsClaimFreeDomainV1WithResponse Claim free domain
+	//
+	// Claim a free domain available on your account and register it.
+	//
+	// Unlike purchasing a domain, this consumes a free domain you already have,
+	// so no payment method is required.
+	//
+	// A successful response means the domain is registered. If registration fails, login to
+	// [hPanel](https://hpanel.hostinger.com/) and check domain registration status.
+	//
+	// If no WHOIS information is provided, default contact information for that TLD will be used.
+	// Before making request, ensure WHOIS information for desired TLD exists in your account.
+	//
+	// Some TLDs require `additional_details` to be provided and these will be validated before claiming.
+	//
+	// Requests which cannot be fulfilled are rejected with an error code in the response body,
+	// for example `2037` when no free domain is available.
+	//
+	// Use this endpoint to register a domain using a free domain from your account.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/domains/v1/portfolio/claim (the `DomainsClaimFreeDomainV1` operationId).
+	DomainsClaimFreeDomainV1WithResponse(ctx context.Context, body DomainsClaimFreeDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsClaimFreeDomainV1Response, error)
 
 	// DomainsGetDomainDetailsV1WithResponse Get domain details
 	//
@@ -37943,6 +42911,58 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with GET /api/domains/v1/transfers (the `DomainsGetTransferListV1` operationId).
 	DomainsGetTransferListV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*DomainsGetTransferListV1Response, error)
+
+	// DomainsClaimFreeDomainTransferV1WithBodyWithResponse Claim free domain transfer
+	//
+	// Claim a free domain transfer available on your account and start the transfer.
+	//
+	// Unlike purchasing a transfer, this consumes a free domain transfer you already have,
+	// so no payment method is required.
+	//
+	// Before making request, unlock the domain at the current registrar and get its authorization
+	// code. The transfer is validated first, so domains which cannot be transferred are rejected
+	// before the free domain transfer is consumed.
+	//
+	// A successful response means the transfer has been started. Completion depends on the current
+	// registrar and can be followed with the [transfer list endpoint](#tag/domains-transfer).
+	//
+	// If no WHOIS information is provided, default contact information for that TLD will be used.
+	// Before making request, ensure WHOIS information for desired TLD exists in your account.
+	//
+	// Requests which cannot be fulfilled are rejected with an error code in the response body.
+	//
+	// Use this endpoint to transfer a domain using a free domain transfer from your account.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/domains/v1/transfers/claim (the `DomainsClaimFreeDomainTransferV1` operationId).
+	DomainsClaimFreeDomainTransferV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DomainsClaimFreeDomainTransferV1Response, error)
+
+	// DomainsClaimFreeDomainTransferV1WithResponse Claim free domain transfer
+	//
+	// Claim a free domain transfer available on your account and start the transfer.
+	//
+	// Unlike purchasing a transfer, this consumes a free domain transfer you already have,
+	// so no payment method is required.
+	//
+	// Before making request, unlock the domain at the current registrar and get its authorization
+	// code. The transfer is validated first, so domains which cannot be transferred are rejected
+	// before the free domain transfer is consumed.
+	//
+	// A successful response means the transfer has been started. Completion depends on the current
+	// registrar and can be followed with the [transfer list endpoint](#tag/domains-transfer).
+	//
+	// If no WHOIS information is provided, default contact information for that TLD will be used.
+	// Before making request, ensure WHOIS information for desired TLD exists in your account.
+	//
+	// Requests which cannot be fulfilled are rejected with an error code in the response body.
+	//
+	// Use this endpoint to transfer a domain using a free domain transfer from your account.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/domains/v1/transfers/claim (the `DomainsClaimFreeDomainTransferV1` operationId).
+	DomainsClaimFreeDomainTransferV1WithResponse(ctx context.Context, body DomainsClaimFreeDomainTransferV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsClaimFreeDomainTransferV1Response, error)
 
 	// DomainsGetTransferV1WithResponse Get transfer
 	//
@@ -40468,9 +45488,16 @@ type ClientWithResponsesInterface interface {
 	// This endpoint returns a paginated list of contacts with their basic information.
 	// You can filter contacts by group UUID and subscription status.
 	//
+	// **Deprecated.** This endpoint cannot target a profile, so it always falls back to the
+	// client's default profile and cannot list contacts of any other profile. Use
+	// `GET /api/reach/v1/profiles/{profileUuid}/contacts` instead, which also replaces the
+	// group filter with a tag filter.
+	//
 	// Returns a wrapper object for the known response body format(s).
 	//
 	// Corresponds with GET /api/reach/v1/contacts (the `ReachListContactsV1` operationId).
+	//
+	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	ReachListContactsV1WithResponse(ctx context.Context, params *ReachListContactsV1Params, reqEditors ...RequestEditorFn) (*ReachListContactsV1Response, error)
 
 	// ReachCreateANewContactV1WithBodyWithResponse Create a new contact
@@ -40524,9 +45551,15 @@ type ClientWithResponsesInterface interface {
 	//
 	// This endpoint permanently removes a contact from the email marketing system.
 	//
+	// **Deprecated.** This endpoint cannot target a profile, so it always falls back to the
+	// client's default profile and cannot delete contacts of any other profile. Use
+	// `DELETE /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid}` instead.
+	//
 	// Returns a wrapper object for the known response body format(s).
 	//
 	// Corresponds with DELETE /api/reach/v1/contacts/{uuid} (the `ReachDeleteAContactV1` operationId).
+	//
+	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	ReachDeleteAContactV1WithResponse(ctx context.Context, uuid Uuid, reqEditors ...RequestEditorFn) (*ReachDeleteAContactV1Response, error)
 
 	// ReachListProfilesV1WithResponse List Profiles
@@ -40537,6 +45570,19 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with GET /api/reach/v1/profiles (the `ReachListProfilesV1` operationId).
 	ReachListProfilesV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*ReachListProfilesV1Response, error)
+
+	// ReachListProfileContactsV1WithResponse List profile contacts
+	//
+	// Get a paginated list of contacts belonging to a profile.
+	//
+	// Contacts can be filtered by subscription status, by tag, and by an email search term.
+	// The `meta.total` field of the response is the number of contacts matching the filters,
+	// so calling this endpoint without filters gives the profile's total contact count.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/contacts (the `ReachListProfileContactsV1` operationId).
+	ReachListProfileContactsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, params *ReachListProfileContactsV1Params, reqEditors ...RequestEditorFn) (*ReachListProfileContactsV1Response, error)
 
 	// ReachCreateNewContactsV1WithBodyWithResponse Create new contacts
 	//
@@ -40566,6 +45612,162 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/contacts (the `ReachCreateNewContactsV1` operationId).
 	ReachCreateNewContactsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachCreateNewContactsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachCreateNewContactsV1Response, error)
 
+	// ReachCreateContactsInBulkV1WithBodyWithResponse Create contacts in bulk
+	//
+	// Create many contacts in a profile in a single call.
+	//
+	// The contacts are imported in the background, so a success response means the import was
+	// accepted rather than finished. Contacts whose email already exists in the profile are
+	// left as they are. If double opt-in is enabled, new contacts start off pending and are
+	// sent a confirmation email.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/contacts/bulk (the `ReachCreateContactsInBulkV1` operationId).
+	ReachCreateContactsInBulkV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachCreateContactsInBulkV1Response, error)
+
+	// ReachCreateContactsInBulkV1WithResponse Create contacts in bulk
+	//
+	// Create many contacts in a profile in a single call.
+	//
+	// The contacts are imported in the background, so a success response means the import was
+	// accepted rather than finished. Contacts whose email already exists in the profile are
+	// left as they are. If double opt-in is enabled, new contacts start off pending and are
+	// sent a confirmation email.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/contacts/bulk (the `ReachCreateContactsInBulkV1` operationId).
+	ReachCreateContactsInBulkV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachCreateContactsInBulkV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachCreateContactsInBulkV1Response, error)
+
+	// ReachListContactFieldsV1WithResponse List contact fields
+	//
+	// Get the custom contact fields defined in a profile.
+	//
+	// Custom fields let you store your own attributes on contacts. The returned uuids are what
+	// you pass to the contact update endpoint to set values, and choice fields also list the
+	// options available to pick from.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/contacts/fields (the `ReachListContactFieldsV1` operationId).
+	ReachListContactFieldsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachListContactFieldsV1Response, error)
+
+	// ReachCreateAContactFieldV1WithBodyWithResponse Create a contact field
+	//
+	// Define a new custom contact field in a profile.
+	//
+	// The `slug` is derived from the label and, like the field type, cannot be changed later.
+	// Use the returned uuid to set values on contacts.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/contacts/fields (the `ReachCreateAContactFieldV1` operationId).
+	ReachCreateAContactFieldV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachCreateAContactFieldV1Response, error)
+
+	// ReachCreateAContactFieldV1WithResponse Create a contact field
+	//
+	// Define a new custom contact field in a profile.
+	//
+	// The `slug` is derived from the label and, like the field type, cannot be changed later.
+	// Use the returned uuid to set values on contacts.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/contacts/fields (the `ReachCreateAContactFieldV1` operationId).
+	ReachCreateAContactFieldV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachCreateAContactFieldV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachCreateAContactFieldV1Response, error)
+
+	// ReachDeleteAContactFieldV1WithResponse Delete a contact field
+	//
+	// Delete a custom contact field.
+	//
+	// Every value contacts hold for the field is deleted with it, and for the choice types so
+	// are its options. The contacts themselves are not affected.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/contacts/fields/{fieldUuid} (the `ReachDeleteAContactFieldV1` operationId).
+	ReachDeleteAContactFieldV1WithResponse(ctx context.Context, profileUuid ProfileUuid, fieldUuid FieldUuid, reqEditors ...RequestEditorFn) (*ReachDeleteAContactFieldV1Response, error)
+
+	// ReachUpdateAContactFieldV1WithBodyWithResponse Update a contact field
+	//
+	// Rename a custom contact field and, for the choice types, replace its option set.
+	//
+	// Options carrying a uuid are kept and relabelled, options without one are created, and any
+	// existing option left out of the list is deleted along with the values contacts hold for
+	// it. The field type and slug cannot be changed.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/contacts/fields/{fieldUuid} (the `ReachUpdateAContactFieldV1` operationId).
+	ReachUpdateAContactFieldV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, fieldUuid FieldUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachUpdateAContactFieldV1Response, error)
+
+	// ReachUpdateAContactFieldV1WithResponse Update a contact field
+	//
+	// Rename a custom contact field and, for the choice types, replace its option set.
+	//
+	// Options carrying a uuid are kept and relabelled, options without one are created, and any
+	// existing option left out of the list is deleted along with the values contacts hold for
+	// it. The field type and slug cannot be changed.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/contacts/fields/{fieldUuid} (the `ReachUpdateAContactFieldV1` operationId).
+	ReachUpdateAContactFieldV1WithResponse(ctx context.Context, profileUuid ProfileUuid, fieldUuid FieldUuid, body ReachUpdateAContactFieldV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachUpdateAContactFieldV1Response, error)
+
+	// ReachDeleteAProfileContactV1WithResponse Delete a profile contact
+	//
+	// Permanently delete a contact from a profile.
+	//
+	// The contact is removed together with its custom field values and tag assignments.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid} (the `ReachDeleteAProfileContactV1` operationId).
+	ReachDeleteAProfileContactV1WithResponse(ctx context.Context, profileUuid ProfileUuid, contactUuid ContactUuid, reqEditors ...RequestEditorFn) (*ReachDeleteAProfileContactV1Response, error)
+
+	// ReachGetContactDetailsV1WithResponse Get contact details
+	//
+	// Get the full details of a single contact.
+	//
+	// Alongside the contact's own attributes this returns the tags assigned to it and the
+	// values it holds for the profile's custom contact fields.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid} (the `ReachGetContactDetailsV1` operationId).
+	ReachGetContactDetailsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, contactUuid ContactUuid, reqEditors ...RequestEditorFn) (*ReachGetContactDetailsV1Response, error)
+
+	// ReachUpdateAContactV1WithBodyWithResponse Update a contact
+	//
+	// Update a contact's attributes and custom field values.
+	//
+	// Only the properties present in the request body are changed, so a partial body is enough
+	// to change a single attribute. Sending a property as `null` clears it.
+	//
+	// The response carries the contact's core attributes. Read back its tags, custom field
+	// values, source and note with `GET /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid}`.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid} (the `ReachUpdateAContactV1` operationId).
+	ReachUpdateAContactV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contactUuid ContactUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachUpdateAContactV1Response, error)
+
+	// ReachUpdateAContactV1WithResponse Update a contact
+	//
+	// Update a contact's attributes and custom field values.
+	//
+	// Only the properties present in the request body are changed, so a partial body is enough
+	// to change a single attribute. Sending a property as `null` clears it.
+	//
+	// The response carries the contact's core attributes. Read back its tags, custom field
+	// values, source and note with `GET /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid}`.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid} (the `ReachUpdateAContactV1` operationId).
+	ReachUpdateAContactV1WithResponse(ctx context.Context, profileUuid ProfileUuid, contactUuid ContactUuid, body ReachUpdateAContactV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachUpdateAContactV1Response, error)
+
 	// ReachGetProfileDomainDNSStatusV1WithResponse Get profile domain DNS status
 	//
 	// Retrieve the DNS configuration status for a profile's domain.
@@ -40577,6 +45779,92 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/domains/dns-status (the `ReachGetProfileDomainDNSStatusV1` operationId).
 	ReachGetProfileDomainDNSStatusV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachGetProfileDomainDNSStatusV1Response, error)
+
+	// ReachListProfileSegmentsV1WithResponse List profile segments
+	//
+	// Get a paginated list of the segments defined in a profile.
+	//
+	// Each entry carries the number of contacts currently matching it, which is recalculated on
+	// read rather than stored. Use `count_type` to count either every matching contact or only
+	// the subscribed ones.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments (the `ReachListProfileSegmentsV1` operationId).
+	ReachListProfileSegmentsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, params *ReachListProfileSegmentsV1Params, reqEditors ...RequestEditorFn) (*ReachListProfileSegmentsV1Response, error)
+
+	// ReachCreateAProfileSegmentV1WithBodyWithResponse Create a profile segment
+	//
+	// Create a segment in a profile.
+	//
+	// A segment is a saved set of conditions rather than a fixed list, so its membership changes
+	// as contacts change. Creating one does not modify any contact.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/segmentation/segments (the `ReachCreateAProfileSegmentV1` operationId).
+	ReachCreateAProfileSegmentV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachCreateAProfileSegmentV1Response, error)
+
+	// ReachCreateAProfileSegmentV1WithResponse Create a profile segment
+	//
+	// Create a segment in a profile.
+	//
+	// A segment is a saved set of conditions rather than a fixed list, so its membership changes
+	// as contacts change. Creating one does not modify any contact.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/segmentation/segments (the `ReachCreateAProfileSegmentV1` operationId).
+	ReachCreateAProfileSegmentV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachCreateAProfileSegmentV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachCreateAProfileSegmentV1Response, error)
+
+	// ReachDeleteAProfileSegmentV1WithResponse Delete a profile segment
+	//
+	// Delete a segment.
+	//
+	// Only the segment definition is removed. The contacts that matched it are left untouched.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid} (the `ReachDeleteAProfileSegmentV1` operationId).
+	ReachDeleteAProfileSegmentV1WithResponse(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, reqEditors ...RequestEditorFn) (*ReachDeleteAProfileSegmentV1Response, error)
+
+	// ReachGetProfileSegmentDetailsV1WithResponse Get profile segment details
+	//
+	// Get a single segment of a profile, including the conditions that define it.
+	//
+	// To retrieve the contacts currently matching those conditions, use the segment contacts
+	// endpoint instead.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid} (the `ReachGetProfileSegmentDetailsV1` operationId).
+	ReachGetProfileSegmentDetailsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, reqEditors ...RequestEditorFn) (*ReachGetProfileSegmentDetailsV1Response, error)
+
+	// ReachUpdateAProfileSegmentV1WithBodyWithResponse Update a profile segment
+	//
+	// Rename a segment and/or replace the conditions that define it.
+	//
+	// `name` is always required. Omit `conditions` to rename without touching the conditions;
+	// supply them and they replace the existing set entirely rather than being merged into it.
+	// Contacts are never modified, but which of them match the segment can change immediately.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid} (the `ReachUpdateAProfileSegmentV1` operationId).
+	ReachUpdateAProfileSegmentV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachUpdateAProfileSegmentV1Response, error)
+
+	// ReachUpdateAProfileSegmentV1WithResponse Update a profile segment
+	//
+	// Rename a segment and/or replace the conditions that define it.
+	//
+	// `name` is always required. Omit `conditions` to rename without touching the conditions;
+	// supply them and they replace the existing set entirely rather than being merged into it.
+	// Contacts are never modified, but which of them match the segment can change immediately.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid} (the `ReachUpdateAProfileSegmentV1` operationId).
+	ReachUpdateAProfileSegmentV1WithResponse(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, body ReachUpdateAProfileSegmentV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachUpdateAProfileSegmentV1Response, error)
 
 	// ReachListProfileSegmentContactsV1WithResponse List profile segment contacts
 	//
@@ -40590,15 +45878,182 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}/contacts (the `ReachListProfileSegmentContactsV1` operationId).
 	ReachListProfileSegmentContactsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, params *ReachListProfileSegmentContactsV1Params, reqEditors ...RequestEditorFn) (*ReachListProfileSegmentContactsV1Response, error)
 
+	// ReachCountProfileSegmentContactsV1WithResponse Count profile segment contacts
+	//
+	// Count the contacts currently matching a segment without listing them.
+	//
+	// Cheaper than paging through the segment contacts endpoint when only the size is needed.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}/count (the `ReachCountProfileSegmentContactsV1` operationId).
+	ReachCountProfileSegmentContactsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, reqEditors ...RequestEditorFn) (*ReachCountProfileSegmentContactsV1Response, error)
+
+	// ReachListProfileTagsV1WithResponse List profile tags
+	//
+	// Get all tags defined in a profile.
+	//
+	// Tags are the way contacts are grouped in Reach, and can be used to filter the contact
+	// list or to build segments.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/tags (the `ReachListProfileTagsV1` operationId).
+	ReachListProfileTagsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachListProfileTagsV1Response, error)
+
+	// ReachCreateOrFindTagsV1WithBodyWithResponse Create or find tags
+	//
+	// Create tags in a profile.
+	//
+	// Names that already exist in the profile are not duplicated: the existing tag is returned
+	// instead, so the call is safe to repeat. Every tag in the request is returned, whether it
+	// was created now or already existed.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/tags (the `ReachCreateOrFindTagsV1` operationId).
+	ReachCreateOrFindTagsV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachCreateOrFindTagsV1Response, error)
+
+	// ReachCreateOrFindTagsV1WithResponse Create or find tags
+	//
+	// Create tags in a profile.
+	//
+	// Names that already exist in the profile are not duplicated: the existing tag is returned
+	// instead, so the call is safe to repeat. Every tag in the request is returned, whether it
+	// was created now or already existed.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/tags (the `ReachCreateOrFindTagsV1` operationId).
+	ReachCreateOrFindTagsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachCreateOrFindTagsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachCreateOrFindTagsV1Response, error)
+
+	// ReachDeleteATagV1WithResponse Delete a tag
+	//
+	// Delete a tag and remove it from every contact carrying it.
+	//
+	// The contacts themselves are not deleted. This is idempotent: deleting a tag that does not
+	// exist in the profile still succeeds.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid} (the `ReachDeleteATagV1` operationId).
+	ReachDeleteATagV1WithResponse(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, reqEditors ...RequestEditorFn) (*ReachDeleteATagV1Response, error)
+
+	// ReachRenameATagV1WithBodyWithResponse Rename a tag
+	//
+	// Rename a tag.
+	//
+	// The contacts assigned to the tag are unaffected. Names are unique within a profile, so
+	// renaming a tag to a name that is already taken is rejected.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid} (the `ReachRenameATagV1` operationId).
+	ReachRenameATagV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachRenameATagV1Response, error)
+
+	// ReachRenameATagV1WithResponse Rename a tag
+	//
+	// Rename a tag.
+	//
+	// The contacts assigned to the tag are unaffected. Names are unique within a profile, so
+	// renaming a tag to a name that is already taken is rejected.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid} (the `ReachRenameATagV1` operationId).
+	ReachRenameATagV1WithResponse(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, body ReachRenameATagV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachRenameATagV1Response, error)
+
+	// ReachRemoveContactsFromATagV1WithBodyWithResponse Remove contacts from a tag
+	//
+	// Remove a tag from many contacts at once.
+	//
+	// Pass `contact_uuids` to target specific contacts, or `all_contacts` to target every contact
+	// in the profile. The work is queued, so a success response means it was accepted rather than
+	// finished. The tag itself and the contacts are not deleted.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts (the `ReachRemoveContactsFromATagV1` operationId).
+	ReachRemoveContactsFromATagV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachRemoveContactsFromATagV1Response, error)
+
+	// ReachRemoveContactsFromATagV1WithResponse Remove contacts from a tag
+	//
+	// Remove a tag from many contacts at once.
+	//
+	// Pass `contact_uuids` to target specific contacts, or `all_contacts` to target every contact
+	// in the profile. The work is queued, so a success response means it was accepted rather than
+	// finished. The tag itself and the contacts are not deleted.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts (the `ReachRemoveContactsFromATagV1` operationId).
+	ReachRemoveContactsFromATagV1WithResponse(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, body ReachRemoveContactsFromATagV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachRemoveContactsFromATagV1Response, error)
+
+	// ReachAssignContactsToATagV1WithBodyWithResponse Assign contacts to a tag
+	//
+	// Assign a tag to many contacts at once.
+	//
+	// Pass `contact_uuids` to target specific contacts, or `all_contacts` to target every contact
+	// in the profile. The work is queued, so a success response means it was accepted rather than
+	// finished. Contacts that already carry the tag are left alone.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts (the `ReachAssignContactsToATagV1` operationId).
+	ReachAssignContactsToATagV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachAssignContactsToATagV1Response, error)
+
+	// ReachAssignContactsToATagV1WithResponse Assign contacts to a tag
+	//
+	// Assign a tag to many contacts at once.
+	//
+	// Pass `contact_uuids` to target specific contacts, or `all_contacts` to target every contact
+	// in the profile. The work is queued, so a success response means it was accepted rather than
+	// finished. Contacts that already carry the tag are left alone.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts (the `ReachAssignContactsToATagV1` operationId).
+	ReachAssignContactsToATagV1WithResponse(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, body ReachAssignContactsToATagV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachAssignContactsToATagV1Response, error)
+
+	// ReachRemoveAContactFromATagV1WithResponse Remove a contact from a tag
+	//
+	// Remove a tag from a single contact.
+	//
+	// Unlike the bulk endpoint this is applied immediately rather than queued. Neither the tag
+	// nor the contact is deleted.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts/{contactUuid} (the `ReachRemoveAContactFromATagV1` operationId).
+	ReachRemoveAContactFromATagV1WithResponse(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, contactUuid ContactUuid, reqEditors ...RequestEditorFn) (*ReachRemoveAContactFromATagV1Response, error)
+
+	// ReachAssignAContactToATagV1WithResponse Assign a contact to a tag
+	//
+	// Assign a tag to a single contact.
+	//
+	// Unlike the bulk endpoint this is applied immediately rather than queued. Assigning a tag
+	// the contact already carries succeeds without duplicating it.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts/{contactUuid} (the `ReachAssignAContactToATagV1` operationId).
+	ReachAssignAContactToATagV1WithResponse(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, contactUuid ContactUuid, reqEditors ...RequestEditorFn) (*ReachAssignAContactToATagV1Response, error)
+
 	// ReachListSegmentsV1WithResponse List segments
 	//
 	// Get a list of all contact segments.
 	//
 	// This endpoint returns a list of contact segments that can be used to organize contacts.
 	//
+	// **Deprecated.** This endpoint cannot target a profile, so it always falls back to
+	// the client's default profile and cannot list the segments of any other profile. Use
+	// `GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments` instead.
+	//
 	// Returns a wrapper object for the known response body format(s).
 	//
 	// Corresponds with GET /api/reach/v1/segmentation/segments (the `ReachListSegmentsV1` operationId).
+	//
+	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	ReachListSegmentsV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*ReachListSegmentsV1Response, error)
 
 	// ReachCreateANewContactSegmentV1WithBodyWithResponse Create a new contact segment
@@ -40608,9 +46063,15 @@ type ClientWithResponsesInterface interface {
 	// This endpoint allows creating a new contact segment that can be used to organize contacts.
 	// The segment can be configured with specific criteria like email, name, subscription status, etc.
 	//
+	// **Deprecated.** This endpoint cannot target a profile, so it always falls back to
+	// the client's default profile and cannot create segments in any other profile. Use
+	// `POST /api/reach/v1/profiles/{profileUuid}/segmentation/segments` instead.
+	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
 	// Corresponds with POST /api/reach/v1/segmentation/segments (the `ReachCreateANewContactSegmentV1` operationId).
+	//
+	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	ReachCreateANewContactSegmentV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachCreateANewContactSegmentV1Response, error)
 
 	// ReachCreateANewContactSegmentV1WithResponse Create a new contact segment
@@ -40620,9 +46081,15 @@ type ClientWithResponsesInterface interface {
 	// This endpoint allows creating a new contact segment that can be used to organize contacts.
 	// The segment can be configured with specific criteria like email, name, subscription status, etc.
 	//
+	// **Deprecated.** This endpoint cannot target a profile, so it always falls back to
+	// the client's default profile and cannot create segments in any other profile. Use
+	// `POST /api/reach/v1/profiles/{profileUuid}/segmentation/segments` instead.
+	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
 	// Corresponds with POST /api/reach/v1/segmentation/segments (the `ReachCreateANewContactSegmentV1` operationId).
+	//
+	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	ReachCreateANewContactSegmentV1WithResponse(ctx context.Context, body ReachCreateANewContactSegmentV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachCreateANewContactSegmentV1Response, error)
 
 	// ReachGetSegmentDetailsV1WithResponse Get segment details
@@ -40632,9 +46099,15 @@ type ClientWithResponsesInterface interface {
 	// This endpoint retrieves information about a single segment identified by UUID.
 	// Segments are used to organize and group contacts based on specific criteria.
 	//
+	// **Deprecated.** This endpoint cannot target a profile, so it always falls back to
+	// the client's default profile and cannot read segments of any other profile. Use
+	// `GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}` instead.
+	//
 	// Returns a wrapper object for the known response body format(s).
 	//
 	// Corresponds with GET /api/reach/v1/segmentation/segments/{segmentUuid} (the `ReachGetSegmentDetailsV1` operationId).
+	//
+	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	ReachGetSegmentDetailsV1WithResponse(ctx context.Context, segmentUuid SegmentUuid, reqEditors ...RequestEditorFn) (*ReachGetSegmentDetailsV1Response, error)
 
 	// ReachListSegmentContactsV1WithResponse List segment contacts
@@ -40644,9 +46117,15 @@ type ClientWithResponsesInterface interface {
 	// This endpoint allows you to fetch and filter contacts that belong to a particular segment,
 	// identified by its UUID.
 	//
+	// **Deprecated.** This endpoint cannot target a profile, so it always falls back to
+	// the client's default profile and cannot read segments of any other profile. Use
+	// `GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}/contacts` instead.
+	//
 	// Returns a wrapper object for the known response body format(s).
 	//
 	// Corresponds with GET /api/reach/v1/segmentation/segments/{segmentUuid}/contacts (the `ReachListSegmentContactsV1` operationId).
+	//
+	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	ReachListSegmentContactsV1WithResponse(ctx context.Context, segmentUuid SegmentUuid, params *ReachListSegmentContactsV1Params, reqEditors ...RequestEditorFn) (*ReachListSegmentContactsV1Response, error)
 
 	// V2GetDomainVerificationsDIRECTWithBodyWithResponse Get domain verifications
@@ -44605,6 +50084,460 @@ func (r DomainsGetPendingIRTPVerificationV1Response) ContentType() string {
 	return ""
 }
 
+type DomainsGetIncomingDomainMoveListV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *DomainsV1MoveMoveCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r DomainsGetIncomingDomainMoveListV1Response) GetJSON200() *DomainsV1MoveMoveCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DomainsGetIncomingDomainMoveListV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DomainsGetIncomingDomainMoveListV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DomainsGetIncomingDomainMoveListV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DomainsGetIncomingDomainMoveListV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DomainsGetIncomingDomainMoveListV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DomainsGetIncomingDomainMoveListV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DomainsRejectIncomingDomainMoveV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r DomainsRejectIncomingDomainMoveV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DomainsRejectIncomingDomainMoveV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DomainsRejectIncomingDomainMoveV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DomainsRejectIncomingDomainMoveV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DomainsRejectIncomingDomainMoveV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DomainsRejectIncomingDomainMoveV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DomainsRejectIncomingDomainMoveV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DomainsGetIncomingDomainMoveV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *DomainsV1MoveMoveResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r DomainsGetIncomingDomainMoveV1Response) GetJSON200() *DomainsV1MoveMoveResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DomainsGetIncomingDomainMoveV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DomainsGetIncomingDomainMoveV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DomainsGetIncomingDomainMoveV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DomainsGetIncomingDomainMoveV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DomainsGetIncomingDomainMoveV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DomainsGetIncomingDomainMoveV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DomainsAcceptIncomingDomainMoveV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r DomainsAcceptIncomingDomainMoveV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DomainsAcceptIncomingDomainMoveV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r DomainsAcceptIncomingDomainMoveV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DomainsAcceptIncomingDomainMoveV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DomainsAcceptIncomingDomainMoveV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DomainsAcceptIncomingDomainMoveV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DomainsAcceptIncomingDomainMoveV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DomainsAcceptIncomingDomainMoveV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DomainsGetOutgoingDomainMoveListV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *DomainsV1MoveMoveCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r DomainsGetOutgoingDomainMoveListV1Response) GetJSON200() *DomainsV1MoveMoveCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DomainsGetOutgoingDomainMoveListV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DomainsGetOutgoingDomainMoveListV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DomainsGetOutgoingDomainMoveListV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DomainsGetOutgoingDomainMoveListV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DomainsGetOutgoingDomainMoveListV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DomainsGetOutgoingDomainMoveListV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DomainsCancelOutgoingDomainMoveV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r DomainsCancelOutgoingDomainMoveV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DomainsCancelOutgoingDomainMoveV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DomainsCancelOutgoingDomainMoveV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DomainsCancelOutgoingDomainMoveV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DomainsCancelOutgoingDomainMoveV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DomainsCancelOutgoingDomainMoveV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DomainsCancelOutgoingDomainMoveV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DomainsGetOutgoingDomainMoveV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *DomainsV1MoveMoveResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r DomainsGetOutgoingDomainMoveV1Response) GetJSON200() *DomainsV1MoveMoveResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DomainsGetOutgoingDomainMoveV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DomainsGetOutgoingDomainMoveV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DomainsGetOutgoingDomainMoveV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DomainsGetOutgoingDomainMoveV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DomainsGetOutgoingDomainMoveV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DomainsGetOutgoingDomainMoveV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DomainsStartOutgoingDomainMoveV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r DomainsStartOutgoingDomainMoveV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DomainsStartOutgoingDomainMoveV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r DomainsStartOutgoingDomainMoveV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DomainsStartOutgoingDomainMoveV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DomainsStartOutgoingDomainMoveV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DomainsStartOutgoingDomainMoveV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DomainsStartOutgoingDomainMoveV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DomainsStartOutgoingDomainMoveV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type DomainsGetDomainListV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -44716,6 +50649,68 @@ func (r DomainsPurchaseNewDomainV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r DomainsPurchaseNewDomainV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DomainsClaimFreeDomainV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *DomainsV1PortfolioClaimResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r DomainsClaimFreeDomainV1Response) GetJSON200() *DomainsV1PortfolioClaimResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DomainsClaimFreeDomainV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r DomainsClaimFreeDomainV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DomainsClaimFreeDomainV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DomainsClaimFreeDomainV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DomainsClaimFreeDomainV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DomainsClaimFreeDomainV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DomainsClaimFreeDomainV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -45218,6 +51213,68 @@ func (r DomainsGetTransferListV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r DomainsGetTransferListV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DomainsClaimFreeDomainTransferV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *DomainsV1TransferTransferResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r DomainsClaimFreeDomainTransferV1Response) GetJSON200() *DomainsV1TransferTransferResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DomainsClaimFreeDomainTransferV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r DomainsClaimFreeDomainTransferV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DomainsClaimFreeDomainTransferV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DomainsClaimFreeDomainTransferV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DomainsClaimFreeDomainTransferV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DomainsClaimFreeDomainTransferV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DomainsClaimFreeDomainTransferV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -54118,6 +60175,69 @@ func (r ReachListProfilesV1Response) ContentType() string {
 	return ""
 }
 
+type ReachListProfileContactsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *struct {
+		// Data Array of [`Reach.V1.Contacts.ProfileContactResource`](#model/reachv1contactsprofilecontactresource)
+		Data *ReachV1ContactsProfileContactCollection `json:"data,omitempty"`
+		Meta *CommonSchemaPaginationMetaSchema        `json:"meta,omitempty"`
+	}
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachListProfileContactsV1Response) GetJSON200() *struct {
+	// Data Array of [`Reach.V1.Contacts.ProfileContactResource`](#model/reachv1contactsprofilecontactresource)
+	Data *ReachV1ContactsProfileContactCollection `json:"data,omitempty"`
+	Meta *CommonSchemaPaginationMetaSchema        `json:"meta,omitempty"`
+} {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachListProfileContactsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachListProfileContactsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachListProfileContactsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachListProfileContactsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachListProfileContactsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachListProfileContactsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type ReachCreateNewContactsV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -54180,6 +60300,474 @@ func (r ReachCreateNewContactsV1Response) ContentType() string {
 	return ""
 }
 
+type ReachCreateContactsInBulkV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachCreateContactsInBulkV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachCreateContactsInBulkV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachCreateContactsInBulkV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachCreateContactsInBulkV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachCreateContactsInBulkV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachCreateContactsInBulkV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachCreateContactsInBulkV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachCreateContactsInBulkV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachListContactFieldsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1ContactsFieldsContactFieldCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachListContactFieldsV1Response) GetJSON200() *ReachV1ContactsFieldsContactFieldCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachListContactFieldsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachListContactFieldsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachListContactFieldsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachListContactFieldsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachListContactFieldsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachListContactFieldsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachCreateAContactFieldV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1ContactsFieldsContactFieldResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachCreateAContactFieldV1Response) GetJSON200() *ReachV1ContactsFieldsContactFieldResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachCreateAContactFieldV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachCreateAContactFieldV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachCreateAContactFieldV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachCreateAContactFieldV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachCreateAContactFieldV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachCreateAContactFieldV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachCreateAContactFieldV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachDeleteAContactFieldV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachDeleteAContactFieldV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachDeleteAContactFieldV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachDeleteAContactFieldV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachDeleteAContactFieldV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachDeleteAContactFieldV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachDeleteAContactFieldV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachDeleteAContactFieldV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachUpdateAContactFieldV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1ContactsFieldsContactFieldResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachUpdateAContactFieldV1Response) GetJSON200() *ReachV1ContactsFieldsContactFieldResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachUpdateAContactFieldV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachUpdateAContactFieldV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachUpdateAContactFieldV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachUpdateAContactFieldV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachUpdateAContactFieldV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachUpdateAContactFieldV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachUpdateAContactFieldV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachDeleteAProfileContactV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachDeleteAProfileContactV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachDeleteAProfileContactV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachDeleteAProfileContactV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachDeleteAProfileContactV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachDeleteAProfileContactV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachDeleteAProfileContactV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachDeleteAProfileContactV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachGetContactDetailsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1ContactsContactDetailsResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachGetContactDetailsV1Response) GetJSON200() *ReachV1ContactsContactDetailsResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachGetContactDetailsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachGetContactDetailsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachGetContactDetailsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachGetContactDetailsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachGetContactDetailsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachGetContactDetailsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachUpdateAContactV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1ContactsProfileContactUpdateResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachUpdateAContactV1Response) GetJSON200() *ReachV1ContactsProfileContactUpdateResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachUpdateAContactV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachUpdateAContactV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachUpdateAContactV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachUpdateAContactV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachUpdateAContactV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachUpdateAContactV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachUpdateAContactV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type ReachGetProfileDomainDNSStatusV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -54229,6 +60817,303 @@ func (r ReachGetProfileDomainDNSStatusV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r ReachGetProfileDomainDNSStatusV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachListProfileSegmentsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *struct {
+		// Data Array of [`Reach.V1.Contacts.Segments.SegmentListItemResource`](#model/reachv1contactssegmentssegmentlistitemresource)
+		Data *ReachV1ContactsSegmentsSegmentListItemCollection `json:"data,omitempty"`
+		Meta *CommonSchemaPaginationMetaSchema                 `json:"meta,omitempty"`
+	}
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachListProfileSegmentsV1Response) GetJSON200() *struct {
+	// Data Array of [`Reach.V1.Contacts.Segments.SegmentListItemResource`](#model/reachv1contactssegmentssegmentlistitemresource)
+	Data *ReachV1ContactsSegmentsSegmentListItemCollection `json:"data,omitempty"`
+	Meta *CommonSchemaPaginationMetaSchema                 `json:"meta,omitempty"`
+} {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachListProfileSegmentsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachListProfileSegmentsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachListProfileSegmentsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachListProfileSegmentsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachListProfileSegmentsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachListProfileSegmentsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachCreateAProfileSegmentV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1ContactsSegmentsSegmentResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachCreateAProfileSegmentV1Response) GetJSON200() *ReachV1ContactsSegmentsSegmentResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachCreateAProfileSegmentV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachCreateAProfileSegmentV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachCreateAProfileSegmentV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachCreateAProfileSegmentV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachCreateAProfileSegmentV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachCreateAProfileSegmentV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachCreateAProfileSegmentV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachDeleteAProfileSegmentV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachDeleteAProfileSegmentV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachDeleteAProfileSegmentV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachDeleteAProfileSegmentV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachDeleteAProfileSegmentV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachDeleteAProfileSegmentV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachDeleteAProfileSegmentV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachDeleteAProfileSegmentV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachGetProfileSegmentDetailsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1ContactsSegmentsSegmentResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachGetProfileSegmentDetailsV1Response) GetJSON200() *ReachV1ContactsSegmentsSegmentResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachGetProfileSegmentDetailsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachGetProfileSegmentDetailsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachGetProfileSegmentDetailsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachGetProfileSegmentDetailsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachGetProfileSegmentDetailsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachGetProfileSegmentDetailsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachUpdateAProfileSegmentV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1ContactsSegmentsSegmentResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachUpdateAProfileSegmentV1Response) GetJSON200() *ReachV1ContactsSegmentsSegmentResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachUpdateAProfileSegmentV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachUpdateAProfileSegmentV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachUpdateAProfileSegmentV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachUpdateAProfileSegmentV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachUpdateAProfileSegmentV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachUpdateAProfileSegmentV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachUpdateAProfileSegmentV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -54292,6 +61177,529 @@ func (r ReachListProfileSegmentContactsV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r ReachListProfileSegmentContactsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachCountProfileSegmentContactsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1ContactsSegmentsSegmentContactsCountResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachCountProfileSegmentContactsV1Response) GetJSON200() *ReachV1ContactsSegmentsSegmentContactsCountResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachCountProfileSegmentContactsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachCountProfileSegmentContactsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachCountProfileSegmentContactsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachCountProfileSegmentContactsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachCountProfileSegmentContactsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachCountProfileSegmentContactsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachListProfileTagsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1ContactsTagsTagCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachListProfileTagsV1Response) GetJSON200() *ReachV1ContactsTagsTagCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachListProfileTagsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachListProfileTagsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachListProfileTagsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachListProfileTagsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachListProfileTagsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachListProfileTagsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachCreateOrFindTagsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1ContactsTagsTagCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachCreateOrFindTagsV1Response) GetJSON200() *ReachV1ContactsTagsTagCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachCreateOrFindTagsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachCreateOrFindTagsV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachCreateOrFindTagsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachCreateOrFindTagsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachCreateOrFindTagsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachCreateOrFindTagsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachCreateOrFindTagsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachDeleteATagV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachDeleteATagV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachDeleteATagV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachDeleteATagV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachDeleteATagV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachDeleteATagV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachDeleteATagV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachDeleteATagV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachRenameATagV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1ContactsTagsTagResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachRenameATagV1Response) GetJSON200() *ReachV1ContactsTagsTagResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachRenameATagV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachRenameATagV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachRenameATagV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachRenameATagV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachRenameATagV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachRenameATagV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachRenameATagV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachRemoveContactsFromATagV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachRemoveContactsFromATagV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachRemoveContactsFromATagV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachRemoveContactsFromATagV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachRemoveContactsFromATagV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachRemoveContactsFromATagV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachRemoveContactsFromATagV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachRemoveContactsFromATagV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachRemoveContactsFromATagV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachAssignContactsToATagV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachAssignContactsToATagV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachAssignContactsToATagV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachAssignContactsToATagV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachAssignContactsToATagV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachAssignContactsToATagV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachAssignContactsToATagV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachAssignContactsToATagV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachAssignContactsToATagV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachRemoveAContactFromATagV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachRemoveAContactFromATagV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachRemoveAContactFromATagV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachRemoveAContactFromATagV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachRemoveAContactFromATagV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachRemoveAContactFromATagV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachRemoveAContactFromATagV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachRemoveAContactFromATagV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachAssignAContactToATagV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1ContactsTagsTagResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachAssignAContactToATagV1Response) GetJSON200() *ReachV1ContactsTagsTagResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachAssignAContactToATagV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachAssignAContactToATagV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachAssignAContactToATagV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachAssignAContactToATagV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachAssignAContactToATagV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachAssignAContactToATagV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -59538,6 +66946,232 @@ func (c *ClientWithResponses) DomainsGetPendingIRTPVerificationV1WithResponse(ct
 	return ParseDomainsGetPendingIRTPVerificationV1Response(rsp)
 }
 
+// DomainsGetIncomingDomainMoveListV1WithResponse Get incoming domain move list
+//
+// Retrieve all domains other Hostinger accounts are moving to your account.
+//
+// Moves of every status are returned, including the ones which already completed.
+//
+// Use this endpoint to find domains waiting for you to accept them.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/domains/v1/move/incoming (the `DomainsGetIncomingDomainMoveListV1` operationId).
+func (c *ClientWithResponses) DomainsGetIncomingDomainMoveListV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*DomainsGetIncomingDomainMoveListV1Response, error) {
+	rsp, err := c.DomainsGetIncomingDomainMoveListV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsGetIncomingDomainMoveListV1Response(rsp)
+}
+
+// DomainsRejectIncomingDomainMoveV1WithResponse Reject incoming domain move
+//
+// Reject an incoming move for a specified domain.
+//
+// The domain stays in the account which initiated the move.
+// Moves you have already accepted cannot be rejected anymore.
+//
+// Use this endpoint to decline a domain you do not want to take over.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/domains/v1/move/incoming/{domain} (the `DomainsRejectIncomingDomainMoveV1` operationId).
+func (c *ClientWithResponses) DomainsRejectIncomingDomainMoveV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*DomainsRejectIncomingDomainMoveV1Response, error) {
+	rsp, err := c.DomainsRejectIncomingDomainMoveV1(ctx, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsRejectIncomingDomainMoveV1Response(rsp)
+}
+
+// DomainsGetIncomingDomainMoveV1WithResponse Get incoming domain move
+//
+// Retrieve the incoming move for a specified domain.
+//
+// Returns 404 when no account is moving this domain to you.
+//
+// Use this endpoint to check whether a domain addressed to you is still waiting to be accepted.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/domains/v1/move/incoming/{domain} (the `DomainsGetIncomingDomainMoveV1` operationId).
+func (c *ClientWithResponses) DomainsGetIncomingDomainMoveV1WithResponse(ctx context.Context, domain Domain, params *DomainsGetIncomingDomainMoveV1Params, reqEditors ...RequestEditorFn) (*DomainsGetIncomingDomainMoveV1Response, error) {
+	rsp, err := c.DomainsGetIncomingDomainMoveV1(ctx, domain, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsGetIncomingDomainMoveV1Response(rsp)
+}
+
+// DomainsAcceptIncomingDomainMoveV1WithBodyWithResponse Accept incoming domain move
+//
+// Accept an incoming move for a specified domain.
+//
+// The provided WHOIS profiles become the contacts of the domain, so they must belong
+// to your account and satisfy the requirements of the TLD. Only the contact types the
+// domain actually uses are applied, but all four profile IDs have to be provided.
+//
+// The move has to still be waiting for your decision, already accepted moves
+// cannot be accepted again.
+//
+// Accepting does not complete the move. A confirmation email is sent to the email address of
+// the new owner contact, and the domain changes hands only after the change is confirmed from it.
+// Until then the move stays in the `activating` status, which can be followed with the
+// [incoming move endpoint](#tag/domains-move).
+//
+// Use this endpoint to take ownership of a domain offered to you.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/domains/v1/move/incoming/{domain} (the `DomainsAcceptIncomingDomainMoveV1` operationId).
+func (c *ClientWithResponses) DomainsAcceptIncomingDomainMoveV1WithBodyWithResponse(ctx context.Context, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DomainsAcceptIncomingDomainMoveV1Response, error) {
+	rsp, err := c.DomainsAcceptIncomingDomainMoveV1WithBody(ctx, domain, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsAcceptIncomingDomainMoveV1Response(rsp)
+}
+
+// DomainsAcceptIncomingDomainMoveV1WithResponse Accept incoming domain move
+//
+// Accept an incoming move for a specified domain.
+//
+// The provided WHOIS profiles become the contacts of the domain, so they must belong
+// to your account and satisfy the requirements of the TLD. Only the contact types the
+// domain actually uses are applied, but all four profile IDs have to be provided.
+//
+// The move has to still be waiting for your decision, already accepted moves
+// cannot be accepted again.
+//
+// Accepting does not complete the move. A confirmation email is sent to the email address of
+// the new owner contact, and the domain changes hands only after the change is confirmed from it.
+// Until then the move stays in the `activating` status, which can be followed with the
+// [incoming move endpoint](#tag/domains-move).
+//
+// Use this endpoint to take ownership of a domain offered to you.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/domains/v1/move/incoming/{domain} (the `DomainsAcceptIncomingDomainMoveV1` operationId).
+func (c *ClientWithResponses) DomainsAcceptIncomingDomainMoveV1WithResponse(ctx context.Context, domain Domain, body DomainsAcceptIncomingDomainMoveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsAcceptIncomingDomainMoveV1Response, error) {
+	rsp, err := c.DomainsAcceptIncomingDomainMoveV1(ctx, domain, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsAcceptIncomingDomainMoveV1Response(rsp)
+}
+
+// DomainsGetOutgoingDomainMoveListV1WithResponse Get outgoing domain move list
+//
+// Retrieve all domains you are moving to other Hostinger accounts.
+//
+// Only moves which have not completed yet are returned.
+//
+// Use this endpoint to track moves you have initiated and the accounts they are addressed to.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/domains/v1/move/outgoing (the `DomainsGetOutgoingDomainMoveListV1` operationId).
+func (c *ClientWithResponses) DomainsGetOutgoingDomainMoveListV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*DomainsGetOutgoingDomainMoveListV1Response, error) {
+	rsp, err := c.DomainsGetOutgoingDomainMoveListV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsGetOutgoingDomainMoveListV1Response(rsp)
+}
+
+// DomainsCancelOutgoingDomainMoveV1WithResponse Cancel outgoing domain move
+//
+// Cancel an outgoing move for a specified domain.
+//
+// The move can only be cancelled while the receiving account has not accepted it yet.
+// The domain stays in your account.
+//
+// Use this endpoint to withdraw a move you no longer want to complete.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/domains/v1/move/outgoing/{domain} (the `DomainsCancelOutgoingDomainMoveV1` operationId).
+func (c *ClientWithResponses) DomainsCancelOutgoingDomainMoveV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*DomainsCancelOutgoingDomainMoveV1Response, error) {
+	rsp, err := c.DomainsCancelOutgoingDomainMoveV1(ctx, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsCancelOutgoingDomainMoveV1Response(rsp)
+}
+
+// DomainsGetOutgoingDomainMoveV1WithResponse Get outgoing domain move
+//
+// Retrieve the outgoing move for a specified domain.
+//
+// Returns 404 when the domain has no move in progress.
+//
+// Use this endpoint to track the status of a move you have initiated for a single domain.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/domains/v1/move/outgoing/{domain} (the `DomainsGetOutgoingDomainMoveV1` operationId).
+func (c *ClientWithResponses) DomainsGetOutgoingDomainMoveV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*DomainsGetOutgoingDomainMoveV1Response, error) {
+	rsp, err := c.DomainsGetOutgoingDomainMoveV1(ctx, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsGetOutgoingDomainMoveV1Response(rsp)
+}
+
+// DomainsStartOutgoingDomainMoveV1WithBodyWithResponse Start outgoing domain move
+//
+// Initiate a move of a specified domain to another Hostinger account.
+//
+// The receiving account has to already exist and accept the move before the domain changes hands.
+//
+// The domain must be active. The subscription it belongs to is resolved automatically,
+// and the request is rejected with a 404 status code when the domain has no domain
+// subscription of its own.
+//
+// Domains protected by premium protection require an additional verification step,
+// such requests are rejected with a 428 status code.
+//
+// Use this endpoint to hand a domain over to another Hostinger user.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/domains/v1/move/outgoing/{domain} (the `DomainsStartOutgoingDomainMoveV1` operationId).
+func (c *ClientWithResponses) DomainsStartOutgoingDomainMoveV1WithBodyWithResponse(ctx context.Context, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DomainsStartOutgoingDomainMoveV1Response, error) {
+	rsp, err := c.DomainsStartOutgoingDomainMoveV1WithBody(ctx, domain, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsStartOutgoingDomainMoveV1Response(rsp)
+}
+
+// DomainsStartOutgoingDomainMoveV1WithResponse Start outgoing domain move
+//
+// Initiate a move of a specified domain to another Hostinger account.
+//
+// The receiving account has to already exist and accept the move before the domain changes hands.
+//
+// The domain must be active. The subscription it belongs to is resolved automatically,
+// and the request is rejected with a 404 status code when the domain has no domain
+// subscription of its own.
+//
+// Domains protected by premium protection require an additional verification step,
+// such requests are rejected with a 428 status code.
+//
+// Use this endpoint to hand a domain over to another Hostinger user.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/domains/v1/move/outgoing/{domain} (the `DomainsStartOutgoingDomainMoveV1` operationId).
+func (c *ClientWithResponses) DomainsStartOutgoingDomainMoveV1WithResponse(ctx context.Context, domain Domain, body DomainsStartOutgoingDomainMoveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsStartOutgoingDomainMoveV1Response, error) {
+	rsp, err := c.DomainsStartOutgoingDomainMoveV1(ctx, domain, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsStartOutgoingDomainMoveV1Response(rsp)
+}
+
 // DomainsGetDomainListV1WithResponse Get domain list
 //
 // Retrieve all domains associated with your account.
@@ -59605,6 +67239,68 @@ func (c *ClientWithResponses) DomainsPurchaseNewDomainV1WithResponse(ctx context
 		return nil, err
 	}
 	return ParseDomainsPurchaseNewDomainV1Response(rsp)
+}
+
+// DomainsClaimFreeDomainV1WithBodyWithResponse Claim free domain
+//
+// Claim a free domain available on your account and register it.
+//
+// Unlike purchasing a domain, this consumes a free domain you already have,
+// so no payment method is required.
+//
+// A successful response means the domain is registered. If registration fails, login to
+// [hPanel](https://hpanel.hostinger.com/) and check domain registration status.
+//
+// If no WHOIS information is provided, default contact information for that TLD will be used.
+// Before making request, ensure WHOIS information for desired TLD exists in your account.
+//
+// Some TLDs require `additional_details` to be provided and these will be validated before claiming.
+//
+// Requests which cannot be fulfilled are rejected with an error code in the response body,
+// for example `2037` when no free domain is available.
+//
+// Use this endpoint to register a domain using a free domain from your account.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/domains/v1/portfolio/claim (the `DomainsClaimFreeDomainV1` operationId).
+func (c *ClientWithResponses) DomainsClaimFreeDomainV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DomainsClaimFreeDomainV1Response, error) {
+	rsp, err := c.DomainsClaimFreeDomainV1WithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsClaimFreeDomainV1Response(rsp)
+}
+
+// DomainsClaimFreeDomainV1WithResponse Claim free domain
+//
+// Claim a free domain available on your account and register it.
+//
+// Unlike purchasing a domain, this consumes a free domain you already have,
+// so no payment method is required.
+//
+// A successful response means the domain is registered. If registration fails, login to
+// [hPanel](https://hpanel.hostinger.com/) and check domain registration status.
+//
+// If no WHOIS information is provided, default contact information for that TLD will be used.
+// Before making request, ensure WHOIS information for desired TLD exists in your account.
+//
+// Some TLDs require `additional_details` to be provided and these will be validated before claiming.
+//
+// Requests which cannot be fulfilled are rejected with an error code in the response body,
+// for example `2037` when no free domain is available.
+//
+// Use this endpoint to register a domain using a free domain from your account.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/domains/v1/portfolio/claim (the `DomainsClaimFreeDomainV1` operationId).
+func (c *ClientWithResponses) DomainsClaimFreeDomainV1WithResponse(ctx context.Context, body DomainsClaimFreeDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsClaimFreeDomainV1Response, error) {
+	rsp, err := c.DomainsClaimFreeDomainV1(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsClaimFreeDomainV1Response(rsp)
 }
 
 // DomainsGetDomainDetailsV1WithResponse Get domain details
@@ -59792,6 +67488,70 @@ func (c *ClientWithResponses) DomainsGetTransferListV1WithResponse(ctx context.C
 		return nil, err
 	}
 	return ParseDomainsGetTransferListV1Response(rsp)
+}
+
+// DomainsClaimFreeDomainTransferV1WithBodyWithResponse Claim free domain transfer
+//
+// Claim a free domain transfer available on your account and start the transfer.
+//
+// Unlike purchasing a transfer, this consumes a free domain transfer you already have,
+// so no payment method is required.
+//
+// Before making request, unlock the domain at the current registrar and get its authorization
+// code. The transfer is validated first, so domains which cannot be transferred are rejected
+// before the free domain transfer is consumed.
+//
+// A successful response means the transfer has been started. Completion depends on the current
+// registrar and can be followed with the [transfer list endpoint](#tag/domains-transfer).
+//
+// If no WHOIS information is provided, default contact information for that TLD will be used.
+// Before making request, ensure WHOIS information for desired TLD exists in your account.
+//
+// Requests which cannot be fulfilled are rejected with an error code in the response body.
+//
+// Use this endpoint to transfer a domain using a free domain transfer from your account.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/domains/v1/transfers/claim (the `DomainsClaimFreeDomainTransferV1` operationId).
+func (c *ClientWithResponses) DomainsClaimFreeDomainTransferV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DomainsClaimFreeDomainTransferV1Response, error) {
+	rsp, err := c.DomainsClaimFreeDomainTransferV1WithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsClaimFreeDomainTransferV1Response(rsp)
+}
+
+// DomainsClaimFreeDomainTransferV1WithResponse Claim free domain transfer
+//
+// Claim a free domain transfer available on your account and start the transfer.
+//
+// Unlike purchasing a transfer, this consumes a free domain transfer you already have,
+// so no payment method is required.
+//
+// Before making request, unlock the domain at the current registrar and get its authorization
+// code. The transfer is validated first, so domains which cannot be transferred are rejected
+// before the free domain transfer is consumed.
+//
+// A successful response means the transfer has been started. Completion depends on the current
+// registrar and can be followed with the [transfer list endpoint](#tag/domains-transfer).
+//
+// If no WHOIS information is provided, default contact information for that TLD will be used.
+// Before making request, ensure WHOIS information for desired TLD exists in your account.
+//
+// Requests which cannot be fulfilled are rejected with an error code in the response body.
+//
+// Use this endpoint to transfer a domain using a free domain transfer from your account.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/domains/v1/transfers/claim (the `DomainsClaimFreeDomainTransferV1` operationId).
+func (c *ClientWithResponses) DomainsClaimFreeDomainTransferV1WithResponse(ctx context.Context, body DomainsClaimFreeDomainTransferV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsClaimFreeDomainTransferV1Response, error) {
+	rsp, err := c.DomainsClaimFreeDomainTransferV1(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsClaimFreeDomainTransferV1Response(rsp)
 }
 
 // DomainsGetTransferV1WithResponse Get transfer
@@ -63458,9 +71218,16 @@ func (c *ClientWithResponses) MailTestWebhookV1WithResponse(ctx context.Context,
 // This endpoint returns a paginated list of contacts with their basic information.
 // You can filter contacts by group UUID and subscription status.
 //
+// **Deprecated.** This endpoint cannot target a profile, so it always falls back to the
+// client's default profile and cannot list contacts of any other profile. Use
+// `GET /api/reach/v1/profiles/{profileUuid}/contacts` instead, which also replaces the
+// group filter with a tag filter.
+//
 // Returns a wrapper object for the known response body format(s).
 //
 // Corresponds with GET /api/reach/v1/contacts (the `ReachListContactsV1` operationId).
+//
+// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 func (c *ClientWithResponses) ReachListContactsV1WithResponse(ctx context.Context, params *ReachListContactsV1Params, reqEditors ...RequestEditorFn) (*ReachListContactsV1Response, error) {
 	rsp, err := c.ReachListContactsV1(ctx, params, reqEditors...)
 	if err != nil {
@@ -63537,9 +71304,15 @@ func (c *ClientWithResponses) ReachListContactGroupsV1WithResponse(ctx context.C
 //
 // This endpoint permanently removes a contact from the email marketing system.
 //
+// **Deprecated.** This endpoint cannot target a profile, so it always falls back to the
+// client's default profile and cannot delete contacts of any other profile. Use
+// `DELETE /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid}` instead.
+//
 // Returns a wrapper object for the known response body format(s).
 //
 // Corresponds with DELETE /api/reach/v1/contacts/{uuid} (the `ReachDeleteAContactV1` operationId).
+//
+// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 func (c *ClientWithResponses) ReachDeleteAContactV1WithResponse(ctx context.Context, uuid Uuid, reqEditors ...RequestEditorFn) (*ReachDeleteAContactV1Response, error) {
 	rsp, err := c.ReachDeleteAContactV1(ctx, uuid, reqEditors...)
 	if err != nil {
@@ -63561,6 +71334,25 @@ func (c *ClientWithResponses) ReachListProfilesV1WithResponse(ctx context.Contex
 		return nil, err
 	}
 	return ParseReachListProfilesV1Response(rsp)
+}
+
+// ReachListProfileContactsV1WithResponse List profile contacts
+//
+// Get a paginated list of contacts belonging to a profile.
+//
+// Contacts can be filtered by subscription status, by tag, and by an email search term.
+// The `meta.total` field of the response is the number of contacts matching the filters,
+// so calling this endpoint without filters gives the profile's total contact count.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/contacts (the `ReachListProfileContactsV1` operationId).
+func (c *ClientWithResponses) ReachListProfileContactsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, params *ReachListProfileContactsV1Params, reqEditors ...RequestEditorFn) (*ReachListProfileContactsV1Response, error) {
+	rsp, err := c.ReachListProfileContactsV1(ctx, profileUuid, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachListProfileContactsV1Response(rsp)
 }
 
 // ReachCreateNewContactsV1WithBodyWithResponse Create new contacts
@@ -63603,6 +71395,234 @@ func (c *ClientWithResponses) ReachCreateNewContactsV1WithResponse(ctx context.C
 	return ParseReachCreateNewContactsV1Response(rsp)
 }
 
+// ReachCreateContactsInBulkV1WithBodyWithResponse Create contacts in bulk
+//
+// Create many contacts in a profile in a single call.
+//
+// The contacts are imported in the background, so a success response means the import was
+// accepted rather than finished. Contacts whose email already exists in the profile are
+// left as they are. If double opt-in is enabled, new contacts start off pending and are
+// sent a confirmation email.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/contacts/bulk (the `ReachCreateContactsInBulkV1` operationId).
+func (c *ClientWithResponses) ReachCreateContactsInBulkV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachCreateContactsInBulkV1Response, error) {
+	rsp, err := c.ReachCreateContactsInBulkV1WithBody(ctx, profileUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachCreateContactsInBulkV1Response(rsp)
+}
+
+// ReachCreateContactsInBulkV1WithResponse Create contacts in bulk
+//
+// Create many contacts in a profile in a single call.
+//
+// The contacts are imported in the background, so a success response means the import was
+// accepted rather than finished. Contacts whose email already exists in the profile are
+// left as they are. If double opt-in is enabled, new contacts start off pending and are
+// sent a confirmation email.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/contacts/bulk (the `ReachCreateContactsInBulkV1` operationId).
+func (c *ClientWithResponses) ReachCreateContactsInBulkV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachCreateContactsInBulkV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachCreateContactsInBulkV1Response, error) {
+	rsp, err := c.ReachCreateContactsInBulkV1(ctx, profileUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachCreateContactsInBulkV1Response(rsp)
+}
+
+// ReachListContactFieldsV1WithResponse List contact fields
+//
+// Get the custom contact fields defined in a profile.
+//
+// Custom fields let you store your own attributes on contacts. The returned uuids are what
+// you pass to the contact update endpoint to set values, and choice fields also list the
+// options available to pick from.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/contacts/fields (the `ReachListContactFieldsV1` operationId).
+func (c *ClientWithResponses) ReachListContactFieldsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachListContactFieldsV1Response, error) {
+	rsp, err := c.ReachListContactFieldsV1(ctx, profileUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachListContactFieldsV1Response(rsp)
+}
+
+// ReachCreateAContactFieldV1WithBodyWithResponse Create a contact field
+//
+// Define a new custom contact field in a profile.
+//
+// The `slug` is derived from the label and, like the field type, cannot be changed later.
+// Use the returned uuid to set values on contacts.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/contacts/fields (the `ReachCreateAContactFieldV1` operationId).
+func (c *ClientWithResponses) ReachCreateAContactFieldV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachCreateAContactFieldV1Response, error) {
+	rsp, err := c.ReachCreateAContactFieldV1WithBody(ctx, profileUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachCreateAContactFieldV1Response(rsp)
+}
+
+// ReachCreateAContactFieldV1WithResponse Create a contact field
+//
+// Define a new custom contact field in a profile.
+//
+// The `slug` is derived from the label and, like the field type, cannot be changed later.
+// Use the returned uuid to set values on contacts.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/contacts/fields (the `ReachCreateAContactFieldV1` operationId).
+func (c *ClientWithResponses) ReachCreateAContactFieldV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachCreateAContactFieldV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachCreateAContactFieldV1Response, error) {
+	rsp, err := c.ReachCreateAContactFieldV1(ctx, profileUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachCreateAContactFieldV1Response(rsp)
+}
+
+// ReachDeleteAContactFieldV1WithResponse Delete a contact field
+//
+// Delete a custom contact field.
+//
+// Every value contacts hold for the field is deleted with it, and for the choice types so
+// are its options. The contacts themselves are not affected.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/contacts/fields/{fieldUuid} (the `ReachDeleteAContactFieldV1` operationId).
+func (c *ClientWithResponses) ReachDeleteAContactFieldV1WithResponse(ctx context.Context, profileUuid ProfileUuid, fieldUuid FieldUuid, reqEditors ...RequestEditorFn) (*ReachDeleteAContactFieldV1Response, error) {
+	rsp, err := c.ReachDeleteAContactFieldV1(ctx, profileUuid, fieldUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachDeleteAContactFieldV1Response(rsp)
+}
+
+// ReachUpdateAContactFieldV1WithBodyWithResponse Update a contact field
+//
+// Rename a custom contact field and, for the choice types, replace its option set.
+//
+// Options carrying a uuid are kept and relabelled, options without one are created, and any
+// existing option left out of the list is deleted along with the values contacts hold for
+// it. The field type and slug cannot be changed.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/contacts/fields/{fieldUuid} (the `ReachUpdateAContactFieldV1` operationId).
+func (c *ClientWithResponses) ReachUpdateAContactFieldV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, fieldUuid FieldUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachUpdateAContactFieldV1Response, error) {
+	rsp, err := c.ReachUpdateAContactFieldV1WithBody(ctx, profileUuid, fieldUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachUpdateAContactFieldV1Response(rsp)
+}
+
+// ReachUpdateAContactFieldV1WithResponse Update a contact field
+//
+// Rename a custom contact field and, for the choice types, replace its option set.
+//
+// Options carrying a uuid are kept and relabelled, options without one are created, and any
+// existing option left out of the list is deleted along with the values contacts hold for
+// it. The field type and slug cannot be changed.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/contacts/fields/{fieldUuid} (the `ReachUpdateAContactFieldV1` operationId).
+func (c *ClientWithResponses) ReachUpdateAContactFieldV1WithResponse(ctx context.Context, profileUuid ProfileUuid, fieldUuid FieldUuid, body ReachUpdateAContactFieldV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachUpdateAContactFieldV1Response, error) {
+	rsp, err := c.ReachUpdateAContactFieldV1(ctx, profileUuid, fieldUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachUpdateAContactFieldV1Response(rsp)
+}
+
+// ReachDeleteAProfileContactV1WithResponse Delete a profile contact
+//
+// Permanently delete a contact from a profile.
+//
+// The contact is removed together with its custom field values and tag assignments.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid} (the `ReachDeleteAProfileContactV1` operationId).
+func (c *ClientWithResponses) ReachDeleteAProfileContactV1WithResponse(ctx context.Context, profileUuid ProfileUuid, contactUuid ContactUuid, reqEditors ...RequestEditorFn) (*ReachDeleteAProfileContactV1Response, error) {
+	rsp, err := c.ReachDeleteAProfileContactV1(ctx, profileUuid, contactUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachDeleteAProfileContactV1Response(rsp)
+}
+
+// ReachGetContactDetailsV1WithResponse Get contact details
+//
+// Get the full details of a single contact.
+//
+// Alongside the contact's own attributes this returns the tags assigned to it and the
+// values it holds for the profile's custom contact fields.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid} (the `ReachGetContactDetailsV1` operationId).
+func (c *ClientWithResponses) ReachGetContactDetailsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, contactUuid ContactUuid, reqEditors ...RequestEditorFn) (*ReachGetContactDetailsV1Response, error) {
+	rsp, err := c.ReachGetContactDetailsV1(ctx, profileUuid, contactUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachGetContactDetailsV1Response(rsp)
+}
+
+// ReachUpdateAContactV1WithBodyWithResponse Update a contact
+//
+// Update a contact's attributes and custom field values.
+//
+// Only the properties present in the request body are changed, so a partial body is enough
+// to change a single attribute. Sending a property as `null` clears it.
+//
+// The response carries the contact's core attributes. Read back its tags, custom field
+// values, source and note with `GET /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid}`.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid} (the `ReachUpdateAContactV1` operationId).
+func (c *ClientWithResponses) ReachUpdateAContactV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contactUuid ContactUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachUpdateAContactV1Response, error) {
+	rsp, err := c.ReachUpdateAContactV1WithBody(ctx, profileUuid, contactUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachUpdateAContactV1Response(rsp)
+}
+
+// ReachUpdateAContactV1WithResponse Update a contact
+//
+// Update a contact's attributes and custom field values.
+//
+// Only the properties present in the request body are changed, so a partial body is enough
+// to change a single attribute. Sending a property as `null` clears it.
+//
+// The response carries the contact's core attributes. Read back its tags, custom field
+// values, source and note with `GET /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid}`.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid} (the `ReachUpdateAContactV1` operationId).
+func (c *ClientWithResponses) ReachUpdateAContactV1WithResponse(ctx context.Context, profileUuid ProfileUuid, contactUuid ContactUuid, body ReachUpdateAContactV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachUpdateAContactV1Response, error) {
+	rsp, err := c.ReachUpdateAContactV1(ctx, profileUuid, contactUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachUpdateAContactV1Response(rsp)
+}
+
 // ReachGetProfileDomainDNSStatusV1WithResponse Get profile domain DNS status
 //
 // Retrieve the DNS configuration status for a profile's domain.
@@ -63619,6 +71639,134 @@ func (c *ClientWithResponses) ReachGetProfileDomainDNSStatusV1WithResponse(ctx c
 		return nil, err
 	}
 	return ParseReachGetProfileDomainDNSStatusV1Response(rsp)
+}
+
+// ReachListProfileSegmentsV1WithResponse List profile segments
+//
+// Get a paginated list of the segments defined in a profile.
+//
+// Each entry carries the number of contacts currently matching it, which is recalculated on
+// read rather than stored. Use `count_type` to count either every matching contact or only
+// the subscribed ones.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments (the `ReachListProfileSegmentsV1` operationId).
+func (c *ClientWithResponses) ReachListProfileSegmentsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, params *ReachListProfileSegmentsV1Params, reqEditors ...RequestEditorFn) (*ReachListProfileSegmentsV1Response, error) {
+	rsp, err := c.ReachListProfileSegmentsV1(ctx, profileUuid, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachListProfileSegmentsV1Response(rsp)
+}
+
+// ReachCreateAProfileSegmentV1WithBodyWithResponse Create a profile segment
+//
+// Create a segment in a profile.
+//
+// A segment is a saved set of conditions rather than a fixed list, so its membership changes
+// as contacts change. Creating one does not modify any contact.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/segmentation/segments (the `ReachCreateAProfileSegmentV1` operationId).
+func (c *ClientWithResponses) ReachCreateAProfileSegmentV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachCreateAProfileSegmentV1Response, error) {
+	rsp, err := c.ReachCreateAProfileSegmentV1WithBody(ctx, profileUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachCreateAProfileSegmentV1Response(rsp)
+}
+
+// ReachCreateAProfileSegmentV1WithResponse Create a profile segment
+//
+// Create a segment in a profile.
+//
+// A segment is a saved set of conditions rather than a fixed list, so its membership changes
+// as contacts change. Creating one does not modify any contact.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/segmentation/segments (the `ReachCreateAProfileSegmentV1` operationId).
+func (c *ClientWithResponses) ReachCreateAProfileSegmentV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachCreateAProfileSegmentV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachCreateAProfileSegmentV1Response, error) {
+	rsp, err := c.ReachCreateAProfileSegmentV1(ctx, profileUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachCreateAProfileSegmentV1Response(rsp)
+}
+
+// ReachDeleteAProfileSegmentV1WithResponse Delete a profile segment
+//
+// Delete a segment.
+//
+// Only the segment definition is removed. The contacts that matched it are left untouched.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid} (the `ReachDeleteAProfileSegmentV1` operationId).
+func (c *ClientWithResponses) ReachDeleteAProfileSegmentV1WithResponse(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, reqEditors ...RequestEditorFn) (*ReachDeleteAProfileSegmentV1Response, error) {
+	rsp, err := c.ReachDeleteAProfileSegmentV1(ctx, profileUuid, segmentUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachDeleteAProfileSegmentV1Response(rsp)
+}
+
+// ReachGetProfileSegmentDetailsV1WithResponse Get profile segment details
+//
+// Get a single segment of a profile, including the conditions that define it.
+//
+// To retrieve the contacts currently matching those conditions, use the segment contacts
+// endpoint instead.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid} (the `ReachGetProfileSegmentDetailsV1` operationId).
+func (c *ClientWithResponses) ReachGetProfileSegmentDetailsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, reqEditors ...RequestEditorFn) (*ReachGetProfileSegmentDetailsV1Response, error) {
+	rsp, err := c.ReachGetProfileSegmentDetailsV1(ctx, profileUuid, segmentUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachGetProfileSegmentDetailsV1Response(rsp)
+}
+
+// ReachUpdateAProfileSegmentV1WithBodyWithResponse Update a profile segment
+//
+// Rename a segment and/or replace the conditions that define it.
+//
+// `name` is always required. Omit `conditions` to rename without touching the conditions;
+// supply them and they replace the existing set entirely rather than being merged into it.
+// Contacts are never modified, but which of them match the segment can change immediately.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid} (the `ReachUpdateAProfileSegmentV1` operationId).
+func (c *ClientWithResponses) ReachUpdateAProfileSegmentV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachUpdateAProfileSegmentV1Response, error) {
+	rsp, err := c.ReachUpdateAProfileSegmentV1WithBody(ctx, profileUuid, segmentUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachUpdateAProfileSegmentV1Response(rsp)
+}
+
+// ReachUpdateAProfileSegmentV1WithResponse Update a profile segment
+//
+// Rename a segment and/or replace the conditions that define it.
+//
+// `name` is always required. Omit `conditions` to rename without touching the conditions;
+// supply them and they replace the existing set entirely rather than being merged into it.
+// Contacts are never modified, but which of them match the segment can change immediately.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid} (the `ReachUpdateAProfileSegmentV1` operationId).
+func (c *ClientWithResponses) ReachUpdateAProfileSegmentV1WithResponse(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, body ReachUpdateAProfileSegmentV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachUpdateAProfileSegmentV1Response, error) {
+	rsp, err := c.ReachUpdateAProfileSegmentV1(ctx, profileUuid, segmentUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachUpdateAProfileSegmentV1Response(rsp)
 }
 
 // ReachListProfileSegmentContactsV1WithResponse List profile segment contacts
@@ -63639,15 +71787,260 @@ func (c *ClientWithResponses) ReachListProfileSegmentContactsV1WithResponse(ctx 
 	return ParseReachListProfileSegmentContactsV1Response(rsp)
 }
 
+// ReachCountProfileSegmentContactsV1WithResponse Count profile segment contacts
+//
+// Count the contacts currently matching a segment without listing them.
+//
+// Cheaper than paging through the segment contacts endpoint when only the size is needed.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}/count (the `ReachCountProfileSegmentContactsV1` operationId).
+func (c *ClientWithResponses) ReachCountProfileSegmentContactsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, reqEditors ...RequestEditorFn) (*ReachCountProfileSegmentContactsV1Response, error) {
+	rsp, err := c.ReachCountProfileSegmentContactsV1(ctx, profileUuid, segmentUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachCountProfileSegmentContactsV1Response(rsp)
+}
+
+// ReachListProfileTagsV1WithResponse List profile tags
+//
+// Get all tags defined in a profile.
+//
+// Tags are the way contacts are grouped in Reach, and can be used to filter the contact
+// list or to build segments.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/tags (the `ReachListProfileTagsV1` operationId).
+func (c *ClientWithResponses) ReachListProfileTagsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachListProfileTagsV1Response, error) {
+	rsp, err := c.ReachListProfileTagsV1(ctx, profileUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachListProfileTagsV1Response(rsp)
+}
+
+// ReachCreateOrFindTagsV1WithBodyWithResponse Create or find tags
+//
+// Create tags in a profile.
+//
+// Names that already exist in the profile are not duplicated: the existing tag is returned
+// instead, so the call is safe to repeat. Every tag in the request is returned, whether it
+// was created now or already existed.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/tags (the `ReachCreateOrFindTagsV1` operationId).
+func (c *ClientWithResponses) ReachCreateOrFindTagsV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachCreateOrFindTagsV1Response, error) {
+	rsp, err := c.ReachCreateOrFindTagsV1WithBody(ctx, profileUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachCreateOrFindTagsV1Response(rsp)
+}
+
+// ReachCreateOrFindTagsV1WithResponse Create or find tags
+//
+// Create tags in a profile.
+//
+// Names that already exist in the profile are not duplicated: the existing tag is returned
+// instead, so the call is safe to repeat. Every tag in the request is returned, whether it
+// was created now or already existed.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/tags (the `ReachCreateOrFindTagsV1` operationId).
+func (c *ClientWithResponses) ReachCreateOrFindTagsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachCreateOrFindTagsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachCreateOrFindTagsV1Response, error) {
+	rsp, err := c.ReachCreateOrFindTagsV1(ctx, profileUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachCreateOrFindTagsV1Response(rsp)
+}
+
+// ReachDeleteATagV1WithResponse Delete a tag
+//
+// Delete a tag and remove it from every contact carrying it.
+//
+// The contacts themselves are not deleted. This is idempotent: deleting a tag that does not
+// exist in the profile still succeeds.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid} (the `ReachDeleteATagV1` operationId).
+func (c *ClientWithResponses) ReachDeleteATagV1WithResponse(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, reqEditors ...RequestEditorFn) (*ReachDeleteATagV1Response, error) {
+	rsp, err := c.ReachDeleteATagV1(ctx, profileUuid, tagUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachDeleteATagV1Response(rsp)
+}
+
+// ReachRenameATagV1WithBodyWithResponse Rename a tag
+//
+// Rename a tag.
+//
+// The contacts assigned to the tag are unaffected. Names are unique within a profile, so
+// renaming a tag to a name that is already taken is rejected.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid} (the `ReachRenameATagV1` operationId).
+func (c *ClientWithResponses) ReachRenameATagV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachRenameATagV1Response, error) {
+	rsp, err := c.ReachRenameATagV1WithBody(ctx, profileUuid, tagUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachRenameATagV1Response(rsp)
+}
+
+// ReachRenameATagV1WithResponse Rename a tag
+//
+// Rename a tag.
+//
+// The contacts assigned to the tag are unaffected. Names are unique within a profile, so
+// renaming a tag to a name that is already taken is rejected.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid} (the `ReachRenameATagV1` operationId).
+func (c *ClientWithResponses) ReachRenameATagV1WithResponse(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, body ReachRenameATagV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachRenameATagV1Response, error) {
+	rsp, err := c.ReachRenameATagV1(ctx, profileUuid, tagUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachRenameATagV1Response(rsp)
+}
+
+// ReachRemoveContactsFromATagV1WithBodyWithResponse Remove contacts from a tag
+//
+// Remove a tag from many contacts at once.
+//
+// Pass `contact_uuids` to target specific contacts, or `all_contacts` to target every contact
+// in the profile. The work is queued, so a success response means it was accepted rather than
+// finished. The tag itself and the contacts are not deleted.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts (the `ReachRemoveContactsFromATagV1` operationId).
+func (c *ClientWithResponses) ReachRemoveContactsFromATagV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachRemoveContactsFromATagV1Response, error) {
+	rsp, err := c.ReachRemoveContactsFromATagV1WithBody(ctx, profileUuid, tagUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachRemoveContactsFromATagV1Response(rsp)
+}
+
+// ReachRemoveContactsFromATagV1WithResponse Remove contacts from a tag
+//
+// Remove a tag from many contacts at once.
+//
+// Pass `contact_uuids` to target specific contacts, or `all_contacts` to target every contact
+// in the profile. The work is queued, so a success response means it was accepted rather than
+// finished. The tag itself and the contacts are not deleted.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts (the `ReachRemoveContactsFromATagV1` operationId).
+func (c *ClientWithResponses) ReachRemoveContactsFromATagV1WithResponse(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, body ReachRemoveContactsFromATagV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachRemoveContactsFromATagV1Response, error) {
+	rsp, err := c.ReachRemoveContactsFromATagV1(ctx, profileUuid, tagUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachRemoveContactsFromATagV1Response(rsp)
+}
+
+// ReachAssignContactsToATagV1WithBodyWithResponse Assign contacts to a tag
+//
+// Assign a tag to many contacts at once.
+//
+// Pass `contact_uuids` to target specific contacts, or `all_contacts` to target every contact
+// in the profile. The work is queued, so a success response means it was accepted rather than
+// finished. Contacts that already carry the tag are left alone.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts (the `ReachAssignContactsToATagV1` operationId).
+func (c *ClientWithResponses) ReachAssignContactsToATagV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachAssignContactsToATagV1Response, error) {
+	rsp, err := c.ReachAssignContactsToATagV1WithBody(ctx, profileUuid, tagUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachAssignContactsToATagV1Response(rsp)
+}
+
+// ReachAssignContactsToATagV1WithResponse Assign contacts to a tag
+//
+// Assign a tag to many contacts at once.
+//
+// Pass `contact_uuids` to target specific contacts, or `all_contacts` to target every contact
+// in the profile. The work is queued, so a success response means it was accepted rather than
+// finished. Contacts that already carry the tag are left alone.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts (the `ReachAssignContactsToATagV1` operationId).
+func (c *ClientWithResponses) ReachAssignContactsToATagV1WithResponse(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, body ReachAssignContactsToATagV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachAssignContactsToATagV1Response, error) {
+	rsp, err := c.ReachAssignContactsToATagV1(ctx, profileUuid, tagUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachAssignContactsToATagV1Response(rsp)
+}
+
+// ReachRemoveAContactFromATagV1WithResponse Remove a contact from a tag
+//
+// Remove a tag from a single contact.
+//
+// Unlike the bulk endpoint this is applied immediately rather than queued. Neither the tag
+// nor the contact is deleted.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts/{contactUuid} (the `ReachRemoveAContactFromATagV1` operationId).
+func (c *ClientWithResponses) ReachRemoveAContactFromATagV1WithResponse(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, contactUuid ContactUuid, reqEditors ...RequestEditorFn) (*ReachRemoveAContactFromATagV1Response, error) {
+	rsp, err := c.ReachRemoveAContactFromATagV1(ctx, profileUuid, tagUuid, contactUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachRemoveAContactFromATagV1Response(rsp)
+}
+
+// ReachAssignAContactToATagV1WithResponse Assign a contact to a tag
+//
+// Assign a tag to a single contact.
+//
+// Unlike the bulk endpoint this is applied immediately rather than queued. Assigning a tag
+// the contact already carries succeeds without duplicating it.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts/{contactUuid} (the `ReachAssignAContactToATagV1` operationId).
+func (c *ClientWithResponses) ReachAssignAContactToATagV1WithResponse(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, contactUuid ContactUuid, reqEditors ...RequestEditorFn) (*ReachAssignAContactToATagV1Response, error) {
+	rsp, err := c.ReachAssignAContactToATagV1(ctx, profileUuid, tagUuid, contactUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachAssignAContactToATagV1Response(rsp)
+}
+
 // ReachListSegmentsV1WithResponse List segments
 //
 // Get a list of all contact segments.
 //
 // This endpoint returns a list of contact segments that can be used to organize contacts.
 //
+// **Deprecated.** This endpoint cannot target a profile, so it always falls back to
+// the client's default profile and cannot list the segments of any other profile. Use
+// `GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments` instead.
+//
 // Returns a wrapper object for the known response body format(s).
 //
 // Corresponds with GET /api/reach/v1/segmentation/segments (the `ReachListSegmentsV1` operationId).
+//
+// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 func (c *ClientWithResponses) ReachListSegmentsV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*ReachListSegmentsV1Response, error) {
 	rsp, err := c.ReachListSegmentsV1(ctx, reqEditors...)
 	if err != nil {
@@ -63663,9 +72056,15 @@ func (c *ClientWithResponses) ReachListSegmentsV1WithResponse(ctx context.Contex
 // This endpoint allows creating a new contact segment that can be used to organize contacts.
 // The segment can be configured with specific criteria like email, name, subscription status, etc.
 //
+// **Deprecated.** This endpoint cannot target a profile, so it always falls back to
+// the client's default profile and cannot create segments in any other profile. Use
+// `POST /api/reach/v1/profiles/{profileUuid}/segmentation/segments` instead.
+//
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
 // Corresponds with POST /api/reach/v1/segmentation/segments (the `ReachCreateANewContactSegmentV1` operationId).
+//
+// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 func (c *ClientWithResponses) ReachCreateANewContactSegmentV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachCreateANewContactSegmentV1Response, error) {
 	rsp, err := c.ReachCreateANewContactSegmentV1WithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
@@ -63681,9 +72080,14 @@ func (c *ClientWithResponses) ReachCreateANewContactSegmentV1WithBodyWithRespons
 // This endpoint allows creating a new contact segment that can be used to organize contacts.
 // The segment can be configured with specific criteria like email, name, subscription status, etc.
 //
+// **Deprecated.** This endpoint cannot target a profile, so it always falls back to
+// the client's default profile and cannot create segments in any other profile. Use
+// `POST /api/reach/v1/profiles/{profileUuid}/segmentation/segments` instead.
+//
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
 // Corresponds with POST /api/reach/v1/segmentation/segments (the `ReachCreateANewContactSegmentV1` operationId).
+// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 func (c *ClientWithResponses) ReachCreateANewContactSegmentV1WithResponse(ctx context.Context, body ReachCreateANewContactSegmentV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachCreateANewContactSegmentV1Response, error) {
 	rsp, err := c.ReachCreateANewContactSegmentV1(ctx, body, reqEditors...)
 	if err != nil {
@@ -63699,9 +72103,15 @@ func (c *ClientWithResponses) ReachCreateANewContactSegmentV1WithResponse(ctx co
 // This endpoint retrieves information about a single segment identified by UUID.
 // Segments are used to organize and group contacts based on specific criteria.
 //
+// **Deprecated.** This endpoint cannot target a profile, so it always falls back to
+// the client's default profile and cannot read segments of any other profile. Use
+// `GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}` instead.
+//
 // Returns a wrapper object for the known response body format(s).
 //
 // Corresponds with GET /api/reach/v1/segmentation/segments/{segmentUuid} (the `ReachGetSegmentDetailsV1` operationId).
+//
+// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 func (c *ClientWithResponses) ReachGetSegmentDetailsV1WithResponse(ctx context.Context, segmentUuid SegmentUuid, reqEditors ...RequestEditorFn) (*ReachGetSegmentDetailsV1Response, error) {
 	rsp, err := c.ReachGetSegmentDetailsV1(ctx, segmentUuid, reqEditors...)
 	if err != nil {
@@ -63717,9 +72127,15 @@ func (c *ClientWithResponses) ReachGetSegmentDetailsV1WithResponse(ctx context.C
 // This endpoint allows you to fetch and filter contacts that belong to a particular segment,
 // identified by its UUID.
 //
+// **Deprecated.** This endpoint cannot target a profile, so it always falls back to
+// the client's default profile and cannot read segments of any other profile. Use
+// `GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}/contacts` instead.
+//
 // Returns a wrapper object for the known response body format(s).
 //
 // Corresponds with GET /api/reach/v1/segmentation/segments/{segmentUuid}/contacts (the `ReachListSegmentContactsV1` operationId).
+//
+// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 func (c *ClientWithResponses) ReachListSegmentContactsV1WithResponse(ctx context.Context, segmentUuid SegmentUuid, params *ReachListSegmentContactsV1Params, reqEditors ...RequestEditorFn) (*ReachListSegmentContactsV1Response, error) {
 	rsp, err := c.ReachListSegmentContactsV1(ctx, segmentUuid, params, reqEditors...)
 	if err != nil {
@@ -67418,6 +75834,340 @@ func ParseDomainsGetPendingIRTPVerificationV1Response(rsp *http.Response) (*Doma
 	return response, nil
 }
 
+// ParseDomainsGetIncomingDomainMoveListV1Response parses an HTTP response from a DomainsGetIncomingDomainMoveListV1WithResponse call
+func ParseDomainsGetIncomingDomainMoveListV1Response(rsp *http.Response) (*DomainsGetIncomingDomainMoveListV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DomainsGetIncomingDomainMoveListV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest DomainsV1MoveMoveCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDomainsRejectIncomingDomainMoveV1Response parses an HTTP response from a DomainsRejectIncomingDomainMoveV1WithResponse call
+func ParseDomainsRejectIncomingDomainMoveV1Response(rsp *http.Response) (*DomainsRejectIncomingDomainMoveV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DomainsRejectIncomingDomainMoveV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDomainsGetIncomingDomainMoveV1Response parses an HTTP response from a DomainsGetIncomingDomainMoveV1WithResponse call
+func ParseDomainsGetIncomingDomainMoveV1Response(rsp *http.Response) (*DomainsGetIncomingDomainMoveV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DomainsGetIncomingDomainMoveV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest DomainsV1MoveMoveResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDomainsAcceptIncomingDomainMoveV1Response parses an HTTP response from a DomainsAcceptIncomingDomainMoveV1WithResponse call
+func ParseDomainsAcceptIncomingDomainMoveV1Response(rsp *http.Response) (*DomainsAcceptIncomingDomainMoveV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DomainsAcceptIncomingDomainMoveV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDomainsGetOutgoingDomainMoveListV1Response parses an HTTP response from a DomainsGetOutgoingDomainMoveListV1WithResponse call
+func ParseDomainsGetOutgoingDomainMoveListV1Response(rsp *http.Response) (*DomainsGetOutgoingDomainMoveListV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DomainsGetOutgoingDomainMoveListV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest DomainsV1MoveMoveCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDomainsCancelOutgoingDomainMoveV1Response parses an HTTP response from a DomainsCancelOutgoingDomainMoveV1WithResponse call
+func ParseDomainsCancelOutgoingDomainMoveV1Response(rsp *http.Response) (*DomainsCancelOutgoingDomainMoveV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DomainsCancelOutgoingDomainMoveV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDomainsGetOutgoingDomainMoveV1Response parses an HTTP response from a DomainsGetOutgoingDomainMoveV1WithResponse call
+func ParseDomainsGetOutgoingDomainMoveV1Response(rsp *http.Response) (*DomainsGetOutgoingDomainMoveV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DomainsGetOutgoingDomainMoveV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest DomainsV1MoveMoveResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDomainsStartOutgoingDomainMoveV1Response parses an HTTP response from a DomainsStartOutgoingDomainMoveV1WithResponse call
+func ParseDomainsStartOutgoingDomainMoveV1Response(rsp *http.Response) (*DomainsStartOutgoingDomainMoveV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DomainsStartOutgoingDomainMoveV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseDomainsGetDomainListV1Response parses an HTTP response from a DomainsGetDomainListV1WithResponse call
 func ParseDomainsGetDomainListV1Response(rsp *http.Response) (*DomainsGetDomainListV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -67474,6 +76224,53 @@ func ParseDomainsPurchaseNewDomainV1Response(rsp *http.Response) (*DomainsPurcha
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest BillingV1OrderOrderResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDomainsClaimFreeDomainV1Response parses an HTTP response from a DomainsClaimFreeDomainV1WithResponse call
+func ParseDomainsClaimFreeDomainV1Response(rsp *http.Response) (*DomainsClaimFreeDomainV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DomainsClaimFreeDomainV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest DomainsV1PortfolioClaimResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -67859,6 +76656,53 @@ func ParseDomainsGetTransferListV1Response(rsp *http.Response) (*DomainsGetTrans
 			return nil, err
 		}
 		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDomainsClaimFreeDomainTransferV1Response parses an HTTP response from a DomainsClaimFreeDomainTransferV1WithResponse call
+func ParseDomainsClaimFreeDomainTransferV1Response(rsp *http.Response) (*DomainsClaimFreeDomainTransferV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DomainsClaimFreeDomainTransferV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest DomainsV1TransferTransferResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse
@@ -74556,6 +83400,50 @@ func ParseReachListProfilesV1Response(rsp *http.Response) (*ReachListProfilesV1R
 	return response, nil
 }
 
+// ParseReachListProfileContactsV1Response parses an HTTP response from a ReachListProfileContactsV1WithResponse call
+func ParseReachListProfileContactsV1Response(rsp *http.Response) (*ReachListProfileContactsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachListProfileContactsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			// Data Array of [`Reach.V1.Contacts.ProfileContactResource`](#model/reachv1contactsprofilecontactresource)
+			Data *ReachV1ContactsProfileContactCollection `json:"data,omitempty"`
+			Meta *CommonSchemaPaginationMetaSchema        `json:"meta,omitempty"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseReachCreateNewContactsV1Response parses an HTTP response from a ReachCreateNewContactsV1WithResponse call
 func ParseReachCreateNewContactsV1Response(rsp *http.Response) (*ReachCreateNewContactsV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -74572,6 +83460,354 @@ func ParseReachCreateNewContactsV1Response(rsp *http.Response) (*ReachCreateNewC
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachCreateContactsInBulkV1Response parses an HTTP response from a ReachCreateContactsInBulkV1WithResponse call
+func ParseReachCreateContactsInBulkV1Response(rsp *http.Response) (*ReachCreateContactsInBulkV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachCreateContactsInBulkV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachListContactFieldsV1Response parses an HTTP response from a ReachListContactFieldsV1WithResponse call
+func ParseReachListContactFieldsV1Response(rsp *http.Response) (*ReachListContactFieldsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachListContactFieldsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1ContactsFieldsContactFieldCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachCreateAContactFieldV1Response parses an HTTP response from a ReachCreateAContactFieldV1WithResponse call
+func ParseReachCreateAContactFieldV1Response(rsp *http.Response) (*ReachCreateAContactFieldV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachCreateAContactFieldV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1ContactsFieldsContactFieldResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachDeleteAContactFieldV1Response parses an HTTP response from a ReachDeleteAContactFieldV1WithResponse call
+func ParseReachDeleteAContactFieldV1Response(rsp *http.Response) (*ReachDeleteAContactFieldV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachDeleteAContactFieldV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachUpdateAContactFieldV1Response parses an HTTP response from a ReachUpdateAContactFieldV1WithResponse call
+func ParseReachUpdateAContactFieldV1Response(rsp *http.Response) (*ReachUpdateAContactFieldV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachUpdateAContactFieldV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1ContactsFieldsContactFieldResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachDeleteAProfileContactV1Response parses an HTTP response from a ReachDeleteAProfileContactV1WithResponse call
+func ParseReachDeleteAProfileContactV1Response(rsp *http.Response) (*ReachDeleteAProfileContactV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachDeleteAProfileContactV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachGetContactDetailsV1Response parses an HTTP response from a ReachGetContactDetailsV1WithResponse call
+func ParseReachGetContactDetailsV1Response(rsp *http.Response) (*ReachGetContactDetailsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachGetContactDetailsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1ContactsContactDetailsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachUpdateAContactV1Response parses an HTTP response from a ReachUpdateAContactV1WithResponse call
+func ParseReachUpdateAContactV1Response(rsp *http.Response) (*ReachUpdateAContactV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachUpdateAContactV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1ContactsProfileContactUpdateResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -74643,6 +83879,224 @@ func ParseReachGetProfileDomainDNSStatusV1Response(rsp *http.Response) (*ReachGe
 	return response, nil
 }
 
+// ParseReachListProfileSegmentsV1Response parses an HTTP response from a ReachListProfileSegmentsV1WithResponse call
+func ParseReachListProfileSegmentsV1Response(rsp *http.Response) (*ReachListProfileSegmentsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachListProfileSegmentsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			// Data Array of [`Reach.V1.Contacts.Segments.SegmentListItemResource`](#model/reachv1contactssegmentssegmentlistitemresource)
+			Data *ReachV1ContactsSegmentsSegmentListItemCollection `json:"data,omitempty"`
+			Meta *CommonSchemaPaginationMetaSchema                 `json:"meta,omitempty"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachCreateAProfileSegmentV1Response parses an HTTP response from a ReachCreateAProfileSegmentV1WithResponse call
+func ParseReachCreateAProfileSegmentV1Response(rsp *http.Response) (*ReachCreateAProfileSegmentV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachCreateAProfileSegmentV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1ContactsSegmentsSegmentResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachDeleteAProfileSegmentV1Response parses an HTTP response from a ReachDeleteAProfileSegmentV1WithResponse call
+func ParseReachDeleteAProfileSegmentV1Response(rsp *http.Response) (*ReachDeleteAProfileSegmentV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachDeleteAProfileSegmentV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachGetProfileSegmentDetailsV1Response parses an HTTP response from a ReachGetProfileSegmentDetailsV1WithResponse call
+func ParseReachGetProfileSegmentDetailsV1Response(rsp *http.Response) (*ReachGetProfileSegmentDetailsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachGetProfileSegmentDetailsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1ContactsSegmentsSegmentResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachUpdateAProfileSegmentV1Response parses an HTTP response from a ReachUpdateAProfileSegmentV1WithResponse call
+func ParseReachUpdateAProfileSegmentV1Response(rsp *http.Response) (*ReachUpdateAProfileSegmentV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachUpdateAProfileSegmentV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1ContactsSegmentsSegmentResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseReachListProfileSegmentContactsV1Response parses an HTTP response from a ReachListProfileSegmentContactsV1WithResponse call
 func ParseReachListProfileSegmentContactsV1Response(rsp *http.Response) (*ReachListProfileSegmentContactsV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -74663,6 +84117,394 @@ func ParseReachListProfileSegmentContactsV1Response(rsp *http.Response) (*ReachL
 			Data *ReachV1ContactsSegmentsSegmentationContactCollection `json:"data,omitempty"`
 			Meta *CommonSchemaPaginationMetaSchema                     `json:"meta,omitempty"`
 		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachCountProfileSegmentContactsV1Response parses an HTTP response from a ReachCountProfileSegmentContactsV1WithResponse call
+func ParseReachCountProfileSegmentContactsV1Response(rsp *http.Response) (*ReachCountProfileSegmentContactsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachCountProfileSegmentContactsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1ContactsSegmentsSegmentContactsCountResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachListProfileTagsV1Response parses an HTTP response from a ReachListProfileTagsV1WithResponse call
+func ParseReachListProfileTagsV1Response(rsp *http.Response) (*ReachListProfileTagsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachListProfileTagsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1ContactsTagsTagCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachCreateOrFindTagsV1Response parses an HTTP response from a ReachCreateOrFindTagsV1WithResponse call
+func ParseReachCreateOrFindTagsV1Response(rsp *http.Response) (*ReachCreateOrFindTagsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachCreateOrFindTagsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1ContactsTagsTagCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachDeleteATagV1Response parses an HTTP response from a ReachDeleteATagV1WithResponse call
+func ParseReachDeleteATagV1Response(rsp *http.Response) (*ReachDeleteATagV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachDeleteATagV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachRenameATagV1Response parses an HTTP response from a ReachRenameATagV1WithResponse call
+func ParseReachRenameATagV1Response(rsp *http.Response) (*ReachRenameATagV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachRenameATagV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1ContactsTagsTagResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachRemoveContactsFromATagV1Response parses an HTTP response from a ReachRemoveContactsFromATagV1WithResponse call
+func ParseReachRemoveContactsFromATagV1Response(rsp *http.Response) (*ReachRemoveContactsFromATagV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachRemoveContactsFromATagV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachAssignContactsToATagV1Response parses an HTTP response from a ReachAssignContactsToATagV1WithResponse call
+func ParseReachAssignContactsToATagV1Response(rsp *http.Response) (*ReachAssignContactsToATagV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachAssignContactsToATagV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachRemoveAContactFromATagV1Response parses an HTTP response from a ReachRemoveAContactFromATagV1WithResponse call
+func ParseReachRemoveAContactFromATagV1Response(rsp *http.Response) (*ReachRemoveAContactFromATagV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachRemoveAContactFromATagV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachAssignAContactToATagV1Response parses an HTTP response from a ReachAssignAContactToATagV1WithResponse call
+func ParseReachAssignAContactToATagV1Response(rsp *http.Response) (*ReachAssignAContactToATagV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachAssignAContactToATagV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1ContactsTagsTagResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

@@ -519,6 +519,16 @@
     "method": "POST",
     "path": "/api/billing/v1/payment-methods/{paymentMethodId}"
   },
+  "domains_acceptIncomingDomainMoveV1": {
+    "command": "hostinger domains move accept-incoming",
+    "method": "PUT",
+    "path": "/api/domains/v1/move/incoming/{domain}"
+  },
+  "domains_cancelOutgoingDomainMoveV1": {
+    "command": "hostinger domains move cancel-outgoing",
+    "method": "DELETE",
+    "path": "/api/domains/v1/move/outgoing/{domain}"
+  },
   "domains_cancelPendingIRTPVerificationV1": {
     "command": "hostinger domains whois cancel-pending-irtp-verification",
     "method": "DELETE",
@@ -533,6 +543,16 @@
     "command": "hostinger domains availability check",
     "method": "POST",
     "path": "/api/domains/v1/availability"
+  },
+  "domains_claimFreeDomainTransferV1": {
+    "command": "hostinger domains transfer claim-free",
+    "method": "POST",
+    "path": "/api/domains/v1/transfers/claim"
+  },
+  "domains_claimFreeDomainV1": {
+    "command": "hostinger domains portfolio claim-free",
+    "method": "POST",
+    "path": "/api/domains/v1/portfolio/claim"
   },
   "domains_createDomainForwardingV1": {
     "command": "hostinger domains forwarding create",
@@ -599,6 +619,26 @@
     "method": "GET",
     "path": "/api/domains/v1/portfolio/{domain}/renewal"
   },
+  "domains_getIncomingDomainMoveListV1": {
+    "command": "hostinger domains move incoming-list",
+    "method": "GET",
+    "path": "/api/domains/v1/move/incoming"
+  },
+  "domains_getIncomingDomainMoveV1": {
+    "command": "hostinger domains move incoming",
+    "method": "GET",
+    "path": "/api/domains/v1/move/incoming/{domain}"
+  },
+  "domains_getOutgoingDomainMoveListV1": {
+    "command": "hostinger domains move outgoing-list",
+    "method": "GET",
+    "path": "/api/domains/v1/move/outgoing"
+  },
+  "domains_getOutgoingDomainMoveV1": {
+    "command": "hostinger domains move outgoing",
+    "method": "GET",
+    "path": "/api/domains/v1/move/outgoing/{domain}"
+  },
   "domains_getPendingIRTPVerificationV1": {
     "command": "hostinger domains whois pending-irtp-verification",
     "method": "GET",
@@ -634,10 +674,20 @@
     "method": "POST",
     "path": "/api/domains/v1/portfolio"
   },
+  "domains_rejectIncomingDomainMoveV1": {
+    "command": "hostinger domains move reject-incoming",
+    "method": "DELETE",
+    "path": "/api/domains/v1/move/incoming/{domain}"
+  },
   "domains_setWHOISProfileAsDefaultV1": {
     "command": "hostinger domains whois set-as-default",
     "method": "PUT",
     "path": "/api/domains/v1/whois/default/{whoisId}"
+  },
+  "domains_startOutgoingDomainMoveV1": {
+    "command": "hostinger domains move start-outgoing",
+    "method": "POST",
+    "path": "/api/domains/v1/move/outgoing/{domain}"
   },
   "domains_unsetDefaultWHOISProfileV1": {
     "command": "hostinger domains whois unset-default",
@@ -1294,6 +1344,26 @@
     "method": "PATCH",
     "path": "/api/mail/v1/webhooks/{webhookId}"
   },
+  "reach_assignAContactToATagV1": {
+    "command": "hostinger reach tags assign-contact-to",
+    "method": "POST",
+    "path": "/api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts/{contactUuid}"
+  },
+  "reach_assignContactsToATagV1": {
+    "command": "hostinger reach tags assign-contacts-to",
+    "method": "POST",
+    "path": "/api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts"
+  },
+  "reach_countProfileSegmentContactsV1": {
+    "command": "hostinger reach segments count-profile-contacts",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}/count"
+  },
+  "reach_createAContactFieldV1": {
+    "command": "hostinger reach contact-fields create",
+    "method": "POST",
+    "path": "/api/reach/v1/profiles/{profileUuid}/contacts/fields"
+  },
   "reach_createANewContactSegmentV1": {
     "command": "hostinger reach segments create",
     "method": "POST",
@@ -1304,25 +1374,75 @@
     "method": "POST",
     "path": "/api/reach/v1/contacts"
   },
+  "reach_createAProfileSegmentV1": {
+    "command": "hostinger reach segments create-profile",
+    "method": "POST",
+    "path": "/api/reach/v1/profiles/{profileUuid}/segmentation/segments"
+  },
+  "reach_createContactsInBulkV1": {
+    "command": "hostinger reach contacts create-in-bulk",
+    "method": "POST",
+    "path": "/api/reach/v1/profiles/{profileUuid}/contacts/bulk"
+  },
   "reach_createNewContactsV1": {
     "command": "hostinger reach contacts create-bulk",
     "method": "POST",
     "path": "/api/reach/v1/profiles/{profileUuid}/contacts"
+  },
+  "reach_createOrFindTagsV1": {
+    "command": "hostinger reach tags create-or-find",
+    "method": "POST",
+    "path": "/api/reach/v1/profiles/{profileUuid}/tags"
+  },
+  "reach_deleteAContactFieldV1": {
+    "command": "hostinger reach contact-fields delete",
+    "method": "DELETE",
+    "path": "/api/reach/v1/profiles/{profileUuid}/contacts/fields/{fieldUuid}"
   },
   "reach_deleteAContactV1": {
     "command": "hostinger reach contacts delete",
     "method": "DELETE",
     "path": "/api/reach/v1/contacts/{uuid}"
   },
+  "reach_deleteAProfileContactV1": {
+    "command": "hostinger reach contacts delete-profile",
+    "method": "DELETE",
+    "path": "/api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid}"
+  },
+  "reach_deleteAProfileSegmentV1": {
+    "command": "hostinger reach segments delete-profile",
+    "method": "DELETE",
+    "path": "/api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}"
+  },
+  "reach_deleteATagV1": {
+    "command": "hostinger reach tags delete",
+    "method": "DELETE",
+    "path": "/api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}"
+  },
+  "reach_getContactDetailsV1": {
+    "command": "hostinger reach contacts get",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid}"
+  },
   "reach_getProfileDomainDNSStatusV1": {
     "command": "hostinger reach profiles domain-dns-status",
     "method": "GET",
     "path": "/api/reach/v1/profiles/{profileUuid}/domains/dns-status"
   },
+  "reach_getProfileSegmentDetailsV1": {
+    "command": "hostinger reach segments profile",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}"
+  },
   "reach_getSegmentDetailsV1": {
     "command": "hostinger reach segments get",
     "method": "GET",
     "path": "/api/reach/v1/segmentation/segments/{segmentUuid}"
+  },
+  "reach_listContactFieldsV1": {
+    "command": "hostinger reach contact-fields list",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/contacts/fields"
   },
   "reach_listContactGroupsV1": {
     "command": "hostinger reach contacts list-groups",
@@ -1334,10 +1454,25 @@
     "method": "GET",
     "path": "/api/reach/v1/contacts"
   },
+  "reach_listProfileContactsV1": {
+    "command": "hostinger reach contacts list-profile",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/contacts"
+  },
   "reach_listProfileSegmentContactsV1": {
     "command": "hostinger reach segments list-profile-contacts",
     "method": "GET",
     "path": "/api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}/contacts"
+  },
+  "reach_listProfileSegmentsV1": {
+    "command": "hostinger reach segments list-profile",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/segmentation/segments"
+  },
+  "reach_listProfileTagsV1": {
+    "command": "hostinger reach tags list-profile",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/tags"
   },
   "reach_listProfilesV1": {
     "command": "hostinger reach profiles list",
@@ -1353,6 +1488,36 @@
     "command": "hostinger reach segments list",
     "method": "GET",
     "path": "/api/reach/v1/segmentation/segments"
+  },
+  "reach_removeAContactFromATagV1": {
+    "command": "hostinger reach tags remove-contact-from",
+    "method": "DELETE",
+    "path": "/api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts/{contactUuid}"
+  },
+  "reach_removeContactsFromATagV1": {
+    "command": "hostinger reach tags remove-contacts-from",
+    "method": "DELETE",
+    "path": "/api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts"
+  },
+  "reach_renameATagV1": {
+    "command": "hostinger reach tags rename",
+    "method": "PATCH",
+    "path": "/api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}"
+  },
+  "reach_updateAContactFieldV1": {
+    "command": "hostinger reach contact-fields update",
+    "method": "PATCH",
+    "path": "/api/reach/v1/profiles/{profileUuid}/contacts/fields/{fieldUuid}"
+  },
+  "reach_updateAContactV1": {
+    "command": "hostinger reach contacts update",
+    "method": "PATCH",
+    "path": "/api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid}"
+  },
+  "reach_updateAProfileSegmentV1": {
+    "command": "hostinger reach segments update-profile",
+    "method": "PUT",
+    "path": "/api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}"
   },
   "v2_getDomainVerificationsDIRECT": {
     "command": "hostinger domains verifications direct",

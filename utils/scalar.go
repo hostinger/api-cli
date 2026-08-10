@@ -4,6 +4,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/google/uuid"
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
@@ -66,4 +67,8 @@ func StringToDate(dateStr string) openapi_types.Date {
 // every other formatted kind, so generated commands need no extra import.
 func StringToEmail(email string) openapi_types.Email {
 	return openapi_types.Email(email)
+}
+
+func StringToUUID(s string) openapi_types.UUID {
+	return uuid.MustParse(s)
 }

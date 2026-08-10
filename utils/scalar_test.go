@@ -21,3 +21,19 @@ func TestStringToDatePanicsOnGarbage(t *testing.T) {
 	}()
 	StringToDate("16/03/2026")
 }
+
+func TestStringToUUID(t *testing.T) {
+	const want = "550e8400-e29b-41d4-a716-446655440000"
+	if got := StringToUUID(want); got.String() != want {
+		t.Errorf("StringToUUID(%q) = %q, want %q", want, got, want)
+	}
+}
+
+func TestStringToUUIDPanicsOnGarbage(t *testing.T) {
+	defer func() {
+		if recover() == nil {
+			t.Error("StringToUUID did not panic on an unparseable uuid")
+		}
+	}()
+	StringToUUID("not-a-uuid")
+}

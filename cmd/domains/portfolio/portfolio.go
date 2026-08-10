@@ -11,6 +11,7 @@ var GroupCmd = &cobra.Command{
 
 func init() {
 	GroupCmd.AddCommand(AuthorizationCodeCmd)
+	GroupCmd.AddCommand(ClaimFreeCmd)
 	GroupCmd.AddCommand(DisableLockCmd)
 	GroupCmd.AddCommand(DisablePrivacyProtectionCmd)
 	GroupCmd.AddCommand(EnableLockCmd)

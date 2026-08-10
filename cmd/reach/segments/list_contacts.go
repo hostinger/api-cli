@@ -13,7 +13,7 @@ import (
 var ListContactsCmd = &cobra.Command{
 	Use:   "list-contacts <segment-uuid>",
 	Short: "List segment contacts",
-	Long:  "Retrieve contacts associated with a specific segment.\n\nThis endpoint allows you to fetch and filter contacts that belong to a particular segment,\nidentified by its UUID.",
+	Long:  "Retrieve contacts associated with a specific segment.\n\nThis endpoint allows you to fetch and filter contacts that belong to a particular segment,\nidentified by its UUID.\n\n**Deprecated.** This endpoint cannot target a profile, so it always falls back to\nthe client's default profile and cannot read segments of any other profile. Use\n`GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}/contacts` instead.",
 	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
 	Run: func(cmd *cobra.Command, args []string) {
 		r, err := api.Request().ReachListSegmentContactsV1WithResponse(context.TODO(), args[0], listContactsParams(cmd))
