@@ -2,6 +2,13 @@ name: release
 
 on:
   workflow_dispatch:
+  workflow_call:
+    inputs:
+      tag:
+        description: 'Tag to publish; defaults to the tag on the checked-out commit'
+        required: false
+        type: string
+        default: ''
 
 permissions:
   contents: write
@@ -10,6 +17,17 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
+      - name: Get GitHub token
+        uses: actions/create-github-app-token@v3
+        id: get_token
+        with:
+          app-id: ${{ secrets.HOSTINGERBOT_APP_ID }}
+          private-key: ${{ secrets.HOSTINGERBOT_PRIVATE_KEY }}
+          owner: hostinger
+          repositories: |
+            api-cli
+            homebrew-tap
+
       - name: Repo checkout
         uses: actions/checkout@v7
         with:
@@ -27,4 +45,5 @@ jobs:
           version: "~> v2"
           args: release --clean
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.get_token.outputs.token }}
+          GORELEASER_CURRENT_TAG: ${{ inputs.tag }}

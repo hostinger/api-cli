@@ -6,28 +6,17 @@ on:
       - main
     paths-ignore:
       - ".github/**"
-  # Escape hatch for when a release needs cutting without a content push, e.g.
-  # after a failed run leaves a tag behind with no release.
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  release:
+  tag:
     runs-on: ubuntu-latest
+    outputs:
+      new_tag: ${{ steps.bump.outputs.new_tag }}
     steps:
-      - name: Get GitHub token
-        uses: actions/create-github-app-token@v3
-        id: get_token
-        with:
-          app-id: ${{ secrets.HOSTINGERBOT_APP_ID }}
-          private-key: ${{ secrets.HOSTINGERBOT_PRIVATE_KEY }}
-          owner: hostinger
-          repositories: |
-            api-cli
-            homebrew-tap
-
       - name: Repo checkout
         uses: actions/checkout@v7
         with:
@@ -40,28 +29,16 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           release_branches: main
 
-      - name: Fetch tags
-        if: steps.bump.outputs.new_tag != ''
-        run: git fetch --force --tags
-
-      - name: Install Go
-        uses: actions/setup-go@v7
-        with:
-          go-version-file: 'go.mod'
-
-      - name: Run GoReleaser
-        if: steps.bump.outputs.new_tag != ''
-        uses: goreleaser/goreleaser-action@v7
-        with:
-          distribution: goreleaser
-          version: "~> v2"
-          args: release --clean
-        env:
-          GITHUB_TOKEN: ${{ steps.get_token.outputs.token }}
-          GORELEASER_CURRENT_TAG: ${{ steps.bump.outputs.new_tag }}
+  release:
+    needs: tag
+    if: needs.tag.outputs.new_tag != ''
+    uses: ./.github/workflows/release.yaml
+    secrets: inherit
+    with:
+      tag: ${{ needs.tag.outputs.new_tag }}
 
   notify-failure:
-    needs: [release]
+    needs: [tag, release]
     if: failure()
     runs-on: ubuntu-latest
     steps:
