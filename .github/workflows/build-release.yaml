@@ -6,6 +6,9 @@ on:
       - main
     paths-ignore:
       - ".github/**"
+  # Escape hatch for when a release needs cutting without a content push, e.g.
+  # after a failed run leaves a tag behind with no release.
+  workflow_dispatch:
 
 permissions:
   contents: write
