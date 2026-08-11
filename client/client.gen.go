@@ -3752,32 +3752,6 @@ type AgencyHostingV1WebsitesSslCertResource struct {
 	Names *[]string `json:"names,omitempty"`
 }
 
-// AgencyHostingV1WebsitesWebsiteDeletionResource defines model for AgencyHosting.V1.Websites.WebsiteDeletionResource.
-type AgencyHostingV1WebsitesWebsiteDeletionResource struct {
-	// DeletedAt Example: 2024-05-29T05:49:49+00:00
-	DeletedAt *time.Time `json:"deleted_at,omitempty"`
-
-	// IsCleanupScheduled Whether background cleanup has been scheduled
-	//
-	// Example: true
-	IsCleanupScheduled *bool `json:"is_cleanup_scheduled,omitempty"`
-
-	// Message Human-readable result message
-	//
-	// Example: Website scheduled for deletion
-	Message *string `json:"message,omitempty"`
-
-	// Status Deletion status
-	//
-	// Example: deleted
-	Status *string `json:"status,omitempty"`
-
-	// WebsiteUid Deleted website UID
-	//
-	// Example: zpwlGlp19
-	WebsiteUid *string `json:"website_uid,omitempty"`
-}
-
 // AgencyHostingV1WebsitesWebsiteDomainDetailsCollection Array of [`AgencyHosting.V1.Websites.WebsiteDomainDetailsResource`](#model/agencyhostingv1websiteswebsitedomaindetailsresource)
 type AgencyHostingV1WebsitesWebsiteDomainDetailsCollection = []AgencyHostingV1WebsitesWebsiteDomainDetailsResource
 
@@ -12686,9 +12660,9 @@ type ClientInterface interface {
 
 	// AgencyHostingDeleteAgencyPlanWebsiteV1 Delete Agency Plan website
 	//
-	// Deletes an Agency Plan website and schedules cleanup of its resources.
-	//
-	// This action is irreversible. Website files, databases, and linked domains are removed.
+	// Permanently deletes an Agency Plan website. Deletion is processed asynchronously: the
+	// website is immediately transitioned to a deleting state and the underlying server
+	// resources are removed in the background.
 	//
 	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid} (the `AgencyHostingDeleteAgencyPlanWebsiteV1` operationId).
 	AgencyHostingDeleteAgencyPlanWebsiteV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -17917,9 +17891,9 @@ func (c *Client) AgencyHostingGetAgencyPlanWebsiteSetupStatusV1(ctx context.Cont
 
 // AgencyHostingDeleteAgencyPlanWebsiteV1 Delete Agency Plan website
 //
-// Deletes an Agency Plan website and schedules cleanup of its resources.
-//
-// This action is irreversible. Website files, databases, and linked domains are removed.
+// Permanently deletes an Agency Plan website. Deletion is processed asynchronously: the
+// website is immediately transitioned to a deleting state and the underlying server
+// resources are removed in the background.
 //
 // Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid} (the `AgencyHostingDeleteAgencyPlanWebsiteV1` operationId).
 func (c *Client) AgencyHostingDeleteAgencyPlanWebsiteV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -41765,9 +41739,9 @@ type ClientWithResponsesInterface interface {
 
 	// AgencyHostingDeleteAgencyPlanWebsiteV1WithResponse Delete Agency Plan website
 	//
-	// Deletes an Agency Plan website and schedules cleanup of its resources.
-	//
-	// This action is irreversible. Website files, databases, and linked domains are removed.
+	// Permanently deletes an Agency Plan website. Deletion is processed asynchronously: the
+	// website is immediately transitioned to a deleting state and the underlying server
+	// resources are removed in the background.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
@@ -47533,7 +47507,7 @@ type AgencyHostingDeleteAgencyPlanWebsiteV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *AgencyHostingV1WebsitesWebsiteDeletionResource
+	JSON200 *CommonSuccessEmptyResource
 	// JSON401 the response for an HTTP 401 `application/json` response
 	JSON401 *CommonResponseUnauthorizedResponse
 	// JSON500 the response for an HTTP 500 `application/json` response
@@ -47541,7 +47515,7 @@ type AgencyHostingDeleteAgencyPlanWebsiteV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingDeleteAgencyPlanWebsiteV1Response) GetJSON200() *AgencyHostingV1WebsitesWebsiteDeletionResource {
+func (r AgencyHostingDeleteAgencyPlanWebsiteV1Response) GetJSON200() *CommonSuccessEmptyResource {
 	return r.JSON200
 }
 
@@ -65827,9 +65801,9 @@ func (c *ClientWithResponses) AgencyHostingGetAgencyPlanWebsiteSetupStatusV1With
 
 // AgencyHostingDeleteAgencyPlanWebsiteV1WithResponse Delete Agency Plan website
 //
-// Deletes an Agency Plan website and schedules cleanup of its resources.
-//
-// This action is irreversible. Website files, databases, and linked domains are removed.
+// Permanently deletes an Agency Plan website. Deletion is processed asynchronously: the
+// website is immediately transitioned to a deleting state and the underlying server
+// resources are removed in the background.
 //
 // Returns a wrapper object for the known response body format(s).
 //
@@ -73962,7 +73936,7 @@ func ParseAgencyHostingDeleteAgencyPlanWebsiteV1Response(rsp *http.Response) (*A
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest AgencyHostingV1WebsitesWebsiteDeletionResource
+		var dest CommonSuccessEmptyResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

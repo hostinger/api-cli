@@ -4,9 +4,9 @@ Delete Agency Plan website
 
 ### Synopsis
 
-Deletes an Agency Plan website and schedules cleanup of its resources.
-
-This action is irreversible. Website files, databases, and linked domains are removed.
+Permanently deletes an Agency Plan website. Deletion is processed asynchronously: the
+website is immediately transitioned to a deleting state and the underlying server
+resources are removed in the background.
 
 ```
 hostinger agency-hosting websites delete-plan <website_uid> [flags]

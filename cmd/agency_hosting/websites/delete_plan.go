@@ -12,7 +12,7 @@ import (
 var DeletePlanCmd = &cobra.Command{
 	Use:   "delete-plan <website_uid>",
 	Short: "Delete Agency Plan website",
-	Long:  "Deletes an Agency Plan website and schedules cleanup of its resources.\n\nThis action is irreversible. Website files, databases, and linked domains are removed.",
+	Long:  "Permanently deletes an Agency Plan website. Deletion is processed asynchronously: the\nwebsite is immediately transitioned to a deleting state and the underlying server\nresources are removed in the background.",
 	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
 	Run: func(cmd *cobra.Command, args []string) {
 		r, err := api.Request().AgencyHostingDeleteAgencyPlanWebsiteV1WithResponse(context.TODO(), args[0])
