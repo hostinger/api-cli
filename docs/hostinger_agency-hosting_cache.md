@@ -18,5 +18,5 @@ Cache commands
 ### SEE ALSO
 
 * [hostinger agency-hosting](hostinger_agency-hosting.md)	 - Agency Hosting commands
-* [hostinger agency-hosting cache clear-plan-website](hostinger_agency-hosting_cache_clear-plan-website.md)	 - Clear Agency Plan website cache
+* [hostinger agency-hosting cache clear-website](hostinger_agency-hosting_cache_clear-website.md)	 - Clear website cache
 

@@ -18,6 +18,6 @@ Website Setups commands
 ### SEE ALSO
 
 * [hostinger agency-hosting](hostinger_agency-hosting.md)	 - Agency Hosting commands
-* [hostinger agency-hosting website-setups plan-status](hostinger_agency-hosting_website-setups_plan-status.md)	 - Get Agency Plan website setup status
-* [hostinger agency-hosting website-setups provision-plan](hostinger_agency-hosting_website-setups_provision-plan.md)	 - Provision a new Agency Plan website
+* [hostinger agency-hosting website-setups create](hostinger_agency-hosting_website-setups_create.md)	 - Create a new website
+* [hostinger agency-hosting website-setups status](hostinger_agency-hosting_website-setups_status.md)	 - Get website setup status
 

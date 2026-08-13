@@ -10811,8 +10811,8 @@ type CommonResponseUnprocessableContentResponse struct {
 	Message *string `json:"message,omitempty"`
 }
 
-// AgencyHostingListAgencyPlanDomainsV1Params defines parameters for AgencyHostingListAgencyPlanDomainsV1.
-type AgencyHostingListAgencyPlanDomainsV1Params struct {
+// AgencyHostingListDomainsV1Params defines parameters for AgencyHostingListDomainsV1.
+type AgencyHostingListDomainsV1Params struct {
 	// Page Page number
 	Page *Page `form:"page,omitempty" json:"page,omitempty"`
 
@@ -10823,8 +10823,8 @@ type AgencyHostingListAgencyPlanDomainsV1Params struct {
 	WebsiteUuids *WebsiteUuids `form:"website_uuids,omitempty" json:"website_uuids,omitempty"`
 }
 
-// AgencyHostingListAgencyPlanOrdersV1Params defines parameters for AgencyHostingListAgencyPlanOrdersV1.
-type AgencyHostingListAgencyPlanOrdersV1Params struct {
+// AgencyHostingListOrdersV1Params defines parameters for AgencyHostingListOrdersV1.
+type AgencyHostingListOrdersV1Params struct {
 	// Page Page number
 	Page *Page `form:"page,omitempty" json:"page,omitempty"`
 
@@ -10832,8 +10832,8 @@ type AgencyHostingListAgencyPlanOrdersV1Params struct {
 	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
 }
 
-// AgencyHostingListAgencyPlanWebsiteCronJobsV1Params defines parameters for AgencyHostingListAgencyPlanWebsiteCronJobsV1.
-type AgencyHostingListAgencyPlanWebsiteCronJobsV1Params struct {
+// AgencyHostingListWebsiteCronJobsV1Params defines parameters for AgencyHostingListWebsiteCronJobsV1.
+type AgencyHostingListWebsiteCronJobsV1Params struct {
 	// Page Page number
 	Page *Page `form:"page,omitempty" json:"page,omitempty"`
 
@@ -10841,8 +10841,8 @@ type AgencyHostingListAgencyPlanWebsiteCronJobsV1Params struct {
 	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
 }
 
-// AgencyHostingListAgencyPlanWebsiteDatabasesV1Params defines parameters for AgencyHostingListAgencyPlanWebsiteDatabasesV1.
-type AgencyHostingListAgencyPlanWebsiteDatabasesV1Params struct {
+// AgencyHostingListWebsiteDatabasesV1Params defines parameters for AgencyHostingListWebsiteDatabasesV1.
+type AgencyHostingListWebsiteDatabasesV1Params struct {
 	// Page Page number
 	Page *Page `form:"page,omitempty" json:"page,omitempty"`
 
@@ -11477,32 +11477,32 @@ type VPSGetAttachedPublicKeysV1Params struct {
 	Page *Page `form:"page,omitempty" json:"page,omitempty"`
 }
 
-// AgencyHostingProvisionANewAgencyPlanWebsiteV1JSONRequestBody defines body for AgencyHostingProvisionANewAgencyPlanWebsiteV1 for application/json ContentType.
-type AgencyHostingProvisionANewAgencyPlanWebsiteV1JSONRequestBody = AgencyHostingV1SetupsCreateSetupRequest
+// AgencyHostingCreateANewWebsiteV1JSONRequestBody defines body for AgencyHostingCreateANewWebsiteV1 for application/json ContentType.
+type AgencyHostingCreateANewWebsiteV1JSONRequestBody = AgencyHostingV1SetupsCreateSetupRequest
 
-// AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1JSONRequestBody defines body for AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1 for application/json ContentType.
-type AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1JSONRequestBody = AgencyHostingV1WebsitesBuildAssetsRequest
+// AgencyHostingBuildWebsiteNodeJSAssetsV1JSONRequestBody defines body for AgencyHostingBuildWebsiteNodeJSAssetsV1 for application/json ContentType.
+type AgencyHostingBuildWebsiteNodeJSAssetsV1JSONRequestBody = AgencyHostingV1WebsitesBuildAssetsRequest
 
-// AgencyHostingCreateAgencyPlanWebsiteCronJobV1JSONRequestBody defines body for AgencyHostingCreateAgencyPlanWebsiteCronJobV1 for application/json ContentType.
-type AgencyHostingCreateAgencyPlanWebsiteCronJobV1JSONRequestBody = AgencyHostingV1WebsitesCronJobsCreateCronJobRequest
+// AgencyHostingCreateWebsiteCronJobV1JSONRequestBody defines body for AgencyHostingCreateWebsiteCronJobV1 for application/json ContentType.
+type AgencyHostingCreateWebsiteCronJobV1JSONRequestBody = AgencyHostingV1WebsitesCronJobsCreateCronJobRequest
 
-// AgencyHostingCreateAgencyPlanWebsiteDatabaseV1JSONRequestBody defines body for AgencyHostingCreateAgencyPlanWebsiteDatabaseV1 for application/json ContentType.
-type AgencyHostingCreateAgencyPlanWebsiteDatabaseV1JSONRequestBody = AgencyHostingV1WebsitesDatabasesCreateDatabaseRequest
+// AgencyHostingCreateWebsiteDatabaseV1JSONRequestBody defines body for AgencyHostingCreateWebsiteDatabaseV1 for application/json ContentType.
+type AgencyHostingCreateWebsiteDatabaseV1JSONRequestBody = AgencyHostingV1WebsitesDatabasesCreateDatabaseRequest
 
-// AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1JSONRequestBody defines body for AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1 for application/json ContentType.
-type AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1JSONRequestBody = AgencyHostingV1WebsitesDatabasesUsersCreateDatabaseUserRequest
+// AgencyHostingCreateWebsiteDatabaseUserV1JSONRequestBody defines body for AgencyHostingCreateWebsiteDatabaseUserV1 for application/json ContentType.
+type AgencyHostingCreateWebsiteDatabaseUserV1JSONRequestBody = AgencyHostingV1WebsitesDatabasesUsersCreateDatabaseUserRequest
 
-// AgencyHostingLinkDomainToAgencyPlanWebsiteV1JSONRequestBody defines body for AgencyHostingLinkDomainToAgencyPlanWebsiteV1 for application/json ContentType.
-type AgencyHostingLinkDomainToAgencyPlanWebsiteV1JSONRequestBody = AgencyHostingV1DomainsLinkDomainRequest
+// AgencyHostingLinkDomainToWebsiteV1JSONRequestBody defines body for AgencyHostingLinkDomainToWebsiteV1 for application/json ContentType.
+type AgencyHostingLinkDomainToWebsiteV1JSONRequestBody = AgencyHostingV1DomainsLinkDomainRequest
 
-// AgencyHostingChangeAgencyPlanWebsiteDomainV1JSONRequestBody defines body for AgencyHostingChangeAgencyPlanWebsiteDomainV1 for application/json ContentType.
-type AgencyHostingChangeAgencyPlanWebsiteDomainV1JSONRequestBody = AgencyHostingV1DomainsChangeDomainRequest
+// AgencyHostingChangeWebsiteDomainV1JSONRequestBody defines body for AgencyHostingChangeWebsiteDomainV1 for application/json ContentType.
+type AgencyHostingChangeWebsiteDomainV1JSONRequestBody = AgencyHostingV1DomainsChangeDomainRequest
 
-// AgencyHostingImportAgencyPlanWebsiteFromArchiveV1JSONRequestBody defines body for AgencyHostingImportAgencyPlanWebsiteFromArchiveV1 for application/json ContentType.
-type AgencyHostingImportAgencyPlanWebsiteFromArchiveV1JSONRequestBody = AgencyHostingV1FilesImportArchiveRequest
+// AgencyHostingImportWebsiteFromArchiveV1JSONRequestBody defines body for AgencyHostingImportWebsiteFromArchiveV1 for application/json ContentType.
+type AgencyHostingImportWebsiteFromArchiveV1JSONRequestBody = AgencyHostingV1FilesImportArchiveRequest
 
-// AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1JSONRequestBody defines body for AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1 for application/json ContentType.
-type AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1JSONRequestBody = AgencyHostingV1WordPressChangeVersionRequest
+// AgencyHostingChangeWordPressVersionV1JSONRequestBody defines body for AgencyHostingChangeWordPressVersionV1 for application/json ContentType.
+type AgencyHostingChangeWordPressVersionV1JSONRequestBody = AgencyHostingV1WordPressChangeVersionRequest
 
 // BillingCreatePurchaseOrderV1JSONRequestBody defines body for BillingCreatePurchaseOrderV1 for application/json ContentType.
 type BillingCreatePurchaseOrderV1JSONRequestBody = BillingV1OrderPurchaseRequest
@@ -12765,23 +12765,23 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 // The interface specification for the client above.
 type ClientInterface interface {
 
-	// AgencyHostingListAgencyPlanDomainsV1 List Agency Plan domains
+	// AgencyHostingListDomainsV1 List domains
 	//
 	// Returns a paginated list of domains associated with Agency Plan websites accessible to the authenticated client.
 	//
 	// Use the website_uuids filter to narrow results to specific websites.
 	//
-	// Corresponds with GET /api/agency-hosting/v1/domains (the `AgencyHostingListAgencyPlanDomainsV1` operationId).
-	AgencyHostingListAgencyPlanDomainsV1(ctx context.Context, params *AgencyHostingListAgencyPlanDomainsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with GET /api/agency-hosting/v1/domains (the `AgencyHostingListDomainsV1` operationId).
+	AgencyHostingListDomainsV1(ctx context.Context, params *AgencyHostingListDomainsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingListAgencyPlanOrdersV1 List Agency Plan orders
+	// AgencyHostingListOrdersV1 List orders
 	//
 	// Returns a paginated list of Agency Plan orders accessible to the authenticated client.
 	//
-	// Corresponds with GET /api/agency-hosting/v1/orders (the `AgencyHostingListAgencyPlanOrdersV1` operationId).
-	AgencyHostingListAgencyPlanOrdersV1(ctx context.Context, params *AgencyHostingListAgencyPlanOrdersV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with GET /api/agency-hosting/v1/orders (the `AgencyHostingListOrdersV1` operationId).
+	AgencyHostingListOrdersV1(ctx context.Context, params *AgencyHostingListOrdersV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1 List available datacenters for an Agency Plan order
+	// AgencyHostingListAvailableDatacentersV1 List available datacenters
 	//
 	// Lists the datacenters available for provisioning a new website on the given Agency Plan
 	// hosting order.
@@ -12790,10 +12790,10 @@ type ClientInterface interface {
 	// latency; comparing the results across datacenters lets you pick the nearest one (lowest
 	// ping) before choosing its `code` as the `datacenter_code` when creating a website setup.
 	//
-	// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/datacenters (the `AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1` operationId).
-	AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1(ctx context.Context, orderId OrderIdPath, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/datacenters (the `AgencyHostingListAvailableDatacentersV1` operationId).
+	AgencyHostingListAvailableDatacentersV1(ctx context.Context, orderId OrderIdPath, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingProvisionANewAgencyPlanWebsiteV1WithBody Provision a new Agency Plan website
+	// AgencyHostingCreateANewWebsiteV1WithBody Create a new website
 	//
 	// Provisions a new website on one of your Agency Plan hosting orders.
 	//
@@ -12815,10 +12815,10 @@ type ClientInterface interface {
 	//
 	// Takes any type of body and a specified content type.
 	//
-	// Corresponds with POST /api/agency-hosting/v1/orders/{order_id}/websites/setups (the `AgencyHostingProvisionANewAgencyPlanWebsiteV1` operationId).
-	AgencyHostingProvisionANewAgencyPlanWebsiteV1WithBody(ctx context.Context, orderId OrderIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/orders/{order_id}/websites/setups (the `AgencyHostingCreateANewWebsiteV1` operationId).
+	AgencyHostingCreateANewWebsiteV1WithBody(ctx context.Context, orderId OrderIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingProvisionANewAgencyPlanWebsiteV1 Provision a new Agency Plan website
+	// AgencyHostingCreateANewWebsiteV1 Create a new website
 	//
 	// Provisions a new website on one of your Agency Plan hosting orders.
 	//
@@ -12840,10 +12840,10 @@ type ClientInterface interface {
 	//
 	// Takes a body of the `application/json` content type.
 	//
-	// Corresponds with POST /api/agency-hosting/v1/orders/{order_id}/websites/setups (the `AgencyHostingProvisionANewAgencyPlanWebsiteV1` operationId).
-	AgencyHostingProvisionANewAgencyPlanWebsiteV1(ctx context.Context, orderId OrderIdPath, body AgencyHostingProvisionANewAgencyPlanWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/orders/{order_id}/websites/setups (the `AgencyHostingCreateANewWebsiteV1` operationId).
+	AgencyHostingCreateANewWebsiteV1(ctx context.Context, orderId OrderIdPath, body AgencyHostingCreateANewWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingGetAgencyPlanWebsiteSetupStatusV1 Get Agency Plan website setup status
+	// AgencyHostingGetWebsiteSetupStatusV1 Get website setup status
 	//
 	// Returns the current status of an Agency Plan website setup started via the setups
 	// endpoint.
@@ -12851,27 +12851,27 @@ type ClientInterface interface {
 	// Poll this endpoint using the `setup_uuid` returned from the provisioning request until
 	// `status` becomes `completed`, at which point `website_uid` identifies the new website.
 	//
-	// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/websites/setups/{setup_uuid} (the `AgencyHostingGetAgencyPlanWebsiteSetupStatusV1` operationId).
-	AgencyHostingGetAgencyPlanWebsiteSetupStatusV1(ctx context.Context, orderId OrderIdPath, setupUuid SetupUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/websites/setups/{setup_uuid} (the `AgencyHostingGetWebsiteSetupStatusV1` operationId).
+	AgencyHostingGetWebsiteSetupStatusV1(ctx context.Context, orderId OrderIdPath, setupUuid SetupUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingDeleteAgencyPlanWebsiteV1 Delete Agency Plan website
+	// AgencyHostingDeleteWebsiteV1 Delete website
 	//
 	// Permanently deletes an Agency Plan website. Deletion is processed asynchronously: the
 	// website is immediately transitioned to a deleting state and the underlying server
 	// resources are removed in the background.
 	//
-	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid} (the `AgencyHostingDeleteAgencyPlanWebsiteV1` operationId).
-	AgencyHostingDeleteAgencyPlanWebsiteV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid} (the `AgencyHostingDeleteWebsiteV1` operationId).
+	AgencyHostingDeleteWebsiteV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingGetAgencyPlanWebsiteDetailsV1 Get Agency Plan website details
+	// AgencyHostingGetWebsiteDetailsV1 Get website details
 	//
 	// Retrieves detailed information about a specific Agency Plan website, including configuration,
 	// status, metadata, hosting plan details, and resource quotas.
 	//
-	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid} (the `AgencyHostingGetAgencyPlanWebsiteDetailsV1` operationId).
-	AgencyHostingGetAgencyPlanWebsiteDetailsV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid} (the `AgencyHostingGetWebsiteDetailsV1` operationId).
+	AgencyHostingGetWebsiteDetailsV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithBody Build Agency Plan website NodeJS assets
+	// AgencyHostingBuildWebsiteNodeJSAssetsV1WithBody Build website NodeJS assets
 	//
 	// Builds and deploys a Node.js application for an Agency Plan website from an already-uploaded archive.
 	//
@@ -12880,10 +12880,10 @@ type ClientInterface interface {
 	//
 	// Takes any type of body and a specified content type.
 	//
-	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/build-assets (the `AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1` operationId).
-	AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/build-assets (the `AgencyHostingBuildWebsiteNodeJSAssetsV1` operationId).
+	AgencyHostingBuildWebsiteNodeJSAssetsV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1 Build Agency Plan website NodeJS assets
+	// AgencyHostingBuildWebsiteNodeJSAssetsV1 Build website NodeJS assets
 	//
 	// Builds and deploys a Node.js application for an Agency Plan website from an already-uploaded archive.
 	//
@@ -12892,28 +12892,28 @@ type ClientInterface interface {
 	//
 	// Takes a body of the `application/json` content type.
 	//
-	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/build-assets (the `AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1` operationId).
-	AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/build-assets (the `AgencyHostingBuildWebsiteNodeJSAssetsV1` operationId).
+	AgencyHostingBuildWebsiteNodeJSAssetsV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingBuildWebsiteNodeJSAssetsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingClearAgencyPlanWebsiteCacheV1 Clear Agency Plan website cache
+	// AgencyHostingClearWebsiteCacheV1 Clear website cache
 	//
 	// Clears cache for all domains associated with an Agency Plan website, including its preview domain.
 	//
 	// This operation clears all cache types for the website.
 	//
-	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/cache (the `AgencyHostingClearAgencyPlanWebsiteCacheV1` operationId).
-	AgencyHostingClearAgencyPlanWebsiteCacheV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/cache (the `AgencyHostingClearWebsiteCacheV1` operationId).
+	AgencyHostingClearWebsiteCacheV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingListAgencyPlanWebsiteCronJobsV1 List Agency Plan website cron jobs
+	// AgencyHostingListWebsiteCronJobsV1 List website cron jobs
 	//
 	// Returns a paginated list of cron jobs configured for an Agency Plan website.
 	//
 	// Each entry includes the schedule expression and the command executed on that schedule.
 	//
-	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/cron-jobs (the `AgencyHostingListAgencyPlanWebsiteCronJobsV1` operationId).
-	AgencyHostingListAgencyPlanWebsiteCronJobsV1(ctx context.Context, websiteUid WebsiteUid, params *AgencyHostingListAgencyPlanWebsiteCronJobsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/cron-jobs (the `AgencyHostingListWebsiteCronJobsV1` operationId).
+	AgencyHostingListWebsiteCronJobsV1(ctx context.Context, websiteUid WebsiteUid, params *AgencyHostingListWebsiteCronJobsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithBody Create Agency Plan website cron job
+	// AgencyHostingCreateWebsiteCronJobV1WithBody Create website cron job
 	//
 	// Creates a cron job for an Agency Plan website from a schedule expression and a command.
 	//
@@ -12921,10 +12921,10 @@ type ClientInterface interface {
 	//
 	// Takes any type of body and a specified content type.
 	//
-	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/cron-jobs (the `AgencyHostingCreateAgencyPlanWebsiteCronJobV1` operationId).
-	AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/cron-jobs (the `AgencyHostingCreateWebsiteCronJobV1` operationId).
+	AgencyHostingCreateWebsiteCronJobV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingCreateAgencyPlanWebsiteCronJobV1 Create Agency Plan website cron job
+	// AgencyHostingCreateWebsiteCronJobV1 Create website cron job
 	//
 	// Creates a cron job for an Agency Plan website from a schedule expression and a command.
 	//
@@ -12932,28 +12932,28 @@ type ClientInterface interface {
 	//
 	// Takes a body of the `application/json` content type.
 	//
-	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/cron-jobs (the `AgencyHostingCreateAgencyPlanWebsiteCronJobV1` operationId).
-	AgencyHostingCreateAgencyPlanWebsiteCronJobV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingCreateAgencyPlanWebsiteCronJobV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/cron-jobs (the `AgencyHostingCreateWebsiteCronJobV1` operationId).
+	AgencyHostingCreateWebsiteCronJobV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingCreateWebsiteCronJobV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingDeleteAgencyPlanWebsiteCronJobV1 Delete Agency Plan website cron job
+	// AgencyHostingDeleteWebsiteCronJobV1 Delete website cron job
 	//
 	// Permanently deletes the cron job identified by its uuid from an Agency Plan website.
 	//
 	// The operation is idempotent: deleting a cron job that does not exist succeeds without error.
 	//
-	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/cron-jobs/{uuid} (the `AgencyHostingDeleteAgencyPlanWebsiteCronJobV1` operationId).
-	AgencyHostingDeleteAgencyPlanWebsiteCronJobV1(ctx context.Context, websiteUid WebsiteUid, uuid AgencyCronJobUuidPath, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/cron-jobs/{uuid} (the `AgencyHostingDeleteWebsiteCronJobV1` operationId).
+	AgencyHostingDeleteWebsiteCronJobV1(ctx context.Context, websiteUid WebsiteUid, uuid AgencyCronJobUuidPath, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingListAgencyPlanWebsiteDatabasesV1 List Agency Plan website databases
+	// AgencyHostingListWebsiteDatabasesV1 List website databases
 	//
 	// Returns a paginated list of MySQL databases created for an Agency Plan website.
 	//
 	// Each entry includes the database's non-system users.
 	//
-	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/databases (the `AgencyHostingListAgencyPlanWebsiteDatabasesV1` operationId).
-	AgencyHostingListAgencyPlanWebsiteDatabasesV1(ctx context.Context, websiteUid WebsiteUid, params *AgencyHostingListAgencyPlanWebsiteDatabasesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/databases (the `AgencyHostingListWebsiteDatabasesV1` operationId).
+	AgencyHostingListWebsiteDatabasesV1(ctx context.Context, websiteUid WebsiteUid, params *AgencyHostingListWebsiteDatabasesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingCreateAgencyPlanWebsiteDatabaseV1WithBody Create Agency Plan website database
+	// AgencyHostingCreateWebsiteDatabaseV1WithBody Create website database
 	//
 	// Creates a MySQL database with a dedicated user for an Agency Plan website.
 	//
@@ -12961,10 +12961,10 @@ type ClientInterface interface {
 	//
 	// Takes any type of body and a specified content type.
 	//
-	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases (the `AgencyHostingCreateAgencyPlanWebsiteDatabaseV1` operationId).
-	AgencyHostingCreateAgencyPlanWebsiteDatabaseV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases (the `AgencyHostingCreateWebsiteDatabaseV1` operationId).
+	AgencyHostingCreateWebsiteDatabaseV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingCreateAgencyPlanWebsiteDatabaseV1 Create Agency Plan website database
+	// AgencyHostingCreateWebsiteDatabaseV1 Create website database
 	//
 	// Creates a MySQL database with a dedicated user for an Agency Plan website.
 	//
@@ -12972,19 +12972,19 @@ type ClientInterface interface {
 	//
 	// Takes a body of the `application/json` content type.
 	//
-	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases (the `AgencyHostingCreateAgencyPlanWebsiteDatabaseV1` operationId).
-	AgencyHostingCreateAgencyPlanWebsiteDatabaseV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingCreateAgencyPlanWebsiteDatabaseV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases (the `AgencyHostingCreateWebsiteDatabaseV1` operationId).
+	AgencyHostingCreateWebsiteDatabaseV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingCreateWebsiteDatabaseV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1 Delete Agency Plan website database
+	// AgencyHostingDeleteWebsiteDatabaseV1 Delete website database
 	//
 	// Permanently deletes a MySQL database and all its data from an Agency Plan website, including its users.
 	//
 	// The operation is idempotent: deleting a database that does not exist succeeds without error.
 	//
-	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name} (the `AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1` operationId).
-	AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name} (the `AgencyHostingDeleteWebsiteDatabaseV1` operationId).
+	AgencyHostingDeleteWebsiteDatabaseV1(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1WithBody Create Agency Plan website database user
+	// AgencyHostingCreateWebsiteDatabaseUserV1WithBody Create website database user
 	//
 	// Creates a user for an existing database on an Agency Plan website.
 	//
@@ -12992,10 +12992,10 @@ type ClientInterface interface {
 	//
 	// Takes any type of body and a specified content type.
 	//
-	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users (the `AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1` operationId).
-	AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1WithBody(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users (the `AgencyHostingCreateWebsiteDatabaseUserV1` operationId).
+	AgencyHostingCreateWebsiteDatabaseUserV1WithBody(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1 Create Agency Plan website database user
+	// AgencyHostingCreateWebsiteDatabaseUserV1 Create website database user
 	//
 	// Creates a user for an existing database on an Agency Plan website.
 	//
@@ -13003,37 +13003,37 @@ type ClientInterface interface {
 	//
 	// Takes a body of the `application/json` content type.
 	//
-	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users (the `AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1` operationId).
-	AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, body AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users (the `AgencyHostingCreateWebsiteDatabaseUserV1` operationId).
+	AgencyHostingCreateWebsiteDatabaseUserV1(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, body AgencyHostingCreateWebsiteDatabaseUserV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1 Delete Agency Plan website database user
+	// AgencyHostingDeleteWebsiteDatabaseUserV1 Delete website database user
 	//
 	// Permanently deletes a database user from an Agency Plan website database, revoking all access it had.
 	//
 	// The operation is idempotent: deleting a user that does not exist succeeds without error.
 	//
-	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users/{database_user_name} (the `AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1` operationId).
-	AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, databaseUserName AgencyDatabaseUserNamePath, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users/{database_user_name} (the `AgencyHostingDeleteWebsiteDatabaseUserV1` operationId).
+	AgencyHostingDeleteWebsiteDatabaseUserV1(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, databaseUserName AgencyDatabaseUserNamePath, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBody Link domain to Agency Plan website
+	// AgencyHostingLinkDomainToWebsiteV1WithBody Link domain to website
 	//
 	// Links a domain to the specified Agency Plan website so it can serve traffic for that domain.
 	//
 	// Takes any type of body and a specified content type.
 	//
-	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/domains (the `AgencyHostingLinkDomainToAgencyPlanWebsiteV1` operationId).
-	AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/domains (the `AgencyHostingLinkDomainToWebsiteV1` operationId).
+	AgencyHostingLinkDomainToWebsiteV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingLinkDomainToAgencyPlanWebsiteV1 Link domain to Agency Plan website
+	// AgencyHostingLinkDomainToWebsiteV1 Link domain to website
 	//
 	// Links a domain to the specified Agency Plan website so it can serve traffic for that domain.
 	//
 	// Takes a body of the `application/json` content type.
 	//
-	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/domains (the `AgencyHostingLinkDomainToAgencyPlanWebsiteV1` operationId).
-	AgencyHostingLinkDomainToAgencyPlanWebsiteV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingLinkDomainToAgencyPlanWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/domains (the `AgencyHostingLinkDomainToWebsiteV1` operationId).
+	AgencyHostingLinkDomainToWebsiteV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingLinkDomainToWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1 Unlink domain from Agency Plan website
+	// AgencyHostingUnlinkDomainFromWebsiteV1 Unlink domain from website
 	//
 	// Unlinks a domain from the specified Agency Plan website.
 	//
@@ -13043,10 +13043,10 @@ type ClientInterface interface {
 	//
 	// If this is the only domain on the website, unlinking leaves the website without an accessible domain.
 	//
-	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/domains/{domain} (the `AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1` operationId).
-	AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/domains/{domain} (the `AgencyHostingUnlinkDomainFromWebsiteV1` operationId).
+	AgencyHostingUnlinkDomainFromWebsiteV1(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingChangeAgencyPlanWebsiteDomainV1WithBody Change Agency Plan website domain
+	// AgencyHostingChangeWebsiteDomainV1WithBody Change website domain
 	//
 	// Changes the primary domain for an Agency Plan website.
 	//
@@ -13055,10 +13055,10 @@ type ClientInterface interface {
 	//
 	// Takes any type of body and a specified content type.
 	//
-	// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/domains/{from_domain} (the `AgencyHostingChangeAgencyPlanWebsiteDomainV1` operationId).
-	AgencyHostingChangeAgencyPlanWebsiteDomainV1WithBody(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/domains/{from_domain} (the `AgencyHostingChangeWebsiteDomainV1` operationId).
+	AgencyHostingChangeWebsiteDomainV1WithBody(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingChangeAgencyPlanWebsiteDomainV1 Change Agency Plan website domain
+	// AgencyHostingChangeWebsiteDomainV1 Change website domain
 	//
 	// Changes the primary domain for an Agency Plan website.
 	//
@@ -13067,10 +13067,10 @@ type ClientInterface interface {
 	//
 	// Takes a body of the `application/json` content type.
 	//
-	// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/domains/{from_domain} (the `AgencyHostingChangeAgencyPlanWebsiteDomainV1` operationId).
-	AgencyHostingChangeAgencyPlanWebsiteDomainV1(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, body AgencyHostingChangeAgencyPlanWebsiteDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/domains/{from_domain} (the `AgencyHostingChangeWebsiteDomainV1` operationId).
+	AgencyHostingChangeWebsiteDomainV1(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, body AgencyHostingChangeWebsiteDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithBody Import Agency Plan website from archive
+	// AgencyHostingImportWebsiteFromArchiveV1WithBody Import website from archive
 	//
 	// Imports an Agency Plan website from an already-uploaded archive.
 	//
@@ -13080,10 +13080,10 @@ type ClientInterface interface {
 	//
 	// Takes any type of body and a specified content type.
 	//
-	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/import-archive (the `AgencyHostingImportAgencyPlanWebsiteFromArchiveV1` operationId).
-	AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/import-archive (the `AgencyHostingImportWebsiteFromArchiveV1` operationId).
+	AgencyHostingImportWebsiteFromArchiveV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingImportAgencyPlanWebsiteFromArchiveV1 Import Agency Plan website from archive
+	// AgencyHostingImportWebsiteFromArchiveV1 Import website from archive
 	//
 	// Imports an Agency Plan website from an already-uploaded archive.
 	//
@@ -13093,51 +13093,51 @@ type ClientInterface interface {
 	//
 	// Takes a body of the `application/json` content type.
 	//
-	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/import-archive (the `AgencyHostingImportAgencyPlanWebsiteFromArchiveV1` operationId).
-	AgencyHostingImportAgencyPlanWebsiteFromArchiveV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingImportAgencyPlanWebsiteFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/import-archive (the `AgencyHostingImportWebsiteFromArchiveV1` operationId).
+	AgencyHostingImportWebsiteFromArchiveV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingImportWebsiteFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingListRunningAgencyPlanWebsiteProcessesV1 List running Agency Plan website processes
+	// AgencyHostingListWebsiteProcessesV1 List website processes
 	//
 	// Lists active and recently completed asynchronous processes for an Agency Plan website.
 	//
 	// Each process has a unique ID (for tracking), a type, and a status (running, completed, failed).
 	// Poll this endpoint after initiating async operations (SSL setup, backups, cloning) to track progress.
 	//
-	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/processes (the `AgencyHostingListRunningAgencyPlanWebsiteProcessesV1` operationId).
-	AgencyHostingListRunningAgencyPlanWebsiteProcessesV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/processes (the `AgencyHostingListWebsiteProcessesV1` operationId).
+	AgencyHostingListWebsiteProcessesV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1 Get Agency Plan website WordPress settings
+	// AgencyHostingGetWordPressSettingsV1 Get WordPress settings
 	//
 	// Returns the current WordPress settings for an Agency Plan website: installed core version,
 	// LiteSpeed Cache plugin status, object cache status, and maintenance mode status.
 	//
-	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings (the `AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1` operationId).
-	AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings (the `AgencyHostingGetWordPressSettingsV1` operationId).
+	AgencyHostingGetWordPressSettingsV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithBody Change Agency Plan website WordPress core version
+	// AgencyHostingChangeWordPressVersionV1WithBody Change WordPress version
 	//
 	// Changes the installed WordPress core version on an Agency Plan website to one of the versions available for installation.
 	//
 	// Takes any type of body and a specified content type.
 	//
-	// Corresponds with PATCH /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/version (the `AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1` operationId).
-	AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with PATCH /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/version (the `AgencyHostingChangeWordPressVersionV1` operationId).
+	AgencyHostingChangeWordPressVersionV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1 Change Agency Plan website WordPress core version
+	// AgencyHostingChangeWordPressVersionV1 Change WordPress version
 	//
 	// Changes the installed WordPress core version on an Agency Plan website to one of the versions available for installation.
 	//
 	// Takes a body of the `application/json` content type.
 	//
-	// Corresponds with PATCH /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/version (the `AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1` operationId).
-	AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with PATCH /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/version (the `AgencyHostingChangeWordPressVersionV1` operationId).
+	AgencyHostingChangeWordPressVersionV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingChangeWordPressVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1 List available WordPress versions for an Agency Plan website
+	// AgencyHostingListAvailableWordPressVersionsV1 List available WordPress versions
 	//
 	// Lists the WordPress core versions available for installation on an Agency Plan website.
 	//
-	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/versions (the `AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1` operationId).
-	AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/versions (the `AgencyHostingListAvailableWordPressVersionsV1` operationId).
+	AgencyHostingListAvailableWordPressVersionsV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// BillingGetCatalogItemListV1 Get catalog item list
 	//
@@ -18007,15 +18007,15 @@ type ClientInterface interface {
 	VPSStopVirtualMachineV1(ctx context.Context, virtualMachineId VirtualMachineId, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
-// AgencyHostingListAgencyPlanDomainsV1 List Agency Plan domains
+// AgencyHostingListDomainsV1 List domains
 //
 // Returns a paginated list of domains associated with Agency Plan websites accessible to the authenticated client.
 //
 // Use the website_uuids filter to narrow results to specific websites.
 //
-// Corresponds with GET /api/agency-hosting/v1/domains (the `AgencyHostingListAgencyPlanDomainsV1` operationId).
-func (c *Client) AgencyHostingListAgencyPlanDomainsV1(ctx context.Context, params *AgencyHostingListAgencyPlanDomainsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingListAgencyPlanDomainsV1Request(c.Server, params)
+// Corresponds with GET /api/agency-hosting/v1/domains (the `AgencyHostingListDomainsV1` operationId).
+func (c *Client) AgencyHostingListDomainsV1(ctx context.Context, params *AgencyHostingListDomainsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingListDomainsV1Request(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -18026,13 +18026,13 @@ func (c *Client) AgencyHostingListAgencyPlanDomainsV1(ctx context.Context, param
 	return c.Client.Do(req)
 }
 
-// AgencyHostingListAgencyPlanOrdersV1 List Agency Plan orders
+// AgencyHostingListOrdersV1 List orders
 //
 // Returns a paginated list of Agency Plan orders accessible to the authenticated client.
 //
-// Corresponds with GET /api/agency-hosting/v1/orders (the `AgencyHostingListAgencyPlanOrdersV1` operationId).
-func (c *Client) AgencyHostingListAgencyPlanOrdersV1(ctx context.Context, params *AgencyHostingListAgencyPlanOrdersV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingListAgencyPlanOrdersV1Request(c.Server, params)
+// Corresponds with GET /api/agency-hosting/v1/orders (the `AgencyHostingListOrdersV1` operationId).
+func (c *Client) AgencyHostingListOrdersV1(ctx context.Context, params *AgencyHostingListOrdersV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingListOrdersV1Request(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -18043,7 +18043,7 @@ func (c *Client) AgencyHostingListAgencyPlanOrdersV1(ctx context.Context, params
 	return c.Client.Do(req)
 }
 
-// AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1 List available datacenters for an Agency Plan order
+// AgencyHostingListAvailableDatacentersV1 List available datacenters
 //
 // Lists the datacenters available for provisioning a new website on the given Agency Plan
 // hosting order.
@@ -18052,9 +18052,9 @@ func (c *Client) AgencyHostingListAgencyPlanOrdersV1(ctx context.Context, params
 // latency; comparing the results across datacenters lets you pick the nearest one (lowest
 // ping) before choosing its `code` as the `datacenter_code` when creating a website setup.
 //
-// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/datacenters (the `AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1` operationId).
-func (c *Client) AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1(ctx context.Context, orderId OrderIdPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Request(c.Server, orderId)
+// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/datacenters (the `AgencyHostingListAvailableDatacentersV1` operationId).
+func (c *Client) AgencyHostingListAvailableDatacentersV1(ctx context.Context, orderId OrderIdPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingListAvailableDatacentersV1Request(c.Server, orderId)
 	if err != nil {
 		return nil, err
 	}
@@ -18065,7 +18065,7 @@ func (c *Client) AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1(ctx
 	return c.Client.Do(req)
 }
 
-// AgencyHostingProvisionANewAgencyPlanWebsiteV1WithBody Provision a new Agency Plan website
+// AgencyHostingCreateANewWebsiteV1WithBody Create a new website
 //
 // Provisions a new website on one of your Agency Plan hosting orders.
 //
@@ -18087,9 +18087,9 @@ func (c *Client) AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1(ctx
 //
 // Takes any type of body and a specified content type.
 //
-// Corresponds with POST /api/agency-hosting/v1/orders/{order_id}/websites/setups (the `AgencyHostingProvisionANewAgencyPlanWebsiteV1` operationId).
-func (c *Client) AgencyHostingProvisionANewAgencyPlanWebsiteV1WithBody(ctx context.Context, orderId OrderIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingProvisionANewAgencyPlanWebsiteV1RequestWithBody(c.Server, orderId, contentType, body)
+// Corresponds with POST /api/agency-hosting/v1/orders/{order_id}/websites/setups (the `AgencyHostingCreateANewWebsiteV1` operationId).
+func (c *Client) AgencyHostingCreateANewWebsiteV1WithBody(ctx context.Context, orderId OrderIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingCreateANewWebsiteV1RequestWithBody(c.Server, orderId, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -18100,7 +18100,7 @@ func (c *Client) AgencyHostingProvisionANewAgencyPlanWebsiteV1WithBody(ctx conte
 	return c.Client.Do(req)
 }
 
-// AgencyHostingProvisionANewAgencyPlanWebsiteV1 Provision a new Agency Plan website
+// AgencyHostingCreateANewWebsiteV1 Create a new website
 //
 // Provisions a new website on one of your Agency Plan hosting orders.
 //
@@ -18122,9 +18122,9 @@ func (c *Client) AgencyHostingProvisionANewAgencyPlanWebsiteV1WithBody(ctx conte
 //
 // Takes a body of the `application/json` content type.
 //
-// Corresponds with POST /api/agency-hosting/v1/orders/{order_id}/websites/setups (the `AgencyHostingProvisionANewAgencyPlanWebsiteV1` operationId).
-func (c *Client) AgencyHostingProvisionANewAgencyPlanWebsiteV1(ctx context.Context, orderId OrderIdPath, body AgencyHostingProvisionANewAgencyPlanWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingProvisionANewAgencyPlanWebsiteV1Request(c.Server, orderId, body)
+// Corresponds with POST /api/agency-hosting/v1/orders/{order_id}/websites/setups (the `AgencyHostingCreateANewWebsiteV1` operationId).
+func (c *Client) AgencyHostingCreateANewWebsiteV1(ctx context.Context, orderId OrderIdPath, body AgencyHostingCreateANewWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingCreateANewWebsiteV1Request(c.Server, orderId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -18135,7 +18135,7 @@ func (c *Client) AgencyHostingProvisionANewAgencyPlanWebsiteV1(ctx context.Conte
 	return c.Client.Do(req)
 }
 
-// AgencyHostingGetAgencyPlanWebsiteSetupStatusV1 Get Agency Plan website setup status
+// AgencyHostingGetWebsiteSetupStatusV1 Get website setup status
 //
 // Returns the current status of an Agency Plan website setup started via the setups
 // endpoint.
@@ -18143,9 +18143,9 @@ func (c *Client) AgencyHostingProvisionANewAgencyPlanWebsiteV1(ctx context.Conte
 // Poll this endpoint using the `setup_uuid` returned from the provisioning request until
 // `status` becomes `completed`, at which point `website_uid` identifies the new website.
 //
-// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/websites/setups/{setup_uuid} (the `AgencyHostingGetAgencyPlanWebsiteSetupStatusV1` operationId).
-func (c *Client) AgencyHostingGetAgencyPlanWebsiteSetupStatusV1(ctx context.Context, orderId OrderIdPath, setupUuid SetupUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingGetAgencyPlanWebsiteSetupStatusV1Request(c.Server, orderId, setupUuid)
+// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/websites/setups/{setup_uuid} (the `AgencyHostingGetWebsiteSetupStatusV1` operationId).
+func (c *Client) AgencyHostingGetWebsiteSetupStatusV1(ctx context.Context, orderId OrderIdPath, setupUuid SetupUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingGetWebsiteSetupStatusV1Request(c.Server, orderId, setupUuid)
 	if err != nil {
 		return nil, err
 	}
@@ -18156,15 +18156,15 @@ func (c *Client) AgencyHostingGetAgencyPlanWebsiteSetupStatusV1(ctx context.Cont
 	return c.Client.Do(req)
 }
 
-// AgencyHostingDeleteAgencyPlanWebsiteV1 Delete Agency Plan website
+// AgencyHostingDeleteWebsiteV1 Delete website
 //
 // Permanently deletes an Agency Plan website. Deletion is processed asynchronously: the
 // website is immediately transitioned to a deleting state and the underlying server
 // resources are removed in the background.
 //
-// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid} (the `AgencyHostingDeleteAgencyPlanWebsiteV1` operationId).
-func (c *Client) AgencyHostingDeleteAgencyPlanWebsiteV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingDeleteAgencyPlanWebsiteV1Request(c.Server, websiteUid)
+// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid} (the `AgencyHostingDeleteWebsiteV1` operationId).
+func (c *Client) AgencyHostingDeleteWebsiteV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingDeleteWebsiteV1Request(c.Server, websiteUid)
 	if err != nil {
 		return nil, err
 	}
@@ -18175,14 +18175,14 @@ func (c *Client) AgencyHostingDeleteAgencyPlanWebsiteV1(ctx context.Context, web
 	return c.Client.Do(req)
 }
 
-// AgencyHostingGetAgencyPlanWebsiteDetailsV1 Get Agency Plan website details
+// AgencyHostingGetWebsiteDetailsV1 Get website details
 //
 // Retrieves detailed information about a specific Agency Plan website, including configuration,
 // status, metadata, hosting plan details, and resource quotas.
 //
-// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid} (the `AgencyHostingGetAgencyPlanWebsiteDetailsV1` operationId).
-func (c *Client) AgencyHostingGetAgencyPlanWebsiteDetailsV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingGetAgencyPlanWebsiteDetailsV1Request(c.Server, websiteUid)
+// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid} (the `AgencyHostingGetWebsiteDetailsV1` operationId).
+func (c *Client) AgencyHostingGetWebsiteDetailsV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingGetWebsiteDetailsV1Request(c.Server, websiteUid)
 	if err != nil {
 		return nil, err
 	}
@@ -18193,7 +18193,7 @@ func (c *Client) AgencyHostingGetAgencyPlanWebsiteDetailsV1(ctx context.Context,
 	return c.Client.Do(req)
 }
 
-// AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithBody Build Agency Plan website NodeJS assets
+// AgencyHostingBuildWebsiteNodeJSAssetsV1WithBody Build website NodeJS assets
 //
 // Builds and deploys a Node.js application for an Agency Plan website from an already-uploaded archive.
 //
@@ -18202,9 +18202,9 @@ func (c *Client) AgencyHostingGetAgencyPlanWebsiteDetailsV1(ctx context.Context,
 //
 // Takes any type of body and a specified content type.
 //
-// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/build-assets (the `AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1` operationId).
-func (c *Client) AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1RequestWithBody(c.Server, websiteUid, contentType, body)
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/build-assets (the `AgencyHostingBuildWebsiteNodeJSAssetsV1` operationId).
+func (c *Client) AgencyHostingBuildWebsiteNodeJSAssetsV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingBuildWebsiteNodeJSAssetsV1RequestWithBody(c.Server, websiteUid, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -18215,7 +18215,7 @@ func (c *Client) AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithBody(ctx c
 	return c.Client.Do(req)
 }
 
-// AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1 Build Agency Plan website NodeJS assets
+// AgencyHostingBuildWebsiteNodeJSAssetsV1 Build website NodeJS assets
 //
 // Builds and deploys a Node.js application for an Agency Plan website from an already-uploaded archive.
 //
@@ -18224,9 +18224,9 @@ func (c *Client) AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithBody(ctx c
 //
 // Takes a body of the `application/json` content type.
 //
-// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/build-assets (the `AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1` operationId).
-func (c *Client) AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Request(c.Server, websiteUid, body)
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/build-assets (the `AgencyHostingBuildWebsiteNodeJSAssetsV1` operationId).
+func (c *Client) AgencyHostingBuildWebsiteNodeJSAssetsV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingBuildWebsiteNodeJSAssetsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingBuildWebsiteNodeJSAssetsV1Request(c.Server, websiteUid, body)
 	if err != nil {
 		return nil, err
 	}
@@ -18237,15 +18237,15 @@ func (c *Client) AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1(ctx context.C
 	return c.Client.Do(req)
 }
 
-// AgencyHostingClearAgencyPlanWebsiteCacheV1 Clear Agency Plan website cache
+// AgencyHostingClearWebsiteCacheV1 Clear website cache
 //
 // Clears cache for all domains associated with an Agency Plan website, including its preview domain.
 //
 // This operation clears all cache types for the website.
 //
-// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/cache (the `AgencyHostingClearAgencyPlanWebsiteCacheV1` operationId).
-func (c *Client) AgencyHostingClearAgencyPlanWebsiteCacheV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingClearAgencyPlanWebsiteCacheV1Request(c.Server, websiteUid)
+// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/cache (the `AgencyHostingClearWebsiteCacheV1` operationId).
+func (c *Client) AgencyHostingClearWebsiteCacheV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingClearWebsiteCacheV1Request(c.Server, websiteUid)
 	if err != nil {
 		return nil, err
 	}
@@ -18256,15 +18256,15 @@ func (c *Client) AgencyHostingClearAgencyPlanWebsiteCacheV1(ctx context.Context,
 	return c.Client.Do(req)
 }
 
-// AgencyHostingListAgencyPlanWebsiteCronJobsV1 List Agency Plan website cron jobs
+// AgencyHostingListWebsiteCronJobsV1 List website cron jobs
 //
 // Returns a paginated list of cron jobs configured for an Agency Plan website.
 //
 // Each entry includes the schedule expression and the command executed on that schedule.
 //
-// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/cron-jobs (the `AgencyHostingListAgencyPlanWebsiteCronJobsV1` operationId).
-func (c *Client) AgencyHostingListAgencyPlanWebsiteCronJobsV1(ctx context.Context, websiteUid WebsiteUid, params *AgencyHostingListAgencyPlanWebsiteCronJobsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingListAgencyPlanWebsiteCronJobsV1Request(c.Server, websiteUid, params)
+// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/cron-jobs (the `AgencyHostingListWebsiteCronJobsV1` operationId).
+func (c *Client) AgencyHostingListWebsiteCronJobsV1(ctx context.Context, websiteUid WebsiteUid, params *AgencyHostingListWebsiteCronJobsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingListWebsiteCronJobsV1Request(c.Server, websiteUid, params)
 	if err != nil {
 		return nil, err
 	}
@@ -18275,7 +18275,7 @@ func (c *Client) AgencyHostingListAgencyPlanWebsiteCronJobsV1(ctx context.Contex
 	return c.Client.Do(req)
 }
 
-// AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithBody Create Agency Plan website cron job
+// AgencyHostingCreateWebsiteCronJobV1WithBody Create website cron job
 //
 // Creates a cron job for an Agency Plan website from a schedule expression and a command.
 //
@@ -18283,9 +18283,9 @@ func (c *Client) AgencyHostingListAgencyPlanWebsiteCronJobsV1(ctx context.Contex
 //
 // Takes any type of body and a specified content type.
 //
-// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/cron-jobs (the `AgencyHostingCreateAgencyPlanWebsiteCronJobV1` operationId).
-func (c *Client) AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingCreateAgencyPlanWebsiteCronJobV1RequestWithBody(c.Server, websiteUid, contentType, body)
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/cron-jobs (the `AgencyHostingCreateWebsiteCronJobV1` operationId).
+func (c *Client) AgencyHostingCreateWebsiteCronJobV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingCreateWebsiteCronJobV1RequestWithBody(c.Server, websiteUid, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -18296,7 +18296,7 @@ func (c *Client) AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithBody(ctx conte
 	return c.Client.Do(req)
 }
 
-// AgencyHostingCreateAgencyPlanWebsiteCronJobV1 Create Agency Plan website cron job
+// AgencyHostingCreateWebsiteCronJobV1 Create website cron job
 //
 // Creates a cron job for an Agency Plan website from a schedule expression and a command.
 //
@@ -18304,9 +18304,9 @@ func (c *Client) AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithBody(ctx conte
 //
 // Takes a body of the `application/json` content type.
 //
-// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/cron-jobs (the `AgencyHostingCreateAgencyPlanWebsiteCronJobV1` operationId).
-func (c *Client) AgencyHostingCreateAgencyPlanWebsiteCronJobV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingCreateAgencyPlanWebsiteCronJobV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingCreateAgencyPlanWebsiteCronJobV1Request(c.Server, websiteUid, body)
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/cron-jobs (the `AgencyHostingCreateWebsiteCronJobV1` operationId).
+func (c *Client) AgencyHostingCreateWebsiteCronJobV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingCreateWebsiteCronJobV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingCreateWebsiteCronJobV1Request(c.Server, websiteUid, body)
 	if err != nil {
 		return nil, err
 	}
@@ -18317,15 +18317,15 @@ func (c *Client) AgencyHostingCreateAgencyPlanWebsiteCronJobV1(ctx context.Conte
 	return c.Client.Do(req)
 }
 
-// AgencyHostingDeleteAgencyPlanWebsiteCronJobV1 Delete Agency Plan website cron job
+// AgencyHostingDeleteWebsiteCronJobV1 Delete website cron job
 //
 // Permanently deletes the cron job identified by its uuid from an Agency Plan website.
 //
 // The operation is idempotent: deleting a cron job that does not exist succeeds without error.
 //
-// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/cron-jobs/{uuid} (the `AgencyHostingDeleteAgencyPlanWebsiteCronJobV1` operationId).
-func (c *Client) AgencyHostingDeleteAgencyPlanWebsiteCronJobV1(ctx context.Context, websiteUid WebsiteUid, uuid AgencyCronJobUuidPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingDeleteAgencyPlanWebsiteCronJobV1Request(c.Server, websiteUid, uuid)
+// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/cron-jobs/{uuid} (the `AgencyHostingDeleteWebsiteCronJobV1` operationId).
+func (c *Client) AgencyHostingDeleteWebsiteCronJobV1(ctx context.Context, websiteUid WebsiteUid, uuid AgencyCronJobUuidPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingDeleteWebsiteCronJobV1Request(c.Server, websiteUid, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -18336,15 +18336,15 @@ func (c *Client) AgencyHostingDeleteAgencyPlanWebsiteCronJobV1(ctx context.Conte
 	return c.Client.Do(req)
 }
 
-// AgencyHostingListAgencyPlanWebsiteDatabasesV1 List Agency Plan website databases
+// AgencyHostingListWebsiteDatabasesV1 List website databases
 //
 // Returns a paginated list of MySQL databases created for an Agency Plan website.
 //
 // Each entry includes the database's non-system users.
 //
-// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/databases (the `AgencyHostingListAgencyPlanWebsiteDatabasesV1` operationId).
-func (c *Client) AgencyHostingListAgencyPlanWebsiteDatabasesV1(ctx context.Context, websiteUid WebsiteUid, params *AgencyHostingListAgencyPlanWebsiteDatabasesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingListAgencyPlanWebsiteDatabasesV1Request(c.Server, websiteUid, params)
+// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/databases (the `AgencyHostingListWebsiteDatabasesV1` operationId).
+func (c *Client) AgencyHostingListWebsiteDatabasesV1(ctx context.Context, websiteUid WebsiteUid, params *AgencyHostingListWebsiteDatabasesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingListWebsiteDatabasesV1Request(c.Server, websiteUid, params)
 	if err != nil {
 		return nil, err
 	}
@@ -18355,7 +18355,7 @@ func (c *Client) AgencyHostingListAgencyPlanWebsiteDatabasesV1(ctx context.Conte
 	return c.Client.Do(req)
 }
 
-// AgencyHostingCreateAgencyPlanWebsiteDatabaseV1WithBody Create Agency Plan website database
+// AgencyHostingCreateWebsiteDatabaseV1WithBody Create website database
 //
 // Creates a MySQL database with a dedicated user for an Agency Plan website.
 //
@@ -18363,9 +18363,9 @@ func (c *Client) AgencyHostingListAgencyPlanWebsiteDatabasesV1(ctx context.Conte
 //
 // Takes any type of body and a specified content type.
 //
-// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases (the `AgencyHostingCreateAgencyPlanWebsiteDatabaseV1` operationId).
-func (c *Client) AgencyHostingCreateAgencyPlanWebsiteDatabaseV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingCreateAgencyPlanWebsiteDatabaseV1RequestWithBody(c.Server, websiteUid, contentType, body)
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases (the `AgencyHostingCreateWebsiteDatabaseV1` operationId).
+func (c *Client) AgencyHostingCreateWebsiteDatabaseV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingCreateWebsiteDatabaseV1RequestWithBody(c.Server, websiteUid, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -18376,7 +18376,7 @@ func (c *Client) AgencyHostingCreateAgencyPlanWebsiteDatabaseV1WithBody(ctx cont
 	return c.Client.Do(req)
 }
 
-// AgencyHostingCreateAgencyPlanWebsiteDatabaseV1 Create Agency Plan website database
+// AgencyHostingCreateWebsiteDatabaseV1 Create website database
 //
 // Creates a MySQL database with a dedicated user for an Agency Plan website.
 //
@@ -18384,9 +18384,9 @@ func (c *Client) AgencyHostingCreateAgencyPlanWebsiteDatabaseV1WithBody(ctx cont
 //
 // Takes a body of the `application/json` content type.
 //
-// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases (the `AgencyHostingCreateAgencyPlanWebsiteDatabaseV1` operationId).
-func (c *Client) AgencyHostingCreateAgencyPlanWebsiteDatabaseV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingCreateAgencyPlanWebsiteDatabaseV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingCreateAgencyPlanWebsiteDatabaseV1Request(c.Server, websiteUid, body)
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases (the `AgencyHostingCreateWebsiteDatabaseV1` operationId).
+func (c *Client) AgencyHostingCreateWebsiteDatabaseV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingCreateWebsiteDatabaseV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingCreateWebsiteDatabaseV1Request(c.Server, websiteUid, body)
 	if err != nil {
 		return nil, err
 	}
@@ -18397,15 +18397,15 @@ func (c *Client) AgencyHostingCreateAgencyPlanWebsiteDatabaseV1(ctx context.Cont
 	return c.Client.Do(req)
 }
 
-// AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1 Delete Agency Plan website database
+// AgencyHostingDeleteWebsiteDatabaseV1 Delete website database
 //
 // Permanently deletes a MySQL database and all its data from an Agency Plan website, including its users.
 //
 // The operation is idempotent: deleting a database that does not exist succeeds without error.
 //
-// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name} (the `AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1` operationId).
-func (c *Client) AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingDeleteAgencyPlanWebsiteDatabaseV1Request(c.Server, websiteUid, databaseName)
+// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name} (the `AgencyHostingDeleteWebsiteDatabaseV1` operationId).
+func (c *Client) AgencyHostingDeleteWebsiteDatabaseV1(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingDeleteWebsiteDatabaseV1Request(c.Server, websiteUid, databaseName)
 	if err != nil {
 		return nil, err
 	}
@@ -18416,7 +18416,7 @@ func (c *Client) AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1(ctx context.Cont
 	return c.Client.Do(req)
 }
 
-// AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1WithBody Create Agency Plan website database user
+// AgencyHostingCreateWebsiteDatabaseUserV1WithBody Create website database user
 //
 // Creates a user for an existing database on an Agency Plan website.
 //
@@ -18424,9 +18424,9 @@ func (c *Client) AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1(ctx context.Cont
 //
 // Takes any type of body and a specified content type.
 //
-// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users (the `AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1` operationId).
-func (c *Client) AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1WithBody(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1RequestWithBody(c.Server, websiteUid, databaseName, contentType, body)
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users (the `AgencyHostingCreateWebsiteDatabaseUserV1` operationId).
+func (c *Client) AgencyHostingCreateWebsiteDatabaseUserV1WithBody(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingCreateWebsiteDatabaseUserV1RequestWithBody(c.Server, websiteUid, databaseName, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -18437,7 +18437,7 @@ func (c *Client) AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1WithBody(ctx 
 	return c.Client.Do(req)
 }
 
-// AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1 Create Agency Plan website database user
+// AgencyHostingCreateWebsiteDatabaseUserV1 Create website database user
 //
 // Creates a user for an existing database on an Agency Plan website.
 //
@@ -18445,9 +18445,9 @@ func (c *Client) AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1WithBody(ctx 
 //
 // Takes a body of the `application/json` content type.
 //
-// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users (the `AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1` operationId).
-func (c *Client) AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, body AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Request(c.Server, websiteUid, databaseName, body)
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users (the `AgencyHostingCreateWebsiteDatabaseUserV1` operationId).
+func (c *Client) AgencyHostingCreateWebsiteDatabaseUserV1(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, body AgencyHostingCreateWebsiteDatabaseUserV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingCreateWebsiteDatabaseUserV1Request(c.Server, websiteUid, databaseName, body)
 	if err != nil {
 		return nil, err
 	}
@@ -18458,15 +18458,15 @@ func (c *Client) AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1(ctx context.
 	return c.Client.Do(req)
 }
 
-// AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1 Delete Agency Plan website database user
+// AgencyHostingDeleteWebsiteDatabaseUserV1 Delete website database user
 //
 // Permanently deletes a database user from an Agency Plan website database, revoking all access it had.
 //
 // The operation is idempotent: deleting a user that does not exist succeeds without error.
 //
-// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users/{database_user_name} (the `AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1` operationId).
-func (c *Client) AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, databaseUserName AgencyDatabaseUserNamePath, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1Request(c.Server, websiteUid, databaseName, databaseUserName)
+// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users/{database_user_name} (the `AgencyHostingDeleteWebsiteDatabaseUserV1` operationId).
+func (c *Client) AgencyHostingDeleteWebsiteDatabaseUserV1(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, databaseUserName AgencyDatabaseUserNamePath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingDeleteWebsiteDatabaseUserV1Request(c.Server, websiteUid, databaseName, databaseUserName)
 	if err != nil {
 		return nil, err
 	}
@@ -18477,15 +18477,15 @@ func (c *Client) AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1(ctx context.
 	return c.Client.Do(req)
 }
 
-// AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBody Link domain to Agency Plan website
+// AgencyHostingLinkDomainToWebsiteV1WithBody Link domain to website
 //
 // Links a domain to the specified Agency Plan website so it can serve traffic for that domain.
 //
 // Takes any type of body and a specified content type.
 //
-// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/domains (the `AgencyHostingLinkDomainToAgencyPlanWebsiteV1` operationId).
-func (c *Client) AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingLinkDomainToAgencyPlanWebsiteV1RequestWithBody(c.Server, websiteUid, contentType, body)
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/domains (the `AgencyHostingLinkDomainToWebsiteV1` operationId).
+func (c *Client) AgencyHostingLinkDomainToWebsiteV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingLinkDomainToWebsiteV1RequestWithBody(c.Server, websiteUid, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -18496,15 +18496,15 @@ func (c *Client) AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBody(ctx contex
 	return c.Client.Do(req)
 }
 
-// AgencyHostingLinkDomainToAgencyPlanWebsiteV1 Link domain to Agency Plan website
+// AgencyHostingLinkDomainToWebsiteV1 Link domain to website
 //
 // Links a domain to the specified Agency Plan website so it can serve traffic for that domain.
 //
 // Takes a body of the `application/json` content type.
 //
-// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/domains (the `AgencyHostingLinkDomainToAgencyPlanWebsiteV1` operationId).
-func (c *Client) AgencyHostingLinkDomainToAgencyPlanWebsiteV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingLinkDomainToAgencyPlanWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingLinkDomainToAgencyPlanWebsiteV1Request(c.Server, websiteUid, body)
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/domains (the `AgencyHostingLinkDomainToWebsiteV1` operationId).
+func (c *Client) AgencyHostingLinkDomainToWebsiteV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingLinkDomainToWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingLinkDomainToWebsiteV1Request(c.Server, websiteUid, body)
 	if err != nil {
 		return nil, err
 	}
@@ -18515,7 +18515,7 @@ func (c *Client) AgencyHostingLinkDomainToAgencyPlanWebsiteV1(ctx context.Contex
 	return c.Client.Do(req)
 }
 
-// AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1 Unlink domain from Agency Plan website
+// AgencyHostingUnlinkDomainFromWebsiteV1 Unlink domain from website
 //
 // Unlinks a domain from the specified Agency Plan website.
 //
@@ -18525,9 +18525,9 @@ func (c *Client) AgencyHostingLinkDomainToAgencyPlanWebsiteV1(ctx context.Contex
 //
 // If this is the only domain on the website, unlinking leaves the website without an accessible domain.
 //
-// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/domains/{domain} (the `AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1` operationId).
-func (c *Client) AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Request(c.Server, websiteUid, domain)
+// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/domains/{domain} (the `AgencyHostingUnlinkDomainFromWebsiteV1` operationId).
+func (c *Client) AgencyHostingUnlinkDomainFromWebsiteV1(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingUnlinkDomainFromWebsiteV1Request(c.Server, websiteUid, domain)
 	if err != nil {
 		return nil, err
 	}
@@ -18538,7 +18538,7 @@ func (c *Client) AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1(ctx context.Co
 	return c.Client.Do(req)
 }
 
-// AgencyHostingChangeAgencyPlanWebsiteDomainV1WithBody Change Agency Plan website domain
+// AgencyHostingChangeWebsiteDomainV1WithBody Change website domain
 //
 // Changes the primary domain for an Agency Plan website.
 //
@@ -18547,9 +18547,9 @@ func (c *Client) AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1(ctx context.Co
 //
 // Takes any type of body and a specified content type.
 //
-// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/domains/{from_domain} (the `AgencyHostingChangeAgencyPlanWebsiteDomainV1` operationId).
-func (c *Client) AgencyHostingChangeAgencyPlanWebsiteDomainV1WithBody(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingChangeAgencyPlanWebsiteDomainV1RequestWithBody(c.Server, websiteUid, fromDomain, contentType, body)
+// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/domains/{from_domain} (the `AgencyHostingChangeWebsiteDomainV1` operationId).
+func (c *Client) AgencyHostingChangeWebsiteDomainV1WithBody(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingChangeWebsiteDomainV1RequestWithBody(c.Server, websiteUid, fromDomain, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -18560,7 +18560,7 @@ func (c *Client) AgencyHostingChangeAgencyPlanWebsiteDomainV1WithBody(ctx contex
 	return c.Client.Do(req)
 }
 
-// AgencyHostingChangeAgencyPlanWebsiteDomainV1 Change Agency Plan website domain
+// AgencyHostingChangeWebsiteDomainV1 Change website domain
 //
 // Changes the primary domain for an Agency Plan website.
 //
@@ -18569,9 +18569,9 @@ func (c *Client) AgencyHostingChangeAgencyPlanWebsiteDomainV1WithBody(ctx contex
 //
 // Takes a body of the `application/json` content type.
 //
-// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/domains/{from_domain} (the `AgencyHostingChangeAgencyPlanWebsiteDomainV1` operationId).
-func (c *Client) AgencyHostingChangeAgencyPlanWebsiteDomainV1(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, body AgencyHostingChangeAgencyPlanWebsiteDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingChangeAgencyPlanWebsiteDomainV1Request(c.Server, websiteUid, fromDomain, body)
+// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/domains/{from_domain} (the `AgencyHostingChangeWebsiteDomainV1` operationId).
+func (c *Client) AgencyHostingChangeWebsiteDomainV1(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, body AgencyHostingChangeWebsiteDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingChangeWebsiteDomainV1Request(c.Server, websiteUid, fromDomain, body)
 	if err != nil {
 		return nil, err
 	}
@@ -18582,7 +18582,7 @@ func (c *Client) AgencyHostingChangeAgencyPlanWebsiteDomainV1(ctx context.Contex
 	return c.Client.Do(req)
 }
 
-// AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithBody Import Agency Plan website from archive
+// AgencyHostingImportWebsiteFromArchiveV1WithBody Import website from archive
 //
 // Imports an Agency Plan website from an already-uploaded archive.
 //
@@ -18592,9 +18592,9 @@ func (c *Client) AgencyHostingChangeAgencyPlanWebsiteDomainV1(ctx context.Contex
 //
 // Takes any type of body and a specified content type.
 //
-// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/import-archive (the `AgencyHostingImportAgencyPlanWebsiteFromArchiveV1` operationId).
-func (c *Client) AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingImportAgencyPlanWebsiteFromArchiveV1RequestWithBody(c.Server, websiteUid, contentType, body)
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/import-archive (the `AgencyHostingImportWebsiteFromArchiveV1` operationId).
+func (c *Client) AgencyHostingImportWebsiteFromArchiveV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingImportWebsiteFromArchiveV1RequestWithBody(c.Server, websiteUid, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -18605,7 +18605,7 @@ func (c *Client) AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithBody(ctx c
 	return c.Client.Do(req)
 }
 
-// AgencyHostingImportAgencyPlanWebsiteFromArchiveV1 Import Agency Plan website from archive
+// AgencyHostingImportWebsiteFromArchiveV1 Import website from archive
 //
 // Imports an Agency Plan website from an already-uploaded archive.
 //
@@ -18615,9 +18615,9 @@ func (c *Client) AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithBody(ctx c
 //
 // Takes a body of the `application/json` content type.
 //
-// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/import-archive (the `AgencyHostingImportAgencyPlanWebsiteFromArchiveV1` operationId).
-func (c *Client) AgencyHostingImportAgencyPlanWebsiteFromArchiveV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingImportAgencyPlanWebsiteFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingImportAgencyPlanWebsiteFromArchiveV1Request(c.Server, websiteUid, body)
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/import-archive (the `AgencyHostingImportWebsiteFromArchiveV1` operationId).
+func (c *Client) AgencyHostingImportWebsiteFromArchiveV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingImportWebsiteFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingImportWebsiteFromArchiveV1Request(c.Server, websiteUid, body)
 	if err != nil {
 		return nil, err
 	}
@@ -18628,16 +18628,16 @@ func (c *Client) AgencyHostingImportAgencyPlanWebsiteFromArchiveV1(ctx context.C
 	return c.Client.Do(req)
 }
 
-// AgencyHostingListRunningAgencyPlanWebsiteProcessesV1 List running Agency Plan website processes
+// AgencyHostingListWebsiteProcessesV1 List website processes
 //
 // Lists active and recently completed asynchronous processes for an Agency Plan website.
 //
 // Each process has a unique ID (for tracking), a type, and a status (running, completed, failed).
 // Poll this endpoint after initiating async operations (SSL setup, backups, cloning) to track progress.
 //
-// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/processes (the `AgencyHostingListRunningAgencyPlanWebsiteProcessesV1` operationId).
-func (c *Client) AgencyHostingListRunningAgencyPlanWebsiteProcessesV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingListRunningAgencyPlanWebsiteProcessesV1Request(c.Server, websiteUid)
+// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/processes (the `AgencyHostingListWebsiteProcessesV1` operationId).
+func (c *Client) AgencyHostingListWebsiteProcessesV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingListWebsiteProcessesV1Request(c.Server, websiteUid)
 	if err != nil {
 		return nil, err
 	}
@@ -18648,14 +18648,14 @@ func (c *Client) AgencyHostingListRunningAgencyPlanWebsiteProcessesV1(ctx contex
 	return c.Client.Do(req)
 }
 
-// AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1 Get Agency Plan website WordPress settings
+// AgencyHostingGetWordPressSettingsV1 Get WordPress settings
 //
 // Returns the current WordPress settings for an Agency Plan website: installed core version,
 // LiteSpeed Cache plugin status, object cache status, and maintenance mode status.
 //
-// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings (the `AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1` operationId).
-func (c *Client) AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Request(c.Server, websiteUid)
+// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings (the `AgencyHostingGetWordPressSettingsV1` operationId).
+func (c *Client) AgencyHostingGetWordPressSettingsV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingGetWordPressSettingsV1Request(c.Server, websiteUid)
 	if err != nil {
 		return nil, err
 	}
@@ -18666,15 +18666,15 @@ func (c *Client) AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1(ctx contex
 	return c.Client.Do(req)
 }
 
-// AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithBody Change Agency Plan website WordPress core version
+// AgencyHostingChangeWordPressVersionV1WithBody Change WordPress version
 //
 // Changes the installed WordPress core version on an Agency Plan website to one of the versions available for installation.
 //
 // Takes any type of body and a specified content type.
 //
-// Corresponds with PATCH /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/version (the `AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1` operationId).
-func (c *Client) AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1RequestWithBody(c.Server, websiteUid, contentType, body)
+// Corresponds with PATCH /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/version (the `AgencyHostingChangeWordPressVersionV1` operationId).
+func (c *Client) AgencyHostingChangeWordPressVersionV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingChangeWordPressVersionV1RequestWithBody(c.Server, websiteUid, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -18685,15 +18685,15 @@ func (c *Client) AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithB
 	return c.Client.Do(req)
 }
 
-// AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1 Change Agency Plan website WordPress core version
+// AgencyHostingChangeWordPressVersionV1 Change WordPress version
 //
 // Changes the installed WordPress core version on an Agency Plan website to one of the versions available for installation.
 //
 // Takes a body of the `application/json` content type.
 //
-// Corresponds with PATCH /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/version (the `AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1` operationId).
-func (c *Client) AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Request(c.Server, websiteUid, body)
+// Corresponds with PATCH /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/version (the `AgencyHostingChangeWordPressVersionV1` operationId).
+func (c *Client) AgencyHostingChangeWordPressVersionV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingChangeWordPressVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingChangeWordPressVersionV1Request(c.Server, websiteUid, body)
 	if err != nil {
 		return nil, err
 	}
@@ -18704,13 +18704,13 @@ func (c *Client) AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1(ctx 
 	return c.Client.Do(req)
 }
 
-// AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1 List available WordPress versions for an Agency Plan website
+// AgencyHostingListAvailableWordPressVersionsV1 List available WordPress versions
 //
 // Lists the WordPress core versions available for installation on an Agency Plan website.
 //
-// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/versions (the `AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1` operationId).
-func (c *Client) AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Request(c.Server, websiteUid)
+// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/versions (the `AgencyHostingListAvailableWordPressVersionsV1` operationId).
+func (c *Client) AgencyHostingListAvailableWordPressVersionsV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingListAvailableWordPressVersionsV1Request(c.Server, websiteUid)
 	if err != nil {
 		return nil, err
 	}
@@ -27438,8 +27438,8 @@ func (c *Client) VPSStopVirtualMachineV1(ctx context.Context, virtualMachineId V
 	return c.Client.Do(req)
 }
 
-// NewAgencyHostingListAgencyPlanDomainsV1Request constructs an http.Request for the AgencyHostingListAgencyPlanDomainsV1 method
-func NewAgencyHostingListAgencyPlanDomainsV1Request(server string, params *AgencyHostingListAgencyPlanDomainsV1Params) (*http.Request, error) {
+// NewAgencyHostingListDomainsV1Request constructs an http.Request for the AgencyHostingListDomainsV1 method
+func NewAgencyHostingListDomainsV1Request(server string, params *AgencyHostingListDomainsV1Params) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -27516,8 +27516,8 @@ func NewAgencyHostingListAgencyPlanDomainsV1Request(server string, params *Agenc
 	return req, nil
 }
 
-// NewAgencyHostingListAgencyPlanOrdersV1Request constructs an http.Request for the AgencyHostingListAgencyPlanOrdersV1 method
-func NewAgencyHostingListAgencyPlanOrdersV1Request(server string, params *AgencyHostingListAgencyPlanOrdersV1Params) (*http.Request, error) {
+// NewAgencyHostingListOrdersV1Request constructs an http.Request for the AgencyHostingListOrdersV1 method
+func NewAgencyHostingListOrdersV1Request(server string, params *AgencyHostingListOrdersV1Params) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -27582,8 +27582,8 @@ func NewAgencyHostingListAgencyPlanOrdersV1Request(server string, params *Agency
 	return req, nil
 }
 
-// NewAgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Request constructs an http.Request for the AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1 method
-func NewAgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Request(server string, orderId OrderIdPath) (*http.Request, error) {
+// NewAgencyHostingListAvailableDatacentersV1Request constructs an http.Request for the AgencyHostingListAvailableDatacentersV1 method
+func NewAgencyHostingListAvailableDatacentersV1Request(server string, orderId OrderIdPath) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -27616,19 +27616,19 @@ func NewAgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Request(serve
 	return req, nil
 }
 
-// NewAgencyHostingProvisionANewAgencyPlanWebsiteV1Request calls the generic AgencyHostingProvisionANewAgencyPlanWebsiteV1 builder with application/json body
-func NewAgencyHostingProvisionANewAgencyPlanWebsiteV1Request(server string, orderId OrderIdPath, body AgencyHostingProvisionANewAgencyPlanWebsiteV1JSONRequestBody) (*http.Request, error) {
+// NewAgencyHostingCreateANewWebsiteV1Request calls the generic AgencyHostingCreateANewWebsiteV1 builder with application/json body
+func NewAgencyHostingCreateANewWebsiteV1Request(server string, orderId OrderIdPath, body AgencyHostingCreateANewWebsiteV1JSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewAgencyHostingProvisionANewAgencyPlanWebsiteV1RequestWithBody(server, orderId, "application/json", bodyReader)
+	return NewAgencyHostingCreateANewWebsiteV1RequestWithBody(server, orderId, "application/json", bodyReader)
 }
 
-// NewAgencyHostingProvisionANewAgencyPlanWebsiteV1RequestWithBody constructs an http.Request for the AgencyHostingProvisionANewAgencyPlanWebsiteV1 method, with any body, and a specified content type
-func NewAgencyHostingProvisionANewAgencyPlanWebsiteV1RequestWithBody(server string, orderId OrderIdPath, contentType string, body io.Reader) (*http.Request, error) {
+// NewAgencyHostingCreateANewWebsiteV1RequestWithBody constructs an http.Request for the AgencyHostingCreateANewWebsiteV1 method, with any body, and a specified content type
+func NewAgencyHostingCreateANewWebsiteV1RequestWithBody(server string, orderId OrderIdPath, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -27663,8 +27663,8 @@ func NewAgencyHostingProvisionANewAgencyPlanWebsiteV1RequestWithBody(server stri
 	return req, nil
 }
 
-// NewAgencyHostingGetAgencyPlanWebsiteSetupStatusV1Request constructs an http.Request for the AgencyHostingGetAgencyPlanWebsiteSetupStatusV1 method
-func NewAgencyHostingGetAgencyPlanWebsiteSetupStatusV1Request(server string, orderId OrderIdPath, setupUuid SetupUuid) (*http.Request, error) {
+// NewAgencyHostingGetWebsiteSetupStatusV1Request constructs an http.Request for the AgencyHostingGetWebsiteSetupStatusV1 method
+func NewAgencyHostingGetWebsiteSetupStatusV1Request(server string, orderId OrderIdPath, setupUuid SetupUuid) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -27704,8 +27704,8 @@ func NewAgencyHostingGetAgencyPlanWebsiteSetupStatusV1Request(server string, ord
 	return req, nil
 }
 
-// NewAgencyHostingDeleteAgencyPlanWebsiteV1Request constructs an http.Request for the AgencyHostingDeleteAgencyPlanWebsiteV1 method
-func NewAgencyHostingDeleteAgencyPlanWebsiteV1Request(server string, websiteUid WebsiteUid) (*http.Request, error) {
+// NewAgencyHostingDeleteWebsiteV1Request constructs an http.Request for the AgencyHostingDeleteWebsiteV1 method
+func NewAgencyHostingDeleteWebsiteV1Request(server string, websiteUid WebsiteUid) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -27738,8 +27738,8 @@ func NewAgencyHostingDeleteAgencyPlanWebsiteV1Request(server string, websiteUid 
 	return req, nil
 }
 
-// NewAgencyHostingGetAgencyPlanWebsiteDetailsV1Request constructs an http.Request for the AgencyHostingGetAgencyPlanWebsiteDetailsV1 method
-func NewAgencyHostingGetAgencyPlanWebsiteDetailsV1Request(server string, websiteUid WebsiteUid) (*http.Request, error) {
+// NewAgencyHostingGetWebsiteDetailsV1Request constructs an http.Request for the AgencyHostingGetWebsiteDetailsV1 method
+func NewAgencyHostingGetWebsiteDetailsV1Request(server string, websiteUid WebsiteUid) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -27772,19 +27772,19 @@ func NewAgencyHostingGetAgencyPlanWebsiteDetailsV1Request(server string, website
 	return req, nil
 }
 
-// NewAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Request calls the generic AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1 builder with application/json body
-func NewAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Request(server string, websiteUid WebsiteUid, body AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1JSONRequestBody) (*http.Request, error) {
+// NewAgencyHostingBuildWebsiteNodeJSAssetsV1Request calls the generic AgencyHostingBuildWebsiteNodeJSAssetsV1 builder with application/json body
+func NewAgencyHostingBuildWebsiteNodeJSAssetsV1Request(server string, websiteUid WebsiteUid, body AgencyHostingBuildWebsiteNodeJSAssetsV1JSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1RequestWithBody(server, websiteUid, "application/json", bodyReader)
+	return NewAgencyHostingBuildWebsiteNodeJSAssetsV1RequestWithBody(server, websiteUid, "application/json", bodyReader)
 }
 
-// NewAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1RequestWithBody constructs an http.Request for the AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1 method, with any body, and a specified content type
-func NewAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1RequestWithBody(server string, websiteUid WebsiteUid, contentType string, body io.Reader) (*http.Request, error) {
+// NewAgencyHostingBuildWebsiteNodeJSAssetsV1RequestWithBody constructs an http.Request for the AgencyHostingBuildWebsiteNodeJSAssetsV1 method, with any body, and a specified content type
+func NewAgencyHostingBuildWebsiteNodeJSAssetsV1RequestWithBody(server string, websiteUid WebsiteUid, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -27819,8 +27819,8 @@ func NewAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1RequestWithBody(server 
 	return req, nil
 }
 
-// NewAgencyHostingClearAgencyPlanWebsiteCacheV1Request constructs an http.Request for the AgencyHostingClearAgencyPlanWebsiteCacheV1 method
-func NewAgencyHostingClearAgencyPlanWebsiteCacheV1Request(server string, websiteUid WebsiteUid) (*http.Request, error) {
+// NewAgencyHostingClearWebsiteCacheV1Request constructs an http.Request for the AgencyHostingClearWebsiteCacheV1 method
+func NewAgencyHostingClearWebsiteCacheV1Request(server string, websiteUid WebsiteUid) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -27853,8 +27853,8 @@ func NewAgencyHostingClearAgencyPlanWebsiteCacheV1Request(server string, website
 	return req, nil
 }
 
-// NewAgencyHostingListAgencyPlanWebsiteCronJobsV1Request constructs an http.Request for the AgencyHostingListAgencyPlanWebsiteCronJobsV1 method
-func NewAgencyHostingListAgencyPlanWebsiteCronJobsV1Request(server string, websiteUid WebsiteUid, params *AgencyHostingListAgencyPlanWebsiteCronJobsV1Params) (*http.Request, error) {
+// NewAgencyHostingListWebsiteCronJobsV1Request constructs an http.Request for the AgencyHostingListWebsiteCronJobsV1 method
+func NewAgencyHostingListWebsiteCronJobsV1Request(server string, websiteUid WebsiteUid, params *AgencyHostingListWebsiteCronJobsV1Params) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -27926,19 +27926,19 @@ func NewAgencyHostingListAgencyPlanWebsiteCronJobsV1Request(server string, websi
 	return req, nil
 }
 
-// NewAgencyHostingCreateAgencyPlanWebsiteCronJobV1Request calls the generic AgencyHostingCreateAgencyPlanWebsiteCronJobV1 builder with application/json body
-func NewAgencyHostingCreateAgencyPlanWebsiteCronJobV1Request(server string, websiteUid WebsiteUid, body AgencyHostingCreateAgencyPlanWebsiteCronJobV1JSONRequestBody) (*http.Request, error) {
+// NewAgencyHostingCreateWebsiteCronJobV1Request calls the generic AgencyHostingCreateWebsiteCronJobV1 builder with application/json body
+func NewAgencyHostingCreateWebsiteCronJobV1Request(server string, websiteUid WebsiteUid, body AgencyHostingCreateWebsiteCronJobV1JSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewAgencyHostingCreateAgencyPlanWebsiteCronJobV1RequestWithBody(server, websiteUid, "application/json", bodyReader)
+	return NewAgencyHostingCreateWebsiteCronJobV1RequestWithBody(server, websiteUid, "application/json", bodyReader)
 }
 
-// NewAgencyHostingCreateAgencyPlanWebsiteCronJobV1RequestWithBody constructs an http.Request for the AgencyHostingCreateAgencyPlanWebsiteCronJobV1 method, with any body, and a specified content type
-func NewAgencyHostingCreateAgencyPlanWebsiteCronJobV1RequestWithBody(server string, websiteUid WebsiteUid, contentType string, body io.Reader) (*http.Request, error) {
+// NewAgencyHostingCreateWebsiteCronJobV1RequestWithBody constructs an http.Request for the AgencyHostingCreateWebsiteCronJobV1 method, with any body, and a specified content type
+func NewAgencyHostingCreateWebsiteCronJobV1RequestWithBody(server string, websiteUid WebsiteUid, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -27973,8 +27973,8 @@ func NewAgencyHostingCreateAgencyPlanWebsiteCronJobV1RequestWithBody(server stri
 	return req, nil
 }
 
-// NewAgencyHostingDeleteAgencyPlanWebsiteCronJobV1Request constructs an http.Request for the AgencyHostingDeleteAgencyPlanWebsiteCronJobV1 method
-func NewAgencyHostingDeleteAgencyPlanWebsiteCronJobV1Request(server string, websiteUid WebsiteUid, uuid AgencyCronJobUuidPath) (*http.Request, error) {
+// NewAgencyHostingDeleteWebsiteCronJobV1Request constructs an http.Request for the AgencyHostingDeleteWebsiteCronJobV1 method
+func NewAgencyHostingDeleteWebsiteCronJobV1Request(server string, websiteUid WebsiteUid, uuid AgencyCronJobUuidPath) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -28014,8 +28014,8 @@ func NewAgencyHostingDeleteAgencyPlanWebsiteCronJobV1Request(server string, webs
 	return req, nil
 }
 
-// NewAgencyHostingListAgencyPlanWebsiteDatabasesV1Request constructs an http.Request for the AgencyHostingListAgencyPlanWebsiteDatabasesV1 method
-func NewAgencyHostingListAgencyPlanWebsiteDatabasesV1Request(server string, websiteUid WebsiteUid, params *AgencyHostingListAgencyPlanWebsiteDatabasesV1Params) (*http.Request, error) {
+// NewAgencyHostingListWebsiteDatabasesV1Request constructs an http.Request for the AgencyHostingListWebsiteDatabasesV1 method
+func NewAgencyHostingListWebsiteDatabasesV1Request(server string, websiteUid WebsiteUid, params *AgencyHostingListWebsiteDatabasesV1Params) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -28087,19 +28087,19 @@ func NewAgencyHostingListAgencyPlanWebsiteDatabasesV1Request(server string, webs
 	return req, nil
 }
 
-// NewAgencyHostingCreateAgencyPlanWebsiteDatabaseV1Request calls the generic AgencyHostingCreateAgencyPlanWebsiteDatabaseV1 builder with application/json body
-func NewAgencyHostingCreateAgencyPlanWebsiteDatabaseV1Request(server string, websiteUid WebsiteUid, body AgencyHostingCreateAgencyPlanWebsiteDatabaseV1JSONRequestBody) (*http.Request, error) {
+// NewAgencyHostingCreateWebsiteDatabaseV1Request calls the generic AgencyHostingCreateWebsiteDatabaseV1 builder with application/json body
+func NewAgencyHostingCreateWebsiteDatabaseV1Request(server string, websiteUid WebsiteUid, body AgencyHostingCreateWebsiteDatabaseV1JSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewAgencyHostingCreateAgencyPlanWebsiteDatabaseV1RequestWithBody(server, websiteUid, "application/json", bodyReader)
+	return NewAgencyHostingCreateWebsiteDatabaseV1RequestWithBody(server, websiteUid, "application/json", bodyReader)
 }
 
-// NewAgencyHostingCreateAgencyPlanWebsiteDatabaseV1RequestWithBody constructs an http.Request for the AgencyHostingCreateAgencyPlanWebsiteDatabaseV1 method, with any body, and a specified content type
-func NewAgencyHostingCreateAgencyPlanWebsiteDatabaseV1RequestWithBody(server string, websiteUid WebsiteUid, contentType string, body io.Reader) (*http.Request, error) {
+// NewAgencyHostingCreateWebsiteDatabaseV1RequestWithBody constructs an http.Request for the AgencyHostingCreateWebsiteDatabaseV1 method, with any body, and a specified content type
+func NewAgencyHostingCreateWebsiteDatabaseV1RequestWithBody(server string, websiteUid WebsiteUid, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -28134,8 +28134,8 @@ func NewAgencyHostingCreateAgencyPlanWebsiteDatabaseV1RequestWithBody(server str
 	return req, nil
 }
 
-// NewAgencyHostingDeleteAgencyPlanWebsiteDatabaseV1Request constructs an http.Request for the AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1 method
-func NewAgencyHostingDeleteAgencyPlanWebsiteDatabaseV1Request(server string, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath) (*http.Request, error) {
+// NewAgencyHostingDeleteWebsiteDatabaseV1Request constructs an http.Request for the AgencyHostingDeleteWebsiteDatabaseV1 method
+func NewAgencyHostingDeleteWebsiteDatabaseV1Request(server string, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -28175,19 +28175,19 @@ func NewAgencyHostingDeleteAgencyPlanWebsiteDatabaseV1Request(server string, web
 	return req, nil
 }
 
-// NewAgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Request calls the generic AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1 builder with application/json body
-func NewAgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Request(server string, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, body AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1JSONRequestBody) (*http.Request, error) {
+// NewAgencyHostingCreateWebsiteDatabaseUserV1Request calls the generic AgencyHostingCreateWebsiteDatabaseUserV1 builder with application/json body
+func NewAgencyHostingCreateWebsiteDatabaseUserV1Request(server string, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, body AgencyHostingCreateWebsiteDatabaseUserV1JSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewAgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1RequestWithBody(server, websiteUid, databaseName, "application/json", bodyReader)
+	return NewAgencyHostingCreateWebsiteDatabaseUserV1RequestWithBody(server, websiteUid, databaseName, "application/json", bodyReader)
 }
 
-// NewAgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1RequestWithBody constructs an http.Request for the AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1 method, with any body, and a specified content type
-func NewAgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1RequestWithBody(server string, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, contentType string, body io.Reader) (*http.Request, error) {
+// NewAgencyHostingCreateWebsiteDatabaseUserV1RequestWithBody constructs an http.Request for the AgencyHostingCreateWebsiteDatabaseUserV1 method, with any body, and a specified content type
+func NewAgencyHostingCreateWebsiteDatabaseUserV1RequestWithBody(server string, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -28229,8 +28229,8 @@ func NewAgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1RequestWithBody(server
 	return req, nil
 }
 
-// NewAgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1Request constructs an http.Request for the AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1 method
-func NewAgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1Request(server string, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, databaseUserName AgencyDatabaseUserNamePath) (*http.Request, error) {
+// NewAgencyHostingDeleteWebsiteDatabaseUserV1Request constructs an http.Request for the AgencyHostingDeleteWebsiteDatabaseUserV1 method
+func NewAgencyHostingDeleteWebsiteDatabaseUserV1Request(server string, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, databaseUserName AgencyDatabaseUserNamePath) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -28277,19 +28277,19 @@ func NewAgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1Request(server string,
 	return req, nil
 }
 
-// NewAgencyHostingLinkDomainToAgencyPlanWebsiteV1Request calls the generic AgencyHostingLinkDomainToAgencyPlanWebsiteV1 builder with application/json body
-func NewAgencyHostingLinkDomainToAgencyPlanWebsiteV1Request(server string, websiteUid WebsiteUid, body AgencyHostingLinkDomainToAgencyPlanWebsiteV1JSONRequestBody) (*http.Request, error) {
+// NewAgencyHostingLinkDomainToWebsiteV1Request calls the generic AgencyHostingLinkDomainToWebsiteV1 builder with application/json body
+func NewAgencyHostingLinkDomainToWebsiteV1Request(server string, websiteUid WebsiteUid, body AgencyHostingLinkDomainToWebsiteV1JSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewAgencyHostingLinkDomainToAgencyPlanWebsiteV1RequestWithBody(server, websiteUid, "application/json", bodyReader)
+	return NewAgencyHostingLinkDomainToWebsiteV1RequestWithBody(server, websiteUid, "application/json", bodyReader)
 }
 
-// NewAgencyHostingLinkDomainToAgencyPlanWebsiteV1RequestWithBody constructs an http.Request for the AgencyHostingLinkDomainToAgencyPlanWebsiteV1 method, with any body, and a specified content type
-func NewAgencyHostingLinkDomainToAgencyPlanWebsiteV1RequestWithBody(server string, websiteUid WebsiteUid, contentType string, body io.Reader) (*http.Request, error) {
+// NewAgencyHostingLinkDomainToWebsiteV1RequestWithBody constructs an http.Request for the AgencyHostingLinkDomainToWebsiteV1 method, with any body, and a specified content type
+func NewAgencyHostingLinkDomainToWebsiteV1RequestWithBody(server string, websiteUid WebsiteUid, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -28324,8 +28324,8 @@ func NewAgencyHostingLinkDomainToAgencyPlanWebsiteV1RequestWithBody(server strin
 	return req, nil
 }
 
-// NewAgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Request constructs an http.Request for the AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1 method
-func NewAgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Request(server string, websiteUid WebsiteUid, domain Domain) (*http.Request, error) {
+// NewAgencyHostingUnlinkDomainFromWebsiteV1Request constructs an http.Request for the AgencyHostingUnlinkDomainFromWebsiteV1 method
+func NewAgencyHostingUnlinkDomainFromWebsiteV1Request(server string, websiteUid WebsiteUid, domain Domain) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -28365,19 +28365,19 @@ func NewAgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Request(server string, w
 	return req, nil
 }
 
-// NewAgencyHostingChangeAgencyPlanWebsiteDomainV1Request calls the generic AgencyHostingChangeAgencyPlanWebsiteDomainV1 builder with application/json body
-func NewAgencyHostingChangeAgencyPlanWebsiteDomainV1Request(server string, websiteUid WebsiteUid, fromDomain FromDomain, body AgencyHostingChangeAgencyPlanWebsiteDomainV1JSONRequestBody) (*http.Request, error) {
+// NewAgencyHostingChangeWebsiteDomainV1Request calls the generic AgencyHostingChangeWebsiteDomainV1 builder with application/json body
+func NewAgencyHostingChangeWebsiteDomainV1Request(server string, websiteUid WebsiteUid, fromDomain FromDomain, body AgencyHostingChangeWebsiteDomainV1JSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewAgencyHostingChangeAgencyPlanWebsiteDomainV1RequestWithBody(server, websiteUid, fromDomain, "application/json", bodyReader)
+	return NewAgencyHostingChangeWebsiteDomainV1RequestWithBody(server, websiteUid, fromDomain, "application/json", bodyReader)
 }
 
-// NewAgencyHostingChangeAgencyPlanWebsiteDomainV1RequestWithBody constructs an http.Request for the AgencyHostingChangeAgencyPlanWebsiteDomainV1 method, with any body, and a specified content type
-func NewAgencyHostingChangeAgencyPlanWebsiteDomainV1RequestWithBody(server string, websiteUid WebsiteUid, fromDomain FromDomain, contentType string, body io.Reader) (*http.Request, error) {
+// NewAgencyHostingChangeWebsiteDomainV1RequestWithBody constructs an http.Request for the AgencyHostingChangeWebsiteDomainV1 method, with any body, and a specified content type
+func NewAgencyHostingChangeWebsiteDomainV1RequestWithBody(server string, websiteUid WebsiteUid, fromDomain FromDomain, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -28419,19 +28419,19 @@ func NewAgencyHostingChangeAgencyPlanWebsiteDomainV1RequestWithBody(server strin
 	return req, nil
 }
 
-// NewAgencyHostingImportAgencyPlanWebsiteFromArchiveV1Request calls the generic AgencyHostingImportAgencyPlanWebsiteFromArchiveV1 builder with application/json body
-func NewAgencyHostingImportAgencyPlanWebsiteFromArchiveV1Request(server string, websiteUid WebsiteUid, body AgencyHostingImportAgencyPlanWebsiteFromArchiveV1JSONRequestBody) (*http.Request, error) {
+// NewAgencyHostingImportWebsiteFromArchiveV1Request calls the generic AgencyHostingImportWebsiteFromArchiveV1 builder with application/json body
+func NewAgencyHostingImportWebsiteFromArchiveV1Request(server string, websiteUid WebsiteUid, body AgencyHostingImportWebsiteFromArchiveV1JSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewAgencyHostingImportAgencyPlanWebsiteFromArchiveV1RequestWithBody(server, websiteUid, "application/json", bodyReader)
+	return NewAgencyHostingImportWebsiteFromArchiveV1RequestWithBody(server, websiteUid, "application/json", bodyReader)
 }
 
-// NewAgencyHostingImportAgencyPlanWebsiteFromArchiveV1RequestWithBody constructs an http.Request for the AgencyHostingImportAgencyPlanWebsiteFromArchiveV1 method, with any body, and a specified content type
-func NewAgencyHostingImportAgencyPlanWebsiteFromArchiveV1RequestWithBody(server string, websiteUid WebsiteUid, contentType string, body io.Reader) (*http.Request, error) {
+// NewAgencyHostingImportWebsiteFromArchiveV1RequestWithBody constructs an http.Request for the AgencyHostingImportWebsiteFromArchiveV1 method, with any body, and a specified content type
+func NewAgencyHostingImportWebsiteFromArchiveV1RequestWithBody(server string, websiteUid WebsiteUid, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -28466,8 +28466,8 @@ func NewAgencyHostingImportAgencyPlanWebsiteFromArchiveV1RequestWithBody(server 
 	return req, nil
 }
 
-// NewAgencyHostingListRunningAgencyPlanWebsiteProcessesV1Request constructs an http.Request for the AgencyHostingListRunningAgencyPlanWebsiteProcessesV1 method
-func NewAgencyHostingListRunningAgencyPlanWebsiteProcessesV1Request(server string, websiteUid WebsiteUid) (*http.Request, error) {
+// NewAgencyHostingListWebsiteProcessesV1Request constructs an http.Request for the AgencyHostingListWebsiteProcessesV1 method
+func NewAgencyHostingListWebsiteProcessesV1Request(server string, websiteUid WebsiteUid) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -28500,8 +28500,8 @@ func NewAgencyHostingListRunningAgencyPlanWebsiteProcessesV1Request(server strin
 	return req, nil
 }
 
-// NewAgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Request constructs an http.Request for the AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1 method
-func NewAgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Request(server string, websiteUid WebsiteUid) (*http.Request, error) {
+// NewAgencyHostingGetWordPressSettingsV1Request constructs an http.Request for the AgencyHostingGetWordPressSettingsV1 method
+func NewAgencyHostingGetWordPressSettingsV1Request(server string, websiteUid WebsiteUid) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -28534,19 +28534,19 @@ func NewAgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Request(server strin
 	return req, nil
 }
 
-// NewAgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Request calls the generic AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1 builder with application/json body
-func NewAgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Request(server string, websiteUid WebsiteUid, body AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1JSONRequestBody) (*http.Request, error) {
+// NewAgencyHostingChangeWordPressVersionV1Request calls the generic AgencyHostingChangeWordPressVersionV1 builder with application/json body
+func NewAgencyHostingChangeWordPressVersionV1Request(server string, websiteUid WebsiteUid, body AgencyHostingChangeWordPressVersionV1JSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewAgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1RequestWithBody(server, websiteUid, "application/json", bodyReader)
+	return NewAgencyHostingChangeWordPressVersionV1RequestWithBody(server, websiteUid, "application/json", bodyReader)
 }
 
-// NewAgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1RequestWithBody constructs an http.Request for the AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1 method, with any body, and a specified content type
-func NewAgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1RequestWithBody(server string, websiteUid WebsiteUid, contentType string, body io.Reader) (*http.Request, error) {
+// NewAgencyHostingChangeWordPressVersionV1RequestWithBody constructs an http.Request for the AgencyHostingChangeWordPressVersionV1 method, with any body, and a specified content type
+func NewAgencyHostingChangeWordPressVersionV1RequestWithBody(server string, websiteUid WebsiteUid, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -28581,8 +28581,8 @@ func NewAgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1RequestWithBod
 	return req, nil
 }
 
-// NewAgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Request constructs an http.Request for the AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1 method
-func NewAgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Request(server string, websiteUid WebsiteUid) (*http.Request, error) {
+// NewAgencyHostingListAvailableWordPressVersionsV1Request constructs an http.Request for the AgencyHostingListAvailableWordPressVersionsV1 method
+func NewAgencyHostingListAvailableWordPressVersionsV1Request(server string, websiteUid WebsiteUid) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -42373,7 +42373,7 @@ func WithBaseURL(baseURL string) ClientOption {
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
 
-	// AgencyHostingListAgencyPlanDomainsV1WithResponse List Agency Plan domains
+	// AgencyHostingListDomainsV1WithResponse List domains
 	//
 	// Returns a paginated list of domains associated with Agency Plan websites accessible to the authenticated client.
 	//
@@ -42381,19 +42381,19 @@ type ClientWithResponsesInterface interface {
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with GET /api/agency-hosting/v1/domains (the `AgencyHostingListAgencyPlanDomainsV1` operationId).
-	AgencyHostingListAgencyPlanDomainsV1WithResponse(ctx context.Context, params *AgencyHostingListAgencyPlanDomainsV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListAgencyPlanDomainsV1Response, error)
+	// Corresponds with GET /api/agency-hosting/v1/domains (the `AgencyHostingListDomainsV1` operationId).
+	AgencyHostingListDomainsV1WithResponse(ctx context.Context, params *AgencyHostingListDomainsV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListDomainsV1Response, error)
 
-	// AgencyHostingListAgencyPlanOrdersV1WithResponse List Agency Plan orders
+	// AgencyHostingListOrdersV1WithResponse List orders
 	//
 	// Returns a paginated list of Agency Plan orders accessible to the authenticated client.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with GET /api/agency-hosting/v1/orders (the `AgencyHostingListAgencyPlanOrdersV1` operationId).
-	AgencyHostingListAgencyPlanOrdersV1WithResponse(ctx context.Context, params *AgencyHostingListAgencyPlanOrdersV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListAgencyPlanOrdersV1Response, error)
+	// Corresponds with GET /api/agency-hosting/v1/orders (the `AgencyHostingListOrdersV1` operationId).
+	AgencyHostingListOrdersV1WithResponse(ctx context.Context, params *AgencyHostingListOrdersV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListOrdersV1Response, error)
 
-	// AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1WithResponse List available datacenters for an Agency Plan order
+	// AgencyHostingListAvailableDatacentersV1WithResponse List available datacenters
 	//
 	// Lists the datacenters available for provisioning a new website on the given Agency Plan
 	// hosting order.
@@ -42404,10 +42404,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/datacenters (the `AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1` operationId).
-	AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1WithResponse(ctx context.Context, orderId OrderIdPath, reqEditors ...RequestEditorFn) (*AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response, error)
+	// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/datacenters (the `AgencyHostingListAvailableDatacentersV1` operationId).
+	AgencyHostingListAvailableDatacentersV1WithResponse(ctx context.Context, orderId OrderIdPath, reqEditors ...RequestEditorFn) (*AgencyHostingListAvailableDatacentersV1Response, error)
 
-	// AgencyHostingProvisionANewAgencyPlanWebsiteV1WithBodyWithResponse Provision a new Agency Plan website
+	// AgencyHostingCreateANewWebsiteV1WithBodyWithResponse Create a new website
 	//
 	// Provisions a new website on one of your Agency Plan hosting orders.
 	//
@@ -42429,10 +42429,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with POST /api/agency-hosting/v1/orders/{order_id}/websites/setups (the `AgencyHostingProvisionANewAgencyPlanWebsiteV1` operationId).
-	AgencyHostingProvisionANewAgencyPlanWebsiteV1WithBodyWithResponse(ctx context.Context, orderId OrderIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingProvisionANewAgencyPlanWebsiteV1Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/orders/{order_id}/websites/setups (the `AgencyHostingCreateANewWebsiteV1` operationId).
+	AgencyHostingCreateANewWebsiteV1WithBodyWithResponse(ctx context.Context, orderId OrderIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingCreateANewWebsiteV1Response, error)
 
-	// AgencyHostingProvisionANewAgencyPlanWebsiteV1WithResponse Provision a new Agency Plan website
+	// AgencyHostingCreateANewWebsiteV1WithResponse Create a new website
 	//
 	// Provisions a new website on one of your Agency Plan hosting orders.
 	//
@@ -42454,10 +42454,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with POST /api/agency-hosting/v1/orders/{order_id}/websites/setups (the `AgencyHostingProvisionANewAgencyPlanWebsiteV1` operationId).
-	AgencyHostingProvisionANewAgencyPlanWebsiteV1WithResponse(ctx context.Context, orderId OrderIdPath, body AgencyHostingProvisionANewAgencyPlanWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingProvisionANewAgencyPlanWebsiteV1Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/orders/{order_id}/websites/setups (the `AgencyHostingCreateANewWebsiteV1` operationId).
+	AgencyHostingCreateANewWebsiteV1WithResponse(ctx context.Context, orderId OrderIdPath, body AgencyHostingCreateANewWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingCreateANewWebsiteV1Response, error)
 
-	// AgencyHostingGetAgencyPlanWebsiteSetupStatusV1WithResponse Get Agency Plan website setup status
+	// AgencyHostingGetWebsiteSetupStatusV1WithResponse Get website setup status
 	//
 	// Returns the current status of an Agency Plan website setup started via the setups
 	// endpoint.
@@ -42467,10 +42467,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/websites/setups/{setup_uuid} (the `AgencyHostingGetAgencyPlanWebsiteSetupStatusV1` operationId).
-	AgencyHostingGetAgencyPlanWebsiteSetupStatusV1WithResponse(ctx context.Context, orderId OrderIdPath, setupUuid SetupUuid, reqEditors ...RequestEditorFn) (*AgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response, error)
+	// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/websites/setups/{setup_uuid} (the `AgencyHostingGetWebsiteSetupStatusV1` operationId).
+	AgencyHostingGetWebsiteSetupStatusV1WithResponse(ctx context.Context, orderId OrderIdPath, setupUuid SetupUuid, reqEditors ...RequestEditorFn) (*AgencyHostingGetWebsiteSetupStatusV1Response, error)
 
-	// AgencyHostingDeleteAgencyPlanWebsiteV1WithResponse Delete Agency Plan website
+	// AgencyHostingDeleteWebsiteV1WithResponse Delete website
 	//
 	// Permanently deletes an Agency Plan website. Deletion is processed asynchronously: the
 	// website is immediately transitioned to a deleting state and the underlying server
@@ -42478,20 +42478,20 @@ type ClientWithResponsesInterface interface {
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid} (the `AgencyHostingDeleteAgencyPlanWebsiteV1` operationId).
-	AgencyHostingDeleteAgencyPlanWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingDeleteAgencyPlanWebsiteV1Response, error)
+	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid} (the `AgencyHostingDeleteWebsiteV1` operationId).
+	AgencyHostingDeleteWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingDeleteWebsiteV1Response, error)
 
-	// AgencyHostingGetAgencyPlanWebsiteDetailsV1WithResponse Get Agency Plan website details
+	// AgencyHostingGetWebsiteDetailsV1WithResponse Get website details
 	//
 	// Retrieves detailed information about a specific Agency Plan website, including configuration,
 	// status, metadata, hosting plan details, and resource quotas.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid} (the `AgencyHostingGetAgencyPlanWebsiteDetailsV1` operationId).
-	AgencyHostingGetAgencyPlanWebsiteDetailsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingGetAgencyPlanWebsiteDetailsV1Response, error)
+	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid} (the `AgencyHostingGetWebsiteDetailsV1` operationId).
+	AgencyHostingGetWebsiteDetailsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingGetWebsiteDetailsV1Response, error)
 
-	// AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithBodyWithResponse Build Agency Plan website NodeJS assets
+	// AgencyHostingBuildWebsiteNodeJSAssetsV1WithBodyWithResponse Build website NodeJS assets
 	//
 	// Builds and deploys a Node.js application for an Agency Plan website from an already-uploaded archive.
 	//
@@ -42500,10 +42500,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/build-assets (the `AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1` operationId).
-	AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/build-assets (the `AgencyHostingBuildWebsiteNodeJSAssetsV1` operationId).
+	AgencyHostingBuildWebsiteNodeJSAssetsV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingBuildWebsiteNodeJSAssetsV1Response, error)
 
-	// AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithResponse Build Agency Plan website NodeJS assets
+	// AgencyHostingBuildWebsiteNodeJSAssetsV1WithResponse Build website NodeJS assets
 	//
 	// Builds and deploys a Node.js application for an Agency Plan website from an already-uploaded archive.
 	//
@@ -42512,10 +42512,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/build-assets (the `AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1` operationId).
-	AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/build-assets (the `AgencyHostingBuildWebsiteNodeJSAssetsV1` operationId).
+	AgencyHostingBuildWebsiteNodeJSAssetsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingBuildWebsiteNodeJSAssetsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingBuildWebsiteNodeJSAssetsV1Response, error)
 
-	// AgencyHostingClearAgencyPlanWebsiteCacheV1WithResponse Clear Agency Plan website cache
+	// AgencyHostingClearWebsiteCacheV1WithResponse Clear website cache
 	//
 	// Clears cache for all domains associated with an Agency Plan website, including its preview domain.
 	//
@@ -42523,10 +42523,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/cache (the `AgencyHostingClearAgencyPlanWebsiteCacheV1` operationId).
-	AgencyHostingClearAgencyPlanWebsiteCacheV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingClearAgencyPlanWebsiteCacheV1Response, error)
+	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/cache (the `AgencyHostingClearWebsiteCacheV1` operationId).
+	AgencyHostingClearWebsiteCacheV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingClearWebsiteCacheV1Response, error)
 
-	// AgencyHostingListAgencyPlanWebsiteCronJobsV1WithResponse List Agency Plan website cron jobs
+	// AgencyHostingListWebsiteCronJobsV1WithResponse List website cron jobs
 	//
 	// Returns a paginated list of cron jobs configured for an Agency Plan website.
 	//
@@ -42534,10 +42534,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/cron-jobs (the `AgencyHostingListAgencyPlanWebsiteCronJobsV1` operationId).
-	AgencyHostingListAgencyPlanWebsiteCronJobsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, params *AgencyHostingListAgencyPlanWebsiteCronJobsV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListAgencyPlanWebsiteCronJobsV1Response, error)
+	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/cron-jobs (the `AgencyHostingListWebsiteCronJobsV1` operationId).
+	AgencyHostingListWebsiteCronJobsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, params *AgencyHostingListWebsiteCronJobsV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListWebsiteCronJobsV1Response, error)
 
-	// AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithBodyWithResponse Create Agency Plan website cron job
+	// AgencyHostingCreateWebsiteCronJobV1WithBodyWithResponse Create website cron job
 	//
 	// Creates a cron job for an Agency Plan website from a schedule expression and a command.
 	//
@@ -42545,10 +42545,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/cron-jobs (the `AgencyHostingCreateAgencyPlanWebsiteCronJobV1` operationId).
-	AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/cron-jobs (the `AgencyHostingCreateWebsiteCronJobV1` operationId).
+	AgencyHostingCreateWebsiteCronJobV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingCreateWebsiteCronJobV1Response, error)
 
-	// AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithResponse Create Agency Plan website cron job
+	// AgencyHostingCreateWebsiteCronJobV1WithResponse Create website cron job
 	//
 	// Creates a cron job for an Agency Plan website from a schedule expression and a command.
 	//
@@ -42556,10 +42556,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/cron-jobs (the `AgencyHostingCreateAgencyPlanWebsiteCronJobV1` operationId).
-	AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingCreateAgencyPlanWebsiteCronJobV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/cron-jobs (the `AgencyHostingCreateWebsiteCronJobV1` operationId).
+	AgencyHostingCreateWebsiteCronJobV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingCreateWebsiteCronJobV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingCreateWebsiteCronJobV1Response, error)
 
-	// AgencyHostingDeleteAgencyPlanWebsiteCronJobV1WithResponse Delete Agency Plan website cron job
+	// AgencyHostingDeleteWebsiteCronJobV1WithResponse Delete website cron job
 	//
 	// Permanently deletes the cron job identified by its uuid from an Agency Plan website.
 	//
@@ -42567,10 +42567,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/cron-jobs/{uuid} (the `AgencyHostingDeleteAgencyPlanWebsiteCronJobV1` operationId).
-	AgencyHostingDeleteAgencyPlanWebsiteCronJobV1WithResponse(ctx context.Context, websiteUid WebsiteUid, uuid AgencyCronJobUuidPath, reqEditors ...RequestEditorFn) (*AgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response, error)
+	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/cron-jobs/{uuid} (the `AgencyHostingDeleteWebsiteCronJobV1` operationId).
+	AgencyHostingDeleteWebsiteCronJobV1WithResponse(ctx context.Context, websiteUid WebsiteUid, uuid AgencyCronJobUuidPath, reqEditors ...RequestEditorFn) (*AgencyHostingDeleteWebsiteCronJobV1Response, error)
 
-	// AgencyHostingListAgencyPlanWebsiteDatabasesV1WithResponse List Agency Plan website databases
+	// AgencyHostingListWebsiteDatabasesV1WithResponse List website databases
 	//
 	// Returns a paginated list of MySQL databases created for an Agency Plan website.
 	//
@@ -42578,10 +42578,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/databases (the `AgencyHostingListAgencyPlanWebsiteDatabasesV1` operationId).
-	AgencyHostingListAgencyPlanWebsiteDatabasesV1WithResponse(ctx context.Context, websiteUid WebsiteUid, params *AgencyHostingListAgencyPlanWebsiteDatabasesV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListAgencyPlanWebsiteDatabasesV1Response, error)
+	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/databases (the `AgencyHostingListWebsiteDatabasesV1` operationId).
+	AgencyHostingListWebsiteDatabasesV1WithResponse(ctx context.Context, websiteUid WebsiteUid, params *AgencyHostingListWebsiteDatabasesV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListWebsiteDatabasesV1Response, error)
 
-	// AgencyHostingCreateAgencyPlanWebsiteDatabaseV1WithBodyWithResponse Create Agency Plan website database
+	// AgencyHostingCreateWebsiteDatabaseV1WithBodyWithResponse Create website database
 	//
 	// Creates a MySQL database with a dedicated user for an Agency Plan website.
 	//
@@ -42589,10 +42589,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases (the `AgencyHostingCreateAgencyPlanWebsiteDatabaseV1` operationId).
-	AgencyHostingCreateAgencyPlanWebsiteDatabaseV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingCreateAgencyPlanWebsiteDatabaseV1Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases (the `AgencyHostingCreateWebsiteDatabaseV1` operationId).
+	AgencyHostingCreateWebsiteDatabaseV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingCreateWebsiteDatabaseV1Response, error)
 
-	// AgencyHostingCreateAgencyPlanWebsiteDatabaseV1WithResponse Create Agency Plan website database
+	// AgencyHostingCreateWebsiteDatabaseV1WithResponse Create website database
 	//
 	// Creates a MySQL database with a dedicated user for an Agency Plan website.
 	//
@@ -42600,10 +42600,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases (the `AgencyHostingCreateAgencyPlanWebsiteDatabaseV1` operationId).
-	AgencyHostingCreateAgencyPlanWebsiteDatabaseV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingCreateAgencyPlanWebsiteDatabaseV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingCreateAgencyPlanWebsiteDatabaseV1Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases (the `AgencyHostingCreateWebsiteDatabaseV1` operationId).
+	AgencyHostingCreateWebsiteDatabaseV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingCreateWebsiteDatabaseV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingCreateWebsiteDatabaseV1Response, error)
 
-	// AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1WithResponse Delete Agency Plan website database
+	// AgencyHostingDeleteWebsiteDatabaseV1WithResponse Delete website database
 	//
 	// Permanently deletes a MySQL database and all its data from an Agency Plan website, including its users.
 	//
@@ -42611,10 +42611,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name} (the `AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1` operationId).
-	AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1WithResponse(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, reqEditors ...RequestEditorFn) (*AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1Response, error)
+	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name} (the `AgencyHostingDeleteWebsiteDatabaseV1` operationId).
+	AgencyHostingDeleteWebsiteDatabaseV1WithResponse(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, reqEditors ...RequestEditorFn) (*AgencyHostingDeleteWebsiteDatabaseV1Response, error)
 
-	// AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1WithBodyWithResponse Create Agency Plan website database user
+	// AgencyHostingCreateWebsiteDatabaseUserV1WithBodyWithResponse Create website database user
 	//
 	// Creates a user for an existing database on an Agency Plan website.
 	//
@@ -42622,10 +42622,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users (the `AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1` operationId).
-	AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users (the `AgencyHostingCreateWebsiteDatabaseUserV1` operationId).
+	AgencyHostingCreateWebsiteDatabaseUserV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingCreateWebsiteDatabaseUserV1Response, error)
 
-	// AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1WithResponse Create Agency Plan website database user
+	// AgencyHostingCreateWebsiteDatabaseUserV1WithResponse Create website database user
 	//
 	// Creates a user for an existing database on an Agency Plan website.
 	//
@@ -42633,10 +42633,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users (the `AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1` operationId).
-	AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1WithResponse(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, body AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users (the `AgencyHostingCreateWebsiteDatabaseUserV1` operationId).
+	AgencyHostingCreateWebsiteDatabaseUserV1WithResponse(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, body AgencyHostingCreateWebsiteDatabaseUserV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingCreateWebsiteDatabaseUserV1Response, error)
 
-	// AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1WithResponse Delete Agency Plan website database user
+	// AgencyHostingDeleteWebsiteDatabaseUserV1WithResponse Delete website database user
 	//
 	// Permanently deletes a database user from an Agency Plan website database, revoking all access it had.
 	//
@@ -42644,28 +42644,28 @@ type ClientWithResponsesInterface interface {
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users/{database_user_name} (the `AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1` operationId).
-	AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1WithResponse(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, databaseUserName AgencyDatabaseUserNamePath, reqEditors ...RequestEditorFn) (*AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1Response, error)
+	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users/{database_user_name} (the `AgencyHostingDeleteWebsiteDatabaseUserV1` operationId).
+	AgencyHostingDeleteWebsiteDatabaseUserV1WithResponse(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, databaseUserName AgencyDatabaseUserNamePath, reqEditors ...RequestEditorFn) (*AgencyHostingDeleteWebsiteDatabaseUserV1Response, error)
 
-	// AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBodyWithResponse Link domain to Agency Plan website
+	// AgencyHostingLinkDomainToWebsiteV1WithBodyWithResponse Link domain to website
 	//
 	// Links a domain to the specified Agency Plan website so it can serve traffic for that domain.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/domains (the `AgencyHostingLinkDomainToAgencyPlanWebsiteV1` operationId).
-	AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/domains (the `AgencyHostingLinkDomainToWebsiteV1` operationId).
+	AgencyHostingLinkDomainToWebsiteV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingLinkDomainToWebsiteV1Response, error)
 
-	// AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithResponse Link domain to Agency Plan website
+	// AgencyHostingLinkDomainToWebsiteV1WithResponse Link domain to website
 	//
 	// Links a domain to the specified Agency Plan website so it can serve traffic for that domain.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/domains (the `AgencyHostingLinkDomainToAgencyPlanWebsiteV1` operationId).
-	AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingLinkDomainToAgencyPlanWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/domains (the `AgencyHostingLinkDomainToWebsiteV1` operationId).
+	AgencyHostingLinkDomainToWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingLinkDomainToWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingLinkDomainToWebsiteV1Response, error)
 
-	// AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1WithResponse Unlink domain from Agency Plan website
+	// AgencyHostingUnlinkDomainFromWebsiteV1WithResponse Unlink domain from website
 	//
 	// Unlinks a domain from the specified Agency Plan website.
 	//
@@ -42677,10 +42677,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/domains/{domain} (the `AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1` operationId).
-	AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response, error)
+	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/domains/{domain} (the `AgencyHostingUnlinkDomainFromWebsiteV1` operationId).
+	AgencyHostingUnlinkDomainFromWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*AgencyHostingUnlinkDomainFromWebsiteV1Response, error)
 
-	// AgencyHostingChangeAgencyPlanWebsiteDomainV1WithBodyWithResponse Change Agency Plan website domain
+	// AgencyHostingChangeWebsiteDomainV1WithBodyWithResponse Change website domain
 	//
 	// Changes the primary domain for an Agency Plan website.
 	//
@@ -42689,10 +42689,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/domains/{from_domain} (the `AgencyHostingChangeAgencyPlanWebsiteDomainV1` operationId).
-	AgencyHostingChangeAgencyPlanWebsiteDomainV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingChangeAgencyPlanWebsiteDomainV1Response, error)
+	// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/domains/{from_domain} (the `AgencyHostingChangeWebsiteDomainV1` operationId).
+	AgencyHostingChangeWebsiteDomainV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingChangeWebsiteDomainV1Response, error)
 
-	// AgencyHostingChangeAgencyPlanWebsiteDomainV1WithResponse Change Agency Plan website domain
+	// AgencyHostingChangeWebsiteDomainV1WithResponse Change website domain
 	//
 	// Changes the primary domain for an Agency Plan website.
 	//
@@ -42701,10 +42701,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/domains/{from_domain} (the `AgencyHostingChangeAgencyPlanWebsiteDomainV1` operationId).
-	AgencyHostingChangeAgencyPlanWebsiteDomainV1WithResponse(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, body AgencyHostingChangeAgencyPlanWebsiteDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingChangeAgencyPlanWebsiteDomainV1Response, error)
+	// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/domains/{from_domain} (the `AgencyHostingChangeWebsiteDomainV1` operationId).
+	AgencyHostingChangeWebsiteDomainV1WithResponse(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, body AgencyHostingChangeWebsiteDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingChangeWebsiteDomainV1Response, error)
 
-	// AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithBodyWithResponse Import Agency Plan website from archive
+	// AgencyHostingImportWebsiteFromArchiveV1WithBodyWithResponse Import website from archive
 	//
 	// Imports an Agency Plan website from an already-uploaded archive.
 	//
@@ -42714,10 +42714,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/import-archive (the `AgencyHostingImportAgencyPlanWebsiteFromArchiveV1` operationId).
-	AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/import-archive (the `AgencyHostingImportWebsiteFromArchiveV1` operationId).
+	AgencyHostingImportWebsiteFromArchiveV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingImportWebsiteFromArchiveV1Response, error)
 
-	// AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithResponse Import Agency Plan website from archive
+	// AgencyHostingImportWebsiteFromArchiveV1WithResponse Import website from archive
 	//
 	// Imports an Agency Plan website from an already-uploaded archive.
 	//
@@ -42727,10 +42727,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/import-archive (the `AgencyHostingImportAgencyPlanWebsiteFromArchiveV1` operationId).
-	AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingImportAgencyPlanWebsiteFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response, error)
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/import-archive (the `AgencyHostingImportWebsiteFromArchiveV1` operationId).
+	AgencyHostingImportWebsiteFromArchiveV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingImportWebsiteFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingImportWebsiteFromArchiveV1Response, error)
 
-	// AgencyHostingListRunningAgencyPlanWebsiteProcessesV1WithResponse List running Agency Plan website processes
+	// AgencyHostingListWebsiteProcessesV1WithResponse List website processes
 	//
 	// Lists active and recently completed asynchronous processes for an Agency Plan website.
 	//
@@ -42739,45 +42739,45 @@ type ClientWithResponsesInterface interface {
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/processes (the `AgencyHostingListRunningAgencyPlanWebsiteProcessesV1` operationId).
-	AgencyHostingListRunningAgencyPlanWebsiteProcessesV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response, error)
+	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/processes (the `AgencyHostingListWebsiteProcessesV1` operationId).
+	AgencyHostingListWebsiteProcessesV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingListWebsiteProcessesV1Response, error)
 
-	// AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1WithResponse Get Agency Plan website WordPress settings
+	// AgencyHostingGetWordPressSettingsV1WithResponse Get WordPress settings
 	//
 	// Returns the current WordPress settings for an Agency Plan website: installed core version,
 	// LiteSpeed Cache plugin status, object cache status, and maintenance mode status.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings (the `AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1` operationId).
-	AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response, error)
+	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings (the `AgencyHostingGetWordPressSettingsV1` operationId).
+	AgencyHostingGetWordPressSettingsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingGetWordPressSettingsV1Response, error)
 
-	// AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithBodyWithResponse Change Agency Plan website WordPress core version
+	// AgencyHostingChangeWordPressVersionV1WithBodyWithResponse Change WordPress version
 	//
 	// Changes the installed WordPress core version on an Agency Plan website to one of the versions available for installation.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with PATCH /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/version (the `AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1` operationId).
-	AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response, error)
+	// Corresponds with PATCH /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/version (the `AgencyHostingChangeWordPressVersionV1` operationId).
+	AgencyHostingChangeWordPressVersionV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingChangeWordPressVersionV1Response, error)
 
-	// AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithResponse Change Agency Plan website WordPress core version
+	// AgencyHostingChangeWordPressVersionV1WithResponse Change WordPress version
 	//
 	// Changes the installed WordPress core version on an Agency Plan website to one of the versions available for installation.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with PATCH /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/version (the `AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1` operationId).
-	AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response, error)
+	// Corresponds with PATCH /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/version (the `AgencyHostingChangeWordPressVersionV1` operationId).
+	AgencyHostingChangeWordPressVersionV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingChangeWordPressVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingChangeWordPressVersionV1Response, error)
 
-	// AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1WithResponse List available WordPress versions for an Agency Plan website
+	// AgencyHostingListAvailableWordPressVersionsV1WithResponse List available WordPress versions
 	//
 	// Lists the WordPress core versions available for installation on an Agency Plan website.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/versions (the `AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1` operationId).
-	AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response, error)
+	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/versions (the `AgencyHostingListAvailableWordPressVersionsV1` operationId).
+	AgencyHostingListAvailableWordPressVersionsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingListAvailableWordPressVersionsV1Response, error)
 
 	// BillingGetCatalogItemListV1WithResponse Get catalog item list
 	//
@@ -48015,7 +48015,7 @@ type ClientWithResponsesInterface interface {
 	VPSStopVirtualMachineV1WithResponse(ctx context.Context, virtualMachineId VirtualMachineId, reqEditors ...RequestEditorFn) (*VPSStopVirtualMachineV1Response, error)
 }
 
-type AgencyHostingListAgencyPlanDomainsV1Response struct {
+type AgencyHostingListDomainsV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -48031,7 +48031,7 @@ type AgencyHostingListAgencyPlanDomainsV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingListAgencyPlanDomainsV1Response) GetJSON200() *struct {
+func (r AgencyHostingListDomainsV1Response) GetJSON200() *struct {
 	// Data Array of [`AgencyHosting.V1.Domains.DomainResource`](#model/agencyhostingv1domainsdomainresource)
 	Data *AgencyHostingV1DomainsDomainCollection `json:"data,omitempty"`
 	Meta *CommonSchemaPaginationMetaSchema       `json:"meta,omitempty"`
@@ -48040,22 +48040,22 @@ func (r AgencyHostingListAgencyPlanDomainsV1Response) GetJSON200() *struct {
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingListAgencyPlanDomainsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgencyHostingListDomainsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingListAgencyPlanDomainsV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgencyHostingListDomainsV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgencyHostingListAgencyPlanDomainsV1Response) GetBody() []byte {
+func (r AgencyHostingListDomainsV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgencyHostingListAgencyPlanDomainsV1Response) Status() string {
+func (r AgencyHostingListDomainsV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48063,7 +48063,7 @@ func (r AgencyHostingListAgencyPlanDomainsV1Response) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingListAgencyPlanDomainsV1Response) StatusCode() int {
+func (r AgencyHostingListDomainsV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48071,14 +48071,14 @@ func (r AgencyHostingListAgencyPlanDomainsV1Response) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingListAgencyPlanDomainsV1Response) ContentType() string {
+func (r AgencyHostingListDomainsV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AgencyHostingListAgencyPlanOrdersV1Response struct {
+type AgencyHostingListOrdersV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -48094,7 +48094,7 @@ type AgencyHostingListAgencyPlanOrdersV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingListAgencyPlanOrdersV1Response) GetJSON200() *struct {
+func (r AgencyHostingListOrdersV1Response) GetJSON200() *struct {
 	// Data Array of [`AgencyHosting.V1.Orders.OrderResource`](#model/agencyhostingv1ordersorderresource)
 	Data *AgencyHostingV1OrdersOrderCollection `json:"data,omitempty"`
 	Meta *CommonSchemaPaginationMetaSchema     `json:"meta,omitempty"`
@@ -48103,22 +48103,22 @@ func (r AgencyHostingListAgencyPlanOrdersV1Response) GetJSON200() *struct {
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingListAgencyPlanOrdersV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgencyHostingListOrdersV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingListAgencyPlanOrdersV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgencyHostingListOrdersV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgencyHostingListAgencyPlanOrdersV1Response) GetBody() []byte {
+func (r AgencyHostingListOrdersV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgencyHostingListAgencyPlanOrdersV1Response) Status() string {
+func (r AgencyHostingListOrdersV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48126,7 +48126,7 @@ func (r AgencyHostingListAgencyPlanOrdersV1Response) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingListAgencyPlanOrdersV1Response) StatusCode() int {
+func (r AgencyHostingListOrdersV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48134,14 +48134,14 @@ func (r AgencyHostingListAgencyPlanOrdersV1Response) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingListAgencyPlanOrdersV1Response) ContentType() string {
+func (r AgencyHostingListOrdersV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response struct {
+type AgencyHostingListAvailableDatacentersV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -48153,27 +48153,27 @@ type AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response struct 
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response) GetJSON200() *AgencyHostingV1DatacentersDatacenterCollection {
+func (r AgencyHostingListAvailableDatacentersV1Response) GetJSON200() *AgencyHostingV1DatacentersDatacenterCollection {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgencyHostingListAvailableDatacentersV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgencyHostingListAvailableDatacentersV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response) GetBody() []byte {
+func (r AgencyHostingListAvailableDatacentersV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response) Status() string {
+func (r AgencyHostingListAvailableDatacentersV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48181,7 +48181,7 @@ func (r AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response) Sta
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response) StatusCode() int {
+func (r AgencyHostingListAvailableDatacentersV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48189,14 +48189,14 @@ func (r AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response) Sta
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response) ContentType() string {
+func (r AgencyHostingListAvailableDatacentersV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AgencyHostingProvisionANewAgencyPlanWebsiteV1Response struct {
+type AgencyHostingCreateANewWebsiteV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -48210,32 +48210,32 @@ type AgencyHostingProvisionANewAgencyPlanWebsiteV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingProvisionANewAgencyPlanWebsiteV1Response) GetJSON200() *AgencyHostingV1SetupsWebsiteSetupResource {
+func (r AgencyHostingCreateANewWebsiteV1Response) GetJSON200() *AgencyHostingV1SetupsWebsiteSetupResource {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingProvisionANewAgencyPlanWebsiteV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgencyHostingCreateANewWebsiteV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON422 returns the response for an HTTP 422 `application/json` response
-func (r AgencyHostingProvisionANewAgencyPlanWebsiteV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+func (r AgencyHostingCreateANewWebsiteV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
 	return r.JSON422
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingProvisionANewAgencyPlanWebsiteV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgencyHostingCreateANewWebsiteV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgencyHostingProvisionANewAgencyPlanWebsiteV1Response) GetBody() []byte {
+func (r AgencyHostingCreateANewWebsiteV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgencyHostingProvisionANewAgencyPlanWebsiteV1Response) Status() string {
+func (r AgencyHostingCreateANewWebsiteV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48243,7 +48243,7 @@ func (r AgencyHostingProvisionANewAgencyPlanWebsiteV1Response) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingProvisionANewAgencyPlanWebsiteV1Response) StatusCode() int {
+func (r AgencyHostingCreateANewWebsiteV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48251,14 +48251,14 @@ func (r AgencyHostingProvisionANewAgencyPlanWebsiteV1Response) StatusCode() int 
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingProvisionANewAgencyPlanWebsiteV1Response) ContentType() string {
+func (r AgencyHostingCreateANewWebsiteV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response struct {
+type AgencyHostingGetWebsiteSetupStatusV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -48270,27 +48270,27 @@ type AgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response) GetJSON200() *AgencyHostingV1SetupsWebsiteSetupStatusResource {
+func (r AgencyHostingGetWebsiteSetupStatusV1Response) GetJSON200() *AgencyHostingV1SetupsWebsiteSetupStatusResource {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgencyHostingGetWebsiteSetupStatusV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgencyHostingGetWebsiteSetupStatusV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response) GetBody() []byte {
+func (r AgencyHostingGetWebsiteSetupStatusV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response) Status() string {
+func (r AgencyHostingGetWebsiteSetupStatusV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48298,7 +48298,7 @@ func (r AgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response) Status() string 
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response) StatusCode() int {
+func (r AgencyHostingGetWebsiteSetupStatusV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48306,14 +48306,14 @@ func (r AgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response) StatusCode() int
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response) ContentType() string {
+func (r AgencyHostingGetWebsiteSetupStatusV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AgencyHostingDeleteAgencyPlanWebsiteV1Response struct {
+type AgencyHostingDeleteWebsiteV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -48325,27 +48325,27 @@ type AgencyHostingDeleteAgencyPlanWebsiteV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingDeleteAgencyPlanWebsiteV1Response) GetJSON200() *CommonSuccessEmptyResource {
+func (r AgencyHostingDeleteWebsiteV1Response) GetJSON200() *CommonSuccessEmptyResource {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingDeleteAgencyPlanWebsiteV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgencyHostingDeleteWebsiteV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingDeleteAgencyPlanWebsiteV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgencyHostingDeleteWebsiteV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgencyHostingDeleteAgencyPlanWebsiteV1Response) GetBody() []byte {
+func (r AgencyHostingDeleteWebsiteV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgencyHostingDeleteAgencyPlanWebsiteV1Response) Status() string {
+func (r AgencyHostingDeleteWebsiteV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48353,7 +48353,7 @@ func (r AgencyHostingDeleteAgencyPlanWebsiteV1Response) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingDeleteAgencyPlanWebsiteV1Response) StatusCode() int {
+func (r AgencyHostingDeleteWebsiteV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48361,14 +48361,14 @@ func (r AgencyHostingDeleteAgencyPlanWebsiteV1Response) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingDeleteAgencyPlanWebsiteV1Response) ContentType() string {
+func (r AgencyHostingDeleteWebsiteV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AgencyHostingGetAgencyPlanWebsiteDetailsV1Response struct {
+type AgencyHostingGetWebsiteDetailsV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -48380,27 +48380,27 @@ type AgencyHostingGetAgencyPlanWebsiteDetailsV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingGetAgencyPlanWebsiteDetailsV1Response) GetJSON200() *AgencyHostingV1WebsitesWebsiteResource {
+func (r AgencyHostingGetWebsiteDetailsV1Response) GetJSON200() *AgencyHostingV1WebsitesWebsiteResource {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingGetAgencyPlanWebsiteDetailsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgencyHostingGetWebsiteDetailsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingGetAgencyPlanWebsiteDetailsV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgencyHostingGetWebsiteDetailsV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgencyHostingGetAgencyPlanWebsiteDetailsV1Response) GetBody() []byte {
+func (r AgencyHostingGetWebsiteDetailsV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgencyHostingGetAgencyPlanWebsiteDetailsV1Response) Status() string {
+func (r AgencyHostingGetWebsiteDetailsV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48408,7 +48408,7 @@ func (r AgencyHostingGetAgencyPlanWebsiteDetailsV1Response) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingGetAgencyPlanWebsiteDetailsV1Response) StatusCode() int {
+func (r AgencyHostingGetWebsiteDetailsV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48416,14 +48416,14 @@ func (r AgencyHostingGetAgencyPlanWebsiteDetailsV1Response) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingGetAgencyPlanWebsiteDetailsV1Response) ContentType() string {
+func (r AgencyHostingGetWebsiteDetailsV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response struct {
+type AgencyHostingBuildWebsiteNodeJSAssetsV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -48437,32 +48437,32 @@ type AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response) GetJSON200() *CommonSuccessEmptyResource {
+func (r AgencyHostingBuildWebsiteNodeJSAssetsV1Response) GetJSON200() *CommonSuccessEmptyResource {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgencyHostingBuildWebsiteNodeJSAssetsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON422 returns the response for an HTTP 422 `application/json` response
-func (r AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+func (r AgencyHostingBuildWebsiteNodeJSAssetsV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
 	return r.JSON422
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgencyHostingBuildWebsiteNodeJSAssetsV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response) GetBody() []byte {
+func (r AgencyHostingBuildWebsiteNodeJSAssetsV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response) Status() string {
+func (r AgencyHostingBuildWebsiteNodeJSAssetsV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48470,7 +48470,7 @@ func (r AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response) Status() stri
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response) StatusCode() int {
+func (r AgencyHostingBuildWebsiteNodeJSAssetsV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48478,14 +48478,14 @@ func (r AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response) StatusCode() 
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response) ContentType() string {
+func (r AgencyHostingBuildWebsiteNodeJSAssetsV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AgencyHostingClearAgencyPlanWebsiteCacheV1Response struct {
+type AgencyHostingClearWebsiteCacheV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -48497,27 +48497,27 @@ type AgencyHostingClearAgencyPlanWebsiteCacheV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingClearAgencyPlanWebsiteCacheV1Response) GetJSON200() *CommonSuccessEmptyResource {
+func (r AgencyHostingClearWebsiteCacheV1Response) GetJSON200() *CommonSuccessEmptyResource {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingClearAgencyPlanWebsiteCacheV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgencyHostingClearWebsiteCacheV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingClearAgencyPlanWebsiteCacheV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgencyHostingClearWebsiteCacheV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgencyHostingClearAgencyPlanWebsiteCacheV1Response) GetBody() []byte {
+func (r AgencyHostingClearWebsiteCacheV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgencyHostingClearAgencyPlanWebsiteCacheV1Response) Status() string {
+func (r AgencyHostingClearWebsiteCacheV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48525,7 +48525,7 @@ func (r AgencyHostingClearAgencyPlanWebsiteCacheV1Response) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingClearAgencyPlanWebsiteCacheV1Response) StatusCode() int {
+func (r AgencyHostingClearWebsiteCacheV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48533,14 +48533,14 @@ func (r AgencyHostingClearAgencyPlanWebsiteCacheV1Response) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingClearAgencyPlanWebsiteCacheV1Response) ContentType() string {
+func (r AgencyHostingClearWebsiteCacheV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AgencyHostingListAgencyPlanWebsiteCronJobsV1Response struct {
+type AgencyHostingListWebsiteCronJobsV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -48556,7 +48556,7 @@ type AgencyHostingListAgencyPlanWebsiteCronJobsV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingListAgencyPlanWebsiteCronJobsV1Response) GetJSON200() *struct {
+func (r AgencyHostingListWebsiteCronJobsV1Response) GetJSON200() *struct {
 	// Data Array of [`AgencyHosting.V1.Websites.CronJobs.CronJobResource`](#model/agencyhostingv1websitescronjobscronjobresource)
 	Data *AgencyHostingV1WebsitesCronJobsCronJobCollection `json:"data,omitempty"`
 	Meta *CommonSchemaPaginationMetaSchema                 `json:"meta,omitempty"`
@@ -48565,22 +48565,22 @@ func (r AgencyHostingListAgencyPlanWebsiteCronJobsV1Response) GetJSON200() *stru
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingListAgencyPlanWebsiteCronJobsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgencyHostingListWebsiteCronJobsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingListAgencyPlanWebsiteCronJobsV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgencyHostingListWebsiteCronJobsV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgencyHostingListAgencyPlanWebsiteCronJobsV1Response) GetBody() []byte {
+func (r AgencyHostingListWebsiteCronJobsV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgencyHostingListAgencyPlanWebsiteCronJobsV1Response) Status() string {
+func (r AgencyHostingListWebsiteCronJobsV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48588,7 +48588,7 @@ func (r AgencyHostingListAgencyPlanWebsiteCronJobsV1Response) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingListAgencyPlanWebsiteCronJobsV1Response) StatusCode() int {
+func (r AgencyHostingListWebsiteCronJobsV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48596,14 +48596,14 @@ func (r AgencyHostingListAgencyPlanWebsiteCronJobsV1Response) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingListAgencyPlanWebsiteCronJobsV1Response) ContentType() string {
+func (r AgencyHostingListWebsiteCronJobsV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response struct {
+type AgencyHostingCreateWebsiteCronJobV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -48617,32 +48617,32 @@ type AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response) GetJSON200() *AgencyHostingV1WebsitesCronJobsCronJobResource {
+func (r AgencyHostingCreateWebsiteCronJobV1Response) GetJSON200() *AgencyHostingV1WebsitesCronJobsCronJobResource {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgencyHostingCreateWebsiteCronJobV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON422 returns the response for an HTTP 422 `application/json` response
-func (r AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+func (r AgencyHostingCreateWebsiteCronJobV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
 	return r.JSON422
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgencyHostingCreateWebsiteCronJobV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response) GetBody() []byte {
+func (r AgencyHostingCreateWebsiteCronJobV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response) Status() string {
+func (r AgencyHostingCreateWebsiteCronJobV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48650,7 +48650,7 @@ func (r AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response) StatusCode() int {
+func (r AgencyHostingCreateWebsiteCronJobV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48658,14 +48658,14 @@ func (r AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response) StatusCode() int 
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response) ContentType() string {
+func (r AgencyHostingCreateWebsiteCronJobV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response struct {
+type AgencyHostingDeleteWebsiteCronJobV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -48677,27 +48677,27 @@ type AgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response) GetJSON200() *CommonSuccessEmptyResource {
+func (r AgencyHostingDeleteWebsiteCronJobV1Response) GetJSON200() *CommonSuccessEmptyResource {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgencyHostingDeleteWebsiteCronJobV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgencyHostingDeleteWebsiteCronJobV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response) GetBody() []byte {
+func (r AgencyHostingDeleteWebsiteCronJobV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response) Status() string {
+func (r AgencyHostingDeleteWebsiteCronJobV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48705,7 +48705,7 @@ func (r AgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response) StatusCode() int {
+func (r AgencyHostingDeleteWebsiteCronJobV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48713,14 +48713,14 @@ func (r AgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response) StatusCode() int 
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response) ContentType() string {
+func (r AgencyHostingDeleteWebsiteCronJobV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AgencyHostingListAgencyPlanWebsiteDatabasesV1Response struct {
+type AgencyHostingListWebsiteDatabasesV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -48736,7 +48736,7 @@ type AgencyHostingListAgencyPlanWebsiteDatabasesV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingListAgencyPlanWebsiteDatabasesV1Response) GetJSON200() *struct {
+func (r AgencyHostingListWebsiteDatabasesV1Response) GetJSON200() *struct {
 	// Data Array of [`AgencyHosting.V1.Websites.Databases.DatabaseResource`](#model/agencyhostingv1websitesdatabasesdatabaseresource)
 	Data *AgencyHostingV1WebsitesDatabasesDatabaseCollection `json:"data,omitempty"`
 	Meta *CommonSchemaPaginationMetaSchema                   `json:"meta,omitempty"`
@@ -48745,22 +48745,22 @@ func (r AgencyHostingListAgencyPlanWebsiteDatabasesV1Response) GetJSON200() *str
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingListAgencyPlanWebsiteDatabasesV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgencyHostingListWebsiteDatabasesV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingListAgencyPlanWebsiteDatabasesV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgencyHostingListWebsiteDatabasesV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgencyHostingListAgencyPlanWebsiteDatabasesV1Response) GetBody() []byte {
+func (r AgencyHostingListWebsiteDatabasesV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgencyHostingListAgencyPlanWebsiteDatabasesV1Response) Status() string {
+func (r AgencyHostingListWebsiteDatabasesV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48768,7 +48768,7 @@ func (r AgencyHostingListAgencyPlanWebsiteDatabasesV1Response) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingListAgencyPlanWebsiteDatabasesV1Response) StatusCode() int {
+func (r AgencyHostingListWebsiteDatabasesV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48776,14 +48776,14 @@ func (r AgencyHostingListAgencyPlanWebsiteDatabasesV1Response) StatusCode() int 
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingListAgencyPlanWebsiteDatabasesV1Response) ContentType() string {
+func (r AgencyHostingListWebsiteDatabasesV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AgencyHostingCreateAgencyPlanWebsiteDatabaseV1Response struct {
+type AgencyHostingCreateWebsiteDatabaseV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -48797,32 +48797,32 @@ type AgencyHostingCreateAgencyPlanWebsiteDatabaseV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingCreateAgencyPlanWebsiteDatabaseV1Response) GetJSON200() *AgencyHostingV1WebsitesDatabasesDatabaseResource {
+func (r AgencyHostingCreateWebsiteDatabaseV1Response) GetJSON200() *AgencyHostingV1WebsitesDatabasesDatabaseResource {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingCreateAgencyPlanWebsiteDatabaseV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgencyHostingCreateWebsiteDatabaseV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON422 returns the response for an HTTP 422 `application/json` response
-func (r AgencyHostingCreateAgencyPlanWebsiteDatabaseV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+func (r AgencyHostingCreateWebsiteDatabaseV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
 	return r.JSON422
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingCreateAgencyPlanWebsiteDatabaseV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgencyHostingCreateWebsiteDatabaseV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgencyHostingCreateAgencyPlanWebsiteDatabaseV1Response) GetBody() []byte {
+func (r AgencyHostingCreateWebsiteDatabaseV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgencyHostingCreateAgencyPlanWebsiteDatabaseV1Response) Status() string {
+func (r AgencyHostingCreateWebsiteDatabaseV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48830,7 +48830,7 @@ func (r AgencyHostingCreateAgencyPlanWebsiteDatabaseV1Response) Status() string 
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingCreateAgencyPlanWebsiteDatabaseV1Response) StatusCode() int {
+func (r AgencyHostingCreateWebsiteDatabaseV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48838,14 +48838,14 @@ func (r AgencyHostingCreateAgencyPlanWebsiteDatabaseV1Response) StatusCode() int
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingCreateAgencyPlanWebsiteDatabaseV1Response) ContentType() string {
+func (r AgencyHostingCreateWebsiteDatabaseV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1Response struct {
+type AgencyHostingDeleteWebsiteDatabaseV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -48857,27 +48857,27 @@ type AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1Response) GetJSON200() *CommonSuccessEmptyResource {
+func (r AgencyHostingDeleteWebsiteDatabaseV1Response) GetJSON200() *CommonSuccessEmptyResource {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgencyHostingDeleteWebsiteDatabaseV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgencyHostingDeleteWebsiteDatabaseV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1Response) GetBody() []byte {
+func (r AgencyHostingDeleteWebsiteDatabaseV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1Response) Status() string {
+func (r AgencyHostingDeleteWebsiteDatabaseV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48885,7 +48885,7 @@ func (r AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1Response) Status() string 
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1Response) StatusCode() int {
+func (r AgencyHostingDeleteWebsiteDatabaseV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48893,14 +48893,14 @@ func (r AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1Response) StatusCode() int
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1Response) ContentType() string {
+func (r AgencyHostingDeleteWebsiteDatabaseV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Response struct {
+type AgencyHostingCreateWebsiteDatabaseUserV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -48914,32 +48914,32 @@ type AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Response) GetJSON200() *AgencyHostingV1WebsitesDatabasesDatabaseUserResource {
+func (r AgencyHostingCreateWebsiteDatabaseUserV1Response) GetJSON200() *AgencyHostingV1WebsitesDatabasesDatabaseUserResource {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgencyHostingCreateWebsiteDatabaseUserV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON422 returns the response for an HTTP 422 `application/json` response
-func (r AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+func (r AgencyHostingCreateWebsiteDatabaseUserV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
 	return r.JSON422
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgencyHostingCreateWebsiteDatabaseUserV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Response) GetBody() []byte {
+func (r AgencyHostingCreateWebsiteDatabaseUserV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Response) Status() string {
+func (r AgencyHostingCreateWebsiteDatabaseUserV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48947,7 +48947,7 @@ func (r AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Response) Status() str
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Response) StatusCode() int {
+func (r AgencyHostingCreateWebsiteDatabaseUserV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48955,14 +48955,14 @@ func (r AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Response) StatusCode()
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Response) ContentType() string {
+func (r AgencyHostingCreateWebsiteDatabaseUserV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1Response struct {
+type AgencyHostingDeleteWebsiteDatabaseUserV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -48974,27 +48974,27 @@ type AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1Response) GetJSON200() *CommonSuccessEmptyResource {
+func (r AgencyHostingDeleteWebsiteDatabaseUserV1Response) GetJSON200() *CommonSuccessEmptyResource {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgencyHostingDeleteWebsiteDatabaseUserV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgencyHostingDeleteWebsiteDatabaseUserV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1Response) GetBody() []byte {
+func (r AgencyHostingDeleteWebsiteDatabaseUserV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1Response) Status() string {
+func (r AgencyHostingDeleteWebsiteDatabaseUserV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -49002,7 +49002,7 @@ func (r AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1Response) Status() str
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1Response) StatusCode() int {
+func (r AgencyHostingDeleteWebsiteDatabaseUserV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -49010,14 +49010,14 @@ func (r AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1Response) StatusCode()
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1Response) ContentType() string {
+func (r AgencyHostingDeleteWebsiteDatabaseUserV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response struct {
+type AgencyHostingLinkDomainToWebsiteV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -49031,32 +49031,32 @@ type AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response) GetJSON200() *CommonSuccessEmptyResource {
+func (r AgencyHostingLinkDomainToWebsiteV1Response) GetJSON200() *CommonSuccessEmptyResource {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgencyHostingLinkDomainToWebsiteV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON422 returns the response for an HTTP 422 `application/json` response
-func (r AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+func (r AgencyHostingLinkDomainToWebsiteV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
 	return r.JSON422
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgencyHostingLinkDomainToWebsiteV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response) GetBody() []byte {
+func (r AgencyHostingLinkDomainToWebsiteV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response) Status() string {
+func (r AgencyHostingLinkDomainToWebsiteV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -49064,7 +49064,7 @@ func (r AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response) StatusCode() int {
+func (r AgencyHostingLinkDomainToWebsiteV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -49072,14 +49072,14 @@ func (r AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response) ContentType() string {
+func (r AgencyHostingLinkDomainToWebsiteV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response struct {
+type AgencyHostingUnlinkDomainFromWebsiteV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -49091,27 +49091,27 @@ type AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response) GetJSON200() *CommonSuccessEmptyResource {
+func (r AgencyHostingUnlinkDomainFromWebsiteV1Response) GetJSON200() *CommonSuccessEmptyResource {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgencyHostingUnlinkDomainFromWebsiteV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgencyHostingUnlinkDomainFromWebsiteV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response) GetBody() []byte {
+func (r AgencyHostingUnlinkDomainFromWebsiteV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response) Status() string {
+func (r AgencyHostingUnlinkDomainFromWebsiteV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -49119,7 +49119,7 @@ func (r AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response) Status() strin
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response) StatusCode() int {
+func (r AgencyHostingUnlinkDomainFromWebsiteV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -49127,76 +49127,14 @@ func (r AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response) StatusCode() i
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response) ContentType() string {
+func (r AgencyHostingUnlinkDomainFromWebsiteV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AgencyHostingChangeAgencyPlanWebsiteDomainV1Response struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *CommonSuccessEmptyResource
-	// JSON401 the response for an HTTP 401 `application/json` response
-	JSON401 *CommonResponseUnauthorizedResponse
-	// JSON422 the response for an HTTP 422 `application/json` response
-	JSON422 *CommonResponseUnprocessableContentResponse
-	// JSON500 the response for an HTTP 500 `application/json` response
-	JSON500 *CommonResponseErrorResponse
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingChangeAgencyPlanWebsiteDomainV1Response) GetJSON200() *CommonSuccessEmptyResource {
-	return r.JSON200
-}
-
-// GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingChangeAgencyPlanWebsiteDomainV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
-	return r.JSON401
-}
-
-// GetJSON422 returns the response for an HTTP 422 `application/json` response
-func (r AgencyHostingChangeAgencyPlanWebsiteDomainV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
-	return r.JSON422
-}
-
-// GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingChangeAgencyPlanWebsiteDomainV1Response) GetJSON500() *CommonResponseErrorResponse {
-	return r.JSON500
-}
-
-// GetBody returns the raw response body bytes
-func (r AgencyHostingChangeAgencyPlanWebsiteDomainV1Response) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r AgencyHostingChangeAgencyPlanWebsiteDomainV1Response) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingChangeAgencyPlanWebsiteDomainV1Response) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingChangeAgencyPlanWebsiteDomainV1Response) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response struct {
+type AgencyHostingChangeWebsiteDomainV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -49210,32 +49148,32 @@ type AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response) GetJSON200() *CommonSuccessEmptyResource {
+func (r AgencyHostingChangeWebsiteDomainV1Response) GetJSON200() *CommonSuccessEmptyResource {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgencyHostingChangeWebsiteDomainV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON422 returns the response for an HTTP 422 `application/json` response
-func (r AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+func (r AgencyHostingChangeWebsiteDomainV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
 	return r.JSON422
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgencyHostingChangeWebsiteDomainV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response) GetBody() []byte {
+func (r AgencyHostingChangeWebsiteDomainV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response) Status() string {
+func (r AgencyHostingChangeWebsiteDomainV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -49243,7 +49181,7 @@ func (r AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response) Status() stri
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response) StatusCode() int {
+func (r AgencyHostingChangeWebsiteDomainV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -49251,14 +49189,76 @@ func (r AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response) StatusCode() 
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response) ContentType() string {
+func (r AgencyHostingChangeWebsiteDomainV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response struct {
+type AgencyHostingImportWebsiteFromArchiveV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r AgencyHostingImportWebsiteFromArchiveV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r AgencyHostingImportWebsiteFromArchiveV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r AgencyHostingImportWebsiteFromArchiveV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r AgencyHostingImportWebsiteFromArchiveV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r AgencyHostingImportWebsiteFromArchiveV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingImportWebsiteFromArchiveV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingImportWebsiteFromArchiveV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingImportWebsiteFromArchiveV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingListWebsiteProcessesV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -49270,27 +49270,27 @@ type AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response) GetJSON200() *AgencyHostingV1WebsitesWebsiteProcessCollection {
+func (r AgencyHostingListWebsiteProcessesV1Response) GetJSON200() *AgencyHostingV1WebsitesWebsiteProcessCollection {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgencyHostingListWebsiteProcessesV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgencyHostingListWebsiteProcessesV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response) GetBody() []byte {
+func (r AgencyHostingListWebsiteProcessesV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response) Status() string {
+func (r AgencyHostingListWebsiteProcessesV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -49298,7 +49298,7 @@ func (r AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response) Status() s
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response) StatusCode() int {
+func (r AgencyHostingListWebsiteProcessesV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -49306,14 +49306,14 @@ func (r AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response) StatusCode
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response) ContentType() string {
+func (r AgencyHostingListWebsiteProcessesV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response struct {
+type AgencyHostingGetWordPressSettingsV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -49325,27 +49325,27 @@ type AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response) GetJSON200() *AgencyHostingV1WordPressSettingsResource {
+func (r AgencyHostingGetWordPressSettingsV1Response) GetJSON200() *AgencyHostingV1WordPressSettingsResource {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgencyHostingGetWordPressSettingsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgencyHostingGetWordPressSettingsV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response) GetBody() []byte {
+func (r AgencyHostingGetWordPressSettingsV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response) Status() string {
+func (r AgencyHostingGetWordPressSettingsV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -49353,7 +49353,7 @@ func (r AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response) Status() s
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response) StatusCode() int {
+func (r AgencyHostingGetWordPressSettingsV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -49361,14 +49361,14 @@ func (r AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response) StatusCode
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response) ContentType() string {
+func (r AgencyHostingGetWordPressSettingsV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response struct {
+type AgencyHostingChangeWordPressVersionV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -49382,32 +49382,32 @@ type AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response) GetJSON200() *CommonSuccessEmptyResource {
+func (r AgencyHostingChangeWordPressVersionV1Response) GetJSON200() *CommonSuccessEmptyResource {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgencyHostingChangeWordPressVersionV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON422 returns the response for an HTTP 422 `application/json` response
-func (r AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+func (r AgencyHostingChangeWordPressVersionV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
 	return r.JSON422
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgencyHostingChangeWordPressVersionV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response) GetBody() []byte {
+func (r AgencyHostingChangeWordPressVersionV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response) Status() string {
+func (r AgencyHostingChangeWordPressVersionV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -49415,7 +49415,7 @@ func (r AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response) Stat
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response) StatusCode() int {
+func (r AgencyHostingChangeWordPressVersionV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -49423,14 +49423,14 @@ func (r AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response) Stat
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response) ContentType() string {
+func (r AgencyHostingChangeWordPressVersionV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response struct {
+type AgencyHostingListAvailableWordPressVersionsV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -49442,27 +49442,27 @@ type AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response) GetJSON200() *AgencyHostingV1WordPressVersionCollection {
+func (r AgencyHostingListAvailableWordPressVersionsV1Response) GetJSON200() *AgencyHostingV1WordPressVersionCollection {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgencyHostingListAvailableWordPressVersionsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgencyHostingListAvailableWordPressVersionsV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response) GetBody() []byte {
+func (r AgencyHostingListAvailableWordPressVersionsV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response) Status() string {
+func (r AgencyHostingListAvailableWordPressVersionsV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -49470,7 +49470,7 @@ func (r AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Respo
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response) StatusCode() int {
+func (r AgencyHostingListAvailableWordPressVersionsV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -49478,7 +49478,7 @@ func (r AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Respo
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response) ContentType() string {
+func (r AgencyHostingListAvailableWordPressVersionsV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -66786,7 +66786,7 @@ func (r VPSStopVirtualMachineV1Response) ContentType() string {
 	return ""
 }
 
-// AgencyHostingListAgencyPlanDomainsV1WithResponse List Agency Plan domains
+// AgencyHostingListDomainsV1WithResponse List domains
 //
 // Returns a paginated list of domains associated with Agency Plan websites accessible to the authenticated client.
 //
@@ -66794,31 +66794,31 @@ func (r VPSStopVirtualMachineV1Response) ContentType() string {
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with GET /api/agency-hosting/v1/domains (the `AgencyHostingListAgencyPlanDomainsV1` operationId).
-func (c *ClientWithResponses) AgencyHostingListAgencyPlanDomainsV1WithResponse(ctx context.Context, params *AgencyHostingListAgencyPlanDomainsV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListAgencyPlanDomainsV1Response, error) {
-	rsp, err := c.AgencyHostingListAgencyPlanDomainsV1(ctx, params, reqEditors...)
+// Corresponds with GET /api/agency-hosting/v1/domains (the `AgencyHostingListDomainsV1` operationId).
+func (c *ClientWithResponses) AgencyHostingListDomainsV1WithResponse(ctx context.Context, params *AgencyHostingListDomainsV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListDomainsV1Response, error) {
+	rsp, err := c.AgencyHostingListDomainsV1(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingListAgencyPlanDomainsV1Response(rsp)
+	return ParseAgencyHostingListDomainsV1Response(rsp)
 }
 
-// AgencyHostingListAgencyPlanOrdersV1WithResponse List Agency Plan orders
+// AgencyHostingListOrdersV1WithResponse List orders
 //
 // Returns a paginated list of Agency Plan orders accessible to the authenticated client.
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with GET /api/agency-hosting/v1/orders (the `AgencyHostingListAgencyPlanOrdersV1` operationId).
-func (c *ClientWithResponses) AgencyHostingListAgencyPlanOrdersV1WithResponse(ctx context.Context, params *AgencyHostingListAgencyPlanOrdersV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListAgencyPlanOrdersV1Response, error) {
-	rsp, err := c.AgencyHostingListAgencyPlanOrdersV1(ctx, params, reqEditors...)
+// Corresponds with GET /api/agency-hosting/v1/orders (the `AgencyHostingListOrdersV1` operationId).
+func (c *ClientWithResponses) AgencyHostingListOrdersV1WithResponse(ctx context.Context, params *AgencyHostingListOrdersV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListOrdersV1Response, error) {
+	rsp, err := c.AgencyHostingListOrdersV1(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingListAgencyPlanOrdersV1Response(rsp)
+	return ParseAgencyHostingListOrdersV1Response(rsp)
 }
 
-// AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1WithResponse List available datacenters for an Agency Plan order
+// AgencyHostingListAvailableDatacentersV1WithResponse List available datacenters
 //
 // Lists the datacenters available for provisioning a new website on the given Agency Plan
 // hosting order.
@@ -66829,16 +66829,16 @@ func (c *ClientWithResponses) AgencyHostingListAgencyPlanOrdersV1WithResponse(ct
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/datacenters (the `AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1` operationId).
-func (c *ClientWithResponses) AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1WithResponse(ctx context.Context, orderId OrderIdPath, reqEditors ...RequestEditorFn) (*AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response, error) {
-	rsp, err := c.AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1(ctx, orderId, reqEditors...)
+// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/datacenters (the `AgencyHostingListAvailableDatacentersV1` operationId).
+func (c *ClientWithResponses) AgencyHostingListAvailableDatacentersV1WithResponse(ctx context.Context, orderId OrderIdPath, reqEditors ...RequestEditorFn) (*AgencyHostingListAvailableDatacentersV1Response, error) {
+	rsp, err := c.AgencyHostingListAvailableDatacentersV1(ctx, orderId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response(rsp)
+	return ParseAgencyHostingListAvailableDatacentersV1Response(rsp)
 }
 
-// AgencyHostingProvisionANewAgencyPlanWebsiteV1WithBodyWithResponse Provision a new Agency Plan website
+// AgencyHostingCreateANewWebsiteV1WithBodyWithResponse Create a new website
 //
 // Provisions a new website on one of your Agency Plan hosting orders.
 //
@@ -66860,16 +66860,16 @@ func (c *ClientWithResponses) AgencyHostingListAvailableDatacentersForAnAgencyPl
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with POST /api/agency-hosting/v1/orders/{order_id}/websites/setups (the `AgencyHostingProvisionANewAgencyPlanWebsiteV1` operationId).
-func (c *ClientWithResponses) AgencyHostingProvisionANewAgencyPlanWebsiteV1WithBodyWithResponse(ctx context.Context, orderId OrderIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingProvisionANewAgencyPlanWebsiteV1Response, error) {
-	rsp, err := c.AgencyHostingProvisionANewAgencyPlanWebsiteV1WithBody(ctx, orderId, contentType, body, reqEditors...)
+// Corresponds with POST /api/agency-hosting/v1/orders/{order_id}/websites/setups (the `AgencyHostingCreateANewWebsiteV1` operationId).
+func (c *ClientWithResponses) AgencyHostingCreateANewWebsiteV1WithBodyWithResponse(ctx context.Context, orderId OrderIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingCreateANewWebsiteV1Response, error) {
+	rsp, err := c.AgencyHostingCreateANewWebsiteV1WithBody(ctx, orderId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingProvisionANewAgencyPlanWebsiteV1Response(rsp)
+	return ParseAgencyHostingCreateANewWebsiteV1Response(rsp)
 }
 
-// AgencyHostingProvisionANewAgencyPlanWebsiteV1WithResponse Provision a new Agency Plan website
+// AgencyHostingCreateANewWebsiteV1WithResponse Create a new website
 //
 // Provisions a new website on one of your Agency Plan hosting orders.
 //
@@ -66891,16 +66891,16 @@ func (c *ClientWithResponses) AgencyHostingProvisionANewAgencyPlanWebsiteV1WithB
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with POST /api/agency-hosting/v1/orders/{order_id}/websites/setups (the `AgencyHostingProvisionANewAgencyPlanWebsiteV1` operationId).
-func (c *ClientWithResponses) AgencyHostingProvisionANewAgencyPlanWebsiteV1WithResponse(ctx context.Context, orderId OrderIdPath, body AgencyHostingProvisionANewAgencyPlanWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingProvisionANewAgencyPlanWebsiteV1Response, error) {
-	rsp, err := c.AgencyHostingProvisionANewAgencyPlanWebsiteV1(ctx, orderId, body, reqEditors...)
+// Corresponds with POST /api/agency-hosting/v1/orders/{order_id}/websites/setups (the `AgencyHostingCreateANewWebsiteV1` operationId).
+func (c *ClientWithResponses) AgencyHostingCreateANewWebsiteV1WithResponse(ctx context.Context, orderId OrderIdPath, body AgencyHostingCreateANewWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingCreateANewWebsiteV1Response, error) {
+	rsp, err := c.AgencyHostingCreateANewWebsiteV1(ctx, orderId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingProvisionANewAgencyPlanWebsiteV1Response(rsp)
+	return ParseAgencyHostingCreateANewWebsiteV1Response(rsp)
 }
 
-// AgencyHostingGetAgencyPlanWebsiteSetupStatusV1WithResponse Get Agency Plan website setup status
+// AgencyHostingGetWebsiteSetupStatusV1WithResponse Get website setup status
 //
 // Returns the current status of an Agency Plan website setup started via the setups
 // endpoint.
@@ -66910,16 +66910,16 @@ func (c *ClientWithResponses) AgencyHostingProvisionANewAgencyPlanWebsiteV1WithR
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/websites/setups/{setup_uuid} (the `AgencyHostingGetAgencyPlanWebsiteSetupStatusV1` operationId).
-func (c *ClientWithResponses) AgencyHostingGetAgencyPlanWebsiteSetupStatusV1WithResponse(ctx context.Context, orderId OrderIdPath, setupUuid SetupUuid, reqEditors ...RequestEditorFn) (*AgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response, error) {
-	rsp, err := c.AgencyHostingGetAgencyPlanWebsiteSetupStatusV1(ctx, orderId, setupUuid, reqEditors...)
+// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/websites/setups/{setup_uuid} (the `AgencyHostingGetWebsiteSetupStatusV1` operationId).
+func (c *ClientWithResponses) AgencyHostingGetWebsiteSetupStatusV1WithResponse(ctx context.Context, orderId OrderIdPath, setupUuid SetupUuid, reqEditors ...RequestEditorFn) (*AgencyHostingGetWebsiteSetupStatusV1Response, error) {
+	rsp, err := c.AgencyHostingGetWebsiteSetupStatusV1(ctx, orderId, setupUuid, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response(rsp)
+	return ParseAgencyHostingGetWebsiteSetupStatusV1Response(rsp)
 }
 
-// AgencyHostingDeleteAgencyPlanWebsiteV1WithResponse Delete Agency Plan website
+// AgencyHostingDeleteWebsiteV1WithResponse Delete website
 //
 // Permanently deletes an Agency Plan website. Deletion is processed asynchronously: the
 // website is immediately transitioned to a deleting state and the underlying server
@@ -66927,32 +66927,32 @@ func (c *ClientWithResponses) AgencyHostingGetAgencyPlanWebsiteSetupStatusV1With
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid} (the `AgencyHostingDeleteAgencyPlanWebsiteV1` operationId).
-func (c *ClientWithResponses) AgencyHostingDeleteAgencyPlanWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingDeleteAgencyPlanWebsiteV1Response, error) {
-	rsp, err := c.AgencyHostingDeleteAgencyPlanWebsiteV1(ctx, websiteUid, reqEditors...)
+// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid} (the `AgencyHostingDeleteWebsiteV1` operationId).
+func (c *ClientWithResponses) AgencyHostingDeleteWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingDeleteWebsiteV1Response, error) {
+	rsp, err := c.AgencyHostingDeleteWebsiteV1(ctx, websiteUid, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingDeleteAgencyPlanWebsiteV1Response(rsp)
+	return ParseAgencyHostingDeleteWebsiteV1Response(rsp)
 }
 
-// AgencyHostingGetAgencyPlanWebsiteDetailsV1WithResponse Get Agency Plan website details
+// AgencyHostingGetWebsiteDetailsV1WithResponse Get website details
 //
 // Retrieves detailed information about a specific Agency Plan website, including configuration,
 // status, metadata, hosting plan details, and resource quotas.
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid} (the `AgencyHostingGetAgencyPlanWebsiteDetailsV1` operationId).
-func (c *ClientWithResponses) AgencyHostingGetAgencyPlanWebsiteDetailsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingGetAgencyPlanWebsiteDetailsV1Response, error) {
-	rsp, err := c.AgencyHostingGetAgencyPlanWebsiteDetailsV1(ctx, websiteUid, reqEditors...)
+// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid} (the `AgencyHostingGetWebsiteDetailsV1` operationId).
+func (c *ClientWithResponses) AgencyHostingGetWebsiteDetailsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingGetWebsiteDetailsV1Response, error) {
+	rsp, err := c.AgencyHostingGetWebsiteDetailsV1(ctx, websiteUid, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingGetAgencyPlanWebsiteDetailsV1Response(rsp)
+	return ParseAgencyHostingGetWebsiteDetailsV1Response(rsp)
 }
 
-// AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithBodyWithResponse Build Agency Plan website NodeJS assets
+// AgencyHostingBuildWebsiteNodeJSAssetsV1WithBodyWithResponse Build website NodeJS assets
 //
 // Builds and deploys a Node.js application for an Agency Plan website from an already-uploaded archive.
 //
@@ -66961,16 +66961,16 @@ func (c *ClientWithResponses) AgencyHostingGetAgencyPlanWebsiteDetailsV1WithResp
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/build-assets (the `AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1` operationId).
-func (c *ClientWithResponses) AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response, error) {
-	rsp, err := c.AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithBody(ctx, websiteUid, contentType, body, reqEditors...)
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/build-assets (the `AgencyHostingBuildWebsiteNodeJSAssetsV1` operationId).
+func (c *ClientWithResponses) AgencyHostingBuildWebsiteNodeJSAssetsV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingBuildWebsiteNodeJSAssetsV1Response, error) {
+	rsp, err := c.AgencyHostingBuildWebsiteNodeJSAssetsV1WithBody(ctx, websiteUid, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response(rsp)
+	return ParseAgencyHostingBuildWebsiteNodeJSAssetsV1Response(rsp)
 }
 
-// AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithResponse Build Agency Plan website NodeJS assets
+// AgencyHostingBuildWebsiteNodeJSAssetsV1WithResponse Build website NodeJS assets
 //
 // Builds and deploys a Node.js application for an Agency Plan website from an already-uploaded archive.
 //
@@ -66979,16 +66979,16 @@ func (c *ClientWithResponses) AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1W
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/build-assets (the `AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1` operationId).
-func (c *ClientWithResponses) AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response, error) {
-	rsp, err := c.AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1(ctx, websiteUid, body, reqEditors...)
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/build-assets (the `AgencyHostingBuildWebsiteNodeJSAssetsV1` operationId).
+func (c *ClientWithResponses) AgencyHostingBuildWebsiteNodeJSAssetsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingBuildWebsiteNodeJSAssetsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingBuildWebsiteNodeJSAssetsV1Response, error) {
+	rsp, err := c.AgencyHostingBuildWebsiteNodeJSAssetsV1(ctx, websiteUid, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response(rsp)
+	return ParseAgencyHostingBuildWebsiteNodeJSAssetsV1Response(rsp)
 }
 
-// AgencyHostingClearAgencyPlanWebsiteCacheV1WithResponse Clear Agency Plan website cache
+// AgencyHostingClearWebsiteCacheV1WithResponse Clear website cache
 //
 // Clears cache for all domains associated with an Agency Plan website, including its preview domain.
 //
@@ -66996,16 +66996,16 @@ func (c *ClientWithResponses) AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1W
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/cache (the `AgencyHostingClearAgencyPlanWebsiteCacheV1` operationId).
-func (c *ClientWithResponses) AgencyHostingClearAgencyPlanWebsiteCacheV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingClearAgencyPlanWebsiteCacheV1Response, error) {
-	rsp, err := c.AgencyHostingClearAgencyPlanWebsiteCacheV1(ctx, websiteUid, reqEditors...)
+// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/cache (the `AgencyHostingClearWebsiteCacheV1` operationId).
+func (c *ClientWithResponses) AgencyHostingClearWebsiteCacheV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingClearWebsiteCacheV1Response, error) {
+	rsp, err := c.AgencyHostingClearWebsiteCacheV1(ctx, websiteUid, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingClearAgencyPlanWebsiteCacheV1Response(rsp)
+	return ParseAgencyHostingClearWebsiteCacheV1Response(rsp)
 }
 
-// AgencyHostingListAgencyPlanWebsiteCronJobsV1WithResponse List Agency Plan website cron jobs
+// AgencyHostingListWebsiteCronJobsV1WithResponse List website cron jobs
 //
 // Returns a paginated list of cron jobs configured for an Agency Plan website.
 //
@@ -67013,16 +67013,16 @@ func (c *ClientWithResponses) AgencyHostingClearAgencyPlanWebsiteCacheV1WithResp
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/cron-jobs (the `AgencyHostingListAgencyPlanWebsiteCronJobsV1` operationId).
-func (c *ClientWithResponses) AgencyHostingListAgencyPlanWebsiteCronJobsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, params *AgencyHostingListAgencyPlanWebsiteCronJobsV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListAgencyPlanWebsiteCronJobsV1Response, error) {
-	rsp, err := c.AgencyHostingListAgencyPlanWebsiteCronJobsV1(ctx, websiteUid, params, reqEditors...)
+// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/cron-jobs (the `AgencyHostingListWebsiteCronJobsV1` operationId).
+func (c *ClientWithResponses) AgencyHostingListWebsiteCronJobsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, params *AgencyHostingListWebsiteCronJobsV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListWebsiteCronJobsV1Response, error) {
+	rsp, err := c.AgencyHostingListWebsiteCronJobsV1(ctx, websiteUid, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingListAgencyPlanWebsiteCronJobsV1Response(rsp)
+	return ParseAgencyHostingListWebsiteCronJobsV1Response(rsp)
 }
 
-// AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithBodyWithResponse Create Agency Plan website cron job
+// AgencyHostingCreateWebsiteCronJobV1WithBodyWithResponse Create website cron job
 //
 // Creates a cron job for an Agency Plan website from a schedule expression and a command.
 //
@@ -67030,16 +67030,16 @@ func (c *ClientWithResponses) AgencyHostingListAgencyPlanWebsiteCronJobsV1WithRe
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/cron-jobs (the `AgencyHostingCreateAgencyPlanWebsiteCronJobV1` operationId).
-func (c *ClientWithResponses) AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response, error) {
-	rsp, err := c.AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithBody(ctx, websiteUid, contentType, body, reqEditors...)
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/cron-jobs (the `AgencyHostingCreateWebsiteCronJobV1` operationId).
+func (c *ClientWithResponses) AgencyHostingCreateWebsiteCronJobV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingCreateWebsiteCronJobV1Response, error) {
+	rsp, err := c.AgencyHostingCreateWebsiteCronJobV1WithBody(ctx, websiteUid, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingCreateAgencyPlanWebsiteCronJobV1Response(rsp)
+	return ParseAgencyHostingCreateWebsiteCronJobV1Response(rsp)
 }
 
-// AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithResponse Create Agency Plan website cron job
+// AgencyHostingCreateWebsiteCronJobV1WithResponse Create website cron job
 //
 // Creates a cron job for an Agency Plan website from a schedule expression and a command.
 //
@@ -67047,16 +67047,16 @@ func (c *ClientWithResponses) AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithB
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/cron-jobs (the `AgencyHostingCreateAgencyPlanWebsiteCronJobV1` operationId).
-func (c *ClientWithResponses) AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingCreateAgencyPlanWebsiteCronJobV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response, error) {
-	rsp, err := c.AgencyHostingCreateAgencyPlanWebsiteCronJobV1(ctx, websiteUid, body, reqEditors...)
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/cron-jobs (the `AgencyHostingCreateWebsiteCronJobV1` operationId).
+func (c *ClientWithResponses) AgencyHostingCreateWebsiteCronJobV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingCreateWebsiteCronJobV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingCreateWebsiteCronJobV1Response, error) {
+	rsp, err := c.AgencyHostingCreateWebsiteCronJobV1(ctx, websiteUid, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingCreateAgencyPlanWebsiteCronJobV1Response(rsp)
+	return ParseAgencyHostingCreateWebsiteCronJobV1Response(rsp)
 }
 
-// AgencyHostingDeleteAgencyPlanWebsiteCronJobV1WithResponse Delete Agency Plan website cron job
+// AgencyHostingDeleteWebsiteCronJobV1WithResponse Delete website cron job
 //
 // Permanently deletes the cron job identified by its uuid from an Agency Plan website.
 //
@@ -67064,16 +67064,16 @@ func (c *ClientWithResponses) AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithR
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/cron-jobs/{uuid} (the `AgencyHostingDeleteAgencyPlanWebsiteCronJobV1` operationId).
-func (c *ClientWithResponses) AgencyHostingDeleteAgencyPlanWebsiteCronJobV1WithResponse(ctx context.Context, websiteUid WebsiteUid, uuid AgencyCronJobUuidPath, reqEditors ...RequestEditorFn) (*AgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response, error) {
-	rsp, err := c.AgencyHostingDeleteAgencyPlanWebsiteCronJobV1(ctx, websiteUid, uuid, reqEditors...)
+// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/cron-jobs/{uuid} (the `AgencyHostingDeleteWebsiteCronJobV1` operationId).
+func (c *ClientWithResponses) AgencyHostingDeleteWebsiteCronJobV1WithResponse(ctx context.Context, websiteUid WebsiteUid, uuid AgencyCronJobUuidPath, reqEditors ...RequestEditorFn) (*AgencyHostingDeleteWebsiteCronJobV1Response, error) {
+	rsp, err := c.AgencyHostingDeleteWebsiteCronJobV1(ctx, websiteUid, uuid, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response(rsp)
+	return ParseAgencyHostingDeleteWebsiteCronJobV1Response(rsp)
 }
 
-// AgencyHostingListAgencyPlanWebsiteDatabasesV1WithResponse List Agency Plan website databases
+// AgencyHostingListWebsiteDatabasesV1WithResponse List website databases
 //
 // Returns a paginated list of MySQL databases created for an Agency Plan website.
 //
@@ -67081,16 +67081,16 @@ func (c *ClientWithResponses) AgencyHostingDeleteAgencyPlanWebsiteCronJobV1WithR
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/databases (the `AgencyHostingListAgencyPlanWebsiteDatabasesV1` operationId).
-func (c *ClientWithResponses) AgencyHostingListAgencyPlanWebsiteDatabasesV1WithResponse(ctx context.Context, websiteUid WebsiteUid, params *AgencyHostingListAgencyPlanWebsiteDatabasesV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListAgencyPlanWebsiteDatabasesV1Response, error) {
-	rsp, err := c.AgencyHostingListAgencyPlanWebsiteDatabasesV1(ctx, websiteUid, params, reqEditors...)
+// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/databases (the `AgencyHostingListWebsiteDatabasesV1` operationId).
+func (c *ClientWithResponses) AgencyHostingListWebsiteDatabasesV1WithResponse(ctx context.Context, websiteUid WebsiteUid, params *AgencyHostingListWebsiteDatabasesV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListWebsiteDatabasesV1Response, error) {
+	rsp, err := c.AgencyHostingListWebsiteDatabasesV1(ctx, websiteUid, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingListAgencyPlanWebsiteDatabasesV1Response(rsp)
+	return ParseAgencyHostingListWebsiteDatabasesV1Response(rsp)
 }
 
-// AgencyHostingCreateAgencyPlanWebsiteDatabaseV1WithBodyWithResponse Create Agency Plan website database
+// AgencyHostingCreateWebsiteDatabaseV1WithBodyWithResponse Create website database
 //
 // Creates a MySQL database with a dedicated user for an Agency Plan website.
 //
@@ -67098,16 +67098,16 @@ func (c *ClientWithResponses) AgencyHostingListAgencyPlanWebsiteDatabasesV1WithR
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases (the `AgencyHostingCreateAgencyPlanWebsiteDatabaseV1` operationId).
-func (c *ClientWithResponses) AgencyHostingCreateAgencyPlanWebsiteDatabaseV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingCreateAgencyPlanWebsiteDatabaseV1Response, error) {
-	rsp, err := c.AgencyHostingCreateAgencyPlanWebsiteDatabaseV1WithBody(ctx, websiteUid, contentType, body, reqEditors...)
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases (the `AgencyHostingCreateWebsiteDatabaseV1` operationId).
+func (c *ClientWithResponses) AgencyHostingCreateWebsiteDatabaseV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingCreateWebsiteDatabaseV1Response, error) {
+	rsp, err := c.AgencyHostingCreateWebsiteDatabaseV1WithBody(ctx, websiteUid, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingCreateAgencyPlanWebsiteDatabaseV1Response(rsp)
+	return ParseAgencyHostingCreateWebsiteDatabaseV1Response(rsp)
 }
 
-// AgencyHostingCreateAgencyPlanWebsiteDatabaseV1WithResponse Create Agency Plan website database
+// AgencyHostingCreateWebsiteDatabaseV1WithResponse Create website database
 //
 // Creates a MySQL database with a dedicated user for an Agency Plan website.
 //
@@ -67115,16 +67115,16 @@ func (c *ClientWithResponses) AgencyHostingCreateAgencyPlanWebsiteDatabaseV1With
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases (the `AgencyHostingCreateAgencyPlanWebsiteDatabaseV1` operationId).
-func (c *ClientWithResponses) AgencyHostingCreateAgencyPlanWebsiteDatabaseV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingCreateAgencyPlanWebsiteDatabaseV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingCreateAgencyPlanWebsiteDatabaseV1Response, error) {
-	rsp, err := c.AgencyHostingCreateAgencyPlanWebsiteDatabaseV1(ctx, websiteUid, body, reqEditors...)
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases (the `AgencyHostingCreateWebsiteDatabaseV1` operationId).
+func (c *ClientWithResponses) AgencyHostingCreateWebsiteDatabaseV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingCreateWebsiteDatabaseV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingCreateWebsiteDatabaseV1Response, error) {
+	rsp, err := c.AgencyHostingCreateWebsiteDatabaseV1(ctx, websiteUid, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingCreateAgencyPlanWebsiteDatabaseV1Response(rsp)
+	return ParseAgencyHostingCreateWebsiteDatabaseV1Response(rsp)
 }
 
-// AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1WithResponse Delete Agency Plan website database
+// AgencyHostingDeleteWebsiteDatabaseV1WithResponse Delete website database
 //
 // Permanently deletes a MySQL database and all its data from an Agency Plan website, including its users.
 //
@@ -67132,16 +67132,16 @@ func (c *ClientWithResponses) AgencyHostingCreateAgencyPlanWebsiteDatabaseV1With
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name} (the `AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1` operationId).
-func (c *ClientWithResponses) AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1WithResponse(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, reqEditors ...RequestEditorFn) (*AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1Response, error) {
-	rsp, err := c.AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1(ctx, websiteUid, databaseName, reqEditors...)
+// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name} (the `AgencyHostingDeleteWebsiteDatabaseV1` operationId).
+func (c *ClientWithResponses) AgencyHostingDeleteWebsiteDatabaseV1WithResponse(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, reqEditors ...RequestEditorFn) (*AgencyHostingDeleteWebsiteDatabaseV1Response, error) {
+	rsp, err := c.AgencyHostingDeleteWebsiteDatabaseV1(ctx, websiteUid, databaseName, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingDeleteAgencyPlanWebsiteDatabaseV1Response(rsp)
+	return ParseAgencyHostingDeleteWebsiteDatabaseV1Response(rsp)
 }
 
-// AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1WithBodyWithResponse Create Agency Plan website database user
+// AgencyHostingCreateWebsiteDatabaseUserV1WithBodyWithResponse Create website database user
 //
 // Creates a user for an existing database on an Agency Plan website.
 //
@@ -67149,16 +67149,16 @@ func (c *ClientWithResponses) AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1With
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users (the `AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1` operationId).
-func (c *ClientWithResponses) AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Response, error) {
-	rsp, err := c.AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1WithBody(ctx, websiteUid, databaseName, contentType, body, reqEditors...)
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users (the `AgencyHostingCreateWebsiteDatabaseUserV1` operationId).
+func (c *ClientWithResponses) AgencyHostingCreateWebsiteDatabaseUserV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingCreateWebsiteDatabaseUserV1Response, error) {
+	rsp, err := c.AgencyHostingCreateWebsiteDatabaseUserV1WithBody(ctx, websiteUid, databaseName, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Response(rsp)
+	return ParseAgencyHostingCreateWebsiteDatabaseUserV1Response(rsp)
 }
 
-// AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1WithResponse Create Agency Plan website database user
+// AgencyHostingCreateWebsiteDatabaseUserV1WithResponse Create website database user
 //
 // Creates a user for an existing database on an Agency Plan website.
 //
@@ -67166,16 +67166,16 @@ func (c *ClientWithResponses) AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users (the `AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1` operationId).
-func (c *ClientWithResponses) AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1WithResponse(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, body AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Response, error) {
-	rsp, err := c.AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1(ctx, websiteUid, databaseName, body, reqEditors...)
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users (the `AgencyHostingCreateWebsiteDatabaseUserV1` operationId).
+func (c *ClientWithResponses) AgencyHostingCreateWebsiteDatabaseUserV1WithResponse(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, body AgencyHostingCreateWebsiteDatabaseUserV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingCreateWebsiteDatabaseUserV1Response, error) {
+	rsp, err := c.AgencyHostingCreateWebsiteDatabaseUserV1(ctx, websiteUid, databaseName, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Response(rsp)
+	return ParseAgencyHostingCreateWebsiteDatabaseUserV1Response(rsp)
 }
 
-// AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1WithResponse Delete Agency Plan website database user
+// AgencyHostingDeleteWebsiteDatabaseUserV1WithResponse Delete website database user
 //
 // Permanently deletes a database user from an Agency Plan website database, revoking all access it had.
 //
@@ -67183,46 +67183,46 @@ func (c *ClientWithResponses) AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users/{database_user_name} (the `AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1` operationId).
-func (c *ClientWithResponses) AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1WithResponse(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, databaseUserName AgencyDatabaseUserNamePath, reqEditors ...RequestEditorFn) (*AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1Response, error) {
-	rsp, err := c.AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1(ctx, websiteUid, databaseName, databaseUserName, reqEditors...)
+// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users/{database_user_name} (the `AgencyHostingDeleteWebsiteDatabaseUserV1` operationId).
+func (c *ClientWithResponses) AgencyHostingDeleteWebsiteDatabaseUserV1WithResponse(ctx context.Context, websiteUid WebsiteUid, databaseName AgencyDatabaseNamePath, databaseUserName AgencyDatabaseUserNamePath, reqEditors ...RequestEditorFn) (*AgencyHostingDeleteWebsiteDatabaseUserV1Response, error) {
+	rsp, err := c.AgencyHostingDeleteWebsiteDatabaseUserV1(ctx, websiteUid, databaseName, databaseUserName, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1Response(rsp)
+	return ParseAgencyHostingDeleteWebsiteDatabaseUserV1Response(rsp)
 }
 
-// AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBodyWithResponse Link domain to Agency Plan website
+// AgencyHostingLinkDomainToWebsiteV1WithBodyWithResponse Link domain to website
 //
 // Links a domain to the specified Agency Plan website so it can serve traffic for that domain.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/domains (the `AgencyHostingLinkDomainToAgencyPlanWebsiteV1` operationId).
-func (c *ClientWithResponses) AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response, error) {
-	rsp, err := c.AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithBody(ctx, websiteUid, contentType, body, reqEditors...)
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/domains (the `AgencyHostingLinkDomainToWebsiteV1` operationId).
+func (c *ClientWithResponses) AgencyHostingLinkDomainToWebsiteV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingLinkDomainToWebsiteV1Response, error) {
+	rsp, err := c.AgencyHostingLinkDomainToWebsiteV1WithBody(ctx, websiteUid, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingLinkDomainToAgencyPlanWebsiteV1Response(rsp)
+	return ParseAgencyHostingLinkDomainToWebsiteV1Response(rsp)
 }
 
-// AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithResponse Link domain to Agency Plan website
+// AgencyHostingLinkDomainToWebsiteV1WithResponse Link domain to website
 //
 // Links a domain to the specified Agency Plan website so it can serve traffic for that domain.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/domains (the `AgencyHostingLinkDomainToAgencyPlanWebsiteV1` operationId).
-func (c *ClientWithResponses) AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingLinkDomainToAgencyPlanWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response, error) {
-	rsp, err := c.AgencyHostingLinkDomainToAgencyPlanWebsiteV1(ctx, websiteUid, body, reqEditors...)
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/domains (the `AgencyHostingLinkDomainToWebsiteV1` operationId).
+func (c *ClientWithResponses) AgencyHostingLinkDomainToWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingLinkDomainToWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingLinkDomainToWebsiteV1Response, error) {
+	rsp, err := c.AgencyHostingLinkDomainToWebsiteV1(ctx, websiteUid, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingLinkDomainToAgencyPlanWebsiteV1Response(rsp)
+	return ParseAgencyHostingLinkDomainToWebsiteV1Response(rsp)
 }
 
-// AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1WithResponse Unlink domain from Agency Plan website
+// AgencyHostingUnlinkDomainFromWebsiteV1WithResponse Unlink domain from website
 //
 // Unlinks a domain from the specified Agency Plan website.
 //
@@ -67234,16 +67234,16 @@ func (c *ClientWithResponses) AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithRe
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/domains/{domain} (the `AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1` operationId).
-func (c *ClientWithResponses) AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response, error) {
-	rsp, err := c.AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1(ctx, websiteUid, domain, reqEditors...)
+// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/domains/{domain} (the `AgencyHostingUnlinkDomainFromWebsiteV1` operationId).
+func (c *ClientWithResponses) AgencyHostingUnlinkDomainFromWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*AgencyHostingUnlinkDomainFromWebsiteV1Response, error) {
+	rsp, err := c.AgencyHostingUnlinkDomainFromWebsiteV1(ctx, websiteUid, domain, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response(rsp)
+	return ParseAgencyHostingUnlinkDomainFromWebsiteV1Response(rsp)
 }
 
-// AgencyHostingChangeAgencyPlanWebsiteDomainV1WithBodyWithResponse Change Agency Plan website domain
+// AgencyHostingChangeWebsiteDomainV1WithBodyWithResponse Change website domain
 //
 // Changes the primary domain for an Agency Plan website.
 //
@@ -67252,16 +67252,16 @@ func (c *ClientWithResponses) AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Wi
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/domains/{from_domain} (the `AgencyHostingChangeAgencyPlanWebsiteDomainV1` operationId).
-func (c *ClientWithResponses) AgencyHostingChangeAgencyPlanWebsiteDomainV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingChangeAgencyPlanWebsiteDomainV1Response, error) {
-	rsp, err := c.AgencyHostingChangeAgencyPlanWebsiteDomainV1WithBody(ctx, websiteUid, fromDomain, contentType, body, reqEditors...)
+// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/domains/{from_domain} (the `AgencyHostingChangeWebsiteDomainV1` operationId).
+func (c *ClientWithResponses) AgencyHostingChangeWebsiteDomainV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingChangeWebsiteDomainV1Response, error) {
+	rsp, err := c.AgencyHostingChangeWebsiteDomainV1WithBody(ctx, websiteUid, fromDomain, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingChangeAgencyPlanWebsiteDomainV1Response(rsp)
+	return ParseAgencyHostingChangeWebsiteDomainV1Response(rsp)
 }
 
-// AgencyHostingChangeAgencyPlanWebsiteDomainV1WithResponse Change Agency Plan website domain
+// AgencyHostingChangeWebsiteDomainV1WithResponse Change website domain
 //
 // Changes the primary domain for an Agency Plan website.
 //
@@ -67270,16 +67270,16 @@ func (c *ClientWithResponses) AgencyHostingChangeAgencyPlanWebsiteDomainV1WithBo
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/domains/{from_domain} (the `AgencyHostingChangeAgencyPlanWebsiteDomainV1` operationId).
-func (c *ClientWithResponses) AgencyHostingChangeAgencyPlanWebsiteDomainV1WithResponse(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, body AgencyHostingChangeAgencyPlanWebsiteDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingChangeAgencyPlanWebsiteDomainV1Response, error) {
-	rsp, err := c.AgencyHostingChangeAgencyPlanWebsiteDomainV1(ctx, websiteUid, fromDomain, body, reqEditors...)
+// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/domains/{from_domain} (the `AgencyHostingChangeWebsiteDomainV1` operationId).
+func (c *ClientWithResponses) AgencyHostingChangeWebsiteDomainV1WithResponse(ctx context.Context, websiteUid WebsiteUid, fromDomain FromDomain, body AgencyHostingChangeWebsiteDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingChangeWebsiteDomainV1Response, error) {
+	rsp, err := c.AgencyHostingChangeWebsiteDomainV1(ctx, websiteUid, fromDomain, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingChangeAgencyPlanWebsiteDomainV1Response(rsp)
+	return ParseAgencyHostingChangeWebsiteDomainV1Response(rsp)
 }
 
-// AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithBodyWithResponse Import Agency Plan website from archive
+// AgencyHostingImportWebsiteFromArchiveV1WithBodyWithResponse Import website from archive
 //
 // Imports an Agency Plan website from an already-uploaded archive.
 //
@@ -67289,16 +67289,16 @@ func (c *ClientWithResponses) AgencyHostingChangeAgencyPlanWebsiteDomainV1WithRe
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/import-archive (the `AgencyHostingImportAgencyPlanWebsiteFromArchiveV1` operationId).
-func (c *ClientWithResponses) AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response, error) {
-	rsp, err := c.AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithBody(ctx, websiteUid, contentType, body, reqEditors...)
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/import-archive (the `AgencyHostingImportWebsiteFromArchiveV1` operationId).
+func (c *ClientWithResponses) AgencyHostingImportWebsiteFromArchiveV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingImportWebsiteFromArchiveV1Response, error) {
+	rsp, err := c.AgencyHostingImportWebsiteFromArchiveV1WithBody(ctx, websiteUid, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response(rsp)
+	return ParseAgencyHostingImportWebsiteFromArchiveV1Response(rsp)
 }
 
-// AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithResponse Import Agency Plan website from archive
+// AgencyHostingImportWebsiteFromArchiveV1WithResponse Import website from archive
 //
 // Imports an Agency Plan website from an already-uploaded archive.
 //
@@ -67308,16 +67308,16 @@ func (c *ClientWithResponses) AgencyHostingImportAgencyPlanWebsiteFromArchiveV1W
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/import-archive (the `AgencyHostingImportAgencyPlanWebsiteFromArchiveV1` operationId).
-func (c *ClientWithResponses) AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingImportAgencyPlanWebsiteFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response, error) {
-	rsp, err := c.AgencyHostingImportAgencyPlanWebsiteFromArchiveV1(ctx, websiteUid, body, reqEditors...)
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/import-archive (the `AgencyHostingImportWebsiteFromArchiveV1` operationId).
+func (c *ClientWithResponses) AgencyHostingImportWebsiteFromArchiveV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingImportWebsiteFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingImportWebsiteFromArchiveV1Response, error) {
+	rsp, err := c.AgencyHostingImportWebsiteFromArchiveV1(ctx, websiteUid, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response(rsp)
+	return ParseAgencyHostingImportWebsiteFromArchiveV1Response(rsp)
 }
 
-// AgencyHostingListRunningAgencyPlanWebsiteProcessesV1WithResponse List running Agency Plan website processes
+// AgencyHostingListWebsiteProcessesV1WithResponse List website processes
 //
 // Lists active and recently completed asynchronous processes for an Agency Plan website.
 //
@@ -67326,74 +67326,74 @@ func (c *ClientWithResponses) AgencyHostingImportAgencyPlanWebsiteFromArchiveV1W
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/processes (the `AgencyHostingListRunningAgencyPlanWebsiteProcessesV1` operationId).
-func (c *ClientWithResponses) AgencyHostingListRunningAgencyPlanWebsiteProcessesV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response, error) {
-	rsp, err := c.AgencyHostingListRunningAgencyPlanWebsiteProcessesV1(ctx, websiteUid, reqEditors...)
+// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/processes (the `AgencyHostingListWebsiteProcessesV1` operationId).
+func (c *ClientWithResponses) AgencyHostingListWebsiteProcessesV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingListWebsiteProcessesV1Response, error) {
+	rsp, err := c.AgencyHostingListWebsiteProcessesV1(ctx, websiteUid, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response(rsp)
+	return ParseAgencyHostingListWebsiteProcessesV1Response(rsp)
 }
 
-// AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1WithResponse Get Agency Plan website WordPress settings
+// AgencyHostingGetWordPressSettingsV1WithResponse Get WordPress settings
 //
 // Returns the current WordPress settings for an Agency Plan website: installed core version,
 // LiteSpeed Cache plugin status, object cache status, and maintenance mode status.
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings (the `AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1` operationId).
-func (c *ClientWithResponses) AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response, error) {
-	rsp, err := c.AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1(ctx, websiteUid, reqEditors...)
+// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings (the `AgencyHostingGetWordPressSettingsV1` operationId).
+func (c *ClientWithResponses) AgencyHostingGetWordPressSettingsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingGetWordPressSettingsV1Response, error) {
+	rsp, err := c.AgencyHostingGetWordPressSettingsV1(ctx, websiteUid, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response(rsp)
+	return ParseAgencyHostingGetWordPressSettingsV1Response(rsp)
 }
 
-// AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithBodyWithResponse Change Agency Plan website WordPress core version
+// AgencyHostingChangeWordPressVersionV1WithBodyWithResponse Change WordPress version
 //
 // Changes the installed WordPress core version on an Agency Plan website to one of the versions available for installation.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with PATCH /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/version (the `AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1` operationId).
-func (c *ClientWithResponses) AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response, error) {
-	rsp, err := c.AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithBody(ctx, websiteUid, contentType, body, reqEditors...)
+// Corresponds with PATCH /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/version (the `AgencyHostingChangeWordPressVersionV1` operationId).
+func (c *ClientWithResponses) AgencyHostingChangeWordPressVersionV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingChangeWordPressVersionV1Response, error) {
+	rsp, err := c.AgencyHostingChangeWordPressVersionV1WithBody(ctx, websiteUid, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response(rsp)
+	return ParseAgencyHostingChangeWordPressVersionV1Response(rsp)
 }
 
-// AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithResponse Change Agency Plan website WordPress core version
+// AgencyHostingChangeWordPressVersionV1WithResponse Change WordPress version
 //
 // Changes the installed WordPress core version on an Agency Plan website to one of the versions available for installation.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with PATCH /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/version (the `AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1` operationId).
-func (c *ClientWithResponses) AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response, error) {
-	rsp, err := c.AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1(ctx, websiteUid, body, reqEditors...)
+// Corresponds with PATCH /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/version (the `AgencyHostingChangeWordPressVersionV1` operationId).
+func (c *ClientWithResponses) AgencyHostingChangeWordPressVersionV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingChangeWordPressVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingChangeWordPressVersionV1Response, error) {
+	rsp, err := c.AgencyHostingChangeWordPressVersionV1(ctx, websiteUid, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response(rsp)
+	return ParseAgencyHostingChangeWordPressVersionV1Response(rsp)
 }
 
-// AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1WithResponse List available WordPress versions for an Agency Plan website
+// AgencyHostingListAvailableWordPressVersionsV1WithResponse List available WordPress versions
 //
 // Lists the WordPress core versions available for installation on an Agency Plan website.
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/versions (the `AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1` operationId).
-func (c *ClientWithResponses) AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response, error) {
-	rsp, err := c.AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1(ctx, websiteUid, reqEditors...)
+// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/versions (the `AgencyHostingListAvailableWordPressVersionsV1` operationId).
+func (c *ClientWithResponses) AgencyHostingListAvailableWordPressVersionsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingListAvailableWordPressVersionsV1Response, error) {
+	rsp, err := c.AgencyHostingListAvailableWordPressVersionsV1(ctx, websiteUid, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response(rsp)
+	return ParseAgencyHostingListAvailableWordPressVersionsV1Response(rsp)
 }
 
 // BillingGetCatalogItemListV1WithResponse Get catalog item list
@@ -74945,15 +74945,15 @@ func (c *ClientWithResponses) VPSStopVirtualMachineV1WithResponse(ctx context.Co
 	return ParseVPSStopVirtualMachineV1Response(rsp)
 }
 
-// ParseAgencyHostingListAgencyPlanDomainsV1Response parses an HTTP response from a AgencyHostingListAgencyPlanDomainsV1WithResponse call
-func ParseAgencyHostingListAgencyPlanDomainsV1Response(rsp *http.Response) (*AgencyHostingListAgencyPlanDomainsV1Response, error) {
+// ParseAgencyHostingListDomainsV1Response parses an HTTP response from a AgencyHostingListDomainsV1WithResponse call
+func ParseAgencyHostingListDomainsV1Response(rsp *http.Response) (*AgencyHostingListDomainsV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgencyHostingListAgencyPlanDomainsV1Response{
+	response := &AgencyHostingListDomainsV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -74989,15 +74989,15 @@ func ParseAgencyHostingListAgencyPlanDomainsV1Response(rsp *http.Response) (*Age
 	return response, nil
 }
 
-// ParseAgencyHostingListAgencyPlanOrdersV1Response parses an HTTP response from a AgencyHostingListAgencyPlanOrdersV1WithResponse call
-func ParseAgencyHostingListAgencyPlanOrdersV1Response(rsp *http.Response) (*AgencyHostingListAgencyPlanOrdersV1Response, error) {
+// ParseAgencyHostingListOrdersV1Response parses an HTTP response from a AgencyHostingListOrdersV1WithResponse call
+func ParseAgencyHostingListOrdersV1Response(rsp *http.Response) (*AgencyHostingListOrdersV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgencyHostingListAgencyPlanOrdersV1Response{
+	response := &AgencyHostingListOrdersV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -75033,15 +75033,15 @@ func ParseAgencyHostingListAgencyPlanOrdersV1Response(rsp *http.Response) (*Agen
 	return response, nil
 }
 
-// ParseAgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response parses an HTTP response from a AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1WithResponse call
-func ParseAgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response(rsp *http.Response) (*AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response, error) {
+// ParseAgencyHostingListAvailableDatacentersV1Response parses an HTTP response from a AgencyHostingListAvailableDatacentersV1WithResponse call
+func ParseAgencyHostingListAvailableDatacentersV1Response(rsp *http.Response) (*AgencyHostingListAvailableDatacentersV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response{
+	response := &AgencyHostingListAvailableDatacentersV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -75073,15 +75073,15 @@ func ParseAgencyHostingListAvailableDatacentersForAnAgencyPlanOrderV1Response(rs
 	return response, nil
 }
 
-// ParseAgencyHostingProvisionANewAgencyPlanWebsiteV1Response parses an HTTP response from a AgencyHostingProvisionANewAgencyPlanWebsiteV1WithResponse call
-func ParseAgencyHostingProvisionANewAgencyPlanWebsiteV1Response(rsp *http.Response) (*AgencyHostingProvisionANewAgencyPlanWebsiteV1Response, error) {
+// ParseAgencyHostingCreateANewWebsiteV1Response parses an HTTP response from a AgencyHostingCreateANewWebsiteV1WithResponse call
+func ParseAgencyHostingCreateANewWebsiteV1Response(rsp *http.Response) (*AgencyHostingCreateANewWebsiteV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgencyHostingProvisionANewAgencyPlanWebsiteV1Response{
+	response := &AgencyHostingCreateANewWebsiteV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -75120,15 +75120,15 @@ func ParseAgencyHostingProvisionANewAgencyPlanWebsiteV1Response(rsp *http.Respon
 	return response, nil
 }
 
-// ParseAgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response parses an HTTP response from a AgencyHostingGetAgencyPlanWebsiteSetupStatusV1WithResponse call
-func ParseAgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response(rsp *http.Response) (*AgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response, error) {
+// ParseAgencyHostingGetWebsiteSetupStatusV1Response parses an HTTP response from a AgencyHostingGetWebsiteSetupStatusV1WithResponse call
+func ParseAgencyHostingGetWebsiteSetupStatusV1Response(rsp *http.Response) (*AgencyHostingGetWebsiteSetupStatusV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response{
+	response := &AgencyHostingGetWebsiteSetupStatusV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -75160,15 +75160,15 @@ func ParseAgencyHostingGetAgencyPlanWebsiteSetupStatusV1Response(rsp *http.Respo
 	return response, nil
 }
 
-// ParseAgencyHostingDeleteAgencyPlanWebsiteV1Response parses an HTTP response from a AgencyHostingDeleteAgencyPlanWebsiteV1WithResponse call
-func ParseAgencyHostingDeleteAgencyPlanWebsiteV1Response(rsp *http.Response) (*AgencyHostingDeleteAgencyPlanWebsiteV1Response, error) {
+// ParseAgencyHostingDeleteWebsiteV1Response parses an HTTP response from a AgencyHostingDeleteWebsiteV1WithResponse call
+func ParseAgencyHostingDeleteWebsiteV1Response(rsp *http.Response) (*AgencyHostingDeleteWebsiteV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgencyHostingDeleteAgencyPlanWebsiteV1Response{
+	response := &AgencyHostingDeleteWebsiteV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -75200,15 +75200,15 @@ func ParseAgencyHostingDeleteAgencyPlanWebsiteV1Response(rsp *http.Response) (*A
 	return response, nil
 }
 
-// ParseAgencyHostingGetAgencyPlanWebsiteDetailsV1Response parses an HTTP response from a AgencyHostingGetAgencyPlanWebsiteDetailsV1WithResponse call
-func ParseAgencyHostingGetAgencyPlanWebsiteDetailsV1Response(rsp *http.Response) (*AgencyHostingGetAgencyPlanWebsiteDetailsV1Response, error) {
+// ParseAgencyHostingGetWebsiteDetailsV1Response parses an HTTP response from a AgencyHostingGetWebsiteDetailsV1WithResponse call
+func ParseAgencyHostingGetWebsiteDetailsV1Response(rsp *http.Response) (*AgencyHostingGetWebsiteDetailsV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgencyHostingGetAgencyPlanWebsiteDetailsV1Response{
+	response := &AgencyHostingGetWebsiteDetailsV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -75240,15 +75240,15 @@ func ParseAgencyHostingGetAgencyPlanWebsiteDetailsV1Response(rsp *http.Response)
 	return response, nil
 }
 
-// ParseAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response parses an HTTP response from a AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1WithResponse call
-func ParseAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response(rsp *http.Response) (*AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response, error) {
+// ParseAgencyHostingBuildWebsiteNodeJSAssetsV1Response parses an HTTP response from a AgencyHostingBuildWebsiteNodeJSAssetsV1WithResponse call
+func ParseAgencyHostingBuildWebsiteNodeJSAssetsV1Response(rsp *http.Response) (*AgencyHostingBuildWebsiteNodeJSAssetsV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response{
+	response := &AgencyHostingBuildWebsiteNodeJSAssetsV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -75287,15 +75287,15 @@ func ParseAgencyHostingBuildAgencyPlanWebsiteNodeJSAssetsV1Response(rsp *http.Re
 	return response, nil
 }
 
-// ParseAgencyHostingClearAgencyPlanWebsiteCacheV1Response parses an HTTP response from a AgencyHostingClearAgencyPlanWebsiteCacheV1WithResponse call
-func ParseAgencyHostingClearAgencyPlanWebsiteCacheV1Response(rsp *http.Response) (*AgencyHostingClearAgencyPlanWebsiteCacheV1Response, error) {
+// ParseAgencyHostingClearWebsiteCacheV1Response parses an HTTP response from a AgencyHostingClearWebsiteCacheV1WithResponse call
+func ParseAgencyHostingClearWebsiteCacheV1Response(rsp *http.Response) (*AgencyHostingClearWebsiteCacheV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgencyHostingClearAgencyPlanWebsiteCacheV1Response{
+	response := &AgencyHostingClearWebsiteCacheV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -75327,15 +75327,15 @@ func ParseAgencyHostingClearAgencyPlanWebsiteCacheV1Response(rsp *http.Response)
 	return response, nil
 }
 
-// ParseAgencyHostingListAgencyPlanWebsiteCronJobsV1Response parses an HTTP response from a AgencyHostingListAgencyPlanWebsiteCronJobsV1WithResponse call
-func ParseAgencyHostingListAgencyPlanWebsiteCronJobsV1Response(rsp *http.Response) (*AgencyHostingListAgencyPlanWebsiteCronJobsV1Response, error) {
+// ParseAgencyHostingListWebsiteCronJobsV1Response parses an HTTP response from a AgencyHostingListWebsiteCronJobsV1WithResponse call
+func ParseAgencyHostingListWebsiteCronJobsV1Response(rsp *http.Response) (*AgencyHostingListWebsiteCronJobsV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgencyHostingListAgencyPlanWebsiteCronJobsV1Response{
+	response := &AgencyHostingListWebsiteCronJobsV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -75371,15 +75371,15 @@ func ParseAgencyHostingListAgencyPlanWebsiteCronJobsV1Response(rsp *http.Respons
 	return response, nil
 }
 
-// ParseAgencyHostingCreateAgencyPlanWebsiteCronJobV1Response parses an HTTP response from a AgencyHostingCreateAgencyPlanWebsiteCronJobV1WithResponse call
-func ParseAgencyHostingCreateAgencyPlanWebsiteCronJobV1Response(rsp *http.Response) (*AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response, error) {
+// ParseAgencyHostingCreateWebsiteCronJobV1Response parses an HTTP response from a AgencyHostingCreateWebsiteCronJobV1WithResponse call
+func ParseAgencyHostingCreateWebsiteCronJobV1Response(rsp *http.Response) (*AgencyHostingCreateWebsiteCronJobV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgencyHostingCreateAgencyPlanWebsiteCronJobV1Response{
+	response := &AgencyHostingCreateWebsiteCronJobV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -75418,15 +75418,15 @@ func ParseAgencyHostingCreateAgencyPlanWebsiteCronJobV1Response(rsp *http.Respon
 	return response, nil
 }
 
-// ParseAgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response parses an HTTP response from a AgencyHostingDeleteAgencyPlanWebsiteCronJobV1WithResponse call
-func ParseAgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response(rsp *http.Response) (*AgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response, error) {
+// ParseAgencyHostingDeleteWebsiteCronJobV1Response parses an HTTP response from a AgencyHostingDeleteWebsiteCronJobV1WithResponse call
+func ParseAgencyHostingDeleteWebsiteCronJobV1Response(rsp *http.Response) (*AgencyHostingDeleteWebsiteCronJobV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response{
+	response := &AgencyHostingDeleteWebsiteCronJobV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -75458,15 +75458,15 @@ func ParseAgencyHostingDeleteAgencyPlanWebsiteCronJobV1Response(rsp *http.Respon
 	return response, nil
 }
 
-// ParseAgencyHostingListAgencyPlanWebsiteDatabasesV1Response parses an HTTP response from a AgencyHostingListAgencyPlanWebsiteDatabasesV1WithResponse call
-func ParseAgencyHostingListAgencyPlanWebsiteDatabasesV1Response(rsp *http.Response) (*AgencyHostingListAgencyPlanWebsiteDatabasesV1Response, error) {
+// ParseAgencyHostingListWebsiteDatabasesV1Response parses an HTTP response from a AgencyHostingListWebsiteDatabasesV1WithResponse call
+func ParseAgencyHostingListWebsiteDatabasesV1Response(rsp *http.Response) (*AgencyHostingListWebsiteDatabasesV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgencyHostingListAgencyPlanWebsiteDatabasesV1Response{
+	response := &AgencyHostingListWebsiteDatabasesV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -75502,15 +75502,15 @@ func ParseAgencyHostingListAgencyPlanWebsiteDatabasesV1Response(rsp *http.Respon
 	return response, nil
 }
 
-// ParseAgencyHostingCreateAgencyPlanWebsiteDatabaseV1Response parses an HTTP response from a AgencyHostingCreateAgencyPlanWebsiteDatabaseV1WithResponse call
-func ParseAgencyHostingCreateAgencyPlanWebsiteDatabaseV1Response(rsp *http.Response) (*AgencyHostingCreateAgencyPlanWebsiteDatabaseV1Response, error) {
+// ParseAgencyHostingCreateWebsiteDatabaseV1Response parses an HTTP response from a AgencyHostingCreateWebsiteDatabaseV1WithResponse call
+func ParseAgencyHostingCreateWebsiteDatabaseV1Response(rsp *http.Response) (*AgencyHostingCreateWebsiteDatabaseV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgencyHostingCreateAgencyPlanWebsiteDatabaseV1Response{
+	response := &AgencyHostingCreateWebsiteDatabaseV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -75549,15 +75549,15 @@ func ParseAgencyHostingCreateAgencyPlanWebsiteDatabaseV1Response(rsp *http.Respo
 	return response, nil
 }
 
-// ParseAgencyHostingDeleteAgencyPlanWebsiteDatabaseV1Response parses an HTTP response from a AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1WithResponse call
-func ParseAgencyHostingDeleteAgencyPlanWebsiteDatabaseV1Response(rsp *http.Response) (*AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1Response, error) {
+// ParseAgencyHostingDeleteWebsiteDatabaseV1Response parses an HTTP response from a AgencyHostingDeleteWebsiteDatabaseV1WithResponse call
+func ParseAgencyHostingDeleteWebsiteDatabaseV1Response(rsp *http.Response) (*AgencyHostingDeleteWebsiteDatabaseV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgencyHostingDeleteAgencyPlanWebsiteDatabaseV1Response{
+	response := &AgencyHostingDeleteWebsiteDatabaseV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -75589,15 +75589,15 @@ func ParseAgencyHostingDeleteAgencyPlanWebsiteDatabaseV1Response(rsp *http.Respo
 	return response, nil
 }
 
-// ParseAgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Response parses an HTTP response from a AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1WithResponse call
-func ParseAgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Response(rsp *http.Response) (*AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Response, error) {
+// ParseAgencyHostingCreateWebsiteDatabaseUserV1Response parses an HTTP response from a AgencyHostingCreateWebsiteDatabaseUserV1WithResponse call
+func ParseAgencyHostingCreateWebsiteDatabaseUserV1Response(rsp *http.Response) (*AgencyHostingCreateWebsiteDatabaseUserV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Response{
+	response := &AgencyHostingCreateWebsiteDatabaseUserV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -75636,15 +75636,15 @@ func ParseAgencyHostingCreateAgencyPlanWebsiteDatabaseUserV1Response(rsp *http.R
 	return response, nil
 }
 
-// ParseAgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1Response parses an HTTP response from a AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1WithResponse call
-func ParseAgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1Response(rsp *http.Response) (*AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1Response, error) {
+// ParseAgencyHostingDeleteWebsiteDatabaseUserV1Response parses an HTTP response from a AgencyHostingDeleteWebsiteDatabaseUserV1WithResponse call
+func ParseAgencyHostingDeleteWebsiteDatabaseUserV1Response(rsp *http.Response) (*AgencyHostingDeleteWebsiteDatabaseUserV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1Response{
+	response := &AgencyHostingDeleteWebsiteDatabaseUserV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -75676,102 +75676,15 @@ func ParseAgencyHostingDeleteAgencyPlanWebsiteDatabaseUserV1Response(rsp *http.R
 	return response, nil
 }
 
-// ParseAgencyHostingLinkDomainToAgencyPlanWebsiteV1Response parses an HTTP response from a AgencyHostingLinkDomainToAgencyPlanWebsiteV1WithResponse call
-func ParseAgencyHostingLinkDomainToAgencyPlanWebsiteV1Response(rsp *http.Response) (*AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response, error) {
+// ParseAgencyHostingLinkDomainToWebsiteV1Response parses an HTTP response from a AgencyHostingLinkDomainToWebsiteV1WithResponse call
+func ParseAgencyHostingLinkDomainToWebsiteV1Response(rsp *http.Response) (*AgencyHostingLinkDomainToWebsiteV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgencyHostingLinkDomainToAgencyPlanWebsiteV1Response{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest CommonSuccessEmptyResource
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest CommonResponseUnauthorizedResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest CommonResponseUnprocessableContentResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON422 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest CommonResponseErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseAgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response parses an HTTP response from a AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1WithResponse call
-func ParseAgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response(rsp *http.Response) (*AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &AgencyHostingUnlinkDomainFromAgencyPlanWebsiteV1Response{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest CommonSuccessEmptyResource
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest CommonResponseUnauthorizedResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest CommonResponseErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseAgencyHostingChangeAgencyPlanWebsiteDomainV1Response parses an HTTP response from a AgencyHostingChangeAgencyPlanWebsiteDomainV1WithResponse call
-func ParseAgencyHostingChangeAgencyPlanWebsiteDomainV1Response(rsp *http.Response) (*AgencyHostingChangeAgencyPlanWebsiteDomainV1Response, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &AgencyHostingChangeAgencyPlanWebsiteDomainV1Response{
+	response := &AgencyHostingLinkDomainToWebsiteV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -75810,15 +75723,55 @@ func ParseAgencyHostingChangeAgencyPlanWebsiteDomainV1Response(rsp *http.Respons
 	return response, nil
 }
 
-// ParseAgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response parses an HTTP response from a AgencyHostingImportAgencyPlanWebsiteFromArchiveV1WithResponse call
-func ParseAgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response(rsp *http.Response) (*AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response, error) {
+// ParseAgencyHostingUnlinkDomainFromWebsiteV1Response parses an HTTP response from a AgencyHostingUnlinkDomainFromWebsiteV1WithResponse call
+func ParseAgencyHostingUnlinkDomainFromWebsiteV1Response(rsp *http.Response) (*AgencyHostingUnlinkDomainFromWebsiteV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response{
+	response := &AgencyHostingUnlinkDomainFromWebsiteV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingChangeWebsiteDomainV1Response parses an HTTP response from a AgencyHostingChangeWebsiteDomainV1WithResponse call
+func ParseAgencyHostingChangeWebsiteDomainV1Response(rsp *http.Response) (*AgencyHostingChangeWebsiteDomainV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingChangeWebsiteDomainV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -75857,15 +75810,62 @@ func ParseAgencyHostingImportAgencyPlanWebsiteFromArchiveV1Response(rsp *http.Re
 	return response, nil
 }
 
-// ParseAgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response parses an HTTP response from a AgencyHostingListRunningAgencyPlanWebsiteProcessesV1WithResponse call
-func ParseAgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response(rsp *http.Response) (*AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response, error) {
+// ParseAgencyHostingImportWebsiteFromArchiveV1Response parses an HTTP response from a AgencyHostingImportWebsiteFromArchiveV1WithResponse call
+func ParseAgencyHostingImportWebsiteFromArchiveV1Response(rsp *http.Response) (*AgencyHostingImportWebsiteFromArchiveV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response{
+	response := &AgencyHostingImportWebsiteFromArchiveV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingListWebsiteProcessesV1Response parses an HTTP response from a AgencyHostingListWebsiteProcessesV1WithResponse call
+func ParseAgencyHostingListWebsiteProcessesV1Response(rsp *http.Response) (*AgencyHostingListWebsiteProcessesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingListWebsiteProcessesV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -75897,15 +75897,15 @@ func ParseAgencyHostingListRunningAgencyPlanWebsiteProcessesV1Response(rsp *http
 	return response, nil
 }
 
-// ParseAgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response parses an HTTP response from a AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1WithResponse call
-func ParseAgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response(rsp *http.Response) (*AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response, error) {
+// ParseAgencyHostingGetWordPressSettingsV1Response parses an HTTP response from a AgencyHostingGetWordPressSettingsV1WithResponse call
+func ParseAgencyHostingGetWordPressSettingsV1Response(rsp *http.Response) (*AgencyHostingGetWordPressSettingsV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response{
+	response := &AgencyHostingGetWordPressSettingsV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -75937,15 +75937,15 @@ func ParseAgencyHostingGetAgencyPlanWebsiteWordPressSettingsV1Response(rsp *http
 	return response, nil
 }
 
-// ParseAgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response parses an HTTP response from a AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1WithResponse call
-func ParseAgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response(rsp *http.Response) (*AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response, error) {
+// ParseAgencyHostingChangeWordPressVersionV1Response parses an HTTP response from a AgencyHostingChangeWordPressVersionV1WithResponse call
+func ParseAgencyHostingChangeWordPressVersionV1Response(rsp *http.Response) (*AgencyHostingChangeWordPressVersionV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response{
+	response := &AgencyHostingChangeWordPressVersionV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -75984,15 +75984,15 @@ func ParseAgencyHostingChangeAgencyPlanWebsiteWordPressCoreVersionV1Response(rsp
 	return response, nil
 }
 
-// ParseAgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response parses an HTTP response from a AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1WithResponse call
-func ParseAgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response(rsp *http.Response) (*AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response, error) {
+// ParseAgencyHostingListAvailableWordPressVersionsV1Response parses an HTTP response from a AgencyHostingListAvailableWordPressVersionsV1WithResponse call
+func ParseAgencyHostingListAvailableWordPressVersionsV1Response(rsp *http.Response) (*AgencyHostingListAvailableWordPressVersionsV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgencyHostingListAvailableWordPressVersionsForAnAgencyPlanWebsiteV1Response{
+	response := &AgencyHostingListAvailableWordPressVersionsV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}

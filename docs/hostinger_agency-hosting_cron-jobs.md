@@ -18,7 +18,7 @@ Cron Jobs commands
 ### SEE ALSO
 
 * [hostinger agency-hosting](hostinger_agency-hosting.md)	 - Agency Hosting commands
-* [hostinger agency-hosting cron-jobs create-plan-website](hostinger_agency-hosting_cron-jobs_create-plan-website.md)	 - Create Agency Plan website cron job
-* [hostinger agency-hosting cron-jobs delete-plan-website](hostinger_agency-hosting_cron-jobs_delete-plan-website.md)	 - Delete Agency Plan website cron job
-* [hostinger agency-hosting cron-jobs list-plan-website](hostinger_agency-hosting_cron-jobs_list-plan-website.md)	 - List Agency Plan website cron jobs
+* [hostinger agency-hosting cron-jobs create-website](hostinger_agency-hosting_cron-jobs_create-website.md)	 - Create website cron job
+* [hostinger agency-hosting cron-jobs delete-website](hostinger_agency-hosting_cron-jobs_delete-website.md)	 - Delete website cron job
+* [hostinger agency-hosting cron-jobs list-website](hostinger_agency-hosting_cron-jobs_list-website.md)	 - List website cron jobs
 

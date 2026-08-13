@@ -18,5 +18,5 @@ Orders commands
 ### SEE ALSO
 
 * [hostinger agency-hosting](hostinger_agency-hosting.md)	 - Agency Hosting commands
-* [hostinger agency-hosting orders list-plan](hostinger_agency-hosting_orders_list-plan.md)	 - List Agency Plan orders
+* [hostinger agency-hosting orders list](hostinger_agency-hosting_orders_list.md)	 - List orders
 

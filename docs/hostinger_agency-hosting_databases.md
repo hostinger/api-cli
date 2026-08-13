@@ -18,9 +18,9 @@ Databases commands
 ### SEE ALSO
 
 * [hostinger agency-hosting](hostinger_agency-hosting.md)	 - Agency Hosting commands
-* [hostinger agency-hosting databases create-plan-website](hostinger_agency-hosting_databases_create-plan-website.md)	 - Create Agency Plan website database
-* [hostinger agency-hosting databases create-plan-website-user](hostinger_agency-hosting_databases_create-plan-website-user.md)	 - Create Agency Plan website database user
-* [hostinger agency-hosting databases delete-plan-website](hostinger_agency-hosting_databases_delete-plan-website.md)	 - Delete Agency Plan website database
-* [hostinger agency-hosting databases delete-plan-website-user](hostinger_agency-hosting_databases_delete-plan-website-user.md)	 - Delete Agency Plan website database user
-* [hostinger agency-hosting databases list-plan-website](hostinger_agency-hosting_databases_list-plan-website.md)	 - List Agency Plan website databases
+* [hostinger agency-hosting databases create-website](hostinger_agency-hosting_databases_create-website.md)	 - Create website database
+* [hostinger agency-hosting databases create-website-user](hostinger_agency-hosting_databases_create-website-user.md)	 - Create website database user
+* [hostinger agency-hosting databases delete-website](hostinger_agency-hosting_databases_delete-website.md)	 - Delete website database
+* [hostinger agency-hosting databases delete-website-user](hostinger_agency-hosting_databases_delete-website-user.md)	 - Delete website database user
+* [hostinger agency-hosting databases list-website](hostinger_agency-hosting_databases_list-website.md)	 - List website databases
 

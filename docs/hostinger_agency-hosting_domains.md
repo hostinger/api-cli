@@ -18,8 +18,8 @@ Domains commands
 ### SEE ALSO
 
 * [hostinger agency-hosting](hostinger_agency-hosting.md)	 - Agency Hosting commands
-* [hostinger agency-hosting domains change-plan-website](hostinger_agency-hosting_domains_change-plan-website.md)	 - Change Agency Plan website domain
-* [hostinger agency-hosting domains link-to-plan-website](hostinger_agency-hosting_domains_link-to-plan-website.md)	 - Link domain to Agency Plan website
-* [hostinger agency-hosting domains list-plan](hostinger_agency-hosting_domains_list-plan.md)	 - List Agency Plan domains
-* [hostinger agency-hosting domains unlink-from-plan-website](hostinger_agency-hosting_domains_unlink-from-plan-website.md)	 - Unlink domain from Agency Plan website
+* [hostinger agency-hosting domains change-website](hostinger_agency-hosting_domains_change-website.md)	 - Change website domain
+* [hostinger agency-hosting domains link-to-website](hostinger_agency-hosting_domains_link-to-website.md)	 - Link domain to website
+* [hostinger agency-hosting domains list](hostinger_agency-hosting_domains_list.md)	 - List domains
+* [hostinger agency-hosting domains unlink-from-website](hostinger_agency-hosting_domains_unlink-from-website.md)	 - Unlink domain from website
 

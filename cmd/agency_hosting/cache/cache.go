@@ -10,5 +10,5 @@ var GroupCmd = &cobra.Command{
 }
 
 func init() {
-	GroupCmd.AddCommand(ClearPlanWebsiteCmd)
+	GroupCmd.AddCommand(ClearWebsiteCmd)
 }

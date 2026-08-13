@@ -10,8 +10,8 @@ var GroupCmd = &cobra.Command{
 }
 
 func init() {
-	GroupCmd.AddCommand(BuildPlanNodejsAssetsCmd)
-	GroupCmd.AddCommand(DeletePlanCmd)
-	GroupCmd.AddCommand(ListRunningPlanProcessesCmd)
-	GroupCmd.AddCommand(PlanCmd)
+	GroupCmd.AddCommand(BuildNodejsAssetsCmd)
+	GroupCmd.AddCommand(DeleteCmd)
+	GroupCmd.AddCommand(GetCmd)
+	GroupCmd.AddCommand(ListProcessesCmd)
 }

@@ -10,9 +10,9 @@ var GroupCmd = &cobra.Command{
 }
 
 func init() {
-	GroupCmd.AddCommand(CreatePlanWebsiteCmd)
-	GroupCmd.AddCommand(CreatePlanWebsiteUserCmd)
-	GroupCmd.AddCommand(DeletePlanWebsiteCmd)
-	GroupCmd.AddCommand(DeletePlanWebsiteUserCmd)
-	GroupCmd.AddCommand(ListPlanWebsiteCmd)
+	GroupCmd.AddCommand(CreateWebsiteCmd)
+	GroupCmd.AddCommand(CreateWebsiteUserCmd)
+	GroupCmd.AddCommand(DeleteWebsiteCmd)
+	GroupCmd.AddCommand(DeleteWebsiteUserCmd)
+	GroupCmd.AddCommand(ListWebsiteCmd)
 }

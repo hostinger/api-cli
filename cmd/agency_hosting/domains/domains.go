@@ -10,8 +10,8 @@ var GroupCmd = &cobra.Command{
 }
 
 func init() {
-	GroupCmd.AddCommand(ChangePlanWebsiteCmd)
-	GroupCmd.AddCommand(LinkToPlanWebsiteCmd)
-	GroupCmd.AddCommand(ListPlanCmd)
-	GroupCmd.AddCommand(UnlinkFromPlanWebsiteCmd)
+	GroupCmd.AddCommand(ChangeWebsiteCmd)
+	GroupCmd.AddCommand(LinkToWebsiteCmd)
+	GroupCmd.AddCommand(ListCmd)
+	GroupCmd.AddCommand(UnlinkFromWebsiteCmd)
 }

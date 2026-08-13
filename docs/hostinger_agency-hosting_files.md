@@ -18,5 +18,5 @@ Files commands
 ### SEE ALSO
 
 * [hostinger agency-hosting](hostinger_agency-hosting.md)	 - Agency Hosting commands
-* [hostinger agency-hosting files import-plan-website-from-archive](hostinger_agency-hosting_files_import-plan-website-from-archive.md)	 - Import Agency Plan website from archive
+* [hostinger agency-hosting files import-website-from-archive](hostinger_agency-hosting_files_import-website-from-archive.md)	 - Import website from archive
 

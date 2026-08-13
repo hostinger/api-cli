@@ -18,5 +18,5 @@ Datacenters commands
 ### SEE ALSO
 
 * [hostinger agency-hosting](hostinger_agency-hosting.md)	 - Agency Hosting commands
-* [hostinger agency-hosting datacenters list-for-plan-order](hostinger_agency-hosting_datacenters_list-for-plan-order.md)	 - List available datacenters for an Agency Plan order
+* [hostinger agency-hosting datacenters list](hostinger_agency-hosting_datacenters_list.md)	 - List available datacenters
 

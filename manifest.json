@@ -349,128 +349,128 @@
     "method": "POST",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/docker/{projectName}/update"
   },
-  "agency-hosting_buildAgencyPlanWebsiteNodeJSAssetsV1": {
-    "command": "hostinger agency-hosting websites build-plan-nodejs-assets",
+  "agency-hosting_buildWebsiteNodeJSAssetsV1": {
+    "command": "hostinger agency-hosting websites build-nodejs-assets",
     "method": "POST",
     "path": "/api/agency-hosting/v1/websites/{website_uid}/build-assets"
   },
-  "agency-hosting_changeAgencyPlanWebsiteDomainV1": {
-    "command": "hostinger agency-hosting domains change-plan-website",
+  "agency-hosting_changeWebsiteDomainV1": {
+    "command": "hostinger agency-hosting domains change-website",
     "method": "PUT",
     "path": "/api/agency-hosting/v1/websites/{website_uid}/domains/{from_domain}"
   },
-  "agency-hosting_changeAgencyPlanWebsiteWordPressCoreVersionV1": {
-    "command": "hostinger agency-hosting wordpress change-plan-website-core-version",
+  "agency-hosting_changeWordPressVersionV1": {
+    "command": "hostinger agency-hosting wordpress change-version",
     "method": "PATCH",
     "path": "/api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/version"
   },
-  "agency-hosting_clearAgencyPlanWebsiteCacheV1": {
-    "command": "hostinger agency-hosting cache clear-plan-website",
+  "agency-hosting_clearWebsiteCacheV1": {
+    "command": "hostinger agency-hosting cache clear-website",
     "method": "DELETE",
     "path": "/api/agency-hosting/v1/websites/{website_uid}/cache"
   },
-  "agency-hosting_createAgencyPlanWebsiteCronJobV1": {
-    "command": "hostinger agency-hosting cron-jobs create-plan-website",
-    "method": "POST",
-    "path": "/api/agency-hosting/v1/websites/{website_uid}/cron-jobs"
-  },
-  "agency-hosting_createAgencyPlanWebsiteDatabaseUserV1": {
-    "command": "hostinger agency-hosting databases create-plan-website-user",
-    "method": "POST",
-    "path": "/api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users"
-  },
-  "agency-hosting_createAgencyPlanWebsiteDatabaseV1": {
-    "command": "hostinger agency-hosting databases create-plan-website",
-    "method": "POST",
-    "path": "/api/agency-hosting/v1/websites/{website_uid}/databases"
-  },
-  "agency-hosting_deleteAgencyPlanWebsiteCronJobV1": {
-    "command": "hostinger agency-hosting cron-jobs delete-plan-website",
-    "method": "DELETE",
-    "path": "/api/agency-hosting/v1/websites/{website_uid}/cron-jobs/{uuid}"
-  },
-  "agency-hosting_deleteAgencyPlanWebsiteDatabaseUserV1": {
-    "command": "hostinger agency-hosting databases delete-plan-website-user",
-    "method": "DELETE",
-    "path": "/api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users/{database_user_name}"
-  },
-  "agency-hosting_deleteAgencyPlanWebsiteDatabaseV1": {
-    "command": "hostinger agency-hosting databases delete-plan-website",
-    "method": "DELETE",
-    "path": "/api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}"
-  },
-  "agency-hosting_deleteAgencyPlanWebsiteV1": {
-    "command": "hostinger agency-hosting websites delete-plan",
-    "method": "DELETE",
-    "path": "/api/agency-hosting/v1/websites/{website_uid}"
-  },
-  "agency-hosting_getAgencyPlanWebsiteDetailsV1": {
-    "command": "hostinger agency-hosting websites plan",
-    "method": "GET",
-    "path": "/api/agency-hosting/v1/websites/{website_uid}"
-  },
-  "agency-hosting_getAgencyPlanWebsiteSetupStatusV1": {
-    "command": "hostinger agency-hosting website-setups plan-status",
-    "method": "GET",
-    "path": "/api/agency-hosting/v1/orders/{order_id}/websites/setups/{setup_uuid}"
-  },
-  "agency-hosting_getAgencyPlanWebsiteWordPressSettingsV1": {
-    "command": "hostinger agency-hosting wordpress plan-website-settings",
-    "method": "GET",
-    "path": "/api/agency-hosting/v1/websites/{website_uid}/wordpress/settings"
-  },
-  "agency-hosting_importAgencyPlanWebsiteFromArchiveV1": {
-    "command": "hostinger agency-hosting files import-plan-website-from-archive",
-    "method": "POST",
-    "path": "/api/agency-hosting/v1/websites/{website_uid}/files/import-archive"
-  },
-  "agency-hosting_linkDomainToAgencyPlanWebsiteV1": {
-    "command": "hostinger agency-hosting domains link-to-plan-website",
-    "method": "POST",
-    "path": "/api/agency-hosting/v1/websites/{website_uid}/domains"
-  },
-  "agency-hosting_listAgencyPlanDomainsV1": {
-    "command": "hostinger agency-hosting domains list-plan",
-    "method": "GET",
-    "path": "/api/agency-hosting/v1/domains"
-  },
-  "agency-hosting_listAgencyPlanOrdersV1": {
-    "command": "hostinger agency-hosting orders list-plan",
-    "method": "GET",
-    "path": "/api/agency-hosting/v1/orders"
-  },
-  "agency-hosting_listAgencyPlanWebsiteCronJobsV1": {
-    "command": "hostinger agency-hosting cron-jobs list-plan-website",
-    "method": "GET",
-    "path": "/api/agency-hosting/v1/websites/{website_uid}/cron-jobs"
-  },
-  "agency-hosting_listAgencyPlanWebsiteDatabasesV1": {
-    "command": "hostinger agency-hosting databases list-plan-website",
-    "method": "GET",
-    "path": "/api/agency-hosting/v1/websites/{website_uid}/databases"
-  },
-  "agency-hosting_listAvailableDatacentersForAnAgencyPlanOrderV1": {
-    "command": "hostinger agency-hosting datacenters list-for-plan-order",
-    "method": "GET",
-    "path": "/api/agency-hosting/v1/orders/{order_id}/datacenters"
-  },
-  "agency-hosting_listAvailableWordPressVersionsForAnAgencyPlanWebsiteV1": {
-    "command": "hostinger agency-hosting wordpress list-versions-for-plan-website",
-    "method": "GET",
-    "path": "/api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/versions"
-  },
-  "agency-hosting_listRunningAgencyPlanWebsiteProcessesV1": {
-    "command": "hostinger agency-hosting websites list-running-plan-processes",
-    "method": "GET",
-    "path": "/api/agency-hosting/v1/websites/{website_uid}/processes"
-  },
-  "agency-hosting_provisionANewAgencyPlanWebsiteV1": {
-    "command": "hostinger agency-hosting website-setups provision-plan",
+  "agency-hosting_createANewWebsiteV1": {
+    "command": "hostinger agency-hosting website-setups create",
     "method": "POST",
     "path": "/api/agency-hosting/v1/orders/{order_id}/websites/setups"
   },
-  "agency-hosting_unlinkDomainFromAgencyPlanWebsiteV1": {
-    "command": "hostinger agency-hosting domains unlink-from-plan-website",
+  "agency-hosting_createWebsiteCronJobV1": {
+    "command": "hostinger agency-hosting cron-jobs create-website",
+    "method": "POST",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/cron-jobs"
+  },
+  "agency-hosting_createWebsiteDatabaseUserV1": {
+    "command": "hostinger agency-hosting databases create-website-user",
+    "method": "POST",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users"
+  },
+  "agency-hosting_createWebsiteDatabaseV1": {
+    "command": "hostinger agency-hosting databases create-website",
+    "method": "POST",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/databases"
+  },
+  "agency-hosting_deleteWebsiteCronJobV1": {
+    "command": "hostinger agency-hosting cron-jobs delete-website",
+    "method": "DELETE",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/cron-jobs/{uuid}"
+  },
+  "agency-hosting_deleteWebsiteDatabaseUserV1": {
+    "command": "hostinger agency-hosting databases delete-website-user",
+    "method": "DELETE",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}/users/{database_user_name}"
+  },
+  "agency-hosting_deleteWebsiteDatabaseV1": {
+    "command": "hostinger agency-hosting databases delete-website",
+    "method": "DELETE",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/databases/{database_name}"
+  },
+  "agency-hosting_deleteWebsiteV1": {
+    "command": "hostinger agency-hosting websites delete",
+    "method": "DELETE",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}"
+  },
+  "agency-hosting_getWebsiteDetailsV1": {
+    "command": "hostinger agency-hosting websites get",
+    "method": "GET",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}"
+  },
+  "agency-hosting_getWebsiteSetupStatusV1": {
+    "command": "hostinger agency-hosting website-setups status",
+    "method": "GET",
+    "path": "/api/agency-hosting/v1/orders/{order_id}/websites/setups/{setup_uuid}"
+  },
+  "agency-hosting_getWordPressSettingsV1": {
+    "command": "hostinger agency-hosting wordpress settings",
+    "method": "GET",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/wordpress/settings"
+  },
+  "agency-hosting_importWebsiteFromArchiveV1": {
+    "command": "hostinger agency-hosting files import-website-from-archive",
+    "method": "POST",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/files/import-archive"
+  },
+  "agency-hosting_linkDomainToWebsiteV1": {
+    "command": "hostinger agency-hosting domains link-to-website",
+    "method": "POST",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/domains"
+  },
+  "agency-hosting_listAvailableDatacentersV1": {
+    "command": "hostinger agency-hosting datacenters list",
+    "method": "GET",
+    "path": "/api/agency-hosting/v1/orders/{order_id}/datacenters"
+  },
+  "agency-hosting_listAvailableWordPressVersionsV1": {
+    "command": "hostinger agency-hosting wordpress list-versions",
+    "method": "GET",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/versions"
+  },
+  "agency-hosting_listDomainsV1": {
+    "command": "hostinger agency-hosting domains list",
+    "method": "GET",
+    "path": "/api/agency-hosting/v1/domains"
+  },
+  "agency-hosting_listOrdersV1": {
+    "command": "hostinger agency-hosting orders list",
+    "method": "GET",
+    "path": "/api/agency-hosting/v1/orders"
+  },
+  "agency-hosting_listWebsiteCronJobsV1": {
+    "command": "hostinger agency-hosting cron-jobs list-website",
+    "method": "GET",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/cron-jobs"
+  },
+  "agency-hosting_listWebsiteDatabasesV1": {
+    "command": "hostinger agency-hosting databases list-website",
+    "method": "GET",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/databases"
+  },
+  "agency-hosting_listWebsiteProcessesV1": {
+    "command": "hostinger agency-hosting websites list-processes",
+    "method": "GET",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/processes"
+  },
+  "agency-hosting_unlinkDomainFromWebsiteV1": {
+    "command": "hostinger agency-hosting domains unlink-from-website",
     "method": "DELETE",
     "path": "/api/agency-hosting/v1/websites/{website_uid}/domains/{domain}"
   },

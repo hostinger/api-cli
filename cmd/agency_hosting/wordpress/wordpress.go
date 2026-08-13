@@ -10,7 +10,7 @@ var GroupCmd = &cobra.Command{
 }
 
 func init() {
-	GroupCmd.AddCommand(ChangePlanWebsiteCoreVersionCmd)
-	GroupCmd.AddCommand(ListVersionsForPlanWebsiteCmd)
-	GroupCmd.AddCommand(PlanWebsiteSettingsCmd)
+	GroupCmd.AddCommand(ChangeVersionCmd)
+	GroupCmd.AddCommand(ListVersionsCmd)
+	GroupCmd.AddCommand(SettingsCmd)
 }

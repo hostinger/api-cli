@@ -10,6 +10,6 @@ var GroupCmd = &cobra.Command{
 }
 
 func init() {
-	GroupCmd.AddCommand(PlanStatusCmd)
-	GroupCmd.AddCommand(ProvisionPlanCmd)
+	GroupCmd.AddCommand(CreateCmd)
+	GroupCmd.AddCommand(StatusCmd)
 }

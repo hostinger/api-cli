@@ -10,5 +10,5 @@ var GroupCmd = &cobra.Command{
 }
 
 func init() {
-	GroupCmd.AddCommand(ListForPlanOrderCmd)
+	GroupCmd.AddCommand(ListCmd)
 }

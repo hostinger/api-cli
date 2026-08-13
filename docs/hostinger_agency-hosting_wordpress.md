@@ -18,7 +18,7 @@ WordPress commands
 ### SEE ALSO
 
 * [hostinger agency-hosting](hostinger_agency-hosting.md)	 - Agency Hosting commands
-* [hostinger agency-hosting wordpress change-plan-website-core-version](hostinger_agency-hosting_wordpress_change-plan-website-core-version.md)	 - Change Agency Plan website WordPress core version
-* [hostinger agency-hosting wordpress list-versions-for-plan-website](hostinger_agency-hosting_wordpress_list-versions-for-plan-website.md)	 - List available WordPress versions for an Agency Plan website
-* [hostinger agency-hosting wordpress plan-website-settings](hostinger_agency-hosting_wordpress_plan-website-settings.md)	 - Get Agency Plan website WordPress settings
+* [hostinger agency-hosting wordpress change-version](hostinger_agency-hosting_wordpress_change-version.md)	 - Change WordPress version
+* [hostinger agency-hosting wordpress list-versions](hostinger_agency-hosting_wordpress_list-versions.md)	 - List available WordPress versions
+* [hostinger agency-hosting wordpress settings](hostinger_agency-hosting_wordpress_settings.md)	 - Get WordPress settings
 
