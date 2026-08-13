@@ -689,6 +689,16 @@
     "method": "POST",
     "path": "/api/domains/v1/move/outgoing/{domain}"
   },
+  "domains_suggestDomainNamesFromADescriptionV1": {
+    "command": "hostinger domains availability suggest-names-from-description",
+    "method": "POST",
+    "path": "/api/domains/v1/availability/alternatives-from-description"
+  },
+  "domains_suggestDomainNamesFromADomainV1": {
+    "command": "hostinger domains availability suggest-names-from",
+    "method": "POST",
+    "path": "/api/domains/v1/availability/alternatives-from-domain"
+  },
   "domains_unsetDefaultWHOISProfileV1": {
     "command": "hostinger domains whois unset-default",
     "method": "DELETE",
@@ -763,6 +773,11 @@
     "command": "hostinger ecommerce sales-channels update",
     "method": "PATCH",
     "path": "/api/ecommerce/v1/stores/{store_id}/sales-channels/{sales_channel_id}"
+  },
+  "ecommerce_uploadAndAttachAProductImageV1": {
+    "command": "hostinger ecommerce products upload-and-attach-image",
+    "method": "POST",
+    "path": "/api/ecommerce/v1/stores/{store_id}/products/{product_id}/images"
   },
   "horizons_createWebsiteV1": {
     "command": "hostinger horizons websites create",
@@ -924,6 +939,11 @@
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/databases/{name}/phpmyadmin-link"
   },
+  "hosting_getWebsiteFileContentV1": {
+    "command": "hostinger hosting files website-content",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/domains/{domain}/files/content"
+  },
   "hosting_installWordPressPluginsV1": {
     "command": "hostinger wordpress plugins install",
     "method": "POST",
@@ -998,6 +1018,11 @@
     "command": "hostinger wordpress plugins list-suggested",
     "method": "GET",
     "path": "/api/hosting/v1/wordpress/plugins/suggested"
+  },
+  "hosting_listWebsiteFilesAndDirectoriesV1": {
+    "command": "hostinger hosting files list-website-and-directories",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/domains/{domain}/files"
   },
   "hosting_listWebsiteParkedDomainsV1": {
     "command": "hostinger hosting domains list-website-parked",

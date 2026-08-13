@@ -10,7 +10,7 @@ Multiple TLDs can be checked at once.
 If you want alternative domains with response, provide only one TLD and set `with_alternatives` to `true`.
 TLDs should be provided without leading dot (e.g. `com`, `net`, `org`).
 
-Endpoint has rate limit of 10 requests per minute.
+Endpoint has rate limit of 90 requests per minute.
 
 Use this endpoint to verify domain availability before purchase.
 

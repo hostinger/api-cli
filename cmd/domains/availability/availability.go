@@ -11,4 +11,6 @@ var GroupCmd = &cobra.Command{
 
 func init() {
 	GroupCmd.AddCommand(CheckCmd)
+	GroupCmd.AddCommand(SuggestNamesFromCmd)
+	GroupCmd.AddCommand(SuggestNamesFromDescriptionCmd)
 }

@@ -12,4 +12,5 @@ var GroupCmd = &cobra.Command{
 func init() {
 	GroupCmd.AddCommand(CreateDigitalCmd)
 	GroupCmd.AddCommand(CreatePhysicalCmd)
+	GroupCmd.AddCommand(UploadAndAttachImageCmd)
 }

@@ -807,6 +807,30 @@ func (e HostingV1DomainsParkedDomainResourceType) Valid() bool {
 	}
 }
 
+// Defines values for HostingV1FilesFilesResourceItemsType.
+const (
+	HostingV1FilesFilesResourceItemsTypeDirectory HostingV1FilesFilesResourceItemsType = "directory"
+	HostingV1FilesFilesResourceItemsTypeFile      HostingV1FilesFilesResourceItemsType = "file"
+	HostingV1FilesFilesResourceItemsTypeOther     HostingV1FilesFilesResourceItemsType = "other"
+	HostingV1FilesFilesResourceItemsTypeSymlink   HostingV1FilesFilesResourceItemsType = "symlink"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1FilesFilesResourceItemsType enum.
+func (e HostingV1FilesFilesResourceItemsType) Valid() bool {
+	switch e {
+	case HostingV1FilesFilesResourceItemsTypeDirectory:
+		return true
+	case HostingV1FilesFilesResourceItemsTypeFile:
+		return true
+	case HostingV1FilesFilesResourceItemsTypeOther:
+		return true
+	case HostingV1FilesFilesResourceItemsTypeSymlink:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for HostingV1NodeJsBuildOptionsResourceAppType.
 const (
 	HostingV1NodeJsBuildOptionsResourceAppTypeAngular        HostingV1NodeJsBuildOptionsResourceAppType = "angular"
@@ -1002,21 +1026,6 @@ func (e HostingV1NodeJsVulnerabilityResourceSeverity) Valid() bool {
 	case HostingV1NodeJsVulnerabilityResourceSeverityModerate:
 		return true
 	case HostingV1NodeJsVulnerabilityResourceSeverityUnknown:
-		return true
-	default:
-		return false
-	}
-}
-
-// Defines values for HostingV1WebsitesDeleteWebsiteRequestConfirm.
-const (
-	True HostingV1WebsitesDeleteWebsiteRequestConfirm = true
-)
-
-// Valid indicates whether the value is a known member of the HostingV1WebsitesDeleteWebsiteRequestConfirm enum.
-func (e HostingV1WebsitesDeleteWebsiteRequestConfirm) Valid() bool {
-	switch e {
-	case True:
 		return true
 	default:
 		return false
@@ -2952,6 +2961,30 @@ func (e BillingGetCatalogItemListV1ParamsCategory) Valid() bool {
 	}
 }
 
+// Defines values for HostingListWebsiteFilesAndDirectoriesV1ParamsFileTypes.
+const (
+	HostingListWebsiteFilesAndDirectoriesV1ParamsFileTypesDirectory HostingListWebsiteFilesAndDirectoriesV1ParamsFileTypes = "directory"
+	HostingListWebsiteFilesAndDirectoriesV1ParamsFileTypesFile      HostingListWebsiteFilesAndDirectoriesV1ParamsFileTypes = "file"
+	HostingListWebsiteFilesAndDirectoriesV1ParamsFileTypesOther     HostingListWebsiteFilesAndDirectoriesV1ParamsFileTypes = "other"
+	HostingListWebsiteFilesAndDirectoriesV1ParamsFileTypesSymlink   HostingListWebsiteFilesAndDirectoriesV1ParamsFileTypes = "symlink"
+)
+
+// Valid indicates whether the value is a known member of the HostingListWebsiteFilesAndDirectoriesV1ParamsFileTypes enum.
+func (e HostingListWebsiteFilesAndDirectoriesV1ParamsFileTypes) Valid() bool {
+	switch e {
+	case HostingListWebsiteFilesAndDirectoriesV1ParamsFileTypesDirectory:
+		return true
+	case HostingListWebsiteFilesAndDirectoriesV1ParamsFileTypesFile:
+		return true
+	case HostingListWebsiteFilesAndDirectoriesV1ParamsFileTypesOther:
+		return true
+	case HostingListWebsiteFilesAndDirectoriesV1ParamsFileTypesSymlink:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for HostingListNodeJSBuildsV1ParamsStates.
 const (
 	HostingListNodeJSBuildsV1ParamsStatesCompleted HostingListNodeJSBuildsV1ParamsStates = "completed"
@@ -4657,6 +4690,35 @@ type DomainAccessVerifierV2VerificationsListRequest struct {
 	Domains []string `json:"domains"`
 }
 
+// DomainsV1AvailabilityAlternativeCollection Suggested domain names
+type DomainsV1AvailabilityAlternativeCollection = []string
+
+// DomainsV1AvailabilityAlternativesFromDescriptionRequest defines model for Domains.V1.Availability.AlternativesFromDescriptionRequest.
+type DomainsV1AvailabilityAlternativesFromDescriptionRequest struct {
+	// Description Free-text description of the project the domain is needed for
+	//
+	// Example: A bakery in Vilnius selling sourdough bread and pastries
+	Description string `json:"description"`
+
+	// Limit Amount of domain names to suggest
+	//
+	// Example: 10
+	Limit int `json:"limit"`
+}
+
+// DomainsV1AvailabilityAlternativesFromDomainRequest defines model for Domains.V1.Availability.AlternativesFromDomainRequest.
+type DomainsV1AvailabilityAlternativesFromDomainRequest struct {
+	// Domain Domain name to base the suggestions on
+	//
+	// Example: mydomain
+	Domain string `json:"domain"`
+
+	// Limit Amount of domain names to suggest
+	//
+	// Example: 10
+	Limit int `json:"limit"`
+}
+
 // DomainsV1AvailabilityAvailabilityCollection Array of [`Domains.V1.Availability.AvailabilityResource`](#model/domainsv1availabilityavailabilityresource)
 type DomainsV1AvailabilityAvailabilityCollection = []DomainsV1AvailabilityAvailabilityResource
 
@@ -5464,6 +5526,31 @@ type EcommerceV1ProductProductCreationResource struct {
 // Example: physical
 type EcommerceV1ProductProductCreationResourceProductType string
 
+// EcommerceV1ProductProductImageUploadResource defines model for Ecommerce.V1.Product.ProductImageUploadResource.
+type EcommerceV1ProductProductImageUploadResource struct {
+	// IsThumbnail Whether the image was set as the product's thumbnail (primary image).
+	//
+	// Example: true
+	IsThumbnail *bool `json:"is_thumbnail,omitempty"`
+
+	// Url CDN URL of the uploaded image.
+	//
+	// Example: https://cdn.example.com/store_01.../assets/01J8Z5F8W9K8M4A7B3C2D1E0FG.png
+	Url *string `json:"url,omitempty"`
+}
+
+// EcommerceV1ProductUploadProductImageRequest defines model for Ecommerce.V1.Product.UploadProductImageRequest.
+type EcommerceV1ProductUploadProductImageRequest struct {
+	// Image Raster image file (JPEG, PNG, GIF or WebP), maximum 15MB. SVG is not accepted.
+	Image string `json:"image"`
+
+	// IsThumbnail When true, the image becomes the product's thumbnail (primary image). When omitted, it becomes the
+	// thumbnail only if the product does not have one yet.
+	//
+	// Example: true
+	IsThumbnail *bool `json:"is_thumbnail,omitempty"`
+}
+
 // EcommerceV1SalesChannelSalesChannelCreationResource defines model for Ecommerce.V1.SalesChannel.SalesChannelCreationResource.
 type EcommerceV1SalesChannelSalesChannelCreationResource struct {
 	SalesChannel *struct {
@@ -6224,6 +6311,86 @@ type HostingV1DomainsVerifyOwnershipRequest struct {
 	Domain string `json:"domain"`
 }
 
+// HostingV1FilesFileContentResource defines model for Hosting.V1.Files.FileContentResource.
+type HostingV1FilesFileContentResource struct {
+	// Content File content for the requested line range.
+	//
+	// Example: <?php
+	// echo 'Hello world';
+	Content string `json:"content"`
+
+	// FromLine Line offset the returned content starts from.
+	//
+	// Example: 0
+	FromLine int `json:"from_line"`
+
+	// Path File path, relative to the document root.
+	//
+	// Example: index.php
+	Path string `json:"path"`
+
+	// SizeBytes Total file size in bytes.
+	//
+	// Example: 2048
+	SizeBytes int `json:"size_bytes"`
+
+	// TotalLines Total number of lines in the file.
+	//
+	// Example: 84
+	TotalLines int `json:"total_lines"`
+}
+
+// HostingV1FilesFilesResource defines model for Hosting.V1.Files.FilesResource.
+type HostingV1FilesFilesResource struct {
+	// Items Entries found in the listed directory.
+	Items []struct {
+		// Name Entry name.
+		//
+		// Example: index.php
+		Name string `json:"name"`
+
+		// Path Entry path, relative to the document root.
+		//
+		// Example: wp-content/index.php
+		Path string `json:"path"`
+
+		// SizeBytes Entry size in bytes. Null for directories, symlinks, and other non-file entries.
+		//
+		// Example: 512
+		SizeBytes *int `json:"size_bytes"`
+
+		// Type Entry type.
+		//
+		// Example: file
+		Type HostingV1FilesFilesResourceItemsType `json:"type"`
+	} `json:"items"`
+
+	// Offset Number of entries skipped before this page.
+	//
+	// Example: 0
+	Offset int `json:"offset"`
+
+	// Path Listed directory, relative to the document root.
+	//
+	// Example: wp-content
+	Path string `json:"path"`
+
+	// TotalItems Total number of entries matching the listing, across all pages.
+	//
+	// Example: 42
+	TotalItems int `json:"total_items"`
+
+	// TotalItemsCurrentPage Number of entries in this page.
+	//
+	// Example: 20
+	TotalItemsCurrentPage int `json:"total_items_current_page"`
+}
+
+// HostingV1FilesFilesResourceItemsType Entry type.
+//
+// Example: file
+type HostingV1FilesFilesResourceItemsType string
+
 // HostingV1NodeJsBuildCollection Array of [`Hosting.V1.NodeJs.BuildResource`](#model/hostingv1nodejsbuildresource)
 type HostingV1NodeJsBuildCollection = []HostingV1NodeJsBuildResource
 
@@ -6700,19 +6867,6 @@ type HostingV1WebsitesCreateWebsiteRequest struct {
 	// Example: 12345
 	OrderId int `json:"order_id"`
 }
-
-// HostingV1WebsitesDeleteWebsiteRequest defines model for Hosting.V1.Websites.DeleteWebsiteRequest.
-type HostingV1WebsitesDeleteWebsiteRequest struct {
-	// Confirm Must be boolean true to confirm the permanent deletion of the website.
-	//
-	// Example: true
-	Confirm HostingV1WebsitesDeleteWebsiteRequestConfirm `json:"confirm"`
-}
-
-// HostingV1WebsitesDeleteWebsiteRequestConfirm Must be boolean true to confirm the permanent deletion of the website.
-//
-// Example: true
-type HostingV1WebsitesDeleteWebsiteRequestConfirm bool
 
 // HostingV1WebsitesWebsiteCollection Array of [`Hosting.V1.Websites.WebsiteResource`](#model/hostingv1websiteswebsiteresource)
 type HostingV1WebsitesWebsiteCollection = []HostingV1WebsitesWebsiteResource
@@ -10393,6 +10547,9 @@ type DatabaseNamePath = string
 // DatabaseSearch Example: test_db
 type DatabaseSearch = string
 
+// Directory Example: blog
+type Directory = string
+
 // Domain Example: mydomain.tld
 type Domain = string
 
@@ -10753,6 +10910,39 @@ type HostingDeleteDatabaseRemoteConnectionV1Params struct {
 	// Ip Remote host to revoke: the IPv4/IPv6 address, or "%",
 	// exactly as returned by the list remote connections endpoint.
 	Ip string `form:"ip" json:"ip"`
+}
+
+// HostingListWebsiteFilesAndDirectoriesV1Params defines parameters for HostingListWebsiteFilesAndDirectoriesV1.
+type HostingListWebsiteFilesAndDirectoriesV1Params struct {
+	// Directory Directory path to check
+	Directory *Directory `form:"directory,omitempty" json:"directory,omitempty"`
+
+	// MaxDepth How many directory levels deep to recurse.
+	MaxDepth *int `form:"max_depth,omitempty" json:"max_depth,omitempty"`
+
+	// MaxItems Max number of entries to return in this page.
+	MaxItems *int `form:"max_items,omitempty" json:"max_items,omitempty"`
+
+	// Offset Number of entries to skip. Page with offset + item count until reaching total_items.
+	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
+
+	// FileTypes Filter by entry type, e.g. file,directory. Omit for all types.
+	FileTypes *[]HostingListWebsiteFilesAndDirectoriesV1ParamsFileTypes `form:"file_types,omitempty" json:"file_types,omitempty"`
+}
+
+// HostingListWebsiteFilesAndDirectoriesV1ParamsFileTypes defines parameters for HostingListWebsiteFilesAndDirectoriesV1.
+type HostingListWebsiteFilesAndDirectoriesV1ParamsFileTypes string
+
+// HostingGetWebsiteFileContentV1Params defines parameters for HostingGetWebsiteFileContentV1.
+type HostingGetWebsiteFileContentV1Params struct {
+	// Path File path, relative to the document root.
+	Path string `form:"path" json:"path"`
+
+	// FromLine Line offset to start reading from.
+	FromLine *int `form:"from_line,omitempty" json:"from_line,omitempty"`
+
+	// MaxLines Max number of lines to return.
+	MaxLines *int `form:"max_lines,omitempty" json:"max_lines,omitempty"`
 }
 
 // HostingClearWebsiteCacheV1Params defines parameters for HostingClearWebsiteCacheV1.
@@ -11335,6 +11525,12 @@ type DNSValidateDNSRecordsV1JSONRequestBody = DNSV1ZoneUpdateRequest
 // DomainsCheckDomainAvailabilityV1JSONRequestBody defines body for DomainsCheckDomainAvailabilityV1 for application/json ContentType.
 type DomainsCheckDomainAvailabilityV1JSONRequestBody = DomainsV1AvailabilityAvailabilityRequest
 
+// DomainsSuggestDomainNamesFromADescriptionV1JSONRequestBody defines body for DomainsSuggestDomainNamesFromADescriptionV1 for application/json ContentType.
+type DomainsSuggestDomainNamesFromADescriptionV1JSONRequestBody = DomainsV1AvailabilityAlternativesFromDescriptionRequest
+
+// DomainsSuggestDomainNamesFromADomainV1JSONRequestBody defines body for DomainsSuggestDomainNamesFromADomainV1 for application/json ContentType.
+type DomainsSuggestDomainNamesFromADomainV1JSONRequestBody = DomainsV1AvailabilityAlternativesFromDomainRequest
+
 // DomainsCreateDomainForwardingV1JSONRequestBody defines body for DomainsCreateDomainForwardingV1 for application/json ContentType.
 type DomainsCreateDomainForwardingV1JSONRequestBody = DomainsV1ForwardingStoreRequest
 
@@ -11376,6 +11572,9 @@ type EcommerceCreateDigitalProductV1JSONRequestBody = EcommerceV1ProductCreateDi
 
 // EcommerceCreatePhysicalProductV1JSONRequestBody defines body for EcommerceCreatePhysicalProductV1 for application/json ContentType.
 type EcommerceCreatePhysicalProductV1JSONRequestBody = EcommerceV1ProductCreatePhysicalProductRequest
+
+// EcommerceUploadAndAttachAProductImageV1JSONRequestBody defines body for EcommerceUploadAndAttachAProductImageV1 for application/json ContentType.
+type EcommerceUploadAndAttachAProductImageV1JSONRequestBody = EcommerceV1ProductUploadProductImageRequest
 
 // EcommerceCreateCustomSalesChannelV1JSONRequestBody defines body for EcommerceCreateCustomSalesChannelV1 for application/json ContentType.
 type EcommerceCreateCustomSalesChannelV1JSONRequestBody = EcommerceV1SalesChannelStoreRequest
@@ -11484,9 +11683,6 @@ type HostingVerifyDomainOwnershipV1JSONRequestBody = HostingV1DomainsVerifyOwner
 
 // HostingCreateWebsiteV1JSONRequestBody defines body for HostingCreateWebsiteV1 for application/json ContentType.
 type HostingCreateWebsiteV1JSONRequestBody = HostingV1WebsitesCreateWebsiteRequest
-
-// HostingDeleteWebsiteV1JSONRequestBody defines body for HostingDeleteWebsiteV1 for application/json ContentType.
-type HostingDeleteWebsiteV1JSONRequestBody = HostingV1WebsitesDeleteWebsiteRequest
 
 // MailUpdateAutoreplyV1JSONRequestBody defines body for MailUpdateAutoreplyV1 for application/json ContentType.
 type MailUpdateAutoreplyV1JSONRequestBody = MailV1SchemaUpsertAutoreplyRequestSchema
@@ -13250,7 +13446,7 @@ type ClientInterface interface {
 	// If you want alternative domains with response, provide only one TLD and set `with_alternatives` to `true`.
 	// TLDs should be provided without leading dot (e.g. `com`, `net`, `org`).
 	//
-	// Endpoint has rate limit of 10 requests per minute.
+	// Endpoint has rate limit of 90 requests per minute.
 	//
 	// Use this endpoint to verify domain availability before purchase.
 	//
@@ -13267,7 +13463,7 @@ type ClientInterface interface {
 	// If you want alternative domains with response, provide only one TLD and set `with_alternatives` to `true`.
 	// TLDs should be provided without leading dot (e.g. `com`, `net`, `org`).
 	//
-	// Endpoint has rate limit of 10 requests per minute.
+	// Endpoint has rate limit of 90 requests per minute.
 	//
 	// Use this endpoint to verify domain availability before purchase.
 	//
@@ -13275,6 +13471,66 @@ type ClientInterface interface {
 	//
 	// Corresponds with POST /api/domains/v1/availability (the `DomainsCheckDomainAvailabilityV1` operationId).
 	DomainsCheckDomainAvailabilityV1(ctx context.Context, body DomainsCheckDomainAvailabilityV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsSuggestDomainNamesFromADescriptionV1WithBody Suggest domain names from a description
+	//
+	// Suggest available domain names based on a free-text description of your project.
+	//
+	// Suggestions are generated by an AI model, so they differ between calls.
+	//
+	// Endpoint has rate limit of 90 requests per minute.
+	//
+	// Use this endpoint to find a domain name when you only know what the website is about.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/domains/v1/availability/alternatives-from-description (the `DomainsSuggestDomainNamesFromADescriptionV1` operationId).
+	DomainsSuggestDomainNamesFromADescriptionV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsSuggestDomainNamesFromADescriptionV1 Suggest domain names from a description
+	//
+	// Suggest available domain names based on a free-text description of your project.
+	//
+	// Suggestions are generated by an AI model, so they differ between calls.
+	//
+	// Endpoint has rate limit of 90 requests per minute.
+	//
+	// Use this endpoint to find a domain name when you only know what the website is about.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/domains/v1/availability/alternatives-from-description (the `DomainsSuggestDomainNamesFromADescriptionV1` operationId).
+	DomainsSuggestDomainNamesFromADescriptionV1(ctx context.Context, body DomainsSuggestDomainNamesFromADescriptionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsSuggestDomainNamesFromADomainV1WithBody Suggest domain names from a domain
+	//
+	// Suggest available domain names based on a domain name you already have in mind.
+	//
+	// Suggestions are generated by an AI model, so they differ between calls.
+	//
+	// Endpoint has rate limit of 90 requests per minute.
+	//
+	// Use this endpoint when the domain you wanted is taken and you need close alternatives.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/domains/v1/availability/alternatives-from-domain (the `DomainsSuggestDomainNamesFromADomainV1` operationId).
+	DomainsSuggestDomainNamesFromADomainV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsSuggestDomainNamesFromADomainV1 Suggest domain names from a domain
+	//
+	// Suggest available domain names based on a domain name you already have in mind.
+	//
+	// Suggestions are generated by an AI model, so they differ between calls.
+	//
+	// Endpoint has rate limit of 90 requests per minute.
+	//
+	// Use this endpoint when the domain you wanted is taken and you need close alternatives.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/domains/v1/availability/alternatives-from-domain (the `DomainsSuggestDomainNamesFromADomainV1` operationId).
+	DomainsSuggestDomainNamesFromADomainV1(ctx context.Context, body DomainsSuggestDomainNamesFromADomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DomainsCreateDomainForwardingV1WithBody Create domain forwarding
 	//
@@ -14011,6 +14267,28 @@ type ClientInterface interface {
 	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/physical (the `EcommerceCreatePhysicalProductV1` operationId).
 	EcommerceCreatePhysicalProductV1(ctx context.Context, storeId string, body EcommerceCreatePhysicalProductV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// EcommerceUploadAndAttachAProductImageV1WithBody Upload and attach a product image
+	//
+	// Upload a raster image (JPEG, PNG, GIF or WebP, max 15MB) and attach it to a product in a single call.
+	// The image is virus-scanned and validated by content, then stored on the CDN. Set is_thumbnail to make
+	// it the product's primary image.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/images (the `EcommerceUploadAndAttachAProductImageV1` operationId).
+	EcommerceUploadAndAttachAProductImageV1WithBody(ctx context.Context, storeId string, productId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceUploadAndAttachAProductImageV1 Upload and attach a product image
+	//
+	// Upload a raster image (JPEG, PNG, GIF or WebP, max 15MB) and attach it to a product in a single call.
+	// The image is virus-scanned and validated by content, then stored on the CDN. Set is_thumbnail to make
+	// it the product's primary image.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/images (the `EcommerceUploadAndAttachAProductImageV1` operationId).
+	EcommerceUploadAndAttachAProductImageV1(ctx context.Context, storeId string, productId string, body EcommerceUploadAndAttachAProductImageV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// EcommerceListSalesChannelsV1 List sales channels
 	//
 	// List a store's active sales channels with their full metadata.
@@ -14346,6 +14624,26 @@ type ClientInterface interface {
 	//
 	// Corresponds with PATCH /api/hosting/v1/accounts/{username}/databases/{name}/repair (the `HostingRepairDatabaseV1` operationId).
 	HostingRepairDatabaseV1(ctx context.Context, username UsernamePath, name DatabaseNamePath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingListWebsiteFilesAndDirectoriesV1 List website files and directories
+	//
+	// List files and directories under a website's document root.
+	//
+	// Use `directory` to browse a subdirectory relative to the document root. Symlinked entries
+	// are listed but never traversed into or resolved.
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/domains/{domain}/files (the `HostingListWebsiteFilesAndDirectoriesV1` operationId).
+	HostingListWebsiteFilesAndDirectoriesV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingListWebsiteFilesAndDirectoriesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingGetWebsiteFileContentV1 Get website file content
+	//
+	// Get a single file's content, relative to a website's document root.
+	//
+	// Read-only; refuses symlinks, oversized files, non-text file types, and files identified as
+	// containing secrets (e.g. credential files) — none of these are returned by this endpoint.
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/domains/{domain}/files/content (the `HostingGetWebsiteFileContentV1` operationId).
+	HostingGetWebsiteFileContentV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetWebsiteFileContentV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingClearWebsiteCacheV1 Clear website cache
 	//
@@ -15545,43 +15843,14 @@ type ClientInterface interface {
 	// Corresponds with POST /api/hosting/v1/websites (the `HostingCreateWebsiteV1` operationId).
 	HostingCreateWebsiteV1(ctx context.Context, body HostingCreateWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// HostingDeleteWebsiteV1WithBody Delete website
-	//
-	// Permanently deletes a website and all of its data. This action is destructive
-	// and cannot be undone. Always ask the user for explicit confirmation before
-	// calling this endpoint.
-	//
-	// All website files, databases and related configuration will be removed.
-	// The hosting plan itself is kept, so a new website can be created on it afterwards.
-	//
-	// The confirm field must be boolean true, otherwise the request is rejected.
-	//
-	// Supported websites: main and addon domain websites on web hosting plans, and
-	// Website Builder websites. Parked domains and subdomains cannot be deleted with
-	// this endpoint. The domain must be the exact website domain, not a preview
-	// domain or an alias.
-	//
-	// Returns 404 when the domain does not exist or does not belong to the
-	// authenticated client.
-	//
-	// Website removal is processed asynchronously and can take a few minutes to
-	// complete. The response returns before the removal finishes.
-	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with DELETE /api/hosting/v1/websites/{domain} (the `HostingDeleteWebsiteV1` operationId).
-	HostingDeleteWebsiteV1WithBody(ctx context.Context, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
 	// HostingDeleteWebsiteV1 Delete website
 	//
-	// Permanently deletes a website and all of its data. This action is destructive
-	// and cannot be undone. Always ask the user for explicit confirmation before
-	// calling this endpoint.
+	// This endpoint permanently removes a website and all of its data. This action
+	// cannot be undone. Before calling it, make sure the user understands the
+	// consequences and explicitly confirms that they want to proceed.
 	//
 	// All website files, databases and related configuration will be removed.
 	// The hosting plan itself is kept, so a new website can be created on it afterwards.
-	//
-	// The confirm field must be boolean true, otherwise the request is rejected.
 	//
 	// Supported websites: main and addon domain websites on web hosting plans, and
 	// Website Builder websites. Parked domains and subdomains cannot be deleted with
@@ -15594,10 +15863,8 @@ type ClientInterface interface {
 	// Website removal is processed asynchronously and can take a few minutes to
 	// complete. The response returns before the removal finishes.
 	//
-	// Takes a body of the `application/json` content type.
-	//
 	// Corresponds with DELETE /api/hosting/v1/websites/{domain} (the `HostingDeleteWebsiteV1` operationId).
-	HostingDeleteWebsiteV1(ctx context.Context, domain Domain, body HostingDeleteWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	HostingDeleteWebsiteV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingListWordPressInstallationsV1 List WordPress installations
 	//
@@ -18991,7 +19258,7 @@ func (c *Client) DNSValidateDNSRecordsV1(ctx context.Context, domain Domain, bod
 // If you want alternative domains with response, provide only one TLD and set `with_alternatives` to `true`.
 // TLDs should be provided without leading dot (e.g. `com`, `net`, `org`).
 //
-// Endpoint has rate limit of 10 requests per minute.
+// Endpoint has rate limit of 90 requests per minute.
 //
 // Use this endpoint to verify domain availability before purchase.
 //
@@ -19018,7 +19285,7 @@ func (c *Client) DomainsCheckDomainAvailabilityV1WithBody(ctx context.Context, c
 // If you want alternative domains with response, provide only one TLD and set `with_alternatives` to `true`.
 // TLDs should be provided without leading dot (e.g. `com`, `net`, `org`).
 //
-// Endpoint has rate limit of 10 requests per minute.
+// Endpoint has rate limit of 90 requests per minute.
 //
 // Use this endpoint to verify domain availability before purchase.
 //
@@ -19027,6 +19294,106 @@ func (c *Client) DomainsCheckDomainAvailabilityV1WithBody(ctx context.Context, c
 // Corresponds with POST /api/domains/v1/availability (the `DomainsCheckDomainAvailabilityV1` operationId).
 func (c *Client) DomainsCheckDomainAvailabilityV1(ctx context.Context, body DomainsCheckDomainAvailabilityV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDomainsCheckDomainAvailabilityV1Request(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsSuggestDomainNamesFromADescriptionV1WithBody Suggest domain names from a description
+//
+// Suggest available domain names based on a free-text description of your project.
+//
+// Suggestions are generated by an AI model, so they differ between calls.
+//
+// Endpoint has rate limit of 90 requests per minute.
+//
+// Use this endpoint to find a domain name when you only know what the website is about.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/domains/v1/availability/alternatives-from-description (the `DomainsSuggestDomainNamesFromADescriptionV1` operationId).
+func (c *Client) DomainsSuggestDomainNamesFromADescriptionV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsSuggestDomainNamesFromADescriptionV1RequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsSuggestDomainNamesFromADescriptionV1 Suggest domain names from a description
+//
+// Suggest available domain names based on a free-text description of your project.
+//
+// Suggestions are generated by an AI model, so they differ between calls.
+//
+// Endpoint has rate limit of 90 requests per minute.
+//
+// Use this endpoint to find a domain name when you only know what the website is about.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/domains/v1/availability/alternatives-from-description (the `DomainsSuggestDomainNamesFromADescriptionV1` operationId).
+func (c *Client) DomainsSuggestDomainNamesFromADescriptionV1(ctx context.Context, body DomainsSuggestDomainNamesFromADescriptionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsSuggestDomainNamesFromADescriptionV1Request(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsSuggestDomainNamesFromADomainV1WithBody Suggest domain names from a domain
+//
+// Suggest available domain names based on a domain name you already have in mind.
+//
+// Suggestions are generated by an AI model, so they differ between calls.
+//
+// Endpoint has rate limit of 90 requests per minute.
+//
+// Use this endpoint when the domain you wanted is taken and you need close alternatives.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/domains/v1/availability/alternatives-from-domain (the `DomainsSuggestDomainNamesFromADomainV1` operationId).
+func (c *Client) DomainsSuggestDomainNamesFromADomainV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsSuggestDomainNamesFromADomainV1RequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsSuggestDomainNamesFromADomainV1 Suggest domain names from a domain
+//
+// Suggest available domain names based on a domain name you already have in mind.
+//
+// Suggestions are generated by an AI model, so they differ between calls.
+//
+// Endpoint has rate limit of 90 requests per minute.
+//
+// Use this endpoint when the domain you wanted is taken and you need close alternatives.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/domains/v1/availability/alternatives-from-domain (the `DomainsSuggestDomainNamesFromADomainV1` operationId).
+func (c *Client) DomainsSuggestDomainNamesFromADomainV1(ctx context.Context, body DomainsSuggestDomainNamesFromADomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsSuggestDomainNamesFromADomainV1Request(c.Server, body)
 	if err != nil {
 		return nil, err
 	}
@@ -20352,6 +20719,48 @@ func (c *Client) EcommerceCreatePhysicalProductV1(ctx context.Context, storeId s
 	return c.Client.Do(req)
 }
 
+// EcommerceUploadAndAttachAProductImageV1WithBody Upload and attach a product image
+//
+// Upload a raster image (JPEG, PNG, GIF or WebP, max 15MB) and attach it to a product in a single call.
+// The image is virus-scanned and validated by content, then stored on the CDN. Set is_thumbnail to make
+// it the product's primary image.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/images (the `EcommerceUploadAndAttachAProductImageV1` operationId).
+func (c *Client) EcommerceUploadAndAttachAProductImageV1WithBody(ctx context.Context, storeId string, productId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceUploadAndAttachAProductImageV1RequestWithBody(c.Server, storeId, productId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceUploadAndAttachAProductImageV1 Upload and attach a product image
+//
+// Upload a raster image (JPEG, PNG, GIF or WebP, max 15MB) and attach it to a product in a single call.
+// The image is virus-scanned and validated by content, then stored on the CDN. Set is_thumbnail to make
+// it the product's primary image.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/images (the `EcommerceUploadAndAttachAProductImageV1` operationId).
+func (c *Client) EcommerceUploadAndAttachAProductImageV1(ctx context.Context, storeId string, productId string, body EcommerceUploadAndAttachAProductImageV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceUploadAndAttachAProductImageV1Request(c.Server, storeId, productId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // EcommerceListSalesChannelsV1 List sales channels
 //
 // List a store's active sales channels with their full metadata.
@@ -20948,6 +21357,46 @@ func (c *Client) HostingCreateDatabaseRemoteConnectionV1(ctx context.Context, us
 // Corresponds with PATCH /api/hosting/v1/accounts/{username}/databases/{name}/repair (the `HostingRepairDatabaseV1` operationId).
 func (c *Client) HostingRepairDatabaseV1(ctx context.Context, username UsernamePath, name DatabaseNamePath, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingRepairDatabaseV1Request(c.Server, username, name)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingListWebsiteFilesAndDirectoriesV1 List website files and directories
+//
+// List files and directories under a website's document root.
+//
+// Use `directory` to browse a subdirectory relative to the document root. Symlinked entries
+// are listed but never traversed into or resolved.
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/domains/{domain}/files (the `HostingListWebsiteFilesAndDirectoriesV1` operationId).
+func (c *Client) HostingListWebsiteFilesAndDirectoriesV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingListWebsiteFilesAndDirectoriesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingListWebsiteFilesAndDirectoriesV1Request(c.Server, username, domain, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingGetWebsiteFileContentV1 Get website file content
+//
+// Get a single file's content, relative to a website's document root.
+//
+// Read-only; refuses symlinks, oversized files, non-text file types, and files identified as
+// containing secrets (e.g. credential files) — none of these are returned by this endpoint.
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/domains/{domain}/files/content (the `HostingGetWebsiteFileContentV1` operationId).
+func (c *Client) HostingGetWebsiteFileContentV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetWebsiteFileContentV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingGetWebsiteFileContentV1Request(c.Server, username, domain, params)
 	if err != nil {
 		return nil, err
 	}
@@ -23006,53 +23455,14 @@ func (c *Client) HostingCreateWebsiteV1(ctx context.Context, body HostingCreateW
 	return c.Client.Do(req)
 }
 
-// HostingDeleteWebsiteV1WithBody Delete website
-//
-// Permanently deletes a website and all of its data. This action is destructive
-// and cannot be undone. Always ask the user for explicit confirmation before
-// calling this endpoint.
-//
-// All website files, databases and related configuration will be removed.
-// The hosting plan itself is kept, so a new website can be created on it afterwards.
-//
-// The confirm field must be boolean true, otherwise the request is rejected.
-//
-// Supported websites: main and addon domain websites on web hosting plans, and
-// Website Builder websites. Parked domains and subdomains cannot be deleted with
-// this endpoint. The domain must be the exact website domain, not a preview
-// domain or an alias.
-//
-// Returns 404 when the domain does not exist or does not belong to the
-// authenticated client.
-//
-// Website removal is processed asynchronously and can take a few minutes to
-// complete. The response returns before the removal finishes.
-//
-// Takes any type of body and a specified content type.
-//
-// Corresponds with DELETE /api/hosting/v1/websites/{domain} (the `HostingDeleteWebsiteV1` operationId).
-func (c *Client) HostingDeleteWebsiteV1WithBody(ctx context.Context, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewHostingDeleteWebsiteV1RequestWithBody(c.Server, domain, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
 // HostingDeleteWebsiteV1 Delete website
 //
-// Permanently deletes a website and all of its data. This action is destructive
-// and cannot be undone. Always ask the user for explicit confirmation before
-// calling this endpoint.
+// This endpoint permanently removes a website and all of its data. This action
+// cannot be undone. Before calling it, make sure the user understands the
+// consequences and explicitly confirms that they want to proceed.
 //
 // All website files, databases and related configuration will be removed.
 // The hosting plan itself is kept, so a new website can be created on it afterwards.
-//
-// The confirm field must be boolean true, otherwise the request is rejected.
 //
 // Supported websites: main and addon domain websites on web hosting plans, and
 // Website Builder websites. Parked domains and subdomains cannot be deleted with
@@ -23065,11 +23475,9 @@ func (c *Client) HostingDeleteWebsiteV1WithBody(ctx context.Context, domain Doma
 // Website removal is processed asynchronously and can take a few minutes to
 // complete. The response returns before the removal finishes.
 //
-// Takes a body of the `application/json` content type.
-//
 // Corresponds with DELETE /api/hosting/v1/websites/{domain} (the `HostingDeleteWebsiteV1` operationId).
-func (c *Client) HostingDeleteWebsiteV1(ctx context.Context, domain Domain, body HostingDeleteWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewHostingDeleteWebsiteV1Request(c.Server, domain, body)
+func (c *Client) HostingDeleteWebsiteV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingDeleteWebsiteV1Request(c.Server, domain)
 	if err != nil {
 		return nil, err
 	}
@@ -28928,6 +29336,86 @@ func NewDomainsCheckDomainAvailabilityV1RequestWithBody(server string, contentTy
 	return req, nil
 }
 
+// NewDomainsSuggestDomainNamesFromADescriptionV1Request calls the generic DomainsSuggestDomainNamesFromADescriptionV1 builder with application/json body
+func NewDomainsSuggestDomainNamesFromADescriptionV1Request(server string, body DomainsSuggestDomainNamesFromADescriptionV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewDomainsSuggestDomainNamesFromADescriptionV1RequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewDomainsSuggestDomainNamesFromADescriptionV1RequestWithBody constructs an http.Request for the DomainsSuggestDomainNamesFromADescriptionV1 method, with any body, and a specified content type
+func NewDomainsSuggestDomainNamesFromADescriptionV1RequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/domains/v1/availability/alternatives-from-description")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDomainsSuggestDomainNamesFromADomainV1Request calls the generic DomainsSuggestDomainNamesFromADomainV1 builder with application/json body
+func NewDomainsSuggestDomainNamesFromADomainV1Request(server string, body DomainsSuggestDomainNamesFromADomainV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewDomainsSuggestDomainNamesFromADomainV1RequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewDomainsSuggestDomainNamesFromADomainV1RequestWithBody constructs an http.Request for the DomainsSuggestDomainNamesFromADomainV1 method, with any body, and a specified content type
+func NewDomainsSuggestDomainNamesFromADomainV1RequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/domains/v1/availability/alternatives-from-domain")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewDomainsCreateDomainForwardingV1Request calls the generic DomainsCreateDomainForwardingV1 builder with application/json body
 func NewDomainsCreateDomainForwardingV1Request(server string, body DomainsCreateDomainForwardingV1JSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
@@ -30589,6 +31077,60 @@ func NewEcommerceCreatePhysicalProductV1RequestWithBody(server string, storeId s
 	return req, nil
 }
 
+// NewEcommerceUploadAndAttachAProductImageV1Request calls the generic EcommerceUploadAndAttachAProductImageV1 builder with application/json body
+func NewEcommerceUploadAndAttachAProductImageV1Request(server string, storeId string, productId string, body EcommerceUploadAndAttachAProductImageV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewEcommerceUploadAndAttachAProductImageV1RequestWithBody(server, storeId, productId, "application/json", bodyReader)
+}
+
+// NewEcommerceUploadAndAttachAProductImageV1RequestWithBody constructs an http.Request for the EcommerceUploadAndAttachAProductImageV1 method, with any body, and a specified content type
+func NewEcommerceUploadAndAttachAProductImageV1RequestWithBody(server string, storeId string, productId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "product_id", productId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/products/%s/images", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewEcommerceListSalesChannelsV1Request constructs an http.Request for the EcommerceListSalesChannelsV1 method
 func NewEcommerceListSalesChannelsV1Request(server string, storeId string) (*http.Request, error) {
 	var err error
@@ -31513,6 +32055,210 @@ func NewHostingRepairDatabaseV1Request(server string, username UsernamePath, nam
 	}
 
 	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingListWebsiteFilesAndDirectoriesV1Request constructs an http.Request for the HostingListWebsiteFilesAndDirectoriesV1 method
+func NewHostingListWebsiteFilesAndDirectoriesV1Request(server string, username UsernamePath, domain Domain, params *HostingListWebsiteFilesAndDirectoriesV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/domains/%s/files", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Directory != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "directory", *params.Directory, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.MaxDepth != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "max_depth", *params.MaxDepth, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.MaxItems != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "max_items", *params.MaxItems, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Offset != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "offset", *params.Offset, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FileTypes != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", false, "file_types", *params.FileTypes, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "array", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingGetWebsiteFileContentV1Request constructs an http.Request for the HostingGetWebsiteFileContentV1 method
+func NewHostingGetWebsiteFileContentV1Request(server string, username UsernamePath, domain Domain, params *HostingGetWebsiteFileContentV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/domains/%s/files/content", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "path", params.Path, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+			return nil, err
+		} else {
+			for _, qp := range strings.Split(queryFrag, "&") {
+				rawQueryFragments = append(rawQueryFragments, qp)
+			}
+		}
+
+		if params.FromLine != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "from_line", *params.FromLine, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.MaxLines != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "max_lines", *params.MaxLines, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -34496,19 +35242,8 @@ func NewHostingCreateWebsiteV1RequestWithBody(server string, contentType string,
 	return req, nil
 }
 
-// NewHostingDeleteWebsiteV1Request calls the generic HostingDeleteWebsiteV1 builder with application/json body
-func NewHostingDeleteWebsiteV1Request(server string, domain Domain, body HostingDeleteWebsiteV1JSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewHostingDeleteWebsiteV1RequestWithBody(server, domain, "application/json", bodyReader)
-}
-
-// NewHostingDeleteWebsiteV1RequestWithBody constructs an http.Request for the HostingDeleteWebsiteV1 method, with any body, and a specified content type
-func NewHostingDeleteWebsiteV1RequestWithBody(server string, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
+// NewHostingDeleteWebsiteV1Request constructs an http.Request for the HostingDeleteWebsiteV1 method
+func NewHostingDeleteWebsiteV1Request(server string, domain Domain) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -34533,12 +35268,10 @@ func NewHostingDeleteWebsiteV1RequestWithBody(server string, domain Domain, cont
 		return nil, err
 	}
 
-	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), body)
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
-
-	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -42375,7 +43108,7 @@ type ClientWithResponsesInterface interface {
 	// If you want alternative domains with response, provide only one TLD and set `with_alternatives` to `true`.
 	// TLDs should be provided without leading dot (e.g. `com`, `net`, `org`).
 	//
-	// Endpoint has rate limit of 10 requests per minute.
+	// Endpoint has rate limit of 90 requests per minute.
 	//
 	// Use this endpoint to verify domain availability before purchase.
 	//
@@ -42392,7 +43125,7 @@ type ClientWithResponsesInterface interface {
 	// If you want alternative domains with response, provide only one TLD and set `with_alternatives` to `true`.
 	// TLDs should be provided without leading dot (e.g. `com`, `net`, `org`).
 	//
-	// Endpoint has rate limit of 10 requests per minute.
+	// Endpoint has rate limit of 90 requests per minute.
 	//
 	// Use this endpoint to verify domain availability before purchase.
 	//
@@ -42400,6 +43133,66 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with POST /api/domains/v1/availability (the `DomainsCheckDomainAvailabilityV1` operationId).
 	DomainsCheckDomainAvailabilityV1WithResponse(ctx context.Context, body DomainsCheckDomainAvailabilityV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsCheckDomainAvailabilityV1Response, error)
+
+	// DomainsSuggestDomainNamesFromADescriptionV1WithBodyWithResponse Suggest domain names from a description
+	//
+	// Suggest available domain names based on a free-text description of your project.
+	//
+	// Suggestions are generated by an AI model, so they differ between calls.
+	//
+	// Endpoint has rate limit of 90 requests per minute.
+	//
+	// Use this endpoint to find a domain name when you only know what the website is about.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/domains/v1/availability/alternatives-from-description (the `DomainsSuggestDomainNamesFromADescriptionV1` operationId).
+	DomainsSuggestDomainNamesFromADescriptionV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DomainsSuggestDomainNamesFromADescriptionV1Response, error)
+
+	// DomainsSuggestDomainNamesFromADescriptionV1WithResponse Suggest domain names from a description
+	//
+	// Suggest available domain names based on a free-text description of your project.
+	//
+	// Suggestions are generated by an AI model, so they differ between calls.
+	//
+	// Endpoint has rate limit of 90 requests per minute.
+	//
+	// Use this endpoint to find a domain name when you only know what the website is about.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/domains/v1/availability/alternatives-from-description (the `DomainsSuggestDomainNamesFromADescriptionV1` operationId).
+	DomainsSuggestDomainNamesFromADescriptionV1WithResponse(ctx context.Context, body DomainsSuggestDomainNamesFromADescriptionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsSuggestDomainNamesFromADescriptionV1Response, error)
+
+	// DomainsSuggestDomainNamesFromADomainV1WithBodyWithResponse Suggest domain names from a domain
+	//
+	// Suggest available domain names based on a domain name you already have in mind.
+	//
+	// Suggestions are generated by an AI model, so they differ between calls.
+	//
+	// Endpoint has rate limit of 90 requests per minute.
+	//
+	// Use this endpoint when the domain you wanted is taken and you need close alternatives.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/domains/v1/availability/alternatives-from-domain (the `DomainsSuggestDomainNamesFromADomainV1` operationId).
+	DomainsSuggestDomainNamesFromADomainV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DomainsSuggestDomainNamesFromADomainV1Response, error)
+
+	// DomainsSuggestDomainNamesFromADomainV1WithResponse Suggest domain names from a domain
+	//
+	// Suggest available domain names based on a domain name you already have in mind.
+	//
+	// Suggestions are generated by an AI model, so they differ between calls.
+	//
+	// Endpoint has rate limit of 90 requests per minute.
+	//
+	// Use this endpoint when the domain you wanted is taken and you need close alternatives.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/domains/v1/availability/alternatives-from-domain (the `DomainsSuggestDomainNamesFromADomainV1` operationId).
+	DomainsSuggestDomainNamesFromADomainV1WithResponse(ctx context.Context, body DomainsSuggestDomainNamesFromADomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsSuggestDomainNamesFromADomainV1Response, error)
 
 	// DomainsCreateDomainForwardingV1WithBodyWithResponse Create domain forwarding
 	//
@@ -43196,6 +43989,28 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/physical (the `EcommerceCreatePhysicalProductV1` operationId).
 	EcommerceCreatePhysicalProductV1WithResponse(ctx context.Context, storeId string, body EcommerceCreatePhysicalProductV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceCreatePhysicalProductV1Response, error)
 
+	// EcommerceUploadAndAttachAProductImageV1WithBodyWithResponse Upload and attach a product image
+	//
+	// Upload a raster image (JPEG, PNG, GIF or WebP, max 15MB) and attach it to a product in a single call.
+	// The image is virus-scanned and validated by content, then stored on the CDN. Set is_thumbnail to make
+	// it the product's primary image.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/images (the `EcommerceUploadAndAttachAProductImageV1` operationId).
+	EcommerceUploadAndAttachAProductImageV1WithBodyWithResponse(ctx context.Context, storeId string, productId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceUploadAndAttachAProductImageV1Response, error)
+
+	// EcommerceUploadAndAttachAProductImageV1WithResponse Upload and attach a product image
+	//
+	// Upload a raster image (JPEG, PNG, GIF or WebP, max 15MB) and attach it to a product in a single call.
+	// The image is virus-scanned and validated by content, then stored on the CDN. Set is_thumbnail to make
+	// it the product's primary image.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/images (the `EcommerceUploadAndAttachAProductImageV1` operationId).
+	EcommerceUploadAndAttachAProductImageV1WithResponse(ctx context.Context, storeId string, productId string, body EcommerceUploadAndAttachAProductImageV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceUploadAndAttachAProductImageV1Response, error)
+
 	// EcommerceListSalesChannelsV1WithResponse List sales channels
 	//
 	// List a store's active sales channels with their full metadata.
@@ -43553,6 +44368,30 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with PATCH /api/hosting/v1/accounts/{username}/databases/{name}/repair (the `HostingRepairDatabaseV1` operationId).
 	HostingRepairDatabaseV1WithResponse(ctx context.Context, username UsernamePath, name DatabaseNamePath, reqEditors ...RequestEditorFn) (*HostingRepairDatabaseV1Response, error)
+
+	// HostingListWebsiteFilesAndDirectoriesV1WithResponse List website files and directories
+	//
+	// List files and directories under a website's document root.
+	//
+	// Use `directory` to browse a subdirectory relative to the document root. Symlinked entries
+	// are listed but never traversed into or resolved.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/domains/{domain}/files (the `HostingListWebsiteFilesAndDirectoriesV1` operationId).
+	HostingListWebsiteFilesAndDirectoriesV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingListWebsiteFilesAndDirectoriesV1Params, reqEditors ...RequestEditorFn) (*HostingListWebsiteFilesAndDirectoriesV1Response, error)
+
+	// HostingGetWebsiteFileContentV1WithResponse Get website file content
+	//
+	// Get a single file's content, relative to a website's document root.
+	//
+	// Read-only; refuses symlinks, oversized files, non-text file types, and files identified as
+	// containing secrets (e.g. credential files) — none of these are returned by this endpoint.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/domains/{domain}/files/content (the `HostingGetWebsiteFileContentV1` operationId).
+	HostingGetWebsiteFileContentV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetWebsiteFileContentV1Params, reqEditors ...RequestEditorFn) (*HostingGetWebsiteFileContentV1Response, error)
 
 	// HostingClearWebsiteCacheV1WithResponse Clear website cache
 	//
@@ -44810,43 +45649,14 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /api/hosting/v1/websites (the `HostingCreateWebsiteV1` operationId).
 	HostingCreateWebsiteV1WithResponse(ctx context.Context, body HostingCreateWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingCreateWebsiteV1Response, error)
 
-	// HostingDeleteWebsiteV1WithBodyWithResponse Delete website
-	//
-	// Permanently deletes a website and all of its data. This action is destructive
-	// and cannot be undone. Always ask the user for explicit confirmation before
-	// calling this endpoint.
-	//
-	// All website files, databases and related configuration will be removed.
-	// The hosting plan itself is kept, so a new website can be created on it afterwards.
-	//
-	// The confirm field must be boolean true, otherwise the request is rejected.
-	//
-	// Supported websites: main and addon domain websites on web hosting plans, and
-	// Website Builder websites. Parked domains and subdomains cannot be deleted with
-	// this endpoint. The domain must be the exact website domain, not a preview
-	// domain or an alias.
-	//
-	// Returns 404 when the domain does not exist or does not belong to the
-	// authenticated client.
-	//
-	// Website removal is processed asynchronously and can take a few minutes to
-	// complete. The response returns before the removal finishes.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /api/hosting/v1/websites/{domain} (the `HostingDeleteWebsiteV1` operationId).
-	HostingDeleteWebsiteV1WithBodyWithResponse(ctx context.Context, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingDeleteWebsiteV1Response, error)
-
 	// HostingDeleteWebsiteV1WithResponse Delete website
 	//
-	// Permanently deletes a website and all of its data. This action is destructive
-	// and cannot be undone. Always ask the user for explicit confirmation before
-	// calling this endpoint.
+	// This endpoint permanently removes a website and all of its data. This action
+	// cannot be undone. Before calling it, make sure the user understands the
+	// consequences and explicitly confirms that they want to proceed.
 	//
 	// All website files, databases and related configuration will be removed.
 	// The hosting plan itself is kept, so a new website can be created on it afterwards.
-	//
-	// The confirm field must be boolean true, otherwise the request is rejected.
 	//
 	// Supported websites: main and addon domain websites on web hosting plans, and
 	// Website Builder websites. Parked domains and subdomains cannot be deleted with
@@ -44859,10 +45669,10 @@ type ClientWithResponsesInterface interface {
 	// Website removal is processed asynchronously and can take a few minutes to
 	// complete. The response returns before the removal finishes.
 	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	// Returns a wrapper object for the known response body format(s).
 	//
 	// Corresponds with DELETE /api/hosting/v1/websites/{domain} (the `HostingDeleteWebsiteV1` operationId).
-	HostingDeleteWebsiteV1WithResponse(ctx context.Context, domain Domain, body HostingDeleteWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingDeleteWebsiteV1Response, error)
+	HostingDeleteWebsiteV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*HostingDeleteWebsiteV1Response, error)
 
 	// HostingListWordPressInstallationsV1WithResponse List WordPress installations
 	//
@@ -49714,6 +50524,130 @@ func (r DomainsCheckDomainAvailabilityV1Response) ContentType() string {
 	return ""
 }
 
+type DomainsSuggestDomainNamesFromADescriptionV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *DomainsV1AvailabilityAlternativeCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r DomainsSuggestDomainNamesFromADescriptionV1Response) GetJSON200() *DomainsV1AvailabilityAlternativeCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DomainsSuggestDomainNamesFromADescriptionV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r DomainsSuggestDomainNamesFromADescriptionV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DomainsSuggestDomainNamesFromADescriptionV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DomainsSuggestDomainNamesFromADescriptionV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DomainsSuggestDomainNamesFromADescriptionV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DomainsSuggestDomainNamesFromADescriptionV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DomainsSuggestDomainNamesFromADescriptionV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DomainsSuggestDomainNamesFromADomainV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *DomainsV1AvailabilityAlternativeCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r DomainsSuggestDomainNamesFromADomainV1Response) GetJSON200() *DomainsV1AvailabilityAlternativeCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DomainsSuggestDomainNamesFromADomainV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r DomainsSuggestDomainNamesFromADomainV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DomainsSuggestDomainNamesFromADomainV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DomainsSuggestDomainNamesFromADomainV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DomainsSuggestDomainNamesFromADomainV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DomainsSuggestDomainNamesFromADomainV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DomainsSuggestDomainNamesFromADomainV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type DomainsCreateDomainForwardingV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -52240,6 +53174,68 @@ func (r EcommerceCreatePhysicalProductV1Response) ContentType() string {
 	return ""
 }
 
+type EcommerceUploadAndAttachAProductImageV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *EcommerceV1ProductProductImageUploadResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r EcommerceUploadAndAttachAProductImageV1Response) GetJSON200() *EcommerceV1ProductProductImageUploadResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r EcommerceUploadAndAttachAProductImageV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r EcommerceUploadAndAttachAProductImageV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r EcommerceUploadAndAttachAProductImageV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r EcommerceUploadAndAttachAProductImageV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceUploadAndAttachAProductImageV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceUploadAndAttachAProductImageV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceUploadAndAttachAProductImageV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type EcommerceListSalesChannelsV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -53343,6 +54339,130 @@ func (r HostingRepairDatabaseV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingRepairDatabaseV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingListWebsiteFilesAndDirectoriesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1FilesFilesResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingListWebsiteFilesAndDirectoriesV1Response) GetJSON200() *HostingV1FilesFilesResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingListWebsiteFilesAndDirectoriesV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingListWebsiteFilesAndDirectoriesV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingListWebsiteFilesAndDirectoriesV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingListWebsiteFilesAndDirectoriesV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingListWebsiteFilesAndDirectoriesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingListWebsiteFilesAndDirectoriesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingListWebsiteFilesAndDirectoriesV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingGetWebsiteFileContentV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1FilesFileContentResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingGetWebsiteFileContentV1Response) GetJSON200() *HostingV1FilesFileContentResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingGetWebsiteFileContentV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingGetWebsiteFileContentV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingGetWebsiteFileContentV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingGetWebsiteFileContentV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingGetWebsiteFileContentV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingGetWebsiteFileContentV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingGetWebsiteFileContentV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -66743,7 +67863,7 @@ func (c *ClientWithResponses) DNSValidateDNSRecordsV1WithResponse(ctx context.Co
 // If you want alternative domains with response, provide only one TLD and set `with_alternatives` to `true`.
 // TLDs should be provided without leading dot (e.g. `com`, `net`, `org`).
 //
-// Endpoint has rate limit of 10 requests per minute.
+// Endpoint has rate limit of 90 requests per minute.
 //
 // Use this endpoint to verify domain availability before purchase.
 //
@@ -66766,7 +67886,7 @@ func (c *ClientWithResponses) DomainsCheckDomainAvailabilityV1WithBodyWithRespon
 // If you want alternative domains with response, provide only one TLD and set `with_alternatives` to `true`.
 // TLDs should be provided without leading dot (e.g. `com`, `net`, `org`).
 //
-// Endpoint has rate limit of 10 requests per minute.
+// Endpoint has rate limit of 90 requests per minute.
 //
 // Use this endpoint to verify domain availability before purchase.
 //
@@ -66779,6 +67899,90 @@ func (c *ClientWithResponses) DomainsCheckDomainAvailabilityV1WithResponse(ctx c
 		return nil, err
 	}
 	return ParseDomainsCheckDomainAvailabilityV1Response(rsp)
+}
+
+// DomainsSuggestDomainNamesFromADescriptionV1WithBodyWithResponse Suggest domain names from a description
+//
+// Suggest available domain names based on a free-text description of your project.
+//
+// Suggestions are generated by an AI model, so they differ between calls.
+//
+// Endpoint has rate limit of 90 requests per minute.
+//
+// Use this endpoint to find a domain name when you only know what the website is about.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/domains/v1/availability/alternatives-from-description (the `DomainsSuggestDomainNamesFromADescriptionV1` operationId).
+func (c *ClientWithResponses) DomainsSuggestDomainNamesFromADescriptionV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DomainsSuggestDomainNamesFromADescriptionV1Response, error) {
+	rsp, err := c.DomainsSuggestDomainNamesFromADescriptionV1WithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsSuggestDomainNamesFromADescriptionV1Response(rsp)
+}
+
+// DomainsSuggestDomainNamesFromADescriptionV1WithResponse Suggest domain names from a description
+//
+// Suggest available domain names based on a free-text description of your project.
+//
+// Suggestions are generated by an AI model, so they differ between calls.
+//
+// Endpoint has rate limit of 90 requests per minute.
+//
+// Use this endpoint to find a domain name when you only know what the website is about.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/domains/v1/availability/alternatives-from-description (the `DomainsSuggestDomainNamesFromADescriptionV1` operationId).
+func (c *ClientWithResponses) DomainsSuggestDomainNamesFromADescriptionV1WithResponse(ctx context.Context, body DomainsSuggestDomainNamesFromADescriptionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsSuggestDomainNamesFromADescriptionV1Response, error) {
+	rsp, err := c.DomainsSuggestDomainNamesFromADescriptionV1(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsSuggestDomainNamesFromADescriptionV1Response(rsp)
+}
+
+// DomainsSuggestDomainNamesFromADomainV1WithBodyWithResponse Suggest domain names from a domain
+//
+// Suggest available domain names based on a domain name you already have in mind.
+//
+// Suggestions are generated by an AI model, so they differ between calls.
+//
+// Endpoint has rate limit of 90 requests per minute.
+//
+// Use this endpoint when the domain you wanted is taken and you need close alternatives.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/domains/v1/availability/alternatives-from-domain (the `DomainsSuggestDomainNamesFromADomainV1` operationId).
+func (c *ClientWithResponses) DomainsSuggestDomainNamesFromADomainV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DomainsSuggestDomainNamesFromADomainV1Response, error) {
+	rsp, err := c.DomainsSuggestDomainNamesFromADomainV1WithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsSuggestDomainNamesFromADomainV1Response(rsp)
+}
+
+// DomainsSuggestDomainNamesFromADomainV1WithResponse Suggest domain names from a domain
+//
+// Suggest available domain names based on a domain name you already have in mind.
+//
+// Suggestions are generated by an AI model, so they differ between calls.
+//
+// Endpoint has rate limit of 90 requests per minute.
+//
+// Use this endpoint when the domain you wanted is taken and you need close alternatives.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/domains/v1/availability/alternatives-from-domain (the `DomainsSuggestDomainNamesFromADomainV1` operationId).
+func (c *ClientWithResponses) DomainsSuggestDomainNamesFromADomainV1WithResponse(ctx context.Context, body DomainsSuggestDomainNamesFromADomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsSuggestDomainNamesFromADomainV1Response, error) {
+	rsp, err := c.DomainsSuggestDomainNamesFromADomainV1(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsSuggestDomainNamesFromADomainV1Response(rsp)
 }
 
 // DomainsCreateDomainForwardingV1WithBodyWithResponse Create domain forwarding
@@ -67924,6 +69128,40 @@ func (c *ClientWithResponses) EcommerceCreatePhysicalProductV1WithResponse(ctx c
 	return ParseEcommerceCreatePhysicalProductV1Response(rsp)
 }
 
+// EcommerceUploadAndAttachAProductImageV1WithBodyWithResponse Upload and attach a product image
+//
+// Upload a raster image (JPEG, PNG, GIF or WebP, max 15MB) and attach it to a product in a single call.
+// The image is virus-scanned and validated by content, then stored on the CDN. Set is_thumbnail to make
+// it the product's primary image.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/images (the `EcommerceUploadAndAttachAProductImageV1` operationId).
+func (c *ClientWithResponses) EcommerceUploadAndAttachAProductImageV1WithBodyWithResponse(ctx context.Context, storeId string, productId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceUploadAndAttachAProductImageV1Response, error) {
+	rsp, err := c.EcommerceUploadAndAttachAProductImageV1WithBody(ctx, storeId, productId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceUploadAndAttachAProductImageV1Response(rsp)
+}
+
+// EcommerceUploadAndAttachAProductImageV1WithResponse Upload and attach a product image
+//
+// Upload a raster image (JPEG, PNG, GIF or WebP, max 15MB) and attach it to a product in a single call.
+// The image is virus-scanned and validated by content, then stored on the CDN. Set is_thumbnail to make
+// it the product's primary image.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/images (the `EcommerceUploadAndAttachAProductImageV1` operationId).
+func (c *ClientWithResponses) EcommerceUploadAndAttachAProductImageV1WithResponse(ctx context.Context, storeId string, productId string, body EcommerceUploadAndAttachAProductImageV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceUploadAndAttachAProductImageV1Response, error) {
+	rsp, err := c.EcommerceUploadAndAttachAProductImageV1(ctx, storeId, productId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceUploadAndAttachAProductImageV1Response(rsp)
+}
+
 // EcommerceListSalesChannelsV1WithResponse List sales channels
 //
 // List a store's active sales channels with their full metadata.
@@ -68442,6 +69680,42 @@ func (c *ClientWithResponses) HostingRepairDatabaseV1WithResponse(ctx context.Co
 		return nil, err
 	}
 	return ParseHostingRepairDatabaseV1Response(rsp)
+}
+
+// HostingListWebsiteFilesAndDirectoriesV1WithResponse List website files and directories
+//
+// List files and directories under a website's document root.
+//
+// Use `directory` to browse a subdirectory relative to the document root. Symlinked entries
+// are listed but never traversed into or resolved.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/domains/{domain}/files (the `HostingListWebsiteFilesAndDirectoriesV1` operationId).
+func (c *ClientWithResponses) HostingListWebsiteFilesAndDirectoriesV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingListWebsiteFilesAndDirectoriesV1Params, reqEditors ...RequestEditorFn) (*HostingListWebsiteFilesAndDirectoriesV1Response, error) {
+	rsp, err := c.HostingListWebsiteFilesAndDirectoriesV1(ctx, username, domain, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingListWebsiteFilesAndDirectoriesV1Response(rsp)
+}
+
+// HostingGetWebsiteFileContentV1WithResponse Get website file content
+//
+// Get a single file's content, relative to a website's document root.
+//
+// Read-only; refuses symlinks, oversized files, non-text file types, and files identified as
+// containing secrets (e.g. credential files) — none of these are returned by this endpoint.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/domains/{domain}/files/content (the `HostingGetWebsiteFileContentV1` operationId).
+func (c *ClientWithResponses) HostingGetWebsiteFileContentV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetWebsiteFileContentV1Params, reqEditors ...RequestEditorFn) (*HostingGetWebsiteFileContentV1Response, error) {
+	rsp, err := c.HostingGetWebsiteFileContentV1(ctx, username, domain, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingGetWebsiteFileContentV1Response(rsp)
 }
 
 // HostingClearWebsiteCacheV1WithResponse Clear website cache
@@ -70210,49 +71484,14 @@ func (c *ClientWithResponses) HostingCreateWebsiteV1WithResponse(ctx context.Con
 	return ParseHostingCreateWebsiteV1Response(rsp)
 }
 
-// HostingDeleteWebsiteV1WithBodyWithResponse Delete website
-//
-// Permanently deletes a website and all of its data. This action is destructive
-// and cannot be undone. Always ask the user for explicit confirmation before
-// calling this endpoint.
-//
-// All website files, databases and related configuration will be removed.
-// The hosting plan itself is kept, so a new website can be created on it afterwards.
-//
-// The confirm field must be boolean true, otherwise the request is rejected.
-//
-// Supported websites: main and addon domain websites on web hosting plans, and
-// Website Builder websites. Parked domains and subdomains cannot be deleted with
-// this endpoint. The domain must be the exact website domain, not a preview
-// domain or an alias.
-//
-// Returns 404 when the domain does not exist or does not belong to the
-// authenticated client.
-//
-// Website removal is processed asynchronously and can take a few minutes to
-// complete. The response returns before the removal finishes.
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with DELETE /api/hosting/v1/websites/{domain} (the `HostingDeleteWebsiteV1` operationId).
-func (c *ClientWithResponses) HostingDeleteWebsiteV1WithBodyWithResponse(ctx context.Context, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingDeleteWebsiteV1Response, error) {
-	rsp, err := c.HostingDeleteWebsiteV1WithBody(ctx, domain, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseHostingDeleteWebsiteV1Response(rsp)
-}
-
 // HostingDeleteWebsiteV1WithResponse Delete website
 //
-// Permanently deletes a website and all of its data. This action is destructive
-// and cannot be undone. Always ask the user for explicit confirmation before
-// calling this endpoint.
+// This endpoint permanently removes a website and all of its data. This action
+// cannot be undone. Before calling it, make sure the user understands the
+// consequences and explicitly confirms that they want to proceed.
 //
 // All website files, databases and related configuration will be removed.
 // The hosting plan itself is kept, so a new website can be created on it afterwards.
-//
-// The confirm field must be boolean true, otherwise the request is rejected.
 //
 // Supported websites: main and addon domain websites on web hosting plans, and
 // Website Builder websites. Parked domains and subdomains cannot be deleted with
@@ -70265,11 +71504,11 @@ func (c *ClientWithResponses) HostingDeleteWebsiteV1WithBodyWithResponse(ctx con
 // Website removal is processed asynchronously and can take a few minutes to
 // complete. The response returns before the removal finishes.
 //
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+// Returns a wrapper object for the known response body format(s).
 //
 // Corresponds with DELETE /api/hosting/v1/websites/{domain} (the `HostingDeleteWebsiteV1` operationId).
-func (c *ClientWithResponses) HostingDeleteWebsiteV1WithResponse(ctx context.Context, domain Domain, body HostingDeleteWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingDeleteWebsiteV1Response, error) {
-	rsp, err := c.HostingDeleteWebsiteV1(ctx, domain, body, reqEditors...)
+func (c *ClientWithResponses) HostingDeleteWebsiteV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*HostingDeleteWebsiteV1Response, error) {
+	rsp, err := c.HostingDeleteWebsiteV1(ctx, domain, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -75554,6 +76793,100 @@ func ParseDomainsCheckDomainAvailabilityV1Response(rsp *http.Response) (*Domains
 	return response, nil
 }
 
+// ParseDomainsSuggestDomainNamesFromADescriptionV1Response parses an HTTP response from a DomainsSuggestDomainNamesFromADescriptionV1WithResponse call
+func ParseDomainsSuggestDomainNamesFromADescriptionV1Response(rsp *http.Response) (*DomainsSuggestDomainNamesFromADescriptionV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DomainsSuggestDomainNamesFromADescriptionV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest DomainsV1AvailabilityAlternativeCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDomainsSuggestDomainNamesFromADomainV1Response parses an HTTP response from a DomainsSuggestDomainNamesFromADomainV1WithResponse call
+func ParseDomainsSuggestDomainNamesFromADomainV1Response(rsp *http.Response) (*DomainsSuggestDomainNamesFromADomainV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DomainsSuggestDomainNamesFromADomainV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest DomainsV1AvailabilityAlternativeCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseDomainsCreateDomainForwardingV1Response parses an HTTP response from a DomainsCreateDomainForwardingV1WithResponse call
 func ParseDomainsCreateDomainForwardingV1Response(rsp *http.Response) (*DomainsCreateDomainForwardingV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -77416,6 +78749,53 @@ func ParseEcommerceCreatePhysicalProductV1Response(rsp *http.Response) (*Ecommer
 	return response, nil
 }
 
+// ParseEcommerceUploadAndAttachAProductImageV1Response parses an HTTP response from a EcommerceUploadAndAttachAProductImageV1WithResponse call
+func ParseEcommerceUploadAndAttachAProductImageV1Response(rsp *http.Response) (*EcommerceUploadAndAttachAProductImageV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceUploadAndAttachAProductImageV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest EcommerceV1ProductProductImageUploadResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseEcommerceListSalesChannelsV1Response parses an HTTP response from a EcommerceListSalesChannelsV1WithResponse call
 func ParseEcommerceListSalesChannelsV1Response(rsp *http.Response) (*EcommerceListSalesChannelsV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -78223,6 +79603,100 @@ func ParseHostingRepairDatabaseV1Response(rsp *http.Response) (*HostingRepairDat
 			return nil, err
 		}
 		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingListWebsiteFilesAndDirectoriesV1Response parses an HTTP response from a HostingListWebsiteFilesAndDirectoriesV1WithResponse call
+func ParseHostingListWebsiteFilesAndDirectoriesV1Response(rsp *http.Response) (*HostingListWebsiteFilesAndDirectoriesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingListWebsiteFilesAndDirectoriesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1FilesFilesResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingGetWebsiteFileContentV1Response parses an HTTP response from a HostingGetWebsiteFileContentV1WithResponse call
+func ParseHostingGetWebsiteFileContentV1Response(rsp *http.Response) (*HostingGetWebsiteFileContentV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingGetWebsiteFileContentV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1FilesFileContentResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse
