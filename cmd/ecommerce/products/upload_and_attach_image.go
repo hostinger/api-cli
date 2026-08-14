@@ -31,18 +31,24 @@ var UploadAndAttachImageCmd = &cobra.Command{
 }
 
 func init() {
-	UploadAndAttachImageCmd.Flags().StringP("image-url", "", "", "Publicly reachable URL of the raster image (JPEG, PNG, GIF or WebP), maximum 15MB. The image is\nfetched, virus-scanned and validated by content, then stored on the CDN. SVG is not accepted.")
+	UploadAndAttachImageCmd.Flags().StringP("image-url", "", "", "Publicly reachable URL of the raster image (JPEG, PNG, GIF or WebP), maximum 15MB. The image is\nfetched, virus-scanned and validated by content, then stored on the CDN. SVG is not accepted.\nProvide either this or object_name.")
 	UploadAndAttachImageCmd.Flags().BoolP("is-thumbnail", "", false, "When true, the image becomes the product's thumbnail (primary image). When omitted, it becomes the\nthumbnail only if the product does not have one yet.")
-	UploadAndAttachImageCmd.MarkFlagRequired("image-url")
+	UploadAndAttachImageCmd.Flags().StringP("object-name", "", "", "Key returned by the upload-url endpoint. Provide this instead of image_url to attach an uploaded image.")
 }
 
 func uploadAndAttachImageBody(cmd *cobra.Command) map[string]any {
 	body := map[string]any{}
-	imageUrlVal, _ := cmd.Flags().GetString("image-url")
-	body["image_url"] = imageUrlVal
+	if cmd.Flags().Changed("image-url") {
+		v, _ := cmd.Flags().GetString("image-url")
+		body["image_url"] = v
+	}
 	if cmd.Flags().Changed("is-thumbnail") {
 		v, _ := cmd.Flags().GetBool("is-thumbnail")
 		body["is_thumbnail"] = v
+	}
+	if cmd.Flags().Changed("object-name") {
+		v, _ := cmd.Flags().GetString("object-name")
+		body["object_name"] = v
 	}
 	return body
 }

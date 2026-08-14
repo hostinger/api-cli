@@ -5539,19 +5539,46 @@ type EcommerceV1ProductProductImageUploadResource struct {
 	Url *string `json:"url,omitempty"`
 }
 
+// EcommerceV1ProductProductImageUploadUrlResource defines model for Ecommerce.V1.Product.ProductImageUploadUrlResource.
+type EcommerceV1ProductProductImageUploadUrlResource struct {
+	// Fields Form fields to send alongside the file in the multipart POST.
+	Fields *map[string]string `json:"fields,omitempty"`
+
+	// MaxBytes Maximum accepted upload size in bytes.
+	//
+	// Example: 15728640
+	MaxBytes *int `json:"max_bytes,omitempty"`
+
+	// ObjectName Key of the uploaded object — send it to the attach-image endpoint.
+	//
+	// Example: store_01J8Z5F8W9K8M4A7B3C2D1E0FG/01J8Z5F8W9K8M4A7B3C2D1E0FG
+	ObjectName *string `json:"object_name,omitempty"`
+
+	// UploadUrl Signed URL to upload the image to with a multipart/form-data POST.
+	//
+	// Example: https://storage.googleapis.com/ecommerce-quarantine-euw3
+	UploadUrl *string `json:"upload_url,omitempty"`
+}
+
 // EcommerceV1ProductUploadProductImageRequest defines model for Ecommerce.V1.Product.UploadProductImageRequest.
 type EcommerceV1ProductUploadProductImageRequest struct {
 	// ImageUrl Publicly reachable URL of the raster image (JPEG, PNG, GIF or WebP), maximum 15MB. The image is
 	// fetched, virus-scanned and validated by content, then stored on the CDN. SVG is not accepted.
+	// Provide either this or object_name.
 	//
 	// Example: https://images.example.com/product.png
-	ImageUrl string `json:"image_url"`
+	ImageUrl *string `json:"image_url,omitempty"`
 
 	// IsThumbnail When true, the image becomes the product's thumbnail (primary image). When omitted, it becomes the
 	// thumbnail only if the product does not have one yet.
 	//
 	// Example: true
 	IsThumbnail *bool `json:"is_thumbnail,omitempty"`
+
+	// ObjectName Key returned by the upload-url endpoint. Provide this instead of image_url to attach an uploaded image.
+	//
+	// Example: store_01J8Z5F8W9K8M4A7B3C2D1E0FG/01J8Z5F8W9K8M4A7B3C2D1E0FG
+	ObjectName *string `json:"object_name,omitempty"`
 }
 
 // EcommerceV1SalesChannelSalesChannelCreationResource defines model for Ecommerce.V1.SalesChannel.SalesChannelCreationResource.
@@ -14292,6 +14319,14 @@ type ClientInterface interface {
 	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/images (the `EcommerceUploadAndAttachAProductImageV1` operationId).
 	EcommerceUploadAndAttachAProductImageV1(ctx context.Context, storeId string, productId string, body EcommerceUploadAndAttachAProductImageV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// EcommerceCreateAProductImageUploadURLV1 Create a product image upload URL
+	//
+	// Returns a signed URL to upload a product image to (multipart/form-data POST). Then call the
+	// attach-image endpoint with the returned object_name to scan and attach it to the product.
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/images/upload-url (the `EcommerceCreateAProductImageUploadURLV1` operationId).
+	EcommerceCreateAProductImageUploadURLV1(ctx context.Context, storeId string, productId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// EcommerceListSalesChannelsV1 List sales channels
 	//
 	// List a store's active sales channels with their full metadata.
@@ -20754,6 +20789,24 @@ func (c *Client) EcommerceUploadAndAttachAProductImageV1WithBody(ctx context.Con
 // Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/images (the `EcommerceUploadAndAttachAProductImageV1` operationId).
 func (c *Client) EcommerceUploadAndAttachAProductImageV1(ctx context.Context, storeId string, productId string, body EcommerceUploadAndAttachAProductImageV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewEcommerceUploadAndAttachAProductImageV1Request(c.Server, storeId, productId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceCreateAProductImageUploadURLV1 Create a product image upload URL
+//
+// Returns a signed URL to upload a product image to (multipart/form-data POST). Then call the
+// attach-image endpoint with the returned object_name to scan and attach it to the product.
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/images/upload-url (the `EcommerceCreateAProductImageUploadURLV1` operationId).
+func (c *Client) EcommerceCreateAProductImageUploadURLV1(ctx context.Context, storeId string, productId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceCreateAProductImageUploadURLV1Request(c.Server, storeId, productId)
 	if err != nil {
 		return nil, err
 	}
@@ -31130,6 +31183,47 @@ func NewEcommerceUploadAndAttachAProductImageV1RequestWithBody(server string, st
 	}
 
 	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewEcommerceCreateAProductImageUploadURLV1Request constructs an http.Request for the EcommerceCreateAProductImageUploadURLV1 method
+func NewEcommerceCreateAProductImageUploadURLV1Request(server string, storeId string, productId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "product_id", productId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/products/%s/images/upload-url", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 
 	return req, nil
 }
@@ -44014,6 +44108,16 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/images (the `EcommerceUploadAndAttachAProductImageV1` operationId).
 	EcommerceUploadAndAttachAProductImageV1WithResponse(ctx context.Context, storeId string, productId string, body EcommerceUploadAndAttachAProductImageV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceUploadAndAttachAProductImageV1Response, error)
 
+	// EcommerceCreateAProductImageUploadURLV1WithResponse Create a product image upload URL
+	//
+	// Returns a signed URL to upload a product image to (multipart/form-data POST). Then call the
+	// attach-image endpoint with the returned object_name to scan and attach it to the product.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/images/upload-url (the `EcommerceCreateAProductImageUploadURLV1` operationId).
+	EcommerceCreateAProductImageUploadURLV1WithResponse(ctx context.Context, storeId string, productId string, reqEditors ...RequestEditorFn) (*EcommerceCreateAProductImageUploadURLV1Response, error)
+
 	// EcommerceListSalesChannelsV1WithResponse List sales channels
 	//
 	// List a store's active sales channels with their full metadata.
@@ -53233,6 +53337,61 @@ func (r EcommerceUploadAndAttachAProductImageV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r EcommerceUploadAndAttachAProductImageV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type EcommerceCreateAProductImageUploadURLV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *EcommerceV1ProductProductImageUploadUrlResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r EcommerceCreateAProductImageUploadURLV1Response) GetJSON200() *EcommerceV1ProductProductImageUploadUrlResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r EcommerceCreateAProductImageUploadURLV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r EcommerceCreateAProductImageUploadURLV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r EcommerceCreateAProductImageUploadURLV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceCreateAProductImageUploadURLV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceCreateAProductImageUploadURLV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceCreateAProductImageUploadURLV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -69165,6 +69324,22 @@ func (c *ClientWithResponses) EcommerceUploadAndAttachAProductImageV1WithRespons
 	return ParseEcommerceUploadAndAttachAProductImageV1Response(rsp)
 }
 
+// EcommerceCreateAProductImageUploadURLV1WithResponse Create a product image upload URL
+//
+// Returns a signed URL to upload a product image to (multipart/form-data POST). Then call the
+// attach-image endpoint with the returned object_name to scan and attach it to the product.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/images/upload-url (the `EcommerceCreateAProductImageUploadURLV1` operationId).
+func (c *ClientWithResponses) EcommerceCreateAProductImageUploadURLV1WithResponse(ctx context.Context, storeId string, productId string, reqEditors ...RequestEditorFn) (*EcommerceCreateAProductImageUploadURLV1Response, error) {
+	rsp, err := c.EcommerceCreateAProductImageUploadURLV1(ctx, storeId, productId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceCreateAProductImageUploadURLV1Response(rsp)
+}
+
 // EcommerceListSalesChannelsV1WithResponse List sales channels
 //
 // List a store's active sales channels with their full metadata.
@@ -78786,6 +78961,46 @@ func ParseEcommerceUploadAndAttachAProductImageV1Response(rsp *http.Response) (*
 			return nil, err
 		}
 		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceCreateAProductImageUploadURLV1Response parses an HTTP response from a EcommerceCreateAProductImageUploadURLV1WithResponse call
+func ParseEcommerceCreateAProductImageUploadURLV1Response(rsp *http.Response) (*EcommerceCreateAProductImageUploadURLV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceCreateAProductImageUploadURLV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest EcommerceV1ProductProductImageUploadUrlResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse

@@ -15,11 +15,13 @@ hostinger ecommerce products upload-and-attach-image <store_id> <product_id> [fl
 ### Options
 
 ```
-  -h, --help               help for upload-and-attach-image
-      --image-url string   Publicly reachable URL of the raster image (JPEG, PNG, GIF or WebP), maximum 15MB. The image is
-                           fetched, virus-scanned and validated by content, then stored on the CDN. SVG is not accepted.
-      --is-thumbnail       When true, the image becomes the product's thumbnail (primary image). When omitted, it becomes the
-                           thumbnail only if the product does not have one yet.
+  -h, --help                 help for upload-and-attach-image
+      --image-url string     Publicly reachable URL of the raster image (JPEG, PNG, GIF or WebP), maximum 15MB. The image is
+                             fetched, virus-scanned and validated by content, then stored on the CDN. SVG is not accepted.
+                             Provide either this or object_name.
+      --is-thumbnail         When true, the image becomes the product's thumbnail (primary image). When omitted, it becomes the
+                             thumbnail only if the product does not have one yet.
+      --object-name string   Key returned by the upload-url endpoint. Provide this instead of image_url to attach an uploaded image.
 ```
 
 ### Options inherited from parent commands

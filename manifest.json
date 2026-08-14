@@ -714,6 +714,11 @@
     "method": "PUT",
     "path": "/api/domains/v1/portfolio/{domain}/nameservers"
   },
+  "ecommerce_createAProductImageUploadURLV1": {
+    "command": "hostinger ecommerce products create-image-upload-url",
+    "method": "POST",
+    "path": "/api/ecommerce/v1/stores/{store_id}/products/{product_id}/images/upload-url"
+  },
   "ecommerce_createCustomSalesChannelV1": {
     "command": "hostinger ecommerce sales-channels create-custom",
     "method": "POST",
