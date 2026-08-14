@@ -5541,8 +5541,11 @@ type EcommerceV1ProductProductImageUploadResource struct {
 
 // EcommerceV1ProductUploadProductImageRequest defines model for Ecommerce.V1.Product.UploadProductImageRequest.
 type EcommerceV1ProductUploadProductImageRequest struct {
-	// Image Raster image file (JPEG, PNG, GIF or WebP), maximum 15MB. SVG is not accepted.
-	Image string `json:"image"`
+	// ImageUrl Publicly reachable URL of the raster image (JPEG, PNG, GIF or WebP), maximum 15MB. The image is
+	// fetched, virus-scanned and validated by content, then stored on the CDN. SVG is not accepted.
+	//
+	// Example: https://images.example.com/product.png
+	ImageUrl string `json:"image_url"`
 
 	// IsThumbnail When true, the image becomes the product's thumbnail (primary image). When omitted, it becomes the
 	// thumbnail only if the product does not have one yet.
@@ -14269,9 +14272,9 @@ type ClientInterface interface {
 
 	// EcommerceUploadAndAttachAProductImageV1WithBody Upload and attach a product image
 	//
-	// Upload a raster image (JPEG, PNG, GIF or WebP, max 15MB) and attach it to a product in a single call.
-	// The image is virus-scanned and validated by content, then stored on the CDN. Set is_thumbnail to make
-	// it the product's primary image.
+	// Fetch a raster image (JPEG, PNG, GIF or WebP, max 15MB) from a URL and attach it to a product in a
+	// single call. The image is virus-scanned and validated by content, then stored on the CDN. Set
+	// is_thumbnail to make it the product's primary image.
 	//
 	// Takes any type of body and a specified content type.
 	//
@@ -14280,9 +14283,9 @@ type ClientInterface interface {
 
 	// EcommerceUploadAndAttachAProductImageV1 Upload and attach a product image
 	//
-	// Upload a raster image (JPEG, PNG, GIF or WebP, max 15MB) and attach it to a product in a single call.
-	// The image is virus-scanned and validated by content, then stored on the CDN. Set is_thumbnail to make
-	// it the product's primary image.
+	// Fetch a raster image (JPEG, PNG, GIF or WebP, max 15MB) from a URL and attach it to a product in a
+	// single call. The image is virus-scanned and validated by content, then stored on the CDN. Set
+	// is_thumbnail to make it the product's primary image.
 	//
 	// Takes a body of the `application/json` content type.
 	//
@@ -20721,9 +20724,9 @@ func (c *Client) EcommerceCreatePhysicalProductV1(ctx context.Context, storeId s
 
 // EcommerceUploadAndAttachAProductImageV1WithBody Upload and attach a product image
 //
-// Upload a raster image (JPEG, PNG, GIF or WebP, max 15MB) and attach it to a product in a single call.
-// The image is virus-scanned and validated by content, then stored on the CDN. Set is_thumbnail to make
-// it the product's primary image.
+// Fetch a raster image (JPEG, PNG, GIF or WebP, max 15MB) from a URL and attach it to a product in a
+// single call. The image is virus-scanned and validated by content, then stored on the CDN. Set
+// is_thumbnail to make it the product's primary image.
 //
 // Takes any type of body and a specified content type.
 //
@@ -20742,9 +20745,9 @@ func (c *Client) EcommerceUploadAndAttachAProductImageV1WithBody(ctx context.Con
 
 // EcommerceUploadAndAttachAProductImageV1 Upload and attach a product image
 //
-// Upload a raster image (JPEG, PNG, GIF or WebP, max 15MB) and attach it to a product in a single call.
-// The image is virus-scanned and validated by content, then stored on the CDN. Set is_thumbnail to make
-// it the product's primary image.
+// Fetch a raster image (JPEG, PNG, GIF or WebP, max 15MB) from a URL and attach it to a product in a
+// single call. The image is virus-scanned and validated by content, then stored on the CDN. Set
+// is_thumbnail to make it the product's primary image.
 //
 // Takes a body of the `application/json` content type.
 //
@@ -43991,9 +43994,9 @@ type ClientWithResponsesInterface interface {
 
 	// EcommerceUploadAndAttachAProductImageV1WithBodyWithResponse Upload and attach a product image
 	//
-	// Upload a raster image (JPEG, PNG, GIF or WebP, max 15MB) and attach it to a product in a single call.
-	// The image is virus-scanned and validated by content, then stored on the CDN. Set is_thumbnail to make
-	// it the product's primary image.
+	// Fetch a raster image (JPEG, PNG, GIF or WebP, max 15MB) from a URL and attach it to a product in a
+	// single call. The image is virus-scanned and validated by content, then stored on the CDN. Set
+	// is_thumbnail to make it the product's primary image.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -44002,9 +44005,9 @@ type ClientWithResponsesInterface interface {
 
 	// EcommerceUploadAndAttachAProductImageV1WithResponse Upload and attach a product image
 	//
-	// Upload a raster image (JPEG, PNG, GIF or WebP, max 15MB) and attach it to a product in a single call.
-	// The image is virus-scanned and validated by content, then stored on the CDN. Set is_thumbnail to make
-	// it the product's primary image.
+	// Fetch a raster image (JPEG, PNG, GIF or WebP, max 15MB) from a URL and attach it to a product in a
+	// single call. The image is virus-scanned and validated by content, then stored on the CDN. Set
+	// is_thumbnail to make it the product's primary image.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -69130,9 +69133,9 @@ func (c *ClientWithResponses) EcommerceCreatePhysicalProductV1WithResponse(ctx c
 
 // EcommerceUploadAndAttachAProductImageV1WithBodyWithResponse Upload and attach a product image
 //
-// Upload a raster image (JPEG, PNG, GIF or WebP, max 15MB) and attach it to a product in a single call.
-// The image is virus-scanned and validated by content, then stored on the CDN. Set is_thumbnail to make
-// it the product's primary image.
+// Fetch a raster image (JPEG, PNG, GIF or WebP, max 15MB) from a URL and attach it to a product in a
+// single call. The image is virus-scanned and validated by content, then stored on the CDN. Set
+// is_thumbnail to make it the product's primary image.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
@@ -69147,9 +69150,9 @@ func (c *ClientWithResponses) EcommerceUploadAndAttachAProductImageV1WithBodyWit
 
 // EcommerceUploadAndAttachAProductImageV1WithResponse Upload and attach a product image
 //
-// Upload a raster image (JPEG, PNG, GIF or WebP, max 15MB) and attach it to a product in a single call.
-// The image is virus-scanned and validated by content, then stored on the CDN. Set is_thumbnail to make
-// it the product's primary image.
+// Fetch a raster image (JPEG, PNG, GIF or WebP, max 15MB) from a URL and attach it to a product in a
+// single call. The image is virus-scanned and validated by content, then stored on the CDN. Set
+// is_thumbnail to make it the product's primary image.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
