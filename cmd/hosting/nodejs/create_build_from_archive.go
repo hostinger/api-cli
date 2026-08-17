@@ -18,7 +18,7 @@ var CreateBuildFromArchiveCmd = &cobra.Command{
 	Long:  "Upload a project archive, auto-detect build settings, and immediately start a Node.js build.\n\nThis is the recommended single-step approach for deploying a Node.js application.\nThe archive is uploaded to the website's file storage, build settings are auto-detected\nfrom the package.json inside the archive, and the build process starts automatically.\nOptional override fields take precedence over auto-detected values.\nMaximum archive size is 50MB.\n\nBefore archiving, exclude `node_modules/` and any build output directories\n(e.g. `dist/`, `.next/`, `build/`) — they are not needed because the build\nprocess runs the install step automatically, and including them unnecessarily\nincreases the archive size. This also helps keep the archive well under the 50MB limit.\n\nExample (zip):\n```\nzip -r archive.zip . --exclude \"node_modules/*\" --exclude \"dist/*\"\n```\n\nThe returned build `uuid` can be used to poll progress and retrieve logs via\nthe `Get Node.js Build Logs` endpoint.",
 	Args:  cobra.MatchAll(cobra.ExactArgs(2)),
 	Run: func(cmd *cobra.Command, args []string) {
-		utils.EnumCheck(cmd, "app-type", []string{"create-react-app", "vite", "angular", "react", "vue", "parcel", "express", "fastify", "nest"})
+		utils.EnumCheck(cmd, "app-type", []string{"create-react-app", "gatsby", "vite", "angular", "react", "vue", "parcel", "next", "nuxt", "nest", "express", "fastify", "astro", "svelte", "svelte-kit", "hono", "react-router", "nitro", "other"})
 		utils.EnumCheck(cmd, "package-manager", []string{"npm", "yarn", "pnpm"})
 		payload, err := json.Marshal(createBuildFromArchiveBody(cmd))
 		if err != nil {
@@ -34,7 +34,7 @@ var CreateBuildFromArchiveCmd = &cobra.Command{
 }
 
 func init() {
-	CreateBuildFromArchiveCmd.Flags().StringP("app-type", "", "", "Node.js application type override (one of: create-react-app, vite, angular, react, vue, parcel, express, fastify, nest)")
+	CreateBuildFromArchiveCmd.Flags().StringP("app-type", "", "", "Node.js application type override (one of: create-react-app, gatsby, vite, angular, react, vue, parcel, next, nuxt, nest, express, fastify, astro, svelte, svelte-kit, hono, react-router, nitro, other)")
 	CreateBuildFromArchiveCmd.Flags().StringP("archive", "", "", "Project archive file (.zip, .tar.gz, or .tgz), maximum 50MB")
 	CreateBuildFromArchiveCmd.Flags().StringP("build-script", "", "", "Build script override")
 	CreateBuildFromArchiveCmd.Flags().StringP("entry-file", "", "", "Main entry point file override")

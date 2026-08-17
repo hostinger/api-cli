@@ -32,7 +32,7 @@ hostinger hosting nodejs create-build-from-archive <username> <domain> [flags]
 ### Options
 
 ```
-      --app-type string           Node.js application type override (one of: create-react-app, vite, angular, react, vue, parcel, express, fastify, nest)
+      --app-type string           Node.js application type override (one of: create-react-app, gatsby, vite, angular, react, vue, parcel, next, nuxt, nest, express, fastify, astro, svelte, svelte-kit, hono, react-router, nitro, other)
       --archive string            Project archive file (.zip, .tar.gz, or .tgz), maximum 50MB
       --build-script string       Build script override
       --entry-file string         Main entry point file override

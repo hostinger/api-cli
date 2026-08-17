@@ -834,9 +834,22 @@ func (e HostingV1FilesFilesResourceItemsType) Valid() bool {
 // Defines values for HostingV1NodeJsBuildOptionsResourceAppType.
 const (
 	HostingV1NodeJsBuildOptionsResourceAppTypeAngular        HostingV1NodeJsBuildOptionsResourceAppType = "angular"
+	HostingV1NodeJsBuildOptionsResourceAppTypeAstro          HostingV1NodeJsBuildOptionsResourceAppType = "astro"
 	HostingV1NodeJsBuildOptionsResourceAppTypeCreateReactApp HostingV1NodeJsBuildOptionsResourceAppType = "create-react-app"
+	HostingV1NodeJsBuildOptionsResourceAppTypeExpress        HostingV1NodeJsBuildOptionsResourceAppType = "express"
+	HostingV1NodeJsBuildOptionsResourceAppTypeFastify        HostingV1NodeJsBuildOptionsResourceAppType = "fastify"
+	HostingV1NodeJsBuildOptionsResourceAppTypeGatsby         HostingV1NodeJsBuildOptionsResourceAppType = "gatsby"
+	HostingV1NodeJsBuildOptionsResourceAppTypeHono           HostingV1NodeJsBuildOptionsResourceAppType = "hono"
+	HostingV1NodeJsBuildOptionsResourceAppTypeNest           HostingV1NodeJsBuildOptionsResourceAppType = "nest"
+	HostingV1NodeJsBuildOptionsResourceAppTypeNext           HostingV1NodeJsBuildOptionsResourceAppType = "next"
+	HostingV1NodeJsBuildOptionsResourceAppTypeNitro          HostingV1NodeJsBuildOptionsResourceAppType = "nitro"
+	HostingV1NodeJsBuildOptionsResourceAppTypeNuxt           HostingV1NodeJsBuildOptionsResourceAppType = "nuxt"
+	HostingV1NodeJsBuildOptionsResourceAppTypeOther          HostingV1NodeJsBuildOptionsResourceAppType = "other"
 	HostingV1NodeJsBuildOptionsResourceAppTypeParcel         HostingV1NodeJsBuildOptionsResourceAppType = "parcel"
 	HostingV1NodeJsBuildOptionsResourceAppTypeReact          HostingV1NodeJsBuildOptionsResourceAppType = "react"
+	HostingV1NodeJsBuildOptionsResourceAppTypeReactRouter    HostingV1NodeJsBuildOptionsResourceAppType = "react-router"
+	HostingV1NodeJsBuildOptionsResourceAppTypeSvelte         HostingV1NodeJsBuildOptionsResourceAppType = "svelte"
+	HostingV1NodeJsBuildOptionsResourceAppTypeSvelteKit      HostingV1NodeJsBuildOptionsResourceAppType = "svelte-kit"
 	HostingV1NodeJsBuildOptionsResourceAppTypeVite           HostingV1NodeJsBuildOptionsResourceAppType = "vite"
 	HostingV1NodeJsBuildOptionsResourceAppTypeVue            HostingV1NodeJsBuildOptionsResourceAppType = "vue"
 )
@@ -846,11 +859,37 @@ func (e HostingV1NodeJsBuildOptionsResourceAppType) Valid() bool {
 	switch e {
 	case HostingV1NodeJsBuildOptionsResourceAppTypeAngular:
 		return true
+	case HostingV1NodeJsBuildOptionsResourceAppTypeAstro:
+		return true
 	case HostingV1NodeJsBuildOptionsResourceAppTypeCreateReactApp:
+		return true
+	case HostingV1NodeJsBuildOptionsResourceAppTypeExpress:
+		return true
+	case HostingV1NodeJsBuildOptionsResourceAppTypeFastify:
+		return true
+	case HostingV1NodeJsBuildOptionsResourceAppTypeGatsby:
+		return true
+	case HostingV1NodeJsBuildOptionsResourceAppTypeHono:
+		return true
+	case HostingV1NodeJsBuildOptionsResourceAppTypeNest:
+		return true
+	case HostingV1NodeJsBuildOptionsResourceAppTypeNext:
+		return true
+	case HostingV1NodeJsBuildOptionsResourceAppTypeNitro:
+		return true
+	case HostingV1NodeJsBuildOptionsResourceAppTypeNuxt:
+		return true
+	case HostingV1NodeJsBuildOptionsResourceAppTypeOther:
 		return true
 	case HostingV1NodeJsBuildOptionsResourceAppTypeParcel:
 		return true
 	case HostingV1NodeJsBuildOptionsResourceAppTypeReact:
+		return true
+	case HostingV1NodeJsBuildOptionsResourceAppTypeReactRouter:
+		return true
+	case HostingV1NodeJsBuildOptionsResourceAppTypeSvelte:
+		return true
+	case HostingV1NodeJsBuildOptionsResourceAppTypeSvelteKit:
 		return true
 	case HostingV1NodeJsBuildOptionsResourceAppTypeVite:
 		return true
@@ -924,12 +963,22 @@ func (e HostingV1NodeJsBuildResourceState) Valid() bool {
 // Defines values for HostingV1NodeJsCreateFromArchiveRequestAppType.
 const (
 	HostingV1NodeJsCreateFromArchiveRequestAppTypeAngular        HostingV1NodeJsCreateFromArchiveRequestAppType = "angular"
+	HostingV1NodeJsCreateFromArchiveRequestAppTypeAstro          HostingV1NodeJsCreateFromArchiveRequestAppType = "astro"
 	HostingV1NodeJsCreateFromArchiveRequestAppTypeCreateReactApp HostingV1NodeJsCreateFromArchiveRequestAppType = "create-react-app"
 	HostingV1NodeJsCreateFromArchiveRequestAppTypeExpress        HostingV1NodeJsCreateFromArchiveRequestAppType = "express"
 	HostingV1NodeJsCreateFromArchiveRequestAppTypeFastify        HostingV1NodeJsCreateFromArchiveRequestAppType = "fastify"
+	HostingV1NodeJsCreateFromArchiveRequestAppTypeGatsby         HostingV1NodeJsCreateFromArchiveRequestAppType = "gatsby"
+	HostingV1NodeJsCreateFromArchiveRequestAppTypeHono           HostingV1NodeJsCreateFromArchiveRequestAppType = "hono"
 	HostingV1NodeJsCreateFromArchiveRequestAppTypeNest           HostingV1NodeJsCreateFromArchiveRequestAppType = "nest"
+	HostingV1NodeJsCreateFromArchiveRequestAppTypeNext           HostingV1NodeJsCreateFromArchiveRequestAppType = "next"
+	HostingV1NodeJsCreateFromArchiveRequestAppTypeNitro          HostingV1NodeJsCreateFromArchiveRequestAppType = "nitro"
+	HostingV1NodeJsCreateFromArchiveRequestAppTypeNuxt           HostingV1NodeJsCreateFromArchiveRequestAppType = "nuxt"
+	HostingV1NodeJsCreateFromArchiveRequestAppTypeOther          HostingV1NodeJsCreateFromArchiveRequestAppType = "other"
 	HostingV1NodeJsCreateFromArchiveRequestAppTypeParcel         HostingV1NodeJsCreateFromArchiveRequestAppType = "parcel"
 	HostingV1NodeJsCreateFromArchiveRequestAppTypeReact          HostingV1NodeJsCreateFromArchiveRequestAppType = "react"
+	HostingV1NodeJsCreateFromArchiveRequestAppTypeReactRouter    HostingV1NodeJsCreateFromArchiveRequestAppType = "react-router"
+	HostingV1NodeJsCreateFromArchiveRequestAppTypeSvelte         HostingV1NodeJsCreateFromArchiveRequestAppType = "svelte"
+	HostingV1NodeJsCreateFromArchiveRequestAppTypeSvelteKit      HostingV1NodeJsCreateFromArchiveRequestAppType = "svelte-kit"
 	HostingV1NodeJsCreateFromArchiveRequestAppTypeVite           HostingV1NodeJsCreateFromArchiveRequestAppType = "vite"
 	HostingV1NodeJsCreateFromArchiveRequestAppTypeVue            HostingV1NodeJsCreateFromArchiveRequestAppType = "vue"
 )
@@ -939,17 +988,37 @@ func (e HostingV1NodeJsCreateFromArchiveRequestAppType) Valid() bool {
 	switch e {
 	case HostingV1NodeJsCreateFromArchiveRequestAppTypeAngular:
 		return true
+	case HostingV1NodeJsCreateFromArchiveRequestAppTypeAstro:
+		return true
 	case HostingV1NodeJsCreateFromArchiveRequestAppTypeCreateReactApp:
 		return true
 	case HostingV1NodeJsCreateFromArchiveRequestAppTypeExpress:
 		return true
 	case HostingV1NodeJsCreateFromArchiveRequestAppTypeFastify:
 		return true
+	case HostingV1NodeJsCreateFromArchiveRequestAppTypeGatsby:
+		return true
+	case HostingV1NodeJsCreateFromArchiveRequestAppTypeHono:
+		return true
 	case HostingV1NodeJsCreateFromArchiveRequestAppTypeNest:
+		return true
+	case HostingV1NodeJsCreateFromArchiveRequestAppTypeNext:
+		return true
+	case HostingV1NodeJsCreateFromArchiveRequestAppTypeNitro:
+		return true
+	case HostingV1NodeJsCreateFromArchiveRequestAppTypeNuxt:
+		return true
+	case HostingV1NodeJsCreateFromArchiveRequestAppTypeOther:
 		return true
 	case HostingV1NodeJsCreateFromArchiveRequestAppTypeParcel:
 		return true
 	case HostingV1NodeJsCreateFromArchiveRequestAppTypeReact:
+		return true
+	case HostingV1NodeJsCreateFromArchiveRequestAppTypeReactRouter:
+		return true
+	case HostingV1NodeJsCreateFromArchiveRequestAppTypeSvelte:
+		return true
+	case HostingV1NodeJsCreateFromArchiveRequestAppTypeSvelteKit:
 		return true
 	case HostingV1NodeJsCreateFromArchiveRequestAppTypeVite:
 		return true
