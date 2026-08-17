@@ -1449,6 +1449,11 @@
     "method": "DELETE",
     "path": "/api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}"
   },
+  "reach_deleteFormV1": {
+    "command": "hostinger reach forms delete",
+    "method": "DELETE",
+    "path": "/api/reach/v1/profiles/{profileUuid}/forms/{formUuid}"
+  },
   "reach_getAutomationDetailsV1": {
     "command": "hostinger reach automations get",
     "method": "GET",
@@ -1469,6 +1474,11 @@
     "method": "GET",
     "path": "/api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid}"
   },
+  "reach_getFormDetailsV1": {
+    "command": "hostinger reach forms get",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/forms/{formUuid}"
+  },
   "reach_getProfileDomainDNSStatusV1": {
     "command": "hostinger reach profiles domain-dns-status",
     "method": "GET",
@@ -1478,6 +1488,11 @@
     "command": "hostinger reach segments profile",
     "method": "GET",
     "path": "/api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}"
+  },
+  "reach_getRemainingPlanLimitsV1": {
+    "command": "hostinger reach profiles remaining-plan-limits",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/limits"
   },
   "reach_getSegmentDetailsV1": {
     "command": "hostinger reach segments get",
@@ -1513,6 +1528,11 @@
     "command": "hostinger reach contacts list",
     "method": "GET",
     "path": "/api/reach/v1/contacts"
+  },
+  "reach_listFormsV1": {
+    "command": "hostinger reach forms list",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/forms"
   },
   "reach_listProfileContactsV1": {
     "command": "hostinger reach contacts list-profile",

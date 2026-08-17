@@ -2358,6 +2358,102 @@ func (e ReachV1ContactsUpdateRequestSubscriptionStatus) Valid() bool {
 	}
 }
 
+// Defines values for ReachV1FormsFormDetailsResourceStatus.
+const (
+	ReachV1FormsFormDetailsResourceStatusActive ReachV1FormsFormDetailsResourceStatus = "active"
+	ReachV1FormsFormDetailsResourceStatusDraft  ReachV1FormsFormDetailsResourceStatus = "draft"
+	ReachV1FormsFormDetailsResourceStatusPaused ReachV1FormsFormDetailsResourceStatus = "paused"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1FormsFormDetailsResourceStatus enum.
+func (e ReachV1FormsFormDetailsResourceStatus) Valid() bool {
+	switch e {
+	case ReachV1FormsFormDetailsResourceStatusActive:
+		return true
+	case ReachV1FormsFormDetailsResourceStatusDraft:
+		return true
+	case ReachV1FormsFormDetailsResourceStatusPaused:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1FormsFormDetailsResourceType.
+const (
+	ReachV1FormsFormDetailsResourceTypeForm ReachV1FormsFormDetailsResourceType = "form"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1FormsFormDetailsResourceType enum.
+func (e ReachV1FormsFormDetailsResourceType) Valid() bool {
+	switch e {
+	case ReachV1FormsFormDetailsResourceTypeForm:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1FormsFormResourceStatus.
+const (
+	ReachV1FormsFormResourceStatusActive ReachV1FormsFormResourceStatus = "active"
+	ReachV1FormsFormResourceStatusDraft  ReachV1FormsFormResourceStatus = "draft"
+	ReachV1FormsFormResourceStatusPaused ReachV1FormsFormResourceStatus = "paused"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1FormsFormResourceStatus enum.
+func (e ReachV1FormsFormResourceStatus) Valid() bool {
+	switch e {
+	case ReachV1FormsFormResourceStatusActive:
+		return true
+	case ReachV1FormsFormResourceStatusDraft:
+		return true
+	case ReachV1FormsFormResourceStatusPaused:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1FormsFormResourceType.
+const (
+	ReachV1FormsFormResourceTypeForm ReachV1FormsFormResourceType = "form"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1FormsFormResourceType enum.
+func (e ReachV1FormsFormResourceType) Valid() bool {
+	switch e {
+	case ReachV1FormsFormResourceTypeForm:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1FormsFormTagResourceType.
+const (
+	ReachV1FormsFormTagResourceTypeCustom ReachV1FormsFormTagResourceType = "custom"
+	ReachV1FormsFormTagResourceTypeForm   ReachV1FormsFormTagResourceType = "form"
+	ReachV1FormsFormTagResourceTypeImport ReachV1FormsFormTagResourceType = "import"
+	ReachV1FormsFormTagResourceTypeSystem ReachV1FormsFormTagResourceType = "system"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1FormsFormTagResourceType enum.
+func (e ReachV1FormsFormTagResourceType) Valid() bool {
+	switch e {
+	case ReachV1FormsFormTagResourceTypeCustom:
+		return true
+	case ReachV1FormsFormTagResourceTypeForm:
+		return true
+	case ReachV1FormsFormTagResourceTypeImport:
+		return true
+	case ReachV1FormsFormTagResourceTypeSystem:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for VPSV1ActionActionResourceState.
 const (
 	VPSV1ActionActionResourceStateCreated VPSV1ActionActionResourceState = "created"
@@ -9501,6 +9597,136 @@ type ReachV1ContactsUpdateRequest struct {
 // ReachV1ContactsUpdateRequestSubscriptionStatus Example: subscribed
 type ReachV1ContactsUpdateRequestSubscriptionStatus string
 
+// ReachV1FormsFormCollection Array of [`Reach.V1.Forms.FormResource`](#model/reachv1formsformresource)
+type ReachV1FormsFormCollection = []ReachV1FormsFormResource
+
+// ReachV1FormsFormDetailsResource defines model for Reach.V1.Forms.FormDetailsResource.
+type ReachV1FormsFormDetailsResource struct {
+	// CreatedAt Example: 2025-02-27T11:54:22Z
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Name Example: Newsletter signup
+	Name *string `json:"name,omitempty"`
+
+	// Status A `paused` form keeps its template online but stops accepting submissions.
+	//
+	// Example: active
+	Status *ReachV1FormsFormDetailsResourceStatus `json:"status,omitempty"`
+
+	// Tags Tags applied to every contact this form captures.
+	Tags *[]ReachV1FormsFormTagResource `json:"tags,omitempty"`
+
+	// Template The rendered form template. There is no ready-made embed snippet - either serve the HTML behind
+	// `url` or build your own embed around the form uuid. All fields stay null until the template has
+	// been generated.
+	Template *ReachV1FormsFormTemplateDetailsResource `json:"template,omitempty"`
+
+	// Type Example: form
+	Type *ReachV1FormsFormDetailsResourceType `json:"type,omitempty"`
+
+	// UpdatedAt Example: 2025-03-04T09:12:07Z
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+
+	// Uuid Example: 550e8400-e29b-41d4-a716-446655440000
+	Uuid *string `json:"uuid,omitempty"`
+}
+
+// ReachV1FormsFormDetailsResourceStatus A `paused` form keeps its template online but stops accepting submissions.
+//
+// Example: active
+type ReachV1FormsFormDetailsResourceStatus string
+
+// ReachV1FormsFormDetailsResourceType Example: form
+type ReachV1FormsFormDetailsResourceType string
+
+// ReachV1FormsFormResource defines model for Reach.V1.Forms.FormResource.
+type ReachV1FormsFormResource struct {
+	// CreatedAt Example: 2025-02-27T11:54:22Z
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Name Example: Newsletter signup
+	Name *string `json:"name,omitempty"`
+
+	// Status A `paused` form keeps its template online but stops accepting submissions.
+	//
+	// Example: active
+	Status *ReachV1FormsFormResourceStatus `json:"status,omitempty"`
+
+	// Template The rendered form template. Both fields stay null until the template has been generated.
+	Template *ReachV1FormsFormTemplateResource `json:"template,omitempty"`
+
+	// Type Example: form
+	Type *ReachV1FormsFormResourceType `json:"type,omitempty"`
+
+	// UpdatedAt Example: 2025-03-04T09:12:07Z
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+
+	// Uuid Example: 550e8400-e29b-41d4-a716-446655440000
+	Uuid *string `json:"uuid,omitempty"`
+}
+
+// ReachV1FormsFormResourceStatus A `paused` form keeps its template online but stops accepting submissions.
+//
+// Example: active
+type ReachV1FormsFormResourceStatus string
+
+// ReachV1FormsFormResourceType Example: form
+type ReachV1FormsFormResourceType string
+
+// ReachV1FormsFormTagResource A tag applied to every contact this form captures.
+type ReachV1FormsFormTagResource struct {
+	// Type How the tag came about. `custom` covers the tags you create yourself, `import` the ones added
+	// by contact imports, and `form` and `system` the ones Reach creates on its own. Every form gets
+	// a `form:{name}` tag when it is created.
+	//
+	// Example: system
+	Type *ReachV1FormsFormTagResourceType `json:"type,omitempty"`
+
+	// Uuid Example: 550e8400-e29b-41d4-a716-446655440000
+	Uuid *string `json:"uuid,omitempty"`
+
+	// Value Example: Newsletter
+	Value *string `json:"value,omitempty"`
+}
+
+// ReachV1FormsFormTagResourceType How the tag came about. `custom` covers the tags you create yourself, `import` the ones added
+// by contact imports, and `form` and `system` the ones Reach creates on its own. Every form gets
+// a `form:{name}` tag when it is created.
+//
+// Example: system
+type ReachV1FormsFormTagResourceType string
+
+// ReachV1FormsFormTemplateDetailsResource The rendered form template. There is no ready-made embed snippet - either serve the HTML behind
+// `url` or build your own embed around the form uuid. All fields stay null until the template has
+// been generated.
+type ReachV1FormsFormTemplateDetailsResource struct {
+	// Path Storage path of the template HTML, relative to the storage directory of this profile. `url`
+	// already includes that prefix, so prefer it unless you resolve storage paths yourself.
+	//
+	// Example: forms/8f2c1b9e-1f4a-4a1e-9a2b-2f3c4d5e6f70/9a1b2c3d.html
+	Path *string `json:"path,omitempty"`
+
+	// Url Publicly reachable URL of the template HTML.
+	//
+	// Example: https://cdn-reach.hostinger.com/storage/client123/profile-uuid/form.html
+	Url *string `json:"url,omitempty"`
+
+	// Uuid Example: 2080cc86-e026-4f7b-9598-d4132f8c7c2f
+	Uuid *string `json:"uuid,omitempty"`
+}
+
+// ReachV1FormsFormTemplateResource The rendered form template. Both fields stay null until the template has been generated.
+type ReachV1FormsFormTemplateResource struct {
+	// Path Storage path of the template HTML, relative to the storage directory of this profile. Get the
+	// form details to receive a directly usable URL instead.
+	//
+	// Example: forms/8f2c1b9e-1f4a-4a1e-9a2b-2f3c4d5e6f70/9a1b2c3d.html
+	Path *string `json:"path,omitempty"`
+
+	// Uuid Example: 2080cc86-e026-4f7b-9598-d4132f8c7c2f
+	Uuid *string `json:"uuid,omitempty"`
+}
+
 // ReachV1ProfilesDomainsDnsRecordStatus defines model for Reach.V1.Profiles.Domains.DnsRecordStatus.
 type ReachV1ProfilesDomainsDnsRecordStatus struct {
 	Actual *[]struct {
@@ -9534,6 +9760,52 @@ type ReachV1ProfilesDomainsDnsStatusResource struct {
 	Domain *string                                `json:"domain,omitempty"`
 	Mx     *ReachV1ProfilesDomainsDnsRecordStatus `json:"mx,omitempty"`
 	Spf    *ReachV1ProfilesDomainsDnsRecordStatus `json:"spf,omitempty"`
+}
+
+// ReachV1ProfilesPlanLimitUsageResource Allowance, consumption and headroom of a single plan limit for the current period.
+type ReachV1ProfilesPlanLimitUsageResource struct {
+	// Limit The allowance for the current period.
+	//
+	// Example: 10000
+	Limit *int `json:"limit,omitempty"`
+
+	// Remaining Headroom left. Floors at 0, so it never reports a negative overage.
+	//
+	// Example: 7500
+	Remaining *int `json:"remaining,omitempty"`
+
+	// Used How much of the allowance has been consumed so far.
+	//
+	// Example: 2500
+	Used *int `json:"used,omitempty"`
+}
+
+// ReachV1ProfilesPlanLimitsResource What the plan allows and what is left of it for the current period.
+//
+// `emails` counts every email sent. `recipients` counts the distinct contacts emailed - it is not the
+// size of the contact list, a contact emailed three times counts once and a contact never emailed does
+// not count at all. `ai_credits` counts the AI generations used, and its limit includes any extra
+// credits bought on top of the plan.
+type ReachV1ProfilesPlanLimitsResource struct {
+	// AiCredits Allowance, consumption and headroom of a single plan limit for the current period.
+	AiCredits *ReachV1ProfilesPlanLimitUsageResource `json:"ai_credits,omitempty"`
+
+	// Emails Allowance, consumption and headroom of a single plan limit for the current period.
+	Emails *ReachV1ProfilesPlanLimitUsageResource `json:"emails,omitempty"`
+
+	// PeriodEnd End of the current period, that is the last moment of the calendar month.
+	//
+	// Example: 2025-03-31T23:59:59Z
+	PeriodEnd *time.Time `json:"period_end,omitempty"`
+
+	// PeriodStart Start of the current period. Periods are calendar months rather than billing anniversaries,
+	// so the counters reset at midnight UTC on the 1st no matter when the subscription started.
+	//
+	// Example: 2025-03-01T00:00:00Z
+	PeriodStart *time.Time `json:"period_start,omitempty"`
+
+	// Recipients Allowance, consumption and headroom of a single plan limit for the current period.
+	Recipients *ReachV1ProfilesPlanLimitUsageResource `json:"recipients,omitempty"`
 }
 
 // ReachV1ProfilesProfileCollection Array of [`Reach.V1.Profiles.ProfileResource`](#model/reachv1profilesprofileresource)
@@ -11390,6 +11662,9 @@ type FirewallId = int
 // ForceSync Example: true
 type ForceSync = bool
 
+// FormUuid Example: 550e8400-e09b-41d4-a716-400055000000
+type FormUuid = string
+
 // FromDomain Example: old.example.com
 type FromDomain = string
 
@@ -12298,6 +12573,15 @@ type ReachListProfileContactsV1Params struct {
 
 // ReachListProfileContactsV1ParamsSubscriptionStatus defines parameters for ReachListProfileContactsV1.
 type ReachListProfileContactsV1ParamsSubscriptionStatus string
+
+// ReachListFormsV1Params defines parameters for ReachListFormsV1.
+type ReachListFormsV1Params struct {
+	// Page Page number
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+
+	// PerPage Number of items per page
+	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
+}
 
 // ReachListProfileSegmentsV1Params defines parameters for ReachListProfileSegmentsV1.
 type ReachListProfileSegmentsV1Params struct {
@@ -17641,6 +17925,51 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/domains/dns-status (the `ReachGetProfileDomainDNSStatusV1` operationId).
 	ReachGetProfileDomainDNSStatusV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachListFormsV1 List forms
+	//
+	// Get a paginated list of the signup forms in a profile.
+	//
+	// Each form carries a reference to the template that renders it. Get the form details for a
+	// directly usable template URL and for the tags the form puts on the contacts it captures.
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/forms (the `ReachListFormsV1` operationId).
+	ReachListFormsV1(ctx context.Context, profileUuid ProfileUuid, params *ReachListFormsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachDeleteFormV1 Delete form
+	//
+	// Permanently delete a form together with its template.
+	//
+	// A form that has already captured submissions cannot be deleted, so that the contacts it collected
+	// are never silently discarded - pause the form instead to stop it collecting new ones. Views alone
+	// do not block deletion.
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/forms/{formUuid} (the `ReachDeleteFormV1` operationId).
+	ReachDeleteFormV1(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachGetFormDetailsV1 Get form details
+	//
+	// Get a single form with the URL of its hosted template and the tags it applies to the contacts
+	// it captures.
+	//
+	// There is no ready-made embed snippet in the response - either serve the template HTML yourself
+	// or build your own embed around the form uuid.
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/forms/{formUuid} (the `ReachGetFormDetailsV1` operationId).
+	ReachGetFormDetailsV1(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachGetRemainingPlanLimitsV1 Get remaining plan limits
+	//
+	// Get how much of the plan is left for the current period.
+	//
+	// Two things to keep in mind before you build alerting on this. The period is a calendar month
+	// rather than a billing anniversary, so the counters reset on the 1st no matter when the
+	// subscription started. And usage is tracked per order, so every profile on the same order shares
+	// one pool and reports the same numbers here. Only the current period is available, past usage is
+	// not kept.
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/limits (the `ReachGetRemainingPlanLimitsV1` operationId).
+	ReachGetRemainingPlanLimitsV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReachListProfileSegmentsV1 List profile segments
 	//
@@ -26144,6 +26473,91 @@ func (c *Client) ReachUpdateAContactV1(ctx context.Context, profileUuid ProfileU
 // Corresponds with GET /api/reach/v1/profiles/{profileUuid}/domains/dns-status (the `ReachGetProfileDomainDNSStatusV1` operationId).
 func (c *Client) ReachGetProfileDomainDNSStatusV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReachGetProfileDomainDNSStatusV1Request(c.Server, profileUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachListFormsV1 List forms
+//
+// Get a paginated list of the signup forms in a profile.
+//
+// Each form carries a reference to the template that renders it. Get the form details for a
+// directly usable template URL and for the tags the form puts on the contacts it captures.
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/forms (the `ReachListFormsV1` operationId).
+func (c *Client) ReachListFormsV1(ctx context.Context, profileUuid ProfileUuid, params *ReachListFormsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachListFormsV1Request(c.Server, profileUuid, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachDeleteFormV1 Delete form
+//
+// Permanently delete a form together with its template.
+//
+// A form that has already captured submissions cannot be deleted, so that the contacts it collected
+// are never silently discarded - pause the form instead to stop it collecting new ones. Views alone
+// do not block deletion.
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/forms/{formUuid} (the `ReachDeleteFormV1` operationId).
+func (c *Client) ReachDeleteFormV1(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachDeleteFormV1Request(c.Server, profileUuid, formUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachGetFormDetailsV1 Get form details
+//
+// Get a single form with the URL of its hosted template and the tags it applies to the contacts
+// it captures.
+//
+// There is no ready-made embed snippet in the response - either serve the template HTML yourself
+// or build your own embed around the form uuid.
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/forms/{formUuid} (the `ReachGetFormDetailsV1` operationId).
+func (c *Client) ReachGetFormDetailsV1(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachGetFormDetailsV1Request(c.Server, profileUuid, formUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachGetRemainingPlanLimitsV1 Get remaining plan limits
+//
+// Get how much of the plan is left for the current period.
+//
+// Two things to keep in mind before you build alerting on this. The period is a calendar month
+// rather than a billing anniversary, so the counters reset on the 1st no matter when the
+// subscription started. And usage is tracked per order, so every profile on the same order shares
+// one pool and reports the same numbers here. Only the current period is available, past usage is
+// not kept.
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/limits (the `ReachGetRemainingPlanLimitsV1` operationId).
+func (c *Client) ReachGetRemainingPlanLimitsV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachGetRemainingPlanLimitsV1Request(c.Server, profileUuid)
 	if err != nil {
 		return nil, err
 	}
@@ -40303,6 +40717,195 @@ func NewReachGetProfileDomainDNSStatusV1Request(server string, profileUuid Profi
 	return req, nil
 }
 
+// NewReachListFormsV1Request constructs an http.Request for the ReachListFormsV1 method
+func NewReachListFormsV1Request(server string, profileUuid ProfileUuid, params *ReachListFormsV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/forms", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Page != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page", *params.Page, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PerPage != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "per_page", *params.PerPage, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachDeleteFormV1Request constructs an http.Request for the ReachDeleteFormV1 method
+func NewReachDeleteFormV1Request(server string, profileUuid ProfileUuid, formUuid FormUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "formUuid", formUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/forms/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachGetFormDetailsV1Request constructs an http.Request for the ReachGetFormDetailsV1 method
+func NewReachGetFormDetailsV1Request(server string, profileUuid ProfileUuid, formUuid FormUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "formUuid", formUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/forms/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachGetRemainingPlanLimitsV1Request constructs an http.Request for the ReachGetRemainingPlanLimitsV1 method
+func NewReachGetRemainingPlanLimitsV1Request(server string, profileUuid ProfileUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/limits", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewReachListProfileSegmentsV1Request constructs an http.Request for the ReachListProfileSegmentsV1 method
 func NewReachListProfileSegmentsV1Request(server string, profileUuid ProfileUuid, params *ReachListProfileSegmentsV1Params) (*http.Request, error) {
 	var err error
@@ -48180,6 +48783,59 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/domains/dns-status (the `ReachGetProfileDomainDNSStatusV1` operationId).
 	ReachGetProfileDomainDNSStatusV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachGetProfileDomainDNSStatusV1Response, error)
+
+	// ReachListFormsV1WithResponse List forms
+	//
+	// Get a paginated list of the signup forms in a profile.
+	//
+	// Each form carries a reference to the template that renders it. Get the form details for a
+	// directly usable template URL and for the tags the form puts on the contacts it captures.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/forms (the `ReachListFormsV1` operationId).
+	ReachListFormsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, params *ReachListFormsV1Params, reqEditors ...RequestEditorFn) (*ReachListFormsV1Response, error)
+
+	// ReachDeleteFormV1WithResponse Delete form
+	//
+	// Permanently delete a form together with its template.
+	//
+	// A form that has already captured submissions cannot be deleted, so that the contacts it collected
+	// are never silently discarded - pause the form instead to stop it collecting new ones. Views alone
+	// do not block deletion.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/forms/{formUuid} (the `ReachDeleteFormV1` operationId).
+	ReachDeleteFormV1WithResponse(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, reqEditors ...RequestEditorFn) (*ReachDeleteFormV1Response, error)
+
+	// ReachGetFormDetailsV1WithResponse Get form details
+	//
+	// Get a single form with the URL of its hosted template and the tags it applies to the contacts
+	// it captures.
+	//
+	// There is no ready-made embed snippet in the response - either serve the template HTML yourself
+	// or build your own embed around the form uuid.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/forms/{formUuid} (the `ReachGetFormDetailsV1` operationId).
+	ReachGetFormDetailsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, reqEditors ...RequestEditorFn) (*ReachGetFormDetailsV1Response, error)
+
+	// ReachGetRemainingPlanLimitsV1WithResponse Get remaining plan limits
+	//
+	// Get how much of the plan is left for the current period.
+	//
+	// Two things to keep in mind before you build alerting on this. The period is a calendar month
+	// rather than a billing anniversary, so the counters reset on the 1st no matter when the
+	// subscription started. And usage is tracked per order, so every profile on the same order shares
+	// one pool and reports the same numbers here. Only the current period is available, past usage is
+	// not kept.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/limits (the `ReachGetRemainingPlanLimitsV1` operationId).
+	ReachGetRemainingPlanLimitsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachGetRemainingPlanLimitsV1Response, error)
 
 	// ReachListProfileSegmentsV1WithResponse List profile segments
 	//
@@ -63935,6 +64591,241 @@ func (r ReachGetProfileDomainDNSStatusV1Response) ContentType() string {
 	return ""
 }
 
+type ReachListFormsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *struct {
+		// Data Array of [`Reach.V1.Forms.FormResource`](#model/reachv1formsformresource)
+		Data *ReachV1FormsFormCollection       `json:"data,omitempty"`
+		Meta *CommonSchemaPaginationMetaSchema `json:"meta,omitempty"`
+	}
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachListFormsV1Response) GetJSON200() *struct {
+	// Data Array of [`Reach.V1.Forms.FormResource`](#model/reachv1formsformresource)
+	Data *ReachV1FormsFormCollection       `json:"data,omitempty"`
+	Meta *CommonSchemaPaginationMetaSchema `json:"meta,omitempty"`
+} {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachListFormsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachListFormsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachListFormsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachListFormsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachListFormsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachListFormsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachDeleteFormV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON409 the response for an HTTP 409 `application/json` response
+	JSON409 *CommonResponseErrorResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachDeleteFormV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachDeleteFormV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON409 returns the response for an HTTP 409 `application/json` response
+func (r ReachDeleteFormV1Response) GetJSON409() *CommonResponseErrorResponse {
+	return r.JSON409
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachDeleteFormV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachDeleteFormV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachDeleteFormV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachDeleteFormV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachDeleteFormV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachGetFormDetailsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1FormsFormDetailsResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachGetFormDetailsV1Response) GetJSON200() *ReachV1FormsFormDetailsResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachGetFormDetailsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachGetFormDetailsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachGetFormDetailsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachGetFormDetailsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachGetFormDetailsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachGetFormDetailsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachGetRemainingPlanLimitsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1ProfilesPlanLimitsResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachGetRemainingPlanLimitsV1Response) GetJSON200() *ReachV1ProfilesPlanLimitsResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachGetRemainingPlanLimitsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachGetRemainingPlanLimitsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachGetRemainingPlanLimitsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachGetRemainingPlanLimitsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachGetRemainingPlanLimitsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachGetRemainingPlanLimitsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type ReachListProfileSegmentsV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -75001,6 +75892,83 @@ func (c *ClientWithResponses) ReachGetProfileDomainDNSStatusV1WithResponse(ctx c
 		return nil, err
 	}
 	return ParseReachGetProfileDomainDNSStatusV1Response(rsp)
+}
+
+// ReachListFormsV1WithResponse List forms
+//
+// Get a paginated list of the signup forms in a profile.
+//
+// Each form carries a reference to the template that renders it. Get the form details for a
+// directly usable template URL and for the tags the form puts on the contacts it captures.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/forms (the `ReachListFormsV1` operationId).
+func (c *ClientWithResponses) ReachListFormsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, params *ReachListFormsV1Params, reqEditors ...RequestEditorFn) (*ReachListFormsV1Response, error) {
+	rsp, err := c.ReachListFormsV1(ctx, profileUuid, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachListFormsV1Response(rsp)
+}
+
+// ReachDeleteFormV1WithResponse Delete form
+//
+// Permanently delete a form together with its template.
+//
+// A form that has already captured submissions cannot be deleted, so that the contacts it collected
+// are never silently discarded - pause the form instead to stop it collecting new ones. Views alone
+// do not block deletion.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/forms/{formUuid} (the `ReachDeleteFormV1` operationId).
+func (c *ClientWithResponses) ReachDeleteFormV1WithResponse(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, reqEditors ...RequestEditorFn) (*ReachDeleteFormV1Response, error) {
+	rsp, err := c.ReachDeleteFormV1(ctx, profileUuid, formUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachDeleteFormV1Response(rsp)
+}
+
+// ReachGetFormDetailsV1WithResponse Get form details
+//
+// Get a single form with the URL of its hosted template and the tags it applies to the contacts
+// it captures.
+//
+// There is no ready-made embed snippet in the response - either serve the template HTML yourself
+// or build your own embed around the form uuid.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/forms/{formUuid} (the `ReachGetFormDetailsV1` operationId).
+func (c *ClientWithResponses) ReachGetFormDetailsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, reqEditors ...RequestEditorFn) (*ReachGetFormDetailsV1Response, error) {
+	rsp, err := c.ReachGetFormDetailsV1(ctx, profileUuid, formUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachGetFormDetailsV1Response(rsp)
+}
+
+// ReachGetRemainingPlanLimitsV1WithResponse Get remaining plan limits
+//
+// Get how much of the plan is left for the current period.
+//
+// Two things to keep in mind before you build alerting on this. The period is a calendar month
+// rather than a billing anniversary, so the counters reset on the 1st no matter when the
+// subscription started. And usage is tracked per order, so every profile on the same order shares
+// one pool and reports the same numbers here. Only the current period is available, past usage is
+// not kept.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/limits (the `ReachGetRemainingPlanLimitsV1` operationId).
+func (c *ClientWithResponses) ReachGetRemainingPlanLimitsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachGetRemainingPlanLimitsV1Response, error) {
+	rsp, err := c.ReachGetRemainingPlanLimitsV1(ctx, profileUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachGetRemainingPlanLimitsV1Response(rsp)
 }
 
 // ReachListProfileSegmentsV1WithResponse List profile segments
@@ -87740,6 +88708,177 @@ func ParseReachGetProfileDomainDNSStatusV1Response(rsp *http.Response) (*ReachGe
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest ReachV1ProfilesDomainsDnsStatusResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachListFormsV1Response parses an HTTP response from a ReachListFormsV1WithResponse call
+func ParseReachListFormsV1Response(rsp *http.Response) (*ReachListFormsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachListFormsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			// Data Array of [`Reach.V1.Forms.FormResource`](#model/reachv1formsformresource)
+			Data *ReachV1FormsFormCollection       `json:"data,omitempty"`
+			Meta *CommonSchemaPaginationMetaSchema `json:"meta,omitempty"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachDeleteFormV1Response parses an HTTP response from a ReachDeleteFormV1WithResponse call
+func ParseReachDeleteFormV1Response(rsp *http.Response) (*ReachDeleteFormV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachDeleteFormV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachGetFormDetailsV1Response parses an HTTP response from a ReachGetFormDetailsV1WithResponse call
+func ParseReachGetFormDetailsV1Response(rsp *http.Response) (*ReachGetFormDetailsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachGetFormDetailsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1FormsFormDetailsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachGetRemainingPlanLimitsV1Response parses an HTTP response from a ReachGetRemainingPlanLimitsV1WithResponse call
+func ParseReachGetRemainingPlanLimitsV1Response(rsp *http.Response) (*ReachGetRemainingPlanLimitsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachGetRemainingPlanLimitsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1ProfilesPlanLimitsResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

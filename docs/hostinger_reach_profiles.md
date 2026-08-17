@@ -20,4 +20,5 @@ Profiles commands
 * [hostinger reach](hostinger_reach.md)	 - Reach commands
 * [hostinger reach profiles domain-dns-status](hostinger_reach_profiles_domain-dns-status.md)	 - Get profile domain DNS status
 * [hostinger reach profiles list](hostinger_reach_profiles_list.md)	 - List Profiles
+* [hostinger reach profiles remaining-plan-limits](hostinger_reach_profiles_remaining-plan-limits.md)	 - Get remaining plan limits
 

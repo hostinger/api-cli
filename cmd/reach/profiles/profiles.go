@@ -12,4 +12,5 @@ var GroupCmd = &cobra.Command{
 func init() {
 	GroupCmd.AddCommand(DomainDnsStatusCmd)
 	GroupCmd.AddCommand(ListCmd)
+	GroupCmd.AddCommand(RemainingPlanLimitsCmd)
 }
