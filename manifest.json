@@ -1449,6 +1449,11 @@
     "method": "DELETE",
     "path": "/api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}"
   },
+  "reach_getAutomationDetailsV1": {
+    "command": "hostinger reach automations get",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/automations/{automationUuid}"
+  },
   "reach_getContactDetailsV1": {
     "command": "hostinger reach contacts get",
     "method": "GET",
@@ -1468,6 +1473,16 @@
     "command": "hostinger reach segments get",
     "method": "GET",
     "path": "/api/reach/v1/segmentation/segments/{segmentUuid}"
+  },
+  "reach_listAutomationStepsV1": {
+    "command": "hostinger reach automations list-steps",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/automations/{automationUuid}/steps"
+  },
+  "reach_listAutomationsV1": {
+    "command": "hostinger reach automations list",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/automations"
   },
   "reach_listContactFieldsV1": {
     "command": "hostinger reach contact-fields list",

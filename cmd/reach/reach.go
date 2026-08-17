@@ -1,6 +1,7 @@
 package reach
 
 import (
+	"github.com/hostinger/api-cli/cmd/reach/automations"
 	"github.com/hostinger/api-cli/cmd/reach/contact_fields"
 	"github.com/hostinger/api-cli/cmd/reach/contacts"
 	"github.com/hostinger/api-cli/cmd/reach/profiles"
@@ -16,6 +17,7 @@ var GroupCmd = &cobra.Command{
 }
 
 func init() {
+	GroupCmd.AddCommand(automations.GroupCmd)
 	GroupCmd.AddCommand(contact_fields.GroupCmd)
 	GroupCmd.AddCommand(contacts.GroupCmd)
 	GroupCmd.AddCommand(profiles.GroupCmd)

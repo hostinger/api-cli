@@ -1362,6 +1362,135 @@ func (e MailV1WebhooksWebhookSecretResourceStatus) Valid() bool {
 	}
 }
 
+// Defines values for ReachV1AutomationsAutomationResourceStatus.
+const (
+	ReachV1AutomationsAutomationResourceStatusActive ReachV1AutomationsAutomationResourceStatus = "active"
+	ReachV1AutomationsAutomationResourceStatusDraft  ReachV1AutomationsAutomationResourceStatus = "draft"
+	ReachV1AutomationsAutomationResourceStatusPaused ReachV1AutomationsAutomationResourceStatus = "paused"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1AutomationsAutomationResourceStatus enum.
+func (e ReachV1AutomationsAutomationResourceStatus) Valid() bool {
+	switch e {
+	case ReachV1AutomationsAutomationResourceStatusActive:
+		return true
+	case ReachV1AutomationsAutomationResourceStatusDraft:
+		return true
+	case ReachV1AutomationsAutomationResourceStatusPaused:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1AutomationsAutomationResourceType.
+const (
+	ReachV1AutomationsAutomationResourceTypeCustom                          ReachV1AutomationsAutomationResourceType = "custom"
+	ReachV1AutomationsAutomationResourceTypeEcommerceAbandonedCart          ReachV1AutomationsAutomationResourceType = "ecommerce_abandoned_cart"
+	ReachV1AutomationsAutomationResourceTypeEcommerceDiscountAfterPurchase  ReachV1AutomationsAutomationResourceType = "ecommerce_discount_after_purchase"
+	ReachV1AutomationsAutomationResourceTypeEcommercePostPurchase           ReachV1AutomationsAutomationResourceType = "ecommerce_post_purchase"
+	ReachV1AutomationsAutomationResourceTypeEcommerceRecommendAfterPurchase ReachV1AutomationsAutomationResourceType = "ecommerce_recommend_after_purchase"
+	ReachV1AutomationsAutomationResourceTypeFormSubmitted                   ReachV1AutomationsAutomationResourceType = "form_submitted"
+	ReachV1AutomationsAutomationResourceTypePromotionalSeries               ReachV1AutomationsAutomationResourceType = "promotional_series"
+	ReachV1AutomationsAutomationResourceTypeReEngagementNonClickers         ReachV1AutomationsAutomationResourceType = "re_engagement_non_clickers"
+	ReachV1AutomationsAutomationResourceTypeReEngagementNonOpeners          ReachV1AutomationsAutomationResourceType = "re_engagement_non_openers"
+	ReachV1AutomationsAutomationResourceTypeTrustBuildingSeries             ReachV1AutomationsAutomationResourceType = "trust_building_series"
+	ReachV1AutomationsAutomationResourceTypeWelcome                         ReachV1AutomationsAutomationResourceType = "welcome"
+	ReachV1AutomationsAutomationResourceTypeWelcomeSeries                   ReachV1AutomationsAutomationResourceType = "welcome_series"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1AutomationsAutomationResourceType enum.
+func (e ReachV1AutomationsAutomationResourceType) Valid() bool {
+	switch e {
+	case ReachV1AutomationsAutomationResourceTypeCustom:
+		return true
+	case ReachV1AutomationsAutomationResourceTypeEcommerceAbandonedCart:
+		return true
+	case ReachV1AutomationsAutomationResourceTypeEcommerceDiscountAfterPurchase:
+		return true
+	case ReachV1AutomationsAutomationResourceTypeEcommercePostPurchase:
+		return true
+	case ReachV1AutomationsAutomationResourceTypeEcommerceRecommendAfterPurchase:
+		return true
+	case ReachV1AutomationsAutomationResourceTypeFormSubmitted:
+		return true
+	case ReachV1AutomationsAutomationResourceTypePromotionalSeries:
+		return true
+	case ReachV1AutomationsAutomationResourceTypeReEngagementNonClickers:
+		return true
+	case ReachV1AutomationsAutomationResourceTypeReEngagementNonOpeners:
+		return true
+	case ReachV1AutomationsAutomationResourceTypeTrustBuildingSeries:
+		return true
+	case ReachV1AutomationsAutomationResourceTypeWelcome:
+		return true
+	case ReachV1AutomationsAutomationResourceTypeWelcomeSeries:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1AutomationsStepsAutomationStepResourceType.
+const (
+	Action      ReachV1AutomationsStepsAutomationStepResourceType = "action"
+	Conditional ReachV1AutomationsStepsAutomationStepResourceType = "conditional"
+	Trigger     ReachV1AutomationsStepsAutomationStepResourceType = "trigger"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1AutomationsStepsAutomationStepResourceType enum.
+func (e ReachV1AutomationsStepsAutomationStepResourceType) Valid() bool {
+	switch e {
+	case Action:
+		return true
+	case Conditional:
+		return true
+	case Trigger:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1AutomationsStepsAutomationStepResourceValue.
+const (
+	ReachV1AutomationsStepsAutomationStepResourceValueDecision          ReachV1AutomationsStepsAutomationStepResourceValue = "decision"
+	ReachV1AutomationsStepsAutomationStepResourceValueDelay             ReachV1AutomationsStepsAutomationStepResourceValue = "delay"
+	ReachV1AutomationsStepsAutomationStepResourceValueFormSubmitted     ReachV1AutomationsStepsAutomationStepResourceValue = "form_submitted"
+	ReachV1AutomationsStepsAutomationStepResourceValueNewContact        ReachV1AutomationsStepsAutomationStepResourceValue = "new_contact"
+	ReachV1AutomationsStepsAutomationStepResourceValueNewSegmentContact ReachV1AutomationsStepsAutomationStepResourceValue = "new_segment_contact"
+	ReachV1AutomationsStepsAutomationStepResourceValueSendCampaign      ReachV1AutomationsStepsAutomationStepResourceValue = "send_campaign"
+	ReachV1AutomationsStepsAutomationStepResourceValueSendEmail         ReachV1AutomationsStepsAutomationStepResourceValue = "send_email"
+	ReachV1AutomationsStepsAutomationStepResourceValueSendWelcomeEmail  ReachV1AutomationsStepsAutomationStepResourceValue = "send_welcome_email"
+	ReachV1AutomationsStepsAutomationStepResourceValueWebhook           ReachV1AutomationsStepsAutomationStepResourceValue = "webhook"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1AutomationsStepsAutomationStepResourceValue enum.
+func (e ReachV1AutomationsStepsAutomationStepResourceValue) Valid() bool {
+	switch e {
+	case ReachV1AutomationsStepsAutomationStepResourceValueDecision:
+		return true
+	case ReachV1AutomationsStepsAutomationStepResourceValueDelay:
+		return true
+	case ReachV1AutomationsStepsAutomationStepResourceValueFormSubmitted:
+		return true
+	case ReachV1AutomationsStepsAutomationStepResourceValueNewContact:
+		return true
+	case ReachV1AutomationsStepsAutomationStepResourceValueNewSegmentContact:
+		return true
+	case ReachV1AutomationsStepsAutomationStepResourceValueSendCampaign:
+		return true
+	case ReachV1AutomationsStepsAutomationStepResourceValueSendEmail:
+		return true
+	case ReachV1AutomationsStepsAutomationStepResourceValueSendWelcomeEmail:
+		return true
+	case ReachV1AutomationsStepsAutomationStepResourceValueWebhook:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for ReachV1ContactsContactDetailsResourceSource.
 const (
 	ReachV1ContactsContactDetailsResourceSourceApi      ReachV1ContactsContactDetailsResourceSource = "api"
@@ -2916,6 +3045,45 @@ func (e MailWebhookStatus) Valid() bool {
 	}
 }
 
+// Defines values for ReachAutomationSortDirection.
+const (
+	ReachAutomationSortDirectionAsc  ReachAutomationSortDirection = "asc"
+	ReachAutomationSortDirectionDesc ReachAutomationSortDirection = "desc"
+)
+
+// Valid indicates whether the value is a known member of the ReachAutomationSortDirection enum.
+func (e ReachAutomationSortDirection) Valid() bool {
+	switch e {
+	case ReachAutomationSortDirectionAsc:
+		return true
+	case ReachAutomationSortDirectionDesc:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachAutomationStatus.
+const (
+	ReachAutomationStatusActive ReachAutomationStatus = "active"
+	ReachAutomationStatusDraft  ReachAutomationStatus = "draft"
+	ReachAutomationStatusPaused ReachAutomationStatus = "paused"
+)
+
+// Valid indicates whether the value is a known member of the ReachAutomationStatus enum.
+func (e ReachAutomationStatus) Valid() bool {
+	switch e {
+	case ReachAutomationStatusActive:
+		return true
+	case ReachAutomationStatusDraft:
+		return true
+	case ReachAutomationStatusPaused:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for SubscriptionStatus.
 const (
 	SubscriptionStatusConfirmed    SubscriptionStatus = "confirmed"
@@ -3342,6 +3510,45 @@ func (e ReachListContactsV1ParamsSubscriptionStatus) Valid() bool {
 	case ReachListContactsV1ParamsSubscriptionStatusSubscribed:
 		return true
 	case ReachListContactsV1ParamsSubscriptionStatusUnsubscribed:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachListAutomationsV1ParamsStatus.
+const (
+	ReachListAutomationsV1ParamsStatusActive ReachListAutomationsV1ParamsStatus = "active"
+	ReachListAutomationsV1ParamsStatusDraft  ReachListAutomationsV1ParamsStatus = "draft"
+	ReachListAutomationsV1ParamsStatusPaused ReachListAutomationsV1ParamsStatus = "paused"
+)
+
+// Valid indicates whether the value is a known member of the ReachListAutomationsV1ParamsStatus enum.
+func (e ReachListAutomationsV1ParamsStatus) Valid() bool {
+	switch e {
+	case ReachListAutomationsV1ParamsStatusActive:
+		return true
+	case ReachListAutomationsV1ParamsStatusDraft:
+		return true
+	case ReachListAutomationsV1ParamsStatusPaused:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachListAutomationsV1ParamsSortDirection.
+const (
+	ReachListAutomationsV1ParamsSortDirectionAsc  ReachListAutomationsV1ParamsSortDirection = "asc"
+	ReachListAutomationsV1ParamsSortDirectionDesc ReachListAutomationsV1ParamsSortDirection = "desc"
+)
+
+// Valid indicates whether the value is a known member of the ReachListAutomationsV1ParamsSortDirection enum.
+func (e ReachListAutomationsV1ParamsSortDirection) Valid() bool {
+	switch e {
+	case ReachListAutomationsV1ParamsSortDirectionAsc:
+		return true
+	case ReachListAutomationsV1ParamsSortDirectionDesc:
 		return true
 	default:
 		return false
@@ -8080,6 +8287,121 @@ type MailV1WebhooksWebhookTestResultResource struct {
 	IsSuccessful *bool `json:"is_successful,omitempty"`
 }
 
+// ReachV1AutomationsAutomationCollection Array of [`Reach.V1.Automations.AutomationResource`](#model/reachv1automationsautomationresource)
+type ReachV1AutomationsAutomationCollection = []ReachV1AutomationsAutomationResource
+
+// ReachV1AutomationsAutomationEventsResource Counts of contacts moving through the automation.
+//
+// These are not email engagement metrics. Automations expose no sent, open or click counters -
+// use the campaign statistics endpoint for those.
+type ReachV1AutomationsAutomationEventsResource struct {
+	// Completed Contacts that reached the end of the workflow.
+	//
+	// Example: 4
+	Completed *int `json:"completed,omitempty"`
+
+	// Failed Contacts whose journey through the automation errored and stopped.
+	//
+	// Example: 1
+	Failed *int `json:"failed,omitempty"`
+
+	// InProgress Contacts currently moving through the automation, including those waiting on a delay step.
+	//
+	// Example: 5
+	InProgress *int `json:"in_progress,omitempty"`
+
+	// Started Contacts that ever entered the automation, including those that already left it.
+	//
+	// Example: 10
+	Started *int `json:"started,omitempty"`
+}
+
+// ReachV1AutomationsAutomationResource defines model for Reach.V1.Automations.AutomationResource.
+type ReachV1AutomationsAutomationResource struct {
+	// Config Trigger configuration of the automation. The shape depends on the type.
+	Config *map[string]interface{} `json:"config,omitempty"`
+
+	// CreatedAt Example: 2025-02-27T11:54:22Z
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Events Counts of contacts moving through the automation.
+	//
+	// These are not email engagement metrics. Automations expose no sent, open or click counters -
+	// use the campaign statistics endpoint for those.
+	Events *ReachV1AutomationsAutomationEventsResource `json:"events,omitempty"`
+
+	// Name Example: Welcome series
+	Name *string `json:"name,omitempty"`
+
+	// Status There is no `completed` status. Use `events.completed` to see how many contacts finished.
+	//
+	// Example: active
+	Status *ReachV1AutomationsAutomationResourceStatus `json:"status,omitempty"`
+
+	// Type What kind of workflow this is. `custom` automations are the ones built from scratch.
+	//
+	// Example: welcome_series
+	Type *ReachV1AutomationsAutomationResourceType `json:"type,omitempty"`
+
+	// UpdatedAt Example: 2025-03-04T09:12:07Z
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+
+	// Uuid Example: 550e8400-e29b-41d4-a716-446655440000
+	Uuid *string `json:"uuid,omitempty"`
+}
+
+// ReachV1AutomationsAutomationResourceStatus There is no `completed` status. Use `events.completed` to see how many contacts finished.
+//
+// Example: active
+type ReachV1AutomationsAutomationResourceStatus string
+
+// ReachV1AutomationsAutomationResourceType What kind of workflow this is. `custom` automations are the ones built from scratch.
+//
+// Example: welcome_series
+type ReachV1AutomationsAutomationResourceType string
+
+// ReachV1AutomationsStepsAutomationStepCollection Array of [`Reach.V1.Automations.Steps.AutomationStepResource`](#model/reachv1automationsstepsautomationstepresource)
+type ReachV1AutomationsStepsAutomationStepCollection = []ReachV1AutomationsStepsAutomationStepResource
+
+// ReachV1AutomationsStepsAutomationStepResource defines model for Reach.V1.Automations.Steps.AutomationStepResource.
+type ReachV1AutomationsStepsAutomationStepResource struct {
+	// Config Step configuration. The shape depends on the value, and is empty for steps that take none.
+	Config *map[string]interface{} `json:"config,omitempty"`
+
+	// ParentUuid The step this one branches from. Null for the entry point of the workflow.
+	//
+	// Example: 2080cc86-e026-4f7b-9598-d4132f8c7c2f
+	ParentUuid *string `json:"parent_uuid,omitempty"`
+
+	// StepOrder Position of this step among the steps sharing its parent.
+	//
+	// Example: 1
+	StepOrder *int `json:"step_order,omitempty"`
+
+	// Type Role of the step in the workflow. A `conditional` step branches into several children.
+	//
+	// Example: action
+	Type *ReachV1AutomationsStepsAutomationStepResourceType `json:"type,omitempty"`
+
+	// Uuid Example: 550e8400-e29b-41d4-a716-446655440000
+	Uuid *string `json:"uuid,omitempty"`
+
+	// Value The concrete trigger, action, decision or delay this step performs.
+	//
+	// Example: send_email
+	Value *ReachV1AutomationsStepsAutomationStepResourceValue `json:"value,omitempty"`
+}
+
+// ReachV1AutomationsStepsAutomationStepResourceType Role of the step in the workflow. A `conditional` step branches into several children.
+//
+// Example: action
+type ReachV1AutomationsStepsAutomationStepResourceType string
+
+// ReachV1AutomationsStepsAutomationStepResourceValue The concrete trigger, action, decision or delay this step performs.
+//
+// Example: send_email
+type ReachV1AutomationsStepsAutomationStepResourceValue string
+
 // ReachV1ContactsBulkStoreRequest Create many contacts in one call
 type ReachV1ContactsBulkStoreRequest struct {
 	Contacts []struct {
@@ -10550,6 +10872,9 @@ type AgencyDatabaseNamePath = string
 // AgencyDatabaseUserNamePath Example: my_user
 type AgencyDatabaseUserNamePath = string
 
+// AutomationUuid Example: 550e8400-e09b-41d4-a716-400055000000
+type AutomationUuid = string
+
 // BackupId Example: 8676502
 type BackupId = int
 
@@ -10729,6 +11054,12 @@ type ProjectName = string
 
 // PublicKeyId Example: 6672861
 type PublicKeyId = int
+
+// ReachAutomationSortDirection Example: desc
+type ReachAutomationSortDirection string
+
+// ReachAutomationStatus Example: active
+type ReachAutomationStatus string
 
 // RuleId Example: 8941182
 type RuleId = int
@@ -11410,6 +11741,30 @@ type ReachListContactsV1Params struct {
 
 // ReachListContactsV1ParamsSubscriptionStatus defines parameters for ReachListContactsV1.
 type ReachListContactsV1ParamsSubscriptionStatus string
+
+// ReachListAutomationsV1Params defines parameters for ReachListAutomationsV1.
+type ReachListAutomationsV1Params struct {
+	// Status Filter automations by status.
+	//
+	// There is no `completed` status. An automation that has finished for every contact still
+	// reports `active`.
+	Status *ReachListAutomationsV1ParamsStatus `form:"status,omitempty" json:"status,omitempty"`
+
+	// SortDirection Order automations by creation date. Newest first unless set to `asc`.
+	SortDirection *ReachListAutomationsV1ParamsSortDirection `form:"sort_direction,omitempty" json:"sort_direction,omitempty"`
+
+	// Page Page number
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+
+	// PerPage Number of items per page
+	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
+}
+
+// ReachListAutomationsV1ParamsStatus defines parameters for ReachListAutomationsV1.
+type ReachListAutomationsV1ParamsStatus string
+
+// ReachListAutomationsV1ParamsSortDirection defines parameters for ReachListAutomationsV1.
+type ReachListAutomationsV1ParamsSortDirection string
 
 // ReachListProfileContactsV1Params defines parameters for ReachListProfileContactsV1.
 type ReachListProfileContactsV1Params struct {
@@ -16510,6 +16865,39 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/reach/v1/profiles (the `ReachListProfilesV1` operationId).
 	ReachListProfilesV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachListAutomationsV1 List automations
+	//
+	// Get a paginated list of the automations in a profile.
+	//
+	// Every automation comes with the counts of contacts that entered it, are moving through it,
+	// finished it or failed on the way. Those counts describe the contact journey and are not
+	// email engagement metrics - for opens, clicks and unsubscribes use the campaign statistics
+	// endpoint instead.
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/automations (the `ReachListAutomationsV1` operationId).
+	ReachListAutomationsV1(ctx context.Context, profileUuid ProfileUuid, params *ReachListAutomationsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachGetAutomationDetailsV1 Get automation details
+	//
+	// Get a single automation with the counts of contacts that entered it, are moving through it,
+	// finished it or failed on the way.
+	//
+	// This describes the automation itself. To see the workflow it runs, use the steps endpoint.
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/automations/{automationUuid} (the `ReachGetAutomationDetailsV1` operationId).
+	ReachGetAutomationDetailsV1(ctx context.Context, profileUuid ProfileUuid, automationUuid AutomationUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachListAutomationStepsV1 List automation steps
+	//
+	// Get the workflow of an automation as a flat list of steps.
+	//
+	// The steps form a tree rather than a straight line: follow `parent_uuid` to reconstruct the
+	// branches, and use `step_order` to order the steps that share a parent. An automation with no
+	// steps yet returns an empty list.
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/automations/{automationUuid}/steps (the `ReachListAutomationStepsV1` operationId).
+	ReachListAutomationStepsV1(ctx context.Context, profileUuid ProfileUuid, automationUuid AutomationUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReachListProfileContactsV1 List profile contacts
 	//
@@ -24726,6 +25114,69 @@ func (c *Client) ReachDeleteAContactV1(ctx context.Context, uuid Uuid, reqEditor
 // Corresponds with GET /api/reach/v1/profiles (the `ReachListProfilesV1` operationId).
 func (c *Client) ReachListProfilesV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReachListProfilesV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachListAutomationsV1 List automations
+//
+// Get a paginated list of the automations in a profile.
+//
+// Every automation comes with the counts of contacts that entered it, are moving through it,
+// finished it or failed on the way. Those counts describe the contact journey and are not
+// email engagement metrics - for opens, clicks and unsubscribes use the campaign statistics
+// endpoint instead.
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/automations (the `ReachListAutomationsV1` operationId).
+func (c *Client) ReachListAutomationsV1(ctx context.Context, profileUuid ProfileUuid, params *ReachListAutomationsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachListAutomationsV1Request(c.Server, profileUuid, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachGetAutomationDetailsV1 Get automation details
+//
+// Get a single automation with the counts of contacts that entered it, are moving through it,
+// finished it or failed on the way.
+//
+// This describes the automation itself. To see the workflow it runs, use the steps endpoint.
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/automations/{automationUuid} (the `ReachGetAutomationDetailsV1` operationId).
+func (c *Client) ReachGetAutomationDetailsV1(ctx context.Context, profileUuid ProfileUuid, automationUuid AutomationUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachGetAutomationDetailsV1Request(c.Server, profileUuid, automationUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachListAutomationStepsV1 List automation steps
+//
+// Get the workflow of an automation as a flat list of steps.
+//
+// The steps form a tree rather than a straight line: follow `parent_uuid` to reconstruct the
+// branches, and use `step_order` to order the steps that share a parent. An automation with no
+// steps yet returns an empty list.
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/automations/{automationUuid}/steps (the `ReachListAutomationStepsV1` operationId).
+func (c *Client) ReachListAutomationStepsV1(ctx context.Context, profileUuid ProfileUuid, automationUuid AutomationUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachListAutomationStepsV1Request(c.Server, profileUuid, automationUuid)
 	if err != nil {
 		return nil, err
 	}
@@ -38323,6 +38774,185 @@ func NewReachListProfilesV1Request(server string) (*http.Request, error) {
 	return req, nil
 }
 
+// NewReachListAutomationsV1Request constructs an http.Request for the ReachListAutomationsV1 method
+func NewReachListAutomationsV1Request(server string, profileUuid ProfileUuid, params *ReachListAutomationsV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/automations", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Status != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "status", *params.Status, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.SortDirection != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort_direction", *params.SortDirection, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Page != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page", *params.Page, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PerPage != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "per_page", *params.PerPage, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachGetAutomationDetailsV1Request constructs an http.Request for the ReachGetAutomationDetailsV1 method
+func NewReachGetAutomationDetailsV1Request(server string, profileUuid ProfileUuid, automationUuid AutomationUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "automationUuid", automationUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/automations/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachListAutomationStepsV1Request constructs an http.Request for the ReachListAutomationStepsV1 method
+func NewReachListAutomationStepsV1Request(server string, profileUuid ProfileUuid, automationUuid AutomationUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "automationUuid", automationUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/automations/%s/steps", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewReachListProfileContactsV1Request constructs an http.Request for the ReachListProfileContactsV1 method
 func NewReachListProfileContactsV1Request(server string, profileUuid ProfileUuid, params *ReachListProfileContactsV1Params) (*http.Request, error) {
 	var err error
@@ -46461,6 +47091,45 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with GET /api/reach/v1/profiles (the `ReachListProfilesV1` operationId).
 	ReachListProfilesV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*ReachListProfilesV1Response, error)
+
+	// ReachListAutomationsV1WithResponse List automations
+	//
+	// Get a paginated list of the automations in a profile.
+	//
+	// Every automation comes with the counts of contacts that entered it, are moving through it,
+	// finished it or failed on the way. Those counts describe the contact journey and are not
+	// email engagement metrics - for opens, clicks and unsubscribes use the campaign statistics
+	// endpoint instead.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/automations (the `ReachListAutomationsV1` operationId).
+	ReachListAutomationsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, params *ReachListAutomationsV1Params, reqEditors ...RequestEditorFn) (*ReachListAutomationsV1Response, error)
+
+	// ReachGetAutomationDetailsV1WithResponse Get automation details
+	//
+	// Get a single automation with the counts of contacts that entered it, are moving through it,
+	// finished it or failed on the way.
+	//
+	// This describes the automation itself. To see the workflow it runs, use the steps endpoint.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/automations/{automationUuid} (the `ReachGetAutomationDetailsV1` operationId).
+	ReachGetAutomationDetailsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, automationUuid AutomationUuid, reqEditors ...RequestEditorFn) (*ReachGetAutomationDetailsV1Response, error)
+
+	// ReachListAutomationStepsV1WithResponse List automation steps
+	//
+	// Get the workflow of an automation as a flat list of steps.
+	//
+	// The steps form a tree rather than a straight line: follow `parent_uuid` to reconstruct the
+	// branches, and use `step_order` to order the steps that share a parent. An automation with no
+	// steps yet returns an empty list.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/automations/{automationUuid}/steps (the `ReachListAutomationStepsV1` operationId).
+	ReachListAutomationStepsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, automationUuid AutomationUuid, reqEditors ...RequestEditorFn) (*ReachListAutomationStepsV1Response, error)
 
 	// ReachListProfileContactsV1WithResponse List profile contacts
 	//
@@ -61431,6 +62100,179 @@ func (r ReachListProfilesV1Response) ContentType() string {
 	return ""
 }
 
+type ReachListAutomationsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *struct {
+		// Data Array of [`Reach.V1.Automations.AutomationResource`](#model/reachv1automationsautomationresource)
+		Data *ReachV1AutomationsAutomationCollection `json:"data,omitempty"`
+		Meta *CommonSchemaPaginationMetaSchema       `json:"meta,omitempty"`
+	}
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachListAutomationsV1Response) GetJSON200() *struct {
+	// Data Array of [`Reach.V1.Automations.AutomationResource`](#model/reachv1automationsautomationresource)
+	Data *ReachV1AutomationsAutomationCollection `json:"data,omitempty"`
+	Meta *CommonSchemaPaginationMetaSchema       `json:"meta,omitempty"`
+} {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachListAutomationsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachListAutomationsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachListAutomationsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachListAutomationsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachListAutomationsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachListAutomationsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachGetAutomationDetailsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1AutomationsAutomationResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachGetAutomationDetailsV1Response) GetJSON200() *ReachV1AutomationsAutomationResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachGetAutomationDetailsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachGetAutomationDetailsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachGetAutomationDetailsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachGetAutomationDetailsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachGetAutomationDetailsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachGetAutomationDetailsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachListAutomationStepsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1AutomationsStepsAutomationStepCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachListAutomationStepsV1Response) GetJSON200() *ReachV1AutomationsStepsAutomationStepCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachListAutomationStepsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachListAutomationStepsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachListAutomationStepsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachListAutomationStepsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachListAutomationStepsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachListAutomationStepsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type ReachListProfileContactsV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -72725,6 +73567,63 @@ func (c *ClientWithResponses) ReachListProfilesV1WithResponse(ctx context.Contex
 		return nil, err
 	}
 	return ParseReachListProfilesV1Response(rsp)
+}
+
+// ReachListAutomationsV1WithResponse List automations
+//
+// Get a paginated list of the automations in a profile.
+//
+// Every automation comes with the counts of contacts that entered it, are moving through it,
+// finished it or failed on the way. Those counts describe the contact journey and are not
+// email engagement metrics - for opens, clicks and unsubscribes use the campaign statistics
+// endpoint instead.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/automations (the `ReachListAutomationsV1` operationId).
+func (c *ClientWithResponses) ReachListAutomationsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, params *ReachListAutomationsV1Params, reqEditors ...RequestEditorFn) (*ReachListAutomationsV1Response, error) {
+	rsp, err := c.ReachListAutomationsV1(ctx, profileUuid, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachListAutomationsV1Response(rsp)
+}
+
+// ReachGetAutomationDetailsV1WithResponse Get automation details
+//
+// Get a single automation with the counts of contacts that entered it, are moving through it,
+// finished it or failed on the way.
+//
+// This describes the automation itself. To see the workflow it runs, use the steps endpoint.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/automations/{automationUuid} (the `ReachGetAutomationDetailsV1` operationId).
+func (c *ClientWithResponses) ReachGetAutomationDetailsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, automationUuid AutomationUuid, reqEditors ...RequestEditorFn) (*ReachGetAutomationDetailsV1Response, error) {
+	rsp, err := c.ReachGetAutomationDetailsV1(ctx, profileUuid, automationUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachGetAutomationDetailsV1Response(rsp)
+}
+
+// ReachListAutomationStepsV1WithResponse List automation steps
+//
+// Get the workflow of an automation as a flat list of steps.
+//
+// The steps form a tree rather than a straight line: follow `parent_uuid` to reconstruct the
+// branches, and use `step_order` to order the steps that share a parent. An automation with no
+// steps yet returns an empty list.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/automations/{automationUuid}/steps (the `ReachListAutomationStepsV1` operationId).
+func (c *ClientWithResponses) ReachListAutomationStepsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, automationUuid AutomationUuid, reqEditors ...RequestEditorFn) (*ReachListAutomationStepsV1Response, error) {
+	rsp, err := c.ReachListAutomationStepsV1(ctx, profileUuid, automationUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachListAutomationStepsV1Response(rsp)
 }
 
 // ReachListProfileContactsV1WithResponse List profile contacts
@@ -85042,6 +85941,130 @@ func ParseReachListProfilesV1Response(rsp *http.Response) (*ReachListProfilesV1R
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest ReachV1ProfilesProfileCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachListAutomationsV1Response parses an HTTP response from a ReachListAutomationsV1WithResponse call
+func ParseReachListAutomationsV1Response(rsp *http.Response) (*ReachListAutomationsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachListAutomationsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			// Data Array of [`Reach.V1.Automations.AutomationResource`](#model/reachv1automationsautomationresource)
+			Data *ReachV1AutomationsAutomationCollection `json:"data,omitempty"`
+			Meta *CommonSchemaPaginationMetaSchema       `json:"meta,omitempty"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachGetAutomationDetailsV1Response parses an HTTP response from a ReachGetAutomationDetailsV1WithResponse call
+func ParseReachGetAutomationDetailsV1Response(rsp *http.Response) (*ReachGetAutomationDetailsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachGetAutomationDetailsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1AutomationsAutomationResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachListAutomationStepsV1Response parses an HTTP response from a ReachListAutomationStepsV1WithResponse call
+func ParseReachListAutomationStepsV1Response(rsp *http.Response) (*ReachListAutomationStepsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachListAutomationStepsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1AutomationsStepsAutomationStepCollection
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
