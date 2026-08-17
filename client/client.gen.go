@@ -18,6 +18,45 @@ import (
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
+// Defines values for AgencyHostingV1PhpExtensionResourceState.
+const (
+	AgencyHostingV1PhpExtensionResourceStateBuiltIn  AgencyHostingV1PhpExtensionResourceState = "built-in"
+	AgencyHostingV1PhpExtensionResourceStateDisabled AgencyHostingV1PhpExtensionResourceState = "disabled"
+	AgencyHostingV1PhpExtensionResourceStateEnabled  AgencyHostingV1PhpExtensionResourceState = "enabled"
+)
+
+// Valid indicates whether the value is a known member of the AgencyHostingV1PhpExtensionResourceState enum.
+func (e AgencyHostingV1PhpExtensionResourceState) Valid() bool {
+	switch e {
+	case AgencyHostingV1PhpExtensionResourceStateBuiltIn:
+		return true
+	case AgencyHostingV1PhpExtensionResourceStateDisabled:
+		return true
+	case AgencyHostingV1PhpExtensionResourceStateEnabled:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AgencyHostingV1PhpOptionResourceType.
+const (
+	List  AgencyHostingV1PhpOptionResourceType = "list"
+	Value AgencyHostingV1PhpOptionResourceType = "value"
+)
+
+// Valid indicates whether the value is a known member of the AgencyHostingV1PhpOptionResourceType enum.
+func (e AgencyHostingV1PhpOptionResourceType) Valid() bool {
+	switch e {
+	case List:
+		return true
+	case Value:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for AgencyHostingV1SetupsCreateSetupRequestType.
 const (
 	AgencyHostingV1SetupsCreateSetupRequestTypeHorizons   AgencyHostingV1SetupsCreateSetupRequestType = "horizons"
@@ -4134,6 +4173,116 @@ type AgencyHostingV1OrdersPlanResource struct {
 	//
 	// Example: Shared Business hosting
 	Name *string `json:"name,omitempty"`
+}
+
+// AgencyHostingV1PhpExtensionCollection Array of [`AgencyHosting.V1.Php.ExtensionResource`](#model/agencyhostingv1phpextensionresource)
+type AgencyHostingV1PhpExtensionCollection = []AgencyHostingV1PhpExtensionResource
+
+// AgencyHostingV1PhpExtensionResource defines model for AgencyHosting.V1.Php.ExtensionResource.
+type AgencyHostingV1PhpExtensionResource struct {
+	// Description What the extension provides.
+	//
+	// Example: Lets PHP read and write compressed ZIP archives.
+	Description *string `json:"description,omitempty"`
+
+	// Name PHP extension name.
+	//
+	// Example: zip
+	Name *string `json:"name,omitempty"`
+
+	// State Whether the extension is currently enabled. Extensions in the "built-in" state are compiled into PHP and cannot be turned off.
+	//
+	// Example: enabled
+	State *AgencyHostingV1PhpExtensionResourceState `json:"state,omitempty"`
+}
+
+// AgencyHostingV1PhpExtensionResourceState Whether the extension is currently enabled. Extensions in the "built-in" state are compiled into PHP and cannot be turned off.
+//
+// Example: enabled
+type AgencyHostingV1PhpExtensionResourceState string
+
+// AgencyHostingV1PhpOptionCollection Array of [`AgencyHosting.V1.Php.OptionResource`](#model/agencyhostingv1phpoptionresource)
+type AgencyHostingV1PhpOptionCollection = []AgencyHostingV1PhpOptionResource
+
+// AgencyHostingV1PhpOptionResource defines model for AgencyHosting.V1.Php.OptionResource.
+type AgencyHostingV1PhpOptionResource struct {
+	// AllowedValues Values this option accepts. Null when the option accepts any value of its type.
+	//
+	// Example: ["128M","256M","512M"]
+	AllowedValues *[]string `json:"allowed_values,omitempty"`
+
+	// DefaultValue Value applied when no custom value is set.
+	//
+	// Example: 128M
+	DefaultValue *string `json:"default_value,omitempty"`
+
+	// Description What the directive controls.
+	//
+	// Example: The maximum size in bytes of an uploaded file.
+	Description *string `json:"description,omitempty"`
+
+	// Name php.ini directive name.
+	//
+	// Example: upload_max_filesize
+	Name *string `json:"name,omitempty"`
+
+	// Type Whether the option takes a single value or a list of values.
+	//
+	// Example: value
+	Type *AgencyHostingV1PhpOptionResourceType `json:"type,omitempty"`
+
+	// Value Value currently in effect for the website.
+	//
+	// Example: 256M
+	Value *string `json:"value,omitempty"`
+}
+
+// AgencyHostingV1PhpOptionResourceType Whether the option takes a single value or a list of values.
+//
+// Example: value
+type AgencyHostingV1PhpOptionResourceType string
+
+// AgencyHostingV1PhpUpdateExtensionsRequest defines model for AgencyHosting.V1.Php.UpdateExtensionsRequest.
+type AgencyHostingV1PhpUpdateExtensionsRequest struct {
+	// Extensions Extension names, exactly as returned by the extensions endpoint.
+	//
+	// Example: ["bz2","zip"]
+	Extensions []string `json:"extensions"`
+}
+
+// AgencyHostingV1PhpUpdateOptionsRequest defines model for AgencyHosting.V1.Php.UpdateOptionsRequest.
+type AgencyHostingV1PhpUpdateOptionsRequest struct {
+	// Options Option names and values. Each name must be one of the options returned by the options endpoint, and each value must satisfy that option's allowed_values when it declares them.
+	Options []struct {
+		// Name php.ini directive name.
+		//
+		// Example: memory_limit
+		Name string `json:"name"`
+
+		// Value Value to apply.
+		//
+		// Example: 256M
+		Value string `json:"value"`
+	} `json:"options"`
+}
+
+// AgencyHostingV1PhpUpdateVersionRequest defines model for AgencyHosting.V1.Php.UpdateVersionRequest.
+type AgencyHostingV1PhpUpdateVersionRequest struct {
+	// Version PHP version to switch the website to, as major.minor. Must be one of the versions returned by the available versions endpoint.
+	//
+	// Example: 8.2
+	Version string `json:"version"`
+}
+
+// AgencyHostingV1PhpVersionCollection Array of [`AgencyHosting.V1.Php.VersionResource`](#model/agencyhostingv1phpversionresource)
+type AgencyHostingV1PhpVersionCollection = []AgencyHostingV1PhpVersionResource
+
+// AgencyHostingV1PhpVersionResource defines model for AgencyHosting.V1.Php.VersionResource.
+type AgencyHostingV1PhpVersionResource struct {
+	// Version PHP version available for the website.
+	//
+	// Example: 8.2
+	Version *string `json:"version,omitempty"`
 }
 
 // AgencyHostingV1SetupsCreateSetupRequest Create a new Agency Plan website setup on the given order
@@ -12751,6 +12900,15 @@ type AgencyHostingChangeWebsiteDomainV1JSONRequestBody = AgencyHostingV1DomainsC
 // AgencyHostingImportWebsiteFromArchiveV1JSONRequestBody defines body for AgencyHostingImportWebsiteFromArchiveV1 for application/json ContentType.
 type AgencyHostingImportWebsiteFromArchiveV1JSONRequestBody = AgencyHostingV1FilesImportArchiveRequest
 
+// AgencyHostingReplaceWebsitePHPExtensionsV1JSONRequestBody defines body for AgencyHostingReplaceWebsitePHPExtensionsV1 for application/json ContentType.
+type AgencyHostingReplaceWebsitePHPExtensionsV1JSONRequestBody = AgencyHostingV1PhpUpdateExtensionsRequest
+
+// AgencyHostingReplaceWebsitePHPOptionsV1JSONRequestBody defines body for AgencyHostingReplaceWebsitePHPOptionsV1 for application/json ContentType.
+type AgencyHostingReplaceWebsitePHPOptionsV1JSONRequestBody = AgencyHostingV1PhpUpdateOptionsRequest
+
+// AgencyHostingUpdateWebsitePHPVersionV1JSONRequestBody defines body for AgencyHostingUpdateWebsitePHPVersionV1 for application/json ContentType.
+type AgencyHostingUpdateWebsitePHPVersionV1JSONRequestBody = AgencyHostingV1PhpUpdateVersionRequest
+
 // AgencyHostingChangeWordPressVersionV1JSONRequestBody defines body for AgencyHostingChangeWordPressVersionV1 for application/json ContentType.
 type AgencyHostingChangeWordPressVersionV1JSONRequestBody = AgencyHostingV1WordPressChangeVersionRequest
 
@@ -14043,6 +14201,13 @@ type ClientInterface interface {
 	// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/datacenters (the `AgencyHostingListAvailableDatacentersV1` operationId).
 	AgencyHostingListAvailableDatacentersV1(ctx context.Context, orderId OrderIdPath, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// AgencyHostingListAvailablePHPVersionsForAnOrderV1 List available PHP versions for an order
+	//
+	// Lists the PHP versions available to websites created under an Agency Plan order, determined by the server the order is hosted on. Use this before creating a website; for a website that already exists, call the website-scoped versions endpoint instead.
+	//
+	// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/websites/php-settings/versions (the `AgencyHostingListAvailablePHPVersionsForAnOrderV1` operationId).
+	AgencyHostingListAvailablePHPVersionsForAnOrderV1(ctx context.Context, orderId OrderIdPath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// AgencyHostingCreateANewWebsiteV1WithBody Create a new website
 	//
 	// Provisions a new website on one of your Agency Plan hosting orders.
@@ -14345,6 +14510,81 @@ type ClientInterface interface {
 	//
 	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/import-archive (the `AgencyHostingImportWebsiteFromArchiveV1` operationId).
 	AgencyHostingImportWebsiteFromArchiveV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingImportWebsiteFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingListPHPExtensionsForAWebsiteV1 List PHP extensions for a website
+	//
+	// Lists every PHP extension available to an Agency Plan website and whether it is currently enabled.
+	//
+	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/php-settings/extensions (the `AgencyHostingListPHPExtensionsForAWebsiteV1` operationId).
+	AgencyHostingListPHPExtensionsForAWebsiteV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingReplaceWebsitePHPExtensionsV1WithBody Replace website PHP extensions
+	//
+	// Replaces the set of PHP extensions enabled on an Agency Plan website with the ones provided. Any toggleable extension not in the request is disabled, so call the extensions endpoint first and send the full desired set. Extensions compiled into PHP, reported with the "built-in" state, are always active and are unaffected.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/php-settings/extensions (the `AgencyHostingReplaceWebsitePHPExtensionsV1` operationId).
+	AgencyHostingReplaceWebsitePHPExtensionsV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingReplaceWebsitePHPExtensionsV1 Replace website PHP extensions
+	//
+	// Replaces the set of PHP extensions enabled on an Agency Plan website with the ones provided. Any toggleable extension not in the request is disabled, so call the extensions endpoint first and send the full desired set. Extensions compiled into PHP, reported with the "built-in" state, are always active and are unaffected.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/php-settings/extensions (the `AgencyHostingReplaceWebsitePHPExtensionsV1` operationId).
+	AgencyHostingReplaceWebsitePHPExtensionsV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingReplaceWebsitePHPExtensionsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingListPHPOptionsForAWebsiteV1 List PHP options for a website
+	//
+	// Lists the php.ini directives that can be configured for an Agency Plan website, each with its default, the value currently in effect, and the values it accepts.
+	//
+	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/php-settings/options (the `AgencyHostingListPHPOptionsForAWebsiteV1` operationId).
+	AgencyHostingListPHPOptionsForAWebsiteV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingReplaceWebsitePHPOptionsV1WithBody Replace website PHP options
+	//
+	// Replaces the custom php.ini values on an Agency Plan website with the ones provided. Any option not in the request is reset to its default, so call the options endpoint first and send the full desired set. Sending an empty array resets every option to its default.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/php-settings/options (the `AgencyHostingReplaceWebsitePHPOptionsV1` operationId).
+	AgencyHostingReplaceWebsitePHPOptionsV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingReplaceWebsitePHPOptionsV1 Replace website PHP options
+	//
+	// Replaces the custom php.ini values on an Agency Plan website with the ones provided. Any option not in the request is reset to its default, so call the options endpoint first and send the full desired set. Sending an empty array resets every option to its default.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/php-settings/options (the `AgencyHostingReplaceWebsitePHPOptionsV1` operationId).
+	AgencyHostingReplaceWebsitePHPOptionsV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingReplaceWebsitePHPOptionsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingUpdateWebsitePHPVersionV1WithBody Update website PHP version
+	//
+	// Switches an Agency Plan website to a different PHP version. Call the available versions endpoint first to see which versions can be selected. The website restarts on the new version, so requests served during the switch may fail and code that is incompatible with the target version will break.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PATCH /api/agency-hosting/v1/websites/{website_uid}/php-settings/version (the `AgencyHostingUpdateWebsitePHPVersionV1` operationId).
+	AgencyHostingUpdateWebsitePHPVersionV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingUpdateWebsitePHPVersionV1 Update website PHP version
+	//
+	// Switches an Agency Plan website to a different PHP version. Call the available versions endpoint first to see which versions can be selected. The website restarts on the new version, so requests served during the switch may fail and code that is incompatible with the target version will break.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PATCH /api/agency-hosting/v1/websites/{website_uid}/php-settings/version (the `AgencyHostingUpdateWebsitePHPVersionV1` operationId).
+	AgencyHostingUpdateWebsitePHPVersionV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingUpdateWebsitePHPVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingListAvailablePHPVersionsForAWebsiteV1 List available PHP versions for a website
+	//
+	// Lists the PHP versions an Agency Plan website can be switched to. The version the website is currently running is returned as settings.php.version by the website details endpoint.
+	//
+	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/php-settings/versions (the `AgencyHostingListAvailablePHPVersionsForAWebsiteV1` operationId).
+	AgencyHostingListAvailablePHPVersionsForAWebsiteV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// AgencyHostingListWebsiteProcessesV1 List website processes
 	//
@@ -19435,6 +19675,23 @@ func (c *Client) AgencyHostingListAvailableDatacentersV1(ctx context.Context, or
 	return c.Client.Do(req)
 }
 
+// AgencyHostingListAvailablePHPVersionsForAnOrderV1 List available PHP versions for an order
+//
+// Lists the PHP versions available to websites created under an Agency Plan order, determined by the server the order is hosted on. Use this before creating a website; for a website that already exists, call the website-scoped versions endpoint instead.
+//
+// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/websites/php-settings/versions (the `AgencyHostingListAvailablePHPVersionsForAnOrderV1` operationId).
+func (c *Client) AgencyHostingListAvailablePHPVersionsForAnOrderV1(ctx context.Context, orderId OrderIdPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingListAvailablePHPVersionsForAnOrderV1Request(c.Server, orderId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // AgencyHostingCreateANewWebsiteV1WithBody Create a new website
 //
 // Provisions a new website on one of your Agency Plan hosting orders.
@@ -19988,6 +20245,171 @@ func (c *Client) AgencyHostingImportWebsiteFromArchiveV1WithBody(ctx context.Con
 // Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/import-archive (the `AgencyHostingImportWebsiteFromArchiveV1` operationId).
 func (c *Client) AgencyHostingImportWebsiteFromArchiveV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingImportWebsiteFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewAgencyHostingImportWebsiteFromArchiveV1Request(c.Server, websiteUid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// AgencyHostingListPHPExtensionsForAWebsiteV1 List PHP extensions for a website
+//
+// Lists every PHP extension available to an Agency Plan website and whether it is currently enabled.
+//
+// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/php-settings/extensions (the `AgencyHostingListPHPExtensionsForAWebsiteV1` operationId).
+func (c *Client) AgencyHostingListPHPExtensionsForAWebsiteV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingListPHPExtensionsForAWebsiteV1Request(c.Server, websiteUid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// AgencyHostingReplaceWebsitePHPExtensionsV1WithBody Replace website PHP extensions
+//
+// Replaces the set of PHP extensions enabled on an Agency Plan website with the ones provided. Any toggleable extension not in the request is disabled, so call the extensions endpoint first and send the full desired set. Extensions compiled into PHP, reported with the "built-in" state, are always active and are unaffected.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/php-settings/extensions (the `AgencyHostingReplaceWebsitePHPExtensionsV1` operationId).
+func (c *Client) AgencyHostingReplaceWebsitePHPExtensionsV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingReplaceWebsitePHPExtensionsV1RequestWithBody(c.Server, websiteUid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// AgencyHostingReplaceWebsitePHPExtensionsV1 Replace website PHP extensions
+//
+// Replaces the set of PHP extensions enabled on an Agency Plan website with the ones provided. Any toggleable extension not in the request is disabled, so call the extensions endpoint first and send the full desired set. Extensions compiled into PHP, reported with the "built-in" state, are always active and are unaffected.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/php-settings/extensions (the `AgencyHostingReplaceWebsitePHPExtensionsV1` operationId).
+func (c *Client) AgencyHostingReplaceWebsitePHPExtensionsV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingReplaceWebsitePHPExtensionsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingReplaceWebsitePHPExtensionsV1Request(c.Server, websiteUid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// AgencyHostingListPHPOptionsForAWebsiteV1 List PHP options for a website
+//
+// Lists the php.ini directives that can be configured for an Agency Plan website, each with its default, the value currently in effect, and the values it accepts.
+//
+// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/php-settings/options (the `AgencyHostingListPHPOptionsForAWebsiteV1` operationId).
+func (c *Client) AgencyHostingListPHPOptionsForAWebsiteV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingListPHPOptionsForAWebsiteV1Request(c.Server, websiteUid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// AgencyHostingReplaceWebsitePHPOptionsV1WithBody Replace website PHP options
+//
+// Replaces the custom php.ini values on an Agency Plan website with the ones provided. Any option not in the request is reset to its default, so call the options endpoint first and send the full desired set. Sending an empty array resets every option to its default.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/php-settings/options (the `AgencyHostingReplaceWebsitePHPOptionsV1` operationId).
+func (c *Client) AgencyHostingReplaceWebsitePHPOptionsV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingReplaceWebsitePHPOptionsV1RequestWithBody(c.Server, websiteUid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// AgencyHostingReplaceWebsitePHPOptionsV1 Replace website PHP options
+//
+// Replaces the custom php.ini values on an Agency Plan website with the ones provided. Any option not in the request is reset to its default, so call the options endpoint first and send the full desired set. Sending an empty array resets every option to its default.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/php-settings/options (the `AgencyHostingReplaceWebsitePHPOptionsV1` operationId).
+func (c *Client) AgencyHostingReplaceWebsitePHPOptionsV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingReplaceWebsitePHPOptionsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingReplaceWebsitePHPOptionsV1Request(c.Server, websiteUid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// AgencyHostingUpdateWebsitePHPVersionV1WithBody Update website PHP version
+//
+// Switches an Agency Plan website to a different PHP version. Call the available versions endpoint first to see which versions can be selected. The website restarts on the new version, so requests served during the switch may fail and code that is incompatible with the target version will break.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PATCH /api/agency-hosting/v1/websites/{website_uid}/php-settings/version (the `AgencyHostingUpdateWebsitePHPVersionV1` operationId).
+func (c *Client) AgencyHostingUpdateWebsitePHPVersionV1WithBody(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingUpdateWebsitePHPVersionV1RequestWithBody(c.Server, websiteUid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// AgencyHostingUpdateWebsitePHPVersionV1 Update website PHP version
+//
+// Switches an Agency Plan website to a different PHP version. Call the available versions endpoint first to see which versions can be selected. The website restarts on the new version, so requests served during the switch may fail and code that is incompatible with the target version will break.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PATCH /api/agency-hosting/v1/websites/{website_uid}/php-settings/version (the `AgencyHostingUpdateWebsitePHPVersionV1` operationId).
+func (c *Client) AgencyHostingUpdateWebsitePHPVersionV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingUpdateWebsitePHPVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingUpdateWebsitePHPVersionV1Request(c.Server, websiteUid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// AgencyHostingListAvailablePHPVersionsForAWebsiteV1 List available PHP versions for a website
+//
+// Lists the PHP versions an Agency Plan website can be switched to. The version the website is currently running is returned as settings.php.version by the website details endpoint.
+//
+// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/php-settings/versions (the `AgencyHostingListAvailablePHPVersionsForAWebsiteV1` operationId).
+func (c *Client) AgencyHostingListAvailablePHPVersionsForAWebsiteV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingListAvailablePHPVersionsForAWebsiteV1Request(c.Server, websiteUid)
 	if err != nil {
 		return nil, err
 	}
@@ -29216,6 +29638,40 @@ func NewAgencyHostingListAvailableDatacentersV1Request(server string, orderId Or
 	return req, nil
 }
 
+// NewAgencyHostingListAvailablePHPVersionsForAnOrderV1Request constructs an http.Request for the AgencyHostingListAvailablePHPVersionsForAnOrderV1 method
+func NewAgencyHostingListAvailablePHPVersionsForAnOrderV1Request(server string, orderId OrderIdPath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "order_id", orderId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/orders/%s/websites/php-settings/versions", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewAgencyHostingCreateANewWebsiteV1Request calls the generic AgencyHostingCreateANewWebsiteV1 builder with application/json body
 func NewAgencyHostingCreateANewWebsiteV1Request(server string, orderId OrderIdPath, body AgencyHostingCreateANewWebsiteV1JSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
@@ -30062,6 +30518,249 @@ func NewAgencyHostingImportWebsiteFromArchiveV1RequestWithBody(server string, we
 	}
 
 	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewAgencyHostingListPHPExtensionsForAWebsiteV1Request constructs an http.Request for the AgencyHostingListPHPExtensionsForAWebsiteV1 method
+func NewAgencyHostingListPHPExtensionsForAWebsiteV1Request(server string, websiteUid WebsiteUid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/php-settings/extensions", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAgencyHostingReplaceWebsitePHPExtensionsV1Request calls the generic AgencyHostingReplaceWebsitePHPExtensionsV1 builder with application/json body
+func NewAgencyHostingReplaceWebsitePHPExtensionsV1Request(server string, websiteUid WebsiteUid, body AgencyHostingReplaceWebsitePHPExtensionsV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewAgencyHostingReplaceWebsitePHPExtensionsV1RequestWithBody(server, websiteUid, "application/json", bodyReader)
+}
+
+// NewAgencyHostingReplaceWebsitePHPExtensionsV1RequestWithBody constructs an http.Request for the AgencyHostingReplaceWebsitePHPExtensionsV1 method, with any body, and a specified content type
+func NewAgencyHostingReplaceWebsitePHPExtensionsV1RequestWithBody(server string, websiteUid WebsiteUid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/php-settings/extensions", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewAgencyHostingListPHPOptionsForAWebsiteV1Request constructs an http.Request for the AgencyHostingListPHPOptionsForAWebsiteV1 method
+func NewAgencyHostingListPHPOptionsForAWebsiteV1Request(server string, websiteUid WebsiteUid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/php-settings/options", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAgencyHostingReplaceWebsitePHPOptionsV1Request calls the generic AgencyHostingReplaceWebsitePHPOptionsV1 builder with application/json body
+func NewAgencyHostingReplaceWebsitePHPOptionsV1Request(server string, websiteUid WebsiteUid, body AgencyHostingReplaceWebsitePHPOptionsV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewAgencyHostingReplaceWebsitePHPOptionsV1RequestWithBody(server, websiteUid, "application/json", bodyReader)
+}
+
+// NewAgencyHostingReplaceWebsitePHPOptionsV1RequestWithBody constructs an http.Request for the AgencyHostingReplaceWebsitePHPOptionsV1 method, with any body, and a specified content type
+func NewAgencyHostingReplaceWebsitePHPOptionsV1RequestWithBody(server string, websiteUid WebsiteUid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/php-settings/options", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewAgencyHostingUpdateWebsitePHPVersionV1Request calls the generic AgencyHostingUpdateWebsitePHPVersionV1 builder with application/json body
+func NewAgencyHostingUpdateWebsitePHPVersionV1Request(server string, websiteUid WebsiteUid, body AgencyHostingUpdateWebsitePHPVersionV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewAgencyHostingUpdateWebsitePHPVersionV1RequestWithBody(server, websiteUid, "application/json", bodyReader)
+}
+
+// NewAgencyHostingUpdateWebsitePHPVersionV1RequestWithBody constructs an http.Request for the AgencyHostingUpdateWebsitePHPVersionV1 method, with any body, and a specified content type
+func NewAgencyHostingUpdateWebsitePHPVersionV1RequestWithBody(server string, websiteUid WebsiteUid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/php-settings/version", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewAgencyHostingListAvailablePHPVersionsForAWebsiteV1Request constructs an http.Request for the AgencyHostingListAvailablePHPVersionsForAWebsiteV1 method
+func NewAgencyHostingListAvailablePHPVersionsForAWebsiteV1Request(server string, websiteUid WebsiteUid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/php-settings/versions", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 
 	return req, nil
 }
@@ -44607,6 +45306,15 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/datacenters (the `AgencyHostingListAvailableDatacentersV1` operationId).
 	AgencyHostingListAvailableDatacentersV1WithResponse(ctx context.Context, orderId OrderIdPath, reqEditors ...RequestEditorFn) (*AgencyHostingListAvailableDatacentersV1Response, error)
 
+	// AgencyHostingListAvailablePHPVersionsForAnOrderV1WithResponse List available PHP versions for an order
+	//
+	// Lists the PHP versions available to websites created under an Agency Plan order, determined by the server the order is hosted on. Use this before creating a website; for a website that already exists, call the website-scoped versions endpoint instead.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/websites/php-settings/versions (the `AgencyHostingListAvailablePHPVersionsForAnOrderV1` operationId).
+	AgencyHostingListAvailablePHPVersionsForAnOrderV1WithResponse(ctx context.Context, orderId OrderIdPath, reqEditors ...RequestEditorFn) (*AgencyHostingListAvailablePHPVersionsForAnOrderV1Response, error)
+
 	// AgencyHostingCreateANewWebsiteV1WithBodyWithResponse Create a new website
 	//
 	// Provisions a new website on one of your Agency Plan hosting orders.
@@ -44929,6 +45637,87 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/import-archive (the `AgencyHostingImportWebsiteFromArchiveV1` operationId).
 	AgencyHostingImportWebsiteFromArchiveV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingImportWebsiteFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingImportWebsiteFromArchiveV1Response, error)
+
+	// AgencyHostingListPHPExtensionsForAWebsiteV1WithResponse List PHP extensions for a website
+	//
+	// Lists every PHP extension available to an Agency Plan website and whether it is currently enabled.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/php-settings/extensions (the `AgencyHostingListPHPExtensionsForAWebsiteV1` operationId).
+	AgencyHostingListPHPExtensionsForAWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingListPHPExtensionsForAWebsiteV1Response, error)
+
+	// AgencyHostingReplaceWebsitePHPExtensionsV1WithBodyWithResponse Replace website PHP extensions
+	//
+	// Replaces the set of PHP extensions enabled on an Agency Plan website with the ones provided. Any toggleable extension not in the request is disabled, so call the extensions endpoint first and send the full desired set. Extensions compiled into PHP, reported with the "built-in" state, are always active and are unaffected.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/php-settings/extensions (the `AgencyHostingReplaceWebsitePHPExtensionsV1` operationId).
+	AgencyHostingReplaceWebsitePHPExtensionsV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingReplaceWebsitePHPExtensionsV1Response, error)
+
+	// AgencyHostingReplaceWebsitePHPExtensionsV1WithResponse Replace website PHP extensions
+	//
+	// Replaces the set of PHP extensions enabled on an Agency Plan website with the ones provided. Any toggleable extension not in the request is disabled, so call the extensions endpoint first and send the full desired set. Extensions compiled into PHP, reported with the "built-in" state, are always active and are unaffected.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/php-settings/extensions (the `AgencyHostingReplaceWebsitePHPExtensionsV1` operationId).
+	AgencyHostingReplaceWebsitePHPExtensionsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingReplaceWebsitePHPExtensionsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingReplaceWebsitePHPExtensionsV1Response, error)
+
+	// AgencyHostingListPHPOptionsForAWebsiteV1WithResponse List PHP options for a website
+	//
+	// Lists the php.ini directives that can be configured for an Agency Plan website, each with its default, the value currently in effect, and the values it accepts.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/php-settings/options (the `AgencyHostingListPHPOptionsForAWebsiteV1` operationId).
+	AgencyHostingListPHPOptionsForAWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingListPHPOptionsForAWebsiteV1Response, error)
+
+	// AgencyHostingReplaceWebsitePHPOptionsV1WithBodyWithResponse Replace website PHP options
+	//
+	// Replaces the custom php.ini values on an Agency Plan website with the ones provided. Any option not in the request is reset to its default, so call the options endpoint first and send the full desired set. Sending an empty array resets every option to its default.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/php-settings/options (the `AgencyHostingReplaceWebsitePHPOptionsV1` operationId).
+	AgencyHostingReplaceWebsitePHPOptionsV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingReplaceWebsitePHPOptionsV1Response, error)
+
+	// AgencyHostingReplaceWebsitePHPOptionsV1WithResponse Replace website PHP options
+	//
+	// Replaces the custom php.ini values on an Agency Plan website with the ones provided. Any option not in the request is reset to its default, so call the options endpoint first and send the full desired set. Sending an empty array resets every option to its default.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/php-settings/options (the `AgencyHostingReplaceWebsitePHPOptionsV1` operationId).
+	AgencyHostingReplaceWebsitePHPOptionsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingReplaceWebsitePHPOptionsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingReplaceWebsitePHPOptionsV1Response, error)
+
+	// AgencyHostingUpdateWebsitePHPVersionV1WithBodyWithResponse Update website PHP version
+	//
+	// Switches an Agency Plan website to a different PHP version. Call the available versions endpoint first to see which versions can be selected. The website restarts on the new version, so requests served during the switch may fail and code that is incompatible with the target version will break.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/agency-hosting/v1/websites/{website_uid}/php-settings/version (the `AgencyHostingUpdateWebsitePHPVersionV1` operationId).
+	AgencyHostingUpdateWebsitePHPVersionV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingUpdateWebsitePHPVersionV1Response, error)
+
+	// AgencyHostingUpdateWebsitePHPVersionV1WithResponse Update website PHP version
+	//
+	// Switches an Agency Plan website to a different PHP version. Call the available versions endpoint first to see which versions can be selected. The website restarts on the new version, so requests served during the switch may fail and code that is incompatible with the target version will break.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/agency-hosting/v1/websites/{website_uid}/php-settings/version (the `AgencyHostingUpdateWebsitePHPVersionV1` operationId).
+	AgencyHostingUpdateWebsitePHPVersionV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingUpdateWebsitePHPVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingUpdateWebsitePHPVersionV1Response, error)
+
+	// AgencyHostingListAvailablePHPVersionsForAWebsiteV1WithResponse List available PHP versions for a website
+	//
+	// Lists the PHP versions an Agency Plan website can be switched to. The version the website is currently running is returned as settings.php.version by the website details endpoint.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/php-settings/versions (the `AgencyHostingListAvailablePHPVersionsForAWebsiteV1` operationId).
+	AgencyHostingListAvailablePHPVersionsForAWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingListAvailablePHPVersionsForAWebsiteV1Response, error)
 
 	// AgencyHostingListWebsiteProcessesV1WithResponse List website processes
 	//
@@ -50538,6 +51327,61 @@ func (r AgencyHostingListAvailableDatacentersV1Response) ContentType() string {
 	return ""
 }
 
+type AgencyHostingListAvailablePHPVersionsForAnOrderV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *AgencyHostingV1PhpVersionCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r AgencyHostingListAvailablePHPVersionsForAnOrderV1Response) GetJSON200() *AgencyHostingV1PhpVersionCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r AgencyHostingListAvailablePHPVersionsForAnOrderV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r AgencyHostingListAvailablePHPVersionsForAnOrderV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r AgencyHostingListAvailablePHPVersionsForAnOrderV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingListAvailablePHPVersionsForAnOrderV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingListAvailablePHPVersionsForAnOrderV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingListAvailablePHPVersionsForAnOrderV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type AgencyHostingCreateANewWebsiteV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -51594,6 +52438,357 @@ func (r AgencyHostingImportWebsiteFromArchiveV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r AgencyHostingImportWebsiteFromArchiveV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingListPHPExtensionsForAWebsiteV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *AgencyHostingV1PhpExtensionCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r AgencyHostingListPHPExtensionsForAWebsiteV1Response) GetJSON200() *AgencyHostingV1PhpExtensionCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r AgencyHostingListPHPExtensionsForAWebsiteV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r AgencyHostingListPHPExtensionsForAWebsiteV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r AgencyHostingListPHPExtensionsForAWebsiteV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingListPHPExtensionsForAWebsiteV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingListPHPExtensionsForAWebsiteV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingListPHPExtensionsForAWebsiteV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingReplaceWebsitePHPExtensionsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r AgencyHostingReplaceWebsitePHPExtensionsV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r AgencyHostingReplaceWebsitePHPExtensionsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r AgencyHostingReplaceWebsitePHPExtensionsV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r AgencyHostingReplaceWebsitePHPExtensionsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r AgencyHostingReplaceWebsitePHPExtensionsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingReplaceWebsitePHPExtensionsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingReplaceWebsitePHPExtensionsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingReplaceWebsitePHPExtensionsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingListPHPOptionsForAWebsiteV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *AgencyHostingV1PhpOptionCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r AgencyHostingListPHPOptionsForAWebsiteV1Response) GetJSON200() *AgencyHostingV1PhpOptionCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r AgencyHostingListPHPOptionsForAWebsiteV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r AgencyHostingListPHPOptionsForAWebsiteV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r AgencyHostingListPHPOptionsForAWebsiteV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingListPHPOptionsForAWebsiteV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingListPHPOptionsForAWebsiteV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingListPHPOptionsForAWebsiteV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingReplaceWebsitePHPOptionsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r AgencyHostingReplaceWebsitePHPOptionsV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r AgencyHostingReplaceWebsitePHPOptionsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r AgencyHostingReplaceWebsitePHPOptionsV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r AgencyHostingReplaceWebsitePHPOptionsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r AgencyHostingReplaceWebsitePHPOptionsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingReplaceWebsitePHPOptionsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingReplaceWebsitePHPOptionsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingReplaceWebsitePHPOptionsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingUpdateWebsitePHPVersionV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r AgencyHostingUpdateWebsitePHPVersionV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r AgencyHostingUpdateWebsitePHPVersionV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r AgencyHostingUpdateWebsitePHPVersionV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r AgencyHostingUpdateWebsitePHPVersionV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r AgencyHostingUpdateWebsitePHPVersionV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingUpdateWebsitePHPVersionV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingUpdateWebsitePHPVersionV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingUpdateWebsitePHPVersionV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingListAvailablePHPVersionsForAWebsiteV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *AgencyHostingV1PhpVersionCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r AgencyHostingListAvailablePHPVersionsForAWebsiteV1Response) GetJSON200() *AgencyHostingV1PhpVersionCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r AgencyHostingListAvailablePHPVersionsForAWebsiteV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r AgencyHostingListAvailablePHPVersionsForAWebsiteV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r AgencyHostingListAvailablePHPVersionsForAWebsiteV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingListAvailablePHPVersionsForAWebsiteV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingListAvailablePHPVersionsForAWebsiteV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingListAvailablePHPVersionsForAWebsiteV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -69816,6 +71011,21 @@ func (c *ClientWithResponses) AgencyHostingListAvailableDatacentersV1WithRespons
 	return ParseAgencyHostingListAvailableDatacentersV1Response(rsp)
 }
 
+// AgencyHostingListAvailablePHPVersionsForAnOrderV1WithResponse List available PHP versions for an order
+//
+// Lists the PHP versions available to websites created under an Agency Plan order, determined by the server the order is hosted on. Use this before creating a website; for a website that already exists, call the website-scoped versions endpoint instead.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/websites/php-settings/versions (the `AgencyHostingListAvailablePHPVersionsForAnOrderV1` operationId).
+func (c *ClientWithResponses) AgencyHostingListAvailablePHPVersionsForAnOrderV1WithResponse(ctx context.Context, orderId OrderIdPath, reqEditors ...RequestEditorFn) (*AgencyHostingListAvailablePHPVersionsForAnOrderV1Response, error) {
+	rsp, err := c.AgencyHostingListAvailablePHPVersionsForAnOrderV1(ctx, orderId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingListAvailablePHPVersionsForAnOrderV1Response(rsp)
+}
+
 // AgencyHostingCreateANewWebsiteV1WithBodyWithResponse Create a new website
 //
 // Provisions a new website on one of your Agency Plan hosting orders.
@@ -70293,6 +71503,141 @@ func (c *ClientWithResponses) AgencyHostingImportWebsiteFromArchiveV1WithRespons
 		return nil, err
 	}
 	return ParseAgencyHostingImportWebsiteFromArchiveV1Response(rsp)
+}
+
+// AgencyHostingListPHPExtensionsForAWebsiteV1WithResponse List PHP extensions for a website
+//
+// Lists every PHP extension available to an Agency Plan website and whether it is currently enabled.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/php-settings/extensions (the `AgencyHostingListPHPExtensionsForAWebsiteV1` operationId).
+func (c *ClientWithResponses) AgencyHostingListPHPExtensionsForAWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingListPHPExtensionsForAWebsiteV1Response, error) {
+	rsp, err := c.AgencyHostingListPHPExtensionsForAWebsiteV1(ctx, websiteUid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingListPHPExtensionsForAWebsiteV1Response(rsp)
+}
+
+// AgencyHostingReplaceWebsitePHPExtensionsV1WithBodyWithResponse Replace website PHP extensions
+//
+// Replaces the set of PHP extensions enabled on an Agency Plan website with the ones provided. Any toggleable extension not in the request is disabled, so call the extensions endpoint first and send the full desired set. Extensions compiled into PHP, reported with the "built-in" state, are always active and are unaffected.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/php-settings/extensions (the `AgencyHostingReplaceWebsitePHPExtensionsV1` operationId).
+func (c *ClientWithResponses) AgencyHostingReplaceWebsitePHPExtensionsV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingReplaceWebsitePHPExtensionsV1Response, error) {
+	rsp, err := c.AgencyHostingReplaceWebsitePHPExtensionsV1WithBody(ctx, websiteUid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingReplaceWebsitePHPExtensionsV1Response(rsp)
+}
+
+// AgencyHostingReplaceWebsitePHPExtensionsV1WithResponse Replace website PHP extensions
+//
+// Replaces the set of PHP extensions enabled on an Agency Plan website with the ones provided. Any toggleable extension not in the request is disabled, so call the extensions endpoint first and send the full desired set. Extensions compiled into PHP, reported with the "built-in" state, are always active and are unaffected.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/php-settings/extensions (the `AgencyHostingReplaceWebsitePHPExtensionsV1` operationId).
+func (c *ClientWithResponses) AgencyHostingReplaceWebsitePHPExtensionsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingReplaceWebsitePHPExtensionsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingReplaceWebsitePHPExtensionsV1Response, error) {
+	rsp, err := c.AgencyHostingReplaceWebsitePHPExtensionsV1(ctx, websiteUid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingReplaceWebsitePHPExtensionsV1Response(rsp)
+}
+
+// AgencyHostingListPHPOptionsForAWebsiteV1WithResponse List PHP options for a website
+//
+// Lists the php.ini directives that can be configured for an Agency Plan website, each with its default, the value currently in effect, and the values it accepts.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/php-settings/options (the `AgencyHostingListPHPOptionsForAWebsiteV1` operationId).
+func (c *ClientWithResponses) AgencyHostingListPHPOptionsForAWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingListPHPOptionsForAWebsiteV1Response, error) {
+	rsp, err := c.AgencyHostingListPHPOptionsForAWebsiteV1(ctx, websiteUid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingListPHPOptionsForAWebsiteV1Response(rsp)
+}
+
+// AgencyHostingReplaceWebsitePHPOptionsV1WithBodyWithResponse Replace website PHP options
+//
+// Replaces the custom php.ini values on an Agency Plan website with the ones provided. Any option not in the request is reset to its default, so call the options endpoint first and send the full desired set. Sending an empty array resets every option to its default.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/php-settings/options (the `AgencyHostingReplaceWebsitePHPOptionsV1` operationId).
+func (c *ClientWithResponses) AgencyHostingReplaceWebsitePHPOptionsV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingReplaceWebsitePHPOptionsV1Response, error) {
+	rsp, err := c.AgencyHostingReplaceWebsitePHPOptionsV1WithBody(ctx, websiteUid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingReplaceWebsitePHPOptionsV1Response(rsp)
+}
+
+// AgencyHostingReplaceWebsitePHPOptionsV1WithResponse Replace website PHP options
+//
+// Replaces the custom php.ini values on an Agency Plan website with the ones provided. Any option not in the request is reset to its default, so call the options endpoint first and send the full desired set. Sending an empty array resets every option to its default.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/agency-hosting/v1/websites/{website_uid}/php-settings/options (the `AgencyHostingReplaceWebsitePHPOptionsV1` operationId).
+func (c *ClientWithResponses) AgencyHostingReplaceWebsitePHPOptionsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingReplaceWebsitePHPOptionsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingReplaceWebsitePHPOptionsV1Response, error) {
+	rsp, err := c.AgencyHostingReplaceWebsitePHPOptionsV1(ctx, websiteUid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingReplaceWebsitePHPOptionsV1Response(rsp)
+}
+
+// AgencyHostingUpdateWebsitePHPVersionV1WithBodyWithResponse Update website PHP version
+//
+// Switches an Agency Plan website to a different PHP version. Call the available versions endpoint first to see which versions can be selected. The website restarts on the new version, so requests served during the switch may fail and code that is incompatible with the target version will break.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/agency-hosting/v1/websites/{website_uid}/php-settings/version (the `AgencyHostingUpdateWebsitePHPVersionV1` operationId).
+func (c *ClientWithResponses) AgencyHostingUpdateWebsitePHPVersionV1WithBodyWithResponse(ctx context.Context, websiteUid WebsiteUid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgencyHostingUpdateWebsitePHPVersionV1Response, error) {
+	rsp, err := c.AgencyHostingUpdateWebsitePHPVersionV1WithBody(ctx, websiteUid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingUpdateWebsitePHPVersionV1Response(rsp)
+}
+
+// AgencyHostingUpdateWebsitePHPVersionV1WithResponse Update website PHP version
+//
+// Switches an Agency Plan website to a different PHP version. Call the available versions endpoint first to see which versions can be selected. The website restarts on the new version, so requests served during the switch may fail and code that is incompatible with the target version will break.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/agency-hosting/v1/websites/{website_uid}/php-settings/version (the `AgencyHostingUpdateWebsitePHPVersionV1` operationId).
+func (c *ClientWithResponses) AgencyHostingUpdateWebsitePHPVersionV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingUpdateWebsitePHPVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingUpdateWebsitePHPVersionV1Response, error) {
+	rsp, err := c.AgencyHostingUpdateWebsitePHPVersionV1(ctx, websiteUid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingUpdateWebsitePHPVersionV1Response(rsp)
+}
+
+// AgencyHostingListAvailablePHPVersionsForAWebsiteV1WithResponse List available PHP versions for a website
+//
+// Lists the PHP versions an Agency Plan website can be switched to. The version the website is currently running is returned as settings.php.version by the website details endpoint.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/php-settings/versions (the `AgencyHostingListAvailablePHPVersionsForAWebsiteV1` operationId).
+func (c *ClientWithResponses) AgencyHostingListAvailablePHPVersionsForAWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingListAvailablePHPVersionsForAWebsiteV1Response, error) {
+	rsp, err := c.AgencyHostingListAvailablePHPVersionsForAWebsiteV1(ctx, websiteUid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingListAvailablePHPVersionsForAWebsiteV1Response(rsp)
 }
 
 // AgencyHostingListWebsiteProcessesV1WithResponse List website processes
@@ -78259,6 +79604,46 @@ func ParseAgencyHostingListAvailableDatacentersV1Response(rsp *http.Response) (*
 	return response, nil
 }
 
+// ParseAgencyHostingListAvailablePHPVersionsForAnOrderV1Response parses an HTTP response from a AgencyHostingListAvailablePHPVersionsForAnOrderV1WithResponse call
+func ParseAgencyHostingListAvailablePHPVersionsForAnOrderV1Response(rsp *http.Response) (*AgencyHostingListAvailablePHPVersionsForAnOrderV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingListAvailablePHPVersionsForAnOrderV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AgencyHostingV1PhpVersionCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseAgencyHostingCreateANewWebsiteV1Response parses an HTTP response from a AgencyHostingCreateANewWebsiteV1WithResponse call
 func ParseAgencyHostingCreateANewWebsiteV1Response(rsp *http.Response) (*AgencyHostingCreateANewWebsiteV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -79030,6 +80415,267 @@ func ParseAgencyHostingImportWebsiteFromArchiveV1Response(rsp *http.Response) (*
 			return nil, err
 		}
 		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingListPHPExtensionsForAWebsiteV1Response parses an HTTP response from a AgencyHostingListPHPExtensionsForAWebsiteV1WithResponse call
+func ParseAgencyHostingListPHPExtensionsForAWebsiteV1Response(rsp *http.Response) (*AgencyHostingListPHPExtensionsForAWebsiteV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingListPHPExtensionsForAWebsiteV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AgencyHostingV1PhpExtensionCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingReplaceWebsitePHPExtensionsV1Response parses an HTTP response from a AgencyHostingReplaceWebsitePHPExtensionsV1WithResponse call
+func ParseAgencyHostingReplaceWebsitePHPExtensionsV1Response(rsp *http.Response) (*AgencyHostingReplaceWebsitePHPExtensionsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingReplaceWebsitePHPExtensionsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingListPHPOptionsForAWebsiteV1Response parses an HTTP response from a AgencyHostingListPHPOptionsForAWebsiteV1WithResponse call
+func ParseAgencyHostingListPHPOptionsForAWebsiteV1Response(rsp *http.Response) (*AgencyHostingListPHPOptionsForAWebsiteV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingListPHPOptionsForAWebsiteV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AgencyHostingV1PhpOptionCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingReplaceWebsitePHPOptionsV1Response parses an HTTP response from a AgencyHostingReplaceWebsitePHPOptionsV1WithResponse call
+func ParseAgencyHostingReplaceWebsitePHPOptionsV1Response(rsp *http.Response) (*AgencyHostingReplaceWebsitePHPOptionsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingReplaceWebsitePHPOptionsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingUpdateWebsitePHPVersionV1Response parses an HTTP response from a AgencyHostingUpdateWebsitePHPVersionV1WithResponse call
+func ParseAgencyHostingUpdateWebsitePHPVersionV1Response(rsp *http.Response) (*AgencyHostingUpdateWebsitePHPVersionV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingUpdateWebsitePHPVersionV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingListAvailablePHPVersionsForAWebsiteV1Response parses an HTTP response from a AgencyHostingListAvailablePHPVersionsForAWebsiteV1WithResponse call
+func ParseAgencyHostingListAvailablePHPVersionsForAWebsiteV1Response(rsp *http.Response) (*AgencyHostingListAvailablePHPVersionsForAWebsiteV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingListAvailablePHPVersionsForAWebsiteV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AgencyHostingV1PhpVersionCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse
