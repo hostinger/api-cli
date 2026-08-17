@@ -10,6 +10,7 @@ import (
 	"github.com/hostinger/api-cli/cmd/hosting/nodejs"
 	"github.com/hostinger/api-cli/cmd/hosting/orders"
 	"github.com/hostinger/api-cli/cmd/hosting/php"
+	"github.com/hostinger/api-cli/cmd/hosting/redirects"
 	"github.com/hostinger/api-cli/cmd/hosting/websites"
 
 	"github.com/spf13/cobra"
@@ -30,5 +31,6 @@ func init() {
 	GroupCmd.AddCommand(nodejs.GroupCmd)
 	GroupCmd.AddCommand(orders.GroupCmd)
 	GroupCmd.AddCommand(php.GroupCmd)
+	GroupCmd.AddCommand(redirects.GroupCmd)
 	GroupCmd.AddCommand(websites.GroupCmd)
 }

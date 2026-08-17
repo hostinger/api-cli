@@ -889,6 +889,11 @@
     "method": "POST",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/parked-domains"
   },
+  "hosting_createWebsiteRedirectV1": {
+    "command": "hostinger hosting redirects create-website",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/redirects"
+  },
   "hosting_createWebsiteSubdomainV1": {
     "command": "hostinger hosting domains create-website-subdomain",
     "method": "POST",
@@ -923,6 +928,11 @@
     "command": "hostinger hosting domains delete-website-parked",
     "method": "DELETE",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/parked-domains/{parkedDomain}"
+  },
+  "hosting_deleteWebsiteRedirectV1": {
+    "command": "hostinger hosting redirects delete-website",
+    "method": "DELETE",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/redirects"
   },
   "hosting_deleteWebsiteSubdomainV1": {
     "command": "hostinger hosting domains delete-website-subdomain",
@@ -1068,6 +1078,11 @@
     "command": "hostinger hosting domains list-website-parked",
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/parked-domains"
+  },
+  "hosting_listWebsiteRedirectsV1": {
+    "command": "hostinger hosting redirects list-website",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/redirects"
   },
   "hosting_listWebsiteSubdomainsV1": {
     "command": "hostinger hosting domains list-website-subdomains",

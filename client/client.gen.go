@@ -7629,6 +7629,35 @@ type HostingV1PhpUpdatePhpVersionRequest struct {
 	Version string `json:"version"`
 }
 
+// HostingV1RedirectsCreateRedirectRequest defines model for Hosting.V1.Redirects.CreateRedirectRequest.
+type HostingV1RedirectsCreateRedirectRequest struct {
+	// From Source URL on the selected website
+	//
+	// Example: https://example.com/old-page
+	From string `json:"from"`
+
+	// To Destination URL or IP address
+	//
+	// Example: https://example.com/new-page
+	To string `json:"to"`
+}
+
+// HostingV1RedirectsRedirectCollection Array of [`Hosting.V1.Redirects.RedirectResource`](#model/hostingv1redirectsredirectresource)
+type HostingV1RedirectsRedirectCollection = []HostingV1RedirectsRedirectResource
+
+// HostingV1RedirectsRedirectResource defines model for Hosting.V1.Redirects.RedirectResource.
+type HostingV1RedirectsRedirectResource struct {
+	// From Source URL
+	//
+	// Example: https://example.com/old-page
+	From *string `json:"from,omitempty"`
+
+	// To Destination URL
+	//
+	// Example: https://example.com/new-page
+	To *string `json:"to,omitempty"`
+}
+
 // HostingV1WebsitesCreateWebsiteRequest defines model for Hosting.V1.Websites.CreateWebsiteRequest.
 type HostingV1WebsitesCreateWebsiteRequest struct {
 	// DatacenterCode Datacenter code. This parameter is required when creating the first website on a new hosting plan.
@@ -12315,6 +12344,21 @@ type HostingListNodeJsVulnerabilitiesV1Params struct {
 // HostingListNodeJsVulnerabilitiesV1ParamsSeverities defines parameters for HostingListNodeJsVulnerabilitiesV1.
 type HostingListNodeJsVulnerabilitiesV1ParamsSeverities string
 
+// HostingDeleteWebsiteRedirectV1Params defines parameters for HostingDeleteWebsiteRedirectV1.
+type HostingDeleteWebsiteRedirectV1Params struct {
+	// From Source URL returned by the list redirects endpoint.
+	From string `form:"from" json:"from"`
+}
+
+// HostingListWebsiteRedirectsV1Params defines parameters for HostingListWebsiteRedirectsV1.
+type HostingListWebsiteRedirectsV1Params struct {
+	// Page Page number
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+
+	// PerPage Number of items per page
+	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
+}
+
 // HostingShowAIOptionStatusV1Params defines parameters for HostingShowAIOptionStatusV1.
 type HostingShowAIOptionStatusV1Params struct {
 	// Option Filter the status by a single AI option.
@@ -13031,6 +13075,9 @@ type HostingUpdatePHPOptionsV1JSONRequestBody = HostingV1PhpUpdatePhpOptionsRequ
 
 // HostingUpdatePHPVersionV1JSONRequestBody defines body for HostingUpdatePHPVersionV1 for application/json ContentType.
 type HostingUpdatePHPVersionV1JSONRequestBody = HostingV1PhpUpdatePhpVersionRequest
+
+// HostingCreateWebsiteRedirectV1JSONRequestBody defines body for HostingCreateWebsiteRedirectV1 for application/json ContentType.
+type HostingCreateWebsiteRedirectV1JSONRequestBody = HostingV1RedirectsCreateRedirectRequest
 
 // HostingCreateWebsiteSubdomainV1JSONRequestBody defines body for HostingCreateWebsiteSubdomainV1 for application/json ContentType.
 type HostingCreateWebsiteSubdomainV1JSONRequestBody = HostingV1DomainsCreateSubdomainRequest
@@ -16506,6 +16553,40 @@ type ClientInterface interface {
 	//
 	// Corresponds with PATCH /api/hosting/v1/accounts/{username}/websites/{domain}/php/version (the `HostingUpdatePHPVersionV1` operationId).
 	HostingUpdatePHPVersionV1(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdatePHPVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingDeleteWebsiteRedirectV1 Delete website redirect
+	//
+	// Permanently deletes the redirect identified by its source URL.
+	//
+	// Pass the `from` value exactly as returned by the list redirects endpoint.
+	//
+	// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/redirects (the `HostingDeleteWebsiteRedirectV1` operationId).
+	HostingDeleteWebsiteRedirectV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingDeleteWebsiteRedirectV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingListWebsiteRedirectsV1 List website redirects
+	//
+	// Returns a paginated list of redirects configured for the selected website.
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/redirects (the `HostingListWebsiteRedirectsV1` operationId).
+	HostingListWebsiteRedirectsV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingListWebsiteRedirectsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingCreateWebsiteRedirectV1WithBody Create website redirect
+	//
+	// Creates a redirect from a URL on the selected website to another URL or IP address.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/redirects (the `HostingCreateWebsiteRedirectV1` operationId).
+	HostingCreateWebsiteRedirectV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingCreateWebsiteRedirectV1 Create website redirect
+	//
+	// Creates a redirect from a URL on the selected website to another URL or IP address.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/redirects (the `HostingCreateWebsiteRedirectV1` operationId).
+	HostingCreateWebsiteRedirectV1(ctx context.Context, username UsernamePath, domain Domain, body HostingCreateWebsiteRedirectV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingListWebsiteSubdomainsV1 List website subdomains
 	//
@@ -23831,6 +23912,80 @@ func (c *Client) HostingUpdatePHPVersionV1WithBody(ctx context.Context, username
 // Corresponds with PATCH /api/hosting/v1/accounts/{username}/websites/{domain}/php/version (the `HostingUpdatePHPVersionV1` operationId).
 func (c *Client) HostingUpdatePHPVersionV1(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdatePHPVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingUpdatePHPVersionV1Request(c.Server, username, domain, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingDeleteWebsiteRedirectV1 Delete website redirect
+//
+// Permanently deletes the redirect identified by its source URL.
+//
+// Pass the `from` value exactly as returned by the list redirects endpoint.
+//
+// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/redirects (the `HostingDeleteWebsiteRedirectV1` operationId).
+func (c *Client) HostingDeleteWebsiteRedirectV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingDeleteWebsiteRedirectV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingDeleteWebsiteRedirectV1Request(c.Server, username, domain, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingListWebsiteRedirectsV1 List website redirects
+//
+// Returns a paginated list of redirects configured for the selected website.
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/redirects (the `HostingListWebsiteRedirectsV1` operationId).
+func (c *Client) HostingListWebsiteRedirectsV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingListWebsiteRedirectsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingListWebsiteRedirectsV1Request(c.Server, username, domain, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingCreateWebsiteRedirectV1WithBody Create website redirect
+//
+// Creates a redirect from a URL on the selected website to another URL or IP address.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/redirects (the `HostingCreateWebsiteRedirectV1` operationId).
+func (c *Client) HostingCreateWebsiteRedirectV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingCreateWebsiteRedirectV1RequestWithBody(c.Server, username, domain, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingCreateWebsiteRedirectV1 Create website redirect
+//
+// Creates a redirect from a URL on the selected website to another URL or IP address.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/redirects (the `HostingCreateWebsiteRedirectV1` operationId).
+func (c *Client) HostingCreateWebsiteRedirectV1(ctx context.Context, username UsernamePath, domain Domain, body HostingCreateWebsiteRedirectV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingCreateWebsiteRedirectV1Request(c.Server, username, domain, body)
 	if err != nil {
 		return nil, err
 	}
@@ -35585,6 +35740,204 @@ func NewHostingUpdatePHPVersionV1RequestWithBody(server string, username Usernam
 	}
 
 	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingDeleteWebsiteRedirectV1Request constructs an http.Request for the HostingDeleteWebsiteRedirectV1 method
+func NewHostingDeleteWebsiteRedirectV1Request(server string, username UsernamePath, domain Domain, params *HostingDeleteWebsiteRedirectV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/redirects", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "from", params.From, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: "uri"}); err != nil {
+			return nil, err
+		} else {
+			for _, qp := range strings.Split(queryFrag, "&") {
+				rawQueryFragments = append(rawQueryFragments, qp)
+			}
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingListWebsiteRedirectsV1Request constructs an http.Request for the HostingListWebsiteRedirectsV1 method
+func NewHostingListWebsiteRedirectsV1Request(server string, username UsernamePath, domain Domain, params *HostingListWebsiteRedirectsV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/redirects", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Page != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page", *params.Page, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PerPage != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "per_page", *params.PerPage, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingCreateWebsiteRedirectV1Request calls the generic HostingCreateWebsiteRedirectV1 builder with application/json body
+func NewHostingCreateWebsiteRedirectV1Request(server string, username UsernamePath, domain Domain, body HostingCreateWebsiteRedirectV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingCreateWebsiteRedirectV1RequestWithBody(server, username, domain, "application/json", bodyReader)
+}
+
+// NewHostingCreateWebsiteRedirectV1RequestWithBody constructs an http.Request for the HostingCreateWebsiteRedirectV1 method, with any body, and a specified content type
+func NewHostingCreateWebsiteRedirectV1RequestWithBody(server string, username UsernamePath, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/redirects", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -47776,6 +48129,44 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with PATCH /api/hosting/v1/accounts/{username}/websites/{domain}/php/version (the `HostingUpdatePHPVersionV1` operationId).
 	HostingUpdatePHPVersionV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdatePHPVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUpdatePHPVersionV1Response, error)
 
+	// HostingDeleteWebsiteRedirectV1WithResponse Delete website redirect
+	//
+	// Permanently deletes the redirect identified by its source URL.
+	//
+	// Pass the `from` value exactly as returned by the list redirects endpoint.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/redirects (the `HostingDeleteWebsiteRedirectV1` operationId).
+	HostingDeleteWebsiteRedirectV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingDeleteWebsiteRedirectV1Params, reqEditors ...RequestEditorFn) (*HostingDeleteWebsiteRedirectV1Response, error)
+
+	// HostingListWebsiteRedirectsV1WithResponse List website redirects
+	//
+	// Returns a paginated list of redirects configured for the selected website.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/redirects (the `HostingListWebsiteRedirectsV1` operationId).
+	HostingListWebsiteRedirectsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingListWebsiteRedirectsV1Params, reqEditors ...RequestEditorFn) (*HostingListWebsiteRedirectsV1Response, error)
+
+	// HostingCreateWebsiteRedirectV1WithBodyWithResponse Create website redirect
+	//
+	// Creates a redirect from a URL on the selected website to another URL or IP address.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/redirects (the `HostingCreateWebsiteRedirectV1` operationId).
+	HostingCreateWebsiteRedirectV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingCreateWebsiteRedirectV1Response, error)
+
+	// HostingCreateWebsiteRedirectV1WithResponse Create website redirect
+	//
+	// Creates a redirect from a URL on the selected website to another URL or IP address.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/redirects (the `HostingCreateWebsiteRedirectV1` operationId).
+	HostingCreateWebsiteRedirectV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingCreateWebsiteRedirectV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingCreateWebsiteRedirectV1Response, error)
+
 	// HostingListWebsiteSubdomainsV1WithResponse List website subdomains
 	//
 	// Retrieve all subdomains created under the selected website.
@@ -59116,6 +59507,193 @@ func (r HostingUpdatePHPVersionV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingUpdatePHPVersionV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingDeleteWebsiteRedirectV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingDeleteWebsiteRedirectV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingDeleteWebsiteRedirectV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingDeleteWebsiteRedirectV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingDeleteWebsiteRedirectV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingDeleteWebsiteRedirectV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingDeleteWebsiteRedirectV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingDeleteWebsiteRedirectV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingDeleteWebsiteRedirectV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingListWebsiteRedirectsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *struct {
+		// Data Array of [`Hosting.V1.Redirects.RedirectResource`](#model/hostingv1redirectsredirectresource)
+		Data *HostingV1RedirectsRedirectCollection `json:"data,omitempty"`
+		Meta *CommonSchemaPaginationMetaSchema     `json:"meta,omitempty"`
+	}
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingListWebsiteRedirectsV1Response) GetJSON200() *struct {
+	// Data Array of [`Hosting.V1.Redirects.RedirectResource`](#model/hostingv1redirectsredirectresource)
+	Data *HostingV1RedirectsRedirectCollection `json:"data,omitempty"`
+	Meta *CommonSchemaPaginationMetaSchema     `json:"meta,omitempty"`
+} {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingListWebsiteRedirectsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingListWebsiteRedirectsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingListWebsiteRedirectsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingListWebsiteRedirectsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingListWebsiteRedirectsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingListWebsiteRedirectsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingCreateWebsiteRedirectV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1RedirectsRedirectResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingCreateWebsiteRedirectV1Response) GetJSON200() *HostingV1RedirectsRedirectResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingCreateWebsiteRedirectV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingCreateWebsiteRedirectV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingCreateWebsiteRedirectV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingCreateWebsiteRedirectV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingCreateWebsiteRedirectV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingCreateWebsiteRedirectV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingCreateWebsiteRedirectV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -74597,6 +75175,68 @@ func (c *ClientWithResponses) HostingUpdatePHPVersionV1WithResponse(ctx context.
 	return ParseHostingUpdatePHPVersionV1Response(rsp)
 }
 
+// HostingDeleteWebsiteRedirectV1WithResponse Delete website redirect
+//
+// Permanently deletes the redirect identified by its source URL.
+//
+// Pass the `from` value exactly as returned by the list redirects endpoint.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/redirects (the `HostingDeleteWebsiteRedirectV1` operationId).
+func (c *ClientWithResponses) HostingDeleteWebsiteRedirectV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingDeleteWebsiteRedirectV1Params, reqEditors ...RequestEditorFn) (*HostingDeleteWebsiteRedirectV1Response, error) {
+	rsp, err := c.HostingDeleteWebsiteRedirectV1(ctx, username, domain, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingDeleteWebsiteRedirectV1Response(rsp)
+}
+
+// HostingListWebsiteRedirectsV1WithResponse List website redirects
+//
+// Returns a paginated list of redirects configured for the selected website.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/redirects (the `HostingListWebsiteRedirectsV1` operationId).
+func (c *ClientWithResponses) HostingListWebsiteRedirectsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingListWebsiteRedirectsV1Params, reqEditors ...RequestEditorFn) (*HostingListWebsiteRedirectsV1Response, error) {
+	rsp, err := c.HostingListWebsiteRedirectsV1(ctx, username, domain, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingListWebsiteRedirectsV1Response(rsp)
+}
+
+// HostingCreateWebsiteRedirectV1WithBodyWithResponse Create website redirect
+//
+// Creates a redirect from a URL on the selected website to another URL or IP address.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/redirects (the `HostingCreateWebsiteRedirectV1` operationId).
+func (c *ClientWithResponses) HostingCreateWebsiteRedirectV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingCreateWebsiteRedirectV1Response, error) {
+	rsp, err := c.HostingCreateWebsiteRedirectV1WithBody(ctx, username, domain, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingCreateWebsiteRedirectV1Response(rsp)
+}
+
+// HostingCreateWebsiteRedirectV1WithResponse Create website redirect
+//
+// Creates a redirect from a URL on the selected website to another URL or IP address.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/redirects (the `HostingCreateWebsiteRedirectV1` operationId).
+func (c *ClientWithResponses) HostingCreateWebsiteRedirectV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingCreateWebsiteRedirectV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingCreateWebsiteRedirectV1Response, error) {
+	rsp, err := c.HostingCreateWebsiteRedirectV1(ctx, username, domain, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingCreateWebsiteRedirectV1Response(rsp)
+}
+
 // HostingListWebsiteSubdomainsV1WithResponse List website subdomains
 //
 // Retrieve all subdomains created under the selected website.
@@ -85338,6 +85978,144 @@ func ParseHostingUpdatePHPVersionV1Response(rsp *http.Response) (*HostingUpdateP
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingDeleteWebsiteRedirectV1Response parses an HTTP response from a HostingDeleteWebsiteRedirectV1WithResponse call
+func ParseHostingDeleteWebsiteRedirectV1Response(rsp *http.Response) (*HostingDeleteWebsiteRedirectV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingDeleteWebsiteRedirectV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingListWebsiteRedirectsV1Response parses an HTTP response from a HostingListWebsiteRedirectsV1WithResponse call
+func ParseHostingListWebsiteRedirectsV1Response(rsp *http.Response) (*HostingListWebsiteRedirectsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingListWebsiteRedirectsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			// Data Array of [`Hosting.V1.Redirects.RedirectResource`](#model/hostingv1redirectsredirectresource)
+			Data *HostingV1RedirectsRedirectCollection `json:"data,omitempty"`
+			Meta *CommonSchemaPaginationMetaSchema     `json:"meta,omitempty"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingCreateWebsiteRedirectV1Response parses an HTTP response from a HostingCreateWebsiteRedirectV1WithResponse call
+func ParseHostingCreateWebsiteRedirectV1Response(rsp *http.Response) (*HostingCreateWebsiteRedirectV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingCreateWebsiteRedirectV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1RedirectsRedirectResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
