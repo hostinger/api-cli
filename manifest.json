@@ -1454,6 +1454,16 @@
     "method": "GET",
     "path": "/api/reach/v1/profiles/{profileUuid}/automations/{automationUuid}"
   },
+  "reach_getCampaignDetailsV1": {
+    "command": "hostinger reach campaigns get",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid}"
+  },
+  "reach_getCampaignPerformanceV1": {
+    "command": "hostinger reach campaigns performance",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid}/statistics"
+  },
   "reach_getContactDetailsV1": {
     "command": "hostinger reach contacts get",
     "method": "GET",
@@ -1483,6 +1493,11 @@
     "command": "hostinger reach automations list",
     "method": "GET",
     "path": "/api/reach/v1/profiles/{profileUuid}/automations"
+  },
+  "reach_listCampaignsV1": {
+    "command": "hostinger reach campaigns list",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/campaigns"
   },
   "reach_listContactFieldsV1": {
     "command": "hostinger reach contact-fields list",

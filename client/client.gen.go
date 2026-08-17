@@ -1491,6 +1491,102 @@ func (e ReachV1AutomationsStepsAutomationStepResourceValue) Valid() bool {
 	}
 }
 
+// Defines values for ReachV1CampaignsCampaignDetailsResourceStatus.
+const (
+	ReachV1CampaignsCampaignDetailsResourceStatusDraft     ReachV1CampaignsCampaignDetailsResourceStatus = "draft"
+	ReachV1CampaignsCampaignDetailsResourceStatusFailed    ReachV1CampaignsCampaignDetailsResourceStatus = "failed"
+	ReachV1CampaignsCampaignDetailsResourceStatusPublish   ReachV1CampaignsCampaignDetailsResourceStatus = "publish"
+	ReachV1CampaignsCampaignDetailsResourceStatusScheduled ReachV1CampaignsCampaignDetailsResourceStatus = "scheduled"
+	ReachV1CampaignsCampaignDetailsResourceStatusSending   ReachV1CampaignsCampaignDetailsResourceStatus = "sending"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1CampaignsCampaignDetailsResourceStatus enum.
+func (e ReachV1CampaignsCampaignDetailsResourceStatus) Valid() bool {
+	switch e {
+	case ReachV1CampaignsCampaignDetailsResourceStatusDraft:
+		return true
+	case ReachV1CampaignsCampaignDetailsResourceStatusFailed:
+		return true
+	case ReachV1CampaignsCampaignDetailsResourceStatusPublish:
+		return true
+	case ReachV1CampaignsCampaignDetailsResourceStatusScheduled:
+		return true
+	case ReachV1CampaignsCampaignDetailsResourceStatusSending:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1CampaignsCampaignDetailsResourceType.
+const (
+	ReachV1CampaignsCampaignDetailsResourceTypeAutomation  ReachV1CampaignsCampaignDetailsResourceType = "automation"
+	ReachV1CampaignsCampaignDetailsResourceTypeCampaign    ReachV1CampaignsCampaignDetailsResourceType = "campaign"
+	ReachV1CampaignsCampaignDetailsResourceTypeDoubleOptIn ReachV1CampaignsCampaignDetailsResourceType = "double_opt_in"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1CampaignsCampaignDetailsResourceType enum.
+func (e ReachV1CampaignsCampaignDetailsResourceType) Valid() bool {
+	switch e {
+	case ReachV1CampaignsCampaignDetailsResourceTypeAutomation:
+		return true
+	case ReachV1CampaignsCampaignDetailsResourceTypeCampaign:
+		return true
+	case ReachV1CampaignsCampaignDetailsResourceTypeDoubleOptIn:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1CampaignsCampaignResourceStatus.
+const (
+	ReachV1CampaignsCampaignResourceStatusDraft     ReachV1CampaignsCampaignResourceStatus = "draft"
+	ReachV1CampaignsCampaignResourceStatusFailed    ReachV1CampaignsCampaignResourceStatus = "failed"
+	ReachV1CampaignsCampaignResourceStatusPublish   ReachV1CampaignsCampaignResourceStatus = "publish"
+	ReachV1CampaignsCampaignResourceStatusScheduled ReachV1CampaignsCampaignResourceStatus = "scheduled"
+	ReachV1CampaignsCampaignResourceStatusSending   ReachV1CampaignsCampaignResourceStatus = "sending"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1CampaignsCampaignResourceStatus enum.
+func (e ReachV1CampaignsCampaignResourceStatus) Valid() bool {
+	switch e {
+	case ReachV1CampaignsCampaignResourceStatusDraft:
+		return true
+	case ReachV1CampaignsCampaignResourceStatusFailed:
+		return true
+	case ReachV1CampaignsCampaignResourceStatusPublish:
+		return true
+	case ReachV1CampaignsCampaignResourceStatusScheduled:
+		return true
+	case ReachV1CampaignsCampaignResourceStatusSending:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1CampaignsCampaignResourceType.
+const (
+	ReachV1CampaignsCampaignResourceTypeAutomation  ReachV1CampaignsCampaignResourceType = "automation"
+	ReachV1CampaignsCampaignResourceTypeCampaign    ReachV1CampaignsCampaignResourceType = "campaign"
+	ReachV1CampaignsCampaignResourceTypeDoubleOptIn ReachV1CampaignsCampaignResourceType = "double_opt_in"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1CampaignsCampaignResourceType enum.
+func (e ReachV1CampaignsCampaignResourceType) Valid() bool {
+	switch e {
+	case ReachV1CampaignsCampaignResourceTypeAutomation:
+		return true
+	case ReachV1CampaignsCampaignResourceTypeCampaign:
+		return true
+	case ReachV1CampaignsCampaignResourceTypeDoubleOptIn:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for ReachV1ContactsContactDetailsResourceSource.
 const (
 	ReachV1ContactsContactDetailsResourceSourceApi      ReachV1ContactsContactDetailsResourceSource = "api"
@@ -3084,6 +3180,72 @@ func (e ReachAutomationStatus) Valid() bool {
 	}
 }
 
+// Defines values for ReachCampaignSortDirection.
+const (
+	ReachCampaignSortDirectionAsc  ReachCampaignSortDirection = "asc"
+	ReachCampaignSortDirectionDesc ReachCampaignSortDirection = "desc"
+)
+
+// Valid indicates whether the value is a known member of the ReachCampaignSortDirection enum.
+func (e ReachCampaignSortDirection) Valid() bool {
+	switch e {
+	case ReachCampaignSortDirectionAsc:
+		return true
+	case ReachCampaignSortDirectionDesc:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachCampaignStatus.
+const (
+	ReachCampaignStatusDraft     ReachCampaignStatus = "draft"
+	ReachCampaignStatusFailed    ReachCampaignStatus = "failed"
+	ReachCampaignStatusPublish   ReachCampaignStatus = "publish"
+	ReachCampaignStatusScheduled ReachCampaignStatus = "scheduled"
+	ReachCampaignStatusSending   ReachCampaignStatus = "sending"
+)
+
+// Valid indicates whether the value is a known member of the ReachCampaignStatus enum.
+func (e ReachCampaignStatus) Valid() bool {
+	switch e {
+	case ReachCampaignStatusDraft:
+		return true
+	case ReachCampaignStatusFailed:
+		return true
+	case ReachCampaignStatusPublish:
+		return true
+	case ReachCampaignStatusScheduled:
+		return true
+	case ReachCampaignStatusSending:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachCampaignType.
+const (
+	ReachCampaignTypeAutomation  ReachCampaignType = "automation"
+	ReachCampaignTypeCampaign    ReachCampaignType = "campaign"
+	ReachCampaignTypeDoubleOptIn ReachCampaignType = "double_opt_in"
+)
+
+// Valid indicates whether the value is a known member of the ReachCampaignType enum.
+func (e ReachCampaignType) Valid() bool {
+	switch e {
+	case ReachCampaignTypeAutomation:
+		return true
+	case ReachCampaignTypeCampaign:
+		return true
+	case ReachCampaignTypeDoubleOptIn:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for SubscriptionStatus.
 const (
 	SubscriptionStatusConfirmed    SubscriptionStatus = "confirmed"
@@ -3549,6 +3711,72 @@ func (e ReachListAutomationsV1ParamsSortDirection) Valid() bool {
 	case ReachListAutomationsV1ParamsSortDirectionAsc:
 		return true
 	case ReachListAutomationsV1ParamsSortDirectionDesc:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachListCampaignsV1ParamsStatus.
+const (
+	ReachListCampaignsV1ParamsStatusDraft     ReachListCampaignsV1ParamsStatus = "draft"
+	ReachListCampaignsV1ParamsStatusFailed    ReachListCampaignsV1ParamsStatus = "failed"
+	ReachListCampaignsV1ParamsStatusPublish   ReachListCampaignsV1ParamsStatus = "publish"
+	ReachListCampaignsV1ParamsStatusScheduled ReachListCampaignsV1ParamsStatus = "scheduled"
+	ReachListCampaignsV1ParamsStatusSending   ReachListCampaignsV1ParamsStatus = "sending"
+)
+
+// Valid indicates whether the value is a known member of the ReachListCampaignsV1ParamsStatus enum.
+func (e ReachListCampaignsV1ParamsStatus) Valid() bool {
+	switch e {
+	case ReachListCampaignsV1ParamsStatusDraft:
+		return true
+	case ReachListCampaignsV1ParamsStatusFailed:
+		return true
+	case ReachListCampaignsV1ParamsStatusPublish:
+		return true
+	case ReachListCampaignsV1ParamsStatusScheduled:
+		return true
+	case ReachListCampaignsV1ParamsStatusSending:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachListCampaignsV1ParamsType.
+const (
+	ReachListCampaignsV1ParamsTypeAutomation  ReachListCampaignsV1ParamsType = "automation"
+	ReachListCampaignsV1ParamsTypeCampaign    ReachListCampaignsV1ParamsType = "campaign"
+	ReachListCampaignsV1ParamsTypeDoubleOptIn ReachListCampaignsV1ParamsType = "double_opt_in"
+)
+
+// Valid indicates whether the value is a known member of the ReachListCampaignsV1ParamsType enum.
+func (e ReachListCampaignsV1ParamsType) Valid() bool {
+	switch e {
+	case ReachListCampaignsV1ParamsTypeAutomation:
+		return true
+	case ReachListCampaignsV1ParamsTypeCampaign:
+		return true
+	case ReachListCampaignsV1ParamsTypeDoubleOptIn:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachListCampaignsV1ParamsSortDirection.
+const (
+	ReachListCampaignsV1ParamsSortDirectionAsc  ReachListCampaignsV1ParamsSortDirection = "asc"
+	ReachListCampaignsV1ParamsSortDirectionDesc ReachListCampaignsV1ParamsSortDirection = "desc"
+)
+
+// Valid indicates whether the value is a known member of the ReachListCampaignsV1ParamsSortDirection enum.
+func (e ReachListCampaignsV1ParamsSortDirection) Valid() bool {
+	switch e {
+	case ReachListCampaignsV1ParamsSortDirectionAsc:
+		return true
+	case ReachListCampaignsV1ParamsSortDirectionDesc:
 		return true
 	default:
 		return false
@@ -8402,6 +8630,245 @@ type ReachV1AutomationsStepsAutomationStepResourceType string
 // Example: send_email
 type ReachV1AutomationsStepsAutomationStepResourceValue string
 
+// ReachV1CampaignsCampaignCollection Array of [`Reach.V1.Campaigns.CampaignResource`](#model/reachv1campaignscampaignresource)
+type ReachV1CampaignsCampaignCollection = []ReachV1CampaignsCampaignResource
+
+// ReachV1CampaignsCampaignDeliveryResource Delivery progress. While the campaign is `sending`, `total_sent` climbs towards the estimate.
+type ReachV1CampaignsCampaignDeliveryResource struct {
+	// EstimatedTotalRecipients Recipients this campaign was estimated to reach when sending started. Null for
+	// campaigns that have not started sending.
+	//
+	// Example: 900
+	EstimatedTotalRecipients *int `json:"estimated_total_recipients,omitempty"`
+
+	// SubscribersCount Contacts currently targeted by this campaign.
+	//
+	// Example: 900
+	SubscribersCount *int `json:"subscribers_count,omitempty"`
+
+	// TotalSent Emails sent so far.
+	//
+	// Example: 100
+	TotalSent *int `json:"total_sent,omitempty"`
+}
+
+// ReachV1CampaignsCampaignDetailsResource defines model for Reach.V1.Campaigns.CampaignDetailsResource.
+type ReachV1CampaignsCampaignDetailsResource struct {
+	// CreatedAt Example: 2025-02-27T11:54:22Z
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Delivery Delivery progress. While the campaign is `sending`, `total_sent` climbs towards the estimate.
+	Delivery *ReachV1CampaignsCampaignDeliveryResource `json:"delivery,omitempty"`
+
+	// FailureReason Set only while the status is `failed`.
+	//
+	// Example: sending_limit_reached
+	FailureReason *string `json:"failure_reason,omitempty"`
+
+	// IsAllContacts Whether the campaign targets every contact instead of the listed segments.
+	//
+	// Example: false
+	IsAllContacts *bool `json:"is_all_contacts,omitempty"`
+
+	// IsSmartSend Whether delivery time is picked per contact rather than sent to everyone at once.
+	//
+	// Example: false
+	IsSmartSend *bool `json:"is_smart_send,omitempty"`
+
+	// ScheduledAt Example: 2025-03-04T08:00:00Z
+	ScheduledAt *time.Time `json:"scheduled_at,omitempty"`
+
+	// SegmentUuids Segments this campaign targets. Empty when it targets all contacts.
+	SegmentUuids *[]string `json:"segment_uuids,omitempty"`
+
+	// SenderEmail Example: marketing@example.com
+	SenderEmail *string `json:"sender_email,omitempty"`
+
+	// SenderName Example: Marketing Team
+	SenderName *string `json:"sender_name,omitempty"`
+
+	// SentAt Example: 2025-03-04T09:12:07Z
+	SentAt *time.Time `json:"sent_at,omitempty"`
+
+	// Status A fully sent campaign is `publish`. There is no `sent`, `paused` or `archived` status.
+	//
+	// Example: publish
+	Status *ReachV1CampaignsCampaignDetailsResourceStatus `json:"status,omitempty"`
+
+	// Subject Example: Don't miss our Black Friday deals!
+	Subject *string `json:"subject,omitempty"`
+
+	// TemplateUuid The email template this campaign uses. The template title is not exposed.
+	//
+	// Example: 2080cc86-e026-4f7b-9598-d4132f8c7c2f
+	TemplateUuid *string `json:"template_uuid,omitempty"`
+
+	// Title Example: Black Friday Campaign
+	Title *string `json:"title,omitempty"`
+
+	// Type Example: campaign
+	Type *ReachV1CampaignsCampaignDetailsResourceType `json:"type,omitempty"`
+
+	// UpdatedAt Example: 2025-03-04T09:12:07Z
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+
+	// Uuid Example: 550e8400-e29b-41d4-a716-446655440000
+	Uuid *string `json:"uuid,omitempty"`
+}
+
+// ReachV1CampaignsCampaignDetailsResourceStatus A fully sent campaign is `publish`. There is no `sent`, `paused` or `archived` status.
+//
+// Example: publish
+type ReachV1CampaignsCampaignDetailsResourceStatus string
+
+// ReachV1CampaignsCampaignDetailsResourceType Example: campaign
+type ReachV1CampaignsCampaignDetailsResourceType string
+
+// ReachV1CampaignsCampaignResource defines model for Reach.V1.Campaigns.CampaignResource.
+type ReachV1CampaignsCampaignResource struct {
+	// CreatedAt Example: 2025-02-27T11:54:22Z
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// ScheduledAt Example: 2025-03-04T08:00:00Z
+	ScheduledAt *time.Time `json:"scheduled_at,omitempty"`
+
+	// SenderEmail Example: marketing@example.com
+	SenderEmail *string `json:"sender_email,omitempty"`
+
+	// SenderName Example: Marketing Team
+	SenderName *string `json:"sender_name,omitempty"`
+
+	// SentAt Example: 2025-03-04T09:12:07Z
+	SentAt *time.Time `json:"sent_at,omitempty"`
+
+	// Statistics Headline engagement rates. The statistics endpoint carries the full breakdown.
+	Statistics *ReachV1CampaignsCampaignSummaryStatisticsResource `json:"statistics,omitempty"`
+
+	// Status A fully sent campaign is `publish`. There is no `sent`, `paused` or `archived` status.
+	//
+	// Example: publish
+	Status *ReachV1CampaignsCampaignResourceStatus `json:"status,omitempty"`
+
+	// Subject Example: Don't miss our Black Friday deals!
+	Subject *string `json:"subject,omitempty"`
+
+	// TemplateUuid The email template this campaign uses. The template title is not exposed.
+	//
+	// Example: 2080cc86-e026-4f7b-9598-d4132f8c7c2f
+	TemplateUuid *string `json:"template_uuid,omitempty"`
+
+	// Title Example: Black Friday Campaign
+	Title *string `json:"title,omitempty"`
+
+	// Type Example: campaign
+	Type *ReachV1CampaignsCampaignResourceType `json:"type,omitempty"`
+
+	// UpdatedAt Example: 2025-03-04T09:12:07Z
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+
+	// Uuid Example: 550e8400-e29b-41d4-a716-446655440000
+	Uuid *string `json:"uuid,omitempty"`
+}
+
+// ReachV1CampaignsCampaignResourceStatus A fully sent campaign is `publish`. There is no `sent`, `paused` or `archived` status.
+//
+// Example: publish
+type ReachV1CampaignsCampaignResourceStatus string
+
+// ReachV1CampaignsCampaignResourceType Example: campaign
+type ReachV1CampaignsCampaignResourceType string
+
+// ReachV1CampaignsCampaignStatisticsResource Campaign performance. Every count is unique contacts rather than raw events, so a contact
+// who opens the same email five times is counted once.
+type ReachV1CampaignsCampaignStatisticsResource struct {
+	// BouncedCount Example: 8
+	BouncedCount *int `json:"bounced_count,omitempty"`
+
+	// ClickRate Percentage of sent emails that got a click.
+	//
+	// Example: 10
+	ClickRate *float32 `json:"click_rate,omitempty"`
+
+	// ClickToOpenRate Percentage of the contacts who opened that went on to click.
+	//
+	// Example: 23.5
+	ClickToOpenRate *float32 `json:"click_to_open_rate,omitempty"`
+
+	// ClickedCount Contacts who clicked a link. Only clicks from contacts who also registered an open count.
+	//
+	// Example: 10
+	ClickedCount *int `json:"clicked_count,omitempty"`
+
+	// DeliveredCount Example: 90
+	DeliveredCount *int `json:"delivered_count,omitempty"`
+
+	// DroppedCount Example: 2
+	DroppedCount *int `json:"dropped_count,omitempty"`
+
+	// EstimatedTotalRecipients Recipients this campaign was estimated to reach when sending started. Null for
+	// campaigns that have not started sending.
+	//
+	// Example: 900
+	EstimatedTotalRecipients *int `json:"estimated_total_recipients,omitempty"`
+
+	// HasBouncedContacts Example: false
+	HasBouncedContacts *bool `json:"has_bounced_contacts,omitempty"`
+
+	// OpenRate Percentage of sent emails that were opened.
+	//
+	// Example: 42.5
+	OpenRate *float32 `json:"open_rate,omitempty"`
+
+	// OpenedCount Contacts who opened this campaign.
+	//
+	// Example: 80
+	OpenedCount *int `json:"opened_count,omitempty"`
+
+	// ProcessedCount Example: 100
+	ProcessedCount *int `json:"processed_count,omitempty"`
+
+	// SoftBouncedCount Example: 3
+	SoftBouncedCount *int `json:"soft_bounced_count,omitempty"`
+
+	// TotalSent Emails sent for this campaign, and the denominator of every rate below.
+	//
+	// Example: 100
+	TotalSent *int `json:"total_sent,omitempty"`
+
+	// UnsubscribeRate Percentage of sent emails that led to an unsubscribe.
+	//
+	// Example: 1.5
+	UnsubscribeRate *float32 `json:"unsubscribe_rate,omitempty"`
+
+	// UnsubscribedCount Contacts who unsubscribed through this campaign.
+	//
+	// Example: 5
+	UnsubscribedCount *int `json:"unsubscribed_count,omitempty"`
+}
+
+// ReachV1CampaignsCampaignSummaryStatisticsResource Headline engagement rates. The statistics endpoint carries the full breakdown.
+type ReachV1CampaignsCampaignSummaryStatisticsResource struct {
+	// ClickRate Percentage of sent emails that got a click.
+	//
+	// Example: 10
+	ClickRate *float32 `json:"click_rate,omitempty"`
+
+	// ClickToOpenRate Percentage of the contacts who opened that went on to click.
+	//
+	// Example: 23.5
+	ClickToOpenRate *float32 `json:"click_to_open_rate,omitempty"`
+
+	// OpenRate Percentage of sent emails that were opened.
+	//
+	// Example: 42.5
+	OpenRate *float32 `json:"open_rate,omitempty"`
+
+	// TotalSent Emails sent for this campaign, and the denominator of the rates below.
+	//
+	// Example: 100
+	TotalSent *int `json:"total_sent,omitempty"`
+}
+
 // ReachV1ContactsBulkStoreRequest Create many contacts in one call
 type ReachV1ContactsBulkStoreRequest struct {
 	Contacts []struct {
@@ -10881,6 +11348,9 @@ type BackupId = int
 // BuildUuidPath Example: 123e4567-e89b-12d3-a456-426614174000
 type BuildUuidPath = openapi_types.UUID
 
+// CampaignUuid Example: 550e8400-e09b-41d4-a716-400055000000
+type CampaignUuid = string
+
 // Category Example: VPS
 type Category string
 
@@ -11060,6 +11530,15 @@ type ReachAutomationSortDirection string
 
 // ReachAutomationStatus Example: active
 type ReachAutomationStatus string
+
+// ReachCampaignSortDirection Example: desc
+type ReachCampaignSortDirection string
+
+// ReachCampaignStatus Example: publish
+type ReachCampaignStatus string
+
+// ReachCampaignType Example: campaign
+type ReachCampaignType string
 
 // RuleId Example: 8941182
 type RuleId = int
@@ -11765,6 +12244,39 @@ type ReachListAutomationsV1ParamsStatus string
 
 // ReachListAutomationsV1ParamsSortDirection defines parameters for ReachListAutomationsV1.
 type ReachListAutomationsV1ParamsSortDirection string
+
+// ReachListCampaignsV1Params defines parameters for ReachListCampaignsV1.
+type ReachListCampaignsV1Params struct {
+	// Status Filter campaigns by status.
+	//
+	// A fully sent campaign has the status `publish`. There is no `sent` status, and campaigns can
+	// be neither paused nor archived.
+	Status *ReachListCampaignsV1ParamsStatus `form:"status,omitempty" json:"status,omitempty"`
+
+	// Type Filter campaigns by type.
+	//
+	// Defaults to `campaign`, which leaves out the emails sent by automations and the double
+	// opt-in confirmations.
+	Type *ReachListCampaignsV1ParamsType `form:"type,omitempty" json:"type,omitempty"`
+
+	// SortDirection Order campaigns by creation date. Newest first unless set to `asc`.
+	SortDirection *ReachListCampaignsV1ParamsSortDirection `form:"sort_direction,omitempty" json:"sort_direction,omitempty"`
+
+	// Page Page number
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+
+	// PerPage Number of items per page
+	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
+}
+
+// ReachListCampaignsV1ParamsStatus defines parameters for ReachListCampaignsV1.
+type ReachListCampaignsV1ParamsStatus string
+
+// ReachListCampaignsV1ParamsType defines parameters for ReachListCampaignsV1.
+type ReachListCampaignsV1ParamsType string
+
+// ReachListCampaignsV1ParamsSortDirection defines parameters for ReachListCampaignsV1.
+type ReachListCampaignsV1ParamsSortDirection string
 
 // ReachListProfileContactsV1Params defines parameters for ReachListProfileContactsV1.
 type ReachListProfileContactsV1Params struct {
@@ -16898,6 +17410,40 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/automations/{automationUuid}/steps (the `ReachListAutomationStepsV1` operationId).
 	ReachListAutomationStepsV1(ctx context.Context, profileUuid ProfileUuid, automationUuid AutomationUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachListCampaignsV1 List campaigns
+	//
+	// Get a paginated list of the campaigns in a profile.
+	//
+	// Each campaign carries its headline engagement rates. Filter by status to find drafts,
+	// scheduled, sending or sent campaigns, keeping in mind that a fully sent campaign has the
+	// status `publish`. By default only regular campaigns are returned - pass `type` to get the
+	// emails sent by automations or the double opt-in confirmations instead.
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/campaigns (the `ReachListCampaignsV1` operationId).
+	ReachListCampaignsV1(ctx context.Context, profileUuid ProfileUuid, params *ReachListCampaignsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachGetCampaignDetailsV1 Get campaign details
+	//
+	// Get a single campaign with its sender, subject, template reference, targeting and delivery
+	// progress.
+	//
+	// This describes how the campaign was set up and how far it has got. For opens, clicks and
+	// unsubscribes use the campaign statistics endpoint.
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid} (the `ReachGetCampaignDetailsV1` operationId).
+	ReachGetCampaignDetailsV1(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachGetCampaignPerformanceV1 Get campaign performance
+	//
+	// Get the performance of a campaign: delivery, opens, clicks and unsubscribes, with the
+	// matching rates.
+	//
+	// Every count is unique contacts rather than raw events, so a contact who opens the same email
+	// five times is counted once.
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid}/statistics (the `ReachGetCampaignPerformanceV1` operationId).
+	ReachGetCampaignPerformanceV1(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReachListProfileContactsV1 List profile contacts
 	//
@@ -25177,6 +25723,70 @@ func (c *Client) ReachGetAutomationDetailsV1(ctx context.Context, profileUuid Pr
 // Corresponds with GET /api/reach/v1/profiles/{profileUuid}/automations/{automationUuid}/steps (the `ReachListAutomationStepsV1` operationId).
 func (c *Client) ReachListAutomationStepsV1(ctx context.Context, profileUuid ProfileUuid, automationUuid AutomationUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReachListAutomationStepsV1Request(c.Server, profileUuid, automationUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachListCampaignsV1 List campaigns
+//
+// Get a paginated list of the campaigns in a profile.
+//
+// Each campaign carries its headline engagement rates. Filter by status to find drafts,
+// scheduled, sending or sent campaigns, keeping in mind that a fully sent campaign has the
+// status `publish`. By default only regular campaigns are returned - pass `type` to get the
+// emails sent by automations or the double opt-in confirmations instead.
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/campaigns (the `ReachListCampaignsV1` operationId).
+func (c *Client) ReachListCampaignsV1(ctx context.Context, profileUuid ProfileUuid, params *ReachListCampaignsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachListCampaignsV1Request(c.Server, profileUuid, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachGetCampaignDetailsV1 Get campaign details
+//
+// Get a single campaign with its sender, subject, template reference, targeting and delivery
+// progress.
+//
+// This describes how the campaign was set up and how far it has got. For opens, clicks and
+// unsubscribes use the campaign statistics endpoint.
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid} (the `ReachGetCampaignDetailsV1` operationId).
+func (c *Client) ReachGetCampaignDetailsV1(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachGetCampaignDetailsV1Request(c.Server, profileUuid, campaignUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachGetCampaignPerformanceV1 Get campaign performance
+//
+// Get the performance of a campaign: delivery, opens, clicks and unsubscribes, with the
+// matching rates.
+//
+// Every count is unique contacts rather than raw events, so a contact who opens the same email
+// five times is counted once.
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid}/statistics (the `ReachGetCampaignPerformanceV1` operationId).
+func (c *Client) ReachGetCampaignPerformanceV1(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachGetCampaignPerformanceV1Request(c.Server, profileUuid, campaignUuid)
 	if err != nil {
 		return nil, err
 	}
@@ -38953,6 +39563,197 @@ func NewReachListAutomationStepsV1Request(server string, profileUuid ProfileUuid
 	return req, nil
 }
 
+// NewReachListCampaignsV1Request constructs an http.Request for the ReachListCampaignsV1 method
+func NewReachListCampaignsV1Request(server string, profileUuid ProfileUuid, params *ReachListCampaignsV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/campaigns", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Status != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "status", *params.Status, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Type != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "type", *params.Type, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.SortDirection != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sort_direction", *params.SortDirection, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Page != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page", *params.Page, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PerPage != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "per_page", *params.PerPage, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachGetCampaignDetailsV1Request constructs an http.Request for the ReachGetCampaignDetailsV1 method
+func NewReachGetCampaignDetailsV1Request(server string, profileUuid ProfileUuid, campaignUuid CampaignUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "campaignUuid", campaignUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/campaigns/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachGetCampaignPerformanceV1Request constructs an http.Request for the ReachGetCampaignPerformanceV1 method
+func NewReachGetCampaignPerformanceV1Request(server string, profileUuid ProfileUuid, campaignUuid CampaignUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "campaignUuid", campaignUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/campaigns/%s/statistics", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewReachListProfileContactsV1Request constructs an http.Request for the ReachListProfileContactsV1 method
 func NewReachListProfileContactsV1Request(server string, profileUuid ProfileUuid, params *ReachListProfileContactsV1Params) (*http.Request, error) {
 	var err error
@@ -47130,6 +47931,46 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/automations/{automationUuid}/steps (the `ReachListAutomationStepsV1` operationId).
 	ReachListAutomationStepsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, automationUuid AutomationUuid, reqEditors ...RequestEditorFn) (*ReachListAutomationStepsV1Response, error)
+
+	// ReachListCampaignsV1WithResponse List campaigns
+	//
+	// Get a paginated list of the campaigns in a profile.
+	//
+	// Each campaign carries its headline engagement rates. Filter by status to find drafts,
+	// scheduled, sending or sent campaigns, keeping in mind that a fully sent campaign has the
+	// status `publish`. By default only regular campaigns are returned - pass `type` to get the
+	// emails sent by automations or the double opt-in confirmations instead.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/campaigns (the `ReachListCampaignsV1` operationId).
+	ReachListCampaignsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, params *ReachListCampaignsV1Params, reqEditors ...RequestEditorFn) (*ReachListCampaignsV1Response, error)
+
+	// ReachGetCampaignDetailsV1WithResponse Get campaign details
+	//
+	// Get a single campaign with its sender, subject, template reference, targeting and delivery
+	// progress.
+	//
+	// This describes how the campaign was set up and how far it has got. For opens, clicks and
+	// unsubscribes use the campaign statistics endpoint.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid} (the `ReachGetCampaignDetailsV1` operationId).
+	ReachGetCampaignDetailsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, reqEditors ...RequestEditorFn) (*ReachGetCampaignDetailsV1Response, error)
+
+	// ReachGetCampaignPerformanceV1WithResponse Get campaign performance
+	//
+	// Get the performance of a campaign: delivery, opens, clicks and unsubscribes, with the
+	// matching rates.
+	//
+	// Every count is unique contacts rather than raw events, so a contact who opens the same email
+	// five times is counted once.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid}/statistics (the `ReachGetCampaignPerformanceV1` operationId).
+	ReachGetCampaignPerformanceV1WithResponse(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, reqEditors ...RequestEditorFn) (*ReachGetCampaignPerformanceV1Response, error)
 
 	// ReachListProfileContactsV1WithResponse List profile contacts
 	//
@@ -62273,6 +63114,179 @@ func (r ReachListAutomationStepsV1Response) ContentType() string {
 	return ""
 }
 
+type ReachListCampaignsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *struct {
+		// Data Array of [`Reach.V1.Campaigns.CampaignResource`](#model/reachv1campaignscampaignresource)
+		Data *ReachV1CampaignsCampaignCollection `json:"data,omitempty"`
+		Meta *CommonSchemaPaginationMetaSchema   `json:"meta,omitempty"`
+	}
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachListCampaignsV1Response) GetJSON200() *struct {
+	// Data Array of [`Reach.V1.Campaigns.CampaignResource`](#model/reachv1campaignscampaignresource)
+	Data *ReachV1CampaignsCampaignCollection `json:"data,omitempty"`
+	Meta *CommonSchemaPaginationMetaSchema   `json:"meta,omitempty"`
+} {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachListCampaignsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachListCampaignsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachListCampaignsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachListCampaignsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachListCampaignsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachListCampaignsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachGetCampaignDetailsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1CampaignsCampaignDetailsResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachGetCampaignDetailsV1Response) GetJSON200() *ReachV1CampaignsCampaignDetailsResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachGetCampaignDetailsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachGetCampaignDetailsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachGetCampaignDetailsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachGetCampaignDetailsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachGetCampaignDetailsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachGetCampaignDetailsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachGetCampaignPerformanceV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1CampaignsCampaignStatisticsResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachGetCampaignPerformanceV1Response) GetJSON200() *ReachV1CampaignsCampaignStatisticsResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachGetCampaignPerformanceV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachGetCampaignPerformanceV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachGetCampaignPerformanceV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachGetCampaignPerformanceV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachGetCampaignPerformanceV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachGetCampaignPerformanceV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type ReachListProfileContactsV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -73624,6 +74638,64 @@ func (c *ClientWithResponses) ReachListAutomationStepsV1WithResponse(ctx context
 		return nil, err
 	}
 	return ParseReachListAutomationStepsV1Response(rsp)
+}
+
+// ReachListCampaignsV1WithResponse List campaigns
+//
+// Get a paginated list of the campaigns in a profile.
+//
+// Each campaign carries its headline engagement rates. Filter by status to find drafts,
+// scheduled, sending or sent campaigns, keeping in mind that a fully sent campaign has the
+// status `publish`. By default only regular campaigns are returned - pass `type` to get the
+// emails sent by automations or the double opt-in confirmations instead.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/campaigns (the `ReachListCampaignsV1` operationId).
+func (c *ClientWithResponses) ReachListCampaignsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, params *ReachListCampaignsV1Params, reqEditors ...RequestEditorFn) (*ReachListCampaignsV1Response, error) {
+	rsp, err := c.ReachListCampaignsV1(ctx, profileUuid, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachListCampaignsV1Response(rsp)
+}
+
+// ReachGetCampaignDetailsV1WithResponse Get campaign details
+//
+// Get a single campaign with its sender, subject, template reference, targeting and delivery
+// progress.
+//
+// This describes how the campaign was set up and how far it has got. For opens, clicks and
+// unsubscribes use the campaign statistics endpoint.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid} (the `ReachGetCampaignDetailsV1` operationId).
+func (c *ClientWithResponses) ReachGetCampaignDetailsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, reqEditors ...RequestEditorFn) (*ReachGetCampaignDetailsV1Response, error) {
+	rsp, err := c.ReachGetCampaignDetailsV1(ctx, profileUuid, campaignUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachGetCampaignDetailsV1Response(rsp)
+}
+
+// ReachGetCampaignPerformanceV1WithResponse Get campaign performance
+//
+// Get the performance of a campaign: delivery, opens, clicks and unsubscribes, with the
+// matching rates.
+//
+// Every count is unique contacts rather than raw events, so a contact who opens the same email
+// five times is counted once.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid}/statistics (the `ReachGetCampaignPerformanceV1` operationId).
+func (c *ClientWithResponses) ReachGetCampaignPerformanceV1WithResponse(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, reqEditors ...RequestEditorFn) (*ReachGetCampaignPerformanceV1Response, error) {
+	rsp, err := c.ReachGetCampaignPerformanceV1(ctx, profileUuid, campaignUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachGetCampaignPerformanceV1Response(rsp)
 }
 
 // ReachListProfileContactsV1WithResponse List profile contacts
@@ -86065,6 +87137,130 @@ func ParseReachListAutomationStepsV1Response(rsp *http.Response) (*ReachListAuto
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest ReachV1AutomationsStepsAutomationStepCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachListCampaignsV1Response parses an HTTP response from a ReachListCampaignsV1WithResponse call
+func ParseReachListCampaignsV1Response(rsp *http.Response) (*ReachListCampaignsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachListCampaignsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			// Data Array of [`Reach.V1.Campaigns.CampaignResource`](#model/reachv1campaignscampaignresource)
+			Data *ReachV1CampaignsCampaignCollection `json:"data,omitempty"`
+			Meta *CommonSchemaPaginationMetaSchema   `json:"meta,omitempty"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachGetCampaignDetailsV1Response parses an HTTP response from a ReachGetCampaignDetailsV1WithResponse call
+func ParseReachGetCampaignDetailsV1Response(rsp *http.Response) (*ReachGetCampaignDetailsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachGetCampaignDetailsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1CampaignsCampaignDetailsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachGetCampaignPerformanceV1Response parses an HTTP response from a ReachGetCampaignPerformanceV1WithResponse call
+func ParseReachGetCampaignPerformanceV1Response(rsp *http.Response) (*ReachGetCampaignPerformanceV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachGetCampaignPerformanceV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1CampaignsCampaignStatisticsResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

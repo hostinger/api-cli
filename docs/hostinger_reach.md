@@ -19,6 +19,7 @@ Reach commands
 
 * [hostinger](hostinger.md)	 - Hostinger API Command Line Interface
 * [hostinger reach automations](hostinger_reach_automations.md)	 - Automations commands
+* [hostinger reach campaigns](hostinger_reach_campaigns.md)	 - Campaigns commands
 * [hostinger reach contact-fields](hostinger_reach_contact-fields.md)	 - Contact Fields commands
 * [hostinger reach contacts](hostinger_reach_contacts.md)	 - Contacts commands
 * [hostinger reach profiles](hostinger_reach_profiles.md)	 - Profiles commands
