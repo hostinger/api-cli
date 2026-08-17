@@ -434,6 +434,11 @@
     "method": "POST",
     "path": "/api/agency-hosting/v1/websites/{website_uid}/domains"
   },
+  "agency-hosting_listAgencyPlanOrderDiskUsageMetricsV1": {
+    "command": "hostinger agency-hosting metrics list-plan-order-disk-usage",
+    "method": "GET",
+    "path": "/api/agency-hosting/v1/orders/{order_id}/disk-usage-metrics"
+  },
   "agency-hosting_listAvailableDatacentersV1": {
     "command": "hostinger agency-hosting datacenters list",
     "method": "GET",
@@ -458,6 +463,11 @@
     "command": "hostinger agency-hosting domains list",
     "method": "GET",
     "path": "/api/agency-hosting/v1/domains"
+  },
+  "agency-hosting_listOrderResourceUsageMetricsV1": {
+    "command": "hostinger agency-hosting metrics list-order-resource-usage",
+    "method": "GET",
+    "path": "/api/agency-hosting/v1/orders/{order_id}/resource-usage-metrics"
   },
   "agency-hosting_listOrdersV1": {
     "command": "hostinger agency-hosting orders list",

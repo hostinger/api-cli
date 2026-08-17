@@ -1070,22 +1070,22 @@ func (e HostingV1NodeJsCreateFromArchiveRequestAppType) Valid() bool {
 
 // Defines values for HostingV1NodeJsCreateFromArchiveRequestNodeVersion.
 const (
-	N18 HostingV1NodeJsCreateFromArchiveRequestNodeVersion = 18
-	N20 HostingV1NodeJsCreateFromArchiveRequestNodeVersion = 20
-	N22 HostingV1NodeJsCreateFromArchiveRequestNodeVersion = 22
-	N24 HostingV1NodeJsCreateFromArchiveRequestNodeVersion = 24
+	HostingV1NodeJsCreateFromArchiveRequestNodeVersionN18 HostingV1NodeJsCreateFromArchiveRequestNodeVersion = 18
+	HostingV1NodeJsCreateFromArchiveRequestNodeVersionN20 HostingV1NodeJsCreateFromArchiveRequestNodeVersion = 20
+	HostingV1NodeJsCreateFromArchiveRequestNodeVersionN22 HostingV1NodeJsCreateFromArchiveRequestNodeVersion = 22
+	HostingV1NodeJsCreateFromArchiveRequestNodeVersionN24 HostingV1NodeJsCreateFromArchiveRequestNodeVersion = 24
 )
 
 // Valid indicates whether the value is a known member of the HostingV1NodeJsCreateFromArchiveRequestNodeVersion enum.
 func (e HostingV1NodeJsCreateFromArchiveRequestNodeVersion) Valid() bool {
 	switch e {
-	case N18:
+	case HostingV1NodeJsCreateFromArchiveRequestNodeVersionN18:
 		return true
-	case N20:
+	case HostingV1NodeJsCreateFromArchiveRequestNodeVersionN20:
 		return true
-	case N22:
+	case HostingV1NodeJsCreateFromArchiveRequestNodeVersionN22:
 		return true
-	case N24:
+	case HostingV1NodeJsCreateFromArchiveRequestNodeVersionN24:
 		return true
 	default:
 		return false
@@ -3150,6 +3150,57 @@ func (e WordPressV1ThemesInstalledThemeResourceStatus) Valid() bool {
 	}
 }
 
+// Defines values for AgencyTimeFrameDays.
+const (
+	AgencyTimeFrameDaysN1  AgencyTimeFrameDays = 1
+	AgencyTimeFrameDaysN14 AgencyTimeFrameDays = 14
+	AgencyTimeFrameDaysN30 AgencyTimeFrameDays = 30
+	AgencyTimeFrameDaysN7  AgencyTimeFrameDays = 7
+)
+
+// Valid indicates whether the value is a known member of the AgencyTimeFrameDays enum.
+func (e AgencyTimeFrameDays) Valid() bool {
+	switch e {
+	case AgencyTimeFrameDaysN1:
+		return true
+	case AgencyTimeFrameDaysN14:
+		return true
+	case AgencyTimeFrameDaysN30:
+		return true
+	case AgencyTimeFrameDaysN7:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AgencyTimeFrameHours.
+const (
+	AgencyTimeFrameHoursN1   AgencyTimeFrameHours = 1
+	AgencyTimeFrameHoursN168 AgencyTimeFrameHours = 168
+	AgencyTimeFrameHoursN24  AgencyTimeFrameHours = 24
+	AgencyTimeFrameHoursN336 AgencyTimeFrameHours = 336
+	AgencyTimeFrameHoursN720 AgencyTimeFrameHours = 720
+)
+
+// Valid indicates whether the value is a known member of the AgencyTimeFrameHours enum.
+func (e AgencyTimeFrameHours) Valid() bool {
+	switch e {
+	case AgencyTimeFrameHoursN1:
+		return true
+	case AgencyTimeFrameHoursN168:
+		return true
+	case AgencyTimeFrameHoursN24:
+		return true
+	case AgencyTimeFrameHoursN336:
+		return true
+	case AgencyTimeFrameHoursN720:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for Category.
 const (
 	CategoryDOMAIN Category = "DOMAIN"
@@ -3468,6 +3519,57 @@ func (e SubscriptionStatus) Valid() bool {
 	case SubscriptionStatusSubscribed:
 		return true
 	case SubscriptionStatusUnsubscribed:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1ParamsTimeFrameDays.
+const (
+	AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1ParamsTimeFrameDaysN1  AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1ParamsTimeFrameDays = 1
+	AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1ParamsTimeFrameDaysN14 AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1ParamsTimeFrameDays = 14
+	AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1ParamsTimeFrameDaysN30 AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1ParamsTimeFrameDays = 30
+	AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1ParamsTimeFrameDaysN7  AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1ParamsTimeFrameDays = 7
+)
+
+// Valid indicates whether the value is a known member of the AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1ParamsTimeFrameDays enum.
+func (e AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1ParamsTimeFrameDays) Valid() bool {
+	switch e {
+	case AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1ParamsTimeFrameDaysN1:
+		return true
+	case AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1ParamsTimeFrameDaysN14:
+		return true
+	case AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1ParamsTimeFrameDaysN30:
+		return true
+	case AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1ParamsTimeFrameDaysN7:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AgencyHostingListOrderResourceUsageMetricsV1ParamsTimeFrameHours.
+const (
+	AgencyHostingListOrderResourceUsageMetricsV1ParamsTimeFrameHoursN1   AgencyHostingListOrderResourceUsageMetricsV1ParamsTimeFrameHours = 1
+	AgencyHostingListOrderResourceUsageMetricsV1ParamsTimeFrameHoursN168 AgencyHostingListOrderResourceUsageMetricsV1ParamsTimeFrameHours = 168
+	AgencyHostingListOrderResourceUsageMetricsV1ParamsTimeFrameHoursN24  AgencyHostingListOrderResourceUsageMetricsV1ParamsTimeFrameHours = 24
+	AgencyHostingListOrderResourceUsageMetricsV1ParamsTimeFrameHoursN336 AgencyHostingListOrderResourceUsageMetricsV1ParamsTimeFrameHours = 336
+	AgencyHostingListOrderResourceUsageMetricsV1ParamsTimeFrameHoursN720 AgencyHostingListOrderResourceUsageMetricsV1ParamsTimeFrameHours = 720
+)
+
+// Valid indicates whether the value is a known member of the AgencyHostingListOrderResourceUsageMetricsV1ParamsTimeFrameHours enum.
+func (e AgencyHostingListOrderResourceUsageMetricsV1ParamsTimeFrameHours) Valid() bool {
+	switch e {
+	case AgencyHostingListOrderResourceUsageMetricsV1ParamsTimeFrameHoursN1:
+		return true
+	case AgencyHostingListOrderResourceUsageMetricsV1ParamsTimeFrameHoursN168:
+		return true
+	case AgencyHostingListOrderResourceUsageMetricsV1ParamsTimeFrameHoursN24:
+		return true
+	case AgencyHostingListOrderResourceUsageMetricsV1ParamsTimeFrameHoursN336:
+		return true
+	case AgencyHostingListOrderResourceUsageMetricsV1ParamsTimeFrameHoursN720:
 		return true
 	default:
 		return false
@@ -4127,6 +4229,48 @@ type AgencyHostingV1OrdersDatacenterResource struct {
 	Country *string `json:"country,omitempty"`
 }
 
+// AgencyHostingV1OrdersDiskUsageMetricsLimitsResource defines model for AgencyHosting.V1.Orders.DiskUsageMetrics.LimitsResource.
+type AgencyHostingV1OrdersDiskUsageMetricsLimitsResource struct {
+	// DiskBytes Disk usage quota in bytes
+	//
+	// Example: 104857600
+	DiskBytes *int `json:"disk_bytes,omitempty"`
+
+	// Inodes Inodes quota
+	//
+	// Example: 400000
+	Inodes *int `json:"inodes,omitempty"`
+}
+
+// AgencyHostingV1OrdersDiskUsageMetricsMetricCollection Array of [`AgencyHosting.V1.Orders.DiskUsageMetrics.MetricResource`](#model/agencyhostingv1ordersdiskusagemetricsmetricresource)
+type AgencyHostingV1OrdersDiskUsageMetricsMetricCollection = []AgencyHostingV1OrdersDiskUsageMetricsMetricResource
+
+// AgencyHostingV1OrdersDiskUsageMetricsMetricResource defines model for AgencyHosting.V1.Orders.DiskUsageMetrics.MetricResource.
+type AgencyHostingV1OrdersDiskUsageMetricsMetricResource struct {
+	// DiskBytes Disk usage in bytes at this sample
+	//
+	// Example: 104857600
+	DiskBytes *int `json:"disk_bytes,omitempty"`
+
+	// Inodes Number of inodes used at this sample
+	//
+	// Example: 400000
+	Inodes *int `json:"inodes,omitempty"`
+
+	// Timestamp Unix timestamp of the sample
+	//
+	// Example: 1736325738
+	Timestamp *int `json:"timestamp,omitempty"`
+}
+
+// AgencyHostingV1OrdersDiskUsageMetricsMetricsResource defines model for AgencyHosting.V1.Orders.DiskUsageMetrics.MetricsResource.
+type AgencyHostingV1OrdersDiskUsageMetricsMetricsResource struct {
+	Limits *AgencyHostingV1OrdersDiskUsageMetricsLimitsResource `json:"limits,omitempty"`
+
+	// Metrics Array of [`AgencyHosting.V1.Orders.DiskUsageMetrics.MetricResource`](#model/agencyhostingv1ordersdiskusagemetricsmetricresource)
+	Metrics *AgencyHostingV1OrdersDiskUsageMetricsMetricCollection `json:"metrics,omitempty"`
+}
+
 // AgencyHostingV1OrdersOrderCollection Array of [`AgencyHosting.V1.Orders.OrderResource`](#model/agencyhostingv1ordersorderresource)
 type AgencyHostingV1OrdersOrderCollection = []AgencyHostingV1OrdersOrderResource
 
@@ -4173,6 +4317,80 @@ type AgencyHostingV1OrdersPlanResource struct {
 	//
 	// Example: Shared Business hosting
 	Name *string `json:"name,omitempty"`
+}
+
+// AgencyHostingV1OrdersResourceUsageMetricsLimitsResource defines model for AgencyHosting.V1.Orders.ResourceUsageMetrics.LimitsResource.
+type AgencyHostingV1OrdersResourceUsageMetricsLimitsResource struct {
+	// CpuPercent CPU usage quota in percent
+	//
+	// Example: 400
+	CpuPercent *int `json:"cpu_percent,omitempty"`
+
+	// MemoryBytes Memory usage quota in bytes
+	//
+	// Example: 104857600
+	MemoryBytes *int `json:"memory_bytes,omitempty"`
+
+	// Processes Process usage quota
+	//
+	// Example: 100
+	Processes *int `json:"processes,omitempty"`
+}
+
+// AgencyHostingV1OrdersResourceUsageMetricsMetricCollection Array of [`AgencyHosting.V1.Orders.ResourceUsageMetrics.MetricResource`](#model/agencyhostingv1ordersresourceusagemetricsmetricresource)
+type AgencyHostingV1OrdersResourceUsageMetricsMetricCollection = []AgencyHostingV1OrdersResourceUsageMetricsMetricResource
+
+// AgencyHostingV1OrdersResourceUsageMetricsMetricResource defines model for AgencyHosting.V1.Orders.ResourceUsageMetrics.MetricResource.
+type AgencyHostingV1OrdersResourceUsageMetricsMetricResource struct {
+	// CpuPercent CPU usage percentage at this sample
+	//
+	// Example: 15.5
+	CpuPercent *float32 `json:"cpu_percent,omitempty"`
+
+	// MemoryBytes Memory usage in bytes at this sample
+	//
+	// Example: 125829120
+	MemoryBytes *int `json:"memory_bytes,omitempty"`
+
+	// Processes Number of processes at this sample
+	//
+	// Example: 12
+	Processes *int `json:"processes,omitempty"`
+
+	// Timestamp Unix timestamp of the sample
+	//
+	// Example: 1736325738
+	Timestamp *int `json:"timestamp,omitempty"`
+}
+
+// AgencyHostingV1OrdersResourceUsageMetricsMetricsResource defines model for AgencyHosting.V1.Orders.ResourceUsageMetrics.MetricsResource.
+type AgencyHostingV1OrdersResourceUsageMetricsMetricsResource struct {
+	Limits *AgencyHostingV1OrdersResourceUsageMetricsLimitsResource `json:"limits,omitempty"`
+
+	// Metrics Array of [`AgencyHosting.V1.Orders.ResourceUsageMetrics.MetricResource`](#model/agencyhostingv1ordersresourceusagemetricsmetricresource)
+	Metrics *AgencyHostingV1OrdersResourceUsageMetricsMetricCollection `json:"metrics,omitempty"`
+
+	// Websites Array of [`AgencyHosting.V1.Orders.ResourceUsageMetrics.WebsiteResource`](#model/agencyhostingv1ordersresourceusagemetricswebsiteresource)
+	Websites *AgencyHostingV1OrdersResourceUsageMetricsWebsiteCollection `json:"websites,omitempty"`
+}
+
+// AgencyHostingV1OrdersResourceUsageMetricsWebsiteCollection Array of [`AgencyHosting.V1.Orders.ResourceUsageMetrics.WebsiteResource`](#model/agencyhostingv1ordersresourceusagemetricswebsiteresource)
+type AgencyHostingV1OrdersResourceUsageMetricsWebsiteCollection = []AgencyHostingV1OrdersResourceUsageMetricsWebsiteResource
+
+// AgencyHostingV1OrdersResourceUsageMetricsWebsiteResource defines model for AgencyHosting.V1.Orders.ResourceUsageMetrics.WebsiteResource.
+type AgencyHostingV1OrdersResourceUsageMetricsWebsiteResource struct {
+	// Domains Domains associated with the website
+	//
+	// Example: ["example.com","www.example.com"]
+	Domains *[]string `json:"domains,omitempty"`
+
+	// Metrics Array of [`AgencyHosting.V1.Orders.ResourceUsageMetrics.MetricResource`](#model/agencyhostingv1ordersresourceusagemetricsmetricresource)
+	Metrics *AgencyHostingV1OrdersResourceUsageMetricsMetricCollection `json:"metrics,omitempty"`
+
+	// Uid Website UID
+	//
+	// Example: cvDuwAOvq
+	Uid *string `json:"uid,omitempty"`
 }
 
 // AgencyHostingV1PhpExtensionCollection Array of [`AgencyHosting.V1.Php.ExtensionResource`](#model/agencyhostingv1phpextensionresource)
@@ -11858,6 +12076,12 @@ type AgencyDatabaseNamePath = string
 // AgencyDatabaseUserNamePath Example: my_user
 type AgencyDatabaseUserNamePath = string
 
+// AgencyTimeFrameDays Example: 7
+type AgencyTimeFrameDays int
+
+// AgencyTimeFrameHours Example: 168
+type AgencyTimeFrameHours int
+
 // AutomationUuid Example: 550e8400-e09b-41d4-a716-400055000000
 type AutomationUuid = string
 
@@ -12193,6 +12417,24 @@ type AgencyHostingListOrdersV1Params struct {
 	// PerPage Number of items per page
 	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
 }
+
+// AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Params defines parameters for AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1.
+type AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Params struct {
+	// TimeFrameDays Length of the window in days, ending now. Bucket size grows with the window.
+	TimeFrameDays *AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1ParamsTimeFrameDays `form:"time_frame_days,omitempty" json:"time_frame_days,omitempty"`
+}
+
+// AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1ParamsTimeFrameDays defines parameters for AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1.
+type AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1ParamsTimeFrameDays int
+
+// AgencyHostingListOrderResourceUsageMetricsV1Params defines parameters for AgencyHostingListOrderResourceUsageMetricsV1.
+type AgencyHostingListOrderResourceUsageMetricsV1Params struct {
+	// TimeFrameHours Length of the window in hours, ending now. Bucket size grows with the window.
+	TimeFrameHours *AgencyHostingListOrderResourceUsageMetricsV1ParamsTimeFrameHours `form:"time_frame_hours,omitempty" json:"time_frame_hours,omitempty"`
+}
+
+// AgencyHostingListOrderResourceUsageMetricsV1ParamsTimeFrameHours defines parameters for AgencyHostingListOrderResourceUsageMetricsV1.
+type AgencyHostingListOrderResourceUsageMetricsV1ParamsTimeFrameHours int
 
 // AgencyHostingListWebsiteCronJobsV1Params defines parameters for AgencyHostingListWebsiteCronJobsV1.
 type AgencyHostingListWebsiteCronJobsV1Params struct {
@@ -14247,6 +14489,28 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/datacenters (the `AgencyHostingListAvailableDatacentersV1` operationId).
 	AgencyHostingListAvailableDatacentersV1(ctx context.Context, orderId OrderIdPath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1 List Agency Plan order disk usage metrics
+	//
+	// Returns aggregated disk and inode usage for the Agency Plan order over the
+	// selected time frame, plus the plan quotas. Figures cover the whole order
+	// account. Values may be up to one hour stale. CPU, memory, and process usage
+	// are on the resource-usage-metrics endpoint.
+	//
+	// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/disk-usage-metrics (the `AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1` operationId).
+	AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1(ctx context.Context, orderId OrderIdPath, params *AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingListOrderResourceUsageMetricsV1 List order resource usage metrics
+	//
+	// Returns aggregated CPU, memory, and process usage for the Agency Plan order
+	// over the selected time frame, plus the plan quotas and a per-website
+	// breakdown. Each website is identified by uid. Suspended and deleted websites
+	// are excluded from both the order totals and the per-website breakdown.
+	// Values may be up to one hour stale. Disk and inode usage are on the
+	// disk-usage-metrics endpoint.
+	//
+	// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/resource-usage-metrics (the `AgencyHostingListOrderResourceUsageMetricsV1` operationId).
+	AgencyHostingListOrderResourceUsageMetricsV1(ctx context.Context, orderId OrderIdPath, params *AgencyHostingListOrderResourceUsageMetricsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// AgencyHostingListAvailablePHPVersionsForAnOrderV1 List available PHP versions for an order
 	//
@@ -19746,6 +20010,48 @@ func (c *Client) AgencyHostingListOrdersV1(ctx context.Context, params *AgencyHo
 // Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/datacenters (the `AgencyHostingListAvailableDatacentersV1` operationId).
 func (c *Client) AgencyHostingListAvailableDatacentersV1(ctx context.Context, orderId OrderIdPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewAgencyHostingListAvailableDatacentersV1Request(c.Server, orderId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1 List Agency Plan order disk usage metrics
+//
+// Returns aggregated disk and inode usage for the Agency Plan order over the
+// selected time frame, plus the plan quotas. Figures cover the whole order
+// account. Values may be up to one hour stale. CPU, memory, and process usage
+// are on the resource-usage-metrics endpoint.
+//
+// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/disk-usage-metrics (the `AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1` operationId).
+func (c *Client) AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1(ctx context.Context, orderId OrderIdPath, params *AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Request(c.Server, orderId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// AgencyHostingListOrderResourceUsageMetricsV1 List order resource usage metrics
+//
+// Returns aggregated CPU, memory, and process usage for the Agency Plan order
+// over the selected time frame, plus the plan quotas and a per-website
+// breakdown. Each website is identified by uid. Suspended and deleted websites
+// are excluded from both the order totals and the per-website breakdown.
+// Values may be up to one hour stale. Disk and inode usage are on the
+// disk-usage-metrics endpoint.
+//
+// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/resource-usage-metrics (the `AgencyHostingListOrderResourceUsageMetricsV1` operationId).
+func (c *Client) AgencyHostingListOrderResourceUsageMetricsV1(ctx context.Context, orderId OrderIdPath, params *AgencyHostingListOrderResourceUsageMetricsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingListOrderResourceUsageMetricsV1Request(c.Server, orderId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -29783,6 +30089,128 @@ func NewAgencyHostingListAvailableDatacentersV1Request(server string, orderId Or
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Request constructs an http.Request for the AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1 method
+func NewAgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Request(server string, orderId OrderIdPath, params *AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "order_id", orderId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/orders/%s/disk-usage-metrics", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.TimeFrameDays != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "time_frame_days", *params.TimeFrameDays, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAgencyHostingListOrderResourceUsageMetricsV1Request constructs an http.Request for the AgencyHostingListOrderResourceUsageMetricsV1 method
+func NewAgencyHostingListOrderResourceUsageMetricsV1Request(server string, orderId OrderIdPath, params *AgencyHostingListOrderResourceUsageMetricsV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "order_id", orderId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/orders/%s/resource-usage-metrics", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.TimeFrameHours != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "time_frame_hours", *params.TimeFrameHours, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
 	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
@@ -45659,6 +46087,32 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/datacenters (the `AgencyHostingListAvailableDatacentersV1` operationId).
 	AgencyHostingListAvailableDatacentersV1WithResponse(ctx context.Context, orderId OrderIdPath, reqEditors ...RequestEditorFn) (*AgencyHostingListAvailableDatacentersV1Response, error)
 
+	// AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1WithResponse List Agency Plan order disk usage metrics
+	//
+	// Returns aggregated disk and inode usage for the Agency Plan order over the
+	// selected time frame, plus the plan quotas. Figures cover the whole order
+	// account. Values may be up to one hour stale. CPU, memory, and process usage
+	// are on the resource-usage-metrics endpoint.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/disk-usage-metrics (the `AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1` operationId).
+	AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1WithResponse(ctx context.Context, orderId OrderIdPath, params *AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Response, error)
+
+	// AgencyHostingListOrderResourceUsageMetricsV1WithResponse List order resource usage metrics
+	//
+	// Returns aggregated CPU, memory, and process usage for the Agency Plan order
+	// over the selected time frame, plus the plan quotas and a per-website
+	// breakdown. Each website is identified by uid. Suspended and deleted websites
+	// are excluded from both the order totals and the per-website breakdown.
+	// Values may be up to one hour stale. Disk and inode usage are on the
+	// disk-usage-metrics endpoint.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/resource-usage-metrics (the `AgencyHostingListOrderResourceUsageMetricsV1` operationId).
+	AgencyHostingListOrderResourceUsageMetricsV1WithResponse(ctx context.Context, orderId OrderIdPath, params *AgencyHostingListOrderResourceUsageMetricsV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListOrderResourceUsageMetricsV1Response, error)
+
 	// AgencyHostingListAvailablePHPVersionsForAnOrderV1WithResponse List available PHP versions for an order
 	//
 	// Lists the PHP versions available to websites created under an Agency Plan order, determined by the server the order is hosted on. Use this before creating a website; for a website that already exists, call the website-scoped versions endpoint instead.
@@ -51712,6 +52166,130 @@ func (r AgencyHostingListAvailableDatacentersV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r AgencyHostingListAvailableDatacentersV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *AgencyHostingV1OrdersDiskUsageMetricsMetricsResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Response) GetJSON200() *AgencyHostingV1OrdersDiskUsageMetricsMetricsResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingListOrderResourceUsageMetricsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *AgencyHostingV1OrdersResourceUsageMetricsMetricsResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r AgencyHostingListOrderResourceUsageMetricsV1Response) GetJSON200() *AgencyHostingV1OrdersResourceUsageMetricsMetricsResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r AgencyHostingListOrderResourceUsageMetricsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r AgencyHostingListOrderResourceUsageMetricsV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r AgencyHostingListOrderResourceUsageMetricsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r AgencyHostingListOrderResourceUsageMetricsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingListOrderResourceUsageMetricsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingListOrderResourceUsageMetricsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingListOrderResourceUsageMetricsV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -71589,6 +72167,44 @@ func (c *ClientWithResponses) AgencyHostingListAvailableDatacentersV1WithRespons
 	return ParseAgencyHostingListAvailableDatacentersV1Response(rsp)
 }
 
+// AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1WithResponse List Agency Plan order disk usage metrics
+//
+// Returns aggregated disk and inode usage for the Agency Plan order over the
+// selected time frame, plus the plan quotas. Figures cover the whole order
+// account. Values may be up to one hour stale. CPU, memory, and process usage
+// are on the resource-usage-metrics endpoint.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/disk-usage-metrics (the `AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1` operationId).
+func (c *ClientWithResponses) AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1WithResponse(ctx context.Context, orderId OrderIdPath, params *AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Response, error) {
+	rsp, err := c.AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1(ctx, orderId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Response(rsp)
+}
+
+// AgencyHostingListOrderResourceUsageMetricsV1WithResponse List order resource usage metrics
+//
+// Returns aggregated CPU, memory, and process usage for the Agency Plan order
+// over the selected time frame, plus the plan quotas and a per-website
+// breakdown. Each website is identified by uid. Suspended and deleted websites
+// are excluded from both the order totals and the per-website breakdown.
+// Values may be up to one hour stale. Disk and inode usage are on the
+// disk-usage-metrics endpoint.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/resource-usage-metrics (the `AgencyHostingListOrderResourceUsageMetricsV1` operationId).
+func (c *ClientWithResponses) AgencyHostingListOrderResourceUsageMetricsV1WithResponse(ctx context.Context, orderId OrderIdPath, params *AgencyHostingListOrderResourceUsageMetricsV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListOrderResourceUsageMetricsV1Response, error) {
+	rsp, err := c.AgencyHostingListOrderResourceUsageMetricsV1(ctx, orderId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingListOrderResourceUsageMetricsV1Response(rsp)
+}
+
 // AgencyHostingListAvailablePHPVersionsForAnOrderV1WithResponse List available PHP versions for an order
 //
 // Lists the PHP versions available to websites created under an Agency Plan order, determined by the server the order is hosted on. Use this before creating a website; for a website that already exists, call the website-scoped versions endpoint instead.
@@ -80231,6 +80847,100 @@ func ParseAgencyHostingListAvailableDatacentersV1Response(rsp *http.Response) (*
 			return nil, err
 		}
 		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Response parses an HTTP response from a AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1WithResponse call
+func ParseAgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Response(rsp *http.Response) (*AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingListAgencyPlanOrderDiskUsageMetricsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AgencyHostingV1OrdersDiskUsageMetricsMetricsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingListOrderResourceUsageMetricsV1Response parses an HTTP response from a AgencyHostingListOrderResourceUsageMetricsV1WithResponse call
+func ParseAgencyHostingListOrderResourceUsageMetricsV1Response(rsp *http.Response) (*AgencyHostingListOrderResourceUsageMetricsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingListOrderResourceUsageMetricsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AgencyHostingV1OrdersResourceUsageMetricsMetricsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse

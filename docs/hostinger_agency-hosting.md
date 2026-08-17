@@ -24,6 +24,7 @@ Agency Hosting commands
 * [hostinger agency-hosting datacenters](hostinger_agency-hosting_datacenters.md)	 - Datacenters commands
 * [hostinger agency-hosting domains](hostinger_agency-hosting_domains.md)	 - Domains commands
 * [hostinger agency-hosting files](hostinger_agency-hosting_files.md)	 - Files commands
+* [hostinger agency-hosting metrics](hostinger_agency-hosting_metrics.md)	 - Metrics commands
 * [hostinger agency-hosting orders](hostinger_agency-hosting_orders.md)	 - Orders commands
 * [hostinger agency-hosting php](hostinger_agency-hosting_php.md)	 - PHP commands
 * [hostinger agency-hosting website-setups](hostinger_agency-hosting_website-setups.md)	 - Website Setups commands
