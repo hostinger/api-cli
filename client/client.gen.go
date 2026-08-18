@@ -7088,6 +7088,12 @@ type HostingV1DatabasesDatabaseResource struct {
 	// Example: example.com
 	Domain *string `json:"domain,omitempty"`
 
+	// Host MySQL hostname for remote connections. Same value as hPanel Remote MySQL.
+	// Identical for every database on this account. Not the database user grant host.
+	//
+	// Example: srv1517.hstgr.io
+	Host *string `json:"host,omitempty"`
+
 	// MaxSizeMb Maximum allowed database size in megabytes.
 	//
 	// Example: 3072
@@ -7102,6 +7108,11 @@ type HostingV1DatabasesDatabaseResource struct {
 	//
 	// Example: {"Alter":1,"Drop":0}
 	Permissions *map[string]interface{} `json:"permissions,omitempty"`
+
+	// Port MySQL port for remote connections. Always 3306.
+	//
+	// Example: 3306
+	Port *int `json:"port,omitempty"`
 
 	// UpdatedAt Database last update date in ISO 8601 format.
 	//
