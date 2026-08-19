@@ -18,5 +18,6 @@ Files commands
 ### SEE ALSO
 
 * [hostinger agency-hosting](hostinger_agency-hosting.md)	 - Agency Hosting commands
+* [hostinger agency-hosting files generate-upload-url](hostinger_agency-hosting_files_generate-upload-url.md)	 - Generate upload URL
 * [hostinger agency-hosting files import-website-from-archive](hostinger_agency-hosting_files_import-website-from-archive.md)	 - Import website from archive
 

@@ -962,13 +962,13 @@ func (e HostingV1NodeJsBuildOptionsResourcePackageManager) Valid() bool {
 
 // Defines values for HostingV1NodeJsBuildOptionsResourceSourceType.
 const (
-	Archive HostingV1NodeJsBuildOptionsResourceSourceType = "archive"
+	HostingV1NodeJsBuildOptionsResourceSourceTypeArchive HostingV1NodeJsBuildOptionsResourceSourceType = "archive"
 )
 
 // Valid indicates whether the value is a known member of the HostingV1NodeJsBuildOptionsResourceSourceType enum.
 func (e HostingV1NodeJsBuildOptionsResourceSourceType) Valid() bool {
 	switch e {
-	case Archive:
+	case HostingV1NodeJsBuildOptionsResourceSourceTypeArchive:
 		return true
 	default:
 		return false
@@ -993,6 +993,96 @@ func (e HostingV1NodeJsBuildResourceState) Valid() bool {
 	case HostingV1NodeJsBuildResourceStatePending:
 		return true
 	case HostingV1NodeJsBuildResourceStateRunning:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingV1NodeJsBuildSettingsResourceAppType.
+const (
+	HostingV1NodeJsBuildSettingsResourceAppTypeAngular        HostingV1NodeJsBuildSettingsResourceAppType = "angular"
+	HostingV1NodeJsBuildSettingsResourceAppTypeAstro          HostingV1NodeJsBuildSettingsResourceAppType = "astro"
+	HostingV1NodeJsBuildSettingsResourceAppTypeCreateReactApp HostingV1NodeJsBuildSettingsResourceAppType = "create-react-app"
+	HostingV1NodeJsBuildSettingsResourceAppTypeExpress        HostingV1NodeJsBuildSettingsResourceAppType = "express"
+	HostingV1NodeJsBuildSettingsResourceAppTypeFastify        HostingV1NodeJsBuildSettingsResourceAppType = "fastify"
+	HostingV1NodeJsBuildSettingsResourceAppTypeGatsby         HostingV1NodeJsBuildSettingsResourceAppType = "gatsby"
+	HostingV1NodeJsBuildSettingsResourceAppTypeHono           HostingV1NodeJsBuildSettingsResourceAppType = "hono"
+	HostingV1NodeJsBuildSettingsResourceAppTypeNest           HostingV1NodeJsBuildSettingsResourceAppType = "nest"
+	HostingV1NodeJsBuildSettingsResourceAppTypeNext           HostingV1NodeJsBuildSettingsResourceAppType = "next"
+	HostingV1NodeJsBuildSettingsResourceAppTypeNitro          HostingV1NodeJsBuildSettingsResourceAppType = "nitro"
+	HostingV1NodeJsBuildSettingsResourceAppTypeNuxt           HostingV1NodeJsBuildSettingsResourceAppType = "nuxt"
+	HostingV1NodeJsBuildSettingsResourceAppTypeOther          HostingV1NodeJsBuildSettingsResourceAppType = "other"
+	HostingV1NodeJsBuildSettingsResourceAppTypeParcel         HostingV1NodeJsBuildSettingsResourceAppType = "parcel"
+	HostingV1NodeJsBuildSettingsResourceAppTypeReact          HostingV1NodeJsBuildSettingsResourceAppType = "react"
+	HostingV1NodeJsBuildSettingsResourceAppTypeReactRouter    HostingV1NodeJsBuildSettingsResourceAppType = "react-router"
+	HostingV1NodeJsBuildSettingsResourceAppTypeSvelte         HostingV1NodeJsBuildSettingsResourceAppType = "svelte"
+	HostingV1NodeJsBuildSettingsResourceAppTypeSvelteKit      HostingV1NodeJsBuildSettingsResourceAppType = "svelte-kit"
+	HostingV1NodeJsBuildSettingsResourceAppTypeVite           HostingV1NodeJsBuildSettingsResourceAppType = "vite"
+	HostingV1NodeJsBuildSettingsResourceAppTypeVue            HostingV1NodeJsBuildSettingsResourceAppType = "vue"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1NodeJsBuildSettingsResourceAppType enum.
+func (e HostingV1NodeJsBuildSettingsResourceAppType) Valid() bool {
+	switch e {
+	case HostingV1NodeJsBuildSettingsResourceAppTypeAngular:
+		return true
+	case HostingV1NodeJsBuildSettingsResourceAppTypeAstro:
+		return true
+	case HostingV1NodeJsBuildSettingsResourceAppTypeCreateReactApp:
+		return true
+	case HostingV1NodeJsBuildSettingsResourceAppTypeExpress:
+		return true
+	case HostingV1NodeJsBuildSettingsResourceAppTypeFastify:
+		return true
+	case HostingV1NodeJsBuildSettingsResourceAppTypeGatsby:
+		return true
+	case HostingV1NodeJsBuildSettingsResourceAppTypeHono:
+		return true
+	case HostingV1NodeJsBuildSettingsResourceAppTypeNest:
+		return true
+	case HostingV1NodeJsBuildSettingsResourceAppTypeNext:
+		return true
+	case HostingV1NodeJsBuildSettingsResourceAppTypeNitro:
+		return true
+	case HostingV1NodeJsBuildSettingsResourceAppTypeNuxt:
+		return true
+	case HostingV1NodeJsBuildSettingsResourceAppTypeOther:
+		return true
+	case HostingV1NodeJsBuildSettingsResourceAppTypeParcel:
+		return true
+	case HostingV1NodeJsBuildSettingsResourceAppTypeReact:
+		return true
+	case HostingV1NodeJsBuildSettingsResourceAppTypeReactRouter:
+		return true
+	case HostingV1NodeJsBuildSettingsResourceAppTypeSvelte:
+		return true
+	case HostingV1NodeJsBuildSettingsResourceAppTypeSvelteKit:
+		return true
+	case HostingV1NodeJsBuildSettingsResourceAppTypeVite:
+		return true
+	case HostingV1NodeJsBuildSettingsResourceAppTypeVue:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingV1NodeJsBuildSettingsResourcePackageManager.
+const (
+	HostingV1NodeJsBuildSettingsResourcePackageManagerNpm  HostingV1NodeJsBuildSettingsResourcePackageManager = "npm"
+	HostingV1NodeJsBuildSettingsResourcePackageManagerPnpm HostingV1NodeJsBuildSettingsResourcePackageManager = "pnpm"
+	HostingV1NodeJsBuildSettingsResourcePackageManagerYarn HostingV1NodeJsBuildSettingsResourcePackageManager = "yarn"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1NodeJsBuildSettingsResourcePackageManager enum.
+func (e HostingV1NodeJsBuildSettingsResourcePackageManager) Valid() bool {
+	switch e {
+	case HostingV1NodeJsBuildSettingsResourcePackageManagerNpm:
+		return true
+	case HostingV1NodeJsBuildSettingsResourcePackageManagerPnpm:
+		return true
+	case HostingV1NodeJsBuildSettingsResourcePackageManagerYarn:
 		return true
 	default:
 		return false
@@ -1107,6 +1197,135 @@ func (e HostingV1NodeJsCreateFromArchiveRequestPackageManager) Valid() bool {
 	case HostingV1NodeJsCreateFromArchiveRequestPackageManagerPnpm:
 		return true
 	case HostingV1NodeJsCreateFromArchiveRequestPackageManagerYarn:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingV1NodeJsStartBuildRequestAppType.
+const (
+	HostingV1NodeJsStartBuildRequestAppTypeAngular        HostingV1NodeJsStartBuildRequestAppType = "angular"
+	HostingV1NodeJsStartBuildRequestAppTypeAstro          HostingV1NodeJsStartBuildRequestAppType = "astro"
+	HostingV1NodeJsStartBuildRequestAppTypeCreateReactApp HostingV1NodeJsStartBuildRequestAppType = "create-react-app"
+	HostingV1NodeJsStartBuildRequestAppTypeExpress        HostingV1NodeJsStartBuildRequestAppType = "express"
+	HostingV1NodeJsStartBuildRequestAppTypeFastify        HostingV1NodeJsStartBuildRequestAppType = "fastify"
+	HostingV1NodeJsStartBuildRequestAppTypeGatsby         HostingV1NodeJsStartBuildRequestAppType = "gatsby"
+	HostingV1NodeJsStartBuildRequestAppTypeHono           HostingV1NodeJsStartBuildRequestAppType = "hono"
+	HostingV1NodeJsStartBuildRequestAppTypeNest           HostingV1NodeJsStartBuildRequestAppType = "nest"
+	HostingV1NodeJsStartBuildRequestAppTypeNext           HostingV1NodeJsStartBuildRequestAppType = "next"
+	HostingV1NodeJsStartBuildRequestAppTypeNitro          HostingV1NodeJsStartBuildRequestAppType = "nitro"
+	HostingV1NodeJsStartBuildRequestAppTypeNuxt           HostingV1NodeJsStartBuildRequestAppType = "nuxt"
+	HostingV1NodeJsStartBuildRequestAppTypeOther          HostingV1NodeJsStartBuildRequestAppType = "other"
+	HostingV1NodeJsStartBuildRequestAppTypeParcel         HostingV1NodeJsStartBuildRequestAppType = "parcel"
+	HostingV1NodeJsStartBuildRequestAppTypeReact          HostingV1NodeJsStartBuildRequestAppType = "react"
+	HostingV1NodeJsStartBuildRequestAppTypeReactRouter    HostingV1NodeJsStartBuildRequestAppType = "react-router"
+	HostingV1NodeJsStartBuildRequestAppTypeSvelte         HostingV1NodeJsStartBuildRequestAppType = "svelte"
+	HostingV1NodeJsStartBuildRequestAppTypeSvelteKit      HostingV1NodeJsStartBuildRequestAppType = "svelte-kit"
+	HostingV1NodeJsStartBuildRequestAppTypeVite           HostingV1NodeJsStartBuildRequestAppType = "vite"
+	HostingV1NodeJsStartBuildRequestAppTypeVue            HostingV1NodeJsStartBuildRequestAppType = "vue"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1NodeJsStartBuildRequestAppType enum.
+func (e HostingV1NodeJsStartBuildRequestAppType) Valid() bool {
+	switch e {
+	case HostingV1NodeJsStartBuildRequestAppTypeAngular:
+		return true
+	case HostingV1NodeJsStartBuildRequestAppTypeAstro:
+		return true
+	case HostingV1NodeJsStartBuildRequestAppTypeCreateReactApp:
+		return true
+	case HostingV1NodeJsStartBuildRequestAppTypeExpress:
+		return true
+	case HostingV1NodeJsStartBuildRequestAppTypeFastify:
+		return true
+	case HostingV1NodeJsStartBuildRequestAppTypeGatsby:
+		return true
+	case HostingV1NodeJsStartBuildRequestAppTypeHono:
+		return true
+	case HostingV1NodeJsStartBuildRequestAppTypeNest:
+		return true
+	case HostingV1NodeJsStartBuildRequestAppTypeNext:
+		return true
+	case HostingV1NodeJsStartBuildRequestAppTypeNitro:
+		return true
+	case HostingV1NodeJsStartBuildRequestAppTypeNuxt:
+		return true
+	case HostingV1NodeJsStartBuildRequestAppTypeOther:
+		return true
+	case HostingV1NodeJsStartBuildRequestAppTypeParcel:
+		return true
+	case HostingV1NodeJsStartBuildRequestAppTypeReact:
+		return true
+	case HostingV1NodeJsStartBuildRequestAppTypeReactRouter:
+		return true
+	case HostingV1NodeJsStartBuildRequestAppTypeSvelte:
+		return true
+	case HostingV1NodeJsStartBuildRequestAppTypeSvelteKit:
+		return true
+	case HostingV1NodeJsStartBuildRequestAppTypeVite:
+		return true
+	case HostingV1NodeJsStartBuildRequestAppTypeVue:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingV1NodeJsStartBuildRequestNodeVersion.
+const (
+	HostingV1NodeJsStartBuildRequestNodeVersionN18 HostingV1NodeJsStartBuildRequestNodeVersion = 18
+	HostingV1NodeJsStartBuildRequestNodeVersionN20 HostingV1NodeJsStartBuildRequestNodeVersion = 20
+	HostingV1NodeJsStartBuildRequestNodeVersionN22 HostingV1NodeJsStartBuildRequestNodeVersion = 22
+	HostingV1NodeJsStartBuildRequestNodeVersionN24 HostingV1NodeJsStartBuildRequestNodeVersion = 24
+)
+
+// Valid indicates whether the value is a known member of the HostingV1NodeJsStartBuildRequestNodeVersion enum.
+func (e HostingV1NodeJsStartBuildRequestNodeVersion) Valid() bool {
+	switch e {
+	case HostingV1NodeJsStartBuildRequestNodeVersionN18:
+		return true
+	case HostingV1NodeJsStartBuildRequestNodeVersionN20:
+		return true
+	case HostingV1NodeJsStartBuildRequestNodeVersionN22:
+		return true
+	case HostingV1NodeJsStartBuildRequestNodeVersionN24:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingV1NodeJsStartBuildRequestPackageManager.
+const (
+	HostingV1NodeJsStartBuildRequestPackageManagerNpm  HostingV1NodeJsStartBuildRequestPackageManager = "npm"
+	HostingV1NodeJsStartBuildRequestPackageManagerPnpm HostingV1NodeJsStartBuildRequestPackageManager = "pnpm"
+	HostingV1NodeJsStartBuildRequestPackageManagerYarn HostingV1NodeJsStartBuildRequestPackageManager = "yarn"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1NodeJsStartBuildRequestPackageManager enum.
+func (e HostingV1NodeJsStartBuildRequestPackageManager) Valid() bool {
+	switch e {
+	case HostingV1NodeJsStartBuildRequestPackageManagerNpm:
+		return true
+	case HostingV1NodeJsStartBuildRequestPackageManagerPnpm:
+		return true
+	case HostingV1NodeJsStartBuildRequestPackageManagerYarn:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingV1NodeJsStartBuildRequestSourceType.
+const (
+	HostingV1NodeJsStartBuildRequestSourceTypeArchive HostingV1NodeJsStartBuildRequestSourceType = "archive"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1NodeJsStartBuildRequestSourceType enum.
+func (e HostingV1NodeJsStartBuildRequestSourceType) Valid() bool {
+	switch e {
+	case HostingV1NodeJsStartBuildRequestSourceTypeArchive:
 		return true
 	default:
 		return false
@@ -4241,6 +4460,24 @@ type AgencyHostingV1FilesImportArchiveRequest struct {
 	//
 	// Example: archive.zip
 	ArchiveName string `json:"archive_name"`
+}
+
+// AgencyHostingV1FilesUploadUrlResource defines model for AgencyHosting.V1.Files.UploadUrlResource.
+type AgencyHostingV1FilesUploadUrlResource struct {
+	// AuthKey Authentication token to pass as the `X-Auth` header in TUS upload requests
+	//
+	// Example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxfX0.O-x6KeHMkNqnbYvbRcdDEQXOSLcqyE7xNrnKvftbG3A
+	AuthKey string `json:"auth_key"`
+
+	// RestAuthKey Authentication token to pass as the `X-Auth-Rest` header in TUS upload requests
+	//
+	// Example: 5c3b12fabf3d9652780a23ae705d2feb556c89907d0db50cddb8dffc27c1149d-1b2b4e5d5a5f795f
+	RestAuthKey string `json:"rest_auth_key"`
+
+	// Url The TUS upload endpoint URL to send upload requests to
+	//
+	// Example: https://h5g12345-fm.hstgr.io/rest/1b2b4e5d5a5f795f/api/tus
+	Url string `json:"url"`
 }
 
 // AgencyHostingV1OrdersDatacenterResource defines model for AgencyHosting.V1.Orders.DatacenterResource.
@@ -7426,6 +7663,37 @@ type HostingV1FilesFilesResource struct {
 // Example: file
 type HostingV1FilesFilesResourceItemsType string
 
+// HostingV1FilesGenerateUploadUrlRequest defines model for Hosting.V1.Files.GenerateUploadUrlRequest.
+type HostingV1FilesGenerateUploadUrlRequest struct {
+	// Domain Website domain
+	//
+	// Example: example.com
+	Domain string `json:"domain"`
+
+	// Username Account username
+	//
+	// Example: u123456789
+	Username string `json:"username"`
+}
+
+// HostingV1FilesUploadUrlResource defines model for Hosting.V1.Files.UploadUrlResource.
+type HostingV1FilesUploadUrlResource struct {
+	// AuthKey Authentication token to pass as the `X-Auth` header in TUS upload requests
+	//
+	// Example: eYJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im15dXNlcm5hbWUiLCJkb21haW4iOiJteWRvbWFpbi5jb20iLCJpYXQiOjE2ODgwMjM2MDAsImV4cCI6MTY4ODA2MDgwMH0.4fXoX1HnY2b8jv7gX9h8vZ6xX3K1t7y5H3Z5Z5Z5Z5Q
+	AuthKey string `json:"auth_key"`
+
+	// RestAuthKey Authentication token to pass as the `X-Auth-Rest` header in TUS upload requests
+	//
+	// Example: d555be24e1096adcb6a029fbd1f25fdf18db587c5dbd01e0e49b22f67108b121-f496d493c2swfwea
+	RestAuthKey string `json:"rest_auth_key"`
+
+	// Url The TUS upload endpoint URL to send upload requests to
+	//
+	// Example: https://srv12345-files.hstgr.io/
+	Url string `json:"url"`
+}
+
 // HostingV1NodeJsBuildCollection Array of [`Hosting.V1.NodeJs.BuildResource`](#model/hostingv1nodejsbuildresource)
 type HostingV1NodeJsBuildCollection = []HostingV1NodeJsBuildResource
 
@@ -7547,6 +7815,59 @@ type HostingV1NodeJsBuildResource_Options struct {
 // Example: pending
 type HostingV1NodeJsBuildResourceState string
 
+// HostingV1NodeJsBuildSettingsResource defines model for Hosting.V1.NodeJs.BuildSettingsResource.
+type HostingV1NodeJsBuildSettingsResource struct {
+	// AppType Node.js application type
+	//
+	// Example: create-react-app
+	AppType *HostingV1NodeJsBuildSettingsResourceAppType `json:"app_type"`
+
+	// AvailableScripts The scripts configured in the package.json file
+	//
+	// Example: ["build","test"]
+	AvailableScripts []string `json:"available_scripts"`
+
+	// BuildScript The npm script to run to build the application
+	//
+	// Example: build
+	BuildScript *string `json:"build_script"`
+
+	// EntryFile The main entry point file for the application
+	//
+	// Example: server.js
+	EntryFile *string `json:"entry_file"`
+
+	// NodeVersion Node.js version
+	//
+	// Example: 18
+	NodeVersion *int `json:"node_version"`
+
+	// OutputDirectory Build output directory
+	//
+	// Example: dist
+	OutputDirectory *string `json:"output_directory"`
+
+	// PackageManager Package manager
+	//
+	// Example: npm
+	PackageManager *HostingV1NodeJsBuildSettingsResourcePackageManager `json:"package_manager"`
+
+	// RootDirectory Application root directory
+	//
+	// Example: frontend
+	RootDirectory *string `json:"root_directory"`
+}
+
+// HostingV1NodeJsBuildSettingsResourceAppType Node.js application type
+//
+// Example: create-react-app
+type HostingV1NodeJsBuildSettingsResourceAppType string
+
+// HostingV1NodeJsBuildSettingsResourcePackageManager Package manager
+//
+// Example: npm
+type HostingV1NodeJsBuildSettingsResourcePackageManager string
+
 // HostingV1NodeJsCreateFromArchiveRequest defines model for Hosting.V1.NodeJs.CreateFromArchiveRequest.
 type HostingV1NodeJsCreateFromArchiveRequest struct {
 	// AppType Node.js application type override
@@ -7639,6 +7960,77 @@ type HostingV1NodeJsSourceOptionsResource struct {
 	// Example: archive.zip
 	ArchivePath *string `json:"archive_path,omitempty"`
 }
+
+// HostingV1NodeJsStartBuildRequest defines model for Hosting.V1.NodeJs.StartBuildRequest.
+type HostingV1NodeJsStartBuildRequest struct {
+	// AppType Node.js application type
+	//
+	// Example: vite
+	AppType *HostingV1NodeJsStartBuildRequestAppType `json:"app_type"`
+
+	// BuildScript Build script that will be ran to build the application
+	//
+	// Example: build
+	BuildScript *string `json:"build_script"`
+
+	// EntryFile The main entry point file for the application
+	//
+	// Example: server.js
+	EntryFile *string `json:"entry_file,omitempty"`
+
+	// NodeVersion Node.js version
+	//
+	// Example: 20
+	NodeVersion HostingV1NodeJsStartBuildRequestNodeVersion `json:"node_version"`
+
+	// OutputDirectory Build output directory relative to the root directory
+	//
+	// Example: dist
+	OutputDirectory *string `json:"output_directory"`
+
+	// PackageManager Package manager
+	//
+	// Example: npm
+	PackageManager *HostingV1NodeJsStartBuildRequestPackageManager `json:"package_manager,omitempty"`
+
+	// RootDirectory Application root directory (where package.json is located) relative to public_html
+	//
+	// Example: webapp
+	RootDirectory *string `json:"root_directory"`
+
+	// SourceOptions Source-specific options
+	SourceOptions *struct {
+		// ArchivePath The path to the archive file relative to the document root of the vhost (required if source is "archive")
+		//
+		// Example: example.zip
+		ArchivePath *string `json:"archive_path,omitempty"`
+	} `json:"source_options"`
+
+	// SourceType The source type of the files
+	//
+	// Example: archive
+	SourceType HostingV1NodeJsStartBuildRequestSourceType `json:"source_type"`
+}
+
+// HostingV1NodeJsStartBuildRequestAppType Node.js application type
+//
+// Example: vite
+type HostingV1NodeJsStartBuildRequestAppType string
+
+// HostingV1NodeJsStartBuildRequestNodeVersion Node.js version
+//
+// Example: 20
+type HostingV1NodeJsStartBuildRequestNodeVersion int
+
+// HostingV1NodeJsStartBuildRequestPackageManager Package manager
+//
+// Example: npm
+type HostingV1NodeJsStartBuildRequestPackageManager string
+
+// HostingV1NodeJsStartBuildRequestSourceType The source type of the files
+//
+// Example: archive
+type HostingV1NodeJsStartBuildRequestSourceType string
 
 // HostingV1NodeJsVulnerabilityCollection Array of [`Hosting.V1.NodeJs.VulnerabilityResource`](#model/hostingv1nodejsvulnerabilityresource)
 type HostingV1NodeJsVulnerabilityCollection = []HostingV1NodeJsVulnerabilityResource
@@ -7930,6 +8322,14 @@ type HostingV1WebsitesCreateWebsiteRequest struct {
 	//
 	// Example: 12345
 	OrderId int `json:"order_id"`
+}
+
+// HostingV1WebsitesDeployArchiveRequest defines model for Hosting.V1.Websites.DeployArchiveRequest.
+type HostingV1WebsitesDeployArchiveRequest struct {
+	// ArchivePath Relative path to the archive file from website root directory
+	//
+	// Example: uploads/archive.zip
+	ArchivePath string `json:"archive_path"`
 }
 
 // HostingV1WebsitesWebsiteCollection Array of [`Hosting.V1.Websites.WebsiteResource`](#model/hostingv1websiteswebsiteresource)
@@ -11437,6 +11837,19 @@ type WordPressV1InstallationsDeleteInstallationRequest struct {
 	DeleteFiles *bool `json:"delete_files,omitempty"`
 }
 
+// WordPressV1InstallationsImportWordPressRequest defines model for WordPress.V1.Installations.ImportWordPressRequest.
+type WordPressV1InstallationsImportWordPressRequest struct {
+	// ArchivePath Path to the WordPress archive file (relative to website root)
+	//
+	// Example: backup.zip
+	ArchivePath string `json:"archive_path"`
+
+	// SqlPath Path to the database SQL file (relative to website root)
+	//
+	// Example: database.sql
+	SqlPath string `json:"sql_path"`
+}
+
 // WordPressV1InstallationsInstallWordPressRequest defines model for WordPress.V1.Installations.InstallWordPressRequest.
 type WordPressV1InstallationsInstallWordPressRequest struct {
 	// AutoUpdates WordPress core auto-update policy
@@ -11789,6 +12202,19 @@ type WordPressV1PluginsDeactivatePluginRequest struct {
 	Plugin string `json:"plugin"`
 }
 
+// WordPressV1PluginsDeployPluginRequest defines model for WordPress.V1.Plugins.DeployPluginRequest.
+type WordPressV1PluginsDeployPluginRequest struct {
+	// PluginPath Relative path to the plugin directory from wp-content/plugins
+	//
+	// Example: my-plugin-new
+	PluginPath string `json:"plugin_path"`
+
+	// Slug Slug of the plugin
+	//
+	// Example: my-plugin
+	Slug string `json:"slug"`
+}
+
 // WordPressV1PluginsInstallPluginsRequest defines model for WordPress.V1.Plugins.InstallPluginsRequest.
 type WordPressV1PluginsInstallPluginsRequest struct {
 	// Plugins Plugin slugs to install. Use GET /api/hosting/v1/wordpress/plugins to discover available slugs.
@@ -11986,6 +12412,24 @@ type WordPressV1ThemesActivateThemeRequest struct {
 	//
 	// Example: twentytwentyone
 	Theme string `json:"theme"`
+}
+
+// WordPressV1ThemesDeployThemeRequest defines model for WordPress.V1.Themes.DeployThemeRequest.
+type WordPressV1ThemesDeployThemeRequest struct {
+	// IsActivated Whether to activate the theme after deployment
+	//
+	// Example: false
+	IsActivated *bool `json:"is_activated,omitempty"`
+
+	// Slug Slug of the theme
+	//
+	// Example: twentytwentyone
+	Slug string `json:"slug"`
+
+	// ThemePath Relative path to the theme directory from wp-content/themes
+	//
+	// Example: twentytwentyone-new
+	ThemePath string `json:"theme_path"`
 }
 
 // WordPressV1ThemesInstallThemeRequest defines model for WordPress.V1.Themes.InstallThemeRequest.
@@ -12623,6 +13067,12 @@ type HostingListNodeJSBuildsV1Params struct {
 
 // HostingListNodeJSBuildsV1ParamsStates defines parameters for HostingListNodeJSBuildsV1.
 type HostingListNodeJSBuildsV1ParamsStates string
+
+// HostingGetNodeJsBuildSettingsFromArchiveV1Params defines parameters for HostingGetNodeJsBuildSettingsFromArchiveV1.
+type HostingGetNodeJsBuildSettingsFromArchiveV1Params struct {
+	// ArchivePath The path to the archive file relative to the document root of the vhost
+	ArchivePath string `form:"archive_path" json:"archive_path"`
+}
 
 // HostingGetNodeJSBuildLogsV1Params defines parameters for HostingGetNodeJSBuildLogsV1.
 type HostingGetNodeJSBuildLogsV1Params struct {
@@ -13353,6 +13803,12 @@ type HostingToggleWebsiteCacheV1JSONRequestBody = HostingV1CacheToggleCacheReque
 // HostingToggleCachelessModeV1JSONRequestBody defines body for HostingToggleCachelessModeV1 for application/json ContentType.
 type HostingToggleCachelessModeV1JSONRequestBody = HostingV1CacheToggleCachelessModeRequest
 
+// HostingDeployStaticSiteArchiveV1JSONRequestBody defines body for HostingDeployStaticSiteArchiveV1 for application/json ContentType.
+type HostingDeployStaticSiteArchiveV1JSONRequestBody = HostingV1WebsitesDeployArchiveRequest
+
+// HostingStartNodeJsBuildV1JSONRequestBody defines body for HostingStartNodeJsBuildV1 for application/json ContentType.
+type HostingStartNodeJsBuildV1JSONRequestBody = HostingV1NodeJsStartBuildRequest
+
 // HostingCreateNodeJSBuildFromArchiveV1JSONRequestBody defines body for HostingCreateNodeJSBuildFromArchiveV1 for application/json ContentType.
 type HostingCreateNodeJSBuildFromArchiveV1JSONRequestBody = HostingV1NodeJsCreateFromArchiveRequest
 
@@ -13376,6 +13832,15 @@ type HostingCreateWebsiteRedirectV1JSONRequestBody = HostingV1RedirectsCreateRed
 
 // HostingCreateWebsiteSubdomainV1JSONRequestBody defines body for HostingCreateWebsiteSubdomainV1 for application/json ContentType.
 type HostingCreateWebsiteSubdomainV1JSONRequestBody = HostingV1DomainsCreateSubdomainRequest
+
+// HostingImportWordPressWebsiteV1JSONRequestBody defines body for HostingImportWordPressWebsiteV1 for application/json ContentType.
+type HostingImportWordPressWebsiteV1JSONRequestBody = WordPressV1InstallationsImportWordPressRequest
+
+// HostingDeployWordPressPluginV1JSONRequestBody defines body for HostingDeployWordPressPluginV1 for application/json ContentType.
+type HostingDeployWordPressPluginV1JSONRequestBody = WordPressV1PluginsDeployPluginRequest
+
+// HostingDeployWordPressThemeV1JSONRequestBody defines body for HostingDeployWordPressThemeV1 for application/json ContentType.
+type HostingDeployWordPressThemeV1JSONRequestBody = WordPressV1ThemesDeployThemeRequest
 
 // HostingInstallWordPressV1JSONRequestBody defines body for HostingInstallWordPressV1 for application/json ContentType.
 type HostingInstallWordPressV1JSONRequestBody = WordPressV1InstallationsInstallWordPressRequest
@@ -13430,6 +13895,9 @@ type HostingUpdateWordPressCoreV1JSONRequestBody = WordPressV1InstallationsUpdat
 
 // HostingVerifyDomainOwnershipV1JSONRequestBody defines body for HostingVerifyDomainOwnershipV1 for application/json ContentType.
 type HostingVerifyDomainOwnershipV1JSONRequestBody = HostingV1DomainsVerifyOwnershipRequest
+
+// HostingGenerateUploadURLV1JSONRequestBody defines body for HostingGenerateUploadURLV1 for application/json ContentType.
+type HostingGenerateUploadURLV1JSONRequestBody = HostingV1FilesGenerateUploadUrlRequest
 
 // HostingCreateWebsiteV1JSONRequestBody defines body for HostingCreateWebsiteV1 for application/json ContentType.
 type HostingCreateWebsiteV1JSONRequestBody = HostingV1WebsitesCreateWebsiteRequest
@@ -14874,6 +15342,49 @@ type ClientInterface interface {
 	//
 	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/import-archive (the `AgencyHostingImportWebsiteFromArchiveV1` operationId).
 	AgencyHostingImportWebsiteFromArchiveV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingImportWebsiteFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingGenerateUploadURLV1 Generate upload URL
+	//
+	// Generate a file browser upload URL with authentication credentials for uploading files
+	// to an Agency Plan website's file storage.
+	//
+	// Returns `url`, `auth_key` and `rest_auth_key`. Use these to upload a file to the
+	// website's file storage via the TUS resumable upload protocol (TUS 1.0.0). Send
+	// `X-Auth: {auth_key}` and `X-Auth-Rest: {rest_auth_key}` headers on every request below.
+	//
+	// 1. Create the upload: `POST` to `{url}/{relative_file_path}?override=true` with headers
+	//    `upload-length: {file size in bytes}` and `upload-offset: 0`. Expect `201 Created`.
+	// 2. Upload the file: send the file bytes to the same location (any TUS 1.0.0 client, or
+	//    `PATCH` requests with an `upload-offset` header tracking progress) until complete.
+	//
+	// `relative_file_path` is the destination path inside the website's file storage, e.g.
+	// `app.zip`.
+	//
+	// Instead of a TUS client, plain `curl` also works:
+	// ```
+	// FILE=app.zip
+	// SIZE=$(stat -f%z "$FILE")   # stat -c%s on Linux
+	//
+	// curl -i -X POST "{url}/${FILE}?override=true" \
+	//   -H "X-Auth: {auth_key}" \
+	//   -H "X-Auth-Rest: {rest_auth_key}" \
+	//   -H "Tus-Resumable: 1.0.0" \
+	//   -H "Upload-Length: ${SIZE}" \
+	//   -H "Upload-Offset: 0"
+	// # -> 201 Created
+	//
+	// curl -i -X PATCH "{url}/${FILE}?override=true" \
+	//   -H "X-Auth: {auth_key}" \
+	//   -H "X-Auth-Rest: {rest_auth_key}" \
+	//   -H "Tus-Resumable: 1.0.0" \
+	//   -H "Content-Type: application/offset+octet-stream" \
+	//   -H "Upload-Offset: 0" \
+	//   --data-binary "@${FILE}"
+	// # -> 204 No Content, Upload-Offset response header equals SIZE when done
+	// ```
+	//
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/upload-urls (the `AgencyHostingGenerateUploadURLV1` operationId).
+	AgencyHostingGenerateUploadURLV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// AgencyHostingListPHPExtensionsForAWebsiteV1 List PHP extensions for a website
 	//
@@ -16570,6 +17081,46 @@ type ClientInterface interface {
 	// Corresponds with PATCH /api/hosting/v1/accounts/{username}/websites/{domain}/cacheless-mode/toggle (the `HostingToggleCachelessModeV1` operationId).
 	HostingToggleCachelessModeV1(ctx context.Context, username UsernamePath, domain Domain, body HostingToggleCachelessModeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// HostingDeployStaticSiteArchiveV1WithBody Deploy static site archive
+	//
+	// Deploy a static application from an archive file.
+	//
+	// WARNING: this overwrites the website's existing contents and cannot be undone —
+	// verify this is intended before calling this endpoint.
+	//
+	// This endpoint allows you to deploy a static application from an archive
+	// file that has been uploaded to the website's directory.
+	//
+	// This only works for static sites (pre-built HTML/CSS/JS with no build step). For
+	// Node.js applications, use `Create NodeJS build from archive` instead, or
+	// `Start Node.js build` if the archive is already uploaded. For WordPress sites,
+	// use `Import WordPress website`.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/deploy (the `HostingDeployStaticSiteArchiveV1` operationId).
+	HostingDeployStaticSiteArchiveV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingDeployStaticSiteArchiveV1 Deploy static site archive
+	//
+	// Deploy a static application from an archive file.
+	//
+	// WARNING: this overwrites the website's existing contents and cannot be undone —
+	// verify this is intended before calling this endpoint.
+	//
+	// This endpoint allows you to deploy a static application from an archive
+	// file that has been uploaded to the website's directory.
+	//
+	// This only works for static sites (pre-built HTML/CSS/JS with no build step). For
+	// Node.js applications, use `Create NodeJS build from archive` instead, or
+	// `Start Node.js build` if the archive is already uploaded. For WordPress sites,
+	// use `Import WordPress website`.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/deploy (the `HostingDeployStaticSiteArchiveV1` operationId).
+	HostingDeployStaticSiteArchiveV1(ctx context.Context, username UsernamePath, domain Domain, body HostingDeployStaticSiteArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// HostingListNodeJSBuildsV1 List NodeJS builds
 	//
 	// Retrieve a paginated list of Node.js build processes for a specific website.
@@ -16581,9 +17132,58 @@ type ClientInterface interface {
 	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds (the `HostingListNodeJSBuildsV1` operationId).
 	HostingListNodeJSBuildsV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingListNodeJSBuildsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// HostingStartNodeJsBuildV1WithBody Start Node.js build
+	//
+	// Start a Node.js build process using files already present on the website's file storage.
+	//
+	// WARNING: on success this overwrites the website's existing contents and cannot be
+	// undone — verify this is intended before calling this endpoint.
+	//
+	// The `source_type` must be `archive` and `source_options.archive_path` must point to an
+	// existing archive file on the server (relative to the website document root).
+	// Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
+	//
+	// To auto-detect build settings from an archive before starting, first call the
+	// `Get Node.js Build Settings from Archive` endpoint. To upload an archive and start
+	// a build in one step, use the `Create Node.js Build from Archive` endpoint instead.
+	//
+	// The returned build `uuid` can be used to poll progress and retrieve logs via
+	// the `Get Node.js Build Logs` endpoint.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds (the `HostingStartNodeJsBuildV1` operationId).
+	HostingStartNodeJsBuildV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingStartNodeJsBuildV1 Start Node.js build
+	//
+	// Start a Node.js build process using files already present on the website's file storage.
+	//
+	// WARNING: on success this overwrites the website's existing contents and cannot be
+	// undone — verify this is intended before calling this endpoint.
+	//
+	// The `source_type` must be `archive` and `source_options.archive_path` must point to an
+	// existing archive file on the server (relative to the website document root).
+	// Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
+	//
+	// To auto-detect build settings from an archive before starting, first call the
+	// `Get Node.js Build Settings from Archive` endpoint. To upload an archive and start
+	// a build in one step, use the `Create Node.js Build from Archive` endpoint instead.
+	//
+	// The returned build `uuid` can be used to poll progress and retrieve logs via
+	// the `Get Node.js Build Logs` endpoint.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds (the `HostingStartNodeJsBuildV1` operationId).
+	HostingStartNodeJsBuildV1(ctx context.Context, username UsernamePath, domain Domain, body HostingStartNodeJsBuildV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// HostingCreateNodeJSBuildFromArchiveV1WithBody Create NodeJS build from archive
 	//
 	// Upload a project archive, auto-detect build settings, and immediately start a Node.js build.
+	//
+	// WARNING: on success this overwrites the website's existing contents and cannot be
+	// undone — verify this is intended before calling this endpoint.
 	//
 	// This is the recommended single-step approach for deploying a Node.js application.
 	// The archive is uploaded to the website's file storage, build settings are auto-detected
@@ -16613,6 +17213,9 @@ type ClientInterface interface {
 	//
 	// Upload a project archive, auto-detect build settings, and immediately start a Node.js build.
 	//
+	// WARNING: on success this overwrites the website's existing contents and cannot be
+	// undone — verify this is intended before calling this endpoint.
+	//
 	// This is the recommended single-step approach for deploying a Node.js application.
 	// The archive is uploaded to the website's file storage, build settings are auto-detected
 	// from the package.json inside the archive, and the build process starts automatically.
@@ -16636,6 +17239,22 @@ type ClientInterface interface {
 	//
 	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/from-archive (the `HostingCreateNodeJSBuildFromArchiveV1` operationId).
 	HostingCreateNodeJSBuildFromArchiveV1(ctx context.Context, username UsernamePath, domain Domain, body HostingCreateNodeJSBuildFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingGetNodeJsBuildSettingsFromArchiveV1 Get Node.js build settings from archive
+	//
+	// Auto-detect Node.js build settings from a package.json inside an archive already on the server.
+	//
+	// Use this before calling `Start Node.js Build` to preview what settings will be used,
+	// or to let the user review and override values (framework, node version, root directory,
+	// output directory, build script) before committing to a build.
+	//
+	// The archive must already be present on the website's file storage. Use the
+	// `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
+	// To upload an archive and start a build in one step without inspecting settings first,
+	// use the `Create Node.js Build from Archive` endpoint instead.
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/from-archive (the `HostingGetNodeJsBuildSettingsFromArchiveV1` operationId).
+	HostingGetNodeJsBuildSettingsFromArchiveV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetNodeJsBuildSettingsFromArchiveV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingGetNodeJSBuildLogsV1 Get NodeJS build logs
 	//
@@ -16947,6 +17566,84 @@ type ClientInterface interface {
 	//
 	// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/subdomains/{subdomain} (the `HostingDeleteWebsiteSubdomainV1` operationId).
 	HostingDeleteWebsiteSubdomainV1(ctx context.Context, username UsernamePath, domain Domain, subdomain SubdomainPath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingImportWordPressWebsiteV1WithBody Import WordPress website
+	//
+	// Import WordPress website to the specified domain.
+	//
+	// WARNING: this overwrites the website's existing contents and cannot be undone —
+	// verify this is intended before calling this endpoint.
+	//
+	// This endpoint allows you to import a WordPress website from archive and
+	// database files that have been uploaded to the website's directory.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/import (the `HostingImportWordPressWebsiteV1` operationId).
+	HostingImportWordPressWebsiteV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingImportWordPressWebsiteV1 Import WordPress website
+	//
+	// Import WordPress website to the specified domain.
+	//
+	// WARNING: this overwrites the website's existing contents and cannot be undone —
+	// verify this is intended before calling this endpoint.
+	//
+	// This endpoint allows you to import a WordPress website from archive and
+	// database files that have been uploaded to the website's directory.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/import (the `HostingImportWordPressWebsiteV1` operationId).
+	HostingImportWordPressWebsiteV1(ctx context.Context, username UsernamePath, domain Domain, body HostingImportWordPressWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingDeployWordPressPluginV1WithBody Deploy WordPress plugin
+	//
+	// Deploy a WordPress plugin from an already uploaded directory.
+	//
+	// This endpoint allows you to deploy a WordPress plugin that has been uploaded to the website's directory.
+	// The plugin will be activated and made available in the WordPress admin panel.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/plugins/deploy (the `HostingDeployWordPressPluginV1` operationId).
+	HostingDeployWordPressPluginV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingDeployWordPressPluginV1 Deploy WordPress plugin
+	//
+	// Deploy a WordPress plugin from an already uploaded directory.
+	//
+	// This endpoint allows you to deploy a WordPress plugin that has been uploaded to the website's directory.
+	// The plugin will be activated and made available in the WordPress admin panel.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/plugins/deploy (the `HostingDeployWordPressPluginV1` operationId).
+	HostingDeployWordPressPluginV1(ctx context.Context, username UsernamePath, domain Domain, body HostingDeployWordPressPluginV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingDeployWordPressThemeV1WithBody Deploy WordPress theme
+	//
+	// Deploy a WordPress theme from an already uploaded directory.
+	//
+	// This endpoint allows you to deploy a WordPress theme that has been uploaded to the website's directory.
+	// The theme can be optionally activated after deployment.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/themes/deploy (the `HostingDeployWordPressThemeV1` operationId).
+	HostingDeployWordPressThemeV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingDeployWordPressThemeV1 Deploy WordPress theme
+	//
+	// Deploy a WordPress theme from an already uploaded directory.
+	//
+	// This endpoint allows you to deploy a WordPress theme that has been uploaded to the website's directory.
+	// The theme can be optionally activated after deployment.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/themes/deploy (the `HostingDeployWordPressThemeV1` operationId).
+	HostingDeployWordPressThemeV1(ctx context.Context, username UsernamePath, domain Domain, body HostingDeployWordPressThemeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingInstallWordPressV1WithBody Install WordPress
 	//
@@ -17673,6 +18370,96 @@ type ClientInterface interface {
 	//
 	// Corresponds with POST /api/hosting/v1/domains/verify-ownership (the `HostingVerifyDomainOwnershipV1` operationId).
 	HostingVerifyDomainOwnershipV1(ctx context.Context, body HostingVerifyDomainOwnershipV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingGenerateUploadURLV1WithBody Generate upload URL
+	//
+	// Generate a file browser upload URL with authentication credentials
+	// for uploading files directly to a website's file storage.
+	//
+	// Returns `url`, `auth_key` and `rest_auth_key`. Use these to upload a file to the
+	// website's `public_html` directory via the TUS resumable upload protocol (TUS 1.0.0).
+	// Send `X-Auth: {auth_key}` and `X-Auth-Rest: {rest_auth_key}` headers on every request
+	// below.
+	//
+	// 1. Create the upload: `POST` to `{url}/{relative_file_path}?override=true` with headers
+	//    `upload-length: {file size in bytes}` and `upload-offset: 0`. Expect `201 Created`.
+	// 2. Upload the file: send the file bytes to the same location (any TUS 1.0.0 client, or
+	//    `PATCH` requests with an `upload-offset` header tracking progress) until complete.
+	//
+	// `relative_file_path` is the destination path inside `public_html`, e.g. `app.zip`.
+	//
+	// Instead of a TUS client, plain `curl` also works:
+	// ```
+	// FILE=app.zip
+	// SIZE=$(stat -f%z "$FILE")   # stat -c%s on Linux
+	//
+	// curl -i -X POST "{url}/${FILE}?override=true" \
+	//   -H "X-Auth: {auth_key}" \
+	//   -H "X-Auth-Rest: {rest_auth_key}" \
+	//   -H "Tus-Resumable: 1.0.0" \
+	//   -H "Upload-Length: ${SIZE}" \
+	//   -H "Upload-Offset: 0"
+	// # -> 201 Created
+	//
+	// curl -i -X PATCH "{url}/${FILE}?override=true" \
+	//   -H "X-Auth: {auth_key}" \
+	//   -H "X-Auth-Rest: {rest_auth_key}" \
+	//   -H "Tus-Resumable: 1.0.0" \
+	//   -H "Content-Type: application/offset+octet-stream" \
+	//   -H "Upload-Offset: 0" \
+	//   --data-binary "@${FILE}"
+	// # -> 204 No Content, Upload-Offset response header equals SIZE when done
+	// ```
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/hosting/v1/files/upload-urls (the `HostingGenerateUploadURLV1` operationId).
+	HostingGenerateUploadURLV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingGenerateUploadURLV1 Generate upload URL
+	//
+	// Generate a file browser upload URL with authentication credentials
+	// for uploading files directly to a website's file storage.
+	//
+	// Returns `url`, `auth_key` and `rest_auth_key`. Use these to upload a file to the
+	// website's `public_html` directory via the TUS resumable upload protocol (TUS 1.0.0).
+	// Send `X-Auth: {auth_key}` and `X-Auth-Rest: {rest_auth_key}` headers on every request
+	// below.
+	//
+	// 1. Create the upload: `POST` to `{url}/{relative_file_path}?override=true` with headers
+	//    `upload-length: {file size in bytes}` and `upload-offset: 0`. Expect `201 Created`.
+	// 2. Upload the file: send the file bytes to the same location (any TUS 1.0.0 client, or
+	//    `PATCH` requests with an `upload-offset` header tracking progress) until complete.
+	//
+	// `relative_file_path` is the destination path inside `public_html`, e.g. `app.zip`.
+	//
+	// Instead of a TUS client, plain `curl` also works:
+	// ```
+	// FILE=app.zip
+	// SIZE=$(stat -f%z "$FILE")   # stat -c%s on Linux
+	//
+	// curl -i -X POST "{url}/${FILE}?override=true" \
+	//   -H "X-Auth: {auth_key}" \
+	//   -H "X-Auth-Rest: {rest_auth_key}" \
+	//   -H "Tus-Resumable: 1.0.0" \
+	//   -H "Upload-Length: ${SIZE}" \
+	//   -H "Upload-Offset: 0"
+	// # -> 201 Created
+	//
+	// curl -i -X PATCH "{url}/${FILE}?override=true" \
+	//   -H "X-Auth: {auth_key}" \
+	//   -H "X-Auth-Rest: {rest_auth_key}" \
+	//   -H "Tus-Resumable: 1.0.0" \
+	//   -H "Content-Type: application/offset+octet-stream" \
+	//   -H "Upload-Offset: 0" \
+	//   --data-binary "@${FILE}"
+	// # -> 204 No Content, Upload-Offset response header equals SIZE when done
+	// ```
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/hosting/v1/files/upload-urls (the `HostingGenerateUploadURLV1` operationId).
+	HostingGenerateUploadURLV1(ctx context.Context, body HostingGenerateUploadURLV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingListOrdersV1 List orders
 	//
@@ -20692,6 +21479,61 @@ func (c *Client) AgencyHostingImportWebsiteFromArchiveV1WithBody(ctx context.Con
 // Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/import-archive (the `AgencyHostingImportWebsiteFromArchiveV1` operationId).
 func (c *Client) AgencyHostingImportWebsiteFromArchiveV1(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingImportWebsiteFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewAgencyHostingImportWebsiteFromArchiveV1Request(c.Server, websiteUid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// AgencyHostingGenerateUploadURLV1 Generate upload URL
+//
+// Generate a file browser upload URL with authentication credentials for uploading files
+// to an Agency Plan website's file storage.
+//
+// Returns `url`, `auth_key` and `rest_auth_key`. Use these to upload a file to the
+// website's file storage via the TUS resumable upload protocol (TUS 1.0.0). Send
+// `X-Auth: {auth_key}` and `X-Auth-Rest: {rest_auth_key}` headers on every request below.
+//
+//  1. Create the upload: `POST` to `{url}/{relative_file_path}?override=true` with headers
+//     `upload-length: {file size in bytes}` and `upload-offset: 0`. Expect `201 Created`.
+//  2. Upload the file: send the file bytes to the same location (any TUS 1.0.0 client, or
+//     `PATCH` requests with an `upload-offset` header tracking progress) until complete.
+//
+// `relative_file_path` is the destination path inside the website's file storage, e.g.
+// `app.zip`.
+//
+// Instead of a TUS client, plain `curl` also works:
+// ```
+// FILE=app.zip
+// SIZE=$(stat -f%z "$FILE")   # stat -c%s on Linux
+//
+//	curl -i -X POST "{url}/${FILE}?override=true" \
+//	  -H "X-Auth: {auth_key}" \
+//	  -H "X-Auth-Rest: {rest_auth_key}" \
+//	  -H "Tus-Resumable: 1.0.0" \
+//	  -H "Upload-Length: ${SIZE}" \
+//	  -H "Upload-Offset: 0"
+//
+// # -> 201 Created
+//
+//	curl -i -X PATCH "{url}/${FILE}?override=true" \
+//	  -H "X-Auth: {auth_key}" \
+//	  -H "X-Auth-Rest: {rest_auth_key}" \
+//	  -H "Tus-Resumable: 1.0.0" \
+//	  -H "Content-Type: application/offset+octet-stream" \
+//	  -H "Upload-Offset: 0" \
+//	  --data-binary "@${FILE}"
+//
+// # -> 204 No Content, Upload-Offset response header equals SIZE when done
+// ```
+//
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/upload-urls (the `AgencyHostingGenerateUploadURLV1` operationId).
+func (c *Client) AgencyHostingGenerateUploadURLV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingGenerateUploadURLV1Request(c.Server, websiteUid)
 	if err != nil {
 		return nil, err
 	}
@@ -23777,6 +24619,66 @@ func (c *Client) HostingToggleCachelessModeV1(ctx context.Context, username User
 	return c.Client.Do(req)
 }
 
+// HostingDeployStaticSiteArchiveV1WithBody Deploy static site archive
+//
+// Deploy a static application from an archive file.
+//
+// WARNING: this overwrites the website's existing contents and cannot be undone —
+// verify this is intended before calling this endpoint.
+//
+// This endpoint allows you to deploy a static application from an archive
+// file that has been uploaded to the website's directory.
+//
+// This only works for static sites (pre-built HTML/CSS/JS with no build step). For
+// Node.js applications, use `Create NodeJS build from archive` instead, or
+// `Start Node.js build` if the archive is already uploaded. For WordPress sites,
+// use `Import WordPress website`.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/deploy (the `HostingDeployStaticSiteArchiveV1` operationId).
+func (c *Client) HostingDeployStaticSiteArchiveV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingDeployStaticSiteArchiveV1RequestWithBody(c.Server, username, domain, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingDeployStaticSiteArchiveV1 Deploy static site archive
+//
+// Deploy a static application from an archive file.
+//
+// WARNING: this overwrites the website's existing contents and cannot be undone —
+// verify this is intended before calling this endpoint.
+//
+// This endpoint allows you to deploy a static application from an archive
+// file that has been uploaded to the website's directory.
+//
+// This only works for static sites (pre-built HTML/CSS/JS with no build step). For
+// Node.js applications, use `Create NodeJS build from archive` instead, or
+// `Start Node.js build` if the archive is already uploaded. For WordPress sites,
+// use `Import WordPress website`.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/deploy (the `HostingDeployStaticSiteArchiveV1` operationId).
+func (c *Client) HostingDeployStaticSiteArchiveV1(ctx context.Context, username UsernamePath, domain Domain, body HostingDeployStaticSiteArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingDeployStaticSiteArchiveV1Request(c.Server, username, domain, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // HostingListNodeJSBuildsV1 List NodeJS builds
 //
 // Retrieve a paginated list of Node.js build processes for a specific website.
@@ -23798,9 +24700,78 @@ func (c *Client) HostingListNodeJSBuildsV1(ctx context.Context, username Usernam
 	return c.Client.Do(req)
 }
 
+// HostingStartNodeJsBuildV1WithBody Start Node.js build
+//
+// Start a Node.js build process using files already present on the website's file storage.
+//
+// WARNING: on success this overwrites the website's existing contents and cannot be
+// undone — verify this is intended before calling this endpoint.
+//
+// The `source_type` must be `archive` and `source_options.archive_path` must point to an
+// existing archive file on the server (relative to the website document root).
+// Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
+//
+// To auto-detect build settings from an archive before starting, first call the
+// `Get Node.js Build Settings from Archive` endpoint. To upload an archive and start
+// a build in one step, use the `Create Node.js Build from Archive` endpoint instead.
+//
+// The returned build `uuid` can be used to poll progress and retrieve logs via
+// the `Get Node.js Build Logs` endpoint.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds (the `HostingStartNodeJsBuildV1` operationId).
+func (c *Client) HostingStartNodeJsBuildV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingStartNodeJsBuildV1RequestWithBody(c.Server, username, domain, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingStartNodeJsBuildV1 Start Node.js build
+//
+// Start a Node.js build process using files already present on the website's file storage.
+//
+// WARNING: on success this overwrites the website's existing contents and cannot be
+// undone — verify this is intended before calling this endpoint.
+//
+// The `source_type` must be `archive` and `source_options.archive_path` must point to an
+// existing archive file on the server (relative to the website document root).
+// Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
+//
+// To auto-detect build settings from an archive before starting, first call the
+// `Get Node.js Build Settings from Archive` endpoint. To upload an archive and start
+// a build in one step, use the `Create Node.js Build from Archive` endpoint instead.
+//
+// The returned build `uuid` can be used to poll progress and retrieve logs via
+// the `Get Node.js Build Logs` endpoint.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds (the `HostingStartNodeJsBuildV1` operationId).
+func (c *Client) HostingStartNodeJsBuildV1(ctx context.Context, username UsernamePath, domain Domain, body HostingStartNodeJsBuildV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingStartNodeJsBuildV1Request(c.Server, username, domain, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // HostingCreateNodeJSBuildFromArchiveV1WithBody Create NodeJS build from archive
 //
 // Upload a project archive, auto-detect build settings, and immediately start a Node.js build.
+//
+// WARNING: on success this overwrites the website's existing contents and cannot be
+// undone — verify this is intended before calling this endpoint.
 //
 // This is the recommended single-step approach for deploying a Node.js application.
 // The archive is uploaded to the website's file storage, build settings are auto-detected
@@ -23840,6 +24811,9 @@ func (c *Client) HostingCreateNodeJSBuildFromArchiveV1WithBody(ctx context.Conte
 //
 // Upload a project archive, auto-detect build settings, and immediately start a Node.js build.
 //
+// WARNING: on success this overwrites the website's existing contents and cannot be
+// undone — verify this is intended before calling this endpoint.
+//
 // This is the recommended single-step approach for deploying a Node.js application.
 // The archive is uploaded to the website's file storage, build settings are auto-detected
 // from the package.json inside the archive, and the build process starts automatically.
@@ -23864,6 +24838,32 @@ func (c *Client) HostingCreateNodeJSBuildFromArchiveV1WithBody(ctx context.Conte
 // Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/from-archive (the `HostingCreateNodeJSBuildFromArchiveV1` operationId).
 func (c *Client) HostingCreateNodeJSBuildFromArchiveV1(ctx context.Context, username UsernamePath, domain Domain, body HostingCreateNodeJSBuildFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingCreateNodeJSBuildFromArchiveV1Request(c.Server, username, domain, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingGetNodeJsBuildSettingsFromArchiveV1 Get Node.js build settings from archive
+//
+// Auto-detect Node.js build settings from a package.json inside an archive already on the server.
+//
+// Use this before calling `Start Node.js Build` to preview what settings will be used,
+// or to let the user review and override values (framework, node version, root directory,
+// output directory, build script) before committing to a build.
+//
+// The archive must already be present on the website's file storage. Use the
+// `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
+// To upload an archive and start a build in one step without inspecting settings first,
+// use the `Create Node.js Build from Archive` endpoint instead.
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/from-archive (the `HostingGetNodeJsBuildSettingsFromArchiveV1` operationId).
+func (c *Client) HostingGetNodeJsBuildSettingsFromArchiveV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetNodeJsBuildSettingsFromArchiveV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingGetNodeJsBuildSettingsFromArchiveV1Request(c.Server, username, domain, params)
 	if err != nil {
 		return nil, err
 	}
@@ -24435,6 +25435,144 @@ func (c *Client) HostingCreateWebsiteSubdomainV1(ctx context.Context, username U
 // Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/subdomains/{subdomain} (the `HostingDeleteWebsiteSubdomainV1` operationId).
 func (c *Client) HostingDeleteWebsiteSubdomainV1(ctx context.Context, username UsernamePath, domain Domain, subdomain SubdomainPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingDeleteWebsiteSubdomainV1Request(c.Server, username, domain, subdomain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingImportWordPressWebsiteV1WithBody Import WordPress website
+//
+// Import WordPress website to the specified domain.
+//
+// WARNING: this overwrites the website's existing contents and cannot be undone —
+// verify this is intended before calling this endpoint.
+//
+// This endpoint allows you to import a WordPress website from archive and
+// database files that have been uploaded to the website's directory.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/import (the `HostingImportWordPressWebsiteV1` operationId).
+func (c *Client) HostingImportWordPressWebsiteV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingImportWordPressWebsiteV1RequestWithBody(c.Server, username, domain, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingImportWordPressWebsiteV1 Import WordPress website
+//
+// Import WordPress website to the specified domain.
+//
+// WARNING: this overwrites the website's existing contents and cannot be undone —
+// verify this is intended before calling this endpoint.
+//
+// This endpoint allows you to import a WordPress website from archive and
+// database files that have been uploaded to the website's directory.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/import (the `HostingImportWordPressWebsiteV1` operationId).
+func (c *Client) HostingImportWordPressWebsiteV1(ctx context.Context, username UsernamePath, domain Domain, body HostingImportWordPressWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingImportWordPressWebsiteV1Request(c.Server, username, domain, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingDeployWordPressPluginV1WithBody Deploy WordPress plugin
+//
+// Deploy a WordPress plugin from an already uploaded directory.
+//
+// This endpoint allows you to deploy a WordPress plugin that has been uploaded to the website's directory.
+// The plugin will be activated and made available in the WordPress admin panel.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/plugins/deploy (the `HostingDeployWordPressPluginV1` operationId).
+func (c *Client) HostingDeployWordPressPluginV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingDeployWordPressPluginV1RequestWithBody(c.Server, username, domain, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingDeployWordPressPluginV1 Deploy WordPress plugin
+//
+// Deploy a WordPress plugin from an already uploaded directory.
+//
+// This endpoint allows you to deploy a WordPress plugin that has been uploaded to the website's directory.
+// The plugin will be activated and made available in the WordPress admin panel.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/plugins/deploy (the `HostingDeployWordPressPluginV1` operationId).
+func (c *Client) HostingDeployWordPressPluginV1(ctx context.Context, username UsernamePath, domain Domain, body HostingDeployWordPressPluginV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingDeployWordPressPluginV1Request(c.Server, username, domain, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingDeployWordPressThemeV1WithBody Deploy WordPress theme
+//
+// Deploy a WordPress theme from an already uploaded directory.
+//
+// This endpoint allows you to deploy a WordPress theme that has been uploaded to the website's directory.
+// The theme can be optionally activated after deployment.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/themes/deploy (the `HostingDeployWordPressThemeV1` operationId).
+func (c *Client) HostingDeployWordPressThemeV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingDeployWordPressThemeV1RequestWithBody(c.Server, username, domain, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingDeployWordPressThemeV1 Deploy WordPress theme
+//
+// Deploy a WordPress theme from an already uploaded directory.
+//
+// This endpoint allows you to deploy a WordPress theme that has been uploaded to the website's directory.
+// The theme can be optionally activated after deployment.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/themes/deploy (the `HostingDeployWordPressThemeV1` operationId).
+func (c *Client) HostingDeployWordPressThemeV1(ctx context.Context, username UsernamePath, domain Domain, body HostingDeployWordPressThemeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingDeployWordPressThemeV1Request(c.Server, username, domain, body)
 	if err != nil {
 		return nil, err
 	}
@@ -25671,6 +26809,120 @@ func (c *Client) HostingVerifyDomainOwnershipV1WithBody(ctx context.Context, con
 // Corresponds with POST /api/hosting/v1/domains/verify-ownership (the `HostingVerifyDomainOwnershipV1` operationId).
 func (c *Client) HostingVerifyDomainOwnershipV1(ctx context.Context, body HostingVerifyDomainOwnershipV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingVerifyDomainOwnershipV1Request(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingGenerateUploadURLV1WithBody Generate upload URL
+//
+// Generate a file browser upload URL with authentication credentials
+// for uploading files directly to a website's file storage.
+//
+// Returns `url`, `auth_key` and `rest_auth_key`. Use these to upload a file to the
+// website's `public_html` directory via the TUS resumable upload protocol (TUS 1.0.0).
+// Send `X-Auth: {auth_key}` and `X-Auth-Rest: {rest_auth_key}` headers on every request
+// below.
+//
+//  1. Create the upload: `POST` to `{url}/{relative_file_path}?override=true` with headers
+//     `upload-length: {file size in bytes}` and `upload-offset: 0`. Expect `201 Created`.
+//  2. Upload the file: send the file bytes to the same location (any TUS 1.0.0 client, or
+//     `PATCH` requests with an `upload-offset` header tracking progress) until complete.
+//
+// `relative_file_path` is the destination path inside `public_html`, e.g. `app.zip`.
+//
+// Instead of a TUS client, plain `curl` also works:
+// ```
+// FILE=app.zip
+// SIZE=$(stat -f%z "$FILE")   # stat -c%s on Linux
+//
+//	curl -i -X POST "{url}/${FILE}?override=true" \
+//	  -H "X-Auth: {auth_key}" \
+//	  -H "X-Auth-Rest: {rest_auth_key}" \
+//	  -H "Tus-Resumable: 1.0.0" \
+//	  -H "Upload-Length: ${SIZE}" \
+//	  -H "Upload-Offset: 0"
+//
+// # -> 201 Created
+//
+//	curl -i -X PATCH "{url}/${FILE}?override=true" \
+//	  -H "X-Auth: {auth_key}" \
+//	  -H "X-Auth-Rest: {rest_auth_key}" \
+//	  -H "Tus-Resumable: 1.0.0" \
+//	  -H "Content-Type: application/offset+octet-stream" \
+//	  -H "Upload-Offset: 0" \
+//	  --data-binary "@${FILE}"
+//
+// # -> 204 No Content, Upload-Offset response header equals SIZE when done
+// ```
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/hosting/v1/files/upload-urls (the `HostingGenerateUploadURLV1` operationId).
+func (c *Client) HostingGenerateUploadURLV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingGenerateUploadURLV1RequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingGenerateUploadURLV1 Generate upload URL
+//
+// Generate a file browser upload URL with authentication credentials
+// for uploading files directly to a website's file storage.
+//
+// Returns `url`, `auth_key` and `rest_auth_key`. Use these to upload a file to the
+// website's `public_html` directory via the TUS resumable upload protocol (TUS 1.0.0).
+// Send `X-Auth: {auth_key}` and `X-Auth-Rest: {rest_auth_key}` headers on every request
+// below.
+//
+//  1. Create the upload: `POST` to `{url}/{relative_file_path}?override=true` with headers
+//     `upload-length: {file size in bytes}` and `upload-offset: 0`. Expect `201 Created`.
+//  2. Upload the file: send the file bytes to the same location (any TUS 1.0.0 client, or
+//     `PATCH` requests with an `upload-offset` header tracking progress) until complete.
+//
+// `relative_file_path` is the destination path inside `public_html`, e.g. `app.zip`.
+//
+// Instead of a TUS client, plain `curl` also works:
+// ```
+// FILE=app.zip
+// SIZE=$(stat -f%z "$FILE")   # stat -c%s on Linux
+//
+//	curl -i -X POST "{url}/${FILE}?override=true" \
+//	  -H "X-Auth: {auth_key}" \
+//	  -H "X-Auth-Rest: {rest_auth_key}" \
+//	  -H "Tus-Resumable: 1.0.0" \
+//	  -H "Upload-Length: ${SIZE}" \
+//	  -H "Upload-Offset: 0"
+//
+// # -> 201 Created
+//
+//	curl -i -X PATCH "{url}/${FILE}?override=true" \
+//	  -H "X-Auth: {auth_key}" \
+//	  -H "X-Auth-Rest: {rest_auth_key}" \
+//	  -H "Tus-Resumable: 1.0.0" \
+//	  -H "Content-Type: application/offset+octet-stream" \
+//	  -H "Upload-Offset: 0" \
+//	  --data-binary "@${FILE}"
+//
+// # -> 204 No Content, Upload-Offset response header equals SIZE when done
+// ```
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/hosting/v1/files/upload-urls (the `HostingGenerateUploadURLV1` operationId).
+func (c *Client) HostingGenerateUploadURLV1(ctx context.Context, body HostingGenerateUploadURLV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingGenerateUploadURLV1Request(c.Server, body)
 	if err != nil {
 		return nil, err
 	}
@@ -31172,6 +32424,40 @@ func NewAgencyHostingImportWebsiteFromArchiveV1RequestWithBody(server string, we
 	return req, nil
 }
 
+// NewAgencyHostingGenerateUploadURLV1Request constructs an http.Request for the AgencyHostingGenerateUploadURLV1 method
+func NewAgencyHostingGenerateUploadURLV1Request(server string, websiteUid WebsiteUid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/files/upload-urls", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewAgencyHostingListPHPExtensionsForAWebsiteV1Request constructs an http.Request for the AgencyHostingListPHPExtensionsForAWebsiteV1 method
 func NewAgencyHostingListPHPExtensionsForAWebsiteV1Request(server string, websiteUid WebsiteUid) (*http.Request, error) {
 	var err error
@@ -35432,6 +36718,60 @@ func NewHostingToggleCachelessModeV1RequestWithBody(server string, username User
 	return req, nil
 }
 
+// NewHostingDeployStaticSiteArchiveV1Request calls the generic HostingDeployStaticSiteArchiveV1 builder with application/json body
+func NewHostingDeployStaticSiteArchiveV1Request(server string, username UsernamePath, domain Domain, body HostingDeployStaticSiteArchiveV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingDeployStaticSiteArchiveV1RequestWithBody(server, username, domain, "application/json", bodyReader)
+}
+
+// NewHostingDeployStaticSiteArchiveV1RequestWithBody constructs an http.Request for the HostingDeployStaticSiteArchiveV1 method, with any body, and a specified content type
+func NewHostingDeployStaticSiteArchiveV1RequestWithBody(server string, username UsernamePath, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/deploy", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewHostingListNodeJSBuildsV1Request constructs an http.Request for the HostingListNodeJSBuildsV1 method
 func NewHostingListNodeJSBuildsV1Request(server string, username UsernamePath, domain Domain, params *HostingListNodeJSBuildsV1Params) (*http.Request, error) {
 	var err error
@@ -35524,6 +36864,60 @@ func NewHostingListNodeJSBuildsV1Request(server string, username UsernamePath, d
 	return req, nil
 }
 
+// NewHostingStartNodeJsBuildV1Request calls the generic HostingStartNodeJsBuildV1 builder with application/json body
+func NewHostingStartNodeJsBuildV1Request(server string, username UsernamePath, domain Domain, body HostingStartNodeJsBuildV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingStartNodeJsBuildV1RequestWithBody(server, username, domain, "application/json", bodyReader)
+}
+
+// NewHostingStartNodeJsBuildV1RequestWithBody constructs an http.Request for the HostingStartNodeJsBuildV1 method, with any body, and a specified content type
+func NewHostingStartNodeJsBuildV1RequestWithBody(server string, username UsernamePath, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/nodejs/builds", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewHostingCreateNodeJSBuildFromArchiveV1Request calls the generic HostingCreateNodeJSBuildFromArchiveV1 builder with application/json body
 func NewHostingCreateNodeJSBuildFromArchiveV1Request(server string, username UsernamePath, domain Domain, body HostingCreateNodeJSBuildFromArchiveV1JSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
@@ -35574,6 +36968,70 @@ func NewHostingCreateNodeJSBuildFromArchiveV1RequestWithBody(server string, user
 	}
 
 	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingGetNodeJsBuildSettingsFromArchiveV1Request constructs an http.Request for the HostingGetNodeJsBuildSettingsFromArchiveV1 method
+func NewHostingGetNodeJsBuildSettingsFromArchiveV1Request(server string, username UsernamePath, domain Domain, params *HostingGetNodeJsBuildSettingsFromArchiveV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/nodejs/builds/settings/from-archive", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "archive_path", params.ArchivePath, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+			return nil, err
+		} else {
+			for _, qp := range strings.Split(queryFrag, "&") {
+				rawQueryFragments = append(rawQueryFragments, qp)
+			}
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 
 	return req, nil
 }
@@ -36581,6 +38039,168 @@ func NewHostingDeleteWebsiteSubdomainV1Request(server string, username UsernameP
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewHostingImportWordPressWebsiteV1Request calls the generic HostingImportWordPressWebsiteV1 builder with application/json body
+func NewHostingImportWordPressWebsiteV1Request(server string, username UsernamePath, domain Domain, body HostingImportWordPressWebsiteV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingImportWordPressWebsiteV1RequestWithBody(server, username, domain, "application/json", bodyReader)
+}
+
+// NewHostingImportWordPressWebsiteV1RequestWithBody constructs an http.Request for the HostingImportWordPressWebsiteV1 method, with any body, and a specified content type
+func NewHostingImportWordPressWebsiteV1RequestWithBody(server string, username UsernamePath, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/wordpress/import", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingDeployWordPressPluginV1Request calls the generic HostingDeployWordPressPluginV1 builder with application/json body
+func NewHostingDeployWordPressPluginV1Request(server string, username UsernamePath, domain Domain, body HostingDeployWordPressPluginV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingDeployWordPressPluginV1RequestWithBody(server, username, domain, "application/json", bodyReader)
+}
+
+// NewHostingDeployWordPressPluginV1RequestWithBody constructs an http.Request for the HostingDeployWordPressPluginV1 method, with any body, and a specified content type
+func NewHostingDeployWordPressPluginV1RequestWithBody(server string, username UsernamePath, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/wordpress/plugins/deploy", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingDeployWordPressThemeV1Request calls the generic HostingDeployWordPressThemeV1 builder with application/json body
+func NewHostingDeployWordPressThemeV1Request(server string, username UsernamePath, domain Domain, body HostingDeployWordPressThemeV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingDeployWordPressThemeV1RequestWithBody(server, username, domain, "application/json", bodyReader)
+}
+
+// NewHostingDeployWordPressThemeV1RequestWithBody constructs an http.Request for the HostingDeployWordPressThemeV1 method, with any body, and a specified content type
+func NewHostingDeployWordPressThemeV1RequestWithBody(server string, username UsernamePath, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/wordpress/themes/deploy", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -38167,6 +39787,46 @@ func NewHostingVerifyDomainOwnershipV1RequestWithBody(server string, contentType
 	}
 
 	operationPath := fmt.Sprintf("/api/hosting/v1/domains/verify-ownership")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingGenerateUploadURLV1Request calls the generic HostingGenerateUploadURLV1 builder with application/json body
+func NewHostingGenerateUploadURLV1Request(server string, body HostingGenerateUploadURLV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingGenerateUploadURLV1RequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewHostingGenerateUploadURLV1RequestWithBody constructs an http.Request for the HostingGenerateUploadURLV1 method, with any body, and a specified content type
+func NewHostingGenerateUploadURLV1RequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/files/upload-urls")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -46512,6 +48172,51 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/import-archive (the `AgencyHostingImportWebsiteFromArchiveV1` operationId).
 	AgencyHostingImportWebsiteFromArchiveV1WithResponse(ctx context.Context, websiteUid WebsiteUid, body AgencyHostingImportWebsiteFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgencyHostingImportWebsiteFromArchiveV1Response, error)
 
+	// AgencyHostingGenerateUploadURLV1WithResponse Generate upload URL
+	//
+	// Generate a file browser upload URL with authentication credentials for uploading files
+	// to an Agency Plan website's file storage.
+	//
+	// Returns `url`, `auth_key` and `rest_auth_key`. Use these to upload a file to the
+	// website's file storage via the TUS resumable upload protocol (TUS 1.0.0). Send
+	// `X-Auth: {auth_key}` and `X-Auth-Rest: {rest_auth_key}` headers on every request below.
+	//
+	// 1. Create the upload: `POST` to `{url}/{relative_file_path}?override=true` with headers
+	//    `upload-length: {file size in bytes}` and `upload-offset: 0`. Expect `201 Created`.
+	// 2. Upload the file: send the file bytes to the same location (any TUS 1.0.0 client, or
+	//    `PATCH` requests with an `upload-offset` header tracking progress) until complete.
+	//
+	// `relative_file_path` is the destination path inside the website's file storage, e.g.
+	// `app.zip`.
+	//
+	// Instead of a TUS client, plain `curl` also works:
+	// ```
+	// FILE=app.zip
+	// SIZE=$(stat -f%z "$FILE")   # stat -c%s on Linux
+	//
+	// curl -i -X POST "{url}/${FILE}?override=true" \
+	//   -H "X-Auth: {auth_key}" \
+	//   -H "X-Auth-Rest: {rest_auth_key}" \
+	//   -H "Tus-Resumable: 1.0.0" \
+	//   -H "Upload-Length: ${SIZE}" \
+	//   -H "Upload-Offset: 0"
+	// # -> 201 Created
+	//
+	// curl -i -X PATCH "{url}/${FILE}?override=true" \
+	//   -H "X-Auth: {auth_key}" \
+	//   -H "X-Auth-Rest: {rest_auth_key}" \
+	//   -H "Tus-Resumable: 1.0.0" \
+	//   -H "Content-Type: application/offset+octet-stream" \
+	//   -H "Upload-Offset: 0" \
+	//   --data-binary "@${FILE}"
+	// # -> 204 No Content, Upload-Offset response header equals SIZE when done
+	// ```
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/upload-urls (the `AgencyHostingGenerateUploadURLV1` operationId).
+	AgencyHostingGenerateUploadURLV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingGenerateUploadURLV1Response, error)
+
 	// AgencyHostingListPHPExtensionsForAWebsiteV1WithResponse List PHP extensions for a website
 	//
 	// Lists every PHP extension available to an Agency Plan website and whether it is currently enabled.
@@ -48331,6 +50036,46 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with PATCH /api/hosting/v1/accounts/{username}/websites/{domain}/cacheless-mode/toggle (the `HostingToggleCachelessModeV1` operationId).
 	HostingToggleCachelessModeV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingToggleCachelessModeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingToggleCachelessModeV1Response, error)
 
+	// HostingDeployStaticSiteArchiveV1WithBodyWithResponse Deploy static site archive
+	//
+	// Deploy a static application from an archive file.
+	//
+	// WARNING: this overwrites the website's existing contents and cannot be undone —
+	// verify this is intended before calling this endpoint.
+	//
+	// This endpoint allows you to deploy a static application from an archive
+	// file that has been uploaded to the website's directory.
+	//
+	// This only works for static sites (pre-built HTML/CSS/JS with no build step). For
+	// Node.js applications, use `Create NodeJS build from archive` instead, or
+	// `Start Node.js build` if the archive is already uploaded. For WordPress sites,
+	// use `Import WordPress website`.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/deploy (the `HostingDeployStaticSiteArchiveV1` operationId).
+	HostingDeployStaticSiteArchiveV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingDeployStaticSiteArchiveV1Response, error)
+
+	// HostingDeployStaticSiteArchiveV1WithResponse Deploy static site archive
+	//
+	// Deploy a static application from an archive file.
+	//
+	// WARNING: this overwrites the website's existing contents and cannot be undone —
+	// verify this is intended before calling this endpoint.
+	//
+	// This endpoint allows you to deploy a static application from an archive
+	// file that has been uploaded to the website's directory.
+	//
+	// This only works for static sites (pre-built HTML/CSS/JS with no build step). For
+	// Node.js applications, use `Create NodeJS build from archive` instead, or
+	// `Start Node.js build` if the archive is already uploaded. For WordPress sites,
+	// use `Import WordPress website`.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/deploy (the `HostingDeployStaticSiteArchiveV1` operationId).
+	HostingDeployStaticSiteArchiveV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingDeployStaticSiteArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingDeployStaticSiteArchiveV1Response, error)
+
 	// HostingListNodeJSBuildsV1WithResponse List NodeJS builds
 	//
 	// Retrieve a paginated list of Node.js build processes for a specific website.
@@ -48344,9 +50089,58 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds (the `HostingListNodeJSBuildsV1` operationId).
 	HostingListNodeJSBuildsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingListNodeJSBuildsV1Params, reqEditors ...RequestEditorFn) (*HostingListNodeJSBuildsV1Response, error)
 
+	// HostingStartNodeJsBuildV1WithBodyWithResponse Start Node.js build
+	//
+	// Start a Node.js build process using files already present on the website's file storage.
+	//
+	// WARNING: on success this overwrites the website's existing contents and cannot be
+	// undone — verify this is intended before calling this endpoint.
+	//
+	// The `source_type` must be `archive` and `source_options.archive_path` must point to an
+	// existing archive file on the server (relative to the website document root).
+	// Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
+	//
+	// To auto-detect build settings from an archive before starting, first call the
+	// `Get Node.js Build Settings from Archive` endpoint. To upload an archive and start
+	// a build in one step, use the `Create Node.js Build from Archive` endpoint instead.
+	//
+	// The returned build `uuid` can be used to poll progress and retrieve logs via
+	// the `Get Node.js Build Logs` endpoint.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds (the `HostingStartNodeJsBuildV1` operationId).
+	HostingStartNodeJsBuildV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingStartNodeJsBuildV1Response, error)
+
+	// HostingStartNodeJsBuildV1WithResponse Start Node.js build
+	//
+	// Start a Node.js build process using files already present on the website's file storage.
+	//
+	// WARNING: on success this overwrites the website's existing contents and cannot be
+	// undone — verify this is intended before calling this endpoint.
+	//
+	// The `source_type` must be `archive` and `source_options.archive_path` must point to an
+	// existing archive file on the server (relative to the website document root).
+	// Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
+	//
+	// To auto-detect build settings from an archive before starting, first call the
+	// `Get Node.js Build Settings from Archive` endpoint. To upload an archive and start
+	// a build in one step, use the `Create Node.js Build from Archive` endpoint instead.
+	//
+	// The returned build `uuid` can be used to poll progress and retrieve logs via
+	// the `Get Node.js Build Logs` endpoint.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds (the `HostingStartNodeJsBuildV1` operationId).
+	HostingStartNodeJsBuildV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingStartNodeJsBuildV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingStartNodeJsBuildV1Response, error)
+
 	// HostingCreateNodeJSBuildFromArchiveV1WithBodyWithResponse Create NodeJS build from archive
 	//
 	// Upload a project archive, auto-detect build settings, and immediately start a Node.js build.
+	//
+	// WARNING: on success this overwrites the website's existing contents and cannot be
+	// undone — verify this is intended before calling this endpoint.
 	//
 	// This is the recommended single-step approach for deploying a Node.js application.
 	// The archive is uploaded to the website's file storage, build settings are auto-detected
@@ -48376,6 +50170,9 @@ type ClientWithResponsesInterface interface {
 	//
 	// Upload a project archive, auto-detect build settings, and immediately start a Node.js build.
 	//
+	// WARNING: on success this overwrites the website's existing contents and cannot be
+	// undone — verify this is intended before calling this endpoint.
+	//
 	// This is the recommended single-step approach for deploying a Node.js application.
 	// The archive is uploaded to the website's file storage, build settings are auto-detected
 	// from the package.json inside the archive, and the build process starts automatically.
@@ -48399,6 +50196,24 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/from-archive (the `HostingCreateNodeJSBuildFromArchiveV1` operationId).
 	HostingCreateNodeJSBuildFromArchiveV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingCreateNodeJSBuildFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingCreateNodeJSBuildFromArchiveV1Response, error)
+
+	// HostingGetNodeJsBuildSettingsFromArchiveV1WithResponse Get Node.js build settings from archive
+	//
+	// Auto-detect Node.js build settings from a package.json inside an archive already on the server.
+	//
+	// Use this before calling `Start Node.js Build` to preview what settings will be used,
+	// or to let the user review and override values (framework, node version, root directory,
+	// output directory, build script) before committing to a build.
+	//
+	// The archive must already be present on the website's file storage. Use the
+	// `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
+	// To upload an archive and start a build in one step without inspecting settings first,
+	// use the `Create Node.js Build from Archive` endpoint instead.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/from-archive (the `HostingGetNodeJsBuildSettingsFromArchiveV1` operationId).
+	HostingGetNodeJsBuildSettingsFromArchiveV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetNodeJsBuildSettingsFromArchiveV1Params, reqEditors ...RequestEditorFn) (*HostingGetNodeJsBuildSettingsFromArchiveV1Response, error)
 
 	// HostingGetNodeJSBuildLogsV1WithResponse Get NodeJS build logs
 	//
@@ -48734,6 +50549,84 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/subdomains/{subdomain} (the `HostingDeleteWebsiteSubdomainV1` operationId).
 	HostingDeleteWebsiteSubdomainV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, subdomain SubdomainPath, reqEditors ...RequestEditorFn) (*HostingDeleteWebsiteSubdomainV1Response, error)
+
+	// HostingImportWordPressWebsiteV1WithBodyWithResponse Import WordPress website
+	//
+	// Import WordPress website to the specified domain.
+	//
+	// WARNING: this overwrites the website's existing contents and cannot be undone —
+	// verify this is intended before calling this endpoint.
+	//
+	// This endpoint allows you to import a WordPress website from archive and
+	// database files that have been uploaded to the website's directory.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/import (the `HostingImportWordPressWebsiteV1` operationId).
+	HostingImportWordPressWebsiteV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingImportWordPressWebsiteV1Response, error)
+
+	// HostingImportWordPressWebsiteV1WithResponse Import WordPress website
+	//
+	// Import WordPress website to the specified domain.
+	//
+	// WARNING: this overwrites the website's existing contents and cannot be undone —
+	// verify this is intended before calling this endpoint.
+	//
+	// This endpoint allows you to import a WordPress website from archive and
+	// database files that have been uploaded to the website's directory.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/import (the `HostingImportWordPressWebsiteV1` operationId).
+	HostingImportWordPressWebsiteV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingImportWordPressWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingImportWordPressWebsiteV1Response, error)
+
+	// HostingDeployWordPressPluginV1WithBodyWithResponse Deploy WordPress plugin
+	//
+	// Deploy a WordPress plugin from an already uploaded directory.
+	//
+	// This endpoint allows you to deploy a WordPress plugin that has been uploaded to the website's directory.
+	// The plugin will be activated and made available in the WordPress admin panel.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/plugins/deploy (the `HostingDeployWordPressPluginV1` operationId).
+	HostingDeployWordPressPluginV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingDeployWordPressPluginV1Response, error)
+
+	// HostingDeployWordPressPluginV1WithResponse Deploy WordPress plugin
+	//
+	// Deploy a WordPress plugin from an already uploaded directory.
+	//
+	// This endpoint allows you to deploy a WordPress plugin that has been uploaded to the website's directory.
+	// The plugin will be activated and made available in the WordPress admin panel.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/plugins/deploy (the `HostingDeployWordPressPluginV1` operationId).
+	HostingDeployWordPressPluginV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingDeployWordPressPluginV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingDeployWordPressPluginV1Response, error)
+
+	// HostingDeployWordPressThemeV1WithBodyWithResponse Deploy WordPress theme
+	//
+	// Deploy a WordPress theme from an already uploaded directory.
+	//
+	// This endpoint allows you to deploy a WordPress theme that has been uploaded to the website's directory.
+	// The theme can be optionally activated after deployment.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/themes/deploy (the `HostingDeployWordPressThemeV1` operationId).
+	HostingDeployWordPressThemeV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingDeployWordPressThemeV1Response, error)
+
+	// HostingDeployWordPressThemeV1WithResponse Deploy WordPress theme
+	//
+	// Deploy a WordPress theme from an already uploaded directory.
+	//
+	// This endpoint allows you to deploy a WordPress theme that has been uploaded to the website's directory.
+	// The theme can be optionally activated after deployment.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/themes/deploy (the `HostingDeployWordPressThemeV1` operationId).
+	HostingDeployWordPressThemeV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingDeployWordPressThemeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingDeployWordPressThemeV1Response, error)
 
 	// HostingInstallWordPressV1WithBodyWithResponse Install WordPress
 	//
@@ -49490,6 +51383,96 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with POST /api/hosting/v1/domains/verify-ownership (the `HostingVerifyDomainOwnershipV1` operationId).
 	HostingVerifyDomainOwnershipV1WithResponse(ctx context.Context, body HostingVerifyDomainOwnershipV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingVerifyDomainOwnershipV1Response, error)
+
+	// HostingGenerateUploadURLV1WithBodyWithResponse Generate upload URL
+	//
+	// Generate a file browser upload URL with authentication credentials
+	// for uploading files directly to a website's file storage.
+	//
+	// Returns `url`, `auth_key` and `rest_auth_key`. Use these to upload a file to the
+	// website's `public_html` directory via the TUS resumable upload protocol (TUS 1.0.0).
+	// Send `X-Auth: {auth_key}` and `X-Auth-Rest: {rest_auth_key}` headers on every request
+	// below.
+	//
+	// 1. Create the upload: `POST` to `{url}/{relative_file_path}?override=true` with headers
+	//    `upload-length: {file size in bytes}` and `upload-offset: 0`. Expect `201 Created`.
+	// 2. Upload the file: send the file bytes to the same location (any TUS 1.0.0 client, or
+	//    `PATCH` requests with an `upload-offset` header tracking progress) until complete.
+	//
+	// `relative_file_path` is the destination path inside `public_html`, e.g. `app.zip`.
+	//
+	// Instead of a TUS client, plain `curl` also works:
+	// ```
+	// FILE=app.zip
+	// SIZE=$(stat -f%z "$FILE")   # stat -c%s on Linux
+	//
+	// curl -i -X POST "{url}/${FILE}?override=true" \
+	//   -H "X-Auth: {auth_key}" \
+	//   -H "X-Auth-Rest: {rest_auth_key}" \
+	//   -H "Tus-Resumable: 1.0.0" \
+	//   -H "Upload-Length: ${SIZE}" \
+	//   -H "Upload-Offset: 0"
+	// # -> 201 Created
+	//
+	// curl -i -X PATCH "{url}/${FILE}?override=true" \
+	//   -H "X-Auth: {auth_key}" \
+	//   -H "X-Auth-Rest: {rest_auth_key}" \
+	//   -H "Tus-Resumable: 1.0.0" \
+	//   -H "Content-Type: application/offset+octet-stream" \
+	//   -H "Upload-Offset: 0" \
+	//   --data-binary "@${FILE}"
+	// # -> 204 No Content, Upload-Offset response header equals SIZE when done
+	// ```
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/files/upload-urls (the `HostingGenerateUploadURLV1` operationId).
+	HostingGenerateUploadURLV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingGenerateUploadURLV1Response, error)
+
+	// HostingGenerateUploadURLV1WithResponse Generate upload URL
+	//
+	// Generate a file browser upload URL with authentication credentials
+	// for uploading files directly to a website's file storage.
+	//
+	// Returns `url`, `auth_key` and `rest_auth_key`. Use these to upload a file to the
+	// website's `public_html` directory via the TUS resumable upload protocol (TUS 1.0.0).
+	// Send `X-Auth: {auth_key}` and `X-Auth-Rest: {rest_auth_key}` headers on every request
+	// below.
+	//
+	// 1. Create the upload: `POST` to `{url}/{relative_file_path}?override=true` with headers
+	//    `upload-length: {file size in bytes}` and `upload-offset: 0`. Expect `201 Created`.
+	// 2. Upload the file: send the file bytes to the same location (any TUS 1.0.0 client, or
+	//    `PATCH` requests with an `upload-offset` header tracking progress) until complete.
+	//
+	// `relative_file_path` is the destination path inside `public_html`, e.g. `app.zip`.
+	//
+	// Instead of a TUS client, plain `curl` also works:
+	// ```
+	// FILE=app.zip
+	// SIZE=$(stat -f%z "$FILE")   # stat -c%s on Linux
+	//
+	// curl -i -X POST "{url}/${FILE}?override=true" \
+	//   -H "X-Auth: {auth_key}" \
+	//   -H "X-Auth-Rest: {rest_auth_key}" \
+	//   -H "Tus-Resumable: 1.0.0" \
+	//   -H "Upload-Length: ${SIZE}" \
+	//   -H "Upload-Offset: 0"
+	// # -> 201 Created
+	//
+	// curl -i -X PATCH "{url}/${FILE}?override=true" \
+	//   -H "X-Auth: {auth_key}" \
+	//   -H "X-Auth-Rest: {rest_auth_key}" \
+	//   -H "Tus-Resumable: 1.0.0" \
+	//   -H "Content-Type: application/offset+octet-stream" \
+	//   -H "Upload-Offset: 0" \
+	//   --data-binary "@${FILE}"
+	// # -> 204 No Content, Upload-Offset response header equals SIZE when done
+	// ```
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/files/upload-urls (the `HostingGenerateUploadURLV1` operationId).
+	HostingGenerateUploadURLV1WithResponse(ctx context.Context, body HostingGenerateUploadURLV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingGenerateUploadURLV1Response, error)
 
 	// HostingListOrdersV1WithResponse List orders
 	//
@@ -53481,6 +55464,61 @@ func (r AgencyHostingImportWebsiteFromArchiveV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r AgencyHostingImportWebsiteFromArchiveV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingGenerateUploadURLV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *AgencyHostingV1FilesUploadUrlResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r AgencyHostingGenerateUploadURLV1Response) GetJSON200() *AgencyHostingV1FilesUploadUrlResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r AgencyHostingGenerateUploadURLV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r AgencyHostingGenerateUploadURLV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r AgencyHostingGenerateUploadURLV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingGenerateUploadURLV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingGenerateUploadURLV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingGenerateUploadURLV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -59283,6 +61321,68 @@ func (r HostingToggleCachelessModeV1Response) ContentType() string {
 	return ""
 }
 
+type HostingDeployStaticSiteArchiveV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingDeployStaticSiteArchiveV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingDeployStaticSiteArchiveV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingDeployStaticSiteArchiveV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingDeployStaticSiteArchiveV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingDeployStaticSiteArchiveV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingDeployStaticSiteArchiveV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingDeployStaticSiteArchiveV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingDeployStaticSiteArchiveV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type HostingListNodeJSBuildsV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -59346,6 +61446,68 @@ func (r HostingListNodeJSBuildsV1Response) ContentType() string {
 	return ""
 }
 
+type HostingStartNodeJsBuildV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1NodeJsBuildResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingStartNodeJsBuildV1Response) GetJSON200() *HostingV1NodeJsBuildResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingStartNodeJsBuildV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingStartNodeJsBuildV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingStartNodeJsBuildV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingStartNodeJsBuildV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingStartNodeJsBuildV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingStartNodeJsBuildV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingStartNodeJsBuildV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type HostingCreateNodeJSBuildFromArchiveV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -59402,6 +61564,68 @@ func (r HostingCreateNodeJSBuildFromArchiveV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingCreateNodeJSBuildFromArchiveV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingGetNodeJsBuildSettingsFromArchiveV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1NodeJsBuildSettingsResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingGetNodeJsBuildSettingsFromArchiveV1Response) GetJSON200() *HostingV1NodeJsBuildSettingsResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingGetNodeJsBuildSettingsFromArchiveV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingGetNodeJsBuildSettingsFromArchiveV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingGetNodeJsBuildSettingsFromArchiveV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingGetNodeJsBuildSettingsFromArchiveV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingGetNodeJsBuildSettingsFromArchiveV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingGetNodeJsBuildSettingsFromArchiveV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingGetNodeJsBuildSettingsFromArchiveV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -60518,6 +62742,192 @@ func (r HostingDeleteWebsiteSubdomainV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingDeleteWebsiteSubdomainV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingImportWordPressWebsiteV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingImportWordPressWebsiteV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingImportWordPressWebsiteV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingImportWordPressWebsiteV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingImportWordPressWebsiteV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingImportWordPressWebsiteV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingImportWordPressWebsiteV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingImportWordPressWebsiteV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingImportWordPressWebsiteV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingDeployWordPressPluginV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingDeployWordPressPluginV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingDeployWordPressPluginV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingDeployWordPressPluginV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingDeployWordPressPluginV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingDeployWordPressPluginV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingDeployWordPressPluginV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingDeployWordPressPluginV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingDeployWordPressPluginV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingDeployWordPressThemeV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingDeployWordPressThemeV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingDeployWordPressThemeV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingDeployWordPressThemeV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingDeployWordPressThemeV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingDeployWordPressThemeV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingDeployWordPressThemeV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingDeployWordPressThemeV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingDeployWordPressThemeV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -62459,6 +64869,68 @@ func (r HostingVerifyDomainOwnershipV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingVerifyDomainOwnershipV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingGenerateUploadURLV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1FilesUploadUrlResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingGenerateUploadURLV1Response) GetJSON200() *HostingV1FilesUploadUrlResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingGenerateUploadURLV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingGenerateUploadURLV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingGenerateUploadURLV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingGenerateUploadURLV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingGenerateUploadURLV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingGenerateUploadURLV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingGenerateUploadURLV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -72773,6 +75245,59 @@ func (c *ClientWithResponses) AgencyHostingImportWebsiteFromArchiveV1WithRespons
 	return ParseAgencyHostingImportWebsiteFromArchiveV1Response(rsp)
 }
 
+// AgencyHostingGenerateUploadURLV1WithResponse Generate upload URL
+//
+// Generate a file browser upload URL with authentication credentials for uploading files
+// to an Agency Plan website's file storage.
+//
+// Returns `url`, `auth_key` and `rest_auth_key`. Use these to upload a file to the
+// website's file storage via the TUS resumable upload protocol (TUS 1.0.0). Send
+// `X-Auth: {auth_key}` and `X-Auth-Rest: {rest_auth_key}` headers on every request below.
+//
+//  1. Create the upload: `POST` to `{url}/{relative_file_path}?override=true` with headers
+//     `upload-length: {file size in bytes}` and `upload-offset: 0`. Expect `201 Created`.
+//  2. Upload the file: send the file bytes to the same location (any TUS 1.0.0 client, or
+//     `PATCH` requests with an `upload-offset` header tracking progress) until complete.
+//
+// `relative_file_path` is the destination path inside the website's file storage, e.g.
+// `app.zip`.
+//
+// Instead of a TUS client, plain `curl` also works:
+// ```
+// FILE=app.zip
+// SIZE=$(stat -f%z "$FILE")   # stat -c%s on Linux
+//
+//	curl -i -X POST "{url}/${FILE}?override=true" \
+//	  -H "X-Auth: {auth_key}" \
+//	  -H "X-Auth-Rest: {rest_auth_key}" \
+//	  -H "Tus-Resumable: 1.0.0" \
+//	  -H "Upload-Length: ${SIZE}" \
+//	  -H "Upload-Offset: 0"
+//
+// # -> 201 Created
+//
+//	curl -i -X PATCH "{url}/${FILE}?override=true" \
+//	  -H "X-Auth: {auth_key}" \
+//	  -H "X-Auth-Rest: {rest_auth_key}" \
+//	  -H "Tus-Resumable: 1.0.0" \
+//	  -H "Content-Type: application/offset+octet-stream" \
+//	  -H "Upload-Offset: 0" \
+//	  --data-binary "@${FILE}"
+//
+// # -> 204 No Content, Upload-Offset response header equals SIZE when done
+// ```
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/files/upload-urls (the `AgencyHostingGenerateUploadURLV1` operationId).
+func (c *ClientWithResponses) AgencyHostingGenerateUploadURLV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingGenerateUploadURLV1Response, error) {
+	rsp, err := c.AgencyHostingGenerateUploadURLV1(ctx, websiteUid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingGenerateUploadURLV1Response(rsp)
+}
+
 // AgencyHostingListPHPExtensionsForAWebsiteV1WithResponse List PHP extensions for a website
 //
 // Lists every PHP extension available to an Agency Plan website and whether it is currently enabled.
@@ -75420,6 +77945,58 @@ func (c *ClientWithResponses) HostingToggleCachelessModeV1WithResponse(ctx conte
 	return ParseHostingToggleCachelessModeV1Response(rsp)
 }
 
+// HostingDeployStaticSiteArchiveV1WithBodyWithResponse Deploy static site archive
+//
+// Deploy a static application from an archive file.
+//
+// WARNING: this overwrites the website's existing contents and cannot be undone —
+// verify this is intended before calling this endpoint.
+//
+// This endpoint allows you to deploy a static application from an archive
+// file that has been uploaded to the website's directory.
+//
+// This only works for static sites (pre-built HTML/CSS/JS with no build step). For
+// Node.js applications, use `Create NodeJS build from archive` instead, or
+// `Start Node.js build` if the archive is already uploaded. For WordPress sites,
+// use `Import WordPress website`.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/deploy (the `HostingDeployStaticSiteArchiveV1` operationId).
+func (c *ClientWithResponses) HostingDeployStaticSiteArchiveV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingDeployStaticSiteArchiveV1Response, error) {
+	rsp, err := c.HostingDeployStaticSiteArchiveV1WithBody(ctx, username, domain, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingDeployStaticSiteArchiveV1Response(rsp)
+}
+
+// HostingDeployStaticSiteArchiveV1WithResponse Deploy static site archive
+//
+// Deploy a static application from an archive file.
+//
+// WARNING: this overwrites the website's existing contents and cannot be undone —
+// verify this is intended before calling this endpoint.
+//
+// This endpoint allows you to deploy a static application from an archive
+// file that has been uploaded to the website's directory.
+//
+// This only works for static sites (pre-built HTML/CSS/JS with no build step). For
+// Node.js applications, use `Create NodeJS build from archive` instead, or
+// `Start Node.js build` if the archive is already uploaded. For WordPress sites,
+// use `Import WordPress website`.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/deploy (the `HostingDeployStaticSiteArchiveV1` operationId).
+func (c *ClientWithResponses) HostingDeployStaticSiteArchiveV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingDeployStaticSiteArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingDeployStaticSiteArchiveV1Response, error) {
+	rsp, err := c.HostingDeployStaticSiteArchiveV1(ctx, username, domain, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingDeployStaticSiteArchiveV1Response(rsp)
+}
+
 // HostingListNodeJSBuildsV1WithResponse List NodeJS builds
 //
 // Retrieve a paginated list of Node.js build processes for a specific website.
@@ -75439,9 +78016,70 @@ func (c *ClientWithResponses) HostingListNodeJSBuildsV1WithResponse(ctx context.
 	return ParseHostingListNodeJSBuildsV1Response(rsp)
 }
 
+// HostingStartNodeJsBuildV1WithBodyWithResponse Start Node.js build
+//
+// Start a Node.js build process using files already present on the website's file storage.
+//
+// WARNING: on success this overwrites the website's existing contents and cannot be
+// undone — verify this is intended before calling this endpoint.
+//
+// The `source_type` must be `archive` and `source_options.archive_path` must point to an
+// existing archive file on the server (relative to the website document root).
+// Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
+//
+// To auto-detect build settings from an archive before starting, first call the
+// `Get Node.js Build Settings from Archive` endpoint. To upload an archive and start
+// a build in one step, use the `Create Node.js Build from Archive` endpoint instead.
+//
+// The returned build `uuid` can be used to poll progress and retrieve logs via
+// the `Get Node.js Build Logs` endpoint.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds (the `HostingStartNodeJsBuildV1` operationId).
+func (c *ClientWithResponses) HostingStartNodeJsBuildV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingStartNodeJsBuildV1Response, error) {
+	rsp, err := c.HostingStartNodeJsBuildV1WithBody(ctx, username, domain, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingStartNodeJsBuildV1Response(rsp)
+}
+
+// HostingStartNodeJsBuildV1WithResponse Start Node.js build
+//
+// Start a Node.js build process using files already present on the website's file storage.
+//
+// WARNING: on success this overwrites the website's existing contents and cannot be
+// undone — verify this is intended before calling this endpoint.
+//
+// The `source_type` must be `archive` and `source_options.archive_path` must point to an
+// existing archive file on the server (relative to the website document root).
+// Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
+//
+// To auto-detect build settings from an archive before starting, first call the
+// `Get Node.js Build Settings from Archive` endpoint. To upload an archive and start
+// a build in one step, use the `Create Node.js Build from Archive` endpoint instead.
+//
+// The returned build `uuid` can be used to poll progress and retrieve logs via
+// the `Get Node.js Build Logs` endpoint.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds (the `HostingStartNodeJsBuildV1` operationId).
+func (c *ClientWithResponses) HostingStartNodeJsBuildV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingStartNodeJsBuildV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingStartNodeJsBuildV1Response, error) {
+	rsp, err := c.HostingStartNodeJsBuildV1(ctx, username, domain, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingStartNodeJsBuildV1Response(rsp)
+}
+
 // HostingCreateNodeJSBuildFromArchiveV1WithBodyWithResponse Create NodeJS build from archive
 //
 // Upload a project archive, auto-detect build settings, and immediately start a Node.js build.
+//
+// WARNING: on success this overwrites the website's existing contents and cannot be
+// undone — verify this is intended before calling this endpoint.
 //
 // This is the recommended single-step approach for deploying a Node.js application.
 // The archive is uploaded to the website's file storage, build settings are auto-detected
@@ -75477,6 +78115,9 @@ func (c *ClientWithResponses) HostingCreateNodeJSBuildFromArchiveV1WithBodyWithR
 //
 // Upload a project archive, auto-detect build settings, and immediately start a Node.js build.
 //
+// WARNING: on success this overwrites the website's existing contents and cannot be
+// undone — verify this is intended before calling this endpoint.
+//
 // This is the recommended single-step approach for deploying a Node.js application.
 // The archive is uploaded to the website's file storage, build settings are auto-detected
 // from the package.json inside the archive, and the build process starts automatically.
@@ -75505,6 +78146,30 @@ func (c *ClientWithResponses) HostingCreateNodeJSBuildFromArchiveV1WithResponse(
 		return nil, err
 	}
 	return ParseHostingCreateNodeJSBuildFromArchiveV1Response(rsp)
+}
+
+// HostingGetNodeJsBuildSettingsFromArchiveV1WithResponse Get Node.js build settings from archive
+//
+// Auto-detect Node.js build settings from a package.json inside an archive already on the server.
+//
+// Use this before calling `Start Node.js Build` to preview what settings will be used,
+// or to let the user review and override values (framework, node version, root directory,
+// output directory, build script) before committing to a build.
+//
+// The archive must already be present on the website's file storage. Use the
+// `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
+// To upload an archive and start a build in one step without inspecting settings first,
+// use the `Create Node.js Build from Archive` endpoint instead.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/from-archive (the `HostingGetNodeJsBuildSettingsFromArchiveV1` operationId).
+func (c *ClientWithResponses) HostingGetNodeJsBuildSettingsFromArchiveV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetNodeJsBuildSettingsFromArchiveV1Params, reqEditors ...RequestEditorFn) (*HostingGetNodeJsBuildSettingsFromArchiveV1Response, error) {
+	rsp, err := c.HostingGetNodeJsBuildSettingsFromArchiveV1(ctx, username, domain, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingGetNodeJsBuildSettingsFromArchiveV1Response(rsp)
 }
 
 // HostingGetNodeJSBuildLogsV1WithResponse Get NodeJS build logs
@@ -75996,6 +78661,120 @@ func (c *ClientWithResponses) HostingDeleteWebsiteSubdomainV1WithResponse(ctx co
 		return nil, err
 	}
 	return ParseHostingDeleteWebsiteSubdomainV1Response(rsp)
+}
+
+// HostingImportWordPressWebsiteV1WithBodyWithResponse Import WordPress website
+//
+// Import WordPress website to the specified domain.
+//
+// WARNING: this overwrites the website's existing contents and cannot be undone —
+// verify this is intended before calling this endpoint.
+//
+// This endpoint allows you to import a WordPress website from archive and
+// database files that have been uploaded to the website's directory.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/import (the `HostingImportWordPressWebsiteV1` operationId).
+func (c *ClientWithResponses) HostingImportWordPressWebsiteV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingImportWordPressWebsiteV1Response, error) {
+	rsp, err := c.HostingImportWordPressWebsiteV1WithBody(ctx, username, domain, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingImportWordPressWebsiteV1Response(rsp)
+}
+
+// HostingImportWordPressWebsiteV1WithResponse Import WordPress website
+//
+// Import WordPress website to the specified domain.
+//
+// WARNING: this overwrites the website's existing contents and cannot be undone —
+// verify this is intended before calling this endpoint.
+//
+// This endpoint allows you to import a WordPress website from archive and
+// database files that have been uploaded to the website's directory.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/import (the `HostingImportWordPressWebsiteV1` operationId).
+func (c *ClientWithResponses) HostingImportWordPressWebsiteV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingImportWordPressWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingImportWordPressWebsiteV1Response, error) {
+	rsp, err := c.HostingImportWordPressWebsiteV1(ctx, username, domain, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingImportWordPressWebsiteV1Response(rsp)
+}
+
+// HostingDeployWordPressPluginV1WithBodyWithResponse Deploy WordPress plugin
+//
+// Deploy a WordPress plugin from an already uploaded directory.
+//
+// This endpoint allows you to deploy a WordPress plugin that has been uploaded to the website's directory.
+// The plugin will be activated and made available in the WordPress admin panel.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/plugins/deploy (the `HostingDeployWordPressPluginV1` operationId).
+func (c *ClientWithResponses) HostingDeployWordPressPluginV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingDeployWordPressPluginV1Response, error) {
+	rsp, err := c.HostingDeployWordPressPluginV1WithBody(ctx, username, domain, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingDeployWordPressPluginV1Response(rsp)
+}
+
+// HostingDeployWordPressPluginV1WithResponse Deploy WordPress plugin
+//
+// Deploy a WordPress plugin from an already uploaded directory.
+//
+// This endpoint allows you to deploy a WordPress plugin that has been uploaded to the website's directory.
+// The plugin will be activated and made available in the WordPress admin panel.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/plugins/deploy (the `HostingDeployWordPressPluginV1` operationId).
+func (c *ClientWithResponses) HostingDeployWordPressPluginV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingDeployWordPressPluginV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingDeployWordPressPluginV1Response, error) {
+	rsp, err := c.HostingDeployWordPressPluginV1(ctx, username, domain, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingDeployWordPressPluginV1Response(rsp)
+}
+
+// HostingDeployWordPressThemeV1WithBodyWithResponse Deploy WordPress theme
+//
+// Deploy a WordPress theme from an already uploaded directory.
+//
+// This endpoint allows you to deploy a WordPress theme that has been uploaded to the website's directory.
+// The theme can be optionally activated after deployment.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/themes/deploy (the `HostingDeployWordPressThemeV1` operationId).
+func (c *ClientWithResponses) HostingDeployWordPressThemeV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingDeployWordPressThemeV1Response, error) {
+	rsp, err := c.HostingDeployWordPressThemeV1WithBody(ctx, username, domain, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingDeployWordPressThemeV1Response(rsp)
+}
+
+// HostingDeployWordPressThemeV1WithResponse Deploy WordPress theme
+//
+// Deploy a WordPress theme from an already uploaded directory.
+//
+// This endpoint allows you to deploy a WordPress theme that has been uploaded to the website's directory.
+// The theme can be optionally activated after deployment.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/themes/deploy (the `HostingDeployWordPressThemeV1` operationId).
+func (c *ClientWithResponses) HostingDeployWordPressThemeV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingDeployWordPressThemeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingDeployWordPressThemeV1Response, error) {
+	rsp, err := c.HostingDeployWordPressThemeV1(ctx, username, domain, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingDeployWordPressThemeV1Response(rsp)
 }
 
 // HostingInstallWordPressV1WithBodyWithResponse Install WordPress
@@ -77058,6 +79837,112 @@ func (c *ClientWithResponses) HostingVerifyDomainOwnershipV1WithResponse(ctx con
 		return nil, err
 	}
 	return ParseHostingVerifyDomainOwnershipV1Response(rsp)
+}
+
+// HostingGenerateUploadURLV1WithBodyWithResponse Generate upload URL
+//
+// Generate a file browser upload URL with authentication credentials
+// for uploading files directly to a website's file storage.
+//
+// Returns `url`, `auth_key` and `rest_auth_key`. Use these to upload a file to the
+// website's `public_html` directory via the TUS resumable upload protocol (TUS 1.0.0).
+// Send `X-Auth: {auth_key}` and `X-Auth-Rest: {rest_auth_key}` headers on every request
+// below.
+//
+//  1. Create the upload: `POST` to `{url}/{relative_file_path}?override=true` with headers
+//     `upload-length: {file size in bytes}` and `upload-offset: 0`. Expect `201 Created`.
+//  2. Upload the file: send the file bytes to the same location (any TUS 1.0.0 client, or
+//     `PATCH` requests with an `upload-offset` header tracking progress) until complete.
+//
+// `relative_file_path` is the destination path inside `public_html`, e.g. `app.zip`.
+//
+// Instead of a TUS client, plain `curl` also works:
+// ```
+// FILE=app.zip
+// SIZE=$(stat -f%z "$FILE")   # stat -c%s on Linux
+//
+//	curl -i -X POST "{url}/${FILE}?override=true" \
+//	  -H "X-Auth: {auth_key}" \
+//	  -H "X-Auth-Rest: {rest_auth_key}" \
+//	  -H "Tus-Resumable: 1.0.0" \
+//	  -H "Upload-Length: ${SIZE}" \
+//	  -H "Upload-Offset: 0"
+//
+// # -> 201 Created
+//
+//	curl -i -X PATCH "{url}/${FILE}?override=true" \
+//	  -H "X-Auth: {auth_key}" \
+//	  -H "X-Auth-Rest: {rest_auth_key}" \
+//	  -H "Tus-Resumable: 1.0.0" \
+//	  -H "Content-Type: application/offset+octet-stream" \
+//	  -H "Upload-Offset: 0" \
+//	  --data-binary "@${FILE}"
+//
+// # -> 204 No Content, Upload-Offset response header equals SIZE when done
+// ```
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/files/upload-urls (the `HostingGenerateUploadURLV1` operationId).
+func (c *ClientWithResponses) HostingGenerateUploadURLV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingGenerateUploadURLV1Response, error) {
+	rsp, err := c.HostingGenerateUploadURLV1WithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingGenerateUploadURLV1Response(rsp)
+}
+
+// HostingGenerateUploadURLV1WithResponse Generate upload URL
+//
+// Generate a file browser upload URL with authentication credentials
+// for uploading files directly to a website's file storage.
+//
+// Returns `url`, `auth_key` and `rest_auth_key`. Use these to upload a file to the
+// website's `public_html` directory via the TUS resumable upload protocol (TUS 1.0.0).
+// Send `X-Auth: {auth_key}` and `X-Auth-Rest: {rest_auth_key}` headers on every request
+// below.
+//
+//  1. Create the upload: `POST` to `{url}/{relative_file_path}?override=true` with headers
+//     `upload-length: {file size in bytes}` and `upload-offset: 0`. Expect `201 Created`.
+//  2. Upload the file: send the file bytes to the same location (any TUS 1.0.0 client, or
+//     `PATCH` requests with an `upload-offset` header tracking progress) until complete.
+//
+// `relative_file_path` is the destination path inside `public_html`, e.g. `app.zip`.
+//
+// Instead of a TUS client, plain `curl` also works:
+// ```
+// FILE=app.zip
+// SIZE=$(stat -f%z "$FILE")   # stat -c%s on Linux
+//
+//	curl -i -X POST "{url}/${FILE}?override=true" \
+//	  -H "X-Auth: {auth_key}" \
+//	  -H "X-Auth-Rest: {rest_auth_key}" \
+//	  -H "Tus-Resumable: 1.0.0" \
+//	  -H "Upload-Length: ${SIZE}" \
+//	  -H "Upload-Offset: 0"
+//
+// # -> 201 Created
+//
+//	curl -i -X PATCH "{url}/${FILE}?override=true" \
+//	  -H "X-Auth: {auth_key}" \
+//	  -H "X-Auth-Rest: {rest_auth_key}" \
+//	  -H "Tus-Resumable: 1.0.0" \
+//	  -H "Content-Type: application/offset+octet-stream" \
+//	  -H "Upload-Offset: 0" \
+//	  --data-binary "@${FILE}"
+//
+// # -> 204 No Content, Upload-Offset response header equals SIZE when done
+// ```
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/files/upload-urls (the `HostingGenerateUploadURLV1` operationId).
+func (c *ClientWithResponses) HostingGenerateUploadURLV1WithResponse(ctx context.Context, body HostingGenerateUploadURLV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingGenerateUploadURLV1Response, error) {
+	rsp, err := c.HostingGenerateUploadURLV1(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingGenerateUploadURLV1Response(rsp)
 }
 
 // HostingListOrdersV1WithResponse List orders
@@ -81859,6 +84744,46 @@ func ParseAgencyHostingImportWebsiteFromArchiveV1Response(rsp *http.Response) (*
 	return response, nil
 }
 
+// ParseAgencyHostingGenerateUploadURLV1Response parses an HTTP response from a AgencyHostingGenerateUploadURLV1WithResponse call
+func ParseAgencyHostingGenerateUploadURLV1Response(rsp *http.Response) (*AgencyHostingGenerateUploadURLV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingGenerateUploadURLV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AgencyHostingV1FilesUploadUrlResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseAgencyHostingListPHPExtensionsForAWebsiteV1Response parses an HTTP response from a AgencyHostingListPHPExtensionsForAWebsiteV1WithResponse call
 func ParseAgencyHostingListPHPExtensionsForAWebsiteV1Response(rsp *http.Response) (*AgencyHostingListPHPExtensionsForAWebsiteV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -86147,6 +89072,53 @@ func ParseHostingToggleCachelessModeV1Response(rsp *http.Response) (*HostingTogg
 	return response, nil
 }
 
+// ParseHostingDeployStaticSiteArchiveV1Response parses an HTTP response from a HostingDeployStaticSiteArchiveV1WithResponse call
+func ParseHostingDeployStaticSiteArchiveV1Response(rsp *http.Response) (*HostingDeployStaticSiteArchiveV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingDeployStaticSiteArchiveV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseHostingListNodeJSBuildsV1Response parses an HTTP response from a HostingListNodeJSBuildsV1WithResponse call
 func ParseHostingListNodeJSBuildsV1Response(rsp *http.Response) (*HostingListNodeJSBuildsV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -86191,6 +89163,53 @@ func ParseHostingListNodeJSBuildsV1Response(rsp *http.Response) (*HostingListNod
 	return response, nil
 }
 
+// ParseHostingStartNodeJsBuildV1Response parses an HTTP response from a HostingStartNodeJsBuildV1WithResponse call
+func ParseHostingStartNodeJsBuildV1Response(rsp *http.Response) (*HostingStartNodeJsBuildV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingStartNodeJsBuildV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1NodeJsBuildResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseHostingCreateNodeJSBuildFromArchiveV1Response parses an HTTP response from a HostingCreateNodeJSBuildFromArchiveV1WithResponse call
 func ParseHostingCreateNodeJSBuildFromArchiveV1Response(rsp *http.Response) (*HostingCreateNodeJSBuildFromArchiveV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -86207,6 +89226,53 @@ func ParseHostingCreateNodeJSBuildFromArchiveV1Response(rsp *http.Response) (*Ho
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest HostingV1NodeJsBuildResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingGetNodeJsBuildSettingsFromArchiveV1Response parses an HTTP response from a HostingGetNodeJsBuildSettingsFromArchiveV1WithResponse call
+func ParseHostingGetNodeJsBuildSettingsFromArchiveV1Response(rsp *http.Response) (*HostingGetNodeJsBuildSettingsFromArchiveV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingGetNodeJsBuildSettingsFromArchiveV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1NodeJsBuildSettingsResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -87052,6 +90118,147 @@ func ParseHostingDeleteWebsiteSubdomainV1Response(rsp *http.Response) (*HostingD
 			return nil, err
 		}
 		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingImportWordPressWebsiteV1Response parses an HTTP response from a HostingImportWordPressWebsiteV1WithResponse call
+func ParseHostingImportWordPressWebsiteV1Response(rsp *http.Response) (*HostingImportWordPressWebsiteV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingImportWordPressWebsiteV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingDeployWordPressPluginV1Response parses an HTTP response from a HostingDeployWordPressPluginV1WithResponse call
+func ParseHostingDeployWordPressPluginV1Response(rsp *http.Response) (*HostingDeployWordPressPluginV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingDeployWordPressPluginV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingDeployWordPressThemeV1Response parses an HTTP response from a HostingDeployWordPressThemeV1WithResponse call
+func ParseHostingDeployWordPressThemeV1Response(rsp *http.Response) (*HostingDeployWordPressThemeV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingDeployWordPressThemeV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse
@@ -88480,6 +91687,53 @@ func ParseHostingVerifyDomainOwnershipV1Response(rsp *http.Response) (*HostingVe
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest HostingV1DomainsDomainAccessResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingGenerateUploadURLV1Response parses an HTTP response from a HostingGenerateUploadURLV1WithResponse call
+func ParseHostingGenerateUploadURLV1Response(rsp *http.Response) (*HostingGenerateUploadURLV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingGenerateUploadURLV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1FilesUploadUrlResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

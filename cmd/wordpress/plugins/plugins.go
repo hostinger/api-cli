@@ -13,6 +13,7 @@ func init() {
 	GroupCmd.AddCommand(ActivateCmd)
 	GroupCmd.AddCommand(CheckIfWooCommerceIsInstalledCmd)
 	GroupCmd.AddCommand(DeactivateCmd)
+	GroupCmd.AddCommand(DeployCmd)
 	GroupCmd.AddCommand(InstallCmd)
 	GroupCmd.AddCommand(ListCmd)
 	GroupCmd.AddCommand(ListInstalledCmd)

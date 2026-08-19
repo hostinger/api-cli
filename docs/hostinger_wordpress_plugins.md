@@ -21,6 +21,7 @@ Plugins commands
 * [hostinger wordpress plugins activate](hostinger_wordpress_plugins_activate.md)	 - Activate WordPress plugin
 * [hostinger wordpress plugins check-if-woo-commerce-is-installed](hostinger_wordpress_plugins_check-if-woo-commerce-is-installed.md)	 - Check if WooCommerce is installed
 * [hostinger wordpress plugins deactivate](hostinger_wordpress_plugins_deactivate.md)	 - Deactivate WordPress plugin
+* [hostinger wordpress plugins deploy](hostinger_wordpress_plugins_deploy.md)	 - Deploy WordPress plugin
 * [hostinger wordpress plugins install](hostinger_wordpress_plugins_install.md)	 - Install WordPress plugins
 * [hostinger wordpress plugins list](hostinger_wordpress_plugins_list.md)	 - List available WordPress plugins
 * [hostinger wordpress plugins list-installed](hostinger_wordpress_plugins_list-installed.md)	 - List installed WordPress plugins

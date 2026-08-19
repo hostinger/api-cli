@@ -11,9 +11,11 @@ var GroupCmd = &cobra.Command{
 
 func init() {
 	GroupCmd.AddCommand(BuildLogsCmd)
+	GroupCmd.AddCommand(BuildSettingsFromArchiveCmd)
 	GroupCmd.AddCommand(CreateBuildFromArchiveCmd)
 	GroupCmd.AddCommand(ListBuildsCmd)
 	GroupCmd.AddCommand(ListVulnerabilitiesCmd)
 	GroupCmd.AddCommand(PatchVulnerabilitiesCmd)
 	GroupCmd.AddCommand(RestartApplicationCmd)
+	GroupCmd.AddCommand(StartBuildCmd)
 }

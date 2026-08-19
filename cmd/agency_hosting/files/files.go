@@ -10,5 +10,6 @@ var GroupCmd = &cobra.Command{
 }
 
 func init() {
+	GroupCmd.AddCommand(GenerateUploadUrlCmd)
 	GroupCmd.AddCommand(ImportWebsiteFromArchiveCmd)
 }

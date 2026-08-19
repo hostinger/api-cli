@@ -21,6 +21,7 @@ Installations commands
 * [hostinger wordpress installations check-if-are-valid](hostinger_wordpress_installations_check-if-are-valid.md)	 - Check if WordPress installations are valid
 * [hostinger wordpress installations delete](hostinger_wordpress_installations_delete.md)	 - Delete WordPress installation
 * [hostinger wordpress installations detect](hostinger_wordpress_installations_detect.md)	 - Detect WordPress installations
+* [hostinger wordpress installations import-website](hostinger_wordpress_installations_import-website.md)	 - Import WordPress website
 * [hostinger wordpress installations install](hostinger_wordpress_installations_install.md)	 - Install WordPress
 * [hostinger wordpress installations jwt-token](hostinger_wordpress_installations_jwt-token.md)	 - Get installation JWT token
 * [hostinger wordpress installations list](hostinger_wordpress_installations_list.md)	 - List WordPress installations

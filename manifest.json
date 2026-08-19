@@ -409,6 +409,11 @@
     "method": "DELETE",
     "path": "/api/agency-hosting/v1/websites/{website_uid}"
   },
+  "agency-hosting_generateUploadURLV1": {
+    "command": "hostinger agency-hosting files generate-upload-url",
+    "method": "POST",
+    "path": "/api/agency-hosting/v1/websites/{website_uid}/files/upload-urls"
+  },
   "agency-hosting_getWebsiteDetailsV1": {
     "command": "hostinger agency-hosting websites get",
     "method": "GET",
@@ -959,6 +964,21 @@
     "method": "DELETE",
     "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}"
   },
+  "hosting_deployStaticSiteArchiveV1": {
+    "command": "hostinger hosting websites deploy-static-site-archive",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/deploy"
+  },
+  "hosting_deployWordPressPluginV1": {
+    "command": "hostinger wordpress plugins deploy",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/plugins/deploy"
+  },
+  "hosting_deployWordPressThemeV1": {
+    "command": "hostinger wordpress themes deploy",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/themes/deploy"
+  },
   "hosting_detectWordPressInstallationsV1": {
     "command": "hostinger wordpress installations detect",
     "method": "POST",
@@ -969,6 +989,11 @@
     "method": "POST",
     "path": "/api/hosting/v1/domains/free-subdomains"
   },
+  "hosting_generateUploadURLV1": {
+    "command": "hostinger hosting files generate-upload-url",
+    "method": "POST",
+    "path": "/api/hosting/v1/files/upload-urls"
+  },
   "hosting_getCronJobOutputV1": {
     "command": "hostinger hosting cron-jobs output",
     "method": "GET",
@@ -978,6 +1003,11 @@
     "command": "hostinger wordpress installations jwt-token",
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/jwt-token"
+  },
+  "hosting_getNode.jsBuildSettingsFromArchiveV1": {
+    "command": "hostinger hosting nodejs build-settings-from-archive",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/from-archive"
   },
   "hosting_getNodeJSBuildLogsV1": {
     "command": "hostinger hosting nodejs build-logs",
@@ -1003,6 +1033,11 @@
     "command": "hostinger hosting files website-content",
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/domains/{domain}/files/content"
+  },
+  "hosting_importWordPressWebsiteV1": {
+    "command": "hostinger wordpress installations import-website",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/import"
   },
   "hosting_installWordPressPluginsV1": {
     "command": "hostinger wordpress plugins install",
@@ -1173,6 +1208,11 @@
     "command": "hostinger wordpress installations show-core-version",
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/version"
+  },
+  "hosting_startNode.jsBuildV1": {
+    "command": "hostinger hosting nodejs start-build",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds"
   },
   "hosting_toggleCachelessModeV1": {
     "command": "hostinger hosting cache toggle-cacheless",

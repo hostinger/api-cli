@@ -6,6 +6,9 @@ Create NodeJS build from archive
 
 Upload a project archive, auto-detect build settings, and immediately start a Node.js build.
 
+WARNING: on success this overwrites the website's existing contents and cannot be
+undone — verify this is intended before calling this endpoint.
+
 This is the recommended single-step approach for deploying a Node.js application.
 The archive is uploaded to the website's file storage, build settings are auto-detected
 from the package.json inside the archive, and the build process starts automatically.
