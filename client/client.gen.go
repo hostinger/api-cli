@@ -1164,6 +1164,33 @@ func (e HostingV1WebsitesWebsiteResourceVhostType) Valid() bool {
 	}
 }
 
+// Defines values for HostingV1WebsitesWebsiteResourceWebsiteType.
+const (
+	HostingV1WebsitesWebsiteResourceWebsiteTypeBuilder   HostingV1WebsitesWebsiteResourceWebsiteType = "builder"
+	HostingV1WebsitesWebsiteResourceWebsiteTypeHorizons  HostingV1WebsitesWebsiteResourceWebsiteType = "horizons"
+	HostingV1WebsitesWebsiteResourceWebsiteTypeNodejs    HostingV1WebsitesWebsiteResourceWebsiteType = "nodejs"
+	HostingV1WebsitesWebsiteResourceWebsiteTypeOther     HostingV1WebsitesWebsiteResourceWebsiteType = "other"
+	HostingV1WebsitesWebsiteResourceWebsiteTypeWordpress HostingV1WebsitesWebsiteResourceWebsiteType = "wordpress"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1WebsitesWebsiteResourceWebsiteType enum.
+func (e HostingV1WebsitesWebsiteResourceWebsiteType) Valid() bool {
+	switch e {
+	case HostingV1WebsitesWebsiteResourceWebsiteTypeBuilder:
+		return true
+	case HostingV1WebsitesWebsiteResourceWebsiteTypeHorizons:
+		return true
+	case HostingV1WebsitesWebsiteResourceWebsiteTypeNodejs:
+		return true
+	case HostingV1WebsitesWebsiteResourceWebsiteTypeOther:
+		return true
+	case HostingV1WebsitesWebsiteResourceWebsiteTypeWordpress:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for MailV1ApiTokensApiTokenCreatedResourceType.
 const (
 	MailV1ApiTokensApiTokenCreatedResourceTypeApiToken MailV1ApiTokensApiTokenCreatedResourceType = "api_token"
@@ -7920,10 +7947,15 @@ type HostingV1WebsitesWebsiteResource struct {
 	// Example: 2024-01-15T10:30:00+00:00
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 
-	// Domain Website domain
+	// Domain Website domain. Null for U4S websites with no domain attached.
 	//
 	// Example: example.com
 	Domain *string `json:"domain,omitempty"`
+
+	// HorizonsUuid Horizons UUID. Only present for horizons websites.
+	//
+	// Example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+	HorizonsUuid *string `json:"horizons_uuid,omitempty"`
 
 	// IsEnabled Whether website is enabled
 	//
@@ -7940,26 +7972,36 @@ type HostingV1WebsitesWebsiteResource struct {
 	// Example: parent.com
 	ParentDomain *string `json:"parent_domain,omitempty"`
 
-	// RootDirectory Root directory path
+	// RootDirectory Root directory path. Only present for CloudLinux websites.
 	//
 	// Example: /home/u123456798/domains/example.com/public_html
 	RootDirectory *string `json:"root_directory,omitempty"`
 
-	// Username Username
+	// Username Username. Not applicable for U4S websites.
 	//
 	// Example: cl_user123
 	Username *string `json:"username,omitempty"`
 
-	// VhostType Virtual host type
+	// VhostType Virtual host type. Only present for CloudLinux websites.
 	//
 	// Example: main
 	VhostType *HostingV1WebsitesWebsiteResourceVhostType `json:"vhost_type,omitempty"`
+
+	// WebsiteType Type of website detected on the underlying platform.
+	//
+	// Example: wordpress
+	WebsiteType *HostingV1WebsitesWebsiteResourceWebsiteType `json:"website_type,omitempty"`
 }
 
-// HostingV1WebsitesWebsiteResourceVhostType Virtual host type
+// HostingV1WebsitesWebsiteResourceVhostType Virtual host type. Only present for CloudLinux websites.
 //
 // Example: main
 type HostingV1WebsitesWebsiteResourceVhostType string
+
+// HostingV1WebsitesWebsiteResourceWebsiteType Type of website detected on the underlying platform.
+//
+// Example: wordpress
+type HostingV1WebsitesWebsiteResourceWebsiteType string
 
 // MailV1AliasesAliasCollection Array of [`Mail.V1.Aliases.AliasResource`](#model/mailv1aliasesaliasresource)
 type MailV1AliasesAliasCollection = []MailV1AliasesAliasResource
@@ -17647,11 +17689,18 @@ type ClientInterface interface {
 
 	// HostingListWebsitesV1 List websites
 	//
-	// Retrieve a paginated list of websites (main and addon types) accessible to the authenticated client.
+	// Retrieve a paginated list of websites (CloudLinux, Builder, and Horizons) accessible to the
+	// authenticated client.
 	//
 	// This endpoint returns websites from your hosting accounts as well as
 	// websites from other client hosting accounts that have shared access
 	// with you.
+	//
+	// Each website includes a `website_type` field describing the type of
+	// website detected on the underlying platform (`wordpress`, `builder`,
+	// `horizons`, `nodejs`, or `other`). Some fields, such as
+	// `vhost_type`, `username`, and `root_directory`, only apply to
+	// CloudLinux websites and are null for other platforms.
 	//
 	// Use the available query parameters to filter results by username,
 	// order ID, enabled status, or domain name for more targeted results.
@@ -25657,11 +25706,18 @@ func (c *Client) HostingListOrdersV1(ctx context.Context, params *HostingListOrd
 
 // HostingListWebsitesV1 List websites
 //
-// Retrieve a paginated list of websites (main and addon types) accessible to the authenticated client.
+// Retrieve a paginated list of websites (CloudLinux, Builder, and Horizons) accessible to the
+// authenticated client.
 //
 // This endpoint returns websites from your hosting accounts as well as
 // websites from other client hosting accounts that have shared access
 // with you.
+//
+// Each website includes a `website_type` field describing the type of
+// website detected on the underlying platform (`wordpress`, `builder`,
+// `horizons`, `nodejs`, or `other`). Some fields, such as
+// `vhost_type`, `username`, and `root_directory`, only apply to
+// CloudLinux websites and are null for other platforms.
 //
 // Use the available query parameters to filter results by username,
 // order ID, enabled status, or domain name for more targeted results.
@@ -49452,11 +49508,18 @@ type ClientWithResponsesInterface interface {
 
 	// HostingListWebsitesV1WithResponse List websites
 	//
-	// Retrieve a paginated list of websites (main and addon types) accessible to the authenticated client.
+	// Retrieve a paginated list of websites (CloudLinux, Builder, and Horizons) accessible to the
+	// authenticated client.
 	//
 	// This endpoint returns websites from your hosting accounts as well as
 	// websites from other client hosting accounts that have shared access
 	// with you.
+	//
+	// Each website includes a `website_type` field describing the type of
+	// website detected on the underlying platform (`wordpress`, `builder`,
+	// `horizons`, `nodejs`, or `other`). Some fields, such as
+	// `vhost_type`, `username`, and `root_directory`, only apply to
+	// CloudLinux websites and are null for other platforms.
 	//
 	// Use the available query parameters to filter results by username,
 	// order ID, enabled status, or domain name for more targeted results.
@@ -77020,11 +77083,18 @@ func (c *ClientWithResponses) HostingListOrdersV1WithResponse(ctx context.Contex
 
 // HostingListWebsitesV1WithResponse List websites
 //
-// Retrieve a paginated list of websites (main and addon types) accessible to the authenticated client.
+// Retrieve a paginated list of websites (CloudLinux, Builder, and Horizons) accessible to the
+// authenticated client.
 //
 // This endpoint returns websites from your hosting accounts as well as
 // websites from other client hosting accounts that have shared access
 // with you.
+//
+// Each website includes a `website_type` field describing the type of
+// website detected on the underlying platform (`wordpress`, `builder`,
+// `horizons`, `nodejs`, or `other`). Some fields, such as
+// `vhost_type`, `username`, and `root_directory`, only apply to
+// CloudLinux websites and are null for other platforms.
 //
 // Use the available query parameters to filter results by username,
 // order ID, enabled status, or domain name for more targeted results.
