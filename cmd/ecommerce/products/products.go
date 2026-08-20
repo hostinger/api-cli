@@ -13,5 +13,8 @@ func init() {
 	GroupCmd.AddCommand(CreateDigitalCmd)
 	GroupCmd.AddCommand(CreateImageUploadUrlCmd)
 	GroupCmd.AddCommand(CreatePhysicalCmd)
+	GroupCmd.AddCommand(DeleteCmd)
+	GroupCmd.AddCommand(ListCmd)
+	GroupCmd.AddCommand(UpdateCmd)
 	GroupCmd.AddCommand(UploadAndAttachImageCmd)
 }

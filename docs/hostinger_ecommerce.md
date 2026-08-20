@@ -18,8 +18,11 @@ Ecommerce commands
 ### SEE ALSO
 
 * [hostinger](hostinger.md)	 - Hostinger API Command Line Interface
+* [hostinger ecommerce discounts](hostinger_ecommerce_discounts.md)	 - Discounts commands
 * [hostinger ecommerce miscellaneous](hostinger_ecommerce_miscellaneous.md)	 - Miscellaneous commands
+* [hostinger ecommerce orders](hostinger_ecommerce_orders.md)	 - Orders commands
 * [hostinger ecommerce payments](hostinger_ecommerce_payments.md)	 - Payments commands
+* [hostinger ecommerce product-variants](hostinger_ecommerce_product-variants.md)	 - Product variants commands
 * [hostinger ecommerce products](hostinger_ecommerce_products.md)	 - Products commands
 * [hostinger ecommerce sales-channels](hostinger_ecommerce_sales-channels.md)	 - Sales channels commands
 * [hostinger ecommerce shipping](hostinger_ecommerce_shipping.md)	 - Shipping commands

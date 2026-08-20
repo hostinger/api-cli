@@ -18,5 +18,7 @@ Payments commands
 ### SEE ALSO
 
 * [hostinger ecommerce](hostinger_ecommerce.md)	 - Ecommerce commands
+* [hostinger ecommerce payments create-provider-connect-link](hostinger_ecommerce_payments_create-provider-connect-link.md)	 - Create a payment provider connect link
 * [hostinger ecommerce payments enable-manual-method](hostinger_ecommerce_payments_enable-manual-method.md)	 - Enable manual payment method
+* [hostinger ecommerce payments list-store-providers](hostinger_ecommerce_payments_list-store-providers.md)	 - List store payment providers
 

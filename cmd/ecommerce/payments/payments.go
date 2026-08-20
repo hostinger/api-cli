@@ -10,5 +10,7 @@ var GroupCmd = &cobra.Command{
 }
 
 func init() {
+	GroupCmd.AddCommand(CreateProviderConnectLinkCmd)
 	GroupCmd.AddCommand(EnableManualMethodCmd)
+	GroupCmd.AddCommand(ListStoreProvidersCmd)
 }

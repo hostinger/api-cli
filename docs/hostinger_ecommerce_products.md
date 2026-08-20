@@ -21,5 +21,8 @@ Products commands
 * [hostinger ecommerce products create-digital](hostinger_ecommerce_products_create-digital.md)	 - Create digital product
 * [hostinger ecommerce products create-image-upload-url](hostinger_ecommerce_products_create-image-upload-url.md)	 - Create a product image upload URL
 * [hostinger ecommerce products create-physical](hostinger_ecommerce_products_create-physical.md)	 - Create physical product
+* [hostinger ecommerce products delete](hostinger_ecommerce_products_delete.md)	 - Delete a product
+* [hostinger ecommerce products list](hostinger_ecommerce_products_list.md)	 - List products
+* [hostinger ecommerce products update](hostinger_ecommerce_products_update.md)	 - Update a product
 * [hostinger ecommerce products upload-and-attach-image](hostinger_ecommerce_products_upload-and-attach-image.md)	 - Upload and attach a product image
 

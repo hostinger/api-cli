@@ -732,6 +732,108 @@ func (e DomainsV1WHOISStoreRequestEntityType) Valid() bool {
 	}
 }
 
+// Defines values for EcommerceV1DiscountCreateDiscountRequestAllocation.
+const (
+	EcommerceV1DiscountCreateDiscountRequestAllocationItem  EcommerceV1DiscountCreateDiscountRequestAllocation = "item"
+	EcommerceV1DiscountCreateDiscountRequestAllocationTotal EcommerceV1DiscountCreateDiscountRequestAllocation = "total"
+)
+
+// Valid indicates whether the value is a known member of the EcommerceV1DiscountCreateDiscountRequestAllocation enum.
+func (e EcommerceV1DiscountCreateDiscountRequestAllocation) Valid() bool {
+	switch e {
+	case EcommerceV1DiscountCreateDiscountRequestAllocationItem:
+		return true
+	case EcommerceV1DiscountCreateDiscountRequestAllocationTotal:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for EcommerceV1DiscountCreateDiscountRequestType.
+const (
+	EcommerceV1DiscountCreateDiscountRequestTypeFixed        EcommerceV1DiscountCreateDiscountRequestType = "fixed"
+	EcommerceV1DiscountCreateDiscountRequestTypeFreeShipping EcommerceV1DiscountCreateDiscountRequestType = "free_shipping"
+	EcommerceV1DiscountCreateDiscountRequestTypePercentage   EcommerceV1DiscountCreateDiscountRequestType = "percentage"
+)
+
+// Valid indicates whether the value is a known member of the EcommerceV1DiscountCreateDiscountRequestType enum.
+func (e EcommerceV1DiscountCreateDiscountRequestType) Valid() bool {
+	switch e {
+	case EcommerceV1DiscountCreateDiscountRequestTypeFixed:
+		return true
+	case EcommerceV1DiscountCreateDiscountRequestTypeFreeShipping:
+		return true
+	case EcommerceV1DiscountCreateDiscountRequestTypePercentage:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for EcommerceV1DiscountDiscountResourceAllocation.
+const (
+	EcommerceV1DiscountDiscountResourceAllocationItem  EcommerceV1DiscountDiscountResourceAllocation = "item"
+	EcommerceV1DiscountDiscountResourceAllocationTotal EcommerceV1DiscountDiscountResourceAllocation = "total"
+)
+
+// Valid indicates whether the value is a known member of the EcommerceV1DiscountDiscountResourceAllocation enum.
+func (e EcommerceV1DiscountDiscountResourceAllocation) Valid() bool {
+	switch e {
+	case EcommerceV1DiscountDiscountResourceAllocationItem:
+		return true
+	case EcommerceV1DiscountDiscountResourceAllocationTotal:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for EcommerceV1DiscountDiscountResourceType.
+const (
+	EcommerceV1DiscountDiscountResourceTypeFixed        EcommerceV1DiscountDiscountResourceType = "fixed"
+	EcommerceV1DiscountDiscountResourceTypeFreeShipping EcommerceV1DiscountDiscountResourceType = "free_shipping"
+	EcommerceV1DiscountDiscountResourceTypePercentage   EcommerceV1DiscountDiscountResourceType = "percentage"
+)
+
+// Valid indicates whether the value is a known member of the EcommerceV1DiscountDiscountResourceType enum.
+func (e EcommerceV1DiscountDiscountResourceType) Valid() bool {
+	switch e {
+	case EcommerceV1DiscountDiscountResourceTypeFixed:
+		return true
+	case EcommerceV1DiscountDiscountResourceTypeFreeShipping:
+		return true
+	case EcommerceV1DiscountDiscountResourceTypePercentage:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for EcommerceV1PaymentProviderPaymentProviderListResourceDataConnectedStatus.
+const (
+	EcommerceV1PaymentProviderPaymentProviderListResourceDataConnectedStatusConnected EcommerceV1PaymentProviderPaymentProviderListResourceDataConnectedStatus = "connected"
+	EcommerceV1PaymentProviderPaymentProviderListResourceDataConnectedStatusInvalid   EcommerceV1PaymentProviderPaymentProviderListResourceDataConnectedStatus = "invalid"
+	EcommerceV1PaymentProviderPaymentProviderListResourceDataConnectedStatusNew       EcommerceV1PaymentProviderPaymentProviderListResourceDataConnectedStatus = "new"
+	EcommerceV1PaymentProviderPaymentProviderListResourceDataConnectedStatusPending   EcommerceV1PaymentProviderPaymentProviderListResourceDataConnectedStatus = "pending"
+)
+
+// Valid indicates whether the value is a known member of the EcommerceV1PaymentProviderPaymentProviderListResourceDataConnectedStatus enum.
+func (e EcommerceV1PaymentProviderPaymentProviderListResourceDataConnectedStatus) Valid() bool {
+	switch e {
+	case EcommerceV1PaymentProviderPaymentProviderListResourceDataConnectedStatusConnected:
+		return true
+	case EcommerceV1PaymentProviderPaymentProviderListResourceDataConnectedStatusInvalid:
+		return true
+	case EcommerceV1PaymentProviderPaymentProviderListResourceDataConnectedStatusNew:
+		return true
+	case EcommerceV1PaymentProviderPaymentProviderListResourceDataConnectedStatusPending:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for EcommerceV1ProductProductCreationResourceProductType.
 const (
 	Digital  EcommerceV1ProductProductCreationResourceProductType = "digital"
@@ -744,6 +846,54 @@ func (e EcommerceV1ProductProductCreationResourceProductType) Valid() bool {
 	case Digital:
 		return true
 	case Physical:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for EcommerceV1ProductProductResourceStatus.
+const (
+	EcommerceV1ProductProductResourceStatusArchived  EcommerceV1ProductProductResourceStatus = "archived"
+	EcommerceV1ProductProductResourceStatusDraft     EcommerceV1ProductProductResourceStatus = "draft"
+	EcommerceV1ProductProductResourceStatusProposed  EcommerceV1ProductProductResourceStatus = "proposed"
+	EcommerceV1ProductProductResourceStatusPublished EcommerceV1ProductProductResourceStatus = "published"
+	EcommerceV1ProductProductResourceStatusRejected  EcommerceV1ProductProductResourceStatus = "rejected"
+)
+
+// Valid indicates whether the value is a known member of the EcommerceV1ProductProductResourceStatus enum.
+func (e EcommerceV1ProductProductResourceStatus) Valid() bool {
+	switch e {
+	case EcommerceV1ProductProductResourceStatusArchived:
+		return true
+	case EcommerceV1ProductProductResourceStatusDraft:
+		return true
+	case EcommerceV1ProductProductResourceStatusProposed:
+		return true
+	case EcommerceV1ProductProductResourceStatusPublished:
+		return true
+	case EcommerceV1ProductProductResourceStatusRejected:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for EcommerceV1ProductUpdateRequestStatus.
+const (
+	EcommerceV1ProductUpdateRequestStatusArchived  EcommerceV1ProductUpdateRequestStatus = "archived"
+	EcommerceV1ProductUpdateRequestStatusDraft     EcommerceV1ProductUpdateRequestStatus = "draft"
+	EcommerceV1ProductUpdateRequestStatusPublished EcommerceV1ProductUpdateRequestStatus = "published"
+)
+
+// Valid indicates whether the value is a known member of the EcommerceV1ProductUpdateRequestStatus enum.
+func (e EcommerceV1ProductUpdateRequestStatus) Valid() bool {
+	switch e {
+	case EcommerceV1ProductUpdateRequestStatusArchived:
+		return true
+	case EcommerceV1ProductUpdateRequestStatusDraft:
+		return true
+	case EcommerceV1ProductUpdateRequestStatusPublished:
 		return true
 	default:
 		return false
@@ -842,13 +992,16 @@ func (e EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelType) Valid
 
 // Defines values for EcommerceV1SalesChannelStoreRequestType.
 const (
-	EcommerceV1SalesChannelStoreRequestTypeCustom EcommerceV1SalesChannelStoreRequestType = "custom"
+	EcommerceV1SalesChannelStoreRequestTypeCustom    EcommerceV1SalesChannelStoreRequestType = "custom"
+	EcommerceV1SalesChannelStoreRequestTypeQuickLink EcommerceV1SalesChannelStoreRequestType = "quick-link"
 )
 
 // Valid indicates whether the value is a known member of the EcommerceV1SalesChannelStoreRequestType enum.
 func (e EcommerceV1SalesChannelStoreRequestType) Valid() bool {
 	switch e {
 	case EcommerceV1SalesChannelStoreRequestTypeCustom:
+		return true
+	case EcommerceV1SalesChannelStoreRequestTypeQuickLink:
 		return true
 	default:
 		return false
@@ -2828,22 +2981,22 @@ func (e VPSV1DockerManagerContainerPortResourceProtocol) Valid() bool {
 
 // Defines values for VPSV1DockerManagerContainerPortResourceType.
 const (
-	Exposed        VPSV1DockerManagerContainerPortResourceType = "exposed"
-	ExposedRange   VPSV1DockerManagerContainerPortResourceType = "exposed_range"
-	Published      VPSV1DockerManagerContainerPortResourceType = "published"
-	PublishedRange VPSV1DockerManagerContainerPortResourceType = "published_range"
+	VPSV1DockerManagerContainerPortResourceTypeExposed        VPSV1DockerManagerContainerPortResourceType = "exposed"
+	VPSV1DockerManagerContainerPortResourceTypeExposedRange   VPSV1DockerManagerContainerPortResourceType = "exposed_range"
+	VPSV1DockerManagerContainerPortResourceTypePublished      VPSV1DockerManagerContainerPortResourceType = "published"
+	VPSV1DockerManagerContainerPortResourceTypePublishedRange VPSV1DockerManagerContainerPortResourceType = "published_range"
 )
 
 // Valid indicates whether the value is a known member of the VPSV1DockerManagerContainerPortResourceType enum.
 func (e VPSV1DockerManagerContainerPortResourceType) Valid() bool {
 	switch e {
-	case Exposed:
+	case VPSV1DockerManagerContainerPortResourceTypeExposed:
 		return true
-	case ExposedRange:
+	case VPSV1DockerManagerContainerPortResourceTypeExposedRange:
 		return true
-	case Published:
+	case VPSV1DockerManagerContainerPortResourceTypePublished:
 		return true
-	case PublishedRange:
+	case VPSV1DockerManagerContainerPortResourceTypePublishedRange:
 		return true
 	default:
 		return false
@@ -3864,6 +4017,171 @@ func (e BillingGetCatalogItemListV1ParamsCategory) Valid() bool {
 	case BillingGetCatalogItemListV1ParamsCategoryEMAIL:
 		return true
 	case BillingGetCatalogItemListV1ParamsCategoryVPS:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for EcommerceListDiscountsV1ParamsIsDisabled.
+const (
+	False EcommerceListDiscountsV1ParamsIsDisabled = "false"
+	True  EcommerceListDiscountsV1ParamsIsDisabled = "true"
+)
+
+// Valid indicates whether the value is a known member of the EcommerceListDiscountsV1ParamsIsDisabled enum.
+func (e EcommerceListDiscountsV1ParamsIsDisabled) Valid() bool {
+	switch e {
+	case False:
+		return true
+	case True:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for EcommerceListOrdersV1ParamsStatus.
+const (
+	EcommerceListOrdersV1ParamsStatusArchived       EcommerceListOrdersV1ParamsStatus = "archived"
+	EcommerceListOrdersV1ParamsStatusCanceled       EcommerceListOrdersV1ParamsStatus = "canceled"
+	EcommerceListOrdersV1ParamsStatusCompleted      EcommerceListOrdersV1ParamsStatus = "completed"
+	EcommerceListOrdersV1ParamsStatusPending        EcommerceListOrdersV1ParamsStatus = "pending"
+	EcommerceListOrdersV1ParamsStatusRequiresAction EcommerceListOrdersV1ParamsStatus = "requires_action"
+)
+
+// Valid indicates whether the value is a known member of the EcommerceListOrdersV1ParamsStatus enum.
+func (e EcommerceListOrdersV1ParamsStatus) Valid() bool {
+	switch e {
+	case EcommerceListOrdersV1ParamsStatusArchived:
+		return true
+	case EcommerceListOrdersV1ParamsStatusCanceled:
+		return true
+	case EcommerceListOrdersV1ParamsStatusCompleted:
+		return true
+	case EcommerceListOrdersV1ParamsStatusPending:
+		return true
+	case EcommerceListOrdersV1ParamsStatusRequiresAction:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for EcommerceListOrdersV1ParamsPaymentStatus.
+const (
+	EcommerceListOrdersV1ParamsPaymentStatusAwaiting          EcommerceListOrdersV1ParamsPaymentStatus = "awaiting"
+	EcommerceListOrdersV1ParamsPaymentStatusCanceled          EcommerceListOrdersV1ParamsPaymentStatus = "canceled"
+	EcommerceListOrdersV1ParamsPaymentStatusCaptured          EcommerceListOrdersV1ParamsPaymentStatus = "captured"
+	EcommerceListOrdersV1ParamsPaymentStatusNotPaid           EcommerceListOrdersV1ParamsPaymentStatus = "not_paid"
+	EcommerceListOrdersV1ParamsPaymentStatusNotRequired       EcommerceListOrdersV1ParamsPaymentStatus = "not_required"
+	EcommerceListOrdersV1ParamsPaymentStatusPartiallyRefunded EcommerceListOrdersV1ParamsPaymentStatus = "partially_refunded"
+	EcommerceListOrdersV1ParamsPaymentStatusRefunded          EcommerceListOrdersV1ParamsPaymentStatus = "refunded"
+	EcommerceListOrdersV1ParamsPaymentStatusRequiresAction    EcommerceListOrdersV1ParamsPaymentStatus = "requires_action"
+)
+
+// Valid indicates whether the value is a known member of the EcommerceListOrdersV1ParamsPaymentStatus enum.
+func (e EcommerceListOrdersV1ParamsPaymentStatus) Valid() bool {
+	switch e {
+	case EcommerceListOrdersV1ParamsPaymentStatusAwaiting:
+		return true
+	case EcommerceListOrdersV1ParamsPaymentStatusCanceled:
+		return true
+	case EcommerceListOrdersV1ParamsPaymentStatusCaptured:
+		return true
+	case EcommerceListOrdersV1ParamsPaymentStatusNotPaid:
+		return true
+	case EcommerceListOrdersV1ParamsPaymentStatusNotRequired:
+		return true
+	case EcommerceListOrdersV1ParamsPaymentStatusPartiallyRefunded:
+		return true
+	case EcommerceListOrdersV1ParamsPaymentStatusRefunded:
+		return true
+	case EcommerceListOrdersV1ParamsPaymentStatusRequiresAction:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for EcommerceListOrdersV1ParamsFulfillmentStatus.
+const (
+	EcommerceListOrdersV1ParamsFulfillmentStatusCanceled           EcommerceListOrdersV1ParamsFulfillmentStatus = "canceled"
+	EcommerceListOrdersV1ParamsFulfillmentStatusFulfilled          EcommerceListOrdersV1ParamsFulfillmentStatus = "fulfilled"
+	EcommerceListOrdersV1ParamsFulfillmentStatusNotFulfilled       EcommerceListOrdersV1ParamsFulfillmentStatus = "not_fulfilled"
+	EcommerceListOrdersV1ParamsFulfillmentStatusPartiallyFulfilled EcommerceListOrdersV1ParamsFulfillmentStatus = "partially_fulfilled"
+	EcommerceListOrdersV1ParamsFulfillmentStatusPartiallyReturned  EcommerceListOrdersV1ParamsFulfillmentStatus = "partially_returned"
+	EcommerceListOrdersV1ParamsFulfillmentStatusPartiallyShipped   EcommerceListOrdersV1ParamsFulfillmentStatus = "partially_shipped"
+	EcommerceListOrdersV1ParamsFulfillmentStatusRequiresAction     EcommerceListOrdersV1ParamsFulfillmentStatus = "requires_action"
+	EcommerceListOrdersV1ParamsFulfillmentStatusReturned           EcommerceListOrdersV1ParamsFulfillmentStatus = "returned"
+	EcommerceListOrdersV1ParamsFulfillmentStatusShipped            EcommerceListOrdersV1ParamsFulfillmentStatus = "shipped"
+)
+
+// Valid indicates whether the value is a known member of the EcommerceListOrdersV1ParamsFulfillmentStatus enum.
+func (e EcommerceListOrdersV1ParamsFulfillmentStatus) Valid() bool {
+	switch e {
+	case EcommerceListOrdersV1ParamsFulfillmentStatusCanceled:
+		return true
+	case EcommerceListOrdersV1ParamsFulfillmentStatusFulfilled:
+		return true
+	case EcommerceListOrdersV1ParamsFulfillmentStatusNotFulfilled:
+		return true
+	case EcommerceListOrdersV1ParamsFulfillmentStatusPartiallyFulfilled:
+		return true
+	case EcommerceListOrdersV1ParamsFulfillmentStatusPartiallyReturned:
+		return true
+	case EcommerceListOrdersV1ParamsFulfillmentStatusPartiallyShipped:
+		return true
+	case EcommerceListOrdersV1ParamsFulfillmentStatusRequiresAction:
+		return true
+	case EcommerceListOrdersV1ParamsFulfillmentStatusReturned:
+		return true
+	case EcommerceListOrdersV1ParamsFulfillmentStatusShipped:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for EcommerceListProductsV1ParamsStatus.
+const (
+	EcommerceListProductsV1ParamsStatusArchived  EcommerceListProductsV1ParamsStatus = "archived"
+	EcommerceListProductsV1ParamsStatusDraft     EcommerceListProductsV1ParamsStatus = "draft"
+	EcommerceListProductsV1ParamsStatusProposed  EcommerceListProductsV1ParamsStatus = "proposed"
+	EcommerceListProductsV1ParamsStatusPublished EcommerceListProductsV1ParamsStatus = "published"
+	EcommerceListProductsV1ParamsStatusRejected  EcommerceListProductsV1ParamsStatus = "rejected"
+)
+
+// Valid indicates whether the value is a known member of the EcommerceListProductsV1ParamsStatus enum.
+func (e EcommerceListProductsV1ParamsStatus) Valid() bool {
+	switch e {
+	case EcommerceListProductsV1ParamsStatusArchived:
+		return true
+	case EcommerceListProductsV1ParamsStatusDraft:
+		return true
+	case EcommerceListProductsV1ParamsStatusProposed:
+		return true
+	case EcommerceListProductsV1ParamsStatusPublished:
+		return true
+	case EcommerceListProductsV1ParamsStatusRejected:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for EcommerceListProductsV1ParamsInclude.
+const (
+	Media    EcommerceListProductsV1ParamsInclude = "media"
+	Variants EcommerceListProductsV1ParamsInclude = "variants"
+)
+
+// Valid indicates whether the value is a known member of the EcommerceListProductsV1ParamsInclude enum.
+func (e EcommerceListProductsV1ParamsInclude) Valid() bool {
+	switch e {
+	case Media:
+		return true
+	case Variants:
 		return true
 	default:
 		return false
@@ -6872,6 +7190,141 @@ type DomainsV1WHOISStoreRequest struct {
 // Example: individual
 type DomainsV1WHOISStoreRequestEntityType string
 
+// EcommerceV1DiscountCreateDiscountRequest defines model for Ecommerce.V1.Discount.CreateDiscountRequest.
+type EcommerceV1DiscountCreateDiscountRequest struct {
+	// Allocation Whether the discount applies to the cart total or to each eligible item.
+	//
+	// Example: total
+	Allocation *EcommerceV1DiscountCreateDiscountRequestAllocation `json:"allocation,omitempty"`
+
+	// Code The discount code customers enter at checkout.
+	//
+	// Example: BLACKFRIDAY
+	Code string `json:"code"`
+
+	// EndsAt When the discount expires. A bare date runs to the end of that day in time_zone. Never expires when omitted.
+	//
+	// Example: 2026-02-21T07:35:04.000000Z
+	EndsAt *time.Time `json:"ends_at,omitempty"`
+
+	// MinCartValue Minimum cart value in the smallest currency unit required for the discount to apply.
+	//
+	// Example: 5000
+	MinCartValue *int `json:"min_cart_value,omitempty"`
+
+	// Name A human-friendly discount name.
+	//
+	// Example: Black Friday
+	Name *string `json:"name,omitempty"`
+
+	// StartsAt When the discount becomes active. A bare date (2026-11-27) anchors to time_zone. Defaults to now when omitted.
+	//
+	// Example: 2026-01-21T07:35:04.000000Z
+	StartsAt *time.Time `json:"starts_at,omitempty"`
+
+	// TimeZone IANA time zone used to interpret starts_at and ends_at.
+	//
+	// Example: Europe/Vilnius
+	TimeZone *string `json:"time_zone,omitempty"`
+
+	// Type The discount type.
+	//
+	// Example: percentage
+	Type EcommerceV1DiscountCreateDiscountRequestType `json:"type"`
+
+	// UsageLimit Maximum number of times the discount can be redeemed.
+	//
+	// Example: 100
+	UsageLimit *int `json:"usage_limit,omitempty"`
+
+	// Value For percentage discounts a whole number 1-100; for fixed discounts an amount in the smallest currency unit (e.g. $10 is 1000). Ignored for free_shipping.
+	//
+	// Example: 20
+	Value int `json:"value"`
+}
+
+// EcommerceV1DiscountCreateDiscountRequestAllocation Whether the discount applies to the cart total or to each eligible item.
+//
+// Example: total
+type EcommerceV1DiscountCreateDiscountRequestAllocation string
+
+// EcommerceV1DiscountCreateDiscountRequestType The discount type.
+//
+// Example: percentage
+type EcommerceV1DiscountCreateDiscountRequestType string
+
+// EcommerceV1DiscountDiscountCollection Array of [`Ecommerce.V1.Discount.DiscountResource`](#model/ecommercev1discountdiscountresource)
+type EcommerceV1DiscountDiscountCollection = []EcommerceV1DiscountDiscountResource
+
+// EcommerceV1DiscountDiscountResource defines model for Ecommerce.V1.Discount.DiscountResource.
+type EcommerceV1DiscountDiscountResource struct {
+	// Allocation Whether the discount applies to the cart total or to each item, or null.
+	//
+	// Example: total
+	Allocation *EcommerceV1DiscountDiscountResourceAllocation `json:"allocation,omitempty"`
+
+	// Code The discount code customers enter at checkout.
+	//
+	// Example: BLACKFRIDAY
+	Code *string `json:"code,omitempty"`
+
+	// EndsAt When the discount expires, or null.
+	EndsAt *time.Time `json:"ends_at,omitempty"`
+
+	// Id The discount ID, required by every other discount endpoint.
+	//
+	// Example: disc_01J8Z5F8W9K8M4A7B3C2D1E0FG
+	Id *string `json:"id,omitempty"`
+
+	// IsDisabled Whether the discount is disabled.
+	//
+	// Example: false
+	IsDisabled *bool `json:"is_disabled,omitempty"`
+
+	// Name The discount name, or null.
+	//
+	// Example: Black Friday
+	Name *string `json:"name,omitempty"`
+
+	// StartsAt When the discount becomes active.
+	//
+	// Example: 2026-01-21T07:35:04.000000Z
+	StartsAt *time.Time `json:"starts_at,omitempty"`
+
+	// Type The discount type, or null.
+	//
+	// Example: percentage
+	Type *EcommerceV1DiscountDiscountResourceType `json:"type,omitempty"`
+
+	// UsageCount Number of times the discount has been redeemed.
+	//
+	// Example: 0
+	UsageCount *int `json:"usage_count,omitempty"`
+
+	// UsageLimit Maximum number of redemptions, or null for unlimited.
+	UsageLimit *int `json:"usage_limit,omitempty"`
+
+	// Value The discount value, or null. Percentage is 1-100; fixed is in the smallest currency unit.
+	//
+	// Example: 20
+	Value *int `json:"value,omitempty"`
+}
+
+// EcommerceV1DiscountDiscountResourceAllocation Whether the discount applies to the cart total or to each item, or null.
+//
+// Example: total
+type EcommerceV1DiscountDiscountResourceAllocation string
+
+// EcommerceV1DiscountDiscountResourceType The discount type, or null.
+//
+// Example: percentage
+type EcommerceV1DiscountDiscountResourceType string
+
+// EcommerceV1DiscountDiscountResponseResource defines model for Ecommerce.V1.Discount.DiscountResponseResource.
+type EcommerceV1DiscountDiscountResponseResource struct {
+	Data *EcommerceV1DiscountDiscountResource `json:"data,omitempty"`
+}
+
 // EcommerceV1MiscellaneousCustomStorefrontInstructionsResource defines model for Ecommerce.V1.Miscellaneous.CustomStorefrontInstructionsResource.
 type EcommerceV1MiscellaneousCustomStorefrontInstructionsResource struct {
 	// Instructions Markdown setup instructions for connecting a custom sales channel to your store.
@@ -6880,6 +7333,331 @@ type EcommerceV1MiscellaneousCustomStorefrontInstructionsResource struct {
 	//
 	// Use the Ecommerce API to sync your store.
 	Instructions *string `json:"instructions,omitempty"`
+}
+
+// EcommerceV1OrderCancelRequest defines model for Ecommerce.V1.Order.CancelRequest.
+type EcommerceV1OrderCancelRequest struct {
+	// NotifyCustomer Whether to email the customer about the cancellation. Defaults to true.
+	//
+	// Example: true
+	NotifyCustomer *bool `json:"notify_customer,omitempty"`
+}
+
+// EcommerceV1OrderFulfillRequest defines model for Ecommerce.V1.Order.FulfillRequest.
+type EcommerceV1OrderFulfillRequest struct {
+	// Items Line items to fulfil. Omit to fulfil every remaining unfulfilled item.
+	Items *[]struct {
+		// LineItemId The line item to fulfil, from the order detail items[].id.
+		//
+		// Example: item_01J8Z5F8W9K8M4A7B3C2D1E0FG
+		LineItemId string `json:"line_item_id"`
+
+		// Quantity Quantity of the line item to fulfil.
+		//
+		// Example: 2
+		Quantity int `json:"quantity"`
+	} `json:"items,omitempty"`
+
+	// NotifyCustomer Whether to email the customer about the fulfilment. Defaults to true.
+	//
+	// Example: true
+	NotifyCustomer *bool `json:"notify_customer,omitempty"`
+
+	// TrackingNumber Carrier tracking number for the shipment.
+	//
+	// Example: 1Z999AA10123456784
+	TrackingNumber *string `json:"tracking_number,omitempty"`
+
+	// TrackingUrl Public tracking URL for the shipment. Requires tracking_number.
+	//
+	// Example: https://track.example.com/1Z999AA10123456784
+	TrackingUrl *string `json:"tracking_url,omitempty"`
+}
+
+// EcommerceV1OrderOrderCollection Array of [`Ecommerce.V1.Order.OrderResource`](#model/ecommercev1orderorderresource)
+type EcommerceV1OrderOrderCollection = []EcommerceV1OrderOrderResource
+
+// EcommerceV1OrderOrderDetailResource defines model for Ecommerce.V1.Order.OrderDetailResource.
+type EcommerceV1OrderOrderDetailResource struct {
+	// BillingAddress The billing address, or null.
+	BillingAddress *struct {
+		// Address1 Example: 123 Main St
+		Address1 *string `json:"address_1,omitempty"`
+		Address2 *string `json:"address_2,omitempty"`
+
+		// City Example: Springfield
+		City    *string `json:"city,omitempty"`
+		Company *string `json:"company,omitempty"`
+
+		// CountryCode Example: us
+		CountryCode *string `json:"country_code,omitempty"`
+
+		// Name Example: Jane Buyer
+		Name *string `json:"name,omitempty"`
+
+		// Phone Example: +15551234567
+		Phone *string `json:"phone,omitempty"`
+
+		// PostalCode Example: 62704
+		PostalCode *string `json:"postal_code,omitempty"`
+
+		// ProvinceCode Example: IL
+		ProvinceCode *string `json:"province_code,omitempty"`
+	} `json:"billing_address,omitempty"`
+
+	// CreatedAt ISO timestamp of when the order was created.
+	//
+	// Example: 2026-01-21T07:35:04.000000Z
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// CurrencyCode The order currency code.
+	//
+	// Example: usd
+	CurrencyCode *string `json:"currency_code,omitempty"`
+
+	// CustomerEmail The customer email.
+	//
+	// Example: buyer@example.com
+	CustomerEmail *string `json:"customer_email,omitempty"`
+
+	// DiscountTotal Discount total in the smallest currency unit.
+	//
+	// Example: 0
+	DiscountTotal *int `json:"discount_total,omitempty"`
+
+	// DisplayId The order number.
+	//
+	// Example: 1042
+	DisplayId *int `json:"display_id,omitempty"`
+
+	// FulfillmentStatus The fulfilment status.
+	//
+	// Example: not_fulfilled
+	FulfillmentStatus *string `json:"fulfillment_status,omitempty"`
+
+	// Fulfillments The order fulfilments with tracking.
+	Fulfillments *[]struct {
+		// CanceledAt ISO timestamp of when the fulfilment was canceled, if any.
+		CanceledAt *time.Time `json:"canceled_at,omitempty"`
+
+		// CreatedAt ISO timestamp of when the fulfilment was created.
+		//
+		// Example: 2026-01-22T07:35:04.000000Z
+		CreatedAt *time.Time `json:"created_at,omitempty"`
+
+		// Id The fulfilment ID.
+		//
+		// Example: ful_01J8Z5F8W9K8M4A7B3C2D1E0FG
+		Id *string `json:"id,omitempty"`
+
+		// ShippedAt ISO timestamp of when the fulfilment shipped, if known.
+		ShippedAt *time.Time `json:"shipped_at,omitempty"`
+
+		// Tracking Tracking numbers attached to the fulfilment.
+		Tracking *[]struct {
+			// TrackingNumber Carrier tracking number.
+			//
+			// Example: 1Z999AA10123456784
+			TrackingNumber *string `json:"tracking_number,omitempty"`
+
+			// Url Public tracking URL, when available.
+			//
+			// Example: https://track.example.com/1Z999AA10123456784
+			Url *string `json:"url,omitempty"`
+		} `json:"tracking,omitempty"`
+	} `json:"fulfillments,omitempty"`
+
+	// Id The order ID.
+	//
+	// Example: order_01J8Z5F8W9K8M4A7B3C2D1E0FG
+	Id *string `json:"id,omitempty"`
+
+	// ItemCount Number of distinct line items.
+	//
+	// Example: 3
+	ItemCount *int `json:"item_count,omitempty"`
+
+	// Items The order line items.
+	Items *[]struct {
+		// FulfilledQuantity Quantity already fulfilled.
+		//
+		// Example: 0
+		FulfilledQuantity *int `json:"fulfilled_quantity,omitempty"`
+
+		// Id The line item ID, required by the fulfil endpoint.
+		//
+		// Example: item_01J8Z5F8W9K8M4A7B3C2D1E0FG
+		Id *string `json:"id,omitempty"`
+
+		// Quantity Quantity ordered.
+		//
+		// Example: 2
+		Quantity *int `json:"quantity,omitempty"`
+
+		// ReturnedQuantity Quantity returned.
+		//
+		// Example: 0
+		ReturnedQuantity *int `json:"returned_quantity,omitempty"`
+
+		// Sku The variant SKU.
+		//
+		// Example: TSHIRT-BLU-M
+		Sku *string `json:"sku,omitempty"`
+
+		// Title The line item title.
+		//
+		// Example: Blue T-Shirt / M
+		Title *string `json:"title,omitempty"`
+
+		// Total Line total in the smallest currency unit.
+		//
+		// Example: 4500
+		Total *int `json:"total,omitempty"`
+
+		// UnitPrice Unit price in the smallest currency unit.
+		//
+		// Example: 2250
+		UnitPrice *int `json:"unit_price,omitempty"`
+
+		// VariantId The variant ID.
+		//
+		// Example: variant_01J8Z5F8W9K8M4A7B3C2D1E0FG
+		VariantId *string `json:"variant_id,omitempty"`
+	} `json:"items,omitempty"`
+
+	// MerchantNote Internal note visible only to the merchant.
+	//
+	// Example: Ship in a gift box.
+	MerchantNote *string `json:"merchant_note,omitempty"`
+
+	// PaidTotal Amount paid in the smallest currency unit.
+	//
+	// Example: 4999
+	PaidTotal *int `json:"paid_total,omitempty"`
+
+	// PaymentStatus The payment status.
+	//
+	// Example: captured
+	PaymentStatus *string `json:"payment_status,omitempty"`
+
+	// RefundedTotal Amount refunded in the smallest currency unit.
+	//
+	// Example: 0
+	RefundedTotal *int `json:"refunded_total,omitempty"`
+
+	// ShippingAddress The shipping address, or null.
+	ShippingAddress *struct {
+		// Address1 Example: 123 Main St
+		Address1 *string `json:"address_1,omitempty"`
+		Address2 *string `json:"address_2,omitempty"`
+
+		// City Example: Springfield
+		City    *string `json:"city,omitempty"`
+		Company *string `json:"company,omitempty"`
+
+		// CountryCode Example: us
+		CountryCode *string `json:"country_code,omitempty"`
+
+		// Name Example: Jane Buyer
+		Name *string `json:"name,omitempty"`
+
+		// Phone Example: +15551234567
+		Phone *string `json:"phone,omitempty"`
+
+		// PostalCode Example: 62704
+		PostalCode *string `json:"postal_code,omitempty"`
+
+		// ProvinceCode Example: IL
+		ProvinceCode *string `json:"province_code,omitempty"`
+	} `json:"shipping_address,omitempty"`
+
+	// ShippingTotal Shipping total in the smallest currency unit.
+	//
+	// Example: 300
+	ShippingTotal *int `json:"shipping_total,omitempty"`
+
+	// Status The order status.
+	//
+	// Example: pending
+	Status *string `json:"status,omitempty"`
+
+	// Subtotal Subtotal in the smallest currency unit.
+	//
+	// Example: 4500
+	Subtotal *int `json:"subtotal,omitempty"`
+
+	// TaxTotal Tax total in the smallest currency unit.
+	//
+	// Example: 199
+	TaxTotal *int `json:"tax_total,omitempty"`
+
+	// Total Order total in the smallest currency unit.
+	//
+	// Example: 4999
+	Total *int `json:"total,omitempty"`
+}
+
+// EcommerceV1OrderOrderDetailResponseResource defines model for Ecommerce.V1.Order.OrderDetailResponseResource.
+type EcommerceV1OrderOrderDetailResponseResource struct {
+	Data *EcommerceV1OrderOrderDetailResource `json:"data,omitempty"`
+}
+
+// EcommerceV1OrderOrderResource defines model for Ecommerce.V1.Order.OrderResource.
+type EcommerceV1OrderOrderResource struct {
+	// CreatedAt ISO timestamp of when the order was created.
+	//
+	// Example: 2026-01-21T07:35:04.000000Z
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// CurrencyCode The order currency code.
+	//
+	// Example: usd
+	CurrencyCode *string `json:"currency_code,omitempty"`
+
+	// CustomerEmail The customer email.
+	//
+	// Example: buyer@example.com
+	CustomerEmail *string `json:"customer_email,omitempty"`
+
+	// DisplayId The order number the merchant and customer see.
+	//
+	// Example: 1042
+	DisplayId *int `json:"display_id,omitempty"`
+
+	// FulfillmentStatus The fulfilment status.
+	//
+	// Example: not_fulfilled
+	FulfillmentStatus *string `json:"fulfillment_status,omitempty"`
+
+	// Id The order ID, required by every other order endpoint.
+	//
+	// Example: order_01J8Z5F8W9K8M4A7B3C2D1E0FG
+	Id *string `json:"id,omitempty"`
+
+	// ItemCount Number of distinct line items. Retrieve the order for the items themselves.
+	//
+	// Example: 3
+	ItemCount *int `json:"item_count,omitempty"`
+
+	// PaymentStatus The payment status. A paid order is "captured".
+	//
+	// Example: captured
+	PaymentStatus *string `json:"payment_status,omitempty"`
+
+	// Status The order status.
+	//
+	// Example: pending
+	Status *string `json:"status,omitempty"`
+
+	// Total Order total in the smallest currency unit.
+	//
+	// Example: 4999
+	Total *int `json:"total,omitempty"`
+}
+
+// EcommerceV1OrderOrderResponseResource defines model for Ecommerce.V1.Order.OrderResponseResource.
+type EcommerceV1OrderOrderResponseResource struct {
+	Data *EcommerceV1OrderOrderResource `json:"data,omitempty"`
 }
 
 // EcommerceV1PaymentEnableManualPaymentRequest defines model for Ecommerce.V1.Payment.EnableManualPaymentRequest.
@@ -6918,6 +7696,90 @@ type EcommerceV1PaymentManualPaymentResource struct {
 		Title *string `json:"title,omitempty"`
 	} `json:"payment_method,omitempty"`
 }
+
+// EcommerceV1PaymentProviderPaymentProviderConnectLinkResource defines model for Ecommerce.V1.PaymentProvider.PaymentProviderConnectLinkResource.
+type EcommerceV1PaymentProviderPaymentProviderConnectLinkResource struct {
+	Data *struct {
+		// AdminUrl A deep-link into the store admin for the provider.
+		//
+		// Example: https://admin.example.com/payments/stripe
+		AdminUrl *string `json:"admin_url,omitempty"`
+
+		// Url The gateway onboarding URL for the merchant to open.
+		//
+		// Example: https://connect.stripe.com/setup/s/example
+		Url *string `json:"url,omitempty"`
+	} `json:"data,omitempty"`
+}
+
+// EcommerceV1PaymentProviderPaymentProviderListResource defines model for Ecommerce.V1.PaymentProvider.PaymentProviderListResource.
+type EcommerceV1PaymentProviderPaymentProviderListResource struct {
+	Data *struct {
+		// Available Payment gateways available to install for the store.
+		Available *[]struct {
+			// Id The payment gateway ID, e.g. stripe.
+			//
+			// Example: stripe
+			Id *string `json:"id,omitempty"`
+
+			// IsCurrencySupported Whether the gateway supports the store currency.
+			//
+			// Example: true
+			IsCurrencySupported *bool `json:"is_currency_supported,omitempty"`
+
+			// IsEnabled Whether the gateway is enabled on the store.
+			//
+			// Example: false
+			IsEnabled *bool `json:"is_enabled,omitempty"`
+
+			// IsInstalled Whether the gateway is installed on the store.
+			//
+			// Example: false
+			IsInstalled *bool `json:"is_installed,omitempty"`
+
+			// SupportedCurrencies Currencies the gateway supports; present only when the store currency is unsupported.
+			SupportedCurrencies *[]string `json:"supported_currencies,omitempty"`
+		} `json:"available,omitempty"`
+
+		// Connected Payment providers already connected to the store.
+		Connected *[]struct {
+			// Id The store payment provider row ID.
+			//
+			// Example: storepp_01J8Z5F8W9K8M4A7B3C2D1E0FG
+			Id *string `json:"id,omitempty"`
+
+			// IsEnabled Whether the provider is enabled for the store.
+			//
+			// Example: true
+			IsEnabled *bool `json:"is_enabled,omitempty"`
+
+			// ProviderId The payment gateway ID, e.g. stripe.
+			//
+			// Example: stripe
+			ProviderId *string `json:"provider_id,omitempty"`
+
+			// ShowsAtCheckout Whether the provider shows at checkout.
+			//
+			// Example: true
+			ShowsAtCheckout *bool `json:"shows_at_checkout,omitempty"`
+
+			// Status The connection status.
+			//
+			// Example: connected
+			Status *EcommerceV1PaymentProviderPaymentProviderListResourceDataConnectedStatus `json:"status,omitempty"`
+
+			// Title The provider title, or null.
+			//
+			// Example: Stripe
+			Title *string `json:"title,omitempty"`
+		} `json:"connected,omitempty"`
+	} `json:"data,omitempty"`
+}
+
+// EcommerceV1PaymentProviderPaymentProviderListResourceDataConnectedStatus The connection status.
+//
+// Example: connected
+type EcommerceV1PaymentProviderPaymentProviderListResourceDataConnectedStatus string
 
 // EcommerceV1ProductCreateDigitalProductRequest defines model for Ecommerce.V1.Product.CreateDigitalProductRequest.
 type EcommerceV1ProductCreateDigitalProductRequest struct {
@@ -6970,6 +7832,9 @@ type EcommerceV1ProductCreatePhysicalProductRequest struct {
 	Price int `json:"price"`
 }
 
+// EcommerceV1ProductProductCollection Array of [`Ecommerce.V1.Product.ProductResource`](#model/ecommercev1productproductresource)
+type EcommerceV1ProductProductCollection = []EcommerceV1ProductProductResource
+
 // EcommerceV1ProductProductCreationResource defines model for Ecommerce.V1.Product.ProductCreationResource.
 type EcommerceV1ProductProductCreationResource struct {
 	// AdminUrl Admin UI deep-link to manage the product.
@@ -7014,6 +7879,26 @@ type EcommerceV1ProductProductCreationResource struct {
 // Example: physical
 type EcommerceV1ProductProductCreationResourceProductType string
 
+// EcommerceV1ProductProductDeletedResource defines model for Ecommerce.V1.Product.ProductDeletedResource.
+type EcommerceV1ProductProductDeletedResource struct {
+	Data *struct {
+		// Id The ID of the product.
+		//
+		// Example: prod_01J8Z5F8W9K8M4A7B3C2D1E0FG
+		Id *string `json:"id,omitempty"`
+
+		// IsArchived True when the product was archived instead of deleted (a subscription product with active subscribers).
+		//
+		// Example: false
+		IsArchived *bool `json:"is_archived,omitempty"`
+
+		// IsDeleted True when the product was deleted.
+		//
+		// Example: true
+		IsDeleted *bool `json:"is_deleted,omitempty"`
+	} `json:"data,omitempty"`
+}
+
 // EcommerceV1ProductProductImageUploadResource defines model for Ecommerce.V1.Product.ProductImageUploadResource.
 type EcommerceV1ProductProductImageUploadResource struct {
 	// IsThumbnail Whether the image was set as the product's thumbnail (primary image).
@@ -7047,6 +7932,165 @@ type EcommerceV1ProductProductImageUploadUrlResource struct {
 	// Example: https://storage.googleapis.com/ecommerce-quarantine-euw3
 	UploadUrl *string `json:"upload_url,omitempty"`
 }
+
+// EcommerceV1ProductProductResource defines model for Ecommerce.V1.Product.ProductResource.
+type EcommerceV1ProductProductResource struct {
+	// Id The product ID, required by every other product endpoint.
+	//
+	// Example: prod_01J8Z5F8W9K8M4A7B3C2D1E0FG
+	Id *string `json:"id,omitempty"`
+
+	// Media Present (non-null) only when include=media is set; null otherwise.
+	Media *[]struct {
+		// IsThumbnail Whether this media is the product's thumbnail.
+		//
+		// Example: true
+		IsThumbnail *bool `json:"is_thumbnail,omitempty"`
+
+		// Type The media type, e.g. image or video.
+		//
+		// Example: image
+		Type *string `json:"type,omitempty"`
+
+		// Url The media URL.
+		//
+		// Example: https://cdn.example.com/prod/1.jpg
+		Url *string `json:"url,omitempty"`
+	} `json:"media,omitempty"`
+
+	// PriceRange Effective price bounds across the product's variants.
+	PriceRange *struct {
+		// CurrencyCode The store currency the range is expressed in.
+		//
+		// Example: usd
+		CurrencyCode *string `json:"currency_code,omitempty"`
+
+		// Max Highest effective variant price in the smallest currency unit, or null if unpriced.
+		//
+		// Example: 2499
+		Max *int `json:"max,omitempty"`
+
+		// Min Lowest effective variant price in the smallest currency unit, or null if unpriced.
+		//
+		// Example: 1999
+		Min *int `json:"min,omitempty"`
+	} `json:"price_range,omitempty"`
+
+	// Status The product status.
+	//
+	// Example: published
+	Status *EcommerceV1ProductProductResourceStatus `json:"status,omitempty"`
+
+	// Thumbnail The product's primary image URL, or null.
+	//
+	// Example: https://cdn.example.com/prod/thumb.jpg
+	Thumbnail *string `json:"thumbnail,omitempty"`
+
+	// Title The product name.
+	//
+	// Example: Blue T-Shirt
+	Title *string `json:"title,omitempty"`
+
+	// Type The product type.
+	//
+	// Example: physical
+	Type *string `json:"type,omitempty"`
+
+	// VariantCount Number of variants. Use include=variants to retrieve them.
+	//
+	// Example: 3
+	VariantCount *int `json:"variant_count,omitempty"`
+
+	// Variants Present (non-null) only when include=variants is set; null otherwise.
+	Variants *[]struct {
+		// Id The variant ID.
+		//
+		// Example: variant_01J8Z5F8W9K8M4A7B3C2D1E0FG
+		Id *string `json:"id,omitempty"`
+
+		// InventoryQuantity Units in stock.
+		//
+		// Example: 42
+		InventoryQuantity *int `json:"inventory_quantity,omitempty"`
+
+		// ManageInventory Whether stock is tracked for this variant.
+		//
+		// Example: true
+		ManageInventory *bool `json:"manage_inventory,omitempty"`
+
+		// Options The variant's option values.
+		Options *[]struct {
+			// Name Option name, e.g. Size.
+			//
+			// Example: Size
+			Name *string `json:"name,omitempty"`
+
+			// Value Option value, e.g. L.
+			//
+			// Example: M
+			Value *string `json:"value,omitempty"`
+		} `json:"options,omitempty"`
+
+		// Prices Prices per currency, in the smallest currency unit.
+		Prices *[]struct {
+			// Amount Price in the smallest currency unit.
+			//
+			// Example: 1999
+			Amount *int `json:"amount,omitempty"`
+
+			// CurrencyCode The price currency code.
+			//
+			// Example: usd
+			CurrencyCode *string `json:"currency_code,omitempty"`
+
+			// SaleAmount Sale price in the smallest currency unit, or null.
+			SaleAmount *int `json:"sale_amount,omitempty"`
+		} `json:"prices,omitempty"`
+
+		// Sku The variant SKU.
+		//
+		// Example: TSHIRT-BLU-M
+		Sku *string `json:"sku,omitempty"`
+
+		// Title The variant title.
+		//
+		// Example: Medium
+		Title *string `json:"title,omitempty"`
+	} `json:"variants,omitempty"`
+}
+
+// EcommerceV1ProductProductResourceStatus The product status.
+//
+// Example: published
+type EcommerceV1ProductProductResourceStatus string
+
+// EcommerceV1ProductProductResponseResource defines model for Ecommerce.V1.Product.ProductResponseResource.
+type EcommerceV1ProductProductResponseResource struct {
+	Data *EcommerceV1ProductProductResource `json:"data,omitempty"`
+}
+
+// EcommerceV1ProductUpdateRequest defines model for Ecommerce.V1.Product.UpdateRequest.
+type EcommerceV1ProductUpdateRequest struct {
+	// Description The product description.
+	//
+	// Example: Soft combed cotton, unisex fit.
+	Description *string `json:"description,omitempty"`
+
+	// Name The product name.
+	//
+	// Example: Blue T-Shirt
+	Name *string `json:"name,omitempty"`
+
+	// Status Set "published" to make the product buyable, "draft" to hide it, or "archived" to retire it.
+	//
+	// Example: published
+	Status *EcommerceV1ProductUpdateRequestStatus `json:"status,omitempty"`
+}
+
+// EcommerceV1ProductUpdateRequestStatus Set "published" to make the product buyable, "draft" to hide it, or "archived" to retire it.
+//
+// Example: published
+type EcommerceV1ProductUpdateRequestStatus string
 
 // EcommerceV1ProductUploadProductImageRequest defines model for Ecommerce.V1.Product.UploadProductImageRequest.
 type EcommerceV1ProductUploadProductImageRequest struct {
@@ -7201,23 +8245,25 @@ type EcommerceV1SalesChannelSalesChannelUpdateResourceSalesChannelType string
 
 // EcommerceV1SalesChannelStoreRequest defines model for Ecommerce.V1.SalesChannel.StoreRequest.
 type EcommerceV1SalesChannelStoreRequest struct {
-	// Name Merchant-facing custom name shown in the sales channels list.
+	// Name Merchant-facing custom name. Required for custom channels; not supported for quick-link.
 	//
 	// Example: Vintagio Onepager
-	Name string `json:"name"`
+	Name *string `json:"name,omitempty"`
 
-	// Type Sales channel type. Only "custom" channels can be created via the API.
+	// Type Sales channel type. "custom" is a headless channel: it requires a name and takes an optional public url.
+	// "quick-link" is a one-page store whose handle is auto-generated; it supports neither name nor url.
 	//
 	// Example: custom
 	Type EcommerceV1SalesChannelStoreRequestType `json:"type"`
 
-	// Url Optional public address where the custom sales channel lives.
+	// Url Optional public url for the channel. Custom channels only; not supported for quick-link.
 	//
 	// Example: https://www.bestshirt.vintagio.com
 	Url *string `json:"url,omitempty"`
 }
 
-// EcommerceV1SalesChannelStoreRequestType Sales channel type. Only "custom" channels can be created via the API.
+// EcommerceV1SalesChannelStoreRequestType Sales channel type. "custom" is a headless channel: it requires a name and takes an optional public url.
+// "quick-link" is a one-page store whose handle is auto-generated; it supports neither name nor url.
 //
 // Example: custom
 type EcommerceV1SalesChannelStoreRequestType string
@@ -7454,6 +8500,190 @@ type EcommerceV1StoreStoreResource struct {
 	//
 	// Example: v2_standalone
 	Version *string `json:"version,omitempty"`
+}
+
+// EcommerceV1VariantBatchUpdateVariantsRequest defines model for Ecommerce.V1.Variant.BatchUpdateVariantsRequest.
+type EcommerceV1VariantBatchUpdateVariantsRequest struct {
+	// Variants Variants to update in place by id, up to 100. Variants omitted from the list are left untouched.
+	Variants []struct {
+		// InventoryQuantity Units in stock.
+		//
+		// Example: 42
+		InventoryQuantity *int `json:"inventory_quantity,omitempty"`
+
+		// ManageInventory Whether stock is tracked for this variant.
+		//
+		// Example: true
+		ManageInventory *bool `json:"manage_inventory,omitempty"`
+
+		// Prices The full list of prices for the variant, replacing the existing ones. A free item is amount: 0.
+		Prices *[]struct {
+			// Amount Price in the smallest currency unit (e.g. cents).
+			//
+			// Example: 1999
+			Amount int `json:"amount"`
+
+			// Currency ISO 4217 currency code. Defaults to the store's default currency.
+			//
+			// Example: usd
+			Currency *string `json:"currency,omitempty"`
+
+			// SaleAmount Optional sale price in the smallest currency unit; must be lower than amount.
+			//
+			// Example: 1499
+			SaleAmount *int `json:"sale_amount,omitempty"`
+		} `json:"prices,omitempty"`
+
+		// Title The variant title.
+		//
+		// Example: Red / L
+		Title *string `json:"title,omitempty"`
+
+		// VariantId The id of the variant to update.
+		//
+		// Example: variant_01J8Z5F8W9K8M4A7B3C2D1E0FG
+		VariantId string `json:"variant_id"`
+	} `json:"variants"`
+}
+
+// EcommerceV1VariantCreateVariantRequest defines model for Ecommerce.V1.Variant.CreateVariantRequest.
+type EcommerceV1VariantCreateVariantRequest struct {
+	// InventoryQuantity Units in stock. Defaults to 0.
+	//
+	// Example: 42
+	InventoryQuantity *int `json:"inventory_quantity,omitempty"`
+
+	// ManageInventory Whether stock is tracked for this variant. Defaults to false.
+	//
+	// Example: true
+	ManageInventory *bool `json:"manage_inventory,omitempty"`
+
+	// Options Option name/value pairs that distinguish this variant, e.g. [{name: Size, value: M}]. Options missing from the product are created; provide a value for every option the product already has.
+	Options []struct {
+		// Name Option name, e.g. Size.
+		//
+		// Example: Size
+		Name string `json:"name"`
+
+		// Value Option value for this variant, e.g. M.
+		//
+		// Example: M
+		Value string `json:"value"`
+	} `json:"options"`
+
+	// Prices Prices per currency. Amounts are integers in the smallest currency unit. A free item is amount: 0.
+	Prices *[]struct {
+		// Amount Price in the smallest currency unit (e.g. cents).
+		//
+		// Example: 1999
+		Amount int `json:"amount"`
+
+		// Currency ISO 4217 currency code. Defaults to the store's default currency when omitted.
+		//
+		// Example: usd
+		Currency *string `json:"currency,omitempty"`
+
+		// SaleAmount Optional sale price in the smallest currency unit; must be lower than amount.
+		//
+		// Example: 1499
+		SaleAmount *int `json:"sale_amount,omitempty"`
+	} `json:"prices,omitempty"`
+
+	// Sku The variant SKU.
+	//
+	// Example: TSHIRT-RED-M
+	Sku *string `json:"sku,omitempty"`
+
+	// Title The variant title. Defaults to the option values joined with ' / ' (e.g. 'Red / L').
+	//
+	// Example: Red / M
+	Title *string `json:"title,omitempty"`
+}
+
+// EcommerceV1VariantVariantCollection Array of [`Ecommerce.V1.Variant.VariantResource`](#model/ecommercev1variantvariantresource)
+type EcommerceV1VariantVariantCollection = []EcommerceV1VariantVariantResource
+
+// EcommerceV1VariantVariantDeletedResource defines model for Ecommerce.V1.Variant.VariantDeletedResource.
+type EcommerceV1VariantVariantDeletedResource struct {
+	Data *struct {
+		// Id The ID of the variant.
+		//
+		// Example: variant_01J8Z5F8W9K8M4A7B3C2D1E0FG
+		Id *string `json:"id,omitempty"`
+
+		// IsDeleted True when the variant was deleted.
+		//
+		// Example: true
+		IsDeleted *bool `json:"is_deleted,omitempty"`
+	} `json:"data,omitempty"`
+}
+
+// EcommerceV1VariantVariantListResponseResource defines model for Ecommerce.V1.Variant.VariantListResponseResource.
+type EcommerceV1VariantVariantListResponseResource struct {
+	// Data The variants.
+	Data *[]EcommerceV1VariantVariantResource `json:"data,omitempty"`
+}
+
+// EcommerceV1VariantVariantResource defines model for Ecommerce.V1.Variant.VariantResource.
+type EcommerceV1VariantVariantResource struct {
+	// Id The variant ID, required by every other variant endpoint.
+	//
+	// Example: variant_01J8Z5F8W9K8M4A7B3C2D1E0FG
+	Id *string `json:"id,omitempty"`
+
+	// InventoryQuantity Units in stock.
+	//
+	// Example: 42
+	InventoryQuantity *int `json:"inventory_quantity,omitempty"`
+
+	// ManageInventory Whether stock is tracked for this variant.
+	//
+	// Example: true
+	ManageInventory *bool `json:"manage_inventory,omitempty"`
+
+	// Options The variant's option values.
+	Options *[]struct {
+		// Name Option name, e.g. Size.
+		//
+		// Example: Size
+		Name *string `json:"name,omitempty"`
+
+		// Value Option value, e.g. M.
+		//
+		// Example: M
+		Value *string `json:"value,omitempty"`
+	} `json:"options,omitempty"`
+
+	// Prices Prices per currency, in the smallest currency unit.
+	Prices *[]struct {
+		// Amount Price in the smallest currency unit.
+		//
+		// Example: 1999
+		Amount *int `json:"amount,omitempty"`
+
+		// CurrencyCode The price currency code.
+		//
+		// Example: usd
+		CurrencyCode *string `json:"currency_code,omitempty"`
+
+		// SaleAmount Sale price in the smallest currency unit, or null.
+		SaleAmount *int `json:"sale_amount,omitempty"`
+	} `json:"prices,omitempty"`
+
+	// Sku The variant SKU, or null.
+	//
+	// Example: TSHIRT-RED-M
+	Sku *string `json:"sku,omitempty"`
+
+	// Title The variant title, or null.
+	//
+	// Example: Red / M
+	Title *string `json:"title,omitempty"`
+}
+
+// EcommerceV1VariantVariantResponseResource defines model for Ecommerce.V1.Variant.VariantResponseResource.
+type EcommerceV1VariantVariantResponseResource struct {
+	Data *EcommerceV1VariantVariantResource `json:"data,omitempty"`
 }
 
 // HorizonsV1WebsitesCreateWebsiteRequest defines model for Horizons.V1.Websites.CreateWebsiteRequest.
@@ -13224,6 +14454,96 @@ type EcommerceGetStoresV1Params struct {
 	Page *Page `form:"page,omitempty" json:"page,omitempty"`
 }
 
+// EcommerceListDiscountsV1Params defines parameters for EcommerceListDiscountsV1.
+type EcommerceListDiscountsV1Params struct {
+	// Q Free-text search over discount code and name.
+	Q *string `form:"q,omitempty" json:"q,omitempty"`
+
+	// IsDisabled Filter by disabled state.
+	IsDisabled *EcommerceListDiscountsV1ParamsIsDisabled `form:"is_disabled,omitempty" json:"is_disabled,omitempty"`
+
+	// Page Page number
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+}
+
+// EcommerceListDiscountsV1ParamsIsDisabled defines parameters for EcommerceListDiscountsV1.
+type EcommerceListDiscountsV1ParamsIsDisabled string
+
+// EcommerceListOrdersV1Params defines parameters for EcommerceListOrdersV1.
+type EcommerceListOrdersV1Params struct {
+	// Status Order statuses to include.
+	Status *[]EcommerceListOrdersV1ParamsStatus `form:"status,omitempty" json:"status,omitempty"`
+
+	// PaymentStatus Payment statuses to include. A paid order is "captured".
+	PaymentStatus *[]EcommerceListOrdersV1ParamsPaymentStatus `form:"payment_status,omitempty" json:"payment_status,omitempty"`
+
+	// FulfillmentStatus Fulfilment statuses to include.
+	FulfillmentStatus *[]EcommerceListOrdersV1ParamsFulfillmentStatus `form:"fulfillment_status,omitempty" json:"fulfillment_status,omitempty"`
+
+	// Email Customer email, matched exactly.
+	Email *string `form:"email,omitempty" json:"email,omitempty"`
+
+	// DisplayId The order number the merchant and customer see.
+	DisplayId *string `form:"display_id,omitempty" json:"display_id,omitempty"`
+
+	// Q Free-text search over customer name, email, order number and line items.
+	Q *string `form:"q,omitempty" json:"q,omitempty"`
+
+	// CreatedAtFrom Earliest creation time to include, inclusive. Accepts a date or ISO date-time (UTC).
+	CreatedAtFrom *string `form:"created_at_from,omitempty" json:"created_at_from,omitempty"`
+
+	// CreatedAtTo Latest creation time to include, inclusive. A bare date covers that whole day.
+	CreatedAtTo *string `form:"created_at_to,omitempty" json:"created_at_to,omitempty"`
+
+	// Page Page number
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+}
+
+// EcommerceListOrdersV1ParamsStatus defines parameters for EcommerceListOrdersV1.
+type EcommerceListOrdersV1ParamsStatus string
+
+// EcommerceListOrdersV1ParamsPaymentStatus defines parameters for EcommerceListOrdersV1.
+type EcommerceListOrdersV1ParamsPaymentStatus string
+
+// EcommerceListOrdersV1ParamsFulfillmentStatus defines parameters for EcommerceListOrdersV1.
+type EcommerceListOrdersV1ParamsFulfillmentStatus string
+
+// EcommerceListStorePaymentProvidersV1Params defines parameters for EcommerceListStorePaymentProvidersV1.
+type EcommerceListStorePaymentProvidersV1Params struct {
+	// IncludeCurrencyUnsupported Include gateways that do not support the store currency in the available list.
+	IncludeCurrencyUnsupported *bool `form:"include_currency_unsupported,omitempty" json:"include_currency_unsupported,omitempty"`
+}
+
+// EcommerceListProductsV1Params defines parameters for EcommerceListProductsV1.
+type EcommerceListProductsV1Params struct {
+	// ProductIds Restrict to these product ids. Doubles as a single-product lookup. Up to 200 ids.
+	ProductIds *[]string `form:"product_ids,omitempty" json:"product_ids,omitempty"`
+
+	// Status Product statuses to include.
+	Status *[]EcommerceListProductsV1ParamsStatus `form:"status,omitempty" json:"status,omitempty"`
+
+	// Q Free-text search over product title and SKU.
+	Q *string `form:"q,omitempty" json:"q,omitempty"`
+
+	// Include Opt-in heavy data: "variants" embeds each product's variants; "media" embeds its media.
+	Include *[]EcommerceListProductsV1ParamsInclude `form:"include,omitempty" json:"include,omitempty"`
+
+	// Page Page number
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+}
+
+// EcommerceListProductsV1ParamsStatus defines parameters for EcommerceListProductsV1.
+type EcommerceListProductsV1ParamsStatus string
+
+// EcommerceListProductsV1ParamsInclude defines parameters for EcommerceListProductsV1.
+type EcommerceListProductsV1ParamsInclude string
+
+// EcommerceListProductVariantsV1Params defines parameters for EcommerceListProductVariantsV1.
+type EcommerceListProductVariantsV1Params struct {
+	// Page Page number
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+}
+
 // HostingListAccountDatabasesV1Params defines parameters for HostingListAccountDatabasesV1.
 type HostingListAccountDatabasesV1Params struct {
 	// Page Page number
@@ -14010,6 +15330,15 @@ type DomainsChangeWHOISProfileForDomainV1JSONRequestBody = DomainsV1WHOISChangeU
 // EcommerceCreateStoreV1JSONRequestBody defines body for EcommerceCreateStoreV1 for application/json ContentType.
 type EcommerceCreateStoreV1JSONRequestBody = EcommerceV1StoreStoreRequest
 
+// EcommerceCreateADiscountV1JSONRequestBody defines body for EcommerceCreateADiscountV1 for application/json ContentType.
+type EcommerceCreateADiscountV1JSONRequestBody = EcommerceV1DiscountCreateDiscountRequest
+
+// EcommerceCancelAnOrderV1JSONRequestBody defines body for EcommerceCancelAnOrderV1 for application/json ContentType.
+type EcommerceCancelAnOrderV1JSONRequestBody = EcommerceV1OrderCancelRequest
+
+// EcommerceFulfilAnOrderV1JSONRequestBody defines body for EcommerceFulfilAnOrderV1 for application/json ContentType.
+type EcommerceFulfilAnOrderV1JSONRequestBody = EcommerceV1OrderFulfillRequest
+
 // EcommerceEnableManualPaymentMethodV1JSONRequestBody defines body for EcommerceEnableManualPaymentMethodV1 for application/json ContentType.
 type EcommerceEnableManualPaymentMethodV1JSONRequestBody = EcommerceV1PaymentEnableManualPaymentRequest
 
@@ -14019,11 +15348,20 @@ type EcommerceCreateDigitalProductV1JSONRequestBody = EcommerceV1ProductCreateDi
 // EcommerceCreatePhysicalProductV1JSONRequestBody defines body for EcommerceCreatePhysicalProductV1 for application/json ContentType.
 type EcommerceCreatePhysicalProductV1JSONRequestBody = EcommerceV1ProductCreatePhysicalProductRequest
 
+// EcommerceUpdateAProductV1JSONRequestBody defines body for EcommerceUpdateAProductV1 for application/json ContentType.
+type EcommerceUpdateAProductV1JSONRequestBody = EcommerceV1ProductUpdateRequest
+
 // EcommerceUploadAndAttachAProductImageV1JSONRequestBody defines body for EcommerceUploadAndAttachAProductImageV1 for application/json ContentType.
 type EcommerceUploadAndAttachAProductImageV1JSONRequestBody = EcommerceV1ProductUploadProductImageRequest
 
-// EcommerceCreateCustomSalesChannelV1JSONRequestBody defines body for EcommerceCreateCustomSalesChannelV1 for application/json ContentType.
-type EcommerceCreateCustomSalesChannelV1JSONRequestBody = EcommerceV1SalesChannelStoreRequest
+// EcommerceCreateAProductVariantV1JSONRequestBody defines body for EcommerceCreateAProductVariantV1 for application/json ContentType.
+type EcommerceCreateAProductVariantV1JSONRequestBody = EcommerceV1VariantCreateVariantRequest
+
+// EcommerceUpdateProductVariantsInBatchV1JSONRequestBody defines body for EcommerceUpdateProductVariantsInBatchV1 for application/json ContentType.
+type EcommerceUpdateProductVariantsInBatchV1JSONRequestBody = EcommerceV1VariantBatchUpdateVariantsRequest
+
+// EcommerceCreateASalesChannelV1JSONRequestBody defines body for EcommerceCreateASalesChannelV1 for application/json ContentType.
+type EcommerceCreateASalesChannelV1JSONRequestBody = EcommerceV1SalesChannelStoreRequest
 
 // EcommerceUpdateSalesChannelV1JSONRequestBody defines body for EcommerceUpdateSalesChannelV1 for application/json ContentType.
 type EcommerceUpdateSalesChannelV1JSONRequestBody = EcommerceV1SalesChannelUpdateRequest
@@ -16923,6 +18261,37 @@ type ClientInterface interface {
 	// Corresponds with DELETE /api/ecommerce/v1/stores/{store_id} (the `EcommerceDeleteStoreV1` operationId).
 	EcommerceDeleteStoreV1(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// EcommerceListDiscountsV1 List discounts
+	//
+	// List a store's discounts. Filter by free text over code and name, or by disabled state.
+	// Amounts for fixed discounts are integers in the smallest currency unit; percentage
+	// discounts carry a whole-number value between 1 and 100.
+	//
+	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/discounts (the `EcommerceListDiscountsV1` operationId).
+	EcommerceListDiscountsV1(ctx context.Context, storeId string, params *EcommerceListDiscountsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceCreateADiscountV1WithBody Create a discount
+	//
+	// Create a discount for a store. Fixed discounts take an amount in the smallest currency
+	// unit (e.g. $10 is 1000); percentage discounts take a whole-number value between 1 and 100.
+	// Free-shipping discounts ignore value. Returns the created discount.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/discounts (the `EcommerceCreateADiscountV1` operationId).
+	EcommerceCreateADiscountV1WithBody(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceCreateADiscountV1 Create a discount
+	//
+	// Create a discount for a store. Fixed discounts take an amount in the smallest currency
+	// unit (e.g. $10 is 1000); percentage discounts take a whole-number value between 1 and 100.
+	// Free-shipping discounts ignore value. Returns the created discount.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/discounts (the `EcommerceCreateADiscountV1` operationId).
+	EcommerceCreateADiscountV1(ctx context.Context, storeId string, body EcommerceCreateADiscountV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// EcommerceGetStoreMetadataV1 Get store metadata
 	//
 	// Get a store's readiness metadata: whether payment methods and shipping are configured,
@@ -16930,6 +18299,62 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/metadata (the `EcommerceGetStoreMetadataV1` operationId).
 	EcommerceGetStoreMetadataV1(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceListOrdersV1 List orders
+	//
+	// List a store's orders newest first as summaries. Filter by status, payment or fulfilment
+	// status, customer email, order number or a free-text query. Amounts are in the smallest
+	// currency unit. Retrieve a single order for its line items, addresses and fulfilments.
+	//
+	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/orders (the `EcommerceListOrdersV1` operationId).
+	EcommerceListOrdersV1(ctx context.Context, storeId string, params *EcommerceListOrdersV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceRetrieveAnOrderV1 Retrieve an order
+	//
+	// Retrieve one order in full: line items (each with the id the fulfil endpoint needs),
+	// addresses, the totals breakdown and fulfilments with tracking. Amounts are in the
+	// smallest currency unit.
+	//
+	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/orders/{order_id} (the `EcommerceRetrieveAnOrderV1` operationId).
+	EcommerceRetrieveAnOrderV1(ctx context.Context, storeId string, orderId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceCancelAnOrderV1WithBody Cancel an order
+	//
+	// Cancel the order and optionally email the customer. Returns the updated order summary.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/orders/{order_id}/cancel (the `EcommerceCancelAnOrderV1` operationId).
+	EcommerceCancelAnOrderV1WithBody(ctx context.Context, storeId string, orderId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceCancelAnOrderV1 Cancel an order
+	//
+	// Cancel the order and optionally email the customer. Returns the updated order summary.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/orders/{order_id}/cancel (the `EcommerceCancelAnOrderV1` operationId).
+	EcommerceCancelAnOrderV1(ctx context.Context, storeId string, orderId string, body EcommerceCancelAnOrderV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceFulfilAnOrderV1WithBody Fulfil an order
+	//
+	// Create a fulfilment for the order and attach tracking in one call. Omit items to fulfil
+	// every remaining unfulfilled item. Returns the updated order summary.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/orders/{order_id}/fulfill (the `EcommerceFulfilAnOrderV1` operationId).
+	EcommerceFulfilAnOrderV1WithBody(ctx context.Context, storeId string, orderId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceFulfilAnOrderV1 Fulfil an order
+	//
+	// Create a fulfilment for the order and attach tracking in one call. Omit items to fulfil
+	// every remaining unfulfilled item. Returns the updated order summary.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/orders/{order_id}/fulfill (the `EcommerceFulfilAnOrderV1` operationId).
+	EcommerceFulfilAnOrderV1(ctx context.Context, storeId string, orderId string, body EcommerceFulfilAnOrderV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// EcommerceEnableManualPaymentMethodV1WithBody Enable manual payment method
 	//
@@ -16948,6 +18373,32 @@ type ClientInterface interface {
 	//
 	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/payment-methods/manual (the `EcommerceEnableManualPaymentMethodV1` operationId).
 	EcommerceEnableManualPaymentMethodV1(ctx context.Context, storeId string, body EcommerceEnableManualPaymentMethodV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceListStorePaymentProvidersV1 List store payment providers
+	//
+	// List a store's payment providers, split into providers already connected to the store and
+	// gateways available to install. Never exposes gateway credentials, secrets, or configuration.
+	//
+	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/payment-providers (the `EcommerceListStorePaymentProvidersV1` operationId).
+	EcommerceListStorePaymentProvidersV1(ctx context.Context, storeId string, params *EcommerceListStorePaymentProvidersV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceCreateAPaymentProviderConnectLinkV1 Create a payment provider connect link
+	//
+	// Create an onboarding link for connecting a payment gateway to the store. Returns the gateway
+	// onboarding URL for the merchant to open and a deep-link into the store admin.
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/payment-providers/{provider_id}/connect-link (the `EcommerceCreateAPaymentProviderConnectLinkV1` operationId).
+	EcommerceCreateAPaymentProviderConnectLinkV1(ctx context.Context, storeId string, providerId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceListProductsV1 List products
+	//
+	// List a store's products newest first as lean summaries (name, status, thumbnail, variant
+	// count and price range). Prices are integers in the smallest currency unit and live on
+	// variants. Filter by status, free text or a set of product ids. Use include=variants to
+	// embed each product's variants with prices and inventory, and include=media to embed its media.
+	//
+	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/products (the `EcommerceListProductsV1` operationId).
+	EcommerceListProductsV1(ctx context.Context, storeId string, params *EcommerceListProductsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// EcommerceCreateDigitalProductV1WithBody Create digital product
 	//
@@ -16985,6 +18436,36 @@ type ClientInterface interface {
 	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/physical (the `EcommerceCreatePhysicalProductV1` operationId).
 	EcommerceCreatePhysicalProductV1(ctx context.Context, storeId string, body EcommerceCreatePhysicalProductV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// EcommerceDeleteAProductV1 Delete a product
+	//
+	// Delete a product and its variants from the store. A subscription product with active
+	// subscribers is archived instead of deleted so its data stays available.
+	//
+	// Corresponds with DELETE /api/ecommerce/v1/stores/{store_id}/products/{product_id} (the `EcommerceDeleteAProductV1` operationId).
+	EcommerceDeleteAProductV1(ctx context.Context, storeId string, productId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceUpdateAProductV1WithBody Update a product
+	//
+	// Update a product's name, description or status. Set status to published to make it buyable,
+	// draft to hide it, or archived to retire it. Variants, prices and inventory are managed
+	// through the variant endpoints, not here. Returns the updated product summary.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PATCH /api/ecommerce/v1/stores/{store_id}/products/{product_id} (the `EcommerceUpdateAProductV1` operationId).
+	EcommerceUpdateAProductV1WithBody(ctx context.Context, storeId string, productId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceUpdateAProductV1 Update a product
+	//
+	// Update a product's name, description or status. Set status to published to make it buyable,
+	// draft to hide it, or archived to retire it. Variants, prices and inventory are managed
+	// through the variant endpoints, not here. Returns the updated product summary.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PATCH /api/ecommerce/v1/stores/{store_id}/products/{product_id} (the `EcommerceUpdateAProductV1` operationId).
+	EcommerceUpdateAProductV1(ctx context.Context, storeId string, productId string, body EcommerceUpdateAProductV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// EcommerceUploadAndAttachAProductImageV1WithBody Upload and attach a product image
 	//
 	// Fetch a raster image (JPEG, PNG, GIF or WebP, max 15MB) from a URL and attach it to a product in a
@@ -17015,6 +18496,67 @@ type ClientInterface interface {
 	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/images/upload-url (the `EcommerceCreateAProductImageUploadURLV1` operationId).
 	EcommerceCreateAProductImageUploadURLV1(ctx context.Context, storeId string, productId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// EcommerceListProductVariantsV1 List product variants
+	//
+	// List a product's variants, ordered by rank, with their options, prices and inventory.
+	// Prices are integers in the smallest currency unit and live on variants.
+	//
+	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants (the `EcommerceListProductVariantsV1` operationId).
+	EcommerceListProductVariantsV1(ctx context.Context, storeId string, productId string, params *EcommerceListProductVariantsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceCreateAProductVariantV1WithBody Create a product variant
+	//
+	// Add a variant to a product along one or more option dimensions (e.g. Size, Color). Options
+	// missing from the product are created automatically; provide a value for every option the
+	// product already has. Prices are integers in the smallest currency unit and default to the
+	// store currency. Returns the created variant.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants (the `EcommerceCreateAProductVariantV1` operationId).
+	EcommerceCreateAProductVariantV1WithBody(ctx context.Context, storeId string, productId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceCreateAProductVariantV1 Create a product variant
+	//
+	// Add a variant to a product along one or more option dimensions (e.g. Size, Color). Options
+	// missing from the product are created automatically; provide a value for every option the
+	// product already has. Prices are integers in the smallest currency unit and default to the
+	// store currency. Returns the created variant.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants (the `EcommerceCreateAProductVariantV1` operationId).
+	EcommerceCreateAProductVariantV1(ctx context.Context, storeId string, productId string, body EcommerceCreateAProductVariantV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceUpdateProductVariantsInBatchV1WithBody Update product variants in batch
+	//
+	// Update up to 100 existing variants in place by id — title, inventory, stock tracking and
+	// prices. Variants omitted from the request are left untouched. Prices replace the variant's
+	// existing prices in full. Returns the updated variants.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PATCH /api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants/batch (the `EcommerceUpdateProductVariantsInBatchV1` operationId).
+	EcommerceUpdateProductVariantsInBatchV1WithBody(ctx context.Context, storeId string, productId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceUpdateProductVariantsInBatchV1 Update product variants in batch
+	//
+	// Update up to 100 existing variants in place by id — title, inventory, stock tracking and
+	// prices. Variants omitted from the request are left untouched. Prices replace the variant's
+	// existing prices in full. Returns the updated variants.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PATCH /api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants/batch (the `EcommerceUpdateProductVariantsInBatchV1` operationId).
+	EcommerceUpdateProductVariantsInBatchV1(ctx context.Context, storeId string, productId string, body EcommerceUpdateProductVariantsInBatchV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceDeleteAProductVariantV1 Delete a product variant
+	//
+	// Delete a single variant from the product.
+	//
+	// Corresponds with DELETE /api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants/{variant_id} (the `EcommerceDeleteAProductVariantV1` operationId).
+	EcommerceDeleteAProductVariantV1(ctx context.Context, storeId string, productId string, variantId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// EcommerceListSalesChannelsV1 List sales channels
 	//
 	// List a store's active sales channels with their full metadata.
@@ -17022,25 +18564,27 @@ type ClientInterface interface {
 	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/sales-channels (the `EcommerceListSalesChannelsV1` operationId).
 	EcommerceListSalesChannelsV1(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// EcommerceCreateCustomSalesChannelV1WithBody Create custom sales channel
+	// EcommerceCreateASalesChannelV1WithBody Create a sales channel
 	//
-	// Create a custom sales channel for a store. Build your own frontend and keep your catalog,
-	// orders, shipping and payments in sync through the Ecommerce API.
+	// Create a sales channel for a store. A "custom" channel is headless: build your own frontend and keep
+	// your catalog, orders, shipping and payments in sync through the Ecommerce API. A "quick-link" channel
+	// is a hosted one-page store whose handle is auto-generated.
 	//
 	// Takes any type of body and a specified content type.
 	//
-	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/sales-channels (the `EcommerceCreateCustomSalesChannelV1` operationId).
-	EcommerceCreateCustomSalesChannelV1WithBody(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/sales-channels (the `EcommerceCreateASalesChannelV1` operationId).
+	EcommerceCreateASalesChannelV1WithBody(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// EcommerceCreateCustomSalesChannelV1 Create custom sales channel
+	// EcommerceCreateASalesChannelV1 Create a sales channel
 	//
-	// Create a custom sales channel for a store. Build your own frontend and keep your catalog,
-	// orders, shipping and payments in sync through the Ecommerce API.
+	// Create a sales channel for a store. A "custom" channel is headless: build your own frontend and keep
+	// your catalog, orders, shipping and payments in sync through the Ecommerce API. A "quick-link" channel
+	// is a hosted one-page store whose handle is auto-generated.
 	//
 	// Takes a body of the `application/json` content type.
 	//
-	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/sales-channels (the `EcommerceCreateCustomSalesChannelV1` operationId).
-	EcommerceCreateCustomSalesChannelV1(ctx context.Context, storeId string, body EcommerceCreateCustomSalesChannelV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/sales-channels (the `EcommerceCreateASalesChannelV1` operationId).
+	EcommerceCreateASalesChannelV1(ctx context.Context, storeId string, body EcommerceCreateASalesChannelV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// EcommerceUpdateSalesChannelV1WithBody Update sales channel
 	//
@@ -23987,6 +25531,67 @@ func (c *Client) EcommerceDeleteStoreV1(ctx context.Context, storeId string, req
 	return c.Client.Do(req)
 }
 
+// EcommerceListDiscountsV1 List discounts
+//
+// List a store's discounts. Filter by free text over code and name, or by disabled state.
+// Amounts for fixed discounts are integers in the smallest currency unit; percentage
+// discounts carry a whole-number value between 1 and 100.
+//
+// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/discounts (the `EcommerceListDiscountsV1` operationId).
+func (c *Client) EcommerceListDiscountsV1(ctx context.Context, storeId string, params *EcommerceListDiscountsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceListDiscountsV1Request(c.Server, storeId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceCreateADiscountV1WithBody Create a discount
+//
+// Create a discount for a store. Fixed discounts take an amount in the smallest currency
+// unit (e.g. $10 is 1000); percentage discounts take a whole-number value between 1 and 100.
+// Free-shipping discounts ignore value. Returns the created discount.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/discounts (the `EcommerceCreateADiscountV1` operationId).
+func (c *Client) EcommerceCreateADiscountV1WithBody(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceCreateADiscountV1RequestWithBody(c.Server, storeId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceCreateADiscountV1 Create a discount
+//
+// Create a discount for a store. Fixed discounts take an amount in the smallest currency
+// unit (e.g. $10 is 1000); percentage discounts take a whole-number value between 1 and 100.
+// Free-shipping discounts ignore value. Returns the created discount.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/discounts (the `EcommerceCreateADiscountV1` operationId).
+func (c *Client) EcommerceCreateADiscountV1(ctx context.Context, storeId string, body EcommerceCreateADiscountV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceCreateADiscountV1Request(c.Server, storeId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // EcommerceGetStoreMetadataV1 Get store metadata
 //
 // Get a store's readiness metadata: whether payment methods and shipping are configured,
@@ -23995,6 +25600,122 @@ func (c *Client) EcommerceDeleteStoreV1(ctx context.Context, storeId string, req
 // Corresponds with GET /api/ecommerce/v1/stores/{store_id}/metadata (the `EcommerceGetStoreMetadataV1` operationId).
 func (c *Client) EcommerceGetStoreMetadataV1(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewEcommerceGetStoreMetadataV1Request(c.Server, storeId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceListOrdersV1 List orders
+//
+// List a store's orders newest first as summaries. Filter by status, payment or fulfilment
+// status, customer email, order number or a free-text query. Amounts are in the smallest
+// currency unit. Retrieve a single order for its line items, addresses and fulfilments.
+//
+// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/orders (the `EcommerceListOrdersV1` operationId).
+func (c *Client) EcommerceListOrdersV1(ctx context.Context, storeId string, params *EcommerceListOrdersV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceListOrdersV1Request(c.Server, storeId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceRetrieveAnOrderV1 Retrieve an order
+//
+// Retrieve one order in full: line items (each with the id the fulfil endpoint needs),
+// addresses, the totals breakdown and fulfilments with tracking. Amounts are in the
+// smallest currency unit.
+//
+// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/orders/{order_id} (the `EcommerceRetrieveAnOrderV1` operationId).
+func (c *Client) EcommerceRetrieveAnOrderV1(ctx context.Context, storeId string, orderId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceRetrieveAnOrderV1Request(c.Server, storeId, orderId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceCancelAnOrderV1WithBody Cancel an order
+//
+// Cancel the order and optionally email the customer. Returns the updated order summary.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/orders/{order_id}/cancel (the `EcommerceCancelAnOrderV1` operationId).
+func (c *Client) EcommerceCancelAnOrderV1WithBody(ctx context.Context, storeId string, orderId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceCancelAnOrderV1RequestWithBody(c.Server, storeId, orderId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceCancelAnOrderV1 Cancel an order
+//
+// Cancel the order and optionally email the customer. Returns the updated order summary.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/orders/{order_id}/cancel (the `EcommerceCancelAnOrderV1` operationId).
+func (c *Client) EcommerceCancelAnOrderV1(ctx context.Context, storeId string, orderId string, body EcommerceCancelAnOrderV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceCancelAnOrderV1Request(c.Server, storeId, orderId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceFulfilAnOrderV1WithBody Fulfil an order
+//
+// Create a fulfilment for the order and attach tracking in one call. Omit items to fulfil
+// every remaining unfulfilled item. Returns the updated order summary.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/orders/{order_id}/fulfill (the `EcommerceFulfilAnOrderV1` operationId).
+func (c *Client) EcommerceFulfilAnOrderV1WithBody(ctx context.Context, storeId string, orderId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceFulfilAnOrderV1RequestWithBody(c.Server, storeId, orderId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceFulfilAnOrderV1 Fulfil an order
+//
+// Create a fulfilment for the order and attach tracking in one call. Omit items to fulfil
+// every remaining unfulfilled item. Returns the updated order summary.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/orders/{order_id}/fulfill (the `EcommerceFulfilAnOrderV1` operationId).
+func (c *Client) EcommerceFulfilAnOrderV1(ctx context.Context, storeId string, orderId string, body EcommerceFulfilAnOrderV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceFulfilAnOrderV1Request(c.Server, storeId, orderId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -24033,6 +25754,62 @@ func (c *Client) EcommerceEnableManualPaymentMethodV1WithBody(ctx context.Contex
 // Corresponds with POST /api/ecommerce/v1/stores/{store_id}/payment-methods/manual (the `EcommerceEnableManualPaymentMethodV1` operationId).
 func (c *Client) EcommerceEnableManualPaymentMethodV1(ctx context.Context, storeId string, body EcommerceEnableManualPaymentMethodV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewEcommerceEnableManualPaymentMethodV1Request(c.Server, storeId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceListStorePaymentProvidersV1 List store payment providers
+//
+// List a store's payment providers, split into providers already connected to the store and
+// gateways available to install. Never exposes gateway credentials, secrets, or configuration.
+//
+// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/payment-providers (the `EcommerceListStorePaymentProvidersV1` operationId).
+func (c *Client) EcommerceListStorePaymentProvidersV1(ctx context.Context, storeId string, params *EcommerceListStorePaymentProvidersV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceListStorePaymentProvidersV1Request(c.Server, storeId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceCreateAPaymentProviderConnectLinkV1 Create a payment provider connect link
+//
+// Create an onboarding link for connecting a payment gateway to the store. Returns the gateway
+// onboarding URL for the merchant to open and a deep-link into the store admin.
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/payment-providers/{provider_id}/connect-link (the `EcommerceCreateAPaymentProviderConnectLinkV1` operationId).
+func (c *Client) EcommerceCreateAPaymentProviderConnectLinkV1(ctx context.Context, storeId string, providerId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceCreateAPaymentProviderConnectLinkV1Request(c.Server, storeId, providerId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceListProductsV1 List products
+//
+// List a store's products newest first as lean summaries (name, status, thumbnail, variant
+// count and price range). Prices are integers in the smallest currency unit and live on
+// variants. Filter by status, free text or a set of product ids. Use include=variants to
+// embed each product's variants with prices and inventory, and include=media to embed its media.
+//
+// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/products (the `EcommerceListProductsV1` operationId).
+func (c *Client) EcommerceListProductsV1(ctx context.Context, storeId string, params *EcommerceListProductsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceListProductsV1Request(c.Server, storeId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -24119,6 +25896,66 @@ func (c *Client) EcommerceCreatePhysicalProductV1(ctx context.Context, storeId s
 	return c.Client.Do(req)
 }
 
+// EcommerceDeleteAProductV1 Delete a product
+//
+// Delete a product and its variants from the store. A subscription product with active
+// subscribers is archived instead of deleted so its data stays available.
+//
+// Corresponds with DELETE /api/ecommerce/v1/stores/{store_id}/products/{product_id} (the `EcommerceDeleteAProductV1` operationId).
+func (c *Client) EcommerceDeleteAProductV1(ctx context.Context, storeId string, productId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceDeleteAProductV1Request(c.Server, storeId, productId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceUpdateAProductV1WithBody Update a product
+//
+// Update a product's name, description or status. Set status to published to make it buyable,
+// draft to hide it, or archived to retire it. Variants, prices and inventory are managed
+// through the variant endpoints, not here. Returns the updated product summary.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PATCH /api/ecommerce/v1/stores/{store_id}/products/{product_id} (the `EcommerceUpdateAProductV1` operationId).
+func (c *Client) EcommerceUpdateAProductV1WithBody(ctx context.Context, storeId string, productId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceUpdateAProductV1RequestWithBody(c.Server, storeId, productId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceUpdateAProductV1 Update a product
+//
+// Update a product's name, description or status. Set status to published to make it buyable,
+// draft to hide it, or archived to retire it. Variants, prices and inventory are managed
+// through the variant endpoints, not here. Returns the updated product summary.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PATCH /api/ecommerce/v1/stores/{store_id}/products/{product_id} (the `EcommerceUpdateAProductV1` operationId).
+func (c *Client) EcommerceUpdateAProductV1(ctx context.Context, storeId string, productId string, body EcommerceUpdateAProductV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceUpdateAProductV1Request(c.Server, storeId, productId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // EcommerceUploadAndAttachAProductImageV1WithBody Upload and attach a product image
 //
 // Fetch a raster image (JPEG, PNG, GIF or WebP, max 15MB) from a URL and attach it to a product in a
@@ -24179,6 +26016,127 @@ func (c *Client) EcommerceCreateAProductImageUploadURLV1(ctx context.Context, st
 	return c.Client.Do(req)
 }
 
+// EcommerceListProductVariantsV1 List product variants
+//
+// List a product's variants, ordered by rank, with their options, prices and inventory.
+// Prices are integers in the smallest currency unit and live on variants.
+//
+// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants (the `EcommerceListProductVariantsV1` operationId).
+func (c *Client) EcommerceListProductVariantsV1(ctx context.Context, storeId string, productId string, params *EcommerceListProductVariantsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceListProductVariantsV1Request(c.Server, storeId, productId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceCreateAProductVariantV1WithBody Create a product variant
+//
+// Add a variant to a product along one or more option dimensions (e.g. Size, Color). Options
+// missing from the product are created automatically; provide a value for every option the
+// product already has. Prices are integers in the smallest currency unit and default to the
+// store currency. Returns the created variant.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants (the `EcommerceCreateAProductVariantV1` operationId).
+func (c *Client) EcommerceCreateAProductVariantV1WithBody(ctx context.Context, storeId string, productId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceCreateAProductVariantV1RequestWithBody(c.Server, storeId, productId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceCreateAProductVariantV1 Create a product variant
+//
+// Add a variant to a product along one or more option dimensions (e.g. Size, Color). Options
+// missing from the product are created automatically; provide a value for every option the
+// product already has. Prices are integers in the smallest currency unit and default to the
+// store currency. Returns the created variant.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants (the `EcommerceCreateAProductVariantV1` operationId).
+func (c *Client) EcommerceCreateAProductVariantV1(ctx context.Context, storeId string, productId string, body EcommerceCreateAProductVariantV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceCreateAProductVariantV1Request(c.Server, storeId, productId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceUpdateProductVariantsInBatchV1WithBody Update product variants in batch
+//
+// Update up to 100 existing variants in place by id — title, inventory, stock tracking and
+// prices. Variants omitted from the request are left untouched. Prices replace the variant's
+// existing prices in full. Returns the updated variants.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PATCH /api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants/batch (the `EcommerceUpdateProductVariantsInBatchV1` operationId).
+func (c *Client) EcommerceUpdateProductVariantsInBatchV1WithBody(ctx context.Context, storeId string, productId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceUpdateProductVariantsInBatchV1RequestWithBody(c.Server, storeId, productId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceUpdateProductVariantsInBatchV1 Update product variants in batch
+//
+// Update up to 100 existing variants in place by id — title, inventory, stock tracking and
+// prices. Variants omitted from the request are left untouched. Prices replace the variant's
+// existing prices in full. Returns the updated variants.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PATCH /api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants/batch (the `EcommerceUpdateProductVariantsInBatchV1` operationId).
+func (c *Client) EcommerceUpdateProductVariantsInBatchV1(ctx context.Context, storeId string, productId string, body EcommerceUpdateProductVariantsInBatchV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceUpdateProductVariantsInBatchV1Request(c.Server, storeId, productId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceDeleteAProductVariantV1 Delete a product variant
+//
+// Delete a single variant from the product.
+//
+// Corresponds with DELETE /api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants/{variant_id} (the `EcommerceDeleteAProductVariantV1` operationId).
+func (c *Client) EcommerceDeleteAProductVariantV1(ctx context.Context, storeId string, productId string, variantId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceDeleteAProductVariantV1Request(c.Server, storeId, productId, variantId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // EcommerceListSalesChannelsV1 List sales channels
 //
 // List a store's active sales channels with their full metadata.
@@ -24196,16 +26154,17 @@ func (c *Client) EcommerceListSalesChannelsV1(ctx context.Context, storeId strin
 	return c.Client.Do(req)
 }
 
-// EcommerceCreateCustomSalesChannelV1WithBody Create custom sales channel
+// EcommerceCreateASalesChannelV1WithBody Create a sales channel
 //
-// Create a custom sales channel for a store. Build your own frontend and keep your catalog,
-// orders, shipping and payments in sync through the Ecommerce API.
+// Create a sales channel for a store. A "custom" channel is headless: build your own frontend and keep
+// your catalog, orders, shipping and payments in sync through the Ecommerce API. A "quick-link" channel
+// is a hosted one-page store whose handle is auto-generated.
 //
 // Takes any type of body and a specified content type.
 //
-// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/sales-channels (the `EcommerceCreateCustomSalesChannelV1` operationId).
-func (c *Client) EcommerceCreateCustomSalesChannelV1WithBody(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewEcommerceCreateCustomSalesChannelV1RequestWithBody(c.Server, storeId, contentType, body)
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/sales-channels (the `EcommerceCreateASalesChannelV1` operationId).
+func (c *Client) EcommerceCreateASalesChannelV1WithBody(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceCreateASalesChannelV1RequestWithBody(c.Server, storeId, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -24216,16 +26175,17 @@ func (c *Client) EcommerceCreateCustomSalesChannelV1WithBody(ctx context.Context
 	return c.Client.Do(req)
 }
 
-// EcommerceCreateCustomSalesChannelV1 Create custom sales channel
+// EcommerceCreateASalesChannelV1 Create a sales channel
 //
-// Create a custom sales channel for a store. Build your own frontend and keep your catalog,
-// orders, shipping and payments in sync through the Ecommerce API.
+// Create a sales channel for a store. A "custom" channel is headless: build your own frontend and keep
+// your catalog, orders, shipping and payments in sync through the Ecommerce API. A "quick-link" channel
+// is a hosted one-page store whose handle is auto-generated.
 //
 // Takes a body of the `application/json` content type.
 //
-// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/sales-channels (the `EcommerceCreateCustomSalesChannelV1` operationId).
-func (c *Client) EcommerceCreateCustomSalesChannelV1(ctx context.Context, storeId string, body EcommerceCreateCustomSalesChannelV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewEcommerceCreateCustomSalesChannelV1Request(c.Server, storeId, body)
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/sales-channels (the `EcommerceCreateASalesChannelV1` operationId).
+func (c *Client) EcommerceCreateASalesChannelV1(ctx context.Context, storeId string, body EcommerceCreateASalesChannelV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceCreateASalesChannelV1Request(c.Server, storeId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -35487,6 +37447,138 @@ func NewEcommerceDeleteStoreV1Request(server string, storeId string) (*http.Requ
 	return req, nil
 }
 
+// NewEcommerceListDiscountsV1Request constructs an http.Request for the EcommerceListDiscountsV1 method
+func NewEcommerceListDiscountsV1Request(server string, storeId string, params *EcommerceListDiscountsV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/discounts", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Q != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "q", *params.Q, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.IsDisabled != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "is_disabled", *params.IsDisabled, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Page != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page", *params.Page, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewEcommerceCreateADiscountV1Request calls the generic EcommerceCreateADiscountV1 builder with application/json body
+func NewEcommerceCreateADiscountV1Request(server string, storeId string, body EcommerceCreateADiscountV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewEcommerceCreateADiscountV1RequestWithBody(server, storeId, "application/json", bodyReader)
+}
+
+// NewEcommerceCreateADiscountV1RequestWithBody constructs an http.Request for the EcommerceCreateADiscountV1 method, with any body, and a specified content type
+func NewEcommerceCreateADiscountV1RequestWithBody(server string, storeId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/discounts", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewEcommerceGetStoreMetadataV1Request constructs an http.Request for the EcommerceGetStoreMetadataV1 method
 func NewEcommerceGetStoreMetadataV1Request(server string, storeId string) (*http.Request, error) {
 	var err error
@@ -35517,6 +37609,312 @@ func NewEcommerceGetStoreMetadataV1Request(server string, storeId string) (*http
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewEcommerceListOrdersV1Request constructs an http.Request for the EcommerceListOrdersV1 method
+func NewEcommerceListOrdersV1Request(server string, storeId string, params *EcommerceListOrdersV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/orders", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Status != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "status", *params.Status, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "array", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PaymentStatus != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "payment_status", *params.PaymentStatus, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "array", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FulfillmentStatus != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "fulfillment_status", *params.FulfillmentStatus, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "array", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Email != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "email", *params.Email, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.DisplayId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "display_id", *params.DisplayId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Q != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "q", *params.Q, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.CreatedAtFrom != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "created_at_from", *params.CreatedAtFrom, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.CreatedAtTo != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "created_at_to", *params.CreatedAtTo, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Page != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page", *params.Page, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewEcommerceRetrieveAnOrderV1Request constructs an http.Request for the EcommerceRetrieveAnOrderV1 method
+func NewEcommerceRetrieveAnOrderV1Request(server string, storeId string, orderId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "order_id", orderId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/orders/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewEcommerceCancelAnOrderV1Request calls the generic EcommerceCancelAnOrderV1 builder with application/json body
+func NewEcommerceCancelAnOrderV1Request(server string, storeId string, orderId string, body EcommerceCancelAnOrderV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewEcommerceCancelAnOrderV1RequestWithBody(server, storeId, orderId, "application/json", bodyReader)
+}
+
+// NewEcommerceCancelAnOrderV1RequestWithBody constructs an http.Request for the EcommerceCancelAnOrderV1 method, with any body, and a specified content type
+func NewEcommerceCancelAnOrderV1RequestWithBody(server string, storeId string, orderId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "order_id", orderId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/orders/%s/cancel", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewEcommerceFulfilAnOrderV1Request calls the generic EcommerceFulfilAnOrderV1 builder with application/json body
+func NewEcommerceFulfilAnOrderV1Request(server string, storeId string, orderId string, body EcommerceFulfilAnOrderV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewEcommerceFulfilAnOrderV1RequestWithBody(server, storeId, orderId, "application/json", bodyReader)
+}
+
+// NewEcommerceFulfilAnOrderV1RequestWithBody constructs an http.Request for the EcommerceFulfilAnOrderV1 method, with any body, and a specified content type
+func NewEcommerceFulfilAnOrderV1RequestWithBody(server string, storeId string, orderId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "order_id", orderId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/orders/%s/fulfill", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -35564,6 +37962,217 @@ func NewEcommerceEnableManualPaymentMethodV1RequestWithBody(server string, store
 	}
 
 	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewEcommerceListStorePaymentProvidersV1Request constructs an http.Request for the EcommerceListStorePaymentProvidersV1 method
+func NewEcommerceListStorePaymentProvidersV1Request(server string, storeId string, params *EcommerceListStorePaymentProvidersV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/payment-providers", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.IncludeCurrencyUnsupported != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "include_currency_unsupported", *params.IncludeCurrencyUnsupported, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "boolean", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewEcommerceCreateAPaymentProviderConnectLinkV1Request constructs an http.Request for the EcommerceCreateAPaymentProviderConnectLinkV1 method
+func NewEcommerceCreateAPaymentProviderConnectLinkV1Request(server string, storeId string, providerId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "provider_id", providerId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/payment-providers/%s/connect-link", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewEcommerceListProductsV1Request constructs an http.Request for the EcommerceListProductsV1 method
+func NewEcommerceListProductsV1Request(server string, storeId string, params *EcommerceListProductsV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/products", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.ProductIds != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "product_ids", *params.ProductIds, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "array", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Status != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "status", *params.Status, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "array", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Q != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "q", *params.Q, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Include != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "include", *params.Include, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "array", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Page != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page", *params.Page, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 
 	return req, nil
 }
@@ -35653,6 +38262,101 @@ func NewEcommerceCreatePhysicalProductV1RequestWithBody(server string, storeId s
 	}
 
 	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewEcommerceDeleteAProductV1Request constructs an http.Request for the EcommerceDeleteAProductV1 method
+func NewEcommerceDeleteAProductV1Request(server string, storeId string, productId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "product_id", productId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/products/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewEcommerceUpdateAProductV1Request calls the generic EcommerceUpdateAProductV1 builder with application/json body
+func NewEcommerceUpdateAProductV1Request(server string, storeId string, productId string, body EcommerceUpdateAProductV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewEcommerceUpdateAProductV1RequestWithBody(server, storeId, productId, "application/json", bodyReader)
+}
+
+// NewEcommerceUpdateAProductV1RequestWithBody constructs an http.Request for the EcommerceUpdateAProductV1 method, with any body, and a specified content type
+func NewEcommerceUpdateAProductV1RequestWithBody(server string, storeId string, productId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "product_id", productId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/products/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -35757,6 +38461,230 @@ func NewEcommerceCreateAProductImageUploadURLV1Request(server string, storeId st
 	return req, nil
 }
 
+// NewEcommerceListProductVariantsV1Request constructs an http.Request for the EcommerceListProductVariantsV1 method
+func NewEcommerceListProductVariantsV1Request(server string, storeId string, productId string, params *EcommerceListProductVariantsV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "product_id", productId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/products/%s/variants", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Page != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page", *params.Page, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewEcommerceCreateAProductVariantV1Request calls the generic EcommerceCreateAProductVariantV1 builder with application/json body
+func NewEcommerceCreateAProductVariantV1Request(server string, storeId string, productId string, body EcommerceCreateAProductVariantV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewEcommerceCreateAProductVariantV1RequestWithBody(server, storeId, productId, "application/json", bodyReader)
+}
+
+// NewEcommerceCreateAProductVariantV1RequestWithBody constructs an http.Request for the EcommerceCreateAProductVariantV1 method, with any body, and a specified content type
+func NewEcommerceCreateAProductVariantV1RequestWithBody(server string, storeId string, productId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "product_id", productId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/products/%s/variants", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewEcommerceUpdateProductVariantsInBatchV1Request calls the generic EcommerceUpdateProductVariantsInBatchV1 builder with application/json body
+func NewEcommerceUpdateProductVariantsInBatchV1Request(server string, storeId string, productId string, body EcommerceUpdateProductVariantsInBatchV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewEcommerceUpdateProductVariantsInBatchV1RequestWithBody(server, storeId, productId, "application/json", bodyReader)
+}
+
+// NewEcommerceUpdateProductVariantsInBatchV1RequestWithBody constructs an http.Request for the EcommerceUpdateProductVariantsInBatchV1 method, with any body, and a specified content type
+func NewEcommerceUpdateProductVariantsInBatchV1RequestWithBody(server string, storeId string, productId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "product_id", productId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/products/%s/variants/batch", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewEcommerceDeleteAProductVariantV1Request constructs an http.Request for the EcommerceDeleteAProductVariantV1 method
+func NewEcommerceDeleteAProductVariantV1Request(server string, storeId string, productId string, variantId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "product_id", productId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam2 string
+
+	pathParam2, err = runtime.StyleParamWithOptions("simple", false, "variant_id", variantId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/products/%s/variants/%s", pathParam0, pathParam1, pathParam2)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewEcommerceListSalesChannelsV1Request constructs an http.Request for the EcommerceListSalesChannelsV1 method
 func NewEcommerceListSalesChannelsV1Request(server string, storeId string) (*http.Request, error) {
 	var err error
@@ -35791,19 +38719,19 @@ func NewEcommerceListSalesChannelsV1Request(server string, storeId string) (*htt
 	return req, nil
 }
 
-// NewEcommerceCreateCustomSalesChannelV1Request calls the generic EcommerceCreateCustomSalesChannelV1 builder with application/json body
-func NewEcommerceCreateCustomSalesChannelV1Request(server string, storeId string, body EcommerceCreateCustomSalesChannelV1JSONRequestBody) (*http.Request, error) {
+// NewEcommerceCreateASalesChannelV1Request calls the generic EcommerceCreateASalesChannelV1 builder with application/json body
+func NewEcommerceCreateASalesChannelV1Request(server string, storeId string, body EcommerceCreateASalesChannelV1JSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewEcommerceCreateCustomSalesChannelV1RequestWithBody(server, storeId, "application/json", bodyReader)
+	return NewEcommerceCreateASalesChannelV1RequestWithBody(server, storeId, "application/json", bodyReader)
 }
 
-// NewEcommerceCreateCustomSalesChannelV1RequestWithBody constructs an http.Request for the EcommerceCreateCustomSalesChannelV1 method, with any body, and a specified content type
-func NewEcommerceCreateCustomSalesChannelV1RequestWithBody(server string, storeId string, contentType string, body io.Reader) (*http.Request, error) {
+// NewEcommerceCreateASalesChannelV1RequestWithBody constructs an http.Request for the EcommerceCreateASalesChannelV1 method, with any body, and a specified content type
+func NewEcommerceCreateASalesChannelV1RequestWithBody(server string, storeId string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -49822,6 +52750,39 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with DELETE /api/ecommerce/v1/stores/{store_id} (the `EcommerceDeleteStoreV1` operationId).
 	EcommerceDeleteStoreV1WithResponse(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*EcommerceDeleteStoreV1Response, error)
 
+	// EcommerceListDiscountsV1WithResponse List discounts
+	//
+	// List a store's discounts. Filter by free text over code and name, or by disabled state.
+	// Amounts for fixed discounts are integers in the smallest currency unit; percentage
+	// discounts carry a whole-number value between 1 and 100.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/discounts (the `EcommerceListDiscountsV1` operationId).
+	EcommerceListDiscountsV1WithResponse(ctx context.Context, storeId string, params *EcommerceListDiscountsV1Params, reqEditors ...RequestEditorFn) (*EcommerceListDiscountsV1Response, error)
+
+	// EcommerceCreateADiscountV1WithBodyWithResponse Create a discount
+	//
+	// Create a discount for a store. Fixed discounts take an amount in the smallest currency
+	// unit (e.g. $10 is 1000); percentage discounts take a whole-number value between 1 and 100.
+	// Free-shipping discounts ignore value. Returns the created discount.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/discounts (the `EcommerceCreateADiscountV1` operationId).
+	EcommerceCreateADiscountV1WithBodyWithResponse(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceCreateADiscountV1Response, error)
+
+	// EcommerceCreateADiscountV1WithResponse Create a discount
+	//
+	// Create a discount for a store. Fixed discounts take an amount in the smallest currency
+	// unit (e.g. $10 is 1000); percentage discounts take a whole-number value between 1 and 100.
+	// Free-shipping discounts ignore value. Returns the created discount.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/discounts (the `EcommerceCreateADiscountV1` operationId).
+	EcommerceCreateADiscountV1WithResponse(ctx context.Context, storeId string, body EcommerceCreateADiscountV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceCreateADiscountV1Response, error)
+
 	// EcommerceGetStoreMetadataV1WithResponse Get store metadata
 	//
 	// Get a store's readiness metadata: whether payment methods and shipping are configured,
@@ -49831,6 +52792,66 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/metadata (the `EcommerceGetStoreMetadataV1` operationId).
 	EcommerceGetStoreMetadataV1WithResponse(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*EcommerceGetStoreMetadataV1Response, error)
+
+	// EcommerceListOrdersV1WithResponse List orders
+	//
+	// List a store's orders newest first as summaries. Filter by status, payment or fulfilment
+	// status, customer email, order number or a free-text query. Amounts are in the smallest
+	// currency unit. Retrieve a single order for its line items, addresses and fulfilments.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/orders (the `EcommerceListOrdersV1` operationId).
+	EcommerceListOrdersV1WithResponse(ctx context.Context, storeId string, params *EcommerceListOrdersV1Params, reqEditors ...RequestEditorFn) (*EcommerceListOrdersV1Response, error)
+
+	// EcommerceRetrieveAnOrderV1WithResponse Retrieve an order
+	//
+	// Retrieve one order in full: line items (each with the id the fulfil endpoint needs),
+	// addresses, the totals breakdown and fulfilments with tracking. Amounts are in the
+	// smallest currency unit.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/orders/{order_id} (the `EcommerceRetrieveAnOrderV1` operationId).
+	EcommerceRetrieveAnOrderV1WithResponse(ctx context.Context, storeId string, orderId string, reqEditors ...RequestEditorFn) (*EcommerceRetrieveAnOrderV1Response, error)
+
+	// EcommerceCancelAnOrderV1WithBodyWithResponse Cancel an order
+	//
+	// Cancel the order and optionally email the customer. Returns the updated order summary.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/orders/{order_id}/cancel (the `EcommerceCancelAnOrderV1` operationId).
+	EcommerceCancelAnOrderV1WithBodyWithResponse(ctx context.Context, storeId string, orderId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceCancelAnOrderV1Response, error)
+
+	// EcommerceCancelAnOrderV1WithResponse Cancel an order
+	//
+	// Cancel the order and optionally email the customer. Returns the updated order summary.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/orders/{order_id}/cancel (the `EcommerceCancelAnOrderV1` operationId).
+	EcommerceCancelAnOrderV1WithResponse(ctx context.Context, storeId string, orderId string, body EcommerceCancelAnOrderV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceCancelAnOrderV1Response, error)
+
+	// EcommerceFulfilAnOrderV1WithBodyWithResponse Fulfil an order
+	//
+	// Create a fulfilment for the order and attach tracking in one call. Omit items to fulfil
+	// every remaining unfulfilled item. Returns the updated order summary.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/orders/{order_id}/fulfill (the `EcommerceFulfilAnOrderV1` operationId).
+	EcommerceFulfilAnOrderV1WithBodyWithResponse(ctx context.Context, storeId string, orderId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceFulfilAnOrderV1Response, error)
+
+	// EcommerceFulfilAnOrderV1WithResponse Fulfil an order
+	//
+	// Create a fulfilment for the order and attach tracking in one call. Omit items to fulfil
+	// every remaining unfulfilled item. Returns the updated order summary.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/orders/{order_id}/fulfill (the `EcommerceFulfilAnOrderV1` operationId).
+	EcommerceFulfilAnOrderV1WithResponse(ctx context.Context, storeId string, orderId string, body EcommerceFulfilAnOrderV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceFulfilAnOrderV1Response, error)
 
 	// EcommerceEnableManualPaymentMethodV1WithBodyWithResponse Enable manual payment method
 	//
@@ -49849,6 +52870,38 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/payment-methods/manual (the `EcommerceEnableManualPaymentMethodV1` operationId).
 	EcommerceEnableManualPaymentMethodV1WithResponse(ctx context.Context, storeId string, body EcommerceEnableManualPaymentMethodV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceEnableManualPaymentMethodV1Response, error)
+
+	// EcommerceListStorePaymentProvidersV1WithResponse List store payment providers
+	//
+	// List a store's payment providers, split into providers already connected to the store and
+	// gateways available to install. Never exposes gateway credentials, secrets, or configuration.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/payment-providers (the `EcommerceListStorePaymentProvidersV1` operationId).
+	EcommerceListStorePaymentProvidersV1WithResponse(ctx context.Context, storeId string, params *EcommerceListStorePaymentProvidersV1Params, reqEditors ...RequestEditorFn) (*EcommerceListStorePaymentProvidersV1Response, error)
+
+	// EcommerceCreateAPaymentProviderConnectLinkV1WithResponse Create a payment provider connect link
+	//
+	// Create an onboarding link for connecting a payment gateway to the store. Returns the gateway
+	// onboarding URL for the merchant to open and a deep-link into the store admin.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/payment-providers/{provider_id}/connect-link (the `EcommerceCreateAPaymentProviderConnectLinkV1` operationId).
+	EcommerceCreateAPaymentProviderConnectLinkV1WithResponse(ctx context.Context, storeId string, providerId string, reqEditors ...RequestEditorFn) (*EcommerceCreateAPaymentProviderConnectLinkV1Response, error)
+
+	// EcommerceListProductsV1WithResponse List products
+	//
+	// List a store's products newest first as lean summaries (name, status, thumbnail, variant
+	// count and price range). Prices are integers in the smallest currency unit and live on
+	// variants. Filter by status, free text or a set of product ids. Use include=variants to
+	// embed each product's variants with prices and inventory, and include=media to embed its media.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/products (the `EcommerceListProductsV1` operationId).
+	EcommerceListProductsV1WithResponse(ctx context.Context, storeId string, params *EcommerceListProductsV1Params, reqEditors ...RequestEditorFn) (*EcommerceListProductsV1Response, error)
 
 	// EcommerceCreateDigitalProductV1WithBodyWithResponse Create digital product
 	//
@@ -49886,6 +52939,38 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/physical (the `EcommerceCreatePhysicalProductV1` operationId).
 	EcommerceCreatePhysicalProductV1WithResponse(ctx context.Context, storeId string, body EcommerceCreatePhysicalProductV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceCreatePhysicalProductV1Response, error)
 
+	// EcommerceDeleteAProductV1WithResponse Delete a product
+	//
+	// Delete a product and its variants from the store. A subscription product with active
+	// subscribers is archived instead of deleted so its data stays available.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/ecommerce/v1/stores/{store_id}/products/{product_id} (the `EcommerceDeleteAProductV1` operationId).
+	EcommerceDeleteAProductV1WithResponse(ctx context.Context, storeId string, productId string, reqEditors ...RequestEditorFn) (*EcommerceDeleteAProductV1Response, error)
+
+	// EcommerceUpdateAProductV1WithBodyWithResponse Update a product
+	//
+	// Update a product's name, description or status. Set status to published to make it buyable,
+	// draft to hide it, or archived to retire it. Variants, prices and inventory are managed
+	// through the variant endpoints, not here. Returns the updated product summary.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/ecommerce/v1/stores/{store_id}/products/{product_id} (the `EcommerceUpdateAProductV1` operationId).
+	EcommerceUpdateAProductV1WithBodyWithResponse(ctx context.Context, storeId string, productId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceUpdateAProductV1Response, error)
+
+	// EcommerceUpdateAProductV1WithResponse Update a product
+	//
+	// Update a product's name, description or status. Set status to published to make it buyable,
+	// draft to hide it, or archived to retire it. Variants, prices and inventory are managed
+	// through the variant endpoints, not here. Returns the updated product summary.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/ecommerce/v1/stores/{store_id}/products/{product_id} (the `EcommerceUpdateAProductV1` operationId).
+	EcommerceUpdateAProductV1WithResponse(ctx context.Context, storeId string, productId string, body EcommerceUpdateAProductV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceUpdateAProductV1Response, error)
+
 	// EcommerceUploadAndAttachAProductImageV1WithBodyWithResponse Upload and attach a product image
 	//
 	// Fetch a raster image (JPEG, PNG, GIF or WebP, max 15MB) from a URL and attach it to a product in a
@@ -49918,6 +53003,71 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/images/upload-url (the `EcommerceCreateAProductImageUploadURLV1` operationId).
 	EcommerceCreateAProductImageUploadURLV1WithResponse(ctx context.Context, storeId string, productId string, reqEditors ...RequestEditorFn) (*EcommerceCreateAProductImageUploadURLV1Response, error)
 
+	// EcommerceListProductVariantsV1WithResponse List product variants
+	//
+	// List a product's variants, ordered by rank, with their options, prices and inventory.
+	// Prices are integers in the smallest currency unit and live on variants.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants (the `EcommerceListProductVariantsV1` operationId).
+	EcommerceListProductVariantsV1WithResponse(ctx context.Context, storeId string, productId string, params *EcommerceListProductVariantsV1Params, reqEditors ...RequestEditorFn) (*EcommerceListProductVariantsV1Response, error)
+
+	// EcommerceCreateAProductVariantV1WithBodyWithResponse Create a product variant
+	//
+	// Add a variant to a product along one or more option dimensions (e.g. Size, Color). Options
+	// missing from the product are created automatically; provide a value for every option the
+	// product already has. Prices are integers in the smallest currency unit and default to the
+	// store currency. Returns the created variant.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants (the `EcommerceCreateAProductVariantV1` operationId).
+	EcommerceCreateAProductVariantV1WithBodyWithResponse(ctx context.Context, storeId string, productId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceCreateAProductVariantV1Response, error)
+
+	// EcommerceCreateAProductVariantV1WithResponse Create a product variant
+	//
+	// Add a variant to a product along one or more option dimensions (e.g. Size, Color). Options
+	// missing from the product are created automatically; provide a value for every option the
+	// product already has. Prices are integers in the smallest currency unit and default to the
+	// store currency. Returns the created variant.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants (the `EcommerceCreateAProductVariantV1` operationId).
+	EcommerceCreateAProductVariantV1WithResponse(ctx context.Context, storeId string, productId string, body EcommerceCreateAProductVariantV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceCreateAProductVariantV1Response, error)
+
+	// EcommerceUpdateProductVariantsInBatchV1WithBodyWithResponse Update product variants in batch
+	//
+	// Update up to 100 existing variants in place by id — title, inventory, stock tracking and
+	// prices. Variants omitted from the request are left untouched. Prices replace the variant's
+	// existing prices in full. Returns the updated variants.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants/batch (the `EcommerceUpdateProductVariantsInBatchV1` operationId).
+	EcommerceUpdateProductVariantsInBatchV1WithBodyWithResponse(ctx context.Context, storeId string, productId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceUpdateProductVariantsInBatchV1Response, error)
+
+	// EcommerceUpdateProductVariantsInBatchV1WithResponse Update product variants in batch
+	//
+	// Update up to 100 existing variants in place by id — title, inventory, stock tracking and
+	// prices. Variants omitted from the request are left untouched. Prices replace the variant's
+	// existing prices in full. Returns the updated variants.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants/batch (the `EcommerceUpdateProductVariantsInBatchV1` operationId).
+	EcommerceUpdateProductVariantsInBatchV1WithResponse(ctx context.Context, storeId string, productId string, body EcommerceUpdateProductVariantsInBatchV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceUpdateProductVariantsInBatchV1Response, error)
+
+	// EcommerceDeleteAProductVariantV1WithResponse Delete a product variant
+	//
+	// Delete a single variant from the product.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants/{variant_id} (the `EcommerceDeleteAProductVariantV1` operationId).
+	EcommerceDeleteAProductVariantV1WithResponse(ctx context.Context, storeId string, productId string, variantId string, reqEditors ...RequestEditorFn) (*EcommerceDeleteAProductVariantV1Response, error)
+
 	// EcommerceListSalesChannelsV1WithResponse List sales channels
 	//
 	// List a store's active sales channels with their full metadata.
@@ -49927,25 +53077,27 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/sales-channels (the `EcommerceListSalesChannelsV1` operationId).
 	EcommerceListSalesChannelsV1WithResponse(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*EcommerceListSalesChannelsV1Response, error)
 
-	// EcommerceCreateCustomSalesChannelV1WithBodyWithResponse Create custom sales channel
+	// EcommerceCreateASalesChannelV1WithBodyWithResponse Create a sales channel
 	//
-	// Create a custom sales channel for a store. Build your own frontend and keep your catalog,
-	// orders, shipping and payments in sync through the Ecommerce API.
+	// Create a sales channel for a store. A "custom" channel is headless: build your own frontend and keep
+	// your catalog, orders, shipping and payments in sync through the Ecommerce API. A "quick-link" channel
+	// is a hosted one-page store whose handle is auto-generated.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/sales-channels (the `EcommerceCreateCustomSalesChannelV1` operationId).
-	EcommerceCreateCustomSalesChannelV1WithBodyWithResponse(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceCreateCustomSalesChannelV1Response, error)
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/sales-channels (the `EcommerceCreateASalesChannelV1` operationId).
+	EcommerceCreateASalesChannelV1WithBodyWithResponse(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceCreateASalesChannelV1Response, error)
 
-	// EcommerceCreateCustomSalesChannelV1WithResponse Create custom sales channel
+	// EcommerceCreateASalesChannelV1WithResponse Create a sales channel
 	//
-	// Create a custom sales channel for a store. Build your own frontend and keep your catalog,
-	// orders, shipping and payments in sync through the Ecommerce API.
+	// Create a sales channel for a store. A "custom" channel is headless: build your own frontend and keep
+	// your catalog, orders, shipping and payments in sync through the Ecommerce API. A "quick-link" channel
+	// is a hosted one-page store whose handle is auto-generated.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/sales-channels (the `EcommerceCreateCustomSalesChannelV1` operationId).
-	EcommerceCreateCustomSalesChannelV1WithResponse(ctx context.Context, storeId string, body EcommerceCreateCustomSalesChannelV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceCreateCustomSalesChannelV1Response, error)
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/sales-channels (the `EcommerceCreateASalesChannelV1` operationId).
+	EcommerceCreateASalesChannelV1WithResponse(ctx context.Context, storeId string, body EcommerceCreateASalesChannelV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceCreateASalesChannelV1Response, error)
 
 	// EcommerceUpdateSalesChannelV1WithBodyWithResponse Update sales channel
 	//
@@ -59880,6 +63032,131 @@ func (r EcommerceDeleteStoreV1Response) ContentType() string {
 	return ""
 }
 
+type EcommerceListDiscountsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *struct {
+		// Data Array of [`Ecommerce.V1.Discount.DiscountResource`](#model/ecommercev1discountdiscountresource)
+		Data *EcommerceV1DiscountDiscountCollection `json:"data,omitempty"`
+		Meta *CommonSchemaPaginationMetaSchema      `json:"meta,omitempty"`
+	}
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r EcommerceListDiscountsV1Response) GetJSON200() *struct {
+	// Data Array of [`Ecommerce.V1.Discount.DiscountResource`](#model/ecommercev1discountdiscountresource)
+	Data *EcommerceV1DiscountDiscountCollection `json:"data,omitempty"`
+	Meta *CommonSchemaPaginationMetaSchema      `json:"meta,omitempty"`
+} {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r EcommerceListDiscountsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r EcommerceListDiscountsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r EcommerceListDiscountsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceListDiscountsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceListDiscountsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceListDiscountsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type EcommerceCreateADiscountV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON201 the response for an HTTP 201 `application/json` response
+	JSON201 *EcommerceV1DiscountDiscountResponseResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON201 returns the response for an HTTP 201 `application/json` response
+func (r EcommerceCreateADiscountV1Response) GetJSON201() *EcommerceV1DiscountDiscountResponseResource {
+	return r.JSON201
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r EcommerceCreateADiscountV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r EcommerceCreateADiscountV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r EcommerceCreateADiscountV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r EcommerceCreateADiscountV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceCreateADiscountV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceCreateADiscountV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceCreateADiscountV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type EcommerceGetStoreMetadataV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -59929,6 +63206,248 @@ func (r EcommerceGetStoreMetadataV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r EcommerceGetStoreMetadataV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type EcommerceListOrdersV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *struct {
+		// Data Array of [`Ecommerce.V1.Order.OrderResource`](#model/ecommercev1orderorderresource)
+		Data *EcommerceV1OrderOrderCollection  `json:"data,omitempty"`
+		Meta *CommonSchemaPaginationMetaSchema `json:"meta,omitempty"`
+	}
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r EcommerceListOrdersV1Response) GetJSON200() *struct {
+	// Data Array of [`Ecommerce.V1.Order.OrderResource`](#model/ecommercev1orderorderresource)
+	Data *EcommerceV1OrderOrderCollection  `json:"data,omitempty"`
+	Meta *CommonSchemaPaginationMetaSchema `json:"meta,omitempty"`
+} {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r EcommerceListOrdersV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r EcommerceListOrdersV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r EcommerceListOrdersV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceListOrdersV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceListOrdersV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceListOrdersV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type EcommerceRetrieveAnOrderV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *EcommerceV1OrderOrderDetailResponseResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r EcommerceRetrieveAnOrderV1Response) GetJSON200() *EcommerceV1OrderOrderDetailResponseResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r EcommerceRetrieveAnOrderV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r EcommerceRetrieveAnOrderV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r EcommerceRetrieveAnOrderV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceRetrieveAnOrderV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceRetrieveAnOrderV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceRetrieveAnOrderV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type EcommerceCancelAnOrderV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *EcommerceV1OrderOrderResponseResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r EcommerceCancelAnOrderV1Response) GetJSON200() *EcommerceV1OrderOrderResponseResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r EcommerceCancelAnOrderV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r EcommerceCancelAnOrderV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r EcommerceCancelAnOrderV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r EcommerceCancelAnOrderV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceCancelAnOrderV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceCancelAnOrderV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceCancelAnOrderV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type EcommerceFulfilAnOrderV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *EcommerceV1OrderOrderResponseResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r EcommerceFulfilAnOrderV1Response) GetJSON200() *EcommerceV1OrderOrderResponseResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r EcommerceFulfilAnOrderV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r EcommerceFulfilAnOrderV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r EcommerceFulfilAnOrderV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r EcommerceFulfilAnOrderV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceFulfilAnOrderV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceFulfilAnOrderV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceFulfilAnOrderV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -59991,6 +63510,179 @@ func (r EcommerceEnableManualPaymentMethodV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r EcommerceEnableManualPaymentMethodV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type EcommerceListStorePaymentProvidersV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *EcommerceV1PaymentProviderPaymentProviderListResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r EcommerceListStorePaymentProvidersV1Response) GetJSON200() *EcommerceV1PaymentProviderPaymentProviderListResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r EcommerceListStorePaymentProvidersV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r EcommerceListStorePaymentProvidersV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r EcommerceListStorePaymentProvidersV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceListStorePaymentProvidersV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceListStorePaymentProvidersV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceListStorePaymentProvidersV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type EcommerceCreateAPaymentProviderConnectLinkV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON201 the response for an HTTP 201 `application/json` response
+	JSON201 *EcommerceV1PaymentProviderPaymentProviderConnectLinkResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON201 returns the response for an HTTP 201 `application/json` response
+func (r EcommerceCreateAPaymentProviderConnectLinkV1Response) GetJSON201() *EcommerceV1PaymentProviderPaymentProviderConnectLinkResource {
+	return r.JSON201
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r EcommerceCreateAPaymentProviderConnectLinkV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r EcommerceCreateAPaymentProviderConnectLinkV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r EcommerceCreateAPaymentProviderConnectLinkV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceCreateAPaymentProviderConnectLinkV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceCreateAPaymentProviderConnectLinkV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceCreateAPaymentProviderConnectLinkV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type EcommerceListProductsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *struct {
+		// Data Array of [`Ecommerce.V1.Product.ProductResource`](#model/ecommercev1productproductresource)
+		Data *EcommerceV1ProductProductCollection `json:"data,omitempty"`
+		Meta *CommonSchemaPaginationMetaSchema    `json:"meta,omitempty"`
+	}
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r EcommerceListProductsV1Response) GetJSON200() *struct {
+	// Data Array of [`Ecommerce.V1.Product.ProductResource`](#model/ecommercev1productproductresource)
+	Data *EcommerceV1ProductProductCollection `json:"data,omitempty"`
+	Meta *CommonSchemaPaginationMetaSchema    `json:"meta,omitempty"`
+} {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r EcommerceListProductsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r EcommerceListProductsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r EcommerceListProductsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceListProductsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceListProductsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceListProductsV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -60121,6 +63813,123 @@ func (r EcommerceCreatePhysicalProductV1Response) ContentType() string {
 	return ""
 }
 
+type EcommerceDeleteAProductV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *EcommerceV1ProductProductDeletedResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r EcommerceDeleteAProductV1Response) GetJSON200() *EcommerceV1ProductProductDeletedResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r EcommerceDeleteAProductV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r EcommerceDeleteAProductV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r EcommerceDeleteAProductV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceDeleteAProductV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceDeleteAProductV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceDeleteAProductV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type EcommerceUpdateAProductV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *EcommerceV1ProductProductResponseResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r EcommerceUpdateAProductV1Response) GetJSON200() *EcommerceV1ProductProductResponseResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r EcommerceUpdateAProductV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r EcommerceUpdateAProductV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r EcommerceUpdateAProductV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r EcommerceUpdateAProductV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceUpdateAProductV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceUpdateAProductV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceUpdateAProductV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type EcommerceUploadAndAttachAProductImageV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -60238,6 +64047,248 @@ func (r EcommerceCreateAProductImageUploadURLV1Response) ContentType() string {
 	return ""
 }
 
+type EcommerceListProductVariantsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *struct {
+		// Data Array of [`Ecommerce.V1.Variant.VariantResource`](#model/ecommercev1variantvariantresource)
+		Data *EcommerceV1VariantVariantCollection `json:"data,omitempty"`
+		Meta *CommonSchemaPaginationMetaSchema    `json:"meta,omitempty"`
+	}
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r EcommerceListProductVariantsV1Response) GetJSON200() *struct {
+	// Data Array of [`Ecommerce.V1.Variant.VariantResource`](#model/ecommercev1variantvariantresource)
+	Data *EcommerceV1VariantVariantCollection `json:"data,omitempty"`
+	Meta *CommonSchemaPaginationMetaSchema    `json:"meta,omitempty"`
+} {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r EcommerceListProductVariantsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r EcommerceListProductVariantsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r EcommerceListProductVariantsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceListProductVariantsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceListProductVariantsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceListProductVariantsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type EcommerceCreateAProductVariantV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON201 the response for an HTTP 201 `application/json` response
+	JSON201 *EcommerceV1VariantVariantResponseResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON201 returns the response for an HTTP 201 `application/json` response
+func (r EcommerceCreateAProductVariantV1Response) GetJSON201() *EcommerceV1VariantVariantResponseResource {
+	return r.JSON201
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r EcommerceCreateAProductVariantV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r EcommerceCreateAProductVariantV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r EcommerceCreateAProductVariantV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r EcommerceCreateAProductVariantV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceCreateAProductVariantV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceCreateAProductVariantV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceCreateAProductVariantV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type EcommerceUpdateProductVariantsInBatchV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *EcommerceV1VariantVariantListResponseResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r EcommerceUpdateProductVariantsInBatchV1Response) GetJSON200() *EcommerceV1VariantVariantListResponseResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r EcommerceUpdateProductVariantsInBatchV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r EcommerceUpdateProductVariantsInBatchV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r EcommerceUpdateProductVariantsInBatchV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r EcommerceUpdateProductVariantsInBatchV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceUpdateProductVariantsInBatchV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceUpdateProductVariantsInBatchV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceUpdateProductVariantsInBatchV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type EcommerceDeleteAProductVariantV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *EcommerceV1VariantVariantDeletedResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r EcommerceDeleteAProductVariantV1Response) GetJSON200() *EcommerceV1VariantVariantDeletedResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r EcommerceDeleteAProductVariantV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r EcommerceDeleteAProductVariantV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r EcommerceDeleteAProductVariantV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceDeleteAProductVariantV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceDeleteAProductVariantV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceDeleteAProductVariantV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type EcommerceListSalesChannelsV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -60293,7 +64344,7 @@ func (r EcommerceListSalesChannelsV1Response) ContentType() string {
 	return ""
 }
 
-type EcommerceCreateCustomSalesChannelV1Response struct {
+type EcommerceCreateASalesChannelV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON201 the response for an HTTP 201 `application/json` response
@@ -60307,32 +64358,32 @@ type EcommerceCreateCustomSalesChannelV1Response struct {
 }
 
 // GetJSON201 returns the response for an HTTP 201 `application/json` response
-func (r EcommerceCreateCustomSalesChannelV1Response) GetJSON201() *EcommerceV1SalesChannelSalesChannelCreationResource {
+func (r EcommerceCreateASalesChannelV1Response) GetJSON201() *EcommerceV1SalesChannelSalesChannelCreationResource {
 	return r.JSON201
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r EcommerceCreateCustomSalesChannelV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r EcommerceCreateASalesChannelV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON422 returns the response for an HTTP 422 `application/json` response
-func (r EcommerceCreateCustomSalesChannelV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+func (r EcommerceCreateASalesChannelV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
 	return r.JSON422
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r EcommerceCreateCustomSalesChannelV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r EcommerceCreateASalesChannelV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r EcommerceCreateCustomSalesChannelV1Response) GetBody() []byte {
+func (r EcommerceCreateASalesChannelV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r EcommerceCreateCustomSalesChannelV1Response) Status() string {
+func (r EcommerceCreateASalesChannelV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -60340,7 +64391,7 @@ func (r EcommerceCreateCustomSalesChannelV1Response) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r EcommerceCreateCustomSalesChannelV1Response) StatusCode() int {
+func (r EcommerceCreateASalesChannelV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -60348,7 +64399,7 @@ func (r EcommerceCreateCustomSalesChannelV1Response) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r EcommerceCreateCustomSalesChannelV1Response) ContentType() string {
+func (r EcommerceCreateASalesChannelV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -77432,6 +81483,57 @@ func (c *ClientWithResponses) EcommerceDeleteStoreV1WithResponse(ctx context.Con
 	return ParseEcommerceDeleteStoreV1Response(rsp)
 }
 
+// EcommerceListDiscountsV1WithResponse List discounts
+//
+// List a store's discounts. Filter by free text over code and name, or by disabled state.
+// Amounts for fixed discounts are integers in the smallest currency unit; percentage
+// discounts carry a whole-number value between 1 and 100.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/discounts (the `EcommerceListDiscountsV1` operationId).
+func (c *ClientWithResponses) EcommerceListDiscountsV1WithResponse(ctx context.Context, storeId string, params *EcommerceListDiscountsV1Params, reqEditors ...RequestEditorFn) (*EcommerceListDiscountsV1Response, error) {
+	rsp, err := c.EcommerceListDiscountsV1(ctx, storeId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceListDiscountsV1Response(rsp)
+}
+
+// EcommerceCreateADiscountV1WithBodyWithResponse Create a discount
+//
+// Create a discount for a store. Fixed discounts take an amount in the smallest currency
+// unit (e.g. $10 is 1000); percentage discounts take a whole-number value between 1 and 100.
+// Free-shipping discounts ignore value. Returns the created discount.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/discounts (the `EcommerceCreateADiscountV1` operationId).
+func (c *ClientWithResponses) EcommerceCreateADiscountV1WithBodyWithResponse(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceCreateADiscountV1Response, error) {
+	rsp, err := c.EcommerceCreateADiscountV1WithBody(ctx, storeId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceCreateADiscountV1Response(rsp)
+}
+
+// EcommerceCreateADiscountV1WithResponse Create a discount
+//
+// Create a discount for a store. Fixed discounts take an amount in the smallest currency
+// unit (e.g. $10 is 1000); percentage discounts take a whole-number value between 1 and 100.
+// Free-shipping discounts ignore value. Returns the created discount.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/discounts (the `EcommerceCreateADiscountV1` operationId).
+func (c *ClientWithResponses) EcommerceCreateADiscountV1WithResponse(ctx context.Context, storeId string, body EcommerceCreateADiscountV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceCreateADiscountV1Response, error) {
+	rsp, err := c.EcommerceCreateADiscountV1(ctx, storeId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceCreateADiscountV1Response(rsp)
+}
+
 // EcommerceGetStoreMetadataV1WithResponse Get store metadata
 //
 // Get a store's readiness metadata: whether payment methods and shipping are configured,
@@ -77446,6 +81548,102 @@ func (c *ClientWithResponses) EcommerceGetStoreMetadataV1WithResponse(ctx contex
 		return nil, err
 	}
 	return ParseEcommerceGetStoreMetadataV1Response(rsp)
+}
+
+// EcommerceListOrdersV1WithResponse List orders
+//
+// List a store's orders newest first as summaries. Filter by status, payment or fulfilment
+// status, customer email, order number or a free-text query. Amounts are in the smallest
+// currency unit. Retrieve a single order for its line items, addresses and fulfilments.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/orders (the `EcommerceListOrdersV1` operationId).
+func (c *ClientWithResponses) EcommerceListOrdersV1WithResponse(ctx context.Context, storeId string, params *EcommerceListOrdersV1Params, reqEditors ...RequestEditorFn) (*EcommerceListOrdersV1Response, error) {
+	rsp, err := c.EcommerceListOrdersV1(ctx, storeId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceListOrdersV1Response(rsp)
+}
+
+// EcommerceRetrieveAnOrderV1WithResponse Retrieve an order
+//
+// Retrieve one order in full: line items (each with the id the fulfil endpoint needs),
+// addresses, the totals breakdown and fulfilments with tracking. Amounts are in the
+// smallest currency unit.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/orders/{order_id} (the `EcommerceRetrieveAnOrderV1` operationId).
+func (c *ClientWithResponses) EcommerceRetrieveAnOrderV1WithResponse(ctx context.Context, storeId string, orderId string, reqEditors ...RequestEditorFn) (*EcommerceRetrieveAnOrderV1Response, error) {
+	rsp, err := c.EcommerceRetrieveAnOrderV1(ctx, storeId, orderId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceRetrieveAnOrderV1Response(rsp)
+}
+
+// EcommerceCancelAnOrderV1WithBodyWithResponse Cancel an order
+//
+// Cancel the order and optionally email the customer. Returns the updated order summary.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/orders/{order_id}/cancel (the `EcommerceCancelAnOrderV1` operationId).
+func (c *ClientWithResponses) EcommerceCancelAnOrderV1WithBodyWithResponse(ctx context.Context, storeId string, orderId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceCancelAnOrderV1Response, error) {
+	rsp, err := c.EcommerceCancelAnOrderV1WithBody(ctx, storeId, orderId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceCancelAnOrderV1Response(rsp)
+}
+
+// EcommerceCancelAnOrderV1WithResponse Cancel an order
+//
+// Cancel the order and optionally email the customer. Returns the updated order summary.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/orders/{order_id}/cancel (the `EcommerceCancelAnOrderV1` operationId).
+func (c *ClientWithResponses) EcommerceCancelAnOrderV1WithResponse(ctx context.Context, storeId string, orderId string, body EcommerceCancelAnOrderV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceCancelAnOrderV1Response, error) {
+	rsp, err := c.EcommerceCancelAnOrderV1(ctx, storeId, orderId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceCancelAnOrderV1Response(rsp)
+}
+
+// EcommerceFulfilAnOrderV1WithBodyWithResponse Fulfil an order
+//
+// Create a fulfilment for the order and attach tracking in one call. Omit items to fulfil
+// every remaining unfulfilled item. Returns the updated order summary.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/orders/{order_id}/fulfill (the `EcommerceFulfilAnOrderV1` operationId).
+func (c *ClientWithResponses) EcommerceFulfilAnOrderV1WithBodyWithResponse(ctx context.Context, storeId string, orderId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceFulfilAnOrderV1Response, error) {
+	rsp, err := c.EcommerceFulfilAnOrderV1WithBody(ctx, storeId, orderId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceFulfilAnOrderV1Response(rsp)
+}
+
+// EcommerceFulfilAnOrderV1WithResponse Fulfil an order
+//
+// Create a fulfilment for the order and attach tracking in one call. Omit items to fulfil
+// every remaining unfulfilled item. Returns the updated order summary.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/orders/{order_id}/fulfill (the `EcommerceFulfilAnOrderV1` operationId).
+func (c *ClientWithResponses) EcommerceFulfilAnOrderV1WithResponse(ctx context.Context, storeId string, orderId string, body EcommerceFulfilAnOrderV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceFulfilAnOrderV1Response, error) {
+	rsp, err := c.EcommerceFulfilAnOrderV1(ctx, storeId, orderId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceFulfilAnOrderV1Response(rsp)
 }
 
 // EcommerceEnableManualPaymentMethodV1WithBodyWithResponse Enable manual payment method
@@ -77476,6 +81674,56 @@ func (c *ClientWithResponses) EcommerceEnableManualPaymentMethodV1WithResponse(c
 		return nil, err
 	}
 	return ParseEcommerceEnableManualPaymentMethodV1Response(rsp)
+}
+
+// EcommerceListStorePaymentProvidersV1WithResponse List store payment providers
+//
+// List a store's payment providers, split into providers already connected to the store and
+// gateways available to install. Never exposes gateway credentials, secrets, or configuration.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/payment-providers (the `EcommerceListStorePaymentProvidersV1` operationId).
+func (c *ClientWithResponses) EcommerceListStorePaymentProvidersV1WithResponse(ctx context.Context, storeId string, params *EcommerceListStorePaymentProvidersV1Params, reqEditors ...RequestEditorFn) (*EcommerceListStorePaymentProvidersV1Response, error) {
+	rsp, err := c.EcommerceListStorePaymentProvidersV1(ctx, storeId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceListStorePaymentProvidersV1Response(rsp)
+}
+
+// EcommerceCreateAPaymentProviderConnectLinkV1WithResponse Create a payment provider connect link
+//
+// Create an onboarding link for connecting a payment gateway to the store. Returns the gateway
+// onboarding URL for the merchant to open and a deep-link into the store admin.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/payment-providers/{provider_id}/connect-link (the `EcommerceCreateAPaymentProviderConnectLinkV1` operationId).
+func (c *ClientWithResponses) EcommerceCreateAPaymentProviderConnectLinkV1WithResponse(ctx context.Context, storeId string, providerId string, reqEditors ...RequestEditorFn) (*EcommerceCreateAPaymentProviderConnectLinkV1Response, error) {
+	rsp, err := c.EcommerceCreateAPaymentProviderConnectLinkV1(ctx, storeId, providerId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceCreateAPaymentProviderConnectLinkV1Response(rsp)
+}
+
+// EcommerceListProductsV1WithResponse List products
+//
+// List a store's products newest first as lean summaries (name, status, thumbnail, variant
+// count and price range). Prices are integers in the smallest currency unit and live on
+// variants. Filter by status, free text or a set of product ids. Use include=variants to
+// embed each product's variants with prices and inventory, and include=media to embed its media.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/products (the `EcommerceListProductsV1` operationId).
+func (c *ClientWithResponses) EcommerceListProductsV1WithResponse(ctx context.Context, storeId string, params *EcommerceListProductsV1Params, reqEditors ...RequestEditorFn) (*EcommerceListProductsV1Response, error) {
+	rsp, err := c.EcommerceListProductsV1(ctx, storeId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceListProductsV1Response(rsp)
 }
 
 // EcommerceCreateDigitalProductV1WithBodyWithResponse Create digital product
@@ -77538,6 +81786,56 @@ func (c *ClientWithResponses) EcommerceCreatePhysicalProductV1WithResponse(ctx c
 	return ParseEcommerceCreatePhysicalProductV1Response(rsp)
 }
 
+// EcommerceDeleteAProductV1WithResponse Delete a product
+//
+// Delete a product and its variants from the store. A subscription product with active
+// subscribers is archived instead of deleted so its data stays available.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/ecommerce/v1/stores/{store_id}/products/{product_id} (the `EcommerceDeleteAProductV1` operationId).
+func (c *ClientWithResponses) EcommerceDeleteAProductV1WithResponse(ctx context.Context, storeId string, productId string, reqEditors ...RequestEditorFn) (*EcommerceDeleteAProductV1Response, error) {
+	rsp, err := c.EcommerceDeleteAProductV1(ctx, storeId, productId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceDeleteAProductV1Response(rsp)
+}
+
+// EcommerceUpdateAProductV1WithBodyWithResponse Update a product
+//
+// Update a product's name, description or status. Set status to published to make it buyable,
+// draft to hide it, or archived to retire it. Variants, prices and inventory are managed
+// through the variant endpoints, not here. Returns the updated product summary.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/ecommerce/v1/stores/{store_id}/products/{product_id} (the `EcommerceUpdateAProductV1` operationId).
+func (c *ClientWithResponses) EcommerceUpdateAProductV1WithBodyWithResponse(ctx context.Context, storeId string, productId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceUpdateAProductV1Response, error) {
+	rsp, err := c.EcommerceUpdateAProductV1WithBody(ctx, storeId, productId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceUpdateAProductV1Response(rsp)
+}
+
+// EcommerceUpdateAProductV1WithResponse Update a product
+//
+// Update a product's name, description or status. Set status to published to make it buyable,
+// draft to hide it, or archived to retire it. Variants, prices and inventory are managed
+// through the variant endpoints, not here. Returns the updated product summary.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/ecommerce/v1/stores/{store_id}/products/{product_id} (the `EcommerceUpdateAProductV1` operationId).
+func (c *ClientWithResponses) EcommerceUpdateAProductV1WithResponse(ctx context.Context, storeId string, productId string, body EcommerceUpdateAProductV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceUpdateAProductV1Response, error) {
+	rsp, err := c.EcommerceUpdateAProductV1(ctx, storeId, productId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceUpdateAProductV1Response(rsp)
+}
+
 // EcommerceUploadAndAttachAProductImageV1WithBodyWithResponse Upload and attach a product image
 //
 // Fetch a raster image (JPEG, PNG, GIF or WebP, max 15MB) from a URL and attach it to a product in a
@@ -77588,6 +81886,107 @@ func (c *ClientWithResponses) EcommerceCreateAProductImageUploadURLV1WithRespons
 	return ParseEcommerceCreateAProductImageUploadURLV1Response(rsp)
 }
 
+// EcommerceListProductVariantsV1WithResponse List product variants
+//
+// List a product's variants, ordered by rank, with their options, prices and inventory.
+// Prices are integers in the smallest currency unit and live on variants.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants (the `EcommerceListProductVariantsV1` operationId).
+func (c *ClientWithResponses) EcommerceListProductVariantsV1WithResponse(ctx context.Context, storeId string, productId string, params *EcommerceListProductVariantsV1Params, reqEditors ...RequestEditorFn) (*EcommerceListProductVariantsV1Response, error) {
+	rsp, err := c.EcommerceListProductVariantsV1(ctx, storeId, productId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceListProductVariantsV1Response(rsp)
+}
+
+// EcommerceCreateAProductVariantV1WithBodyWithResponse Create a product variant
+//
+// Add a variant to a product along one or more option dimensions (e.g. Size, Color). Options
+// missing from the product are created automatically; provide a value for every option the
+// product already has. Prices are integers in the smallest currency unit and default to the
+// store currency. Returns the created variant.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants (the `EcommerceCreateAProductVariantV1` operationId).
+func (c *ClientWithResponses) EcommerceCreateAProductVariantV1WithBodyWithResponse(ctx context.Context, storeId string, productId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceCreateAProductVariantV1Response, error) {
+	rsp, err := c.EcommerceCreateAProductVariantV1WithBody(ctx, storeId, productId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceCreateAProductVariantV1Response(rsp)
+}
+
+// EcommerceCreateAProductVariantV1WithResponse Create a product variant
+//
+// Add a variant to a product along one or more option dimensions (e.g. Size, Color). Options
+// missing from the product are created automatically; provide a value for every option the
+// product already has. Prices are integers in the smallest currency unit and default to the
+// store currency. Returns the created variant.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants (the `EcommerceCreateAProductVariantV1` operationId).
+func (c *ClientWithResponses) EcommerceCreateAProductVariantV1WithResponse(ctx context.Context, storeId string, productId string, body EcommerceCreateAProductVariantV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceCreateAProductVariantV1Response, error) {
+	rsp, err := c.EcommerceCreateAProductVariantV1(ctx, storeId, productId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceCreateAProductVariantV1Response(rsp)
+}
+
+// EcommerceUpdateProductVariantsInBatchV1WithBodyWithResponse Update product variants in batch
+//
+// Update up to 100 existing variants in place by id — title, inventory, stock tracking and
+// prices. Variants omitted from the request are left untouched. Prices replace the variant's
+// existing prices in full. Returns the updated variants.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants/batch (the `EcommerceUpdateProductVariantsInBatchV1` operationId).
+func (c *ClientWithResponses) EcommerceUpdateProductVariantsInBatchV1WithBodyWithResponse(ctx context.Context, storeId string, productId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceUpdateProductVariantsInBatchV1Response, error) {
+	rsp, err := c.EcommerceUpdateProductVariantsInBatchV1WithBody(ctx, storeId, productId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceUpdateProductVariantsInBatchV1Response(rsp)
+}
+
+// EcommerceUpdateProductVariantsInBatchV1WithResponse Update product variants in batch
+//
+// Update up to 100 existing variants in place by id — title, inventory, stock tracking and
+// prices. Variants omitted from the request are left untouched. Prices replace the variant's
+// existing prices in full. Returns the updated variants.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants/batch (the `EcommerceUpdateProductVariantsInBatchV1` operationId).
+func (c *ClientWithResponses) EcommerceUpdateProductVariantsInBatchV1WithResponse(ctx context.Context, storeId string, productId string, body EcommerceUpdateProductVariantsInBatchV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceUpdateProductVariantsInBatchV1Response, error) {
+	rsp, err := c.EcommerceUpdateProductVariantsInBatchV1(ctx, storeId, productId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceUpdateProductVariantsInBatchV1Response(rsp)
+}
+
+// EcommerceDeleteAProductVariantV1WithResponse Delete a product variant
+//
+// Delete a single variant from the product.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants/{variant_id} (the `EcommerceDeleteAProductVariantV1` operationId).
+func (c *ClientWithResponses) EcommerceDeleteAProductVariantV1WithResponse(ctx context.Context, storeId string, productId string, variantId string, reqEditors ...RequestEditorFn) (*EcommerceDeleteAProductVariantV1Response, error) {
+	rsp, err := c.EcommerceDeleteAProductVariantV1(ctx, storeId, productId, variantId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceDeleteAProductVariantV1Response(rsp)
+}
+
 // EcommerceListSalesChannelsV1WithResponse List sales channels
 //
 // List a store's active sales channels with their full metadata.
@@ -77603,36 +82002,38 @@ func (c *ClientWithResponses) EcommerceListSalesChannelsV1WithResponse(ctx conte
 	return ParseEcommerceListSalesChannelsV1Response(rsp)
 }
 
-// EcommerceCreateCustomSalesChannelV1WithBodyWithResponse Create custom sales channel
+// EcommerceCreateASalesChannelV1WithBodyWithResponse Create a sales channel
 //
-// Create a custom sales channel for a store. Build your own frontend and keep your catalog,
-// orders, shipping and payments in sync through the Ecommerce API.
+// Create a sales channel for a store. A "custom" channel is headless: build your own frontend and keep
+// your catalog, orders, shipping and payments in sync through the Ecommerce API. A "quick-link" channel
+// is a hosted one-page store whose handle is auto-generated.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/sales-channels (the `EcommerceCreateCustomSalesChannelV1` operationId).
-func (c *ClientWithResponses) EcommerceCreateCustomSalesChannelV1WithBodyWithResponse(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceCreateCustomSalesChannelV1Response, error) {
-	rsp, err := c.EcommerceCreateCustomSalesChannelV1WithBody(ctx, storeId, contentType, body, reqEditors...)
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/sales-channels (the `EcommerceCreateASalesChannelV1` operationId).
+func (c *ClientWithResponses) EcommerceCreateASalesChannelV1WithBodyWithResponse(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceCreateASalesChannelV1Response, error) {
+	rsp, err := c.EcommerceCreateASalesChannelV1WithBody(ctx, storeId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseEcommerceCreateCustomSalesChannelV1Response(rsp)
+	return ParseEcommerceCreateASalesChannelV1Response(rsp)
 }
 
-// EcommerceCreateCustomSalesChannelV1WithResponse Create custom sales channel
+// EcommerceCreateASalesChannelV1WithResponse Create a sales channel
 //
-// Create a custom sales channel for a store. Build your own frontend and keep your catalog,
-// orders, shipping and payments in sync through the Ecommerce API.
+// Create a sales channel for a store. A "custom" channel is headless: build your own frontend and keep
+// your catalog, orders, shipping and payments in sync through the Ecommerce API. A "quick-link" channel
+// is a hosted one-page store whose handle is auto-generated.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/sales-channels (the `EcommerceCreateCustomSalesChannelV1` operationId).
-func (c *ClientWithResponses) EcommerceCreateCustomSalesChannelV1WithResponse(ctx context.Context, storeId string, body EcommerceCreateCustomSalesChannelV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceCreateCustomSalesChannelV1Response, error) {
-	rsp, err := c.EcommerceCreateCustomSalesChannelV1(ctx, storeId, body, reqEditors...)
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/sales-channels (the `EcommerceCreateASalesChannelV1` operationId).
+func (c *ClientWithResponses) EcommerceCreateASalesChannelV1WithResponse(ctx context.Context, storeId string, body EcommerceCreateASalesChannelV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceCreateASalesChannelV1Response, error) {
+	rsp, err := c.EcommerceCreateASalesChannelV1(ctx, storeId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseEcommerceCreateCustomSalesChannelV1Response(rsp)
+	return ParseEcommerceCreateASalesChannelV1Response(rsp)
 }
 
 // EcommerceUpdateSalesChannelV1WithBodyWithResponse Update sales channel
@@ -88019,6 +92420,97 @@ func ParseEcommerceDeleteStoreV1Response(rsp *http.Response) (*EcommerceDeleteSt
 	return response, nil
 }
 
+// ParseEcommerceListDiscountsV1Response parses an HTTP response from a EcommerceListDiscountsV1WithResponse call
+func ParseEcommerceListDiscountsV1Response(rsp *http.Response) (*EcommerceListDiscountsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceListDiscountsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			// Data Array of [`Ecommerce.V1.Discount.DiscountResource`](#model/ecommercev1discountdiscountresource)
+			Data *EcommerceV1DiscountDiscountCollection `json:"data,omitempty"`
+			Meta *CommonSchemaPaginationMetaSchema      `json:"meta,omitempty"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceCreateADiscountV1Response parses an HTTP response from a EcommerceCreateADiscountV1WithResponse call
+func ParseEcommerceCreateADiscountV1Response(rsp *http.Response) (*EcommerceCreateADiscountV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceCreateADiscountV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest EcommerceV1DiscountDiscountResponseResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseEcommerceGetStoreMetadataV1Response parses an HTTP response from a EcommerceGetStoreMetadataV1WithResponse call
 func ParseEcommerceGetStoreMetadataV1Response(rsp *http.Response) (*EcommerceGetStoreMetadataV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -88046,6 +92538,184 @@ func ParseEcommerceGetStoreMetadataV1Response(rsp *http.Response) (*EcommerceGet
 			return nil, err
 		}
 		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceListOrdersV1Response parses an HTTP response from a EcommerceListOrdersV1WithResponse call
+func ParseEcommerceListOrdersV1Response(rsp *http.Response) (*EcommerceListOrdersV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceListOrdersV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			// Data Array of [`Ecommerce.V1.Order.OrderResource`](#model/ecommercev1orderorderresource)
+			Data *EcommerceV1OrderOrderCollection  `json:"data,omitempty"`
+			Meta *CommonSchemaPaginationMetaSchema `json:"meta,omitempty"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceRetrieveAnOrderV1Response parses an HTTP response from a EcommerceRetrieveAnOrderV1WithResponse call
+func ParseEcommerceRetrieveAnOrderV1Response(rsp *http.Response) (*EcommerceRetrieveAnOrderV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceRetrieveAnOrderV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest EcommerceV1OrderOrderDetailResponseResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceCancelAnOrderV1Response parses an HTTP response from a EcommerceCancelAnOrderV1WithResponse call
+func ParseEcommerceCancelAnOrderV1Response(rsp *http.Response) (*EcommerceCancelAnOrderV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceCancelAnOrderV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest EcommerceV1OrderOrderResponseResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceFulfilAnOrderV1Response parses an HTTP response from a EcommerceFulfilAnOrderV1WithResponse call
+func ParseEcommerceFulfilAnOrderV1Response(rsp *http.Response) (*EcommerceFulfilAnOrderV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceFulfilAnOrderV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest EcommerceV1OrderOrderResponseResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse
@@ -88093,6 +92763,130 @@ func ParseEcommerceEnableManualPaymentMethodV1Response(rsp *http.Response) (*Eco
 			return nil, err
 		}
 		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceListStorePaymentProvidersV1Response parses an HTTP response from a EcommerceListStorePaymentProvidersV1WithResponse call
+func ParseEcommerceListStorePaymentProvidersV1Response(rsp *http.Response) (*EcommerceListStorePaymentProvidersV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceListStorePaymentProvidersV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest EcommerceV1PaymentProviderPaymentProviderListResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceCreateAPaymentProviderConnectLinkV1Response parses an HTTP response from a EcommerceCreateAPaymentProviderConnectLinkV1WithResponse call
+func ParseEcommerceCreateAPaymentProviderConnectLinkV1Response(rsp *http.Response) (*EcommerceCreateAPaymentProviderConnectLinkV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceCreateAPaymentProviderConnectLinkV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest EcommerceV1PaymentProviderPaymentProviderConnectLinkResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceListProductsV1Response parses an HTTP response from a EcommerceListProductsV1WithResponse call
+func ParseEcommerceListProductsV1Response(rsp *http.Response) (*EcommerceListProductsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceListProductsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			// Data Array of [`Ecommerce.V1.Product.ProductResource`](#model/ecommercev1productproductresource)
+			Data *EcommerceV1ProductProductCollection `json:"data,omitempty"`
+			Meta *CommonSchemaPaginationMetaSchema    `json:"meta,omitempty"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse
@@ -88173,6 +92967,93 @@ func ParseEcommerceCreatePhysicalProductV1Response(rsp *http.Response) (*Ecommer
 			return nil, err
 		}
 		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceDeleteAProductV1Response parses an HTTP response from a EcommerceDeleteAProductV1WithResponse call
+func ParseEcommerceDeleteAProductV1Response(rsp *http.Response) (*EcommerceDeleteAProductV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceDeleteAProductV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest EcommerceV1ProductProductDeletedResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceUpdateAProductV1Response parses an HTTP response from a EcommerceUpdateAProductV1WithResponse call
+func ParseEcommerceUpdateAProductV1Response(rsp *http.Response) (*EcommerceUpdateAProductV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceUpdateAProductV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest EcommerceV1ProductProductResponseResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
 		var dest CommonResponseUnauthorizedResponse
@@ -88287,6 +93168,184 @@ func ParseEcommerceCreateAProductImageUploadURLV1Response(rsp *http.Response) (*
 	return response, nil
 }
 
+// ParseEcommerceListProductVariantsV1Response parses an HTTP response from a EcommerceListProductVariantsV1WithResponse call
+func ParseEcommerceListProductVariantsV1Response(rsp *http.Response) (*EcommerceListProductVariantsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceListProductVariantsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			// Data Array of [`Ecommerce.V1.Variant.VariantResource`](#model/ecommercev1variantvariantresource)
+			Data *EcommerceV1VariantVariantCollection `json:"data,omitempty"`
+			Meta *CommonSchemaPaginationMetaSchema    `json:"meta,omitempty"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceCreateAProductVariantV1Response parses an HTTP response from a EcommerceCreateAProductVariantV1WithResponse call
+func ParseEcommerceCreateAProductVariantV1Response(rsp *http.Response) (*EcommerceCreateAProductVariantV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceCreateAProductVariantV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest EcommerceV1VariantVariantResponseResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceUpdateProductVariantsInBatchV1Response parses an HTTP response from a EcommerceUpdateProductVariantsInBatchV1WithResponse call
+func ParseEcommerceUpdateProductVariantsInBatchV1Response(rsp *http.Response) (*EcommerceUpdateProductVariantsInBatchV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceUpdateProductVariantsInBatchV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest EcommerceV1VariantVariantListResponseResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceDeleteAProductVariantV1Response parses an HTTP response from a EcommerceDeleteAProductVariantV1WithResponse call
+func ParseEcommerceDeleteAProductVariantV1Response(rsp *http.Response) (*EcommerceDeleteAProductVariantV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceDeleteAProductVariantV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest EcommerceV1VariantVariantDeletedResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseEcommerceListSalesChannelsV1Response parses an HTTP response from a EcommerceListSalesChannelsV1WithResponse call
 func ParseEcommerceListSalesChannelsV1Response(rsp *http.Response) (*EcommerceListSalesChannelsV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -88327,15 +93386,15 @@ func ParseEcommerceListSalesChannelsV1Response(rsp *http.Response) (*EcommerceLi
 	return response, nil
 }
 
-// ParseEcommerceCreateCustomSalesChannelV1Response parses an HTTP response from a EcommerceCreateCustomSalesChannelV1WithResponse call
-func ParseEcommerceCreateCustomSalesChannelV1Response(rsp *http.Response) (*EcommerceCreateCustomSalesChannelV1Response, error) {
+// ParseEcommerceCreateASalesChannelV1Response parses an HTTP response from a EcommerceCreateASalesChannelV1WithResponse call
+func ParseEcommerceCreateASalesChannelV1Response(rsp *http.Response) (*EcommerceCreateASalesChannelV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &EcommerceCreateCustomSalesChannelV1Response{
+	response := &EcommerceCreateASalesChannelV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}

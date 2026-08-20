@@ -769,13 +769,33 @@
     "method": "PUT",
     "path": "/api/domains/v1/portfolio/{domain}/nameservers"
   },
+  "ecommerce_cancelAnOrderV1": {
+    "command": "hostinger ecommerce orders cancel",
+    "method": "POST",
+    "path": "/api/ecommerce/v1/stores/{store_id}/orders/{order_id}/cancel"
+  },
+  "ecommerce_createADiscountV1": {
+    "command": "hostinger ecommerce discounts create",
+    "method": "POST",
+    "path": "/api/ecommerce/v1/stores/{store_id}/discounts"
+  },
+  "ecommerce_createAPaymentProviderConnectLinkV1": {
+    "command": "hostinger ecommerce payments create-provider-connect-link",
+    "method": "POST",
+    "path": "/api/ecommerce/v1/stores/{store_id}/payment-providers/{provider_id}/connect-link"
+  },
   "ecommerce_createAProductImageUploadURLV1": {
     "command": "hostinger ecommerce products create-image-upload-url",
     "method": "POST",
     "path": "/api/ecommerce/v1/stores/{store_id}/products/{product_id}/images/upload-url"
   },
-  "ecommerce_createCustomSalesChannelV1": {
-    "command": "hostinger ecommerce sales-channels create-custom",
+  "ecommerce_createAProductVariantV1": {
+    "command": "hostinger ecommerce product-variants create",
+    "method": "POST",
+    "path": "/api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants"
+  },
+  "ecommerce_createASalesChannelV1": {
+    "command": "hostinger ecommerce sales-channels create",
     "method": "POST",
     "path": "/api/ecommerce/v1/stores/{store_id}/sales-channels"
   },
@@ -794,6 +814,16 @@
     "method": "POST",
     "path": "/api/ecommerce/v1/stores"
   },
+  "ecommerce_deleteAProductV1": {
+    "command": "hostinger ecommerce products delete",
+    "method": "DELETE",
+    "path": "/api/ecommerce/v1/stores/{store_id}/products/{product_id}"
+  },
+  "ecommerce_deleteAProductVariantV1": {
+    "command": "hostinger ecommerce product-variants delete",
+    "method": "DELETE",
+    "path": "/api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants/{variant_id}"
+  },
   "ecommerce_deleteStoreV1": {
     "command": "hostinger ecommerce stores delete",
     "method": "DELETE",
@@ -803,6 +833,11 @@
     "command": "hostinger ecommerce payments enable-manual-method",
     "method": "POST",
     "path": "/api/ecommerce/v1/stores/{store_id}/payment-methods/manual"
+  },
+  "ecommerce_fulfilAnOrderV1": {
+    "command": "hostinger ecommerce orders fulfil",
+    "method": "POST",
+    "path": "/api/ecommerce/v1/stores/{store_id}/orders/{order_id}/fulfill"
   },
   "ecommerce_getCustomStorefrontSetupInstructionsV1": {
     "command": "hostinger ecommerce miscellaneous custom-storefront-setup-instructions",
@@ -819,15 +854,55 @@
     "method": "GET",
     "path": "/api/ecommerce/v1/stores"
   },
+  "ecommerce_listDiscountsV1": {
+    "command": "hostinger ecommerce discounts list",
+    "method": "GET",
+    "path": "/api/ecommerce/v1/stores/{store_id}/discounts"
+  },
+  "ecommerce_listOrdersV1": {
+    "command": "hostinger ecommerce orders list",
+    "method": "GET",
+    "path": "/api/ecommerce/v1/stores/{store_id}/orders"
+  },
+  "ecommerce_listProductVariantsV1": {
+    "command": "hostinger ecommerce product-variants list",
+    "method": "GET",
+    "path": "/api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants"
+  },
+  "ecommerce_listProductsV1": {
+    "command": "hostinger ecommerce products list",
+    "method": "GET",
+    "path": "/api/ecommerce/v1/stores/{store_id}/products"
+  },
   "ecommerce_listSalesChannelsV1": {
     "command": "hostinger ecommerce sales-channels list",
     "method": "GET",
     "path": "/api/ecommerce/v1/stores/{store_id}/sales-channels"
   },
+  "ecommerce_listStorePaymentProvidersV1": {
+    "command": "hostinger ecommerce payments list-store-providers",
+    "method": "GET",
+    "path": "/api/ecommerce/v1/stores/{store_id}/payment-providers"
+  },
+  "ecommerce_retrieveAnOrderV1": {
+    "command": "hostinger ecommerce orders retrieve",
+    "method": "GET",
+    "path": "/api/ecommerce/v1/stores/{store_id}/orders/{order_id}"
+  },
   "ecommerce_setStoreShippingV1": {
     "command": "hostinger ecommerce shipping set-store",
     "method": "POST",
     "path": "/api/ecommerce/v1/stores/{store_id}/shipping"
+  },
+  "ecommerce_updateAProductV1": {
+    "command": "hostinger ecommerce products update",
+    "method": "PATCH",
+    "path": "/api/ecommerce/v1/stores/{store_id}/products/{product_id}"
+  },
+  "ecommerce_updateProductVariantsInBatchV1": {
+    "command": "hostinger ecommerce product-variants update-in-batch",
+    "method": "PATCH",
+    "path": "/api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants/batch"
   },
   "ecommerce_updateSalesChannelV1": {
     "command": "hostinger ecommerce sales-channels update",
