@@ -17497,8 +17497,7 @@ type ClientInterface interface {
 	// Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
 	//
 	// To auto-detect build settings from an archive before starting, first call the
-	// `Get Node.js Build Settings from Archive` endpoint. To upload an archive and start
-	// a build in one step, use the `Create Node.js Build from Archive` endpoint instead.
+	// `Get Node.js Build Settings from Archive` endpoint.
 	//
 	// The returned build `uuid` can be used to poll progress and retrieve logs via
 	// the `Get Node.js Build Logs` endpoint.
@@ -17520,8 +17519,7 @@ type ClientInterface interface {
 	// Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
 	//
 	// To auto-detect build settings from an archive before starting, first call the
-	// `Get Node.js Build Settings from Archive` endpoint. To upload an archive and start
-	// a build in one step, use the `Create Node.js Build from Archive` endpoint instead.
+	// `Get Node.js Build Settings from Archive` endpoint.
 	//
 	// The returned build `uuid` can be used to poll progress and retrieve logs via
 	// the `Get Node.js Build Logs` endpoint.
@@ -17541,8 +17539,6 @@ type ClientInterface interface {
 	//
 	// The archive must already be present on the website's file storage. Use the
 	// `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
-	// To upload an archive and start a build in one step without inspecting settings first,
-	// use the `Create Node.js Build from Archive` endpoint instead.
 	//
 	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/from-archive (the `HostingGetNodeJsBuildSettingsFromArchiveV1` operationId).
 	HostingGetNodeJsBuildSettingsFromArchiveV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetNodeJsBuildSettingsFromArchiveV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -25035,8 +25031,7 @@ func (c *Client) HostingListNodeJSBuildsV1(ctx context.Context, username Usernam
 // Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
 //
 // To auto-detect build settings from an archive before starting, first call the
-// `Get Node.js Build Settings from Archive` endpoint. To upload an archive and start
-// a build in one step, use the `Create Node.js Build from Archive` endpoint instead.
+// `Get Node.js Build Settings from Archive` endpoint.
 //
 // The returned build `uuid` can be used to poll progress and retrieve logs via
 // the `Get Node.js Build Logs` endpoint.
@@ -25068,8 +25063,7 @@ func (c *Client) HostingStartNodeJsBuildV1WithBody(ctx context.Context, username
 // Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
 //
 // To auto-detect build settings from an archive before starting, first call the
-// `Get Node.js Build Settings from Archive` endpoint. To upload an archive and start
-// a build in one step, use the `Create Node.js Build from Archive` endpoint instead.
+// `Get Node.js Build Settings from Archive` endpoint.
 //
 // The returned build `uuid` can be used to poll progress and retrieve logs via
 // the `Get Node.js Build Logs` endpoint.
@@ -25099,8 +25093,6 @@ func (c *Client) HostingStartNodeJsBuildV1(ctx context.Context, username Usernam
 //
 // The archive must already be present on the website's file storage. Use the
 // `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
-// To upload an archive and start a build in one step without inspecting settings first,
-// use the `Create Node.js Build from Archive` endpoint instead.
 //
 // Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/from-archive (the `HostingGetNodeJsBuildSettingsFromArchiveV1` operationId).
 func (c *Client) HostingGetNodeJsBuildSettingsFromArchiveV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetNodeJsBuildSettingsFromArchiveV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -50438,8 +50430,7 @@ type ClientWithResponsesInterface interface {
 	// Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
 	//
 	// To auto-detect build settings from an archive before starting, first call the
-	// `Get Node.js Build Settings from Archive` endpoint. To upload an archive and start
-	// a build in one step, use the `Create Node.js Build from Archive` endpoint instead.
+	// `Get Node.js Build Settings from Archive` endpoint.
 	//
 	// The returned build `uuid` can be used to poll progress and retrieve logs via
 	// the `Get Node.js Build Logs` endpoint.
@@ -50461,8 +50452,7 @@ type ClientWithResponsesInterface interface {
 	// Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
 	//
 	// To auto-detect build settings from an archive before starting, first call the
-	// `Get Node.js Build Settings from Archive` endpoint. To upload an archive and start
-	// a build in one step, use the `Create Node.js Build from Archive` endpoint instead.
+	// `Get Node.js Build Settings from Archive` endpoint.
 	//
 	// The returned build `uuid` can be used to poll progress and retrieve logs via
 	// the `Get Node.js Build Logs` endpoint.
@@ -50482,8 +50472,6 @@ type ClientWithResponsesInterface interface {
 	//
 	// The archive must already be present on the website's file storage. Use the
 	// `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
-	// To upload an archive and start a build in one step without inspecting settings first,
-	// use the `Create Node.js Build from Archive` endpoint instead.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
@@ -78334,8 +78322,7 @@ func (c *ClientWithResponses) HostingListNodeJSBuildsV1WithResponse(ctx context.
 // Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
 //
 // To auto-detect build settings from an archive before starting, first call the
-// `Get Node.js Build Settings from Archive` endpoint. To upload an archive and start
-// a build in one step, use the `Create Node.js Build from Archive` endpoint instead.
+// `Get Node.js Build Settings from Archive` endpoint.
 //
 // The returned build `uuid` can be used to poll progress and retrieve logs via
 // the `Get Node.js Build Logs` endpoint.
@@ -78363,8 +78350,7 @@ func (c *ClientWithResponses) HostingStartNodeJsBuildV1WithBodyWithResponse(ctx 
 // Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
 //
 // To auto-detect build settings from an archive before starting, first call the
-// `Get Node.js Build Settings from Archive` endpoint. To upload an archive and start
-// a build in one step, use the `Create Node.js Build from Archive` endpoint instead.
+// `Get Node.js Build Settings from Archive` endpoint.
 //
 // The returned build `uuid` can be used to poll progress and retrieve logs via
 // the `Get Node.js Build Logs` endpoint.
@@ -78390,8 +78376,6 @@ func (c *ClientWithResponses) HostingStartNodeJsBuildV1WithResponse(ctx context.
 //
 // The archive must already be present on the website's file storage. Use the
 // `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
-// To upload an archive and start a build in one step without inspecting settings first,
-// use the `Create Node.js Build from Archive` endpoint instead.
 //
 // Returns a wrapper object for the known response body format(s).
 //

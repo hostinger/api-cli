@@ -12,8 +12,6 @@ output directory, build script) before committing to a build.
 
 The archive must already be present on the website's file storage. Use the
 `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
-To upload an archive and start a build in one step without inspecting settings first,
-use the `Create Node.js Build from Archive` endpoint instead.
 
 ```
 hostinger hosting nodejs build-settings-from-archive <username> <domain> [flags]
