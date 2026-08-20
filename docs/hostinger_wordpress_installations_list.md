@@ -21,7 +21,7 @@ hostinger wordpress installations list [flags]
 ### Options
 
 ```
-      --domain string      Filter by domain name (exact match)
+      --domain string      Filter by domain name (case-insensitive substring match)
   -h, --help               help for list
       --ownership string   Filter by ownership type. Defaults to "owned". Use "all" to include both owned and managed installations. (one of: owned, managed, all)
       --username string    Filter by specific username

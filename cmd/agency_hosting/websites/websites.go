@@ -13,5 +13,6 @@ func init() {
 	GroupCmd.AddCommand(BuildNodejsAssetsCmd)
 	GroupCmd.AddCommand(DeleteCmd)
 	GroupCmd.AddCommand(GetCmd)
+	GroupCmd.AddCommand(ListPlanCmd)
 	GroupCmd.AddCommand(ListProcessesCmd)
 }

@@ -28,7 +28,7 @@ var ListCmd = &cobra.Command{
 
 func init() {
 	ListCmd.Flags().StringP("username", "", "", "Filter by specific username")
-	ListCmd.Flags().StringP("domain", "", "", "Filter by domain name (exact match)")
+	ListCmd.Flags().StringP("domain", "", "", "Filter by domain name (case-insensitive substring match)")
 	ListCmd.Flags().StringP("ownership", "", "", "Filter by ownership type. Defaults to \"owned\". Use \"all\" to include both owned and managed installations. (one of: owned, managed, all)")
 }
 

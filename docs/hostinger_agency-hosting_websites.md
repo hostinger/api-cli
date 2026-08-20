@@ -21,5 +21,6 @@ Websites commands
 * [hostinger agency-hosting websites build-nodejs-assets](hostinger_agency-hosting_websites_build-nodejs-assets.md)	 - Build website NodeJS assets
 * [hostinger agency-hosting websites delete](hostinger_agency-hosting_websites_delete.md)	 - Delete website
 * [hostinger agency-hosting websites get](hostinger_agency-hosting_websites_get.md)	 - Get website details
+* [hostinger agency-hosting websites list-plan](hostinger_agency-hosting_websites_list-plan.md)	 - List Agency Plan websites
 * [hostinger agency-hosting websites list-processes](hostinger_agency-hosting_websites_list-processes.md)	 - List website processes
 

@@ -93,6 +93,93 @@ func (e AgencyHostingV1SetupsWebsiteSetupStatusResourceStatus) Valid() bool {
 	}
 }
 
+// Defines values for AgencyHostingV1WebsitesH5gWebsiteDetailsResourceState.
+const (
+	AgencyHostingV1WebsitesH5gWebsiteDetailsResourceStateActive    AgencyHostingV1WebsitesH5gWebsiteDetailsResourceState = "active"
+	AgencyHostingV1WebsitesH5gWebsiteDetailsResourceStateSuspended AgencyHostingV1WebsitesH5gWebsiteDetailsResourceState = "suspended"
+)
+
+// Valid indicates whether the value is a known member of the AgencyHostingV1WebsitesH5gWebsiteDetailsResourceState enum.
+func (e AgencyHostingV1WebsitesH5gWebsiteDetailsResourceState) Valid() bool {
+	switch e {
+	case AgencyHostingV1WebsitesH5gWebsiteDetailsResourceStateActive:
+		return true
+	case AgencyHostingV1WebsitesH5gWebsiteDetailsResourceStateSuspended:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AgencyHostingV1WebsitesH5gWebsiteDetailsResourceType.
+const (
+	AgencyHostingV1WebsitesH5gWebsiteDetailsResourceTypeBuilder   AgencyHostingV1WebsitesH5gWebsiteDetailsResourceType = "builder"
+	AgencyHostingV1WebsitesH5gWebsiteDetailsResourceTypeHorizons  AgencyHostingV1WebsitesH5gWebsiteDetailsResourceType = "horizons"
+	AgencyHostingV1WebsitesH5gWebsiteDetailsResourceTypeNodejs    AgencyHostingV1WebsitesH5gWebsiteDetailsResourceType = "nodejs"
+	AgencyHostingV1WebsitesH5gWebsiteDetailsResourceTypeOther     AgencyHostingV1WebsitesH5gWebsiteDetailsResourceType = "other"
+	AgencyHostingV1WebsitesH5gWebsiteDetailsResourceTypeU4s       AgencyHostingV1WebsitesH5gWebsiteDetailsResourceType = "u4s"
+	AgencyHostingV1WebsitesH5gWebsiteDetailsResourceTypeWordpress AgencyHostingV1WebsitesH5gWebsiteDetailsResourceType = "wordpress"
+)
+
+// Valid indicates whether the value is a known member of the AgencyHostingV1WebsitesH5gWebsiteDetailsResourceType enum.
+func (e AgencyHostingV1WebsitesH5gWebsiteDetailsResourceType) Valid() bool {
+	switch e {
+	case AgencyHostingV1WebsitesH5gWebsiteDetailsResourceTypeBuilder:
+		return true
+	case AgencyHostingV1WebsitesH5gWebsiteDetailsResourceTypeHorizons:
+		return true
+	case AgencyHostingV1WebsitesH5gWebsiteDetailsResourceTypeNodejs:
+		return true
+	case AgencyHostingV1WebsitesH5gWebsiteDetailsResourceTypeOther:
+		return true
+	case AgencyHostingV1WebsitesH5gWebsiteDetailsResourceTypeU4s:
+		return true
+	case AgencyHostingV1WebsitesH5gWebsiteDetailsResourceTypeWordpress:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AgencyHostingV1WebsitesU4sWebsiteDetailsResourceType.
+const (
+	AgencyHostingV1WebsitesU4sWebsiteDetailsResourceTypeHorizons AgencyHostingV1WebsitesU4sWebsiteDetailsResourceType = "horizons"
+	AgencyHostingV1WebsitesU4sWebsiteDetailsResourceTypeU4s      AgencyHostingV1WebsitesU4sWebsiteDetailsResourceType = "u4s"
+)
+
+// Valid indicates whether the value is a known member of the AgencyHostingV1WebsitesU4sWebsiteDetailsResourceType enum.
+func (e AgencyHostingV1WebsitesU4sWebsiteDetailsResourceType) Valid() bool {
+	switch e {
+	case AgencyHostingV1WebsitesU4sWebsiteDetailsResourceTypeHorizons:
+		return true
+	case AgencyHostingV1WebsitesU4sWebsiteDetailsResourceTypeU4s:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AgencyHostingV1WebsitesWebsiteListItemResourcePlatform.
+const (
+	AgencyHostingV1WebsitesWebsiteListItemResourcePlatformBuilder AgencyHostingV1WebsitesWebsiteListItemResourcePlatform = "builder"
+	AgencyHostingV1WebsitesWebsiteListItemResourcePlatformH5g     AgencyHostingV1WebsitesWebsiteListItemResourcePlatform = "h5g"
+	AgencyHostingV1WebsitesWebsiteListItemResourcePlatformU4s     AgencyHostingV1WebsitesWebsiteListItemResourcePlatform = "u4s"
+)
+
+// Valid indicates whether the value is a known member of the AgencyHostingV1WebsitesWebsiteListItemResourcePlatform enum.
+func (e AgencyHostingV1WebsitesWebsiteListItemResourcePlatform) Valid() bool {
+	switch e {
+	case AgencyHostingV1WebsitesWebsiteListItemResourcePlatformBuilder:
+		return true
+	case AgencyHostingV1WebsitesWebsiteListItemResourcePlatformH5g:
+		return true
+	case AgencyHostingV1WebsitesWebsiteListItemResourcePlatformU4s:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for AgencyHostingV1WebsitesWebsiteProcessResourceStatus.
 const (
 	AgencyHostingV1WebsitesWebsiteProcessResourceStatusCompleted AgencyHostingV1WebsitesWebsiteProcessResourceStatus = "completed"
@@ -3101,16 +3188,16 @@ func (e VPSV1FirewallRulesStoreRequestSource) Valid() bool {
 
 // Defines values for VPSV1VirtualMachineVirtualMachineResourceActionsLock.
 const (
-	Locked   VPSV1VirtualMachineVirtualMachineResourceActionsLock = "locked"
-	Unlocked VPSV1VirtualMachineVirtualMachineResourceActionsLock = "unlocked"
+	VPSV1VirtualMachineVirtualMachineResourceActionsLockLocked   VPSV1VirtualMachineVirtualMachineResourceActionsLock = "locked"
+	VPSV1VirtualMachineVirtualMachineResourceActionsLockUnlocked VPSV1VirtualMachineVirtualMachineResourceActionsLock = "unlocked"
 )
 
 // Valid indicates whether the value is a known member of the VPSV1VirtualMachineVirtualMachineResourceActionsLock enum.
 func (e VPSV1VirtualMachineVirtualMachineResourceActionsLock) Valid() bool {
 	switch e {
-	case Locked:
+	case VPSV1VirtualMachineVirtualMachineResourceActionsLockLocked:
 		return true
-	case Unlocked:
+	case VPSV1VirtualMachineVirtualMachineResourceActionsLockUnlocked:
 		return true
 	default:
 		return false
@@ -3822,6 +3909,60 @@ func (e AgencyHostingListOrderResourceUsageMetricsV1ParamsTimeFrameHours) Valid(
 	}
 }
 
+// Defines values for AgencyHostingListAgencyPlanWebsitesV1ParamsStates.
+const (
+	AgencyHostingListAgencyPlanWebsitesV1ParamsStatesActive    AgencyHostingListAgencyPlanWebsitesV1ParamsStates = "active"
+	AgencyHostingListAgencyPlanWebsitesV1ParamsStatesDeleted   AgencyHostingListAgencyPlanWebsitesV1ParamsStates = "deleted"
+	AgencyHostingListAgencyPlanWebsitesV1ParamsStatesDeleting  AgencyHostingListAgencyPlanWebsitesV1ParamsStates = "deleting"
+	AgencyHostingListAgencyPlanWebsitesV1ParamsStatesLocked    AgencyHostingListAgencyPlanWebsitesV1ParamsStates = "locked"
+	AgencyHostingListAgencyPlanWebsitesV1ParamsStatesSuspended AgencyHostingListAgencyPlanWebsitesV1ParamsStates = "suspended"
+)
+
+// Valid indicates whether the value is a known member of the AgencyHostingListAgencyPlanWebsitesV1ParamsStates enum.
+func (e AgencyHostingListAgencyPlanWebsitesV1ParamsStates) Valid() bool {
+	switch e {
+	case AgencyHostingListAgencyPlanWebsitesV1ParamsStatesActive:
+		return true
+	case AgencyHostingListAgencyPlanWebsitesV1ParamsStatesDeleted:
+		return true
+	case AgencyHostingListAgencyPlanWebsitesV1ParamsStatesDeleting:
+		return true
+	case AgencyHostingListAgencyPlanWebsitesV1ParamsStatesLocked:
+		return true
+	case AgencyHostingListAgencyPlanWebsitesV1ParamsStatesSuspended:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AgencyHostingListAgencyPlanWebsitesV1ParamsWebsiteTypes.
+const (
+	AgencyHostingListAgencyPlanWebsitesV1ParamsWebsiteTypesBuilder   AgencyHostingListAgencyPlanWebsitesV1ParamsWebsiteTypes = "builder"
+	AgencyHostingListAgencyPlanWebsitesV1ParamsWebsiteTypesHorizons  AgencyHostingListAgencyPlanWebsitesV1ParamsWebsiteTypes = "horizons"
+	AgencyHostingListAgencyPlanWebsitesV1ParamsWebsiteTypesNodejs    AgencyHostingListAgencyPlanWebsitesV1ParamsWebsiteTypes = "nodejs"
+	AgencyHostingListAgencyPlanWebsitesV1ParamsWebsiteTypesOther     AgencyHostingListAgencyPlanWebsitesV1ParamsWebsiteTypes = "other"
+	AgencyHostingListAgencyPlanWebsitesV1ParamsWebsiteTypesWordpress AgencyHostingListAgencyPlanWebsitesV1ParamsWebsiteTypes = "wordpress"
+)
+
+// Valid indicates whether the value is a known member of the AgencyHostingListAgencyPlanWebsitesV1ParamsWebsiteTypes enum.
+func (e AgencyHostingListAgencyPlanWebsitesV1ParamsWebsiteTypes) Valid() bool {
+	switch e {
+	case AgencyHostingListAgencyPlanWebsitesV1ParamsWebsiteTypesBuilder:
+		return true
+	case AgencyHostingListAgencyPlanWebsitesV1ParamsWebsiteTypesHorizons:
+		return true
+	case AgencyHostingListAgencyPlanWebsitesV1ParamsWebsiteTypesNodejs:
+		return true
+	case AgencyHostingListAgencyPlanWebsitesV1ParamsWebsiteTypesOther:
+		return true
+	case AgencyHostingListAgencyPlanWebsitesV1ParamsWebsiteTypesWordpress:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for BillingGetCatalogItemListV1ParamsCategory.
 const (
 	BillingGetCatalogItemListV1ParamsCategoryDOMAIN BillingGetCatalogItemListV1ParamsCategory = "DOMAIN"
@@ -3969,6 +4110,33 @@ func (e HostingListOrdersV1ParamsStatuses) Valid() bool {
 	case HostingListOrdersV1ParamsStatusesDeleting:
 		return true
 	case HostingListOrdersV1ParamsStatusesSuspended:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingListWebsitesV1ParamsWebsiteTypes.
+const (
+	HostingListWebsitesV1ParamsWebsiteTypesBuilder   HostingListWebsitesV1ParamsWebsiteTypes = "builder"
+	HostingListWebsitesV1ParamsWebsiteTypesHorizons  HostingListWebsitesV1ParamsWebsiteTypes = "horizons"
+	HostingListWebsitesV1ParamsWebsiteTypesNodejs    HostingListWebsitesV1ParamsWebsiteTypes = "nodejs"
+	HostingListWebsitesV1ParamsWebsiteTypesOther     HostingListWebsitesV1ParamsWebsiteTypes = "other"
+	HostingListWebsitesV1ParamsWebsiteTypesWordpress HostingListWebsitesV1ParamsWebsiteTypes = "wordpress"
+)
+
+// Valid indicates whether the value is a known member of the HostingListWebsitesV1ParamsWebsiteTypes enum.
+func (e HostingListWebsitesV1ParamsWebsiteTypes) Valid() bool {
+	switch e {
+	case HostingListWebsitesV1ParamsWebsiteTypesBuilder:
+		return true
+	case HostingListWebsitesV1ParamsWebsiteTypesHorizons:
+		return true
+	case HostingListWebsitesV1ParamsWebsiteTypesNodejs:
+		return true
+	case HostingListWebsitesV1ParamsWebsiteTypesOther:
+		return true
+	case HostingListWebsitesV1ParamsWebsiteTypesWordpress:
 		return true
 	default:
 		return false
@@ -4876,6 +5044,32 @@ type AgencyHostingV1WebsitesBuildAssetsRequest struct {
 	ArchivePath string `json:"archive_path"`
 }
 
+// AgencyHostingV1WebsitesBuilderWebsiteDetailsResource defines model for AgencyHosting.V1.Websites.BuilderWebsiteDetailsResource.
+type AgencyHostingV1WebsitesBuilderWebsiteDetailsResource struct {
+	// CreatedAt Example: 2024-05-29T05:49:49.067239Z
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Id Builder ID
+	//
+	// Example: F1eWabGonyLa3162
+	Id *string `json:"id,omitempty"`
+
+	// Type Detected website type
+	//
+	// Example: builder
+	Type *string `json:"type,omitempty"`
+
+	// Username Account username
+	//
+	// Example: u123456789
+	Username *string `json:"username,omitempty"`
+
+	// Vhost Domain name
+	//
+	// Example: test.com
+	Vhost *string `json:"vhost,omitempty"`
+}
+
 // AgencyHostingV1WebsitesCronJobsCreateCronJobRequest defines model for AgencyHosting.V1.Websites.CronJobs.CreateCronJobRequest.
 type AgencyHostingV1WebsitesCronJobsCreateCronJobRequest struct {
 	// Command Command to run on the schedule. Must not contain pipe (|) or redirection (<, >) characters.
@@ -5002,6 +5196,87 @@ type AgencyHostingV1WebsitesDatabasesUsersCreateDatabaseUserRequest struct {
 	Password string `json:"password"`
 }
 
+// AgencyHostingV1WebsitesH5gWebsiteDetailsResource defines model for AgencyHosting.V1.Websites.H5gWebsiteDetailsResource.
+type AgencyHostingV1WebsitesH5gWebsiteDetailsResource struct {
+	// CreatedAt Example: 2024-05-29T05:49:49.067239Z
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Description Description
+	//
+	// Example: Very awesome website
+	Description *string `json:"description,omitempty"`
+
+	// Domains Website domains
+	Domains *[]map[string]interface{} `json:"domains,omitempty"`
+
+	// Flavor Setup flavor
+	//
+	// Example: wp-6.2.0
+	Flavor *string `json:"flavor,omitempty"`
+
+	// HorizonsUuid Horizons UUID (only for horizons websites)
+	HorizonsUuid *string `json:"horizons_uuid,omitempty"`
+
+	// Ipv4 IPv4 address
+	//
+	// Example: 192.161.10.1
+	Ipv4 *string `json:"ipv4,omitempty"`
+
+	// PreviewDomain Preview domain
+	PreviewDomain *map[string]interface{} `json:"preview_domain,omitempty"`
+
+	// Processes Ongoing website processes
+	Processes *[]map[string]interface{} `json:"processes,omitempty"`
+
+	// Settings Website settings, e.g. PHP configuration
+	Settings *map[string]interface{} `json:"settings,omitempty"`
+
+	// State Website state
+	//
+	// Example: active
+	State *AgencyHostingV1WebsitesH5gWebsiteDetailsResourceState `json:"state,omitempty"`
+
+	// Type Detected website type
+	//
+	// Example: wordpress
+	Type *AgencyHostingV1WebsitesH5gWebsiteDetailsResourceType `json:"type,omitempty"`
+
+	// Uid Website UID
+	//
+	// Example: zpwlGlp19
+	Uid *string `json:"uid,omitempty"`
+
+	// Username Username for this order
+	//
+	// Example: u123456789
+	Username *string `json:"username,omitempty"`
+
+	// Wordpress WordPress installation details
+	Wordpress *map[string]interface{} `json:"wordpress,omitempty"`
+}
+
+// AgencyHostingV1WebsitesH5gWebsiteDetailsResourceState Website state
+//
+// Example: active
+type AgencyHostingV1WebsitesH5gWebsiteDetailsResourceState string
+
+// AgencyHostingV1WebsitesH5gWebsiteDetailsResourceType Detected website type
+//
+// Example: wordpress
+type AgencyHostingV1WebsitesH5gWebsiteDetailsResourceType string
+
+// AgencyHostingV1WebsitesPlanResource Website plan details
+type AgencyHostingV1WebsitesPlanResource struct {
+	// DisplayName Example: Premium Hosting
+	DisplayName *string `json:"display_name,omitempty"`
+
+	// HasCdn Example: true
+	HasCdn *bool `json:"has_cdn,omitempty"`
+
+	// Name Example: hostinger_premium
+	Name *string `json:"name,omitempty"`
+}
+
 // AgencyHostingV1WebsitesSslCertResource defines model for AgencyHosting.V1.Websites.SslCertResource.
 type AgencyHostingV1WebsitesSslCertResource struct {
 	// CreatedAt Example: 2024-05-29T05:49:49+00:00
@@ -5015,6 +5290,56 @@ type AgencyHostingV1WebsitesSslCertResource struct {
 	// Example: ["test.com","www.test.com"]
 	Names *[]string `json:"names,omitempty"`
 }
+
+// AgencyHostingV1WebsitesU4sWebsiteDetailsResource defines model for AgencyHosting.V1.Websites.U4sWebsiteDetailsResource.
+type AgencyHostingV1WebsitesU4sWebsiteDetailsResource struct {
+	// Domains Application domains
+	Domains *[]map[string]interface{} `json:"domains,omitempty"`
+
+	// HorizonsUuid Horizons UUID
+	HorizonsUuid *string `json:"horizons_uuid,omitempty"`
+
+	// Port Application port
+	//
+	// Example: 3000
+	Port *int `json:"port,omitempty"`
+
+	// PreviewDomain Preview domain
+	PreviewDomain *map[string]interface{} `json:"preview_domain,omitempty"`
+
+	// Runtime Application runtime
+	//
+	// Example: u4s_node20
+	Runtime *string `json:"runtime,omitempty"`
+
+	// State Application state
+	//
+	// Example: active
+	State *string `json:"state,omitempty"`
+
+	// Title Application title
+	//
+	// Example: My Node App
+	Title *string `json:"title,omitempty"`
+
+	// Type Detected website type
+	//
+	// Example: u4s
+	Type *AgencyHostingV1WebsitesU4sWebsiteDetailsResourceType `json:"type,omitempty"`
+
+	// Uuid Application UUID
+	//
+	// Example: 550e8400-e29b-41d4-a716-446655440000
+	Uuid *string `json:"uuid,omitempty"`
+}
+
+// AgencyHostingV1WebsitesU4sWebsiteDetailsResourceType Detected website type
+//
+// Example: u4s
+type AgencyHostingV1WebsitesU4sWebsiteDetailsResourceType string
+
+// AgencyHostingV1WebsitesWebsiteCollection Array of [`AgencyHosting.V1.Websites.WebsiteListItemResource`](#model/agencyhostingv1websiteswebsitelistitemresource)
+type AgencyHostingV1WebsitesWebsiteCollection = []AgencyHostingV1WebsitesWebsiteListItemResource
 
 // AgencyHostingV1WebsitesWebsiteDomainDetailsCollection Array of [`AgencyHosting.V1.Websites.WebsiteDomainDetailsResource`](#model/agencyhostingv1websiteswebsitedomaindetailsresource)
 type AgencyHostingV1WebsitesWebsiteDomainDetailsCollection = []AgencyHostingV1WebsitesWebsiteDomainDetailsResource
@@ -5054,6 +5379,52 @@ type AgencyHostingV1WebsitesWebsiteDomainDetailsResource_CustomSslCert struct {
 type AgencyHostingV1WebsitesWebsiteDomainDetailsResource_SslCert struct {
 	union json.RawMessage
 }
+
+// AgencyHostingV1WebsitesWebsiteListItemResource Website item. The `details` shape differs per platform — see the `platform` field.
+type AgencyHostingV1WebsitesWebsiteListItemResource struct {
+	// ClientId Example: 123
+	ClientId int `json:"client_id"`
+
+	// CreatedAt Example: 2024-05-29T05:49:49.067239Z
+	CreatedAt time.Time `json:"created_at"`
+
+	// Details Platform-specific website details. Shape depends on `platform`.
+	Details AgencyHostingV1WebsitesWebsiteListItemResource_Details `json:"details"`
+
+	// Id Example: zpwlGlp19
+	Id string `json:"id"`
+
+	// OrderId Example: 1234
+	OrderId int `json:"order_id"`
+
+	// Plan Website plan details
+	Plan AgencyHostingV1WebsitesPlanResource `json:"plan"`
+
+	// Platform Website platform
+	//
+	// Example: h5g
+	Platform AgencyHostingV1WebsitesWebsiteListItemResourcePlatform `json:"platform"`
+
+	// State Website state
+	//
+	// Example: active
+	State string `json:"state"`
+
+	// SuspensionReason Reason for suspension, only populated for payment related suspensions
+	//
+	// Example: non_payment
+	SuspensionReason *string `json:"suspension_reason"`
+}
+
+// AgencyHostingV1WebsitesWebsiteListItemResource_Details Platform-specific website details. Shape depends on `platform`.
+type AgencyHostingV1WebsitesWebsiteListItemResource_Details struct {
+	union json.RawMessage
+}
+
+// AgencyHostingV1WebsitesWebsiteListItemResourcePlatform Website platform
+//
+// Example: h5g
+type AgencyHostingV1WebsitesWebsiteListItemResourcePlatform string
 
 // AgencyHostingV1WebsitesWebsiteOrderPlanResource defines model for AgencyHosting.V1.Websites.WebsiteOrderPlanResource.
 type AgencyHostingV1WebsitesWebsiteOrderPlanResource struct {
@@ -12573,6 +12944,18 @@ type AgencyDatabaseNamePath = string
 // AgencyDatabaseUserNamePath Example: my_user
 type AgencyDatabaseUserNamePath = string
 
+// AgencyHostingDomainFilter Example: example.com
+type AgencyHostingDomainFilter = string
+
+// AgencyHostingOrderIds Example: [12345,67890]
+type AgencyHostingOrderIds = []int
+
+// AgencyHostingStates Example: ["active"]
+type AgencyHostingStates = []string
+
+// AgencyHostingWebsiteTypes Example: ["wordpress","nodejs"]
+type AgencyHostingWebsiteTypes = []string
+
 // AgencyTimeFrameDays Example: 7
 type AgencyTimeFrameDays int
 
@@ -12638,6 +13021,9 @@ type FromDomain = string
 
 // GroupUuid Example: 550e8400-e29b-41d4-a716-446655440000
 type GroupUuid = string
+
+// HostingWebsiteTypes Example: ["wordpress","nodejs"]
+type HostingWebsiteTypes = []string
 
 // IpAddressId Example: 246547
 type IpAddressId = int
@@ -12933,6 +13319,33 @@ type AgencyHostingListOrderResourceUsageMetricsV1Params struct {
 // AgencyHostingListOrderResourceUsageMetricsV1ParamsTimeFrameHours defines parameters for AgencyHostingListOrderResourceUsageMetricsV1.
 type AgencyHostingListOrderResourceUsageMetricsV1ParamsTimeFrameHours int
 
+// AgencyHostingListAgencyPlanWebsitesV1Params defines parameters for AgencyHostingListAgencyPlanWebsitesV1.
+type AgencyHostingListAgencyPlanWebsitesV1Params struct {
+	// Page Page number
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+
+	// PerPage Number of items per page
+	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
+
+	// OrderIds Filter by order IDs. Accepts a comma-separated list.
+	OrderIds *AgencyHostingOrderIds `form:"order_ids,omitempty" json:"order_ids,omitempty"`
+
+	// States Filter by website state. Accepts a comma-separated list.
+	States *AgencyHostingStates `form:"states,omitempty" json:"states,omitempty"`
+
+	// WebsiteTypes Filter by detected website type, e.g. wordpress,nodejs. Accepts a comma-separated list.
+	WebsiteTypes *AgencyHostingWebsiteTypes `form:"website_types,omitempty" json:"website_types,omitempty"`
+
+	// Domain Filter by domain name (case-insensitive substring match)
+	Domain *AgencyHostingDomainFilter `form:"domain,omitempty" json:"domain,omitempty"`
+}
+
+// AgencyHostingListAgencyPlanWebsitesV1ParamsStates defines parameters for AgencyHostingListAgencyPlanWebsitesV1.
+type AgencyHostingListAgencyPlanWebsitesV1ParamsStates string
+
+// AgencyHostingListAgencyPlanWebsitesV1ParamsWebsiteTypes defines parameters for AgencyHostingListAgencyPlanWebsitesV1.
+type AgencyHostingListAgencyPlanWebsitesV1ParamsWebsiteTypes string
+
 // AgencyHostingListWebsiteCronJobsV1Params defines parameters for AgencyHostingListWebsiteCronJobsV1.
 type AgencyHostingListWebsiteCronJobsV1Params struct {
 	// Page Page number
@@ -12989,7 +13402,7 @@ type HostingListAccountDatabasesV1Params struct {
 	// PerPage Number of items per page
 	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
 
-	// Domain Filter by domain name (exact match)
+	// Domain Filter by domain name (case-insensitive substring match)
 	Domain *DomainFilter `form:"domain,omitempty" json:"domain,omitempty"`
 
 	// IsAssigned When used with domain, return only databases assigned to that domain.
@@ -13163,16 +13576,22 @@ type HostingListWebsitesV1Params struct {
 	// IsEnabled Filter by enabled status
 	IsEnabled *IsEnabled `form:"is_enabled,omitempty" json:"is_enabled,omitempty"`
 
-	// Domain Filter by domain name (exact match)
+	// Domain Filter by domain name (case-insensitive substring match)
 	Domain *DomainFilter `form:"domain,omitempty" json:"domain,omitempty"`
+
+	// WebsiteTypes Filter by detected website type, e.g. wordpress,nodejs. Accepts a comma-separated list.
+	WebsiteTypes *HostingWebsiteTypes `form:"website_types,omitempty" json:"website_types,omitempty"`
 }
+
+// HostingListWebsitesV1ParamsWebsiteTypes defines parameters for HostingListWebsitesV1.
+type HostingListWebsitesV1ParamsWebsiteTypes string
 
 // HostingListWordPressInstallationsV1Params defines parameters for HostingListWordPressInstallationsV1.
 type HostingListWordPressInstallationsV1Params struct {
 	// Username Filter by specific username
 	Username *Username `form:"username,omitempty" json:"username,omitempty"`
 
-	// Domain Filter by domain name (exact match)
+	// Domain Filter by domain name (case-insensitive substring match)
 	Domain *DomainFilter `form:"domain,omitempty" json:"domain,omitempty"`
 
 	// Ownership Filter by ownership type. Defaults to "owned". Use "all" to include both owned and managed installations.
@@ -13190,7 +13609,7 @@ type HostingSearchWordPressPluginsV1Params struct {
 
 // HostingCheckIfWooCommerceIsInstalledV1Params defines parameters for HostingCheckIfWooCommerceIsInstalledV1.
 type HostingCheckIfWooCommerceIsInstalledV1Params struct {
-	// Domain Filter by domain name (exact match)
+	// Domain Filter by domain name (case-insensitive substring match)
 	Domain *DomainFilter `form:"domain,omitempty" json:"domain,omitempty"`
 }
 
@@ -14133,6 +14552,94 @@ func (t AgencyHostingV1WebsitesWebsiteDomainDetailsResource_SslCert) MarshalJSON
 }
 
 func (t *AgencyHostingV1WebsitesWebsiteDomainDetailsResource_SslCert) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsAgencyHostingV1WebsitesH5gWebsiteDetailsResource returns the union data inside the AgencyHostingV1WebsitesWebsiteListItemResource_Details as a AgencyHostingV1WebsitesH5gWebsiteDetailsResource
+func (t AgencyHostingV1WebsitesWebsiteListItemResource_Details) AsAgencyHostingV1WebsitesH5gWebsiteDetailsResource() (AgencyHostingV1WebsitesH5gWebsiteDetailsResource, error) {
+	var body AgencyHostingV1WebsitesH5gWebsiteDetailsResource
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromAgencyHostingV1WebsitesH5gWebsiteDetailsResource overwrites any union data inside the AgencyHostingV1WebsitesWebsiteListItemResource_Details as the provided AgencyHostingV1WebsitesH5gWebsiteDetailsResource
+func (t *AgencyHostingV1WebsitesWebsiteListItemResource_Details) FromAgencyHostingV1WebsitesH5gWebsiteDetailsResource(v AgencyHostingV1WebsitesH5gWebsiteDetailsResource) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeAgencyHostingV1WebsitesH5gWebsiteDetailsResource performs a merge with any union data inside the AgencyHostingV1WebsitesWebsiteListItemResource_Details, using the provided AgencyHostingV1WebsitesH5gWebsiteDetailsResource
+func (t *AgencyHostingV1WebsitesWebsiteListItemResource_Details) MergeAgencyHostingV1WebsitesH5gWebsiteDetailsResource(v AgencyHostingV1WebsitesH5gWebsiteDetailsResource) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsAgencyHostingV1WebsitesBuilderWebsiteDetailsResource returns the union data inside the AgencyHostingV1WebsitesWebsiteListItemResource_Details as a AgencyHostingV1WebsitesBuilderWebsiteDetailsResource
+func (t AgencyHostingV1WebsitesWebsiteListItemResource_Details) AsAgencyHostingV1WebsitesBuilderWebsiteDetailsResource() (AgencyHostingV1WebsitesBuilderWebsiteDetailsResource, error) {
+	var body AgencyHostingV1WebsitesBuilderWebsiteDetailsResource
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromAgencyHostingV1WebsitesBuilderWebsiteDetailsResource overwrites any union data inside the AgencyHostingV1WebsitesWebsiteListItemResource_Details as the provided AgencyHostingV1WebsitesBuilderWebsiteDetailsResource
+func (t *AgencyHostingV1WebsitesWebsiteListItemResource_Details) FromAgencyHostingV1WebsitesBuilderWebsiteDetailsResource(v AgencyHostingV1WebsitesBuilderWebsiteDetailsResource) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeAgencyHostingV1WebsitesBuilderWebsiteDetailsResource performs a merge with any union data inside the AgencyHostingV1WebsitesWebsiteListItemResource_Details, using the provided AgencyHostingV1WebsitesBuilderWebsiteDetailsResource
+func (t *AgencyHostingV1WebsitesWebsiteListItemResource_Details) MergeAgencyHostingV1WebsitesBuilderWebsiteDetailsResource(v AgencyHostingV1WebsitesBuilderWebsiteDetailsResource) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsAgencyHostingV1WebsitesU4sWebsiteDetailsResource returns the union data inside the AgencyHostingV1WebsitesWebsiteListItemResource_Details as a AgencyHostingV1WebsitesU4sWebsiteDetailsResource
+func (t AgencyHostingV1WebsitesWebsiteListItemResource_Details) AsAgencyHostingV1WebsitesU4sWebsiteDetailsResource() (AgencyHostingV1WebsitesU4sWebsiteDetailsResource, error) {
+	var body AgencyHostingV1WebsitesU4sWebsiteDetailsResource
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromAgencyHostingV1WebsitesU4sWebsiteDetailsResource overwrites any union data inside the AgencyHostingV1WebsitesWebsiteListItemResource_Details as the provided AgencyHostingV1WebsitesU4sWebsiteDetailsResource
+func (t *AgencyHostingV1WebsitesWebsiteListItemResource_Details) FromAgencyHostingV1WebsitesU4sWebsiteDetailsResource(v AgencyHostingV1WebsitesU4sWebsiteDetailsResource) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeAgencyHostingV1WebsitesU4sWebsiteDetailsResource performs a merge with any union data inside the AgencyHostingV1WebsitesWebsiteListItemResource_Details, using the provided AgencyHostingV1WebsitesU4sWebsiteDetailsResource
+func (t *AgencyHostingV1WebsitesWebsiteListItemResource_Details) MergeAgencyHostingV1WebsitesU4sWebsiteDetailsResource(v AgencyHostingV1WebsitesU4sWebsiteDetailsResource) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t AgencyHostingV1WebsitesWebsiteListItemResource_Details) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *AgencyHostingV1WebsitesWebsiteListItemResource_Details) UnmarshalJSON(b []byte) error {
 	err := t.union.UnmarshalJSON(b)
 	return err
 }
@@ -15100,6 +15607,25 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/websites/setups/{setup_uuid} (the `AgencyHostingGetWebsiteSetupStatusV1` operationId).
 	AgencyHostingGetWebsiteSetupStatusV1(ctx context.Context, orderId OrderIdPath, setupUuid SetupUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingListAgencyPlanWebsitesV1 List Agency Plan websites
+	//
+	// Retrieve a paginated list of Agency Plan websites (H5G, Builder, and Horizons) accessible to
+	// the authenticated client.
+	//
+	// This endpoint returns websites from your hosting accounts as well as
+	// websites from other client hosting accounts that have shared access
+	// with you.
+	//
+	// The response shape differs per platform — see the `platform` field on each item.
+	//
+	// Use `website_types` to list only websites of a given detected type, e.g. only
+	// WordPress websites (`website_types=wordpress`) or only Node.js websites
+	// (`website_types=nodejs`). Combine with `order_ids`, `states`, or `domain` for more
+	// targeted results.
+	//
+	// Corresponds with GET /api/agency-hosting/v1/websites (the `AgencyHostingListAgencyPlanWebsitesV1` operationId).
+	AgencyHostingListAgencyPlanWebsitesV1(ctx context.Context, params *AgencyHostingListAgencyPlanWebsitesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// AgencyHostingDeleteWebsiteV1 Delete website
 	//
@@ -18489,8 +19015,11 @@ type ClientInterface interface {
 	// `vhost_type`, `username`, and `root_directory`, only apply to
 	// CloudLinux websites and are null for other platforms.
 	//
-	// Use the available query parameters to filter results by username,
-	// order ID, enabled status, or domain name for more targeted results.
+	// Use `website_types` to list only websites of a given detected type, e.g. only
+	// WordPress websites (`website_types=wordpress`) or only Node.js websites
+	// (`website_types=nodejs`). Combine with the other available query parameters to
+	// filter by username, order ID, enabled status, or domain name for more targeted
+	// results.
 	//
 	// Corresponds with GET /api/hosting/v1/websites (the `HostingListWebsitesV1` operationId).
 	HostingListWebsitesV1(ctx context.Context, params *HostingListWebsitesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -21007,6 +21536,35 @@ func (c *Client) AgencyHostingCreateANewWebsiteV1(ctx context.Context, orderId O
 // Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/websites/setups/{setup_uuid} (the `AgencyHostingGetWebsiteSetupStatusV1` operationId).
 func (c *Client) AgencyHostingGetWebsiteSetupStatusV1(ctx context.Context, orderId OrderIdPath, setupUuid SetupUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewAgencyHostingGetWebsiteSetupStatusV1Request(c.Server, orderId, setupUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// AgencyHostingListAgencyPlanWebsitesV1 List Agency Plan websites
+//
+// Retrieve a paginated list of Agency Plan websites (H5G, Builder, and Horizons) accessible to
+// the authenticated client.
+//
+// This endpoint returns websites from your hosting accounts as well as
+// websites from other client hosting accounts that have shared access
+// with you.
+//
+// The response shape differs per platform — see the `platform` field on each item.
+//
+// Use `website_types` to list only websites of a given detected type, e.g. only
+// WordPress websites (`website_types=wordpress`) or only Node.js websites
+// (`website_types=nodejs`). Combine with `order_ids`, `states`, or `domain` for more
+// targeted results.
+//
+// Corresponds with GET /api/agency-hosting/v1/websites (the `AgencyHostingListAgencyPlanWebsitesV1` operationId).
+func (c *Client) AgencyHostingListAgencyPlanWebsitesV1(ctx context.Context, params *AgencyHostingListAgencyPlanWebsitesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingListAgencyPlanWebsitesV1Request(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -26971,8 +27529,11 @@ func (c *Client) HostingListOrdersV1(ctx context.Context, params *HostingListOrd
 // `vhost_type`, `username`, and `root_directory`, only apply to
 // CloudLinux websites and are null for other platforms.
 //
-// Use the available query parameters to filter results by username,
-// order ID, enabled status, or domain name for more targeted results.
+// Use `website_types` to list only websites of a given detected type, e.g. only
+// WordPress websites (`website_types=wordpress`) or only Node.js websites
+// (`website_types=nodejs`). Combine with the other available query parameters to
+// filter by username, order ID, enabled status, or domain name for more targeted
+// results.
 //
 // Corresponds with GET /api/hosting/v1/websites (the `HostingListWebsitesV1` operationId).
 func (c *Client) HostingListWebsitesV1(ctx context.Context, params *HostingListWebsitesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -31652,6 +32213,120 @@ func NewAgencyHostingGetWebsiteSetupStatusV1Request(server string, orderId Order
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAgencyHostingListAgencyPlanWebsitesV1Request constructs an http.Request for the AgencyHostingListAgencyPlanWebsitesV1 method
+func NewAgencyHostingListAgencyPlanWebsitesV1Request(server string, params *AgencyHostingListAgencyPlanWebsitesV1Params) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Page != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page", *params.Page, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PerPage != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "per_page", *params.PerPage, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.OrderIds != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", false, "order_ids", *params.OrderIds, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "array", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.States != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", false, "states", *params.States, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "array", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.WebsiteTypes != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", false, "website_types", *params.WebsiteTypes, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "array", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Domain != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "domain", *params.Domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
 	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
@@ -40036,6 +40711,18 @@ func NewHostingListWebsitesV1Request(server string, params *HostingListWebsitesV
 
 		}
 
+		if params.WebsiteTypes != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", false, "website_types", *params.WebsiteTypes, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "array", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
 		if encoded := queryValues.Encode(); encoded != "" {
 			rawQueryFragments = append(rawQueryFragments, encoded)
 		}
@@ -47912,6 +48599,27 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /api/agency-hosting/v1/orders/{order_id}/websites/setups/{setup_uuid} (the `AgencyHostingGetWebsiteSetupStatusV1` operationId).
 	AgencyHostingGetWebsiteSetupStatusV1WithResponse(ctx context.Context, orderId OrderIdPath, setupUuid SetupUuid, reqEditors ...RequestEditorFn) (*AgencyHostingGetWebsiteSetupStatusV1Response, error)
 
+	// AgencyHostingListAgencyPlanWebsitesV1WithResponse List Agency Plan websites
+	//
+	// Retrieve a paginated list of Agency Plan websites (H5G, Builder, and Horizons) accessible to
+	// the authenticated client.
+	//
+	// This endpoint returns websites from your hosting accounts as well as
+	// websites from other client hosting accounts that have shared access
+	// with you.
+	//
+	// The response shape differs per platform — see the `platform` field on each item.
+	//
+	// Use `website_types` to list only websites of a given detected type, e.g. only
+	// WordPress websites (`website_types=wordpress`) or only Node.js websites
+	// (`website_types=nodejs`). Combine with `order_ids`, `states`, or `domain` for more
+	// targeted results.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/agency-hosting/v1/websites (the `AgencyHostingListAgencyPlanWebsitesV1` operationId).
+	AgencyHostingListAgencyPlanWebsitesV1WithResponse(ctx context.Context, params *AgencyHostingListAgencyPlanWebsitesV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListAgencyPlanWebsitesV1Response, error)
+
 	// AgencyHostingDeleteWebsiteV1WithResponse Delete website
 	//
 	// Permanently deletes an Agency Plan website. Deletion is processed asynchronously: the
@@ -51504,8 +52212,11 @@ type ClientWithResponsesInterface interface {
 	// `vhost_type`, `username`, and `root_directory`, only apply to
 	// CloudLinux websites and are null for other platforms.
 	//
-	// Use the available query parameters to filter results by username,
-	// order ID, enabled status, or domain name for more targeted results.
+	// Use `website_types` to list only websites of a given detected type, e.g. only
+	// WordPress websites (`website_types=wordpress`) or only Node.js websites
+	// (`website_types=nodejs`). Combine with the other available query parameters to
+	// filter by username, order ID, enabled status, or domain name for more targeted
+	// results.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
@@ -54519,6 +55230,69 @@ func (r AgencyHostingGetWebsiteSetupStatusV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r AgencyHostingGetWebsiteSetupStatusV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingListAgencyPlanWebsitesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *struct {
+		// Data Array of [`AgencyHosting.V1.Websites.WebsiteListItemResource`](#model/agencyhostingv1websiteswebsitelistitemresource)
+		Data *AgencyHostingV1WebsitesWebsiteCollection `json:"data,omitempty"`
+		Meta *CommonSchemaPaginationMetaSchema         `json:"meta,omitempty"`
+	}
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r AgencyHostingListAgencyPlanWebsitesV1Response) GetJSON200() *struct {
+	// Data Array of [`AgencyHosting.V1.Websites.WebsiteListItemResource`](#model/agencyhostingv1websiteswebsitelistitemresource)
+	Data *AgencyHostingV1WebsitesWebsiteCollection `json:"data,omitempty"`
+	Meta *CommonSchemaPaginationMetaSchema         `json:"meta,omitempty"`
+} {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r AgencyHostingListAgencyPlanWebsitesV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r AgencyHostingListAgencyPlanWebsitesV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r AgencyHostingListAgencyPlanWebsitesV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingListAgencyPlanWebsitesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingListAgencyPlanWebsitesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingListAgencyPlanWebsitesV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -74847,6 +75621,33 @@ func (c *ClientWithResponses) AgencyHostingGetWebsiteSetupStatusV1WithResponse(c
 	return ParseAgencyHostingGetWebsiteSetupStatusV1Response(rsp)
 }
 
+// AgencyHostingListAgencyPlanWebsitesV1WithResponse List Agency Plan websites
+//
+// Retrieve a paginated list of Agency Plan websites (H5G, Builder, and Horizons) accessible to
+// the authenticated client.
+//
+// This endpoint returns websites from your hosting accounts as well as
+// websites from other client hosting accounts that have shared access
+// with you.
+//
+// The response shape differs per platform — see the `platform` field on each item.
+//
+// Use `website_types` to list only websites of a given detected type, e.g. only
+// WordPress websites (`website_types=wordpress`) or only Node.js websites
+// (`website_types=nodejs`). Combine with `order_ids`, `states`, or `domain` for more
+// targeted results.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/agency-hosting/v1/websites (the `AgencyHostingListAgencyPlanWebsitesV1` operationId).
+func (c *ClientWithResponses) AgencyHostingListAgencyPlanWebsitesV1WithResponse(ctx context.Context, params *AgencyHostingListAgencyPlanWebsitesV1Params, reqEditors ...RequestEditorFn) (*AgencyHostingListAgencyPlanWebsitesV1Response, error) {
+	rsp, err := c.AgencyHostingListAgencyPlanWebsitesV1(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingListAgencyPlanWebsitesV1Response(rsp)
+}
+
 // AgencyHostingDeleteWebsiteV1WithResponse Delete website
 //
 // Permanently deletes an Agency Plan website. Deletion is processed asynchronously: the
@@ -79981,8 +80782,11 @@ func (c *ClientWithResponses) HostingListOrdersV1WithResponse(ctx context.Contex
 // `vhost_type`, `username`, and `root_directory`, only apply to
 // CloudLinux websites and are null for other platforms.
 //
-// Use the available query parameters to filter results by username,
-// order ID, enabled status, or domain name for more targeted results.
+// Use `website_types` to list only websites of a given detected type, e.g. only
+// WordPress websites (`website_types=wordpress`) or only Node.js websites
+// (`website_types=nodejs`). Combine with the other available query parameters to
+// filter by username, order ID, enabled status, or domain name for more targeted
+// results.
 //
 // Returns a wrapper object for the known response body format(s).
 //
@@ -84023,6 +84827,50 @@ func ParseAgencyHostingGetWebsiteSetupStatusV1Response(rsp *http.Response) (*Age
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest AgencyHostingV1SetupsWebsiteSetupStatusResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingListAgencyPlanWebsitesV1Response parses an HTTP response from a AgencyHostingListAgencyPlanWebsitesV1WithResponse call
+func ParseAgencyHostingListAgencyPlanWebsitesV1Response(rsp *http.Response) (*AgencyHostingListAgencyPlanWebsitesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingListAgencyPlanWebsitesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			// Data Array of [`AgencyHosting.V1.Websites.WebsiteListItemResource`](#model/agencyhostingv1websiteswebsitelistitemresource)
+			Data *AgencyHostingV1WebsitesWebsiteCollection `json:"data,omitempty"`
+			Meta *CommonSchemaPaginationMetaSchema         `json:"meta,omitempty"`
+		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

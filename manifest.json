@@ -444,6 +444,11 @@
     "method": "GET",
     "path": "/api/agency-hosting/v1/orders/{order_id}/disk-usage-metrics"
   },
+  "agency-hosting_listAgencyPlanWebsitesV1": {
+    "command": "hostinger agency-hosting websites list-plan",
+    "method": "GET",
+    "path": "/api/agency-hosting/v1/websites"
+  },
   "agency-hosting_listAvailableDatacentersV1": {
     "command": "hostinger agency-hosting datacenters list",
     "method": "GET",

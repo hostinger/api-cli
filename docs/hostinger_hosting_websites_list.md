@@ -17,8 +17,11 @@ website detected on the underlying platform (`wordpress`, `builder`,
 `vhost_type`, `username`, and `root_directory`, only apply to
 CloudLinux websites and are null for other platforms.
 
-Use the available query parameters to filter results by username,
-order ID, enabled status, or domain name for more targeted results.
+Use `website_types` to list only websites of a given detected type, e.g. only
+WordPress websites (`website_types=wordpress`) or only Node.js websites
+(`website_types=nodejs`). Combine with the other available query parameters to
+filter by username, order ID, enabled status, or domain name for more targeted
+results.
 
 ```
 hostinger hosting websites list [flags]
@@ -27,13 +30,14 @@ hostinger hosting websites list [flags]
 ### Options
 
 ```
-      --domain string     Filter by domain name (exact match)
-  -h, --help              help for list
-      --is-enabled        Filter by enabled status
-      --order-id int      Order ID
-      --page int          Page number
-      --per-page int      Number of items per page (default 25)
-      --username string   Filter by specific username
+      --domain string           Filter by domain name (case-insensitive substring match)
+  -h, --help                    help for list
+      --is-enabled              Filter by enabled status
+      --order-id int            Order ID
+      --page int                Page number
+      --per-page int            Number of items per page (default 25)
+      --username string         Filter by specific username
+      --website-types strings   Filter by detected website type, e.g. wordpress,nodejs. Accepts a comma-separated list. (one of: wordpress, builder, horizons, nodejs, other)
 ```
 
 ### Options inherited from parent commands

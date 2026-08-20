@@ -25,7 +25,7 @@ var CheckIfWooCommerceIsInstalledCmd = &cobra.Command{
 }
 
 func init() {
-	CheckIfWooCommerceIsInstalledCmd.Flags().StringP("domain", "", "", "Filter by domain name (exact match)")
+	CheckIfWooCommerceIsInstalledCmd.Flags().StringP("domain", "", "", "Filter by domain name (case-insensitive substring match)")
 }
 
 func checkIfWooCommerceIsInstalledParams(cmd *cobra.Command) *client.HostingCheckIfWooCommerceIsInstalledV1Params {

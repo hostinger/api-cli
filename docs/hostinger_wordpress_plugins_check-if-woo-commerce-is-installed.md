@@ -14,7 +14,7 @@ hostinger wordpress plugins check-if-woo-commerce-is-installed [flags]
 ### Options
 
 ```
-      --domain string   Filter by domain name (exact match)
+      --domain string   Filter by domain name (case-insensitive substring match)
   -h, --help            help for check-if-woo-commerce-is-installed
 ```
 

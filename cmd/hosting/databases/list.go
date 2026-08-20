@@ -28,7 +28,7 @@ var ListCmd = &cobra.Command{
 func init() {
 	ListCmd.Flags().IntP("page", "", 0, "Page number")
 	ListCmd.Flags().IntP("per-page", "", 25, "Number of items per page")
-	ListCmd.Flags().StringP("domain", "", "", "Filter by domain name (exact match)")
+	ListCmd.Flags().StringP("domain", "", "", "Filter by domain name (case-insensitive substring match)")
 	ListCmd.Flags().BoolP("is-assigned", "", false, "When used with domain, return only databases assigned to that domain.")
 	ListCmd.Flags().StringP("search", "", "", "Search databases by name, user, or creation date.")
 }

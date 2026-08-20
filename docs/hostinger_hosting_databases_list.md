@@ -15,7 +15,7 @@ hostinger hosting databases list <username> [flags]
 ### Options
 
 ```
-      --domain string   Filter by domain name (exact match)
+      --domain string   Filter by domain name (case-insensitive substring match)
   -h, --help            help for list
       --is-assigned     When used with domain, return only databases assigned to that domain.
       --page int        Page number

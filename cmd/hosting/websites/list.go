@@ -13,7 +13,7 @@ import (
 var ListCmd = &cobra.Command{
 	Use:   "list",
 	Short: "List websites",
-	Long:  "Retrieve a paginated list of websites (CloudLinux, Builder, and Horizons) accessible to the\nauthenticated client.\n\nThis endpoint returns websites from your hosting accounts as well as\nwebsites from other client hosting accounts that have shared access\nwith you.\n\nEach website includes a `website_type` field describing the type of\nwebsite detected on the underlying platform (`wordpress`, `builder`,\n`horizons`, `nodejs`, or `other`). Some fields, such as\n`vhost_type`, `username`, and `root_directory`, only apply to\nCloudLinux websites and are null for other platforms.\n\nUse the available query parameters to filter results by username,\norder ID, enabled status, or domain name for more targeted results.",
+	Long:  "Retrieve a paginated list of websites (CloudLinux, Builder, and Horizons) accessible to the\nauthenticated client.\n\nThis endpoint returns websites from your hosting accounts as well as\nwebsites from other client hosting accounts that have shared access\nwith you.\n\nEach website includes a `website_type` field describing the type of\nwebsite detected on the underlying platform (`wordpress`, `builder`,\n`horizons`, `nodejs`, or `other`). Some fields, such as\n`vhost_type`, `username`, and `root_directory`, only apply to\nCloudLinux websites and are null for other platforms.\n\nUse `website_types` to list only websites of a given detected type, e.g. only\nWordPress websites (`website_types=wordpress`) or only Node.js websites\n(`website_types=nodejs`). Combine with the other available query parameters to\nfilter by username, order ID, enabled status, or domain name for more targeted\nresults.",
 	Run: func(cmd *cobra.Command, args []string) {
 		r, err := api.Request().HostingListWebsitesV1WithResponse(context.TODO(), listParams(cmd))
 		if err != nil {
@@ -30,7 +30,8 @@ func init() {
 	ListCmd.Flags().StringP("username", "", "", "Filter by specific username")
 	ListCmd.Flags().IntP("order-id", "", 0, "Order ID")
 	ListCmd.Flags().BoolP("is-enabled", "", false, "Filter by enabled status")
-	ListCmd.Flags().StringP("domain", "", "", "Filter by domain name (exact match)")
+	ListCmd.Flags().StringP("domain", "", "", "Filter by domain name (case-insensitive substring match)")
+	ListCmd.Flags().StringSliceP("website-types", "", nil, "Filter by detected website type, e.g. wordpress,nodejs. Accepts a comma-separated list. (one of: wordpress, builder, horizons, nodejs, other)")
 }
 
 func listParams(cmd *cobra.Command) *client.HostingListWebsitesV1Params {
@@ -58,6 +59,10 @@ func listParams(cmd *cobra.Command) *client.HostingListWebsitesV1Params {
 	if cmd.Flags().Changed("domain") {
 		v, _ := cmd.Flags().GetString("domain")
 		params.Domain = &v
+	}
+	if cmd.Flags().Changed("website-types") {
+		v, _ := cmd.Flags().GetStringSlice("website-types")
+		params.WebsiteTypes = &v
 	}
 	return params
 }
