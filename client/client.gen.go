@@ -1176,120 +1176,6 @@ func (e HostingV1NodeJsBuildSettingsResourcePackageManager) Valid() bool {
 	}
 }
 
-// Defines values for HostingV1NodeJsCreateFromArchiveRequestAppType.
-const (
-	HostingV1NodeJsCreateFromArchiveRequestAppTypeAngular        HostingV1NodeJsCreateFromArchiveRequestAppType = "angular"
-	HostingV1NodeJsCreateFromArchiveRequestAppTypeAstro          HostingV1NodeJsCreateFromArchiveRequestAppType = "astro"
-	HostingV1NodeJsCreateFromArchiveRequestAppTypeCreateReactApp HostingV1NodeJsCreateFromArchiveRequestAppType = "create-react-app"
-	HostingV1NodeJsCreateFromArchiveRequestAppTypeExpress        HostingV1NodeJsCreateFromArchiveRequestAppType = "express"
-	HostingV1NodeJsCreateFromArchiveRequestAppTypeFastify        HostingV1NodeJsCreateFromArchiveRequestAppType = "fastify"
-	HostingV1NodeJsCreateFromArchiveRequestAppTypeGatsby         HostingV1NodeJsCreateFromArchiveRequestAppType = "gatsby"
-	HostingV1NodeJsCreateFromArchiveRequestAppTypeHono           HostingV1NodeJsCreateFromArchiveRequestAppType = "hono"
-	HostingV1NodeJsCreateFromArchiveRequestAppTypeNest           HostingV1NodeJsCreateFromArchiveRequestAppType = "nest"
-	HostingV1NodeJsCreateFromArchiveRequestAppTypeNext           HostingV1NodeJsCreateFromArchiveRequestAppType = "next"
-	HostingV1NodeJsCreateFromArchiveRequestAppTypeNitro          HostingV1NodeJsCreateFromArchiveRequestAppType = "nitro"
-	HostingV1NodeJsCreateFromArchiveRequestAppTypeNuxt           HostingV1NodeJsCreateFromArchiveRequestAppType = "nuxt"
-	HostingV1NodeJsCreateFromArchiveRequestAppTypeOther          HostingV1NodeJsCreateFromArchiveRequestAppType = "other"
-	HostingV1NodeJsCreateFromArchiveRequestAppTypeParcel         HostingV1NodeJsCreateFromArchiveRequestAppType = "parcel"
-	HostingV1NodeJsCreateFromArchiveRequestAppTypeReact          HostingV1NodeJsCreateFromArchiveRequestAppType = "react"
-	HostingV1NodeJsCreateFromArchiveRequestAppTypeReactRouter    HostingV1NodeJsCreateFromArchiveRequestAppType = "react-router"
-	HostingV1NodeJsCreateFromArchiveRequestAppTypeSvelte         HostingV1NodeJsCreateFromArchiveRequestAppType = "svelte"
-	HostingV1NodeJsCreateFromArchiveRequestAppTypeSvelteKit      HostingV1NodeJsCreateFromArchiveRequestAppType = "svelte-kit"
-	HostingV1NodeJsCreateFromArchiveRequestAppTypeVite           HostingV1NodeJsCreateFromArchiveRequestAppType = "vite"
-	HostingV1NodeJsCreateFromArchiveRequestAppTypeVue            HostingV1NodeJsCreateFromArchiveRequestAppType = "vue"
-)
-
-// Valid indicates whether the value is a known member of the HostingV1NodeJsCreateFromArchiveRequestAppType enum.
-func (e HostingV1NodeJsCreateFromArchiveRequestAppType) Valid() bool {
-	switch e {
-	case HostingV1NodeJsCreateFromArchiveRequestAppTypeAngular:
-		return true
-	case HostingV1NodeJsCreateFromArchiveRequestAppTypeAstro:
-		return true
-	case HostingV1NodeJsCreateFromArchiveRequestAppTypeCreateReactApp:
-		return true
-	case HostingV1NodeJsCreateFromArchiveRequestAppTypeExpress:
-		return true
-	case HostingV1NodeJsCreateFromArchiveRequestAppTypeFastify:
-		return true
-	case HostingV1NodeJsCreateFromArchiveRequestAppTypeGatsby:
-		return true
-	case HostingV1NodeJsCreateFromArchiveRequestAppTypeHono:
-		return true
-	case HostingV1NodeJsCreateFromArchiveRequestAppTypeNest:
-		return true
-	case HostingV1NodeJsCreateFromArchiveRequestAppTypeNext:
-		return true
-	case HostingV1NodeJsCreateFromArchiveRequestAppTypeNitro:
-		return true
-	case HostingV1NodeJsCreateFromArchiveRequestAppTypeNuxt:
-		return true
-	case HostingV1NodeJsCreateFromArchiveRequestAppTypeOther:
-		return true
-	case HostingV1NodeJsCreateFromArchiveRequestAppTypeParcel:
-		return true
-	case HostingV1NodeJsCreateFromArchiveRequestAppTypeReact:
-		return true
-	case HostingV1NodeJsCreateFromArchiveRequestAppTypeReactRouter:
-		return true
-	case HostingV1NodeJsCreateFromArchiveRequestAppTypeSvelte:
-		return true
-	case HostingV1NodeJsCreateFromArchiveRequestAppTypeSvelteKit:
-		return true
-	case HostingV1NodeJsCreateFromArchiveRequestAppTypeVite:
-		return true
-	case HostingV1NodeJsCreateFromArchiveRequestAppTypeVue:
-		return true
-	default:
-		return false
-	}
-}
-
-// Defines values for HostingV1NodeJsCreateFromArchiveRequestNodeVersion.
-const (
-	HostingV1NodeJsCreateFromArchiveRequestNodeVersionN18 HostingV1NodeJsCreateFromArchiveRequestNodeVersion = 18
-	HostingV1NodeJsCreateFromArchiveRequestNodeVersionN20 HostingV1NodeJsCreateFromArchiveRequestNodeVersion = 20
-	HostingV1NodeJsCreateFromArchiveRequestNodeVersionN22 HostingV1NodeJsCreateFromArchiveRequestNodeVersion = 22
-	HostingV1NodeJsCreateFromArchiveRequestNodeVersionN24 HostingV1NodeJsCreateFromArchiveRequestNodeVersion = 24
-)
-
-// Valid indicates whether the value is a known member of the HostingV1NodeJsCreateFromArchiveRequestNodeVersion enum.
-func (e HostingV1NodeJsCreateFromArchiveRequestNodeVersion) Valid() bool {
-	switch e {
-	case HostingV1NodeJsCreateFromArchiveRequestNodeVersionN18:
-		return true
-	case HostingV1NodeJsCreateFromArchiveRequestNodeVersionN20:
-		return true
-	case HostingV1NodeJsCreateFromArchiveRequestNodeVersionN22:
-		return true
-	case HostingV1NodeJsCreateFromArchiveRequestNodeVersionN24:
-		return true
-	default:
-		return false
-	}
-}
-
-// Defines values for HostingV1NodeJsCreateFromArchiveRequestPackageManager.
-const (
-	HostingV1NodeJsCreateFromArchiveRequestPackageManagerNpm  HostingV1NodeJsCreateFromArchiveRequestPackageManager = "npm"
-	HostingV1NodeJsCreateFromArchiveRequestPackageManagerPnpm HostingV1NodeJsCreateFromArchiveRequestPackageManager = "pnpm"
-	HostingV1NodeJsCreateFromArchiveRequestPackageManagerYarn HostingV1NodeJsCreateFromArchiveRequestPackageManager = "yarn"
-)
-
-// Valid indicates whether the value is a known member of the HostingV1NodeJsCreateFromArchiveRequestPackageManager enum.
-func (e HostingV1NodeJsCreateFromArchiveRequestPackageManager) Valid() bool {
-	switch e {
-	case HostingV1NodeJsCreateFromArchiveRequestPackageManagerNpm:
-		return true
-	case HostingV1NodeJsCreateFromArchiveRequestPackageManagerPnpm:
-		return true
-	case HostingV1NodeJsCreateFromArchiveRequestPackageManagerYarn:
-		return true
-	default:
-		return false
-	}
-}
-
 // Defines values for HostingV1NodeJsStartBuildRequestAppType.
 const (
 	HostingV1NodeJsStartBuildRequestAppTypeAngular        HostingV1NodeJsStartBuildRequestAppType = "angular"
@@ -8239,62 +8125,6 @@ type HostingV1NodeJsBuildSettingsResourceAppType string
 // Example: npm
 type HostingV1NodeJsBuildSettingsResourcePackageManager string
 
-// HostingV1NodeJsCreateFromArchiveRequest defines model for Hosting.V1.NodeJs.CreateFromArchiveRequest.
-type HostingV1NodeJsCreateFromArchiveRequest struct {
-	// AppType Node.js application type override
-	//
-	// Example: vite
-	AppType *HostingV1NodeJsCreateFromArchiveRequestAppType `json:"app_type,omitempty"`
-
-	// Archive Project archive file (.zip, .tar.gz, or .tgz), maximum 50MB
-	Archive string `json:"archive"`
-
-	// BuildScript Build script override
-	//
-	// Example: build
-	BuildScript *string `json:"build_script,omitempty"`
-
-	// EntryFile Main entry point file override
-	//
-	// Example: server.js
-	EntryFile *string `json:"entry_file,omitempty"`
-
-	// NodeVersion Node.js version override (auto-detected from package.json if omitted)
-	//
-	// Example: 20
-	NodeVersion *HostingV1NodeJsCreateFromArchiveRequestNodeVersion `json:"node_version,omitempty"`
-
-	// OutputDirectory Build output directory override relative to the root directory
-	//
-	// Example: dist
-	OutputDirectory *string `json:"output_directory,omitempty"`
-
-	// PackageManager Package manager override
-	//
-	// Example: npm
-	PackageManager *HostingV1NodeJsCreateFromArchiveRequestPackageManager `json:"package_manager,omitempty"`
-
-	// RootDirectory Application root directory override (where package.json is located) relative to public_html
-	//
-	// Example: webapp
-	RootDirectory *string `json:"root_directory,omitempty"`
-}
-
-// HostingV1NodeJsCreateFromArchiveRequestAppType Node.js application type override
-//
-// Example: vite
-type HostingV1NodeJsCreateFromArchiveRequestAppType string
-
-// HostingV1NodeJsCreateFromArchiveRequestNodeVersion Node.js version override (auto-detected from package.json if omitted)
-//
-// Example: 20
-type HostingV1NodeJsCreateFromArchiveRequestNodeVersion int
-
-// HostingV1NodeJsCreateFromArchiveRequestPackageManager Package manager override
-//
-// Example: npm
-type HostingV1NodeJsCreateFromArchiveRequestPackageManager string
-
 // HostingV1NodeJsPatchResultResource defines model for Hosting.V1.NodeJs.PatchResultResource.
 type HostingV1NodeJsPatchResultResource struct {
 	// HeadBranch The branch created with the fix
@@ -14228,9 +14058,6 @@ type HostingDeployStaticSiteArchiveV1JSONRequestBody = HostingV1WebsitesDeployAr
 // HostingStartNodeJsBuildV1JSONRequestBody defines body for HostingStartNodeJsBuildV1 for application/json ContentType.
 type HostingStartNodeJsBuildV1JSONRequestBody = HostingV1NodeJsStartBuildRequest
 
-// HostingCreateNodeJSBuildFromArchiveV1JSONRequestBody defines body for HostingCreateNodeJSBuildFromArchiveV1 for application/json ContentType.
-type HostingCreateNodeJSBuildFromArchiveV1JSONRequestBody = HostingV1NodeJsCreateFromArchiveRequest
-
 // HostingPatchNodeJsVulnerabilitiesV1JSONRequestBody defines body for HostingPatchNodeJsVulnerabilitiesV1 for application/json ContentType.
 type HostingPatchNodeJsVulnerabilitiesV1JSONRequestBody = HostingV1NodeJsPatchVulnerabilitiesRequest
 
@@ -17703,68 +17530,6 @@ type ClientInterface interface {
 	//
 	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds (the `HostingStartNodeJsBuildV1` operationId).
 	HostingStartNodeJsBuildV1(ctx context.Context, username UsernamePath, domain Domain, body HostingStartNodeJsBuildV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// HostingCreateNodeJSBuildFromArchiveV1WithBody Create NodeJS build from archive
-	//
-	// Upload a project archive, auto-detect build settings, and immediately start a Node.js build.
-	//
-	// WARNING: on success this overwrites the website's existing contents and cannot be
-	// undone — verify this is intended before calling this endpoint.
-	//
-	// This is the recommended single-step approach for deploying a Node.js application.
-	// The archive is uploaded to the website's file storage, build settings are auto-detected
-	// from the package.json inside the archive, and the build process starts automatically.
-	// Optional override fields take precedence over auto-detected values.
-	// Maximum archive size is 50MB.
-	//
-	// Before archiving, exclude `node_modules/` and any build output directories
-	// (e.g. `dist/`, `.next/`, `build/`) — they are not needed because the build
-	// process runs the install step automatically, and including them unnecessarily
-	// increases the archive size. This also helps keep the archive well under the 50MB limit.
-	//
-	// Example (zip):
-	// ```
-	// zip -r archive.zip . --exclude "node_modules/*" --exclude "dist/*"
-	// ```
-	//
-	// The returned build `uuid` can be used to poll progress and retrieve logs via
-	// the `Get Node.js Build Logs` endpoint.
-	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/from-archive (the `HostingCreateNodeJSBuildFromArchiveV1` operationId).
-	HostingCreateNodeJSBuildFromArchiveV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// HostingCreateNodeJSBuildFromArchiveV1 Create NodeJS build from archive
-	//
-	// Upload a project archive, auto-detect build settings, and immediately start a Node.js build.
-	//
-	// WARNING: on success this overwrites the website's existing contents and cannot be
-	// undone — verify this is intended before calling this endpoint.
-	//
-	// This is the recommended single-step approach for deploying a Node.js application.
-	// The archive is uploaded to the website's file storage, build settings are auto-detected
-	// from the package.json inside the archive, and the build process starts automatically.
-	// Optional override fields take precedence over auto-detected values.
-	// Maximum archive size is 50MB.
-	//
-	// Before archiving, exclude `node_modules/` and any build output directories
-	// (e.g. `dist/`, `.next/`, `build/`) — they are not needed because the build
-	// process runs the install step automatically, and including them unnecessarily
-	// increases the archive size. This also helps keep the archive well under the 50MB limit.
-	//
-	// Example (zip):
-	// ```
-	// zip -r archive.zip . --exclude "node_modules/*" --exclude "dist/*"
-	// ```
-	//
-	// The returned build `uuid` can be used to poll progress and retrieve logs via
-	// the `Get Node.js Build Logs` endpoint.
-	//
-	// Takes a body of the `application/json` content type.
-	//
-	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/from-archive (the `HostingCreateNodeJSBuildFromArchiveV1` operationId).
-	HostingCreateNodeJSBuildFromArchiveV1(ctx context.Context, username UsernamePath, domain Domain, body HostingCreateNodeJSBuildFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingGetNodeJsBuildSettingsFromArchiveV1 Get Node.js build settings from archive
 	//
@@ -25314,88 +25079,6 @@ func (c *Client) HostingStartNodeJsBuildV1WithBody(ctx context.Context, username
 // Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds (the `HostingStartNodeJsBuildV1` operationId).
 func (c *Client) HostingStartNodeJsBuildV1(ctx context.Context, username UsernamePath, domain Domain, body HostingStartNodeJsBuildV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingStartNodeJsBuildV1Request(c.Server, username, domain, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// HostingCreateNodeJSBuildFromArchiveV1WithBody Create NodeJS build from archive
-//
-// Upload a project archive, auto-detect build settings, and immediately start a Node.js build.
-//
-// WARNING: on success this overwrites the website's existing contents and cannot be
-// undone — verify this is intended before calling this endpoint.
-//
-// This is the recommended single-step approach for deploying a Node.js application.
-// The archive is uploaded to the website's file storage, build settings are auto-detected
-// from the package.json inside the archive, and the build process starts automatically.
-// Optional override fields take precedence over auto-detected values.
-// Maximum archive size is 50MB.
-//
-// Before archiving, exclude `node_modules/` and any build output directories
-// (e.g. `dist/`, `.next/`, `build/`) — they are not needed because the build
-// process runs the install step automatically, and including them unnecessarily
-// increases the archive size. This also helps keep the archive well under the 50MB limit.
-//
-// Example (zip):
-// ```
-// zip -r archive.zip . --exclude "node_modules/*" --exclude "dist/*"
-// ```
-//
-// The returned build `uuid` can be used to poll progress and retrieve logs via
-// the `Get Node.js Build Logs` endpoint.
-//
-// Takes any type of body and a specified content type.
-//
-// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/from-archive (the `HostingCreateNodeJSBuildFromArchiveV1` operationId).
-func (c *Client) HostingCreateNodeJSBuildFromArchiveV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewHostingCreateNodeJSBuildFromArchiveV1RequestWithBody(c.Server, username, domain, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// HostingCreateNodeJSBuildFromArchiveV1 Create NodeJS build from archive
-//
-// Upload a project archive, auto-detect build settings, and immediately start a Node.js build.
-//
-// WARNING: on success this overwrites the website's existing contents and cannot be
-// undone — verify this is intended before calling this endpoint.
-//
-// This is the recommended single-step approach for deploying a Node.js application.
-// The archive is uploaded to the website's file storage, build settings are auto-detected
-// from the package.json inside the archive, and the build process starts automatically.
-// Optional override fields take precedence over auto-detected values.
-// Maximum archive size is 50MB.
-//
-// Before archiving, exclude `node_modules/` and any build output directories
-// (e.g. `dist/`, `.next/`, `build/`) — they are not needed because the build
-// process runs the install step automatically, and including them unnecessarily
-// increases the archive size. This also helps keep the archive well under the 50MB limit.
-//
-// Example (zip):
-// ```
-// zip -r archive.zip . --exclude "node_modules/*" --exclude "dist/*"
-// ```
-//
-// The returned build `uuid` can be used to poll progress and retrieve logs via
-// the `Get Node.js Build Logs` endpoint.
-//
-// Takes a body of the `application/json` content type.
-//
-// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/from-archive (the `HostingCreateNodeJSBuildFromArchiveV1` operationId).
-func (c *Client) HostingCreateNodeJSBuildFromArchiveV1(ctx context.Context, username UsernamePath, domain Domain, body HostingCreateNodeJSBuildFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewHostingCreateNodeJSBuildFromArchiveV1Request(c.Server, username, domain, body)
 	if err != nil {
 		return nil, err
 	}
@@ -37574,60 +37257,6 @@ func NewHostingStartNodeJsBuildV1RequestWithBody(server string, username Usernam
 	}
 
 	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/nodejs/builds", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewHostingCreateNodeJSBuildFromArchiveV1Request calls the generic HostingCreateNodeJSBuildFromArchiveV1 builder with application/json body
-func NewHostingCreateNodeJSBuildFromArchiveV1Request(server string, username UsernamePath, domain Domain, body HostingCreateNodeJSBuildFromArchiveV1JSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewHostingCreateNodeJSBuildFromArchiveV1RequestWithBody(server, username, domain, "application/json", bodyReader)
-}
-
-// NewHostingCreateNodeJSBuildFromArchiveV1RequestWithBody constructs an http.Request for the HostingCreateNodeJSBuildFromArchiveV1 method, with any body, and a specified content type
-func NewHostingCreateNodeJSBuildFromArchiveV1RequestWithBody(server string, username UsernamePath, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/nodejs/builds/from-archive", pathParam0, pathParam1)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -50843,68 +50472,6 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds (the `HostingStartNodeJsBuildV1` operationId).
 	HostingStartNodeJsBuildV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingStartNodeJsBuildV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingStartNodeJsBuildV1Response, error)
 
-	// HostingCreateNodeJSBuildFromArchiveV1WithBodyWithResponse Create NodeJS build from archive
-	//
-	// Upload a project archive, auto-detect build settings, and immediately start a Node.js build.
-	//
-	// WARNING: on success this overwrites the website's existing contents and cannot be
-	// undone — verify this is intended before calling this endpoint.
-	//
-	// This is the recommended single-step approach for deploying a Node.js application.
-	// The archive is uploaded to the website's file storage, build settings are auto-detected
-	// from the package.json inside the archive, and the build process starts automatically.
-	// Optional override fields take precedence over auto-detected values.
-	// Maximum archive size is 50MB.
-	//
-	// Before archiving, exclude `node_modules/` and any build output directories
-	// (e.g. `dist/`, `.next/`, `build/`) — they are not needed because the build
-	// process runs the install step automatically, and including them unnecessarily
-	// increases the archive size. This also helps keep the archive well under the 50MB limit.
-	//
-	// Example (zip):
-	// ```
-	// zip -r archive.zip . --exclude "node_modules/*" --exclude "dist/*"
-	// ```
-	//
-	// The returned build `uuid` can be used to poll progress and retrieve logs via
-	// the `Get Node.js Build Logs` endpoint.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/from-archive (the `HostingCreateNodeJSBuildFromArchiveV1` operationId).
-	HostingCreateNodeJSBuildFromArchiveV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingCreateNodeJSBuildFromArchiveV1Response, error)
-
-	// HostingCreateNodeJSBuildFromArchiveV1WithResponse Create NodeJS build from archive
-	//
-	// Upload a project archive, auto-detect build settings, and immediately start a Node.js build.
-	//
-	// WARNING: on success this overwrites the website's existing contents and cannot be
-	// undone — verify this is intended before calling this endpoint.
-	//
-	// This is the recommended single-step approach for deploying a Node.js application.
-	// The archive is uploaded to the website's file storage, build settings are auto-detected
-	// from the package.json inside the archive, and the build process starts automatically.
-	// Optional override fields take precedence over auto-detected values.
-	// Maximum archive size is 50MB.
-	//
-	// Before archiving, exclude `node_modules/` and any build output directories
-	// (e.g. `dist/`, `.next/`, `build/`) — they are not needed because the build
-	// process runs the install step automatically, and including them unnecessarily
-	// increases the archive size. This also helps keep the archive well under the 50MB limit.
-	//
-	// Example (zip):
-	// ```
-	// zip -r archive.zip . --exclude "node_modules/*" --exclude "dist/*"
-	// ```
-	//
-	// The returned build `uuid` can be used to poll progress and retrieve logs via
-	// the `Get Node.js Build Logs` endpoint.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/from-archive (the `HostingCreateNodeJSBuildFromArchiveV1` operationId).
-	HostingCreateNodeJSBuildFromArchiveV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingCreateNodeJSBuildFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingCreateNodeJSBuildFromArchiveV1Response, error)
-
 	// HostingGetNodeJsBuildSettingsFromArchiveV1WithResponse Get Node.js build settings from archive
 	//
 	// Auto-detect Node.js build settings from a package.json inside an archive already on the server.
@@ -62276,68 +61843,6 @@ func (r HostingStartNodeJsBuildV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingStartNodeJsBuildV1Response) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type HostingCreateNodeJSBuildFromArchiveV1Response struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *HostingV1NodeJsBuildResource
-	// JSON401 the response for an HTTP 401 `application/json` response
-	JSON401 *CommonResponseUnauthorizedResponse
-	// JSON422 the response for an HTTP 422 `application/json` response
-	JSON422 *CommonResponseUnprocessableContentResponse
-	// JSON500 the response for an HTTP 500 `application/json` response
-	JSON500 *CommonResponseErrorResponse
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r HostingCreateNodeJSBuildFromArchiveV1Response) GetJSON200() *HostingV1NodeJsBuildResource {
-	return r.JSON200
-}
-
-// GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r HostingCreateNodeJSBuildFromArchiveV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
-	return r.JSON401
-}
-
-// GetJSON422 returns the response for an HTTP 422 `application/json` response
-func (r HostingCreateNodeJSBuildFromArchiveV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
-	return r.JSON422
-}
-
-// GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r HostingCreateNodeJSBuildFromArchiveV1Response) GetJSON500() *CommonResponseErrorResponse {
-	return r.JSON500
-}
-
-// GetBody returns the raw response body bytes
-func (r HostingCreateNodeJSBuildFromArchiveV1Response) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r HostingCreateNodeJSBuildFromArchiveV1Response) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r HostingCreateNodeJSBuildFromArchiveV1Response) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r HostingCreateNodeJSBuildFromArchiveV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -78875,80 +78380,6 @@ func (c *ClientWithResponses) HostingStartNodeJsBuildV1WithResponse(ctx context.
 	return ParseHostingStartNodeJsBuildV1Response(rsp)
 }
 
-// HostingCreateNodeJSBuildFromArchiveV1WithBodyWithResponse Create NodeJS build from archive
-//
-// Upload a project archive, auto-detect build settings, and immediately start a Node.js build.
-//
-// WARNING: on success this overwrites the website's existing contents and cannot be
-// undone — verify this is intended before calling this endpoint.
-//
-// This is the recommended single-step approach for deploying a Node.js application.
-// The archive is uploaded to the website's file storage, build settings are auto-detected
-// from the package.json inside the archive, and the build process starts automatically.
-// Optional override fields take precedence over auto-detected values.
-// Maximum archive size is 50MB.
-//
-// Before archiving, exclude `node_modules/` and any build output directories
-// (e.g. `dist/`, `.next/`, `build/`) — they are not needed because the build
-// process runs the install step automatically, and including them unnecessarily
-// increases the archive size. This also helps keep the archive well under the 50MB limit.
-//
-// Example (zip):
-// ```
-// zip -r archive.zip . --exclude "node_modules/*" --exclude "dist/*"
-// ```
-//
-// The returned build `uuid` can be used to poll progress and retrieve logs via
-// the `Get Node.js Build Logs` endpoint.
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/from-archive (the `HostingCreateNodeJSBuildFromArchiveV1` operationId).
-func (c *ClientWithResponses) HostingCreateNodeJSBuildFromArchiveV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingCreateNodeJSBuildFromArchiveV1Response, error) {
-	rsp, err := c.HostingCreateNodeJSBuildFromArchiveV1WithBody(ctx, username, domain, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseHostingCreateNodeJSBuildFromArchiveV1Response(rsp)
-}
-
-// HostingCreateNodeJSBuildFromArchiveV1WithResponse Create NodeJS build from archive
-//
-// Upload a project archive, auto-detect build settings, and immediately start a Node.js build.
-//
-// WARNING: on success this overwrites the website's existing contents and cannot be
-// undone — verify this is intended before calling this endpoint.
-//
-// This is the recommended single-step approach for deploying a Node.js application.
-// The archive is uploaded to the website's file storage, build settings are auto-detected
-// from the package.json inside the archive, and the build process starts automatically.
-// Optional override fields take precedence over auto-detected values.
-// Maximum archive size is 50MB.
-//
-// Before archiving, exclude `node_modules/` and any build output directories
-// (e.g. `dist/`, `.next/`, `build/`) — they are not needed because the build
-// process runs the install step automatically, and including them unnecessarily
-// increases the archive size. This also helps keep the archive well under the 50MB limit.
-//
-// Example (zip):
-// ```
-// zip -r archive.zip . --exclude "node_modules/*" --exclude "dist/*"
-// ```
-//
-// The returned build `uuid` can be used to poll progress and retrieve logs via
-// the `Get Node.js Build Logs` endpoint.
-//
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/from-archive (the `HostingCreateNodeJSBuildFromArchiveV1` operationId).
-func (c *ClientWithResponses) HostingCreateNodeJSBuildFromArchiveV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingCreateNodeJSBuildFromArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingCreateNodeJSBuildFromArchiveV1Response, error) {
-	rsp, err := c.HostingCreateNodeJSBuildFromArchiveV1(ctx, username, domain, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseHostingCreateNodeJSBuildFromArchiveV1Response(rsp)
-}
-
 // HostingGetNodeJsBuildSettingsFromArchiveV1WithResponse Get Node.js build settings from archive
 //
 // Auto-detect Node.js build settings from a package.json inside an archive already on the server.
@@ -90020,53 +89451,6 @@ func ParseHostingStartNodeJsBuildV1Response(rsp *http.Response) (*HostingStartNo
 	}
 
 	response := &HostingStartNodeJsBuildV1Response{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest HostingV1NodeJsBuildResource
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest CommonResponseUnauthorizedResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest CommonResponseUnprocessableContentResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON422 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest CommonResponseErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseHostingCreateNodeJSBuildFromArchiveV1Response parses an HTTP response from a HostingCreateNodeJSBuildFromArchiveV1WithResponse call
-func ParseHostingCreateNodeJSBuildFromArchiveV1Response(rsp *http.Response) (*HostingCreateNodeJSBuildFromArchiveV1Response, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &HostingCreateNodeJSBuildFromArchiveV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}

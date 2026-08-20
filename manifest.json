@@ -899,11 +899,6 @@
     "method": "POST",
     "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/login/links"
   },
-  "hosting_createNodeJSBuildFromArchiveV1": {
-    "command": "hostinger hosting nodejs create-build-from-archive",
-    "method": "POST",
-    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/from-archive"
-  },
   "hosting_createWebsiteParkedDomainV1": {
     "command": "hostinger hosting domains create-website-parked",
     "method": "POST",
