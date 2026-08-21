@@ -18,12 +18,13 @@ hostinger reach contacts create [flags]
 ### Options
 
 ```
-      --email string     
-  -h, --help             help for create
-      --name string      
-      --note string      
-      --phone string     Phone number in E.164 format (leading "+" then 7-15 digits)
-      --surname string   
+      --email string        
+  -h, --help                help for create
+      --name string         
+      --note string         
+      --phone string        Phone number in E.164 format (leading "+" then 7-15 digits)
+      --surname string      
+      --tag-uuids strings   Existing tags to attach to the created contact
 ```
 
 ### Options inherited from parent commands

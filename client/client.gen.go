@@ -11860,6 +11860,9 @@ type ReachV1ContactsStoreRequest struct {
 
 	// Surname Example: Doe
 	Surname *string `json:"surname,omitempty"`
+
+	// TagUuids Existing tags to attach to the created contact
+	TagUuids *[]string `json:"tag_uuids,omitempty"`
 }
 
 // ReachV1ContactsTagsManageContactsRequest Contacts to assign to, or remove from, a tag

@@ -35,6 +35,7 @@ func init() {
 	CreateCmd.Flags().StringP("note", "", "", "")
 	CreateCmd.Flags().StringP("phone", "", "", "Phone number in E.164 format (leading \"+\" then 7-15 digits)")
 	CreateCmd.Flags().StringP("surname", "", "", "")
+	CreateCmd.Flags().StringSliceP("tag-uuids", "", nil, "Existing tags to attach to the created contact")
 	CreateCmd.MarkFlagRequired("email")
 }
 
@@ -57,6 +58,10 @@ func createBody(cmd *cobra.Command) map[string]any {
 	if cmd.Flags().Changed("surname") {
 		v, _ := cmd.Flags().GetString("surname")
 		body["surname"] = v
+	}
+	if cmd.Flags().Changed("tag-uuids") {
+		v, _ := cmd.Flags().GetStringSlice("tag-uuids")
+		body["tag_uuids"] = v
 	}
 	return body
 }
