@@ -17,8 +17,10 @@ func init() {
 	GroupCmd.AddCommand(GetCmd)
 	GroupCmd.AddCommand(ListCmd)
 	GroupCmd.AddCommand(ListContactsCmd)
+	GroupCmd.AddCommand(ListFilterAttributesCmd)
 	GroupCmd.AddCommand(ListProfileCmd)
 	GroupCmd.AddCommand(ListProfileContactsCmd)
+	GroupCmd.AddCommand(PreviewContactsMatchingConditionsCmd)
 	GroupCmd.AddCommand(ProfileCmd)
 	GroupCmd.AddCommand(UpdateProfileCmd)
 }

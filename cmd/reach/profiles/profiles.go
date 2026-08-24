@@ -10,7 +10,9 @@ var GroupCmd = &cobra.Command{
 }
 
 func init() {
+	GroupCmd.AddCommand(ConnectedSendingDomainCmd)
 	GroupCmd.AddCommand(DomainDnsStatusCmd)
 	GroupCmd.AddCommand(ListCmd)
+	GroupCmd.AddCommand(ListPlanFeatureAccessCmd)
 	GroupCmd.AddCommand(RemainingPlanLimitsCmd)
 }

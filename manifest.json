@@ -1644,6 +1644,11 @@
     "method": "GET",
     "path": "/api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid}/statistics"
   },
+  "reach_getConnectedSendingDomainV1": {
+    "command": "hostinger reach profiles connected-sending-domain",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/domains"
+  },
   "reach_getContactDetailsV1": {
     "command": "hostinger reach contacts get",
     "method": "GET",
@@ -1709,6 +1714,11 @@
     "method": "GET",
     "path": "/api/reach/v1/profiles/{profileUuid}/forms"
   },
+  "reach_listPlanFeatureAccessV1": {
+    "command": "hostinger reach profiles list-plan-feature-access",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/features"
+  },
   "reach_listProfileContactsV1": {
     "command": "hostinger reach contacts list-profile",
     "method": "GET",
@@ -1739,10 +1749,20 @@
     "method": "GET",
     "path": "/api/reach/v1/segmentation/segments/{segmentUuid}/contacts"
   },
+  "reach_listSegmentFilterAttributesV1": {
+    "command": "hostinger reach segments list-filter-attributes",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/segmentation/filters/attributes"
+  },
   "reach_listSegmentsV1": {
     "command": "hostinger reach segments list",
     "method": "GET",
     "path": "/api/reach/v1/segmentation/segments"
+  },
+  "reach_previewContactsMatchingConditionsV1": {
+    "command": "hostinger reach segments preview-contacts-matching-conditions",
+    "method": "POST",
+    "path": "/api/reach/v1/profiles/{profileUuid}/segmentation/filters/contacts"
   },
   "reach_removeAContactFromATagV1": {
     "command": "hostinger reach tags remove-contact-from",

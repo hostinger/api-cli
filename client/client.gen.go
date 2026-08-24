@@ -2343,6 +2343,159 @@ func (e ReachV1ContactsProfileContactUpdateResourceSubscriptionStatus) Valid() b
 	}
 }
 
+// Defines values for ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator.
+const (
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorBounced           ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "bounced"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorClicked           ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "clicked"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorContains          ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "contains"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorDelivered         ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "delivered"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorDropped           ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "dropped"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorEquals            ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "equals"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorExists            ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "exists"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorGte               ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "gte"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorLte               ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "lte"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorNotBounced        ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "not_bounced"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorNotClicked        ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "not_clicked"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorNotContains       ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "not_contains"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorNotDelivered      ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "not_delivered"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorNotDropped        ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "not_dropped"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorNotEquals         ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "not_equals"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorNotOpened         ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "not_opened"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorNotProcessed      ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "not_processed"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorNotSoftBounced    ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "not_soft_bounced"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorNotUnsubscribed   ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "not_unsubscribed"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorNotWithinLastDays ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "not_within_last_days"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorOlderThanDays     ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "older_than_days"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorOpened            ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "opened"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorProcessed         ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "processed"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorSoftBounced       ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "soft_bounced"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorUnsubscribed      ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "unsubscribed"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorWithinLastDays    ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator = "within_last_days"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator enum.
+func (e ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator) Valid() bool {
+	switch e {
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorBounced:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorClicked:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorContains:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorDelivered:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorDropped:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorEquals:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorExists:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorGte:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorLte:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorNotBounced:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorNotClicked:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorNotContains:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorNotDelivered:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorNotDropped:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorNotEquals:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorNotOpened:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorNotProcessed:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorNotSoftBounced:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorNotUnsubscribed:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorNotWithinLastDays:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorOlderThanDays:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorOpened:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorProcessed:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorSoftBounced:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorUnsubscribed:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperatorWithinLastDays:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1ContactsSegmentsProfileFilterContactsRequestLogic.
+const (
+	ReachV1ContactsSegmentsProfileFilterContactsRequestLogicAND ReachV1ContactsSegmentsProfileFilterContactsRequestLogic = "AND"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestLogicOR  ReachV1ContactsSegmentsProfileFilterContactsRequestLogic = "OR"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1ContactsSegmentsProfileFilterContactsRequestLogic enum.
+func (e ReachV1ContactsSegmentsProfileFilterContactsRequestLogic) Valid() bool {
+	switch e {
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestLogicAND:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestLogicOR:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1ContactsSegmentsProfileFilterContactsRequestSortBy.
+const (
+	ReachV1ContactsSegmentsProfileFilterContactsRequestSortByEmail              ReachV1ContactsSegmentsProfileFilterContactsRequestSortBy = "email"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestSortByName               ReachV1ContactsSegmentsProfileFilterContactsRequestSortBy = "name"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestSortByPhone              ReachV1ContactsSegmentsProfileFilterContactsRequestSortBy = "phone"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestSortBySubscriptionStatus ReachV1ContactsSegmentsProfileFilterContactsRequestSortBy = "subscription_status"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestSortBySurname            ReachV1ContactsSegmentsProfileFilterContactsRequestSortBy = "surname"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1ContactsSegmentsProfileFilterContactsRequestSortBy enum.
+func (e ReachV1ContactsSegmentsProfileFilterContactsRequestSortBy) Valid() bool {
+	switch e {
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestSortByEmail:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestSortByName:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestSortByPhone:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestSortBySubscriptionStatus:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestSortBySurname:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1ContactsSegmentsProfileFilterContactsRequestSortDirection.
+const (
+	ReachV1ContactsSegmentsProfileFilterContactsRequestSortDirectionAsc  ReachV1ContactsSegmentsProfileFilterContactsRequestSortDirection = "asc"
+	ReachV1ContactsSegmentsProfileFilterContactsRequestSortDirectionDesc ReachV1ContactsSegmentsProfileFilterContactsRequestSortDirection = "desc"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1ContactsSegmentsProfileFilterContactsRequestSortDirection enum.
+func (e ReachV1ContactsSegmentsProfileFilterContactsRequestSortDirection) Valid() bool {
+	switch e {
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestSortDirectionAsc:
+		return true
+	case ReachV1ContactsSegmentsProfileFilterContactsRequestSortDirectionDesc:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator.
 const (
 	ReachV1ContactsSegmentsProfileStoreRequestConditionsOperatorBounced           ReachV1ContactsSegmentsProfileStoreRequestConditionsOperator = "bounced"
@@ -2553,6 +2706,156 @@ func (e ReachV1ContactsSegmentsProfileUpdateRequestLogic) Valid() bool {
 	case ReachV1ContactsSegmentsProfileUpdateRequestLogicAND:
 		return true
 	case ReachV1ContactsSegmentsProfileUpdateRequestLogicOR:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1ContactsSegmentsSegmentFilterAttributeResourceType.
+const (
+	ReachV1ContactsSegmentsSegmentFilterAttributeResourceTypeCampaignEvents         ReachV1ContactsSegmentsSegmentFilterAttributeResourceType = "campaign_events"
+	ReachV1ContactsSegmentsSegmentFilterAttributeResourceTypeCampaigns              ReachV1ContactsSegmentsSegmentFilterAttributeResourceType = "campaigns"
+	ReachV1ContactsSegmentsSegmentFilterAttributeResourceTypeContactFieldSelections ReachV1ContactsSegmentsSegmentFilterAttributeResourceType = "contact_field_selections"
+	ReachV1ContactsSegmentsSegmentFilterAttributeResourceTypeContactFieldValues     ReachV1ContactsSegmentsSegmentFilterAttributeResourceType = "contact_field_values"
+	ReachV1ContactsSegmentsSegmentFilterAttributeResourceTypeContactMetadata        ReachV1ContactsSegmentsSegmentFilterAttributeResourceType = "contact_metadata"
+	ReachV1ContactsSegmentsSegmentFilterAttributeResourceTypeContactTags            ReachV1ContactsSegmentsSegmentFilterAttributeResourceType = "contact_tags"
+	ReachV1ContactsSegmentsSegmentFilterAttributeResourceTypeContacts               ReachV1ContactsSegmentsSegmentFilterAttributeResourceType = "contacts"
+	ReachV1ContactsSegmentsSegmentFilterAttributeResourceTypeOptInMethod            ReachV1ContactsSegmentsSegmentFilterAttributeResourceType = "opt_in_method"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1ContactsSegmentsSegmentFilterAttributeResourceType enum.
+func (e ReachV1ContactsSegmentsSegmentFilterAttributeResourceType) Valid() bool {
+	switch e {
+	case ReachV1ContactsSegmentsSegmentFilterAttributeResourceTypeCampaignEvents:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterAttributeResourceTypeCampaigns:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterAttributeResourceTypeContactFieldSelections:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterAttributeResourceTypeContactFieldValues:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterAttributeResourceTypeContactMetadata:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterAttributeResourceTypeContactTags:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterAttributeResourceTypeContacts:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterAttributeResourceTypeOptInMethod:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1ContactsSegmentsSegmentFilterOperatorResourceInputType.
+const (
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceInputTypeDate   ReachV1ContactsSegmentsSegmentFilterOperatorResourceInputType = "date"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceInputTypeNumber ReachV1ContactsSegmentsSegmentFilterOperatorResourceInputType = "number"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceInputTypeSelect ReachV1ContactsSegmentsSegmentFilterOperatorResourceInputType = "select"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceInputTypeText   ReachV1ContactsSegmentsSegmentFilterOperatorResourceInputType = "text"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1ContactsSegmentsSegmentFilterOperatorResourceInputType enum.
+func (e ReachV1ContactsSegmentsSegmentFilterOperatorResourceInputType) Valid() bool {
+	switch e {
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceInputTypeDate:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceInputTypeNumber:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceInputTypeSelect:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceInputTypeText:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator.
+const (
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorBounced           ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "bounced"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorClicked           ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "clicked"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorContains          ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "contains"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorDelivered         ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "delivered"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorDropped           ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "dropped"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorEquals            ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "equals"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorExists            ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "exists"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorGte               ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "gte"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorLte               ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "lte"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorNotBounced        ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "not_bounced"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorNotClicked        ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "not_clicked"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorNotContains       ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "not_contains"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorNotDelivered      ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "not_delivered"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorNotDropped        ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "not_dropped"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorNotEquals         ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "not_equals"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorNotOpened         ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "not_opened"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorNotProcessed      ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "not_processed"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorNotSoftBounced    ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "not_soft_bounced"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorNotUnsubscribed   ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "not_unsubscribed"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorNotWithinLastDays ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "not_within_last_days"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorOlderThanDays     ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "older_than_days"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorOpened            ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "opened"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorProcessed         ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "processed"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorSoftBounced       ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "soft_bounced"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorUnsubscribed      ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "unsubscribed"
+	ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorWithinLastDays    ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator = "within_last_days"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator enum.
+func (e ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator) Valid() bool {
+	switch e {
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorBounced:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorClicked:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorContains:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorDelivered:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorDropped:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorEquals:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorExists:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorGte:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorLte:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorNotBounced:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorNotClicked:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorNotContains:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorNotDelivered:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorNotDropped:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorNotEquals:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorNotOpened:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorNotProcessed:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorNotSoftBounced:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorNotUnsubscribed:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorNotWithinLastDays:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorOlderThanDays:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorOpened:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorProcessed:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorSoftBounced:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorUnsubscribed:
+		return true
+	case ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperatorWithinLastDays:
 		return true
 	default:
 		return false
@@ -2928,6 +3231,63 @@ func (e ReachV1FormsFormTagResourceType) Valid() bool {
 	case ReachV1FormsFormTagResourceTypeImport:
 		return true
 	case ReachV1FormsFormTagResourceTypeSystem:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1ProfilesDomainsSendingDomainResourceStatus.
+const (
+	ReachV1ProfilesDomainsSendingDomainResourceStatusActive   ReachV1ProfilesDomainsSendingDomainResourceStatus = "active"
+	ReachV1ProfilesDomainsSendingDomainResourceStatusBlocked  ReachV1ProfilesDomainsSendingDomainResourceStatus = "blocked"
+	ReachV1ProfilesDomainsSendingDomainResourceStatusInactive ReachV1ProfilesDomainsSendingDomainResourceStatus = "inactive"
+	ReachV1ProfilesDomainsSendingDomainResourceStatusPending  ReachV1ProfilesDomainsSendingDomainResourceStatus = "pending"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1ProfilesDomainsSendingDomainResourceStatus enum.
+func (e ReachV1ProfilesDomainsSendingDomainResourceStatus) Valid() bool {
+	switch e {
+	case ReachV1ProfilesDomainsSendingDomainResourceStatusActive:
+		return true
+	case ReachV1ProfilesDomainsSendingDomainResourceStatusBlocked:
+		return true
+	case ReachV1ProfilesDomainsSendingDomainResourceStatusInactive:
+		return true
+	case ReachV1ProfilesDomainsSendingDomainResourceStatusPending:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1ProfilesFeaturesPlanFeatureResourceFeature.
+const (
+	AiGenerateSubjectLines  ReachV1ProfilesFeaturesPlanFeatureResourceFeature = "AiGenerateSubjectLines"
+	AutomationActivation    ReachV1ProfilesFeaturesPlanFeatureResourceFeature = "AutomationActivation"
+	Collaborators           ReachV1ProfilesFeaturesPlanFeatureResourceFeature = "Collaborators"
+	HtmlCodeEditor          ReachV1ProfilesFeaturesPlanFeatureResourceFeature = "HtmlCodeEditor"
+	RemoveSignature         ReachV1ProfilesFeaturesPlanFeatureResourceFeature = "RemoveSignature"
+	SmartSending            ReachV1ProfilesFeaturesPlanFeatureResourceFeature = "SmartSending"
+	TemplateCheckerAnalysis ReachV1ProfilesFeaturesPlanFeatureResourceFeature = "TemplateCheckerAnalysis"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1ProfilesFeaturesPlanFeatureResourceFeature enum.
+func (e ReachV1ProfilesFeaturesPlanFeatureResourceFeature) Valid() bool {
+	switch e {
+	case AiGenerateSubjectLines:
+		return true
+	case AutomationActivation:
+		return true
+	case Collaborators:
+		return true
+	case HtmlCodeEditor:
+		return true
+	case RemoveSignature:
+		return true
+	case SmartSending:
+		return true
+	case TemplateCheckerAnalysis:
 		return true
 	default:
 		return false
@@ -11629,6 +11989,68 @@ type ReachV1ContactsSegmentsContactSegmentResource struct {
 	Uuid *string `json:"uuid,omitempty"`
 }
 
+// ReachV1ContactsSegmentsProfileFilterContactsRequest Conditions to preview, in the same shape accepted when creating a segment
+type ReachV1ContactsSegmentsProfileFilterContactsRequest struct {
+	// Conditions Conditions a contact must satisfy to appear in the preview
+	Conditions []struct {
+		// Attribute A built-in contact attribute, or `cf:{fieldUuid}` to target a custom
+		// contact field. Which operators are accepted depends on the attribute,
+		// so read the segment filter attributes endpoint for the authoritative
+		// list.
+		//
+		// Example: email
+		Attribute string `json:"attribute"`
+
+		// Operator Example: equals
+		Operator ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator `json:"operator"`
+
+		// Value Always a string, including for numeric and date comparisons
+		//
+		// Example: example@example.com
+		Value string `json:"value"`
+	} `json:"conditions"`
+
+	// Logic How to combine multiple conditions
+	//
+	// Example: AND
+	Logic ReachV1ContactsSegmentsProfileFilterContactsRequestLogic `json:"logic"`
+
+	// Page Page number
+	//
+	// Example: 1
+	Page *int `json:"page,omitempty"`
+
+	// PerPage Number of items per page
+	//
+	// Example: 25
+	PerPage *int `json:"per_page,omitempty"`
+
+	// Search Narrow the preview to contacts whose email matches
+	//
+	// Example: john.doe@example.com
+	Search *string `json:"search,omitempty"`
+
+	// SortBy Example: email
+	SortBy *ReachV1ContactsSegmentsProfileFilterContactsRequestSortBy `json:"sort_by,omitempty"`
+
+	// SortDirection Example: asc
+	SortDirection *ReachV1ContactsSegmentsProfileFilterContactsRequestSortDirection `json:"sort_direction,omitempty"`
+}
+
+// ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator Example: equals
+type ReachV1ContactsSegmentsProfileFilterContactsRequestConditionsOperator string
+
+// ReachV1ContactsSegmentsProfileFilterContactsRequestLogic How to combine multiple conditions
+//
+// Example: AND
+type ReachV1ContactsSegmentsProfileFilterContactsRequestLogic string
+
+// ReachV1ContactsSegmentsProfileFilterContactsRequestSortBy Example: email
+type ReachV1ContactsSegmentsProfileFilterContactsRequestSortBy string
+
+// ReachV1ContactsSegmentsProfileFilterContactsRequestSortDirection Example: asc
+type ReachV1ContactsSegmentsProfileFilterContactsRequestSortDirection string
+
 // ReachV1ContactsSegmentsProfileStoreRequest Create a segment from a set of conditions
 type ReachV1ContactsSegmentsProfileStoreRequest struct {
 	// Conditions Conditions a contact must satisfy to fall into the segment
@@ -11726,6 +12148,81 @@ type ReachV1ContactsSegmentsSegmentContactsCountResource struct {
 	// Example: 150
 	Count *int `json:"count,omitempty"`
 }
+
+// ReachV1ContactsSegmentsSegmentFilterAttributeResource One attribute a segment condition can filter on.
+type ReachV1ContactsSegmentsSegmentFilterAttributeResource struct {
+	// Description Example: Contact email address
+	Description *string `json:"description,omitempty"`
+
+	// Name Value to send as the condition `attribute`.
+	//
+	// Example: email
+	Name *string `json:"name,omitempty"`
+
+	// Operators Operators this attribute accepts, keyed by operator name.
+	Operators *map[string]ReachV1ContactsSegmentsSegmentFilterOperatorResource `json:"operators,omitempty"`
+
+	// Type Where the attribute is sourced from.
+	//
+	// Example: contacts
+	Type *ReachV1ContactsSegmentsSegmentFilterAttributeResourceType `json:"type,omitempty"`
+}
+
+// ReachV1ContactsSegmentsSegmentFilterAttributeResourceType Where the attribute is sourced from.
+//
+// Example: contacts
+type ReachV1ContactsSegmentsSegmentFilterAttributeResourceType string
+
+// ReachV1ContactsSegmentsSegmentFilterAttributesResource The vocabulary a segment condition can be built from, for one profile.
+type ReachV1ContactsSegmentsSegmentFilterAttributesResource struct {
+	// Attributes Every attribute a condition can filter on, keyed by the value to send as
+	// `attribute`. Custom contact fields are keyed `cf:{fieldUuid}`, tags and campaigns by
+	// their uuid, so the keys are not a fixed list and should be read from this response
+	// rather than hardcoded.
+	Attributes *map[string]ReachV1ContactsSegmentsSegmentFilterAttributeResource `json:"attributes,omitempty"`
+
+	// LogicOperators The values accepted by `logic` when a segment combines several conditions.
+	//
+	// Example: {"AND":"AND","OR":"OR"}
+	LogicOperators *map[string]string `json:"logic_operators,omitempty"`
+}
+
+// ReachV1ContactsSegmentsSegmentFilterOperatorResource One operator an attribute accepts, and the value format it expects.
+type ReachV1ContactsSegmentsSegmentFilterOperatorResource struct {
+	// Description Example: Exact match
+	Description *string `json:"description,omitempty"`
+
+	// EnumValues The values this operator accepts, keyed by the value to send. Only present when the
+	// operator is constrained to a fixed set, such as a tag or campaign picker.
+	//
+	// Example: {"no":"no","yes":"yes"}
+	EnumValues *map[string]string `json:"enum_values,omitempty"`
+
+	// Example An example value in the format this operator expects.
+	//
+	// Example: john.doe@example.com
+	Example *string `json:"example,omitempty"`
+
+	// InputType Shape of the value this operator expects, useful for rendering an input.
+	//
+	// Example: text
+	InputType *ReachV1ContactsSegmentsSegmentFilterOperatorResourceInputType `json:"input_type,omitempty"`
+
+	// Operator Value to send as the condition `operator`.
+	//
+	// Example: equals
+	Operator *ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator `json:"operator,omitempty"`
+}
+
+// ReachV1ContactsSegmentsSegmentFilterOperatorResourceInputType Shape of the value this operator expects, useful for rendering an input.
+//
+// Example: text
+type ReachV1ContactsSegmentsSegmentFilterOperatorResourceInputType string
+
+// ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator Value to send as the condition `operator`.
+//
+// Example: equals
+type ReachV1ContactsSegmentsSegmentFilterOperatorResourceOperator string
 
 // ReachV1ContactsSegmentsSegmentListItemCollection Array of [`Reach.V1.Contacts.Segments.SegmentListItemResource`](#model/reachv1contactssegmentssegmentlistitemresource)
 type ReachV1ContactsSegmentsSegmentListItemCollection = []ReachV1ContactsSegmentsSegmentListItemResource
@@ -12113,6 +12610,78 @@ type ReachV1ProfilesDomainsDnsStatusResource struct {
 	Mx     *ReachV1ProfilesDomainsDnsRecordStatus `json:"mx,omitempty"`
 	Spf    *ReachV1ProfilesDomainsDnsRecordStatus `json:"spf,omitempty"`
 }
+
+// ReachV1ProfilesDomainsSendingDomainResource The sending domain connected to the profile.
+//
+// When no domain is connected every field is `null` and `suspended_sender_emails` is empty,
+// so the shape stays the same whether or not the profile is set up for sending.
+type ReachV1ProfilesDomainsSendingDomainResource struct {
+	// CreatedAt When the domain was connected to the profile.
+	//
+	// Example: 2025-01-01T00:00:00Z
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Domain Domain campaigns are sent from. It may be a subdomain of the domain that was
+	// connected, so it will not always match the website domain.
+	//
+	// Example: mail.example.com
+	Domain *string `json:"domain,omitempty"`
+
+	// Status Campaigns can only be sent while the domain is `active`.
+	//
+	// Example: active
+	Status *ReachV1ProfilesDomainsSendingDomainResourceStatus `json:"status,omitempty"`
+
+	// SuspendedSenderEmails Sender addresses on this domain that have been suspended. A campaign using one of
+	// them will not go out even while the domain itself is active.
+	SuspendedSenderEmails *[]ReachV1ProfilesDomainsSuspendedSenderEmailResource `json:"suspended_sender_emails,omitempty"`
+
+	// UpdatedAt When the domain or its verification state last changed.
+	//
+	// Example: 2025-01-15T10:30:00Z
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+}
+
+// ReachV1ProfilesDomainsSendingDomainResourceStatus Campaigns can only be sent while the domain is `active`.
+//
+// Example: active
+type ReachV1ProfilesDomainsSendingDomainResourceStatus string
+
+// ReachV1ProfilesDomainsSuspendedSenderEmailResource A sender address on the connected domain that is no longer allowed to send.
+type ReachV1ProfilesDomainsSuspendedSenderEmailResource struct {
+	// Email Example: newsletter@example.com
+	Email *string `json:"email,omitempty"`
+
+	// EmailLocalPart The part of the address before the @.
+	//
+	// Example: newsletter
+	EmailLocalPart *string `json:"email_local_part,omitempty"`
+
+	// SuspendedAt Example: 2025-01-15T10:30:00Z
+	SuspendedAt *time.Time `json:"suspended_at,omitempty"`
+}
+
+// ReachV1ProfilesFeaturesPlanFeatureCollection Array of [`Reach.V1.Profiles.Features.PlanFeatureResource`](#model/reachv1profilesfeaturesplanfeatureresource)
+type ReachV1ProfilesFeaturesPlanFeatureCollection = []ReachV1ProfilesFeaturesPlanFeatureResource
+
+// ReachV1ProfilesFeaturesPlanFeatureResource Whether a single plan feature can be used on the profile.
+type ReachV1ProfilesFeaturesPlanFeatureResource struct {
+	// Feature Example: AutomationActivation
+	Feature *ReachV1ProfilesFeaturesPlanFeatureResourceFeature `json:"feature,omitempty"`
+
+	// IsAvailable Whether the feature can be used right now.
+	//
+	// Example: true
+	IsAvailable *bool `json:"is_available,omitempty"`
+
+	// IsLocked Whether the feature sits outside the base plan and needs an upgrade.
+	//
+	// Example: false
+	IsLocked *bool `json:"is_locked,omitempty"`
+}
+
+// ReachV1ProfilesFeaturesPlanFeatureResourceFeature Example: AutomationActivation
+type ReachV1ProfilesFeaturesPlanFeatureResourceFeature string
 
 // ReachV1ProfilesPlanLimitUsageResource Allowance, consumption and headroom of a single plan limit for the current period.
 type ReachV1ProfilesPlanLimitUsageResource struct {
@@ -15538,6 +16107,9 @@ type ReachUpdateAContactFieldV1JSONRequestBody = ReachV1ContactsFieldsUpdateRequ
 
 // ReachUpdateAContactV1JSONRequestBody defines body for ReachUpdateAContactV1 for application/json ContentType.
 type ReachUpdateAContactV1JSONRequestBody = ReachV1ContactsUpdateRequest
+
+// ReachPreviewContactsMatchingConditionsV1JSONRequestBody defines body for ReachPreviewContactsMatchingConditionsV1 for application/json ContentType.
+type ReachPreviewContactsMatchingConditionsV1JSONRequestBody = ReachV1ContactsSegmentsProfileFilterContactsRequest
 
 // ReachCreateAProfileSegmentV1JSONRequestBody defines body for ReachCreateAProfileSegmentV1 for application/json ContentType.
 type ReachCreateAProfileSegmentV1JSONRequestBody = ReachV1ContactsSegmentsProfileStoreRequest
@@ -21254,6 +21826,19 @@ type ClientInterface interface {
 	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid} (the `ReachUpdateAContactV1` operationId).
 	ReachUpdateAContactV1(ctx context.Context, profileUuid ProfileUuid, contactUuid ContactUuid, body ReachUpdateAContactV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ReachGetConnectedSendingDomainV1 Get connected sending domain
+	//
+	// Get the sending domain connected to the profile, its verification status and any suspended
+	// sender addresses.
+	//
+	// Campaigns only go out once a domain is connected and active, so this is the cheapest way to
+	// check that precondition before building one. A profile with no domain connected returns the
+	// same shape with every field set to `null`. For the individual MX, SPF, DKIM and DMARC records
+	// behind the status, use the DNS status endpoint.
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/domains (the `ReachGetConnectedSendingDomainV1` operationId).
+	ReachGetConnectedSendingDomainV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ReachGetProfileDomainDNSStatusV1 Get profile domain DNS status
 	//
 	// Retrieve the DNS configuration status for a profile's domain.
@@ -21263,6 +21848,20 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/domains/dns-status (the `ReachGetProfileDomainDNSStatusV1` operationId).
 	ReachGetProfileDomainDNSStatusV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachListPlanFeatureAccessV1 List plan feature access
+	//
+	// List which plan features the profile can use.
+	//
+	// This is the feature lock matrix, not a usage quota. `available` means the feature can be
+	// used right now and `locked` means it is not part of the base plan, so an upgrade is needed.
+	// For remaining emails, recipients and AI credits use the limits endpoint instead.
+	//
+	// Worth checking before building something that cannot be activated afterwards, such as an
+	// automation on a plan without automation activation.
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/features (the `ReachListPlanFeatureAccessV1` operationId).
+	ReachListPlanFeatureAccessV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReachListFormsV1 List forms
 	//
@@ -21308,6 +21907,52 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/limits (the `ReachGetRemainingPlanLimitsV1` operationId).
 	ReachGetRemainingPlanLimitsV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachListSegmentFilterAttributesV1 List segment filter attributes
+	//
+	// List every attribute a segment condition can filter on, with the operators each attribute
+	// accepts, the value format they expect and, where the value is constrained, the allowed
+	// values.
+	//
+	// The list is profile specific: it includes the profile's custom contact fields, its tags and
+	// its 20 most recently published campaigns, so the valid attributes cannot be hardcoded. Read
+	// it before creating or updating a segment to discover the valid `attribute`, `operator` and
+	// `value` combinations.
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/segmentation/filters/attributes (the `ReachListSegmentFilterAttributesV1` operationId).
+	ReachListSegmentFilterAttributesV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachPreviewContactsMatchingConditionsV1WithBody Preview contacts matching conditions
+	//
+	// Preview the contacts matching a set of conditions without saving a segment.
+	//
+	// The body is the same set of conditions accepted when creating or updating a segment, so this
+	// is how to check who a filter reaches, and how many, before persisting it. Nothing is stored
+	// and no contact is modified.
+	//
+	// Call the segment filter attributes endpoint first to discover the valid `attribute`,
+	// `operator` and `value` combinations.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/segmentation/filters/contacts (the `ReachPreviewContactsMatchingConditionsV1` operationId).
+	ReachPreviewContactsMatchingConditionsV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachPreviewContactsMatchingConditionsV1 Preview contacts matching conditions
+	//
+	// Preview the contacts matching a set of conditions without saving a segment.
+	//
+	// The body is the same set of conditions accepted when creating or updating a segment, so this
+	// is how to check who a filter reaches, and how many, before persisting it. Nothing is stored
+	// and no contact is modified.
+	//
+	// Call the segment filter attributes endpoint first to discover the valid `attribute`,
+	// `operator` and `value` combinations.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/segmentation/filters/contacts (the `ReachPreviewContactsMatchingConditionsV1` operationId).
+	ReachPreviewContactsMatchingConditionsV1(ctx context.Context, profileUuid ProfileUuid, body ReachPreviewContactsMatchingConditionsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReachListProfileSegmentsV1 List profile segments
 	//
@@ -30933,6 +31578,29 @@ func (c *Client) ReachUpdateAContactV1(ctx context.Context, profileUuid ProfileU
 	return c.Client.Do(req)
 }
 
+// ReachGetConnectedSendingDomainV1 Get connected sending domain
+//
+// Get the sending domain connected to the profile, its verification status and any suspended
+// sender addresses.
+//
+// Campaigns only go out once a domain is connected and active, so this is the cheapest way to
+// check that precondition before building one. A profile with no domain connected returns the
+// same shape with every field set to `null`. For the individual MX, SPF, DKIM and DMARC records
+// behind the status, use the DNS status endpoint.
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/domains (the `ReachGetConnectedSendingDomainV1` operationId).
+func (c *Client) ReachGetConnectedSendingDomainV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachGetConnectedSendingDomainV1Request(c.Server, profileUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // ReachGetProfileDomainDNSStatusV1 Get profile domain DNS status
 //
 // Retrieve the DNS configuration status for a profile's domain.
@@ -30943,6 +31611,30 @@ func (c *Client) ReachUpdateAContactV1(ctx context.Context, profileUuid ProfileU
 // Corresponds with GET /api/reach/v1/profiles/{profileUuid}/domains/dns-status (the `ReachGetProfileDomainDNSStatusV1` operationId).
 func (c *Client) ReachGetProfileDomainDNSStatusV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReachGetProfileDomainDNSStatusV1Request(c.Server, profileUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachListPlanFeatureAccessV1 List plan feature access
+//
+// List which plan features the profile can use.
+//
+// This is the feature lock matrix, not a usage quota. `available` means the feature can be
+// used right now and `locked` means it is not part of the base plan, so an upgrade is needed.
+// For remaining emails, recipients and AI credits use the limits endpoint instead.
+//
+// Worth checking before building something that cannot be activated afterwards, such as an
+// automation on a plan without automation activation.
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/features (the `ReachListPlanFeatureAccessV1` operationId).
+func (c *Client) ReachListPlanFeatureAccessV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachListPlanFeatureAccessV1Request(c.Server, profileUuid)
 	if err != nil {
 		return nil, err
 	}
@@ -31028,6 +31720,82 @@ func (c *Client) ReachGetFormDetailsV1(ctx context.Context, profileUuid ProfileU
 // Corresponds with GET /api/reach/v1/profiles/{profileUuid}/limits (the `ReachGetRemainingPlanLimitsV1` operationId).
 func (c *Client) ReachGetRemainingPlanLimitsV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReachGetRemainingPlanLimitsV1Request(c.Server, profileUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachListSegmentFilterAttributesV1 List segment filter attributes
+//
+// List every attribute a segment condition can filter on, with the operators each attribute
+// accepts, the value format they expect and, where the value is constrained, the allowed
+// values.
+//
+// The list is profile specific: it includes the profile's custom contact fields, its tags and
+// its 20 most recently published campaigns, so the valid attributes cannot be hardcoded. Read
+// it before creating or updating a segment to discover the valid `attribute`, `operator` and
+// `value` combinations.
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/segmentation/filters/attributes (the `ReachListSegmentFilterAttributesV1` operationId).
+func (c *Client) ReachListSegmentFilterAttributesV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachListSegmentFilterAttributesV1Request(c.Server, profileUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachPreviewContactsMatchingConditionsV1WithBody Preview contacts matching conditions
+//
+// Preview the contacts matching a set of conditions without saving a segment.
+//
+// The body is the same set of conditions accepted when creating or updating a segment, so this
+// is how to check who a filter reaches, and how many, before persisting it. Nothing is stored
+// and no contact is modified.
+//
+// Call the segment filter attributes endpoint first to discover the valid `attribute`,
+// `operator` and `value` combinations.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/segmentation/filters/contacts (the `ReachPreviewContactsMatchingConditionsV1` operationId).
+func (c *Client) ReachPreviewContactsMatchingConditionsV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachPreviewContactsMatchingConditionsV1RequestWithBody(c.Server, profileUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachPreviewContactsMatchingConditionsV1 Preview contacts matching conditions
+//
+// Preview the contacts matching a set of conditions without saving a segment.
+//
+// The body is the same set of conditions accepted when creating or updating a segment, so this
+// is how to check who a filter reaches, and how many, before persisting it. Nothing is stored
+// and no contact is modified.
+//
+// Call the segment filter attributes endpoint first to discover the valid `attribute`,
+// `operator` and `value` combinations.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/segmentation/filters/contacts (the `ReachPreviewContactsMatchingConditionsV1` operationId).
+func (c *Client) ReachPreviewContactsMatchingConditionsV1(ctx context.Context, profileUuid ProfileUuid, body ReachPreviewContactsMatchingConditionsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachPreviewContactsMatchingConditionsV1Request(c.Server, profileUuid, body)
 	if err != nil {
 		return nil, err
 	}
@@ -47198,6 +47966,40 @@ func NewReachUpdateAContactV1RequestWithBody(server string, profileUuid ProfileU
 	return req, nil
 }
 
+// NewReachGetConnectedSendingDomainV1Request constructs an http.Request for the ReachGetConnectedSendingDomainV1 method
+func NewReachGetConnectedSendingDomainV1Request(server string, profileUuid ProfileUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/domains", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewReachGetProfileDomainDNSStatusV1Request constructs an http.Request for the ReachGetProfileDomainDNSStatusV1 method
 func NewReachGetProfileDomainDNSStatusV1Request(server string, profileUuid ProfileUuid) (*http.Request, error) {
 	var err error
@@ -47215,6 +48017,40 @@ func NewReachGetProfileDomainDNSStatusV1Request(server string, profileUuid Profi
 	}
 
 	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/domains/dns-status", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachListPlanFeatureAccessV1Request constructs an http.Request for the ReachListPlanFeatureAccessV1 method
+func NewReachListPlanFeatureAccessV1Request(server string, profileUuid ProfileUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/features", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -47417,6 +48253,87 @@ func NewReachGetRemainingPlanLimitsV1Request(server string, profileUuid ProfileU
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewReachListSegmentFilterAttributesV1Request constructs an http.Request for the ReachListSegmentFilterAttributesV1 method
+func NewReachListSegmentFilterAttributesV1Request(server string, profileUuid ProfileUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/segmentation/filters/attributes", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachPreviewContactsMatchingConditionsV1Request calls the generic ReachPreviewContactsMatchingConditionsV1 builder with application/json body
+func NewReachPreviewContactsMatchingConditionsV1Request(server string, profileUuid ProfileUuid, body ReachPreviewContactsMatchingConditionsV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachPreviewContactsMatchingConditionsV1RequestWithBody(server, profileUuid, "application/json", bodyReader)
+}
+
+// NewReachPreviewContactsMatchingConditionsV1RequestWithBody constructs an http.Request for the ReachPreviewContactsMatchingConditionsV1 method, with any body, and a specified content type
+func NewReachPreviewContactsMatchingConditionsV1RequestWithBody(server string, profileUuid ProfileUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/segmentation/filters/contacts", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -55953,6 +56870,21 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid} (the `ReachUpdateAContactV1` operationId).
 	ReachUpdateAContactV1WithResponse(ctx context.Context, profileUuid ProfileUuid, contactUuid ContactUuid, body ReachUpdateAContactV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachUpdateAContactV1Response, error)
 
+	// ReachGetConnectedSendingDomainV1WithResponse Get connected sending domain
+	//
+	// Get the sending domain connected to the profile, its verification status and any suspended
+	// sender addresses.
+	//
+	// Campaigns only go out once a domain is connected and active, so this is the cheapest way to
+	// check that precondition before building one. A profile with no domain connected returns the
+	// same shape with every field set to `null`. For the individual MX, SPF, DKIM and DMARC records
+	// behind the status, use the DNS status endpoint.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/domains (the `ReachGetConnectedSendingDomainV1` operationId).
+	ReachGetConnectedSendingDomainV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachGetConnectedSendingDomainV1Response, error)
+
 	// ReachGetProfileDomainDNSStatusV1WithResponse Get profile domain DNS status
 	//
 	// Retrieve the DNS configuration status for a profile's domain.
@@ -55964,6 +56896,22 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/domains/dns-status (the `ReachGetProfileDomainDNSStatusV1` operationId).
 	ReachGetProfileDomainDNSStatusV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachGetProfileDomainDNSStatusV1Response, error)
+
+	// ReachListPlanFeatureAccessV1WithResponse List plan feature access
+	//
+	// List which plan features the profile can use.
+	//
+	// This is the feature lock matrix, not a usage quota. `available` means the feature can be
+	// used right now and `locked` means it is not part of the base plan, so an upgrade is needed.
+	// For remaining emails, recipients and AI credits use the limits endpoint instead.
+	//
+	// Worth checking before building something that cannot be activated afterwards, such as an
+	// automation on a plan without automation activation.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/features (the `ReachListPlanFeatureAccessV1` operationId).
+	ReachListPlanFeatureAccessV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachListPlanFeatureAccessV1Response, error)
 
 	// ReachListFormsV1WithResponse List forms
 	//
@@ -56017,6 +56965,54 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/limits (the `ReachGetRemainingPlanLimitsV1` operationId).
 	ReachGetRemainingPlanLimitsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachGetRemainingPlanLimitsV1Response, error)
+
+	// ReachListSegmentFilterAttributesV1WithResponse List segment filter attributes
+	//
+	// List every attribute a segment condition can filter on, with the operators each attribute
+	// accepts, the value format they expect and, where the value is constrained, the allowed
+	// values.
+	//
+	// The list is profile specific: it includes the profile's custom contact fields, its tags and
+	// its 20 most recently published campaigns, so the valid attributes cannot be hardcoded. Read
+	// it before creating or updating a segment to discover the valid `attribute`, `operator` and
+	// `value` combinations.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/segmentation/filters/attributes (the `ReachListSegmentFilterAttributesV1` operationId).
+	ReachListSegmentFilterAttributesV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachListSegmentFilterAttributesV1Response, error)
+
+	// ReachPreviewContactsMatchingConditionsV1WithBodyWithResponse Preview contacts matching conditions
+	//
+	// Preview the contacts matching a set of conditions without saving a segment.
+	//
+	// The body is the same set of conditions accepted when creating or updating a segment, so this
+	// is how to check who a filter reaches, and how many, before persisting it. Nothing is stored
+	// and no contact is modified.
+	//
+	// Call the segment filter attributes endpoint first to discover the valid `attribute`,
+	// `operator` and `value` combinations.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/segmentation/filters/contacts (the `ReachPreviewContactsMatchingConditionsV1` operationId).
+	ReachPreviewContactsMatchingConditionsV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachPreviewContactsMatchingConditionsV1Response, error)
+
+	// ReachPreviewContactsMatchingConditionsV1WithResponse Preview contacts matching conditions
+	//
+	// Preview the contacts matching a set of conditions without saving a segment.
+	//
+	// The body is the same set of conditions accepted when creating or updating a segment, so this
+	// is how to check who a filter reaches, and how many, before persisting it. Nothing is stored
+	// and no contact is modified.
+	//
+	// Call the segment filter attributes endpoint first to discover the valid `attribute`,
+	// `operator` and `value` combinations.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/segmentation/filters/contacts (the `ReachPreviewContactsMatchingConditionsV1` operationId).
+	ReachPreviewContactsMatchingConditionsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachPreviewContactsMatchingConditionsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachPreviewContactsMatchingConditionsV1Response, error)
 
 	// ReachListProfileSegmentsV1WithResponse List profile segments
 	//
@@ -73823,6 +74819,61 @@ func (r ReachUpdateAContactV1Response) ContentType() string {
 	return ""
 }
 
+type ReachGetConnectedSendingDomainV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1ProfilesDomainsSendingDomainResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachGetConnectedSendingDomainV1Response) GetJSON200() *ReachV1ProfilesDomainsSendingDomainResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachGetConnectedSendingDomainV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachGetConnectedSendingDomainV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachGetConnectedSendingDomainV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachGetConnectedSendingDomainV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachGetConnectedSendingDomainV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachGetConnectedSendingDomainV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type ReachGetProfileDomainDNSStatusV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -73872,6 +74923,61 @@ func (r ReachGetProfileDomainDNSStatusV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r ReachGetProfileDomainDNSStatusV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachListPlanFeatureAccessV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1ProfilesFeaturesPlanFeatureCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachListPlanFeatureAccessV1Response) GetJSON200() *ReachV1ProfilesFeaturesPlanFeatureCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachListPlanFeatureAccessV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachListPlanFeatureAccessV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachListPlanFeatureAccessV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachListPlanFeatureAccessV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachListPlanFeatureAccessV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachListPlanFeatureAccessV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -74107,6 +75213,131 @@ func (r ReachGetRemainingPlanLimitsV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r ReachGetRemainingPlanLimitsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachListSegmentFilterAttributesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1ContactsSegmentsSegmentFilterAttributesResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachListSegmentFilterAttributesV1Response) GetJSON200() *ReachV1ContactsSegmentsSegmentFilterAttributesResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachListSegmentFilterAttributesV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachListSegmentFilterAttributesV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachListSegmentFilterAttributesV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachListSegmentFilterAttributesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachListSegmentFilterAttributesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachListSegmentFilterAttributesV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachPreviewContactsMatchingConditionsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *struct {
+		// Data Array of [`Reach.V1.Contacts.ProfileContactResource`](#model/reachv1contactsprofilecontactresource)
+		Data *ReachV1ContactsProfileContactCollection `json:"data,omitempty"`
+		Meta *CommonSchemaPaginationMetaSchema        `json:"meta,omitempty"`
+	}
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachPreviewContactsMatchingConditionsV1Response) GetJSON200() *struct {
+	// Data Array of [`Reach.V1.Contacts.ProfileContactResource`](#model/reachv1contactsprofilecontactresource)
+	Data *ReachV1ContactsProfileContactCollection `json:"data,omitempty"`
+	Meta *CommonSchemaPaginationMetaSchema        `json:"meta,omitempty"`
+} {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachPreviewContactsMatchingConditionsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachPreviewContactsMatchingConditionsV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachPreviewContactsMatchingConditionsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachPreviewContactsMatchingConditionsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachPreviewContactsMatchingConditionsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachPreviewContactsMatchingConditionsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachPreviewContactsMatchingConditionsV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -86135,6 +87366,27 @@ func (c *ClientWithResponses) ReachUpdateAContactV1WithResponse(ctx context.Cont
 	return ParseReachUpdateAContactV1Response(rsp)
 }
 
+// ReachGetConnectedSendingDomainV1WithResponse Get connected sending domain
+//
+// Get the sending domain connected to the profile, its verification status and any suspended
+// sender addresses.
+//
+// Campaigns only go out once a domain is connected and active, so this is the cheapest way to
+// check that precondition before building one. A profile with no domain connected returns the
+// same shape with every field set to `null`. For the individual MX, SPF, DKIM and DMARC records
+// behind the status, use the DNS status endpoint.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/domains (the `ReachGetConnectedSendingDomainV1` operationId).
+func (c *ClientWithResponses) ReachGetConnectedSendingDomainV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachGetConnectedSendingDomainV1Response, error) {
+	rsp, err := c.ReachGetConnectedSendingDomainV1(ctx, profileUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachGetConnectedSendingDomainV1Response(rsp)
+}
+
 // ReachGetProfileDomainDNSStatusV1WithResponse Get profile domain DNS status
 //
 // Retrieve the DNS configuration status for a profile's domain.
@@ -86151,6 +87403,28 @@ func (c *ClientWithResponses) ReachGetProfileDomainDNSStatusV1WithResponse(ctx c
 		return nil, err
 	}
 	return ParseReachGetProfileDomainDNSStatusV1Response(rsp)
+}
+
+// ReachListPlanFeatureAccessV1WithResponse List plan feature access
+//
+// List which plan features the profile can use.
+//
+// This is the feature lock matrix, not a usage quota. `available` means the feature can be
+// used right now and `locked` means it is not part of the base plan, so an upgrade is needed.
+// For remaining emails, recipients and AI credits use the limits endpoint instead.
+//
+// Worth checking before building something that cannot be activated afterwards, such as an
+// automation on a plan without automation activation.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/features (the `ReachListPlanFeatureAccessV1` operationId).
+func (c *ClientWithResponses) ReachListPlanFeatureAccessV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachListPlanFeatureAccessV1Response, error) {
+	rsp, err := c.ReachListPlanFeatureAccessV1(ctx, profileUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachListPlanFeatureAccessV1Response(rsp)
 }
 
 // ReachListFormsV1WithResponse List forms
@@ -86228,6 +87502,72 @@ func (c *ClientWithResponses) ReachGetRemainingPlanLimitsV1WithResponse(ctx cont
 		return nil, err
 	}
 	return ParseReachGetRemainingPlanLimitsV1Response(rsp)
+}
+
+// ReachListSegmentFilterAttributesV1WithResponse List segment filter attributes
+//
+// List every attribute a segment condition can filter on, with the operators each attribute
+// accepts, the value format they expect and, where the value is constrained, the allowed
+// values.
+//
+// The list is profile specific: it includes the profile's custom contact fields, its tags and
+// its 20 most recently published campaigns, so the valid attributes cannot be hardcoded. Read
+// it before creating or updating a segment to discover the valid `attribute`, `operator` and
+// `value` combinations.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/segmentation/filters/attributes (the `ReachListSegmentFilterAttributesV1` operationId).
+func (c *ClientWithResponses) ReachListSegmentFilterAttributesV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachListSegmentFilterAttributesV1Response, error) {
+	rsp, err := c.ReachListSegmentFilterAttributesV1(ctx, profileUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachListSegmentFilterAttributesV1Response(rsp)
+}
+
+// ReachPreviewContactsMatchingConditionsV1WithBodyWithResponse Preview contacts matching conditions
+//
+// Preview the contacts matching a set of conditions without saving a segment.
+//
+// The body is the same set of conditions accepted when creating or updating a segment, so this
+// is how to check who a filter reaches, and how many, before persisting it. Nothing is stored
+// and no contact is modified.
+//
+// Call the segment filter attributes endpoint first to discover the valid `attribute`,
+// `operator` and `value` combinations.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/segmentation/filters/contacts (the `ReachPreviewContactsMatchingConditionsV1` operationId).
+func (c *ClientWithResponses) ReachPreviewContactsMatchingConditionsV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachPreviewContactsMatchingConditionsV1Response, error) {
+	rsp, err := c.ReachPreviewContactsMatchingConditionsV1WithBody(ctx, profileUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachPreviewContactsMatchingConditionsV1Response(rsp)
+}
+
+// ReachPreviewContactsMatchingConditionsV1WithResponse Preview contacts matching conditions
+//
+// Preview the contacts matching a set of conditions without saving a segment.
+//
+// The body is the same set of conditions accepted when creating or updating a segment, so this
+// is how to check who a filter reaches, and how many, before persisting it. Nothing is stored
+// and no contact is modified.
+//
+// Call the segment filter attributes endpoint first to discover the valid `attribute`,
+// `operator` and `value` combinations.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/segmentation/filters/contacts (the `ReachPreviewContactsMatchingConditionsV1` operationId).
+func (c *ClientWithResponses) ReachPreviewContactsMatchingConditionsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachPreviewContactsMatchingConditionsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachPreviewContactsMatchingConditionsV1Response, error) {
+	rsp, err := c.ReachPreviewContactsMatchingConditionsV1(ctx, profileUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachPreviewContactsMatchingConditionsV1Response(rsp)
 }
 
 // ReachListProfileSegmentsV1WithResponse List profile segments
@@ -100508,6 +101848,46 @@ func ParseReachUpdateAContactV1Response(rsp *http.Response) (*ReachUpdateAContac
 	return response, nil
 }
 
+// ParseReachGetConnectedSendingDomainV1Response parses an HTTP response from a ReachGetConnectedSendingDomainV1WithResponse call
+func ParseReachGetConnectedSendingDomainV1Response(rsp *http.Response) (*ReachGetConnectedSendingDomainV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachGetConnectedSendingDomainV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1ProfilesDomainsSendingDomainResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseReachGetProfileDomainDNSStatusV1Response parses an HTTP response from a ReachGetProfileDomainDNSStatusV1WithResponse call
 func ParseReachGetProfileDomainDNSStatusV1Response(rsp *http.Response) (*ReachGetProfileDomainDNSStatusV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -100524,6 +101904,46 @@ func ParseReachGetProfileDomainDNSStatusV1Response(rsp *http.Response) (*ReachGe
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest ReachV1ProfilesDomainsDnsStatusResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachListPlanFeatureAccessV1Response parses an HTTP response from a ReachListPlanFeatureAccessV1WithResponse call
+func ParseReachListPlanFeatureAccessV1Response(rsp *http.Response) (*ReachListPlanFeatureAccessV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachListPlanFeatureAccessV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1ProfilesFeaturesPlanFeatureCollection
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -100706,6 +102126,97 @@ func ParseReachGetRemainingPlanLimitsV1Response(rsp *http.Response) (*ReachGetRe
 			return nil, err
 		}
 		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachListSegmentFilterAttributesV1Response parses an HTTP response from a ReachListSegmentFilterAttributesV1WithResponse call
+func ParseReachListSegmentFilterAttributesV1Response(rsp *http.Response) (*ReachListSegmentFilterAttributesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachListSegmentFilterAttributesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1ContactsSegmentsSegmentFilterAttributesResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachPreviewContactsMatchingConditionsV1Response parses an HTTP response from a ReachPreviewContactsMatchingConditionsV1WithResponse call
+func ParseReachPreviewContactsMatchingConditionsV1Response(rsp *http.Response) (*ReachPreviewContactsMatchingConditionsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachPreviewContactsMatchingConditionsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			// Data Array of [`Reach.V1.Contacts.ProfileContactResource`](#model/reachv1contactsprofilecontactresource)
+			Data *ReachV1ContactsProfileContactCollection `json:"data,omitempty"`
+			Meta *CommonSchemaPaginationMetaSchema        `json:"meta,omitempty"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse
