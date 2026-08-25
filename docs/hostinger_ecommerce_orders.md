@@ -20,6 +20,6 @@ Orders commands
 * [hostinger ecommerce](hostinger_ecommerce.md)	 - Ecommerce commands
 * [hostinger ecommerce orders cancel](hostinger_ecommerce_orders_cancel.md)	 - Cancel an order
 * [hostinger ecommerce orders fulfil](hostinger_ecommerce_orders_fulfil.md)	 - Fulfil an order
-* [hostinger ecommerce orders list](hostinger_ecommerce_orders_list.md)	 - List orders
+* [hostinger ecommerce orders list-store](hostinger_ecommerce_orders_list-store.md)	 - List store orders
 * [hostinger ecommerce orders retrieve](hostinger_ecommerce_orders_retrieve.md)	 - Retrieve an order
 

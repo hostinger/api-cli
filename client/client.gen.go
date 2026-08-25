@@ -4401,102 +4401,102 @@ func (e EcommerceListDiscountsV1ParamsIsDisabled) Valid() bool {
 	}
 }
 
-// Defines values for EcommerceListOrdersV1ParamsStatus.
+// Defines values for EcommerceListStoreOrdersV1ParamsStatus.
 const (
-	EcommerceListOrdersV1ParamsStatusArchived       EcommerceListOrdersV1ParamsStatus = "archived"
-	EcommerceListOrdersV1ParamsStatusCanceled       EcommerceListOrdersV1ParamsStatus = "canceled"
-	EcommerceListOrdersV1ParamsStatusCompleted      EcommerceListOrdersV1ParamsStatus = "completed"
-	EcommerceListOrdersV1ParamsStatusPending        EcommerceListOrdersV1ParamsStatus = "pending"
-	EcommerceListOrdersV1ParamsStatusRequiresAction EcommerceListOrdersV1ParamsStatus = "requires_action"
+	EcommerceListStoreOrdersV1ParamsStatusArchived       EcommerceListStoreOrdersV1ParamsStatus = "archived"
+	EcommerceListStoreOrdersV1ParamsStatusCanceled       EcommerceListStoreOrdersV1ParamsStatus = "canceled"
+	EcommerceListStoreOrdersV1ParamsStatusCompleted      EcommerceListStoreOrdersV1ParamsStatus = "completed"
+	EcommerceListStoreOrdersV1ParamsStatusPending        EcommerceListStoreOrdersV1ParamsStatus = "pending"
+	EcommerceListStoreOrdersV1ParamsStatusRequiresAction EcommerceListStoreOrdersV1ParamsStatus = "requires_action"
 )
 
-// Valid indicates whether the value is a known member of the EcommerceListOrdersV1ParamsStatus enum.
-func (e EcommerceListOrdersV1ParamsStatus) Valid() bool {
+// Valid indicates whether the value is a known member of the EcommerceListStoreOrdersV1ParamsStatus enum.
+func (e EcommerceListStoreOrdersV1ParamsStatus) Valid() bool {
 	switch e {
-	case EcommerceListOrdersV1ParamsStatusArchived:
+	case EcommerceListStoreOrdersV1ParamsStatusArchived:
 		return true
-	case EcommerceListOrdersV1ParamsStatusCanceled:
+	case EcommerceListStoreOrdersV1ParamsStatusCanceled:
 		return true
-	case EcommerceListOrdersV1ParamsStatusCompleted:
+	case EcommerceListStoreOrdersV1ParamsStatusCompleted:
 		return true
-	case EcommerceListOrdersV1ParamsStatusPending:
+	case EcommerceListStoreOrdersV1ParamsStatusPending:
 		return true
-	case EcommerceListOrdersV1ParamsStatusRequiresAction:
+	case EcommerceListStoreOrdersV1ParamsStatusRequiresAction:
 		return true
 	default:
 		return false
 	}
 }
 
-// Defines values for EcommerceListOrdersV1ParamsPaymentStatus.
+// Defines values for EcommerceListStoreOrdersV1ParamsPaymentStatus.
 const (
-	EcommerceListOrdersV1ParamsPaymentStatusAwaiting          EcommerceListOrdersV1ParamsPaymentStatus = "awaiting"
-	EcommerceListOrdersV1ParamsPaymentStatusCanceled          EcommerceListOrdersV1ParamsPaymentStatus = "canceled"
-	EcommerceListOrdersV1ParamsPaymentStatusCaptured          EcommerceListOrdersV1ParamsPaymentStatus = "captured"
-	EcommerceListOrdersV1ParamsPaymentStatusNotPaid           EcommerceListOrdersV1ParamsPaymentStatus = "not_paid"
-	EcommerceListOrdersV1ParamsPaymentStatusNotRequired       EcommerceListOrdersV1ParamsPaymentStatus = "not_required"
-	EcommerceListOrdersV1ParamsPaymentStatusPartiallyRefunded EcommerceListOrdersV1ParamsPaymentStatus = "partially_refunded"
-	EcommerceListOrdersV1ParamsPaymentStatusRefunded          EcommerceListOrdersV1ParamsPaymentStatus = "refunded"
-	EcommerceListOrdersV1ParamsPaymentStatusRequiresAction    EcommerceListOrdersV1ParamsPaymentStatus = "requires_action"
+	EcommerceListStoreOrdersV1ParamsPaymentStatusAwaiting          EcommerceListStoreOrdersV1ParamsPaymentStatus = "awaiting"
+	EcommerceListStoreOrdersV1ParamsPaymentStatusCanceled          EcommerceListStoreOrdersV1ParamsPaymentStatus = "canceled"
+	EcommerceListStoreOrdersV1ParamsPaymentStatusCaptured          EcommerceListStoreOrdersV1ParamsPaymentStatus = "captured"
+	EcommerceListStoreOrdersV1ParamsPaymentStatusNotPaid           EcommerceListStoreOrdersV1ParamsPaymentStatus = "not_paid"
+	EcommerceListStoreOrdersV1ParamsPaymentStatusNotRequired       EcommerceListStoreOrdersV1ParamsPaymentStatus = "not_required"
+	EcommerceListStoreOrdersV1ParamsPaymentStatusPartiallyRefunded EcommerceListStoreOrdersV1ParamsPaymentStatus = "partially_refunded"
+	EcommerceListStoreOrdersV1ParamsPaymentStatusRefunded          EcommerceListStoreOrdersV1ParamsPaymentStatus = "refunded"
+	EcommerceListStoreOrdersV1ParamsPaymentStatusRequiresAction    EcommerceListStoreOrdersV1ParamsPaymentStatus = "requires_action"
 )
 
-// Valid indicates whether the value is a known member of the EcommerceListOrdersV1ParamsPaymentStatus enum.
-func (e EcommerceListOrdersV1ParamsPaymentStatus) Valid() bool {
+// Valid indicates whether the value is a known member of the EcommerceListStoreOrdersV1ParamsPaymentStatus enum.
+func (e EcommerceListStoreOrdersV1ParamsPaymentStatus) Valid() bool {
 	switch e {
-	case EcommerceListOrdersV1ParamsPaymentStatusAwaiting:
+	case EcommerceListStoreOrdersV1ParamsPaymentStatusAwaiting:
 		return true
-	case EcommerceListOrdersV1ParamsPaymentStatusCanceled:
+	case EcommerceListStoreOrdersV1ParamsPaymentStatusCanceled:
 		return true
-	case EcommerceListOrdersV1ParamsPaymentStatusCaptured:
+	case EcommerceListStoreOrdersV1ParamsPaymentStatusCaptured:
 		return true
-	case EcommerceListOrdersV1ParamsPaymentStatusNotPaid:
+	case EcommerceListStoreOrdersV1ParamsPaymentStatusNotPaid:
 		return true
-	case EcommerceListOrdersV1ParamsPaymentStatusNotRequired:
+	case EcommerceListStoreOrdersV1ParamsPaymentStatusNotRequired:
 		return true
-	case EcommerceListOrdersV1ParamsPaymentStatusPartiallyRefunded:
+	case EcommerceListStoreOrdersV1ParamsPaymentStatusPartiallyRefunded:
 		return true
-	case EcommerceListOrdersV1ParamsPaymentStatusRefunded:
+	case EcommerceListStoreOrdersV1ParamsPaymentStatusRefunded:
 		return true
-	case EcommerceListOrdersV1ParamsPaymentStatusRequiresAction:
+	case EcommerceListStoreOrdersV1ParamsPaymentStatusRequiresAction:
 		return true
 	default:
 		return false
 	}
 }
 
-// Defines values for EcommerceListOrdersV1ParamsFulfillmentStatus.
+// Defines values for EcommerceListStoreOrdersV1ParamsFulfillmentStatus.
 const (
-	EcommerceListOrdersV1ParamsFulfillmentStatusCanceled           EcommerceListOrdersV1ParamsFulfillmentStatus = "canceled"
-	EcommerceListOrdersV1ParamsFulfillmentStatusFulfilled          EcommerceListOrdersV1ParamsFulfillmentStatus = "fulfilled"
-	EcommerceListOrdersV1ParamsFulfillmentStatusNotFulfilled       EcommerceListOrdersV1ParamsFulfillmentStatus = "not_fulfilled"
-	EcommerceListOrdersV1ParamsFulfillmentStatusPartiallyFulfilled EcommerceListOrdersV1ParamsFulfillmentStatus = "partially_fulfilled"
-	EcommerceListOrdersV1ParamsFulfillmentStatusPartiallyReturned  EcommerceListOrdersV1ParamsFulfillmentStatus = "partially_returned"
-	EcommerceListOrdersV1ParamsFulfillmentStatusPartiallyShipped   EcommerceListOrdersV1ParamsFulfillmentStatus = "partially_shipped"
-	EcommerceListOrdersV1ParamsFulfillmentStatusRequiresAction     EcommerceListOrdersV1ParamsFulfillmentStatus = "requires_action"
-	EcommerceListOrdersV1ParamsFulfillmentStatusReturned           EcommerceListOrdersV1ParamsFulfillmentStatus = "returned"
-	EcommerceListOrdersV1ParamsFulfillmentStatusShipped            EcommerceListOrdersV1ParamsFulfillmentStatus = "shipped"
+	EcommerceListStoreOrdersV1ParamsFulfillmentStatusCanceled           EcommerceListStoreOrdersV1ParamsFulfillmentStatus = "canceled"
+	EcommerceListStoreOrdersV1ParamsFulfillmentStatusFulfilled          EcommerceListStoreOrdersV1ParamsFulfillmentStatus = "fulfilled"
+	EcommerceListStoreOrdersV1ParamsFulfillmentStatusNotFulfilled       EcommerceListStoreOrdersV1ParamsFulfillmentStatus = "not_fulfilled"
+	EcommerceListStoreOrdersV1ParamsFulfillmentStatusPartiallyFulfilled EcommerceListStoreOrdersV1ParamsFulfillmentStatus = "partially_fulfilled"
+	EcommerceListStoreOrdersV1ParamsFulfillmentStatusPartiallyReturned  EcommerceListStoreOrdersV1ParamsFulfillmentStatus = "partially_returned"
+	EcommerceListStoreOrdersV1ParamsFulfillmentStatusPartiallyShipped   EcommerceListStoreOrdersV1ParamsFulfillmentStatus = "partially_shipped"
+	EcommerceListStoreOrdersV1ParamsFulfillmentStatusRequiresAction     EcommerceListStoreOrdersV1ParamsFulfillmentStatus = "requires_action"
+	EcommerceListStoreOrdersV1ParamsFulfillmentStatusReturned           EcommerceListStoreOrdersV1ParamsFulfillmentStatus = "returned"
+	EcommerceListStoreOrdersV1ParamsFulfillmentStatusShipped            EcommerceListStoreOrdersV1ParamsFulfillmentStatus = "shipped"
 )
 
-// Valid indicates whether the value is a known member of the EcommerceListOrdersV1ParamsFulfillmentStatus enum.
-func (e EcommerceListOrdersV1ParamsFulfillmentStatus) Valid() bool {
+// Valid indicates whether the value is a known member of the EcommerceListStoreOrdersV1ParamsFulfillmentStatus enum.
+func (e EcommerceListStoreOrdersV1ParamsFulfillmentStatus) Valid() bool {
 	switch e {
-	case EcommerceListOrdersV1ParamsFulfillmentStatusCanceled:
+	case EcommerceListStoreOrdersV1ParamsFulfillmentStatusCanceled:
 		return true
-	case EcommerceListOrdersV1ParamsFulfillmentStatusFulfilled:
+	case EcommerceListStoreOrdersV1ParamsFulfillmentStatusFulfilled:
 		return true
-	case EcommerceListOrdersV1ParamsFulfillmentStatusNotFulfilled:
+	case EcommerceListStoreOrdersV1ParamsFulfillmentStatusNotFulfilled:
 		return true
-	case EcommerceListOrdersV1ParamsFulfillmentStatusPartiallyFulfilled:
+	case EcommerceListStoreOrdersV1ParamsFulfillmentStatusPartiallyFulfilled:
 		return true
-	case EcommerceListOrdersV1ParamsFulfillmentStatusPartiallyReturned:
+	case EcommerceListStoreOrdersV1ParamsFulfillmentStatusPartiallyReturned:
 		return true
-	case EcommerceListOrdersV1ParamsFulfillmentStatusPartiallyShipped:
+	case EcommerceListStoreOrdersV1ParamsFulfillmentStatusPartiallyShipped:
 		return true
-	case EcommerceListOrdersV1ParamsFulfillmentStatusRequiresAction:
+	case EcommerceListStoreOrdersV1ParamsFulfillmentStatusRequiresAction:
 		return true
-	case EcommerceListOrdersV1ParamsFulfillmentStatusReturned:
+	case EcommerceListStoreOrdersV1ParamsFulfillmentStatusReturned:
 		return true
-	case EcommerceListOrdersV1ParamsFulfillmentStatusShipped:
+	case EcommerceListStoreOrdersV1ParamsFulfillmentStatusShipped:
 		return true
 	default:
 		return false
@@ -15041,16 +15041,16 @@ type EcommerceListDiscountsV1Params struct {
 // EcommerceListDiscountsV1ParamsIsDisabled defines parameters for EcommerceListDiscountsV1.
 type EcommerceListDiscountsV1ParamsIsDisabled string
 
-// EcommerceListOrdersV1Params defines parameters for EcommerceListOrdersV1.
-type EcommerceListOrdersV1Params struct {
+// EcommerceListStoreOrdersV1Params defines parameters for EcommerceListStoreOrdersV1.
+type EcommerceListStoreOrdersV1Params struct {
 	// Status Order statuses to include.
-	Status *[]EcommerceListOrdersV1ParamsStatus `form:"status,omitempty" json:"status,omitempty"`
+	Status *[]EcommerceListStoreOrdersV1ParamsStatus `form:"status,omitempty" json:"status,omitempty"`
 
 	// PaymentStatus Payment statuses to include. A paid order is "captured".
-	PaymentStatus *[]EcommerceListOrdersV1ParamsPaymentStatus `form:"payment_status,omitempty" json:"payment_status,omitempty"`
+	PaymentStatus *[]EcommerceListStoreOrdersV1ParamsPaymentStatus `form:"payment_status,omitempty" json:"payment_status,omitempty"`
 
 	// FulfillmentStatus Fulfilment statuses to include.
-	FulfillmentStatus *[]EcommerceListOrdersV1ParamsFulfillmentStatus `form:"fulfillment_status,omitempty" json:"fulfillment_status,omitempty"`
+	FulfillmentStatus *[]EcommerceListStoreOrdersV1ParamsFulfillmentStatus `form:"fulfillment_status,omitempty" json:"fulfillment_status,omitempty"`
 
 	// Email Customer email, matched exactly.
 	Email *string `form:"email,omitempty" json:"email,omitempty"`
@@ -15071,14 +15071,14 @@ type EcommerceListOrdersV1Params struct {
 	Page *Page `form:"page,omitempty" json:"page,omitempty"`
 }
 
-// EcommerceListOrdersV1ParamsStatus defines parameters for EcommerceListOrdersV1.
-type EcommerceListOrdersV1ParamsStatus string
+// EcommerceListStoreOrdersV1ParamsStatus defines parameters for EcommerceListStoreOrdersV1.
+type EcommerceListStoreOrdersV1ParamsStatus string
 
-// EcommerceListOrdersV1ParamsPaymentStatus defines parameters for EcommerceListOrdersV1.
-type EcommerceListOrdersV1ParamsPaymentStatus string
+// EcommerceListStoreOrdersV1ParamsPaymentStatus defines parameters for EcommerceListStoreOrdersV1.
+type EcommerceListStoreOrdersV1ParamsPaymentStatus string
 
-// EcommerceListOrdersV1ParamsFulfillmentStatus defines parameters for EcommerceListOrdersV1.
-type EcommerceListOrdersV1ParamsFulfillmentStatus string
+// EcommerceListStoreOrdersV1ParamsFulfillmentStatus defines parameters for EcommerceListStoreOrdersV1.
+type EcommerceListStoreOrdersV1ParamsFulfillmentStatus string
 
 // EcommerceListStorePaymentProvidersV1Params defines parameters for EcommerceListStorePaymentProvidersV1.
 type EcommerceListStorePaymentProvidersV1Params struct {
@@ -18875,14 +18875,14 @@ type ClientInterface interface {
 	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/metadata (the `EcommerceGetStoreMetadataV1` operationId).
 	EcommerceGetStoreMetadataV1(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// EcommerceListOrdersV1 List orders
+	// EcommerceListStoreOrdersV1 List store orders
 	//
 	// List a store's orders newest first as summaries. Filter by status, payment or fulfilment
 	// status, customer email, order number or a free-text query. Amounts are in the smallest
 	// currency unit. Retrieve a single order for its line items, addresses and fulfilments.
 	//
-	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/orders (the `EcommerceListOrdersV1` operationId).
-	EcommerceListOrdersV1(ctx context.Context, storeId string, params *EcommerceListOrdersV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/orders (the `EcommerceListStoreOrdersV1` operationId).
+	EcommerceListStoreOrdersV1(ctx context.Context, storeId string, params *EcommerceListStoreOrdersV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// EcommerceRetrieveAnOrderV1 Retrieve an order
 	//
@@ -26258,15 +26258,15 @@ func (c *Client) EcommerceGetStoreMetadataV1(ctx context.Context, storeId string
 	return c.Client.Do(req)
 }
 
-// EcommerceListOrdersV1 List orders
+// EcommerceListStoreOrdersV1 List store orders
 //
 // List a store's orders newest first as summaries. Filter by status, payment or fulfilment
 // status, customer email, order number or a free-text query. Amounts are in the smallest
 // currency unit. Retrieve a single order for its line items, addresses and fulfilments.
 //
-// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/orders (the `EcommerceListOrdersV1` operationId).
-func (c *Client) EcommerceListOrdersV1(ctx context.Context, storeId string, params *EcommerceListOrdersV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewEcommerceListOrdersV1Request(c.Server, storeId, params)
+// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/orders (the `EcommerceListStoreOrdersV1` operationId).
+func (c *Client) EcommerceListStoreOrdersV1(ctx context.Context, storeId string, params *EcommerceListStoreOrdersV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceListStoreOrdersV1Request(c.Server, storeId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -38384,8 +38384,8 @@ func NewEcommerceGetStoreMetadataV1Request(server string, storeId string) (*http
 	return req, nil
 }
 
-// NewEcommerceListOrdersV1Request constructs an http.Request for the EcommerceListOrdersV1 method
-func NewEcommerceListOrdersV1Request(server string, storeId string, params *EcommerceListOrdersV1Params) (*http.Request, error) {
+// NewEcommerceListStoreOrdersV1Request constructs an http.Request for the EcommerceListStoreOrdersV1 method
+func NewEcommerceListStoreOrdersV1Request(server string, storeId string, params *EcommerceListStoreOrdersV1Params) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -53713,7 +53713,7 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/metadata (the `EcommerceGetStoreMetadataV1` operationId).
 	EcommerceGetStoreMetadataV1WithResponse(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*EcommerceGetStoreMetadataV1Response, error)
 
-	// EcommerceListOrdersV1WithResponse List orders
+	// EcommerceListStoreOrdersV1WithResponse List store orders
 	//
 	// List a store's orders newest first as summaries. Filter by status, payment or fulfilment
 	// status, customer email, order number or a free-text query. Amounts are in the smallest
@@ -53721,8 +53721,8 @@ type ClientWithResponsesInterface interface {
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/orders (the `EcommerceListOrdersV1` operationId).
-	EcommerceListOrdersV1WithResponse(ctx context.Context, storeId string, params *EcommerceListOrdersV1Params, reqEditors ...RequestEditorFn) (*EcommerceListOrdersV1Response, error)
+	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/orders (the `EcommerceListStoreOrdersV1` operationId).
+	EcommerceListStoreOrdersV1WithResponse(ctx context.Context, storeId string, params *EcommerceListStoreOrdersV1Params, reqEditors ...RequestEditorFn) (*EcommerceListStoreOrdersV1Response, error)
 
 	// EcommerceRetrieveAnOrderV1WithResponse Retrieve an order
 	//
@@ -64211,7 +64211,7 @@ func (r EcommerceGetStoreMetadataV1Response) ContentType() string {
 	return ""
 }
 
-type EcommerceListOrdersV1Response struct {
+type EcommerceListStoreOrdersV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -64227,7 +64227,7 @@ type EcommerceListOrdersV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r EcommerceListOrdersV1Response) GetJSON200() *struct {
+func (r EcommerceListStoreOrdersV1Response) GetJSON200() *struct {
 	// Data Array of [`Ecommerce.V1.Order.OrderResource`](#model/ecommercev1orderorderresource)
 	Data *EcommerceV1OrderOrderCollection  `json:"data,omitempty"`
 	Meta *CommonSchemaPaginationMetaSchema `json:"meta,omitempty"`
@@ -64236,22 +64236,22 @@ func (r EcommerceListOrdersV1Response) GetJSON200() *struct {
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r EcommerceListOrdersV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r EcommerceListStoreOrdersV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r EcommerceListOrdersV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r EcommerceListStoreOrdersV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r EcommerceListOrdersV1Response) GetBody() []byte {
+func (r EcommerceListStoreOrdersV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r EcommerceListOrdersV1Response) Status() string {
+func (r EcommerceListStoreOrdersV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -64259,7 +64259,7 @@ func (r EcommerceListOrdersV1Response) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r EcommerceListOrdersV1Response) StatusCode() int {
+func (r EcommerceListStoreOrdersV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -64267,7 +64267,7 @@ func (r EcommerceListOrdersV1Response) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r EcommerceListOrdersV1Response) ContentType() string {
+func (r EcommerceListStoreOrdersV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -82784,7 +82784,7 @@ func (c *ClientWithResponses) EcommerceGetStoreMetadataV1WithResponse(ctx contex
 	return ParseEcommerceGetStoreMetadataV1Response(rsp)
 }
 
-// EcommerceListOrdersV1WithResponse List orders
+// EcommerceListStoreOrdersV1WithResponse List store orders
 //
 // List a store's orders newest first as summaries. Filter by status, payment or fulfilment
 // status, customer email, order number or a free-text query. Amounts are in the smallest
@@ -82792,13 +82792,13 @@ func (c *ClientWithResponses) EcommerceGetStoreMetadataV1WithResponse(ctx contex
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/orders (the `EcommerceListOrdersV1` operationId).
-func (c *ClientWithResponses) EcommerceListOrdersV1WithResponse(ctx context.Context, storeId string, params *EcommerceListOrdersV1Params, reqEditors ...RequestEditorFn) (*EcommerceListOrdersV1Response, error) {
-	rsp, err := c.EcommerceListOrdersV1(ctx, storeId, params, reqEditors...)
+// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/orders (the `EcommerceListStoreOrdersV1` operationId).
+func (c *ClientWithResponses) EcommerceListStoreOrdersV1WithResponse(ctx context.Context, storeId string, params *EcommerceListStoreOrdersV1Params, reqEditors ...RequestEditorFn) (*EcommerceListStoreOrdersV1Response, error) {
+	rsp, err := c.EcommerceListStoreOrdersV1(ctx, storeId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseEcommerceListOrdersV1Response(rsp)
+	return ParseEcommerceListStoreOrdersV1Response(rsp)
 }
 
 // EcommerceRetrieveAnOrderV1WithResponse Retrieve an order
@@ -93894,15 +93894,15 @@ func ParseEcommerceGetStoreMetadataV1Response(rsp *http.Response) (*EcommerceGet
 	return response, nil
 }
 
-// ParseEcommerceListOrdersV1Response parses an HTTP response from a EcommerceListOrdersV1WithResponse call
-func ParseEcommerceListOrdersV1Response(rsp *http.Response) (*EcommerceListOrdersV1Response, error) {
+// ParseEcommerceListStoreOrdersV1Response parses an HTTP response from a EcommerceListStoreOrdersV1WithResponse call
+func ParseEcommerceListStoreOrdersV1Response(rsp *http.Response) (*EcommerceListStoreOrdersV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &EcommerceListOrdersV1Response{
+	response := &EcommerceListStoreOrdersV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}

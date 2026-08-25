@@ -859,11 +859,6 @@
     "method": "GET",
     "path": "/api/ecommerce/v1/stores/{store_id}/discounts"
   },
-  "ecommerce_listOrdersV1": {
-    "command": "hostinger ecommerce orders list",
-    "method": "GET",
-    "path": "/api/ecommerce/v1/stores/{store_id}/orders"
-  },
   "ecommerce_listProductVariantsV1": {
     "command": "hostinger ecommerce product-variants list",
     "method": "GET",
@@ -878,6 +873,11 @@
     "command": "hostinger ecommerce sales-channels list",
     "method": "GET",
     "path": "/api/ecommerce/v1/stores/{store_id}/sales-channels"
+  },
+  "ecommerce_listStoreOrdersV1": {
+    "command": "hostinger ecommerce orders list-store",
+    "method": "GET",
+    "path": "/api/ecommerce/v1/stores/{store_id}/orders"
   },
   "ecommerce_listStorePaymentProvidersV1": {
     "command": "hostinger ecommerce payments list-store-providers",
