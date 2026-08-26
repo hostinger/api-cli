@@ -9715,6 +9715,22 @@ type HostingV1NodeJsBuildSettingsResourceAppType string
 // Example: npm
 type HostingV1NodeJsBuildSettingsResourcePackageManager string
 
+// HostingV1NodeJsEnvVarCollection Array of [`Hosting.V1.NodeJs.EnvVarResource`](#model/hostingv1nodejsenvvarresource)
+type HostingV1NodeJsEnvVarCollection = []HostingV1NodeJsEnvVarResource
+
+// HostingV1NodeJsEnvVarResource defines model for Hosting.V1.NodeJs.EnvVarResource.
+type HostingV1NodeJsEnvVarResource struct {
+	// Key Environment variable name
+	//
+	// Example: DATABASE_URL
+	Key *string `json:"key,omitempty"`
+
+	// Value Always the literal string ********. Real values cannot be read back through this API.
+	//
+	// Example: ********
+	Value *string `json:"value,omitempty"`
+}
+
 // HostingV1NodeJsPatchResultResource defines model for Hosting.V1.NodeJs.PatchResultResource.
 type HostingV1NodeJsPatchResultResource struct {
 	// HeadBranch The branch created with the fix
@@ -9742,6 +9758,24 @@ type HostingV1NodeJsPatchResultResource struct {
 type HostingV1NodeJsPatchVulnerabilitiesRequest struct {
 	// VulnerabilityIds List of vulnerability IDs to patch, as returned by the list vulnerabilities endpoint.
 	VulnerabilityIds []string `json:"vulnerability_ids"`
+}
+
+// HostingV1NodeJsSetBuildEnvVarsRequest defines model for Hosting.V1.NodeJs.SetBuildEnvVarsRequest.
+type HostingV1NodeJsSetBuildEnvVarsRequest struct {
+	// EnvVars Environment variables to set. This is the full desired set: any variable not in
+	// this list is deleted, and an empty array deletes every variable.
+	EnvVars []struct {
+		// Key Environment variable name. Must start with an uppercase letter or
+		// underscore, followed by uppercase letters, digits or underscores.
+		//
+		// Example: API_URL
+		Key string `json:"key"`
+
+		// Value Environment variable value.
+		//
+		// Example: https://api.example.com
+		Value string `json:"value"`
+	} `json:"env_vars"`
 }
 
 // HostingV1NodeJsSourceOptionsResource defines model for Hosting.V1.NodeJs.SourceOptionsResource.
@@ -15968,6 +16002,9 @@ type HostingDeployStaticSiteArchiveV1JSONRequestBody = HostingV1WebsitesDeployAr
 // HostingStartNodeJsBuildV1JSONRequestBody defines body for HostingStartNodeJsBuildV1 for application/json ContentType.
 type HostingStartNodeJsBuildV1JSONRequestBody = HostingV1NodeJsStartBuildRequest
 
+// HostingReplaceNodeJsEnvironmentVariablesV1JSONRequestBody defines body for HostingReplaceNodeJsEnvironmentVariablesV1 for application/json ContentType.
+type HostingReplaceNodeJsEnvironmentVariablesV1JSONRequestBody = HostingV1NodeJsSetBuildEnvVarsRequest
+
 // HostingPatchNodeJsVulnerabilitiesV1JSONRequestBody defines body for HostingPatchNodeJsVulnerabilitiesV1 for application/json ContentType.
 type HostingPatchNodeJsVulnerabilitiesV1JSONRequestBody = HostingV1NodeJsPatchVulnerabilitiesRequest
 
@@ -19647,6 +19684,64 @@ type ClientInterface interface {
 	//
 	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds (the `HostingStartNodeJsBuildV1` operationId).
 	HostingStartNodeJsBuildV1(ctx context.Context, username UsernamePath, domain Domain, body HostingStartNodeJsBuildV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingListNodeJsEnvironmentVariablesV1 List Node.js environment variables
+	//
+	// Lists the Node.js environment variables currently set for the website. Values are always
+	// masked as `********` and cannot be read back through this API. Use this endpoint to see
+	// which keys are configured or to verify a change, not to read values.
+	//
+	// To change variables, use the `Replace Node.js environment variables` endpoint. It replaces
+	// the whole set, so never copy the masked values from this response into that request; send
+	// the full desired set with real values taken from the project `.env` file or the user
+	// prompt instead.
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/env (the `HostingListNodeJsEnvironmentVariablesV1` operationId).
+	HostingListNodeJsEnvironmentVariablesV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingReplaceNodeJsEnvironmentVariablesV1WithBody Replace Node.js environment variables
+	//
+	// Replaces the website's Node.js environment variables with the ones provided. This is a
+	// full replace: any variable not in the request is deleted, and sending an empty `env_vars`
+	// array deletes every variable. Saving writes the values and restarts the running Node.js
+	// process.
+	//
+	// A restart is enough for apps that read environment variables at process start, such as
+	// Express or NestJS. It is not enough for frameworks that bake variables into the build.
+	// Next.js standalone is one of those: build-time values (including `NEXT_PUBLIC_*`) need a
+	// fresh build. After this call, use the `Start Node.js build` endpoint so those apps
+	// pick up the new values.
+	//
+	// The `List Node.js environment variables` endpoint returns masked values (`********`), so
+	// never copy values from it into this request. Always send the full desired set with real
+	// values taken from the project `.env` file or the user prompt.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/env (the `HostingReplaceNodeJsEnvironmentVariablesV1` operationId).
+	HostingReplaceNodeJsEnvironmentVariablesV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingReplaceNodeJsEnvironmentVariablesV1 Replace Node.js environment variables
+	//
+	// Replaces the website's Node.js environment variables with the ones provided. This is a
+	// full replace: any variable not in the request is deleted, and sending an empty `env_vars`
+	// array deletes every variable. Saving writes the values and restarts the running Node.js
+	// process.
+	//
+	// A restart is enough for apps that read environment variables at process start, such as
+	// Express or NestJS. It is not enough for frameworks that bake variables into the build.
+	// Next.js standalone is one of those: build-time values (including `NEXT_PUBLIC_*`) need a
+	// fresh build. After this call, use the `Start Node.js build` endpoint so those apps
+	// pick up the new values.
+	//
+	// The `List Node.js environment variables` endpoint returns masked values (`********`), so
+	// never copy values from it into this request. Always send the full desired set with real
+	// values taken from the project `.env` file or the user prompt.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/env (the `HostingReplaceNodeJsEnvironmentVariablesV1` operationId).
+	HostingReplaceNodeJsEnvironmentVariablesV1(ctx context.Context, username UsernamePath, domain Domain, body HostingReplaceNodeJsEnvironmentVariablesV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingGetNodeJsBuildSettingsFromArchiveV1 Get Node.js build settings from archive
 	//
@@ -27681,6 +27776,94 @@ func (c *Client) HostingStartNodeJsBuildV1WithBody(ctx context.Context, username
 // Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds (the `HostingStartNodeJsBuildV1` operationId).
 func (c *Client) HostingStartNodeJsBuildV1(ctx context.Context, username UsernamePath, domain Domain, body HostingStartNodeJsBuildV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingStartNodeJsBuildV1Request(c.Server, username, domain, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingListNodeJsEnvironmentVariablesV1 List Node.js environment variables
+//
+// Lists the Node.js environment variables currently set for the website. Values are always
+// masked as `********` and cannot be read back through this API. Use this endpoint to see
+// which keys are configured or to verify a change, not to read values.
+//
+// To change variables, use the `Replace Node.js environment variables` endpoint. It replaces
+// the whole set, so never copy the masked values from this response into that request; send
+// the full desired set with real values taken from the project `.env` file or the user
+// prompt instead.
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/env (the `HostingListNodeJsEnvironmentVariablesV1` operationId).
+func (c *Client) HostingListNodeJsEnvironmentVariablesV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingListNodeJsEnvironmentVariablesV1Request(c.Server, username, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingReplaceNodeJsEnvironmentVariablesV1WithBody Replace Node.js environment variables
+//
+// Replaces the website's Node.js environment variables with the ones provided. This is a
+// full replace: any variable not in the request is deleted, and sending an empty `env_vars`
+// array deletes every variable. Saving writes the values and restarts the running Node.js
+// process.
+//
+// A restart is enough for apps that read environment variables at process start, such as
+// Express or NestJS. It is not enough for frameworks that bake variables into the build.
+// Next.js standalone is one of those: build-time values (including `NEXT_PUBLIC_*`) need a
+// fresh build. After this call, use the `Start Node.js build` endpoint so those apps
+// pick up the new values.
+//
+// The `List Node.js environment variables` endpoint returns masked values (`********`), so
+// never copy values from it into this request. Always send the full desired set with real
+// values taken from the project `.env` file or the user prompt.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/env (the `HostingReplaceNodeJsEnvironmentVariablesV1` operationId).
+func (c *Client) HostingReplaceNodeJsEnvironmentVariablesV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingReplaceNodeJsEnvironmentVariablesV1RequestWithBody(c.Server, username, domain, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingReplaceNodeJsEnvironmentVariablesV1 Replace Node.js environment variables
+//
+// Replaces the website's Node.js environment variables with the ones provided. This is a
+// full replace: any variable not in the request is deleted, and sending an empty `env_vars`
+// array deletes every variable. Saving writes the values and restarts the running Node.js
+// process.
+//
+// A restart is enough for apps that read environment variables at process start, such as
+// Express or NestJS. It is not enough for frameworks that bake variables into the build.
+// Next.js standalone is one of those: build-time values (including `NEXT_PUBLIC_*`) need a
+// fresh build. After this call, use the `Start Node.js build` endpoint so those apps
+// pick up the new values.
+//
+// The `List Node.js environment variables` endpoint returns masked values (`********`), so
+// never copy values from it into this request. Always send the full desired set with real
+// values taken from the project `.env` file or the user prompt.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/env (the `HostingReplaceNodeJsEnvironmentVariablesV1` operationId).
+func (c *Client) HostingReplaceNodeJsEnvironmentVariablesV1(ctx context.Context, username UsernamePath, domain Domain, body HostingReplaceNodeJsEnvironmentVariablesV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingReplaceNodeJsEnvironmentVariablesV1Request(c.Server, username, domain, body)
 	if err != nil {
 		return nil, err
 	}
@@ -40958,6 +41141,101 @@ func NewHostingStartNodeJsBuildV1RequestWithBody(server string, username Usernam
 	}
 
 	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingListNodeJsEnvironmentVariablesV1Request constructs an http.Request for the HostingListNodeJsEnvironmentVariablesV1 method
+func NewHostingListNodeJsEnvironmentVariablesV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/nodejs/builds/settings/env", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingReplaceNodeJsEnvironmentVariablesV1Request calls the generic HostingReplaceNodeJsEnvironmentVariablesV1 builder with application/json body
+func NewHostingReplaceNodeJsEnvironmentVariablesV1Request(server string, username UsernamePath, domain Domain, body HostingReplaceNodeJsEnvironmentVariablesV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingReplaceNodeJsEnvironmentVariablesV1RequestWithBody(server, username, domain, "application/json", bodyReader)
+}
+
+// NewHostingReplaceNodeJsEnvironmentVariablesV1RequestWithBody constructs an http.Request for the HostingReplaceNodeJsEnvironmentVariablesV1 method, with any body, and a specified content type
+func NewHostingReplaceNodeJsEnvironmentVariablesV1RequestWithBody(server string, username UsernamePath, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/nodejs/builds/settings/env", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -54534,6 +54812,66 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds (the `HostingStartNodeJsBuildV1` operationId).
 	HostingStartNodeJsBuildV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingStartNodeJsBuildV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingStartNodeJsBuildV1Response, error)
 
+	// HostingListNodeJsEnvironmentVariablesV1WithResponse List Node.js environment variables
+	//
+	// Lists the Node.js environment variables currently set for the website. Values are always
+	// masked as `********` and cannot be read back through this API. Use this endpoint to see
+	// which keys are configured or to verify a change, not to read values.
+	//
+	// To change variables, use the `Replace Node.js environment variables` endpoint. It replaces
+	// the whole set, so never copy the masked values from this response into that request; send
+	// the full desired set with real values taken from the project `.env` file or the user
+	// prompt instead.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/env (the `HostingListNodeJsEnvironmentVariablesV1` operationId).
+	HostingListNodeJsEnvironmentVariablesV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingListNodeJsEnvironmentVariablesV1Response, error)
+
+	// HostingReplaceNodeJsEnvironmentVariablesV1WithBodyWithResponse Replace Node.js environment variables
+	//
+	// Replaces the website's Node.js environment variables with the ones provided. This is a
+	// full replace: any variable not in the request is deleted, and sending an empty `env_vars`
+	// array deletes every variable. Saving writes the values and restarts the running Node.js
+	// process.
+	//
+	// A restart is enough for apps that read environment variables at process start, such as
+	// Express or NestJS. It is not enough for frameworks that bake variables into the build.
+	// Next.js standalone is one of those: build-time values (including `NEXT_PUBLIC_*`) need a
+	// fresh build. After this call, use the `Start Node.js build` endpoint so those apps
+	// pick up the new values.
+	//
+	// The `List Node.js environment variables` endpoint returns masked values (`********`), so
+	// never copy values from it into this request. Always send the full desired set with real
+	// values taken from the project `.env` file or the user prompt.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/env (the `HostingReplaceNodeJsEnvironmentVariablesV1` operationId).
+	HostingReplaceNodeJsEnvironmentVariablesV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingReplaceNodeJsEnvironmentVariablesV1Response, error)
+
+	// HostingReplaceNodeJsEnvironmentVariablesV1WithResponse Replace Node.js environment variables
+	//
+	// Replaces the website's Node.js environment variables with the ones provided. This is a
+	// full replace: any variable not in the request is deleted, and sending an empty `env_vars`
+	// array deletes every variable. Saving writes the values and restarts the running Node.js
+	// process.
+	//
+	// A restart is enough for apps that read environment variables at process start, such as
+	// Express or NestJS. It is not enough for frameworks that bake variables into the build.
+	// Next.js standalone is one of those: build-time values (including `NEXT_PUBLIC_*`) need a
+	// fresh build. After this call, use the `Start Node.js build` endpoint so those apps
+	// pick up the new values.
+	//
+	// The `List Node.js environment variables` endpoint returns masked values (`********`), so
+	// never copy values from it into this request. Always send the full desired set with real
+	// values taken from the project `.env` file or the user prompt.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/env (the `HostingReplaceNodeJsEnvironmentVariablesV1` operationId).
+	HostingReplaceNodeJsEnvironmentVariablesV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingReplaceNodeJsEnvironmentVariablesV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingReplaceNodeJsEnvironmentVariablesV1Response, error)
+
 	// HostingGetNodeJsBuildSettingsFromArchiveV1WithResponse Get Node.js build settings from archive
 	//
 	// Auto-detect Node.js build settings from a package.json inside an archive already on the server.
@@ -66881,6 +67219,123 @@ func (r HostingStartNodeJsBuildV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingStartNodeJsBuildV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingListNodeJsEnvironmentVariablesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1NodeJsEnvVarCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingListNodeJsEnvironmentVariablesV1Response) GetJSON200() *HostingV1NodeJsEnvVarCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingListNodeJsEnvironmentVariablesV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingListNodeJsEnvironmentVariablesV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingListNodeJsEnvironmentVariablesV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingListNodeJsEnvironmentVariablesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingListNodeJsEnvironmentVariablesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingListNodeJsEnvironmentVariablesV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingReplaceNodeJsEnvironmentVariablesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingReplaceNodeJsEnvironmentVariablesV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingReplaceNodeJsEnvironmentVariablesV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingReplaceNodeJsEnvironmentVariablesV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingReplaceNodeJsEnvironmentVariablesV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingReplaceNodeJsEnvironmentVariablesV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingReplaceNodeJsEnvironmentVariablesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingReplaceNodeJsEnvironmentVariablesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingReplaceNodeJsEnvironmentVariablesV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -84001,6 +84456,84 @@ func (c *ClientWithResponses) HostingStartNodeJsBuildV1WithResponse(ctx context.
 	return ParseHostingStartNodeJsBuildV1Response(rsp)
 }
 
+// HostingListNodeJsEnvironmentVariablesV1WithResponse List Node.js environment variables
+//
+// Lists the Node.js environment variables currently set for the website. Values are always
+// masked as `********` and cannot be read back through this API. Use this endpoint to see
+// which keys are configured or to verify a change, not to read values.
+//
+// To change variables, use the `Replace Node.js environment variables` endpoint. It replaces
+// the whole set, so never copy the masked values from this response into that request; send
+// the full desired set with real values taken from the project `.env` file or the user
+// prompt instead.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/env (the `HostingListNodeJsEnvironmentVariablesV1` operationId).
+func (c *ClientWithResponses) HostingListNodeJsEnvironmentVariablesV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingListNodeJsEnvironmentVariablesV1Response, error) {
+	rsp, err := c.HostingListNodeJsEnvironmentVariablesV1(ctx, username, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingListNodeJsEnvironmentVariablesV1Response(rsp)
+}
+
+// HostingReplaceNodeJsEnvironmentVariablesV1WithBodyWithResponse Replace Node.js environment variables
+//
+// Replaces the website's Node.js environment variables with the ones provided. This is a
+// full replace: any variable not in the request is deleted, and sending an empty `env_vars`
+// array deletes every variable. Saving writes the values and restarts the running Node.js
+// process.
+//
+// A restart is enough for apps that read environment variables at process start, such as
+// Express or NestJS. It is not enough for frameworks that bake variables into the build.
+// Next.js standalone is one of those: build-time values (including `NEXT_PUBLIC_*`) need a
+// fresh build. After this call, use the `Start Node.js build` endpoint so those apps
+// pick up the new values.
+//
+// The `List Node.js environment variables` endpoint returns masked values (`********`), so
+// never copy values from it into this request. Always send the full desired set with real
+// values taken from the project `.env` file or the user prompt.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/env (the `HostingReplaceNodeJsEnvironmentVariablesV1` operationId).
+func (c *ClientWithResponses) HostingReplaceNodeJsEnvironmentVariablesV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingReplaceNodeJsEnvironmentVariablesV1Response, error) {
+	rsp, err := c.HostingReplaceNodeJsEnvironmentVariablesV1WithBody(ctx, username, domain, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingReplaceNodeJsEnvironmentVariablesV1Response(rsp)
+}
+
+// HostingReplaceNodeJsEnvironmentVariablesV1WithResponse Replace Node.js environment variables
+//
+// Replaces the website's Node.js environment variables with the ones provided. This is a
+// full replace: any variable not in the request is deleted, and sending an empty `env_vars`
+// array deletes every variable. Saving writes the values and restarts the running Node.js
+// process.
+//
+// A restart is enough for apps that read environment variables at process start, such as
+// Express or NestJS. It is not enough for frameworks that bake variables into the build.
+// Next.js standalone is one of those: build-time values (including `NEXT_PUBLIC_*`) need a
+// fresh build. After this call, use the `Start Node.js build` endpoint so those apps
+// pick up the new values.
+//
+// The `List Node.js environment variables` endpoint returns masked values (`********`), so
+// never copy values from it into this request. Always send the full desired set with real
+// values taken from the project `.env` file or the user prompt.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/env (the `HostingReplaceNodeJsEnvironmentVariablesV1` operationId).
+func (c *ClientWithResponses) HostingReplaceNodeJsEnvironmentVariablesV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingReplaceNodeJsEnvironmentVariablesV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingReplaceNodeJsEnvironmentVariablesV1Response, error) {
+	rsp, err := c.HostingReplaceNodeJsEnvironmentVariablesV1(ctx, username, domain, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingReplaceNodeJsEnvironmentVariablesV1Response(rsp)
+}
+
 // HostingGetNodeJsBuildSettingsFromArchiveV1WithResponse Get Node.js build settings from archive
 //
 // Auto-detect Node.js build settings from a package.json inside an archive already on the server.
@@ -95844,6 +96377,93 @@ func ParseHostingStartNodeJsBuildV1Response(rsp *http.Response) (*HostingStartNo
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest HostingV1NodeJsBuildResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingListNodeJsEnvironmentVariablesV1Response parses an HTTP response from a HostingListNodeJsEnvironmentVariablesV1WithResponse call
+func ParseHostingListNodeJsEnvironmentVariablesV1Response(rsp *http.Response) (*HostingListNodeJsEnvironmentVariablesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingListNodeJsEnvironmentVariablesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1NodeJsEnvVarCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingReplaceNodeJsEnvironmentVariablesV1Response parses an HTTP response from a HostingReplaceNodeJsEnvironmentVariablesV1WithResponse call
+func ParseHostingReplaceNodeJsEnvironmentVariablesV1Response(rsp *http.Response) (*HostingReplaceNodeJsEnvironmentVariablesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingReplaceNodeJsEnvironmentVariablesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

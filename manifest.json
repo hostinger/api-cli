@@ -1169,6 +1169,11 @@
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/themes"
   },
+  "hosting_listNode.jsEnvironmentVariablesV1": {
+    "command": "hostinger hosting nodejs list-environment-variables",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/env"
+  },
   "hosting_listNode.jsVulnerabilitiesV1": {
     "command": "hostinger hosting nodejs list-vulnerabilities",
     "method": "GET",
@@ -1238,6 +1243,11 @@
     "command": "hostinger hosting databases repair",
     "method": "PATCH",
     "path": "/api/hosting/v1/accounts/{username}/databases/{name}/repair"
+  },
+  "hosting_replaceNode.jsEnvironmentVariablesV1": {
+    "command": "hostinger hosting nodejs replace-environment-variables",
+    "method": "PUT",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/env"
   },
   "hosting_resetPHPExtensionsV1": {
     "command": "hostinger hosting php reset-extensions",

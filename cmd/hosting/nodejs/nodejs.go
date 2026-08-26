@@ -13,8 +13,10 @@ func init() {
 	GroupCmd.AddCommand(BuildLogsCmd)
 	GroupCmd.AddCommand(BuildSettingsFromArchiveCmd)
 	GroupCmd.AddCommand(ListBuildsCmd)
+	GroupCmd.AddCommand(ListEnvironmentVariablesCmd)
 	GroupCmd.AddCommand(ListVulnerabilitiesCmd)
 	GroupCmd.AddCommand(PatchVulnerabilitiesCmd)
+	GroupCmd.AddCommand(ReplaceEnvironmentVariablesCmd)
 	GroupCmd.AddCommand(RestartApplicationCmd)
 	GroupCmd.AddCommand(StartBuildCmd)
 }
