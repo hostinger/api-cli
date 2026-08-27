@@ -18,6 +18,7 @@ func init() {
 	GroupCmd.AddCommand(DeleteRuleCmd)
 	GroupCmd.AddCommand(GetCmd)
 	GroupCmd.AddCommand(ListCmd)
+	GroupCmd.AddCommand(ReplaceAllRulesInGroupCmd)
 	GroupCmd.AddCommand(SyncCmd)
 	GroupCmd.AddCommand(UpdateRuleCmd)
 }

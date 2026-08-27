@@ -26,6 +26,7 @@ Firewall commands
 * [hostinger vps firewall delete-rule](hostinger_vps_firewall_delete-rule.md)	 - Delete firewall rule
 * [hostinger vps firewall get](hostinger_vps_firewall_get.md)	 - Get firewall details
 * [hostinger vps firewall list](hostinger_vps_firewall_list.md)	 - Get firewall list
+* [hostinger vps firewall replace-all-rules-in-group](hostinger_vps_firewall_replace-all-rules-in-group.md)	 - Replace all firewall rules in group
 * [hostinger vps firewall sync](hostinger_vps_firewall_sync.md)	 - Sync firewall
 * [hostinger vps firewall update-rule](hostinger_vps_firewall_update-rule.md)	 - Update firewall rule
 

@@ -13210,6 +13210,12 @@ type VPSV1FirewallFirewallRuleResourceAction string
 // Example: TCP
 type VPSV1FirewallFirewallRuleResourceProtocol string
 
+// VPSV1FirewallRulesReplaceRequest defines model for VPS.V1.Firewall.Rules.ReplaceRequest.
+type VPSV1FirewallRulesReplaceRequest struct {
+	// Rules The complete set of firewall rules that atomically replaces all existing rules in the group
+	Rules []VPSV1FirewallRulesStoreRequest `json:"rules"`
+}
+
 // VPSV1FirewallRulesStoreRequest defines model for VPS.V1.Firewall.Rules.StoreRequest.
 type VPSV1FirewallRulesStoreRequest struct {
 	// Port Port or port range, ex: 1024:2048
@@ -15807,6 +15813,12 @@ type VPSGetFirewallListV1Params struct {
 	Page *Page `form:"page,omitempty" json:"page,omitempty"`
 }
 
+// VPSReplaceAllFirewallRulesInGroupV1Params defines parameters for VPSReplaceAllFirewallRulesInGroupV1.
+type VPSReplaceAllFirewallRulesInGroupV1Params struct {
+	// Sync Synchronize the firewall group to all its virtual machines after replacing the rules
+	Sync *bool `form:"sync,omitempty" json:"sync,omitempty"`
+}
+
 // VPSGetPostInstallScriptsV1Params defines parameters for VPSGetPostInstallScriptsV1.
 type VPSGetPostInstallScriptsV1Params struct {
 	// Page Page number
@@ -16182,6 +16194,9 @@ type VPSCreateNewFirewallV1JSONRequestBody = VPSV1FirewallStoreRequest
 
 // VPSCreateFirewallRuleV1JSONRequestBody defines body for VPSCreateFirewallRuleV1 for application/json ContentType.
 type VPSCreateFirewallRuleV1JSONRequestBody = VPSV1FirewallRulesStoreRequest
+
+// VPSReplaceAllFirewallRulesInGroupV1JSONRequestBody defines body for VPSReplaceAllFirewallRulesInGroupV1 for application/json ContentType.
+type VPSReplaceAllFirewallRulesInGroupV1JSONRequestBody = VPSV1FirewallRulesReplaceRequest
 
 // VPSUpdateFirewallRuleV1JSONRequestBody defines body for VPSUpdateFirewallRuleV1 for application/json ContentType.
 type VPSUpdateFirewallRuleV1JSONRequestBody = VPSV1FirewallRulesStoreRequest
@@ -22507,6 +22522,32 @@ type ClientInterface interface {
 	//
 	// Corresponds with POST /api/vps/v1/firewall/{firewallId}/rules (the `VPSCreateFirewallRuleV1` operationId).
 	VPSCreateFirewallRuleV1(ctx context.Context, firewallId FirewallId, body VPSCreateFirewallRuleV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// VPSReplaceAllFirewallRulesInGroupV1WithBody Replace all firewall rules in group
+	//
+	// Replaces all firewall rules within a specified firewall group with the provided set of rules
+	// in a single atomic operation, instead of creating or deleting rules one by one.
+	//
+	// Any virtual machine using this firewall group will need to be synchronized after replacing rules;
+	// pass the "sync" query parameter to trigger synchronization immediately.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PUT /api/vps/v1/firewall/{firewallId}/rules (the `VPSReplaceAllFirewallRulesInGroupV1` operationId).
+	VPSReplaceAllFirewallRulesInGroupV1WithBody(ctx context.Context, firewallId FirewallId, params *VPSReplaceAllFirewallRulesInGroupV1Params, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// VPSReplaceAllFirewallRulesInGroupV1 Replace all firewall rules in group
+	//
+	// Replaces all firewall rules within a specified firewall group with the provided set of rules
+	// in a single atomic operation, instead of creating or deleting rules one by one.
+	//
+	// Any virtual machine using this firewall group will need to be synchronized after replacing rules;
+	// pass the "sync" query parameter to trigger synchronization immediately.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PUT /api/vps/v1/firewall/{firewallId}/rules (the `VPSReplaceAllFirewallRulesInGroupV1` operationId).
+	VPSReplaceAllFirewallRulesInGroupV1(ctx context.Context, firewallId FirewallId, params *VPSReplaceAllFirewallRulesInGroupV1Params, body VPSReplaceAllFirewallRulesInGroupV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// VPSDeleteFirewallRuleV1 Delete firewall rule
 	//
@@ -32813,6 +32854,52 @@ func (c *Client) VPSCreateFirewallRuleV1WithBody(ctx context.Context, firewallId
 // Corresponds with POST /api/vps/v1/firewall/{firewallId}/rules (the `VPSCreateFirewallRuleV1` operationId).
 func (c *Client) VPSCreateFirewallRuleV1(ctx context.Context, firewallId FirewallId, body VPSCreateFirewallRuleV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewVPSCreateFirewallRuleV1Request(c.Server, firewallId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// VPSReplaceAllFirewallRulesInGroupV1WithBody Replace all firewall rules in group
+//
+// Replaces all firewall rules within a specified firewall group with the provided set of rules
+// in a single atomic operation, instead of creating or deleting rules one by one.
+//
+// Any virtual machine using this firewall group will need to be synchronized after replacing rules;
+// pass the "sync" query parameter to trigger synchronization immediately.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PUT /api/vps/v1/firewall/{firewallId}/rules (the `VPSReplaceAllFirewallRulesInGroupV1` operationId).
+func (c *Client) VPSReplaceAllFirewallRulesInGroupV1WithBody(ctx context.Context, firewallId FirewallId, params *VPSReplaceAllFirewallRulesInGroupV1Params, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewVPSReplaceAllFirewallRulesInGroupV1RequestWithBody(c.Server, firewallId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// VPSReplaceAllFirewallRulesInGroupV1 Replace all firewall rules in group
+//
+// Replaces all firewall rules within a specified firewall group with the provided set of rules
+// in a single atomic operation, instead of creating or deleting rules one by one.
+//
+// Any virtual machine using this firewall group will need to be synchronized after replacing rules;
+// pass the "sync" query parameter to trigger synchronization immediately.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PUT /api/vps/v1/firewall/{firewallId}/rules (the `VPSReplaceAllFirewallRulesInGroupV1` operationId).
+func (c *Client) VPSReplaceAllFirewallRulesInGroupV1(ctx context.Context, firewallId FirewallId, params *VPSReplaceAllFirewallRulesInGroupV1Params, body VPSReplaceAllFirewallRulesInGroupV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewVPSReplaceAllFirewallRulesInGroupV1Request(c.Server, firewallId, params, body)
 	if err != nil {
 		return nil, err
 	}
@@ -49920,6 +50007,80 @@ func NewVPSCreateFirewallRuleV1RequestWithBody(server string, firewallId Firewal
 	return req, nil
 }
 
+// NewVPSReplaceAllFirewallRulesInGroupV1Request calls the generic VPSReplaceAllFirewallRulesInGroupV1 builder with application/json body
+func NewVPSReplaceAllFirewallRulesInGroupV1Request(server string, firewallId FirewallId, params *VPSReplaceAllFirewallRulesInGroupV1Params, body VPSReplaceAllFirewallRulesInGroupV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewVPSReplaceAllFirewallRulesInGroupV1RequestWithBody(server, firewallId, params, "application/json", bodyReader)
+}
+
+// NewVPSReplaceAllFirewallRulesInGroupV1RequestWithBody constructs an http.Request for the VPSReplaceAllFirewallRulesInGroupV1 method, with any body, and a specified content type
+func NewVPSReplaceAllFirewallRulesInGroupV1RequestWithBody(server string, firewallId FirewallId, params *VPSReplaceAllFirewallRulesInGroupV1Params, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "firewallId", firewallId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/vps/v1/firewall/%s/rules", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Sync != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sync", *params.Sync, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "boolean", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewVPSDeleteFirewallRuleV1Request constructs an http.Request for the VPSDeleteFirewallRuleV1 method
 func NewVPSDeleteFirewallRuleV1Request(server string, firewallId FirewallId, ruleId RuleId) (*http.Request, error) {
 	var err error
@@ -57846,6 +58007,32 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with POST /api/vps/v1/firewall/{firewallId}/rules (the `VPSCreateFirewallRuleV1` operationId).
 	VPSCreateFirewallRuleV1WithResponse(ctx context.Context, firewallId FirewallId, body VPSCreateFirewallRuleV1JSONRequestBody, reqEditors ...RequestEditorFn) (*VPSCreateFirewallRuleV1Response, error)
+
+	// VPSReplaceAllFirewallRulesInGroupV1WithBodyWithResponse Replace all firewall rules in group
+	//
+	// Replaces all firewall rules within a specified firewall group with the provided set of rules
+	// in a single atomic operation, instead of creating or deleting rules one by one.
+	//
+	// Any virtual machine using this firewall group will need to be synchronized after replacing rules;
+	// pass the "sync" query parameter to trigger synchronization immediately.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/vps/v1/firewall/{firewallId}/rules (the `VPSReplaceAllFirewallRulesInGroupV1` operationId).
+	VPSReplaceAllFirewallRulesInGroupV1WithBodyWithResponse(ctx context.Context, firewallId FirewallId, params *VPSReplaceAllFirewallRulesInGroupV1Params, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*VPSReplaceAllFirewallRulesInGroupV1Response, error)
+
+	// VPSReplaceAllFirewallRulesInGroupV1WithResponse Replace all firewall rules in group
+	//
+	// Replaces all firewall rules within a specified firewall group with the provided set of rules
+	// in a single atomic operation, instead of creating or deleting rules one by one.
+	//
+	// Any virtual machine using this firewall group will need to be synchronized after replacing rules;
+	// pass the "sync" query parameter to trigger synchronization immediately.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/vps/v1/firewall/{firewallId}/rules (the `VPSReplaceAllFirewallRulesInGroupV1` operationId).
+	VPSReplaceAllFirewallRulesInGroupV1WithResponse(ctx context.Context, firewallId FirewallId, params *VPSReplaceAllFirewallRulesInGroupV1Params, body VPSReplaceAllFirewallRulesInGroupV1JSONRequestBody, reqEditors ...RequestEditorFn) (*VPSReplaceAllFirewallRulesInGroupV1Response, error)
 
 	// VPSDeleteFirewallRuleV1WithResponse Delete firewall rule
 	//
@@ -77458,6 +77645,68 @@ func (r VPSCreateFirewallRuleV1Response) ContentType() string {
 	return ""
 }
 
+type VPSReplaceAllFirewallRulesInGroupV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *VPSV1FirewallFirewallResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r VPSReplaceAllFirewallRulesInGroupV1Response) GetJSON200() *VPSV1FirewallFirewallResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r VPSReplaceAllFirewallRulesInGroupV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r VPSReplaceAllFirewallRulesInGroupV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r VPSReplaceAllFirewallRulesInGroupV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r VPSReplaceAllFirewallRulesInGroupV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r VPSReplaceAllFirewallRulesInGroupV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r VPSReplaceAllFirewallRulesInGroupV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r VPSReplaceAllFirewallRulesInGroupV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type VPSDeleteFirewallRuleV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -88823,6 +89072,44 @@ func (c *ClientWithResponses) VPSCreateFirewallRuleV1WithResponse(ctx context.Co
 		return nil, err
 	}
 	return ParseVPSCreateFirewallRuleV1Response(rsp)
+}
+
+// VPSReplaceAllFirewallRulesInGroupV1WithBodyWithResponse Replace all firewall rules in group
+//
+// Replaces all firewall rules within a specified firewall group with the provided set of rules
+// in a single atomic operation, instead of creating or deleting rules one by one.
+//
+// Any virtual machine using this firewall group will need to be synchronized after replacing rules;
+// pass the "sync" query parameter to trigger synchronization immediately.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/vps/v1/firewall/{firewallId}/rules (the `VPSReplaceAllFirewallRulesInGroupV1` operationId).
+func (c *ClientWithResponses) VPSReplaceAllFirewallRulesInGroupV1WithBodyWithResponse(ctx context.Context, firewallId FirewallId, params *VPSReplaceAllFirewallRulesInGroupV1Params, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*VPSReplaceAllFirewallRulesInGroupV1Response, error) {
+	rsp, err := c.VPSReplaceAllFirewallRulesInGroupV1WithBody(ctx, firewallId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseVPSReplaceAllFirewallRulesInGroupV1Response(rsp)
+}
+
+// VPSReplaceAllFirewallRulesInGroupV1WithResponse Replace all firewall rules in group
+//
+// Replaces all firewall rules within a specified firewall group with the provided set of rules
+// in a single atomic operation, instead of creating or deleting rules one by one.
+//
+// Any virtual machine using this firewall group will need to be synchronized after replacing rules;
+// pass the "sync" query parameter to trigger synchronization immediately.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/vps/v1/firewall/{firewallId}/rules (the `VPSReplaceAllFirewallRulesInGroupV1` operationId).
+func (c *ClientWithResponses) VPSReplaceAllFirewallRulesInGroupV1WithResponse(ctx context.Context, firewallId FirewallId, params *VPSReplaceAllFirewallRulesInGroupV1Params, body VPSReplaceAllFirewallRulesInGroupV1JSONRequestBody, reqEditors ...RequestEditorFn) (*VPSReplaceAllFirewallRulesInGroupV1Response, error) {
+	rsp, err := c.VPSReplaceAllFirewallRulesInGroupV1(ctx, firewallId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseVPSReplaceAllFirewallRulesInGroupV1Response(rsp)
 }
 
 // VPSDeleteFirewallRuleV1WithResponse Delete firewall rule
@@ -104042,6 +104329,53 @@ func ParseVPSCreateFirewallRuleV1Response(rsp *http.Response) (*VPSCreateFirewal
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest VPSV1FirewallFirewallRuleResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseVPSReplaceAllFirewallRulesInGroupV1Response parses an HTTP response from a VPSReplaceAllFirewallRulesInGroupV1WithResponse call
+func ParseVPSReplaceAllFirewallRulesInGroupV1Response(rsp *http.Response) (*VPSReplaceAllFirewallRulesInGroupV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &VPSReplaceAllFirewallRulesInGroupV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest VPSV1FirewallFirewallResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

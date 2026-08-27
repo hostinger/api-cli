@@ -244,6 +244,11 @@
     "method": "POST",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/recreate"
   },
+  "VPS_replaceAllFirewallRulesInGroupV1": {
+    "command": "hostinger vps firewall replace-all-rules-in-group",
+    "method": "PUT",
+    "path": "/api/vps/v1/firewall/{firewallId}/rules"
+  },
   "VPS_resetHostnameV1": {
     "command": "hostinger vps virtual-machines reset-hostname",
     "method": "DELETE",
