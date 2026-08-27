@@ -6560,6 +6560,9 @@ type BillingV1PaymentMethodPaymentMethodResource struct {
 
 	// PaymentMethod Example: card
 	PaymentMethod *string `json:"payment_method,omitempty"`
+
+	// SuspendedAt Example: 2025-03-28T11:54:22Z
+	SuspendedAt *time.Time `json:"suspended_at,omitempty"`
 }
 
 // BillingV1SubscriptionRenewalRenewRequest defines model for Billing.V1.Subscription.Renewal.RenewRequest.
