@@ -13214,6 +13214,9 @@ type VPSV1FirewallFirewallRuleResourceProtocol string
 type VPSV1FirewallRulesReplaceRequest struct {
 	// Rules The complete set of firewall rules that atomically replaces all existing rules in the group
 	Rules []VPSV1FirewallRulesStoreRequest `json:"rules"`
+
+	// Sync Synchronize the firewall group to all its virtual machines after replacing the rules
+	Sync *bool `json:"sync,omitempty"`
 }
 
 // VPSV1FirewallRulesStoreRequest defines model for VPS.V1.Firewall.Rules.StoreRequest.
@@ -15811,12 +15814,6 @@ type ReachListSegmentContactsV1Params struct {
 type VPSGetFirewallListV1Params struct {
 	// Page Page number
 	Page *Page `form:"page,omitempty" json:"page,omitempty"`
-}
-
-// VPSReplaceAllFirewallRulesInGroupV1Params defines parameters for VPSReplaceAllFirewallRulesInGroupV1.
-type VPSReplaceAllFirewallRulesInGroupV1Params struct {
-	// Sync Synchronize the firewall group to all its virtual machines after replacing the rules
-	Sync *bool `form:"sync,omitempty" json:"sync,omitempty"`
 }
 
 // VPSGetPostInstallScriptsV1Params defines parameters for VPSGetPostInstallScriptsV1.
@@ -22529,12 +22526,12 @@ type ClientInterface interface {
 	// in a single atomic operation, instead of creating or deleting rules one by one.
 	//
 	// Any virtual machine using this firewall group will need to be synchronized after replacing rules;
-	// pass the "sync" query parameter to trigger synchronization immediately.
+	// pass the "sync" parameter to trigger synchronization immediately.
 	//
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /api/vps/v1/firewall/{firewallId}/rules (the `VPSReplaceAllFirewallRulesInGroupV1` operationId).
-	VPSReplaceAllFirewallRulesInGroupV1WithBody(ctx context.Context, firewallId FirewallId, params *VPSReplaceAllFirewallRulesInGroupV1Params, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	VPSReplaceAllFirewallRulesInGroupV1WithBody(ctx context.Context, firewallId FirewallId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// VPSReplaceAllFirewallRulesInGroupV1 Replace all firewall rules in group
 	//
@@ -22542,12 +22539,12 @@ type ClientInterface interface {
 	// in a single atomic operation, instead of creating or deleting rules one by one.
 	//
 	// Any virtual machine using this firewall group will need to be synchronized after replacing rules;
-	// pass the "sync" query parameter to trigger synchronization immediately.
+	// pass the "sync" parameter to trigger synchronization immediately.
 	//
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /api/vps/v1/firewall/{firewallId}/rules (the `VPSReplaceAllFirewallRulesInGroupV1` operationId).
-	VPSReplaceAllFirewallRulesInGroupV1(ctx context.Context, firewallId FirewallId, params *VPSReplaceAllFirewallRulesInGroupV1Params, body VPSReplaceAllFirewallRulesInGroupV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	VPSReplaceAllFirewallRulesInGroupV1(ctx context.Context, firewallId FirewallId, body VPSReplaceAllFirewallRulesInGroupV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// VPSDeleteFirewallRuleV1 Delete firewall rule
 	//
@@ -32870,13 +32867,13 @@ func (c *Client) VPSCreateFirewallRuleV1(ctx context.Context, firewallId Firewal
 // in a single atomic operation, instead of creating or deleting rules one by one.
 //
 // Any virtual machine using this firewall group will need to be synchronized after replacing rules;
-// pass the "sync" query parameter to trigger synchronization immediately.
+// pass the "sync" parameter to trigger synchronization immediately.
 //
 // Takes any type of body and a specified content type.
 //
 // Corresponds with PUT /api/vps/v1/firewall/{firewallId}/rules (the `VPSReplaceAllFirewallRulesInGroupV1` operationId).
-func (c *Client) VPSReplaceAllFirewallRulesInGroupV1WithBody(ctx context.Context, firewallId FirewallId, params *VPSReplaceAllFirewallRulesInGroupV1Params, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewVPSReplaceAllFirewallRulesInGroupV1RequestWithBody(c.Server, firewallId, params, contentType, body)
+func (c *Client) VPSReplaceAllFirewallRulesInGroupV1WithBody(ctx context.Context, firewallId FirewallId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewVPSReplaceAllFirewallRulesInGroupV1RequestWithBody(c.Server, firewallId, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -32893,13 +32890,13 @@ func (c *Client) VPSReplaceAllFirewallRulesInGroupV1WithBody(ctx context.Context
 // in a single atomic operation, instead of creating or deleting rules one by one.
 //
 // Any virtual machine using this firewall group will need to be synchronized after replacing rules;
-// pass the "sync" query parameter to trigger synchronization immediately.
+// pass the "sync" parameter to trigger synchronization immediately.
 //
 // Takes a body of the `application/json` content type.
 //
 // Corresponds with PUT /api/vps/v1/firewall/{firewallId}/rules (the `VPSReplaceAllFirewallRulesInGroupV1` operationId).
-func (c *Client) VPSReplaceAllFirewallRulesInGroupV1(ctx context.Context, firewallId FirewallId, params *VPSReplaceAllFirewallRulesInGroupV1Params, body VPSReplaceAllFirewallRulesInGroupV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewVPSReplaceAllFirewallRulesInGroupV1Request(c.Server, firewallId, params, body)
+func (c *Client) VPSReplaceAllFirewallRulesInGroupV1(ctx context.Context, firewallId FirewallId, body VPSReplaceAllFirewallRulesInGroupV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewVPSReplaceAllFirewallRulesInGroupV1Request(c.Server, firewallId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -50008,18 +50005,18 @@ func NewVPSCreateFirewallRuleV1RequestWithBody(server string, firewallId Firewal
 }
 
 // NewVPSReplaceAllFirewallRulesInGroupV1Request calls the generic VPSReplaceAllFirewallRulesInGroupV1 builder with application/json body
-func NewVPSReplaceAllFirewallRulesInGroupV1Request(server string, firewallId FirewallId, params *VPSReplaceAllFirewallRulesInGroupV1Params, body VPSReplaceAllFirewallRulesInGroupV1JSONRequestBody) (*http.Request, error) {
+func NewVPSReplaceAllFirewallRulesInGroupV1Request(server string, firewallId FirewallId, body VPSReplaceAllFirewallRulesInGroupV1JSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewVPSReplaceAllFirewallRulesInGroupV1RequestWithBody(server, firewallId, params, "application/json", bodyReader)
+	return NewVPSReplaceAllFirewallRulesInGroupV1RequestWithBody(server, firewallId, "application/json", bodyReader)
 }
 
 // NewVPSReplaceAllFirewallRulesInGroupV1RequestWithBody constructs an http.Request for the VPSReplaceAllFirewallRulesInGroupV1 method, with any body, and a specified content type
-func NewVPSReplaceAllFirewallRulesInGroupV1RequestWithBody(server string, firewallId FirewallId, params *VPSReplaceAllFirewallRulesInGroupV1Params, contentType string, body io.Reader) (*http.Request, error) {
+func NewVPSReplaceAllFirewallRulesInGroupV1RequestWithBody(server string, firewallId FirewallId, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -50042,33 +50039,6 @@ func NewVPSReplaceAllFirewallRulesInGroupV1RequestWithBody(server string, firewa
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if params.Sync != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "sync", *params.Sync, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "boolean", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
 	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
@@ -58014,12 +57984,12 @@ type ClientWithResponsesInterface interface {
 	// in a single atomic operation, instead of creating or deleting rules one by one.
 	//
 	// Any virtual machine using this firewall group will need to be synchronized after replacing rules;
-	// pass the "sync" query parameter to trigger synchronization immediately.
+	// pass the "sync" parameter to trigger synchronization immediately.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
 	// Corresponds with PUT /api/vps/v1/firewall/{firewallId}/rules (the `VPSReplaceAllFirewallRulesInGroupV1` operationId).
-	VPSReplaceAllFirewallRulesInGroupV1WithBodyWithResponse(ctx context.Context, firewallId FirewallId, params *VPSReplaceAllFirewallRulesInGroupV1Params, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*VPSReplaceAllFirewallRulesInGroupV1Response, error)
+	VPSReplaceAllFirewallRulesInGroupV1WithBodyWithResponse(ctx context.Context, firewallId FirewallId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*VPSReplaceAllFirewallRulesInGroupV1Response, error)
 
 	// VPSReplaceAllFirewallRulesInGroupV1WithResponse Replace all firewall rules in group
 	//
@@ -58027,12 +57997,12 @@ type ClientWithResponsesInterface interface {
 	// in a single atomic operation, instead of creating or deleting rules one by one.
 	//
 	// Any virtual machine using this firewall group will need to be synchronized after replacing rules;
-	// pass the "sync" query parameter to trigger synchronization immediately.
+	// pass the "sync" parameter to trigger synchronization immediately.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
 	// Corresponds with PUT /api/vps/v1/firewall/{firewallId}/rules (the `VPSReplaceAllFirewallRulesInGroupV1` operationId).
-	VPSReplaceAllFirewallRulesInGroupV1WithResponse(ctx context.Context, firewallId FirewallId, params *VPSReplaceAllFirewallRulesInGroupV1Params, body VPSReplaceAllFirewallRulesInGroupV1JSONRequestBody, reqEditors ...RequestEditorFn) (*VPSReplaceAllFirewallRulesInGroupV1Response, error)
+	VPSReplaceAllFirewallRulesInGroupV1WithResponse(ctx context.Context, firewallId FirewallId, body VPSReplaceAllFirewallRulesInGroupV1JSONRequestBody, reqEditors ...RequestEditorFn) (*VPSReplaceAllFirewallRulesInGroupV1Response, error)
 
 	// VPSDeleteFirewallRuleV1WithResponse Delete firewall rule
 	//
@@ -89080,13 +89050,13 @@ func (c *ClientWithResponses) VPSCreateFirewallRuleV1WithResponse(ctx context.Co
 // in a single atomic operation, instead of creating or deleting rules one by one.
 //
 // Any virtual machine using this firewall group will need to be synchronized after replacing rules;
-// pass the "sync" query parameter to trigger synchronization immediately.
+// pass the "sync" parameter to trigger synchronization immediately.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
 // Corresponds with PUT /api/vps/v1/firewall/{firewallId}/rules (the `VPSReplaceAllFirewallRulesInGroupV1` operationId).
-func (c *ClientWithResponses) VPSReplaceAllFirewallRulesInGroupV1WithBodyWithResponse(ctx context.Context, firewallId FirewallId, params *VPSReplaceAllFirewallRulesInGroupV1Params, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*VPSReplaceAllFirewallRulesInGroupV1Response, error) {
-	rsp, err := c.VPSReplaceAllFirewallRulesInGroupV1WithBody(ctx, firewallId, params, contentType, body, reqEditors...)
+func (c *ClientWithResponses) VPSReplaceAllFirewallRulesInGroupV1WithBodyWithResponse(ctx context.Context, firewallId FirewallId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*VPSReplaceAllFirewallRulesInGroupV1Response, error) {
+	rsp, err := c.VPSReplaceAllFirewallRulesInGroupV1WithBody(ctx, firewallId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -89099,13 +89069,13 @@ func (c *ClientWithResponses) VPSReplaceAllFirewallRulesInGroupV1WithBodyWithRes
 // in a single atomic operation, instead of creating or deleting rules one by one.
 //
 // Any virtual machine using this firewall group will need to be synchronized after replacing rules;
-// pass the "sync" query parameter to trigger synchronization immediately.
+// pass the "sync" parameter to trigger synchronization immediately.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
 // Corresponds with PUT /api/vps/v1/firewall/{firewallId}/rules (the `VPSReplaceAllFirewallRulesInGroupV1` operationId).
-func (c *ClientWithResponses) VPSReplaceAllFirewallRulesInGroupV1WithResponse(ctx context.Context, firewallId FirewallId, params *VPSReplaceAllFirewallRulesInGroupV1Params, body VPSReplaceAllFirewallRulesInGroupV1JSONRequestBody, reqEditors ...RequestEditorFn) (*VPSReplaceAllFirewallRulesInGroupV1Response, error) {
-	rsp, err := c.VPSReplaceAllFirewallRulesInGroupV1(ctx, firewallId, params, body, reqEditors...)
+func (c *ClientWithResponses) VPSReplaceAllFirewallRulesInGroupV1WithResponse(ctx context.Context, firewallId FirewallId, body VPSReplaceAllFirewallRulesInGroupV1JSONRequestBody, reqEditors ...RequestEditorFn) (*VPSReplaceAllFirewallRulesInGroupV1Response, error) {
+	rsp, err := c.VPSReplaceAllFirewallRulesInGroupV1(ctx, firewallId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

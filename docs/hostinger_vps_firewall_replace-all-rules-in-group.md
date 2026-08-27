@@ -8,7 +8,7 @@ Replaces all firewall rules within a specified firewall group with the provided 
 in a single atomic operation, instead of creating or deleting rules one by one.
 
 Any virtual machine using this firewall group will need to be synchronized after replacing rules;
-pass the "sync" query parameter to trigger synchronization immediately.
+pass the "sync" parameter to trigger synchronization immediately.
 
 ```
 hostinger vps firewall replace-all-rules-in-group <firewall-id> [flags]
