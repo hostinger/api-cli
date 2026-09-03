@@ -29,14 +29,12 @@ hostinger agency-hosting website-setups create <order_id> [flags]
 ### Options
 
 ```
-      --clone string                Clone the new website from an existing website (JSON)
       --datacenter-code string      Datacenter code where the website should be provisioned. Available codes depend on live capacity and are not a fixed set.
-      --derive-domain string        Derive the domain from an existing vhost (JSON)
       --domain string               Primary domain to attach to the website. Omit or set to null to get a free auto-generated *.hostingersite.com subdomain instead.
       --flavor wp-<major>.<minor>   Setup flavor: a specific WordPress version in the format wp-<major>.<minor> or `wp-<major>.<minor>.<patch>` (e.g. `wp-6.8.2`), or `php-fpm` for a plain PHP stack. Generic versions like `wp-latest` are not allowed.
   -h, --help                        help for create
       --settings string             Website settings (JSON)
-      --type string                 Website type (one of: horizons, node-static)
+      --type string                 Website type (one of: node-static)
       --wordpress string            WordPress installation options (JSON)
 ```
 

@@ -59,16 +59,13 @@ func (e AgencyHostingV1PhpOptionResourceType) Valid() bool {
 
 // Defines values for AgencyHostingV1SetupsCreateSetupRequestType.
 const (
-	AgencyHostingV1SetupsCreateSetupRequestTypeHorizons   AgencyHostingV1SetupsCreateSetupRequestType = "horizons"
-	AgencyHostingV1SetupsCreateSetupRequestTypeNodeStatic AgencyHostingV1SetupsCreateSetupRequestType = "node-static"
+	NodeStatic AgencyHostingV1SetupsCreateSetupRequestType = "node-static"
 )
 
 // Valid indicates whether the value is a known member of the AgencyHostingV1SetupsCreateSetupRequestType enum.
 func (e AgencyHostingV1SetupsCreateSetupRequestType) Valid() bool {
 	switch e {
-	case AgencyHostingV1SetupsCreateSetupRequestTypeHorizons:
-		return true
-	case AgencyHostingV1SetupsCreateSetupRequestTypeNodeStatic:
+	case NodeStatic:
 		return true
 	default:
 		return false
@@ -5549,27 +5546,10 @@ type AgencyHostingV1PhpVersionResource struct {
 
 // AgencyHostingV1SetupsCreateSetupRequest Create a new Agency Plan website setup on the given order
 type AgencyHostingV1SetupsCreateSetupRequest struct {
-	// Clone Clone the new website from an existing website
-	Clone *struct {
-		// WebsiteUid Example: zpwlGlp19
-		WebsiteUid string `json:"website_uid"`
-	} `json:"clone,omitempty"`
-
 	// DatacenterCode Datacenter code where the website should be provisioned. Available codes depend on live capacity and are not a fixed set.
 	//
 	// Example: us-east
 	DatacenterCode string `json:"datacenter_code"`
-
-	// DeriveDomain Derive the domain from an existing vhost
-	DeriveDomain *struct {
-		FromVhost struct {
-			// Username Example: u123456789
-			Username string `json:"username"`
-
-			// Vhost Example: example.com
-			Vhost string `json:"vhost"`
-		} `json:"from_vhost"`
-	} `json:"derive_domain,omitempty"`
 
 	// Domain Primary domain to attach to the website. Omit or set to null to get a free auto-generated *.hostingersite.com subdomain instead.
 	//
