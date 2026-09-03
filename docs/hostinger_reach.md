@@ -26,4 +26,5 @@ Reach commands
 * [hostinger reach profiles](hostinger_reach_profiles.md)	 - Profiles commands
 * [hostinger reach segments](hostinger_reach_segments.md)	 - Segments commands
 * [hostinger reach tags](hostinger_reach_tags.md)	 - Tags commands
+* [hostinger reach templates](hostinger_reach_templates.md)	 - Templates commands
 

@@ -2067,6 +2067,54 @@ func (e ReachV1CampaignsCampaignResourceType) Valid() bool {
 	}
 }
 
+// Defines values for ReachV1CampaignsCreatedCampaignResourceStatus.
+const (
+	ReachV1CampaignsCreatedCampaignResourceStatusDraft     ReachV1CampaignsCreatedCampaignResourceStatus = "draft"
+	ReachV1CampaignsCreatedCampaignResourceStatusFailed    ReachV1CampaignsCreatedCampaignResourceStatus = "failed"
+	ReachV1CampaignsCreatedCampaignResourceStatusPublish   ReachV1CampaignsCreatedCampaignResourceStatus = "publish"
+	ReachV1CampaignsCreatedCampaignResourceStatusScheduled ReachV1CampaignsCreatedCampaignResourceStatus = "scheduled"
+	ReachV1CampaignsCreatedCampaignResourceStatusSending   ReachV1CampaignsCreatedCampaignResourceStatus = "sending"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1CampaignsCreatedCampaignResourceStatus enum.
+func (e ReachV1CampaignsCreatedCampaignResourceStatus) Valid() bool {
+	switch e {
+	case ReachV1CampaignsCreatedCampaignResourceStatusDraft:
+		return true
+	case ReachV1CampaignsCreatedCampaignResourceStatusFailed:
+		return true
+	case ReachV1CampaignsCreatedCampaignResourceStatusPublish:
+		return true
+	case ReachV1CampaignsCreatedCampaignResourceStatusScheduled:
+		return true
+	case ReachV1CampaignsCreatedCampaignResourceStatusSending:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1CampaignsCreatedCampaignResourceType.
+const (
+	ReachV1CampaignsCreatedCampaignResourceTypeAutomation  ReachV1CampaignsCreatedCampaignResourceType = "automation"
+	ReachV1CampaignsCreatedCampaignResourceTypeCampaign    ReachV1CampaignsCreatedCampaignResourceType = "campaign"
+	ReachV1CampaignsCreatedCampaignResourceTypeDoubleOptIn ReachV1CampaignsCreatedCampaignResourceType = "double_opt_in"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1CampaignsCreatedCampaignResourceType enum.
+func (e ReachV1CampaignsCreatedCampaignResourceType) Valid() bool {
+	switch e {
+	case ReachV1CampaignsCreatedCampaignResourceTypeAutomation:
+		return true
+	case ReachV1CampaignsCreatedCampaignResourceTypeCampaign:
+		return true
+	case ReachV1CampaignsCreatedCampaignResourceTypeDoubleOptIn:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for ReachV1ContactsContactDetailsResourceSource.
 const (
 	ReachV1ContactsContactDetailsResourceSourceApi      ReachV1ContactsContactDetailsResourceSource = "api"
@@ -11711,6 +11759,102 @@ type ReachV1CampaignsCampaignSummaryStatisticsResource struct {
 	TotalSent *int `json:"total_sent,omitempty"`
 }
 
+// ReachV1CampaignsCreatedCampaignResource The campaign as it was stored, without targeting or delivery progress
+type ReachV1CampaignsCreatedCampaignResource struct {
+	// CreatedAt Example: 2025-02-27T11:54:22Z
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// IsAllContacts Whether the campaign targets every contact instead of selected segments.
+	//
+	// Example: false
+	IsAllContacts *bool `json:"is_all_contacts,omitempty"`
+
+	// Metadata The stored extra fields, including the ones Reach sets itself.
+	//
+	// Example: {"preheader":"Our biggest deals of the year"}
+	Metadata *map[string]string `json:"metadata,omitempty"`
+
+	// SenderEmail Example: marketing@example.com
+	SenderEmail *string `json:"sender_email,omitempty"`
+
+	// SenderName Example: Marketing Team
+	SenderName *string `json:"sender_name,omitempty"`
+
+	// Status Always `draft` for a campaign that was just created.
+	//
+	// Example: draft
+	Status *ReachV1CampaignsCreatedCampaignResourceStatus `json:"status,omitempty"`
+
+	// Subject Example: Don't miss our Black Friday deals!
+	Subject *string `json:"subject,omitempty"`
+
+	// TemplateUuid Example: 2080cc86-e026-4f7b-9598-d4132f8c7c2f
+	TemplateUuid *string `json:"template_uuid,omitempty"`
+
+	// Title Example: Black Friday Campaign
+	Title *string `json:"title,omitempty"`
+
+	// Type Example: campaign
+	Type *ReachV1CampaignsCreatedCampaignResourceType `json:"type,omitempty"`
+
+	// UpdatedAt Example: 2025-03-04T09:12:07Z
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+
+	// Uuid Example: 550e8400-e29b-41d4-a716-446655440000
+	Uuid *string `json:"uuid,omitempty"`
+}
+
+// ReachV1CampaignsCreatedCampaignResourceStatus Always `draft` for a campaign that was just created.
+//
+// Example: draft
+type ReachV1CampaignsCreatedCampaignResourceStatus string
+
+// ReachV1CampaignsCreatedCampaignResourceType Example: campaign
+type ReachV1CampaignsCreatedCampaignResourceType string
+
+// ReachV1CampaignsStoreRequest Create a campaign in draft status
+type ReachV1CampaignsStoreRequest struct {
+	// Metadata Extra campaign fields. Any key outside the listed ones is rejected.
+	Metadata *struct {
+		// Preheader Preview text shown after the subject line in the inbox.
+		//
+		// Example: Our biggest deals of the year
+		Preheader *string `json:"preheader,omitempty"`
+
+		// Source Where the campaign was created from.
+		//
+		// Example: api
+		Source *string `json:"source,omitempty"`
+	} `json:"metadata,omitempty"`
+
+	// SenderEmail From address of the campaign. Its domain has to be verified on the profile before
+	// the campaign can be sent.
+	//
+	// Example: marketing@example.com
+	SenderEmail string `json:"sender_email"`
+
+	// SenderName From name shown to the recipients.
+	//
+	// Example: Marketing Team
+	SenderName string `json:"sender_name"`
+
+	// Subject Subject line of the email.
+	//
+	// Example: Don't miss our Black Friday deals!
+	Subject *string `json:"subject,omitempty"`
+
+	// TemplateUuid Template to send, as returned by the template endpoints. Can be left out and
+	// attached later, but the campaign cannot be sent without one.
+	//
+	// Example: 550e8400-e29b-41d4-a716-446655440000
+	TemplateUuid *string `json:"template_uuid,omitempty"`
+
+	// Title Name the campaign is listed under. Not shown to the recipients.
+	//
+	// Example: Black Friday Campaign
+	Title *string `json:"title,omitempty"`
+}
+
 // ReachV1ContactsBulkStoreRequest Create many contacts in one call
 type ReachV1ContactsBulkStoreRequest struct {
 	Contacts []struct {
@@ -12808,6 +12952,43 @@ type ReachV1ProfilesProfileResource struct {
 
 	// Status Example: active
 	Status *string `json:"status,omitempty"`
+}
+
+// ReachV1TemplatesStoreRequest Create a reusable email template
+type ReachV1TemplatesStoreRequest struct {
+	// TemplateContent The email body as HTML. It is sanitised before it is stored, so the saved template
+	// can differ from what was sent - inline any styles the email clients need and keep
+	// the markup self-contained.
+	//
+	// Example: <html><body><h1>Email Template</h1><p>Hello, traveler!</p></body></html>
+	TemplateContent string `json:"template_content"`
+
+	// Title Name the template is listed under. Not shown to the recipients.
+	//
+	// Example: Summer Sale Draft
+	Title *string `json:"title,omitempty"`
+}
+
+// ReachV1TemplatesTemplateCollection Array of [`Reach.V1.Templates.TemplateResource`](#model/reachv1templatestemplateresource)
+type ReachV1TemplatesTemplateCollection = []ReachV1TemplatesTemplateResource
+
+// ReachV1TemplatesTemplateResource defines model for Reach.V1.Templates.TemplateResource.
+type ReachV1TemplatesTemplateResource struct {
+	// CreatedAt Example: 2025-02-27T11:54:22Z
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Title Null for templates that were never named.
+	//
+	// Example: Newsletter Template
+	Title *string `json:"title,omitempty"`
+
+	// UpdatedAt Example: 2025-03-04T09:12:07Z
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+
+	// Uuid Pass this as the `template_uuid` of a campaign.
+	//
+	// Example: 550e8400-e29b-41d4-a716-446655440000
+	Uuid *string `json:"uuid,omitempty"`
 }
 
 // VPSV1ActionActionCollection Array of [`VPS.V1.Action.ActionResource`](#model/vpsv1actionactionresource)
@@ -16142,6 +16323,9 @@ type MailUpdateWebhookV1JSONRequestBody = MailV1SchemaUpdateWebhookRequestSchema
 // Deprecated: this type has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 type ReachCreateANewContactV1JSONRequestBody = ReachV1ContactsStoreRequest
 
+// ReachCreateADraftCampaignV1JSONRequestBody defines body for ReachCreateADraftCampaignV1 for application/json ContentType.
+type ReachCreateADraftCampaignV1JSONRequestBody = ReachV1CampaignsStoreRequest
+
 // ReachCreateNewContactsV1JSONRequestBody defines body for ReachCreateNewContactsV1 for application/json ContentType.
 type ReachCreateNewContactsV1JSONRequestBody = ReachV1ContactsStoreRequest
 
@@ -16177,6 +16361,9 @@ type ReachRemoveContactsFromATagV1JSONRequestBody = ReachV1ContactsTagsManageCon
 
 // ReachAssignContactsToATagV1JSONRequestBody defines body for ReachAssignContactsToATagV1 for application/json ContentType.
 type ReachAssignContactsToATagV1JSONRequestBody = ReachV1ContactsTagsManageContactsRequest
+
+// ReachCreateAnEmailTemplateV1JSONRequestBody defines body for ReachCreateAnEmailTemplateV1 for application/json ContentType.
+type ReachCreateAnEmailTemplateV1JSONRequestBody = ReachV1TemplatesStoreRequest
 
 // ReachCreateANewContactSegmentV1JSONRequestBody defines body for ReachCreateANewContactSegmentV1 for application/json ContentType.
 //
@@ -21727,6 +21914,32 @@ type ClientInterface interface {
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/campaigns (the `ReachListCampaignsV1` operationId).
 	ReachListCampaignsV1(ctx context.Context, profileUuid ProfileUuid, params *ReachListCampaignsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ReachCreateADraftCampaignV1WithBody Create a draft campaign
+	//
+	// Create a campaign in a profile.
+	//
+	// The campaign is created as a draft, so nothing is sent and no contact is touched. It has no
+	// audience yet either - targeting and scheduling are not part of this request, the draft is
+	// finished and sent from the Reach interface.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/campaigns (the `ReachCreateADraftCampaignV1` operationId).
+	ReachCreateADraftCampaignV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachCreateADraftCampaignV1 Create a draft campaign
+	//
+	// Create a campaign in a profile.
+	//
+	// The campaign is created as a draft, so nothing is sent and no contact is touched. It has no
+	// audience yet either - targeting and scheduling are not part of this request, the draft is
+	// finished and sent from the Reach interface.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/campaigns (the `ReachCreateADraftCampaignV1` operationId).
+	ReachCreateADraftCampaignV1(ctx context.Context, profileUuid ProfileUuid, body ReachCreateADraftCampaignV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ReachGetCampaignDetailsV1 Get campaign details
 	//
 	// Get a single campaign with its sender, subject, template reference, targeting and delivery
@@ -22304,6 +22517,43 @@ type ClientInterface interface {
 	//
 	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts/{contactUuid} (the `ReachAssignAContactToATagV1` operationId).
 	ReachAssignAContactToATagV1(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, contactUuid ContactUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachListEmailTemplatesV1 List email templates
+	//
+	// Get a list of the email templates in a profile, most recently updated first.
+	//
+	// Templates are the reusable email bodies a campaign is built from. The list is not paginated
+	// and only the metadata is returned - the template content itself is not exposed. Use the
+	// `uuid` of a template as the `template_uuid` when creating a campaign.
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/templates (the `ReachListEmailTemplatesV1` operationId).
+	ReachListEmailTemplatesV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachCreateAnEmailTemplateV1WithBody Create an email template
+	//
+	// Create an email template in a profile.
+	//
+	// The template holds the HTML body a campaign reuses, so it can be created before any
+	// campaign exists. Only the template metadata comes back - keep the returned `uuid` to
+	// reference it as the `template_uuid` of a campaign.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/templates (the `ReachCreateAnEmailTemplateV1` operationId).
+	ReachCreateAnEmailTemplateV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachCreateAnEmailTemplateV1 Create an email template
+	//
+	// Create an email template in a profile.
+	//
+	// The template holds the HTML body a campaign reuses, so it can be created before any
+	// campaign exists. Only the template metadata comes back - keep the returned `uuid` to
+	// reference it as the `template_uuid` of a campaign.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/templates (the `ReachCreateAnEmailTemplateV1` operationId).
+	ReachCreateAnEmailTemplateV1(ctx context.Context, profileUuid ProfileUuid, body ReachCreateAnEmailTemplateV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReachListSegmentsV1 List segments
 	//
@@ -31423,6 +31673,52 @@ func (c *Client) ReachListCampaignsV1(ctx context.Context, profileUuid ProfileUu
 	return c.Client.Do(req)
 }
 
+// ReachCreateADraftCampaignV1WithBody Create a draft campaign
+//
+// Create a campaign in a profile.
+//
+// The campaign is created as a draft, so nothing is sent and no contact is touched. It has no
+// audience yet either - targeting and scheduling are not part of this request, the draft is
+// finished and sent from the Reach interface.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/campaigns (the `ReachCreateADraftCampaignV1` operationId).
+func (c *Client) ReachCreateADraftCampaignV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachCreateADraftCampaignV1RequestWithBody(c.Server, profileUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachCreateADraftCampaignV1 Create a draft campaign
+//
+// Create a campaign in a profile.
+//
+// The campaign is created as a draft, so nothing is sent and no contact is touched. It has no
+// audience yet either - targeting and scheduling are not part of this request, the draft is
+// finished and sent from the Reach interface.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/campaigns (the `ReachCreateADraftCampaignV1` operationId).
+func (c *Client) ReachCreateADraftCampaignV1(ctx context.Context, profileUuid ProfileUuid, body ReachCreateADraftCampaignV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachCreateADraftCampaignV1Request(c.Server, profileUuid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // ReachGetCampaignDetailsV1 Get campaign details
 //
 // Get a single campaign with its sender, subject, template reference, targeting and delivery
@@ -32471,6 +32767,73 @@ func (c *Client) ReachRemoveAContactFromATagV1(ctx context.Context, profileUuid 
 // Corresponds with POST /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts/{contactUuid} (the `ReachAssignAContactToATagV1` operationId).
 func (c *Client) ReachAssignAContactToATagV1(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, contactUuid ContactUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReachAssignAContactToATagV1Request(c.Server, profileUuid, tagUuid, contactUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachListEmailTemplatesV1 List email templates
+//
+// Get a list of the email templates in a profile, most recently updated first.
+//
+// Templates are the reusable email bodies a campaign is built from. The list is not paginated
+// and only the metadata is returned - the template content itself is not exposed. Use the
+// `uuid` of a template as the `template_uuid` when creating a campaign.
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/templates (the `ReachListEmailTemplatesV1` operationId).
+func (c *Client) ReachListEmailTemplatesV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachListEmailTemplatesV1Request(c.Server, profileUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachCreateAnEmailTemplateV1WithBody Create an email template
+//
+// Create an email template in a profile.
+//
+// The template holds the HTML body a campaign reuses, so it can be created before any
+// campaign exists. Only the template metadata comes back - keep the returned `uuid` to
+// reference it as the `template_uuid` of a campaign.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/templates (the `ReachCreateAnEmailTemplateV1` operationId).
+func (c *Client) ReachCreateAnEmailTemplateV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachCreateAnEmailTemplateV1RequestWithBody(c.Server, profileUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachCreateAnEmailTemplateV1 Create an email template
+//
+// Create an email template in a profile.
+//
+// The template holds the HTML body a campaign reuses, so it can be created before any
+// campaign exists. Only the template metadata comes back - keep the returned `uuid` to
+// reference it as the `template_uuid` of a campaign.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/templates (the `ReachCreateAnEmailTemplateV1` operationId).
+func (c *Client) ReachCreateAnEmailTemplateV1(ctx context.Context, profileUuid ProfileUuid, body ReachCreateAnEmailTemplateV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachCreateAnEmailTemplateV1Request(c.Server, profileUuid, body)
 	if err != nil {
 		return nil, err
 	}
@@ -47734,6 +48097,53 @@ func NewReachListCampaignsV1Request(server string, profileUuid ProfileUuid, para
 	return req, nil
 }
 
+// NewReachCreateADraftCampaignV1Request calls the generic ReachCreateADraftCampaignV1 builder with application/json body
+func NewReachCreateADraftCampaignV1Request(server string, profileUuid ProfileUuid, body ReachCreateADraftCampaignV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachCreateADraftCampaignV1RequestWithBody(server, profileUuid, "application/json", bodyReader)
+}
+
+// NewReachCreateADraftCampaignV1RequestWithBody constructs an http.Request for the ReachCreateADraftCampaignV1 method, with any body, and a specified content type
+func NewReachCreateADraftCampaignV1RequestWithBody(server string, profileUuid ProfileUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/campaigns", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewReachGetCampaignDetailsV1Request constructs an http.Request for the ReachGetCampaignDetailsV1 method
 func NewReachGetCampaignDetailsV1Request(server string, profileUuid ProfileUuid, campaignUuid CampaignUuid) (*http.Request, error) {
 	var err error
@@ -49468,6 +49878,87 @@ func NewReachAssignAContactToATagV1Request(server string, profileUuid ProfileUui
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewReachListEmailTemplatesV1Request constructs an http.Request for the ReachListEmailTemplatesV1 method
+func NewReachListEmailTemplatesV1Request(server string, profileUuid ProfileUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/templates", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachCreateAnEmailTemplateV1Request calls the generic ReachCreateAnEmailTemplateV1 builder with application/json body
+func NewReachCreateAnEmailTemplateV1Request(server string, profileUuid ProfileUuid, body ReachCreateAnEmailTemplateV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachCreateAnEmailTemplateV1RequestWithBody(server, profileUuid, "application/json", bodyReader)
+}
+
+// NewReachCreateAnEmailTemplateV1RequestWithBody constructs an http.Request for the ReachCreateAnEmailTemplateV1 method, with any body, and a specified content type
+func NewReachCreateAnEmailTemplateV1RequestWithBody(server string, profileUuid ProfileUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/templates", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -57119,6 +57610,32 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/campaigns (the `ReachListCampaignsV1` operationId).
 	ReachListCampaignsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, params *ReachListCampaignsV1Params, reqEditors ...RequestEditorFn) (*ReachListCampaignsV1Response, error)
 
+	// ReachCreateADraftCampaignV1WithBodyWithResponse Create a draft campaign
+	//
+	// Create a campaign in a profile.
+	//
+	// The campaign is created as a draft, so nothing is sent and no contact is touched. It has no
+	// audience yet either - targeting and scheduling are not part of this request, the draft is
+	// finished and sent from the Reach interface.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/campaigns (the `ReachCreateADraftCampaignV1` operationId).
+	ReachCreateADraftCampaignV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachCreateADraftCampaignV1Response, error)
+
+	// ReachCreateADraftCampaignV1WithResponse Create a draft campaign
+	//
+	// Create a campaign in a profile.
+	//
+	// The campaign is created as a draft, so nothing is sent and no contact is touched. It has no
+	// audience yet either - targeting and scheduling are not part of this request, the draft is
+	// finished and sent from the Reach interface.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/campaigns (the `ReachCreateADraftCampaignV1` operationId).
+	ReachCreateADraftCampaignV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachCreateADraftCampaignV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachCreateADraftCampaignV1Response, error)
+
 	// ReachGetCampaignDetailsV1WithResponse Get campaign details
 	//
 	// Get a single campaign with its sender, subject, template reference, targeting and delivery
@@ -57744,6 +58261,45 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts/{contactUuid} (the `ReachAssignAContactToATagV1` operationId).
 	ReachAssignAContactToATagV1WithResponse(ctx context.Context, profileUuid ProfileUuid, tagUuid TagUuid, contactUuid ContactUuid, reqEditors ...RequestEditorFn) (*ReachAssignAContactToATagV1Response, error)
+
+	// ReachListEmailTemplatesV1WithResponse List email templates
+	//
+	// Get a list of the email templates in a profile, most recently updated first.
+	//
+	// Templates are the reusable email bodies a campaign is built from. The list is not paginated
+	// and only the metadata is returned - the template content itself is not exposed. Use the
+	// `uuid` of a template as the `template_uuid` when creating a campaign.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/templates (the `ReachListEmailTemplatesV1` operationId).
+	ReachListEmailTemplatesV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachListEmailTemplatesV1Response, error)
+
+	// ReachCreateAnEmailTemplateV1WithBodyWithResponse Create an email template
+	//
+	// Create an email template in a profile.
+	//
+	// The template holds the HTML body a campaign reuses, so it can be created before any
+	// campaign exists. Only the template metadata comes back - keep the returned `uuid` to
+	// reference it as the `template_uuid` of a campaign.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/templates (the `ReachCreateAnEmailTemplateV1` operationId).
+	ReachCreateAnEmailTemplateV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachCreateAnEmailTemplateV1Response, error)
+
+	// ReachCreateAnEmailTemplateV1WithResponse Create an email template
+	//
+	// Create an email template in a profile.
+	//
+	// The template holds the HTML body a campaign reuses, so it can be created before any
+	// campaign exists. Only the template metadata comes back - keep the returned `uuid` to
+	// reference it as the `template_uuid` of a campaign.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/templates (the `ReachCreateAnEmailTemplateV1` operationId).
+	ReachCreateAnEmailTemplateV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachCreateAnEmailTemplateV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachCreateAnEmailTemplateV1Response, error)
 
 	// ReachListSegmentsV1WithResponse List segments
 	//
@@ -74731,6 +75287,68 @@ func (r ReachListCampaignsV1Response) ContentType() string {
 	return ""
 }
 
+type ReachCreateADraftCampaignV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1CampaignsCreatedCampaignResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachCreateADraftCampaignV1Response) GetJSON200() *ReachV1CampaignsCreatedCampaignResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachCreateADraftCampaignV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachCreateADraftCampaignV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachCreateADraftCampaignV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachCreateADraftCampaignV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachCreateADraftCampaignV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachCreateADraftCampaignV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachCreateADraftCampaignV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type ReachGetCampaignDetailsV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -76836,6 +77454,123 @@ func (r ReachAssignAContactToATagV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r ReachAssignAContactToATagV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachListEmailTemplatesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1TemplatesTemplateCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachListEmailTemplatesV1Response) GetJSON200() *ReachV1TemplatesTemplateCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachListEmailTemplatesV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachListEmailTemplatesV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachListEmailTemplatesV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachListEmailTemplatesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachListEmailTemplatesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachListEmailTemplatesV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachCreateAnEmailTemplateV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1TemplatesTemplateResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachCreateAnEmailTemplateV1Response) GetJSON200() *ReachV1TemplatesTemplateResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachCreateAnEmailTemplateV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachCreateAnEmailTemplateV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachCreateAnEmailTemplateV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachCreateAnEmailTemplateV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachCreateAnEmailTemplateV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachCreateAnEmailTemplateV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachCreateAnEmailTemplateV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -87796,6 +88531,44 @@ func (c *ClientWithResponses) ReachListCampaignsV1WithResponse(ctx context.Conte
 	return ParseReachListCampaignsV1Response(rsp)
 }
 
+// ReachCreateADraftCampaignV1WithBodyWithResponse Create a draft campaign
+//
+// Create a campaign in a profile.
+//
+// The campaign is created as a draft, so nothing is sent and no contact is touched. It has no
+// audience yet either - targeting and scheduling are not part of this request, the draft is
+// finished and sent from the Reach interface.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/campaigns (the `ReachCreateADraftCampaignV1` operationId).
+func (c *ClientWithResponses) ReachCreateADraftCampaignV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachCreateADraftCampaignV1Response, error) {
+	rsp, err := c.ReachCreateADraftCampaignV1WithBody(ctx, profileUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachCreateADraftCampaignV1Response(rsp)
+}
+
+// ReachCreateADraftCampaignV1WithResponse Create a draft campaign
+//
+// Create a campaign in a profile.
+//
+// The campaign is created as a draft, so nothing is sent and no contact is touched. It has no
+// audience yet either - targeting and scheduling are not part of this request, the draft is
+// finished and sent from the Reach interface.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/campaigns (the `ReachCreateADraftCampaignV1` operationId).
+func (c *ClientWithResponses) ReachCreateADraftCampaignV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachCreateADraftCampaignV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachCreateADraftCampaignV1Response, error) {
+	rsp, err := c.ReachCreateADraftCampaignV1(ctx, profileUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachCreateADraftCampaignV1Response(rsp)
+}
+
 // ReachGetCampaignDetailsV1WithResponse Get campaign details
 //
 // Get a single campaign with its sender, subject, template reference, targeting and delivery
@@ -88708,6 +89481,63 @@ func (c *ClientWithResponses) ReachAssignAContactToATagV1WithResponse(ctx contex
 		return nil, err
 	}
 	return ParseReachAssignAContactToATagV1Response(rsp)
+}
+
+// ReachListEmailTemplatesV1WithResponse List email templates
+//
+// Get a list of the email templates in a profile, most recently updated first.
+//
+// Templates are the reusable email bodies a campaign is built from. The list is not paginated
+// and only the metadata is returned - the template content itself is not exposed. Use the
+// `uuid` of a template as the `template_uuid` when creating a campaign.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/templates (the `ReachListEmailTemplatesV1` operationId).
+func (c *ClientWithResponses) ReachListEmailTemplatesV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachListEmailTemplatesV1Response, error) {
+	rsp, err := c.ReachListEmailTemplatesV1(ctx, profileUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachListEmailTemplatesV1Response(rsp)
+}
+
+// ReachCreateAnEmailTemplateV1WithBodyWithResponse Create an email template
+//
+// Create an email template in a profile.
+//
+// The template holds the HTML body a campaign reuses, so it can be created before any
+// campaign exists. Only the template metadata comes back - keep the returned `uuid` to
+// reference it as the `template_uuid` of a campaign.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/templates (the `ReachCreateAnEmailTemplateV1` operationId).
+func (c *ClientWithResponses) ReachCreateAnEmailTemplateV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachCreateAnEmailTemplateV1Response, error) {
+	rsp, err := c.ReachCreateAnEmailTemplateV1WithBody(ctx, profileUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachCreateAnEmailTemplateV1Response(rsp)
+}
+
+// ReachCreateAnEmailTemplateV1WithResponse Create an email template
+//
+// Create an email template in a profile.
+//
+// The template holds the HTML body a campaign reuses, so it can be created before any
+// campaign exists. Only the template metadata comes back - keep the returned `uuid` to
+// reference it as the `template_uuid` of a campaign.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/templates (the `ReachCreateAnEmailTemplateV1` operationId).
+func (c *ClientWithResponses) ReachCreateAnEmailTemplateV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachCreateAnEmailTemplateV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachCreateAnEmailTemplateV1Response, error) {
+	rsp, err := c.ReachCreateAnEmailTemplateV1(ctx, profileUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachCreateAnEmailTemplateV1Response(rsp)
 }
 
 // ReachListSegmentsV1WithResponse List segments
@@ -102209,6 +103039,53 @@ func ParseReachListCampaignsV1Response(rsp *http.Response) (*ReachListCampaignsV
 	return response, nil
 }
 
+// ParseReachCreateADraftCampaignV1Response parses an HTTP response from a ReachCreateADraftCampaignV1WithResponse call
+func ParseReachCreateADraftCampaignV1Response(rsp *http.Response) (*ReachCreateADraftCampaignV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachCreateADraftCampaignV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1CampaignsCreatedCampaignResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseReachGetCampaignDetailsV1Response parses an HTTP response from a ReachGetCampaignDetailsV1WithResponse call
 func ParseReachGetCampaignDetailsV1Response(rsp *http.Response) (*ReachGetCampaignDetailsV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -103747,6 +104624,93 @@ func ParseReachAssignAContactToATagV1Response(rsp *http.Response) (*ReachAssignA
 			return nil, err
 		}
 		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachListEmailTemplatesV1Response parses an HTTP response from a ReachListEmailTemplatesV1WithResponse call
+func ParseReachListEmailTemplatesV1Response(rsp *http.Response) (*ReachListEmailTemplatesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachListEmailTemplatesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1TemplatesTemplateCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachCreateAnEmailTemplateV1Response parses an HTTP response from a ReachCreateAnEmailTemplateV1WithResponse call
+func ParseReachCreateAnEmailTemplateV1Response(rsp *http.Response) (*ReachCreateAnEmailTemplateV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachCreateAnEmailTemplateV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1TemplatesTemplateResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse

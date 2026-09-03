@@ -10,6 +10,7 @@ var GroupCmd = &cobra.Command{
 }
 
 func init() {
+	GroupCmd.AddCommand(CreateDraftCmd)
 	GroupCmd.AddCommand(GetCmd)
 	GroupCmd.AddCommand(ListCmd)
 	GroupCmd.AddCommand(PerformanceCmd)

@@ -9,6 +9,7 @@ import (
 	"github.com/hostinger/api-cli/cmd/reach/profiles"
 	"github.com/hostinger/api-cli/cmd/reach/segments"
 	"github.com/hostinger/api-cli/cmd/reach/tags"
+	"github.com/hostinger/api-cli/cmd/reach/templates"
 
 	"github.com/spf13/cobra"
 )
@@ -27,4 +28,5 @@ func init() {
 	GroupCmd.AddCommand(profiles.GroupCmd)
 	GroupCmd.AddCommand(segments.GroupCmd)
 	GroupCmd.AddCommand(tags.GroupCmd)
+	GroupCmd.AddCommand(templates.GroupCmd)
 }

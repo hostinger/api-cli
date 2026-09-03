@@ -18,6 +18,7 @@ Campaigns commands
 ### SEE ALSO
 
 * [hostinger reach](hostinger_reach.md)	 - Reach commands
+* [hostinger reach campaigns create-draft](hostinger_reach_campaigns_create-draft.md)	 - Create a draft campaign
 * [hostinger reach campaigns get](hostinger_reach_campaigns_get.md)	 - Get campaign details
 * [hostinger reach campaigns list](hostinger_reach_campaigns_list.md)	 - List campaigns
 * [hostinger reach campaigns performance](hostinger_reach_campaigns_performance.md)	 - Get campaign performance

@@ -1584,6 +1584,11 @@
     "method": "POST",
     "path": "/api/reach/v1/profiles/{profileUuid}/contacts/fields"
   },
+  "reach_createADraftCampaignV1": {
+    "command": "hostinger reach campaigns create-draft",
+    "method": "POST",
+    "path": "/api/reach/v1/profiles/{profileUuid}/campaigns"
+  },
   "reach_createANewContactSegmentV1": {
     "command": "hostinger reach segments create",
     "method": "POST",
@@ -1598,6 +1603,11 @@
     "command": "hostinger reach segments create-profile",
     "method": "POST",
     "path": "/api/reach/v1/profiles/{profileUuid}/segmentation/segments"
+  },
+  "reach_createAnEmailTemplateV1": {
+    "command": "hostinger reach templates create-email",
+    "method": "POST",
+    "path": "/api/reach/v1/profiles/{profileUuid}/templates"
   },
   "reach_createContactsInBulkV1": {
     "command": "hostinger reach contacts create-in-bulk",
@@ -1723,6 +1733,11 @@
     "command": "hostinger reach contacts list",
     "method": "GET",
     "path": "/api/reach/v1/contacts"
+  },
+  "reach_listEmailTemplatesV1": {
+    "command": "hostinger reach templates list-email",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/templates"
   },
   "reach_listFormsV1": {
     "command": "hostinger reach forms list",
