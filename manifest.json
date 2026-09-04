@@ -944,6 +944,11 @@
     "method": "POST",
     "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/themes/activate"
   },
+  "hosting_analyseFailedNode.jsBuildV1": {
+    "command": "hostinger hosting nodejs analyse-failed-build",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/{uuid}/analysis"
+  },
   "hosting_changeDatabasePasswordV1": {
     "command": "hostinger hosting databases change-password",
     "method": "PATCH",
@@ -958,6 +963,11 @@
     "command": "hostinger wordpress installations check-if-are-valid",
     "method": "POST",
     "path": "/api/hosting/v1/accounts/{username}/wordpress/installations/check-is-valid"
+  },
+  "hosting_clearNode.jsRuntimeLogsV1": {
+    "command": "hostinger hosting nodejs clear-runtime-logs",
+    "method": "DELETE",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/runtime-logs"
   },
   "hosting_clearWebsiteCacheV1": {
     "command": "hostinger hosting cache clear-website",
@@ -1089,10 +1099,25 @@
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/jwt-token"
   },
+  "hosting_getNode.jsBuildDetailsV1": {
+    "command": "hostinger hosting nodejs build",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/{uuid}"
+  },
   "hosting_getNode.jsBuildSettingsFromArchiveV1": {
     "command": "hostinger hosting nodejs build-settings-from-archive",
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/from-archive"
+  },
+  "hosting_getNode.jsBuildSettingsV1": {
+    "command": "hostinger hosting nodejs build-settings",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings"
+  },
+  "hosting_getNode.jsRuntimeLogsV1": {
+    "command": "hostinger hosting nodejs runtime-logs",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/runtime-logs"
   },
   "hosting_getNodeJSBuildLogsV1": {
     "command": "hostinger hosting nodejs build-logs",
@@ -1343,6 +1368,11 @@
     "command": "hostinger wordpress plugins update-hostinger",
     "method": "POST",
     "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/plugins/hostinger/update"
+  },
+  "hosting_updateNode.jsBuildSettingsV1": {
+    "command": "hostinger hosting nodejs update-build-settings",
+    "method": "PUT",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings"
   },
   "hosting_updatePHPExtensionsV1": {
     "command": "hostinger hosting php update-extensions",

@@ -1455,6 +1455,210 @@ func (e HostingV1NodeJsStartBuildRequestSourceType) Valid() bool {
 	}
 }
 
+// Defines values for HostingV1NodeJsStoredBuildSettingsResourceAppType.
+const (
+	HostingV1NodeJsStoredBuildSettingsResourceAppTypeAngular        HostingV1NodeJsStoredBuildSettingsResourceAppType = "angular"
+	HostingV1NodeJsStoredBuildSettingsResourceAppTypeAstro          HostingV1NodeJsStoredBuildSettingsResourceAppType = "astro"
+	HostingV1NodeJsStoredBuildSettingsResourceAppTypeCreateReactApp HostingV1NodeJsStoredBuildSettingsResourceAppType = "create-react-app"
+	HostingV1NodeJsStoredBuildSettingsResourceAppTypeExpress        HostingV1NodeJsStoredBuildSettingsResourceAppType = "express"
+	HostingV1NodeJsStoredBuildSettingsResourceAppTypeFastify        HostingV1NodeJsStoredBuildSettingsResourceAppType = "fastify"
+	HostingV1NodeJsStoredBuildSettingsResourceAppTypeGatsby         HostingV1NodeJsStoredBuildSettingsResourceAppType = "gatsby"
+	HostingV1NodeJsStoredBuildSettingsResourceAppTypeHono           HostingV1NodeJsStoredBuildSettingsResourceAppType = "hono"
+	HostingV1NodeJsStoredBuildSettingsResourceAppTypeNest           HostingV1NodeJsStoredBuildSettingsResourceAppType = "nest"
+	HostingV1NodeJsStoredBuildSettingsResourceAppTypeNext           HostingV1NodeJsStoredBuildSettingsResourceAppType = "next"
+	HostingV1NodeJsStoredBuildSettingsResourceAppTypeNitro          HostingV1NodeJsStoredBuildSettingsResourceAppType = "nitro"
+	HostingV1NodeJsStoredBuildSettingsResourceAppTypeNuxt           HostingV1NodeJsStoredBuildSettingsResourceAppType = "nuxt"
+	HostingV1NodeJsStoredBuildSettingsResourceAppTypeOther          HostingV1NodeJsStoredBuildSettingsResourceAppType = "other"
+	HostingV1NodeJsStoredBuildSettingsResourceAppTypeParcel         HostingV1NodeJsStoredBuildSettingsResourceAppType = "parcel"
+	HostingV1NodeJsStoredBuildSettingsResourceAppTypeReact          HostingV1NodeJsStoredBuildSettingsResourceAppType = "react"
+	HostingV1NodeJsStoredBuildSettingsResourceAppTypeReactRouter    HostingV1NodeJsStoredBuildSettingsResourceAppType = "react-router"
+	HostingV1NodeJsStoredBuildSettingsResourceAppTypeSvelte         HostingV1NodeJsStoredBuildSettingsResourceAppType = "svelte"
+	HostingV1NodeJsStoredBuildSettingsResourceAppTypeSvelteKit      HostingV1NodeJsStoredBuildSettingsResourceAppType = "svelte-kit"
+	HostingV1NodeJsStoredBuildSettingsResourceAppTypeVite           HostingV1NodeJsStoredBuildSettingsResourceAppType = "vite"
+	HostingV1NodeJsStoredBuildSettingsResourceAppTypeVue            HostingV1NodeJsStoredBuildSettingsResourceAppType = "vue"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1NodeJsStoredBuildSettingsResourceAppType enum.
+func (e HostingV1NodeJsStoredBuildSettingsResourceAppType) Valid() bool {
+	switch e {
+	case HostingV1NodeJsStoredBuildSettingsResourceAppTypeAngular:
+		return true
+	case HostingV1NodeJsStoredBuildSettingsResourceAppTypeAstro:
+		return true
+	case HostingV1NodeJsStoredBuildSettingsResourceAppTypeCreateReactApp:
+		return true
+	case HostingV1NodeJsStoredBuildSettingsResourceAppTypeExpress:
+		return true
+	case HostingV1NodeJsStoredBuildSettingsResourceAppTypeFastify:
+		return true
+	case HostingV1NodeJsStoredBuildSettingsResourceAppTypeGatsby:
+		return true
+	case HostingV1NodeJsStoredBuildSettingsResourceAppTypeHono:
+		return true
+	case HostingV1NodeJsStoredBuildSettingsResourceAppTypeNest:
+		return true
+	case HostingV1NodeJsStoredBuildSettingsResourceAppTypeNext:
+		return true
+	case HostingV1NodeJsStoredBuildSettingsResourceAppTypeNitro:
+		return true
+	case HostingV1NodeJsStoredBuildSettingsResourceAppTypeNuxt:
+		return true
+	case HostingV1NodeJsStoredBuildSettingsResourceAppTypeOther:
+		return true
+	case HostingV1NodeJsStoredBuildSettingsResourceAppTypeParcel:
+		return true
+	case HostingV1NodeJsStoredBuildSettingsResourceAppTypeReact:
+		return true
+	case HostingV1NodeJsStoredBuildSettingsResourceAppTypeReactRouter:
+		return true
+	case HostingV1NodeJsStoredBuildSettingsResourceAppTypeSvelte:
+		return true
+	case HostingV1NodeJsStoredBuildSettingsResourceAppTypeSvelteKit:
+		return true
+	case HostingV1NodeJsStoredBuildSettingsResourceAppTypeVite:
+		return true
+	case HostingV1NodeJsStoredBuildSettingsResourceAppTypeVue:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingV1NodeJsStoredBuildSettingsResourcePackageManager.
+const (
+	HostingV1NodeJsStoredBuildSettingsResourcePackageManagerNpm  HostingV1NodeJsStoredBuildSettingsResourcePackageManager = "npm"
+	HostingV1NodeJsStoredBuildSettingsResourcePackageManagerPnpm HostingV1NodeJsStoredBuildSettingsResourcePackageManager = "pnpm"
+	HostingV1NodeJsStoredBuildSettingsResourcePackageManagerYarn HostingV1NodeJsStoredBuildSettingsResourcePackageManager = "yarn"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1NodeJsStoredBuildSettingsResourcePackageManager enum.
+func (e HostingV1NodeJsStoredBuildSettingsResourcePackageManager) Valid() bool {
+	switch e {
+	case HostingV1NodeJsStoredBuildSettingsResourcePackageManagerNpm:
+		return true
+	case HostingV1NodeJsStoredBuildSettingsResourcePackageManagerPnpm:
+		return true
+	case HostingV1NodeJsStoredBuildSettingsResourcePackageManagerYarn:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingV1NodeJsUpdateBuildSettingsRequestAppType.
+const (
+	HostingV1NodeJsUpdateBuildSettingsRequestAppTypeAngular        HostingV1NodeJsUpdateBuildSettingsRequestAppType = "angular"
+	HostingV1NodeJsUpdateBuildSettingsRequestAppTypeAstro          HostingV1NodeJsUpdateBuildSettingsRequestAppType = "astro"
+	HostingV1NodeJsUpdateBuildSettingsRequestAppTypeCreateReactApp HostingV1NodeJsUpdateBuildSettingsRequestAppType = "create-react-app"
+	HostingV1NodeJsUpdateBuildSettingsRequestAppTypeExpress        HostingV1NodeJsUpdateBuildSettingsRequestAppType = "express"
+	HostingV1NodeJsUpdateBuildSettingsRequestAppTypeFastify        HostingV1NodeJsUpdateBuildSettingsRequestAppType = "fastify"
+	HostingV1NodeJsUpdateBuildSettingsRequestAppTypeGatsby         HostingV1NodeJsUpdateBuildSettingsRequestAppType = "gatsby"
+	HostingV1NodeJsUpdateBuildSettingsRequestAppTypeHono           HostingV1NodeJsUpdateBuildSettingsRequestAppType = "hono"
+	HostingV1NodeJsUpdateBuildSettingsRequestAppTypeNest           HostingV1NodeJsUpdateBuildSettingsRequestAppType = "nest"
+	HostingV1NodeJsUpdateBuildSettingsRequestAppTypeNext           HostingV1NodeJsUpdateBuildSettingsRequestAppType = "next"
+	HostingV1NodeJsUpdateBuildSettingsRequestAppTypeNitro          HostingV1NodeJsUpdateBuildSettingsRequestAppType = "nitro"
+	HostingV1NodeJsUpdateBuildSettingsRequestAppTypeNuxt           HostingV1NodeJsUpdateBuildSettingsRequestAppType = "nuxt"
+	HostingV1NodeJsUpdateBuildSettingsRequestAppTypeOther          HostingV1NodeJsUpdateBuildSettingsRequestAppType = "other"
+	HostingV1NodeJsUpdateBuildSettingsRequestAppTypeParcel         HostingV1NodeJsUpdateBuildSettingsRequestAppType = "parcel"
+	HostingV1NodeJsUpdateBuildSettingsRequestAppTypeReact          HostingV1NodeJsUpdateBuildSettingsRequestAppType = "react"
+	HostingV1NodeJsUpdateBuildSettingsRequestAppTypeReactRouter    HostingV1NodeJsUpdateBuildSettingsRequestAppType = "react-router"
+	HostingV1NodeJsUpdateBuildSettingsRequestAppTypeSvelte         HostingV1NodeJsUpdateBuildSettingsRequestAppType = "svelte"
+	HostingV1NodeJsUpdateBuildSettingsRequestAppTypeSvelteKit      HostingV1NodeJsUpdateBuildSettingsRequestAppType = "svelte-kit"
+	HostingV1NodeJsUpdateBuildSettingsRequestAppTypeVite           HostingV1NodeJsUpdateBuildSettingsRequestAppType = "vite"
+	HostingV1NodeJsUpdateBuildSettingsRequestAppTypeVue            HostingV1NodeJsUpdateBuildSettingsRequestAppType = "vue"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1NodeJsUpdateBuildSettingsRequestAppType enum.
+func (e HostingV1NodeJsUpdateBuildSettingsRequestAppType) Valid() bool {
+	switch e {
+	case HostingV1NodeJsUpdateBuildSettingsRequestAppTypeAngular:
+		return true
+	case HostingV1NodeJsUpdateBuildSettingsRequestAppTypeAstro:
+		return true
+	case HostingV1NodeJsUpdateBuildSettingsRequestAppTypeCreateReactApp:
+		return true
+	case HostingV1NodeJsUpdateBuildSettingsRequestAppTypeExpress:
+		return true
+	case HostingV1NodeJsUpdateBuildSettingsRequestAppTypeFastify:
+		return true
+	case HostingV1NodeJsUpdateBuildSettingsRequestAppTypeGatsby:
+		return true
+	case HostingV1NodeJsUpdateBuildSettingsRequestAppTypeHono:
+		return true
+	case HostingV1NodeJsUpdateBuildSettingsRequestAppTypeNest:
+		return true
+	case HostingV1NodeJsUpdateBuildSettingsRequestAppTypeNext:
+		return true
+	case HostingV1NodeJsUpdateBuildSettingsRequestAppTypeNitro:
+		return true
+	case HostingV1NodeJsUpdateBuildSettingsRequestAppTypeNuxt:
+		return true
+	case HostingV1NodeJsUpdateBuildSettingsRequestAppTypeOther:
+		return true
+	case HostingV1NodeJsUpdateBuildSettingsRequestAppTypeParcel:
+		return true
+	case HostingV1NodeJsUpdateBuildSettingsRequestAppTypeReact:
+		return true
+	case HostingV1NodeJsUpdateBuildSettingsRequestAppTypeReactRouter:
+		return true
+	case HostingV1NodeJsUpdateBuildSettingsRequestAppTypeSvelte:
+		return true
+	case HostingV1NodeJsUpdateBuildSettingsRequestAppTypeSvelteKit:
+		return true
+	case HostingV1NodeJsUpdateBuildSettingsRequestAppTypeVite:
+		return true
+	case HostingV1NodeJsUpdateBuildSettingsRequestAppTypeVue:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingV1NodeJsUpdateBuildSettingsRequestNodeVersion.
+const (
+	HostingV1NodeJsUpdateBuildSettingsRequestNodeVersionN18 HostingV1NodeJsUpdateBuildSettingsRequestNodeVersion = 18
+	HostingV1NodeJsUpdateBuildSettingsRequestNodeVersionN20 HostingV1NodeJsUpdateBuildSettingsRequestNodeVersion = 20
+	HostingV1NodeJsUpdateBuildSettingsRequestNodeVersionN22 HostingV1NodeJsUpdateBuildSettingsRequestNodeVersion = 22
+	HostingV1NodeJsUpdateBuildSettingsRequestNodeVersionN24 HostingV1NodeJsUpdateBuildSettingsRequestNodeVersion = 24
+)
+
+// Valid indicates whether the value is a known member of the HostingV1NodeJsUpdateBuildSettingsRequestNodeVersion enum.
+func (e HostingV1NodeJsUpdateBuildSettingsRequestNodeVersion) Valid() bool {
+	switch e {
+	case HostingV1NodeJsUpdateBuildSettingsRequestNodeVersionN18:
+		return true
+	case HostingV1NodeJsUpdateBuildSettingsRequestNodeVersionN20:
+		return true
+	case HostingV1NodeJsUpdateBuildSettingsRequestNodeVersionN22:
+		return true
+	case HostingV1NodeJsUpdateBuildSettingsRequestNodeVersionN24:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingV1NodeJsUpdateBuildSettingsRequestPackageManager.
+const (
+	HostingV1NodeJsUpdateBuildSettingsRequestPackageManagerNpm  HostingV1NodeJsUpdateBuildSettingsRequestPackageManager = "npm"
+	HostingV1NodeJsUpdateBuildSettingsRequestPackageManagerPnpm HostingV1NodeJsUpdateBuildSettingsRequestPackageManager = "pnpm"
+	HostingV1NodeJsUpdateBuildSettingsRequestPackageManagerYarn HostingV1NodeJsUpdateBuildSettingsRequestPackageManager = "yarn"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1NodeJsUpdateBuildSettingsRequestPackageManager enum.
+func (e HostingV1NodeJsUpdateBuildSettingsRequestPackageManager) Valid() bool {
+	switch e {
+	case HostingV1NodeJsUpdateBuildSettingsRequestPackageManagerNpm:
+		return true
+	case HostingV1NodeJsUpdateBuildSettingsRequestPackageManagerPnpm:
+		return true
+	case HostingV1NodeJsUpdateBuildSettingsRequestPackageManagerYarn:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for HostingV1NodeJsVulnerabilityResourceSeverity.
 const (
 	HostingV1NodeJsVulnerabilityResourceSeverityCritical HostingV1NodeJsVulnerabilityResourceSeverity = "critical"
@@ -4635,6 +4839,60 @@ func (e HostingListNodeJSBuildsV1ParamsStates) Valid() bool {
 	case HostingListNodeJSBuildsV1ParamsStatesPending:
 		return true
 	case HostingListNodeJSBuildsV1ParamsStatesRunning:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingGetNodeJsRuntimeLogsV1ParamsPeriod.
+const (
+	N1d HostingGetNodeJsRuntimeLogsV1ParamsPeriod = "1d"
+	N1h HostingGetNodeJsRuntimeLogsV1ParamsPeriod = "1h"
+	N1m HostingGetNodeJsRuntimeLogsV1ParamsPeriod = "1m"
+	N1w HostingGetNodeJsRuntimeLogsV1ParamsPeriod = "1w"
+)
+
+// Valid indicates whether the value is a known member of the HostingGetNodeJsRuntimeLogsV1ParamsPeriod enum.
+func (e HostingGetNodeJsRuntimeLogsV1ParamsPeriod) Valid() bool {
+	switch e {
+	case N1d:
+		return true
+	case N1h:
+		return true
+	case N1m:
+		return true
+	case N1w:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingGetNodeJsRuntimeLogsV1ParamsLevels.
+const (
+	DEBUG HostingGetNodeJsRuntimeLogsV1ParamsLevels = "DEBUG"
+	ERROR HostingGetNodeJsRuntimeLogsV1ParamsLevels = "ERROR"
+	INFO  HostingGetNodeJsRuntimeLogsV1ParamsLevels = "INFO"
+	LOG   HostingGetNodeJsRuntimeLogsV1ParamsLevels = "LOG"
+	TRACE HostingGetNodeJsRuntimeLogsV1ParamsLevels = "TRACE"
+	WARN  HostingGetNodeJsRuntimeLogsV1ParamsLevels = "WARN"
+)
+
+// Valid indicates whether the value is a known member of the HostingGetNodeJsRuntimeLogsV1ParamsLevels enum.
+func (e HostingGetNodeJsRuntimeLogsV1ParamsLevels) Valid() bool {
+	switch e {
+	case DEBUG:
+		return true
+	case ERROR:
+		return true
+	case INFO:
+		return true
+	case LOG:
+		return true
+	case TRACE:
+		return true
+	case WARN:
 		return true
 	default:
 		return false
@@ -9572,6 +9830,19 @@ type HostingV1FilesUploadUrlResource struct {
 	Url string `json:"url"`
 }
 
+// HostingV1NodeJsBuildAnalysisResource defines model for Hosting.V1.NodeJs.BuildAnalysisResource.
+type HostingV1NodeJsBuildAnalysisResource struct {
+	// Analysis Why the build failed. null when no analysis could be produced.
+	//
+	// Example: The build failed because the entry file server.js does not exist in the project root.
+	Analysis *string `json:"analysis"`
+
+	// Solution Suggested fix for the build failure. null when no analysis could be produced.
+	//
+	// Example: Set entry_file to the file that starts the server, for example index.js.
+	Solution *string `json:"solution"`
+}
+
 // HostingV1NodeJsBuildCollection Array of [`Hosting.V1.NodeJs.BuildResource`](#model/hostingv1nodejsbuildresource)
 type HostingV1NodeJsBuildCollection = []HostingV1NodeJsBuildResource
 
@@ -9762,6 +10033,28 @@ type HostingV1NodeJsEnvVarResource struct {
 	Value *string `json:"value,omitempty"`
 }
 
+// HostingV1NodeJsLogEntryCollection Array of [`Hosting.V1.NodeJs.LogEntryResource`](#model/hostingv1nodejslogentryresource)
+type HostingV1NodeJsLogEntryCollection = []HostingV1NodeJsLogEntryResource
+
+// HostingV1NodeJsLogEntryResource defines model for Hosting.V1.NodeJs.LogEntryResource.
+type HostingV1NodeJsLogEntryResource struct {
+	// Level Log level in upper case (usually ERROR, WARN, INFO, LOG, DEBUG or TRACE).
+	// Numeric pino levels are mapped to these names.
+	//
+	// Example: INFO
+	Level string `json:"level"`
+
+	// Message Log message
+	//
+	// Example: Server started on port 3000
+	Message string `json:"message"`
+
+	// Timestamp ISO 8601 timestamp of the log entry
+	//
+	// Example: 2026-03-03T09:11:02.001Z
+	Timestamp string `json:"timestamp"`
+}
+
 // HostingV1NodeJsPatchResultResource defines model for Hosting.V1.NodeJs.PatchResultResource.
 type HostingV1NodeJsPatchResultResource struct {
 	// HeadBranch The branch created with the fix
@@ -9789,6 +10082,30 @@ type HostingV1NodeJsPatchResultResource struct {
 type HostingV1NodeJsPatchVulnerabilitiesRequest struct {
 	// VulnerabilityIds List of vulnerability IDs to patch, as returned by the list vulnerabilities endpoint.
 	VulnerabilityIds []string `json:"vulnerability_ids"`
+}
+
+// HostingV1NodeJsRuntimeLogsResource defines model for Hosting.V1.NodeJs.RuntimeLogsResource.
+type HostingV1NodeJsRuntimeLogsResource struct {
+	// LastDeployedAt Time of the last completed build; entries before it belong to the previous
+	// deployment. null when no build has completed yet.
+	//
+	// Example: 2026-03-03T08:58:41Z
+	LastDeployedAt *time.Time `json:"last_deployed_at"`
+
+	// Logs Array of [`Hosting.V1.NodeJs.LogEntryResource`](#model/hostingv1nodejslogentryresource)
+	Logs HostingV1NodeJsLogEntryCollection `json:"logs"`
+
+	// StartedAt Timestamp of the first line of the log file; null when the file is empty or its first
+	// line has no timestamp field
+	//
+	// Example: 2026-03-03T09:11:02Z
+	StartedAt *time.Time `json:"started_at"`
+
+	// TotalLines Total number of lines in the raw log file. Send total_lines + 1 as from_line in the
+	// next poll to receive only new entries.
+	//
+	// Example: 5042
+	TotalLines int `json:"total_lines"`
 }
 
 // HostingV1NodeJsSetBuildEnvVarsRequest defines model for Hosting.V1.NodeJs.SetBuildEnvVarsRequest.
@@ -9887,6 +10204,110 @@ type HostingV1NodeJsStartBuildRequestPackageManager string
 //
 // Example: archive
 type HostingV1NodeJsStartBuildRequestSourceType string
+
+// HostingV1NodeJsStoredBuildSettingsResource defines model for Hosting.V1.NodeJs.StoredBuildSettingsResource.
+type HostingV1NodeJsStoredBuildSettingsResource struct {
+	// AppType Detected or chosen application framework
+	//
+	// Example: vite
+	AppType *HostingV1NodeJsStoredBuildSettingsResourceAppType `json:"app_type"`
+
+	// BuildScript The package.json script that builds the application
+	//
+	// Example: build
+	BuildScript *string `json:"build_script"`
+
+	// EntryFile The main entry point file for the application
+	//
+	// Example: server.js
+	EntryFile *string `json:"entry_file"`
+
+	// NodeVersion Node.js major version used to build and run the application
+	//
+	// Example: 20
+	NodeVersion int `json:"node_version"`
+
+	// OutputDirectory Build output directory relative to the root directory
+	//
+	// Example: dist
+	OutputDirectory *string `json:"output_directory"`
+
+	// PackageManager Package manager used to install dependencies
+	//
+	// Example: npm
+	PackageManager *HostingV1NodeJsStoredBuildSettingsResourcePackageManager `json:"package_manager"`
+
+	// RootDirectory Application root directory (where package.json is located) relative to public_html;
+	// null means public_html itself
+	//
+	// Example: frontend
+	RootDirectory *string `json:"root_directory"`
+}
+
+// HostingV1NodeJsStoredBuildSettingsResourceAppType Detected or chosen application framework
+//
+// Example: vite
+type HostingV1NodeJsStoredBuildSettingsResourceAppType string
+
+// HostingV1NodeJsStoredBuildSettingsResourcePackageManager Package manager used to install dependencies
+//
+// Example: npm
+type HostingV1NodeJsStoredBuildSettingsResourcePackageManager string
+
+// HostingV1NodeJsUpdateBuildSettingsRequest defines model for Hosting.V1.NodeJs.UpdateBuildSettingsRequest.
+type HostingV1NodeJsUpdateBuildSettingsRequest struct {
+	// AppType Node.js application framework. Set it explicitly when auto-detection picked the wrong one.
+	//
+	// Example: vite
+	AppType *HostingV1NodeJsUpdateBuildSettingsRequestAppType `json:"app_type,omitempty"`
+
+	// BuildScript The package.json script that builds the application
+	//
+	// Example: build
+	BuildScript *string `json:"build_script,omitempty"`
+
+	// EntryFile The main entry point file for the application
+	// (required for express, fastify, nest, nuxt and hono app types)
+	//
+	// Example: server.js
+	EntryFile *string `json:"entry_file,omitempty"`
+
+	// NodeVersion Node.js major version
+	//
+	// Example: 20
+	NodeVersion HostingV1NodeJsUpdateBuildSettingsRequestNodeVersion `json:"node_version"`
+
+	// OutputDirectory Build output directory relative to the root directory
+	//
+	// Example: dist
+	OutputDirectory *string `json:"output_directory,omitempty"`
+
+	// PackageManager Package manager used to install dependencies
+	//
+	// Example: npm
+	PackageManager *HostingV1NodeJsUpdateBuildSettingsRequestPackageManager `json:"package_manager,omitempty"`
+
+	// RootDirectory Application root directory (where package.json is located) relative to public_html.
+	// Omit it, or send ".", for public_html itself.
+	//
+	// Example: webapp
+	RootDirectory *string `json:"root_directory,omitempty"`
+}
+
+// HostingV1NodeJsUpdateBuildSettingsRequestAppType Node.js application framework. Set it explicitly when auto-detection picked the wrong one.
+//
+// Example: vite
+type HostingV1NodeJsUpdateBuildSettingsRequestAppType string
+
+// HostingV1NodeJsUpdateBuildSettingsRequestNodeVersion Node.js major version
+//
+// Example: 20
+type HostingV1NodeJsUpdateBuildSettingsRequestNodeVersion int
+
+// HostingV1NodeJsUpdateBuildSettingsRequestPackageManager Package manager used to install dependencies
+//
+// Example: npm
+type HostingV1NodeJsUpdateBuildSettingsRequestPackageManager string
 
 // HostingV1NodeJsVulnerabilityCollection Array of [`Hosting.V1.NodeJs.VulnerabilityResource`](#model/hostingv1nodejsvulnerabilityresource)
 type HostingV1NodeJsVulnerabilityCollection = []HostingV1NodeJsVulnerabilityResource
@@ -15422,6 +15843,30 @@ type HostingGetNodeJSBuildLogsV1Params struct {
 	FromLine *int `form:"from_line,omitempty" json:"from_line,omitempty"`
 }
 
+// HostingGetNodeJsRuntimeLogsV1Params defines parameters for HostingGetNodeJsRuntimeLogsV1.
+type HostingGetNodeJsRuntimeLogsV1Params struct {
+	// Period Time window for the first fetch. Required when `from_line` is not sent.
+	Period *HostingGetNodeJsRuntimeLogsV1ParamsPeriod `form:"period,omitempty" json:"period,omitempty"`
+
+	// FromLine 1-based line of the log file to start from. For polling send `total_lines + 1` from the
+	// previous response. Cannot be combined with `period`.
+	FromLine *int `form:"from_line,omitempty" json:"from_line,omitempty"`
+
+	// Limit Maximum number of log entries to return. When more entries match, the newest are kept.
+	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
+
+	// Levels Return only entries with these log levels, sent as a comma-separated list, e.g. ERROR,WARN.
+	// Matching runs on the raw log line, so entries written with numeric levels (for example by
+	// pino) are excluded while this filter is set.
+	Levels *[]HostingGetNodeJsRuntimeLogsV1ParamsLevels `form:"levels,omitempty" json:"levels,omitempty"`
+}
+
+// HostingGetNodeJsRuntimeLogsV1ParamsPeriod defines parameters for HostingGetNodeJsRuntimeLogsV1.
+type HostingGetNodeJsRuntimeLogsV1ParamsPeriod string
+
+// HostingGetNodeJsRuntimeLogsV1ParamsLevels defines parameters for HostingGetNodeJsRuntimeLogsV1.
+type HostingGetNodeJsRuntimeLogsV1ParamsLevels string
+
 // HostingListNodeJsVulnerabilitiesV1Params defines parameters for HostingListNodeJsVulnerabilitiesV1.
 type HostingListNodeJsVulnerabilitiesV1Params struct {
 	// Severities Severities to filter by
@@ -16174,6 +16619,9 @@ type HostingDeployStaticSiteArchiveV1JSONRequestBody = HostingV1WebsitesDeployAr
 
 // HostingStartNodeJsBuildV1JSONRequestBody defines body for HostingStartNodeJsBuildV1 for application/json ContentType.
 type HostingStartNodeJsBuildV1JSONRequestBody = HostingV1NodeJsStartBuildRequest
+
+// HostingUpdateNodeJsBuildSettingsV1JSONRequestBody defines body for HostingUpdateNodeJsBuildSettingsV1 for application/json ContentType.
+type HostingUpdateNodeJsBuildSettingsV1JSONRequestBody = HostingV1NodeJsUpdateBuildSettingsRequest
 
 // HostingReplaceNodeJsEnvironmentVariablesV1JSONRequestBody defines body for HostingReplaceNodeJsEnvironmentVariablesV1 for application/json ContentType.
 type HostingReplaceNodeJsEnvironmentVariablesV1JSONRequestBody = HostingV1NodeJsSetBuildEnvVarsRequest
@@ -19867,6 +20315,54 @@ type ClientInterface interface {
 	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds (the `HostingStartNodeJsBuildV1` operationId).
 	HostingStartNodeJsBuildV1(ctx context.Context, username UsernamePath, domain Domain, body HostingStartNodeJsBuildV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// HostingGetNodeJsBuildSettingsV1 Get Node.js build settings
+	//
+	// Returns the build settings stored for the website: framework (`app_type`), Node.js version,
+	// root and output directory, build script, entry file and package manager. Stored settings
+	// drive Git auto-deployment builds. A build started through the API uses the values sent in
+	// that request and saves them here only when no settings exist yet.
+	//
+	// Returns 404 until the first build or the first settings update stores them. Use this after
+	// a failed build to check whether the framework or the entry file were detected wrong, then
+	// fix them with the `Update Node.js build settings` endpoint.
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings (the `HostingGetNodeJsBuildSettingsV1` operationId).
+	HostingGetNodeJsBuildSettingsV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingUpdateNodeJsBuildSettingsV1WithBody Update Node.js build settings
+	//
+	// Replaces the build settings stored for the website. Send the full set: `node_version` is
+	// required and every nullable field you omit is stored as null. Creates the settings when
+	// none exist yet.
+	//
+	// This does not start a build. Stored settings drive Git auto-deployment builds; a build
+	// started through the API uses the values sent in that request, so to rebuild with corrected
+	// settings call `Start Node.js build` with the same values. Typical fixes: a wrong `app_type`
+	// after auto-detection, or a missing `entry_file` for express, fastify, nest, nuxt and hono
+	// apps.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings (the `HostingUpdateNodeJsBuildSettingsV1` operationId).
+	HostingUpdateNodeJsBuildSettingsV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingUpdateNodeJsBuildSettingsV1 Update Node.js build settings
+	//
+	// Replaces the build settings stored for the website. Send the full set: `node_version` is
+	// required and every nullable field you omit is stored as null. Creates the settings when
+	// none exist yet.
+	//
+	// This does not start a build. Stored settings drive Git auto-deployment builds; a build
+	// started through the API uses the values sent in that request, so to rebuild with corrected
+	// settings call `Start Node.js build` with the same values. Typical fixes: a wrong `app_type`
+	// after auto-detection, or a missing `entry_file` for express, fastify, nest, nuxt and hono
+	// apps.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings (the `HostingUpdateNodeJsBuildSettingsV1` operationId).
+	HostingUpdateNodeJsBuildSettingsV1(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdateNodeJsBuildSettingsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// HostingListNodeJsEnvironmentVariablesV1 List Node.js environment variables
 	//
 	// Lists the Node.js environment variables currently set for the website. Values are always
@@ -19939,6 +20435,29 @@ type ClientInterface interface {
 	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/from-archive (the `HostingGetNodeJsBuildSettingsFromArchiveV1` operationId).
 	HostingGetNodeJsBuildSettingsFromArchiveV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetNodeJsBuildSettingsFromArchiveV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// HostingGetNodeJsBuildDetailsV1 Get Node.js build details
+	//
+	// Returns one build by UUID: its state (`pending`, `running`, `completed`, `failed`), the
+	// options it ran with and timestamps. Poll this while a build is pending or running. When it
+	// is failed, read `Get NodeJS build logs` and `Analyse failed Node.js build` for the cause.
+	// Returns 404 when the UUID does not belong to a build of this website.
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/{uuid} (the `HostingGetNodeJsBuildDetailsV1` operationId).
+	HostingGetNodeJsBuildDetailsV1(ctx context.Context, username UsernamePath, domain Domain, uuid BuildUuidPath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingAnalyseFailedNodeJsBuildV1 Analyse failed Node.js build
+	//
+	// Returns an AI analysis of why a build failed and how to fix it, based on the build logs,
+	// the project file list and package.json. Only builds in the `failed` state can be analysed;
+	// any other state returns 422. When no analysis could be produced both `analysis` and
+	// `solution` are null, in which case read `Get NodeJS build logs` instead.
+	//
+	// Each call runs the analysis again, so call it once per failed build and keep the result.
+	// Limited to 5 calls per minute per API client (429 above that).
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/{uuid}/analysis (the `HostingAnalyseFailedNodeJsBuildV1` operationId).
+	HostingAnalyseFailedNodeJsBuildV1(ctx context.Context, username UsernamePath, domain Domain, uuid BuildUuidPath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// HostingGetNodeJSBuildLogsV1 Get NodeJS build logs
 	//
 	// Retrieve logs from a specific Node.js build process.
@@ -19950,6 +20469,35 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/{uuid}/logs (the `HostingGetNodeJSBuildLogsV1` operationId).
 	HostingGetNodeJSBuildLogsV1(ctx context.Context, username UsernamePath, domain Domain, uuid BuildUuidPath, params *HostingGetNodeJSBuildLogsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingClearNodeJsRuntimeLogsV1 Clear Node.js runtime logs
+	//
+	// Empties the Node.js application's runtime log file. This cannot be undone, so confirm with
+	// the user before calling it. Returns success even when no log file exists yet.
+	//
+	// Use it before reproducing a problem so the next `Get Node.js runtime logs` call returns
+	// only fresh entries; start that call with `period` again instead of reusing a `from_line`
+	// from before the clear.
+	//
+	// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/runtime-logs (the `HostingClearNodeJsRuntimeLogsV1` operationId).
+	HostingClearNodeJsRuntimeLogsV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingGetNodeJsRuntimeLogsV1 Get Node.js runtime logs
+	//
+	// Returns the Node.js application's runtime console log entries, oldest first, each with
+	// timestamp, level and message. On the first call send `period` (`1h`, `1d`, `1w` or `1m`)
+	// and optionally `levels` and `limit` (1-5000, default 1000); when more entries match than
+	// `limit`, the newest are kept.
+	//
+	// To poll for new entries send `total_lines + 1` from the previous response as `from_line`
+	// and omit `period`; `period` and `from_line` cannot be combined. Lines that are not JSON
+	// with a timestamp, level and message are skipped, so `logs` may hold fewer than `limit`
+	// entries while `total_lines` counts every raw line. Entries with a timestamp before
+	// `last_deployed_at` belong to the previous deployment. Returns an empty `logs` list when
+	// the application has not written a log file yet.
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/runtime-logs (the `HostingGetNodeJsRuntimeLogsV1` operationId).
+	HostingGetNodeJsRuntimeLogsV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetNodeJsRuntimeLogsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingRestartNodeJsApplicationV1 Restart Node.js application
 	//
@@ -28073,6 +28621,84 @@ func (c *Client) HostingStartNodeJsBuildV1(ctx context.Context, username Usernam
 	return c.Client.Do(req)
 }
 
+// HostingGetNodeJsBuildSettingsV1 Get Node.js build settings
+//
+// Returns the build settings stored for the website: framework (`app_type`), Node.js version,
+// root and output directory, build script, entry file and package manager. Stored settings
+// drive Git auto-deployment builds. A build started through the API uses the values sent in
+// that request and saves them here only when no settings exist yet.
+//
+// Returns 404 until the first build or the first settings update stores them. Use this after
+// a failed build to check whether the framework or the entry file were detected wrong, then
+// fix them with the `Update Node.js build settings` endpoint.
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings (the `HostingGetNodeJsBuildSettingsV1` operationId).
+func (c *Client) HostingGetNodeJsBuildSettingsV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingGetNodeJsBuildSettingsV1Request(c.Server, username, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingUpdateNodeJsBuildSettingsV1WithBody Update Node.js build settings
+//
+// Replaces the build settings stored for the website. Send the full set: `node_version` is
+// required and every nullable field you omit is stored as null. Creates the settings when
+// none exist yet.
+//
+// This does not start a build. Stored settings drive Git auto-deployment builds; a build
+// started through the API uses the values sent in that request, so to rebuild with corrected
+// settings call `Start Node.js build` with the same values. Typical fixes: a wrong `app_type`
+// after auto-detection, or a missing `entry_file` for express, fastify, nest, nuxt and hono
+// apps.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings (the `HostingUpdateNodeJsBuildSettingsV1` operationId).
+func (c *Client) HostingUpdateNodeJsBuildSettingsV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingUpdateNodeJsBuildSettingsV1RequestWithBody(c.Server, username, domain, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingUpdateNodeJsBuildSettingsV1 Update Node.js build settings
+//
+// Replaces the build settings stored for the website. Send the full set: `node_version` is
+// required and every nullable field you omit is stored as null. Creates the settings when
+// none exist yet.
+//
+// This does not start a build. Stored settings drive Git auto-deployment builds; a build
+// started through the API uses the values sent in that request, so to rebuild with corrected
+// settings call `Start Node.js build` with the same values. Typical fixes: a wrong `app_type`
+// after auto-detection, or a missing `entry_file` for express, fastify, nest, nuxt and hono
+// apps.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings (the `HostingUpdateNodeJsBuildSettingsV1` operationId).
+func (c *Client) HostingUpdateNodeJsBuildSettingsV1(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdateNodeJsBuildSettingsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingUpdateNodeJsBuildSettingsV1Request(c.Server, username, domain, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // HostingListNodeJsEnvironmentVariablesV1 List Node.js environment variables
 //
 // Lists the Node.js environment variables currently set for the website. Values are always
@@ -28185,6 +28811,49 @@ func (c *Client) HostingGetNodeJsBuildSettingsFromArchiveV1(ctx context.Context,
 	return c.Client.Do(req)
 }
 
+// HostingGetNodeJsBuildDetailsV1 Get Node.js build details
+//
+// Returns one build by UUID: its state (`pending`, `running`, `completed`, `failed`), the
+// options it ran with and timestamps. Poll this while a build is pending or running. When it
+// is failed, read `Get NodeJS build logs` and `Analyse failed Node.js build` for the cause.
+// Returns 404 when the UUID does not belong to a build of this website.
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/{uuid} (the `HostingGetNodeJsBuildDetailsV1` operationId).
+func (c *Client) HostingGetNodeJsBuildDetailsV1(ctx context.Context, username UsernamePath, domain Domain, uuid BuildUuidPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingGetNodeJsBuildDetailsV1Request(c.Server, username, domain, uuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingAnalyseFailedNodeJsBuildV1 Analyse failed Node.js build
+//
+// Returns an AI analysis of why a build failed and how to fix it, based on the build logs,
+// the project file list and package.json. Only builds in the `failed` state can be analysed;
+// any other state returns 422. When no analysis could be produced both `analysis` and
+// `solution` are null, in which case read `Get NodeJS build logs` instead.
+//
+// Each call runs the analysis again, so call it once per failed build and keep the result.
+// Limited to 5 calls per minute per API client (429 above that).
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/{uuid}/analysis (the `HostingAnalyseFailedNodeJsBuildV1` operationId).
+func (c *Client) HostingAnalyseFailedNodeJsBuildV1(ctx context.Context, username UsernamePath, domain Domain, uuid BuildUuidPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingAnalyseFailedNodeJsBuildV1Request(c.Server, username, domain, uuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // HostingGetNodeJSBuildLogsV1 Get NodeJS build logs
 //
 // Retrieve logs from a specific Node.js build process.
@@ -28197,6 +28866,55 @@ func (c *Client) HostingGetNodeJsBuildSettingsFromArchiveV1(ctx context.Context,
 // Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/{uuid}/logs (the `HostingGetNodeJSBuildLogsV1` operationId).
 func (c *Client) HostingGetNodeJSBuildLogsV1(ctx context.Context, username UsernamePath, domain Domain, uuid BuildUuidPath, params *HostingGetNodeJSBuildLogsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingGetNodeJSBuildLogsV1Request(c.Server, username, domain, uuid, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingClearNodeJsRuntimeLogsV1 Clear Node.js runtime logs
+//
+// Empties the Node.js application's runtime log file. This cannot be undone, so confirm with
+// the user before calling it. Returns success even when no log file exists yet.
+//
+// Use it before reproducing a problem so the next `Get Node.js runtime logs` call returns
+// only fresh entries; start that call with `period` again instead of reusing a `from_line`
+// from before the clear.
+//
+// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/runtime-logs (the `HostingClearNodeJsRuntimeLogsV1` operationId).
+func (c *Client) HostingClearNodeJsRuntimeLogsV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingClearNodeJsRuntimeLogsV1Request(c.Server, username, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingGetNodeJsRuntimeLogsV1 Get Node.js runtime logs
+//
+// Returns the Node.js application's runtime console log entries, oldest first, each with
+// timestamp, level and message. On the first call send `period` (`1h`, `1d`, `1w` or `1m`)
+// and optionally `levels` and `limit` (1-5000, default 1000); when more entries match than
+// `limit`, the newest are kept.
+//
+// To poll for new entries send `total_lines + 1` from the previous response as `from_line`
+// and omit `period`; `period` and `from_line` cannot be combined. Lines that are not JSON
+// with a timestamp, level and message are skipped, so `logs` may hold fewer than `limit`
+// entries while `total_lines` counts every raw line. Entries with a timestamp before
+// `last_deployed_at` belong to the previous deployment. Returns an empty `logs` list when
+// the application has not written a log file yet.
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/runtime-logs (the `HostingGetNodeJsRuntimeLogsV1` operationId).
+func (c *Client) HostingGetNodeJsRuntimeLogsV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetNodeJsRuntimeLogsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingGetNodeJsRuntimeLogsV1Request(c.Server, username, domain, params)
 	if err != nil {
 		return nil, err
 	}
@@ -41621,6 +42339,101 @@ func NewHostingStartNodeJsBuildV1RequestWithBody(server string, username Usernam
 	return req, nil
 }
 
+// NewHostingGetNodeJsBuildSettingsV1Request constructs an http.Request for the HostingGetNodeJsBuildSettingsV1 method
+func NewHostingGetNodeJsBuildSettingsV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/nodejs/builds/settings", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingUpdateNodeJsBuildSettingsV1Request calls the generic HostingUpdateNodeJsBuildSettingsV1 builder with application/json body
+func NewHostingUpdateNodeJsBuildSettingsV1Request(server string, username UsernamePath, domain Domain, body HostingUpdateNodeJsBuildSettingsV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingUpdateNodeJsBuildSettingsV1RequestWithBody(server, username, domain, "application/json", bodyReader)
+}
+
+// NewHostingUpdateNodeJsBuildSettingsV1RequestWithBody constructs an http.Request for the HostingUpdateNodeJsBuildSettingsV1 method, with any body, and a specified content type
+func NewHostingUpdateNodeJsBuildSettingsV1RequestWithBody(server string, username UsernamePath, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/nodejs/builds/settings", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewHostingListNodeJsEnvironmentVariablesV1Request constructs an http.Request for the HostingListNodeJsEnvironmentVariablesV1 method
 func NewHostingListNodeJsEnvironmentVariablesV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
 	var err error
@@ -41780,6 +42593,102 @@ func NewHostingGetNodeJsBuildSettingsFromArchiveV1Request(server string, usernam
 	return req, nil
 }
 
+// NewHostingGetNodeJsBuildDetailsV1Request constructs an http.Request for the HostingGetNodeJsBuildDetailsV1 method
+func NewHostingGetNodeJsBuildDetailsV1Request(server string, username UsernamePath, domain Domain, uuid BuildUuidPath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam2 string
+
+	pathParam2, err = runtime.StyleParamWithOptions("simple", false, "uuid", uuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/nodejs/builds/%s", pathParam0, pathParam1, pathParam2)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingAnalyseFailedNodeJsBuildV1Request constructs an http.Request for the HostingAnalyseFailedNodeJsBuildV1 method
+func NewHostingAnalyseFailedNodeJsBuildV1Request(server string, username UsernamePath, domain Domain, uuid BuildUuidPath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam2 string
+
+	pathParam2, err = runtime.StyleParamWithOptions("simple", false, "uuid", uuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/nodejs/builds/%s/analysis", pathParam0, pathParam1, pathParam2)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewHostingGetNodeJSBuildLogsV1Request constructs an http.Request for the HostingGetNodeJSBuildLogsV1 method
 func NewHostingGetNodeJSBuildLogsV1Request(server string, username UsernamePath, domain Domain, uuid BuildUuidPath, params *HostingGetNodeJSBuildLogsV1Params) (*http.Request, error) {
 	var err error
@@ -41832,6 +42741,151 @@ func NewHostingGetNodeJSBuildLogsV1Request(server string, username UsernamePath,
 		if params.FromLine != nil {
 
 			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "from_line", *params.FromLine, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingClearNodeJsRuntimeLogsV1Request constructs an http.Request for the HostingClearNodeJsRuntimeLogsV1 method
+func NewHostingClearNodeJsRuntimeLogsV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/nodejs/runtime-logs", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingGetNodeJsRuntimeLogsV1Request constructs an http.Request for the HostingGetNodeJsRuntimeLogsV1 method
+func NewHostingGetNodeJsRuntimeLogsV1Request(server string, username UsernamePath, domain Domain, params *HostingGetNodeJsRuntimeLogsV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/nodejs/runtime-logs", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Period != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "period", *params.Period, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.FromLine != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "from_line", *params.FromLine, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "limit", *params.Limit, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Levels != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", false, "levels", *params.Levels, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "array", Format: ""}); err != nil {
 				return nil, err
 			} else {
 				for _, qp := range strings.Split(queryFrag, "&") {
@@ -55492,6 +56546,56 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds (the `HostingStartNodeJsBuildV1` operationId).
 	HostingStartNodeJsBuildV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingStartNodeJsBuildV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingStartNodeJsBuildV1Response, error)
 
+	// HostingGetNodeJsBuildSettingsV1WithResponse Get Node.js build settings
+	//
+	// Returns the build settings stored for the website: framework (`app_type`), Node.js version,
+	// root and output directory, build script, entry file and package manager. Stored settings
+	// drive Git auto-deployment builds. A build started through the API uses the values sent in
+	// that request and saves them here only when no settings exist yet.
+	//
+	// Returns 404 until the first build or the first settings update stores them. Use this after
+	// a failed build to check whether the framework or the entry file were detected wrong, then
+	// fix them with the `Update Node.js build settings` endpoint.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings (the `HostingGetNodeJsBuildSettingsV1` operationId).
+	HostingGetNodeJsBuildSettingsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingGetNodeJsBuildSettingsV1Response, error)
+
+	// HostingUpdateNodeJsBuildSettingsV1WithBodyWithResponse Update Node.js build settings
+	//
+	// Replaces the build settings stored for the website. Send the full set: `node_version` is
+	// required and every nullable field you omit is stored as null. Creates the settings when
+	// none exist yet.
+	//
+	// This does not start a build. Stored settings drive Git auto-deployment builds; a build
+	// started through the API uses the values sent in that request, so to rebuild with corrected
+	// settings call `Start Node.js build` with the same values. Typical fixes: a wrong `app_type`
+	// after auto-detection, or a missing `entry_file` for express, fastify, nest, nuxt and hono
+	// apps.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings (the `HostingUpdateNodeJsBuildSettingsV1` operationId).
+	HostingUpdateNodeJsBuildSettingsV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingUpdateNodeJsBuildSettingsV1Response, error)
+
+	// HostingUpdateNodeJsBuildSettingsV1WithResponse Update Node.js build settings
+	//
+	// Replaces the build settings stored for the website. Send the full set: `node_version` is
+	// required and every nullable field you omit is stored as null. Creates the settings when
+	// none exist yet.
+	//
+	// This does not start a build. Stored settings drive Git auto-deployment builds; a build
+	// started through the API uses the values sent in that request, so to rebuild with corrected
+	// settings call `Start Node.js build` with the same values. Typical fixes: a wrong `app_type`
+	// after auto-detection, or a missing `entry_file` for express, fastify, nest, nuxt and hono
+	// apps.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings (the `HostingUpdateNodeJsBuildSettingsV1` operationId).
+	HostingUpdateNodeJsBuildSettingsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdateNodeJsBuildSettingsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUpdateNodeJsBuildSettingsV1Response, error)
+
 	// HostingListNodeJsEnvironmentVariablesV1WithResponse List Node.js environment variables
 	//
 	// Lists the Node.js environment variables currently set for the website. Values are always
@@ -55568,6 +56672,33 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/from-archive (the `HostingGetNodeJsBuildSettingsFromArchiveV1` operationId).
 	HostingGetNodeJsBuildSettingsFromArchiveV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetNodeJsBuildSettingsFromArchiveV1Params, reqEditors ...RequestEditorFn) (*HostingGetNodeJsBuildSettingsFromArchiveV1Response, error)
 
+	// HostingGetNodeJsBuildDetailsV1WithResponse Get Node.js build details
+	//
+	// Returns one build by UUID: its state (`pending`, `running`, `completed`, `failed`), the
+	// options it ran with and timestamps. Poll this while a build is pending or running. When it
+	// is failed, read `Get NodeJS build logs` and `Analyse failed Node.js build` for the cause.
+	// Returns 404 when the UUID does not belong to a build of this website.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/{uuid} (the `HostingGetNodeJsBuildDetailsV1` operationId).
+	HostingGetNodeJsBuildDetailsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, uuid BuildUuidPath, reqEditors ...RequestEditorFn) (*HostingGetNodeJsBuildDetailsV1Response, error)
+
+	// HostingAnalyseFailedNodeJsBuildV1WithResponse Analyse failed Node.js build
+	//
+	// Returns an AI analysis of why a build failed and how to fix it, based on the build logs,
+	// the project file list and package.json. Only builds in the `failed` state can be analysed;
+	// any other state returns 422. When no analysis could be produced both `analysis` and
+	// `solution` are null, in which case read `Get NodeJS build logs` instead.
+	//
+	// Each call runs the analysis again, so call it once per failed build and keep the result.
+	// Limited to 5 calls per minute per API client (429 above that).
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/{uuid}/analysis (the `HostingAnalyseFailedNodeJsBuildV1` operationId).
+	HostingAnalyseFailedNodeJsBuildV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, uuid BuildUuidPath, reqEditors ...RequestEditorFn) (*HostingAnalyseFailedNodeJsBuildV1Response, error)
+
 	// HostingGetNodeJSBuildLogsV1WithResponse Get NodeJS build logs
 	//
 	// Retrieve logs from a specific Node.js build process.
@@ -55581,6 +56712,39 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/{uuid}/logs (the `HostingGetNodeJSBuildLogsV1` operationId).
 	HostingGetNodeJSBuildLogsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, uuid BuildUuidPath, params *HostingGetNodeJSBuildLogsV1Params, reqEditors ...RequestEditorFn) (*HostingGetNodeJSBuildLogsV1Response, error)
+
+	// HostingClearNodeJsRuntimeLogsV1WithResponse Clear Node.js runtime logs
+	//
+	// Empties the Node.js application's runtime log file. This cannot be undone, so confirm with
+	// the user before calling it. Returns success even when no log file exists yet.
+	//
+	// Use it before reproducing a problem so the next `Get Node.js runtime logs` call returns
+	// only fresh entries; start that call with `period` again instead of reusing a `from_line`
+	// from before the clear.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/runtime-logs (the `HostingClearNodeJsRuntimeLogsV1` operationId).
+	HostingClearNodeJsRuntimeLogsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingClearNodeJsRuntimeLogsV1Response, error)
+
+	// HostingGetNodeJsRuntimeLogsV1WithResponse Get Node.js runtime logs
+	//
+	// Returns the Node.js application's runtime console log entries, oldest first, each with
+	// timestamp, level and message. On the first call send `period` (`1h`, `1d`, `1w` or `1m`)
+	// and optionally `levels` and `limit` (1-5000, default 1000); when more entries match than
+	// `limit`, the newest are kept.
+	//
+	// To poll for new entries send `total_lines + 1` from the previous response as `from_line`
+	// and omit `period`; `period` and `from_line` cannot be combined. Lines that are not JSON
+	// with a timestamp, level and message are skipped, so `logs` may hold fewer than `limit`
+	// entries while `total_lines` counts every raw line. Entries with a timestamp before
+	// `last_deployed_at` belong to the previous deployment. Returns an empty `logs` list when
+	// the application has not written a log file yet.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/runtime-logs (the `HostingGetNodeJsRuntimeLogsV1` operationId).
+	HostingGetNodeJsRuntimeLogsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetNodeJsRuntimeLogsV1Params, reqEditors ...RequestEditorFn) (*HostingGetNodeJsRuntimeLogsV1Response, error)
 
 	// HostingRestartNodeJsApplicationV1WithResponse Restart Node.js application
 	//
@@ -68014,6 +69178,123 @@ func (r HostingStartNodeJsBuildV1Response) ContentType() string {
 	return ""
 }
 
+type HostingGetNodeJsBuildSettingsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1NodeJsStoredBuildSettingsResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingGetNodeJsBuildSettingsV1Response) GetJSON200() *HostingV1NodeJsStoredBuildSettingsResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingGetNodeJsBuildSettingsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingGetNodeJsBuildSettingsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingGetNodeJsBuildSettingsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingGetNodeJsBuildSettingsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingGetNodeJsBuildSettingsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingGetNodeJsBuildSettingsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingUpdateNodeJsBuildSettingsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1NodeJsStoredBuildSettingsResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingUpdateNodeJsBuildSettingsV1Response) GetJSON200() *HostingV1NodeJsStoredBuildSettingsResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingUpdateNodeJsBuildSettingsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingUpdateNodeJsBuildSettingsV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingUpdateNodeJsBuildSettingsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingUpdateNodeJsBuildSettingsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingUpdateNodeJsBuildSettingsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingUpdateNodeJsBuildSettingsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingUpdateNodeJsBuildSettingsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type HostingListNodeJsEnvironmentVariablesV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -68193,6 +69474,123 @@ func (r HostingGetNodeJsBuildSettingsFromArchiveV1Response) ContentType() string
 	return ""
 }
 
+type HostingGetNodeJsBuildDetailsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1NodeJsBuildResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingGetNodeJsBuildDetailsV1Response) GetJSON200() *HostingV1NodeJsBuildResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingGetNodeJsBuildDetailsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingGetNodeJsBuildDetailsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingGetNodeJsBuildDetailsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingGetNodeJsBuildDetailsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingGetNodeJsBuildDetailsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingGetNodeJsBuildDetailsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingAnalyseFailedNodeJsBuildV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1NodeJsBuildAnalysisResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingAnalyseFailedNodeJsBuildV1Response) GetJSON200() *HostingV1NodeJsBuildAnalysisResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingAnalyseFailedNodeJsBuildV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingAnalyseFailedNodeJsBuildV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingAnalyseFailedNodeJsBuildV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingAnalyseFailedNodeJsBuildV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingAnalyseFailedNodeJsBuildV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingAnalyseFailedNodeJsBuildV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingAnalyseFailedNodeJsBuildV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type HostingGetNodeJSBuildLogsV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -68249,6 +69647,123 @@ func (r HostingGetNodeJSBuildLogsV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingGetNodeJSBuildLogsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingClearNodeJsRuntimeLogsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingClearNodeJsRuntimeLogsV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingClearNodeJsRuntimeLogsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingClearNodeJsRuntimeLogsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingClearNodeJsRuntimeLogsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingClearNodeJsRuntimeLogsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingClearNodeJsRuntimeLogsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingClearNodeJsRuntimeLogsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingGetNodeJsRuntimeLogsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1NodeJsRuntimeLogsResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingGetNodeJsRuntimeLogsV1Response) GetJSON200() *HostingV1NodeJsRuntimeLogsResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingGetNodeJsRuntimeLogsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingGetNodeJsRuntimeLogsV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingGetNodeJsRuntimeLogsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingGetNodeJsRuntimeLogsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingGetNodeJsRuntimeLogsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingGetNodeJsRuntimeLogsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingGetNodeJsRuntimeLogsV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -85548,6 +87063,74 @@ func (c *ClientWithResponses) HostingStartNodeJsBuildV1WithResponse(ctx context.
 	return ParseHostingStartNodeJsBuildV1Response(rsp)
 }
 
+// HostingGetNodeJsBuildSettingsV1WithResponse Get Node.js build settings
+//
+// Returns the build settings stored for the website: framework (`app_type`), Node.js version,
+// root and output directory, build script, entry file and package manager. Stored settings
+// drive Git auto-deployment builds. A build started through the API uses the values sent in
+// that request and saves them here only when no settings exist yet.
+//
+// Returns 404 until the first build or the first settings update stores them. Use this after
+// a failed build to check whether the framework or the entry file were detected wrong, then
+// fix them with the `Update Node.js build settings` endpoint.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings (the `HostingGetNodeJsBuildSettingsV1` operationId).
+func (c *ClientWithResponses) HostingGetNodeJsBuildSettingsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingGetNodeJsBuildSettingsV1Response, error) {
+	rsp, err := c.HostingGetNodeJsBuildSettingsV1(ctx, username, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingGetNodeJsBuildSettingsV1Response(rsp)
+}
+
+// HostingUpdateNodeJsBuildSettingsV1WithBodyWithResponse Update Node.js build settings
+//
+// Replaces the build settings stored for the website. Send the full set: `node_version` is
+// required and every nullable field you omit is stored as null. Creates the settings when
+// none exist yet.
+//
+// This does not start a build. Stored settings drive Git auto-deployment builds; a build
+// started through the API uses the values sent in that request, so to rebuild with corrected
+// settings call `Start Node.js build` with the same values. Typical fixes: a wrong `app_type`
+// after auto-detection, or a missing `entry_file` for express, fastify, nest, nuxt and hono
+// apps.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings (the `HostingUpdateNodeJsBuildSettingsV1` operationId).
+func (c *ClientWithResponses) HostingUpdateNodeJsBuildSettingsV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingUpdateNodeJsBuildSettingsV1Response, error) {
+	rsp, err := c.HostingUpdateNodeJsBuildSettingsV1WithBody(ctx, username, domain, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingUpdateNodeJsBuildSettingsV1Response(rsp)
+}
+
+// HostingUpdateNodeJsBuildSettingsV1WithResponse Update Node.js build settings
+//
+// Replaces the build settings stored for the website. Send the full set: `node_version` is
+// required and every nullable field you omit is stored as null. Creates the settings when
+// none exist yet.
+//
+// This does not start a build. Stored settings drive Git auto-deployment builds; a build
+// started through the API uses the values sent in that request, so to rebuild with corrected
+// settings call `Start Node.js build` with the same values. Typical fixes: a wrong `app_type`
+// after auto-detection, or a missing `entry_file` for express, fastify, nest, nuxt and hono
+// apps.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings (the `HostingUpdateNodeJsBuildSettingsV1` operationId).
+func (c *ClientWithResponses) HostingUpdateNodeJsBuildSettingsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdateNodeJsBuildSettingsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUpdateNodeJsBuildSettingsV1Response, error) {
+	rsp, err := c.HostingUpdateNodeJsBuildSettingsV1(ctx, username, domain, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingUpdateNodeJsBuildSettingsV1Response(rsp)
+}
+
 // HostingListNodeJsEnvironmentVariablesV1WithResponse List Node.js environment variables
 //
 // Lists the Node.js environment variables currently set for the website. Values are always
@@ -85648,6 +87231,45 @@ func (c *ClientWithResponses) HostingGetNodeJsBuildSettingsFromArchiveV1WithResp
 	return ParseHostingGetNodeJsBuildSettingsFromArchiveV1Response(rsp)
 }
 
+// HostingGetNodeJsBuildDetailsV1WithResponse Get Node.js build details
+//
+// Returns one build by UUID: its state (`pending`, `running`, `completed`, `failed`), the
+// options it ran with and timestamps. Poll this while a build is pending or running. When it
+// is failed, read `Get NodeJS build logs` and `Analyse failed Node.js build` for the cause.
+// Returns 404 when the UUID does not belong to a build of this website.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/{uuid} (the `HostingGetNodeJsBuildDetailsV1` operationId).
+func (c *ClientWithResponses) HostingGetNodeJsBuildDetailsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, uuid BuildUuidPath, reqEditors ...RequestEditorFn) (*HostingGetNodeJsBuildDetailsV1Response, error) {
+	rsp, err := c.HostingGetNodeJsBuildDetailsV1(ctx, username, domain, uuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingGetNodeJsBuildDetailsV1Response(rsp)
+}
+
+// HostingAnalyseFailedNodeJsBuildV1WithResponse Analyse failed Node.js build
+//
+// Returns an AI analysis of why a build failed and how to fix it, based on the build logs,
+// the project file list and package.json. Only builds in the `failed` state can be analysed;
+// any other state returns 422. When no analysis could be produced both `analysis` and
+// `solution` are null, in which case read `Get NodeJS build logs` instead.
+//
+// Each call runs the analysis again, so call it once per failed build and keep the result.
+// Limited to 5 calls per minute per API client (429 above that).
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/{uuid}/analysis (the `HostingAnalyseFailedNodeJsBuildV1` operationId).
+func (c *ClientWithResponses) HostingAnalyseFailedNodeJsBuildV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, uuid BuildUuidPath, reqEditors ...RequestEditorFn) (*HostingAnalyseFailedNodeJsBuildV1Response, error) {
+	rsp, err := c.HostingAnalyseFailedNodeJsBuildV1(ctx, username, domain, uuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingAnalyseFailedNodeJsBuildV1Response(rsp)
+}
+
 // HostingGetNodeJSBuildLogsV1WithResponse Get NodeJS build logs
 //
 // Retrieve logs from a specific Node.js build process.
@@ -85666,6 +87288,51 @@ func (c *ClientWithResponses) HostingGetNodeJSBuildLogsV1WithResponse(ctx contex
 		return nil, err
 	}
 	return ParseHostingGetNodeJSBuildLogsV1Response(rsp)
+}
+
+// HostingClearNodeJsRuntimeLogsV1WithResponse Clear Node.js runtime logs
+//
+// Empties the Node.js application's runtime log file. This cannot be undone, so confirm with
+// the user before calling it. Returns success even when no log file exists yet.
+//
+// Use it before reproducing a problem so the next `Get Node.js runtime logs` call returns
+// only fresh entries; start that call with `period` again instead of reusing a `from_line`
+// from before the clear.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/runtime-logs (the `HostingClearNodeJsRuntimeLogsV1` operationId).
+func (c *ClientWithResponses) HostingClearNodeJsRuntimeLogsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingClearNodeJsRuntimeLogsV1Response, error) {
+	rsp, err := c.HostingClearNodeJsRuntimeLogsV1(ctx, username, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingClearNodeJsRuntimeLogsV1Response(rsp)
+}
+
+// HostingGetNodeJsRuntimeLogsV1WithResponse Get Node.js runtime logs
+//
+// Returns the Node.js application's runtime console log entries, oldest first, each with
+// timestamp, level and message. On the first call send `period` (`1h`, `1d`, `1w` or `1m`)
+// and optionally `levels` and `limit` (1-5000, default 1000); when more entries match than
+// `limit`, the newest are kept.
+//
+// To poll for new entries send `total_lines + 1` from the previous response as `from_line`
+// and omit `period`; `period` and `from_line` cannot be combined. Lines that are not JSON
+// with a timestamp, level and message are skipped, so `logs` may hold fewer than `limit`
+// entries while `total_lines` counts every raw line. Entries with a timestamp before
+// `last_deployed_at` belong to the previous deployment. Returns an empty `logs` list when
+// the application has not written a log file yet.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/runtime-logs (the `HostingGetNodeJsRuntimeLogsV1` operationId).
+func (c *ClientWithResponses) HostingGetNodeJsRuntimeLogsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetNodeJsRuntimeLogsV1Params, reqEditors ...RequestEditorFn) (*HostingGetNodeJsRuntimeLogsV1Response, error) {
+	rsp, err := c.HostingGetNodeJsRuntimeLogsV1(ctx, username, domain, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingGetNodeJsRuntimeLogsV1Response(rsp)
 }
 
 // HostingRestartNodeJsApplicationV1WithResponse Restart Node.js application
@@ -97657,6 +99324,93 @@ func ParseHostingStartNodeJsBuildV1Response(rsp *http.Response) (*HostingStartNo
 	return response, nil
 }
 
+// ParseHostingGetNodeJsBuildSettingsV1Response parses an HTTP response from a HostingGetNodeJsBuildSettingsV1WithResponse call
+func ParseHostingGetNodeJsBuildSettingsV1Response(rsp *http.Response) (*HostingGetNodeJsBuildSettingsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingGetNodeJsBuildSettingsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1NodeJsStoredBuildSettingsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingUpdateNodeJsBuildSettingsV1Response parses an HTTP response from a HostingUpdateNodeJsBuildSettingsV1WithResponse call
+func ParseHostingUpdateNodeJsBuildSettingsV1Response(rsp *http.Response) (*HostingUpdateNodeJsBuildSettingsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingUpdateNodeJsBuildSettingsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1NodeJsStoredBuildSettingsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseHostingListNodeJsEnvironmentVariablesV1Response parses an HTTP response from a HostingListNodeJsEnvironmentVariablesV1WithResponse call
 func ParseHostingListNodeJsEnvironmentVariablesV1Response(rsp *http.Response) (*HostingListNodeJsEnvironmentVariablesV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -97791,6 +99545,93 @@ func ParseHostingGetNodeJsBuildSettingsFromArchiveV1Response(rsp *http.Response)
 	return response, nil
 }
 
+// ParseHostingGetNodeJsBuildDetailsV1Response parses an HTTP response from a HostingGetNodeJsBuildDetailsV1WithResponse call
+func ParseHostingGetNodeJsBuildDetailsV1Response(rsp *http.Response) (*HostingGetNodeJsBuildDetailsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingGetNodeJsBuildDetailsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1NodeJsBuildResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingAnalyseFailedNodeJsBuildV1Response parses an HTTP response from a HostingAnalyseFailedNodeJsBuildV1WithResponse call
+func ParseHostingAnalyseFailedNodeJsBuildV1Response(rsp *http.Response) (*HostingAnalyseFailedNodeJsBuildV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingAnalyseFailedNodeJsBuildV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1NodeJsBuildAnalysisResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseHostingGetNodeJSBuildLogsV1Response parses an HTTP response from a HostingGetNodeJSBuildLogsV1WithResponse call
 func ParseHostingGetNodeJSBuildLogsV1Response(rsp *http.Response) (*HostingGetNodeJSBuildLogsV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -97807,6 +99648,93 @@ func ParseHostingGetNodeJSBuildLogsV1Response(rsp *http.Response) (*HostingGetNo
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest HostingV1NodeJsBuildLogsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingClearNodeJsRuntimeLogsV1Response parses an HTTP response from a HostingClearNodeJsRuntimeLogsV1WithResponse call
+func ParseHostingClearNodeJsRuntimeLogsV1Response(rsp *http.Response) (*HostingClearNodeJsRuntimeLogsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingClearNodeJsRuntimeLogsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingGetNodeJsRuntimeLogsV1Response parses an HTTP response from a HostingGetNodeJsRuntimeLogsV1WithResponse call
+func ParseHostingGetNodeJsRuntimeLogsV1Response(rsp *http.Response) (*HostingGetNodeJsRuntimeLogsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingGetNodeJsRuntimeLogsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1NodeJsRuntimeLogsResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

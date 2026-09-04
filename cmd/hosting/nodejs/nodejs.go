@@ -10,13 +10,19 @@ var GroupCmd = &cobra.Command{
 }
 
 func init() {
+	GroupCmd.AddCommand(AnalyseFailedBuildCmd)
+	GroupCmd.AddCommand(BuildCmd)
 	GroupCmd.AddCommand(BuildLogsCmd)
+	GroupCmd.AddCommand(BuildSettingsCmd)
 	GroupCmd.AddCommand(BuildSettingsFromArchiveCmd)
+	GroupCmd.AddCommand(ClearRuntimeLogsCmd)
 	GroupCmd.AddCommand(ListBuildsCmd)
 	GroupCmd.AddCommand(ListEnvironmentVariablesCmd)
 	GroupCmd.AddCommand(ListVulnerabilitiesCmd)
 	GroupCmd.AddCommand(PatchVulnerabilitiesCmd)
 	GroupCmd.AddCommand(ReplaceEnvironmentVariablesCmd)
 	GroupCmd.AddCommand(RestartApplicationCmd)
+	GroupCmd.AddCommand(RuntimeLogsCmd)
 	GroupCmd.AddCommand(StartBuildCmd)
+	GroupCmd.AddCommand(UpdateBuildSettingsCmd)
 }
