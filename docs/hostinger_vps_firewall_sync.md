@@ -4,6 +4,9 @@ Sync firewall
 
 ### Synopsis
 
+Deprecated: use `POST /api/vps/v1/firewall/{firewallId}/sync` instead, which syncs the firewall
+to all virtual machines assigned to it.
+
 Sync a firewall for a specified virtual machine.
 
 Firewall can lose sync with virtual machine if the firewall has new rules added, removed or updated.

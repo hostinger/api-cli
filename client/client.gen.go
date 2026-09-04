@@ -22816,7 +22816,21 @@ type ClientInterface interface {
 	// Corresponds with PUT /api/vps/v1/firewall/{firewallId}/rules/{ruleId} (the `VPSUpdateFirewallRuleV1` operationId).
 	VPSUpdateFirewallRuleV1(ctx context.Context, firewallId FirewallId, ruleId RuleId, body VPSUpdateFirewallRuleV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// VPSSyncFirewallToAllAssignedVMsV1 Sync firewall to all assigned VMs
+	//
+	// Sync a firewall's rules to every virtual machine it's assigned to.
+	//
+	// Firewall can lose sync with a virtual machine if the firewall has new rules added, removed or updated.
+	//
+	// Use this endpoint to apply updated firewall rules to all VPS instances assigned to the firewall.
+	//
+	// Corresponds with POST /api/vps/v1/firewall/{firewallId}/sync (the `VPSSyncFirewallToAllAssignedVMsV1` operationId).
+	VPSSyncFirewallToAllAssignedVMsV1(ctx context.Context, firewallId FirewallId, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// VPSSyncFirewallV1 Sync firewall
+	//
+	// Deprecated: use `POST /api/vps/v1/firewall/{firewallId}/sync` instead, which syncs the firewall
+	// to all virtual machines assigned to it.
 	//
 	// Sync a firewall for a specified virtual machine.
 	//
@@ -22825,6 +22839,8 @@ type ClientInterface interface {
 	// Use this endpoint to apply updated firewall rules to VPS instances.
 	//
 	// Corresponds with POST /api/vps/v1/firewall/{firewallId}/sync/{virtualMachineId} (the `VPSSyncFirewallV1` operationId).
+	//
+	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	VPSSyncFirewallV1(ctx context.Context, firewallId FirewallId, virtualMachineId VirtualMachineId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// VPSGetPostInstallScriptsV1 Get post-install scripts
@@ -33320,7 +33336,31 @@ func (c *Client) VPSUpdateFirewallRuleV1(ctx context.Context, firewallId Firewal
 	return c.Client.Do(req)
 }
 
+// VPSSyncFirewallToAllAssignedVMsV1 Sync firewall to all assigned VMs
+//
+// Sync a firewall's rules to every virtual machine it's assigned to.
+//
+// Firewall can lose sync with a virtual machine if the firewall has new rules added, removed or updated.
+//
+// Use this endpoint to apply updated firewall rules to all VPS instances assigned to the firewall.
+//
+// Corresponds with POST /api/vps/v1/firewall/{firewallId}/sync (the `VPSSyncFirewallToAllAssignedVMsV1` operationId).
+func (c *Client) VPSSyncFirewallToAllAssignedVMsV1(ctx context.Context, firewallId FirewallId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewVPSSyncFirewallToAllAssignedVMsV1Request(c.Server, firewallId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // VPSSyncFirewallV1 Sync firewall
+//
+// Deprecated: use `POST /api/vps/v1/firewall/{firewallId}/sync` instead, which syncs the firewall
+// to all virtual machines assigned to it.
 //
 // Sync a firewall for a specified virtual machine.
 //
@@ -33329,6 +33369,7 @@ func (c *Client) VPSUpdateFirewallRuleV1(ctx context.Context, firewallId Firewal
 // Use this endpoint to apply updated firewall rules to VPS instances.
 //
 // Corresponds with POST /api/vps/v1/firewall/{firewallId}/sync/{virtualMachineId} (the `VPSSyncFirewallV1` operationId).
+// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 func (c *Client) VPSSyncFirewallV1(ctx context.Context, firewallId FirewallId, virtualMachineId VirtualMachineId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewVPSSyncFirewallV1Request(c.Server, firewallId, virtualMachineId)
 	if err != nil {
@@ -50617,6 +50658,40 @@ func NewVPSUpdateFirewallRuleV1RequestWithBody(server string, firewallId Firewal
 	return req, nil
 }
 
+// NewVPSSyncFirewallToAllAssignedVMsV1Request constructs an http.Request for the VPSSyncFirewallToAllAssignedVMsV1 method
+func NewVPSSyncFirewallToAllAssignedVMsV1Request(server string, firewallId FirewallId) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "firewallId", firewallId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/vps/v1/firewall/%s/sync", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewVPSSyncFirewallV1Request constructs an http.Request for the VPSSyncFirewallV1 method
 func NewVPSSyncFirewallV1Request(server string, firewallId FirewallId, virtualMachineId VirtualMachineId) (*http.Request, error) {
 	var err error
@@ -58582,7 +58657,23 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with PUT /api/vps/v1/firewall/{firewallId}/rules/{ruleId} (the `VPSUpdateFirewallRuleV1` operationId).
 	VPSUpdateFirewallRuleV1WithResponse(ctx context.Context, firewallId FirewallId, ruleId RuleId, body VPSUpdateFirewallRuleV1JSONRequestBody, reqEditors ...RequestEditorFn) (*VPSUpdateFirewallRuleV1Response, error)
 
+	// VPSSyncFirewallToAllAssignedVMsV1WithResponse Sync firewall to all assigned VMs
+	//
+	// Sync a firewall's rules to every virtual machine it's assigned to.
+	//
+	// Firewall can lose sync with a virtual machine if the firewall has new rules added, removed or updated.
+	//
+	// Use this endpoint to apply updated firewall rules to all VPS instances assigned to the firewall.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/vps/v1/firewall/{firewallId}/sync (the `VPSSyncFirewallToAllAssignedVMsV1` operationId).
+	VPSSyncFirewallToAllAssignedVMsV1WithResponse(ctx context.Context, firewallId FirewallId, reqEditors ...RequestEditorFn) (*VPSSyncFirewallToAllAssignedVMsV1Response, error)
+
 	// VPSSyncFirewallV1WithResponse Sync firewall
+	//
+	// Deprecated: use `POST /api/vps/v1/firewall/{firewallId}/sync` instead, which syncs the firewall
+	// to all virtual machines assigned to it.
 	//
 	// Sync a firewall for a specified virtual machine.
 	//
@@ -58593,6 +58684,8 @@ type ClientWithResponsesInterface interface {
 	// Returns a wrapper object for the known response body format(s).
 	//
 	// Corresponds with POST /api/vps/v1/firewall/{firewallId}/sync/{virtualMachineId} (the `VPSSyncFirewallV1` operationId).
+	//
+	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	VPSSyncFirewallV1WithResponse(ctx context.Context, firewallId FirewallId, virtualMachineId VirtualMachineId, reqEditors ...RequestEditorFn) (*VPSSyncFirewallV1Response, error)
 
 	// VPSGetPostInstallScriptsV1WithResponse Get post-install scripts
@@ -78509,6 +78602,68 @@ func (r VPSUpdateFirewallRuleV1Response) ContentType() string {
 	return ""
 }
 
+type VPSSyncFirewallToAllAssignedVMsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r VPSSyncFirewallToAllAssignedVMsV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r VPSSyncFirewallToAllAssignedVMsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r VPSSyncFirewallToAllAssignedVMsV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r VPSSyncFirewallToAllAssignedVMsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r VPSSyncFirewallToAllAssignedVMsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r VPSSyncFirewallToAllAssignedVMsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r VPSSyncFirewallToAllAssignedVMsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r VPSSyncFirewallToAllAssignedVMsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type VPSSyncFirewallV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -89952,7 +90107,29 @@ func (c *ClientWithResponses) VPSUpdateFirewallRuleV1WithResponse(ctx context.Co
 	return ParseVPSUpdateFirewallRuleV1Response(rsp)
 }
 
+// VPSSyncFirewallToAllAssignedVMsV1WithResponse Sync firewall to all assigned VMs
+//
+// Sync a firewall's rules to every virtual machine it's assigned to.
+//
+// Firewall can lose sync with a virtual machine if the firewall has new rules added, removed or updated.
+//
+// Use this endpoint to apply updated firewall rules to all VPS instances assigned to the firewall.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/vps/v1/firewall/{firewallId}/sync (the `VPSSyncFirewallToAllAssignedVMsV1` operationId).
+func (c *ClientWithResponses) VPSSyncFirewallToAllAssignedVMsV1WithResponse(ctx context.Context, firewallId FirewallId, reqEditors ...RequestEditorFn) (*VPSSyncFirewallToAllAssignedVMsV1Response, error) {
+	rsp, err := c.VPSSyncFirewallToAllAssignedVMsV1(ctx, firewallId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseVPSSyncFirewallToAllAssignedVMsV1Response(rsp)
+}
+
 // VPSSyncFirewallV1WithResponse Sync firewall
+//
+// Deprecated: use `POST /api/vps/v1/firewall/{firewallId}/sync` instead, which syncs the firewall
+// to all virtual machines assigned to it.
 //
 // Sync a firewall for a specified virtual machine.
 //
@@ -89963,6 +90140,8 @@ func (c *ClientWithResponses) VPSUpdateFirewallRuleV1WithResponse(ctx context.Co
 // Returns a wrapper object for the known response body format(s).
 //
 // Corresponds with POST /api/vps/v1/firewall/{firewallId}/sync/{virtualMachineId} (the `VPSSyncFirewallV1` operationId).
+//
+// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 func (c *ClientWithResponses) VPSSyncFirewallV1WithResponse(ctx context.Context, firewallId FirewallId, virtualMachineId VirtualMachineId, reqEditors ...RequestEditorFn) (*VPSSyncFirewallV1Response, error) {
 	rsp, err := c.VPSSyncFirewallV1(ctx, firewallId, virtualMachineId, reqEditors...)
 	if err != nil {
@@ -105377,6 +105556,53 @@ func ParseVPSUpdateFirewallRuleV1Response(rsp *http.Response) (*VPSUpdateFirewal
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest VPSV1FirewallFirewallRuleResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseVPSSyncFirewallToAllAssignedVMsV1Response parses an HTTP response from a VPSSyncFirewallToAllAssignedVMsV1WithResponse call
+func ParseVPSSyncFirewallToAllAssignedVMsV1Response(rsp *http.Response) (*VPSSyncFirewallToAllAssignedVMsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &VPSSyncFirewallToAllAssignedVMsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

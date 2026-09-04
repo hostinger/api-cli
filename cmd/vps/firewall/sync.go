@@ -13,7 +13,7 @@ import (
 var SyncCmd = &cobra.Command{
 	Use:   "sync <firewall-id> <virtual-machine-id>",
 	Short: "Sync firewall",
-	Long:  "Sync a firewall for a specified virtual machine.\n\nFirewall can lose sync with virtual machine if the firewall has new rules added, removed or updated.\n\nUse this endpoint to apply updated firewall rules to VPS instances.",
+	Long:  "Deprecated: use `POST /api/vps/v1/firewall/{firewallId}/sync` instead, which syncs the firewall\nto all virtual machines assigned to it.\n\nSync a firewall for a specified virtual machine.\n\nFirewall can lose sync with virtual machine if the firewall has new rules added, removed or updated.\n\nUse this endpoint to apply updated firewall rules to VPS instances.",
 	Args:  cobra.MatchAll(cobra.ExactArgs(2)),
 	Run: func(cmd *cobra.Command, args []string) {
 		r, err := api.Request().VPSSyncFirewallV1WithResponse(context.TODO(), utils.StringToInt(args[0]), utils.StringToInt(args[1]))

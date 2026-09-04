@@ -28,5 +28,6 @@ Firewall commands
 * [hostinger vps firewall list](hostinger_vps_firewall_list.md)	 - Get firewall list
 * [hostinger vps firewall replace-all-rules-in-group](hostinger_vps_firewall_replace-all-rules-in-group.md)	 - Replace all firewall rules in group
 * [hostinger vps firewall sync](hostinger_vps_firewall_sync.md)	 - Sync firewall
+* [hostinger vps firewall sync-to-all-assigned-v-ms](hostinger_vps_firewall_sync-to-all-assigned-v-ms.md)	 - Sync firewall to all assigned VMs
 * [hostinger vps firewall update-rule](hostinger_vps_firewall_update-rule.md)	 - Update firewall rule
 

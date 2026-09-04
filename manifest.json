@@ -329,6 +329,11 @@
     "method": "POST",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/stop"
   },
+  "VPS_syncFirewallToAllAssignedVMsV1": {
+    "command": "hostinger vps firewall sync-to-all-assigned-v-ms",
+    "method": "POST",
+    "path": "/api/vps/v1/firewall/{firewallId}/sync"
+  },
   "VPS_syncFirewallV1": {
     "command": "hostinger vps firewall sync",
     "method": "POST",

@@ -20,5 +20,6 @@ func init() {
 	GroupCmd.AddCommand(ListCmd)
 	GroupCmd.AddCommand(ReplaceAllRulesInGroupCmd)
 	GroupCmd.AddCommand(SyncCmd)
+	GroupCmd.AddCommand(SyncToAllAssignedVMsCmd)
 	GroupCmd.AddCommand(UpdateRuleCmd)
 }
