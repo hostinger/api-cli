@@ -15,7 +15,7 @@ import (
 var PurchaseCmd = &cobra.Command{
 	Use:   "purchase",
 	Short: "Purchase new domain",
-	Long:  "Purchase and register a new domain name.\n\nIf registration fails, login to [hPanel](https://hpanel.hostinger.com/) and check domain registration status.\n\nIf no payment method is provided, your default payment method will be used automatically.\n\nIf no WHOIS information is provided, default contact information for that TLD will be used.\nBefore making request, ensure WHOIS information for desired TLD exists in your account.\n\nSome TLDs require `additional_details` to be provided and these will be validated before completing purchase.\n\nUse this endpoint to register new domains for users.",
+	Long:  "Purchase and register a new domain name.\n\nIf registration fails, login to [hPanel](https://hpanel.hostinger.com/) and check domain registration status.\n\nIf no payment method is provided, your default payment method will be used automatically.\n\nIf the response is `202 Accepted`, the payment is still being processed and the domain was\n**not** registered. Once the order completes, register the domain from\n[hPanel](https://hpanel.hostinger.com/).\n\nIf no WHOIS information is provided, default contact information for that TLD will be used.\nBefore making request, ensure WHOIS information for desired TLD exists in your account.\n\nSome TLDs require `additional_details` to be provided and these will be validated before completing purchase.\n\nUse this endpoint to register new domains for users.",
 	Run: func(cmd *cobra.Command, args []string) {
 		payload, err := json.Marshal(purchaseBody(cmd))
 		if err != nil {

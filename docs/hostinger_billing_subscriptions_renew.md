@@ -13,6 +13,9 @@ the existing billing infrastructure. Use the
 
 If no payment method is provided, your default payment method will be used automatically.
 
+If the response is `202 Accepted`, the payment is still being processed and the renewal will
+complete asynchronously once the payment is confirmed.
+
 Use this endpoint to renew any subscription available in your account.
 
 ```

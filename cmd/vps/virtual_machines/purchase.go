@@ -15,7 +15,7 @@ import (
 var PurchaseCmd = &cobra.Command{
 	Use:   "purchase",
 	Short: "Purchase new virtual machine",
-	Long:  "Purchase and setup a new virtual machine.\n\nIf virtual machine setup fails for any reason, login to\n[hPanel](https://hpanel.hostinger.com/) and complete the setup manually.\n\nIf no payment method is provided, your default payment method will be used automatically.\n\nUse this endpoint to create new VPS instances.",
+	Long:  "Purchase and setup a new virtual machine.\n\nIf virtual machine setup fails for any reason, login to\n[hPanel](https://hpanel.hostinger.com/) and complete the setup manually.\n\nIf no payment method is provided, your default payment method will be used automatically.\n\nIf the response is `202 Accepted`, the payment is still being processed and the virtual machine\nwas not set up. Login to\n[hPanel](https://hpanel.hostinger.com/) and complete the setup manually.\n\nUse this endpoint to create new VPS instances.",
 	Run: func(cmd *cobra.Command, args []string) {
 		payload, err := json.Marshal(purchaseBody(cmd))
 		if err != nil {

@@ -282,6 +282,21 @@ func (e BillingV1OrderOrderResourceStatus) Valid() bool {
 	}
 }
 
+// Defines values for BillingV1OrderPaymentProcessingResourceStatus.
+const (
+	BillingV1OrderPaymentProcessingResourceStatusPaymentInitiated BillingV1OrderPaymentProcessingResourceStatus = "payment_initiated"
+)
+
+// Valid indicates whether the value is a known member of the BillingV1OrderPaymentProcessingResourceStatus enum.
+func (e BillingV1OrderPaymentProcessingResourceStatus) Valid() bool {
+	switch e {
+	case BillingV1OrderPaymentProcessingResourceStatusPaymentInitiated:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for BillingV1SubscriptionSubscriptionResourceStatus.
 const (
 	BillingV1SubscriptionSubscriptionResourceStatusActive      BillingV1SubscriptionSubscriptionResourceStatus = "active"
@@ -6836,6 +6851,30 @@ type BillingV1OrderOrderResource struct {
 
 // BillingV1OrderOrderResourceStatus Example: completed
 type BillingV1OrderOrderResourceStatus string
+
+// BillingV1OrderPaymentProcessingResource defines model for Billing.V1.Order.PaymentProcessingResource.
+type BillingV1OrderPaymentProcessingResource struct {
+	// Id Order ID
+	//
+	// Example: 2957086
+	Id *int `json:"id,omitempty"`
+
+	// Message Explanation of what happens next
+	//
+	// Example: Payment is being processed. The order will complete automatically once payment is confirmed.
+	Message *string `json:"message,omitempty"`
+
+	// Status Example: payment_initiated
+	Status *BillingV1OrderPaymentProcessingResourceStatus `json:"status,omitempty"`
+
+	// SubscriptionId Subscription ID, use it to find the product once the order completes
+	//
+	// Example: Azz353Uhl1xC54pR0
+	SubscriptionId *string `json:"subscription_id,omitempty"`
+}
+
+// BillingV1OrderPaymentProcessingResourceStatus Example: payment_initiated
+type BillingV1OrderPaymentProcessingResourceStatus string
 
 // BillingV1OrderPurchaseRequest defines model for Billing.V1.Order.PurchaseRequest.
 type BillingV1OrderPurchaseRequest struct {
@@ -18607,6 +18646,9 @@ type ClientInterface interface {
 	//
 	// If no payment method is provided, your default payment method will be used automatically.
 	//
+	// If the response is `202 Accepted`, the payment is still being processed and the order will
+	// complete asynchronously once the payment is confirmed.
+	//
 	// This endpoint only places the order. Product-specific provisioning
 	// (e.g. VPS setup or domain registration) is not performed here — once the
 	// order completes, use the relevant product endpoints or
@@ -18629,6 +18671,9 @@ type ClientInterface interface {
 	// up the `item_id` values available for purchase.
 	//
 	// If no payment method is provided, your default payment method will be used automatically.
+	//
+	// If the response is `202 Accepted`, the payment is still being processed and the order will
+	// complete asynchronously once the payment is confirmed.
 	//
 	// This endpoint only places the order. Product-specific provisioning
 	// (e.g. VPS setup or domain registration) is not performed here — once the
@@ -18710,6 +18755,9 @@ type ClientInterface interface {
 	//
 	// If no payment method is provided, your default payment method will be used automatically.
 	//
+	// If the response is `202 Accepted`, the payment is still being processed and the renewal will
+	// complete asynchronously once the payment is confirmed.
+	//
 	// Use this endpoint to renew any subscription available in your account.
 	//
 	// Takes any type of body and a specified content type.
@@ -18727,6 +18775,9 @@ type ClientInterface interface {
 	// `subscriptionId` values available for renewal.
 	//
 	// If no payment method is provided, your default payment method will be used automatically.
+	//
+	// If the response is `202 Accepted`, the payment is still being processed and the renewal will
+	// complete asynchronously once the payment is confirmed.
 	//
 	// Use this endpoint to renew any subscription available in your account.
 	//
@@ -19231,6 +19282,10 @@ type ClientInterface interface {
 	//
 	// If no payment method is provided, your default payment method will be used automatically.
 	//
+	// If the response is `202 Accepted`, the payment is still being processed and the domain was
+	// **not** registered. Once the order completes, register the domain from
+	// [hPanel](https://hpanel.hostinger.com/).
+	//
 	// If no WHOIS information is provided, default contact information for that TLD will be used.
 	// Before making request, ensure WHOIS information for desired TLD exists in your account.
 	//
@@ -19250,6 +19305,10 @@ type ClientInterface interface {
 	// If registration fails, login to [hPanel](https://hpanel.hostinger.com/) and check domain registration status.
 	//
 	// If no payment method is provided, your default payment method will be used automatically.
+	//
+	// If the response is `202 Accepted`, the payment is still being processed and the domain was
+	// **not** registered. Once the order completes, register the domain from
+	// [hPanel](https://hpanel.hostinger.com/).
 	//
 	// If no WHOIS information is provided, default contact information for that TLD will be used.
 	// Before making request, ensure WHOIS information for desired TLD exists in your account.
@@ -23800,6 +23859,10 @@ type ClientInterface interface {
 	//
 	// If no payment method is provided, your default payment method will be used automatically.
 	//
+	// If the response is `202 Accepted`, the payment is still being processed and the virtual machine
+	// was not set up. Login to
+	// [hPanel](https://hpanel.hostinger.com/) and complete the setup manually.
+	//
 	// Use this endpoint to create new VPS instances.
 	//
 	// Takes any type of body and a specified content type.
@@ -23815,6 +23878,10 @@ type ClientInterface interface {
 	// [hPanel](https://hpanel.hostinger.com/) and complete the setup manually.
 	//
 	// If no payment method is provided, your default payment method will be used automatically.
+	//
+	// If the response is `202 Accepted`, the payment is still being processed and the virtual machine
+	// was not set up. Login to
+	// [hPanel](https://hpanel.hostinger.com/) and complete the setup manually.
 	//
 	// Use this endpoint to create new VPS instances.
 	//
@@ -25502,6 +25569,9 @@ func (c *Client) BillingGetCatalogItemListV1(ctx context.Context, params *Billin
 //
 // If no payment method is provided, your default payment method will be used automatically.
 //
+// If the response is `202 Accepted`, the payment is still being processed and the order will
+// complete asynchronously once the payment is confirmed.
+//
 // This endpoint only places the order. Product-specific provisioning
 // (e.g. VPS setup or domain registration) is not performed here — once the
 // order completes, use the relevant product endpoints or
@@ -25534,6 +25604,9 @@ func (c *Client) BillingCreatePurchaseOrderV1WithBody(ctx context.Context, conte
 // up the `item_id` values available for purchase.
 //
 // If no payment method is provided, your default payment method will be used automatically.
+//
+// If the response is `202 Accepted`, the payment is still being processed and the order will
+// complete asynchronously once the payment is confirmed.
 //
 // This endpoint only places the order. Product-specific provisioning
 // (e.g. VPS setup or domain registration) is not performed here — once the
@@ -25685,6 +25758,9 @@ func (c *Client) BillingEnableAutoRenewalV1(ctx context.Context, subscriptionId 
 //
 // If no payment method is provided, your default payment method will be used automatically.
 //
+// If the response is `202 Accepted`, the payment is still being processed and the renewal will
+// complete asynchronously once the payment is confirmed.
+//
 // Use this endpoint to renew any subscription available in your account.
 //
 // Takes any type of body and a specified content type.
@@ -25712,6 +25788,9 @@ func (c *Client) BillingRenewSubscriptionV1WithBody(ctx context.Context, subscri
 // `subscriptionId` values available for renewal.
 //
 // If no payment method is provided, your default payment method will be used automatically.
+//
+// If the response is `202 Accepted`, the payment is still being processed and the renewal will
+// complete asynchronously once the payment is confirmed.
 //
 // Use this endpoint to renew any subscription available in your account.
 //
@@ -26596,6 +26675,10 @@ func (c *Client) DomainsGetDomainListV1(ctx context.Context, reqEditors ...Reque
 //
 // If no payment method is provided, your default payment method will be used automatically.
 //
+// If the response is `202 Accepted`, the payment is still being processed and the domain was
+// **not** registered. Once the order completes, register the domain from
+// [hPanel](https://hpanel.hostinger.com/).
+//
 // If no WHOIS information is provided, default contact information for that TLD will be used.
 // Before making request, ensure WHOIS information for desired TLD exists in your account.
 //
@@ -26625,6 +26708,10 @@ func (c *Client) DomainsPurchaseNewDomainV1WithBody(ctx context.Context, content
 // If registration fails, login to [hPanel](https://hpanel.hostinger.com/) and check domain registration status.
 //
 // If no payment method is provided, your default payment method will be used automatically.
+//
+// If the response is `202 Accepted`, the payment is still being processed and the domain was
+// **not** registered. Once the order completes, register the domain from
+// [hPanel](https://hpanel.hostinger.com/).
 //
 // If no WHOIS information is provided, default contact information for that TLD will be used.
 // Before making request, ensure WHOIS information for desired TLD exists in your account.
@@ -34798,6 +34885,10 @@ func (c *Client) VPSGetVirtualMachinesV1(ctx context.Context, reqEditors ...Requ
 //
 // If no payment method is provided, your default payment method will be used automatically.
 //
+// If the response is `202 Accepted`, the payment is still being processed and the virtual machine
+// was not set up. Login to
+// [hPanel](https://hpanel.hostinger.com/) and complete the setup manually.
+//
 // Use this endpoint to create new VPS instances.
 //
 // Takes any type of body and a specified content type.
@@ -34823,6 +34914,10 @@ func (c *Client) VPSPurchaseNewVirtualMachineV1WithBody(ctx context.Context, con
 // [hPanel](https://hpanel.hostinger.com/) and complete the setup manually.
 //
 // If no payment method is provided, your default payment method will be used automatically.
+//
+// If the response is `202 Accepted`, the payment is still being processed and the virtual machine
+// was not set up. Login to
+// [hPanel](https://hpanel.hostinger.com/) and complete the setup manually.
 //
 // Use this endpoint to create new VPS instances.
 //
@@ -55058,6 +55153,9 @@ type ClientWithResponsesInterface interface {
 	//
 	// If no payment method is provided, your default payment method will be used automatically.
 	//
+	// If the response is `202 Accepted`, the payment is still being processed and the order will
+	// complete asynchronously once the payment is confirmed.
+	//
 	// This endpoint only places the order. Product-specific provisioning
 	// (e.g. VPS setup or domain registration) is not performed here — once the
 	// order completes, use the relevant product endpoints or
@@ -55080,6 +55178,9 @@ type ClientWithResponsesInterface interface {
 	// up the `item_id` values available for purchase.
 	//
 	// If no payment method is provided, your default payment method will be used automatically.
+	//
+	// If the response is `202 Accepted`, the payment is still being processed and the order will
+	// complete asynchronously once the payment is confirmed.
 	//
 	// This endpoint only places the order. Product-specific provisioning
 	// (e.g. VPS setup or domain registration) is not performed here — once the
@@ -55173,6 +55274,9 @@ type ClientWithResponsesInterface interface {
 	//
 	// If no payment method is provided, your default payment method will be used automatically.
 	//
+	// If the response is `202 Accepted`, the payment is still being processed and the renewal will
+	// complete asynchronously once the payment is confirmed.
+	//
 	// Use this endpoint to renew any subscription available in your account.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
@@ -55190,6 +55294,9 @@ type ClientWithResponsesInterface interface {
 	// `subscriptionId` values available for renewal.
 	//
 	// If no payment method is provided, your default payment method will be used automatically.
+	//
+	// If the response is `202 Accepted`, the payment is still being processed and the renewal will
+	// complete asynchronously once the payment is confirmed.
 	//
 	// Use this endpoint to renew any subscription available in your account.
 	//
@@ -55724,6 +55831,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// If no payment method is provided, your default payment method will be used automatically.
 	//
+	// If the response is `202 Accepted`, the payment is still being processed and the domain was
+	// **not** registered. Once the order completes, register the domain from
+	// [hPanel](https://hpanel.hostinger.com/).
+	//
 	// If no WHOIS information is provided, default contact information for that TLD will be used.
 	// Before making request, ensure WHOIS information for desired TLD exists in your account.
 	//
@@ -55743,6 +55854,10 @@ type ClientWithResponsesInterface interface {
 	// If registration fails, login to [hPanel](https://hpanel.hostinger.com/) and check domain registration status.
 	//
 	// If no payment method is provided, your default payment method will be used automatically.
+	//
+	// If the response is `202 Accepted`, the payment is still being processed and the domain was
+	// **not** registered. Once the order completes, register the domain from
+	// [hPanel](https://hpanel.hostinger.com/).
 	//
 	// If no WHOIS information is provided, default contact information for that TLD will be used.
 	// Before making request, ensure WHOIS information for desired TLD exists in your account.
@@ -60633,6 +60748,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// If no payment method is provided, your default payment method will be used automatically.
 	//
+	// If the response is `202 Accepted`, the payment is still being processed and the virtual machine
+	// was not set up. Login to
+	// [hPanel](https://hpanel.hostinger.com/) and complete the setup manually.
+	//
 	// Use this endpoint to create new VPS instances.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
@@ -60648,6 +60767,10 @@ type ClientWithResponsesInterface interface {
 	// [hPanel](https://hpanel.hostinger.com/) and complete the setup manually.
 	//
 	// If no payment method is provided, your default payment method will be used automatically.
+	//
+	// If the response is `202 Accepted`, the payment is still being processed and the virtual machine
+	// was not set up. Login to
+	// [hPanel](https://hpanel.hostinger.com/) and complete the setup manually.
 	//
 	// Use this endpoint to create new VPS instances.
 	//
@@ -63516,6 +63639,8 @@ type BillingCreatePurchaseOrderV1Response struct {
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
 	JSON200 *BillingV1OrderOrderResource
+	// JSON202 the response for an HTTP 202 `application/json` response
+	JSON202 *BillingV1OrderPaymentProcessingResource
 	// JSON401 the response for an HTTP 401 `application/json` response
 	JSON401 *CommonResponseUnauthorizedResponse
 	// JSON422 the response for an HTTP 422 `application/json` response
@@ -63527,6 +63652,11 @@ type BillingCreatePurchaseOrderV1Response struct {
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
 func (r BillingCreatePurchaseOrderV1Response) GetJSON200() *BillingV1OrderOrderResource {
 	return r.JSON200
+}
+
+// GetJSON202 returns the response for an HTTP 202 `application/json` response
+func (r BillingCreatePurchaseOrderV1Response) GetJSON202() *BillingV1OrderPaymentProcessingResource {
+	return r.JSON202
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
@@ -63908,6 +64038,8 @@ type BillingRenewSubscriptionV1Response struct {
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
 	JSON200 *BillingV1OrderOrderResource
+	// JSON202 the response for an HTTP 202 `application/json` response
+	JSON202 *BillingV1OrderPaymentProcessingResource
 	// JSON401 the response for an HTTP 401 `application/json` response
 	JSON401 *CommonResponseUnauthorizedResponse
 	// JSON422 the response for an HTTP 422 `application/json` response
@@ -63919,6 +64051,11 @@ type BillingRenewSubscriptionV1Response struct {
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
 func (r BillingRenewSubscriptionV1Response) GetJSON200() *BillingV1OrderOrderResource {
 	return r.JSON200
+}
+
+// GetJSON202 returns the response for an HTTP 202 `application/json` response
+func (r BillingRenewSubscriptionV1Response) GetJSON202() *BillingV1OrderPaymentProcessingResource {
+	return r.JSON202
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
@@ -65477,6 +65614,8 @@ type DomainsPurchaseNewDomainV1Response struct {
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
 	JSON200 *BillingV1OrderOrderResource
+	// JSON202 the response for an HTTP 202 `application/json` response
+	JSON202 *BillingV1OrderPaymentProcessingResource
 	// JSON401 the response for an HTTP 401 `application/json` response
 	JSON401 *CommonResponseUnauthorizedResponse
 	// JSON422 the response for an HTTP 422 `application/json` response
@@ -65488,6 +65627,11 @@ type DomainsPurchaseNewDomainV1Response struct {
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
 func (r DomainsPurchaseNewDomainV1Response) GetJSON200() *BillingV1OrderOrderResource {
 	return r.JSON200
+}
+
+// GetJSON202 returns the response for an HTTP 202 `application/json` response
+func (r DomainsPurchaseNewDomainV1Response) GetJSON202() *BillingV1OrderPaymentProcessingResource {
+	return r.JSON202
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
@@ -81773,6 +81917,8 @@ type VPSPurchaseNewVirtualMachineV1Response struct {
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
 	JSON200 *BillingV1OrderVirtualMachineOrderResource
+	// JSON202 the response for an HTTP 202 `application/json` response
+	JSON202 *BillingV1OrderPaymentProcessingResource
 	// JSON401 the response for an HTTP 401 `application/json` response
 	JSON401 *CommonResponseUnauthorizedResponse
 	// JSON422 the response for an HTTP 422 `application/json` response
@@ -81784,6 +81930,11 @@ type VPSPurchaseNewVirtualMachineV1Response struct {
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
 func (r VPSPurchaseNewVirtualMachineV1Response) GetJSON200() *BillingV1OrderVirtualMachineOrderResource {
 	return r.JSON200
+}
+
+// GetJSON202 returns the response for an HTTP 202 `application/json` response
+func (r VPSPurchaseNewVirtualMachineV1Response) GetJSON202() *BillingV1OrderPaymentProcessingResource {
+	return r.JSON202
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
@@ -85007,6 +85158,9 @@ func (c *ClientWithResponses) BillingGetCatalogItemListV1WithResponse(ctx contex
 //
 // If no payment method is provided, your default payment method will be used automatically.
 //
+// If the response is `202 Accepted`, the payment is still being processed and the order will
+// complete asynchronously once the payment is confirmed.
+//
 // This endpoint only places the order. Product-specific provisioning
 // (e.g. VPS setup or domain registration) is not performed here — once the
 // order completes, use the relevant product endpoints or
@@ -85035,6 +85189,9 @@ func (c *ClientWithResponses) BillingCreatePurchaseOrderV1WithBodyWithResponse(c
 // up the `item_id` values available for purchase.
 //
 // If no payment method is provided, your default payment method will be used automatically.
+//
+// If the response is `202 Accepted`, the payment is still being processed and the order will
+// complete asynchronously once the payment is confirmed.
 //
 // This endpoint only places the order. Product-specific provisioning
 // (e.g. VPS setup or domain registration) is not performed here — once the
@@ -85170,6 +85327,9 @@ func (c *ClientWithResponses) BillingEnableAutoRenewalV1WithResponse(ctx context
 //
 // If no payment method is provided, your default payment method will be used automatically.
 //
+// If the response is `202 Accepted`, the payment is still being processed and the renewal will
+// complete asynchronously once the payment is confirmed.
+//
 // Use this endpoint to renew any subscription available in your account.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
@@ -85193,6 +85353,9 @@ func (c *ClientWithResponses) BillingRenewSubscriptionV1WithBodyWithResponse(ctx
 // `subscriptionId` values available for renewal.
 //
 // If no payment method is provided, your default payment method will be used automatically.
+//
+// If the response is `202 Accepted`, the payment is still being processed and the renewal will
+// complete asynchronously once the payment is confirmed.
 //
 // Use this endpoint to renew any subscription available in your account.
 //
@@ -85955,6 +86118,10 @@ func (c *ClientWithResponses) DomainsGetDomainListV1WithResponse(ctx context.Con
 //
 // If no payment method is provided, your default payment method will be used automatically.
 //
+// If the response is `202 Accepted`, the payment is still being processed and the domain was
+// **not** registered. Once the order completes, register the domain from
+// [hPanel](https://hpanel.hostinger.com/).
+//
 // If no WHOIS information is provided, default contact information for that TLD will be used.
 // Before making request, ensure WHOIS information for desired TLD exists in your account.
 //
@@ -85980,6 +86147,10 @@ func (c *ClientWithResponses) DomainsPurchaseNewDomainV1WithBodyWithResponse(ctx
 // If registration fails, login to [hPanel](https://hpanel.hostinger.com/) and check domain registration status.
 //
 // If no payment method is provided, your default payment method will be used automatically.
+//
+// If the response is `202 Accepted`, the payment is still being processed and the domain was
+// **not** registered. Once the order completes, register the domain from
+// [hPanel](https://hpanel.hostinger.com/).
 //
 // If no WHOIS information is provided, default contact information for that TLD will be used.
 // Before making request, ensure WHOIS information for desired TLD exists in your account.
@@ -93050,6 +93221,10 @@ func (c *ClientWithResponses) VPSGetVirtualMachinesV1WithResponse(ctx context.Co
 //
 // If no payment method is provided, your default payment method will be used automatically.
 //
+// If the response is `202 Accepted`, the payment is still being processed and the virtual machine
+// was not set up. Login to
+// [hPanel](https://hpanel.hostinger.com/) and complete the setup manually.
+//
 // Use this endpoint to create new VPS instances.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
@@ -93071,6 +93246,10 @@ func (c *ClientWithResponses) VPSPurchaseNewVirtualMachineV1WithBodyWithResponse
 // [hPanel](https://hpanel.hostinger.com/) and complete the setup manually.
 //
 // If no payment method is provided, your default payment method will be used automatically.
+//
+// If the response is `202 Accepted`, the payment is still being processed and the virtual machine
+// was not set up. Login to
+// [hPanel](https://hpanel.hostinger.com/) and complete the setup manually.
 //
 // Use this endpoint to create new VPS instances.
 //
@@ -95667,6 +95846,13 @@ func ParseBillingCreatePurchaseOrderV1Response(rsp *http.Response) (*BillingCrea
 		}
 		response.JSON200 = &dest
 
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 202:
+		var dest BillingV1OrderPaymentProcessingResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON202 = &dest
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
 		var dest CommonResponseUnauthorizedResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -95953,6 +96139,13 @@ func ParseBillingRenewSubscriptionV1Response(rsp *http.Response) (*BillingRenewS
 			return nil, err
 		}
 		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 202:
+		var dest BillingV1OrderPaymentProcessingResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON202 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
 		var dest CommonResponseUnauthorizedResponse
@@ -97117,6 +97310,13 @@ func ParseDomainsPurchaseNewDomainV1Response(rsp *http.Response) (*DomainsPurcha
 			return nil, err
 		}
 		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 202:
+		var dest BillingV1OrderPaymentProcessingResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON202 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
 		var dest CommonResponseUnauthorizedResponse
@@ -109264,6 +109464,13 @@ func ParseVPSPurchaseNewVirtualMachineV1Response(rsp *http.Response) (*VPSPurcha
 			return nil, err
 		}
 		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 202:
+		var dest BillingV1OrderPaymentProcessingResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON202 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
 		var dest CommonResponseUnauthorizedResponse
