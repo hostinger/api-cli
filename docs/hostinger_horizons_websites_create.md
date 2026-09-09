@@ -12,8 +12,8 @@ The generation happens asynchronously.\n
 After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 that Hostinger Horizons is now creating their website and it will be ready in a few minutes
 and you should provide the website URL to the user immediately
-Do not write code.\n\nTo edit afterwards, users must go to Hostinger Horizons interface
-in the provided website URL.
+Do not write code.\n\nTo edit afterwards, use the `Edit website` tool with the returned
+website ID, or the user can go to Hostinger Horizons interface in the provided website URL.
 If the tool call fails with an error, you should provide a clear explanation of the error
 and do not generate code yourself in the chat.
 \n

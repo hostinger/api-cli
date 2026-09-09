@@ -1065,6 +1065,60 @@ func (e HorizonsV1WebsitesCreateWebsiteRequestMessageType) Valid() bool {
 	}
 }
 
+// Defines values for HorizonsV1WebsitesEditWebsiteRequestMessageType.
+const (
+	HorizonsV1WebsitesEditWebsiteRequestMessageTypeText HorizonsV1WebsitesEditWebsiteRequestMessageType = "text"
+)
+
+// Valid indicates whether the value is a known member of the HorizonsV1WebsitesEditWebsiteRequestMessageType enum.
+func (e HorizonsV1WebsitesEditWebsiteRequestMessageType) Valid() bool {
+	switch e {
+	case HorizonsV1WebsitesEditWebsiteRequestMessageTypeText:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HorizonsV1WebsitesPublishedWebsiteResourceStatus.
+const (
+	Publishing HorizonsV1WebsitesPublishedWebsiteResourceStatus = "publishing"
+)
+
+// Valid indicates whether the value is a known member of the HorizonsV1WebsitesPublishedWebsiteResourceStatus enum.
+func (e HorizonsV1WebsitesPublishedWebsiteResourceStatus) Valid() bool {
+	switch e {
+	case Publishing:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HorizonsV1WebsitesWebsiteResourceStatus.
+const (
+	HorizonsV1WebsitesWebsiteResourceStatusActive    HorizonsV1WebsitesWebsiteResourceStatus = "active"
+	HorizonsV1WebsitesWebsiteResourceStatusDeleted   HorizonsV1WebsitesWebsiteResourceStatus = "deleted"
+	HorizonsV1WebsitesWebsiteResourceStatusDeleting  HorizonsV1WebsitesWebsiteResourceStatus = "deleting"
+	HorizonsV1WebsitesWebsiteResourceStatusSuspended HorizonsV1WebsitesWebsiteResourceStatus = "suspended"
+)
+
+// Valid indicates whether the value is a known member of the HorizonsV1WebsitesWebsiteResourceStatus enum.
+func (e HorizonsV1WebsitesWebsiteResourceStatus) Valid() bool {
+	switch e {
+	case HorizonsV1WebsitesWebsiteResourceStatusActive:
+		return true
+	case HorizonsV1WebsitesWebsiteResourceStatusDeleted:
+		return true
+	case HorizonsV1WebsitesWebsiteResourceStatusDeleting:
+		return true
+	case HorizonsV1WebsitesWebsiteResourceStatusSuspended:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for HostingV1DomainsParkedDomainResourceType.
 const (
 	HostingV1DomainsParkedDomainResourceTypeDomain HostingV1DomainsParkedDomainResourceType = "domain"
@@ -9366,6 +9420,93 @@ type HorizonsV1WebsitesCreatedWebsiteResource struct {
 	WebsiteUrl string `json:"website_url"`
 }
 
+// HorizonsV1WebsitesEditWebsiteRequest defines model for Horizons.V1.Websites.EditWebsiteRequest.
+type HorizonsV1WebsitesEditWebsiteRequest struct {
+	Message []struct {
+		// Text Detailed description of the changes to apply to the website.
+		// Include which sections, features, content or design should change and how.
+		// The specification should be detailed and comprehensive, covering all requested changes.
+		//
+		// Example: Add a testimonials section below the menu and make the hero background green
+		Text string `json:"text"`
+
+		// Type Example: text
+		Type HorizonsV1WebsitesEditWebsiteRequestMessageType `json:"type"`
+	} `json:"message"`
+}
+
+// HorizonsV1WebsitesEditWebsiteRequestMessageType Example: text
+type HorizonsV1WebsitesEditWebsiteRequestMessageType string
+
+// HorizonsV1WebsitesPublishedWebsiteResource defines model for Horizons.V1.Websites.PublishedWebsiteResource.
+type HorizonsV1WebsitesPublishedWebsiteResource struct {
+	// PublishedUrl The URL the published website will be live on in a few minutes
+	//
+	// Example: https://palegreen-dragonfly-303128.hostingersite.com
+	PublishedUrl string `json:"published_url"`
+
+	// Status Always `publishing` - the build runs asynchronously after this response
+	//
+	// Example: publishing
+	Status HorizonsV1WebsitesPublishedWebsiteResourceStatus `json:"status"`
+
+	// WebsiteId The website ID
+	//
+	// Example: 123e4567-e89b-12d3-a456-426614174000
+	WebsiteId string `json:"website_id"`
+
+	// WebsiteUrl The website URL for the user to track progress in Hostinger Horizons interface
+	//
+	// Example: https://horizons.hostinger.com/123e4567-e89b-12d3-a456-426614174000?location=chatgpt
+	WebsiteUrl string `json:"website_url"`
+}
+
+// HorizonsV1WebsitesPublishedWebsiteResourceStatus Always `publishing` - the build runs asynchronously after this response
+//
+// Example: publishing
+type HorizonsV1WebsitesPublishedWebsiteResourceStatus string
+
+// HorizonsV1WebsitesWebsiteCollection Array of [`Horizons.V1.Websites.WebsiteResource`](#model/horizonsv1websiteswebsiteresource)
+type HorizonsV1WebsitesWebsiteCollection = []HorizonsV1WebsitesWebsiteResource
+
+// HorizonsV1WebsitesWebsiteResource defines model for Horizons.V1.Websites.WebsiteResource.
+type HorizonsV1WebsitesWebsiteResource struct {
+	// CreatedAt The website creation date
+	//
+	// Example: 2026-01-15T10:30:45Z
+	CreatedAt time.Time `json:"created_at"`
+
+	// Description The website description
+	//
+	// Example: Coffee shop landing page
+	Description *string `json:"description,omitempty"`
+
+	// Domain The domain the website is published on, if it has been published
+	//
+	// Example: example.com
+	Domain *string `json:"domain,omitempty"`
+
+	// Status The website status
+	//
+	// Example: active
+	Status HorizonsV1WebsitesWebsiteResourceStatus `json:"status"`
+
+	// WebsiteId The website ID
+	//
+	// Example: 123e4567-e89b-12d3-a456-426614174000
+	WebsiteId string `json:"website_id"`
+
+	// WebsiteUrl The website URL for the user to access their website in Hostinger Horizons interface
+	//
+	// Example: https://horizons.hostinger.com/123e4567-e89b-12d3-a456-426614174000
+	WebsiteUrl string `json:"website_url"`
+}
+
+// HorizonsV1WebsitesWebsiteResourceStatus The website status
+//
+// Example: active
+type HorizonsV1WebsitesWebsiteResourceStatus string
+
 // HorizonsV1WebsitesWebsiteUrlResource defines model for Horizons.V1.Websites.WebsiteUrlResource.
 type HorizonsV1WebsitesWebsiteUrlResource struct {
 	// WebsiteUrl The website URL for the user to access their website in Hostinger Horizons interface
@@ -16596,6 +16737,9 @@ type EcommerceSetStoreShippingV1JSONRequestBody = EcommerceV1ShippingSetShipping
 // HorizonsCreateWebsiteV1JSONRequestBody defines body for HorizonsCreateWebsiteV1 for application/json ContentType.
 type HorizonsCreateWebsiteV1JSONRequestBody = HorizonsV1WebsitesCreateWebsiteRequest
 
+// HorizonsEditWebsiteV1JSONRequestBody defines body for HorizonsEditWebsiteV1 for application/json ContentType.
+type HorizonsEditWebsiteV1JSONRequestBody = HorizonsV1WebsitesEditWebsiteRequest
+
 // HostingCreateAccountCronJobV1JSONRequestBody defines body for HostingCreateAccountCronJobV1 for application/json ContentType.
 type HostingCreateAccountCronJobV1JSONRequestBody = HostingV1CronJobsCreateCronJobRequest
 
@@ -19866,6 +20010,18 @@ type ClientInterface interface {
 	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/shipping (the `EcommerceSetStoreShippingV1` operationId).
 	EcommerceSetStoreShippingV1(ctx context.Context, storeId string, body EcommerceSetStoreShippingV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// HorizonsGetWebsiteListV1 Get website list
+	//
+	// List the Hostinger Horizons websites the user owns.\n
+	// Use this tool when the user asks which websites they have, or when you need a website ID
+	// before editing, publishing or cloning a website.\n
+	// Each website is returned with its ID, status, domain and the URL to open it
+	// in Hostinger Horizons interface.\n
+	// The complete list of websites is returned in a single response - it is not paginated.
+	//
+	// Corresponds with GET /api/horizons/v1/websites (the `HorizonsGetWebsiteListV1` operationId).
+	HorizonsGetWebsiteListV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// HorizonsCreateWebsiteV1WithBody Create website
 	//
 	// Create new Hostinger Horizons website from the given message.\n
@@ -19876,8 +20032,8 @@ type ClientInterface interface {
 	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 	// that Hostinger Horizons is now creating their website and it will be ready in a few minutes
 	// and you should provide the website URL to the user immediately
-	// Do not write code.\n\nTo edit afterwards, users must go to Hostinger Horizons interface
-	// in the provided website URL.
+	// Do not write code.\n\nTo edit afterwards, use the `Edit website` tool with the returned
+	// website ID, or the user can go to Hostinger Horizons interface in the provided website URL.
 	// If the tool call fails with an error, you should provide a clear explanation of the error
 	// and do not generate code yourself in the chat.
 	// \n
@@ -19919,8 +20075,8 @@ type ClientInterface interface {
 	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 	// that Hostinger Horizons is now creating their website and it will be ready in a few minutes
 	// and you should provide the website URL to the user immediately
-	// Do not write code.\n\nTo edit afterwards, users must go to Hostinger Horizons interface
-	// in the provided website URL.
+	// Do not write code.\n\nTo edit afterwards, use the `Edit website` tool with the returned
+	// website ID, or the user can go to Hostinger Horizons interface in the provided website URL.
 	// If the tool call fails with an error, you should provide a clear explanation of the error
 	// and do not generate code yourself in the chat.
 	// \n
@@ -19954,12 +20110,75 @@ type ClientInterface interface {
 
 	// HorizonsGetWebsiteV1 Get website
 	//
-	// Get a link for the user to edit their website in Hostinger Horizons interface.\n
-	// Use this tool when user wants to modify, edit or add new features to an existing website.\n
-	// Websites can only be edited in Hostinger Horizons interface in the provided website URL.
+	// Get the link for the user to open their website in Hostinger Horizons interface.\n
+	// Use this tool when the user wants the link to an existing website, or when you need its
+	// website URL before or after editing it.\n
+	// Websites can be edited with the `Edit website` tool, or by the user in Hostinger Horizons
+	// interface in the provided website URL.
 	//
 	// Corresponds with GET /api/horizons/v1/websites/{websiteId} (the `HorizonsGetWebsiteV1` operationId).
 	HorizonsGetWebsiteV1(ctx context.Context, websiteId WebsiteIdPath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HorizonsCloneWebsiteV1 Clone website
+	//
+	// Clone a Hostinger Horizons website into a new website.\n
+	// Use this tool when the user wants a copy of an existing website, for example to try out
+	// changes without touching the original.\n
+	// This tool returns the ID and URL of the newly created copy.
+	// The original website is left untouched.\n
+	// To edit the copy, use the `Edit website` tool with the returned website ID, or the user can
+	// open the provided website URL in Hostinger Horizons interface.
+	//
+	// Corresponds with POST /api/horizons/v1/websites/{websiteId}/clone (the `HorizonsCloneWebsiteV1` operationId).
+	HorizonsCloneWebsiteV1(ctx context.Context, websiteId WebsiteIdPath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HorizonsEditWebsiteV1WithBody Edit website
+	//
+	// Edit an existing Hostinger Horizons website with a follow-up message.\n
+	// Use this tool when the user wants to change, extend or fix a website that already exists.\n
+	// This tool queues the requested changes and returns the website URL and ID.
+	// The changes are applied asynchronously.\n
+	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
+	// that Hostinger Horizons is now applying the requested changes and they will be ready
+	// in a few minutes, and you should provide the website URL to the user immediately.
+	// Do not write code.\n
+	// If the tool call fails with an error, you should provide a clear explanation of the error
+	// and do not generate code yourself in the chat.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/horizons/v1/websites/{websiteId}/messages (the `HorizonsEditWebsiteV1` operationId).
+	HorizonsEditWebsiteV1WithBody(ctx context.Context, websiteId WebsiteIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HorizonsEditWebsiteV1 Edit website
+	//
+	// Edit an existing Hostinger Horizons website with a follow-up message.\n
+	// Use this tool when the user wants to change, extend or fix a website that already exists.\n
+	// This tool queues the requested changes and returns the website URL and ID.
+	// The changes are applied asynchronously.\n
+	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
+	// that Hostinger Horizons is now applying the requested changes and they will be ready
+	// in a few minutes, and you should provide the website URL to the user immediately.
+	// Do not write code.\n
+	// If the tool call fails with an error, you should provide a clear explanation of the error
+	// and do not generate code yourself in the chat.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/horizons/v1/websites/{websiteId}/messages (the `HorizonsEditWebsiteV1` operationId).
+	HorizonsEditWebsiteV1(ctx context.Context, websiteId WebsiteIdPath, body HorizonsEditWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HorizonsPublishWebsiteV1 Publish website
+	//
+	// Publish a Hostinger Horizons website so its latest changes go live.\n
+	// Use this tool when the user asks to publish, deploy or make their website live.\n
+	// This tool starts the publish process and returns the URL the website will be live on.
+	// Publishing happens asynchronously and takes a few minutes.\n
+	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
+	// that the website is being published and you should provide the published URL to the user immediately.
+	//
+	// Corresponds with POST /api/horizons/v1/websites/{websiteId}/publish (the `HorizonsPublishWebsiteV1` operationId).
+	HorizonsPublishWebsiteV1(ctx context.Context, websiteId WebsiteIdPath, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingListAccountCronJobsV1 List account cron jobs
 	//
@@ -27852,6 +28071,28 @@ func (c *Client) EcommerceSetStoreShippingV1(ctx context.Context, storeId string
 	return c.Client.Do(req)
 }
 
+// HorizonsGetWebsiteListV1 Get website list
+//
+// List the Hostinger Horizons websites the user owns.\n
+// Use this tool when the user asks which websites they have, or when you need a website ID
+// before editing, publishing or cloning a website.\n
+// Each website is returned with its ID, status, domain and the URL to open it
+// in Hostinger Horizons interface.\n
+// The complete list of websites is returned in a single response - it is not paginated.
+//
+// Corresponds with GET /api/horizons/v1/websites (the `HorizonsGetWebsiteListV1` operationId).
+func (c *Client) HorizonsGetWebsiteListV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHorizonsGetWebsiteListV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // HorizonsCreateWebsiteV1WithBody Create website
 //
 // Create new Hostinger Horizons website from the given message.\n
@@ -27862,8 +28103,8 @@ func (c *Client) EcommerceSetStoreShippingV1(ctx context.Context, storeId string
 // After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 // that Hostinger Horizons is now creating their website and it will be ready in a few minutes
 // and you should provide the website URL to the user immediately
-// Do not write code.\n\nTo edit afterwards, users must go to Hostinger Horizons interface
-// in the provided website URL.
+// Do not write code.\n\nTo edit afterwards, use the `Edit website` tool with the returned
+// website ID, or the user can go to Hostinger Horizons interface in the provided website URL.
 // If the tool call fails with an error, you should provide a clear explanation of the error
 // and do not generate code yourself in the chat.
 // \n
@@ -27915,8 +28156,8 @@ func (c *Client) HorizonsCreateWebsiteV1WithBody(ctx context.Context, contentTyp
 // After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 // that Hostinger Horizons is now creating their website and it will be ready in a few minutes
 // and you should provide the website URL to the user immediately
-// Do not write code.\n\nTo edit afterwards, users must go to Hostinger Horizons interface
-// in the provided website URL.
+// Do not write code.\n\nTo edit afterwards, use the `Edit website` tool with the returned
+// website ID, or the user can go to Hostinger Horizons interface in the provided website URL.
 // If the tool call fails with an error, you should provide a clear explanation of the error
 // and do not generate code yourself in the chat.
 // \n
@@ -27960,13 +28201,116 @@ func (c *Client) HorizonsCreateWebsiteV1(ctx context.Context, body HorizonsCreat
 
 // HorizonsGetWebsiteV1 Get website
 //
-// Get a link for the user to edit their website in Hostinger Horizons interface.\n
-// Use this tool when user wants to modify, edit or add new features to an existing website.\n
-// Websites can only be edited in Hostinger Horizons interface in the provided website URL.
+// Get the link for the user to open their website in Hostinger Horizons interface.\n
+// Use this tool when the user wants the link to an existing website, or when you need its
+// website URL before or after editing it.\n
+// Websites can be edited with the `Edit website` tool, or by the user in Hostinger Horizons
+// interface in the provided website URL.
 //
 // Corresponds with GET /api/horizons/v1/websites/{websiteId} (the `HorizonsGetWebsiteV1` operationId).
 func (c *Client) HorizonsGetWebsiteV1(ctx context.Context, websiteId WebsiteIdPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHorizonsGetWebsiteV1Request(c.Server, websiteId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HorizonsCloneWebsiteV1 Clone website
+//
+// Clone a Hostinger Horizons website into a new website.\n
+// Use this tool when the user wants a copy of an existing website, for example to try out
+// changes without touching the original.\n
+// This tool returns the ID and URL of the newly created copy.
+// The original website is left untouched.\n
+// To edit the copy, use the `Edit website` tool with the returned website ID, or the user can
+// open the provided website URL in Hostinger Horizons interface.
+//
+// Corresponds with POST /api/horizons/v1/websites/{websiteId}/clone (the `HorizonsCloneWebsiteV1` operationId).
+func (c *Client) HorizonsCloneWebsiteV1(ctx context.Context, websiteId WebsiteIdPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHorizonsCloneWebsiteV1Request(c.Server, websiteId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HorizonsEditWebsiteV1WithBody Edit website
+//
+// Edit an existing Hostinger Horizons website with a follow-up message.\n
+// Use this tool when the user wants to change, extend or fix a website that already exists.\n
+// This tool queues the requested changes and returns the website URL and ID.
+// The changes are applied asynchronously.\n
+// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
+// that Hostinger Horizons is now applying the requested changes and they will be ready
+// in a few minutes, and you should provide the website URL to the user immediately.
+// Do not write code.\n
+// If the tool call fails with an error, you should provide a clear explanation of the error
+// and do not generate code yourself in the chat.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/horizons/v1/websites/{websiteId}/messages (the `HorizonsEditWebsiteV1` operationId).
+func (c *Client) HorizonsEditWebsiteV1WithBody(ctx context.Context, websiteId WebsiteIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHorizonsEditWebsiteV1RequestWithBody(c.Server, websiteId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HorizonsEditWebsiteV1 Edit website
+//
+// Edit an existing Hostinger Horizons website with a follow-up message.\n
+// Use this tool when the user wants to change, extend or fix a website that already exists.\n
+// This tool queues the requested changes and returns the website URL and ID.
+// The changes are applied asynchronously.\n
+// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
+// that Hostinger Horizons is now applying the requested changes and they will be ready
+// in a few minutes, and you should provide the website URL to the user immediately.
+// Do not write code.\n
+// If the tool call fails with an error, you should provide a clear explanation of the error
+// and do not generate code yourself in the chat.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/horizons/v1/websites/{websiteId}/messages (the `HorizonsEditWebsiteV1` operationId).
+func (c *Client) HorizonsEditWebsiteV1(ctx context.Context, websiteId WebsiteIdPath, body HorizonsEditWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHorizonsEditWebsiteV1Request(c.Server, websiteId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HorizonsPublishWebsiteV1 Publish website
+//
+// Publish a Hostinger Horizons website so its latest changes go live.\n
+// Use this tool when the user asks to publish, deploy or make their website live.\n
+// This tool starts the publish process and returns the URL the website will be live on.
+// Publishing happens asynchronously and takes a few minutes.\n
+// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
+// that the website is being published and you should provide the published URL to the user immediately.
+//
+// Corresponds with POST /api/horizons/v1/websites/{websiteId}/publish (the `HorizonsPublishWebsiteV1` operationId).
+func (c *Client) HorizonsPublishWebsiteV1(ctx context.Context, websiteId WebsiteIdPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHorizonsPublishWebsiteV1Request(c.Server, websiteId)
 	if err != nil {
 		return nil, err
 	}
@@ -41010,6 +41354,33 @@ func NewEcommerceSetStoreShippingV1RequestWithBody(server string, storeId string
 	return req, nil
 }
 
+// NewHorizonsGetWebsiteListV1Request constructs an http.Request for the HorizonsGetWebsiteListV1 method
+func NewHorizonsGetWebsiteListV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/horizons/v1/websites")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewHorizonsCreateWebsiteV1Request calls the generic HorizonsCreateWebsiteV1 builder with application/json body
 func NewHorizonsCreateWebsiteV1Request(server string, body HorizonsCreateWebsiteV1JSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
@@ -41077,6 +41448,121 @@ func NewHorizonsGetWebsiteV1Request(server string, websiteId WebsiteIdPath) (*ht
 	}
 
 	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHorizonsCloneWebsiteV1Request constructs an http.Request for the HorizonsCloneWebsiteV1 method
+func NewHorizonsCloneWebsiteV1Request(server string, websiteId WebsiteIdPath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "websiteId", websiteId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/horizons/v1/websites/%s/clone", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHorizonsEditWebsiteV1Request calls the generic HorizonsEditWebsiteV1 builder with application/json body
+func NewHorizonsEditWebsiteV1Request(server string, websiteId WebsiteIdPath, body HorizonsEditWebsiteV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHorizonsEditWebsiteV1RequestWithBody(server, websiteId, "application/json", bodyReader)
+}
+
+// NewHorizonsEditWebsiteV1RequestWithBody constructs an http.Request for the HorizonsEditWebsiteV1 method, with any body, and a specified content type
+func NewHorizonsEditWebsiteV1RequestWithBody(server string, websiteId WebsiteIdPath, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "websiteId", websiteId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/horizons/v1/websites/%s/messages", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHorizonsPublishWebsiteV1Request constructs an http.Request for the HorizonsPublishWebsiteV1 method
+func NewHorizonsPublishWebsiteV1Request(server string, websiteId WebsiteIdPath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "websiteId", websiteId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/horizons/v1/websites/%s/publish", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -56069,6 +56555,20 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/shipping (the `EcommerceSetStoreShippingV1` operationId).
 	EcommerceSetStoreShippingV1WithResponse(ctx context.Context, storeId string, body EcommerceSetStoreShippingV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceSetStoreShippingV1Response, error)
 
+	// HorizonsGetWebsiteListV1WithResponse Get website list
+	//
+	// List the Hostinger Horizons websites the user owns.\n
+	// Use this tool when the user asks which websites they have, or when you need a website ID
+	// before editing, publishing or cloning a website.\n
+	// Each website is returned with its ID, status, domain and the URL to open it
+	// in Hostinger Horizons interface.\n
+	// The complete list of websites is returned in a single response - it is not paginated.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/horizons/v1/websites (the `HorizonsGetWebsiteListV1` operationId).
+	HorizonsGetWebsiteListV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*HorizonsGetWebsiteListV1Response, error)
+
 	// HorizonsCreateWebsiteV1WithBodyWithResponse Create website
 	//
 	// Create new Hostinger Horizons website from the given message.\n
@@ -56079,8 +56579,8 @@ type ClientWithResponsesInterface interface {
 	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 	// that Hostinger Horizons is now creating their website and it will be ready in a few minutes
 	// and you should provide the website URL to the user immediately
-	// Do not write code.\n\nTo edit afterwards, users must go to Hostinger Horizons interface
-	// in the provided website URL.
+	// Do not write code.\n\nTo edit afterwards, use the `Edit website` tool with the returned
+	// website ID, or the user can go to Hostinger Horizons interface in the provided website URL.
 	// If the tool call fails with an error, you should provide a clear explanation of the error
 	// and do not generate code yourself in the chat.
 	// \n
@@ -56122,8 +56622,8 @@ type ClientWithResponsesInterface interface {
 	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 	// that Hostinger Horizons is now creating their website and it will be ready in a few minutes
 	// and you should provide the website URL to the user immediately
-	// Do not write code.\n\nTo edit afterwards, users must go to Hostinger Horizons interface
-	// in the provided website URL.
+	// Do not write code.\n\nTo edit afterwards, use the `Edit website` tool with the returned
+	// website ID, or the user can go to Hostinger Horizons interface in the provided website URL.
 	// If the tool call fails with an error, you should provide a clear explanation of the error
 	// and do not generate code yourself in the chat.
 	// \n
@@ -56157,14 +56657,81 @@ type ClientWithResponsesInterface interface {
 
 	// HorizonsGetWebsiteV1WithResponse Get website
 	//
-	// Get a link for the user to edit their website in Hostinger Horizons interface.\n
-	// Use this tool when user wants to modify, edit or add new features to an existing website.\n
-	// Websites can only be edited in Hostinger Horizons interface in the provided website URL.
+	// Get the link for the user to open their website in Hostinger Horizons interface.\n
+	// Use this tool when the user wants the link to an existing website, or when you need its
+	// website URL before or after editing it.\n
+	// Websites can be edited with the `Edit website` tool, or by the user in Hostinger Horizons
+	// interface in the provided website URL.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
 	// Corresponds with GET /api/horizons/v1/websites/{websiteId} (the `HorizonsGetWebsiteV1` operationId).
 	HorizonsGetWebsiteV1WithResponse(ctx context.Context, websiteId WebsiteIdPath, reqEditors ...RequestEditorFn) (*HorizonsGetWebsiteV1Response, error)
+
+	// HorizonsCloneWebsiteV1WithResponse Clone website
+	//
+	// Clone a Hostinger Horizons website into a new website.\n
+	// Use this tool when the user wants a copy of an existing website, for example to try out
+	// changes without touching the original.\n
+	// This tool returns the ID and URL of the newly created copy.
+	// The original website is left untouched.\n
+	// To edit the copy, use the `Edit website` tool with the returned website ID, or the user can
+	// open the provided website URL in Hostinger Horizons interface.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/horizons/v1/websites/{websiteId}/clone (the `HorizonsCloneWebsiteV1` operationId).
+	HorizonsCloneWebsiteV1WithResponse(ctx context.Context, websiteId WebsiteIdPath, reqEditors ...RequestEditorFn) (*HorizonsCloneWebsiteV1Response, error)
+
+	// HorizonsEditWebsiteV1WithBodyWithResponse Edit website
+	//
+	// Edit an existing Hostinger Horizons website with a follow-up message.\n
+	// Use this tool when the user wants to change, extend or fix a website that already exists.\n
+	// This tool queues the requested changes and returns the website URL and ID.
+	// The changes are applied asynchronously.\n
+	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
+	// that Hostinger Horizons is now applying the requested changes and they will be ready
+	// in a few minutes, and you should provide the website URL to the user immediately.
+	// Do not write code.\n
+	// If the tool call fails with an error, you should provide a clear explanation of the error
+	// and do not generate code yourself in the chat.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/horizons/v1/websites/{websiteId}/messages (the `HorizonsEditWebsiteV1` operationId).
+	HorizonsEditWebsiteV1WithBodyWithResponse(ctx context.Context, websiteId WebsiteIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HorizonsEditWebsiteV1Response, error)
+
+	// HorizonsEditWebsiteV1WithResponse Edit website
+	//
+	// Edit an existing Hostinger Horizons website with a follow-up message.\n
+	// Use this tool when the user wants to change, extend or fix a website that already exists.\n
+	// This tool queues the requested changes and returns the website URL and ID.
+	// The changes are applied asynchronously.\n
+	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
+	// that Hostinger Horizons is now applying the requested changes and they will be ready
+	// in a few minutes, and you should provide the website URL to the user immediately.
+	// Do not write code.\n
+	// If the tool call fails with an error, you should provide a clear explanation of the error
+	// and do not generate code yourself in the chat.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/horizons/v1/websites/{websiteId}/messages (the `HorizonsEditWebsiteV1` operationId).
+	HorizonsEditWebsiteV1WithResponse(ctx context.Context, websiteId WebsiteIdPath, body HorizonsEditWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HorizonsEditWebsiteV1Response, error)
+
+	// HorizonsPublishWebsiteV1WithResponse Publish website
+	//
+	// Publish a Hostinger Horizons website so its latest changes go live.\n
+	// Use this tool when the user asks to publish, deploy or make their website live.\n
+	// This tool starts the publish process and returns the URL the website will be live on.
+	// Publishing happens asynchronously and takes a few minutes.\n
+	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
+	// that the website is being published and you should provide the published URL to the user immediately.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/horizons/v1/websites/{websiteId}/publish (the `HorizonsPublishWebsiteV1` operationId).
+	HorizonsPublishWebsiteV1WithResponse(ctx context.Context, websiteId WebsiteIdPath, reqEditors ...RequestEditorFn) (*HorizonsPublishWebsiteV1Response, error)
 
 	// HostingListAccountCronJobsV1WithResponse List account cron jobs
 	//
@@ -67820,6 +68387,61 @@ func (r EcommerceSetStoreShippingV1Response) ContentType() string {
 	return ""
 }
 
+type HorizonsGetWebsiteListV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HorizonsV1WebsitesWebsiteCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HorizonsGetWebsiteListV1Response) GetJSON200() *HorizonsV1WebsitesWebsiteCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HorizonsGetWebsiteListV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HorizonsGetWebsiteListV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HorizonsGetWebsiteListV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HorizonsGetWebsiteListV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HorizonsGetWebsiteListV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HorizonsGetWebsiteListV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type HorizonsCreateWebsiteV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -67931,6 +68553,178 @@ func (r HorizonsGetWebsiteV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HorizonsGetWebsiteV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HorizonsCloneWebsiteV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HorizonsV1WebsitesCreatedWebsiteResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HorizonsCloneWebsiteV1Response) GetJSON200() *HorizonsV1WebsitesCreatedWebsiteResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HorizonsCloneWebsiteV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HorizonsCloneWebsiteV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HorizonsCloneWebsiteV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HorizonsCloneWebsiteV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HorizonsCloneWebsiteV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HorizonsCloneWebsiteV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HorizonsEditWebsiteV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HorizonsV1WebsitesCreatedWebsiteResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HorizonsEditWebsiteV1Response) GetJSON200() *HorizonsV1WebsitesCreatedWebsiteResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HorizonsEditWebsiteV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HorizonsEditWebsiteV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HorizonsEditWebsiteV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HorizonsEditWebsiteV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HorizonsEditWebsiteV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HorizonsEditWebsiteV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HorizonsEditWebsiteV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HorizonsPublishWebsiteV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HorizonsV1WebsitesPublishedWebsiteResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HorizonsPublishWebsiteV1Response) GetJSON200() *HorizonsV1WebsitesPublishedWebsiteResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HorizonsPublishWebsiteV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HorizonsPublishWebsiteV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HorizonsPublishWebsiteV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HorizonsPublishWebsiteV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HorizonsPublishWebsiteV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HorizonsPublishWebsiteV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -86394,6 +87188,26 @@ func (c *ClientWithResponses) EcommerceSetStoreShippingV1WithResponse(ctx contex
 	return ParseEcommerceSetStoreShippingV1Response(rsp)
 }
 
+// HorizonsGetWebsiteListV1WithResponse Get website list
+//
+// List the Hostinger Horizons websites the user owns.\n
+// Use this tool when the user asks which websites they have, or when you need a website ID
+// before editing, publishing or cloning a website.\n
+// Each website is returned with its ID, status, domain and the URL to open it
+// in Hostinger Horizons interface.\n
+// The complete list of websites is returned in a single response - it is not paginated.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/horizons/v1/websites (the `HorizonsGetWebsiteListV1` operationId).
+func (c *ClientWithResponses) HorizonsGetWebsiteListV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*HorizonsGetWebsiteListV1Response, error) {
+	rsp, err := c.HorizonsGetWebsiteListV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHorizonsGetWebsiteListV1Response(rsp)
+}
+
 // HorizonsCreateWebsiteV1WithBodyWithResponse Create website
 //
 // Create new Hostinger Horizons website from the given message.\n
@@ -86404,8 +87218,8 @@ func (c *ClientWithResponses) EcommerceSetStoreShippingV1WithResponse(ctx contex
 // After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 // that Hostinger Horizons is now creating their website and it will be ready in a few minutes
 // and you should provide the website URL to the user immediately
-// Do not write code.\n\nTo edit afterwards, users must go to Hostinger Horizons interface
-// in the provided website URL.
+// Do not write code.\n\nTo edit afterwards, use the `Edit website` tool with the returned
+// website ID, or the user can go to Hostinger Horizons interface in the provided website URL.
 // If the tool call fails with an error, you should provide a clear explanation of the error
 // and do not generate code yourself in the chat.
 // \n
@@ -86453,8 +87267,8 @@ func (c *ClientWithResponses) HorizonsCreateWebsiteV1WithBodyWithResponse(ctx co
 // After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 // that Hostinger Horizons is now creating their website and it will be ready in a few minutes
 // and you should provide the website URL to the user immediately
-// Do not write code.\n\nTo edit afterwards, users must go to Hostinger Horizons interface
-// in the provided website URL.
+// Do not write code.\n\nTo edit afterwards, use the `Edit website` tool with the returned
+// website ID, or the user can go to Hostinger Horizons interface in the provided website URL.
 // If the tool call fails with an error, you should provide a clear explanation of the error
 // and do not generate code yourself in the chat.
 // \n
@@ -86494,9 +87308,11 @@ func (c *ClientWithResponses) HorizonsCreateWebsiteV1WithResponse(ctx context.Co
 
 // HorizonsGetWebsiteV1WithResponse Get website
 //
-// Get a link for the user to edit their website in Hostinger Horizons interface.\n
-// Use this tool when user wants to modify, edit or add new features to an existing website.\n
-// Websites can only be edited in Hostinger Horizons interface in the provided website URL.
+// Get the link for the user to open their website in Hostinger Horizons interface.\n
+// Use this tool when the user wants the link to an existing website, or when you need its
+// website URL before or after editing it.\n
+// Websites can be edited with the `Edit website` tool, or by the user in Hostinger Horizons
+// interface in the provided website URL.
 //
 // Returns a wrapper object for the known response body format(s).
 //
@@ -86507,6 +87323,95 @@ func (c *ClientWithResponses) HorizonsGetWebsiteV1WithResponse(ctx context.Conte
 		return nil, err
 	}
 	return ParseHorizonsGetWebsiteV1Response(rsp)
+}
+
+// HorizonsCloneWebsiteV1WithResponse Clone website
+//
+// Clone a Hostinger Horizons website into a new website.\n
+// Use this tool when the user wants a copy of an existing website, for example to try out
+// changes without touching the original.\n
+// This tool returns the ID and URL of the newly created copy.
+// The original website is left untouched.\n
+// To edit the copy, use the `Edit website` tool with the returned website ID, or the user can
+// open the provided website URL in Hostinger Horizons interface.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/horizons/v1/websites/{websiteId}/clone (the `HorizonsCloneWebsiteV1` operationId).
+func (c *ClientWithResponses) HorizonsCloneWebsiteV1WithResponse(ctx context.Context, websiteId WebsiteIdPath, reqEditors ...RequestEditorFn) (*HorizonsCloneWebsiteV1Response, error) {
+	rsp, err := c.HorizonsCloneWebsiteV1(ctx, websiteId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHorizonsCloneWebsiteV1Response(rsp)
+}
+
+// HorizonsEditWebsiteV1WithBodyWithResponse Edit website
+//
+// Edit an existing Hostinger Horizons website with a follow-up message.\n
+// Use this tool when the user wants to change, extend or fix a website that already exists.\n
+// This tool queues the requested changes and returns the website URL and ID.
+// The changes are applied asynchronously.\n
+// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
+// that Hostinger Horizons is now applying the requested changes and they will be ready
+// in a few minutes, and you should provide the website URL to the user immediately.
+// Do not write code.\n
+// If the tool call fails with an error, you should provide a clear explanation of the error
+// and do not generate code yourself in the chat.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/horizons/v1/websites/{websiteId}/messages (the `HorizonsEditWebsiteV1` operationId).
+func (c *ClientWithResponses) HorizonsEditWebsiteV1WithBodyWithResponse(ctx context.Context, websiteId WebsiteIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HorizonsEditWebsiteV1Response, error) {
+	rsp, err := c.HorizonsEditWebsiteV1WithBody(ctx, websiteId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHorizonsEditWebsiteV1Response(rsp)
+}
+
+// HorizonsEditWebsiteV1WithResponse Edit website
+//
+// Edit an existing Hostinger Horizons website with a follow-up message.\n
+// Use this tool when the user wants to change, extend or fix a website that already exists.\n
+// This tool queues the requested changes and returns the website URL and ID.
+// The changes are applied asynchronously.\n
+// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
+// that Hostinger Horizons is now applying the requested changes and they will be ready
+// in a few minutes, and you should provide the website URL to the user immediately.
+// Do not write code.\n
+// If the tool call fails with an error, you should provide a clear explanation of the error
+// and do not generate code yourself in the chat.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/horizons/v1/websites/{websiteId}/messages (the `HorizonsEditWebsiteV1` operationId).
+func (c *ClientWithResponses) HorizonsEditWebsiteV1WithResponse(ctx context.Context, websiteId WebsiteIdPath, body HorizonsEditWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HorizonsEditWebsiteV1Response, error) {
+	rsp, err := c.HorizonsEditWebsiteV1(ctx, websiteId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHorizonsEditWebsiteV1Response(rsp)
+}
+
+// HorizonsPublishWebsiteV1WithResponse Publish website
+//
+// Publish a Hostinger Horizons website so its latest changes go live.\n
+// Use this tool when the user asks to publish, deploy or make their website live.\n
+// This tool starts the publish process and returns the URL the website will be live on.
+// Publishing happens asynchronously and takes a few minutes.\n
+// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
+// that the website is being published and you should provide the published URL to the user immediately.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/horizons/v1/websites/{websiteId}/publish (the `HorizonsPublishWebsiteV1` operationId).
+func (c *ClientWithResponses) HorizonsPublishWebsiteV1WithResponse(ctx context.Context, websiteId WebsiteIdPath, reqEditors ...RequestEditorFn) (*HorizonsPublishWebsiteV1Response, error) {
+	rsp, err := c.HorizonsPublishWebsiteV1(ctx, websiteId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHorizonsPublishWebsiteV1Response(rsp)
 }
 
 // HostingListAccountCronJobsV1WithResponse List account cron jobs
@@ -98319,6 +99224,46 @@ func ParseEcommerceSetStoreShippingV1Response(rsp *http.Response) (*EcommerceSet
 	return response, nil
 }
 
+// ParseHorizonsGetWebsiteListV1Response parses an HTTP response from a HorizonsGetWebsiteListV1WithResponse call
+func ParseHorizonsGetWebsiteListV1Response(rsp *http.Response) (*HorizonsGetWebsiteListV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HorizonsGetWebsiteListV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HorizonsV1WebsitesWebsiteCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseHorizonsCreateWebsiteV1Response parses an HTTP response from a HorizonsCreateWebsiteV1WithResponse call
 func ParseHorizonsCreateWebsiteV1Response(rsp *http.Response) (*HorizonsCreateWebsiteV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -98382,6 +99327,133 @@ func ParseHorizonsGetWebsiteV1Response(rsp *http.Response) (*HorizonsGetWebsiteV
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest HorizonsV1WebsitesWebsiteUrlResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHorizonsCloneWebsiteV1Response parses an HTTP response from a HorizonsCloneWebsiteV1WithResponse call
+func ParseHorizonsCloneWebsiteV1Response(rsp *http.Response) (*HorizonsCloneWebsiteV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HorizonsCloneWebsiteV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HorizonsV1WebsitesCreatedWebsiteResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHorizonsEditWebsiteV1Response parses an HTTP response from a HorizonsEditWebsiteV1WithResponse call
+func ParseHorizonsEditWebsiteV1Response(rsp *http.Response) (*HorizonsEditWebsiteV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HorizonsEditWebsiteV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HorizonsV1WebsitesCreatedWebsiteResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHorizonsPublishWebsiteV1Response parses an HTTP response from a HorizonsPublishWebsiteV1WithResponse call
+func ParseHorizonsPublishWebsiteV1Response(rsp *http.Response) (*HorizonsPublishWebsiteV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HorizonsPublishWebsiteV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HorizonsV1WebsitesPublishedWebsiteResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

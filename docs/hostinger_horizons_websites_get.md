@@ -4,9 +4,11 @@ Get website
 
 ### Synopsis
 
-Get a link for the user to edit their website in Hostinger Horizons interface.\n
-Use this tool when user wants to modify, edit or add new features to an existing website.\n
-Websites can only be edited in Hostinger Horizons interface in the provided website URL.
+Get the link for the user to open their website in Hostinger Horizons interface.\n
+Use this tool when the user wants the link to an existing website, or when you need its
+website URL before or after editing it.\n
+Websites can be edited with the `Edit website` tool, or by the user in Hostinger Horizons
+interface in the provided website URL.
 
 ```
 hostinger horizons websites get <website-id> [flags]

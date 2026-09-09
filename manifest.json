@@ -924,15 +924,35 @@
     "method": "POST",
     "path": "/api/ecommerce/v1/stores/{store_id}/products/{product_id}/images"
   },
+  "horizons_cloneWebsiteV1": {
+    "command": "hostinger horizons websites clone",
+    "method": "POST",
+    "path": "/api/horizons/v1/websites/{websiteId}/clone"
+  },
   "horizons_createWebsiteV1": {
     "command": "hostinger horizons websites create",
     "method": "POST",
+    "path": "/api/horizons/v1/websites"
+  },
+  "horizons_editWebsiteV1": {
+    "command": "hostinger horizons websites edit",
+    "method": "POST",
+    "path": "/api/horizons/v1/websites/{websiteId}/messages"
+  },
+  "horizons_getWebsiteListV1": {
+    "command": "hostinger horizons websites list",
+    "method": "GET",
     "path": "/api/horizons/v1/websites"
   },
   "horizons_getWebsiteV1": {
     "command": "hostinger horizons websites get",
     "method": "GET",
     "path": "/api/horizons/v1/websites/{websiteId}"
+  },
+  "horizons_publishWebsiteV1": {
+    "command": "hostinger horizons websites publish",
+    "method": "POST",
+    "path": "/api/horizons/v1/websites/{websiteId}/publish"
   },
   "hosting_activateWordPressPluginV1": {
     "command": "hostinger wordpress plugins activate",
