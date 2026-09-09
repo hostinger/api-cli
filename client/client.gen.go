@@ -8797,9 +8797,12 @@ type EcommerceV1ProductUpdateRequestStatus string
 
 // EcommerceV1ProductUploadProductImageRequest defines model for Ecommerce.V1.Product.UploadProductImageRequest.
 type EcommerceV1ProductUploadProductImageRequest struct {
-	// ImageUrl Publicly reachable URL of the raster image (JPEG, PNG, GIF or WebP), maximum 15MB. The image is
-	// fetched, virus-scanned and validated by content, then stored on the CDN. SVG is not accepted.
-	// Provide either this or object_name.
+	// ImageUrl Publicly reachable URL of a raster image (JPEG, PNG, GIF or WebP), maximum 15MB. Fetching
+	// the image requires HTTPS on port 443 without embedded credentials. At most one redirect
+	// is allowed; its destination must meet the same URL requirements. Private or reserved
+	// network destinations, unsupported URLs and longer redirect chains are rejected. The image
+	// is fetched, virus-scanned and validated by content, then stored on the CDN. SVG is not
+	// accepted. Provide either this or object_name.
 	//
 	// Example: https://images.example.com/product.png
 	ImageUrl *string `json:"image_url,omitempty"`
@@ -19855,8 +19858,10 @@ type ClientInterface interface {
 	// EcommerceUploadAndAttachAProductImageV1WithBody Upload and attach a product image
 	//
 	// Fetch a raster image (JPEG, PNG, GIF or WebP, max 15MB) from a URL and attach it to a product in a
-	// single call. The image is virus-scanned and validated by content, then stored on the CDN. Set
-	// is_thumbnail to make it the product's primary image.
+	// single call. Image downloads require HTTPS on port 443 without embedded credentials. At most one redirect
+	// is allowed, and its destination must meet the same requirements. Private or reserved network
+	// destinations, unsupported URLs and longer redirect chains are rejected. The image is virus-scanned
+	// and validated by content, then stored on the CDN. Set is_thumbnail to make it the product's primary image.
 	//
 	// Takes any type of body and a specified content type.
 	//
@@ -19866,8 +19871,10 @@ type ClientInterface interface {
 	// EcommerceUploadAndAttachAProductImageV1 Upload and attach a product image
 	//
 	// Fetch a raster image (JPEG, PNG, GIF or WebP, max 15MB) from a URL and attach it to a product in a
-	// single call. The image is virus-scanned and validated by content, then stored on the CDN. Set
-	// is_thumbnail to make it the product's primary image.
+	// single call. Image downloads require HTTPS on port 443 without embedded credentials. At most one redirect
+	// is allowed, and its destination must meet the same requirements. Private or reserved network
+	// destinations, unsupported URLs and longer redirect chains are rejected. The image is virus-scanned
+	// and validated by content, then stored on the CDN. Set is_thumbnail to make it the product's primary image.
 	//
 	// Takes a body of the `application/json` content type.
 	//
@@ -27756,8 +27763,10 @@ func (c *Client) EcommerceUpdateAProductV1(ctx context.Context, storeId string, 
 // EcommerceUploadAndAttachAProductImageV1WithBody Upload and attach a product image
 //
 // Fetch a raster image (JPEG, PNG, GIF or WebP, max 15MB) from a URL and attach it to a product in a
-// single call. The image is virus-scanned and validated by content, then stored on the CDN. Set
-// is_thumbnail to make it the product's primary image.
+// single call. Image downloads require HTTPS on port 443 without embedded credentials. At most one redirect
+// is allowed, and its destination must meet the same requirements. Private or reserved network
+// destinations, unsupported URLs and longer redirect chains are rejected. The image is virus-scanned
+// and validated by content, then stored on the CDN. Set is_thumbnail to make it the product's primary image.
 //
 // Takes any type of body and a specified content type.
 //
@@ -27777,8 +27786,10 @@ func (c *Client) EcommerceUploadAndAttachAProductImageV1WithBody(ctx context.Con
 // EcommerceUploadAndAttachAProductImageV1 Upload and attach a product image
 //
 // Fetch a raster image (JPEG, PNG, GIF or WebP, max 15MB) from a URL and attach it to a product in a
-// single call. The image is virus-scanned and validated by content, then stored on the CDN. Set
-// is_thumbnail to make it the product's primary image.
+// single call. Image downloads require HTTPS on port 443 without embedded credentials. At most one redirect
+// is allowed, and its destination must meet the same requirements. Private or reserved network
+// destinations, unsupported URLs and longer redirect chains are rejected. The image is virus-scanned
+// and validated by content, then stored on the CDN. Set is_thumbnail to make it the product's primary image.
 //
 // Takes a body of the `application/json` content type.
 //
@@ -56392,8 +56403,10 @@ type ClientWithResponsesInterface interface {
 	// EcommerceUploadAndAttachAProductImageV1WithBodyWithResponse Upload and attach a product image
 	//
 	// Fetch a raster image (JPEG, PNG, GIF or WebP, max 15MB) from a URL and attach it to a product in a
-	// single call. The image is virus-scanned and validated by content, then stored on the CDN. Set
-	// is_thumbnail to make it the product's primary image.
+	// single call. Image downloads require HTTPS on port 443 without embedded credentials. At most one redirect
+	// is allowed, and its destination must meet the same requirements. Private or reserved network
+	// destinations, unsupported URLs and longer redirect chains are rejected. The image is virus-scanned
+	// and validated by content, then stored on the CDN. Set is_thumbnail to make it the product's primary image.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -56403,8 +56416,10 @@ type ClientWithResponsesInterface interface {
 	// EcommerceUploadAndAttachAProductImageV1WithResponse Upload and attach a product image
 	//
 	// Fetch a raster image (JPEG, PNG, GIF or WebP, max 15MB) from a URL and attach it to a product in a
-	// single call. The image is virus-scanned and validated by content, then stored on the CDN. Set
-	// is_thumbnail to make it the product's primary image.
+	// single call. Image downloads require HTTPS on port 443 without embedded credentials. At most one redirect
+	// is allowed, and its destination must meet the same requirements. Private or reserved network
+	// destinations, unsupported URLs and longer redirect chains are rejected. The image is virus-scanned
+	// and validated by content, then stored on the CDN. Set is_thumbnail to make it the product's primary image.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -67792,17 +67807,26 @@ type EcommerceUploadAndAttachAProductImageV1Response struct {
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
 	JSON200 *EcommerceV1ProductProductImageUploadResource
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *CommonResponseErrorResponse
 	// JSON401 the response for an HTTP 401 `application/json` response
 	JSON401 *CommonResponseUnauthorizedResponse
 	// JSON422 the response for an HTTP 422 `application/json` response
 	JSON422 *CommonResponseUnprocessableContentResponse
 	// JSON500 the response for an HTTP 500 `application/json` response
 	JSON500 *CommonResponseErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseErrorResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
 func (r EcommerceUploadAndAttachAProductImageV1Response) GetJSON200() *EcommerceV1ProductProductImageUploadResource {
 	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r EcommerceUploadAndAttachAProductImageV1Response) GetJSON400() *CommonResponseErrorResponse {
+	return r.JSON400
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
@@ -67818,6 +67842,11 @@ func (r EcommerceUploadAndAttachAProductImageV1Response) GetJSON422() *CommonRes
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
 func (r EcommerceUploadAndAttachAProductImageV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r EcommerceUploadAndAttachAProductImageV1Response) GetJSON502() *CommonResponseErrorResponse {
+	return r.JSON502
 }
 
 // GetBody returns the raw response body bytes
@@ -86929,8 +86958,10 @@ func (c *ClientWithResponses) EcommerceUpdateAProductV1WithResponse(ctx context.
 // EcommerceUploadAndAttachAProductImageV1WithBodyWithResponse Upload and attach a product image
 //
 // Fetch a raster image (JPEG, PNG, GIF or WebP, max 15MB) from a URL and attach it to a product in a
-// single call. The image is virus-scanned and validated by content, then stored on the CDN. Set
-// is_thumbnail to make it the product's primary image.
+// single call. Image downloads require HTTPS on port 443 without embedded credentials. At most one redirect
+// is allowed, and its destination must meet the same requirements. Private or reserved network
+// destinations, unsupported URLs and longer redirect chains are rejected. The image is virus-scanned
+// and validated by content, then stored on the CDN. Set is_thumbnail to make it the product's primary image.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
@@ -86946,8 +86977,10 @@ func (c *ClientWithResponses) EcommerceUploadAndAttachAProductImageV1WithBodyWit
 // EcommerceUploadAndAttachAProductImageV1WithResponse Upload and attach a product image
 //
 // Fetch a raster image (JPEG, PNG, GIF or WebP, max 15MB) from a URL and attach it to a product in a
-// single call. The image is virus-scanned and validated by content, then stored on the CDN. Set
-// is_thumbnail to make it the product's primary image.
+// single call. Image downloads require HTTPS on port 443 without embedded credentials. At most one redirect
+// is allowed, and its destination must meet the same requirements. Private or reserved network
+// destinations, unsupported URLs and longer redirect chains are rejected. The image is virus-scanned
+// and validated by content, then stored on the CDN. Set is_thumbnail to make it the product's primary image.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
@@ -98799,6 +98832,13 @@ func ParseEcommerceUploadAndAttachAProductImageV1Response(rsp *http.Response) (*
 		}
 		response.JSON200 = &dest
 
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
 		var dest CommonResponseUnauthorizedResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -98819,6 +98859,13 @@ func ParseEcommerceUploadAndAttachAProductImageV1Response(rsp *http.Response) (*
 			return nil, err
 		}
 		response.JSON500 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 502:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON502 = &dest
 
 	}
 
