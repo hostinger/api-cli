@@ -619,6 +619,11 @@
     "method": "POST",
     "path": "/api/domains/v1/portfolio/claim"
   },
+  "domains_completeDomainSetupV1": {
+    "command": "hostinger domains portfolio complete-setup",
+    "method": "POST",
+    "path": "/api/domains/v1/portfolio/{domain}/setup"
+  },
   "domains_createDomainForwardingV1": {
     "command": "hostinger domains forwarding create",
     "method": "POST",

@@ -7742,6 +7742,35 @@ type DomainsV1PortfolioRenewalRenewalInformationResource struct {
 	Status *string `json:"status,omitempty"`
 }
 
+// DomainsV1PortfolioSetupRequest defines model for Domains.V1.Portfolio.SetupRequest.
+type DomainsV1PortfolioSetupRequest struct {
+	// AdditionalDetails Additional registration data, possible values depends on TLD
+	AdditionalDetails *map[string]interface{} `json:"additional_details,omitempty"`
+
+	// DomainContacts Domain contact information
+	DomainContacts *struct {
+		// AdminId Administrative contact WHOIS record ID
+		//
+		// Example: 546123
+		AdminId *int `json:"admin_id,omitempty"`
+
+		// BillingId Billing contact WHOIS record ID
+		//
+		// Example: 741288
+		BillingId *int `json:"billing_id,omitempty"`
+
+		// OwnerId Owner contact WHOIS record ID
+		//
+		// Example: 741288
+		OwnerId *int `json:"owner_id,omitempty"`
+
+		// TechId Technical contact WHOIS record ID
+		//
+		// Example: 741288
+		TechId *int `json:"tech_id,omitempty"`
+	} `json:"domain_contacts,omitempty"`
+}
+
 // DomainsV1PortfolioUpdateNameserversRequest defines model for Domains.V1.Portfolio.UpdateNameserversRequest.
 type DomainsV1PortfolioUpdateNameserversRequest struct {
 	// Ns1 First name server
@@ -16730,6 +16759,9 @@ type DomainsClaimFreeDomainV1JSONRequestBody = DomainsV1PortfolioClaimRequest
 // DomainsUpdateDomainNameserversV1JSONRequestBody defines body for DomainsUpdateDomainNameserversV1 for application/json ContentType.
 type DomainsUpdateDomainNameserversV1JSONRequestBody = DomainsV1PortfolioUpdateNameserversRequest
 
+// DomainsCompleteDomainSetupV1JSONRequestBody defines body for DomainsCompleteDomainSetupV1 for application/json ContentType.
+type DomainsCompleteDomainSetupV1JSONRequestBody = DomainsV1PortfolioSetupRequest
+
 // DomainsClaimFreeDomainTransferV1JSONRequestBody defines body for DomainsClaimFreeDomainTransferV1 for application/json ContentType.
 type DomainsClaimFreeDomainTransferV1JSONRequestBody = DomainsV1TransferClaimRequest
 
@@ -19478,6 +19510,76 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/domains/v1/portfolio/{domain}/renewal (the `DomainsGetDomainRenewalInformationV1` operationId).
 	DomainsGetDomainRenewalInformationV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsCompleteDomainSetupV1WithBody Complete domain setup
+	//
+	// Register a domain you have already paid for but which has not been set up yet.
+	//
+	// Use this endpoint when an order completed without registering the domain, for example when
+	// `Purchase new domain` returned `202 Accepted` and the domain was added to your account without
+	// being registered, or when an earlier setup attempt failed. No new order is placed and no payment
+	// is taken: the subscription you already own is used, for the period you already paid for.
+	//
+	// A domain is left awaiting setup when the details needed to register it were missing or invalid
+	// as the order completed. Domains ordered elsewhere can be awaiting setup for the same reason.
+	// Complete the missing information, then call this endpoint. If the order itself has not completed
+	// yet, the domain is not on your account, wait until it appears in `Get domain list`.
+	//
+	// If `domain_contacts` is omitted, the default WHOIS profile of that TLD is used for all four
+	// roles. The profile must exist and be complete for the TLD, an incomplete profile is the most
+	// common reason a domain is left awaiting setup. Create one with `Create WHOIS profile`.
+	//
+	// Some TLDs require `additional_details`. These are validated before setup, so a missing or
+	// invalid value is rejected without any registration being attempted.
+	//
+	// The domain is set up with the default nameservers and without privacy protection. Use
+	// `Update domain nameservers` and `Enable privacy protection` afterwards to change either.
+	//
+	// A successful response means the setup request was accepted, not that the domain is already
+	// registered. Poll `Get domain list` for the outcome, the domain appears in `Get domain details`
+	// only once it is registered.
+	//
+	// Use this endpoint to finish registering a domain that is awaiting setup on your account.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/domains/v1/portfolio/{domain}/setup (the `DomainsCompleteDomainSetupV1` operationId).
+	DomainsCompleteDomainSetupV1WithBody(ctx context.Context, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsCompleteDomainSetupV1 Complete domain setup
+	//
+	// Register a domain you have already paid for but which has not been set up yet.
+	//
+	// Use this endpoint when an order completed without registering the domain, for example when
+	// `Purchase new domain` returned `202 Accepted` and the domain was added to your account without
+	// being registered, or when an earlier setup attempt failed. No new order is placed and no payment
+	// is taken: the subscription you already own is used, for the period you already paid for.
+	//
+	// A domain is left awaiting setup when the details needed to register it were missing or invalid
+	// as the order completed. Domains ordered elsewhere can be awaiting setup for the same reason.
+	// Complete the missing information, then call this endpoint. If the order itself has not completed
+	// yet, the domain is not on your account, wait until it appears in `Get domain list`.
+	//
+	// If `domain_contacts` is omitted, the default WHOIS profile of that TLD is used for all four
+	// roles. The profile must exist and be complete for the TLD, an incomplete profile is the most
+	// common reason a domain is left awaiting setup. Create one with `Create WHOIS profile`.
+	//
+	// Some TLDs require `additional_details`. These are validated before setup, so a missing or
+	// invalid value is rejected without any registration being attempted.
+	//
+	// The domain is set up with the default nameservers and without privacy protection. Use
+	// `Update domain nameservers` and `Enable privacy protection` afterwards to change either.
+	//
+	// A successful response means the setup request was accepted, not that the domain is already
+	// registered. Poll `Get domain list` for the outcome, the domain appears in `Get domain details`
+	// only once it is registered.
+	//
+	// Use this endpoint to finish registering a domain that is awaiting setup on your account.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/domains/v1/portfolio/{domain}/setup (the `DomainsCompleteDomainSetupV1` operationId).
+	DomainsCompleteDomainSetupV1(ctx context.Context, domain Domain, body DomainsCompleteDomainSetupV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DomainsGetTransferListV1 Get transfer list
 	//
@@ -26992,6 +27094,96 @@ func (c *Client) DomainsEnablePrivacyProtectionV1(ctx context.Context, domain Do
 // Corresponds with GET /api/domains/v1/portfolio/{domain}/renewal (the `DomainsGetDomainRenewalInformationV1` operationId).
 func (c *Client) DomainsGetDomainRenewalInformationV1(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDomainsGetDomainRenewalInformationV1Request(c.Server, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsCompleteDomainSetupV1WithBody Complete domain setup
+//
+// Register a domain you have already paid for but which has not been set up yet.
+//
+// Use this endpoint when an order completed without registering the domain, for example when
+// `Purchase new domain` returned `202 Accepted` and the domain was added to your account without
+// being registered, or when an earlier setup attempt failed. No new order is placed and no payment
+// is taken: the subscription you already own is used, for the period you already paid for.
+//
+// A domain is left awaiting setup when the details needed to register it were missing or invalid
+// as the order completed. Domains ordered elsewhere can be awaiting setup for the same reason.
+// Complete the missing information, then call this endpoint. If the order itself has not completed
+// yet, the domain is not on your account, wait until it appears in `Get domain list`.
+//
+// If `domain_contacts` is omitted, the default WHOIS profile of that TLD is used for all four
+// roles. The profile must exist and be complete for the TLD, an incomplete profile is the most
+// common reason a domain is left awaiting setup. Create one with `Create WHOIS profile`.
+//
+// Some TLDs require `additional_details`. These are validated before setup, so a missing or
+// invalid value is rejected without any registration being attempted.
+//
+// The domain is set up with the default nameservers and without privacy protection. Use
+// `Update domain nameservers` and `Enable privacy protection` afterwards to change either.
+//
+// A successful response means the setup request was accepted, not that the domain is already
+// registered. Poll `Get domain list` for the outcome, the domain appears in `Get domain details`
+// only once it is registered.
+//
+// Use this endpoint to finish registering a domain that is awaiting setup on your account.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/domains/v1/portfolio/{domain}/setup (the `DomainsCompleteDomainSetupV1` operationId).
+func (c *Client) DomainsCompleteDomainSetupV1WithBody(ctx context.Context, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsCompleteDomainSetupV1RequestWithBody(c.Server, domain, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsCompleteDomainSetupV1 Complete domain setup
+//
+// Register a domain you have already paid for but which has not been set up yet.
+//
+// Use this endpoint when an order completed without registering the domain, for example when
+// `Purchase new domain` returned `202 Accepted` and the domain was added to your account without
+// being registered, or when an earlier setup attempt failed. No new order is placed and no payment
+// is taken: the subscription you already own is used, for the period you already paid for.
+//
+// A domain is left awaiting setup when the details needed to register it were missing or invalid
+// as the order completed. Domains ordered elsewhere can be awaiting setup for the same reason.
+// Complete the missing information, then call this endpoint. If the order itself has not completed
+// yet, the domain is not on your account, wait until it appears in `Get domain list`.
+//
+// If `domain_contacts` is omitted, the default WHOIS profile of that TLD is used for all four
+// roles. The profile must exist and be complete for the TLD, an incomplete profile is the most
+// common reason a domain is left awaiting setup. Create one with `Create WHOIS profile`.
+//
+// Some TLDs require `additional_details`. These are validated before setup, so a missing or
+// invalid value is rejected without any registration being attempted.
+//
+// The domain is set up with the default nameservers and without privacy protection. Use
+// `Update domain nameservers` and `Enable privacy protection` afterwards to change either.
+//
+// A successful response means the setup request was accepted, not that the domain is already
+// registered. Poll `Get domain list` for the outcome, the domain appears in `Get domain details`
+// only once it is registered.
+//
+// Use this endpoint to finish registering a domain that is awaiting setup on your account.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/domains/v1/portfolio/{domain}/setup (the `DomainsCompleteDomainSetupV1` operationId).
+func (c *Client) DomainsCompleteDomainSetupV1(ctx context.Context, domain Domain, body DomainsCompleteDomainSetupV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsCompleteDomainSetupV1Request(c.Server, domain, body)
 	if err != nil {
 		return nil, err
 	}
@@ -39481,6 +39673,53 @@ func NewDomainsGetDomainRenewalInformationV1Request(server string, domain Domain
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewDomainsCompleteDomainSetupV1Request calls the generic DomainsCompleteDomainSetupV1 builder with application/json body
+func NewDomainsCompleteDomainSetupV1Request(server string, domain Domain, body DomainsCompleteDomainSetupV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewDomainsCompleteDomainSetupV1RequestWithBody(server, domain, "application/json", bodyReader)
+}
+
+// NewDomainsCompleteDomainSetupV1RequestWithBody constructs an http.Request for the DomainsCompleteDomainSetupV1 method, with any body, and a specified content type
+func NewDomainsCompleteDomainSetupV1RequestWithBody(server string, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/domains/v1/portfolio/%s/setup", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -56042,6 +56281,76 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /api/domains/v1/portfolio/{domain}/renewal (the `DomainsGetDomainRenewalInformationV1` operationId).
 	DomainsGetDomainRenewalInformationV1WithResponse(ctx context.Context, domain Domain, reqEditors ...RequestEditorFn) (*DomainsGetDomainRenewalInformationV1Response, error)
 
+	// DomainsCompleteDomainSetupV1WithBodyWithResponse Complete domain setup
+	//
+	// Register a domain you have already paid for but which has not been set up yet.
+	//
+	// Use this endpoint when an order completed without registering the domain, for example when
+	// `Purchase new domain` returned `202 Accepted` and the domain was added to your account without
+	// being registered, or when an earlier setup attempt failed. No new order is placed and no payment
+	// is taken: the subscription you already own is used, for the period you already paid for.
+	//
+	// A domain is left awaiting setup when the details needed to register it were missing or invalid
+	// as the order completed. Domains ordered elsewhere can be awaiting setup for the same reason.
+	// Complete the missing information, then call this endpoint. If the order itself has not completed
+	// yet, the domain is not on your account, wait until it appears in `Get domain list`.
+	//
+	// If `domain_contacts` is omitted, the default WHOIS profile of that TLD is used for all four
+	// roles. The profile must exist and be complete for the TLD, an incomplete profile is the most
+	// common reason a domain is left awaiting setup. Create one with `Create WHOIS profile`.
+	//
+	// Some TLDs require `additional_details`. These are validated before setup, so a missing or
+	// invalid value is rejected without any registration being attempted.
+	//
+	// The domain is set up with the default nameservers and without privacy protection. Use
+	// `Update domain nameservers` and `Enable privacy protection` afterwards to change either.
+	//
+	// A successful response means the setup request was accepted, not that the domain is already
+	// registered. Poll `Get domain list` for the outcome, the domain appears in `Get domain details`
+	// only once it is registered.
+	//
+	// Use this endpoint to finish registering a domain that is awaiting setup on your account.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/domains/v1/portfolio/{domain}/setup (the `DomainsCompleteDomainSetupV1` operationId).
+	DomainsCompleteDomainSetupV1WithBodyWithResponse(ctx context.Context, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DomainsCompleteDomainSetupV1Response, error)
+
+	// DomainsCompleteDomainSetupV1WithResponse Complete domain setup
+	//
+	// Register a domain you have already paid for but which has not been set up yet.
+	//
+	// Use this endpoint when an order completed without registering the domain, for example when
+	// `Purchase new domain` returned `202 Accepted` and the domain was added to your account without
+	// being registered, or when an earlier setup attempt failed. No new order is placed and no payment
+	// is taken: the subscription you already own is used, for the period you already paid for.
+	//
+	// A domain is left awaiting setup when the details needed to register it were missing or invalid
+	// as the order completed. Domains ordered elsewhere can be awaiting setup for the same reason.
+	// Complete the missing information, then call this endpoint. If the order itself has not completed
+	// yet, the domain is not on your account, wait until it appears in `Get domain list`.
+	//
+	// If `domain_contacts` is omitted, the default WHOIS profile of that TLD is used for all four
+	// roles. The profile must exist and be complete for the TLD, an incomplete profile is the most
+	// common reason a domain is left awaiting setup. Create one with `Create WHOIS profile`.
+	//
+	// Some TLDs require `additional_details`. These are validated before setup, so a missing or
+	// invalid value is rejected without any registration being attempted.
+	//
+	// The domain is set up with the default nameservers and without privacy protection. Use
+	// `Update domain nameservers` and `Enable privacy protection` afterwards to change either.
+	//
+	// A successful response means the setup request was accepted, not that the domain is already
+	// registered. Poll `Get domain list` for the outcome, the domain appears in `Get domain details`
+	// only once it is registered.
+	//
+	// Use this endpoint to finish registering a domain that is awaiting setup on your account.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/domains/v1/portfolio/{domain}/setup (the `DomainsCompleteDomainSetupV1` operationId).
+	DomainsCompleteDomainSetupV1WithResponse(ctx context.Context, domain Domain, body DomainsCompleteDomainSetupV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsCompleteDomainSetupV1Response, error)
+
 	// DomainsGetTransferListV1WithResponse Get transfer list
 	//
 	// Retrieve all domain transfers in your portfolio.
@@ -66186,6 +66495,75 @@ func (r DomainsGetDomainRenewalInformationV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r DomainsGetDomainRenewalInformationV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DomainsCompleteDomainSetupV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseErrorResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r DomainsCompleteDomainSetupV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DomainsCompleteDomainSetupV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r DomainsCompleteDomainSetupV1Response) GetJSON404() *CommonResponseErrorResponse {
+	return r.JSON404
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r DomainsCompleteDomainSetupV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DomainsCompleteDomainSetupV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DomainsCompleteDomainSetupV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DomainsCompleteDomainSetupV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DomainsCompleteDomainSetupV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DomainsCompleteDomainSetupV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -86407,6 +86785,88 @@ func (c *ClientWithResponses) DomainsGetDomainRenewalInformationV1WithResponse(c
 	return ParseDomainsGetDomainRenewalInformationV1Response(rsp)
 }
 
+// DomainsCompleteDomainSetupV1WithBodyWithResponse Complete domain setup
+//
+// Register a domain you have already paid for but which has not been set up yet.
+//
+// Use this endpoint when an order completed without registering the domain, for example when
+// `Purchase new domain` returned `202 Accepted` and the domain was added to your account without
+// being registered, or when an earlier setup attempt failed. No new order is placed and no payment
+// is taken: the subscription you already own is used, for the period you already paid for.
+//
+// A domain is left awaiting setup when the details needed to register it were missing or invalid
+// as the order completed. Domains ordered elsewhere can be awaiting setup for the same reason.
+// Complete the missing information, then call this endpoint. If the order itself has not completed
+// yet, the domain is not on your account, wait until it appears in `Get domain list`.
+//
+// If `domain_contacts` is omitted, the default WHOIS profile of that TLD is used for all four
+// roles. The profile must exist and be complete for the TLD, an incomplete profile is the most
+// common reason a domain is left awaiting setup. Create one with `Create WHOIS profile`.
+//
+// Some TLDs require `additional_details`. These are validated before setup, so a missing or
+// invalid value is rejected without any registration being attempted.
+//
+// The domain is set up with the default nameservers and without privacy protection. Use
+// `Update domain nameservers` and `Enable privacy protection` afterwards to change either.
+//
+// A successful response means the setup request was accepted, not that the domain is already
+// registered. Poll `Get domain list` for the outcome, the domain appears in `Get domain details`
+// only once it is registered.
+//
+// Use this endpoint to finish registering a domain that is awaiting setup on your account.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/domains/v1/portfolio/{domain}/setup (the `DomainsCompleteDomainSetupV1` operationId).
+func (c *ClientWithResponses) DomainsCompleteDomainSetupV1WithBodyWithResponse(ctx context.Context, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DomainsCompleteDomainSetupV1Response, error) {
+	rsp, err := c.DomainsCompleteDomainSetupV1WithBody(ctx, domain, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsCompleteDomainSetupV1Response(rsp)
+}
+
+// DomainsCompleteDomainSetupV1WithResponse Complete domain setup
+//
+// Register a domain you have already paid for but which has not been set up yet.
+//
+// Use this endpoint when an order completed without registering the domain, for example when
+// `Purchase new domain` returned `202 Accepted` and the domain was added to your account without
+// being registered, or when an earlier setup attempt failed. No new order is placed and no payment
+// is taken: the subscription you already own is used, for the period you already paid for.
+//
+// A domain is left awaiting setup when the details needed to register it were missing or invalid
+// as the order completed. Domains ordered elsewhere can be awaiting setup for the same reason.
+// Complete the missing information, then call this endpoint. If the order itself has not completed
+// yet, the domain is not on your account, wait until it appears in `Get domain list`.
+//
+// If `domain_contacts` is omitted, the default WHOIS profile of that TLD is used for all four
+// roles. The profile must exist and be complete for the TLD, an incomplete profile is the most
+// common reason a domain is left awaiting setup. Create one with `Create WHOIS profile`.
+//
+// Some TLDs require `additional_details`. These are validated before setup, so a missing or
+// invalid value is rejected without any registration being attempted.
+//
+// The domain is set up with the default nameservers and without privacy protection. Use
+// `Update domain nameservers` and `Enable privacy protection` afterwards to change either.
+//
+// A successful response means the setup request was accepted, not that the domain is already
+// registered. Poll `Get domain list` for the outcome, the domain appears in `Get domain details`
+// only once it is registered.
+//
+// Use this endpoint to finish registering a domain that is awaiting setup on your account.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/domains/v1/portfolio/{domain}/setup (the `DomainsCompleteDomainSetupV1` operationId).
+func (c *ClientWithResponses) DomainsCompleteDomainSetupV1WithResponse(ctx context.Context, domain Domain, body DomainsCompleteDomainSetupV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsCompleteDomainSetupV1Response, error) {
+	rsp, err := c.DomainsCompleteDomainSetupV1(ctx, domain, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsCompleteDomainSetupV1Response(rsp)
+}
+
 // DomainsGetTransferListV1WithResponse Get transfer list
 //
 // Retrieve all domain transfers in your portfolio.
@@ -97710,6 +98170,60 @@ func ParseDomainsGetDomainRenewalInformationV1Response(rsp *http.Response) (*Dom
 			return nil, err
 		}
 		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDomainsCompleteDomainSetupV1Response parses an HTTP response from a DomainsCompleteDomainSetupV1WithResponse call
+func ParseDomainsCompleteDomainSetupV1Response(rsp *http.Response) (*DomainsCompleteDomainSetupV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DomainsCompleteDomainSetupV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse
