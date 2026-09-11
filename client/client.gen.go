@@ -7876,6 +7876,11 @@ type DomainsV1WHOISProfileResource struct {
 	// Example: 746263
 	Id *int `json:"id,omitempty"`
 
+	// IsDefault Whether the profile is pre-selected when registering new domains of its TLD
+	//
+	// Example: true
+	IsDefault *bool `json:"is_default,omitempty"`
+
 	// Tld TLD to which contact profile can be applied to
 	//
 	// Example: com
