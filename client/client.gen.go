@@ -1176,6 +1176,66 @@ func (e HostingV1FilesFilesResourceItemsType) Valid() bool {
 	}
 }
 
+// Defines values for HostingV1GitGitInstallationResourceAccountType.
+const (
+	HostingV1GitGitInstallationResourceAccountTypeOrganization HostingV1GitGitInstallationResourceAccountType = "Organization"
+	HostingV1GitGitInstallationResourceAccountTypeUser         HostingV1GitGitInstallationResourceAccountType = "User"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1GitGitInstallationResourceAccountType enum.
+func (e HostingV1GitGitInstallationResourceAccountType) Valid() bool {
+	switch e {
+	case HostingV1GitGitInstallationResourceAccountTypeOrganization:
+		return true
+	case HostingV1GitGitInstallationResourceAccountTypeUser:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingV1GitGitInstallationResourceProvider.
+const (
+	HostingV1GitGitInstallationResourceProviderBitbucket HostingV1GitGitInstallationResourceProvider = "bitbucket"
+	HostingV1GitGitInstallationResourceProviderGithub    HostingV1GitGitInstallationResourceProvider = "github"
+	HostingV1GitGitInstallationResourceProviderGitlab    HostingV1GitGitInstallationResourceProvider = "gitlab"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1GitGitInstallationResourceProvider enum.
+func (e HostingV1GitGitInstallationResourceProvider) Valid() bool {
+	switch e {
+	case HostingV1GitGitInstallationResourceProviderBitbucket:
+		return true
+	case HostingV1GitGitInstallationResourceProviderGithub:
+		return true
+	case HostingV1GitGitInstallationResourceProviderGitlab:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingV1GitGitInstallationResourceStatus.
+const (
+	HostingV1GitGitInstallationResourceStatusActive    HostingV1GitGitInstallationResourceStatus = "active"
+	HostingV1GitGitInstallationResourceStatusPending   HostingV1GitGitInstallationResourceStatus = "pending"
+	HostingV1GitGitInstallationResourceStatusSuspended HostingV1GitGitInstallationResourceStatus = "suspended"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1GitGitInstallationResourceStatus enum.
+func (e HostingV1GitGitInstallationResourceStatus) Valid() bool {
+	switch e {
+	case HostingV1GitGitInstallationResourceStatusActive:
+		return true
+	case HostingV1GitGitInstallationResourceStatusPending:
+		return true
+	case HostingV1GitGitInstallationResourceStatusSuspended:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for HostingV1NodeJsBuildOptionsResourceAppType.
 const (
 	HostingV1NodeJsBuildOptionsResourceAppTypeAngular        HostingV1NodeJsBuildOptionsResourceAppType = "angular"
@@ -4446,6 +4506,27 @@ func (e MailWebhookStatus) Valid() bool {
 	}
 }
 
+// Defines values for Provider.
+const (
+	ProviderBitbucket Provider = "bitbucket"
+	ProviderGithub    Provider = "github"
+	ProviderGitlab    Provider = "gitlab"
+)
+
+// Valid indicates whether the value is a known member of the Provider enum.
+func (e Provider) Valid() bool {
+	switch e {
+	case ProviderBitbucket:
+		return true
+	case ProviderGithub:
+		return true
+	case ProviderGitlab:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for ReachAutomationSortDirection.
 const (
 	ReachAutomationSortDirectionAsc  ReachAutomationSortDirection = "asc"
@@ -4545,6 +4626,27 @@ func (e ReachCampaignType) Valid() bool {
 	case ReachCampaignTypeCampaign:
 		return true
 	case ReachCampaignTypeDoubleOptIn:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for Status.
+const (
+	StatusActive    Status = "active"
+	StatusPending   Status = "pending"
+	StatusSuspended Status = "suspended"
+)
+
+// Valid indicates whether the value is a known member of the Status enum.
+func (e Status) Valid() bool {
+	switch e {
+	case StatusActive:
+		return true
+	case StatusPending:
+		return true
+	case StatusSuspended:
 		return true
 	default:
 		return false
@@ -5022,6 +5124,48 @@ const (
 func (e HostingListInstalledWordPressPluginsV1ParamsCategory) Valid() bool {
 	switch e {
 	case Cache:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingListGitInstallationsV1ParamsProvider.
+const (
+	HostingListGitInstallationsV1ParamsProviderBitbucket HostingListGitInstallationsV1ParamsProvider = "bitbucket"
+	HostingListGitInstallationsV1ParamsProviderGithub    HostingListGitInstallationsV1ParamsProvider = "github"
+	HostingListGitInstallationsV1ParamsProviderGitlab    HostingListGitInstallationsV1ParamsProvider = "gitlab"
+)
+
+// Valid indicates whether the value is a known member of the HostingListGitInstallationsV1ParamsProvider enum.
+func (e HostingListGitInstallationsV1ParamsProvider) Valid() bool {
+	switch e {
+	case HostingListGitInstallationsV1ParamsProviderBitbucket:
+		return true
+	case HostingListGitInstallationsV1ParamsProviderGithub:
+		return true
+	case HostingListGitInstallationsV1ParamsProviderGitlab:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingListGitInstallationsV1ParamsStatus.
+const (
+	HostingListGitInstallationsV1ParamsStatusActive    HostingListGitInstallationsV1ParamsStatus = "active"
+	HostingListGitInstallationsV1ParamsStatusPending   HostingListGitInstallationsV1ParamsStatus = "pending"
+	HostingListGitInstallationsV1ParamsStatusSuspended HostingListGitInstallationsV1ParamsStatus = "suspended"
+)
+
+// Valid indicates whether the value is a known member of the HostingListGitInstallationsV1ParamsStatus enum.
+func (e HostingListGitInstallationsV1ParamsStatus) Valid() bool {
+	switch e {
+	case HostingListGitInstallationsV1ParamsStatusActive:
+		return true
+	case HostingListGitInstallationsV1ParamsStatusPending:
+		return true
+	case HostingListGitInstallationsV1ParamsStatusSuspended:
 		return true
 	default:
 		return false
@@ -10045,6 +10189,122 @@ type HostingV1FilesUploadUrlResource struct {
 	//
 	// Example: https://srv12345-files.hstgr.io/
 	Url string `json:"url"`
+}
+
+// HostingV1GitGitInstallationCollection Array of [`Hosting.V1.Git.GitInstallationResource`](#model/hostingv1gitgitinstallationresource)
+type HostingV1GitGitInstallationCollection = []HostingV1GitGitInstallationResource
+
+// HostingV1GitGitInstallationResource defines model for Hosting.V1.Git.GitInstallationResource.
+type HostingV1GitGitInstallationResource struct {
+	// AccountAvatarUrl Avatar URL of the connected provider account
+	//
+	// Example: https://avatars.githubusercontent.com/u/583231
+	AccountAvatarUrl *string `json:"account_avatar_url"`
+
+	// AccountLogin Login of the connected provider account (user or organization)
+	//
+	// Example: octocat
+	AccountLogin *string `json:"account_login"`
+
+	// AccountType Whether the connected account is a user or an organization
+	//
+	// Example: User
+	AccountType *HostingV1GitGitInstallationResourceAccountType `json:"account_type"`
+
+	// CreatedAt When the installation record was created
+	//
+	// Example: 2026-01-15T10:00:00Z
+	CreatedAt time.Time `json:"created_at"`
+
+	// HasOauth True when the GitHub user account has a stored OAuth token whose refresh token is
+	// still valid, false when the token is missing or its refresh token expired. Null for
+	// organization accounts and for providers other than GitHub.
+	//
+	// Example: true
+	HasOauth *bool `json:"has_oauth"`
+
+	// InstalledAt When the provider app was installed on the account
+	//
+	// Example: 2026-01-15T10:30:00Z
+	InstalledAt *time.Time `json:"installed_at"`
+
+	// Provider Git provider the account belongs to
+	//
+	// Example: github
+	Provider HostingV1GitGitInstallationResourceProvider `json:"provider"`
+
+	// Status Installation status. Only active installations are listed unless the status filter says
+	// otherwise.
+	//
+	// Example: active
+	Status HostingV1GitGitInstallationResourceStatus `json:"status"`
+
+	// Uuid Installation identifier. Use it as the path parameter of List Git installation repositories.
+	//
+	// Example: 018f5e2a-1234-7890-abcd-1234567890ab
+	Uuid string `json:"uuid"`
+}
+
+// HostingV1GitGitInstallationResourceAccountType Whether the connected account is a user or an organization
+//
+// Example: User
+type HostingV1GitGitInstallationResourceAccountType string
+
+// HostingV1GitGitInstallationResourceProvider Git provider the account belongs to
+//
+// Example: github
+type HostingV1GitGitInstallationResourceProvider string
+
+// HostingV1GitGitInstallationResourceStatus Installation status. Only active installations are listed unless the status filter says
+// otherwise.
+//
+// Example: active
+type HostingV1GitGitInstallationResourceStatus string
+
+// HostingV1GitGitRepositoryCollection Array of [`Hosting.V1.Git.GitRepositoryResource`](#model/hostingv1gitgitrepositoryresource)
+type HostingV1GitGitRepositoryCollection = []HostingV1GitGitRepositoryResource
+
+// HostingV1GitGitRepositoryResource defines model for Hosting.V1.Git.GitRepositoryResource.
+type HostingV1GitGitRepositoryResource struct {
+	// CloneUrl HTTPS clone URL
+	//
+	// Example: https://github.com/octocat/my-repository.git
+	CloneUrl string `json:"clone_url"`
+
+	// DefaultBranch Default branch of the repository
+	//
+	// Example: main
+	DefaultBranch string `json:"default_branch"`
+
+	// FullName Owner and repository name joined with a slash
+	//
+	// Example: octocat/my-repository
+	FullName string `json:"full_name"`
+
+	// HtmlUrl Repository page URL
+	//
+	// Example: https://github.com/octocat/my-repository
+	HtmlUrl string `json:"html_url"`
+
+	// Id Repository identifier assigned by the Git provider
+	//
+	// Example: 12345
+	Id int `json:"id"`
+
+	// IsPrivate Whether the repository is private
+	//
+	// Example: false
+	IsPrivate bool `json:"is_private"`
+
+	// Name Repository name without the .git suffix
+	//
+	// Example: my-repository
+	Name string `json:"name"`
+
+	// Owner Repository owner login
+	//
+	// Example: octocat
+	Owner string `json:"owner"`
 }
 
 // HostingV1NodeJsBuildAnalysisResource defines model for Hosting.V1.NodeJs.BuildAnalysisResource.
@@ -15496,6 +15756,9 @@ type FormUuid = string
 // FromDomain Example: old.example.com
 type FromDomain = string
 
+// GitInstallationUuidPath Example: 018f5e2a-1234-7890-abcd-1234567890ab
+type GitInstallationUuidPath = openapi_types.UUID
+
 // GroupUuid Example: 550e8400-e29b-41d4-a716-446655440000
 type GroupUuid = string
 
@@ -15628,6 +15891,9 @@ type ProfileUuid = string
 // ProjectName Example: my-docker-project
 type ProjectName = string
 
+// Provider Example: github
+type Provider string
+
 // PublicKeyId Example: 6672861
 type PublicKeyId = int
 
@@ -15663,6 +15929,9 @@ type SnapshotId = int
 
 // SoftwarePath Example: 1232456789
 type SoftwarePath = string
+
+// Status Example: active
+type Status string
 
 // Statuses Example: ["active","suspended"]
 type Statuses = []string
@@ -16131,6 +16400,21 @@ type HostingListAvailableDatacentersV1Params struct {
 	// OrderId Order ID
 	OrderId OrderIdRequired `form:"order_id" json:"order_id"`
 }
+
+// HostingListGitInstallationsV1Params defines parameters for HostingListGitInstallationsV1.
+type HostingListGitInstallationsV1Params struct {
+	// Provider Filter by Git provider
+	Provider *HostingListGitInstallationsV1ParamsProvider `form:"provider,omitempty" json:"provider,omitempty"`
+
+	// Status Filter by installation status
+	Status *HostingListGitInstallationsV1ParamsStatus `form:"status,omitempty" json:"status,omitempty"`
+}
+
+// HostingListGitInstallationsV1ParamsProvider defines parameters for HostingListGitInstallationsV1.
+type HostingListGitInstallationsV1ParamsProvider string
+
+// HostingListGitInstallationsV1ParamsStatus defines parameters for HostingListGitInstallationsV1.
+type HostingListGitInstallationsV1ParamsStatus string
 
 // HostingListOrdersV1Params defines parameters for HostingListOrdersV1.
 type HostingListOrdersV1Params struct {
@@ -22083,6 +22367,36 @@ type ClientInterface interface {
 	//
 	// Corresponds with POST /api/hosting/v1/files/upload-urls (the `HostingGenerateUploadURLV1` operationId).
 	HostingGenerateUploadURLV1(ctx context.Context, body HostingGenerateUploadURLV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingListGitInstallationsV1 List Git installations
+	//
+	// Lists the Git provider accounts the customer has connected. Only installations with status
+	// `active` are returned unless the `status` filter says otherwise.
+	//
+	// An empty list means the customer has no active installation. Check `status=suspended` and
+	// `status=pending` as well. If there is none at all, GitHub has to be connected once in hPanel
+	// (Websites, Manage, Advanced, Git, Connect GitHub; or Add Website, Node.js Web App, Import Git
+	// Repository, Continue with GitHub); this endpoint then lists the new installation.
+	//
+	// Use `uuid` as the path parameter of `List Git installation repositories`.
+	//
+	// Corresponds with GET /api/hosting/v1/git/installations (the `HostingListGitInstallationsV1` operationId).
+	HostingListGitInstallationsV1(ctx context.Context, params *HostingListGitInstallationsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingListGitInstallationRepositoriesV1 List Git installation repositories
+	//
+	// Lists the repositories the Git installation can access, read live from the provider. Works
+	// for github and gitlab installations. Use an active installation: a suspended or pending one
+	// is still queried and the call fails with whatever the provider answers. The list is cut at
+	// the first 500 repositories in the order the provider returns them; when the account has
+	// more, name the repository directly instead of searching this list.
+	//
+	// `owner`, `name` and `default_branch` identify a repository and a branch to deploy. Returns
+	// 404 when the installation does not belong to the customer. Limited to 10 calls per minute
+	// per API client (429 above that).
+	//
+	// Corresponds with GET /api/hosting/v1/git/installations/{uuid}/repositories (the `HostingListGitInstallationRepositoriesV1` operationId).
+	HostingListGitInstallationRepositoriesV1(ctx context.Context, uuid GitInstallationUuidPath, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingListOrdersV1 List orders
 	//
@@ -31591,6 +31905,56 @@ func (c *Client) HostingGenerateUploadURLV1WithBody(ctx context.Context, content
 // Corresponds with POST /api/hosting/v1/files/upload-urls (the `HostingGenerateUploadURLV1` operationId).
 func (c *Client) HostingGenerateUploadURLV1(ctx context.Context, body HostingGenerateUploadURLV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingGenerateUploadURLV1Request(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingListGitInstallationsV1 List Git installations
+//
+// Lists the Git provider accounts the customer has connected. Only installations with status
+// `active` are returned unless the `status` filter says otherwise.
+//
+// An empty list means the customer has no active installation. Check `status=suspended` and
+// `status=pending` as well. If there is none at all, GitHub has to be connected once in hPanel
+// (Websites, Manage, Advanced, Git, Connect GitHub; or Add Website, Node.js Web App, Import Git
+// Repository, Continue with GitHub); this endpoint then lists the new installation.
+//
+// Use `uuid` as the path parameter of `List Git installation repositories`.
+//
+// Corresponds with GET /api/hosting/v1/git/installations (the `HostingListGitInstallationsV1` operationId).
+func (c *Client) HostingListGitInstallationsV1(ctx context.Context, params *HostingListGitInstallationsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingListGitInstallationsV1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingListGitInstallationRepositoriesV1 List Git installation repositories
+//
+// Lists the repositories the Git installation can access, read live from the provider. Works
+// for github and gitlab installations. Use an active installation: a suspended or pending one
+// is still queried and the call fails with whatever the provider answers. The list is cut at
+// the first 500 repositories in the order the provider returns them; when the account has
+// more, name the repository directly instead of searching this list.
+//
+// `owner`, `name` and `default_branch` identify a repository and a branch to deploy. Returns
+// 404 when the installation does not belong to the customer. Limited to 10 calls per minute
+// per API client (429 above that).
+//
+// Corresponds with GET /api/hosting/v1/git/installations/{uuid}/repositories (the `HostingListGitInstallationRepositoriesV1` operationId).
+func (c *Client) HostingListGitInstallationRepositoriesV1(ctx context.Context, uuid GitInstallationUuidPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingListGitInstallationRepositoriesV1Request(c.Server, uuid)
 	if err != nil {
 		return nil, err
 	}
@@ -46480,6 +46844,106 @@ func NewHostingGenerateUploadURLV1RequestWithBody(server string, contentType str
 	return req, nil
 }
 
+// NewHostingListGitInstallationsV1Request constructs an http.Request for the HostingListGitInstallationsV1 method
+func NewHostingListGitInstallationsV1Request(server string, params *HostingListGitInstallationsV1Params) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/git/installations")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Provider != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "provider", *params.Provider, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Status != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "status", *params.Status, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingListGitInstallationRepositoriesV1Request constructs an http.Request for the HostingListGitInstallationRepositoriesV1 method
+func NewHostingListGitInstallationRepositoriesV1Request(server string, uuid GitInstallationUuidPath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "uuid", uuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/git/installations/%s/repositories", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewHostingListOrdersV1Request constructs an http.Request for the HostingListOrdersV1 method
 func NewHostingListOrdersV1Request(server string, params *HostingListOrdersV1Params) (*http.Request, error) {
 	var err error
@@ -59001,6 +59465,40 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with POST /api/hosting/v1/files/upload-urls (the `HostingGenerateUploadURLV1` operationId).
 	HostingGenerateUploadURLV1WithResponse(ctx context.Context, body HostingGenerateUploadURLV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingGenerateUploadURLV1Response, error)
+
+	// HostingListGitInstallationsV1WithResponse List Git installations
+	//
+	// Lists the Git provider accounts the customer has connected. Only installations with status
+	// `active` are returned unless the `status` filter says otherwise.
+	//
+	// An empty list means the customer has no active installation. Check `status=suspended` and
+	// `status=pending` as well. If there is none at all, GitHub has to be connected once in hPanel
+	// (Websites, Manage, Advanced, Git, Connect GitHub; or Add Website, Node.js Web App, Import Git
+	// Repository, Continue with GitHub); this endpoint then lists the new installation.
+	//
+	// Use `uuid` as the path parameter of `List Git installation repositories`.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/hosting/v1/git/installations (the `HostingListGitInstallationsV1` operationId).
+	HostingListGitInstallationsV1WithResponse(ctx context.Context, params *HostingListGitInstallationsV1Params, reqEditors ...RequestEditorFn) (*HostingListGitInstallationsV1Response, error)
+
+	// HostingListGitInstallationRepositoriesV1WithResponse List Git installation repositories
+	//
+	// Lists the repositories the Git installation can access, read live from the provider. Works
+	// for github and gitlab installations. Use an active installation: a suspended or pending one
+	// is still queried and the call fails with whatever the provider answers. The list is cut at
+	// the first 500 repositories in the order the provider returns them; when the account has
+	// more, name the repository directly instead of searching this list.
+	//
+	// `owner`, `name` and `default_branch` identify a repository and a branch to deploy. Returns
+	// 404 when the installation does not belong to the customer. Limited to 10 calls per minute
+	// per API client (429 above that).
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/hosting/v1/git/installations/{uuid}/repositories (the `HostingListGitInstallationRepositoriesV1` operationId).
+	HostingListGitInstallationRepositoriesV1WithResponse(ctx context.Context, uuid GitInstallationUuidPath, reqEditors ...RequestEditorFn) (*HostingListGitInstallationRepositoriesV1Response, error)
 
 	// HostingListOrdersV1WithResponse List orders
 	//
@@ -74357,6 +74855,137 @@ func (r HostingGenerateUploadURLV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingGenerateUploadURLV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingListGitInstallationsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1GitGitInstallationCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingListGitInstallationsV1Response) GetJSON200() *HostingV1GitGitInstallationCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingListGitInstallationsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingListGitInstallationsV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingListGitInstallationsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingListGitInstallationsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingListGitInstallationsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingListGitInstallationsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingListGitInstallationsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingListGitInstallationRepositoriesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1GitGitRepositoryCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseErrorResponse
+	// JSON429 the response for an HTTP 429 `application/json` response
+	JSON429 *CommonResponseErrorResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingListGitInstallationRepositoriesV1Response) GetJSON200() *HostingV1GitGitRepositoryCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingListGitInstallationRepositoriesV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r HostingListGitInstallationRepositoriesV1Response) GetJSON404() *CommonResponseErrorResponse {
+	return r.JSON404
+}
+
+// GetJSON429 returns the response for an HTTP 429 `application/json` response
+func (r HostingListGitInstallationRepositoriesV1Response) GetJSON429() *CommonResponseErrorResponse {
+	return r.JSON429
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingListGitInstallationRepositoriesV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingListGitInstallationRepositoriesV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingListGitInstallationRepositoriesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingListGitInstallationRepositoriesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingListGitInstallationRepositoriesV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -90662,6 +91291,52 @@ func (c *ClientWithResponses) HostingGenerateUploadURLV1WithResponse(ctx context
 	return ParseHostingGenerateUploadURLV1Response(rsp)
 }
 
+// HostingListGitInstallationsV1WithResponse List Git installations
+//
+// Lists the Git provider accounts the customer has connected. Only installations with status
+// `active` are returned unless the `status` filter says otherwise.
+//
+// An empty list means the customer has no active installation. Check `status=suspended` and
+// `status=pending` as well. If there is none at all, GitHub has to be connected once in hPanel
+// (Websites, Manage, Advanced, Git, Connect GitHub; or Add Website, Node.js Web App, Import Git
+// Repository, Continue with GitHub); this endpoint then lists the new installation.
+//
+// Use `uuid` as the path parameter of `List Git installation repositories`.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/hosting/v1/git/installations (the `HostingListGitInstallationsV1` operationId).
+func (c *ClientWithResponses) HostingListGitInstallationsV1WithResponse(ctx context.Context, params *HostingListGitInstallationsV1Params, reqEditors ...RequestEditorFn) (*HostingListGitInstallationsV1Response, error) {
+	rsp, err := c.HostingListGitInstallationsV1(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingListGitInstallationsV1Response(rsp)
+}
+
+// HostingListGitInstallationRepositoriesV1WithResponse List Git installation repositories
+//
+// Lists the repositories the Git installation can access, read live from the provider. Works
+// for github and gitlab installations. Use an active installation: a suspended or pending one
+// is still queried and the call fails with whatever the provider answers. The list is cut at
+// the first 500 repositories in the order the provider returns them; when the account has
+// more, name the repository directly instead of searching this list.
+//
+// `owner`, `name` and `default_branch` identify a repository and a branch to deploy. Returns
+// 404 when the installation does not belong to the customer. Limited to 10 calls per minute
+// per API client (429 above that).
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/hosting/v1/git/installations/{uuid}/repositories (the `HostingListGitInstallationRepositoriesV1` operationId).
+func (c *ClientWithResponses) HostingListGitInstallationRepositoriesV1WithResponse(ctx context.Context, uuid GitInstallationUuidPath, reqEditors ...RequestEditorFn) (*HostingListGitInstallationRepositoriesV1Response, error) {
+	rsp, err := c.HostingListGitInstallationRepositoriesV1(ctx, uuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingListGitInstallationRepositoriesV1Response(rsp)
+}
+
 // HostingListOrdersV1WithResponse List orders
 //
 // Retrieve a paginated list of orders accessible to the authenticated client.
@@ -104005,6 +104680,107 @@ func ParseHostingGenerateUploadURLV1Response(rsp *http.Response) (*HostingGenera
 			return nil, err
 		}
 		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingListGitInstallationsV1Response parses an HTTP response from a HostingListGitInstallationsV1WithResponse call
+func ParseHostingListGitInstallationsV1Response(rsp *http.Response) (*HostingListGitInstallationsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingListGitInstallationsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1GitGitInstallationCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingListGitInstallationRepositoriesV1Response parses an HTTP response from a HostingListGitInstallationRepositoriesV1WithResponse call
+func ParseHostingListGitInstallationRepositoriesV1Response(rsp *http.Response) (*HostingListGitInstallationRepositoriesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingListGitInstallationRepositoriesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1GitGitRepositoryCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse

@@ -1219,6 +1219,16 @@
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/databases/remote-connections"
   },
+  "hosting_listGitInstallationRepositoriesV1": {
+    "command": "hostinger hosting git list-installation-repositories",
+    "method": "GET",
+    "path": "/api/hosting/v1/git/installations/{uuid}/repositories"
+  },
+  "hosting_listGitInstallationsV1": {
+    "command": "hostinger hosting git list-installations",
+    "method": "GET",
+    "path": "/api/hosting/v1/git/installations"
+  },
   "hosting_listInstalledWordPressPluginsV1": {
     "command": "hostinger wordpress plugins list-installed",
     "method": "GET",
