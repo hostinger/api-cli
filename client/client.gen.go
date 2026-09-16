@@ -1821,6 +1821,63 @@ func (e HostingV1NodeJsVulnerabilityResourceSeverity) Valid() bool {
 	}
 }
 
+// Defines values for HostingV1SslSslStatusResourceProvider.
+const (
+	HostingV1SslSslStatusResourceProviderCustom      HostingV1SslSslStatusResourceProvider = "custom"
+	HostingV1SslSslStatusResourceProviderGooglessl   HostingV1SslSslStatusResourceProvider = "googlessl"
+	HostingV1SslSslStatusResourceProviderHssl        HostingV1SslSslStatusResourceProvider = "hssl"
+	HostingV1SslSslStatusResourceProviderLetsencrypt HostingV1SslSslStatusResourceProvider = "letsencrypt"
+	HostingV1SslSslStatusResourceProviderZerossl     HostingV1SslSslStatusResourceProvider = "zerossl"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1SslSslStatusResourceProvider enum.
+func (e HostingV1SslSslStatusResourceProvider) Valid() bool {
+	switch e {
+	case HostingV1SslSslStatusResourceProviderCustom:
+		return true
+	case HostingV1SslSslStatusResourceProviderGooglessl:
+		return true
+	case HostingV1SslSslStatusResourceProviderHssl:
+		return true
+	case HostingV1SslSslStatusResourceProviderLetsencrypt:
+		return true
+	case HostingV1SslSslStatusResourceProviderZerossl:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingV1SslSslStatusResourceStatus.
+const (
+	HostingV1SslSslStatusResourceStatusActive          HostingV1SslSslStatusResourceStatus = "active"
+	HostingV1SslSslStatusResourceStatusExpired         HostingV1SslSslStatusResourceStatus = "expired"
+	HostingV1SslSslStatusResourceStatusFailed          HostingV1SslSslStatusResourceStatus = "failed"
+	HostingV1SslSslStatusResourceStatusInstalling      HostingV1SslSslStatusResourceStatus = "installing"
+	HostingV1SslSslStatusResourceStatusNotInstalled    HostingV1SslSslStatusResourceStatus = "not_installed"
+	HostingV1SslSslStatusResourceStatusWaitingForRetry HostingV1SslSslStatusResourceStatus = "waiting_for_retry"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1SslSslStatusResourceStatus enum.
+func (e HostingV1SslSslStatusResourceStatus) Valid() bool {
+	switch e {
+	case HostingV1SslSslStatusResourceStatusActive:
+		return true
+	case HostingV1SslSslStatusResourceStatusExpired:
+		return true
+	case HostingV1SslSslStatusResourceStatusFailed:
+		return true
+	case HostingV1SslSslStatusResourceStatusInstalling:
+		return true
+	case HostingV1SslSslStatusResourceStatusNotInstalled:
+		return true
+	case HostingV1SslSslStatusResourceStatusWaitingForRetry:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for HostingV1WebsitesWebsiteResourceVhostType.
 const (
 	Addon     HostingV1WebsitesWebsiteResourceVhostType = "addon"
@@ -11218,6 +11275,66 @@ type HostingV1RedirectsRedirectResource struct {
 	To *string `json:"to,omitempty"`
 }
 
+// HostingV1SslSslStatusResource defines model for Hosting.V1.Ssl.SslStatusResource.
+type HostingV1SslSslStatusResource struct {
+	// ExpiresAt End of the assigned certificate validity period; null when no certificate details are
+	// available.
+	//
+	// Example: 2027-01-15T10:30:00Z
+	ExpiresAt *time.Time `json:"expires_at"`
+
+	// IsHttpsRedirectEnabled Whether HTTP requests to the website are redirected to HTTPS
+	//
+	// Example: true
+	IsHttpsRedirectEnabled bool `json:"is_https_redirect_enabled"`
+
+	// IsLifetime Whether the certificate comes from a lifetime provider managed by the platform, not an
+	// uploaded one. Follows `provider`: it reflects the last recorded installation when no
+	// certificate is assigned, and is false when `provider` is null.
+	//
+	// Example: true
+	IsLifetime bool `json:"is_lifetime"`
+
+	// LastError Last installation error, when it is one of the known displayable messages
+	//
+	// Example: Max attempts to retry were reached
+	LastError *string `json:"last_error"`
+
+	// Provider Provider of the assigned certificate, or of the last recorded installation when none is
+	// assigned. `custom` means an uploaded certificate. Null when no certificate is assigned and
+	// no installation is recorded, which is also the case for free subdomains on the
+	// platform-managed certificate.
+	//
+	// Example: letsencrypt
+	Provider *HostingV1SslSslStatusResourceProvider `json:"provider"`
+
+	// Status Current certificate status
+	//
+	// Example: active
+	Status HostingV1SslSslStatusResourceStatus `json:"status"`
+}
+
+// HostingV1SslSslStatusResourceProvider Provider of the assigned certificate, or of the last recorded installation when none is
+// assigned. `custom` means an uploaded certificate. Null when no certificate is assigned and
+// no installation is recorded, which is also the case for free subdomains on the
+// platform-managed certificate.
+//
+// Example: letsencrypt
+type HostingV1SslSslStatusResourceProvider string
+
+// HostingV1SslSslStatusResourceStatus Current certificate status
+//
+// Example: active
+type HostingV1SslSslStatusResourceStatus string
+
+// HostingV1SslToggleHttpsRedirectRequest defines model for Hosting.V1.Ssl.ToggleHttpsRedirectRequest.
+type HostingV1SslToggleHttpsRedirectRequest struct {
+	// IsEnabled Turn the HTTP to HTTPS redirect on (true) or off (false) for the website.
+	//
+	// Example: true
+	IsEnabled bool `json:"is_enabled"`
+}
+
 // HostingV1WebsitesCreateWebsiteRequest defines model for Hosting.V1.Websites.CreateWebsiteRequest.
 type HostingV1WebsitesCreateWebsiteRequest struct {
 	// DatacenterCode Datacenter code. This parameter is required when creating the first website on a new hosting plan.
@@ -17312,6 +17429,9 @@ type HostingUpdatePHPVersionV1JSONRequestBody = HostingV1PhpUpdatePhpVersionRequ
 // HostingCreateWebsiteRedirectV1JSONRequestBody defines body for HostingCreateWebsiteRedirectV1 for application/json ContentType.
 type HostingCreateWebsiteRedirectV1JSONRequestBody = HostingV1RedirectsCreateRedirectRequest
 
+// HostingToggleHTTPSRedirectV1JSONRequestBody defines body for HostingToggleHTTPSRedirectV1 for application/json ContentType.
+type HostingToggleHTTPSRedirectV1JSONRequestBody = HostingV1SslToggleHttpsRedirectRequest
+
 // HostingCreateWebsiteSubdomainV1JSONRequestBody defines body for HostingCreateWebsiteSubdomainV1 for application/json ContentType.
 type HostingCreateWebsiteSubdomainV1JSONRequestBody = HostingV1DomainsCreateSubdomainRequest
 
@@ -21694,6 +21814,74 @@ type ClientInterface interface {
 	//
 	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/redirects (the `HostingCreateWebsiteRedirectV1` operationId).
 	HostingCreateWebsiteRedirectV1(ctx context.Context, username UsernamePath, domain Domain, body HostingCreateWebsiteRedirectV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingUninstallSSLV1 Uninstall SSL
+	//
+	// Removes the SSL certificate assigned to the website, turns the HTTPS redirect off and cancels
+	// a pending installation retry. The website serves plain HTTP until a new installation
+	// completes. `Get SSL status` reports `not_installed` as soon as the call returns; the call also
+	// succeeds when no certificate is assigned, so repeating it is safe.
+	//
+	// Returns 422 for free subdomains (their certificate is managed by the platform) and while an
+	// installation is `installing`.
+	//
+	// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/ssl (the `HostingUninstallSSLV1` operationId).
+	HostingUninstallSSLV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingToggleHTTPSRedirectV1WithBody Toggle HTTPS redirect
+	//
+	// Turns the HTTP to HTTPS redirect of the website on or off, based on `is_enabled`. Does
+	// nothing when the redirect is already in the requested state. Turning it on requires an
+	// installed certificate (`status` `active` or `expired` on `Get SSL status`) and returns 422
+	// when there is none; turning it off is always accepted.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PATCH /api/hosting/v1/accounts/{username}/websites/{domain}/ssl/https-redirect/toggle (the `HostingToggleHTTPSRedirectV1` operationId).
+	HostingToggleHTTPSRedirectV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingToggleHTTPSRedirectV1 Toggle HTTPS redirect
+	//
+	// Turns the HTTP to HTTPS redirect of the website on or off, based on `is_enabled`. Does
+	// nothing when the redirect is already in the requested state. Turning it on requires an
+	// installed certificate (`status` `active` or `expired` on `Get SSL status`) and returns 422
+	// when there is none; turning it off is always accepted.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PATCH /api/hosting/v1/accounts/{username}/websites/{domain}/ssl/https-redirect/toggle (the `HostingToggleHTTPSRedirectV1` operationId).
+	HostingToggleHTTPSRedirectV1(ctx context.Context, username UsernamePath, domain Domain, body HostingToggleHTTPSRedirectV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingInstallSSLV1 Install SSL
+	//
+	// Requests a lifetime SSL certificate for the website. The installation runs in the background;
+	// `Get SSL status` reports `active` or `failed` when it ends. An `active` lifetime certificate
+	// does not block the request: a new installation is requested, which is how a certificate is
+	// reinstalled.
+	//
+	// Returns 422 for free subdomains (their certificate is managed by the platform), while an
+	// installation is `installing` or `waiting_for_retry`, when the website's certificate was
+	// revoked (it cannot be reissued), and when an uploaded custom certificate is installed; that
+	// one has to be uninstalled first.
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/ssl/setup (the `HostingInstallSSLV1` operationId).
+	HostingInstallSSLV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingGetSSLStatusV1 Get SSL status
+	//
+	// Returns the SSL state of the website: the certificate `status` and `provider`, whether the
+	// certificate is a lifetime one managed by the platform, whether HTTP requests are redirected to
+	// HTTPS, when the certificate stops being valid and the last installation error.
+	//
+	// `installing` and `waiting_for_retry` mean an installation is in progress. `failed` means the
+	// last installation gave up, or the website was not updated for 60 minutes while `installing`;
+	// `last_error` holds the reason when it is a known message, otherwise it is null. `expired`
+	// means the assigned certificate's validity has ended. `not_installed` means no certificate is
+	// assigned. Free subdomains use a platform-managed certificate: with no installation recorded
+	// they report `active` with `provider` and `expires_at` null.
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/ssl/status (the `HostingGetSSLStatusV1` operationId).
+	HostingGetSSLStatusV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingListWebsiteSubdomainsV1 List website subdomains
 	//
@@ -30708,6 +30896,124 @@ func (c *Client) HostingCreateWebsiteRedirectV1WithBody(ctx context.Context, use
 // Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/redirects (the `HostingCreateWebsiteRedirectV1` operationId).
 func (c *Client) HostingCreateWebsiteRedirectV1(ctx context.Context, username UsernamePath, domain Domain, body HostingCreateWebsiteRedirectV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingCreateWebsiteRedirectV1Request(c.Server, username, domain, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingUninstallSSLV1 Uninstall SSL
+//
+// Removes the SSL certificate assigned to the website, turns the HTTPS redirect off and cancels
+// a pending installation retry. The website serves plain HTTP until a new installation
+// completes. `Get SSL status` reports `not_installed` as soon as the call returns; the call also
+// succeeds when no certificate is assigned, so repeating it is safe.
+//
+// Returns 422 for free subdomains (their certificate is managed by the platform) and while an
+// installation is `installing`.
+//
+// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/ssl (the `HostingUninstallSSLV1` operationId).
+func (c *Client) HostingUninstallSSLV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingUninstallSSLV1Request(c.Server, username, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingToggleHTTPSRedirectV1WithBody Toggle HTTPS redirect
+//
+// Turns the HTTP to HTTPS redirect of the website on or off, based on `is_enabled`. Does
+// nothing when the redirect is already in the requested state. Turning it on requires an
+// installed certificate (`status` `active` or `expired` on `Get SSL status`) and returns 422
+// when there is none; turning it off is always accepted.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PATCH /api/hosting/v1/accounts/{username}/websites/{domain}/ssl/https-redirect/toggle (the `HostingToggleHTTPSRedirectV1` operationId).
+func (c *Client) HostingToggleHTTPSRedirectV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingToggleHTTPSRedirectV1RequestWithBody(c.Server, username, domain, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingToggleHTTPSRedirectV1 Toggle HTTPS redirect
+//
+// Turns the HTTP to HTTPS redirect of the website on or off, based on `is_enabled`. Does
+// nothing when the redirect is already in the requested state. Turning it on requires an
+// installed certificate (`status` `active` or `expired` on `Get SSL status`) and returns 422
+// when there is none; turning it off is always accepted.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PATCH /api/hosting/v1/accounts/{username}/websites/{domain}/ssl/https-redirect/toggle (the `HostingToggleHTTPSRedirectV1` operationId).
+func (c *Client) HostingToggleHTTPSRedirectV1(ctx context.Context, username UsernamePath, domain Domain, body HostingToggleHTTPSRedirectV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingToggleHTTPSRedirectV1Request(c.Server, username, domain, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingInstallSSLV1 Install SSL
+//
+// Requests a lifetime SSL certificate for the website. The installation runs in the background;
+// `Get SSL status` reports `active` or `failed` when it ends. An `active` lifetime certificate
+// does not block the request: a new installation is requested, which is how a certificate is
+// reinstalled.
+//
+// Returns 422 for free subdomains (their certificate is managed by the platform), while an
+// installation is `installing` or `waiting_for_retry`, when the website's certificate was
+// revoked (it cannot be reissued), and when an uploaded custom certificate is installed; that
+// one has to be uninstalled first.
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/ssl/setup (the `HostingInstallSSLV1` operationId).
+func (c *Client) HostingInstallSSLV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingInstallSSLV1Request(c.Server, username, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingGetSSLStatusV1 Get SSL status
+//
+// Returns the SSL state of the website: the certificate `status` and `provider`, whether the
+// certificate is a lifetime one managed by the platform, whether HTTP requests are redirected to
+// HTTPS, when the certificate stops being valid and the last installation error.
+//
+// `installing` and `waiting_for_retry` mean an installation is in progress. `failed` means the
+// last installation gave up, or the website was not updated for 60 minutes while `installing`;
+// `last_error` holds the reason when it is a known message, otherwise it is null. `expired`
+// means the assigned certificate's validity has ended. `not_installed` means no certificate is
+// assigned. Free subdomains use a platform-managed certificate: with no installation recorded
+// they report `active` with `provider` and `expires_at` null.
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/ssl/status (the `HostingGetSSLStatusV1` operationId).
+func (c *Client) HostingGetSSLStatusV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingGetSSLStatusV1Request(c.Server, username, domain)
 	if err != nil {
 		return nil, err
 	}
@@ -45411,6 +45717,183 @@ func NewHostingCreateWebsiteRedirectV1RequestWithBody(server string, username Us
 	return req, nil
 }
 
+// NewHostingUninstallSSLV1Request constructs an http.Request for the HostingUninstallSSLV1 method
+func NewHostingUninstallSSLV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/ssl", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingToggleHTTPSRedirectV1Request calls the generic HostingToggleHTTPSRedirectV1 builder with application/json body
+func NewHostingToggleHTTPSRedirectV1Request(server string, username UsernamePath, domain Domain, body HostingToggleHTTPSRedirectV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingToggleHTTPSRedirectV1RequestWithBody(server, username, domain, "application/json", bodyReader)
+}
+
+// NewHostingToggleHTTPSRedirectV1RequestWithBody constructs an http.Request for the HostingToggleHTTPSRedirectV1 method, with any body, and a specified content type
+func NewHostingToggleHTTPSRedirectV1RequestWithBody(server string, username UsernamePath, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/ssl/https-redirect/toggle", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingInstallSSLV1Request constructs an http.Request for the HostingInstallSSLV1 method
+func NewHostingInstallSSLV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/ssl/setup", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingGetSSLStatusV1Request constructs an http.Request for the HostingGetSSLStatusV1 method
+func NewHostingGetSSLStatusV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/ssl/status", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewHostingListWebsiteSubdomainsV1Request constructs an http.Request for the HostingListWebsiteSubdomainsV1 method
 func NewHostingListWebsiteSubdomainsV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
 	var err error
@@ -59078,6 +59561,80 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/redirects (the `HostingCreateWebsiteRedirectV1` operationId).
 	HostingCreateWebsiteRedirectV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingCreateWebsiteRedirectV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingCreateWebsiteRedirectV1Response, error)
+
+	// HostingUninstallSSLV1WithResponse Uninstall SSL
+	//
+	// Removes the SSL certificate assigned to the website, turns the HTTPS redirect off and cancels
+	// a pending installation retry. The website serves plain HTTP until a new installation
+	// completes. `Get SSL status` reports `not_installed` as soon as the call returns; the call also
+	// succeeds when no certificate is assigned, so repeating it is safe.
+	//
+	// Returns 422 for free subdomains (their certificate is managed by the platform) and while an
+	// installation is `installing`.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/ssl (the `HostingUninstallSSLV1` operationId).
+	HostingUninstallSSLV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingUninstallSSLV1Response, error)
+
+	// HostingToggleHTTPSRedirectV1WithBodyWithResponse Toggle HTTPS redirect
+	//
+	// Turns the HTTP to HTTPS redirect of the website on or off, based on `is_enabled`. Does
+	// nothing when the redirect is already in the requested state. Turning it on requires an
+	// installed certificate (`status` `active` or `expired` on `Get SSL status`) and returns 422
+	// when there is none; turning it off is always accepted.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/hosting/v1/accounts/{username}/websites/{domain}/ssl/https-redirect/toggle (the `HostingToggleHTTPSRedirectV1` operationId).
+	HostingToggleHTTPSRedirectV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingToggleHTTPSRedirectV1Response, error)
+
+	// HostingToggleHTTPSRedirectV1WithResponse Toggle HTTPS redirect
+	//
+	// Turns the HTTP to HTTPS redirect of the website on or off, based on `is_enabled`. Does
+	// nothing when the redirect is already in the requested state. Turning it on requires an
+	// installed certificate (`status` `active` or `expired` on `Get SSL status`) and returns 422
+	// when there is none; turning it off is always accepted.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/hosting/v1/accounts/{username}/websites/{domain}/ssl/https-redirect/toggle (the `HostingToggleHTTPSRedirectV1` operationId).
+	HostingToggleHTTPSRedirectV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingToggleHTTPSRedirectV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingToggleHTTPSRedirectV1Response, error)
+
+	// HostingInstallSSLV1WithResponse Install SSL
+	//
+	// Requests a lifetime SSL certificate for the website. The installation runs in the background;
+	// `Get SSL status` reports `active` or `failed` when it ends. An `active` lifetime certificate
+	// does not block the request: a new installation is requested, which is how a certificate is
+	// reinstalled.
+	//
+	// Returns 422 for free subdomains (their certificate is managed by the platform), while an
+	// installation is `installing` or `waiting_for_retry`, when the website's certificate was
+	// revoked (it cannot be reissued), and when an uploaded custom certificate is installed; that
+	// one has to be uninstalled first.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/ssl/setup (the `HostingInstallSSLV1` operationId).
+	HostingInstallSSLV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingInstallSSLV1Response, error)
+
+	// HostingGetSSLStatusV1WithResponse Get SSL status
+	//
+	// Returns the SSL state of the website: the certificate `status` and `provider`, whether the
+	// certificate is a lifetime one managed by the platform, whether HTTP requests are redirected to
+	// HTTPS, when the certificate stops being valid and the last installation error.
+	//
+	// `installing` and `waiting_for_retry` mean an installation is in progress. `failed` means the
+	// last installation gave up, or the website was not updated for 60 minutes while `installing`;
+	// `last_error` holds the reason when it is a known message, otherwise it is null. `expired`
+	// means the assigned certificate's validity has ended. `not_installed` means no certificate is
+	// assigned. Free subdomains use a platform-managed certificate: with no installation recorded
+	// they report `active` with `provider` and `expires_at` null.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/ssl/status (the `HostingGetSSLStatusV1` operationId).
+	HostingGetSSLStatusV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingGetSSLStatusV1Response, error)
 
 	// HostingListWebsiteSubdomainsV1WithResponse List website subdomains
 	//
@@ -73253,6 +73810,247 @@ func (r HostingCreateWebsiteRedirectV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingCreateWebsiteRedirectV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingUninstallSSLV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingUninstallSSLV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingUninstallSSLV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingUninstallSSLV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingUninstallSSLV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingUninstallSSLV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingUninstallSSLV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingUninstallSSLV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingUninstallSSLV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingToggleHTTPSRedirectV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingToggleHTTPSRedirectV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingToggleHTTPSRedirectV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingToggleHTTPSRedirectV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingToggleHTTPSRedirectV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingToggleHTTPSRedirectV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingToggleHTTPSRedirectV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingToggleHTTPSRedirectV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingToggleHTTPSRedirectV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingInstallSSLV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingInstallSSLV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingInstallSSLV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingInstallSSLV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingInstallSSLV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingInstallSSLV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingInstallSSLV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingInstallSSLV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingInstallSSLV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingGetSSLStatusV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1SslSslStatusResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingGetSSLStatusV1Response) GetJSON200() *HostingV1SslSslStatusResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingGetSSLStatusV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingGetSSLStatusV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingGetSSLStatusV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingGetSSLStatusV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingGetSSLStatusV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingGetSSLStatusV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -90792,6 +91590,110 @@ func (c *ClientWithResponses) HostingCreateWebsiteRedirectV1WithResponse(ctx con
 	return ParseHostingCreateWebsiteRedirectV1Response(rsp)
 }
 
+// HostingUninstallSSLV1WithResponse Uninstall SSL
+//
+// Removes the SSL certificate assigned to the website, turns the HTTPS redirect off and cancels
+// a pending installation retry. The website serves plain HTTP until a new installation
+// completes. `Get SSL status` reports `not_installed` as soon as the call returns; the call also
+// succeeds when no certificate is assigned, so repeating it is safe.
+//
+// Returns 422 for free subdomains (their certificate is managed by the platform) and while an
+// installation is `installing`.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/ssl (the `HostingUninstallSSLV1` operationId).
+func (c *ClientWithResponses) HostingUninstallSSLV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingUninstallSSLV1Response, error) {
+	rsp, err := c.HostingUninstallSSLV1(ctx, username, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingUninstallSSLV1Response(rsp)
+}
+
+// HostingToggleHTTPSRedirectV1WithBodyWithResponse Toggle HTTPS redirect
+//
+// Turns the HTTP to HTTPS redirect of the website on or off, based on `is_enabled`. Does
+// nothing when the redirect is already in the requested state. Turning it on requires an
+// installed certificate (`status` `active` or `expired` on `Get SSL status`) and returns 422
+// when there is none; turning it off is always accepted.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/hosting/v1/accounts/{username}/websites/{domain}/ssl/https-redirect/toggle (the `HostingToggleHTTPSRedirectV1` operationId).
+func (c *ClientWithResponses) HostingToggleHTTPSRedirectV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingToggleHTTPSRedirectV1Response, error) {
+	rsp, err := c.HostingToggleHTTPSRedirectV1WithBody(ctx, username, domain, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingToggleHTTPSRedirectV1Response(rsp)
+}
+
+// HostingToggleHTTPSRedirectV1WithResponse Toggle HTTPS redirect
+//
+// Turns the HTTP to HTTPS redirect of the website on or off, based on `is_enabled`. Does
+// nothing when the redirect is already in the requested state. Turning it on requires an
+// installed certificate (`status` `active` or `expired` on `Get SSL status`) and returns 422
+// when there is none; turning it off is always accepted.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/hosting/v1/accounts/{username}/websites/{domain}/ssl/https-redirect/toggle (the `HostingToggleHTTPSRedirectV1` operationId).
+func (c *ClientWithResponses) HostingToggleHTTPSRedirectV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingToggleHTTPSRedirectV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingToggleHTTPSRedirectV1Response, error) {
+	rsp, err := c.HostingToggleHTTPSRedirectV1(ctx, username, domain, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingToggleHTTPSRedirectV1Response(rsp)
+}
+
+// HostingInstallSSLV1WithResponse Install SSL
+//
+// Requests a lifetime SSL certificate for the website. The installation runs in the background;
+// `Get SSL status` reports `active` or `failed` when it ends. An `active` lifetime certificate
+// does not block the request: a new installation is requested, which is how a certificate is
+// reinstalled.
+//
+// Returns 422 for free subdomains (their certificate is managed by the platform), while an
+// installation is `installing` or `waiting_for_retry`, when the website's certificate was
+// revoked (it cannot be reissued), and when an uploaded custom certificate is installed; that
+// one has to be uninstalled first.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/ssl/setup (the `HostingInstallSSLV1` operationId).
+func (c *ClientWithResponses) HostingInstallSSLV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingInstallSSLV1Response, error) {
+	rsp, err := c.HostingInstallSSLV1(ctx, username, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingInstallSSLV1Response(rsp)
+}
+
+// HostingGetSSLStatusV1WithResponse Get SSL status
+//
+// Returns the SSL state of the website: the certificate `status` and `provider`, whether the
+// certificate is a lifetime one managed by the platform, whether HTTP requests are redirected to
+// HTTPS, when the certificate stops being valid and the last installation error.
+//
+// `installing` and `waiting_for_retry` mean an installation is in progress. `failed` means the
+// last installation gave up, or the website was not updated for 60 minutes while `installing`;
+// `last_error` holds the reason when it is a known message, otherwise it is null. `expired`
+// means the assigned certificate's validity has ended. `not_installed` means no certificate is
+// assigned. Free subdomains use a platform-managed certificate: with no installation recorded
+// they report `active` with `provider` and `expires_at` null.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/ssl/status (the `HostingGetSSLStatusV1` operationId).
+func (c *ClientWithResponses) HostingGetSSLStatusV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingGetSSLStatusV1Response, error) {
+	rsp, err := c.HostingGetSSLStatusV1(ctx, username, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingGetSSLStatusV1Response(rsp)
+}
+
 // HostingListWebsiteSubdomainsV1WithResponse List website subdomains
 //
 // Retrieve all subdomains created under the selected website.
@@ -103903,6 +104805,187 @@ func ParseHostingCreateWebsiteRedirectV1Response(rsp *http.Response) (*HostingCr
 			return nil, err
 		}
 		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingUninstallSSLV1Response parses an HTTP response from a HostingUninstallSSLV1WithResponse call
+func ParseHostingUninstallSSLV1Response(rsp *http.Response) (*HostingUninstallSSLV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingUninstallSSLV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingToggleHTTPSRedirectV1Response parses an HTTP response from a HostingToggleHTTPSRedirectV1WithResponse call
+func ParseHostingToggleHTTPSRedirectV1Response(rsp *http.Response) (*HostingToggleHTTPSRedirectV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingToggleHTTPSRedirectV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingInstallSSLV1Response parses an HTTP response from a HostingInstallSSLV1WithResponse call
+func ParseHostingInstallSSLV1Response(rsp *http.Response) (*HostingInstallSSLV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingInstallSSLV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingGetSSLStatusV1Response parses an HTTP response from a HostingGetSSLStatusV1WithResponse call
+func ParseHostingGetSSLStatusV1Response(rsp *http.Response) (*HostingGetSSLStatusV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingGetSSLStatusV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1SslSslStatusResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse

@@ -1174,6 +1174,11 @@
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/databases/{name}/phpmyadmin-link"
   },
+  "hosting_getSSLStatusV1": {
+    "command": "hostinger hosting ssl status",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/ssl/status"
+  },
   "hosting_getWebsiteFileContentV1": {
     "command": "hostinger hosting files website-content",
     "method": "GET",
@@ -1183,6 +1188,11 @@
     "command": "hostinger wordpress installations import-website",
     "method": "POST",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/wordpress/import"
+  },
+  "hosting_installSSLV1": {
+    "command": "hostinger hosting ssl install",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/ssl/setup"
   },
   "hosting_installWordPressPluginsV1": {
     "command": "hostinger wordpress plugins install",
@@ -1384,6 +1394,11 @@
     "method": "PATCH",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/cacheless-mode/toggle"
   },
+  "hosting_toggleHTTPSRedirectV1": {
+    "command": "hostinger hosting ssl toggle-https-redirect",
+    "method": "PATCH",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/ssl/https-redirect/toggle"
+  },
   "hosting_toggleMaintenanceModeV1": {
     "command": "hostinger wordpress maintenance toggle",
     "method": "PATCH",
@@ -1398,6 +1413,11 @@
     "command": "hostinger hosting cache toggle-website",
     "method": "PATCH",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/cache/toggle"
+  },
+  "hosting_uninstallSSLV1": {
+    "command": "hostinger hosting ssl uninstall",
+    "method": "DELETE",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/ssl"
   },
   "hosting_uninstallWordPressPluginsV1": {
     "command": "hostinger wordpress plugins uninstall",
