@@ -8,11 +8,13 @@ Lists the Git provider accounts the customer has connected. Only installations w
 `active` are returned unless the `status` filter says otherwise.
 
 An empty list means the customer has no active installation. Check `status=suspended` and
-`status=pending` as well. If there is none at all, GitHub has to be connected once in hPanel
-(Websites, Manage, Advanced, Git, Connect GitHub; or Add Website, Node.js Web App, Import Git
-Repository, Continue with GitHub); this endpoint then lists the new installation.
+`status=pending` as well. If there is none at all, a Git provider (GitHub or GitLab) has to be
+connected once in hPanel (Websites, Manage, Advanced, Git; or Add Website, Node.js Web App,
+Import Git Repository); this endpoint then lists the new installation.
 
-Use `uuid` as the path parameter of `List Git installation repositories`.
+Use `uuid` as the path parameter of `List Git installation repositories`, and as
+`installation_uuid` in `Start Node.js build` with `source_type` `git` and in
+`Update Git auto-deployment settings`.
 
 ```
 hostinger hosting git list-installations [flags]

@@ -1329,12 +1329,15 @@ func (e HostingV1NodeJsBuildOptionsResourcePackageManager) Valid() bool {
 // Defines values for HostingV1NodeJsBuildOptionsResourceSourceType.
 const (
 	HostingV1NodeJsBuildOptionsResourceSourceTypeArchive HostingV1NodeJsBuildOptionsResourceSourceType = "archive"
+	HostingV1NodeJsBuildOptionsResourceSourceTypeGit     HostingV1NodeJsBuildOptionsResourceSourceType = "git"
 )
 
 // Valid indicates whether the value is a known member of the HostingV1NodeJsBuildOptionsResourceSourceType enum.
 func (e HostingV1NodeJsBuildOptionsResourceSourceType) Valid() bool {
 	switch e {
 	case HostingV1NodeJsBuildOptionsResourceSourceTypeArchive:
+		return true
+	case HostingV1NodeJsBuildOptionsResourceSourceTypeGit:
 		return true
 	default:
 		return false
@@ -1572,12 +1575,15 @@ func (e HostingV1NodeJsStartBuildRequestPackageManager) Valid() bool {
 // Defines values for HostingV1NodeJsStartBuildRequestSourceType.
 const (
 	HostingV1NodeJsStartBuildRequestSourceTypeArchive HostingV1NodeJsStartBuildRequestSourceType = "archive"
+	HostingV1NodeJsStartBuildRequestSourceTypeGit     HostingV1NodeJsStartBuildRequestSourceType = "git"
 )
 
 // Valid indicates whether the value is a known member of the HostingV1NodeJsStartBuildRequestSourceType enum.
 func (e HostingV1NodeJsStartBuildRequestSourceType) Valid() bool {
 	switch e {
 	case HostingV1NodeJsStartBuildRequestSourceTypeArchive:
+		return true
+	case HostingV1NodeJsStartBuildRequestSourceTypeGit:
 		return true
 	default:
 		return false
@@ -10191,6 +10197,68 @@ type HostingV1FilesUploadUrlResource struct {
 	Url string `json:"url"`
 }
 
+// HostingV1GitGitAutoDeploymentSettingsResource Every field is null when the website has no Git auto-deployment configured.
+type HostingV1GitGitAutoDeploymentSettingsResource struct {
+	// Branch Branch that is deployed
+	//
+	// Example: main
+	Branch *string `json:"branch"`
+
+	// Directory Subdirectory under the website document root the repository deploys into. Empty means
+	// the document root.
+	//
+	// Example: my-api
+	Directory *string `json:"directory"`
+
+	// InstallationUuid Git installation the repository is accessed through
+	//
+	// Example: 018f5e2a-1234-7890-abcd-1234567890ab
+	InstallationUuid *string `json:"installation_uuid"`
+
+	// IsEnabled Whether pushes to the branch deploy automatically
+	//
+	// Example: true
+	IsEnabled *bool `json:"is_enabled"`
+
+	// Owner Repository owner login
+	//
+	// Example: octocat
+	Owner *string `json:"owner"`
+
+	// Repository Repository name
+	//
+	// Example: my-site
+	Repository *string `json:"repository"`
+}
+
+// HostingV1GitGitCommitAuthorResource defines model for Hosting.V1.Git.GitCommitAuthorResource.
+type HostingV1GitGitCommitAuthorResource struct {
+	// AvatarUrl Avatar URL of the author on the Git provider
+	//
+	// Example: https://avatars.githubusercontent.com/u/583231
+	AvatarUrl *string `json:"avatar_url"`
+
+	// Name Author name as recorded in the commit
+	//
+	// Example: Jane Doe
+	Name string `json:"name"`
+}
+
+// HostingV1GitGitCommitResource defines model for Hosting.V1.Git.GitCommitResource.
+type HostingV1GitGitCommitResource struct {
+	Author HostingV1GitGitCommitAuthorResource `json:"author"`
+
+	// Hash Full commit SHA
+	//
+	// Example: a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0
+	Hash string `json:"hash"`
+
+	// Message Commit message
+	//
+	// Example: Initial commit
+	Message string `json:"message"`
+}
+
 // HostingV1GitGitInstallationCollection Array of [`Hosting.V1.Git.GitInstallationResource`](#model/hostingv1gitgitinstallationresource)
 type HostingV1GitGitInstallationCollection = []HostingV1GitGitInstallationResource
 
@@ -10305,6 +10373,41 @@ type HostingV1GitGitRepositoryResource struct {
 	//
 	// Example: octocat
 	Owner string `json:"owner"`
+}
+
+// HostingV1GitUpdateGitAutoDeploymentSettingsRequest defines model for Hosting.V1.Git.UpdateGitAutoDeploymentSettingsRequest.
+type HostingV1GitUpdateGitAutoDeploymentSettingsRequest struct {
+	// Branch Branch to deploy
+	//
+	// Example: main
+	Branch string `json:"branch"`
+
+	// Directory Subdirectory under the website document root to deploy into. Empty, null or omitted means
+	// the document root.
+	//
+	// Example: my-api
+	Directory *string `json:"directory,omitempty"`
+
+	// InstallationUuid Active Git installation from `List Git installations`
+	//
+	// Example: 018f5e2a-1234-7890-abcd-1234567890ab
+	InstallationUuid string `json:"installation_uuid"`
+
+	// IsEnabled Whether pushes to the branch deploy automatically
+	//
+	// Example: true
+	IsEnabled *bool `json:"is_enabled,omitempty"`
+
+	// Owner Repository owner login, as returned by `List Git installation repositories`. GitLab group
+	// paths use slashes.
+	//
+	// Example: octocat
+	Owner string `json:"owner"`
+
+	// Repository Repository name without the .git suffix
+	//
+	// Example: my-site
+	Repository string `json:"repository"`
 }
 
 // HostingV1NodeJsBuildAnalysisResource defines model for Hosting.V1.NodeJs.BuildAnalysisResource.
@@ -10603,12 +10706,42 @@ type HostingV1NodeJsSetBuildEnvVarsRequest struct {
 	} `json:"env_vars"`
 }
 
-// HostingV1NodeJsSourceOptionsResource defines model for Hosting.V1.NodeJs.SourceOptionsResource.
+// HostingV1NodeJsSourceOptionsResource Which keys carry values depends on the parent source_type; the others are null.
 type HostingV1NodeJsSourceOptionsResource struct {
 	// ArchivePath Present if sourceType is "archive"
 	//
 	// Example: archive.zip
 	ArchivePath *string `json:"archive_path,omitempty"`
+
+	// Branch Branch that was built (present if source_type is "git")
+	//
+	// Example: main
+	Branch *string `json:"branch"`
+
+	// Commit Commit that was built (present if source_type is "git"). Null until the clone step
+	// has resolved the branch head.
+	Commit *HostingV1NodeJsSourceOptionsResource_Commit `json:"commit"`
+
+	// InstallationUuid Git installation used to access the repository (present if source_type is "git")
+	//
+	// Example: 018f5e2a-1234-7890-abcd-1234567890ab
+	InstallationUuid *string `json:"installation_uuid"`
+
+	// Owner Repository owner login (present if source_type is "git")
+	//
+	// Example: octocat
+	Owner *string `json:"owner"`
+
+	// Repository Repository name without the .git suffix (present if source_type is "git")
+	//
+	// Example: my-site
+	Repository *string `json:"repository"`
+}
+
+// HostingV1NodeJsSourceOptionsResource_Commit Commit that was built (present if source_type is "git"). Null until the clone step
+// has resolved the branch head.
+type HostingV1NodeJsSourceOptionsResource_Commit struct {
+	union json.RawMessage
 }
 
 // HostingV1NodeJsStartBuildRequest defines model for Hosting.V1.NodeJs.StartBuildRequest.
@@ -10648,15 +10781,39 @@ type HostingV1NodeJsStartBuildRequest struct {
 	// Example: webapp
 	RootDirectory *string `json:"root_directory"`
 
-	// SourceOptions Source-specific options
+	// SourceOptions Source-specific options. For `archive` send `archive_path`. For `git` send `owner`,
+	// `repository`, `branch` and `installation_uuid`, taken from `List Git installations`
+	// and `List Git installation repositories`.
 	SourceOptions *struct {
 		// ArchivePath The path to the archive file relative to the document root of the vhost (required if source is "archive")
 		//
 		// Example: example.zip
 		ArchivePath *string `json:"archive_path,omitempty"`
+
+		// Branch Branch to build (required if source is "git")
+		//
+		// Example: main
+		Branch *string `json:"branch,omitempty"`
+
+		// InstallationUuid Git installation used to access the repository (required if source is "git")
+		//
+		// Example: 018f5e2a-1234-7890-abcd-1234567890ab
+		InstallationUuid *string `json:"installation_uuid,omitempty"`
+
+		// Owner Repository owner login (required if source is "git"). GitLab group paths use
+		// slashes.
+		//
+		// Example: octocat
+		Owner *string `json:"owner,omitempty"`
+
+		// Repository Repository name without the .git suffix (required if source is "git")
+		//
+		// Example: my-site
+		Repository *string `json:"repository,omitempty"`
 	} `json:"source_options"`
 
-	// SourceType The source type of the files
+	// SourceType Where the files come from: `archive` (an uploaded archive on the website) or `git`
+	// (a branch of a repository reachable through a Git installation).
 	//
 	// Example: archive
 	SourceType HostingV1NodeJsStartBuildRequestSourceType `json:"source_type"`
@@ -10677,7 +10834,8 @@ type HostingV1NodeJsStartBuildRequestNodeVersion int
 // Example: npm
 type HostingV1NodeJsStartBuildRequestPackageManager string
 
-// HostingV1NodeJsStartBuildRequestSourceType The source type of the files
+// HostingV1NodeJsStartBuildRequestSourceType Where the files come from: `archive` (an uploaded archive on the website) or `git`
+// (a branch of a repository reachable through a Git installation).
 //
 // Example: archive
 type HostingV1NodeJsStartBuildRequestSourceType string
@@ -17124,6 +17282,9 @@ type HostingToggleCachelessModeV1JSONRequestBody = HostingV1CacheToggleCacheless
 // HostingDeployStaticSiteArchiveV1JSONRequestBody defines body for HostingDeployStaticSiteArchiveV1 for application/json ContentType.
 type HostingDeployStaticSiteArchiveV1JSONRequestBody = HostingV1WebsitesDeployArchiveRequest
 
+// HostingUpdateGitAutoDeploymentSettingsV1JSONRequestBody defines body for HostingUpdateGitAutoDeploymentSettingsV1 for application/json ContentType.
+type HostingUpdateGitAutoDeploymentSettingsV1JSONRequestBody = HostingV1GitUpdateGitAutoDeploymentSettingsRequest
+
 // HostingStartNodeJsBuildV1JSONRequestBody defines body for HostingStartNodeJsBuildV1 for application/json ContentType.
 type HostingStartNodeJsBuildV1JSONRequestBody = HostingV1NodeJsStartBuildRequest
 
@@ -17770,6 +17931,42 @@ func (t HostingV1NodeJsBuildResource_Options) MarshalJSON() ([]byte, error) {
 }
 
 func (t *HostingV1NodeJsBuildResource_Options) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsHostingV1GitGitCommitResource returns the union data inside the HostingV1NodeJsSourceOptionsResource_Commit as a HostingV1GitGitCommitResource
+func (t HostingV1NodeJsSourceOptionsResource_Commit) AsHostingV1GitGitCommitResource() (HostingV1GitGitCommitResource, error) {
+	var body HostingV1GitGitCommitResource
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromHostingV1GitGitCommitResource overwrites any union data inside the HostingV1NodeJsSourceOptionsResource_Commit as the provided HostingV1GitGitCommitResource
+func (t *HostingV1NodeJsSourceOptionsResource_Commit) FromHostingV1GitGitCommitResource(v HostingV1GitGitCommitResource) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeHostingV1GitGitCommitResource performs a merge with any union data inside the HostingV1NodeJsSourceOptionsResource_Commit, using the provided HostingV1GitGitCommitResource
+func (t *HostingV1NodeJsSourceOptionsResource_Commit) MergeHostingV1GitGitCommitResource(v HostingV1GitGitCommitResource) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t HostingV1NodeJsSourceOptionsResource_Commit) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *HostingV1NodeJsSourceOptionsResource_Commit) UnmarshalJSON(b []byte) error {
 	err := t.union.UnmarshalJSON(b)
 	return err
 }
@@ -20936,6 +21133,65 @@ type ClientInterface interface {
 	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/deploy (the `HostingDeployStaticSiteArchiveV1` operationId).
 	HostingDeployStaticSiteArchiveV1(ctx context.Context, username UsernamePath, domain Domain, body HostingDeployStaticSiteArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// HostingDeleteGitAutoDeploymentSettingsV1 Delete Git auto-deployment settings
+	//
+	// Removes the Git auto-deployment settings of the website. Files already deployed stay on the
+	// website; pushes stop deploying until settings are saved again. Succeeds also when nothing is
+	// configured.
+	//
+	// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/git/auto-deployments/settings (the `HostingDeleteGitAutoDeploymentSettingsV1` operationId).
+	HostingDeleteGitAutoDeploymentSettingsV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingGetGitAutoDeploymentSettingsV1 Get Git auto-deployment settings
+	//
+	// Returns the Git auto-deployment settings of the website: which repository and branch deploy
+	// into which directory, and whether pushes trigger a deployment. `is_enabled` false keeps the
+	// repository link but ignores pushes.
+	//
+	// When the website has no auto-deployment configured every field is null. Save settings with
+	// `Update Git auto-deployment settings`.
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/git/auto-deployments/settings (the `HostingGetGitAutoDeploymentSettingsV1` operationId).
+	HostingGetGitAutoDeploymentSettingsV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingUpdateGitAutoDeploymentSettingsV1WithBody Update Git auto-deployment settings
+	//
+	// Creates or replaces the Git auto-deployment settings of the website: repository, branch, the
+	// directory under the document root to deploy into, and `is_enabled`. Send the full set;
+	// `is_enabled` defaults to true and `directory` to the document root. `installation_uuid` must
+	// be an installation from `List Git installations` that belongs to the same customer as the
+	// website.
+	//
+	// For PHP and static websites, saving with `is_enabled` true deploys the branch right away and
+	// every later push to that branch deploys again. For Node.js and Website Builder websites saving
+	// does not clone anything. On a Node.js website start the first deploy with
+	// `Start Node.js build` using `source_type` `git`; pushes then trigger new builds with the build
+	// settings stored for the website.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/git/auto-deployments/settings (the `HostingUpdateGitAutoDeploymentSettingsV1` operationId).
+	HostingUpdateGitAutoDeploymentSettingsV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingUpdateGitAutoDeploymentSettingsV1 Update Git auto-deployment settings
+	//
+	// Creates or replaces the Git auto-deployment settings of the website: repository, branch, the
+	// directory under the document root to deploy into, and `is_enabled`. Send the full set;
+	// `is_enabled` defaults to true and `directory` to the document root. `installation_uuid` must
+	// be an installation from `List Git installations` that belongs to the same customer as the
+	// website.
+	//
+	// For PHP and static websites, saving with `is_enabled` true deploys the branch right away and
+	// every later push to that branch deploys again. For Node.js and Website Builder websites saving
+	// does not clone anything. On a Node.js website start the first deploy with
+	// `Start Node.js build` using `source_type` `git`; pushes then trigger new builds with the build
+	// settings stored for the website.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/git/auto-deployments/settings (the `HostingUpdateGitAutoDeploymentSettingsV1` operationId).
+	HostingUpdateGitAutoDeploymentSettingsV1(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdateGitAutoDeploymentSettingsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// HostingListNodeJSBuildsV1 List NodeJS builds
 	//
 	// Retrieve a paginated list of Node.js build processes for a specific website.
@@ -20954,12 +21210,16 @@ type ClientInterface interface {
 	// WARNING: on success this overwrites the website's existing contents and cannot be
 	// undone — verify this is intended before calling this endpoint.
 	//
-	// The `source_type` must be `archive` and `source_options.archive_path` must point to an
-	// existing archive file on the server (relative to the website document root).
-	// Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
-	//
-	// To auto-detect build settings from an archive before starting, first call the
+	// With `source_type` `archive`, `source_options.archive_path` must point to an existing
+	// archive file on the server (relative to the website document root). Use the
+	// `Generate Upload URL` endpoint to obtain credentials and upload the archive first. To
+	// auto-detect build settings from an archive before starting, first call the
 	// `Get Node.js Build Settings from Archive` endpoint.
+	//
+	// With `source_type` `git`, `source_options` carries `owner`, `repository`, `branch` and
+	// `installation_uuid`. Take the installation from `List Git installations` and the owner and
+	// repository from `List Git installation repositories`; the branch is cloned at its current
+	// head. The installation must belong to the same customer as the website.
 	//
 	// The returned build `uuid` can be used to poll progress and retrieve logs via
 	// the `Get Node.js Build Logs` endpoint.
@@ -20976,12 +21236,16 @@ type ClientInterface interface {
 	// WARNING: on success this overwrites the website's existing contents and cannot be
 	// undone — verify this is intended before calling this endpoint.
 	//
-	// The `source_type` must be `archive` and `source_options.archive_path` must point to an
-	// existing archive file on the server (relative to the website document root).
-	// Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
-	//
-	// To auto-detect build settings from an archive before starting, first call the
+	// With `source_type` `archive`, `source_options.archive_path` must point to an existing
+	// archive file on the server (relative to the website document root). Use the
+	// `Generate Upload URL` endpoint to obtain credentials and upload the archive first. To
+	// auto-detect build settings from an archive before starting, first call the
 	// `Get Node.js Build Settings from Archive` endpoint.
+	//
+	// With `source_type` `git`, `source_options` carries `owner`, `repository`, `branch` and
+	// `installation_uuid`. Take the installation from `List Git installations` and the owner and
+	// repository from `List Git installation repositories`; the branch is cloned at its current
+	// head. The installation must belong to the same customer as the website.
 	//
 	// The returned build `uuid` can be used to poll progress and retrieve logs via
 	// the `Get Node.js Build Logs` endpoint.
@@ -22374,11 +22638,13 @@ type ClientInterface interface {
 	// `active` are returned unless the `status` filter says otherwise.
 	//
 	// An empty list means the customer has no active installation. Check `status=suspended` and
-	// `status=pending` as well. If there is none at all, GitHub has to be connected once in hPanel
-	// (Websites, Manage, Advanced, Git, Connect GitHub; or Add Website, Node.js Web App, Import Git
-	// Repository, Continue with GitHub); this endpoint then lists the new installation.
+	// `status=pending` as well. If there is none at all, a Git provider (GitHub or GitLab) has to be
+	// connected once in hPanel (Websites, Manage, Advanced, Git; or Add Website, Node.js Web App,
+	// Import Git Repository); this endpoint then lists the new installation.
 	//
-	// Use `uuid` as the path parameter of `List Git installation repositories`.
+	// Use `uuid` as the path parameter of `List Git installation repositories`, and as
+	// `installation_uuid` in `Start Node.js build` with `source_type` `git` and in
+	// `Update Git auto-deployment settings`.
 	//
 	// Corresponds with GET /api/hosting/v1/git/installations (the `HostingListGitInstallationsV1` operationId).
 	HostingListGitInstallationsV1(ctx context.Context, params *HostingListGitInstallationsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -22391,9 +22657,10 @@ type ClientInterface interface {
 	// the first 500 repositories in the order the provider returns them; when the account has
 	// more, name the repository directly instead of searching this list.
 	//
-	// `owner`, `name` and `default_branch` identify a repository and a branch to deploy. Returns
-	// 404 when the installation does not belong to the customer. Limited to 10 calls per minute
-	// per API client (429 above that).
+	// `owner`, `name` and a branch (`default_branch` or another one) go into `source_options` of
+	// `Start Node.js build` or into `Update Git auto-deployment settings`. Returns 404 when the
+	// installation does not belong to the customer. Limited to 10 calls per minute per API client
+	// (429 above that).
 	//
 	// Corresponds with GET /api/hosting/v1/git/installations/{uuid}/repositories (the `HostingListGitInstallationRepositoriesV1` operationId).
 	HostingListGitInstallationRepositoriesV1(ctx context.Context, uuid GitInstallationUuidPath, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -29489,6 +29756,105 @@ func (c *Client) HostingDeployStaticSiteArchiveV1(ctx context.Context, username 
 	return c.Client.Do(req)
 }
 
+// HostingDeleteGitAutoDeploymentSettingsV1 Delete Git auto-deployment settings
+//
+// Removes the Git auto-deployment settings of the website. Files already deployed stay on the
+// website; pushes stop deploying until settings are saved again. Succeeds also when nothing is
+// configured.
+//
+// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/git/auto-deployments/settings (the `HostingDeleteGitAutoDeploymentSettingsV1` operationId).
+func (c *Client) HostingDeleteGitAutoDeploymentSettingsV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingDeleteGitAutoDeploymentSettingsV1Request(c.Server, username, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingGetGitAutoDeploymentSettingsV1 Get Git auto-deployment settings
+//
+// Returns the Git auto-deployment settings of the website: which repository and branch deploy
+// into which directory, and whether pushes trigger a deployment. `is_enabled` false keeps the
+// repository link but ignores pushes.
+//
+// When the website has no auto-deployment configured every field is null. Save settings with
+// `Update Git auto-deployment settings`.
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/git/auto-deployments/settings (the `HostingGetGitAutoDeploymentSettingsV1` operationId).
+func (c *Client) HostingGetGitAutoDeploymentSettingsV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingGetGitAutoDeploymentSettingsV1Request(c.Server, username, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingUpdateGitAutoDeploymentSettingsV1WithBody Update Git auto-deployment settings
+//
+// Creates or replaces the Git auto-deployment settings of the website: repository, branch, the
+// directory under the document root to deploy into, and `is_enabled`. Send the full set;
+// `is_enabled` defaults to true and `directory` to the document root. `installation_uuid` must
+// be an installation from `List Git installations` that belongs to the same customer as the
+// website.
+//
+// For PHP and static websites, saving with `is_enabled` true deploys the branch right away and
+// every later push to that branch deploys again. For Node.js and Website Builder websites saving
+// does not clone anything. On a Node.js website start the first deploy with
+// `Start Node.js build` using `source_type` `git`; pushes then trigger new builds with the build
+// settings stored for the website.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/git/auto-deployments/settings (the `HostingUpdateGitAutoDeploymentSettingsV1` operationId).
+func (c *Client) HostingUpdateGitAutoDeploymentSettingsV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingUpdateGitAutoDeploymentSettingsV1RequestWithBody(c.Server, username, domain, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingUpdateGitAutoDeploymentSettingsV1 Update Git auto-deployment settings
+//
+// Creates or replaces the Git auto-deployment settings of the website: repository, branch, the
+// directory under the document root to deploy into, and `is_enabled`. Send the full set;
+// `is_enabled` defaults to true and `directory` to the document root. `installation_uuid` must
+// be an installation from `List Git installations` that belongs to the same customer as the
+// website.
+//
+// For PHP and static websites, saving with `is_enabled` true deploys the branch right away and
+// every later push to that branch deploys again. For Node.js and Website Builder websites saving
+// does not clone anything. On a Node.js website start the first deploy with
+// `Start Node.js build` using `source_type` `git`; pushes then trigger new builds with the build
+// settings stored for the website.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/git/auto-deployments/settings (the `HostingUpdateGitAutoDeploymentSettingsV1` operationId).
+func (c *Client) HostingUpdateGitAutoDeploymentSettingsV1(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdateGitAutoDeploymentSettingsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingUpdateGitAutoDeploymentSettingsV1Request(c.Server, username, domain, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // HostingListNodeJSBuildsV1 List NodeJS builds
 //
 // Retrieve a paginated list of Node.js build processes for a specific website.
@@ -29517,12 +29883,16 @@ func (c *Client) HostingListNodeJSBuildsV1(ctx context.Context, username Usernam
 // WARNING: on success this overwrites the website's existing contents and cannot be
 // undone — verify this is intended before calling this endpoint.
 //
-// The `source_type` must be `archive` and `source_options.archive_path` must point to an
-// existing archive file on the server (relative to the website document root).
-// Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
-//
-// To auto-detect build settings from an archive before starting, first call the
+// With `source_type` `archive`, `source_options.archive_path` must point to an existing
+// archive file on the server (relative to the website document root). Use the
+// `Generate Upload URL` endpoint to obtain credentials and upload the archive first. To
+// auto-detect build settings from an archive before starting, first call the
 // `Get Node.js Build Settings from Archive` endpoint.
+//
+// With `source_type` `git`, `source_options` carries `owner`, `repository`, `branch` and
+// `installation_uuid`. Take the installation from `List Git installations` and the owner and
+// repository from `List Git installation repositories`; the branch is cloned at its current
+// head. The installation must belong to the same customer as the website.
 //
 // The returned build `uuid` can be used to poll progress and retrieve logs via
 // the `Get Node.js Build Logs` endpoint.
@@ -29549,12 +29919,16 @@ func (c *Client) HostingStartNodeJsBuildV1WithBody(ctx context.Context, username
 // WARNING: on success this overwrites the website's existing contents and cannot be
 // undone — verify this is intended before calling this endpoint.
 //
-// The `source_type` must be `archive` and `source_options.archive_path` must point to an
-// existing archive file on the server (relative to the website document root).
-// Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
-//
-// To auto-detect build settings from an archive before starting, first call the
+// With `source_type` `archive`, `source_options.archive_path` must point to an existing
+// archive file on the server (relative to the website document root). Use the
+// `Generate Upload URL` endpoint to obtain credentials and upload the archive first. To
+// auto-detect build settings from an archive before starting, first call the
 // `Get Node.js Build Settings from Archive` endpoint.
+//
+// With `source_type` `git`, `source_options` carries `owner`, `repository`, `branch` and
+// `installation_uuid`. Take the installation from `List Git installations` and the owner and
+// repository from `List Git installation repositories`; the branch is cloned at its current
+// head. The installation must belong to the same customer as the website.
 //
 // The returned build `uuid` can be used to poll progress and retrieve logs via
 // the `Get Node.js Build Logs` endpoint.
@@ -31921,11 +32295,13 @@ func (c *Client) HostingGenerateUploadURLV1(ctx context.Context, body HostingGen
 // `active` are returned unless the `status` filter says otherwise.
 //
 // An empty list means the customer has no active installation. Check `status=suspended` and
-// `status=pending` as well. If there is none at all, GitHub has to be connected once in hPanel
-// (Websites, Manage, Advanced, Git, Connect GitHub; or Add Website, Node.js Web App, Import Git
-// Repository, Continue with GitHub); this endpoint then lists the new installation.
+// `status=pending` as well. If there is none at all, a Git provider (GitHub or GitLab) has to be
+// connected once in hPanel (Websites, Manage, Advanced, Git; or Add Website, Node.js Web App,
+// Import Git Repository); this endpoint then lists the new installation.
 //
-// Use `uuid` as the path parameter of `List Git installation repositories`.
+// Use `uuid` as the path parameter of `List Git installation repositories`, and as
+// `installation_uuid` in `Start Node.js build` with `source_type` `git` and in
+// `Update Git auto-deployment settings`.
 //
 // Corresponds with GET /api/hosting/v1/git/installations (the `HostingListGitInstallationsV1` operationId).
 func (c *Client) HostingListGitInstallationsV1(ctx context.Context, params *HostingListGitInstallationsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -31948,9 +32324,10 @@ func (c *Client) HostingListGitInstallationsV1(ctx context.Context, params *Host
 // the first 500 repositories in the order the provider returns them; when the account has
 // more, name the repository directly instead of searching this list.
 //
-// `owner`, `name` and `default_branch` identify a repository and a branch to deploy. Returns
-// 404 when the installation does not belong to the customer. Limited to 10 calls per minute
-// per API client (429 above that).
+// `owner`, `name` and a branch (`default_branch` or another one) go into `source_options` of
+// `Start Node.js build` or into `Update Git auto-deployment settings`. Returns 404 when the
+// installation does not belong to the customer. Limited to 10 calls per minute per API client
+// (429 above that).
 //
 // Corresponds with GET /api/hosting/v1/git/installations/{uuid}/repositories (the `HostingListGitInstallationRepositoriesV1` operationId).
 func (c *Client) HostingListGitInstallationRepositoriesV1(ctx context.Context, uuid GitInstallationUuidPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -43384,6 +43761,142 @@ func NewHostingDeployStaticSiteArchiveV1RequestWithBody(server string, username 
 	}
 
 	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingDeleteGitAutoDeploymentSettingsV1Request constructs an http.Request for the HostingDeleteGitAutoDeploymentSettingsV1 method
+func NewHostingDeleteGitAutoDeploymentSettingsV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/git/auto-deployments/settings", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingGetGitAutoDeploymentSettingsV1Request constructs an http.Request for the HostingGetGitAutoDeploymentSettingsV1 method
+func NewHostingGetGitAutoDeploymentSettingsV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/git/auto-deployments/settings", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingUpdateGitAutoDeploymentSettingsV1Request calls the generic HostingUpdateGitAutoDeploymentSettingsV1 builder with application/json body
+func NewHostingUpdateGitAutoDeploymentSettingsV1Request(server string, username UsernamePath, domain Domain, body HostingUpdateGitAutoDeploymentSettingsV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingUpdateGitAutoDeploymentSettingsV1RequestWithBody(server, username, domain, "application/json", bodyReader)
+}
+
+// NewHostingUpdateGitAutoDeploymentSettingsV1RequestWithBody constructs an http.Request for the HostingUpdateGitAutoDeploymentSettingsV1 method, with any body, and a specified content type
+func NewHostingUpdateGitAutoDeploymentSettingsV1RequestWithBody(server string, username UsernamePath, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/git/auto-deployments/settings", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -57964,6 +58477,69 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/deploy (the `HostingDeployStaticSiteArchiveV1` operationId).
 	HostingDeployStaticSiteArchiveV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingDeployStaticSiteArchiveV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingDeployStaticSiteArchiveV1Response, error)
 
+	// HostingDeleteGitAutoDeploymentSettingsV1WithResponse Delete Git auto-deployment settings
+	//
+	// Removes the Git auto-deployment settings of the website. Files already deployed stay on the
+	// website; pushes stop deploying until settings are saved again. Succeeds also when nothing is
+	// configured.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/git/auto-deployments/settings (the `HostingDeleteGitAutoDeploymentSettingsV1` operationId).
+	HostingDeleteGitAutoDeploymentSettingsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingDeleteGitAutoDeploymentSettingsV1Response, error)
+
+	// HostingGetGitAutoDeploymentSettingsV1WithResponse Get Git auto-deployment settings
+	//
+	// Returns the Git auto-deployment settings of the website: which repository and branch deploy
+	// into which directory, and whether pushes trigger a deployment. `is_enabled` false keeps the
+	// repository link but ignores pushes.
+	//
+	// When the website has no auto-deployment configured every field is null. Save settings with
+	// `Update Git auto-deployment settings`.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/git/auto-deployments/settings (the `HostingGetGitAutoDeploymentSettingsV1` operationId).
+	HostingGetGitAutoDeploymentSettingsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingGetGitAutoDeploymentSettingsV1Response, error)
+
+	// HostingUpdateGitAutoDeploymentSettingsV1WithBodyWithResponse Update Git auto-deployment settings
+	//
+	// Creates or replaces the Git auto-deployment settings of the website: repository, branch, the
+	// directory under the document root to deploy into, and `is_enabled`. Send the full set;
+	// `is_enabled` defaults to true and `directory` to the document root. `installation_uuid` must
+	// be an installation from `List Git installations` that belongs to the same customer as the
+	// website.
+	//
+	// For PHP and static websites, saving with `is_enabled` true deploys the branch right away and
+	// every later push to that branch deploys again. For Node.js and Website Builder websites saving
+	// does not clone anything. On a Node.js website start the first deploy with
+	// `Start Node.js build` using `source_type` `git`; pushes then trigger new builds with the build
+	// settings stored for the website.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/git/auto-deployments/settings (the `HostingUpdateGitAutoDeploymentSettingsV1` operationId).
+	HostingUpdateGitAutoDeploymentSettingsV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingUpdateGitAutoDeploymentSettingsV1Response, error)
+
+	// HostingUpdateGitAutoDeploymentSettingsV1WithResponse Update Git auto-deployment settings
+	//
+	// Creates or replaces the Git auto-deployment settings of the website: repository, branch, the
+	// directory under the document root to deploy into, and `is_enabled`. Send the full set;
+	// `is_enabled` defaults to true and `directory` to the document root. `installation_uuid` must
+	// be an installation from `List Git installations` that belongs to the same customer as the
+	// website.
+	//
+	// For PHP and static websites, saving with `is_enabled` true deploys the branch right away and
+	// every later push to that branch deploys again. For Node.js and Website Builder websites saving
+	// does not clone anything. On a Node.js website start the first deploy with
+	// `Start Node.js build` using `source_type` `git`; pushes then trigger new builds with the build
+	// settings stored for the website.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/git/auto-deployments/settings (the `HostingUpdateGitAutoDeploymentSettingsV1` operationId).
+	HostingUpdateGitAutoDeploymentSettingsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdateGitAutoDeploymentSettingsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUpdateGitAutoDeploymentSettingsV1Response, error)
+
 	// HostingListNodeJSBuildsV1WithResponse List NodeJS builds
 	//
 	// Retrieve a paginated list of Node.js build processes for a specific website.
@@ -57984,12 +58560,16 @@ type ClientWithResponsesInterface interface {
 	// WARNING: on success this overwrites the website's existing contents and cannot be
 	// undone — verify this is intended before calling this endpoint.
 	//
-	// The `source_type` must be `archive` and `source_options.archive_path` must point to an
-	// existing archive file on the server (relative to the website document root).
-	// Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
-	//
-	// To auto-detect build settings from an archive before starting, first call the
+	// With `source_type` `archive`, `source_options.archive_path` must point to an existing
+	// archive file on the server (relative to the website document root). Use the
+	// `Generate Upload URL` endpoint to obtain credentials and upload the archive first. To
+	// auto-detect build settings from an archive before starting, first call the
 	// `Get Node.js Build Settings from Archive` endpoint.
+	//
+	// With `source_type` `git`, `source_options` carries `owner`, `repository`, `branch` and
+	// `installation_uuid`. Take the installation from `List Git installations` and the owner and
+	// repository from `List Git installation repositories`; the branch is cloned at its current
+	// head. The installation must belong to the same customer as the website.
 	//
 	// The returned build `uuid` can be used to poll progress and retrieve logs via
 	// the `Get Node.js Build Logs` endpoint.
@@ -58006,12 +58586,16 @@ type ClientWithResponsesInterface interface {
 	// WARNING: on success this overwrites the website's existing contents and cannot be
 	// undone — verify this is intended before calling this endpoint.
 	//
-	// The `source_type` must be `archive` and `source_options.archive_path` must point to an
-	// existing archive file on the server (relative to the website document root).
-	// Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
-	//
-	// To auto-detect build settings from an archive before starting, first call the
+	// With `source_type` `archive`, `source_options.archive_path` must point to an existing
+	// archive file on the server (relative to the website document root). Use the
+	// `Generate Upload URL` endpoint to obtain credentials and upload the archive first. To
+	// auto-detect build settings from an archive before starting, first call the
 	// `Get Node.js Build Settings from Archive` endpoint.
+	//
+	// With `source_type` `git`, `source_options` carries `owner`, `repository`, `branch` and
+	// `installation_uuid`. Take the installation from `List Git installations` and the owner and
+	// repository from `List Git installation repositories`; the branch is cloned at its current
+	// head. The installation must belong to the same customer as the website.
 	//
 	// The returned build `uuid` can be used to poll progress and retrieve logs via
 	// the `Get Node.js Build Logs` endpoint.
@@ -59472,11 +60056,13 @@ type ClientWithResponsesInterface interface {
 	// `active` are returned unless the `status` filter says otherwise.
 	//
 	// An empty list means the customer has no active installation. Check `status=suspended` and
-	// `status=pending` as well. If there is none at all, GitHub has to be connected once in hPanel
-	// (Websites, Manage, Advanced, Git, Connect GitHub; or Add Website, Node.js Web App, Import Git
-	// Repository, Continue with GitHub); this endpoint then lists the new installation.
+	// `status=pending` as well. If there is none at all, a Git provider (GitHub or GitLab) has to be
+	// connected once in hPanel (Websites, Manage, Advanced, Git; or Add Website, Node.js Web App,
+	// Import Git Repository); this endpoint then lists the new installation.
 	//
-	// Use `uuid` as the path parameter of `List Git installation repositories`.
+	// Use `uuid` as the path parameter of `List Git installation repositories`, and as
+	// `installation_uuid` in `Start Node.js build` with `source_type` `git` and in
+	// `Update Git auto-deployment settings`.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
@@ -59491,9 +60077,10 @@ type ClientWithResponsesInterface interface {
 	// the first 500 repositories in the order the provider returns them; when the account has
 	// more, name the repository directly instead of searching this list.
 	//
-	// `owner`, `name` and `default_branch` identify a repository and a branch to deploy. Returns
-	// 404 when the installation does not belong to the customer. Limited to 10 calls per minute
-	// per API client (429 above that).
+	// `owner`, `name` and a branch (`default_branch` or another one) go into `source_options` of
+	// `Start Node.js build` or into `Update Git auto-deployment settings`. Returns 404 when the
+	// installation does not belong to the customer. Limited to 10 calls per minute per API client
+	// (429 above that).
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
@@ -70895,6 +71482,178 @@ func (r HostingDeployStaticSiteArchiveV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingDeployStaticSiteArchiveV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingDeleteGitAutoDeploymentSettingsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingDeleteGitAutoDeploymentSettingsV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingDeleteGitAutoDeploymentSettingsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingDeleteGitAutoDeploymentSettingsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingDeleteGitAutoDeploymentSettingsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingDeleteGitAutoDeploymentSettingsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingDeleteGitAutoDeploymentSettingsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingDeleteGitAutoDeploymentSettingsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingGetGitAutoDeploymentSettingsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1GitGitAutoDeploymentSettingsResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingGetGitAutoDeploymentSettingsV1Response) GetJSON200() *HostingV1GitGitAutoDeploymentSettingsResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingGetGitAutoDeploymentSettingsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingGetGitAutoDeploymentSettingsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingGetGitAutoDeploymentSettingsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingGetGitAutoDeploymentSettingsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingGetGitAutoDeploymentSettingsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingGetGitAutoDeploymentSettingsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingUpdateGitAutoDeploymentSettingsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingUpdateGitAutoDeploymentSettingsV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingUpdateGitAutoDeploymentSettingsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingUpdateGitAutoDeploymentSettingsV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingUpdateGitAutoDeploymentSettingsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingUpdateGitAutoDeploymentSettingsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingUpdateGitAutoDeploymentSettingsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingUpdateGitAutoDeploymentSettingsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingUpdateGitAutoDeploymentSettingsV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -89191,6 +89950,93 @@ func (c *ClientWithResponses) HostingDeployStaticSiteArchiveV1WithResponse(ctx c
 	return ParseHostingDeployStaticSiteArchiveV1Response(rsp)
 }
 
+// HostingDeleteGitAutoDeploymentSettingsV1WithResponse Delete Git auto-deployment settings
+//
+// Removes the Git auto-deployment settings of the website. Files already deployed stay on the
+// website; pushes stop deploying until settings are saved again. Succeeds also when nothing is
+// configured.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/git/auto-deployments/settings (the `HostingDeleteGitAutoDeploymentSettingsV1` operationId).
+func (c *ClientWithResponses) HostingDeleteGitAutoDeploymentSettingsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingDeleteGitAutoDeploymentSettingsV1Response, error) {
+	rsp, err := c.HostingDeleteGitAutoDeploymentSettingsV1(ctx, username, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingDeleteGitAutoDeploymentSettingsV1Response(rsp)
+}
+
+// HostingGetGitAutoDeploymentSettingsV1WithResponse Get Git auto-deployment settings
+//
+// Returns the Git auto-deployment settings of the website: which repository and branch deploy
+// into which directory, and whether pushes trigger a deployment. `is_enabled` false keeps the
+// repository link but ignores pushes.
+//
+// When the website has no auto-deployment configured every field is null. Save settings with
+// `Update Git auto-deployment settings`.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/git/auto-deployments/settings (the `HostingGetGitAutoDeploymentSettingsV1` operationId).
+func (c *ClientWithResponses) HostingGetGitAutoDeploymentSettingsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingGetGitAutoDeploymentSettingsV1Response, error) {
+	rsp, err := c.HostingGetGitAutoDeploymentSettingsV1(ctx, username, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingGetGitAutoDeploymentSettingsV1Response(rsp)
+}
+
+// HostingUpdateGitAutoDeploymentSettingsV1WithBodyWithResponse Update Git auto-deployment settings
+//
+// Creates or replaces the Git auto-deployment settings of the website: repository, branch, the
+// directory under the document root to deploy into, and `is_enabled`. Send the full set;
+// `is_enabled` defaults to true and `directory` to the document root. `installation_uuid` must
+// be an installation from `List Git installations` that belongs to the same customer as the
+// website.
+//
+// For PHP and static websites, saving with `is_enabled` true deploys the branch right away and
+// every later push to that branch deploys again. For Node.js and Website Builder websites saving
+// does not clone anything. On a Node.js website start the first deploy with
+// `Start Node.js build` using `source_type` `git`; pushes then trigger new builds with the build
+// settings stored for the website.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/git/auto-deployments/settings (the `HostingUpdateGitAutoDeploymentSettingsV1` operationId).
+func (c *ClientWithResponses) HostingUpdateGitAutoDeploymentSettingsV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingUpdateGitAutoDeploymentSettingsV1Response, error) {
+	rsp, err := c.HostingUpdateGitAutoDeploymentSettingsV1WithBody(ctx, username, domain, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingUpdateGitAutoDeploymentSettingsV1Response(rsp)
+}
+
+// HostingUpdateGitAutoDeploymentSettingsV1WithResponse Update Git auto-deployment settings
+//
+// Creates or replaces the Git auto-deployment settings of the website: repository, branch, the
+// directory under the document root to deploy into, and `is_enabled`. Send the full set;
+// `is_enabled` defaults to true and `directory` to the document root. `installation_uuid` must
+// be an installation from `List Git installations` that belongs to the same customer as the
+// website.
+//
+// For PHP and static websites, saving with `is_enabled` true deploys the branch right away and
+// every later push to that branch deploys again. For Node.js and Website Builder websites saving
+// does not clone anything. On a Node.js website start the first deploy with
+// `Start Node.js build` using `source_type` `git`; pushes then trigger new builds with the build
+// settings stored for the website.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/git/auto-deployments/settings (the `HostingUpdateGitAutoDeploymentSettingsV1` operationId).
+func (c *ClientWithResponses) HostingUpdateGitAutoDeploymentSettingsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdateGitAutoDeploymentSettingsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUpdateGitAutoDeploymentSettingsV1Response, error) {
+	rsp, err := c.HostingUpdateGitAutoDeploymentSettingsV1(ctx, username, domain, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingUpdateGitAutoDeploymentSettingsV1Response(rsp)
+}
+
 // HostingListNodeJSBuildsV1WithResponse List NodeJS builds
 //
 // Retrieve a paginated list of Node.js build processes for a specific website.
@@ -89217,12 +90063,16 @@ func (c *ClientWithResponses) HostingListNodeJSBuildsV1WithResponse(ctx context.
 // WARNING: on success this overwrites the website's existing contents and cannot be
 // undone — verify this is intended before calling this endpoint.
 //
-// The `source_type` must be `archive` and `source_options.archive_path` must point to an
-// existing archive file on the server (relative to the website document root).
-// Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
-//
-// To auto-detect build settings from an archive before starting, first call the
+// With `source_type` `archive`, `source_options.archive_path` must point to an existing
+// archive file on the server (relative to the website document root). Use the
+// `Generate Upload URL` endpoint to obtain credentials and upload the archive first. To
+// auto-detect build settings from an archive before starting, first call the
 // `Get Node.js Build Settings from Archive` endpoint.
+//
+// With `source_type` `git`, `source_options` carries `owner`, `repository`, `branch` and
+// `installation_uuid`. Take the installation from `List Git installations` and the owner and
+// repository from `List Git installation repositories`; the branch is cloned at its current
+// head. The installation must belong to the same customer as the website.
 //
 // The returned build `uuid` can be used to poll progress and retrieve logs via
 // the `Get Node.js Build Logs` endpoint.
@@ -89245,12 +90095,16 @@ func (c *ClientWithResponses) HostingStartNodeJsBuildV1WithBodyWithResponse(ctx 
 // WARNING: on success this overwrites the website's existing contents and cannot be
 // undone — verify this is intended before calling this endpoint.
 //
-// The `source_type` must be `archive` and `source_options.archive_path` must point to an
-// existing archive file on the server (relative to the website document root).
-// Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
-//
-// To auto-detect build settings from an archive before starting, first call the
+// With `source_type` `archive`, `source_options.archive_path` must point to an existing
+// archive file on the server (relative to the website document root). Use the
+// `Generate Upload URL` endpoint to obtain credentials and upload the archive first. To
+// auto-detect build settings from an archive before starting, first call the
 // `Get Node.js Build Settings from Archive` endpoint.
+//
+// With `source_type` `git`, `source_options` carries `owner`, `repository`, `branch` and
+// `installation_uuid`. Take the installation from `List Git installations` and the owner and
+// repository from `List Git installation repositories`; the branch is cloned at its current
+// head. The installation must belong to the same customer as the website.
 //
 // The returned build `uuid` can be used to poll progress and retrieve logs via
 // the `Get Node.js Build Logs` endpoint.
@@ -91297,11 +92151,13 @@ func (c *ClientWithResponses) HostingGenerateUploadURLV1WithResponse(ctx context
 // `active` are returned unless the `status` filter says otherwise.
 //
 // An empty list means the customer has no active installation. Check `status=suspended` and
-// `status=pending` as well. If there is none at all, GitHub has to be connected once in hPanel
-// (Websites, Manage, Advanced, Git, Connect GitHub; or Add Website, Node.js Web App, Import Git
-// Repository, Continue with GitHub); this endpoint then lists the new installation.
+// `status=pending` as well. If there is none at all, a Git provider (GitHub or GitLab) has to be
+// connected once in hPanel (Websites, Manage, Advanced, Git; or Add Website, Node.js Web App,
+// Import Git Repository); this endpoint then lists the new installation.
 //
-// Use `uuid` as the path parameter of `List Git installation repositories`.
+// Use `uuid` as the path parameter of `List Git installation repositories`, and as
+// `installation_uuid` in `Start Node.js build` with `source_type` `git` and in
+// `Update Git auto-deployment settings`.
 //
 // Returns a wrapper object for the known response body format(s).
 //
@@ -91322,9 +92178,10 @@ func (c *ClientWithResponses) HostingListGitInstallationsV1WithResponse(ctx cont
 // the first 500 repositories in the order the provider returns them; when the account has
 // more, name the repository directly instead of searching this list.
 //
-// `owner`, `name` and `default_branch` identify a repository and a branch to deploy. Returns
-// 404 when the installation does not belong to the customer. Limited to 10 calls per minute
-// per API client (429 above that).
+// `owner`, `name` and a branch (`default_branch` or another one) go into `source_options` of
+// `Start Node.js build` or into `Update Git auto-deployment settings`. Returns 404 when the
+// installation does not belong to the customer. Limited to 10 calls per minute per API client
+// (429 above that).
 //
 // Returns a wrapper object for the known response body format(s).
 //
@@ -101708,6 +102565,133 @@ func ParseHostingDeployStaticSiteArchiveV1Response(rsp *http.Response) (*Hosting
 	}
 
 	response := &HostingDeployStaticSiteArchiveV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingDeleteGitAutoDeploymentSettingsV1Response parses an HTTP response from a HostingDeleteGitAutoDeploymentSettingsV1WithResponse call
+func ParseHostingDeleteGitAutoDeploymentSettingsV1Response(rsp *http.Response) (*HostingDeleteGitAutoDeploymentSettingsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingDeleteGitAutoDeploymentSettingsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingGetGitAutoDeploymentSettingsV1Response parses an HTTP response from a HostingGetGitAutoDeploymentSettingsV1WithResponse call
+func ParseHostingGetGitAutoDeploymentSettingsV1Response(rsp *http.Response) (*HostingGetGitAutoDeploymentSettingsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingGetGitAutoDeploymentSettingsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1GitGitAutoDeploymentSettingsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingUpdateGitAutoDeploymentSettingsV1Response parses an HTTP response from a HostingUpdateGitAutoDeploymentSettingsV1WithResponse call
+func ParseHostingUpdateGitAutoDeploymentSettingsV1Response(rsp *http.Response) (*HostingUpdateGitAutoDeploymentSettingsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingUpdateGitAutoDeploymentSettingsV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}

@@ -10,9 +10,10 @@ is still queried and the call fails with whatever the provider answers. The list
 the first 500 repositories in the order the provider returns them; when the account has
 more, name the repository directly instead of searching this list.
 
-`owner`, `name` and `default_branch` identify a repository and a branch to deploy. Returns
-404 when the installation does not belong to the customer. Limited to 10 calls per minute
-per API client (429 above that).
+`owner`, `name` and a branch (`default_branch` or another one) go into `source_options` of
+`Start Node.js build` or into `Update Git auto-deployment settings`. Returns 404 when the
+installation does not belong to the customer. Limited to 10 calls per minute per API client
+(429 above that).
 
 ```
 hostinger hosting git list-installation-repositories <uuid> [flags]

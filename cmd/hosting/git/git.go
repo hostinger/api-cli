@@ -10,6 +10,9 @@ var GroupCmd = &cobra.Command{
 }
 
 func init() {
+	GroupCmd.AddCommand(AutoDeploymentSettingsCmd)
+	GroupCmd.AddCommand(DeleteAutoDeploymentSettingsCmd)
 	GroupCmd.AddCommand(ListInstallationRepositoriesCmd)
 	GroupCmd.AddCommand(ListInstallationsCmd)
+	GroupCmd.AddCommand(UpdateAutoDeploymentSettingsCmd)
 }

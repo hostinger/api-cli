@@ -9,12 +9,16 @@ Start a Node.js build process using files already present on the website's file 
 WARNING: on success this overwrites the website's existing contents and cannot be
 undone — verify this is intended before calling this endpoint.
 
-The `source_type` must be `archive` and `source_options.archive_path` must point to an
-existing archive file on the server (relative to the website document root).
-Use the `Generate Upload URL` endpoint to obtain credentials and upload the archive first.
-
-To auto-detect build settings from an archive before starting, first call the
+With `source_type` `archive`, `source_options.archive_path` must point to an existing
+archive file on the server (relative to the website document root). Use the
+`Generate Upload URL` endpoint to obtain credentials and upload the archive first. To
+auto-detect build settings from an archive before starting, first call the
 `Get Node.js Build Settings from Archive` endpoint.
+
+With `source_type` `git`, `source_options` carries `owner`, `repository`, `branch` and
+`installation_uuid`. Take the installation from `List Git installations` and the owner and
+repository from `List Git installation repositories`; the branch is cloned at its current
+head. The installation must belong to the same customer as the website.
 
 The returned build `uuid` can be used to poll progress and retrieve logs via
 the `Get Node.js Build Logs` endpoint.
@@ -34,8 +38,11 @@ hostinger hosting nodejs start-build <username> <domain> [flags]
       --output-directory string   Build output directory relative to the root directory
       --package-manager string    Package manager (one of: npm, yarn, pnpm)
       --root-directory string     Application root directory (where package.json is located) relative to public_html
-      --source-options string     Source-specific options (JSON)
-      --source-type string        The source type of the files (one of: archive)
+      --source-options archive    Source-specific options. For archive send `archive_path`. For `git` send `owner`,
+                                  `repository`, `branch` and `installation_uuid`, taken from `List Git installations`
+                                  and `List Git installation repositories`. (JSON)
+      --source-type archive       Where the files come from: archive (an uploaded archive on the website) or `git`
+                                  (a branch of a repository reachable through a Git installation). (one of: archive, git)
 ```
 
 ### Options inherited from parent commands
