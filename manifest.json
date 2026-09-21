@@ -1379,6 +1379,11 @@
     "method": "PATCH",
     "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/hostinger-plugins/ai-option/status"
   },
+  "hosting_setupWebsiteDatabaseV1": {
+    "command": "hostinger hosting databases setup-website",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/databases/setup"
+  },
   "hosting_showAIOptionStatusV1": {
     "command": "hostinger wordpress ai-tools show-option-status",
     "method": "GET",

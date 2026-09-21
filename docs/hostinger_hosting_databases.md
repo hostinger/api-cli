@@ -27,4 +27,5 @@ Databases commands
 * [hostinger hosting databases list-remote-connections](hostinger_hosting_databases_list-remote-connections.md)	 - List database remote connections
 * [hostinger hosting databases phpmyadmin-link](hostinger_hosting_databases_phpmyadmin-link.md)	 - Get phpMyAdmin link
 * [hostinger hosting databases repair](hostinger_hosting_databases_repair.md)	 - Repair database
+* [hostinger hosting databases setup-website](hostinger_hosting_databases_setup-website.md)	 - Setup website database
 

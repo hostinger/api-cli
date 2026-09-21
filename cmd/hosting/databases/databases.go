@@ -19,4 +19,5 @@ func init() {
 	GroupCmd.AddCommand(ListRemoteConnectionsCmd)
 	GroupCmd.AddCommand(PhpmyadminLinkCmd)
 	GroupCmd.AddCommand(RepairCmd)
+	GroupCmd.AddCommand(SetupWebsiteCmd)
 }
