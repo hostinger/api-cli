@@ -27,6 +27,7 @@ Agency Hosting commands
 * [hostinger agency-hosting metrics](hostinger_agency-hosting_metrics.md)	 - Metrics commands
 * [hostinger agency-hosting orders](hostinger_agency-hosting_orders.md)	 - Orders commands
 * [hostinger agency-hosting php](hostinger_agency-hosting_php.md)	 - PHP commands
+* [hostinger agency-hosting ssl](hostinger_agency-hosting_ssl.md)	 - SSL commands
 * [hostinger agency-hosting website-setups](hostinger_agency-hosting_website-setups.md)	 - Website Setups commands
 * [hostinger agency-hosting websites](hostinger_agency-hosting_websites.md)	 - Websites commands
 * [hostinger agency-hosting wordpress](hostinger_agency-hosting_wordpress.md)	 - WordPress commands

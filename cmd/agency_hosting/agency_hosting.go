@@ -10,6 +10,7 @@ import (
 	"github.com/hostinger/api-cli/cmd/agency_hosting/metrics"
 	"github.com/hostinger/api-cli/cmd/agency_hosting/orders"
 	"github.com/hostinger/api-cli/cmd/agency_hosting/php"
+	"github.com/hostinger/api-cli/cmd/agency_hosting/ssl"
 	"github.com/hostinger/api-cli/cmd/agency_hosting/website_setups"
 	"github.com/hostinger/api-cli/cmd/agency_hosting/websites"
 	"github.com/hostinger/api-cli/cmd/agency_hosting/wordpress"
@@ -32,6 +33,7 @@ func init() {
 	GroupCmd.AddCommand(metrics.GroupCmd)
 	GroupCmd.AddCommand(orders.GroupCmd)
 	GroupCmd.AddCommand(php.GroupCmd)
+	GroupCmd.AddCommand(ssl.GroupCmd)
 	GroupCmd.AddCommand(website_setups.GroupCmd)
 	GroupCmd.AddCommand(websites.GroupCmd)
 	GroupCmd.AddCommand(wordpress.GroupCmd)

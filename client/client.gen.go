@@ -90,6 +90,33 @@ func (e AgencyHostingV1SetupsWebsiteSetupStatusResourceStatus) Valid() bool {
 	}
 }
 
+// Defines values for AgencyHostingV1SslSslStatusResourceStatus.
+const (
+	AgencyHostingV1SslSslStatusResourceStatusActive       AgencyHostingV1SslSslStatusResourceStatus = "active"
+	AgencyHostingV1SslSslStatusResourceStatusExpired      AgencyHostingV1SslSslStatusResourceStatus = "expired"
+	AgencyHostingV1SslSslStatusResourceStatusFailed       AgencyHostingV1SslSslStatusResourceStatus = "failed"
+	AgencyHostingV1SslSslStatusResourceStatusInstalling   AgencyHostingV1SslSslStatusResourceStatus = "installing"
+	AgencyHostingV1SslSslStatusResourceStatusNotInstalled AgencyHostingV1SslSslStatusResourceStatus = "not_installed"
+)
+
+// Valid indicates whether the value is a known member of the AgencyHostingV1SslSslStatusResourceStatus enum.
+func (e AgencyHostingV1SslSslStatusResourceStatus) Valid() bool {
+	switch e {
+	case AgencyHostingV1SslSslStatusResourceStatusActive:
+		return true
+	case AgencyHostingV1SslSslStatusResourceStatusExpired:
+		return true
+	case AgencyHostingV1SslSslStatusResourceStatusFailed:
+		return true
+	case AgencyHostingV1SslSslStatusResourceStatusInstalling:
+		return true
+	case AgencyHostingV1SslSslStatusResourceStatusNotInstalled:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for AgencyHostingV1WebsitesH5gWebsiteDetailsResourceState.
 const (
 	AgencyHostingV1WebsitesH5gWebsiteDetailsResourceStateActive    AgencyHostingV1WebsitesH5gWebsiteDetailsResourceState = "active"
@@ -6161,6 +6188,39 @@ type AgencyHostingV1SetupsWebsiteSetupStatusResource struct {
 //
 // Example: running
 type AgencyHostingV1SetupsWebsiteSetupStatusResourceStatus string
+
+// AgencyHostingV1SslSslStatusResource defines model for AgencyHosting.V1.Ssl.SslStatusResource.
+type AgencyHostingV1SslSslStatusResource struct {
+	// ExpiresAt End of the validity period of the certificate in place; null when there is none or the
+	// uploaded certificate carries no expiry.
+	//
+	// Example: 2027-01-15T10:30:00Z
+	ExpiresAt *time.Time `json:"expires_at"`
+
+	// IsCustom Whether the certificate was uploaded by the customer instead of issued or sold by the
+	// platform.
+	//
+	// Example: false
+	IsCustom bool `json:"is_custom"`
+
+	// Status `installing` while a certificate setup is running or retrying, `active` when a valid
+	// certificate is in place (uploaded, platform-issued, or a lifetime certificate bought for
+	// the domain), `failed` when the last setup gave up and no valid certificate is in place,
+	// `expired` when the certificate has run out, `not_installed` when the domain has no
+	// certificate and no setup process.
+	//
+	// Example: active
+	Status AgencyHostingV1SslSslStatusResourceStatus `json:"status"`
+}
+
+// AgencyHostingV1SslSslStatusResourceStatus `installing` while a certificate setup is running or retrying, `active` when a valid
+// certificate is in place (uploaded, platform-issued, or a lifetime certificate bought for
+// the domain), `failed` when the last setup gave up and no valid certificate is in place,
+// `expired` when the certificate has run out, `not_installed` when the domain has no
+// certificate and no setup process.
+//
+// Example: active
+type AgencyHostingV1SslSslStatusResourceStatus string
 
 // AgencyHostingV1WebsitesBuildAssetsRequest Build Node.js assets from an already-uploaded archive
 type AgencyHostingV1WebsitesBuildAssetsRequest struct {
@@ -19050,6 +19110,64 @@ type ClientInterface interface {
 	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/domains/{domain} (the `AgencyHostingUnlinkDomainFromWebsiteV1` operationId).
 	AgencyHostingUnlinkDomainFromWebsiteV1(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// AgencyHostingUninstallWebsiteSSLV1 Uninstall website SSL
+	//
+	// Removes the platform-issued Let's Encrypt certificate of the domain: the certificate is revoked
+	// and deleted before the response, so the domain is no longer served with a platform certificate
+	// until a new setup completes. Also succeeds when the domain has no platform certificate to
+	// remove. Uploaded (custom) certificates are not affected.
+	//
+	// Returns 422 when a certificate process is recorded for the domain (a failed setup counts until
+	// it is cleaned up), 429 when the same domain was requested less than a minute ago, and 403 when
+	// the website is suspended or locked, and 404 when the website or the domain does not exist.
+	//
+	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/domains/{domain}/ssl (the `AgencyHostingUninstallWebsiteSSLV1` operationId).
+	AgencyHostingUninstallWebsiteSSLV1(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingReinstallWebsiteSSLV1 Reinstall website SSL
+	//
+	// Replaces the Let's Encrypt certificate of the domain: the current platform certificate, when
+	// one is recorded, is revoked and removed, then a new setup starts in the background. Returns at
+	// once; `Get website SSL status` reports `installing` while it runs, then `active` or `failed`.
+	//
+	// Returns 422 for free subdomains, when a certificate process is recorded for the domain (a
+	// failed setup counts until it is cleaned up), or when the domain hit its limit of three setups
+	// per seven days. Returns 429 when the same domain was requested less than a minute ago, and 403
+	// when the website is suspended or locked, and 404 when the website or the domain does not exist.
+	//
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/domains/{domain}/ssl/reinstall (the `AgencyHostingReinstallWebsiteSSLV1` operationId).
+	AgencyHostingReinstallWebsiteSSLV1(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingInstallWebsiteSSLV1 Install website SSL
+	//
+	// Starts a Let's Encrypt certificate setup for the domain and returns at once; the setup runs in
+	// the background. `Get website SSL status` reports `installing` while it runs, then `active` or
+	// `failed`; the `ssl_setup` entry of `List website processes` shows the same progress.
+	//
+	// Returns 422 when the domain already has a platform certificate that is not expired, when a
+	// certificate process is recorded for the domain (a failed setup counts until it is cleaned up),
+	// or when the domain hit its limit of three setups per seven days. Returns 429 when the same
+	// domain was requested less than a minute ago, 403 when the website is suspended or locked, and
+	// 404 when the website or the domain does not exist.
+	//
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/domains/{domain}/ssl/setup (the `AgencyHostingInstallWebsiteSSLV1` operationId).
+	AgencyHostingInstallWebsiteSSLV1(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgencyHostingGetWebsiteSSLStatusV1 Get website SSL status
+	//
+	// Returns the SSL state of one domain of an Agency Plan website: the certificate `status`,
+	// whether the certificate was uploaded by the customer, and when it stops being valid.
+	//
+	// `installing` means a certificate setup is running or retrying; the `ssl_setup` entry of
+	// `List website processes` shows the same progress. `active` means a valid certificate is in
+	// place: uploaded by the customer, issued by the platform, or a lifetime certificate bought for
+	// the domain. `failed` means the last setup gave up and no valid certificate is in place.
+	// `expired` means the certificate has run out. `not_installed` means the domain has no
+	// certificate and no setup process. Returns 404 when the website or the domain does not exist.
+	//
+	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/domains/{domain}/ssl/status (the `AgencyHostingGetWebsiteSSLStatusV1` operationId).
+	AgencyHostingGetWebsiteSSLStatusV1(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// AgencyHostingChangeWebsiteDomainV1WithBody Change website domain
 	//
 	// Changes the primary domain for an Agency Plan website.
@@ -25999,6 +26117,104 @@ func (c *Client) AgencyHostingLinkDomainToWebsiteV1(ctx context.Context, website
 // Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/domains/{domain} (the `AgencyHostingUnlinkDomainFromWebsiteV1` operationId).
 func (c *Client) AgencyHostingUnlinkDomainFromWebsiteV1(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewAgencyHostingUnlinkDomainFromWebsiteV1Request(c.Server, websiteUid, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// AgencyHostingUninstallWebsiteSSLV1 Uninstall website SSL
+//
+// Removes the platform-issued Let's Encrypt certificate of the domain: the certificate is revoked
+// and deleted before the response, so the domain is no longer served with a platform certificate
+// until a new setup completes. Also succeeds when the domain has no platform certificate to
+// remove. Uploaded (custom) certificates are not affected.
+//
+// Returns 422 when a certificate process is recorded for the domain (a failed setup counts until
+// it is cleaned up), 429 when the same domain was requested less than a minute ago, and 403 when
+// the website is suspended or locked, and 404 when the website or the domain does not exist.
+//
+// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/domains/{domain}/ssl (the `AgencyHostingUninstallWebsiteSSLV1` operationId).
+func (c *Client) AgencyHostingUninstallWebsiteSSLV1(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingUninstallWebsiteSSLV1Request(c.Server, websiteUid, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// AgencyHostingReinstallWebsiteSSLV1 Reinstall website SSL
+//
+// Replaces the Let's Encrypt certificate of the domain: the current platform certificate, when
+// one is recorded, is revoked and removed, then a new setup starts in the background. Returns at
+// once; `Get website SSL status` reports `installing` while it runs, then `active` or `failed`.
+//
+// Returns 422 for free subdomains, when a certificate process is recorded for the domain (a
+// failed setup counts until it is cleaned up), or when the domain hit its limit of three setups
+// per seven days. Returns 429 when the same domain was requested less than a minute ago, and 403
+// when the website is suspended or locked, and 404 when the website or the domain does not exist.
+//
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/domains/{domain}/ssl/reinstall (the `AgencyHostingReinstallWebsiteSSLV1` operationId).
+func (c *Client) AgencyHostingReinstallWebsiteSSLV1(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingReinstallWebsiteSSLV1Request(c.Server, websiteUid, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// AgencyHostingInstallWebsiteSSLV1 Install website SSL
+//
+// Starts a Let's Encrypt certificate setup for the domain and returns at once; the setup runs in
+// the background. `Get website SSL status` reports `installing` while it runs, then `active` or
+// `failed`; the `ssl_setup` entry of `List website processes` shows the same progress.
+//
+// Returns 422 when the domain already has a platform certificate that is not expired, when a
+// certificate process is recorded for the domain (a failed setup counts until it is cleaned up),
+// or when the domain hit its limit of three setups per seven days. Returns 429 when the same
+// domain was requested less than a minute ago, 403 when the website is suspended or locked, and
+// 404 when the website or the domain does not exist.
+//
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/domains/{domain}/ssl/setup (the `AgencyHostingInstallWebsiteSSLV1` operationId).
+func (c *Client) AgencyHostingInstallWebsiteSSLV1(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingInstallWebsiteSSLV1Request(c.Server, websiteUid, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// AgencyHostingGetWebsiteSSLStatusV1 Get website SSL status
+//
+// Returns the SSL state of one domain of an Agency Plan website: the certificate `status`,
+// whether the certificate was uploaded by the customer, and when it stops being valid.
+//
+// `installing` means a certificate setup is running or retrying; the `ssl_setup` entry of
+// `List website processes` shows the same progress. `active` means a valid certificate is in
+// place: uploaded by the customer, issued by the platform, or a lifetime certificate bought for
+// the domain. `failed` means the last setup gave up and no valid certificate is in place.
+// `expired` means the certificate has run out. `not_installed` means the domain has no
+// certificate and no setup process. Returns 404 when the website or the domain does not exist.
+//
+// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/domains/{domain}/ssl/status (the `AgencyHostingGetWebsiteSSLStatusV1` operationId).
+func (c *Client) AgencyHostingGetWebsiteSSLStatusV1(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgencyHostingGetWebsiteSSLStatusV1Request(c.Server, websiteUid, domain)
 	if err != nil {
 		return nil, err
 	}
@@ -38463,6 +38679,170 @@ func NewAgencyHostingUnlinkDomainFromWebsiteV1Request(server string, websiteUid 
 	}
 
 	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAgencyHostingUninstallWebsiteSSLV1Request constructs an http.Request for the AgencyHostingUninstallWebsiteSSLV1 method
+func NewAgencyHostingUninstallWebsiteSSLV1Request(server string, websiteUid WebsiteUid, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/domains/%s/ssl", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAgencyHostingReinstallWebsiteSSLV1Request constructs an http.Request for the AgencyHostingReinstallWebsiteSSLV1 method
+func NewAgencyHostingReinstallWebsiteSSLV1Request(server string, websiteUid WebsiteUid, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/domains/%s/ssl/reinstall", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAgencyHostingInstallWebsiteSSLV1Request constructs an http.Request for the AgencyHostingInstallWebsiteSSLV1 method
+func NewAgencyHostingInstallWebsiteSSLV1Request(server string, websiteUid WebsiteUid, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/domains/%s/ssl/setup", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAgencyHostingGetWebsiteSSLStatusV1Request constructs an http.Request for the AgencyHostingGetWebsiteSSLStatusV1 method
+func NewAgencyHostingGetWebsiteSSLStatusV1Request(server string, websiteUid WebsiteUid, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "website_uid", websiteUid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/domains/%s/ssl/status", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -56607,6 +56987,72 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/domains/{domain} (the `AgencyHostingUnlinkDomainFromWebsiteV1` operationId).
 	AgencyHostingUnlinkDomainFromWebsiteV1WithResponse(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*AgencyHostingUnlinkDomainFromWebsiteV1Response, error)
 
+	// AgencyHostingUninstallWebsiteSSLV1WithResponse Uninstall website SSL
+	//
+	// Removes the platform-issued Let's Encrypt certificate of the domain: the certificate is revoked
+	// and deleted before the response, so the domain is no longer served with a platform certificate
+	// until a new setup completes. Also succeeds when the domain has no platform certificate to
+	// remove. Uploaded (custom) certificates are not affected.
+	//
+	// Returns 422 when a certificate process is recorded for the domain (a failed setup counts until
+	// it is cleaned up), 429 when the same domain was requested less than a minute ago, and 403 when
+	// the website is suspended or locked, and 404 when the website or the domain does not exist.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/domains/{domain}/ssl (the `AgencyHostingUninstallWebsiteSSLV1` operationId).
+	AgencyHostingUninstallWebsiteSSLV1WithResponse(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*AgencyHostingUninstallWebsiteSSLV1Response, error)
+
+	// AgencyHostingReinstallWebsiteSSLV1WithResponse Reinstall website SSL
+	//
+	// Replaces the Let's Encrypt certificate of the domain: the current platform certificate, when
+	// one is recorded, is revoked and removed, then a new setup starts in the background. Returns at
+	// once; `Get website SSL status` reports `installing` while it runs, then `active` or `failed`.
+	//
+	// Returns 422 for free subdomains, when a certificate process is recorded for the domain (a
+	// failed setup counts until it is cleaned up), or when the domain hit its limit of three setups
+	// per seven days. Returns 429 when the same domain was requested less than a minute ago, and 403
+	// when the website is suspended or locked, and 404 when the website or the domain does not exist.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/domains/{domain}/ssl/reinstall (the `AgencyHostingReinstallWebsiteSSLV1` operationId).
+	AgencyHostingReinstallWebsiteSSLV1WithResponse(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*AgencyHostingReinstallWebsiteSSLV1Response, error)
+
+	// AgencyHostingInstallWebsiteSSLV1WithResponse Install website SSL
+	//
+	// Starts a Let's Encrypt certificate setup for the domain and returns at once; the setup runs in
+	// the background. `Get website SSL status` reports `installing` while it runs, then `active` or
+	// `failed`; the `ssl_setup` entry of `List website processes` shows the same progress.
+	//
+	// Returns 422 when the domain already has a platform certificate that is not expired, when a
+	// certificate process is recorded for the domain (a failed setup counts until it is cleaned up),
+	// or when the domain hit its limit of three setups per seven days. Returns 429 when the same
+	// domain was requested less than a minute ago, 403 when the website is suspended or locked, and
+	// 404 when the website or the domain does not exist.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/domains/{domain}/ssl/setup (the `AgencyHostingInstallWebsiteSSLV1` operationId).
+	AgencyHostingInstallWebsiteSSLV1WithResponse(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*AgencyHostingInstallWebsiteSSLV1Response, error)
+
+	// AgencyHostingGetWebsiteSSLStatusV1WithResponse Get website SSL status
+	//
+	// Returns the SSL state of one domain of an Agency Plan website: the certificate `status`,
+	// whether the certificate was uploaded by the customer, and when it stops being valid.
+	//
+	// `installing` means a certificate setup is running or retrying; the `ssl_setup` entry of
+	// `List website processes` shows the same progress. `active` means a valid certificate is in
+	// place: uploaded by the customer, issued by the platform, or a lifetime certificate bought for
+	// the domain. `failed` means the last setup gave up and no valid certificate is in place.
+	// `expired` means the certificate has run out. `not_installed` means the domain has no
+	// certificate and no setup process. Returns 404 when the website or the domain does not exist.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/domains/{domain}/ssl/status (the `AgencyHostingGetWebsiteSSLStatusV1` operationId).
+	AgencyHostingGetWebsiteSSLStatusV1WithResponse(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*AgencyHostingGetWebsiteSSLStatusV1Response, error)
+
 	// AgencyHostingChangeWebsiteDomainV1WithBodyWithResponse Change website domain
 	//
 	// Changes the primary domain for an Agency Plan website.
@@ -64772,6 +65218,247 @@ func (r AgencyHostingUnlinkDomainFromWebsiteV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r AgencyHostingUnlinkDomainFromWebsiteV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingUninstallWebsiteSSLV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r AgencyHostingUninstallWebsiteSSLV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r AgencyHostingUninstallWebsiteSSLV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r AgencyHostingUninstallWebsiteSSLV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r AgencyHostingUninstallWebsiteSSLV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r AgencyHostingUninstallWebsiteSSLV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingUninstallWebsiteSSLV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingUninstallWebsiteSSLV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingUninstallWebsiteSSLV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingReinstallWebsiteSSLV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r AgencyHostingReinstallWebsiteSSLV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r AgencyHostingReinstallWebsiteSSLV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r AgencyHostingReinstallWebsiteSSLV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r AgencyHostingReinstallWebsiteSSLV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r AgencyHostingReinstallWebsiteSSLV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingReinstallWebsiteSSLV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingReinstallWebsiteSSLV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingReinstallWebsiteSSLV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingInstallWebsiteSSLV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r AgencyHostingInstallWebsiteSSLV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r AgencyHostingInstallWebsiteSSLV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r AgencyHostingInstallWebsiteSSLV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r AgencyHostingInstallWebsiteSSLV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r AgencyHostingInstallWebsiteSSLV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingInstallWebsiteSSLV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingInstallWebsiteSSLV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingInstallWebsiteSSLV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgencyHostingGetWebsiteSSLStatusV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *AgencyHostingV1SslSslStatusResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r AgencyHostingGetWebsiteSSLStatusV1Response) GetJSON200() *AgencyHostingV1SslSslStatusResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r AgencyHostingGetWebsiteSSLStatusV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r AgencyHostingGetWebsiteSSLStatusV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r AgencyHostingGetWebsiteSSLStatusV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r AgencyHostingGetWebsiteSSLStatusV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgencyHostingGetWebsiteSSLStatusV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgencyHostingGetWebsiteSSLStatusV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -87355,6 +88042,96 @@ func (c *ClientWithResponses) AgencyHostingUnlinkDomainFromWebsiteV1WithResponse
 	return ParseAgencyHostingUnlinkDomainFromWebsiteV1Response(rsp)
 }
 
+// AgencyHostingUninstallWebsiteSSLV1WithResponse Uninstall website SSL
+//
+// Removes the platform-issued Let's Encrypt certificate of the domain: the certificate is revoked
+// and deleted before the response, so the domain is no longer served with a platform certificate
+// until a new setup completes. Also succeeds when the domain has no platform certificate to
+// remove. Uploaded (custom) certificates are not affected.
+//
+// Returns 422 when a certificate process is recorded for the domain (a failed setup counts until
+// it is cleaned up), 429 when the same domain was requested less than a minute ago, and 403 when
+// the website is suspended or locked, and 404 when the website or the domain does not exist.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/agency-hosting/v1/websites/{website_uid}/domains/{domain}/ssl (the `AgencyHostingUninstallWebsiteSSLV1` operationId).
+func (c *ClientWithResponses) AgencyHostingUninstallWebsiteSSLV1WithResponse(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*AgencyHostingUninstallWebsiteSSLV1Response, error) {
+	rsp, err := c.AgencyHostingUninstallWebsiteSSLV1(ctx, websiteUid, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingUninstallWebsiteSSLV1Response(rsp)
+}
+
+// AgencyHostingReinstallWebsiteSSLV1WithResponse Reinstall website SSL
+//
+// Replaces the Let's Encrypt certificate of the domain: the current platform certificate, when
+// one is recorded, is revoked and removed, then a new setup starts in the background. Returns at
+// once; `Get website SSL status` reports `installing` while it runs, then `active` or `failed`.
+//
+// Returns 422 for free subdomains, when a certificate process is recorded for the domain (a
+// failed setup counts until it is cleaned up), or when the domain hit its limit of three setups
+// per seven days. Returns 429 when the same domain was requested less than a minute ago, and 403
+// when the website is suspended or locked, and 404 when the website or the domain does not exist.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/domains/{domain}/ssl/reinstall (the `AgencyHostingReinstallWebsiteSSLV1` operationId).
+func (c *ClientWithResponses) AgencyHostingReinstallWebsiteSSLV1WithResponse(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*AgencyHostingReinstallWebsiteSSLV1Response, error) {
+	rsp, err := c.AgencyHostingReinstallWebsiteSSLV1(ctx, websiteUid, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingReinstallWebsiteSSLV1Response(rsp)
+}
+
+// AgencyHostingInstallWebsiteSSLV1WithResponse Install website SSL
+//
+// Starts a Let's Encrypt certificate setup for the domain and returns at once; the setup runs in
+// the background. `Get website SSL status` reports `installing` while it runs, then `active` or
+// `failed`; the `ssl_setup` entry of `List website processes` shows the same progress.
+//
+// Returns 422 when the domain already has a platform certificate that is not expired, when a
+// certificate process is recorded for the domain (a failed setup counts until it is cleaned up),
+// or when the domain hit its limit of three setups per seven days. Returns 429 when the same
+// domain was requested less than a minute ago, 403 when the website is suspended or locked, and
+// 404 when the website or the domain does not exist.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/agency-hosting/v1/websites/{website_uid}/domains/{domain}/ssl/setup (the `AgencyHostingInstallWebsiteSSLV1` operationId).
+func (c *ClientWithResponses) AgencyHostingInstallWebsiteSSLV1WithResponse(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*AgencyHostingInstallWebsiteSSLV1Response, error) {
+	rsp, err := c.AgencyHostingInstallWebsiteSSLV1(ctx, websiteUid, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingInstallWebsiteSSLV1Response(rsp)
+}
+
+// AgencyHostingGetWebsiteSSLStatusV1WithResponse Get website SSL status
+//
+// Returns the SSL state of one domain of an Agency Plan website: the certificate `status`,
+// whether the certificate was uploaded by the customer, and when it stops being valid.
+//
+// `installing` means a certificate setup is running or retrying; the `ssl_setup` entry of
+// `List website processes` shows the same progress. `active` means a valid certificate is in
+// place: uploaded by the customer, issued by the platform, or a lifetime certificate bought for
+// the domain. `failed` means the last setup gave up and no valid certificate is in place.
+// `expired` means the certificate has run out. `not_installed` means the domain has no
+// certificate and no setup process. Returns 404 when the website or the domain does not exist.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/domains/{domain}/ssl/status (the `AgencyHostingGetWebsiteSSLStatusV1` operationId).
+func (c *ClientWithResponses) AgencyHostingGetWebsiteSSLStatusV1WithResponse(ctx context.Context, websiteUid WebsiteUid, domain Domain, reqEditors ...RequestEditorFn) (*AgencyHostingGetWebsiteSSLStatusV1Response, error) {
+	rsp, err := c.AgencyHostingGetWebsiteSSLStatusV1(ctx, websiteUid, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgencyHostingGetWebsiteSSLStatusV1Response(rsp)
+}
+
 // AgencyHostingChangeWebsiteDomainV1WithBodyWithResponse Change website domain
 //
 // Changes the primary domain for an Agency Plan website.
@@ -98098,6 +98875,187 @@ func ParseAgencyHostingUnlinkDomainFromWebsiteV1Response(rsp *http.Response) (*A
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingUninstallWebsiteSSLV1Response parses an HTTP response from a AgencyHostingUninstallWebsiteSSLV1WithResponse call
+func ParseAgencyHostingUninstallWebsiteSSLV1Response(rsp *http.Response) (*AgencyHostingUninstallWebsiteSSLV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingUninstallWebsiteSSLV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingReinstallWebsiteSSLV1Response parses an HTTP response from a AgencyHostingReinstallWebsiteSSLV1WithResponse call
+func ParseAgencyHostingReinstallWebsiteSSLV1Response(rsp *http.Response) (*AgencyHostingReinstallWebsiteSSLV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingReinstallWebsiteSSLV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingInstallWebsiteSSLV1Response parses an HTTP response from a AgencyHostingInstallWebsiteSSLV1WithResponse call
+func ParseAgencyHostingInstallWebsiteSSLV1Response(rsp *http.Response) (*AgencyHostingInstallWebsiteSSLV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingInstallWebsiteSSLV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgencyHostingGetWebsiteSSLStatusV1Response parses an HTTP response from a AgencyHostingGetWebsiteSSLStatusV1WithResponse call
+func ParseAgencyHostingGetWebsiteSSLStatusV1Response(rsp *http.Response) (*AgencyHostingGetWebsiteSSLStatusV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgencyHostingGetWebsiteSSLStatusV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AgencyHostingV1SslSslStatusResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
