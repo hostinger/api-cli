@@ -11459,7 +11459,7 @@ type HostingV1WebsitesCreateWebsiteRequest struct {
 	// Example: example.com
 	Domain string `json:"domain"`
 
-	// OrderId ID of the associated order
+	// OrderId Hosting order ID to create this website on. Choose the order whose hosting plan should host the new website. List orders to find available IDs.
 	//
 	// Example: 12345
 	OrderId int `json:"order_id"`
@@ -23123,7 +23123,10 @@ type ClientInterface interface {
 	//
 	// Create a new website for the authenticated client.
 	//
-	// Provide the domain name and associated order ID to create a new website.
+	// You must choose which hosting order to create this website on. Pass that
+	// order as `order_id` together with the domain name. List orders to see
+	// available IDs; the website is provisioned on that order's hosting plan.
+	//
 	// The datacenter_code parameter is required when creating the first website
 	// on a new hosting plan - this will set up and configure new hosting account
 	// in the selected datacenter.
@@ -23142,7 +23145,10 @@ type ClientInterface interface {
 	//
 	// Create a new website for the authenticated client.
 	//
-	// Provide the domain name and associated order ID to create a new website.
+	// You must choose which hosting order to create this website on. Pass that
+	// order as `order_id` together with the domain name. List orders to see
+	// available IDs; the website is provisioned on that order's hosting plan.
+	//
 	// The datacenter_code parameter is required when creating the first website
 	// on a new hosting plan - this will set up and configure new hosting account
 	// in the selected datacenter.
@@ -33112,7 +33118,10 @@ func (c *Client) HostingListWebsitesV1(ctx context.Context, params *HostingListW
 //
 // Create a new website for the authenticated client.
 //
-// Provide the domain name and associated order ID to create a new website.
+// You must choose which hosting order to create this website on. Pass that
+// order as `order_id` together with the domain name. List orders to see
+// available IDs; the website is provisioned on that order's hosting plan.
+//
 // The datacenter_code parameter is required when creating the first website
 // on a new hosting plan - this will set up and configure new hosting account
 // in the selected datacenter.
@@ -33141,7 +33150,10 @@ func (c *Client) HostingCreateWebsiteV1WithBody(ctx context.Context, contentType
 //
 // Create a new website for the authenticated client.
 //
-// Provide the domain name and associated order ID to create a new website.
+// You must choose which hosting order to create this website on. Pass that
+// order as `order_id` together with the domain name. List orders to see
+// available IDs; the website is provisioned on that order's hosting plan.
+//
 // The datacenter_code parameter is required when creating the first website
 // on a new hosting plan - this will set up and configure new hosting account
 // in the selected datacenter.
@@ -61432,7 +61444,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Create a new website for the authenticated client.
 	//
-	// Provide the domain name and associated order ID to create a new website.
+	// You must choose which hosting order to create this website on. Pass that
+	// order as `order_id` together with the domain name. List orders to see
+	// available IDs; the website is provisioned on that order's hosting plan.
+	//
 	// The datacenter_code parameter is required when creating the first website
 	// on a new hosting plan - this will set up and configure new hosting account
 	// in the selected datacenter.
@@ -61451,7 +61466,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Create a new website for the authenticated client.
 	//
-	// Provide the domain name and associated order ID to create a new website.
+	// You must choose which hosting order to create this website on. Pass that
+	// order as `order_id` together with the domain name. List orders to see
+	// available IDs; the website is provisioned on that order's hosting plan.
+	//
 	// The datacenter_code parameter is required when creating the first website
 	// on a new hosting plan - this will set up and configure new hosting account
 	// in the selected datacenter.
@@ -94357,7 +94375,10 @@ func (c *ClientWithResponses) HostingListWebsitesV1WithResponse(ctx context.Cont
 //
 // Create a new website for the authenticated client.
 //
-// Provide the domain name and associated order ID to create a new website.
+// You must choose which hosting order to create this website on. Pass that
+// order as `order_id` together with the domain name. List orders to see
+// available IDs; the website is provisioned on that order's hosting plan.
+//
 // The datacenter_code parameter is required when creating the first website
 // on a new hosting plan - this will set up and configure new hosting account
 // in the selected datacenter.
@@ -94382,7 +94403,10 @@ func (c *ClientWithResponses) HostingCreateWebsiteV1WithBodyWithResponse(ctx con
 //
 // Create a new website for the authenticated client.
 //
-// Provide the domain name and associated order ID to create a new website.
+// You must choose which hosting order to create this website on. Pass that
+// order as `order_id` together with the domain name. List orders to see
+// available IDs; the website is provisioned on that order's hosting plan.
+//
 // The datacenter_code parameter is required when creating the first website
 // on a new hosting plan - this will set up and configure new hosting account
 // in the selected datacenter.
