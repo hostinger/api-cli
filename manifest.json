@@ -1319,6 +1319,11 @@
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/redirects"
   },
+  "hosting_listWebsiteSetupsV1": {
+    "command": "hostinger hosting websites list-setups",
+    "method": "GET",
+    "path": "/api/hosting/v1/onboardings"
+  },
   "hosting_listWebsiteSubdomainsV1": {
     "command": "hostinger hosting domains list-website-subdomains",
     "method": "GET",

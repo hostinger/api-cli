@@ -1848,6 +1848,27 @@ func (e HostingV1NodeJsVulnerabilityResourceSeverity) Valid() bool {
 	}
 }
 
+// Defines values for HostingV1OnboardingsOnboardingResourceStatus.
+const (
+	HostingV1OnboardingsOnboardingResourceStatusCompleted HostingV1OnboardingsOnboardingResourceStatus = "completed"
+	HostingV1OnboardingsOnboardingResourceStatusFailed    HostingV1OnboardingsOnboardingResourceStatus = "failed"
+	HostingV1OnboardingsOnboardingResourceStatusRunning   HostingV1OnboardingsOnboardingResourceStatus = "running"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1OnboardingsOnboardingResourceStatus enum.
+func (e HostingV1OnboardingsOnboardingResourceStatus) Valid() bool {
+	switch e {
+	case HostingV1OnboardingsOnboardingResourceStatusCompleted:
+		return true
+	case HostingV1OnboardingsOnboardingResourceStatusFailed:
+		return true
+	case HostingV1OnboardingsOnboardingResourceStatusRunning:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for HostingV1SslSslStatusResourceProvider.
 const (
 	HostingV1SslSslStatusResourceProviderCustom      HostingV1SslSslStatusResourceProvider = "custom"
@@ -11199,6 +11220,42 @@ type HostingV1NodeJsVulnerabilityResource struct {
 // Example: high
 type HostingV1NodeJsVulnerabilityResourceSeverity string
 
+// HostingV1OnboardingsOnboardingCollection Array of [`Hosting.V1.Onboardings.OnboardingResource`](#model/hostingv1onboardingsonboardingresource)
+type HostingV1OnboardingsOnboardingCollection = []HostingV1OnboardingsOnboardingResource
+
+// HostingV1OnboardingsOnboardingResource defines model for Hosting.V1.Onboardings.OnboardingResource.
+type HostingV1OnboardingsOnboardingResource struct {
+	// CreatedAt When the setup was requested.
+	//
+	// Example: 2024-01-15T10:30:00.000000Z
+	CreatedAt time.Time `json:"created_at"`
+
+	// Domain Domain of the website being set up.
+	//
+	// Example: example.com
+	Domain string `json:"domain"`
+
+	// Status `running` while the website is still being set up, `completed` once the setup has finished, `failed` when it stopped before finishing or has not reported progress for over an hour.
+	//
+	// Example: running
+	Status HostingV1OnboardingsOnboardingResourceStatus `json:"status"`
+
+	// UpdatedAt When the setup last reported progress.
+	//
+	// Example: 2024-01-15T10:32:00.000000Z
+	UpdatedAt time.Time `json:"updated_at"`
+
+	// Username Hosting account username.
+	//
+	// Example: u123456789
+	Username string `json:"username"`
+}
+
+// HostingV1OnboardingsOnboardingResourceStatus `running` while the website is still being set up, `completed` once the setup has finished, `failed` when it stopped before finishing or has not reported progress for over an hour.
+//
+// Example: running
+type HostingV1OnboardingsOnboardingResourceStatus string
+
 // HostingV1OrdersOrderCollection Array of [`Hosting.V1.Orders.OrderResource`](#model/hostingv1ordersorderresource)
 type HostingV1OrdersOrderCollection = []HostingV1OrdersOrderResource
 
@@ -11498,7 +11555,7 @@ type HostingV1WebsitesWebsiteResource struct {
 	// Example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
 	HorizonsUuid *string `json:"horizons_uuid,omitempty"`
 
-	// IsEnabled Whether website is enabled
+	// IsEnabled True unless the website is suspended. Not a readiness signal: a website that is still being set up is enabled too, see the list website setups endpoint.
 	//
 	// Example: true
 	IsEnabled *bool `json:"is_enabled,omitempty"`
@@ -16365,6 +16422,19 @@ type WebsiteUuids = []string
 // WhoisId Example: 564651
 type WhoisId = int
 
+// CommonResponseConflictResponse defines model for Common.Response.ConflictResponse.
+type CommonResponseConflictResponse struct {
+	// CorrelationId Request correlation ID
+	//
+	// Example: 26a91bd9-f8c8-4a83-9df9-83e23d696fe3
+	CorrelationId *string `json:"correlation_id,omitempty"`
+
+	// Message Message of the error
+	//
+	// Example: Error message
+	Message *string `json:"message,omitempty"`
+}
+
 // CommonResponseErrorResponse defines model for Common.Response.ErrorResponse.
 type CommonResponseErrorResponse struct {
 	// CorrelationId Request correlation ID
@@ -16802,6 +16872,12 @@ type HostingListGitInstallationsV1ParamsProvider string
 
 // HostingListGitInstallationsV1ParamsStatus defines parameters for HostingListGitInstallationsV1.
 type HostingListGitInstallationsV1ParamsStatus string
+
+// HostingListWebsiteSetupsV1Params defines parameters for HostingListWebsiteSetupsV1.
+type HostingListWebsiteSetupsV1Params struct {
+	// Domain Filter by domain name (exact match)
+	Domain *string `form:"domain,omitempty" json:"domain,omitempty"`
+}
 
 // HostingListOrdersV1Params defines parameters for HostingListOrdersV1.
 type HostingListOrdersV1Params struct {
@@ -21274,7 +21350,9 @@ type ClientInterface interface {
 	// Allows a remote host to connect to the specified database.
 	//
 	// Provide an IPv4/IPv6 address, or "%" to allow any host. The database name must be
-	// the full name returned by the list databases endpoint.
+	// the full name returned by the list databases endpoint. Database creation is synchronous,
+	// so a 404 here means no database with that name exists under the username, not that it
+	// is still being created.
 	//
 	// Takes any type of body and a specified content type.
 	//
@@ -21286,7 +21364,9 @@ type ClientInterface interface {
 	// Allows a remote host to connect to the specified database.
 	//
 	// Provide an IPv4/IPv6 address, or "%" to allow any host. The database name must be
-	// the full name returned by the list databases endpoint.
+	// the full name returned by the list databases endpoint. Database creation is synchronous,
+	// so a 404 here means no database with that name exists under the username, not that it
+	// is still being created.
 	//
 	// Takes a body of the `application/json` content type.
 	//
@@ -22964,6 +23044,10 @@ type ClientInterface interface {
 	// Generate a file browser upload URL with authentication credentials
 	// for uploading files directly to a website's file storage.
 	//
+	// While the website is still being set up (`status: running` on the list website setups
+	// endpoint) this endpoint returns 409 with a `Retry-After` header: wait that many
+	// seconds and retry, or poll the website setups until the status is `completed`.
+	//
 	// Returns `url`, `auth_key` and `rest_auth_key`. Use these to upload a file to the
 	// website's `public_html` directory via the TUS resumable upload protocol (TUS 1.0.0).
 	// Send `X-Auth: {auth_key}` and `X-Auth-Rest: {rest_auth_key}` headers on every request
@@ -23008,6 +23092,10 @@ type ClientInterface interface {
 	//
 	// Generate a file browser upload URL with authentication credentials
 	// for uploading files directly to a website's file storage.
+	//
+	// While the website is still being set up (`status: running` on the list website setups
+	// endpoint) this endpoint returns 409 with a `Retry-After` header: wait that many
+	// seconds and retry, or poll the website setups until the status is `completed`.
 	//
 	// Returns `url`, `auth_key` and `rest_auth_key`. Use these to upload a file to the
 	// website's `public_html` directory via the TUS resumable upload protocol (TUS 1.0.0).
@@ -23082,6 +23170,22 @@ type ClientInterface interface {
 	// Corresponds with GET /api/hosting/v1/git/installations/{uuid}/repositories (the `HostingListGitInstallationRepositoriesV1` operationId).
 	HostingListGitInstallationRepositoriesV1(ctx context.Context, uuid GitInstallationUuidPath, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// HostingListWebsiteSetupsV1 List website setups
+	//
+	// Returns the website setups started in the last 24 hours for the hosting accounts
+	// accessible to the authenticated client, newest first.
+	//
+	// Meant for polling right after creating a website: the website shows up in the
+	// websites list before its server-side setup has finished, and while the setup is
+	// `running` endpoints that operate on that website may respond with `404` or `409`.
+	// Poll this endpoint with the `domain` filter every 10 to 15 seconds and wait for
+	// `status: completed` before uploading files, deploying or creating databases.
+	// `failed` means the setup stopped before finishing or has not reported progress for
+	// over an hour. Setups older than 24 hours are not listed.
+	//
+	// Corresponds with GET /api/hosting/v1/onboardings (the `HostingListWebsiteSetupsV1` operationId).
+	HostingListWebsiteSetupsV1(ctx context.Context, params *HostingListWebsiteSetupsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// HostingListOrdersV1 List orders
 	//
 	// Retrieve a paginated list of orders accessible to the authenticated client.
@@ -23116,6 +23220,11 @@ type ClientInterface interface {
 	// filter by username, order ID, enabled status, or domain name for more targeted
 	// results.
 	//
+	// A website appears in this list before its server-side setup has finished, and
+	// `is_enabled` reflects suspension, not readiness. To know when a newly created website
+	// is ready for file, deploy or database operations, poll the list website setups
+	// endpoint instead.
+	//
 	// Corresponds with GET /api/hosting/v1/websites (the `HostingListWebsitesV1` operationId).
 	HostingListWebsitesV1(ctx context.Context, params *HostingListWebsitesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -23133,8 +23242,11 @@ type ClientInterface interface {
 	//
 	// Subsequent websites will be hosted on the same datacenter automatically.
 	//
-	// Website creation takes up to a few minutes to complete. Check the
-	// websites list endpoint to see when your new website becomes available.
+	// Website creation is asynchronous and takes up to a few minutes. Poll the list website
+	// setups endpoint with the `domain` filter every 10 to 15 seconds and wait for `status:
+	// completed` before uploading files, deploying or creating databases. While the setup is
+	// `running`, endpoints that operate on the website may respond with `404` or `409`.
+	// `is_enabled` on the websites list reflects suspension, not readiness.
 	//
 	// Takes any type of body and a specified content type.
 	//
@@ -23155,8 +23267,11 @@ type ClientInterface interface {
 	//
 	// Subsequent websites will be hosted on the same datacenter automatically.
 	//
-	// Website creation takes up to a few minutes to complete. Check the
-	// websites list endpoint to see when your new website becomes available.
+	// Website creation is asynchronous and takes up to a few minutes. Poll the list website
+	// setups endpoint with the `domain` filter every 10 to 15 seconds and wait for `status:
+	// completed` before uploading files, deploying or creating databases. While the setup is
+	// `running`, endpoints that operate on the website may respond with `404` or `409`.
+	// `is_enabled` on the websites list reflects suspension, not readiness.
 	//
 	// Takes a body of the `application/json` content type.
 	//
@@ -30005,7 +30120,9 @@ func (c *Client) HostingDeleteDatabaseRemoteConnectionV1(ctx context.Context, us
 // Allows a remote host to connect to the specified database.
 //
 // Provide an IPv4/IPv6 address, or "%" to allow any host. The database name must be
-// the full name returned by the list databases endpoint.
+// the full name returned by the list databases endpoint. Database creation is synchronous,
+// so a 404 here means no database with that name exists under the username, not that it
+// is still being created.
 //
 // Takes any type of body and a specified content type.
 //
@@ -30027,7 +30144,9 @@ func (c *Client) HostingCreateDatabaseRemoteConnectionV1WithBody(ctx context.Con
 // Allows a remote host to connect to the specified database.
 //
 // Provide an IPv4/IPv6 address, or "%" to allow any host. The database name must be
-// the full name returned by the list databases endpoint.
+// the full name returned by the list databases endpoint. Database creation is synchronous,
+// so a 404 here means no database with that name exists under the username, not that it
+// is still being created.
 //
 // Takes a body of the `application/json` content type.
 //
@@ -32895,6 +33014,10 @@ func (c *Client) HostingVerifyDomainOwnershipV1(ctx context.Context, body Hostin
 // Generate a file browser upload URL with authentication credentials
 // for uploading files directly to a website's file storage.
 //
+// While the website is still being set up (`status: running` on the list website setups
+// endpoint) this endpoint returns 409 with a `Retry-After` header: wait that many
+// seconds and retry, or poll the website setups until the status is `completed`.
+//
 // Returns `url`, `auth_key` and `rest_auth_key`. Use these to upload a file to the
 // website's `public_html` directory via the TUS resumable upload protocol (TUS 1.0.0).
 // Send `X-Auth: {auth_key}` and `X-Auth-Rest: {rest_auth_key}` headers on every request
@@ -32951,6 +33074,10 @@ func (c *Client) HostingGenerateUploadURLV1WithBody(ctx context.Context, content
 //
 // Generate a file browser upload URL with authentication credentials
 // for uploading files directly to a website's file storage.
+//
+// While the website is still being set up (`status: running` on the list website setups
+// endpoint) this endpoint returns 409 with a `Retry-After` header: wait that many
+// seconds and retry, or poll the website setups until the status is `completed`.
 //
 // Returns `url`, `auth_key` and `rest_auth_key`. Use these to upload a file to the
 // website's `public_html` directory via the TUS resumable upload protocol (TUS 1.0.0).
@@ -33057,6 +33184,32 @@ func (c *Client) HostingListGitInstallationRepositoriesV1(ctx context.Context, u
 	return c.Client.Do(req)
 }
 
+// HostingListWebsiteSetupsV1 List website setups
+//
+// Returns the website setups started in the last 24 hours for the hosting accounts
+// accessible to the authenticated client, newest first.
+//
+// Meant for polling right after creating a website: the website shows up in the
+// websites list before its server-side setup has finished, and while the setup is
+// `running` endpoints that operate on that website may respond with `404` or `409`.
+// Poll this endpoint with the `domain` filter every 10 to 15 seconds and wait for
+// `status: completed` before uploading files, deploying or creating databases.
+// `failed` means the setup stopped before finishing or has not reported progress for
+// over an hour. Setups older than 24 hours are not listed.
+//
+// Corresponds with GET /api/hosting/v1/onboardings (the `HostingListWebsiteSetupsV1` operationId).
+func (c *Client) HostingListWebsiteSetupsV1(ctx context.Context, params *HostingListWebsiteSetupsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingListWebsiteSetupsV1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // HostingListOrdersV1 List orders
 //
 // Retrieve a paginated list of orders accessible to the authenticated client.
@@ -33101,6 +33254,11 @@ func (c *Client) HostingListOrdersV1(ctx context.Context, params *HostingListOrd
 // filter by username, order ID, enabled status, or domain name for more targeted
 // results.
 //
+// A website appears in this list before its server-side setup has finished, and
+// `is_enabled` reflects suspension, not readiness. To know when a newly created website
+// is ready for file, deploy or database operations, poll the list website setups
+// endpoint instead.
+//
 // Corresponds with GET /api/hosting/v1/websites (the `HostingListWebsitesV1` operationId).
 func (c *Client) HostingListWebsitesV1(ctx context.Context, params *HostingListWebsitesV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingListWebsitesV1Request(c.Server, params)
@@ -33128,8 +33286,11 @@ func (c *Client) HostingListWebsitesV1(ctx context.Context, params *HostingListW
 //
 // Subsequent websites will be hosted on the same datacenter automatically.
 //
-// Website creation takes up to a few minutes to complete. Check the
-// websites list endpoint to see when your new website becomes available.
+// Website creation is asynchronous and takes up to a few minutes. Poll the list website
+// setups endpoint with the `domain` filter every 10 to 15 seconds and wait for `status:
+// completed` before uploading files, deploying or creating databases. While the setup is
+// `running`, endpoints that operate on the website may respond with `404` or `409`.
+// `is_enabled` on the websites list reflects suspension, not readiness.
 //
 // Takes any type of body and a specified content type.
 //
@@ -33160,8 +33321,11 @@ func (c *Client) HostingCreateWebsiteV1WithBody(ctx context.Context, contentType
 //
 // Subsequent websites will be hosted on the same datacenter automatically.
 //
-// Website creation takes up to a few minutes to complete. Check the
-// websites list endpoint to see when your new website becomes available.
+// Website creation is asynchronous and takes up to a few minutes. Poll the list website
+// setups endpoint with the `domain` filter every 10 to 15 seconds and wait for `status:
+// completed` before uploading files, deploying or creating databases. While the setup is
+// `running`, endpoints that operate on the website may respond with `404` or `409`.
+// `is_enabled` on the websites list reflects suspension, not readiness.
 //
 // Takes a body of the `application/json` content type.
 //
@@ -48573,6 +48737,60 @@ func NewHostingListGitInstallationRepositoriesV1Request(server string, uuid GitI
 	return req, nil
 }
 
+// NewHostingListWebsiteSetupsV1Request constructs an http.Request for the HostingListWebsiteSetupsV1 method
+func NewHostingListWebsiteSetupsV1Request(server string, params *HostingListWebsiteSetupsV1Params) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/onboardings")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Domain != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "domain", *params.Domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewHostingListOrdersV1Request constructs an http.Request for the HostingListOrdersV1 method
 func NewHostingListOrdersV1Request(server string, params *HostingListOrdersV1Params) (*http.Request, error) {
 	var err error
@@ -59499,7 +59717,9 @@ type ClientWithResponsesInterface interface {
 	// Allows a remote host to connect to the specified database.
 	//
 	// Provide an IPv4/IPv6 address, or "%" to allow any host. The database name must be
-	// the full name returned by the list databases endpoint.
+	// the full name returned by the list databases endpoint. Database creation is synchronous,
+	// so a 404 here means no database with that name exists under the username, not that it
+	// is still being created.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -59511,7 +59731,9 @@ type ClientWithResponsesInterface interface {
 	// Allows a remote host to connect to the specified database.
 	//
 	// Provide an IPv4/IPv6 address, or "%" to allow any host. The database name must be
-	// the full name returned by the list databases endpoint.
+	// the full name returned by the list databases endpoint. Database creation is synchronous,
+	// so a 404 here means no database with that name exists under the username, not that it
+	// is still being created.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -61277,6 +61499,10 @@ type ClientWithResponsesInterface interface {
 	// Generate a file browser upload URL with authentication credentials
 	// for uploading files directly to a website's file storage.
 	//
+	// While the website is still being set up (`status: running` on the list website setups
+	// endpoint) this endpoint returns 409 with a `Retry-After` header: wait that many
+	// seconds and retry, or poll the website setups until the status is `completed`.
+	//
 	// Returns `url`, `auth_key` and `rest_auth_key`. Use these to upload a file to the
 	// website's `public_html` directory via the TUS resumable upload protocol (TUS 1.0.0).
 	// Send `X-Auth: {auth_key}` and `X-Auth-Rest: {rest_auth_key}` headers on every request
@@ -61321,6 +61547,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Generate a file browser upload URL with authentication credentials
 	// for uploading files directly to a website's file storage.
+	//
+	// While the website is still being set up (`status: running` on the list website setups
+	// endpoint) this endpoint returns 409 with a `Retry-After` header: wait that many
+	// seconds and retry, or poll the website setups until the status is `completed`.
 	//
 	// Returns `url`, `auth_key` and `rest_auth_key`. Use these to upload a file to the
 	// website's `public_html` directory via the TUS resumable upload protocol (TUS 1.0.0).
@@ -61399,6 +61629,24 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /api/hosting/v1/git/installations/{uuid}/repositories (the `HostingListGitInstallationRepositoriesV1` operationId).
 	HostingListGitInstallationRepositoriesV1WithResponse(ctx context.Context, uuid GitInstallationUuidPath, reqEditors ...RequestEditorFn) (*HostingListGitInstallationRepositoriesV1Response, error)
 
+	// HostingListWebsiteSetupsV1WithResponse List website setups
+	//
+	// Returns the website setups started in the last 24 hours for the hosting accounts
+	// accessible to the authenticated client, newest first.
+	//
+	// Meant for polling right after creating a website: the website shows up in the
+	// websites list before its server-side setup has finished, and while the setup is
+	// `running` endpoints that operate on that website may respond with `404` or `409`.
+	// Poll this endpoint with the `domain` filter every 10 to 15 seconds and wait for
+	// `status: completed` before uploading files, deploying or creating databases.
+	// `failed` means the setup stopped before finishing or has not reported progress for
+	// over an hour. Setups older than 24 hours are not listed.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/hosting/v1/onboardings (the `HostingListWebsiteSetupsV1` operationId).
+	HostingListWebsiteSetupsV1WithResponse(ctx context.Context, params *HostingListWebsiteSetupsV1Params, reqEditors ...RequestEditorFn) (*HostingListWebsiteSetupsV1Response, error)
+
 	// HostingListOrdersV1WithResponse List orders
 	//
 	// Retrieve a paginated list of orders accessible to the authenticated client.
@@ -61435,6 +61683,11 @@ type ClientWithResponsesInterface interface {
 	// filter by username, order ID, enabled status, or domain name for more targeted
 	// results.
 	//
+	// A website appears in this list before its server-side setup has finished, and
+	// `is_enabled` reflects suspension, not readiness. To know when a newly created website
+	// is ready for file, deploy or database operations, poll the list website setups
+	// endpoint instead.
+	//
 	// Returns a wrapper object for the known response body format(s).
 	//
 	// Corresponds with GET /api/hosting/v1/websites (the `HostingListWebsitesV1` operationId).
@@ -61454,8 +61707,11 @@ type ClientWithResponsesInterface interface {
 	//
 	// Subsequent websites will be hosted on the same datacenter automatically.
 	//
-	// Website creation takes up to a few minutes to complete. Check the
-	// websites list endpoint to see when your new website becomes available.
+	// Website creation is asynchronous and takes up to a few minutes. Poll the list website
+	// setups endpoint with the `domain` filter every 10 to 15 seconds and wait for `status:
+	// completed` before uploading files, deploying or creating databases. While the setup is
+	// `running`, endpoints that operate on the website may respond with `404` or `409`.
+	// `is_enabled` on the websites list reflects suspension, not readiness.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -61476,8 +61732,11 @@ type ClientWithResponsesInterface interface {
 	//
 	// Subsequent websites will be hosted on the same datacenter automatically.
 	//
-	// Website creation takes up to a few minutes to complete. Check the
-	// websites list endpoint to see when your new website becomes available.
+	// Website creation is asynchronous and takes up to a few minutes. Poll the list website
+	// setups endpoint with the `domain` filter every 10 to 15 seconds and wait for `status:
+	// completed` before uploading files, deploying or creating databases. While the setup is
+	// `running`, endpoints that operate on the website may respond with `404` or `409`.
+	// `is_enabled` on the websites list reflects suspension, not readiness.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -77420,6 +77679,11 @@ func (r HostingVerifyDomainOwnershipV1Response) ContentType() string {
 	return ""
 }
 
+// HostingGenerateUploadURLV1Response409Headers the declared response headers of an HTTP 409 response for HostingGenerateUploadURLV1
+type HostingGenerateUploadURLV1Response409Headers struct {
+	RetryAfter *int
+}
+
 type HostingGenerateUploadURLV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -77427,10 +77691,14 @@ type HostingGenerateUploadURLV1Response struct {
 	JSON200 *HostingV1FilesUploadUrlResource
 	// JSON401 the response for an HTTP 401 `application/json` response
 	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON409 the response for an HTTP 409 `application/json` response
+	JSON409 *CommonResponseConflictResponse
 	// JSON422 the response for an HTTP 422 `application/json` response
 	JSON422 *CommonResponseUnprocessableContentResponse
 	// JSON500 the response for an HTTP 500 `application/json` response
 	JSON500 *CommonResponseErrorResponse
+	// Headers409 the parsed response headers for an HTTP 409 response
+	Headers409 *HostingGenerateUploadURLV1Response409Headers
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
@@ -77441,6 +77709,11 @@ func (r HostingGenerateUploadURLV1Response) GetJSON200() *HostingV1FilesUploadUr
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
 func (r HostingGenerateUploadURLV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
+}
+
+// GetJSON409 returns the response for an HTTP 409 `application/json` response
+func (r HostingGenerateUploadURLV1Response) GetJSON409() *CommonResponseConflictResponse {
+	return r.JSON409
 }
 
 // GetJSON422 returns the response for an HTTP 422 `application/json` response
@@ -77607,6 +77880,68 @@ func (r HostingListGitInstallationRepositoriesV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingListGitInstallationRepositoriesV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingListWebsiteSetupsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1OnboardingsOnboardingCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingListWebsiteSetupsV1Response) GetJSON200() *HostingV1OnboardingsOnboardingCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingListWebsiteSetupsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingListWebsiteSetupsV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingListWebsiteSetupsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingListWebsiteSetupsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingListWebsiteSetupsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingListWebsiteSetupsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingListWebsiteSetupsV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -91670,7 +92005,9 @@ func (c *ClientWithResponses) HostingDeleteDatabaseRemoteConnectionV1WithRespons
 // Allows a remote host to connect to the specified database.
 //
 // Provide an IPv4/IPv6 address, or "%" to allow any host. The database name must be
-// the full name returned by the list databases endpoint.
+// the full name returned by the list databases endpoint. Database creation is synchronous,
+// so a 404 here means no database with that name exists under the username, not that it
+// is still being created.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
@@ -91688,7 +92025,9 @@ func (c *ClientWithResponses) HostingCreateDatabaseRemoteConnectionV1WithBodyWit
 // Allows a remote host to connect to the specified database.
 //
 // Provide an IPv4/IPv6 address, or "%" to allow any host. The database name must be
-// the full name returned by the list databases endpoint.
+// the full name returned by the list databases endpoint. Database creation is synchronous,
+// so a 404 here means no database with that name exists under the username, not that it
+// is still being created.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
@@ -94168,6 +94507,10 @@ func (c *ClientWithResponses) HostingVerifyDomainOwnershipV1WithResponse(ctx con
 // Generate a file browser upload URL with authentication credentials
 // for uploading files directly to a website's file storage.
 //
+// While the website is still being set up (`status: running` on the list website setups
+// endpoint) this endpoint returns 409 with a `Retry-After` header: wait that many
+// seconds and retry, or poll the website setups until the status is `completed`.
+//
 // Returns `url`, `auth_key` and `rest_auth_key`. Use these to upload a file to the
 // website's `public_html` directory via the TUS resumable upload protocol (TUS 1.0.0).
 // Send `X-Auth: {auth_key}` and `X-Auth-Rest: {rest_auth_key}` headers on every request
@@ -94220,6 +94563,10 @@ func (c *ClientWithResponses) HostingGenerateUploadURLV1WithBodyWithResponse(ctx
 //
 // Generate a file browser upload URL with authentication credentials
 // for uploading files directly to a website's file storage.
+//
+// While the website is still being set up (`status: running` on the list website setups
+// endpoint) this endpoint returns 409 with a `Retry-After` header: wait that many
+// seconds and retry, or poll the website setups until the status is `completed`.
 //
 // Returns `url`, `auth_key` and `rest_auth_key`. Use these to upload a file to the
 // website's `public_html` directory via the TUS resumable upload protocol (TUS 1.0.0).
@@ -94318,6 +94665,30 @@ func (c *ClientWithResponses) HostingListGitInstallationRepositoriesV1WithRespon
 	return ParseHostingListGitInstallationRepositoriesV1Response(rsp)
 }
 
+// HostingListWebsiteSetupsV1WithResponse List website setups
+//
+// Returns the website setups started in the last 24 hours for the hosting accounts
+// accessible to the authenticated client, newest first.
+//
+// Meant for polling right after creating a website: the website shows up in the
+// websites list before its server-side setup has finished, and while the setup is
+// `running` endpoints that operate on that website may respond with `404` or `409`.
+// Poll this endpoint with the `domain` filter every 10 to 15 seconds and wait for
+// `status: completed` before uploading files, deploying or creating databases.
+// `failed` means the setup stopped before finishing or has not reported progress for
+// over an hour. Setups older than 24 hours are not listed.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/hosting/v1/onboardings (the `HostingListWebsiteSetupsV1` operationId).
+func (c *ClientWithResponses) HostingListWebsiteSetupsV1WithResponse(ctx context.Context, params *HostingListWebsiteSetupsV1Params, reqEditors ...RequestEditorFn) (*HostingListWebsiteSetupsV1Response, error) {
+	rsp, err := c.HostingListWebsiteSetupsV1(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingListWebsiteSetupsV1Response(rsp)
+}
+
 // HostingListOrdersV1WithResponse List orders
 //
 // Retrieve a paginated list of orders accessible to the authenticated client.
@@ -94360,6 +94731,11 @@ func (c *ClientWithResponses) HostingListOrdersV1WithResponse(ctx context.Contex
 // filter by username, order ID, enabled status, or domain name for more targeted
 // results.
 //
+// A website appears in this list before its server-side setup has finished, and
+// `is_enabled` reflects suspension, not readiness. To know when a newly created website
+// is ready for file, deploy or database operations, poll the list website setups
+// endpoint instead.
+//
 // Returns a wrapper object for the known response body format(s).
 //
 // Corresponds with GET /api/hosting/v1/websites (the `HostingListWebsitesV1` operationId).
@@ -94385,8 +94761,11 @@ func (c *ClientWithResponses) HostingListWebsitesV1WithResponse(ctx context.Cont
 //
 // Subsequent websites will be hosted on the same datacenter automatically.
 //
-// Website creation takes up to a few minutes to complete. Check the
-// websites list endpoint to see when your new website becomes available.
+// Website creation is asynchronous and takes up to a few minutes. Poll the list website
+// setups endpoint with the `domain` filter every 10 to 15 seconds and wait for `status:
+// completed` before uploading files, deploying or creating databases. While the setup is
+// `running`, endpoints that operate on the website may respond with `404` or `409`.
+// `is_enabled` on the websites list reflects suspension, not readiness.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
@@ -94413,8 +94792,11 @@ func (c *ClientWithResponses) HostingCreateWebsiteV1WithBodyWithResponse(ctx con
 //
 // Subsequent websites will be hosted on the same datacenter automatically.
 //
-// Website creation takes up to a few minutes to complete. Check the
-// websites list endpoint to see when your new website becomes available.
+// Website creation is asynchronous and takes up to a few minutes. Poll the list website
+// setups endpoint with the `domain` filter every 10 to 15 seconds and wait for `status:
+// completed` before uploading files, deploying or creating databases. While the setup is
+// `running`, endpoints that operate on the website may respond with `404` or `409`.
+// `is_enabled` on the websites list reflects suspension, not readiness.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
@@ -108197,6 +108579,13 @@ func ParseHostingGenerateUploadURLV1Response(rsp *http.Response) (*HostingGenera
 		}
 		response.JSON401 = &dest
 
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest CommonResponseConflictResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
 		var dest CommonResponseUnprocessableContentResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -108211,6 +108600,19 @@ func ParseHostingGenerateUploadURLV1Response(rsp *http.Response) (*HostingGenera
 		}
 		response.JSON500 = &dest
 
+	}
+
+	switch {
+	case rsp.StatusCode == 409:
+		var headers HostingGenerateUploadURLV1Response409Headers
+		if values := rsp.Header.Values("Retry-After"); len(values) > 0 {
+			var value int
+			if err := runtime.BindStyledParameterWithOptions("simple", "Retry-After", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.RetryAfter = &value
+		}
+		response.Headers409 = &headers
 	}
 
 	return response, nil
@@ -108304,6 +108706,53 @@ func ParseHostingListGitInstallationRepositoriesV1Response(rsp *http.Response) (
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingListWebsiteSetupsV1Response parses an HTTP response from a HostingListWebsiteSetupsV1WithResponse call
+func ParseHostingListWebsiteSetupsV1Response(rsp *http.Response) (*HostingListWebsiteSetupsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingListWebsiteSetupsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1OnboardingsOnboardingCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse

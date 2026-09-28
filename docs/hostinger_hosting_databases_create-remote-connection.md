@@ -7,7 +7,9 @@ Create database remote connection
 Allows a remote host to connect to the specified database.
 
 Provide an IPv4/IPv6 address, or "%" to allow any host. The database name must be
-the full name returned by the list databases endpoint.
+the full name returned by the list databases endpoint. Database creation is synchronous,
+so a 404 here means no database with that name exists under the username, not that it
+is still being created.
 
 ```
 hostinger hosting databases create-remote-connection <username> <name> [flags]

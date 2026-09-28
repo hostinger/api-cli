@@ -14,7 +14,7 @@ import (
 var CreateRemoteConnectionCmd = &cobra.Command{
 	Use:   "create-remote-connection <username> <name>",
 	Short: "Create database remote connection",
-	Long:  "Allows a remote host to connect to the specified database.\n\nProvide an IPv4/IPv6 address, or \"%\" to allow any host. The database name must be\nthe full name returned by the list databases endpoint.",
+	Long:  "Allows a remote host to connect to the specified database.\n\nProvide an IPv4/IPv6 address, or \"%\" to allow any host. The database name must be\nthe full name returned by the list databases endpoint. Database creation is synchronous,\nso a 404 here means no database with that name exists under the username, not that it\nis still being created.",
 	Args:  cobra.MatchAll(cobra.ExactArgs(2)),
 	Run: func(cmd *cobra.Command, args []string) {
 		payload, err := json.Marshal(createRemoteConnectionBody(cmd))

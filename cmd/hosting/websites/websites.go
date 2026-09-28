@@ -14,4 +14,5 @@ func init() {
 	GroupCmd.AddCommand(DeleteCmd)
 	GroupCmd.AddCommand(DeployStaticSiteArchiveCmd)
 	GroupCmd.AddCommand(ListCmd)
+	GroupCmd.AddCommand(ListSetupsCmd)
 }

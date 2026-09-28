@@ -16,8 +16,11 @@ in the selected datacenter.
 
 Subsequent websites will be hosted on the same datacenter automatically.
 
-Website creation takes up to a few minutes to complete. Check the
-websites list endpoint to see when your new website becomes available.
+Website creation is asynchronous and takes up to a few minutes. Poll the list website
+setups endpoint with the `domain` filter every 10 to 15 seconds and wait for `status:
+completed` before uploading files, deploying or creating databases. While the setup is
+`running`, endpoints that operate on the website may respond with `404` or `409`.
+`is_enabled` on the websites list reflects suspension, not readiness.
 
 ```
 hostinger hosting websites create [flags]

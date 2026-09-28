@@ -23,6 +23,11 @@ WordPress websites (`website_types=wordpress`) or only Node.js websites
 filter by username, order ID, enabled status, or domain name for more targeted
 results.
 
+A website appears in this list before its server-side setup has finished, and
+`is_enabled` reflects suspension, not readiness. To know when a newly created website
+is ready for file, deploy or database operations, poll the list website setups
+endpoint instead.
+
 ```
 hostinger hosting websites list [flags]
 ```
