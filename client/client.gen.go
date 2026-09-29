@@ -8126,6 +8126,47 @@ type DomainsV1TransferClaimRequest struct {
 // DomainsV1TransferTransferCollection Array of [`Domains.V1.Transfer.TransferResource`](#model/domainsv1transfertransferresource)
 type DomainsV1TransferTransferCollection = []DomainsV1TransferTransferResource
 
+// DomainsV1TransferTransferRequest defines model for Domains.V1.Transfer.TransferRequest.
+type DomainsV1TransferTransferRequest struct {
+	// AuthCode Authorization code from the current registrar
+	//
+	// Example: Auth123Code456
+	AuthCode string `json:"auth_code"`
+
+	// Domain Domain name
+	//
+	// Example: my-new-domain.tld
+	Domain string `json:"domain"`
+
+	// DomainContacts Domain contact information
+	DomainContacts *struct {
+		// AdminId Administrative contact WHOIS record ID
+		//
+		// Example: 546123
+		AdminId *int `json:"admin_id,omitempty"`
+
+		// BillingId Billing contact WHOIS record ID
+		//
+		// Example: 741288
+		BillingId *int `json:"billing_id,omitempty"`
+
+		// OwnerId Owner contact WHOIS record ID
+		//
+		// Example: 741288
+		OwnerId *int `json:"owner_id,omitempty"`
+
+		// TechId Technical contact WHOIS record ID
+		//
+		// Example: 741288
+		TechId *int `json:"tech_id,omitempty"`
+	} `json:"domain_contacts,omitempty"`
+
+	// ShouldKeepNs Keep the existing nameservers of the domain
+	//
+	// Example: true
+	ShouldKeepNs *bool `json:"should_keep_ns,omitempty"`
+}
+
 // DomainsV1TransferTransferResource defines model for Domains.V1.Transfer.TransferResource.
 type DomainsV1TransferTransferResource struct {
 	// CompletedAt When the transfer completed
@@ -17509,6 +17550,9 @@ type DomainsUpdateDomainNameserversV1JSONRequestBody = DomainsV1PortfolioUpdateN
 // DomainsCompleteDomainSetupV1JSONRequestBody defines body for DomainsCompleteDomainSetupV1 for application/json ContentType.
 type DomainsCompleteDomainSetupV1JSONRequestBody = DomainsV1PortfolioSetupRequest
 
+// DomainsStartDomainTransferV1JSONRequestBody defines body for DomainsStartDomainTransferV1 for application/json ContentType.
+type DomainsStartDomainTransferV1JSONRequestBody = DomainsV1TransferTransferRequest
+
 // DomainsClaimFreeDomainTransferV1JSONRequestBody defines body for DomainsClaimFreeDomainTransferV1 for application/json ContentType.
 type DomainsClaimFreeDomainTransferV1JSONRequestBody = DomainsV1TransferClaimRequest
 
@@ -20439,6 +20483,50 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/domains/v1/transfers (the `DomainsGetTransferListV1` operationId).
 	DomainsGetTransferListV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsStartDomainTransferV1WithBody Start domain transfer
+	//
+	// Transfer a domain from another registrar to your account.
+	//
+	// The transfer runs on a domain transfer service you have already purchased.
+	//
+	// Before making request, unlock the domain at the current registrar and get its authorization
+	// code.
+	//
+	// A successful response means the transfer has been started. Completion depends on the current
+	// registrar and can be followed with the [transfer list endpoint](#tag/domains-transfer).
+	//
+	// If no WHOIS information is provided, default contact information for that TLD will be used.
+	// Before making request, ensure WHOIS information for desired TLD exists in your account.
+	//
+	// Use this endpoint to bring domains registered elsewhere into your account.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/domains/v1/transfers (the `DomainsStartDomainTransferV1` operationId).
+	DomainsStartDomainTransferV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DomainsStartDomainTransferV1 Start domain transfer
+	//
+	// Transfer a domain from another registrar to your account.
+	//
+	// The transfer runs on a domain transfer service you have already purchased.
+	//
+	// Before making request, unlock the domain at the current registrar and get its authorization
+	// code.
+	//
+	// A successful response means the transfer has been started. Completion depends on the current
+	// registrar and can be followed with the [transfer list endpoint](#tag/domains-transfer).
+	//
+	// If no WHOIS information is provided, default contact information for that TLD will be used.
+	// Before making request, ensure WHOIS information for desired TLD exists in your account.
+	//
+	// Use this endpoint to bring domains registered elsewhere into your account.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/domains/v1/transfers (the `DomainsStartDomainTransferV1` operationId).
+	DomainsStartDomainTransferV1(ctx context.Context, body DomainsStartDomainTransferV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DomainsClaimFreeDomainTransferV1WithBody Claim free domain transfer
 	//
@@ -28420,6 +28508,70 @@ func (c *Client) DomainsCompleteDomainSetupV1(ctx context.Context, domain Domain
 // Corresponds with GET /api/domains/v1/transfers (the `DomainsGetTransferListV1` operationId).
 func (c *Client) DomainsGetTransferListV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDomainsGetTransferListV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsStartDomainTransferV1WithBody Start domain transfer
+//
+// Transfer a domain from another registrar to your account.
+//
+// The transfer runs on a domain transfer service you have already purchased.
+//
+// Before making request, unlock the domain at the current registrar and get its authorization
+// code.
+//
+// A successful response means the transfer has been started. Completion depends on the current
+// registrar and can be followed with the [transfer list endpoint](#tag/domains-transfer).
+//
+// If no WHOIS information is provided, default contact information for that TLD will be used.
+// Before making request, ensure WHOIS information for desired TLD exists in your account.
+//
+// Use this endpoint to bring domains registered elsewhere into your account.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/domains/v1/transfers (the `DomainsStartDomainTransferV1` operationId).
+func (c *Client) DomainsStartDomainTransferV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsStartDomainTransferV1RequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DomainsStartDomainTransferV1 Start domain transfer
+//
+// Transfer a domain from another registrar to your account.
+//
+// The transfer runs on a domain transfer service you have already purchased.
+//
+// Before making request, unlock the domain at the current registrar and get its authorization
+// code.
+//
+// A successful response means the transfer has been started. Completion depends on the current
+// registrar and can be followed with the [transfer list endpoint](#tag/domains-transfer).
+//
+// If no WHOIS information is provided, default contact information for that TLD will be used.
+// Before making request, ensure WHOIS information for desired TLD exists in your account.
+//
+// Use this endpoint to bring domains registered elsewhere into your account.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/domains/v1/transfers (the `DomainsStartDomainTransferV1` operationId).
+func (c *Client) DomainsStartDomainTransferV1(ctx context.Context, body DomainsStartDomainTransferV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDomainsStartDomainTransferV1Request(c.Server, body)
 	if err != nil {
 		return nil, err
 	}
@@ -41537,6 +41689,46 @@ func NewDomainsGetTransferListV1Request(server string) (*http.Request, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewDomainsStartDomainTransferV1Request calls the generic DomainsStartDomainTransferV1 builder with application/json body
+func NewDomainsStartDomainTransferV1Request(server string, body DomainsStartDomainTransferV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewDomainsStartDomainTransferV1RequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewDomainsStartDomainTransferV1RequestWithBody constructs an http.Request for the DomainsStartDomainTransferV1 method, with any body, and a specified content type
+func NewDomainsStartDomainTransferV1RequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/domains/v1/transfers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -58739,6 +58931,50 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /api/domains/v1/transfers (the `DomainsGetTransferListV1` operationId).
 	DomainsGetTransferListV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*DomainsGetTransferListV1Response, error)
 
+	// DomainsStartDomainTransferV1WithBodyWithResponse Start domain transfer
+	//
+	// Transfer a domain from another registrar to your account.
+	//
+	// The transfer runs on a domain transfer service you have already purchased.
+	//
+	// Before making request, unlock the domain at the current registrar and get its authorization
+	// code.
+	//
+	// A successful response means the transfer has been started. Completion depends on the current
+	// registrar and can be followed with the [transfer list endpoint](#tag/domains-transfer).
+	//
+	// If no WHOIS information is provided, default contact information for that TLD will be used.
+	// Before making request, ensure WHOIS information for desired TLD exists in your account.
+	//
+	// Use this endpoint to bring domains registered elsewhere into your account.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/domains/v1/transfers (the `DomainsStartDomainTransferV1` operationId).
+	DomainsStartDomainTransferV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DomainsStartDomainTransferV1Response, error)
+
+	// DomainsStartDomainTransferV1WithResponse Start domain transfer
+	//
+	// Transfer a domain from another registrar to your account.
+	//
+	// The transfer runs on a domain transfer service you have already purchased.
+	//
+	// Before making request, unlock the domain at the current registrar and get its authorization
+	// code.
+	//
+	// A successful response means the transfer has been started. Completion depends on the current
+	// registrar and can be followed with the [transfer list endpoint](#tag/domains-transfer).
+	//
+	// If no WHOIS information is provided, default contact information for that TLD will be used.
+	// Before making request, ensure WHOIS information for desired TLD exists in your account.
+	//
+	// Use this endpoint to bring domains registered elsewhere into your account.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/domains/v1/transfers (the `DomainsStartDomainTransferV1` operationId).
+	DomainsStartDomainTransferV1WithResponse(ctx context.Context, body DomainsStartDomainTransferV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsStartDomainTransferV1Response, error)
+
 	// DomainsClaimFreeDomainTransferV1WithBodyWithResponse Claim free domain transfer
 	//
 	// Claim a free domain transfer available on your account and start the transfer.
@@ -69522,6 +69758,68 @@ func (r DomainsGetTransferListV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r DomainsGetTransferListV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DomainsStartDomainTransferV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r DomainsStartDomainTransferV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DomainsStartDomainTransferV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r DomainsStartDomainTransferV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DomainsStartDomainTransferV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DomainsStartDomainTransferV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DomainsStartDomainTransferV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DomainsStartDomainTransferV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DomainsStartDomainTransferV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -90559,6 +90857,62 @@ func (c *ClientWithResponses) DomainsGetTransferListV1WithResponse(ctx context.C
 	return ParseDomainsGetTransferListV1Response(rsp)
 }
 
+// DomainsStartDomainTransferV1WithBodyWithResponse Start domain transfer
+//
+// Transfer a domain from another registrar to your account.
+//
+// The transfer runs on a domain transfer service you have already purchased.
+//
+// Before making request, unlock the domain at the current registrar and get its authorization
+// code.
+//
+// A successful response means the transfer has been started. Completion depends on the current
+// registrar and can be followed with the [transfer list endpoint](#tag/domains-transfer).
+//
+// If no WHOIS information is provided, default contact information for that TLD will be used.
+// Before making request, ensure WHOIS information for desired TLD exists in your account.
+//
+// Use this endpoint to bring domains registered elsewhere into your account.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/domains/v1/transfers (the `DomainsStartDomainTransferV1` operationId).
+func (c *ClientWithResponses) DomainsStartDomainTransferV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DomainsStartDomainTransferV1Response, error) {
+	rsp, err := c.DomainsStartDomainTransferV1WithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsStartDomainTransferV1Response(rsp)
+}
+
+// DomainsStartDomainTransferV1WithResponse Start domain transfer
+//
+// Transfer a domain from another registrar to your account.
+//
+// The transfer runs on a domain transfer service you have already purchased.
+//
+// Before making request, unlock the domain at the current registrar and get its authorization
+// code.
+//
+// A successful response means the transfer has been started. Completion depends on the current
+// registrar and can be followed with the [transfer list endpoint](#tag/domains-transfer).
+//
+// If no WHOIS information is provided, default contact information for that TLD will be used.
+// Before making request, ensure WHOIS information for desired TLD exists in your account.
+//
+// Use this endpoint to bring domains registered elsewhere into your account.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/domains/v1/transfers (the `DomainsStartDomainTransferV1` operationId).
+func (c *ClientWithResponses) DomainsStartDomainTransferV1WithResponse(ctx context.Context, body DomainsStartDomainTransferV1JSONRequestBody, reqEditors ...RequestEditorFn) (*DomainsStartDomainTransferV1Response, error) {
+	rsp, err := c.DomainsStartDomainTransferV1(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDomainsStartDomainTransferV1Response(rsp)
+}
+
 // DomainsClaimFreeDomainTransferV1WithBodyWithResponse Claim free domain transfer
 //
 // Claim a free domain transfer available on your account and start the transfer.
@@ -102489,6 +102843,53 @@ func ParseDomainsGetTransferListV1Response(rsp *http.Response) (*DomainsGetTrans
 			return nil, err
 		}
 		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDomainsStartDomainTransferV1Response parses an HTTP response from a DomainsStartDomainTransferV1WithResponse call
+func ParseDomainsStartDomainTransferV1Response(rsp *http.Response) (*DomainsStartDomainTransferV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DomainsStartDomainTransferV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse

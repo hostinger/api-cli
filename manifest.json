@@ -774,6 +774,11 @@
     "method": "PUT",
     "path": "/api/domains/v1/whois/default/{whoisId}"
   },
+  "domains_startDomainTransferV1": {
+    "command": "hostinger domains transfer start",
+    "method": "POST",
+    "path": "/api/domains/v1/transfers"
+  },
   "domains_startOutgoingDomainMoveV1": {
     "command": "hostinger domains move start-outgoing",
     "method": "POST",

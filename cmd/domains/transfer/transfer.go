@@ -13,4 +13,5 @@ func init() {
 	GroupCmd.AddCommand(ClaimFreeCmd)
 	GroupCmd.AddCommand(GetCmd)
 	GroupCmd.AddCommand(ListCmd)
+	GroupCmd.AddCommand(StartCmd)
 }
