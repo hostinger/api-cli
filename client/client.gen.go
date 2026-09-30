@@ -4424,9 +4424,10 @@ func (e AgencyTimeFrameHours) Valid() bool {
 
 // Defines values for Category.
 const (
-	CategoryDOMAIN Category = "DOMAIN"
-	CategoryEMAIL  Category = "EMAIL"
-	CategoryVPS    Category = "VPS"
+	CategoryDOMAIN  Category = "DOMAIN"
+	CategoryEMAIL   Category = "EMAIL"
+	CategoryHOSTING Category = "HOSTING"
+	CategoryVPS     Category = "VPS"
 )
 
 // Valid indicates whether the value is a known member of the Category enum.
@@ -4435,6 +4436,8 @@ func (e Category) Valid() bool {
 	case CategoryDOMAIN:
 		return true
 	case CategoryEMAIL:
+		return true
+	case CategoryHOSTING:
 		return true
 	case CategoryVPS:
 		return true
@@ -4895,9 +4898,10 @@ func (e AgencyHostingListAgencyPlanWebsitesV1ParamsWebsiteTypes) Valid() bool {
 
 // Defines values for BillingGetCatalogItemListV1ParamsCategory.
 const (
-	BillingGetCatalogItemListV1ParamsCategoryDOMAIN BillingGetCatalogItemListV1ParamsCategory = "DOMAIN"
-	BillingGetCatalogItemListV1ParamsCategoryEMAIL  BillingGetCatalogItemListV1ParamsCategory = "EMAIL"
-	BillingGetCatalogItemListV1ParamsCategoryVPS    BillingGetCatalogItemListV1ParamsCategory = "VPS"
+	BillingGetCatalogItemListV1ParamsCategoryDOMAIN  BillingGetCatalogItemListV1ParamsCategory = "DOMAIN"
+	BillingGetCatalogItemListV1ParamsCategoryEMAIL   BillingGetCatalogItemListV1ParamsCategory = "EMAIL"
+	BillingGetCatalogItemListV1ParamsCategoryHOSTING BillingGetCatalogItemListV1ParamsCategory = "HOSTING"
+	BillingGetCatalogItemListV1ParamsCategoryVPS     BillingGetCatalogItemListV1ParamsCategory = "VPS"
 )
 
 // Valid indicates whether the value is a known member of the BillingGetCatalogItemListV1ParamsCategory enum.
@@ -4906,6 +4910,8 @@ func (e BillingGetCatalogItemListV1ParamsCategory) Valid() bool {
 	case BillingGetCatalogItemListV1ParamsCategoryDOMAIN:
 		return true
 	case BillingGetCatalogItemListV1ParamsCategoryEMAIL:
+		return true
+	case BillingGetCatalogItemListV1ParamsCategoryHOSTING:
 		return true
 	case BillingGetCatalogItemListV1ParamsCategoryVPS:
 		return true
