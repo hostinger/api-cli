@@ -15563,14 +15563,18 @@ type WordPressV1InstallationsInstallWordPressRequest struct {
 		Password string `json:"password"`
 	} `json:"credentials"`
 
-	// Database Optional. If the named database already exists, it will be used for this WordPress install. Otherwise a new database is created with a generated name and random credentials.
+	// Database Optional. If the named database already exists on the account, it is used for this WordPress install. Otherwise a new database is created with this name, or with a generated name when database is omitted or null. A new database gets a random database user and counts toward the plan's database limit.
+	//
+	// Example: {"name":"mydb"}
 	Database *struct {
 		// Name Database name (username prefix added if missing)
 		//
 		// Example: mydb
 		Name *string `json:"name,omitempty"`
 
-		// Password Example: ********
+		// Password Password for a new database. Random when omitted or null. Ignored when the named database already exists.
+		//
+		// Example: ********
 		Password *string `json:"password,omitempty"`
 	} `json:"database,omitempty"`
 
@@ -22594,6 +22598,9 @@ type ClientInterface interface {
 	// by username and domain to track progress. When the installation appears in
 	// that list, WordPress is ready.
 	//
+	// Returns 422 when the account already uses all the databases its plan allows,
+	// unless `database.name` is an existing database on the account.
+	//
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /api/hosting/v1/accounts/{username}/wordpress/installations (the `HostingInstallWordPressV1` operationId).
@@ -22617,6 +22624,9 @@ type ClientInterface interface {
 	// takes 1-2 minutes. Poll GET /api/hosting/v1/wordpress/installations filtered
 	// by username and domain to track progress. When the installation appears in
 	// that list, WordPress is ready.
+	//
+	// Returns 422 when the account already uses all the databases its plan allows,
+	// unless `database.name` is an existing database on the account.
 	//
 	// Takes a body of the `application/json` content type.
 	//
@@ -32249,6 +32259,9 @@ func (c *Client) HostingDeployWordPressThemeV1(ctx context.Context, username Use
 // by username and domain to track progress. When the installation appears in
 // that list, WordPress is ready.
 //
+// Returns 422 when the account already uses all the databases its plan allows,
+// unless `database.name` is an existing database on the account.
+//
 // Takes any type of body and a specified content type.
 //
 // Corresponds with POST /api/hosting/v1/accounts/{username}/wordpress/installations (the `HostingInstallWordPressV1` operationId).
@@ -32282,6 +32295,9 @@ func (c *Client) HostingInstallWordPressV1WithBody(ctx context.Context, username
 // takes 1-2 minutes. Poll GET /api/hosting/v1/wordpress/installations filtered
 // by username and domain to track progress. When the installation appears in
 // that list, WordPress is ready.
+//
+// Returns 422 when the account already uses all the databases its plan allows,
+// unless `database.name` is an existing database on the account.
 //
 // Takes a body of the `application/json` content type.
 //
@@ -61548,6 +61564,9 @@ type ClientWithResponsesInterface interface {
 	// by username and domain to track progress. When the installation appears in
 	// that list, WordPress is ready.
 	//
+	// Returns 422 when the account already uses all the databases its plan allows,
+	// unless `database.name` is an existing database on the account.
+	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
 	// Corresponds with POST /api/hosting/v1/accounts/{username}/wordpress/installations (the `HostingInstallWordPressV1` operationId).
@@ -61571,6 +61590,9 @@ type ClientWithResponsesInterface interface {
 	// takes 1-2 minutes. Poll GET /api/hosting/v1/wordpress/installations filtered
 	// by username and domain to track progress. When the installation appears in
 	// that list, WordPress is ready.
+	//
+	// Returns 422 when the account already uses all the databases its plan allows,
+	// unless `database.name` is an existing database on the account.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -94719,6 +94741,9 @@ func (c *ClientWithResponses) HostingDeployWordPressThemeV1WithResponse(ctx cont
 // by username and domain to track progress. When the installation appears in
 // that list, WordPress is ready.
 //
+// Returns 422 when the account already uses all the databases its plan allows,
+// unless `database.name` is an existing database on the account.
+//
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
 // Corresponds with POST /api/hosting/v1/accounts/{username}/wordpress/installations (the `HostingInstallWordPressV1` operationId).
@@ -94748,6 +94773,9 @@ func (c *ClientWithResponses) HostingInstallWordPressV1WithBodyWithResponse(ctx 
 // takes 1-2 minutes. Poll GET /api/hosting/v1/wordpress/installations filtered
 // by username and domain to track progress. When the installation appears in
 // that list, WordPress is ready.
+//
+// Returns 422 when the account already uses all the databases its plan allows,
+// unless `database.name` is an existing database on the account.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //

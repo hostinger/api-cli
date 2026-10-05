@@ -15,7 +15,7 @@ import (
 var InstallCmd = &cobra.Command{
 	Use:   "install <username>",
 	Short: "Install WordPress",
-	Long:  "Install WordPress on an existing website.\n\nThe website must already exist before calling this endpoint. To create a new\nwebsite first, use POST /api/hosting/v1/websites and poll\nGET /api/hosting/v1/websites until it appears.\n\nCall GET /api/hosting/v1/wordpress/installations filtered by username and\ndomain before proceeding to check whether WordPress is already installed on\nthe target domain/path. If WordPress already exists and `overwrite` is false\n(the default), the async job will fail.\n\nThis operation is asynchronous: a successful response only means the install\njob has been queued, not that WordPress is ready. Installation typically\ntakes 1-2 minutes. Poll GET /api/hosting/v1/wordpress/installations filtered\nby username and domain to track progress. When the installation appears in\nthat list, WordPress is ready.",
+	Long:  "Install WordPress on an existing website.\n\nThe website must already exist before calling this endpoint. To create a new\nwebsite first, use POST /api/hosting/v1/websites and poll\nGET /api/hosting/v1/websites until it appears.\n\nCall GET /api/hosting/v1/wordpress/installations filtered by username and\ndomain before proceeding to check whether WordPress is already installed on\nthe target domain/path. If WordPress already exists and `overwrite` is false\n(the default), the async job will fail.\n\nThis operation is asynchronous: a successful response only means the install\njob has been queued, not that WordPress is ready. Installation typically\ntakes 1-2 minutes. Poll GET /api/hosting/v1/wordpress/installations filtered\nby username and domain to track progress. When the installation appears in\nthat list, WordPress is ready.\n\nReturns 422 when the account already uses all the databases its plan allows,\nunless `database.name` is an existing database on the account.",
 	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
 	Run: func(cmd *cobra.Command, args []string) {
 		utils.EnumCheck(cmd, "auto-updates", []string{"all", "none", "minor"})
@@ -35,7 +35,7 @@ var InstallCmd = &cobra.Command{
 func init() {
 	InstallCmd.Flags().StringP("auto-updates", "", "", "WordPress core auto-update policy (one of: all, none, minor)")
 	InstallCmd.Flags().StringP("credentials", "", "", "WordPress admin credentials (JSON)")
-	InstallCmd.Flags().StringP("database", "", "", "Optional. If the named database already exists, it will be used for this WordPress install. Otherwise a new database is created with a generated name and random credentials. (JSON)")
+	InstallCmd.Flags().StringP("database", "", "", "Optional. If the named database already exists on the account, it is used for this WordPress install. Otherwise a new database is created with this name, or with a generated name when database is omitted or null. A new database gets a random database user and counts toward the plan's database limit. (JSON)")
 	InstallCmd.Flags().StringP("directory", "", "", "Relative directory to install WordPress into. Defaults to the website root when omitted.")
 	InstallCmd.Flags().StringP("domain", "", "", "Domain of the existing website where WordPress will be installed")
 	InstallCmd.Flags().StringP("language", "", "", "WordPress locale. Defaults to en_US when omitted.")
