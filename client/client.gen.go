@@ -10434,6 +10434,27 @@ type HostingV1FilesUploadUrlResource struct {
 	Url string `json:"url"`
 }
 
+// HostingV1GitDeployWebsiteGitRepositoryRequest defines model for Hosting.V1.Git.DeployWebsiteGitRepositoryRequest.
+type HostingV1GitDeployWebsiteGitRepositoryRequest struct {
+	// Branch Branch to clone and pull
+	//
+	// Example: main
+	Branch string `json:"branch"`
+
+	// Directory Directory under the website document root, exactly as `List website Git repositories` returns
+	// it for an existing repository. Empty, null or omitted means the document root.
+	//
+	// Example: my-site
+	Directory *string `json:"directory,omitempty"`
+
+	// RepositoryUrl Clone URL of the repository on any Git host, SSH or HTTPS. Private repositories need an SSH URL
+	// and the account's Git SSH key added to the repository as a deploy key. An HTTP or HTTPS URL with
+	// a username or token, or any URL with a password, is rejected.
+	//
+	// Example: git@github.com:octocat/my-site.git
+	RepositoryUrl string `json:"repository_url"`
+}
+
 // HostingV1GitGitAutoDeploymentSettingsResource Every field is null when the website has no Git auto-deployment configured.
 type HostingV1GitGitAutoDeploymentSettingsResource struct {
 	// Branch Branch that is deployed
@@ -10494,6 +10515,21 @@ type HostingV1GitGitCommitResource struct {
 	//
 	// Example: Initial commit
 	Message string `json:"message"`
+}
+
+// HostingV1GitGitDeployOutputResource Result of cloning or pulling a Git repository into the website
+type HostingV1GitGitDeployOutputResource struct {
+	// IsSuccess Whether the clone or pull, and composer install when it ran, finished without errors
+	//
+	// Example: true
+	IsSuccess bool `json:"is_success"`
+
+	// Output Log of the deployment steps, and the Git or composer error when `is_success` is false
+	//
+	// Example: Deployment start
+	// Repository cloned
+	// Deployment end
+	Output string `json:"output"`
 }
 
 // HostingV1GitGitInstallationCollection Array of [`Hosting.V1.Git.GitInstallationResource`](#model/hostingv1gitgitinstallationresource)
@@ -10612,6 +10648,14 @@ type HostingV1GitGitRepositoryResource struct {
 	Owner string `json:"owner"`
 }
 
+// HostingV1GitGitSshKeyResource Public SSH key the hosting account uses to clone and pull Git repositories
+type HostingV1GitGitSshKeyResource struct {
+	// PublicKey Public key to add as a deploy key on the Git host. Null when the account has no key yet.
+	//
+	// Example: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7 u123456789@example-server
+	PublicKey *string `json:"public_key"`
+}
+
 // HostingV1GitUpdateGitAutoDeploymentSettingsRequest defines model for Hosting.V1.Git.UpdateGitAutoDeploymentSettingsRequest.
 type HostingV1GitUpdateGitAutoDeploymentSettingsRequest struct {
 	// Branch Branch to deploy
@@ -10645,6 +10689,55 @@ type HostingV1GitUpdateGitAutoDeploymentSettingsRequest struct {
 	//
 	// Example: my-site
 	Repository string `json:"repository"`
+}
+
+// HostingV1GitWebsiteGitRepositoryCollection Array of [`Hosting.V1.Git.WebsiteGitRepositoryResource`](#model/hostingv1gitwebsitegitrepositoryresource)
+type HostingV1GitWebsiteGitRepositoryCollection = []HostingV1GitWebsiteGitRepositoryResource
+
+// HostingV1GitWebsiteGitRepositoryResource Git repository linked to a directory of the website. A repository whose clone failed stays listed;
+// deploying it again retries the clone.
+type HostingV1GitWebsiteGitRepositoryResource struct {
+	// Branch Branch that is cloned and pulled
+	//
+	// Example: main
+	Branch string `json:"branch"`
+
+	// Directory Directory under the website document root. Empty means the document root.
+	//
+	// Example: my-site
+	Directory string `json:"directory"`
+
+	// RepositoryUrl Clone URL of the repository. A username, password or token in an HTTP(S) URL, or a password in any
+	// URL, is shown as `***`.
+	//
+	// Example: git@github.com:octocat/my-site.git
+	RepositoryUrl string `json:"repository_url"`
+
+	// Webhook Auto-deployment webhook of the repository, the same one the Git section of hPanel shows
+	Webhook HostingV1GitWebsiteGitRepositoryWebhookResource `json:"webhook"`
+}
+
+// HostingV1GitWebsiteGitRepositoryWebhookResource Auto-deployment webhook of the repository, the same one the Git section of hPanel shows
+type HostingV1GitWebsiteGitRepositoryWebhookResource struct {
+	// Provider Git host detected from the repository URL. Null when it is not GitHub, GitLab or Bitbucket.
+	//
+	// Example: Github
+	Provider *string `json:"provider"`
+
+	// SetupUrl Page on the Git host where the webhook is added. Null when the host is not detected.
+	//
+	// Example: https://github.com/octocat/my-site/settings/hooks/new
+	SetupUrl *string `json:"setup_url"`
+
+	// TutorialUrl Git host guide for adding a webhook. Null when the host is not detected.
+	//
+	// Example: https://developer.github.com/webhooks/creating/
+	TutorialUrl *string `json:"tutorial_url"`
+
+	// Url Webhook URL to add on the Git host for automatic deployment
+	//
+	// Example: https://webhooks.hostinger.com/deploy/6f1ed002ab5595859014ebf0951522d9
+	Url string `json:"url"`
 }
 
 // HostingV1NodeJsBuildAnalysisResource defines model for Hosting.V1.NodeJs.BuildAnalysisResource.
@@ -17643,6 +17736,9 @@ type HostingDeployStaticSiteArchiveV1JSONRequestBody = HostingV1WebsitesDeployAr
 // HostingUpdateGitAutoDeploymentSettingsV1JSONRequestBody defines body for HostingUpdateGitAutoDeploymentSettingsV1 for application/json ContentType.
 type HostingUpdateGitAutoDeploymentSettingsV1JSONRequestBody = HostingV1GitUpdateGitAutoDeploymentSettingsRequest
 
+// HostingDeployWebsiteGitRepositoryV1JSONRequestBody defines body for HostingDeployWebsiteGitRepositoryV1 for application/json ContentType.
+type HostingDeployWebsiteGitRepositoryV1JSONRequestBody = HostingV1GitDeployWebsiteGitRepositoryRequest
+
 // HostingStartNodeJsBuildV1JSONRequestBody defines body for HostingStartNodeJsBuildV1 for application/json ContentType.
 type HostingStartNodeJsBuildV1JSONRequestBody = HostingV1NodeJsStartBuildRequest
 
@@ -21497,6 +21593,24 @@ type ClientInterface interface {
 	// Corresponds with GET /api/hosting/v1/accounts/{username}/domains/{domain}/files/content (the `HostingGetWebsiteFileContentV1` operationId).
 	HostingGetWebsiteFileContentV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetWebsiteFileContentV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// HostingGetGitSSHPublicKeyV1 Get Git SSH public key
+	//
+	// Returns the public SSH key of the hosting account. `Deploy website Git repository` uses this key to
+	// clone and pull over SSH, so a private repository works once the key is added to it as a deploy key
+	// on the Git host. `public_key` is null when the account has no key yet.
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/git/ssh-key (the `HostingGetGitSSHPublicKeyV1` operationId).
+	HostingGetGitSSHPublicKeyV1(ctx context.Context, username UsernamePath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingGenerateGitSSHKeyV1 Generate Git SSH key
+	//
+	// Creates the SSH key pair of the hosting account and returns the public key. When the account already
+	// has a key, returns that key unchanged. One key serves every website of the account; add the public
+	// key to a private repository as a deploy key before deploying it.
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/git/ssh-key (the `HostingGenerateGitSSHKeyV1` operationId).
+	HostingGenerateGitSSHKeyV1(ctx context.Context, username UsernamePath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// HostingClearWebsiteCacheV1 Clear website cache
 	//
 	// Permanently clears all server-side cache for the website at once. Use it when content was
@@ -21714,6 +21828,60 @@ type ClientInterface interface {
 	//
 	// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/git/auto-deployments/settings (the `HostingUpdateGitAutoDeploymentSettingsV1` operationId).
 	HostingUpdateGitAutoDeploymentSettingsV1(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdateGitAutoDeploymentSettingsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingListWebsiteGitRepositoriesV1 List website Git repositories
+	//
+	// Lists the Git repositories linked to directories of the website, with
+	// `Deploy website Git repository` or in the Git section of hPanel: clone URL, branch and directory of
+	// each one. A repository whose clone failed stays listed; deploying it again retries the clone. GitHub
+	// and GitLab auto-deployments are not listed here; see `Get Git auto-deployment settings`.
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/git/repositories (the `HostingListWebsiteGitRepositoriesV1` operationId).
+	HostingListWebsiteGitRepositoriesV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingDeployWebsiteGitRepositoryV1WithBody Deploy website Git repository
+	//
+	// Clones a Git repository into a directory of the website, or pulls it again. An empty or missing
+	// directory gets a clone of the branch. A directory that already holds this repository and branch is
+	// reset to its last commit and pulled: changes made on the server to files the repository tracks are
+	// discarded, files it does not track stay. A directory that holds other files, including another
+	// repository or another branch of this one, is rejected. `composer install` runs after the clone or
+	// pull when the repository has a `composer.json`.
+	//
+	// The call waits for the deployment and returns its log. `is_success` false means Git or composer
+	// failed and the log says why. A second call for the same directory is rejected while the first is
+	// still waiting for the server. If the request times out, the deployment may still finish on the
+	// server; calling again later with the same repository and branch pulls.
+	//
+	// Private repositories need an SSH URL and the account's Git SSH key from `Generate Git SSH key`,
+	// added to the repository as a deploy key.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/git/repositories/deploy (the `HostingDeployWebsiteGitRepositoryV1` operationId).
+	HostingDeployWebsiteGitRepositoryV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingDeployWebsiteGitRepositoryV1 Deploy website Git repository
+	//
+	// Clones a Git repository into a directory of the website, or pulls it again. An empty or missing
+	// directory gets a clone of the branch. A directory that already holds this repository and branch is
+	// reset to its last commit and pulled: changes made on the server to files the repository tracks are
+	// discarded, files it does not track stay. A directory that holds other files, including another
+	// repository or another branch of this one, is rejected. `composer install` runs after the clone or
+	// pull when the repository has a `composer.json`.
+	//
+	// The call waits for the deployment and returns its log. `is_success` false means Git or composer
+	// failed and the log says why. A second call for the same directory is rejected while the first is
+	// still waiting for the server. If the request times out, the deployment may still finish on the
+	// server; calling again later with the same repository and branch pulls.
+	//
+	// Private repositories need an SSH URL and the account's Git SSH key from `Generate Git SSH key`,
+	// added to the repository as a deploy key.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/git/repositories/deploy (the `HostingDeployWebsiteGitRepositoryV1` operationId).
+	HostingDeployWebsiteGitRepositoryV1(ctx context.Context, username UsernamePath, domain Domain, body HostingDeployWebsiteGitRepositoryV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingListNodeJSBuildsV1 List NodeJS builds
 	//
@@ -30381,6 +30549,44 @@ func (c *Client) HostingGetWebsiteFileContentV1(ctx context.Context, username Us
 	return c.Client.Do(req)
 }
 
+// HostingGetGitSSHPublicKeyV1 Get Git SSH public key
+//
+// Returns the public SSH key of the hosting account. `Deploy website Git repository` uses this key to
+// clone and pull over SSH, so a private repository works once the key is added to it as a deploy key
+// on the Git host. `public_key` is null when the account has no key yet.
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/git/ssh-key (the `HostingGetGitSSHPublicKeyV1` operationId).
+func (c *Client) HostingGetGitSSHPublicKeyV1(ctx context.Context, username UsernamePath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingGetGitSSHPublicKeyV1Request(c.Server, username)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingGenerateGitSSHKeyV1 Generate Git SSH key
+//
+// Creates the SSH key pair of the hosting account and returns the public key. When the account already
+// has a key, returns that key unchanged. One key serves every website of the account; add the public
+// key to a private repository as a deploy key before deploying it.
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/git/ssh-key (the `HostingGenerateGitSSHKeyV1` operationId).
+func (c *Client) HostingGenerateGitSSHKeyV1(ctx context.Context, username UsernamePath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingGenerateGitSSHKeyV1Request(c.Server, username)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // HostingClearWebsiteCacheV1 Clear website cache
 //
 // Permanently clears all server-side cache for the website at once. Use it when content was
@@ -30719,6 +30925,90 @@ func (c *Client) HostingUpdateGitAutoDeploymentSettingsV1WithBody(ctx context.Co
 // Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/git/auto-deployments/settings (the `HostingUpdateGitAutoDeploymentSettingsV1` operationId).
 func (c *Client) HostingUpdateGitAutoDeploymentSettingsV1(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdateGitAutoDeploymentSettingsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingUpdateGitAutoDeploymentSettingsV1Request(c.Server, username, domain, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingListWebsiteGitRepositoriesV1 List website Git repositories
+//
+// Lists the Git repositories linked to directories of the website, with
+// `Deploy website Git repository` or in the Git section of hPanel: clone URL, branch and directory of
+// each one. A repository whose clone failed stays listed; deploying it again retries the clone. GitHub
+// and GitLab auto-deployments are not listed here; see `Get Git auto-deployment settings`.
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/git/repositories (the `HostingListWebsiteGitRepositoriesV1` operationId).
+func (c *Client) HostingListWebsiteGitRepositoriesV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingListWebsiteGitRepositoriesV1Request(c.Server, username, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingDeployWebsiteGitRepositoryV1WithBody Deploy website Git repository
+//
+// Clones a Git repository into a directory of the website, or pulls it again. An empty or missing
+// directory gets a clone of the branch. A directory that already holds this repository and branch is
+// reset to its last commit and pulled: changes made on the server to files the repository tracks are
+// discarded, files it does not track stay. A directory that holds other files, including another
+// repository or another branch of this one, is rejected. `composer install` runs after the clone or
+// pull when the repository has a `composer.json`.
+//
+// The call waits for the deployment and returns its log. `is_success` false means Git or composer
+// failed and the log says why. A second call for the same directory is rejected while the first is
+// still waiting for the server. If the request times out, the deployment may still finish on the
+// server; calling again later with the same repository and branch pulls.
+//
+// Private repositories need an SSH URL and the account's Git SSH key from `Generate Git SSH key`,
+// added to the repository as a deploy key.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/git/repositories/deploy (the `HostingDeployWebsiteGitRepositoryV1` operationId).
+func (c *Client) HostingDeployWebsiteGitRepositoryV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingDeployWebsiteGitRepositoryV1RequestWithBody(c.Server, username, domain, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingDeployWebsiteGitRepositoryV1 Deploy website Git repository
+//
+// Clones a Git repository into a directory of the website, or pulls it again. An empty or missing
+// directory gets a clone of the branch. A directory that already holds this repository and branch is
+// reset to its last commit and pulled: changes made on the server to files the repository tracks are
+// discarded, files it does not track stay. A directory that holds other files, including another
+// repository or another branch of this one, is rejected. `composer install` runs after the clone or
+// pull when the repository has a `composer.json`.
+//
+// The call waits for the deployment and returns its log. `is_success` false means Git or composer
+// failed and the log says why. A second call for the same directory is rejected while the first is
+// still waiting for the server. If the request times out, the deployment may still finish on the
+// server; calling again later with the same repository and branch pulls.
+//
+// Private repositories need an SSH URL and the account's Git SSH key from `Generate Git SSH key`,
+// added to the repository as a deploy key.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/git/repositories/deploy (the `HostingDeployWebsiteGitRepositoryV1` operationId).
+func (c *Client) HostingDeployWebsiteGitRepositoryV1(ctx context.Context, username UsernamePath, domain Domain, body HostingDeployWebsiteGitRepositoryV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingDeployWebsiteGitRepositoryV1Request(c.Server, username, domain, body)
 	if err != nil {
 		return nil, err
 	}
@@ -44787,6 +45077,74 @@ func NewHostingGetWebsiteFileContentV1Request(server string, username UsernamePa
 	return req, nil
 }
 
+// NewHostingGetGitSSHPublicKeyV1Request constructs an http.Request for the HostingGetGitSSHPublicKeyV1 method
+func NewHostingGetGitSSHPublicKeyV1Request(server string, username UsernamePath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/git/ssh-key", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingGenerateGitSSHKeyV1Request constructs an http.Request for the HostingGenerateGitSSHKeyV1 method
+func NewHostingGenerateGitSSHKeyV1Request(server string, username UsernamePath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/git/ssh-key", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewHostingClearWebsiteCacheV1Request constructs an http.Request for the HostingClearWebsiteCacheV1 method
 func NewHostingClearWebsiteCacheV1Request(server string, username UsernamePath, domain Domain, params *HostingClearWebsiteCacheV1Params) (*http.Request, error) {
 	var err error
@@ -45198,6 +45556,101 @@ func NewHostingUpdateGitAutoDeploymentSettingsV1RequestWithBody(server string, u
 	}
 
 	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingListWebsiteGitRepositoriesV1Request constructs an http.Request for the HostingListWebsiteGitRepositoriesV1 method
+func NewHostingListWebsiteGitRepositoriesV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/git/repositories", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingDeployWebsiteGitRepositoryV1Request calls the generic HostingDeployWebsiteGitRepositoryV1 builder with application/json body
+func NewHostingDeployWebsiteGitRepositoryV1Request(server string, username UsernamePath, domain Domain, body HostingDeployWebsiteGitRepositoryV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingDeployWebsiteGitRepositoryV1RequestWithBody(server, username, domain, "application/json", bodyReader)
+}
+
+// NewHostingDeployWebsiteGitRepositoryV1RequestWithBody constructs an http.Request for the HostingDeployWebsiteGitRepositoryV1 method, with any body, and a specified content type
+func NewHostingDeployWebsiteGitRepositoryV1RequestWithBody(server string, username UsernamePath, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/git/repositories/deploy", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -60018,6 +60471,28 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /api/hosting/v1/accounts/{username}/domains/{domain}/files/content (the `HostingGetWebsiteFileContentV1` operationId).
 	HostingGetWebsiteFileContentV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetWebsiteFileContentV1Params, reqEditors ...RequestEditorFn) (*HostingGetWebsiteFileContentV1Response, error)
 
+	// HostingGetGitSSHPublicKeyV1WithResponse Get Git SSH public key
+	//
+	// Returns the public SSH key of the hosting account. `Deploy website Git repository` uses this key to
+	// clone and pull over SSH, so a private repository works once the key is added to it as a deploy key
+	// on the Git host. `public_key` is null when the account has no key yet.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/git/ssh-key (the `HostingGetGitSSHPublicKeyV1` operationId).
+	HostingGetGitSSHPublicKeyV1WithResponse(ctx context.Context, username UsernamePath, reqEditors ...RequestEditorFn) (*HostingGetGitSSHPublicKeyV1Response, error)
+
+	// HostingGenerateGitSSHKeyV1WithResponse Generate Git SSH key
+	//
+	// Creates the SSH key pair of the hosting account and returns the public key. When the account already
+	// has a key, returns that key unchanged. One key serves every website of the account; add the public
+	// key to a private repository as a deploy key before deploying it.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/git/ssh-key (the `HostingGenerateGitSSHKeyV1` operationId).
+	HostingGenerateGitSSHKeyV1WithResponse(ctx context.Context, username UsernamePath, reqEditors ...RequestEditorFn) (*HostingGenerateGitSSHKeyV1Response, error)
+
 	// HostingClearWebsiteCacheV1WithResponse Clear website cache
 	//
 	// Permanently clears all server-side cache for the website at once. Use it when content was
@@ -60241,6 +60716,62 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/git/auto-deployments/settings (the `HostingUpdateGitAutoDeploymentSettingsV1` operationId).
 	HostingUpdateGitAutoDeploymentSettingsV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdateGitAutoDeploymentSettingsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUpdateGitAutoDeploymentSettingsV1Response, error)
+
+	// HostingListWebsiteGitRepositoriesV1WithResponse List website Git repositories
+	//
+	// Lists the Git repositories linked to directories of the website, with
+	// `Deploy website Git repository` or in the Git section of hPanel: clone URL, branch and directory of
+	// each one. A repository whose clone failed stays listed; deploying it again retries the clone. GitHub
+	// and GitLab auto-deployments are not listed here; see `Get Git auto-deployment settings`.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/git/repositories (the `HostingListWebsiteGitRepositoriesV1` operationId).
+	HostingListWebsiteGitRepositoriesV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingListWebsiteGitRepositoriesV1Response, error)
+
+	// HostingDeployWebsiteGitRepositoryV1WithBodyWithResponse Deploy website Git repository
+	//
+	// Clones a Git repository into a directory of the website, or pulls it again. An empty or missing
+	// directory gets a clone of the branch. A directory that already holds this repository and branch is
+	// reset to its last commit and pulled: changes made on the server to files the repository tracks are
+	// discarded, files it does not track stay. A directory that holds other files, including another
+	// repository or another branch of this one, is rejected. `composer install` runs after the clone or
+	// pull when the repository has a `composer.json`.
+	//
+	// The call waits for the deployment and returns its log. `is_success` false means Git or composer
+	// failed and the log says why. A second call for the same directory is rejected while the first is
+	// still waiting for the server. If the request times out, the deployment may still finish on the
+	// server; calling again later with the same repository and branch pulls.
+	//
+	// Private repositories need an SSH URL and the account's Git SSH key from `Generate Git SSH key`,
+	// added to the repository as a deploy key.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/git/repositories/deploy (the `HostingDeployWebsiteGitRepositoryV1` operationId).
+	HostingDeployWebsiteGitRepositoryV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingDeployWebsiteGitRepositoryV1Response, error)
+
+	// HostingDeployWebsiteGitRepositoryV1WithResponse Deploy website Git repository
+	//
+	// Clones a Git repository into a directory of the website, or pulls it again. An empty or missing
+	// directory gets a clone of the branch. A directory that already holds this repository and branch is
+	// reset to its last commit and pulled: changes made on the server to files the repository tracks are
+	// discarded, files it does not track stay. A directory that holds other files, including another
+	// repository or another branch of this one, is rejected. `composer install` runs after the clone or
+	// pull when the repository has a `composer.json`.
+	//
+	// The call waits for the deployment and returns its log. `is_success` false means Git or composer
+	// failed and the log says why. A second call for the same directory is rejected while the first is
+	// still waiting for the server. If the request times out, the deployment may still finish on the
+	// server; calling again later with the same repository and branch pulls.
+	//
+	// Private repositories need an SSH URL and the account's Git SSH key from `Generate Git SSH key`,
+	// added to the repository as a deploy key.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/git/repositories/deploy (the `HostingDeployWebsiteGitRepositoryV1` operationId).
+	HostingDeployWebsiteGitRepositoryV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingDeployWebsiteGitRepositoryV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingDeployWebsiteGitRepositoryV1Response, error)
 
 	// HostingListNodeJSBuildsV1WithResponse List NodeJS builds
 	//
@@ -73369,6 +73900,123 @@ func (r HostingGetWebsiteFileContentV1Response) ContentType() string {
 	return ""
 }
 
+type HostingGetGitSSHPublicKeyV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1GitGitSshKeyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingGetGitSSHPublicKeyV1Response) GetJSON200() *HostingV1GitGitSshKeyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingGetGitSSHPublicKeyV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingGetGitSSHPublicKeyV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingGetGitSSHPublicKeyV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingGetGitSSHPublicKeyV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingGetGitSSHPublicKeyV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingGetGitSSHPublicKeyV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingGenerateGitSSHKeyV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1GitGitSshKeyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingGenerateGitSSHKeyV1Response) GetJSON200() *HostingV1GitGitSshKeyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingGenerateGitSSHKeyV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingGenerateGitSSHKeyV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingGenerateGitSSHKeyV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingGenerateGitSSHKeyV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingGenerateGitSSHKeyV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingGenerateGitSSHKeyV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingGenerateGitSSHKeyV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type HostingClearWebsiteCacheV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -73838,6 +74486,123 @@ func (r HostingUpdateGitAutoDeploymentSettingsV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingUpdateGitAutoDeploymentSettingsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingListWebsiteGitRepositoriesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1GitWebsiteGitRepositoryCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingListWebsiteGitRepositoriesV1Response) GetJSON200() *HostingV1GitWebsiteGitRepositoryCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingListWebsiteGitRepositoriesV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingListWebsiteGitRepositoriesV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingListWebsiteGitRepositoriesV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingListWebsiteGitRepositoriesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingListWebsiteGitRepositoriesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingListWebsiteGitRepositoriesV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingDeployWebsiteGitRepositoryV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1GitGitDeployOutputResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingDeployWebsiteGitRepositoryV1Response) GetJSON200() *HostingV1GitGitDeployOutputResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingDeployWebsiteGitRepositoryV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingDeployWebsiteGitRepositoryV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingDeployWebsiteGitRepositoryV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingDeployWebsiteGitRepositoryV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingDeployWebsiteGitRepositoryV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingDeployWebsiteGitRepositoryV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingDeployWebsiteGitRepositoryV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -92454,6 +93219,40 @@ func (c *ClientWithResponses) HostingGetWebsiteFileContentV1WithResponse(ctx con
 	return ParseHostingGetWebsiteFileContentV1Response(rsp)
 }
 
+// HostingGetGitSSHPublicKeyV1WithResponse Get Git SSH public key
+//
+// Returns the public SSH key of the hosting account. `Deploy website Git repository` uses this key to
+// clone and pull over SSH, so a private repository works once the key is added to it as a deploy key
+// on the Git host. `public_key` is null when the account has no key yet.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/git/ssh-key (the `HostingGetGitSSHPublicKeyV1` operationId).
+func (c *ClientWithResponses) HostingGetGitSSHPublicKeyV1WithResponse(ctx context.Context, username UsernamePath, reqEditors ...RequestEditorFn) (*HostingGetGitSSHPublicKeyV1Response, error) {
+	rsp, err := c.HostingGetGitSSHPublicKeyV1(ctx, username, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingGetGitSSHPublicKeyV1Response(rsp)
+}
+
+// HostingGenerateGitSSHKeyV1WithResponse Generate Git SSH key
+//
+// Creates the SSH key pair of the hosting account and returns the public key. When the account already
+// has a key, returns that key unchanged. One key serves every website of the account; add the public
+// key to a private repository as a deploy key before deploying it.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/git/ssh-key (the `HostingGenerateGitSSHKeyV1` operationId).
+func (c *ClientWithResponses) HostingGenerateGitSSHKeyV1WithResponse(ctx context.Context, username UsernamePath, reqEditors ...RequestEditorFn) (*HostingGenerateGitSSHKeyV1Response, error) {
+	rsp, err := c.HostingGenerateGitSSHKeyV1(ctx, username, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingGenerateGitSSHKeyV1Response(rsp)
+}
+
 // HostingClearWebsiteCacheV1WithResponse Clear website cache
 //
 // Permanently clears all server-side cache for the website at once. Use it when content was
@@ -92754,6 +93553,80 @@ func (c *ClientWithResponses) HostingUpdateGitAutoDeploymentSettingsV1WithRespon
 		return nil, err
 	}
 	return ParseHostingUpdateGitAutoDeploymentSettingsV1Response(rsp)
+}
+
+// HostingListWebsiteGitRepositoriesV1WithResponse List website Git repositories
+//
+// Lists the Git repositories linked to directories of the website, with
+// `Deploy website Git repository` or in the Git section of hPanel: clone URL, branch and directory of
+// each one. A repository whose clone failed stays listed; deploying it again retries the clone. GitHub
+// and GitLab auto-deployments are not listed here; see `Get Git auto-deployment settings`.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/git/repositories (the `HostingListWebsiteGitRepositoriesV1` operationId).
+func (c *ClientWithResponses) HostingListWebsiteGitRepositoriesV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingListWebsiteGitRepositoriesV1Response, error) {
+	rsp, err := c.HostingListWebsiteGitRepositoriesV1(ctx, username, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingListWebsiteGitRepositoriesV1Response(rsp)
+}
+
+// HostingDeployWebsiteGitRepositoryV1WithBodyWithResponse Deploy website Git repository
+//
+// Clones a Git repository into a directory of the website, or pulls it again. An empty or missing
+// directory gets a clone of the branch. A directory that already holds this repository and branch is
+// reset to its last commit and pulled: changes made on the server to files the repository tracks are
+// discarded, files it does not track stay. A directory that holds other files, including another
+// repository or another branch of this one, is rejected. `composer install` runs after the clone or
+// pull when the repository has a `composer.json`.
+//
+// The call waits for the deployment and returns its log. `is_success` false means Git or composer
+// failed and the log says why. A second call for the same directory is rejected while the first is
+// still waiting for the server. If the request times out, the deployment may still finish on the
+// server; calling again later with the same repository and branch pulls.
+//
+// Private repositories need an SSH URL and the account's Git SSH key from `Generate Git SSH key`,
+// added to the repository as a deploy key.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/git/repositories/deploy (the `HostingDeployWebsiteGitRepositoryV1` operationId).
+func (c *ClientWithResponses) HostingDeployWebsiteGitRepositoryV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingDeployWebsiteGitRepositoryV1Response, error) {
+	rsp, err := c.HostingDeployWebsiteGitRepositoryV1WithBody(ctx, username, domain, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingDeployWebsiteGitRepositoryV1Response(rsp)
+}
+
+// HostingDeployWebsiteGitRepositoryV1WithResponse Deploy website Git repository
+//
+// Clones a Git repository into a directory of the website, or pulls it again. An empty or missing
+// directory gets a clone of the branch. A directory that already holds this repository and branch is
+// reset to its last commit and pulled: changes made on the server to files the repository tracks are
+// discarded, files it does not track stay. A directory that holds other files, including another
+// repository or another branch of this one, is rejected. `composer install` runs after the clone or
+// pull when the repository has a `composer.json`.
+//
+// The call waits for the deployment and returns its log. `is_success` false means Git or composer
+// failed and the log says why. A second call for the same directory is rejected while the first is
+// still waiting for the server. If the request times out, the deployment may still finish on the
+// server; calling again later with the same repository and branch pulls.
+//
+// Private repositories need an SSH URL and the account's Git SSH key from `Generate Git SSH key`,
+// added to the repository as a deploy key.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/git/repositories/deploy (the `HostingDeployWebsiteGitRepositoryV1` operationId).
+func (c *ClientWithResponses) HostingDeployWebsiteGitRepositoryV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingDeployWebsiteGitRepositoryV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingDeployWebsiteGitRepositoryV1Response, error) {
+	rsp, err := c.HostingDeployWebsiteGitRepositoryV1(ctx, username, domain, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingDeployWebsiteGitRepositoryV1Response(rsp)
 }
 
 // HostingListNodeJSBuildsV1WithResponse List NodeJS builds
@@ -105522,6 +106395,93 @@ func ParseHostingGetWebsiteFileContentV1Response(rsp *http.Response) (*HostingGe
 	return response, nil
 }
 
+// ParseHostingGetGitSSHPublicKeyV1Response parses an HTTP response from a HostingGetGitSSHPublicKeyV1WithResponse call
+func ParseHostingGetGitSSHPublicKeyV1Response(rsp *http.Response) (*HostingGetGitSSHPublicKeyV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingGetGitSSHPublicKeyV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1GitGitSshKeyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingGenerateGitSSHKeyV1Response parses an HTTP response from a HostingGenerateGitSSHKeyV1WithResponse call
+func ParseHostingGenerateGitSSHKeyV1Response(rsp *http.Response) (*HostingGenerateGitSSHKeyV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingGenerateGitSSHKeyV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1GitGitSshKeyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseHostingClearWebsiteCacheV1Response parses an HTTP response from a HostingClearWebsiteCacheV1WithResponse call
 func ParseHostingClearWebsiteCacheV1Response(rsp *http.Response) (*HostingClearWebsiteCacheV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -105846,6 +106806,93 @@ func ParseHostingUpdateGitAutoDeploymentSettingsV1Response(rsp *http.Response) (
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingListWebsiteGitRepositoriesV1Response parses an HTTP response from a HostingListWebsiteGitRepositoriesV1WithResponse call
+func ParseHostingListWebsiteGitRepositoriesV1Response(rsp *http.Response) (*HostingListWebsiteGitRepositoriesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingListWebsiteGitRepositoriesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1GitWebsiteGitRepositoryCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingDeployWebsiteGitRepositoryV1Response parses an HTTP response from a HostingDeployWebsiteGitRepositoryV1WithResponse call
+func ParseHostingDeployWebsiteGitRepositoryV1Response(rsp *http.Response) (*HostingDeployWebsiteGitRepositoryV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingDeployWebsiteGitRepositoryV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1GitGitDeployOutputResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

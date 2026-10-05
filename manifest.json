@@ -1119,6 +1119,11 @@
     "method": "POST",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/deploy"
   },
+  "hosting_deployWebsiteGitRepositoryV1": {
+    "command": "hostinger hosting git deploy-website-repository",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/git/repositories/deploy"
+  },
   "hosting_deployWordPressPluginV1": {
     "command": "hostinger wordpress plugins deploy",
     "method": "POST",
@@ -1139,6 +1144,11 @@
     "method": "POST",
     "path": "/api/hosting/v1/domains/free-subdomains"
   },
+  "hosting_generateGitSSHKeyV1": {
+    "command": "hostinger hosting git generate-ssh-key",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/git/ssh-key"
+  },
   "hosting_generateUploadURLV1": {
     "command": "hostinger hosting files generate-upload-url",
     "method": "POST",
@@ -1153,6 +1163,11 @@
     "command": "hostinger hosting git auto-deployment-settings",
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/git/auto-deployments/settings"
+  },
+  "hosting_getGitSSHPublicKeyV1": {
+    "command": "hostinger hosting git ssh-public-key",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/git/ssh-key"
   },
   "hosting_getInstallationJWTTokenV1": {
     "command": "hostinger wordpress installations jwt-token",
@@ -1313,6 +1328,11 @@
     "command": "hostinger hosting files list-website-and-directories",
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/domains/{domain}/files"
+  },
+  "hosting_listWebsiteGitRepositoriesV1": {
+    "command": "hostinger hosting git list-website-repositories",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/git/repositories"
   },
   "hosting_listWebsiteParkedDomainsV1": {
     "command": "hostinger hosting domains list-website-parked",

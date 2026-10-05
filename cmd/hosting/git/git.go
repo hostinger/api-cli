@@ -12,7 +12,11 @@ var GroupCmd = &cobra.Command{
 func init() {
 	GroupCmd.AddCommand(AutoDeploymentSettingsCmd)
 	GroupCmd.AddCommand(DeleteAutoDeploymentSettingsCmd)
+	GroupCmd.AddCommand(DeployWebsiteRepositoryCmd)
+	GroupCmd.AddCommand(GenerateSshKeyCmd)
 	GroupCmd.AddCommand(ListInstallationRepositoriesCmd)
 	GroupCmd.AddCommand(ListInstallationsCmd)
+	GroupCmd.AddCommand(ListWebsiteRepositoriesCmd)
+	GroupCmd.AddCommand(SshPublicKeyCmd)
 	GroupCmd.AddCommand(UpdateAutoDeploymentSettingsCmd)
 }
