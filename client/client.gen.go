@@ -23452,6 +23452,9 @@ type ClientInterface interface {
 	//
 	// Retrieve a paginated list of orders accessible to the authenticated client.
 	//
+	// Only Web and Cloud hosting orders are listed. Agency Plan orders are listed by
+	// `GET /api/agency-hosting/v1/orders`.
+	//
 	// This endpoint returns orders of your hosting accounts as well as orders
 	// of other client hosting accounts that have shared access with you.
 	//
@@ -23498,6 +23501,9 @@ type ClientInterface interface {
 	// order as `order_id` together with the domain name. List orders to see
 	// available IDs; the website is provisioned on that order's hosting plan.
 	//
+	// Only Web and Cloud hosting orders are accepted. To create a website on an Agency
+	// Plan order, use `POST /api/agency-hosting/v1/orders/{order_id}/websites/setups`.
+	//
 	// The datacenter_code parameter is required when creating the first website
 	// on a new hosting plan - this will set up and configure new hosting account
 	// in the selected datacenter.
@@ -23522,6 +23528,9 @@ type ClientInterface interface {
 	// You must choose which hosting order to create this website on. Pass that
 	// order as `order_id` together with the domain name. List orders to see
 	// available IDs; the website is provisioned on that order's hosting plan.
+	//
+	// Only Web and Cloud hosting orders are accepted. To create a website on an Agency
+	// Plan order, use `POST /api/agency-hosting/v1/orders/{order_id}/websites/setups`.
 	//
 	// The datacenter_code parameter is required when creating the first website
 	// on a new hosting plan - this will set up and configure new hosting account
@@ -33662,6 +33671,9 @@ func (c *Client) HostingListWebsiteSetupsV1(ctx context.Context, params *Hosting
 //
 // Retrieve a paginated list of orders accessible to the authenticated client.
 //
+// Only Web and Cloud hosting orders are listed. Agency Plan orders are listed by
+// `GET /api/agency-hosting/v1/orders`.
+//
 // This endpoint returns orders of your hosting accounts as well as orders
 // of other client hosting accounts that have shared access with you.
 //
@@ -33728,6 +33740,9 @@ func (c *Client) HostingListWebsitesV1(ctx context.Context, params *HostingListW
 // order as `order_id` together with the domain name. List orders to see
 // available IDs; the website is provisioned on that order's hosting plan.
 //
+// Only Web and Cloud hosting orders are accepted. To create a website on an Agency
+// Plan order, use `POST /api/agency-hosting/v1/orders/{order_id}/websites/setups`.
+//
 // The datacenter_code parameter is required when creating the first website
 // on a new hosting plan - this will set up and configure new hosting account
 // in the selected datacenter.
@@ -33762,6 +33777,9 @@ func (c *Client) HostingCreateWebsiteV1WithBody(ctx context.Context, contentType
 // You must choose which hosting order to create this website on. Pass that
 // order as `order_id` together with the domain name. List orders to see
 // available IDs; the website is provisioned on that order's hosting plan.
+//
+// Only Web and Cloud hosting orders are accepted. To create a website on an Agency
+// Plan order, use `POST /api/agency-hosting/v1/orders/{order_id}/websites/setups`.
 //
 // The datacenter_code parameter is required when creating the first website
 // on a new hosting plan - this will set up and configure new hosting account
@@ -62424,6 +62442,9 @@ type ClientWithResponsesInterface interface {
 	//
 	// Retrieve a paginated list of orders accessible to the authenticated client.
 	//
+	// Only Web and Cloud hosting orders are listed. Agency Plan orders are listed by
+	// `GET /api/agency-hosting/v1/orders`.
+	//
 	// This endpoint returns orders of your hosting accounts as well as orders
 	// of other client hosting accounts that have shared access with you.
 	//
@@ -62474,6 +62495,9 @@ type ClientWithResponsesInterface interface {
 	// order as `order_id` together with the domain name. List orders to see
 	// available IDs; the website is provisioned on that order's hosting plan.
 	//
+	// Only Web and Cloud hosting orders are accepted. To create a website on an Agency
+	// Plan order, use `POST /api/agency-hosting/v1/orders/{order_id}/websites/setups`.
+	//
 	// The datacenter_code parameter is required when creating the first website
 	// on a new hosting plan - this will set up and configure new hosting account
 	// in the selected datacenter.
@@ -62498,6 +62522,9 @@ type ClientWithResponsesInterface interface {
 	// You must choose which hosting order to create this website on. Pass that
 	// order as `order_id` together with the domain name. List orders to see
 	// available IDs; the website is provisioned on that order's hosting plan.
+	//
+	// Only Web and Cloud hosting orders are accepted. To create a website on an Agency
+	// Plan order, use `POST /api/agency-hosting/v1/orders/{order_id}/websites/setups`.
 	//
 	// The datacenter_code parameter is required when creating the first website
 	// on a new hosting plan - this will set up and configure new hosting account
@@ -95926,6 +95953,9 @@ func (c *ClientWithResponses) HostingListWebsiteSetupsV1WithResponse(ctx context
 //
 // Retrieve a paginated list of orders accessible to the authenticated client.
 //
+// Only Web and Cloud hosting orders are listed. Agency Plan orders are listed by
+// `GET /api/agency-hosting/v1/orders`.
+//
 // This endpoint returns orders of your hosting accounts as well as orders
 // of other client hosting accounts that have shared access with you.
 //
@@ -95988,6 +96018,9 @@ func (c *ClientWithResponses) HostingListWebsitesV1WithResponse(ctx context.Cont
 // order as `order_id` together with the domain name. List orders to see
 // available IDs; the website is provisioned on that order's hosting plan.
 //
+// Only Web and Cloud hosting orders are accepted. To create a website on an Agency
+// Plan order, use `POST /api/agency-hosting/v1/orders/{order_id}/websites/setups`.
+//
 // The datacenter_code parameter is required when creating the first website
 // on a new hosting plan - this will set up and configure new hosting account
 // in the selected datacenter.
@@ -96018,6 +96051,9 @@ func (c *ClientWithResponses) HostingCreateWebsiteV1WithBodyWithResponse(ctx con
 // You must choose which hosting order to create this website on. Pass that
 // order as `order_id` together with the domain name. List orders to see
 // available IDs; the website is provisioned on that order's hosting plan.
+//
+// Only Web and Cloud hosting orders are accepted. To create a website on an Agency
+// Plan order, use `POST /api/agency-hosting/v1/orders/{order_id}/websites/setups`.
 //
 // The datacenter_code parameter is required when creating the first website
 // on a new hosting plan - this will set up and configure new hosting account

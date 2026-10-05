@@ -6,6 +6,9 @@ List orders
 
 Retrieve a paginated list of orders accessible to the authenticated client.
 
+Only Web and Cloud hosting orders are listed. Agency Plan orders are listed by
+`GET /api/agency-hosting/v1/orders`.
+
 This endpoint returns orders of your hosting accounts as well as orders
 of other client hosting accounts that have shared access with you.
 

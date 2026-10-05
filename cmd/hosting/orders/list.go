@@ -13,7 +13,7 @@ import (
 var ListCmd = &cobra.Command{
 	Use:   "list",
 	Short: "List orders",
-	Long:  "Retrieve a paginated list of orders accessible to the authenticated client.\n\nThis endpoint returns orders of your hosting accounts as well as orders\nof other client hosting accounts that have shared access with you.\n\nUse the available query parameters to filter results by order statuses\nor specific order IDs for more targeted results.",
+	Long:  "Retrieve a paginated list of orders accessible to the authenticated client.\n\nOnly Web and Cloud hosting orders are listed. Agency Plan orders are listed by\n`GET /api/agency-hosting/v1/orders`.\n\nThis endpoint returns orders of your hosting accounts as well as orders\nof other client hosting accounts that have shared access with you.\n\nUse the available query parameters to filter results by order statuses\nor specific order IDs for more targeted results.",
 	Run: func(cmd *cobra.Command, args []string) {
 		r, err := api.Request().HostingListOrdersV1WithResponse(context.TODO(), listParams(cmd))
 		if err != nil {
