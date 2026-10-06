@@ -1869,6 +1869,30 @@ func (e HostingV1OnboardingsOnboardingResourceStatus) Valid() bool {
 	}
 }
 
+// Defines values for HostingV1OnboardingsStartOnboardingRequestType.
+const (
+	HostingV1OnboardingsStartOnboardingRequestTypeHeadlessEcommerce  HostingV1OnboardingsStartOnboardingRequestType = "headless_ecommerce"
+	HostingV1OnboardingsStartOnboardingRequestTypeHeadlessPocketbase HostingV1OnboardingsStartOnboardingRequestType = "headless_pocketbase"
+	HostingV1OnboardingsStartOnboardingRequestTypeHeadlessWordpress  HostingV1OnboardingsStartOnboardingRequestType = "headless_wordpress"
+	HostingV1OnboardingsStartOnboardingRequestTypeWordpress          HostingV1OnboardingsStartOnboardingRequestType = "wordpress"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1OnboardingsStartOnboardingRequestType enum.
+func (e HostingV1OnboardingsStartOnboardingRequestType) Valid() bool {
+	switch e {
+	case HostingV1OnboardingsStartOnboardingRequestTypeHeadlessEcommerce:
+		return true
+	case HostingV1OnboardingsStartOnboardingRequestTypeHeadlessPocketbase:
+		return true
+	case HostingV1OnboardingsStartOnboardingRequestTypeHeadlessWordpress:
+		return true
+	case HostingV1OnboardingsStartOnboardingRequestTypeWordpress:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for HostingV1SslSslStatusResourceProvider.
 const (
 	HostingV1SslSslStatusResourceProviderCustom      HostingV1SslSslStatusResourceProvider = "custom"
@@ -11380,6 +11404,11 @@ type HostingV1OnboardingsOnboardingResource struct {
 	// Example: running
 	Status HostingV1OnboardingsOnboardingResourceStatus `json:"status"`
 
+	// Type Website type requested for the setup: `wordpress`, `headless_wordpress`, `headless_ecommerce` or `headless_pocketbase`. `null` for an empty website. Setups started outside this API may report other legacy types.
+	//
+	// Example: wordpress
+	Type *string `json:"type,omitempty"`
+
 	// UpdatedAt When the setup last reported progress.
 	//
 	// Example: 2024-01-15T10:32:00.000000Z
@@ -11395,6 +11424,55 @@ type HostingV1OnboardingsOnboardingResource struct {
 //
 // Example: running
 type HostingV1OnboardingsOnboardingResourceStatus string
+
+// HostingV1OnboardingsStartOnboardingRequest Website type, domain and WordPress settings for a new website setup
+type HostingV1OnboardingsStartOnboardingRequest struct {
+	// Domain Customer-owned domain. Cannot start with "www.". Omit or `null` to set the website up on a generated temporary free subdomain.
+	//
+	// Example: example.com
+	Domain *string `json:"domain,omitempty"`
+
+	// Type Website type. Omit or `null` for an empty website. `wordpress` installs WordPress in the website root and requires `wordpress`. The headless types (`headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`) create a headless website; `headless_wordpress` additionally installs WordPress into the `cms` directory with generated credentials.
+	//
+	// Example: wordpress
+	Type *HostingV1OnboardingsStartOnboardingRequestType `json:"type,omitempty"`
+
+	// Wordpress WordPress install settings. Required when `type` is `wordpress`, not allowed otherwise. The site title is the domain.
+	Wordpress *struct {
+		// Admin WordPress administrator account
+		Admin struct {
+			// Email WordPress admin email address
+			//
+			// Example: admin@example.com
+			Email string `json:"email"`
+
+			// Password WordPress admin password (8-50 characters, mixed case, a digit, and not compromised)
+			//
+			// Example: S3curePass123
+			Password string `json:"password"`
+
+			// User WordPress admin username (letters, numbers, and underscore)
+			//
+			// Example: site_admin
+			User string `json:"user"`
+		} `json:"admin"`
+
+		// IsAiBuilder When `true`, installs the Hostinger AI theme (`hostinger-ai-theme`). Defaults to `false` when omitted.
+		//
+		// Example: false
+		IsAiBuilder *bool `json:"is_ai_builder,omitempty"`
+
+		// Language WordPress locale, for example `en_US` or `lt_LT`. Defaults to `en_US` when omitted.
+		//
+		// Example: en_US
+		Language *string `json:"language,omitempty"`
+	} `json:"wordpress,omitempty"`
+}
+
+// HostingV1OnboardingsStartOnboardingRequestType Website type. Omit or `null` for an empty website. `wordpress` installs WordPress in the website root and requires `wordpress`. The headless types (`headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`) create a headless website; `headless_wordpress` additionally installs WordPress into the `cms` directory with generated credentials.
+//
+// Example: wordpress
+type HostingV1OnboardingsStartOnboardingRequestType string
 
 // HostingV1OrdersOrderCollection Array of [`Hosting.V1.Orders.OrderResource`](#model/hostingv1ordersorderresource)
 type HostingV1OrdersOrderCollection = []HostingV1OrdersOrderResource
@@ -16350,6 +16428,12 @@ type GitInstallationUuidPath = openapi_types.UUID
 // GroupUuid Example: 550e8400-e29b-41d4-a716-446655440000
 type GroupUuid = string
 
+// HostingOrderIdPath Example: 12345
+type HostingOrderIdPath = int
+
+// HostingSubscriptionId Example: sub_abc123
+type HostingSubscriptionId = string
+
 // HostingWebsiteTypes Example: ["wordpress","nodejs"]
 type HostingWebsiteTypes = []string
 
@@ -17019,6 +17103,12 @@ type HostingListGitInstallationsV1ParamsStatus string
 
 // HostingListWebsiteSetupsV1Params defines parameters for HostingListWebsiteSetupsV1.
 type HostingListWebsiteSetupsV1Params struct {
+	// OrderId Order ID
+	OrderId *OrderId `form:"order_id,omitempty" json:"order_id,omitempty"`
+
+	// SubscriptionId Filter by hosting order subscription ID
+	SubscriptionId *HostingSubscriptionId `form:"subscription_id,omitempty" json:"subscription_id,omitempty"`
+
 	// Domain Filter by domain name (exact match)
 	Domain *string `form:"domain,omitempty" json:"domain,omitempty"`
 }
@@ -17841,6 +17931,9 @@ type HostingVerifyDomainOwnershipV1JSONRequestBody = HostingV1DomainsVerifyOwner
 
 // HostingGenerateUploadURLV1JSONRequestBody defines body for HostingGenerateUploadURLV1 for application/json ContentType.
 type HostingGenerateUploadURLV1JSONRequestBody = HostingV1FilesGenerateUploadUrlRequest
+
+// HostingStartWebsiteSetupV1JSONRequestBody defines body for HostingStartWebsiteSetupV1 for application/json ContentType.
+type HostingStartWebsiteSetupV1JSONRequestBody = HostingV1OnboardingsStartOnboardingRequest
 
 // HostingCreateWebsiteV1JSONRequestBody defines body for HostingCreateWebsiteV1 for application/json ContentType.
 type HostingCreateWebsiteV1JSONRequestBody = HostingV1WebsitesCreateWebsiteRequest
@@ -23445,15 +23538,19 @@ type ClientInterface interface {
 	// HostingListWebsiteSetupsV1 List website setups
 	//
 	// Returns the website setups started in the last 24 hours for the hosting accounts
-	// accessible to the authenticated client, newest first.
+	// accessible to the authenticated client, newest first. Narrow the list with the
+	// `order_id`, `subscription_id` or `domain` filters.
 	//
-	// Meant for polling right after creating a website: the website shows up in the
-	// websites list before its server-side setup has finished, and while the setup is
-	// `running` endpoints that operate on that website may respond with `404` or `409`.
-	// Poll this endpoint with the `domain` filter every 10 to 15 seconds and wait for
-	// `status: completed` before uploading files, deploying or creating databases.
+	// Meant for polling right after creating a website or starting a website setup: the
+	// website shows up in the websites list before its server-side setup has finished, and
+	// while the setup is `running` endpoints that operate on that website may respond with
+	// `404` or `409`. Poll this endpoint with the `domain` filter every 10 to 15 seconds and
+	// wait for `status: completed` before uploading files, deploying or creating databases.
 	// `failed` means the setup stopped before finishing or has not reported progress for
 	// over an hour. Setups older than 24 hours are not listed.
+	//
+	// `type` is the website type the setup was started with (`wordpress`, `headless_wordpress`,
+	// `headless_ecommerce`, `headless_pocketbase`), or `null` for an empty website.
 	//
 	// Corresponds with GET /api/hosting/v1/onboardings (the `HostingListWebsiteSetupsV1` operationId).
 	HostingListWebsiteSetupsV1(ctx context.Context, params *HostingListWebsiteSetupsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -23473,6 +23570,60 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/hosting/v1/orders (the `HostingListOrdersV1` operationId).
 	HostingListOrdersV1(ctx context.Context, params *HostingListOrdersV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingStartWebsiteSetupV1WithBody Start website setup
+	//
+	// Starts a website setup on a Web or Cloud hosting order and returns the created setup
+	// right away; the website itself is provisioned asynchronously. Poll the list website
+	// setups endpoint with the `domain` filter every 10 to 15 seconds and wait for
+	// `status: completed` before uploading files, deploying or creating databases.
+	//
+	// Omit `type` for an empty website. `type: wordpress` installs WordPress in the website
+	// root with the admin user, email and password from `wordpress`, the domain as the site
+	// title, and `en_US` when `wordpress.language` is omitted. The headless types
+	// (`headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`) create a headless
+	// website; `headless_wordpress` additionally installs WordPress into the `cms` directory
+	// of the website root with generated credentials.
+	//
+	// Omit `domain` to set the website up on a generated temporary free subdomain.
+	//
+	// The order must already have a hosting account: to create the first website on a new
+	// hosting plan use the create website endpoint, which takes the `datacenter_code`.
+	// Returns 404 when the order does not exist or is not accessible to the authenticated
+	// client, and 409 with a `Retry-After` header while a setup for the same domain is still
+	// running.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/hosting/v1/orders/{order_id}/onboardings (the `HostingStartWebsiteSetupV1` operationId).
+	HostingStartWebsiteSetupV1WithBody(ctx context.Context, orderId HostingOrderIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingStartWebsiteSetupV1 Start website setup
+	//
+	// Starts a website setup on a Web or Cloud hosting order and returns the created setup
+	// right away; the website itself is provisioned asynchronously. Poll the list website
+	// setups endpoint with the `domain` filter every 10 to 15 seconds and wait for
+	// `status: completed` before uploading files, deploying or creating databases.
+	//
+	// Omit `type` for an empty website. `type: wordpress` installs WordPress in the website
+	// root with the admin user, email and password from `wordpress`, the domain as the site
+	// title, and `en_US` when `wordpress.language` is omitted. The headless types
+	// (`headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`) create a headless
+	// website; `headless_wordpress` additionally installs WordPress into the `cms` directory
+	// of the website root with generated credentials.
+	//
+	// Omit `domain` to set the website up on a generated temporary free subdomain.
+	//
+	// The order must already have a hosting account: to create the first website on a new
+	// hosting plan use the create website endpoint, which takes the `datacenter_code`.
+	// Returns 404 when the order does not exist or is not accessible to the authenticated
+	// client, and 409 with a `Retry-After` header while a setup for the same domain is still
+	// running.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/hosting/v1/orders/{order_id}/onboardings (the `HostingStartWebsiteSetupV1` operationId).
+	HostingStartWebsiteSetupV1(ctx context.Context, orderId HostingOrderIdPath, body HostingStartWebsiteSetupV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingListWebsitesV1 List websites
 	//
@@ -33660,15 +33811,19 @@ func (c *Client) HostingListGitInstallationRepositoriesV1(ctx context.Context, u
 // HostingListWebsiteSetupsV1 List website setups
 //
 // Returns the website setups started in the last 24 hours for the hosting accounts
-// accessible to the authenticated client, newest first.
+// accessible to the authenticated client, newest first. Narrow the list with the
+// `order_id`, `subscription_id` or `domain` filters.
 //
-// Meant for polling right after creating a website: the website shows up in the
-// websites list before its server-side setup has finished, and while the setup is
-// `running` endpoints that operate on that website may respond with `404` or `409`.
-// Poll this endpoint with the `domain` filter every 10 to 15 seconds and wait for
-// `status: completed` before uploading files, deploying or creating databases.
+// Meant for polling right after creating a website or starting a website setup: the
+// website shows up in the websites list before its server-side setup has finished, and
+// while the setup is `running` endpoints that operate on that website may respond with
+// `404` or `409`. Poll this endpoint with the `domain` filter every 10 to 15 seconds and
+// wait for `status: completed` before uploading files, deploying or creating databases.
 // `failed` means the setup stopped before finishing or has not reported progress for
 // over an hour. Setups older than 24 hours are not listed.
+//
+// `type` is the website type the setup was started with (`wordpress`, `headless_wordpress`,
+// `headless_ecommerce`, `headless_pocketbase`), or `null` for an empty website.
 //
 // Corresponds with GET /api/hosting/v1/onboardings (the `HostingListWebsiteSetupsV1` operationId).
 func (c *Client) HostingListWebsiteSetupsV1(ctx context.Context, params *HostingListWebsiteSetupsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -33699,6 +33854,80 @@ func (c *Client) HostingListWebsiteSetupsV1(ctx context.Context, params *Hosting
 // Corresponds with GET /api/hosting/v1/orders (the `HostingListOrdersV1` operationId).
 func (c *Client) HostingListOrdersV1(ctx context.Context, params *HostingListOrdersV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingListOrdersV1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingStartWebsiteSetupV1WithBody Start website setup
+//
+// Starts a website setup on a Web or Cloud hosting order and returns the created setup
+// right away; the website itself is provisioned asynchronously. Poll the list website
+// setups endpoint with the `domain` filter every 10 to 15 seconds and wait for
+// `status: completed` before uploading files, deploying or creating databases.
+//
+// Omit `type` for an empty website. `type: wordpress` installs WordPress in the website
+// root with the admin user, email and password from `wordpress`, the domain as the site
+// title, and `en_US` when `wordpress.language` is omitted. The headless types
+// (`headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`) create a headless
+// website; `headless_wordpress` additionally installs WordPress into the `cms` directory
+// of the website root with generated credentials.
+//
+// Omit `domain` to set the website up on a generated temporary free subdomain.
+//
+// The order must already have a hosting account: to create the first website on a new
+// hosting plan use the create website endpoint, which takes the `datacenter_code`.
+// Returns 404 when the order does not exist or is not accessible to the authenticated
+// client, and 409 with a `Retry-After` header while a setup for the same domain is still
+// running.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/hosting/v1/orders/{order_id}/onboardings (the `HostingStartWebsiteSetupV1` operationId).
+func (c *Client) HostingStartWebsiteSetupV1WithBody(ctx context.Context, orderId HostingOrderIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingStartWebsiteSetupV1RequestWithBody(c.Server, orderId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingStartWebsiteSetupV1 Start website setup
+//
+// Starts a website setup on a Web or Cloud hosting order and returns the created setup
+// right away; the website itself is provisioned asynchronously. Poll the list website
+// setups endpoint with the `domain` filter every 10 to 15 seconds and wait for
+// `status: completed` before uploading files, deploying or creating databases.
+//
+// Omit `type` for an empty website. `type: wordpress` installs WordPress in the website
+// root with the admin user, email and password from `wordpress`, the domain as the site
+// title, and `en_US` when `wordpress.language` is omitted. The headless types
+// (`headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`) create a headless
+// website; `headless_wordpress` additionally installs WordPress into the `cms` directory
+// of the website root with generated credentials.
+//
+// Omit `domain` to set the website up on a generated temporary free subdomain.
+//
+// The order must already have a hosting account: to create the first website on a new
+// hosting plan use the create website endpoint, which takes the `datacenter_code`.
+// Returns 404 when the order does not exist or is not accessible to the authenticated
+// client, and 409 with a `Retry-After` header while a setup for the same domain is still
+// running.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/hosting/v1/orders/{order_id}/onboardings (the `HostingStartWebsiteSetupV1` operationId).
+func (c *Client) HostingStartWebsiteSetupV1(ctx context.Context, orderId HostingOrderIdPath, body HostingStartWebsiteSetupV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingStartWebsiteSetupV1Request(c.Server, orderId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -49450,6 +49679,30 @@ func NewHostingListWebsiteSetupsV1Request(server string, params *HostingListWebs
 		// per the OpenAPI spec (e.g. "color=blue,black,brown").
 		var rawQueryFragments []string
 
+		if params.OrderId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "order_id", *params.OrderId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.SubscriptionId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "subscription_id", *params.SubscriptionId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
 		if params.Domain != nil {
 
 			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "domain", *params.Domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
@@ -49562,6 +49815,53 @@ func NewHostingListOrdersV1Request(server string, params *HostingListOrdersV1Par
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewHostingStartWebsiteSetupV1Request calls the generic HostingStartWebsiteSetupV1 builder with application/json body
+func NewHostingStartWebsiteSetupV1Request(server string, orderId HostingOrderIdPath, body HostingStartWebsiteSetupV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingStartWebsiteSetupV1RequestWithBody(server, orderId, "application/json", bodyReader)
+}
+
+// NewHostingStartWebsiteSetupV1RequestWithBody constructs an http.Request for the HostingStartWebsiteSetupV1 method, with any body, and a specified content type
+func NewHostingStartWebsiteSetupV1RequestWithBody(server string, orderId HostingOrderIdPath, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "order_id", orderId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/orders/%s/onboardings", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -62445,15 +62745,19 @@ type ClientWithResponsesInterface interface {
 	// HostingListWebsiteSetupsV1WithResponse List website setups
 	//
 	// Returns the website setups started in the last 24 hours for the hosting accounts
-	// accessible to the authenticated client, newest first.
+	// accessible to the authenticated client, newest first. Narrow the list with the
+	// `order_id`, `subscription_id` or `domain` filters.
 	//
-	// Meant for polling right after creating a website: the website shows up in the
-	// websites list before its server-side setup has finished, and while the setup is
-	// `running` endpoints that operate on that website may respond with `404` or `409`.
-	// Poll this endpoint with the `domain` filter every 10 to 15 seconds and wait for
-	// `status: completed` before uploading files, deploying or creating databases.
+	// Meant for polling right after creating a website or starting a website setup: the
+	// website shows up in the websites list before its server-side setup has finished, and
+	// while the setup is `running` endpoints that operate on that website may respond with
+	// `404` or `409`. Poll this endpoint with the `domain` filter every 10 to 15 seconds and
+	// wait for `status: completed` before uploading files, deploying or creating databases.
 	// `failed` means the setup stopped before finishing or has not reported progress for
 	// over an hour. Setups older than 24 hours are not listed.
+	//
+	// `type` is the website type the setup was started with (`wordpress`, `headless_wordpress`,
+	// `headless_ecommerce`, `headless_pocketbase`), or `null` for an empty website.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
@@ -62477,6 +62781,60 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with GET /api/hosting/v1/orders (the `HostingListOrdersV1` operationId).
 	HostingListOrdersV1WithResponse(ctx context.Context, params *HostingListOrdersV1Params, reqEditors ...RequestEditorFn) (*HostingListOrdersV1Response, error)
+
+	// HostingStartWebsiteSetupV1WithBodyWithResponse Start website setup
+	//
+	// Starts a website setup on a Web or Cloud hosting order and returns the created setup
+	// right away; the website itself is provisioned asynchronously. Poll the list website
+	// setups endpoint with the `domain` filter every 10 to 15 seconds and wait for
+	// `status: completed` before uploading files, deploying or creating databases.
+	//
+	// Omit `type` for an empty website. `type: wordpress` installs WordPress in the website
+	// root with the admin user, email and password from `wordpress`, the domain as the site
+	// title, and `en_US` when `wordpress.language` is omitted. The headless types
+	// (`headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`) create a headless
+	// website; `headless_wordpress` additionally installs WordPress into the `cms` directory
+	// of the website root with generated credentials.
+	//
+	// Omit `domain` to set the website up on a generated temporary free subdomain.
+	//
+	// The order must already have a hosting account: to create the first website on a new
+	// hosting plan use the create website endpoint, which takes the `datacenter_code`.
+	// Returns 404 when the order does not exist or is not accessible to the authenticated
+	// client, and 409 with a `Retry-After` header while a setup for the same domain is still
+	// running.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/orders/{order_id}/onboardings (the `HostingStartWebsiteSetupV1` operationId).
+	HostingStartWebsiteSetupV1WithBodyWithResponse(ctx context.Context, orderId HostingOrderIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingStartWebsiteSetupV1Response, error)
+
+	// HostingStartWebsiteSetupV1WithResponse Start website setup
+	//
+	// Starts a website setup on a Web or Cloud hosting order and returns the created setup
+	// right away; the website itself is provisioned asynchronously. Poll the list website
+	// setups endpoint with the `domain` filter every 10 to 15 seconds and wait for
+	// `status: completed` before uploading files, deploying or creating databases.
+	//
+	// Omit `type` for an empty website. `type: wordpress` installs WordPress in the website
+	// root with the admin user, email and password from `wordpress`, the domain as the site
+	// title, and `en_US` when `wordpress.language` is omitted. The headless types
+	// (`headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`) create a headless
+	// website; `headless_wordpress` additionally installs WordPress into the `cms` directory
+	// of the website root with generated credentials.
+	//
+	// Omit `domain` to set the website up on a generated temporary free subdomain.
+	//
+	// The order must already have a hosting account: to create the first website on a new
+	// hosting plan use the create website endpoint, which takes the `datacenter_code`.
+	// Returns 404 when the order does not exist or is not accessible to the authenticated
+	// client, and 409 with a `Retry-After` header while a setup for the same domain is still
+	// running.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/orders/{order_id}/onboardings (the `HostingStartWebsiteSetupV1` operationId).
+	HostingStartWebsiteSetupV1WithResponse(ctx context.Context, orderId HostingOrderIdPath, body HostingStartWebsiteSetupV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingStartWebsiteSetupV1Response, error)
 
 	// HostingListWebsitesV1WithResponse List websites
 	//
@@ -79123,6 +79481,89 @@ func (r HostingListOrdersV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingListOrdersV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// HostingStartWebsiteSetupV1Response409Headers the declared response headers of an HTTP 409 response for HostingStartWebsiteSetupV1
+type HostingStartWebsiteSetupV1Response409Headers struct {
+	RetryAfter *int
+}
+
+type HostingStartWebsiteSetupV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON201 the response for an HTTP 201 `application/json` response
+	JSON201 *HostingV1OnboardingsOnboardingResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseErrorResponse
+	// JSON409 the response for an HTTP 409 `application/json` response
+	JSON409 *CommonResponseConflictResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+	// Headers409 the parsed response headers for an HTTP 409 response
+	Headers409 *HostingStartWebsiteSetupV1Response409Headers
+}
+
+// GetJSON201 returns the response for an HTTP 201 `application/json` response
+func (r HostingStartWebsiteSetupV1Response) GetJSON201() *HostingV1OnboardingsOnboardingResource {
+	return r.JSON201
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingStartWebsiteSetupV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r HostingStartWebsiteSetupV1Response) GetJSON404() *CommonResponseErrorResponse {
+	return r.JSON404
+}
+
+// GetJSON409 returns the response for an HTTP 409 `application/json` response
+func (r HostingStartWebsiteSetupV1Response) GetJSON409() *CommonResponseConflictResponse {
+	return r.JSON409
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingStartWebsiteSetupV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingStartWebsiteSetupV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingStartWebsiteSetupV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingStartWebsiteSetupV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingStartWebsiteSetupV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingStartWebsiteSetupV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -95956,15 +96397,19 @@ func (c *ClientWithResponses) HostingListGitInstallationRepositoriesV1WithRespon
 // HostingListWebsiteSetupsV1WithResponse List website setups
 //
 // Returns the website setups started in the last 24 hours for the hosting accounts
-// accessible to the authenticated client, newest first.
+// accessible to the authenticated client, newest first. Narrow the list with the
+// `order_id`, `subscription_id` or `domain` filters.
 //
-// Meant for polling right after creating a website: the website shows up in the
-// websites list before its server-side setup has finished, and while the setup is
-// `running` endpoints that operate on that website may respond with `404` or `409`.
-// Poll this endpoint with the `domain` filter every 10 to 15 seconds and wait for
-// `status: completed` before uploading files, deploying or creating databases.
+// Meant for polling right after creating a website or starting a website setup: the
+// website shows up in the websites list before its server-side setup has finished, and
+// while the setup is `running` endpoints that operate on that website may respond with
+// `404` or `409`. Poll this endpoint with the `domain` filter every 10 to 15 seconds and
+// wait for `status: completed` before uploading files, deploying or creating databases.
 // `failed` means the setup stopped before finishing or has not reported progress for
 // over an hour. Setups older than 24 hours are not listed.
+//
+// `type` is the website type the setup was started with (`wordpress`, `headless_wordpress`,
+// `headless_ecommerce`, `headless_pocketbase`), or `null` for an empty website.
 //
 // Returns a wrapper object for the known response body format(s).
 //
@@ -95999,6 +96444,72 @@ func (c *ClientWithResponses) HostingListOrdersV1WithResponse(ctx context.Contex
 		return nil, err
 	}
 	return ParseHostingListOrdersV1Response(rsp)
+}
+
+// HostingStartWebsiteSetupV1WithBodyWithResponse Start website setup
+//
+// Starts a website setup on a Web or Cloud hosting order and returns the created setup
+// right away; the website itself is provisioned asynchronously. Poll the list website
+// setups endpoint with the `domain` filter every 10 to 15 seconds and wait for
+// `status: completed` before uploading files, deploying or creating databases.
+//
+// Omit `type` for an empty website. `type: wordpress` installs WordPress in the website
+// root with the admin user, email and password from `wordpress`, the domain as the site
+// title, and `en_US` when `wordpress.language` is omitted. The headless types
+// (`headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`) create a headless
+// website; `headless_wordpress` additionally installs WordPress into the `cms` directory
+// of the website root with generated credentials.
+//
+// Omit `domain` to set the website up on a generated temporary free subdomain.
+//
+// The order must already have a hosting account: to create the first website on a new
+// hosting plan use the create website endpoint, which takes the `datacenter_code`.
+// Returns 404 when the order does not exist or is not accessible to the authenticated
+// client, and 409 with a `Retry-After` header while a setup for the same domain is still
+// running.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/orders/{order_id}/onboardings (the `HostingStartWebsiteSetupV1` operationId).
+func (c *ClientWithResponses) HostingStartWebsiteSetupV1WithBodyWithResponse(ctx context.Context, orderId HostingOrderIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingStartWebsiteSetupV1Response, error) {
+	rsp, err := c.HostingStartWebsiteSetupV1WithBody(ctx, orderId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingStartWebsiteSetupV1Response(rsp)
+}
+
+// HostingStartWebsiteSetupV1WithResponse Start website setup
+//
+// Starts a website setup on a Web or Cloud hosting order and returns the created setup
+// right away; the website itself is provisioned asynchronously. Poll the list website
+// setups endpoint with the `domain` filter every 10 to 15 seconds and wait for
+// `status: completed` before uploading files, deploying or creating databases.
+//
+// Omit `type` for an empty website. `type: wordpress` installs WordPress in the website
+// root with the admin user, email and password from `wordpress`, the domain as the site
+// title, and `en_US` when `wordpress.language` is omitted. The headless types
+// (`headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`) create a headless
+// website; `headless_wordpress` additionally installs WordPress into the `cms` directory
+// of the website root with generated credentials.
+//
+// Omit `domain` to set the website up on a generated temporary free subdomain.
+//
+// The order must already have a hosting account: to create the first website on a new
+// hosting plan use the create website endpoint, which takes the `datacenter_code`.
+// Returns 404 when the order does not exist or is not accessible to the authenticated
+// client, and 409 with a `Retry-After` header while a setup for the same domain is still
+// running.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/orders/{order_id}/onboardings (the `HostingStartWebsiteSetupV1` operationId).
+func (c *ClientWithResponses) HostingStartWebsiteSetupV1WithResponse(ctx context.Context, orderId HostingOrderIdPath, body HostingStartWebsiteSetupV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingStartWebsiteSetupV1Response, error) {
+	rsp, err := c.HostingStartWebsiteSetupV1(ctx, orderId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingStartWebsiteSetupV1Response(rsp)
 }
 
 // HostingListWebsitesV1WithResponse List websites
@@ -110323,6 +110834,80 @@ func ParseHostingListOrdersV1Response(rsp *http.Response) (*HostingListOrdersV1R
 		}
 		response.JSON500 = &dest
 
+	}
+
+	return response, nil
+}
+
+// ParseHostingStartWebsiteSetupV1Response parses an HTTP response from a HostingStartWebsiteSetupV1WithResponse call
+func ParseHostingStartWebsiteSetupV1Response(rsp *http.Response) (*HostingStartWebsiteSetupV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingStartWebsiteSetupV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest HostingV1OnboardingsOnboardingResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest CommonResponseConflictResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 409:
+		var headers HostingStartWebsiteSetupV1Response409Headers
+		if values := rsp.Header.Values("Retry-After"); len(values) > 0 {
+			var value int
+			if err := runtime.BindStyledParameterWithOptions("simple", "Retry-After", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.RetryAfter = &value
+		}
+		response.Headers409 = &headers
 	}
 
 	return response, nil

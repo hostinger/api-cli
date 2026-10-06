@@ -23,4 +23,5 @@ Websites commands
 * [hostinger hosting websites deploy-static-site-archive](hostinger_hosting_websites_deploy-static-site-archive.md)	 - Deploy static site archive
 * [hostinger hosting websites list](hostinger_hosting_websites_list.md)	 - List websites
 * [hostinger hosting websites list-setups](hostinger_hosting_websites_list-setups.md)	 - List website setups
+* [hostinger hosting websites start-setup](hostinger_hosting_websites_start-setup.md)	 - Start website setup
 

@@ -1444,6 +1444,11 @@
     "method": "POST",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds"
   },
+  "hosting_startWebsiteSetupV1": {
+    "command": "hostinger hosting websites start-setup",
+    "method": "POST",
+    "path": "/api/hosting/v1/orders/{order_id}/onboardings"
+  },
   "hosting_toggleCachelessModeV1": {
     "command": "hostinger hosting cache toggle-cacheless",
     "method": "PATCH",
