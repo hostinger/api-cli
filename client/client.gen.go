@@ -9873,6 +9873,16 @@ type HorizonsV1WebsitesEditWebsiteRequest struct {
 // HorizonsV1WebsitesEditWebsiteRequestMessageType Example: text
 type HorizonsV1WebsitesEditWebsiteRequestMessageType string
 
+// HorizonsV1WebsitesPublishWebsiteRequest defines model for Horizons.V1.Websites.PublishWebsiteRequest.
+type HorizonsV1WebsitesPublishWebsiteRequest struct {
+	// IsTemplate Set to true to publish the website as a template: its published pages show a "Use template" banner
+	// that copies the website into the visitor's own account. Set to false to remove the banner.
+	// Leave it out to keep the current setting.
+	//
+	// Example: true
+	IsTemplate *bool `json:"is_template,omitempty"`
+}
+
 // HorizonsV1WebsitesPublishedWebsiteResource defines model for Horizons.V1.Websites.PublishedWebsiteResource.
 type HorizonsV1WebsitesPublishedWebsiteResource struct {
 	// PublishedUrl The URL the published website will be live on in a few minutes
@@ -9944,6 +9954,29 @@ type HorizonsV1WebsitesWebsiteResourceStatus string
 
 // HorizonsV1WebsitesWebsiteUrlResource defines model for Horizons.V1.Websites.WebsiteUrlResource.
 type HorizonsV1WebsitesWebsiteUrlResource struct {
+	// HasEcommerceStore Whether the website has an ecommerce store
+	//
+	// Example: false
+	HasEcommerceStore *bool `json:"has_ecommerce_store,omitempty"`
+
+	// IsInProgress Whether Hostinger Horizons is still generating changes or publishing the website.
+	// Publishing is refused while it is true, and editing while changes are being generated.
+	// An unfinished template migration also refuses publishing, with its own error,
+	// without setting this flag.
+	//
+	// Example: false
+	IsInProgress *bool `json:"is_in_progress,omitempty"`
+
+	// IsTemplate Whether the website is published as a template, so its published pages show a "Use template" banner
+	//
+	// Example: false
+	IsTemplate *bool `json:"is_template,omitempty"`
+
+	// PublishedAt When the website was last published, or null if it has never been published
+	//
+	// Example: 2026-01-15T10:30:45Z
+	PublishedAt *time.Time `json:"published_at,omitempty"`
+
 	// WebsiteUrl The website URL for the user to access their website in Hostinger Horizons interface
 	//
 	// Example: https://horizons.hostinger.com/123e4567-e89b-12d3-a456-426614174000?location=chatgpt
@@ -17803,6 +17836,9 @@ type HorizonsCreateWebsiteV1JSONRequestBody = HorizonsV1WebsitesCreateWebsiteReq
 // HorizonsEditWebsiteV1JSONRequestBody defines body for HorizonsEditWebsiteV1 for application/json ContentType.
 type HorizonsEditWebsiteV1JSONRequestBody = HorizonsV1WebsitesEditWebsiteRequest
 
+// HorizonsPublishWebsiteV1JSONRequestBody defines body for HorizonsPublishWebsiteV1 for application/json ContentType.
+type HorizonsPublishWebsiteV1JSONRequestBody = HorizonsV1WebsitesPublishWebsiteRequest
+
 // HostingCreateAccountCronJobV1JSONRequestBody defines body for HostingCreateAccountCronJobV1 for application/json ContentType.
 type HostingCreateAccountCronJobV1JSONRequestBody = HostingV1CronJobsCreateCronJobRequest
 
@@ -21423,6 +21459,10 @@ type ClientInterface interface {
 	// Get the link for the user to open their website in Hostinger Horizons interface.\n
 	// Use this tool when the user wants the link to an existing website, or when you need its
 	// website URL before or after editing it.\n
+	// `is_in_progress` is true while changes are being generated or the website is being published;
+	// wait until it is false before publishing. `published_at` is when the website was last published,
+	// `is_template` is whether its published pages show the "Use template" banner, and
+	// `has_ecommerce_store` is whether it has an online store.\n
 	// Websites can be edited with the `Edit website` tool, or by the user in Hostinger Horizons
 	// interface in the provided website URL.
 	//
@@ -21478,17 +21518,39 @@ type ClientInterface interface {
 	// Corresponds with POST /api/horizons/v1/websites/{websiteId}/messages (the `HorizonsEditWebsiteV1` operationId).
 	HorizonsEditWebsiteV1(ctx context.Context, websiteId WebsiteIdPath, body HorizonsEditWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// HorizonsPublishWebsiteV1WithBody Publish website
+	//
+	// Publish a Hostinger Horizons website so its latest changes go live.\n
+	// Use this tool when the user asks to publish, deploy or make their website live.\n
+	// This tool starts the publish process and returns the URL the website will be live on.
+	// Publishing happens asynchronously and takes a few minutes.\n
+	// Set `is_template` only when the user explicitly asks to share the website as a template:
+	// true adds a "Use template" banner to its published pages that copies the website into the
+	// visitor's own account, and false removes it. Leave it out to keep the current setting.\n
+	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
+	// that the website is being published and you should provide the published URL to the user immediately.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/horizons/v1/websites/{websiteId}/publish (the `HorizonsPublishWebsiteV1` operationId).
+	HorizonsPublishWebsiteV1WithBody(ctx context.Context, websiteId WebsiteIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// HorizonsPublishWebsiteV1 Publish website
 	//
 	// Publish a Hostinger Horizons website so its latest changes go live.\n
 	// Use this tool when the user asks to publish, deploy or make their website live.\n
 	// This tool starts the publish process and returns the URL the website will be live on.
 	// Publishing happens asynchronously and takes a few minutes.\n
+	// Set `is_template` only when the user explicitly asks to share the website as a template:
+	// true adds a "Use template" banner to its published pages that copies the website into the
+	// visitor's own account, and false removes it. Leave it out to keep the current setting.\n
 	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 	// that the website is being published and you should provide the published URL to the user immediately.
 	//
+	// Takes a body of the `application/json` content type.
+	//
 	// Corresponds with POST /api/horizons/v1/websites/{websiteId}/publish (the `HorizonsPublishWebsiteV1` operationId).
-	HorizonsPublishWebsiteV1(ctx context.Context, websiteId WebsiteIdPath, reqEditors ...RequestEditorFn) (*http.Response, error)
+	HorizonsPublishWebsiteV1(ctx context.Context, websiteId WebsiteIdPath, body HorizonsPublishWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingListAccountCronJobsV1 List account cron jobs
 	//
@@ -30212,6 +30274,10 @@ func (c *Client) HorizonsCreateWebsiteV1(ctx context.Context, body HorizonsCreat
 // Get the link for the user to open their website in Hostinger Horizons interface.\n
 // Use this tool when the user wants the link to an existing website, or when you need its
 // website URL before or after editing it.\n
+// `is_in_progress` is true while changes are being generated or the website is being published;
+// wait until it is false before publishing. `published_at` is when the website was last published,
+// `is_template` is whether its published pages show the "Use template" banner, and
+// `has_ecommerce_store` is whether it has an online store.\n
 // Websites can be edited with the `Edit website` tool, or by the user in Hostinger Horizons
 // interface in the provided website URL.
 //
@@ -30307,18 +30373,50 @@ func (c *Client) HorizonsEditWebsiteV1(ctx context.Context, websiteId WebsiteIdP
 	return c.Client.Do(req)
 }
 
+// HorizonsPublishWebsiteV1WithBody Publish website
+//
+// Publish a Hostinger Horizons website so its latest changes go live.\n
+// Use this tool when the user asks to publish, deploy or make their website live.\n
+// This tool starts the publish process and returns the URL the website will be live on.
+// Publishing happens asynchronously and takes a few minutes.\n
+// Set `is_template` only when the user explicitly asks to share the website as a template:
+// true adds a "Use template" banner to its published pages that copies the website into the
+// visitor's own account, and false removes it. Leave it out to keep the current setting.\n
+// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
+// that the website is being published and you should provide the published URL to the user immediately.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/horizons/v1/websites/{websiteId}/publish (the `HorizonsPublishWebsiteV1` operationId).
+func (c *Client) HorizonsPublishWebsiteV1WithBody(ctx context.Context, websiteId WebsiteIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHorizonsPublishWebsiteV1RequestWithBody(c.Server, websiteId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // HorizonsPublishWebsiteV1 Publish website
 //
 // Publish a Hostinger Horizons website so its latest changes go live.\n
 // Use this tool when the user asks to publish, deploy or make their website live.\n
 // This tool starts the publish process and returns the URL the website will be live on.
 // Publishing happens asynchronously and takes a few minutes.\n
+// Set `is_template` only when the user explicitly asks to share the website as a template:
+// true adds a "Use template" banner to its published pages that copies the website into the
+// visitor's own account, and false removes it. Leave it out to keep the current setting.\n
 // After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 // that the website is being published and you should provide the published URL to the user immediately.
 //
+// Takes a body of the `application/json` content type.
+//
 // Corresponds with POST /api/horizons/v1/websites/{websiteId}/publish (the `HorizonsPublishWebsiteV1` operationId).
-func (c *Client) HorizonsPublishWebsiteV1(ctx context.Context, websiteId WebsiteIdPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewHorizonsPublishWebsiteV1Request(c.Server, websiteId)
+func (c *Client) HorizonsPublishWebsiteV1(ctx context.Context, websiteId WebsiteIdPath, body HorizonsPublishWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHorizonsPublishWebsiteV1Request(c.Server, websiteId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -44427,8 +44525,19 @@ func NewHorizonsEditWebsiteV1RequestWithBody(server string, websiteId WebsiteIdP
 	return req, nil
 }
 
-// NewHorizonsPublishWebsiteV1Request constructs an http.Request for the HorizonsPublishWebsiteV1 method
-func NewHorizonsPublishWebsiteV1Request(server string, websiteId WebsiteIdPath) (*http.Request, error) {
+// NewHorizonsPublishWebsiteV1Request calls the generic HorizonsPublishWebsiteV1 builder with application/json body
+func NewHorizonsPublishWebsiteV1Request(server string, websiteId WebsiteIdPath, body HorizonsPublishWebsiteV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHorizonsPublishWebsiteV1RequestWithBody(server, websiteId, "application/json", bodyReader)
+}
+
+// NewHorizonsPublishWebsiteV1RequestWithBody constructs an http.Request for the HorizonsPublishWebsiteV1 method, with any body, and a specified content type
+func NewHorizonsPublishWebsiteV1RequestWithBody(server string, websiteId WebsiteIdPath, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -44453,10 +44562,12 @@ func NewHorizonsPublishWebsiteV1Request(server string, websiteId WebsiteIdPath) 
 		return nil, err
 	}
 
-	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -60510,6 +60621,10 @@ type ClientWithResponsesInterface interface {
 	// Get the link for the user to open their website in Hostinger Horizons interface.\n
 	// Use this tool when the user wants the link to an existing website, or when you need its
 	// website URL before or after editing it.\n
+	// `is_in_progress` is true while changes are being generated or the website is being published;
+	// wait until it is false before publishing. `published_at` is when the website was last published,
+	// `is_template` is whether its published pages show the "Use template" banner, and
+	// `has_ecommerce_store` is whether it has an online store.\n
 	// Websites can be edited with the `Edit website` tool, or by the user in Hostinger Horizons
 	// interface in the provided website URL.
 	//
@@ -60569,19 +60684,39 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /api/horizons/v1/websites/{websiteId}/messages (the `HorizonsEditWebsiteV1` operationId).
 	HorizonsEditWebsiteV1WithResponse(ctx context.Context, websiteId WebsiteIdPath, body HorizonsEditWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HorizonsEditWebsiteV1Response, error)
 
+	// HorizonsPublishWebsiteV1WithBodyWithResponse Publish website
+	//
+	// Publish a Hostinger Horizons website so its latest changes go live.\n
+	// Use this tool when the user asks to publish, deploy or make their website live.\n
+	// This tool starts the publish process and returns the URL the website will be live on.
+	// Publishing happens asynchronously and takes a few minutes.\n
+	// Set `is_template` only when the user explicitly asks to share the website as a template:
+	// true adds a "Use template" banner to its published pages that copies the website into the
+	// visitor's own account, and false removes it. Leave it out to keep the current setting.\n
+	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
+	// that the website is being published and you should provide the published URL to the user immediately.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/horizons/v1/websites/{websiteId}/publish (the `HorizonsPublishWebsiteV1` operationId).
+	HorizonsPublishWebsiteV1WithBodyWithResponse(ctx context.Context, websiteId WebsiteIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HorizonsPublishWebsiteV1Response, error)
+
 	// HorizonsPublishWebsiteV1WithResponse Publish website
 	//
 	// Publish a Hostinger Horizons website so its latest changes go live.\n
 	// Use this tool when the user asks to publish, deploy or make their website live.\n
 	// This tool starts the publish process and returns the URL the website will be live on.
 	// Publishing happens asynchronously and takes a few minutes.\n
+	// Set `is_template` only when the user explicitly asks to share the website as a template:
+	// true adds a "Use template" banner to its published pages that copies the website into the
+	// visitor's own account, and false removes it. Leave it out to keep the current setting.\n
 	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 	// that the website is being published and you should provide the published URL to the user immediately.
 	//
-	// Returns a wrapper object for the known response body format(s).
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
 	// Corresponds with POST /api/horizons/v1/websites/{websiteId}/publish (the `HorizonsPublishWebsiteV1` operationId).
-	HorizonsPublishWebsiteV1WithResponse(ctx context.Context, websiteId WebsiteIdPath, reqEditors ...RequestEditorFn) (*HorizonsPublishWebsiteV1Response, error)
+	HorizonsPublishWebsiteV1WithResponse(ctx context.Context, websiteId WebsiteIdPath, body HorizonsPublishWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HorizonsPublishWebsiteV1Response, error)
 
 	// HostingListAccountCronJobsV1WithResponse List account cron jobs
 	//
@@ -73384,6 +73519,8 @@ type HorizonsPublishWebsiteV1Response struct {
 	JSON200 *HorizonsV1WebsitesPublishedWebsiteResource
 	// JSON401 the response for an HTTP 401 `application/json` response
 	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
 	// JSON500 the response for an HTTP 500 `application/json` response
 	JSON500 *CommonResponseErrorResponse
 }
@@ -73396,6 +73533,11 @@ func (r HorizonsPublishWebsiteV1Response) GetJSON200() *HorizonsV1WebsitesPublis
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
 func (r HorizonsPublishWebsiteV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HorizonsPublishWebsiteV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
@@ -93270,6 +93412,10 @@ func (c *ClientWithResponses) HorizonsCreateWebsiteV1WithResponse(ctx context.Co
 // Get the link for the user to open their website in Hostinger Horizons interface.\n
 // Use this tool when the user wants the link to an existing website, or when you need its
 // website URL before or after editing it.\n
+// `is_in_progress` is true while changes are being generated or the website is being published;
+// wait until it is false before publishing. `published_at` is when the website was last published,
+// `is_template` is whether its published pages show the "Use template" banner, and
+// `has_ecommerce_store` is whether it has an online store.\n
 // Websites can be edited with the `Edit website` tool, or by the user in Hostinger Horizons
 // interface in the provided website URL.
 //
@@ -93353,20 +93499,46 @@ func (c *ClientWithResponses) HorizonsEditWebsiteV1WithResponse(ctx context.Cont
 	return ParseHorizonsEditWebsiteV1Response(rsp)
 }
 
+// HorizonsPublishWebsiteV1WithBodyWithResponse Publish website
+//
+// Publish a Hostinger Horizons website so its latest changes go live.\n
+// Use this tool when the user asks to publish, deploy or make their website live.\n
+// This tool starts the publish process and returns the URL the website will be live on.
+// Publishing happens asynchronously and takes a few minutes.\n
+// Set `is_template` only when the user explicitly asks to share the website as a template:
+// true adds a "Use template" banner to its published pages that copies the website into the
+// visitor's own account, and false removes it. Leave it out to keep the current setting.\n
+// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
+// that the website is being published and you should provide the published URL to the user immediately.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/horizons/v1/websites/{websiteId}/publish (the `HorizonsPublishWebsiteV1` operationId).
+func (c *ClientWithResponses) HorizonsPublishWebsiteV1WithBodyWithResponse(ctx context.Context, websiteId WebsiteIdPath, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HorizonsPublishWebsiteV1Response, error) {
+	rsp, err := c.HorizonsPublishWebsiteV1WithBody(ctx, websiteId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHorizonsPublishWebsiteV1Response(rsp)
+}
+
 // HorizonsPublishWebsiteV1WithResponse Publish website
 //
 // Publish a Hostinger Horizons website so its latest changes go live.\n
 // Use this tool when the user asks to publish, deploy or make their website live.\n
 // This tool starts the publish process and returns the URL the website will be live on.
 // Publishing happens asynchronously and takes a few minutes.\n
+// Set `is_template` only when the user explicitly asks to share the website as a template:
+// true adds a "Use template" banner to its published pages that copies the website into the
+// visitor's own account, and false removes it. Leave it out to keep the current setting.\n
 // After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 // that the website is being published and you should provide the published URL to the user immediately.
 //
-// Returns a wrapper object for the known response body format(s).
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
 // Corresponds with POST /api/horizons/v1/websites/{websiteId}/publish (the `HorizonsPublishWebsiteV1` operationId).
-func (c *ClientWithResponses) HorizonsPublishWebsiteV1WithResponse(ctx context.Context, websiteId WebsiteIdPath, reqEditors ...RequestEditorFn) (*HorizonsPublishWebsiteV1Response, error) {
-	rsp, err := c.HorizonsPublishWebsiteV1(ctx, websiteId, reqEditors...)
+func (c *ClientWithResponses) HorizonsPublishWebsiteV1WithResponse(ctx context.Context, websiteId WebsiteIdPath, body HorizonsPublishWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HorizonsPublishWebsiteV1Response, error) {
+	rsp, err := c.HorizonsPublishWebsiteV1(ctx, websiteId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -106311,6 +106483,13 @@ func ParseHorizonsPublishWebsiteV1Response(rsp *http.Response) (*HorizonsPublish
 			return nil, err
 		}
 		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse

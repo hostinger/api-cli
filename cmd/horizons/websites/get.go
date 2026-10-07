@@ -12,7 +12,7 @@ import (
 var GetCmd = &cobra.Command{
 	Use:   "get <website-id>",
 	Short: "Get website",
-	Long:  "Get the link for the user to open their website in Hostinger Horizons interface.\\n\nUse this tool when the user wants the link to an existing website, or when you need its\nwebsite URL before or after editing it.\\n\nWebsites can be edited with the `Edit website` tool, or by the user in Hostinger Horizons\ninterface in the provided website URL.",
+	Long:  "Get the link for the user to open their website in Hostinger Horizons interface.\\n\nUse this tool when the user wants the link to an existing website, or when you need its\nwebsite URL before or after editing it.\\n\n`is_in_progress` is true while changes are being generated or the website is being published;\nwait until it is false before publishing. `published_at` is when the website was last published,\n`is_template` is whether its published pages show the \"Use template\" banner, and\n`has_ecommerce_store` is whether it has an online store.\\n\nWebsites can be edited with the `Edit website` tool, or by the user in Hostinger Horizons\ninterface in the provided website URL.",
 	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
 	Run: func(cmd *cobra.Command, args []string) {
 		r, err := api.Request().HorizonsGetWebsiteV1WithResponse(context.TODO(), args[0])
