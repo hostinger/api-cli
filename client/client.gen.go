@@ -7290,7 +7290,9 @@ type BillingV1SubscriptionSubscriptionResource struct {
 	// CurrencyCode Example: USD
 	CurrencyCode *string `json:"currency_code,omitempty"`
 
-	// ExpiresAt Example: 2025-03-27T11:54:22Z
+	// ExpiresAt Final date when the subscription will be or was cancelled and expire. Set when a cancellation is scheduled (e.g. after auto-renewal is disabled) or the subscription is already cancelled; `null` otherwise.
+	//
+	// Example: 2025-03-27T11:54:22Z
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
 
 	// Id Subscription ID
@@ -7304,7 +7306,9 @@ type BillingV1SubscriptionSubscriptionResource struct {
 	// Name Example: KVM 1
 	Name *string `json:"name,omitempty"`
 
-	// NextBillingAt Example: 2025-02-28T11:54:22Z
+	// NextBillingAt Date when the next charge will happen while the subscription is auto-renewing. Only relevant when `is_auto_renewed` is `true`; ignore it otherwise.
+	//
+	// Example: 2025-02-28T11:54:22Z
 	NextBillingAt *time.Time `json:"next_billing_at,omitempty"`
 
 	// RenewalPrice Renewal price in cents
