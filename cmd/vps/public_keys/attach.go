@@ -15,7 +15,7 @@ import (
 var AttachCmd = &cobra.Command{
 	Use:   "attach <virtual-machine-id>",
 	Short: "Attach public key",
-	Long:  "Attach existing public keys from your account to a specified virtual machine.\n\nMultiple keys can be attached to a single virtual machine.\n\nUse this endpoint to enable SSH key authentication for VPS instances.",
+	Long:  "Deprecated: use `POST /api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys` instead.\n\nAttach existing public keys from your account to a specified virtual machine.\n\nMultiple keys can be attached to a single virtual machine.\n\nUse this endpoint to enable SSH key authentication for VPS instances.",
 	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
 	Run: func(cmd *cobra.Command, args []string) {
 		payload, err := json.Marshal(attachBody(cmd))

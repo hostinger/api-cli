@@ -29,6 +29,7 @@ VPS commands
 * [hostinger vps public-keys](hostinger_vps_public-keys.md)	 - Public Keys commands
 * [hostinger vps recovery](hostinger_vps_recovery.md)	 - Recovery commands
 * [hostinger vps snapshots](hostinger_vps_snapshots.md)	 - Snapshots commands
+* [hostinger vps ssh-keys](hostinger_vps_ssh-keys.md)	 - SSH Keys commands
 * [hostinger vps templates](hostinger_vps_templates.md)	 - OS Templates commands
 * [hostinger vps virtual-machines](hostinger_vps_virtual-machines.md)	 - Virtual machine commands
 

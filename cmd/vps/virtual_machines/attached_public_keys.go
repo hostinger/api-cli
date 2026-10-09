@@ -14,7 +14,7 @@ import (
 var AttachedPublicKeysCmd = &cobra.Command{
 	Use:   "attached-public-keys <virtual-machine-id>",
 	Short: "Get attached public keys",
-	Long:  "Retrieve public keys attached to a specified virtual machine.\n\nUse this endpoint to view SSH keys configured for specific VPS instances.",
+	Long:  "Deprecated: use `GET /api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys` instead.\n\nRetrieve public keys attached to a specified virtual machine.\n\nUse this endpoint to view SSH keys configured for specific VPS instances.",
 	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
 	Run: func(cmd *cobra.Command, args []string) {
 		r, err := api.Request().VPSGetAttachedPublicKeysV1WithResponse(context.TODO(), utils.StringToInt(args[0]), attachedPublicKeysParams(cmd))

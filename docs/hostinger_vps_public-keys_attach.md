@@ -4,6 +4,8 @@ Attach public key
 
 ### Synopsis
 
+Deprecated: use `POST /api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys` instead.
+
 Attach existing public keys from your account to a specified virtual machine.
 
 Multiple keys can be attached to a single virtual machine.

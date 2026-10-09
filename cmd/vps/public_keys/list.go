@@ -13,7 +13,7 @@ import (
 var ListCmd = &cobra.Command{
 	Use:   "list",
 	Short: "Get public keys",
-	Long:  "Retrieve public keys associated with your account.\n\nUse this endpoint to view available SSH keys for VPS authentication.",
+	Long:  "Deprecated: account-level public keys have no direct replacement. Root SSH keys are now managed per\nvirtual machine via `GET /api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys`.\n\nRetrieve public keys associated with your account.\n\nUse this endpoint to view available SSH keys for VPS authentication.",
 	Run: func(cmd *cobra.Command, args []string) {
 		r, err := api.Request().VPSGetPublicKeysV1WithResponse(context.TODO(), listParams(cmd))
 		if err != nil {

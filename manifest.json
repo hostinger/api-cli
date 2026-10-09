@@ -44,6 +44,11 @@
     "method": "POST",
     "path": "/api/vps/v1/firewall/{firewallId}/activate/{virtualMachineId}"
   },
+  "VPS_addVirtualMachineSSHKeysV1": {
+    "command": "hostinger vps ssh-keys add-virtual-machine",
+    "method": "POST",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys"
+  },
   "VPS_attachPublicKeyV1": {
     "command": "hostinger vps public-keys attach",
     "method": "POST",
@@ -234,6 +239,11 @@
     "method": "POST",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/monarx"
   },
+  "VPS_listVirtualMachineSSHKeysV1": {
+    "command": "hostinger vps ssh-keys list-virtual-machine",
+    "method": "GET",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys"
+  },
   "VPS_purchaseNewVirtualMachineV1": {
     "command": "hostinger vps virtual-machines purchase",
     "method": "POST",
@@ -243,6 +253,11 @@
     "command": "hostinger vps virtual-machines recreate",
     "method": "POST",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/recreate"
+  },
+  "VPS_removeVirtualMachineSSHKeysV1": {
+    "command": "hostinger vps ssh-keys remove-virtual-machine",
+    "method": "DELETE",
+    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys"
   },
   "VPS_replaceAllFirewallRulesInGroupV1": {
     "command": "hostinger vps firewall replace-all-rules-in-group",

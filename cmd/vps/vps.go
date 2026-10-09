@@ -12,6 +12,7 @@ import (
 	"github.com/hostinger/api-cli/cmd/vps/public_keys"
 	"github.com/hostinger/api-cli/cmd/vps/recovery"
 	"github.com/hostinger/api-cli/cmd/vps/snapshots"
+	"github.com/hostinger/api-cli/cmd/vps/ssh_keys"
 	"github.com/hostinger/api-cli/cmd/vps/templates"
 	"github.com/hostinger/api-cli/cmd/vps/virtual_machines"
 
@@ -35,6 +36,7 @@ func init() {
 	GroupCmd.AddCommand(public_keys.GroupCmd)
 	GroupCmd.AddCommand(recovery.GroupCmd)
 	GroupCmd.AddCommand(snapshots.GroupCmd)
+	GroupCmd.AddCommand(ssh_keys.GroupCmd)
 	GroupCmd.AddCommand(templates.GroupCmd)
 	GroupCmd.AddCommand(virtual_machines.GroupCmd)
 }

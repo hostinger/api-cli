@@ -14,7 +14,7 @@ import (
 var CreateCmd = &cobra.Command{
 	Use:   "create",
 	Short: "Create public key",
-	Long:  "Add a new public key to your account.\n\nUse this endpoint to register SSH keys for VPS authentication.",
+	Long:  "Deprecated: account-level public keys have no direct replacement. Root SSH keys are now managed per\nvirtual machine via `POST /api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys`.\n\nAdd a new public key to your account.\n\nUse this endpoint to register SSH keys for VPS authentication.",
 	Run: func(cmd *cobra.Command, args []string) {
 		payload, err := json.Marshal(createBody(cmd))
 		if err != nil {

@@ -4,6 +4,9 @@ Create public key
 
 ### Synopsis
 
+Deprecated: account-level public keys have no direct replacement. Root SSH keys are now managed per
+virtual machine via `POST /api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys`.
+
 Add a new public key to your account.
 
 Use this endpoint to register SSH keys for VPS authentication.

@@ -4,6 +4,8 @@ Get attached public keys
 
 ### Synopsis
 
+Deprecated: use `GET /api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys` instead.
+
 Retrieve public keys attached to a specified virtual machine.
 
 Use this endpoint to view SSH keys configured for specific VPS instances.
