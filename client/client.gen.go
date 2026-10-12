@@ -14334,6 +14334,18 @@ type ReachV1FormsFormTemplateResource struct {
 	Uuid *string `json:"uuid,omitempty"`
 }
 
+// ReachV1ProfilesDomainsConnectRequest Sending domain to connect to the profile
+type ReachV1ProfilesDomainsConnectRequest struct {
+	// Domain Example: example.com
+	Domain string `json:"domain"`
+}
+
+// ReachV1ProfilesDomainsDisconnectRequest Sending domain to disconnect from the profile
+type ReachV1ProfilesDomainsDisconnectRequest struct {
+	// Domain Example: example.com
+	Domain string `json:"domain"`
+}
+
 // ReachV1ProfilesDomainsDnsRecordStatus defines model for Reach.V1.Profiles.Domains.DnsRecordStatus.
 type ReachV1ProfilesDomainsDnsRecordStatus struct {
 	Actual *[]struct {
@@ -14360,6 +14372,7 @@ type ReachV1ProfilesDomainsDnsRecordStatus struct {
 
 // ReachV1ProfilesDomainsDnsStatusResource defines model for Reach.V1.Profiles.Domains.DnsStatusResource.
 type ReachV1ProfilesDomainsDnsStatusResource struct {
+	A     *ReachV1ProfilesDomainsDnsRecordStatus `json:"a,omitempty"`
 	Dkim  *ReachV1ProfilesDomainsDnsRecordStatus `json:"dkim,omitempty"`
 	Dmarc *ReachV1ProfilesDomainsDnsRecordStatus `json:"dmarc,omitempty"`
 
@@ -14529,6 +14542,138 @@ type ReachV1ProfilesProfileResource struct {
 
 	// Status Example: active
 	Status *string `json:"status,omitempty"`
+}
+
+// ReachV1ProfilesSettingsSettingsResource Sender identity and brand details saved on the profile.
+//
+// A profile that never filled its settings in returns empty values, so every field can be
+// `null`.
+type ReachV1ProfilesSettingsSettingsResource struct {
+	// About Example: We provide innovative solutions.
+	About *string `json:"about,omitempty"`
+
+	// AccentColor Example: #FF0000
+	AccentColor *string `json:"accent_color,omitempty"`
+
+	// BackgroundColor Example: #FFFFFF
+	BackgroundColor *string `json:"background_color,omitempty"`
+
+	// BrandName Example: Acme Corporation
+	BrandName *string `json:"brand_name,omitempty"`
+
+	// BusinessAddress Example: 123 Main St, New York, NY 10001
+	BusinessAddress *string `json:"business_address,omitempty"`
+
+	// ButtonColor Example: #00FF00
+	ButtonColor *string `json:"button_color,omitempty"`
+
+	// ButtonCorners Button corner radius in pixels.
+	//
+	// Example: 8
+	ButtonCorners *int `json:"button_corners,omitempty"`
+
+	// ButtonText Button text colour.
+	//
+	// Example: #FFFFFF
+	ButtonText *string `json:"button_text,omitempty"`
+
+	// FontFamily Body and button font.
+	//
+	// Example: Arial
+	FontFamily *string `json:"font_family,omitempty"`
+
+	// HeadingFontFamily Example: Poppins
+	HeadingFontFamily *string   `json:"heading_font_family,omitempty"`
+	Keywords          *[]string `json:"keywords,omitempty"`
+
+	// LinksColor Example: #0000FF
+	LinksColor *string `json:"links_color,omitempty"`
+
+	// LogoUrl Example: https://example.com/logo.png
+	LogoUrl *string `json:"logo_url,omitempty"`
+
+	// PrivacyPolicyUrl Example: https://example.com/privacy
+	PrivacyPolicyUrl *string   `json:"privacy_policy_url,omitempty"`
+	SellingPoints    *[]string `json:"selling_points,omitempty"`
+
+	// SenderEmail Part of the default sender address before the `@`. It is combined with the
+	// profile's connected sending domain, see the connected sending domain endpoint.
+	//
+	// Example: hello
+	SenderEmail *string `json:"sender_email,omitempty"`
+
+	// SenderName Default sender name that campaigns created afterwards start from.
+	//
+	// Example: Acme
+	SenderName  *string   `json:"sender_name,omitempty"`
+	SocialLinks *[]string `json:"social_links,omitempty"`
+
+	// Socials Social profile links keyed by platform.
+	Socials *map[string]string `json:"socials,omitempty"`
+
+	// TextColor Example: #000000
+	TextColor *string   `json:"text_color,omitempty"`
+	Topics    *[]string `json:"topics,omitempty"`
+
+	// WebsiteUrl Example: https://example.com
+	WebsiteUrl *string `json:"website_url,omitempty"`
+}
+
+// ReachV1ProfilesSettingsUpdateRequest Settings to change. Only the fields sent are changed; `null` or an empty string clears a text field.
+type ReachV1ProfilesSettingsUpdateRequest struct {
+	About *string `json:"about,omitempty"`
+
+	// AccentColor Example: #FF0000
+	AccentColor *string `json:"accent_color,omitempty"`
+
+	// BackgroundColor Example: #FFFFFF
+	BackgroundColor *string `json:"background_color,omitempty"`
+
+	// BrandName Example: Acme Corporation
+	BrandName       *string `json:"brand_name,omitempty"`
+	BusinessAddress *string `json:"business_address,omitempty"`
+
+	// ButtonColor Example: #00FF00
+	ButtonColor   *string `json:"button_color,omitempty"`
+	ButtonCorners *int    `json:"button_corners,omitempty"`
+
+	// ButtonText Button text colour.
+	//
+	// Example: #FFFFFF
+	ButtonText        *string   `json:"button_text,omitempty"`
+	FontFamily        *string   `json:"font_family,omitempty"`
+	HeadingFontFamily *string   `json:"heading_font_family,omitempty"`
+	Keywords          *[]string `json:"keywords,omitempty"`
+
+	// LinksColor Example: #0000FF
+	LinksColor *string `json:"links_color,omitempty"`
+
+	// LogoUrl Public image URL. Logo uploads are not supported.
+	LogoUrl          *string   `json:"logo_url,omitempty"`
+	PrivacyPolicyUrl *string   `json:"privacy_policy_url,omitempty"`
+	SellingPoints    *[]string `json:"selling_points,omitempty"`
+
+	// SenderEmail Part of the default sender address before the `@`, for example `hello`. Never send a
+	// full address: Reach adds the profile's connected sending domain itself.
+	//
+	// Example: hello
+	SenderEmail *string `json:"sender_email,omitempty"`
+
+	// SenderName Default sender name. Letters, numbers and spaces only.
+	//
+	// Example: Acme
+	SenderName  *string   `json:"sender_name,omitempty"`
+	SocialLinks *[]string `json:"social_links,omitempty"`
+
+	// Socials Social profile links keyed by platform.
+	Socials *map[string]string `json:"socials,omitempty"`
+
+	// TextColor Example: #000000
+	TextColor *string   `json:"text_color,omitempty"`
+	Topics    *[]string `json:"topics,omitempty"`
+
+	// WebsiteUrl Example: https://example.com
+	WebsiteUrl *string `json:"website_url,omitempty"`
 }
 
 // ReachV1TemplatesStoreRequest Create a reusable email template
@@ -18073,6 +18218,12 @@ type ReachUpdateAContactFieldV1JSONRequestBody = ReachV1ContactsFieldsUpdateRequ
 // ReachUpdateAContactV1JSONRequestBody defines body for ReachUpdateAContactV1 for application/json ContentType.
 type ReachUpdateAContactV1JSONRequestBody = ReachV1ContactsUpdateRequest
 
+// ReachDeleteSendingDomainV1JSONRequestBody defines body for ReachDeleteSendingDomainV1 for application/json ContentType.
+type ReachDeleteSendingDomainV1JSONRequestBody = ReachV1ProfilesDomainsDisconnectRequest
+
+// ReachConnectSendingDomainV1JSONRequestBody defines body for ReachConnectSendingDomainV1 for application/json ContentType.
+type ReachConnectSendingDomainV1JSONRequestBody = ReachV1ProfilesDomainsConnectRequest
+
 // ReachPreviewContactsMatchingConditionsV1JSONRequestBody defines body for ReachPreviewContactsMatchingConditionsV1 for application/json ContentType.
 type ReachPreviewContactsMatchingConditionsV1JSONRequestBody = ReachV1ContactsSegmentsProfileFilterContactsRequest
 
@@ -18081,6 +18232,9 @@ type ReachCreateAProfileSegmentV1JSONRequestBody = ReachV1ContactsSegmentsProfil
 
 // ReachUpdateAProfileSegmentV1JSONRequestBody defines body for ReachUpdateAProfileSegmentV1 for application/json ContentType.
 type ReachUpdateAProfileSegmentV1JSONRequestBody = ReachV1ContactsSegmentsProfileUpdateRequest
+
+// ReachUpdateProfileSettingsV1JSONRequestBody defines body for ReachUpdateProfileSettingsV1 for application/json ContentType.
+type ReachUpdateProfileSettingsV1JSONRequestBody = ReachV1ProfilesSettingsUpdateRequest
 
 // ReachCreateOrFindTagsV1JSONRequestBody defines body for ReachCreateOrFindTagsV1 for application/json ContentType.
 type ReachCreateOrFindTagsV1JSONRequestBody = ReachV1ContactsTagsStoreRequest
@@ -24738,6 +24892,40 @@ type ClientInterface interface {
 	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid} (the `ReachUpdateAContactV1` operationId).
 	ReachUpdateAContactV1(ctx context.Context, profileUuid ProfileUuid, contactUuid ContactUuid, body ReachUpdateAContactV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ReachDeleteSendingDomainV1WithBody Delete sending domain
+	//
+	// Disconnect the sending domain from the profile.
+	//
+	// The domain record is removed, so the profile has no sending domain afterwards and campaigns
+	// cannot be sent until a domain is connected again. Sender addresses already stored on
+	// campaigns, automations and settings are left untouched and keep pointing at the removed
+	// domain. A domain that is not connected to the profile also succeeds, so success is not proof
+	// that anything was deleted. DNS records at the DNS provider are not removed. To switch
+	// domains, delete this one and connect the new one. Confirm the domain with the customer
+	// before calling.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/domains (the `ReachDeleteSendingDomainV1` operationId).
+	ReachDeleteSendingDomainV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachDeleteSendingDomainV1 Delete sending domain
+	//
+	// Disconnect the sending domain from the profile.
+	//
+	// The domain record is removed, so the profile has no sending domain afterwards and campaigns
+	// cannot be sent until a domain is connected again. Sender addresses already stored on
+	// campaigns, automations and settings are left untouched and keep pointing at the removed
+	// domain. A domain that is not connected to the profile also succeeds, so success is not proof
+	// that anything was deleted. DNS records at the DNS provider are not removed. To switch
+	// domains, delete this one and connect the new one. Confirm the domain with the customer
+	// before calling.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/domains (the `ReachDeleteSendingDomainV1` operationId).
+	ReachDeleteSendingDomainV1(ctx context.Context, profileUuid ProfileUuid, body ReachDeleteSendingDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ReachGetConnectedSendingDomainV1 Get connected sending domain
 	//
 	// Get the sending domain connected to the profile, its verification status and any suspended
@@ -24750,6 +24938,46 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/domains (the `ReachGetConnectedSendingDomainV1` operationId).
 	ReachGetConnectedSendingDomainV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachConnectSendingDomainV1WithBody Connect sending domain
+	//
+	// Connect a sending domain to the profile so emails can be sent from addresses on it.
+	//
+	// Connecting does not make the domain ready to send: check the DNS status endpoint next for
+	// records that are still missing. A domain the account owns or has already verified connects
+	// immediately. Any other domain starts a TXT ownership verification and returns `409`;
+	// complete the verification in Reach, then retry. Returns `422` when the profile or another
+	// profile already has the domain, the domain is blocked, or its ownership cannot be verified.
+	// An already connected domain is never replaced.
+	//
+	// On success the sender address of draft and scheduled campaigns, and of published automation
+	// and double opt-in emails, moves onto the new domain in the background, keeping the part
+	// before the `@`.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/domains (the `ReachConnectSendingDomainV1` operationId).
+	ReachConnectSendingDomainV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachConnectSendingDomainV1 Connect sending domain
+	//
+	// Connect a sending domain to the profile so emails can be sent from addresses on it.
+	//
+	// Connecting does not make the domain ready to send: check the DNS status endpoint next for
+	// records that are still missing. A domain the account owns or has already verified connects
+	// immediately. Any other domain starts a TXT ownership verification and returns `409`;
+	// complete the verification in Reach, then retry. Returns `422` when the profile or another
+	// profile already has the domain, the domain is blocked, or its ownership cannot be verified.
+	// An already connected domain is never replaced.
+	//
+	// On success the sender address of draft and scheduled campaigns, and of published automation
+	// and double opt-in emails, moves onto the new domain in the background, keeping the part
+	// before the `@`.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/domains (the `ReachConnectSendingDomainV1` operationId).
+	ReachConnectSendingDomainV1(ctx context.Context, profileUuid ProfileUuid, body ReachConnectSendingDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReachGetProfileDomainDNSStatusV1 Get profile domain DNS status
 	//
@@ -24964,6 +25192,50 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}/count (the `ReachCountProfileSegmentContactsV1` operationId).
 	ReachCountProfileSegmentContactsV1(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachGetProfileSettingsV1 Get profile settings
+	//
+	// Get the profile's saved sender identity and brand details.
+	//
+	// Read the default sender before creating a campaign instead of asking the customer, and
+	// reuse the brand fields when generating email content. Any field can be `null` for a profile
+	// that never filled its settings in. This does not check that the sending domain is
+	// verified, use the connected sending domain endpoint for that.
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/settings (the `ReachGetProfileSettingsV1` operationId).
+	ReachGetProfileSettingsV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachUpdateProfileSettingsV1WithBody Update profile settings
+	//
+	// Change the profile's default sender and brand details.
+	//
+	// Send only the fields to change: every omitted field keeps its value, and `null` or an empty
+	// string clears a text field. The default sender is what campaigns created afterwards start
+	// from; existing campaigns keep their own sender. `sender_email` is only the part before the
+	// `@`, because Reach combines it with the profile's connected sending domain, so an address
+	// outside that domain cannot be set. Connecting a sending domain is a separate endpoint and
+	// a connected domain cannot be changed here. Returns the settings after the change.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/settings (the `ReachUpdateProfileSettingsV1` operationId).
+	ReachUpdateProfileSettingsV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachUpdateProfileSettingsV1 Update profile settings
+	//
+	// Change the profile's default sender and brand details.
+	//
+	// Send only the fields to change: every omitted field keeps its value, and `null` or an empty
+	// string clears a text field. The default sender is what campaigns created afterwards start
+	// from; existing campaigns keep their own sender. `sender_email` is only the part before the
+	// `@`, because Reach combines it with the profile's connected sending domain, so an address
+	// outside that domain cannot be set. Connecting a sending domain is a separate endpoint and
+	// a connected domain cannot be changed here. Returns the settings after the change.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/settings (the `ReachUpdateProfileSettingsV1` operationId).
+	ReachUpdateProfileSettingsV1(ctx context.Context, profileUuid ProfileUuid, body ReachUpdateProfileSettingsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReachListProfileTagsV1 List profile tags
 	//
@@ -36041,6 +36313,60 @@ func (c *Client) ReachUpdateAContactV1(ctx context.Context, profileUuid ProfileU
 	return c.Client.Do(req)
 }
 
+// ReachDeleteSendingDomainV1WithBody Delete sending domain
+//
+// Disconnect the sending domain from the profile.
+//
+// The domain record is removed, so the profile has no sending domain afterwards and campaigns
+// cannot be sent until a domain is connected again. Sender addresses already stored on
+// campaigns, automations and settings are left untouched and keep pointing at the removed
+// domain. A domain that is not connected to the profile also succeeds, so success is not proof
+// that anything was deleted. DNS records at the DNS provider are not removed. To switch
+// domains, delete this one and connect the new one. Confirm the domain with the customer
+// before calling.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/domains (the `ReachDeleteSendingDomainV1` operationId).
+func (c *Client) ReachDeleteSendingDomainV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachDeleteSendingDomainV1RequestWithBody(c.Server, profileUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachDeleteSendingDomainV1 Delete sending domain
+//
+// Disconnect the sending domain from the profile.
+//
+// The domain record is removed, so the profile has no sending domain afterwards and campaigns
+// cannot be sent until a domain is connected again. Sender addresses already stored on
+// campaigns, automations and settings are left untouched and keep pointing at the removed
+// domain. A domain that is not connected to the profile also succeeds, so success is not proof
+// that anything was deleted. DNS records at the DNS provider are not removed. To switch
+// domains, delete this one and connect the new one. Confirm the domain with the customer
+// before calling.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/domains (the `ReachDeleteSendingDomainV1` operationId).
+func (c *Client) ReachDeleteSendingDomainV1(ctx context.Context, profileUuid ProfileUuid, body ReachDeleteSendingDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachDeleteSendingDomainV1Request(c.Server, profileUuid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // ReachGetConnectedSendingDomainV1 Get connected sending domain
 //
 // Get the sending domain connected to the profile, its verification status and any suspended
@@ -36054,6 +36380,66 @@ func (c *Client) ReachUpdateAContactV1(ctx context.Context, profileUuid ProfileU
 // Corresponds with GET /api/reach/v1/profiles/{profileUuid}/domains (the `ReachGetConnectedSendingDomainV1` operationId).
 func (c *Client) ReachGetConnectedSendingDomainV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReachGetConnectedSendingDomainV1Request(c.Server, profileUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachConnectSendingDomainV1WithBody Connect sending domain
+//
+// Connect a sending domain to the profile so emails can be sent from addresses on it.
+//
+// Connecting does not make the domain ready to send: check the DNS status endpoint next for
+// records that are still missing. A domain the account owns or has already verified connects
+// immediately. Any other domain starts a TXT ownership verification and returns `409`;
+// complete the verification in Reach, then retry. Returns `422` when the profile or another
+// profile already has the domain, the domain is blocked, or its ownership cannot be verified.
+// An already connected domain is never replaced.
+//
+// On success the sender address of draft and scheduled campaigns, and of published automation
+// and double opt-in emails, moves onto the new domain in the background, keeping the part
+// before the `@`.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/domains (the `ReachConnectSendingDomainV1` operationId).
+func (c *Client) ReachConnectSendingDomainV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachConnectSendingDomainV1RequestWithBody(c.Server, profileUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachConnectSendingDomainV1 Connect sending domain
+//
+// Connect a sending domain to the profile so emails can be sent from addresses on it.
+//
+// Connecting does not make the domain ready to send: check the DNS status endpoint next for
+// records that are still missing. A domain the account owns or has already verified connects
+// immediately. Any other domain starts a TXT ownership verification and returns `409`;
+// complete the verification in Reach, then retry. Returns `422` when the profile or another
+// profile already has the domain, the domain is blocked, or its ownership cannot be verified.
+// An already connected domain is never replaced.
+//
+// On success the sender address of draft and scheduled campaigns, and of published automation
+// and double opt-in emails, moves onto the new domain in the background, keeping the part
+// before the `@`.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/domains (the `ReachConnectSendingDomainV1` operationId).
+func (c *Client) ReachConnectSendingDomainV1(ctx context.Context, profileUuid ProfileUuid, body ReachConnectSendingDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachConnectSendingDomainV1Request(c.Server, profileUuid, body)
 	if err != nil {
 		return nil, err
 	}
@@ -36448,6 +36834,80 @@ func (c *Client) ReachListProfileSegmentContactsV1(ctx context.Context, profileU
 // Corresponds with GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}/count (the `ReachCountProfileSegmentContactsV1` operationId).
 func (c *Client) ReachCountProfileSegmentContactsV1(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReachCountProfileSegmentContactsV1Request(c.Server, profileUuid, segmentUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachGetProfileSettingsV1 Get profile settings
+//
+// Get the profile's saved sender identity and brand details.
+//
+// Read the default sender before creating a campaign instead of asking the customer, and
+// reuse the brand fields when generating email content. Any field can be `null` for a profile
+// that never filled its settings in. This does not check that the sending domain is
+// verified, use the connected sending domain endpoint for that.
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/settings (the `ReachGetProfileSettingsV1` operationId).
+func (c *Client) ReachGetProfileSettingsV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachGetProfileSettingsV1Request(c.Server, profileUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachUpdateProfileSettingsV1WithBody Update profile settings
+//
+// Change the profile's default sender and brand details.
+//
+// Send only the fields to change: every omitted field keeps its value, and `null` or an empty
+// string clears a text field. The default sender is what campaigns created afterwards start
+// from; existing campaigns keep their own sender. `sender_email` is only the part before the
+// `@`, because Reach combines it with the profile's connected sending domain, so an address
+// outside that domain cannot be set. Connecting a sending domain is a separate endpoint and
+// a connected domain cannot be changed here. Returns the settings after the change.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/settings (the `ReachUpdateProfileSettingsV1` operationId).
+func (c *Client) ReachUpdateProfileSettingsV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachUpdateProfileSettingsV1RequestWithBody(c.Server, profileUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachUpdateProfileSettingsV1 Update profile settings
+//
+// Change the profile's default sender and brand details.
+//
+// Send only the fields to change: every omitted field keeps its value, and `null` or an empty
+// string clears a text field. The default sender is what campaigns created afterwards start
+// from; existing campaigns keep their own sender. `sender_email` is only the part before the
+// `@`, because Reach combines it with the profile's connected sending domain, so an address
+// outside that domain cannot be set. Connecting a sending domain is a separate endpoint and
+// a connected domain cannot be changed here. Returns the settings after the change.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/settings (the `ReachUpdateProfileSettingsV1` operationId).
+func (c *Client) ReachUpdateProfileSettingsV1(ctx context.Context, profileUuid ProfileUuid, body ReachUpdateProfileSettingsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachUpdateProfileSettingsV1Request(c.Server, profileUuid, body)
 	if err != nil {
 		return nil, err
 	}
@@ -54356,6 +54816,53 @@ func NewReachUpdateAContactV1RequestWithBody(server string, profileUuid ProfileU
 	return req, nil
 }
 
+// NewReachDeleteSendingDomainV1Request calls the generic ReachDeleteSendingDomainV1 builder with application/json body
+func NewReachDeleteSendingDomainV1Request(server string, profileUuid ProfileUuid, body ReachDeleteSendingDomainV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachDeleteSendingDomainV1RequestWithBody(server, profileUuid, "application/json", bodyReader)
+}
+
+// NewReachDeleteSendingDomainV1RequestWithBody constructs an http.Request for the ReachDeleteSendingDomainV1 method, with any body, and a specified content type
+func NewReachDeleteSendingDomainV1RequestWithBody(server string, profileUuid ProfileUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/domains", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewReachGetConnectedSendingDomainV1Request constructs an http.Request for the ReachGetConnectedSendingDomainV1 method
 func NewReachGetConnectedSendingDomainV1Request(server string, profileUuid ProfileUuid) (*http.Request, error) {
 	var err error
@@ -54386,6 +54893,53 @@ func NewReachGetConnectedSendingDomainV1Request(server string, profileUuid Profi
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewReachConnectSendingDomainV1Request calls the generic ReachConnectSendingDomainV1 builder with application/json body
+func NewReachConnectSendingDomainV1Request(server string, profileUuid ProfileUuid, body ReachConnectSendingDomainV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachConnectSendingDomainV1RequestWithBody(server, profileUuid, "application/json", bodyReader)
+}
+
+// NewReachConnectSendingDomainV1RequestWithBody constructs an http.Request for the ReachConnectSendingDomainV1 method, with any body, and a specified content type
+func NewReachConnectSendingDomainV1RequestWithBody(server string, profileUuid ProfileUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/domains", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -55113,6 +55667,87 @@ func NewReachCountProfileSegmentContactsV1Request(server string, profileUuid Pro
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewReachGetProfileSettingsV1Request constructs an http.Request for the ReachGetProfileSettingsV1 method
+func NewReachGetProfileSettingsV1Request(server string, profileUuid ProfileUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/settings", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachUpdateProfileSettingsV1Request calls the generic ReachUpdateProfileSettingsV1 builder with application/json body
+func NewReachUpdateProfileSettingsV1Request(server string, profileUuid ProfileUuid, body ReachUpdateProfileSettingsV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachUpdateProfileSettingsV1RequestWithBody(server, profileUuid, "application/json", bodyReader)
+}
+
+// NewReachUpdateProfileSettingsV1RequestWithBody constructs an http.Request for the ReachUpdateProfileSettingsV1 method, with any body, and a specified content type
+func NewReachUpdateProfileSettingsV1RequestWithBody(server string, profileUuid ProfileUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/settings", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -64491,6 +65126,40 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid} (the `ReachUpdateAContactV1` operationId).
 	ReachUpdateAContactV1WithResponse(ctx context.Context, profileUuid ProfileUuid, contactUuid ContactUuid, body ReachUpdateAContactV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachUpdateAContactV1Response, error)
 
+	// ReachDeleteSendingDomainV1WithBodyWithResponse Delete sending domain
+	//
+	// Disconnect the sending domain from the profile.
+	//
+	// The domain record is removed, so the profile has no sending domain afterwards and campaigns
+	// cannot be sent until a domain is connected again. Sender addresses already stored on
+	// campaigns, automations and settings are left untouched and keep pointing at the removed
+	// domain. A domain that is not connected to the profile also succeeds, so success is not proof
+	// that anything was deleted. DNS records at the DNS provider are not removed. To switch
+	// domains, delete this one and connect the new one. Confirm the domain with the customer
+	// before calling.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/domains (the `ReachDeleteSendingDomainV1` operationId).
+	ReachDeleteSendingDomainV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachDeleteSendingDomainV1Response, error)
+
+	// ReachDeleteSendingDomainV1WithResponse Delete sending domain
+	//
+	// Disconnect the sending domain from the profile.
+	//
+	// The domain record is removed, so the profile has no sending domain afterwards and campaigns
+	// cannot be sent until a domain is connected again. Sender addresses already stored on
+	// campaigns, automations and settings are left untouched and keep pointing at the removed
+	// domain. A domain that is not connected to the profile also succeeds, so success is not proof
+	// that anything was deleted. DNS records at the DNS provider are not removed. To switch
+	// domains, delete this one and connect the new one. Confirm the domain with the customer
+	// before calling.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/domains (the `ReachDeleteSendingDomainV1` operationId).
+	ReachDeleteSendingDomainV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachDeleteSendingDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachDeleteSendingDomainV1Response, error)
+
 	// ReachGetConnectedSendingDomainV1WithResponse Get connected sending domain
 	//
 	// Get the sending domain connected to the profile, its verification status and any suspended
@@ -64505,6 +65174,46 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/domains (the `ReachGetConnectedSendingDomainV1` operationId).
 	ReachGetConnectedSendingDomainV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachGetConnectedSendingDomainV1Response, error)
+
+	// ReachConnectSendingDomainV1WithBodyWithResponse Connect sending domain
+	//
+	// Connect a sending domain to the profile so emails can be sent from addresses on it.
+	//
+	// Connecting does not make the domain ready to send: check the DNS status endpoint next for
+	// records that are still missing. A domain the account owns or has already verified connects
+	// immediately. Any other domain starts a TXT ownership verification and returns `409`;
+	// complete the verification in Reach, then retry. Returns `422` when the profile or another
+	// profile already has the domain, the domain is blocked, or its ownership cannot be verified.
+	// An already connected domain is never replaced.
+	//
+	// On success the sender address of draft and scheduled campaigns, and of published automation
+	// and double opt-in emails, moves onto the new domain in the background, keeping the part
+	// before the `@`.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/domains (the `ReachConnectSendingDomainV1` operationId).
+	ReachConnectSendingDomainV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachConnectSendingDomainV1Response, error)
+
+	// ReachConnectSendingDomainV1WithResponse Connect sending domain
+	//
+	// Connect a sending domain to the profile so emails can be sent from addresses on it.
+	//
+	// Connecting does not make the domain ready to send: check the DNS status endpoint next for
+	// records that are still missing. A domain the account owns or has already verified connects
+	// immediately. Any other domain starts a TXT ownership verification and returns `409`;
+	// complete the verification in Reach, then retry. Returns `422` when the profile or another
+	// profile already has the domain, the domain is blocked, or its ownership cannot be verified.
+	// An already connected domain is never replaced.
+	//
+	// On success the sender address of draft and scheduled campaigns, and of published automation
+	// and double opt-in emails, moves onto the new domain in the background, keeping the part
+	// before the `@`.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/domains (the `ReachConnectSendingDomainV1` operationId).
+	ReachConnectSendingDomainV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachConnectSendingDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachConnectSendingDomainV1Response, error)
 
 	// ReachGetProfileDomainDNSStatusV1WithResponse Get profile domain DNS status
 	//
@@ -64743,6 +65452,52 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}/count (the `ReachCountProfileSegmentContactsV1` operationId).
 	ReachCountProfileSegmentContactsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, segmentUuid SegmentUuid, reqEditors ...RequestEditorFn) (*ReachCountProfileSegmentContactsV1Response, error)
+
+	// ReachGetProfileSettingsV1WithResponse Get profile settings
+	//
+	// Get the profile's saved sender identity and brand details.
+	//
+	// Read the default sender before creating a campaign instead of asking the customer, and
+	// reuse the brand fields when generating email content. Any field can be `null` for a profile
+	// that never filled its settings in. This does not check that the sending domain is
+	// verified, use the connected sending domain endpoint for that.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/settings (the `ReachGetProfileSettingsV1` operationId).
+	ReachGetProfileSettingsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachGetProfileSettingsV1Response, error)
+
+	// ReachUpdateProfileSettingsV1WithBodyWithResponse Update profile settings
+	//
+	// Change the profile's default sender and brand details.
+	//
+	// Send only the fields to change: every omitted field keeps its value, and `null` or an empty
+	// string clears a text field. The default sender is what campaigns created afterwards start
+	// from; existing campaigns keep their own sender. `sender_email` is only the part before the
+	// `@`, because Reach combines it with the profile's connected sending domain, so an address
+	// outside that domain cannot be set. Connecting a sending domain is a separate endpoint and
+	// a connected domain cannot be changed here. Returns the settings after the change.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/settings (the `ReachUpdateProfileSettingsV1` operationId).
+	ReachUpdateProfileSettingsV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachUpdateProfileSettingsV1Response, error)
+
+	// ReachUpdateProfileSettingsV1WithResponse Update profile settings
+	//
+	// Change the profile's default sender and brand details.
+	//
+	// Send only the fields to change: every omitted field keeps its value, and `null` or an empty
+	// string clears a text field. The default sender is what campaigns created afterwards start
+	// from; existing campaigns keep their own sender. `sender_email` is only the part before the
+	// `@`, because Reach combines it with the profile's connected sending domain, so an address
+	// outside that domain cannot be set. Connecting a sending domain is a separate endpoint and
+	// a connected domain cannot be changed here. Returns the settings after the change.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/settings (the `ReachUpdateProfileSettingsV1` operationId).
+	ReachUpdateProfileSettingsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachUpdateProfileSettingsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachUpdateProfileSettingsV1Response, error)
 
 	// ReachListProfileTagsV1WithResponse List profile tags
 	//
@@ -84802,6 +85557,68 @@ func (r ReachUpdateAContactV1Response) ContentType() string {
 	return ""
 }
 
+type ReachDeleteSendingDomainV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachDeleteSendingDomainV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachDeleteSendingDomainV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachDeleteSendingDomainV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachDeleteSendingDomainV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachDeleteSendingDomainV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachDeleteSendingDomainV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachDeleteSendingDomainV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachDeleteSendingDomainV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type ReachGetConnectedSendingDomainV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -84851,6 +85668,82 @@ func (r ReachGetConnectedSendingDomainV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r ReachGetConnectedSendingDomainV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// ReachConnectSendingDomainV1Response409Headers the declared response headers of an HTTP 409 response for ReachConnectSendingDomainV1
+type ReachConnectSendingDomainV1Response409Headers struct {
+	RetryAfter *int
+}
+
+type ReachConnectSendingDomainV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON409 the response for an HTTP 409 `application/json` response
+	JSON409 *CommonResponseConflictResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+	// Headers409 the parsed response headers for an HTTP 409 response
+	Headers409 *ReachConnectSendingDomainV1Response409Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachConnectSendingDomainV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachConnectSendingDomainV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON409 returns the response for an HTTP 409 `application/json` response
+func (r ReachConnectSendingDomainV1Response) GetJSON409() *CommonResponseConflictResponse {
+	return r.JSON409
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachConnectSendingDomainV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachConnectSendingDomainV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachConnectSendingDomainV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachConnectSendingDomainV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachConnectSendingDomainV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachConnectSendingDomainV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -85736,6 +86629,123 @@ func (r ReachCountProfileSegmentContactsV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r ReachCountProfileSegmentContactsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachGetProfileSettingsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1ProfilesSettingsSettingsResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachGetProfileSettingsV1Response) GetJSON200() *ReachV1ProfilesSettingsSettingsResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachGetProfileSettingsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachGetProfileSettingsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachGetProfileSettingsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachGetProfileSettingsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachGetProfileSettingsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachGetProfileSettingsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachUpdateProfileSettingsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1ProfilesSettingsSettingsResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachUpdateProfileSettingsV1Response) GetJSON200() *ReachV1ProfilesSettingsSettingsResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachUpdateProfileSettingsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachUpdateProfileSettingsV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachUpdateProfileSettingsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachUpdateProfileSettingsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachUpdateProfileSettingsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachUpdateProfileSettingsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachUpdateProfileSettingsV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -98999,6 +100009,52 @@ func (c *ClientWithResponses) ReachUpdateAContactV1WithResponse(ctx context.Cont
 	return ParseReachUpdateAContactV1Response(rsp)
 }
 
+// ReachDeleteSendingDomainV1WithBodyWithResponse Delete sending domain
+//
+// Disconnect the sending domain from the profile.
+//
+// The domain record is removed, so the profile has no sending domain afterwards and campaigns
+// cannot be sent until a domain is connected again. Sender addresses already stored on
+// campaigns, automations and settings are left untouched and keep pointing at the removed
+// domain. A domain that is not connected to the profile also succeeds, so success is not proof
+// that anything was deleted. DNS records at the DNS provider are not removed. To switch
+// domains, delete this one and connect the new one. Confirm the domain with the customer
+// before calling.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/domains (the `ReachDeleteSendingDomainV1` operationId).
+func (c *ClientWithResponses) ReachDeleteSendingDomainV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachDeleteSendingDomainV1Response, error) {
+	rsp, err := c.ReachDeleteSendingDomainV1WithBody(ctx, profileUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachDeleteSendingDomainV1Response(rsp)
+}
+
+// ReachDeleteSendingDomainV1WithResponse Delete sending domain
+//
+// Disconnect the sending domain from the profile.
+//
+// The domain record is removed, so the profile has no sending domain afterwards and campaigns
+// cannot be sent until a domain is connected again. Sender addresses already stored on
+// campaigns, automations and settings are left untouched and keep pointing at the removed
+// domain. A domain that is not connected to the profile also succeeds, so success is not proof
+// that anything was deleted. DNS records at the DNS provider are not removed. To switch
+// domains, delete this one and connect the new one. Confirm the domain with the customer
+// before calling.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/domains (the `ReachDeleteSendingDomainV1` operationId).
+func (c *ClientWithResponses) ReachDeleteSendingDomainV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachDeleteSendingDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachDeleteSendingDomainV1Response, error) {
+	rsp, err := c.ReachDeleteSendingDomainV1(ctx, profileUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachDeleteSendingDomainV1Response(rsp)
+}
+
 // ReachGetConnectedSendingDomainV1WithResponse Get connected sending domain
 //
 // Get the sending domain connected to the profile, its verification status and any suspended
@@ -99018,6 +100074,58 @@ func (c *ClientWithResponses) ReachGetConnectedSendingDomainV1WithResponse(ctx c
 		return nil, err
 	}
 	return ParseReachGetConnectedSendingDomainV1Response(rsp)
+}
+
+// ReachConnectSendingDomainV1WithBodyWithResponse Connect sending domain
+//
+// Connect a sending domain to the profile so emails can be sent from addresses on it.
+//
+// Connecting does not make the domain ready to send: check the DNS status endpoint next for
+// records that are still missing. A domain the account owns or has already verified connects
+// immediately. Any other domain starts a TXT ownership verification and returns `409`;
+// complete the verification in Reach, then retry. Returns `422` when the profile or another
+// profile already has the domain, the domain is blocked, or its ownership cannot be verified.
+// An already connected domain is never replaced.
+//
+// On success the sender address of draft and scheduled campaigns, and of published automation
+// and double opt-in emails, moves onto the new domain in the background, keeping the part
+// before the `@`.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/domains (the `ReachConnectSendingDomainV1` operationId).
+func (c *ClientWithResponses) ReachConnectSendingDomainV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachConnectSendingDomainV1Response, error) {
+	rsp, err := c.ReachConnectSendingDomainV1WithBody(ctx, profileUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachConnectSendingDomainV1Response(rsp)
+}
+
+// ReachConnectSendingDomainV1WithResponse Connect sending domain
+//
+// Connect a sending domain to the profile so emails can be sent from addresses on it.
+//
+// Connecting does not make the domain ready to send: check the DNS status endpoint next for
+// records that are still missing. A domain the account owns or has already verified connects
+// immediately. Any other domain starts a TXT ownership verification and returns `409`;
+// complete the verification in Reach, then retry. Returns `422` when the profile or another
+// profile already has the domain, the domain is blocked, or its ownership cannot be verified.
+// An already connected domain is never replaced.
+//
+// On success the sender address of draft and scheduled campaigns, and of published automation
+// and double opt-in emails, moves onto the new domain in the background, keeping the part
+// before the `@`.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/domains (the `ReachConnectSendingDomainV1` operationId).
+func (c *ClientWithResponses) ReachConnectSendingDomainV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachConnectSendingDomainV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachConnectSendingDomainV1Response, error) {
+	rsp, err := c.ReachConnectSendingDomainV1(ctx, profileUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachConnectSendingDomainV1Response(rsp)
 }
 
 // ReachGetProfileDomainDNSStatusV1WithResponse Get profile domain DNS status
@@ -99364,6 +100472,70 @@ func (c *ClientWithResponses) ReachCountProfileSegmentContactsV1WithResponse(ctx
 		return nil, err
 	}
 	return ParseReachCountProfileSegmentContactsV1Response(rsp)
+}
+
+// ReachGetProfileSettingsV1WithResponse Get profile settings
+//
+// Get the profile's saved sender identity and brand details.
+//
+// Read the default sender before creating a campaign instead of asking the customer, and
+// reuse the brand fields when generating email content. Any field can be `null` for a profile
+// that never filled its settings in. This does not check that the sending domain is
+// verified, use the connected sending domain endpoint for that.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/settings (the `ReachGetProfileSettingsV1` operationId).
+func (c *ClientWithResponses) ReachGetProfileSettingsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachGetProfileSettingsV1Response, error) {
+	rsp, err := c.ReachGetProfileSettingsV1(ctx, profileUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachGetProfileSettingsV1Response(rsp)
+}
+
+// ReachUpdateProfileSettingsV1WithBodyWithResponse Update profile settings
+//
+// Change the profile's default sender and brand details.
+//
+// Send only the fields to change: every omitted field keeps its value, and `null` or an empty
+// string clears a text field. The default sender is what campaigns created afterwards start
+// from; existing campaigns keep their own sender. `sender_email` is only the part before the
+// `@`, because Reach combines it with the profile's connected sending domain, so an address
+// outside that domain cannot be set. Connecting a sending domain is a separate endpoint and
+// a connected domain cannot be changed here. Returns the settings after the change.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/settings (the `ReachUpdateProfileSettingsV1` operationId).
+func (c *ClientWithResponses) ReachUpdateProfileSettingsV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachUpdateProfileSettingsV1Response, error) {
+	rsp, err := c.ReachUpdateProfileSettingsV1WithBody(ctx, profileUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachUpdateProfileSettingsV1Response(rsp)
+}
+
+// ReachUpdateProfileSettingsV1WithResponse Update profile settings
+//
+// Change the profile's default sender and brand details.
+//
+// Send only the fields to change: every omitted field keeps its value, and `null` or an empty
+// string clears a text field. The default sender is what campaigns created afterwards start
+// from; existing campaigns keep their own sender. `sender_email` is only the part before the
+// `@`, because Reach combines it with the profile's connected sending domain, so an address
+// outside that domain cannot be set. Connecting a sending domain is a separate endpoint and
+// a connected domain cannot be changed here. Returns the settings after the change.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/settings (the `ReachUpdateProfileSettingsV1` operationId).
+func (c *ClientWithResponses) ReachUpdateProfileSettingsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachUpdateProfileSettingsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachUpdateProfileSettingsV1Response, error) {
+	rsp, err := c.ReachUpdateProfileSettingsV1(ctx, profileUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachUpdateProfileSettingsV1Response(rsp)
 }
 
 // ReachListProfileTagsV1WithResponse List profile tags
@@ -115394,6 +116566,53 @@ func ParseReachUpdateAContactV1Response(rsp *http.Response) (*ReachUpdateAContac
 	return response, nil
 }
 
+// ParseReachDeleteSendingDomainV1Response parses an HTTP response from a ReachDeleteSendingDomainV1WithResponse call
+func ParseReachDeleteSendingDomainV1Response(rsp *http.Response) (*ReachDeleteSendingDomainV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachDeleteSendingDomainV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseReachGetConnectedSendingDomainV1Response parses an HTTP response from a ReachGetConnectedSendingDomainV1WithResponse call
 func ParseReachGetConnectedSendingDomainV1Response(rsp *http.Response) (*ReachGetConnectedSendingDomainV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -115429,6 +116648,73 @@ func ParseReachGetConnectedSendingDomainV1Response(rsp *http.Response) (*ReachGe
 		}
 		response.JSON500 = &dest
 
+	}
+
+	return response, nil
+}
+
+// ParseReachConnectSendingDomainV1Response parses an HTTP response from a ReachConnectSendingDomainV1WithResponse call
+func ParseReachConnectSendingDomainV1Response(rsp *http.Response) (*ReachConnectSendingDomainV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachConnectSendingDomainV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest CommonResponseConflictResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 409:
+		var headers ReachConnectSendingDomainV1Response409Headers
+		if values := rsp.Header.Values("Retry-After"); len(values) > 0 {
+			var value int
+			if err := runtime.BindStyledParameterWithOptions("simple", "Retry-After", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.RetryAfter = &value
+		}
+		response.Headers409 = &headers
 	}
 
 	return response, nil
@@ -116065,6 +117351,93 @@ func ParseReachCountProfileSegmentContactsV1Response(rsp *http.Response) (*Reach
 			return nil, err
 		}
 		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachGetProfileSettingsV1Response parses an HTTP response from a ReachGetProfileSettingsV1WithResponse call
+func ParseReachGetProfileSettingsV1Response(rsp *http.Response) (*ReachGetProfileSettingsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachGetProfileSettingsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1ProfilesSettingsSettingsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachUpdateProfileSettingsV1Response parses an HTTP response from a ReachUpdateProfileSettingsV1WithResponse call
+func ParseReachUpdateProfileSettingsV1Response(rsp *http.Response) (*ReachUpdateProfileSettingsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachUpdateProfileSettingsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1ProfilesSettingsSettingsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse

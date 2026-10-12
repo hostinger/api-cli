@@ -1754,6 +1754,11 @@
     "method": "POST",
     "path": "/api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts"
   },
+  "reach_connectSendingDomainV1": {
+    "command": "hostinger reach profiles connect-sending-domain",
+    "method": "POST",
+    "path": "/api/reach/v1/profiles/{profileUuid}/domains"
+  },
   "reach_countProfileSegmentContactsV1": {
     "command": "hostinger reach segments count-profile-contacts",
     "method": "GET",
@@ -1834,6 +1839,11 @@
     "method": "DELETE",
     "path": "/api/reach/v1/profiles/{profileUuid}/forms/{formUuid}"
   },
+  "reach_deleteSendingDomainV1": {
+    "command": "hostinger reach profiles delete-sending-domain",
+    "method": "DELETE",
+    "path": "/api/reach/v1/profiles/{profileUuid}/domains"
+  },
   "reach_getAutomationDetailsV1": {
     "command": "hostinger reach automations get",
     "method": "GET",
@@ -1873,6 +1883,11 @@
     "command": "hostinger reach segments profile",
     "method": "GET",
     "path": "/api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}"
+  },
+  "reach_getProfileSettingsV1": {
+    "command": "hostinger reach profiles settings",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/settings"
   },
   "reach_getRemainingPlanLimitsV1": {
     "command": "hostinger reach profiles remaining-plan-limits",
@@ -2003,6 +2018,11 @@
     "command": "hostinger reach segments update-profile",
     "method": "PUT",
     "path": "/api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}"
+  },
+  "reach_updateProfileSettingsV1": {
+    "command": "hostinger reach profiles update-settings",
+    "method": "PATCH",
+    "path": "/api/reach/v1/profiles/{profileUuid}/settings"
   },
   "v2_getDomainVerificationsDIRECT": {
     "command": "hostinger domains verifications direct",
