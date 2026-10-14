@@ -14,7 +14,7 @@ import (
 var ListCmd = &cobra.Command{
 	Use:   "list",
 	Short: "List WordPress installations",
-	Long:  "List WordPress installations accessible to the authenticated client.\n\nUse this endpoint to discover existing WordPress installations and to poll\nfor installation status after calling the install endpoint. When a newly\nrequested installation appears in this list, WordPress is ready. Filter by\nusername and domain to narrow results to a specific website.\n\nEach installation includes a `valid` flag and, when invalid, a\n`validationError` describing why.",
+	Long:  "List WordPress installations on shared and cloud web hosting accounts (the\n`/api/hosting/v1` family, identified by `username`) accessible to the\nauthenticated client.\n\nAgency Plan websites are not included. To work with WordPress on an Agency Plan\nwebsite, list them with GET /api/agency-hosting/v1/websites?website_types=wordpress\nand read their details with\nGET /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings. An account\nthat only has Agency Plan websites receives an empty list from this endpoint.\n\nUse this endpoint to discover existing WordPress installations and to poll\nfor installation status after calling the install endpoint. When a newly\nrequested installation appears in this list, WordPress is ready. Filter by\nusername and domain to narrow results to a specific website.\n\nEach installation includes a `valid` flag and, when invalid, a\n`validationError` describing why.",
 	Run: func(cmd *cobra.Command, args []string) {
 		utils.EnumCheck(cmd, "ownership", []string{"owned", "managed", "all"})
 		r, err := api.Request().HostingListWordPressInstallationsV1WithResponse(context.TODO(), listParams(cmd))
