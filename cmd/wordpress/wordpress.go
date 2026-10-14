@@ -1,6 +1,7 @@
 package wordpress
 
 import (
+	"github.com/hostinger/api-cli/cmd/wordpress/ai_content"
 	"github.com/hostinger/api-cli/cmd/wordpress/ai_tools"
 	"github.com/hostinger/api-cli/cmd/wordpress/installations"
 	"github.com/hostinger/api-cli/cmd/wordpress/litespeed_cache"
@@ -19,6 +20,7 @@ var GroupCmd = &cobra.Command{
 }
 
 func init() {
+	GroupCmd.AddCommand(ai_content.GroupCmd)
 	GroupCmd.AddCommand(ai_tools.GroupCmd)
 	GroupCmd.AddCommand(installations.GroupCmd)
 	GroupCmd.AddCommand(litespeed_cache.GroupCmd)

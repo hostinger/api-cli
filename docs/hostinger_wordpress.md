@@ -18,6 +18,7 @@ WordPress commands
 ### SEE ALSO
 
 * [hostinger](hostinger.md)	 - Hostinger API Command Line Interface
+* [hostinger wordpress ai-content](hostinger_wordpress_ai-content.md)	 - AI Content commands
 * [hostinger wordpress ai-tools](hostinger_wordpress_ai-tools.md)	 - AI Tools commands
 * [hostinger wordpress installations](hostinger_wordpress_installations.md)	 - Installations commands
 * [hostinger wordpress litespeed-cache](hostinger_wordpress_litespeed-cache.md)	 - LiteSpeed Cache commands

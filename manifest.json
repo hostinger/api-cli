@@ -1164,6 +1164,11 @@
     "method": "POST",
     "path": "/api/hosting/v1/accounts/{username}/git/ssh-key"
   },
+  "hosting_generateImagesV1": {
+    "command": "hostinger wordpress ai-content generate-images",
+    "method": "POST",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/content/images/generate"
+  },
   "hosting_generateUploadURLV1": {
     "command": "hostinger hosting files generate-upload-url",
     "method": "POST",
