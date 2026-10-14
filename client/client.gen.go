@@ -1263,6 +1263,69 @@ func (e HostingV1GitGitInstallationResourceStatus) Valid() bool {
 	}
 }
 
+// Defines values for HostingV1HeadlessStoreAgentReportRequestInfoOutcome.
+const (
+	HostingV1HeadlessStoreAgentReportRequestInfoOutcomeAbandoned HostingV1HeadlessStoreAgentReportRequestInfoOutcome = "abandoned"
+	HostingV1HeadlessStoreAgentReportRequestInfoOutcomeFailed    HostingV1HeadlessStoreAgentReportRequestInfoOutcome = "failed"
+	HostingV1HeadlessStoreAgentReportRequestInfoOutcomeLive      HostingV1HeadlessStoreAgentReportRequestInfoOutcome = "live"
+	HostingV1HeadlessStoreAgentReportRequestInfoOutcomeStopped   HostingV1HeadlessStoreAgentReportRequestInfoOutcome = "stopped"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1HeadlessStoreAgentReportRequestInfoOutcome enum.
+func (e HostingV1HeadlessStoreAgentReportRequestInfoOutcome) Valid() bool {
+	switch e {
+	case HostingV1HeadlessStoreAgentReportRequestInfoOutcomeAbandoned:
+		return true
+	case HostingV1HeadlessStoreAgentReportRequestInfoOutcomeFailed:
+		return true
+	case HostingV1HeadlessStoreAgentReportRequestInfoOutcomeLive:
+		return true
+	case HostingV1HeadlessStoreAgentReportRequestInfoOutcomeStopped:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingV1HeadlessStoreAgentReportRequestRunKind.
+const (
+	Build    HostingV1HeadlessStoreAgentReportRequestRunKind = "build"
+	Iterate  HostingV1HeadlessStoreAgentReportRequestRunKind = "iterate"
+	Redesign HostingV1HeadlessStoreAgentReportRequestRunKind = "redesign"
+	Resume   HostingV1HeadlessStoreAgentReportRequestRunKind = "resume"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1HeadlessStoreAgentReportRequestRunKind enum.
+func (e HostingV1HeadlessStoreAgentReportRequestRunKind) Valid() bool {
+	switch e {
+	case Build:
+		return true
+	case Iterate:
+		return true
+	case Redesign:
+		return true
+	case Resume:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingV1HeadlessStoreAgentReportRequestSchemaVersion.
+const (
+	HostingV1HeadlessStoreAgentReportRequestSchemaVersionN1 HostingV1HeadlessStoreAgentReportRequestSchemaVersion = "1"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1HeadlessStoreAgentReportRequestSchemaVersion enum.
+func (e HostingV1HeadlessStoreAgentReportRequestSchemaVersion) Valid() bool {
+	switch e {
+	case HostingV1HeadlessStoreAgentReportRequestSchemaVersionN1:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for HostingV1NodeJsBuildOptionsResourceAppType.
 const (
 	HostingV1NodeJsBuildOptionsResourceAppTypeAngular        HostingV1NodeJsBuildOptionsResourceAppType = "angular"
@@ -10831,6 +10894,109 @@ type HostingV1GitWebsiteGitRepositoryWebhookResource struct {
 	Url string `json:"url"`
 }
 
+// HostingV1HeadlessAgentReportResource defines model for Hosting.V1.Headless.AgentReportResource.
+type HostingV1HeadlessAgentReportResource struct {
+	// CreatedAt When the report was received
+	//
+	// Example: 2026-10-14T10:30:00.000000Z
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Id Stored report ID
+	//
+	// Example: 1024
+	Id *int `json:"id,omitempty"`
+
+	// RunId ID of the run the report is for
+	//
+	// Example: 2026-10-14T10-00-00Z
+	RunId *string `json:"run_id,omitempty"`
+}
+
+// HostingV1HeadlessStoreAgentReportRequest Headless build report (report.schema.json v1), as written by the headless skill at the end of a run. Send the report unchanged.
+type HostingV1HeadlessStoreAgentReportRequest struct {
+	// Consent Upload status of the report, as written by the headless skill
+	Consent struct {
+		Note *string `json:"note,omitempty"`
+
+		// Sent Example: false
+		Sent bool `json:"sent"`
+	} `json:"consent"`
+
+	// GeneratedAt When the report was written
+	//
+	// Example: 2026-10-14T10:30:00Z
+	GeneratedAt time.Time `json:"generated_at"`
+
+	// Info Website, tool and outcome of the run
+	Info struct {
+		// Domain Example: example.com
+		Domain string `json:"domain"`
+
+		// Outcome Example: live
+		Outcome HostingV1HeadlessStoreAgentReportRequestInfoOutcome `json:"outcome"`
+
+		// Tool Example: claude-code
+		Tool *string `json:"tool"`
+	} `json:"info"`
+
+	// Issues Problems hit during the run
+	Issues []map[string]interface{} `json:"issues"`
+
+	// LoggingGaps Where the run log is missing or unsure
+	LoggingGaps *[]map[string]interface{} `json:"logging_gaps,omitempty"`
+
+	// PreviousRuns Earlier runs for the same website
+	PreviousRuns []map[string]interface{} `json:"previous_runs"`
+
+	// Run The run the report is for
+	Run struct {
+		FollowUps *[]map[string]interface{} `json:"follow_ups,omitempty"`
+
+		// Id Example: 2026-10-14T10-00-00Z
+		Id string `json:"id"`
+
+		// Kind Example: build
+		Kind  HostingV1HeadlessStoreAgentReportRequestRunKind `json:"kind"`
+		Skill *string                                         `json:"skill,omitempty"`
+	} `json:"run"`
+
+	// SchemaVersion Report schema version
+	//
+	// Example: 1
+	SchemaVersion HostingV1HeadlessStoreAgentReportRequestSchemaVersion `json:"schema_version"`
+
+	// SkillGaps Places where the skill instructions were missing or wrong
+	SkillGaps []map[string]interface{} `json:"skill_gaps"`
+
+	// Timing Run start and end times and per-stage timings
+	Timing struct {
+		EndedAt      time.Time                `json:"ended_at"`
+		MinutesTotal *float32                 `json:"minutes_total"`
+		Stages       []map[string]interface{} `json:"stages"`
+		StartedAt    time.Time                `json:"started_at"`
+	} `json:"timing"`
+
+	// Tokens Token usage, only when the tool reports its own usage
+	Tokens *map[string]interface{} `json:"tokens"`
+
+	// UserFeedback Feedback the user gave during the run
+	UserFeedback []map[string]interface{} `json:"user_feedback"`
+
+	// WhatWentWell Things that worked well during the run
+	WhatWentWell []map[string]interface{} `json:"what_went_well"`
+}
+
+// HostingV1HeadlessStoreAgentReportRequestInfoOutcome Example: live
+type HostingV1HeadlessStoreAgentReportRequestInfoOutcome string
+
+// HostingV1HeadlessStoreAgentReportRequestRunKind Example: build
+type HostingV1HeadlessStoreAgentReportRequestRunKind string
+
+// HostingV1HeadlessStoreAgentReportRequestSchemaVersion Report schema version
+//
+// Example: 1
+type HostingV1HeadlessStoreAgentReportRequestSchemaVersion string
+
 // HostingV1NodeJsBuildAnalysisResource defines model for Hosting.V1.NodeJs.BuildAnalysisResource.
 type HostingV1NodeJsBuildAnalysisResource struct {
 	// Analysis Why the build failed. null when no analysis could be produced.
@@ -18248,6 +18414,9 @@ type HostingVerifyDomainOwnershipV1JSONRequestBody = HostingV1DomainsVerifyOwner
 // HostingGenerateUploadURLV1JSONRequestBody defines body for HostingGenerateUploadURLV1 for application/json ContentType.
 type HostingGenerateUploadURLV1JSONRequestBody = HostingV1FilesGenerateUploadUrlRequest
 
+// HostingSubmitHeadlessBuildReportV1JSONRequestBody defines body for HostingSubmitHeadlessBuildReportV1 for application/json ContentType.
+type HostingSubmitHeadlessBuildReportV1JSONRequestBody = HostingV1HeadlessStoreAgentReportRequest
+
 // HostingStartWebsiteSetupV1JSONRequestBody defines body for HostingStartWebsiteSetupV1 for application/json ContentType.
 type HostingStartWebsiteSetupV1JSONRequestBody = HostingV1OnboardingsStartOnboardingRequest
 
@@ -23931,6 +24100,36 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/hosting/v1/git/installations/{uuid}/repositories (the `HostingListGitInstallationRepositoriesV1` operationId).
 	HostingListGitInstallationRepositoriesV1(ctx context.Context, uuid GitInstallationUuidPath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingSubmitHeadlessBuildReportV1WithBody Submit headless build report
+	//
+	// Submits the build report the headless skill writes at the end of a run (including early
+	// stops), so Hostinger can learn where builds get stuck. Send one report per call, with the
+	// report JSON as the request body, unchanged. Only send a report when the user agreed to it.
+	//
+	// The report must match report.schema.json v1; an invalid report returns 422 and is not
+	// stored. The report is linked to the authenticated account, so do not add account details
+	// to it.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/hosting/v1/headless/agent-reports (the `HostingSubmitHeadlessBuildReportV1` operationId).
+	HostingSubmitHeadlessBuildReportV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingSubmitHeadlessBuildReportV1 Submit headless build report
+	//
+	// Submits the build report the headless skill writes at the end of a run (including early
+	// stops), so Hostinger can learn where builds get stuck. Send one report per call, with the
+	// report JSON as the request body, unchanged. Only send a report when the user agreed to it.
+	//
+	// The report must match report.schema.json v1; an invalid report returns 422 and is not
+	// stored. The report is linked to the authenticated account, so do not add account details
+	// to it.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/hosting/v1/headless/agent-reports (the `HostingSubmitHeadlessBuildReportV1` operationId).
+	HostingSubmitHeadlessBuildReportV1(ctx context.Context, body HostingSubmitHeadlessBuildReportV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingListWebsiteSetupsV1 List website setups
 	//
@@ -34512,6 +34711,56 @@ func (c *Client) HostingListGitInstallationsV1(ctx context.Context, params *Host
 // Corresponds with GET /api/hosting/v1/git/installations/{uuid}/repositories (the `HostingListGitInstallationRepositoriesV1` operationId).
 func (c *Client) HostingListGitInstallationRepositoriesV1(ctx context.Context, uuid GitInstallationUuidPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingListGitInstallationRepositoriesV1Request(c.Server, uuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingSubmitHeadlessBuildReportV1WithBody Submit headless build report
+//
+// Submits the build report the headless skill writes at the end of a run (including early
+// stops), so Hostinger can learn where builds get stuck. Send one report per call, with the
+// report JSON as the request body, unchanged. Only send a report when the user agreed to it.
+//
+// The report must match report.schema.json v1; an invalid report returns 422 and is not
+// stored. The report is linked to the authenticated account, so do not add account details
+// to it.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/hosting/v1/headless/agent-reports (the `HostingSubmitHeadlessBuildReportV1` operationId).
+func (c *Client) HostingSubmitHeadlessBuildReportV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingSubmitHeadlessBuildReportV1RequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingSubmitHeadlessBuildReportV1 Submit headless build report
+//
+// Submits the build report the headless skill writes at the end of a run (including early
+// stops), so Hostinger can learn where builds get stuck. Send one report per call, with the
+// report JSON as the request body, unchanged. Only send a report when the user agreed to it.
+//
+// The report must match report.schema.json v1; an invalid report returns 422 and is not
+// stored. The report is linked to the authenticated account, so do not add account details
+// to it.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/hosting/v1/headless/agent-reports (the `HostingSubmitHeadlessBuildReportV1` operationId).
+func (c *Client) HostingSubmitHeadlessBuildReportV1(ctx context.Context, body HostingSubmitHeadlessBuildReportV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingSubmitHeadlessBuildReportV1Request(c.Server, body)
 	if err != nil {
 		return nil, err
 	}
@@ -50770,6 +51019,46 @@ func NewHostingListGitInstallationRepositoriesV1Request(server string, uuid GitI
 	return req, nil
 }
 
+// NewHostingSubmitHeadlessBuildReportV1Request calls the generic HostingSubmitHeadlessBuildReportV1 builder with application/json body
+func NewHostingSubmitHeadlessBuildReportV1Request(server string, body HostingSubmitHeadlessBuildReportV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingSubmitHeadlessBuildReportV1RequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewHostingSubmitHeadlessBuildReportV1RequestWithBody constructs an http.Request for the HostingSubmitHeadlessBuildReportV1 method, with any body, and a specified content type
+func NewHostingSubmitHeadlessBuildReportV1RequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/headless/agent-reports")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewHostingListWebsiteSetupsV1Request constructs an http.Request for the HostingListWebsiteSetupsV1 method
 func NewHostingListWebsiteSetupsV1Request(server string, params *HostingListWebsiteSetupsV1Params) (*http.Request, error) {
 	var err error
@@ -64223,6 +64512,36 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with GET /api/hosting/v1/git/installations/{uuid}/repositories (the `HostingListGitInstallationRepositoriesV1` operationId).
 	HostingListGitInstallationRepositoriesV1WithResponse(ctx context.Context, uuid GitInstallationUuidPath, reqEditors ...RequestEditorFn) (*HostingListGitInstallationRepositoriesV1Response, error)
+
+	// HostingSubmitHeadlessBuildReportV1WithBodyWithResponse Submit headless build report
+	//
+	// Submits the build report the headless skill writes at the end of a run (including early
+	// stops), so Hostinger can learn where builds get stuck. Send one report per call, with the
+	// report JSON as the request body, unchanged. Only send a report when the user agreed to it.
+	//
+	// The report must match report.schema.json v1; an invalid report returns 422 and is not
+	// stored. The report is linked to the authenticated account, so do not add account details
+	// to it.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/headless/agent-reports (the `HostingSubmitHeadlessBuildReportV1` operationId).
+	HostingSubmitHeadlessBuildReportV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingSubmitHeadlessBuildReportV1Response, error)
+
+	// HostingSubmitHeadlessBuildReportV1WithResponse Submit headless build report
+	//
+	// Submits the build report the headless skill writes at the end of a run (including early
+	// stops), so Hostinger can learn where builds get stuck. Send one report per call, with the
+	// report JSON as the request body, unchanged. Only send a report when the user agreed to it.
+	//
+	// The report must match report.schema.json v1; an invalid report returns 422 and is not
+	// stored. The report is linked to the authenticated account, so do not add account details
+	// to it.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/headless/agent-reports (the `HostingSubmitHeadlessBuildReportV1` operationId).
+	HostingSubmitHeadlessBuildReportV1WithResponse(ctx context.Context, body HostingSubmitHeadlessBuildReportV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingSubmitHeadlessBuildReportV1Response, error)
 
 	// HostingListWebsiteSetupsV1WithResponse List website setups
 	//
@@ -81136,6 +81455,68 @@ func (r HostingListGitInstallationRepositoriesV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingListGitInstallationRepositoriesV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingSubmitHeadlessBuildReportV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON201 the response for an HTTP 201 `application/json` response
+	JSON201 *HostingV1HeadlessAgentReportResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON201 returns the response for an HTTP 201 `application/json` response
+func (r HostingSubmitHeadlessBuildReportV1Response) GetJSON201() *HostingV1HeadlessAgentReportResource {
+	return r.JSON201
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingSubmitHeadlessBuildReportV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingSubmitHeadlessBuildReportV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingSubmitHeadlessBuildReportV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingSubmitHeadlessBuildReportV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingSubmitHeadlessBuildReportV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingSubmitHeadlessBuildReportV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingSubmitHeadlessBuildReportV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -98686,6 +99067,48 @@ func (c *ClientWithResponses) HostingListGitInstallationRepositoriesV1WithRespon
 	return ParseHostingListGitInstallationRepositoriesV1Response(rsp)
 }
 
+// HostingSubmitHeadlessBuildReportV1WithBodyWithResponse Submit headless build report
+//
+// Submits the build report the headless skill writes at the end of a run (including early
+// stops), so Hostinger can learn where builds get stuck. Send one report per call, with the
+// report JSON as the request body, unchanged. Only send a report when the user agreed to it.
+//
+// The report must match report.schema.json v1; an invalid report returns 422 and is not
+// stored. The report is linked to the authenticated account, so do not add account details
+// to it.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/headless/agent-reports (the `HostingSubmitHeadlessBuildReportV1` operationId).
+func (c *ClientWithResponses) HostingSubmitHeadlessBuildReportV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingSubmitHeadlessBuildReportV1Response, error) {
+	rsp, err := c.HostingSubmitHeadlessBuildReportV1WithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingSubmitHeadlessBuildReportV1Response(rsp)
+}
+
+// HostingSubmitHeadlessBuildReportV1WithResponse Submit headless build report
+//
+// Submits the build report the headless skill writes at the end of a run (including early
+// stops), so Hostinger can learn where builds get stuck. Send one report per call, with the
+// report JSON as the request body, unchanged. Only send a report when the user agreed to it.
+//
+// The report must match report.schema.json v1; an invalid report returns 422 and is not
+// stored. The report is linked to the authenticated account, so do not add account details
+// to it.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/headless/agent-reports (the `HostingSubmitHeadlessBuildReportV1` operationId).
+func (c *ClientWithResponses) HostingSubmitHeadlessBuildReportV1WithResponse(ctx context.Context, body HostingSubmitHeadlessBuildReportV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingSubmitHeadlessBuildReportV1Response, error) {
+	rsp, err := c.HostingSubmitHeadlessBuildReportV1(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingSubmitHeadlessBuildReportV1Response(rsp)
+}
+
 // HostingListWebsiteSetupsV1WithResponse List website setups
 //
 // Returns the website setups started in the last 24 hours for the hosting accounts
@@ -113380,6 +113803,53 @@ func ParseHostingListGitInstallationRepositoriesV1Response(rsp *http.Response) (
 			return nil, err
 		}
 		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingSubmitHeadlessBuildReportV1Response parses an HTTP response from a HostingSubmitHeadlessBuildReportV1WithResponse call
+func ParseHostingSubmitHeadlessBuildReportV1Response(rsp *http.Response) (*HostingSubmitHeadlessBuildReportV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingSubmitHeadlessBuildReportV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest HostingV1HeadlessAgentReportResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse
