@@ -11884,7 +11884,12 @@ type HostingV1OnboardingsOnboardingResourceStatus string
 
 // HostingV1OnboardingsStartOnboardingRequest Website type, domain and WordPress settings for a new website setup
 type HostingV1OnboardingsStartOnboardingRequest struct {
-	// Domain Customer-owned domain. Cannot start with "www.". Omit or `null` to set the website up on a generated temporary free subdomain.
+	// DatacenterCode Datacenter for the hosting account when the order does not have one yet. Omit to use the order's default datacenter. Ignored when the order already has a hosting account. List available datacenters to find valid codes.
+	//
+	// Example: us-east-1
+	DatacenterCode *string `json:"datacenter_code,omitempty"`
+
+	// Domain Customer-owned domain. Cannot start with "www." and can have at most one subdomain level, e.g. `blog.example.com`. Omit or `null` to set the website up on a generated temporary free subdomain.
 	//
 	// Example: example.com
 	Domain *string `json:"domain,omitempty"`
@@ -12181,12 +12186,12 @@ type HostingV1SslToggleHttpsRedirectRequest struct {
 
 // HostingV1WebsitesCreateWebsiteRequest defines model for Hosting.V1.Websites.CreateWebsiteRequest.
 type HostingV1WebsitesCreateWebsiteRequest struct {
-	// DatacenterCode Datacenter code. This parameter is required when creating the first website on a new hosting plan.
+	// DatacenterCode Datacenter for the hosting account when the order does not have one yet. Omit to use the order's default datacenter. Ignored when the order already has a hosting account. Must be an available datacenter; list available datacenters to find valid codes.
 	//
 	// Example: us-east-1
 	DatacenterCode *string `json:"datacenter_code,omitempty"`
 
-	// Domain Domain name for the website. Cannot start with "www."
+	// Domain Domain name for the website. Cannot start with "www." and can have at most one subdomain level, e.g. `blog.example.com`.
 	//
 	// Example: example.com
 	Domain string `json:"domain"`
@@ -18651,6 +18656,8 @@ type HostingSubmitHeadlessBuildReportV1JSONRequestBody = HostingV1HeadlessStoreA
 type HostingStartWebsiteSetupV1JSONRequestBody = HostingV1OnboardingsStartOnboardingRequest
 
 // HostingCreateWebsiteV1JSONRequestBody defines body for HostingCreateWebsiteV1 for application/json ContentType.
+//
+// Deprecated: this type has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 type HostingCreateWebsiteV1JSONRequestBody = HostingV1WebsitesCreateWebsiteRequest
 
 // MailUpdateAutoreplyV1JSONRequestBody defines body for MailUpdateAutoreplyV1 for application/json ContentType.
@@ -24500,8 +24507,8 @@ type ClientInterface interface {
 	//
 	// Omit `domain` to set the website up on a generated temporary free subdomain.
 	//
-	// The order must already have a hosting account: to create the first website on a new
-	// hosting plan use the create website endpoint, which takes the `datacenter_code`.
+	// When the order has no hosting account yet, the setup creates one first, in the datacenter
+	// given by `datacenter_code` or the order's default datacenter when it is omitted.
 	// Returns 404 when the order does not exist or is not accessible to the authenticated
 	// client, and 409 with a `Retry-After` header while a setup for the same domain is still
 	// running.
@@ -24527,8 +24534,8 @@ type ClientInterface interface {
 	//
 	// Omit `domain` to set the website up on a generated temporary free subdomain.
 	//
-	// The order must already have a hosting account: to create the first website on a new
-	// hosting plan use the create website endpoint, which takes the `datacenter_code`.
+	// When the order has no hosting account yet, the setup creates one first, in the datacenter
+	// given by `datacenter_code` or the order's default datacenter when it is omitted.
 	// Returns 404 when the order does not exist or is not accessible to the authenticated
 	// client, and 409 with a `Retry-After` header while a setup for the same domain is still
 	// running.
@@ -24569,6 +24576,10 @@ type ClientInterface interface {
 
 	// HostingCreateWebsiteV1WithBody Create website
 	//
+	// Deprecated: use `POST /api/hosting/v1/orders/{order_id}/onboardings` (start website setup)
+	// instead. It takes the same `domain` and `datacenter_code`, can also install WordPress, and
+	// returns the created setup.
+	//
 	// Create a new website for the authenticated client.
 	//
 	// You must choose which hosting order to create this website on. Pass that
@@ -24578,10 +24589,8 @@ type ClientInterface interface {
 	// Only Web and Cloud hosting orders are accepted. To create a website on an Agency
 	// Plan order, use `POST /api/agency-hosting/v1/orders/{order_id}/websites/setups`.
 	//
-	// The datacenter_code parameter is required when creating the first website
-	// on a new hosting plan - this will set up and configure new hosting account
-	// in the selected datacenter.
-	//
+	// When the order has no hosting account yet, a new hosting account is set up first, in the
+	// datacenter given by `datacenter_code` or the order's default datacenter when it is omitted.
 	// Subsequent websites will be hosted on the same datacenter automatically.
 	//
 	// Website creation is asynchronous and takes up to a few minutes. Poll the list website
@@ -24593,9 +24602,15 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /api/hosting/v1/websites (the `HostingCreateWebsiteV1` operationId).
+	//
+	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	HostingCreateWebsiteV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingCreateWebsiteV1 Create website
+	//
+	// Deprecated: use `POST /api/hosting/v1/orders/{order_id}/onboardings` (start website setup)
+	// instead. It takes the same `domain` and `datacenter_code`, can also install WordPress, and
+	// returns the created setup.
 	//
 	// Create a new website for the authenticated client.
 	//
@@ -24606,10 +24621,8 @@ type ClientInterface interface {
 	// Only Web and Cloud hosting orders are accepted. To create a website on an Agency
 	// Plan order, use `POST /api/agency-hosting/v1/orders/{order_id}/websites/setups`.
 	//
-	// The datacenter_code parameter is required when creating the first website
-	// on a new hosting plan - this will set up and configure new hosting account
-	// in the selected datacenter.
-	//
+	// When the order has no hosting account yet, a new hosting account is set up first, in the
+	// datacenter given by `datacenter_code` or the order's default datacenter when it is omitted.
 	// Subsequent websites will be hosted on the same datacenter automatically.
 	//
 	// Website creation is asynchronous and takes up to a few minutes. Poll the list website
@@ -24621,6 +24634,8 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /api/hosting/v1/websites (the `HostingCreateWebsiteV1` operationId).
+	//
+	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	HostingCreateWebsiteV1(ctx context.Context, body HostingCreateWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingDeleteWebsiteV1 Delete website
@@ -35251,8 +35266,8 @@ func (c *Client) HostingListOrdersV1(ctx context.Context, params *HostingListOrd
 //
 // Omit `domain` to set the website up on a generated temporary free subdomain.
 //
-// The order must already have a hosting account: to create the first website on a new
-// hosting plan use the create website endpoint, which takes the `datacenter_code`.
+// When the order has no hosting account yet, the setup creates one first, in the datacenter
+// given by `datacenter_code` or the order's default datacenter when it is omitted.
 // Returns 404 when the order does not exist or is not accessible to the authenticated
 // client, and 409 with a `Retry-After` header while a setup for the same domain is still
 // running.
@@ -35288,8 +35303,8 @@ func (c *Client) HostingStartWebsiteSetupV1WithBody(ctx context.Context, orderId
 //
 // Omit `domain` to set the website up on a generated temporary free subdomain.
 //
-// The order must already have a hosting account: to create the first website on a new
-// hosting plan use the create website endpoint, which takes the `datacenter_code`.
+// When the order has no hosting account yet, the setup creates one first, in the datacenter
+// given by `datacenter_code` or the order's default datacenter when it is omitted.
 // Returns 404 when the order does not exist or is not accessible to the authenticated
 // client, and 409 with a `Retry-After` header while a setup for the same domain is still
 // running.
@@ -35350,6 +35365,10 @@ func (c *Client) HostingListWebsitesV1(ctx context.Context, params *HostingListW
 
 // HostingCreateWebsiteV1WithBody Create website
 //
+// Deprecated: use `POST /api/hosting/v1/orders/{order_id}/onboardings` (start website setup)
+// instead. It takes the same `domain` and `datacenter_code`, can also install WordPress, and
+// returns the created setup.
+//
 // Create a new website for the authenticated client.
 //
 // You must choose which hosting order to create this website on. Pass that
@@ -35359,10 +35378,8 @@ func (c *Client) HostingListWebsitesV1(ctx context.Context, params *HostingListW
 // Only Web and Cloud hosting orders are accepted. To create a website on an Agency
 // Plan order, use `POST /api/agency-hosting/v1/orders/{order_id}/websites/setups`.
 //
-// The datacenter_code parameter is required when creating the first website
-// on a new hosting plan - this will set up and configure new hosting account
-// in the selected datacenter.
-//
+// When the order has no hosting account yet, a new hosting account is set up first, in the
+// datacenter given by `datacenter_code` or the order's default datacenter when it is omitted.
 // Subsequent websites will be hosted on the same datacenter automatically.
 //
 // Website creation is asynchronous and takes up to a few minutes. Poll the list website
@@ -35374,6 +35391,7 @@ func (c *Client) HostingListWebsitesV1(ctx context.Context, params *HostingListW
 // Takes any type of body and a specified content type.
 //
 // Corresponds with POST /api/hosting/v1/websites (the `HostingCreateWebsiteV1` operationId).
+// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 func (c *Client) HostingCreateWebsiteV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingCreateWebsiteV1RequestWithBody(c.Server, contentType, body)
 	if err != nil {
@@ -35388,6 +35406,10 @@ func (c *Client) HostingCreateWebsiteV1WithBody(ctx context.Context, contentType
 
 // HostingCreateWebsiteV1 Create website
 //
+// Deprecated: use `POST /api/hosting/v1/orders/{order_id}/onboardings` (start website setup)
+// instead. It takes the same `domain` and `datacenter_code`, can also install WordPress, and
+// returns the created setup.
+//
 // Create a new website for the authenticated client.
 //
 // You must choose which hosting order to create this website on. Pass that
@@ -35397,10 +35419,8 @@ func (c *Client) HostingCreateWebsiteV1WithBody(ctx context.Context, contentType
 // Only Web and Cloud hosting orders are accepted. To create a website on an Agency
 // Plan order, use `POST /api/agency-hosting/v1/orders/{order_id}/websites/setups`.
 //
-// The datacenter_code parameter is required when creating the first website
-// on a new hosting plan - this will set up and configure new hosting account
-// in the selected datacenter.
-//
+// When the order has no hosting account yet, a new hosting account is set up first, in the
+// datacenter given by `datacenter_code` or the order's default datacenter when it is omitted.
 // Subsequent websites will be hosted on the same datacenter automatically.
 //
 // Website creation is asynchronous and takes up to a few minutes. Poll the list website
@@ -35412,6 +35432,7 @@ func (c *Client) HostingCreateWebsiteV1WithBody(ctx context.Context, contentType
 // Takes a body of the `application/json` content type.
 //
 // Corresponds with POST /api/hosting/v1/websites (the `HostingCreateWebsiteV1` operationId).
+// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 func (c *Client) HostingCreateWebsiteV1(ctx context.Context, body HostingCreateWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingCreateWebsiteV1Request(c.Server, body)
 	if err != nil {
@@ -65163,8 +65184,8 @@ type ClientWithResponsesInterface interface {
 	//
 	// Omit `domain` to set the website up on a generated temporary free subdomain.
 	//
-	// The order must already have a hosting account: to create the first website on a new
-	// hosting plan use the create website endpoint, which takes the `datacenter_code`.
+	// When the order has no hosting account yet, the setup creates one first, in the datacenter
+	// given by `datacenter_code` or the order's default datacenter when it is omitted.
 	// Returns 404 when the order does not exist or is not accessible to the authenticated
 	// client, and 409 with a `Retry-After` header while a setup for the same domain is still
 	// running.
@@ -65190,8 +65211,8 @@ type ClientWithResponsesInterface interface {
 	//
 	// Omit `domain` to set the website up on a generated temporary free subdomain.
 	//
-	// The order must already have a hosting account: to create the first website on a new
-	// hosting plan use the create website endpoint, which takes the `datacenter_code`.
+	// When the order has no hosting account yet, the setup creates one first, in the datacenter
+	// given by `datacenter_code` or the order's default datacenter when it is omitted.
 	// Returns 404 when the order does not exist or is not accessible to the authenticated
 	// client, and 409 with a `Retry-After` header while a setup for the same domain is still
 	// running.
@@ -65234,6 +65255,10 @@ type ClientWithResponsesInterface interface {
 
 	// HostingCreateWebsiteV1WithBodyWithResponse Create website
 	//
+	// Deprecated: use `POST /api/hosting/v1/orders/{order_id}/onboardings` (start website setup)
+	// instead. It takes the same `domain` and `datacenter_code`, can also install WordPress, and
+	// returns the created setup.
+	//
 	// Create a new website for the authenticated client.
 	//
 	// You must choose which hosting order to create this website on. Pass that
@@ -65243,10 +65268,8 @@ type ClientWithResponsesInterface interface {
 	// Only Web and Cloud hosting orders are accepted. To create a website on an Agency
 	// Plan order, use `POST /api/agency-hosting/v1/orders/{order_id}/websites/setups`.
 	//
-	// The datacenter_code parameter is required when creating the first website
-	// on a new hosting plan - this will set up and configure new hosting account
-	// in the selected datacenter.
-	//
+	// When the order has no hosting account yet, a new hosting account is set up first, in the
+	// datacenter given by `datacenter_code` or the order's default datacenter when it is omitted.
 	// Subsequent websites will be hosted on the same datacenter automatically.
 	//
 	// Website creation is asynchronous and takes up to a few minutes. Poll the list website
@@ -65258,9 +65281,15 @@ type ClientWithResponsesInterface interface {
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
 	// Corresponds with POST /api/hosting/v1/websites (the `HostingCreateWebsiteV1` operationId).
+	//
+	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	HostingCreateWebsiteV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingCreateWebsiteV1Response, error)
 
 	// HostingCreateWebsiteV1WithResponse Create website
+	//
+	// Deprecated: use `POST /api/hosting/v1/orders/{order_id}/onboardings` (start website setup)
+	// instead. It takes the same `domain` and `datacenter_code`, can also install WordPress, and
+	// returns the created setup.
 	//
 	// Create a new website for the authenticated client.
 	//
@@ -65271,10 +65300,8 @@ type ClientWithResponsesInterface interface {
 	// Only Web and Cloud hosting orders are accepted. To create a website on an Agency
 	// Plan order, use `POST /api/agency-hosting/v1/orders/{order_id}/websites/setups`.
 	//
-	// The datacenter_code parameter is required when creating the first website
-	// on a new hosting plan - this will set up and configure new hosting account
-	// in the selected datacenter.
-	//
+	// When the order has no hosting account yet, a new hosting account is set up first, in the
+	// datacenter given by `datacenter_code` or the order's default datacenter when it is omitted.
 	// Subsequent websites will be hosted on the same datacenter automatically.
 	//
 	// Website creation is asynchronous and takes up to a few minutes. Poll the list website
@@ -65286,6 +65313,8 @@ type ClientWithResponsesInterface interface {
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
 	// Corresponds with POST /api/hosting/v1/websites (the `HostingCreateWebsiteV1` operationId).
+	//
+	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	HostingCreateWebsiteV1WithResponse(ctx context.Context, body HostingCreateWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingCreateWebsiteV1Response, error)
 
 	// HostingDeleteWebsiteV1WithResponse Delete website
@@ -82530,6 +82559,11 @@ func (r HostingListWebsitesV1Response) ContentType() string {
 	return ""
 }
 
+// HostingCreateWebsiteV1Response409Headers the declared response headers of an HTTP 409 response for HostingCreateWebsiteV1
+type HostingCreateWebsiteV1Response409Headers struct {
+	RetryAfter *int
+}
+
 type HostingCreateWebsiteV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -82537,10 +82571,14 @@ type HostingCreateWebsiteV1Response struct {
 	JSON200 *CommonSuccessEmptyResource
 	// JSON401 the response for an HTTP 401 `application/json` response
 	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON409 the response for an HTTP 409 `application/json` response
+	JSON409 *CommonResponseConflictResponse
 	// JSON422 the response for an HTTP 422 `application/json` response
 	JSON422 *CommonResponseUnprocessableContentResponse
 	// JSON500 the response for an HTTP 500 `application/json` response
 	JSON500 *CommonResponseErrorResponse
+	// Headers409 the parsed response headers for an HTTP 409 response
+	Headers409 *HostingCreateWebsiteV1Response409Headers
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
@@ -82551,6 +82589,11 @@ func (r HostingCreateWebsiteV1Response) GetJSON200() *CommonSuccessEmptyResource
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
 func (r HostingCreateWebsiteV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
+}
+
+// GetJSON409 returns the response for an HTTP 409 `application/json` response
+func (r HostingCreateWebsiteV1Response) GetJSON409() *CommonResponseConflictResponse {
+	return r.JSON409
 }
 
 // GetJSON422 returns the response for an HTTP 422 `application/json` response
@@ -99992,8 +100035,8 @@ func (c *ClientWithResponses) HostingListOrdersV1WithResponse(ctx context.Contex
 //
 // Omit `domain` to set the website up on a generated temporary free subdomain.
 //
-// The order must already have a hosting account: to create the first website on a new
-// hosting plan use the create website endpoint, which takes the `datacenter_code`.
+// When the order has no hosting account yet, the setup creates one first, in the datacenter
+// given by `datacenter_code` or the order's default datacenter when it is omitted.
 // Returns 404 when the order does not exist or is not accessible to the authenticated
 // client, and 409 with a `Retry-After` header while a setup for the same domain is still
 // running.
@@ -100025,8 +100068,8 @@ func (c *ClientWithResponses) HostingStartWebsiteSetupV1WithBodyWithResponse(ctx
 //
 // Omit `domain` to set the website up on a generated temporary free subdomain.
 //
-// The order must already have a hosting account: to create the first website on a new
-// hosting plan use the create website endpoint, which takes the `datacenter_code`.
+// When the order has no hosting account yet, the setup creates one first, in the datacenter
+// given by `datacenter_code` or the order's default datacenter when it is omitted.
 // Returns 404 when the order does not exist or is not accessible to the authenticated
 // client, and 409 with a `Retry-After` header while a setup for the same domain is still
 // running.
@@ -100081,6 +100124,10 @@ func (c *ClientWithResponses) HostingListWebsitesV1WithResponse(ctx context.Cont
 
 // HostingCreateWebsiteV1WithBodyWithResponse Create website
 //
+// Deprecated: use `POST /api/hosting/v1/orders/{order_id}/onboardings` (start website setup)
+// instead. It takes the same `domain` and `datacenter_code`, can also install WordPress, and
+// returns the created setup.
+//
 // Create a new website for the authenticated client.
 //
 // You must choose which hosting order to create this website on. Pass that
@@ -100090,10 +100137,8 @@ func (c *ClientWithResponses) HostingListWebsitesV1WithResponse(ctx context.Cont
 // Only Web and Cloud hosting orders are accepted. To create a website on an Agency
 // Plan order, use `POST /api/agency-hosting/v1/orders/{order_id}/websites/setups`.
 //
-// The datacenter_code parameter is required when creating the first website
-// on a new hosting plan - this will set up and configure new hosting account
-// in the selected datacenter.
-//
+// When the order has no hosting account yet, a new hosting account is set up first, in the
+// datacenter given by `datacenter_code` or the order's default datacenter when it is omitted.
 // Subsequent websites will be hosted on the same datacenter automatically.
 //
 // Website creation is asynchronous and takes up to a few minutes. Poll the list website
@@ -100105,6 +100150,8 @@ func (c *ClientWithResponses) HostingListWebsitesV1WithResponse(ctx context.Cont
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
 // Corresponds with POST /api/hosting/v1/websites (the `HostingCreateWebsiteV1` operationId).
+//
+// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 func (c *ClientWithResponses) HostingCreateWebsiteV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingCreateWebsiteV1Response, error) {
 	rsp, err := c.HostingCreateWebsiteV1WithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
@@ -100115,6 +100162,10 @@ func (c *ClientWithResponses) HostingCreateWebsiteV1WithBodyWithResponse(ctx con
 
 // HostingCreateWebsiteV1WithResponse Create website
 //
+// Deprecated: use `POST /api/hosting/v1/orders/{order_id}/onboardings` (start website setup)
+// instead. It takes the same `domain` and `datacenter_code`, can also install WordPress, and
+// returns the created setup.
+//
 // Create a new website for the authenticated client.
 //
 // You must choose which hosting order to create this website on. Pass that
@@ -100124,10 +100175,8 @@ func (c *ClientWithResponses) HostingCreateWebsiteV1WithBodyWithResponse(ctx con
 // Only Web and Cloud hosting orders are accepted. To create a website on an Agency
 // Plan order, use `POST /api/agency-hosting/v1/orders/{order_id}/websites/setups`.
 //
-// The datacenter_code parameter is required when creating the first website
-// on a new hosting plan - this will set up and configure new hosting account
-// in the selected datacenter.
-//
+// When the order has no hosting account yet, a new hosting account is set up first, in the
+// datacenter given by `datacenter_code` or the order's default datacenter when it is omitted.
 // Subsequent websites will be hosted on the same datacenter automatically.
 //
 // Website creation is asynchronous and takes up to a few minutes. Poll the list website
@@ -100139,6 +100188,7 @@ func (c *ClientWithResponses) HostingCreateWebsiteV1WithBodyWithResponse(ctx con
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
 // Corresponds with POST /api/hosting/v1/websites (the `HostingCreateWebsiteV1` operationId).
+// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 func (c *ClientWithResponses) HostingCreateWebsiteV1WithResponse(ctx context.Context, body HostingCreateWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingCreateWebsiteV1Response, error) {
 	rsp, err := c.HostingCreateWebsiteV1(ctx, body, reqEditors...)
 	if err != nil {
@@ -115042,6 +115092,13 @@ func ParseHostingCreateWebsiteV1Response(rsp *http.Response) (*HostingCreateWebs
 		}
 		response.JSON401 = &dest
 
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest CommonResponseConflictResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
 		var dest CommonResponseUnprocessableContentResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -115056,6 +115113,19 @@ func ParseHostingCreateWebsiteV1Response(rsp *http.Response) (*HostingCreateWebs
 		}
 		response.JSON500 = &dest
 
+	}
+
+	switch {
+	case rsp.StatusCode == 409:
+		var headers HostingCreateWebsiteV1Response409Headers
+		if values := rsp.Header.Values("Retry-After"); len(values) > 0 {
+			var value int
+			if err := runtime.BindStyledParameterWithOptions("simple", "Retry-After", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.RetryAfter = &value
+		}
+		response.Headers409 = &headers
 	}
 
 	return response, nil

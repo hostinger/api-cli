@@ -18,8 +18,8 @@ of the website root with generated credentials.
 
 Omit `domain` to set the website up on a generated temporary free subdomain.
 
-The order must already have a hosting account: to create the first website on a new
-hosting plan use the create website endpoint, which takes the `datacenter_code`.
+When the order has no hosting account yet, the setup creates one first, in the datacenter
+given by `datacenter_code` or the order's default datacenter when it is omitted.
 Returns 404 when the order does not exist or is not accessible to the authenticated
 client, and 409 with a `Retry-After` header while a setup for the same domain is still
 running.
@@ -31,10 +31,11 @@ hostinger hosting websites start-setup <order_id> [flags]
 ### Options
 
 ```
-      --domain null      Customer-owned domain. Cannot start with "www.". Omit or null to set the website up on a generated temporary free subdomain.
-  -h, --help             help for start-setup
-      --type null        Website type. Omit or null for an empty website. `wordpress` installs WordPress in the website root and requires `wordpress`. The headless types (`headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`) create a headless website; `headless_wordpress` additionally installs WordPress into the `cms` directory with generated credentials. (one of: wordpress, headless_wordpress, headless_ecommerce, headless_pocketbase)
-      --wordpress type   WordPress install settings. Required when type is `wordpress`, not allowed otherwise. The site title is the domain. (JSON)
+      --datacenter-code string    Datacenter for the hosting account when the order does not have one yet. Omit to use the order's default datacenter. Ignored when the order already has a hosting account. List available datacenters to find valid codes.
+      --domain blog.example.com   Customer-owned domain. Cannot start with "www." and can have at most one subdomain level, e.g. blog.example.com. Omit or `null` to set the website up on a generated temporary free subdomain.
+  -h, --help                      help for start-setup
+      --type null                 Website type. Omit or null for an empty website. `wordpress` installs WordPress in the website root and requires `wordpress`. The headless types (`headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`) create a headless website; `headless_wordpress` additionally installs WordPress into the `cms` directory with generated credentials. (one of: wordpress, headless_wordpress, headless_ecommerce, headless_pocketbase)
+      --wordpress type            WordPress install settings. Required when type is `wordpress`, not allowed otherwise. The site title is the domain. (JSON)
 ```
 
 ### Options inherited from parent commands
