@@ -574,6 +574,21 @@
     "method": "PATCH",
     "path": "/api/agency-hosting/v1/websites/{website_uid}/php-settings/version"
   },
+  "agent-readiness_getWebsiteScanV1": {
+    "command": "hostinger agent-readiness scans website",
+    "method": "GET",
+    "path": "/api/agent-readiness/v1/scans/{domain}"
+  },
+  "agent-readiness_listChecksV1": {
+    "command": "hostinger agent-readiness checks list",
+    "method": "GET",
+    "path": "/api/agent-readiness/v1/checks"
+  },
+  "agent-readiness_runWebsiteScanV1": {
+    "command": "hostinger agent-readiness scans run-website",
+    "method": "POST",
+    "path": "/api/agent-readiness/v1/scans"
+  },
   "billing_createPurchaseOrderV1": {
     "command": "hostinger billing orders create-purchase",
     "method": "POST",

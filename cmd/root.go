@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"github.com/hostinger/api-cli/cmd/agency_hosting"
+	"github.com/hostinger/api-cli/cmd/agent_readiness"
 	"github.com/hostinger/api-cli/cmd/billing"
 	"github.com/hostinger/api-cli/cmd/dns"
 	"github.com/hostinger/api-cli/cmd/domains"
@@ -55,6 +56,7 @@ func init() {
 	})
 
 	RootCmd.AddCommand(agency_hosting.GroupCmd)
+	RootCmd.AddCommand(agent_readiness.GroupCmd)
 	RootCmd.AddCommand(billing.GroupCmd)
 	RootCmd.AddCommand(dns.GroupCmd)
 	RootCmd.AddCommand(domains.GroupCmd)

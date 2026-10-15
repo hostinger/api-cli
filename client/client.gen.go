@@ -243,6 +243,54 @@ func (e AgencyHostingV1WebsitesWebsiteResourceState) Valid() bool {
 	}
 }
 
+// Defines values for AgentReadinessV1ScansCheckResultResourceStatus.
+const (
+	AgentReadinessV1ScansCheckResultResourceStatusError         AgentReadinessV1ScansCheckResultResourceStatus = "error"
+	AgentReadinessV1ScansCheckResultResourceStatusFail          AgentReadinessV1ScansCheckResultResourceStatus = "fail"
+	AgentReadinessV1ScansCheckResultResourceStatusNotApplicable AgentReadinessV1ScansCheckResultResourceStatus = "not_applicable"
+	AgentReadinessV1ScansCheckResultResourceStatusPartial       AgentReadinessV1ScansCheckResultResourceStatus = "partial"
+	AgentReadinessV1ScansCheckResultResourceStatusPass          AgentReadinessV1ScansCheckResultResourceStatus = "pass"
+)
+
+// Valid indicates whether the value is a known member of the AgentReadinessV1ScansCheckResultResourceStatus enum.
+func (e AgentReadinessV1ScansCheckResultResourceStatus) Valid() bool {
+	switch e {
+	case AgentReadinessV1ScansCheckResultResourceStatusError:
+		return true
+	case AgentReadinessV1ScansCheckResultResourceStatusFail:
+		return true
+	case AgentReadinessV1ScansCheckResultResourceStatusNotApplicable:
+		return true
+	case AgentReadinessV1ScansCheckResultResourceStatusPartial:
+		return true
+	case AgentReadinessV1ScansCheckResultResourceStatusPass:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AgentReadinessV1ScansScanResourceStatus.
+const (
+	AgentReadinessV1ScansScanResourceStatusCompleted AgentReadinessV1ScansScanResourceStatus = "completed"
+	AgentReadinessV1ScansScanResourceStatusFailed    AgentReadinessV1ScansScanResourceStatus = "failed"
+	AgentReadinessV1ScansScanResourceStatusPending   AgentReadinessV1ScansScanResourceStatus = "pending"
+)
+
+// Valid indicates whether the value is a known member of the AgentReadinessV1ScansScanResourceStatus enum.
+func (e AgentReadinessV1ScansScanResourceStatus) Valid() bool {
+	switch e {
+	case AgentReadinessV1ScansScanResourceStatusCompleted:
+		return true
+	case AgentReadinessV1ScansScanResourceStatusFailed:
+		return true
+	case AgentReadinessV1ScansScanResourceStatusPending:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for BillingV1CatalogCatalogItemPriceResourcePeriodUnit.
 const (
 	BillingV1CatalogCatalogItemPriceResourcePeriodUnitDay   BillingV1CatalogCatalogItemPriceResourcePeriodUnit = "day"
@@ -2102,16 +2150,16 @@ func (e MailV1ApiTokensApiTokenResourceType) Valid() bool {
 
 // Defines values for MailV1LogsActionActionLogResourceResponseStatus.
 const (
-	Fail MailV1LogsActionActionLogResourceResponseStatus = "Fail"
-	OK   MailV1LogsActionActionLogResourceResponseStatus = "OK"
+	MailV1LogsActionActionLogResourceResponseStatusFail MailV1LogsActionActionLogResourceResponseStatus = "Fail"
+	MailV1LogsActionActionLogResourceResponseStatusOK   MailV1LogsActionActionLogResourceResponseStatus = "OK"
 )
 
 // Valid indicates whether the value is a known member of the MailV1LogsActionActionLogResourceResponseStatus enum.
 func (e MailV1LogsActionActionLogResourceResponseStatus) Valid() bool {
 	switch e {
-	case Fail:
+	case MailV1LogsActionActionLogResourceResponseStatusFail:
 		return true
-	case OK:
+	case MailV1LogsActionActionLogResourceResponseStatusOK:
 		return true
 	default:
 		return false
@@ -7123,6 +7171,182 @@ type AgencyHostingV1WordPressVersionResource struct {
 	// Example: 6.5.5
 	Version *string `json:"version,omitempty"`
 }
+
+// AgentReadinessV1ChecksCheckCollection Array of [`AgentReadiness.V1.Checks.CheckResource`](#model/agentreadinessv1checkscheckresource)
+type AgentReadinessV1ChecksCheckCollection = []AgentReadinessV1ChecksCheckResource
+
+// AgentReadinessV1ChecksCheckResource defines model for AgentReadiness.V1.Checks.CheckResource.
+type AgentReadinessV1ChecksCheckResource struct {
+	// Category Category the check belongs to
+	//
+	// Example: crawl_permission
+	Category string `json:"category"`
+
+	// CategoryLabel Human-readable category name
+	//
+	// Example: Crawl permission
+	CategoryLabel string `json:"category_label"`
+
+	// Id Check ID, as used by `check_id` in scan results
+	//
+	// Example: crawl_permission.robots_txt_valid
+	Id string `json:"id"`
+
+	// Name Human-readable check name
+	//
+	// Example: robots.txt is present and parseable
+	Name string `json:"name"`
+
+	// Weight Points this check can earn
+	//
+	// Example: 4
+	Weight int `json:"weight"`
+}
+
+// AgentReadinessV1ScansCategoriesResource defines model for AgentReadiness.V1.Scans.CategoriesResource.
+type AgentReadinessV1ScansCategoriesResource struct {
+	AgentInteraction     AgentReadinessV1ScansCategoryScoreResource `json:"agent_interaction"`
+	AgentNativeContent   AgentReadinessV1ScansCategoryScoreResource `json:"agent_native_content"`
+	CommercialLegibility AgentReadinessV1ScansCategoryScoreResource `json:"commercial_legibility"`
+	CrawlPermission      AgentReadinessV1ScansCategoryScoreResource `json:"crawl_permission"`
+	Findability          AgentReadinessV1ScansCategoryScoreResource `json:"findability"`
+	Readability          AgentReadinessV1ScansCategoryScoreResource `json:"readability"`
+	StructuredMeaning    AgentReadinessV1ScansCategoryScoreResource `json:"structured_meaning"`
+}
+
+// AgentReadinessV1ScansCategoryScoreResource defines model for AgentReadiness.V1.Scans.CategoryScoreResource.
+type AgentReadinessV1ScansCategoryScoreResource struct {
+	// Earned Points earned by the counted checks in this category
+	//
+	// Example: 15
+	Earned int `json:"earned"`
+
+	// Possible Points possible for the counted checks in this category
+	//
+	// Example: 20
+	Possible int `json:"possible"`
+
+	// Score Points this category contributes to the 0-100 total score
+	//
+	// Example: 15
+	Score int `json:"score"`
+
+	// Weight Maximum points this category can contribute
+	//
+	// Example: 20
+	Weight int `json:"weight"`
+}
+
+// AgentReadinessV1ScansCheckResultResource defines model for AgentReadiness.V1.Scans.CheckResultResource.
+type AgentReadinessV1ScansCheckResultResource struct {
+	// Category Category the check belongs to
+	//
+	// Example: crawl_permission
+	Category string `json:"category"`
+
+	// CheckId Check ID, as listed by the `List checks` operation
+	//
+	// Example: crawl_permission.robots_txt_valid
+	CheckId string `json:"check_id"`
+
+	// Earned Points earned by this check
+	//
+	// Example: 4
+	Earned int `json:"earned"`
+
+	// Evidence What the scanner observed
+	//
+	// Example: robots.txt returned 200 and parsed cleanly
+	Evidence string `json:"evidence"`
+
+	// Fix How to improve the result, or null when there is nothing to fix
+	Fix *string `json:"fix"`
+
+	// Possible Points this check can earn
+	//
+	// Example: 4
+	Possible int `json:"possible"`
+
+	// Status Check outcome. `not_applicable` and `error` checks do not count towards the category score.
+	//
+	// Example: pass
+	Status AgentReadinessV1ScansCheckResultResourceStatus `json:"status"`
+}
+
+// AgentReadinessV1ScansCheckResultResourceStatus Check outcome. `not_applicable` and `error` checks do not count towards the category score.
+//
+// Example: pass
+type AgentReadinessV1ScansCheckResultResourceStatus string
+
+// AgentReadinessV1ScansRunScanRequest defines model for AgentReadiness.V1.Scans.RunScanRequest.
+type AgentReadinessV1ScansRunScanRequest struct {
+	// Domain Domain name or full URL of the website to scan. Only the host is used.
+	//
+	// Example: example.com
+	Domain string `json:"domain"`
+}
+
+// AgentReadinessV1ScansScanResource defines model for AgentReadiness.V1.Scans.ScanResource.
+type AgentReadinessV1ScansScanResource struct {
+	// Categories Score breakdown per category. Null unless completed.
+	Categories *AgentReadinessV1ScansScanResource_Categories `json:"categories"`
+
+	// Domain Domain name that was scanned
+	//
+	// Example: example.com
+	Domain string `json:"domain"`
+
+	// Grade Letter grade for the score, from `A` to `F`. Null unless completed, and null when unreachable.
+	//
+	// Example: B
+	Grade *string `json:"grade"`
+
+	// IsOutdated Whether the scan was produced by an older scoring method than the current one
+	//
+	// Example: false
+	IsOutdated bool `json:"is_outdated"`
+
+	// IsUnreachable Whether the website homepage could not be fetched
+	//
+	// Example: false
+	IsUnreachable bool `json:"is_unreachable"`
+
+	// Results Result of every check. Null unless completed.
+	Results *[]AgentReadinessV1ScansCheckResultResource `json:"results"`
+
+	// ScannedAt When the scan finished. Null unless completed.
+	//
+	// Example: 2026-10-15T12:00:00Z
+	ScannedAt *time.Time `json:"scanned_at"`
+
+	// ScannerVersion Version of the scoring method that produced this scan
+	//
+	// Example: 4
+	ScannerVersion int `json:"scanner_version"`
+
+	// Score Agent readiness score from 0 to 100. Null unless completed, and null when unreachable.
+	//
+	// Example: 78
+	Score *int `json:"score"`
+
+	// Status Scan status. Result fields are null until the status is `completed`.
+	//
+	// Example: completed
+	Status AgentReadinessV1ScansScanResourceStatus `json:"status"`
+
+	// UnassessedCategories Categories where no check could be counted. They still cost their full weight. Null unless completed.
+	UnassessedCategories *[]string `json:"unassessed_categories"`
+}
+
+// AgentReadinessV1ScansScanResource_Categories Score breakdown per category. Null unless completed.
+type AgentReadinessV1ScansScanResource_Categories struct {
+	union json.RawMessage
+}
+
+// AgentReadinessV1ScansScanResourceStatus Scan status. Result fields are null until the status is `completed`.
+//
+// Example: completed
+type AgentReadinessV1ScansScanResourceStatus string
 
 // BillingV1CatalogCatalogItemCollection Array of [`Billing.V1.Catalog.CatalogItemResource`](#model/billingv1catalogcatalogitemresource)
 type BillingV1CatalogCatalogItemCollection = []BillingV1CatalogCatalogItemResource
@@ -16841,6 +17065,9 @@ type AgencyTimeFrameDays int
 // AgencyTimeFrameHours Example: 168
 type AgencyTimeFrameHours int
 
+// AgentReadinessDomainPath Example: example.com
+type AgentReadinessDomainPath = string
+
 // AutomationUuid Example: 550e8400-e09b-41d4-a716-400055000000
 type AutomationUuid = string
 
@@ -18168,6 +18395,9 @@ type AgencyHostingUpdateWebsitePHPVersionV1JSONRequestBody = AgencyHostingV1PhpU
 // AgencyHostingChangeWordPressVersionV1JSONRequestBody defines body for AgencyHostingChangeWordPressVersionV1 for application/json ContentType.
 type AgencyHostingChangeWordPressVersionV1JSONRequestBody = AgencyHostingV1WordPressChangeVersionRequest
 
+// AgentReadinessRunWebsiteScanV1JSONRequestBody defines body for AgentReadinessRunWebsiteScanV1 for application/json ContentType.
+type AgentReadinessRunWebsiteScanV1JSONRequestBody = AgentReadinessV1ScansRunScanRequest
+
 // BillingCreatePurchaseOrderV1JSONRequestBody defines body for BillingCreatePurchaseOrderV1 for application/json ContentType.
 type BillingCreatePurchaseOrderV1JSONRequestBody = BillingV1OrderPurchaseRequest
 
@@ -18917,6 +19147,42 @@ func (t AgencyHostingV1WebsitesWebsiteSettingsResource_Php) MarshalJSON() ([]byt
 }
 
 func (t *AgencyHostingV1WebsitesWebsiteSettingsResource_Php) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsAgentReadinessV1ScansCategoriesResource returns the union data inside the AgentReadinessV1ScansScanResource_Categories as a AgentReadinessV1ScansCategoriesResource
+func (t AgentReadinessV1ScansScanResource_Categories) AsAgentReadinessV1ScansCategoriesResource() (AgentReadinessV1ScansCategoriesResource, error) {
+	var body AgentReadinessV1ScansCategoriesResource
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromAgentReadinessV1ScansCategoriesResource overwrites any union data inside the AgentReadinessV1ScansScanResource_Categories as the provided AgentReadinessV1ScansCategoriesResource
+func (t *AgentReadinessV1ScansScanResource_Categories) FromAgentReadinessV1ScansCategoriesResource(v AgentReadinessV1ScansCategoriesResource) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeAgentReadinessV1ScansCategoriesResource performs a merge with any union data inside the AgentReadinessV1ScansScanResource_Categories, using the provided AgentReadinessV1ScansCategoriesResource
+func (t *AgentReadinessV1ScansScanResource_Categories) MergeAgentReadinessV1ScansCategoriesResource(v AgentReadinessV1ScansCategoriesResource) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t AgentReadinessV1ScansScanResource_Categories) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *AgentReadinessV1ScansScanResource_Categories) UnmarshalJSON(b []byte) error {
 	err := t.union.UnmarshalJSON(b)
 	return err
 }
@@ -20256,6 +20522,57 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/versions (the `AgencyHostingListAvailableWordPressVersionsV1` operationId).
 	AgencyHostingListAvailableWordPressVersionsV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgentReadinessListChecksV1 List checks
+	//
+	// List every check an agent readiness scan runs, with its name, category and weight.\n
+	// Use it to show the human-readable name of each `check_id` in a scan's results.
+	//
+	// Corresponds with GET /api/agent-readiness/v1/checks (the `AgentReadinessListChecksV1` operationId).
+	AgentReadinessListChecksV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgentReadinessRunWebsiteScanV1WithBody Run website scan
+	//
+	// Start a scan of how ready a public website is for AI agents to discover, read and act on.\n
+	// Scanning is asynchronous: this operation only starts the scan, and the returned scan is usually `pending`
+	// with no results yet. To get the results, poll the `Get website scan` operation with the same domain every
+	// few seconds until its status is `completed` or `failed`. The scan itself is limited to 60 seconds,
+	// plus any time it waits in the queue. A `failed` scan is not retried; run this operation again.\n
+	// Starting a scan for a domain that already has a pending scan from the last 5 minutes
+	// returns that scan instead of starting a new one.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/agent-readiness/v1/scans (the `AgentReadinessRunWebsiteScanV1` operationId).
+	AgentReadinessRunWebsiteScanV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgentReadinessRunWebsiteScanV1 Run website scan
+	//
+	// Start a scan of how ready a public website is for AI agents to discover, read and act on.\n
+	// Scanning is asynchronous: this operation only starts the scan, and the returned scan is usually `pending`
+	// with no results yet. To get the results, poll the `Get website scan` operation with the same domain every
+	// few seconds until its status is `completed` or `failed`. The scan itself is limited to 60 seconds,
+	// plus any time it waits in the queue. A `failed` scan is not retried; run this operation again.\n
+	// Starting a scan for a domain that already has a pending scan from the last 5 minutes
+	// returns that scan instead of starting a new one.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/agent-readiness/v1/scans (the `AgentReadinessRunWebsiteScanV1` operationId).
+	AgentReadinessRunWebsiteScanV1(ctx context.Context, body AgentReadinessRunWebsiteScanV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AgentReadinessGetWebsiteScanV1 Get website scan
+	//
+	// Get the latest agent readiness scan of a website.\n
+	// Scans started with the `Run website scan` operation are asynchronous. While the status is `pending`,
+	// the result fields are null; wait a few seconds and call this operation again until the status is
+	// `completed` or `failed`. A `failed` scan is not retried; run the scan again.\n
+	// A completed scan has a 0-100 score, a letter grade, a score per category, and the result of every
+	// check with the evidence found and how to fix it. Check names are listed by the `List checks` operation.\n
+	// Returns 404 when the domain has never been scanned; use the `Run website scan` operation first.
+	//
+	// Corresponds with GET /api/agent-readiness/v1/scans/{domain} (the `AgentReadinessGetWebsiteScanV1` operationId).
+	AgentReadinessGetWebsiteScanV1(ctx context.Context, domain AgentReadinessDomainPath, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// BillingGetCatalogItemListV1 Get catalog item list
 	//
@@ -28103,6 +28420,97 @@ func (c *Client) AgencyHostingChangeWordPressVersionV1(ctx context.Context, webs
 // Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/versions (the `AgencyHostingListAvailableWordPressVersionsV1` operationId).
 func (c *Client) AgencyHostingListAvailableWordPressVersionsV1(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewAgencyHostingListAvailableWordPressVersionsV1Request(c.Server, websiteUid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// AgentReadinessListChecksV1 List checks
+//
+// List every check an agent readiness scan runs, with its name, category and weight.\n
+// Use it to show the human-readable name of each `check_id` in a scan's results.
+//
+// Corresponds with GET /api/agent-readiness/v1/checks (the `AgentReadinessListChecksV1` operationId).
+func (c *Client) AgentReadinessListChecksV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgentReadinessListChecksV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// AgentReadinessRunWebsiteScanV1WithBody Run website scan
+//
+// Start a scan of how ready a public website is for AI agents to discover, read and act on.\n
+// Scanning is asynchronous: this operation only starts the scan, and the returned scan is usually `pending`
+// with no results yet. To get the results, poll the `Get website scan` operation with the same domain every
+// few seconds until its status is `completed` or `failed`. The scan itself is limited to 60 seconds,
+// plus any time it waits in the queue. A `failed` scan is not retried; run this operation again.\n
+// Starting a scan for a domain that already has a pending scan from the last 5 minutes
+// returns that scan instead of starting a new one.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/agent-readiness/v1/scans (the `AgentReadinessRunWebsiteScanV1` operationId).
+func (c *Client) AgentReadinessRunWebsiteScanV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgentReadinessRunWebsiteScanV1RequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// AgentReadinessRunWebsiteScanV1 Run website scan
+//
+// Start a scan of how ready a public website is for AI agents to discover, read and act on.\n
+// Scanning is asynchronous: this operation only starts the scan, and the returned scan is usually `pending`
+// with no results yet. To get the results, poll the `Get website scan` operation with the same domain every
+// few seconds until its status is `completed` or `failed`. The scan itself is limited to 60 seconds,
+// plus any time it waits in the queue. A `failed` scan is not retried; run this operation again.\n
+// Starting a scan for a domain that already has a pending scan from the last 5 minutes
+// returns that scan instead of starting a new one.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/agent-readiness/v1/scans (the `AgentReadinessRunWebsiteScanV1` operationId).
+func (c *Client) AgentReadinessRunWebsiteScanV1(ctx context.Context, body AgentReadinessRunWebsiteScanV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgentReadinessRunWebsiteScanV1Request(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// AgentReadinessGetWebsiteScanV1 Get website scan
+//
+// Get the latest agent readiness scan of a website.\n
+// Scans started with the `Run website scan` operation are asynchronous. While the status is `pending`,
+// the result fields are null; wait a few seconds and call this operation again until the status is
+// `completed` or `failed`. A `failed` scan is not retried; run the scan again.\n
+// A completed scan has a 0-100 score, a letter grade, a score per category, and the result of every
+// check with the evidence found and how to fix it. Check names are listed by the `List checks` operation.\n
+// Returns 404 when the domain has never been scanned; use the `Run website scan` operation first.
+//
+// Corresponds with GET /api/agent-readiness/v1/scans/{domain} (the `AgentReadinessGetWebsiteScanV1` operationId).
+func (c *Client) AgentReadinessGetWebsiteScanV1(ctx context.Context, domain AgentReadinessDomainPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgentReadinessGetWebsiteScanV1Request(c.Server, domain)
 	if err != nil {
 		return nil, err
 	}
@@ -41735,6 +42143,107 @@ func NewAgencyHostingListAvailableWordPressVersionsV1Request(server string, webs
 	}
 
 	operationPath := fmt.Sprintf("/api/agency-hosting/v1/websites/%s/wordpress/settings/versions", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAgentReadinessListChecksV1Request constructs an http.Request for the AgentReadinessListChecksV1 method
+func NewAgentReadinessListChecksV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agent-readiness/v1/checks")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAgentReadinessRunWebsiteScanV1Request calls the generic AgentReadinessRunWebsiteScanV1 builder with application/json body
+func NewAgentReadinessRunWebsiteScanV1Request(server string, body AgentReadinessRunWebsiteScanV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewAgentReadinessRunWebsiteScanV1RequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewAgentReadinessRunWebsiteScanV1RequestWithBody constructs an http.Request for the AgentReadinessRunWebsiteScanV1 method, with any body, and a specified content type
+func NewAgentReadinessRunWebsiteScanV1RequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agent-readiness/v1/scans")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewAgentReadinessGetWebsiteScanV1Request constructs an http.Request for the AgentReadinessGetWebsiteScanV1 method
+func NewAgentReadinessGetWebsiteScanV1Request(server string, domain AgentReadinessDomainPath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/agent-readiness/v1/scans/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -60445,6 +60954,61 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /api/agency-hosting/v1/websites/{website_uid}/wordpress/settings/versions (the `AgencyHostingListAvailableWordPressVersionsV1` operationId).
 	AgencyHostingListAvailableWordPressVersionsV1WithResponse(ctx context.Context, websiteUid WebsiteUid, reqEditors ...RequestEditorFn) (*AgencyHostingListAvailableWordPressVersionsV1Response, error)
 
+	// AgentReadinessListChecksV1WithResponse List checks
+	//
+	// List every check an agent readiness scan runs, with its name, category and weight.\n
+	// Use it to show the human-readable name of each `check_id` in a scan's results.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/agent-readiness/v1/checks (the `AgentReadinessListChecksV1` operationId).
+	AgentReadinessListChecksV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*AgentReadinessListChecksV1Response, error)
+
+	// AgentReadinessRunWebsiteScanV1WithBodyWithResponse Run website scan
+	//
+	// Start a scan of how ready a public website is for AI agents to discover, read and act on.\n
+	// Scanning is asynchronous: this operation only starts the scan, and the returned scan is usually `pending`
+	// with no results yet. To get the results, poll the `Get website scan` operation with the same domain every
+	// few seconds until its status is `completed` or `failed`. The scan itself is limited to 60 seconds,
+	// plus any time it waits in the queue. A `failed` scan is not retried; run this operation again.\n
+	// Starting a scan for a domain that already has a pending scan from the last 5 minutes
+	// returns that scan instead of starting a new one.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/agent-readiness/v1/scans (the `AgentReadinessRunWebsiteScanV1` operationId).
+	AgentReadinessRunWebsiteScanV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgentReadinessRunWebsiteScanV1Response, error)
+
+	// AgentReadinessRunWebsiteScanV1WithResponse Run website scan
+	//
+	// Start a scan of how ready a public website is for AI agents to discover, read and act on.\n
+	// Scanning is asynchronous: this operation only starts the scan, and the returned scan is usually `pending`
+	// with no results yet. To get the results, poll the `Get website scan` operation with the same domain every
+	// few seconds until its status is `completed` or `failed`. The scan itself is limited to 60 seconds,
+	// plus any time it waits in the queue. A `failed` scan is not retried; run this operation again.\n
+	// Starting a scan for a domain that already has a pending scan from the last 5 minutes
+	// returns that scan instead of starting a new one.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/agent-readiness/v1/scans (the `AgentReadinessRunWebsiteScanV1` operationId).
+	AgentReadinessRunWebsiteScanV1WithResponse(ctx context.Context, body AgentReadinessRunWebsiteScanV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgentReadinessRunWebsiteScanV1Response, error)
+
+	// AgentReadinessGetWebsiteScanV1WithResponse Get website scan
+	//
+	// Get the latest agent readiness scan of a website.\n
+	// Scans started with the `Run website scan` operation are asynchronous. While the status is `pending`,
+	// the result fields are null; wait a few seconds and call this operation again until the status is
+	// `completed` or `failed`. A `failed` scan is not retried; run the scan again.\n
+	// A completed scan has a 0-100 score, a letter grade, a score per category, and the result of every
+	// check with the evidence found and how to fix it. Check names are listed by the `List checks` operation.\n
+	// Returns 404 when the domain has never been scanned; use the `Run website scan` operation first.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/agent-readiness/v1/scans/{domain} (the `AgentReadinessGetWebsiteScanV1` operationId).
+	AgentReadinessGetWebsiteScanV1WithResponse(ctx context.Context, domain AgentReadinessDomainPath, reqEditors ...RequestEditorFn) (*AgentReadinessGetWebsiteScanV1Response, error)
+
 	// BillingGetCatalogItemListV1WithResponse Get catalog item list
 	//
 	// Retrieve catalog items available for order.
@@ -70000,6 +70564,178 @@ func (r AgencyHostingListAvailableWordPressVersionsV1Response) StatusCode() int 
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r AgencyHostingListAvailableWordPressVersionsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgentReadinessListChecksV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *AgentReadinessV1ChecksCheckCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r AgentReadinessListChecksV1Response) GetJSON200() *AgentReadinessV1ChecksCheckCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r AgentReadinessListChecksV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r AgentReadinessListChecksV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r AgentReadinessListChecksV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r AgentReadinessListChecksV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgentReadinessListChecksV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgentReadinessListChecksV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgentReadinessRunWebsiteScanV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *AgentReadinessV1ScansScanResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r AgentReadinessRunWebsiteScanV1Response) GetJSON200() *AgentReadinessV1ScansScanResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r AgentReadinessRunWebsiteScanV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r AgentReadinessRunWebsiteScanV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r AgentReadinessRunWebsiteScanV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r AgentReadinessRunWebsiteScanV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r AgentReadinessRunWebsiteScanV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgentReadinessRunWebsiteScanV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgentReadinessRunWebsiteScanV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type AgentReadinessGetWebsiteScanV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *AgentReadinessV1ScansScanResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r AgentReadinessGetWebsiteScanV1Response) GetJSON200() *AgentReadinessV1ScansScanResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r AgentReadinessGetWebsiteScanV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r AgentReadinessGetWebsiteScanV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r AgentReadinessGetWebsiteScanV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r AgentReadinessGetWebsiteScanV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AgentReadinessGetWebsiteScanV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r AgentReadinessGetWebsiteScanV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -93339,6 +94075,85 @@ func (c *ClientWithResponses) AgencyHostingListAvailableWordPressVersionsV1WithR
 	return ParseAgencyHostingListAvailableWordPressVersionsV1Response(rsp)
 }
 
+// AgentReadinessListChecksV1WithResponse List checks
+//
+// List every check an agent readiness scan runs, with its name, category and weight.\n
+// Use it to show the human-readable name of each `check_id` in a scan's results.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/agent-readiness/v1/checks (the `AgentReadinessListChecksV1` operationId).
+func (c *ClientWithResponses) AgentReadinessListChecksV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*AgentReadinessListChecksV1Response, error) {
+	rsp, err := c.AgentReadinessListChecksV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgentReadinessListChecksV1Response(rsp)
+}
+
+// AgentReadinessRunWebsiteScanV1WithBodyWithResponse Run website scan
+//
+// Start a scan of how ready a public website is for AI agents to discover, read and act on.\n
+// Scanning is asynchronous: this operation only starts the scan, and the returned scan is usually `pending`
+// with no results yet. To get the results, poll the `Get website scan` operation with the same domain every
+// few seconds until its status is `completed` or `failed`. The scan itself is limited to 60 seconds,
+// plus any time it waits in the queue. A `failed` scan is not retried; run this operation again.\n
+// Starting a scan for a domain that already has a pending scan from the last 5 minutes
+// returns that scan instead of starting a new one.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/agent-readiness/v1/scans (the `AgentReadinessRunWebsiteScanV1` operationId).
+func (c *ClientWithResponses) AgentReadinessRunWebsiteScanV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgentReadinessRunWebsiteScanV1Response, error) {
+	rsp, err := c.AgentReadinessRunWebsiteScanV1WithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgentReadinessRunWebsiteScanV1Response(rsp)
+}
+
+// AgentReadinessRunWebsiteScanV1WithResponse Run website scan
+//
+// Start a scan of how ready a public website is for AI agents to discover, read and act on.\n
+// Scanning is asynchronous: this operation only starts the scan, and the returned scan is usually `pending`
+// with no results yet. To get the results, poll the `Get website scan` operation with the same domain every
+// few seconds until its status is `completed` or `failed`. The scan itself is limited to 60 seconds,
+// plus any time it waits in the queue. A `failed` scan is not retried; run this operation again.\n
+// Starting a scan for a domain that already has a pending scan from the last 5 minutes
+// returns that scan instead of starting a new one.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/agent-readiness/v1/scans (the `AgentReadinessRunWebsiteScanV1` operationId).
+func (c *ClientWithResponses) AgentReadinessRunWebsiteScanV1WithResponse(ctx context.Context, body AgentReadinessRunWebsiteScanV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgentReadinessRunWebsiteScanV1Response, error) {
+	rsp, err := c.AgentReadinessRunWebsiteScanV1(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgentReadinessRunWebsiteScanV1Response(rsp)
+}
+
+// AgentReadinessGetWebsiteScanV1WithResponse Get website scan
+//
+// Get the latest agent readiness scan of a website.\n
+// Scans started with the `Run website scan` operation are asynchronous. While the status is `pending`,
+// the result fields are null; wait a few seconds and call this operation again until the status is
+// `completed` or `failed`. A `failed` scan is not retried; run the scan again.\n
+// A completed scan has a 0-100 score, a letter grade, a score per category, and the result of every
+// check with the evidence found and how to fix it. Check names are listed by the `List checks` operation.\n
+// Returns 404 when the domain has never been scanned; use the `Run website scan` operation first.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/agent-readiness/v1/scans/{domain} (the `AgentReadinessGetWebsiteScanV1` operationId).
+func (c *ClientWithResponses) AgentReadinessGetWebsiteScanV1WithResponse(ctx context.Context, domain AgentReadinessDomainPath, reqEditors ...RequestEditorFn) (*AgentReadinessGetWebsiteScanV1Response, error) {
+	rsp, err := c.AgentReadinessGetWebsiteScanV1(ctx, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAgentReadinessGetWebsiteScanV1Response(rsp)
+}
+
 // BillingGetCatalogItemListV1WithResponse Get catalog item list
 //
 // Retrieve catalog items available for order.
@@ -105273,6 +106088,133 @@ func ParseAgencyHostingListAvailableWordPressVersionsV1Response(rsp *http.Respon
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest AgencyHostingV1WordPressVersionCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgentReadinessListChecksV1Response parses an HTTP response from a AgentReadinessListChecksV1WithResponse call
+func ParseAgentReadinessListChecksV1Response(rsp *http.Response) (*AgentReadinessListChecksV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgentReadinessListChecksV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AgentReadinessV1ChecksCheckCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgentReadinessRunWebsiteScanV1Response parses an HTTP response from a AgentReadinessRunWebsiteScanV1WithResponse call
+func ParseAgentReadinessRunWebsiteScanV1Response(rsp *http.Response) (*AgentReadinessRunWebsiteScanV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgentReadinessRunWebsiteScanV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AgentReadinessV1ScansScanResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAgentReadinessGetWebsiteScanV1Response parses an HTTP response from a AgentReadinessGetWebsiteScanV1WithResponse call
+func ParseAgentReadinessGetWebsiteScanV1Response(rsp *http.Response) (*AgentReadinessGetWebsiteScanV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AgentReadinessGetWebsiteScanV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AgentReadinessV1ScansScanResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
