@@ -11,4 +11,5 @@ var GroupCmd = &cobra.Command{
 
 func init() {
 	GroupCmd.AddCommand(GenerateImagesCmd)
+	GroupCmd.AddCommand(GenerationResultCmd)
 }

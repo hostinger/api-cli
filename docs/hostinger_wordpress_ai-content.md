@@ -19,4 +19,5 @@ AI Content commands
 
 * [hostinger wordpress](hostinger_wordpress.md)	 - WordPress commands
 * [hostinger wordpress ai-content generate-images](hostinger_wordpress_ai-content_generate-images.md)	 - Generate images
+* [hostinger wordpress ai-content generation-result](hostinger_wordpress_ai-content_generation-result.md)	 - Get generation result
 

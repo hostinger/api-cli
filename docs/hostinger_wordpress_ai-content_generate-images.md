@@ -4,13 +4,20 @@ Generate images
 
 ### Synopsis
 
-Generate one or more images from a prompt and an image type for the specified
-WordPress installation. Images are returned inline as base64-encoded PNGs. They match
-the requested aspect ratio and are never smaller than the requested size; logos are
-transparent PNGs cropped to the mark.
+Start generating one or more images from a prompt and an image type for the specified
+WordPress installation. The generation runs asynchronously: the response is returned
+right away with `status: in-progress` and a `generation_id`. Poll
+GET /api/hosting/v1/accounts/{username}/wordpress/{software}/content/generations/{generation_id}
+every few seconds until `status` is `completed` or `failed`.
 
-Generation is synchronous and can take up to a minute. The endpoint is limited to
-10 requests per minute.
+A completed generation returns temporary image URLs together with the time they expire;
+download the images before then. Images match the requested aspect ratio and are never
+smaller than the requested size; logos are transparent images cropped to the mark.
+
+Only one image generation can run per installation at a time: while one is still in
+progress the endpoint returns 409 without the ID of the running generation, so a caller
+that did not receive the `202` has to wait for it to finish (up to a few minutes) before
+starting a new one. The endpoint is limited to 10 requests per minute.
 
 Provide the WordPress installation (software) identifier in the path. It can
 be obtained from GET /api/hosting/v1/wordpress/installations (the `id` field).

@@ -1194,6 +1194,11 @@
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/cron-jobs/{uid}/output"
   },
+  "hosting_getGenerationResultV1": {
+    "command": "hostinger wordpress ai-content generation-result",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/wordpress/{software}/content/generations/{generation_id}"
+  },
   "hosting_getGitAutoDeploymentSettingsV1": {
     "command": "hostinger hosting git auto-deployment-settings",
     "method": "GET",
