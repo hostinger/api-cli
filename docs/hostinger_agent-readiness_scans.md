@@ -18,6 +18,6 @@ Scans commands
 ### SEE ALSO
 
 * [hostinger agent-readiness](hostinger_agent-readiness.md)	 - Agent Readiness commands
-* [hostinger agent-readiness scans run-website](hostinger_agent-readiness_scans_run-website.md)	 - Run website scan
-* [hostinger agent-readiness scans website](hostinger_agent-readiness_scans_website.md)	 - Get website scan
+* [hostinger agent-readiness scans get](hostinger_agent-readiness_scans_get.md)	 - Get agent readiness scan
+* [hostinger agent-readiness scans run](hostinger_agent-readiness_scans_run.md)	 - Run agent readiness scan
 

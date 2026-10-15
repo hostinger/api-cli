@@ -10,6 +10,6 @@ var GroupCmd = &cobra.Command{
 }
 
 func init() {
-	GroupCmd.AddCommand(RunWebsiteCmd)
-	GroupCmd.AddCommand(WebsiteCmd)
+	GroupCmd.AddCommand(GetCmd)
+	GroupCmd.AddCommand(RunCmd)
 }

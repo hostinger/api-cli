@@ -574,8 +574,8 @@
     "method": "PATCH",
     "path": "/api/agency-hosting/v1/websites/{website_uid}/php-settings/version"
   },
-  "agent-readiness_getWebsiteScanV1": {
-    "command": "hostinger agent-readiness scans website",
+  "agent-readiness_getAgentReadinessScanV1": {
+    "command": "hostinger agent-readiness scans get",
     "method": "GET",
     "path": "/api/agent-readiness/v1/scans/{domain}"
   },
@@ -584,8 +584,8 @@
     "method": "GET",
     "path": "/api/agent-readiness/v1/checks"
   },
-  "agent-readiness_runWebsiteScanV1": {
-    "command": "hostinger agent-readiness scans run-website",
+  "agent-readiness_runAgentReadinessScanV1": {
+    "command": "hostinger agent-readiness scans run",
     "method": "POST",
     "path": "/api/agent-readiness/v1/scans"
   },

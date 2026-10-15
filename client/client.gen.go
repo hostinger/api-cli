@@ -18395,8 +18395,8 @@ type AgencyHostingUpdateWebsitePHPVersionV1JSONRequestBody = AgencyHostingV1PhpU
 // AgencyHostingChangeWordPressVersionV1JSONRequestBody defines body for AgencyHostingChangeWordPressVersionV1 for application/json ContentType.
 type AgencyHostingChangeWordPressVersionV1JSONRequestBody = AgencyHostingV1WordPressChangeVersionRequest
 
-// AgentReadinessRunWebsiteScanV1JSONRequestBody defines body for AgentReadinessRunWebsiteScanV1 for application/json ContentType.
-type AgentReadinessRunWebsiteScanV1JSONRequestBody = AgentReadinessV1ScansRunScanRequest
+// AgentReadinessRunAgentReadinessScanV1JSONRequestBody defines body for AgentReadinessRunAgentReadinessScanV1 for application/json ContentType.
+type AgentReadinessRunAgentReadinessScanV1JSONRequestBody = AgentReadinessV1ScansRunScanRequest
 
 // BillingCreatePurchaseOrderV1JSONRequestBody defines body for BillingCreatePurchaseOrderV1 for application/json ContentType.
 type BillingCreatePurchaseOrderV1JSONRequestBody = BillingV1OrderPurchaseRequest
@@ -20531,48 +20531,48 @@ type ClientInterface interface {
 	// Corresponds with GET /api/agent-readiness/v1/checks (the `AgentReadinessListChecksV1` operationId).
 	AgentReadinessListChecksV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgentReadinessRunWebsiteScanV1WithBody Run website scan
+	// AgentReadinessRunAgentReadinessScanV1WithBody Run agent readiness scan
 	//
 	// Start a scan of how ready a public website is for AI agents to discover, read and act on.\n
 	// Scanning is asynchronous: this operation only starts the scan, and the returned scan is usually `pending`
-	// with no results yet. To get the results, poll the `Get website scan` operation with the same domain every
-	// few seconds until its status is `completed` or `failed`. The scan itself is limited to 60 seconds,
+	// with no results yet. To get the results, poll the `Get agent readiness scan` operation with the same
+	// domain every few seconds until its status is `completed` or `failed`. The scan itself is limited to 60 seconds,
 	// plus any time it waits in the queue. A `failed` scan is not retried; run this operation again.\n
 	// Starting a scan for a domain that already has a pending scan from the last 5 minutes
 	// returns that scan instead of starting a new one.
 	//
 	// Takes any type of body and a specified content type.
 	//
-	// Corresponds with POST /api/agent-readiness/v1/scans (the `AgentReadinessRunWebsiteScanV1` operationId).
-	AgentReadinessRunWebsiteScanV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with POST /api/agent-readiness/v1/scans (the `AgentReadinessRunAgentReadinessScanV1` operationId).
+	AgentReadinessRunAgentReadinessScanV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgentReadinessRunWebsiteScanV1 Run website scan
+	// AgentReadinessRunAgentReadinessScanV1 Run agent readiness scan
 	//
 	// Start a scan of how ready a public website is for AI agents to discover, read and act on.\n
 	// Scanning is asynchronous: this operation only starts the scan, and the returned scan is usually `pending`
-	// with no results yet. To get the results, poll the `Get website scan` operation with the same domain every
-	// few seconds until its status is `completed` or `failed`. The scan itself is limited to 60 seconds,
+	// with no results yet. To get the results, poll the `Get agent readiness scan` operation with the same
+	// domain every few seconds until its status is `completed` or `failed`. The scan itself is limited to 60 seconds,
 	// plus any time it waits in the queue. A `failed` scan is not retried; run this operation again.\n
 	// Starting a scan for a domain that already has a pending scan from the last 5 minutes
 	// returns that scan instead of starting a new one.
 	//
 	// Takes a body of the `application/json` content type.
 	//
-	// Corresponds with POST /api/agent-readiness/v1/scans (the `AgentReadinessRunWebsiteScanV1` operationId).
-	AgentReadinessRunWebsiteScanV1(ctx context.Context, body AgentReadinessRunWebsiteScanV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with POST /api/agent-readiness/v1/scans (the `AgentReadinessRunAgentReadinessScanV1` operationId).
+	AgentReadinessRunAgentReadinessScanV1(ctx context.Context, body AgentReadinessRunAgentReadinessScanV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AgentReadinessGetWebsiteScanV1 Get website scan
+	// AgentReadinessGetAgentReadinessScanV1 Get agent readiness scan
 	//
 	// Get the latest agent readiness scan of a website.\n
-	// Scans started with the `Run website scan` operation are asynchronous. While the status is `pending`,
-	// the result fields are null; wait a few seconds and call this operation again until the status is
+	// Scans started with the `Run agent readiness scan` operation are asynchronous. While the status is
+	// `pending`, the result fields are null; wait a few seconds and call this operation again until the status is
 	// `completed` or `failed`. A `failed` scan is not retried; run the scan again.\n
 	// A completed scan has a 0-100 score, a letter grade, a score per category, and the result of every
 	// check with the evidence found and how to fix it. Check names are listed by the `List checks` operation.\n
-	// Returns 404 when the domain has never been scanned; use the `Run website scan` operation first.
+	// Returns 404 when the domain has never been scanned; use the `Run agent readiness scan` operation first.
 	//
-	// Corresponds with GET /api/agent-readiness/v1/scans/{domain} (the `AgentReadinessGetWebsiteScanV1` operationId).
-	AgentReadinessGetWebsiteScanV1(ctx context.Context, domain AgentReadinessDomainPath, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with GET /api/agent-readiness/v1/scans/{domain} (the `AgentReadinessGetAgentReadinessScanV1` operationId).
+	AgentReadinessGetAgentReadinessScanV1(ctx context.Context, domain AgentReadinessDomainPath, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// BillingGetCatalogItemListV1 Get catalog item list
 	//
@@ -28448,21 +28448,21 @@ func (c *Client) AgentReadinessListChecksV1(ctx context.Context, reqEditors ...R
 	return c.Client.Do(req)
 }
 
-// AgentReadinessRunWebsiteScanV1WithBody Run website scan
+// AgentReadinessRunAgentReadinessScanV1WithBody Run agent readiness scan
 //
 // Start a scan of how ready a public website is for AI agents to discover, read and act on.\n
 // Scanning is asynchronous: this operation only starts the scan, and the returned scan is usually `pending`
-// with no results yet. To get the results, poll the `Get website scan` operation with the same domain every
-// few seconds until its status is `completed` or `failed`. The scan itself is limited to 60 seconds,
+// with no results yet. To get the results, poll the `Get agent readiness scan` operation with the same
+// domain every few seconds until its status is `completed` or `failed`. The scan itself is limited to 60 seconds,
 // plus any time it waits in the queue. A `failed` scan is not retried; run this operation again.\n
 // Starting a scan for a domain that already has a pending scan from the last 5 minutes
 // returns that scan instead of starting a new one.
 //
 // Takes any type of body and a specified content type.
 //
-// Corresponds with POST /api/agent-readiness/v1/scans (the `AgentReadinessRunWebsiteScanV1` operationId).
-func (c *Client) AgentReadinessRunWebsiteScanV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgentReadinessRunWebsiteScanV1RequestWithBody(c.Server, contentType, body)
+// Corresponds with POST /api/agent-readiness/v1/scans (the `AgentReadinessRunAgentReadinessScanV1` operationId).
+func (c *Client) AgentReadinessRunAgentReadinessScanV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgentReadinessRunAgentReadinessScanV1RequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -28473,21 +28473,21 @@ func (c *Client) AgentReadinessRunWebsiteScanV1WithBody(ctx context.Context, con
 	return c.Client.Do(req)
 }
 
-// AgentReadinessRunWebsiteScanV1 Run website scan
+// AgentReadinessRunAgentReadinessScanV1 Run agent readiness scan
 //
 // Start a scan of how ready a public website is for AI agents to discover, read and act on.\n
 // Scanning is asynchronous: this operation only starts the scan, and the returned scan is usually `pending`
-// with no results yet. To get the results, poll the `Get website scan` operation with the same domain every
-// few seconds until its status is `completed` or `failed`. The scan itself is limited to 60 seconds,
+// with no results yet. To get the results, poll the `Get agent readiness scan` operation with the same
+// domain every few seconds until its status is `completed` or `failed`. The scan itself is limited to 60 seconds,
 // plus any time it waits in the queue. A `failed` scan is not retried; run this operation again.\n
 // Starting a scan for a domain that already has a pending scan from the last 5 minutes
 // returns that scan instead of starting a new one.
 //
 // Takes a body of the `application/json` content type.
 //
-// Corresponds with POST /api/agent-readiness/v1/scans (the `AgentReadinessRunWebsiteScanV1` operationId).
-func (c *Client) AgentReadinessRunWebsiteScanV1(ctx context.Context, body AgentReadinessRunWebsiteScanV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgentReadinessRunWebsiteScanV1Request(c.Server, body)
+// Corresponds with POST /api/agent-readiness/v1/scans (the `AgentReadinessRunAgentReadinessScanV1` operationId).
+func (c *Client) AgentReadinessRunAgentReadinessScanV1(ctx context.Context, body AgentReadinessRunAgentReadinessScanV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgentReadinessRunAgentReadinessScanV1Request(c.Server, body)
 	if err != nil {
 		return nil, err
 	}
@@ -28498,19 +28498,19 @@ func (c *Client) AgentReadinessRunWebsiteScanV1(ctx context.Context, body AgentR
 	return c.Client.Do(req)
 }
 
-// AgentReadinessGetWebsiteScanV1 Get website scan
+// AgentReadinessGetAgentReadinessScanV1 Get agent readiness scan
 //
 // Get the latest agent readiness scan of a website.\n
-// Scans started with the `Run website scan` operation are asynchronous. While the status is `pending`,
-// the result fields are null; wait a few seconds and call this operation again until the status is
+// Scans started with the `Run agent readiness scan` operation are asynchronous. While the status is
+// `pending`, the result fields are null; wait a few seconds and call this operation again until the status is
 // `completed` or `failed`. A `failed` scan is not retried; run the scan again.\n
 // A completed scan has a 0-100 score, a letter grade, a score per category, and the result of every
 // check with the evidence found and how to fix it. Check names are listed by the `List checks` operation.\n
-// Returns 404 when the domain has never been scanned; use the `Run website scan` operation first.
+// Returns 404 when the domain has never been scanned; use the `Run agent readiness scan` operation first.
 //
-// Corresponds with GET /api/agent-readiness/v1/scans/{domain} (the `AgentReadinessGetWebsiteScanV1` operationId).
-func (c *Client) AgentReadinessGetWebsiteScanV1(ctx context.Context, domain AgentReadinessDomainPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAgentReadinessGetWebsiteScanV1Request(c.Server, domain)
+// Corresponds with GET /api/agent-readiness/v1/scans/{domain} (the `AgentReadinessGetAgentReadinessScanV1` operationId).
+func (c *Client) AgentReadinessGetAgentReadinessScanV1(ctx context.Context, domain AgentReadinessDomainPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAgentReadinessGetAgentReadinessScanV1Request(c.Server, domain)
 	if err != nil {
 		return nil, err
 	}
@@ -42187,19 +42187,19 @@ func NewAgentReadinessListChecksV1Request(server string) (*http.Request, error) 
 	return req, nil
 }
 
-// NewAgentReadinessRunWebsiteScanV1Request calls the generic AgentReadinessRunWebsiteScanV1 builder with application/json body
-func NewAgentReadinessRunWebsiteScanV1Request(server string, body AgentReadinessRunWebsiteScanV1JSONRequestBody) (*http.Request, error) {
+// NewAgentReadinessRunAgentReadinessScanV1Request calls the generic AgentReadinessRunAgentReadinessScanV1 builder with application/json body
+func NewAgentReadinessRunAgentReadinessScanV1Request(server string, body AgentReadinessRunAgentReadinessScanV1JSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewAgentReadinessRunWebsiteScanV1RequestWithBody(server, "application/json", bodyReader)
+	return NewAgentReadinessRunAgentReadinessScanV1RequestWithBody(server, "application/json", bodyReader)
 }
 
-// NewAgentReadinessRunWebsiteScanV1RequestWithBody constructs an http.Request for the AgentReadinessRunWebsiteScanV1 method, with any body, and a specified content type
-func NewAgentReadinessRunWebsiteScanV1RequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+// NewAgentReadinessRunAgentReadinessScanV1RequestWithBody constructs an http.Request for the AgentReadinessRunAgentReadinessScanV1 method, with any body, and a specified content type
+func NewAgentReadinessRunAgentReadinessScanV1RequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -42227,8 +42227,8 @@ func NewAgentReadinessRunWebsiteScanV1RequestWithBody(server string, contentType
 	return req, nil
 }
 
-// NewAgentReadinessGetWebsiteScanV1Request constructs an http.Request for the AgentReadinessGetWebsiteScanV1 method
-func NewAgentReadinessGetWebsiteScanV1Request(server string, domain AgentReadinessDomainPath) (*http.Request, error) {
+// NewAgentReadinessGetAgentReadinessScanV1Request constructs an http.Request for the AgentReadinessGetAgentReadinessScanV1 method
+func NewAgentReadinessGetAgentReadinessScanV1Request(server string, domain AgentReadinessDomainPath) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -60964,50 +60964,50 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /api/agent-readiness/v1/checks (the `AgentReadinessListChecksV1` operationId).
 	AgentReadinessListChecksV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*AgentReadinessListChecksV1Response, error)
 
-	// AgentReadinessRunWebsiteScanV1WithBodyWithResponse Run website scan
+	// AgentReadinessRunAgentReadinessScanV1WithBodyWithResponse Run agent readiness scan
 	//
 	// Start a scan of how ready a public website is for AI agents to discover, read and act on.\n
 	// Scanning is asynchronous: this operation only starts the scan, and the returned scan is usually `pending`
-	// with no results yet. To get the results, poll the `Get website scan` operation with the same domain every
-	// few seconds until its status is `completed` or `failed`. The scan itself is limited to 60 seconds,
+	// with no results yet. To get the results, poll the `Get agent readiness scan` operation with the same
+	// domain every few seconds until its status is `completed` or `failed`. The scan itself is limited to 60 seconds,
 	// plus any time it waits in the queue. A `failed` scan is not retried; run this operation again.\n
 	// Starting a scan for a domain that already has a pending scan from the last 5 minutes
 	// returns that scan instead of starting a new one.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with POST /api/agent-readiness/v1/scans (the `AgentReadinessRunWebsiteScanV1` operationId).
-	AgentReadinessRunWebsiteScanV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgentReadinessRunWebsiteScanV1Response, error)
+	// Corresponds with POST /api/agent-readiness/v1/scans (the `AgentReadinessRunAgentReadinessScanV1` operationId).
+	AgentReadinessRunAgentReadinessScanV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgentReadinessRunAgentReadinessScanV1Response, error)
 
-	// AgentReadinessRunWebsiteScanV1WithResponse Run website scan
+	// AgentReadinessRunAgentReadinessScanV1WithResponse Run agent readiness scan
 	//
 	// Start a scan of how ready a public website is for AI agents to discover, read and act on.\n
 	// Scanning is asynchronous: this operation only starts the scan, and the returned scan is usually `pending`
-	// with no results yet. To get the results, poll the `Get website scan` operation with the same domain every
-	// few seconds until its status is `completed` or `failed`. The scan itself is limited to 60 seconds,
+	// with no results yet. To get the results, poll the `Get agent readiness scan` operation with the same
+	// domain every few seconds until its status is `completed` or `failed`. The scan itself is limited to 60 seconds,
 	// plus any time it waits in the queue. A `failed` scan is not retried; run this operation again.\n
 	// Starting a scan for a domain that already has a pending scan from the last 5 minutes
 	// returns that scan instead of starting a new one.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with POST /api/agent-readiness/v1/scans (the `AgentReadinessRunWebsiteScanV1` operationId).
-	AgentReadinessRunWebsiteScanV1WithResponse(ctx context.Context, body AgentReadinessRunWebsiteScanV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgentReadinessRunWebsiteScanV1Response, error)
+	// Corresponds with POST /api/agent-readiness/v1/scans (the `AgentReadinessRunAgentReadinessScanV1` operationId).
+	AgentReadinessRunAgentReadinessScanV1WithResponse(ctx context.Context, body AgentReadinessRunAgentReadinessScanV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgentReadinessRunAgentReadinessScanV1Response, error)
 
-	// AgentReadinessGetWebsiteScanV1WithResponse Get website scan
+	// AgentReadinessGetAgentReadinessScanV1WithResponse Get agent readiness scan
 	//
 	// Get the latest agent readiness scan of a website.\n
-	// Scans started with the `Run website scan` operation are asynchronous. While the status is `pending`,
-	// the result fields are null; wait a few seconds and call this operation again until the status is
+	// Scans started with the `Run agent readiness scan` operation are asynchronous. While the status is
+	// `pending`, the result fields are null; wait a few seconds and call this operation again until the status is
 	// `completed` or `failed`. A `failed` scan is not retried; run the scan again.\n
 	// A completed scan has a 0-100 score, a letter grade, a score per category, and the result of every
 	// check with the evidence found and how to fix it. Check names are listed by the `List checks` operation.\n
-	// Returns 404 when the domain has never been scanned; use the `Run website scan` operation first.
+	// Returns 404 when the domain has never been scanned; use the `Run agent readiness scan` operation first.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with GET /api/agent-readiness/v1/scans/{domain} (the `AgentReadinessGetWebsiteScanV1` operationId).
-	AgentReadinessGetWebsiteScanV1WithResponse(ctx context.Context, domain AgentReadinessDomainPath, reqEditors ...RequestEditorFn) (*AgentReadinessGetWebsiteScanV1Response, error)
+	// Corresponds with GET /api/agent-readiness/v1/scans/{domain} (the `AgentReadinessGetAgentReadinessScanV1` operationId).
+	AgentReadinessGetAgentReadinessScanV1WithResponse(ctx context.Context, domain AgentReadinessDomainPath, reqEditors ...RequestEditorFn) (*AgentReadinessGetAgentReadinessScanV1Response, error)
 
 	// BillingGetCatalogItemListV1WithResponse Get catalog item list
 	//
@@ -70625,7 +70625,7 @@ func (r AgentReadinessListChecksV1Response) ContentType() string {
 	return ""
 }
 
-type AgentReadinessRunWebsiteScanV1Response struct {
+type AgentReadinessRunAgentReadinessScanV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -70639,32 +70639,32 @@ type AgentReadinessRunWebsiteScanV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgentReadinessRunWebsiteScanV1Response) GetJSON200() *AgentReadinessV1ScansScanResource {
+func (r AgentReadinessRunAgentReadinessScanV1Response) GetJSON200() *AgentReadinessV1ScansScanResource {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgentReadinessRunWebsiteScanV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgentReadinessRunAgentReadinessScanV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON422 returns the response for an HTTP 422 `application/json` response
-func (r AgentReadinessRunWebsiteScanV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+func (r AgentReadinessRunAgentReadinessScanV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
 	return r.JSON422
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgentReadinessRunWebsiteScanV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgentReadinessRunAgentReadinessScanV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgentReadinessRunWebsiteScanV1Response) GetBody() []byte {
+func (r AgentReadinessRunAgentReadinessScanV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgentReadinessRunWebsiteScanV1Response) Status() string {
+func (r AgentReadinessRunAgentReadinessScanV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -70672,7 +70672,7 @@ func (r AgentReadinessRunWebsiteScanV1Response) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgentReadinessRunWebsiteScanV1Response) StatusCode() int {
+func (r AgentReadinessRunAgentReadinessScanV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -70680,14 +70680,14 @@ func (r AgentReadinessRunWebsiteScanV1Response) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgentReadinessRunWebsiteScanV1Response) ContentType() string {
+func (r AgentReadinessRunAgentReadinessScanV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type AgentReadinessGetWebsiteScanV1Response struct {
+type AgentReadinessGetAgentReadinessScanV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -70699,27 +70699,27 @@ type AgentReadinessGetWebsiteScanV1Response struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r AgentReadinessGetWebsiteScanV1Response) GetJSON200() *AgentReadinessV1ScansScanResource {
+func (r AgentReadinessGetAgentReadinessScanV1Response) GetJSON200() *AgentReadinessV1ScansScanResource {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r AgentReadinessGetWebsiteScanV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+func (r AgentReadinessGetAgentReadinessScanV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r AgentReadinessGetWebsiteScanV1Response) GetJSON500() *CommonResponseErrorResponse {
+func (r AgentReadinessGetAgentReadinessScanV1Response) GetJSON500() *CommonResponseErrorResponse {
 	return r.JSON500
 }
 
 // GetBody returns the raw response body bytes
-func (r AgentReadinessGetWebsiteScanV1Response) GetBody() []byte {
+func (r AgentReadinessGetAgentReadinessScanV1Response) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r AgentReadinessGetWebsiteScanV1Response) Status() string {
+func (r AgentReadinessGetAgentReadinessScanV1Response) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -70727,7 +70727,7 @@ func (r AgentReadinessGetWebsiteScanV1Response) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AgentReadinessGetWebsiteScanV1Response) StatusCode() int {
+func (r AgentReadinessGetAgentReadinessScanV1Response) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -70735,7 +70735,7 @@ func (r AgentReadinessGetWebsiteScanV1Response) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r AgentReadinessGetWebsiteScanV1Response) ContentType() string {
+func (r AgentReadinessGetAgentReadinessScanV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -94091,67 +94091,67 @@ func (c *ClientWithResponses) AgentReadinessListChecksV1WithResponse(ctx context
 	return ParseAgentReadinessListChecksV1Response(rsp)
 }
 
-// AgentReadinessRunWebsiteScanV1WithBodyWithResponse Run website scan
+// AgentReadinessRunAgentReadinessScanV1WithBodyWithResponse Run agent readiness scan
 //
 // Start a scan of how ready a public website is for AI agents to discover, read and act on.\n
 // Scanning is asynchronous: this operation only starts the scan, and the returned scan is usually `pending`
-// with no results yet. To get the results, poll the `Get website scan` operation with the same domain every
-// few seconds until its status is `completed` or `failed`. The scan itself is limited to 60 seconds,
+// with no results yet. To get the results, poll the `Get agent readiness scan` operation with the same
+// domain every few seconds until its status is `completed` or `failed`. The scan itself is limited to 60 seconds,
 // plus any time it waits in the queue. A `failed` scan is not retried; run this operation again.\n
 // Starting a scan for a domain that already has a pending scan from the last 5 minutes
 // returns that scan instead of starting a new one.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with POST /api/agent-readiness/v1/scans (the `AgentReadinessRunWebsiteScanV1` operationId).
-func (c *ClientWithResponses) AgentReadinessRunWebsiteScanV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgentReadinessRunWebsiteScanV1Response, error) {
-	rsp, err := c.AgentReadinessRunWebsiteScanV1WithBody(ctx, contentType, body, reqEditors...)
+// Corresponds with POST /api/agent-readiness/v1/scans (the `AgentReadinessRunAgentReadinessScanV1` operationId).
+func (c *ClientWithResponses) AgentReadinessRunAgentReadinessScanV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AgentReadinessRunAgentReadinessScanV1Response, error) {
+	rsp, err := c.AgentReadinessRunAgentReadinessScanV1WithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgentReadinessRunWebsiteScanV1Response(rsp)
+	return ParseAgentReadinessRunAgentReadinessScanV1Response(rsp)
 }
 
-// AgentReadinessRunWebsiteScanV1WithResponse Run website scan
+// AgentReadinessRunAgentReadinessScanV1WithResponse Run agent readiness scan
 //
 // Start a scan of how ready a public website is for AI agents to discover, read and act on.\n
 // Scanning is asynchronous: this operation only starts the scan, and the returned scan is usually `pending`
-// with no results yet. To get the results, poll the `Get website scan` operation with the same domain every
-// few seconds until its status is `completed` or `failed`. The scan itself is limited to 60 seconds,
+// with no results yet. To get the results, poll the `Get agent readiness scan` operation with the same
+// domain every few seconds until its status is `completed` or `failed`. The scan itself is limited to 60 seconds,
 // plus any time it waits in the queue. A `failed` scan is not retried; run this operation again.\n
 // Starting a scan for a domain that already has a pending scan from the last 5 minutes
 // returns that scan instead of starting a new one.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with POST /api/agent-readiness/v1/scans (the `AgentReadinessRunWebsiteScanV1` operationId).
-func (c *ClientWithResponses) AgentReadinessRunWebsiteScanV1WithResponse(ctx context.Context, body AgentReadinessRunWebsiteScanV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgentReadinessRunWebsiteScanV1Response, error) {
-	rsp, err := c.AgentReadinessRunWebsiteScanV1(ctx, body, reqEditors...)
+// Corresponds with POST /api/agent-readiness/v1/scans (the `AgentReadinessRunAgentReadinessScanV1` operationId).
+func (c *ClientWithResponses) AgentReadinessRunAgentReadinessScanV1WithResponse(ctx context.Context, body AgentReadinessRunAgentReadinessScanV1JSONRequestBody, reqEditors ...RequestEditorFn) (*AgentReadinessRunAgentReadinessScanV1Response, error) {
+	rsp, err := c.AgentReadinessRunAgentReadinessScanV1(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgentReadinessRunWebsiteScanV1Response(rsp)
+	return ParseAgentReadinessRunAgentReadinessScanV1Response(rsp)
 }
 
-// AgentReadinessGetWebsiteScanV1WithResponse Get website scan
+// AgentReadinessGetAgentReadinessScanV1WithResponse Get agent readiness scan
 //
 // Get the latest agent readiness scan of a website.\n
-// Scans started with the `Run website scan` operation are asynchronous. While the status is `pending`,
-// the result fields are null; wait a few seconds and call this operation again until the status is
+// Scans started with the `Run agent readiness scan` operation are asynchronous. While the status is
+// `pending`, the result fields are null; wait a few seconds and call this operation again until the status is
 // `completed` or `failed`. A `failed` scan is not retried; run the scan again.\n
 // A completed scan has a 0-100 score, a letter grade, a score per category, and the result of every
 // check with the evidence found and how to fix it. Check names are listed by the `List checks` operation.\n
-// Returns 404 when the domain has never been scanned; use the `Run website scan` operation first.
+// Returns 404 when the domain has never been scanned; use the `Run agent readiness scan` operation first.
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with GET /api/agent-readiness/v1/scans/{domain} (the `AgentReadinessGetWebsiteScanV1` operationId).
-func (c *ClientWithResponses) AgentReadinessGetWebsiteScanV1WithResponse(ctx context.Context, domain AgentReadinessDomainPath, reqEditors ...RequestEditorFn) (*AgentReadinessGetWebsiteScanV1Response, error) {
-	rsp, err := c.AgentReadinessGetWebsiteScanV1(ctx, domain, reqEditors...)
+// Corresponds with GET /api/agent-readiness/v1/scans/{domain} (the `AgentReadinessGetAgentReadinessScanV1` operationId).
+func (c *ClientWithResponses) AgentReadinessGetAgentReadinessScanV1WithResponse(ctx context.Context, domain AgentReadinessDomainPath, reqEditors ...RequestEditorFn) (*AgentReadinessGetAgentReadinessScanV1Response, error) {
+	rsp, err := c.AgentReadinessGetAgentReadinessScanV1(ctx, domain, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAgentReadinessGetWebsiteScanV1Response(rsp)
+	return ParseAgentReadinessGetAgentReadinessScanV1Response(rsp)
 }
 
 // BillingGetCatalogItemListV1WithResponse Get catalog item list
@@ -106152,15 +106152,15 @@ func ParseAgentReadinessListChecksV1Response(rsp *http.Response) (*AgentReadines
 	return response, nil
 }
 
-// ParseAgentReadinessRunWebsiteScanV1Response parses an HTTP response from a AgentReadinessRunWebsiteScanV1WithResponse call
-func ParseAgentReadinessRunWebsiteScanV1Response(rsp *http.Response) (*AgentReadinessRunWebsiteScanV1Response, error) {
+// ParseAgentReadinessRunAgentReadinessScanV1Response parses an HTTP response from a AgentReadinessRunAgentReadinessScanV1WithResponse call
+func ParseAgentReadinessRunAgentReadinessScanV1Response(rsp *http.Response) (*AgentReadinessRunAgentReadinessScanV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgentReadinessRunWebsiteScanV1Response{
+	response := &AgentReadinessRunAgentReadinessScanV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -106199,15 +106199,15 @@ func ParseAgentReadinessRunWebsiteScanV1Response(rsp *http.Response) (*AgentRead
 	return response, nil
 }
 
-// ParseAgentReadinessGetWebsiteScanV1Response parses an HTTP response from a AgentReadinessGetWebsiteScanV1WithResponse call
-func ParseAgentReadinessGetWebsiteScanV1Response(rsp *http.Response) (*AgentReadinessGetWebsiteScanV1Response, error) {
+// ParseAgentReadinessGetAgentReadinessScanV1Response parses an HTTP response from a AgentReadinessGetAgentReadinessScanV1WithResponse call
+func ParseAgentReadinessGetAgentReadinessScanV1Response(rsp *http.Response) (*AgentReadinessGetAgentReadinessScanV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AgentReadinessGetWebsiteScanV1Response{
+	response := &AgentReadinessGetAgentReadinessScanV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
