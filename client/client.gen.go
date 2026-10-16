@@ -9361,6 +9361,24 @@ type EcommerceV1ProductCreatePhysicalProductRequest struct {
 	//
 	// Example: 1000
 	Price int `json:"price"`
+
+	// SeoSettings Search-engine settings. Omitted fields are generated from the name and description; a slug already in use gets a numeric suffix. Send at least one field.
+	SeoSettings *struct {
+		// Description Search-engine description for the product page.
+		//
+		// Example: Soft combed cotton, unisex fit.
+		Description *string `json:"description,omitempty"`
+
+		// Slug URL slug of the product page. Lowercase letters, digits and dashes.
+		//
+		// Example: blue-t-shirt
+		Slug *string `json:"slug,omitempty"`
+
+		// Title Search-engine title for the product page.
+		//
+		// Example: Blue T-Shirt | My Shop
+		Title *string `json:"title,omitempty"`
+	} `json:"seo_settings,omitempty"`
 }
 
 // EcommerceV1ProductProductCollection Array of [`Ecommerce.V1.Product.ProductResource`](#model/ecommercev1productproductresource)
@@ -9602,6 +9620,25 @@ type EcommerceV1ProductProductResponseResource struct {
 
 // EcommerceV1ProductUpdateRequest defines model for Ecommerce.V1.Product.UpdateRequest.
 type EcommerceV1ProductUpdateRequest struct {
+	// CollectionChanges Adds the product to or removes it from collections without touching its other collections. Send at least one collection in add or remove.
+	CollectionChanges *struct {
+		// Add Collections to add the product to. Every id must exist in the store.
+		Add *[]struct {
+			// Id The collection id.
+			//
+			// Example: pcol_01J8Z5F8W9K8M4A7B3C2D1E0FG
+			Id string `json:"id"`
+		} `json:"add,omitempty"`
+
+		// Remove Collections to take the product out of. Ids the product is not in are ignored.
+		Remove *[]struct {
+			// Id The collection id.
+			//
+			// Example: pcol_01J8Z5F8W9K8M4A7B3C2D1E0FG
+			Id string `json:"id"`
+		} `json:"remove,omitempty"`
+	} `json:"collection_changes,omitempty"`
+
 	// Description The product description.
 	//
 	// Example: Soft combed cotton, unisex fit.
@@ -9611,6 +9648,24 @@ type EcommerceV1ProductUpdateRequest struct {
 	//
 	// Example: Blue T-Shirt
 	Name *string `json:"name,omitempty"`
+
+	// SeoSettings Search-engine settings to change. Send at least one field; omitted fields keep their current values.
+	SeoSettings *struct {
+		// Description Search-engine description for the product page.
+		//
+		// Example: Soft combed cotton, unisex fit.
+		Description *string `json:"description,omitempty"`
+
+		// Slug URL slug of the product page. Lowercase letters, digits and dashes.
+		//
+		// Example: blue-t-shirt
+		Slug *string `json:"slug,omitempty"`
+
+		// Title Search-engine title for the product page.
+		//
+		// Example: Blue T-Shirt | My Shop
+		Title *string `json:"title,omitempty"`
+	} `json:"seo_settings,omitempty"`
 
 	// Status Set "published" to make the product buyable, "draft" to hide it, or "archived" to retire it.
 	//
@@ -10067,6 +10122,11 @@ type EcommerceV1VariantBatchUpdateVariantsRequest struct {
 			// Example: 1499
 			SaleAmount *int `json:"sale_amount,omitempty"`
 		} `json:"prices,omitempty"`
+
+		// Sku The variant SKU.
+		//
+		// Example: TSHIRT-RED-L
+		Sku *string `json:"sku,omitempty"`
 
 		// Title The variant title.
 		//
@@ -22178,9 +22238,11 @@ type ClientInterface interface {
 
 	// EcommerceUpdateAProductV1WithBody Update a product
 	//
-	// Update a product's name, description or status. Set status to published to make it buyable,
-	// draft to hide it, or archived to retire it. Variants, prices and inventory are managed
-	// through the variant endpoints, not here. Returns the updated product summary.
+	// Update a product's name, description, status, SEO settings or collections. Set status to
+	// published to make it buyable, draft to hide it, or archived to retire it. SEO settings (title,
+	// description, slug) left out keep their values. collection_changes adds or removes collections
+	// without touching the others. Variants, prices and inventory are managed through the variant
+	// endpoints, not here. Returns the updated product summary.
 	//
 	// Takes any type of body and a specified content type.
 	//
@@ -22189,9 +22251,11 @@ type ClientInterface interface {
 
 	// EcommerceUpdateAProductV1 Update a product
 	//
-	// Update a product's name, description or status. Set status to published to make it buyable,
-	// draft to hide it, or archived to retire it. Variants, prices and inventory are managed
-	// through the variant endpoints, not here. Returns the updated product summary.
+	// Update a product's name, description, status, SEO settings or collections. Set status to
+	// published to make it buyable, draft to hide it, or archived to retire it. SEO settings (title,
+	// description, slug) left out keep their values. collection_changes adds or removes collections
+	// without touching the others. Variants, prices and inventory are managed through the variant
+	// endpoints, not here. Returns the updated product summary.
 	//
 	// Takes a body of the `application/json` content type.
 	//
@@ -22266,8 +22330,8 @@ type ClientInterface interface {
 
 	// EcommerceUpdateProductVariantsInBatchV1WithBody Update product variants in batch
 	//
-	// Update up to 100 existing variants in place by id — title, inventory, stock tracking and
-	// prices. Variants omitted from the request are left untouched. Prices replace the variant's
+	// Update up to 100 existing variants in place by id — title, SKU, inventory, stock tracking
+	// and prices. Variants omitted from the request are left untouched. Prices replace the variant's
 	// existing prices in full. Returns the updated variants.
 	//
 	// Takes any type of body and a specified content type.
@@ -22277,8 +22341,8 @@ type ClientInterface interface {
 
 	// EcommerceUpdateProductVariantsInBatchV1 Update product variants in batch
 	//
-	// Update up to 100 existing variants in place by id — title, inventory, stock tracking and
-	// prices. Variants omitted from the request are left untouched. Prices replace the variant's
+	// Update up to 100 existing variants in place by id — title, SKU, inventory, stock tracking
+	// and prices. Variants omitted from the request are left untouched. Prices replace the variant's
 	// existing prices in full. Returns the updated variants.
 	//
 	// Takes a body of the `application/json` content type.
@@ -31206,9 +31270,11 @@ func (c *Client) EcommerceDeleteAProductV1(ctx context.Context, storeId string, 
 
 // EcommerceUpdateAProductV1WithBody Update a product
 //
-// Update a product's name, description or status. Set status to published to make it buyable,
-// draft to hide it, or archived to retire it. Variants, prices and inventory are managed
-// through the variant endpoints, not here. Returns the updated product summary.
+// Update a product's name, description, status, SEO settings or collections. Set status to
+// published to make it buyable, draft to hide it, or archived to retire it. SEO settings (title,
+// description, slug) left out keep their values. collection_changes adds or removes collections
+// without touching the others. Variants, prices and inventory are managed through the variant
+// endpoints, not here. Returns the updated product summary.
 //
 // Takes any type of body and a specified content type.
 //
@@ -31227,9 +31293,11 @@ func (c *Client) EcommerceUpdateAProductV1WithBody(ctx context.Context, storeId 
 
 // EcommerceUpdateAProductV1 Update a product
 //
-// Update a product's name, description or status. Set status to published to make it buyable,
-// draft to hide it, or archived to retire it. Variants, prices and inventory are managed
-// through the variant endpoints, not here. Returns the updated product summary.
+// Update a product's name, description, status, SEO settings or collections. Set status to
+// published to make it buyable, draft to hide it, or archived to retire it. SEO settings (title,
+// description, slug) left out keep their values. collection_changes adds or removes collections
+// without touching the others. Variants, prices and inventory are managed through the variant
+// endpoints, not here. Returns the updated product summary.
 //
 // Takes a body of the `application/json` content type.
 //
@@ -31374,8 +31442,8 @@ func (c *Client) EcommerceCreateAProductVariantV1(ctx context.Context, storeId s
 
 // EcommerceUpdateProductVariantsInBatchV1WithBody Update product variants in batch
 //
-// Update up to 100 existing variants in place by id — title, inventory, stock tracking and
-// prices. Variants omitted from the request are left untouched. Prices replace the variant's
+// Update up to 100 existing variants in place by id — title, SKU, inventory, stock tracking
+// and prices. Variants omitted from the request are left untouched. Prices replace the variant's
 // existing prices in full. Returns the updated variants.
 //
 // Takes any type of body and a specified content type.
@@ -31395,8 +31463,8 @@ func (c *Client) EcommerceUpdateProductVariantsInBatchV1WithBody(ctx context.Con
 
 // EcommerceUpdateProductVariantsInBatchV1 Update product variants in batch
 //
-// Update up to 100 existing variants in place by id — title, inventory, stock tracking and
-// prices. Variants omitted from the request are left untouched. Prices replace the variant's
+// Update up to 100 existing variants in place by id — title, SKU, inventory, stock tracking
+// and prices. Variants omitted from the request are left untouched. Prices replace the variant's
 // existing prices in full. Returns the updated variants.
 //
 // Takes a body of the `application/json` content type.
@@ -62874,9 +62942,11 @@ type ClientWithResponsesInterface interface {
 
 	// EcommerceUpdateAProductV1WithBodyWithResponse Update a product
 	//
-	// Update a product's name, description or status. Set status to published to make it buyable,
-	// draft to hide it, or archived to retire it. Variants, prices and inventory are managed
-	// through the variant endpoints, not here. Returns the updated product summary.
+	// Update a product's name, description, status, SEO settings or collections. Set status to
+	// published to make it buyable, draft to hide it, or archived to retire it. SEO settings (title,
+	// description, slug) left out keep their values. collection_changes adds or removes collections
+	// without touching the others. Variants, prices and inventory are managed through the variant
+	// endpoints, not here. Returns the updated product summary.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -62885,9 +62955,11 @@ type ClientWithResponsesInterface interface {
 
 	// EcommerceUpdateAProductV1WithResponse Update a product
 	//
-	// Update a product's name, description or status. Set status to published to make it buyable,
-	// draft to hide it, or archived to retire it. Variants, prices and inventory are managed
-	// through the variant endpoints, not here. Returns the updated product summary.
+	// Update a product's name, description, status, SEO settings or collections. Set status to
+	// published to make it buyable, draft to hide it, or archived to retire it. SEO settings (title,
+	// description, slug) left out keep their values. collection_changes adds or removes collections
+	// without touching the others. Variants, prices and inventory are managed through the variant
+	// endpoints, not here. Returns the updated product summary.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -62966,8 +63038,8 @@ type ClientWithResponsesInterface interface {
 
 	// EcommerceUpdateProductVariantsInBatchV1WithBodyWithResponse Update product variants in batch
 	//
-	// Update up to 100 existing variants in place by id — title, inventory, stock tracking and
-	// prices. Variants omitted from the request are left untouched. Prices replace the variant's
+	// Update up to 100 existing variants in place by id — title, SKU, inventory, stock tracking
+	// and prices. Variants omitted from the request are left untouched. Prices replace the variant's
 	// existing prices in full. Returns the updated variants.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
@@ -62977,8 +63049,8 @@ type ClientWithResponsesInterface interface {
 
 	// EcommerceUpdateProductVariantsInBatchV1WithResponse Update product variants in batch
 	//
-	// Update up to 100 existing variants in place by id — title, inventory, stock tracking and
-	// prices. Variants omitted from the request are left untouched. Prices replace the variant's
+	// Update up to 100 existing variants in place by id — title, SKU, inventory, stock tracking
+	// and prices. Variants omitted from the request are left untouched. Prices replace the variant's
 	// existing prices in full. Returns the updated variants.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
@@ -96790,9 +96862,11 @@ func (c *ClientWithResponses) EcommerceDeleteAProductV1WithResponse(ctx context.
 
 // EcommerceUpdateAProductV1WithBodyWithResponse Update a product
 //
-// Update a product's name, description or status. Set status to published to make it buyable,
-// draft to hide it, or archived to retire it. Variants, prices and inventory are managed
-// through the variant endpoints, not here. Returns the updated product summary.
+// Update a product's name, description, status, SEO settings or collections. Set status to
+// published to make it buyable, draft to hide it, or archived to retire it. SEO settings (title,
+// description, slug) left out keep their values. collection_changes adds or removes collections
+// without touching the others. Variants, prices and inventory are managed through the variant
+// endpoints, not here. Returns the updated product summary.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
@@ -96807,9 +96881,11 @@ func (c *ClientWithResponses) EcommerceUpdateAProductV1WithBodyWithResponse(ctx 
 
 // EcommerceUpdateAProductV1WithResponse Update a product
 //
-// Update a product's name, description or status. Set status to published to make it buyable,
-// draft to hide it, or archived to retire it. Variants, prices and inventory are managed
-// through the variant endpoints, not here. Returns the updated product summary.
+// Update a product's name, description, status, SEO settings or collections. Set status to
+// published to make it buyable, draft to hide it, or archived to retire it. SEO settings (title,
+// description, slug) left out keep their values. collection_changes adds or removes collections
+// without touching the others. Variants, prices and inventory are managed through the variant
+// endpoints, not here. Returns the updated product summary.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
@@ -96930,8 +97006,8 @@ func (c *ClientWithResponses) EcommerceCreateAProductVariantV1WithResponse(ctx c
 
 // EcommerceUpdateProductVariantsInBatchV1WithBodyWithResponse Update product variants in batch
 //
-// Update up to 100 existing variants in place by id — title, inventory, stock tracking and
-// prices. Variants omitted from the request are left untouched. Prices replace the variant's
+// Update up to 100 existing variants in place by id — title, SKU, inventory, stock tracking
+// and prices. Variants omitted from the request are left untouched. Prices replace the variant's
 // existing prices in full. Returns the updated variants.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
@@ -96947,8 +97023,8 @@ func (c *ClientWithResponses) EcommerceUpdateProductVariantsInBatchV1WithBodyWit
 
 // EcommerceUpdateProductVariantsInBatchV1WithResponse Update product variants in batch
 //
-// Update up to 100 existing variants in place by id — title, inventory, stock tracking and
-// prices. Variants omitted from the request are left untouched. Prices replace the variant's
+// Update up to 100 existing variants in place by id — title, SKU, inventory, stock tracking
+// and prices. Variants omitted from the request are left untouched. Prices replace the variant's
 // existing prices in full. Returns the updated variants.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).

@@ -13,11 +13,12 @@ hostinger ecommerce products create-physical <store_id> [flags]
 ### Options
 
 ```
-      --currency string      ISO 4217 currency code. Defaults to the store's default currency when omitted.
-      --description string   The product description.
-  -h, --help                 help for create-physical
-      --name string          The product name.
-      --price int            Price in the smallest currency unit (e.g. cents). Must be positive.
+      --currency string       ISO 4217 currency code. Defaults to the store's default currency when omitted.
+      --description string    The product description.
+  -h, --help                  help for create-physical
+      --name string           The product name.
+      --price int             Price in the smallest currency unit (e.g. cents). Must be positive.
+      --seo-settings string   Search-engine settings. Omitted fields are generated from the name and description; a slug already in use gets a numeric suffix. Send at least one field. (JSON)
 ```
 
 ### Options inherited from parent commands

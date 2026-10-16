@@ -8,6 +8,7 @@ import (
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -35,6 +36,7 @@ func init() {
 	CreatePhysicalCmd.Flags().StringP("description", "", "", "The product description.")
 	CreatePhysicalCmd.Flags().StringP("name", "", "", "The product name.")
 	CreatePhysicalCmd.Flags().IntP("price", "", 0, "Price in the smallest currency unit (e.g. cents). Must be positive.")
+	CreatePhysicalCmd.Flags().StringP("seo-settings", "", "", "Search-engine settings. Omitted fields are generated from the name and description; a slug already in use gets a numeric suffix. Send at least one field. (JSON)")
 	CreatePhysicalCmd.MarkFlagRequired("name")
 	CreatePhysicalCmd.MarkFlagRequired("price")
 }
@@ -53,5 +55,9 @@ func createPhysicalBody(cmd *cobra.Command) map[string]any {
 	body["name"] = nameVal
 	priceVal, _ := cmd.Flags().GetInt("price")
 	body["price"] = priceVal
+	if cmd.Flags().Changed("seo-settings") {
+		v, _ := cmd.Flags().GetString("seo-settings")
+		body["seo_settings"] = utils.JSONValue(v, "seo-settings")
+	}
 	return body
 }

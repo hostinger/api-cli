@@ -15,7 +15,7 @@ import (
 var UpdateInBatchCmd = &cobra.Command{
 	Use:   "update-in-batch <store_id> <product_id>",
 	Short: "Update product variants in batch",
-	Long:  "Update up to 100 existing variants in place by id — title, inventory, stock tracking and\nprices. Variants omitted from the request are left untouched. Prices replace the variant's\nexisting prices in full. Returns the updated variants.",
+	Long:  "Update up to 100 existing variants in place by id — title, SKU, inventory, stock tracking\nand prices. Variants omitted from the request are left untouched. Prices replace the variant's\nexisting prices in full. Returns the updated variants.",
 	Args:  cobra.MatchAll(cobra.ExactArgs(2)),
 	Run: func(cmd *cobra.Command, args []string) {
 		payload, err := json.Marshal(updateInBatchBody(cmd))
