@@ -8,21 +8,27 @@ import (
 // If width is 0, it will be calculated automatically
 func CenterText(text string, width int) string {
 	var lines []string
+
 	if width == 0 {
 		width = GetStringMaxWidth(text)
 	}
-	linesTmp := strings.Split(text, "\n")
-	for _, line := range linesTmp {
+
+	linesTmp := strings.SplitSeq(text, "\n")
+	for line := range linesTmp {
 		if len(RemoveEscapeCodes(line)) > width {
 			extraLines := []string{""}
 			extraLinesCounter := 0
+
 			for i, letter := range line {
 				if i%width == 0 && i != 0 {
 					extraLinesCounter++
+
 					extraLines = append(extraLines, "")
 				}
+
 				extraLines[extraLinesCounter] += string(letter)
 			}
+
 			for _, extraLine := range extraLines {
 				padding := width - len(RemoveEscapeCodes(extraLine))
 				extraLine = strings.Repeat(" ", padding/2) + extraLine + strings.Repeat(" ", padding/2) + "\n"
@@ -35,10 +41,10 @@ func CenterText(text string, width int) string {
 		}
 	}
 
-	var line string
+	var line strings.Builder
 	for _, s := range lines {
-		line += s
+		line.WriteString(s)
 	}
 
-	return strings.TrimSuffix(line, "\n")
+	return strings.TrimSuffix(line.String(), "\n")
 }

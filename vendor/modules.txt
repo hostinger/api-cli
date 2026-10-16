@@ -1,8 +1,8 @@
 # atomicgo.dev/cursor v0.2.0
 ## explicit; go 1.15
 atomicgo.dev/cursor
-# atomicgo.dev/keyboard v0.2.9
-## explicit; go 1.15
+# atomicgo.dev/keyboard v0.2.10
+## explicit; go 1.25.0
 atomicgo.dev/keyboard
 atomicgo.dev/keyboard/internal
 atomicgo.dev/keyboard/keys
@@ -35,9 +35,6 @@ github.com/go-viper/mapstructure/v2/internal/errors
 # github.com/google/uuid v1.6.0
 ## explicit
 github.com/google/uuid
-# github.com/gookit/color v1.6.0
-## explicit; go 1.18
-github.com/gookit/color
 # github.com/inconshreveable/mousetrap v1.1.0
 ## explicit; go 1.18
 github.com/inconshreveable/mousetrap
@@ -47,7 +44,7 @@ github.com/liamg/tml
 # github.com/lithammer/fuzzysearch v1.1.8
 ## explicit; go 1.15
 github.com/lithammer/fuzzysearch/fuzzy
-# github.com/mattn/go-runewidth v0.0.20
+# github.com/mattn/go-runewidth v0.0.24
 ## explicit; go 1.20
 github.com/mattn/go-runewidth
 # github.com/oapi-codegen/oapi-codegen/v2 v2.8.0
@@ -64,10 +61,11 @@ github.com/pelletier/go-toml/v2/internal/characters
 github.com/pelletier/go-toml/v2/internal/danger
 github.com/pelletier/go-toml/v2/internal/tracker
 github.com/pelletier/go-toml/v2/unstable
-# github.com/pterm/pterm v0.12.83
-## explicit; go 1.24.0
+# github.com/pterm/pterm v0.12.84
+## explicit; go 1.26.0
 github.com/pterm/pterm
 github.com/pterm/pterm/internal
+github.com/pterm/pterm/internal/color
 # github.com/rogpeppe/go-internal v1.12.0
 ## explicit; go 1.20
 # github.com/russross/blackfriday/v2 v2.1.0
@@ -108,19 +106,16 @@ github.com/spf13/viper/internal/features
 # github.com/subosito/gotenv v1.6.0
 ## explicit; go 1.18
 github.com/subosito/gotenv
-# github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e
-## explicit; go 1.19
-github.com/xo/terminfo
 # go.yaml.in/yaml/v3 v3.0.4
 ## explicit; go 1.16
 go.yaml.in/yaml/v3
-# golang.org/x/sys v0.41.0
-## explicit; go 1.24.0
+# golang.org/x/sys v0.44.0
+## explicit; go 1.25.0
 golang.org/x/sys/plan9
 golang.org/x/sys/unix
 golang.org/x/sys/windows
-# golang.org/x/term v0.40.0
-## explicit; go 1.24.0
+# golang.org/x/term v0.43.0
+## explicit; go 1.25.0
 golang.org/x/term
 # golang.org/x/text v0.40.0
 ## explicit; go 1.25.0
