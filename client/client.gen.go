@@ -10476,6 +10476,14 @@ type HostingV1CacheToggleCachelessModeRequest struct {
 	Enabled bool `json:"enabled"`
 }
 
+// HostingV1CdnCdnStatusResource defines model for Hosting.V1.Cdn.CdnStatusResource.
+type HostingV1CdnCdnStatusResource struct {
+	// IsEnabled Whether the Hostinger CDN is enabled for the website domain
+	//
+	// Example: true
+	IsEnabled bool `json:"is_enabled"`
+}
+
 // HostingV1CronJobsCreateCronJobRequest defines model for Hosting.V1.CronJobs.CreateCronJobRequest.
 type HostingV1CronJobsCreateCronJobRequest struct {
 	// Command Command to execute on the schedule.
@@ -22874,7 +22882,8 @@ type ClientInterface interface {
 	// Permanently clears all server-side cache for the website at once. Use it when content was
 	// updated and needs to be visible immediately, or after making major changes.
 	//
-	// Also purges the Hostinger CDN cache when CDN is enabled on the website. For a WordPress
+	// Also purges the Hostinger CDN cache when CDN is enabled on the website. To purge only the CDN
+	// cache and leave the server cache untouched, use `Purge CDN cache`. For a WordPress
 	// installation living in a subdirectory, pass the directory query parameter to clear its cache.
 	//
 	// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/cache/clear (the `HostingClearWebsiteCacheV1` operationId).
@@ -22931,6 +22940,61 @@ type ClientInterface interface {
 	//
 	// Corresponds with PATCH /api/hosting/v1/accounts/{username}/websites/{domain}/cacheless-mode/toggle (the `HostingToggleCachelessModeV1` operationId).
 	HostingToggleCachelessModeV1(ctx context.Context, username UsernamePath, domain Domain, body HostingToggleCachelessModeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingDisableCDNV1 Disable CDN
+	//
+	// Turns off the Hostinger CDN for the website domain. Once DNS propagation completes, the
+	// website content is served directly from the origin server. Repeating the call is safe; when
+	// CDN is already disabled, it applies the DNS change again.
+	//
+	// Returns 422 for platform-managed domains (for example `*.hostingersite.com` and
+	// `*.app-preview.com`), where CDN cannot be disabled, even when CDN is already off. Also returns
+	// 422 while the account is being moved to another server (retry after the move finishes), or
+	// when the CDN provider rejects the change. Returns 404 when the domain is not a website on the
+	// account.
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/cdn/disable (the `HostingDisableCDNV1` operationId).
+	HostingDisableCDNV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingEnableCDNV1 Enable CDN
+	//
+	// Turns on the Hostinger CDN for the website domain, which speeds up page loads and reduces the
+	// load on the server. Works for the main domain, parked domains and subdomains of the account.
+	//
+	// Enabling changes the domain's DNS records and usually takes a few seconds. After that, DNS
+	// propagation can take a few more minutes before visitors are served through the CDN.
+	//
+	// Repeating the call is safe, for example after a timeout. When CDN is already enabled, it
+	// applies the DNS change again and refreshes the CDN SSL certificate.
+	//
+	// Returns 422 when the account is disabled, while the account is being moved to another
+	// server (retry after the move finishes), or when the CDN provider rejects the change.
+	// Returns 404 when the domain is not a website on the account.
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/cdn/enable (the `HostingEnableCDNV1` operationId).
+	HostingEnableCDNV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingPurgeCDNCacheV1 Purge CDN cache
+	//
+	// Purges the website's content from the Hostinger CDN edge cache only. The origin server cache
+	// is not touched; to clear both, use `Clear website cache`.
+	//
+	// Returns 422 when CDN is not enabled on the website. Returns 404 when the domain is not a
+	// website on the account.
+	//
+	// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/cdn/purge (the `HostingPurgeCDNCacheV1` operationId).
+	HostingPurgeCDNCacheV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingGetCDNStatusV1 Get CDN status
+	//
+	// Returns whether the Hostinger CDN is enabled for the website domain. Works for the main
+	// domain, parked domains and subdomains of the account.
+	//
+	// The domain must be the exact website name as listed on the account, without a `www.` prefix.
+	// Returns 404 when the domain is not a website on the account.
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/cdn/status (the `HostingGetCDNStatusV1` operationId).
+	HostingGetCDNStatusV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingSetupWebsiteDatabaseV1WithBody Setup website database
 	//
@@ -32423,7 +32487,8 @@ func (c *Client) HostingGenerateGitSSHKeyV1(ctx context.Context, username Userna
 // Permanently clears all server-side cache for the website at once. Use it when content was
 // updated and needs to be visible immediately, or after making major changes.
 //
-// Also purges the Hostinger CDN cache when CDN is enabled on the website. For a WordPress
+// Also purges the Hostinger CDN cache when CDN is enabled on the website. To purge only the CDN
+// cache and leave the server cache untouched, use `Purge CDN cache`. For a WordPress
 // installation living in a subdirectory, pass the directory query parameter to clear its cache.
 //
 // Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/cache/clear (the `HostingClearWebsiteCacheV1` operationId).
@@ -32521,6 +32586,101 @@ func (c *Client) HostingToggleCachelessModeV1WithBody(ctx context.Context, usern
 // Corresponds with PATCH /api/hosting/v1/accounts/{username}/websites/{domain}/cacheless-mode/toggle (the `HostingToggleCachelessModeV1` operationId).
 func (c *Client) HostingToggleCachelessModeV1(ctx context.Context, username UsernamePath, domain Domain, body HostingToggleCachelessModeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingToggleCachelessModeV1Request(c.Server, username, domain, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingDisableCDNV1 Disable CDN
+//
+// Turns off the Hostinger CDN for the website domain. Once DNS propagation completes, the
+// website content is served directly from the origin server. Repeating the call is safe; when
+// CDN is already disabled, it applies the DNS change again.
+//
+// Returns 422 for platform-managed domains (for example `*.hostingersite.com` and
+// `*.app-preview.com`), where CDN cannot be disabled, even when CDN is already off. Also returns
+// 422 while the account is being moved to another server (retry after the move finishes), or
+// when the CDN provider rejects the change. Returns 404 when the domain is not a website on the
+// account.
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/cdn/disable (the `HostingDisableCDNV1` operationId).
+func (c *Client) HostingDisableCDNV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingDisableCDNV1Request(c.Server, username, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingEnableCDNV1 Enable CDN
+//
+// Turns on the Hostinger CDN for the website domain, which speeds up page loads and reduces the
+// load on the server. Works for the main domain, parked domains and subdomains of the account.
+//
+// Enabling changes the domain's DNS records and usually takes a few seconds. After that, DNS
+// propagation can take a few more minutes before visitors are served through the CDN.
+//
+// Repeating the call is safe, for example after a timeout. When CDN is already enabled, it
+// applies the DNS change again and refreshes the CDN SSL certificate.
+//
+// Returns 422 when the account is disabled, while the account is being moved to another
+// server (retry after the move finishes), or when the CDN provider rejects the change.
+// Returns 404 when the domain is not a website on the account.
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/cdn/enable (the `HostingEnableCDNV1` operationId).
+func (c *Client) HostingEnableCDNV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingEnableCDNV1Request(c.Server, username, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingPurgeCDNCacheV1 Purge CDN cache
+//
+// Purges the website's content from the Hostinger CDN edge cache only. The origin server cache
+// is not touched; to clear both, use `Clear website cache`.
+//
+// Returns 422 when CDN is not enabled on the website. Returns 404 when the domain is not a
+// website on the account.
+//
+// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/cdn/purge (the `HostingPurgeCDNCacheV1` operationId).
+func (c *Client) HostingPurgeCDNCacheV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingPurgeCDNCacheV1Request(c.Server, username, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingGetCDNStatusV1 Get CDN status
+//
+// Returns whether the Hostinger CDN is enabled for the website domain. Works for the main
+// domain, parked domains and subdomains of the account.
+//
+// The domain must be the exact website name as listed on the account, without a `www.` prefix.
+// Returns 404 when the domain is not a website on the account.
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/cdn/status (the `HostingGetCDNStatusV1` operationId).
+func (c *Client) HostingGetCDNStatusV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingGetCDNStatusV1Request(c.Server, username, domain)
 	if err != nil {
 		return nil, err
 	}
@@ -47885,6 +48045,170 @@ func NewHostingToggleCachelessModeV1RequestWithBody(server string, username User
 	}
 
 	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingDisableCDNV1Request constructs an http.Request for the HostingDisableCDNV1 method
+func NewHostingDisableCDNV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/cdn/disable", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingEnableCDNV1Request constructs an http.Request for the HostingEnableCDNV1 method
+func NewHostingEnableCDNV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/cdn/enable", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingPurgeCDNCacheV1Request constructs an http.Request for the HostingPurgeCDNCacheV1 method
+func NewHostingPurgeCDNCacheV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/cdn/purge", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingGetCDNStatusV1Request constructs an http.Request for the HostingGetCDNStatusV1 method
+func NewHostingGetCDNStatusV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/cdn/status", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 
 	return req, nil
 }
@@ -63692,7 +64016,8 @@ type ClientWithResponsesInterface interface {
 	// Permanently clears all server-side cache for the website at once. Use it when content was
 	// updated and needs to be visible immediately, or after making major changes.
 	//
-	// Also purges the Hostinger CDN cache when CDN is enabled on the website. For a WordPress
+	// Also purges the Hostinger CDN cache when CDN is enabled on the website. To purge only the CDN
+	// cache and leave the server cache untouched, use `Purge CDN cache`. For a WordPress
 	// installation living in a subdirectory, pass the directory query parameter to clear its cache.
 	//
 	// Returns a wrapper object for the known response body format(s).
@@ -63751,6 +64076,69 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with PATCH /api/hosting/v1/accounts/{username}/websites/{domain}/cacheless-mode/toggle (the `HostingToggleCachelessModeV1` operationId).
 	HostingToggleCachelessModeV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingToggleCachelessModeV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingToggleCachelessModeV1Response, error)
+
+	// HostingDisableCDNV1WithResponse Disable CDN
+	//
+	// Turns off the Hostinger CDN for the website domain. Once DNS propagation completes, the
+	// website content is served directly from the origin server. Repeating the call is safe; when
+	// CDN is already disabled, it applies the DNS change again.
+	//
+	// Returns 422 for platform-managed domains (for example `*.hostingersite.com` and
+	// `*.app-preview.com`), where CDN cannot be disabled, even when CDN is already off. Also returns
+	// 422 while the account is being moved to another server (retry after the move finishes), or
+	// when the CDN provider rejects the change. Returns 404 when the domain is not a website on the
+	// account.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/cdn/disable (the `HostingDisableCDNV1` operationId).
+	HostingDisableCDNV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingDisableCDNV1Response, error)
+
+	// HostingEnableCDNV1WithResponse Enable CDN
+	//
+	// Turns on the Hostinger CDN for the website domain, which speeds up page loads and reduces the
+	// load on the server. Works for the main domain, parked domains and subdomains of the account.
+	//
+	// Enabling changes the domain's DNS records and usually takes a few seconds. After that, DNS
+	// propagation can take a few more minutes before visitors are served through the CDN.
+	//
+	// Repeating the call is safe, for example after a timeout. When CDN is already enabled, it
+	// applies the DNS change again and refreshes the CDN SSL certificate.
+	//
+	// Returns 422 when the account is disabled, while the account is being moved to another
+	// server (retry after the move finishes), or when the CDN provider rejects the change.
+	// Returns 404 when the domain is not a website on the account.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/cdn/enable (the `HostingEnableCDNV1` operationId).
+	HostingEnableCDNV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingEnableCDNV1Response, error)
+
+	// HostingPurgeCDNCacheV1WithResponse Purge CDN cache
+	//
+	// Purges the website's content from the Hostinger CDN edge cache only. The origin server cache
+	// is not touched; to clear both, use `Clear website cache`.
+	//
+	// Returns 422 when CDN is not enabled on the website. Returns 404 when the domain is not a
+	// website on the account.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/cdn/purge (the `HostingPurgeCDNCacheV1` operationId).
+	HostingPurgeCDNCacheV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingPurgeCDNCacheV1Response, error)
+
+	// HostingGetCDNStatusV1WithResponse Get CDN status
+	//
+	// Returns whether the Hostinger CDN is enabled for the website domain. Works for the main
+	// domain, parked domains and subdomains of the account.
+	//
+	// The domain must be the exact website name as listed on the account, without a `www.` prefix.
+	// Returns 404 when the domain is not a website on the account.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/cdn/status (the `HostingGetCDNStatusV1` operationId).
+	HostingGetCDNStatusV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingGetCDNStatusV1Response, error)
 
 	// HostingSetupWebsiteDatabaseV1WithBodyWithResponse Setup website database
 	//
@@ -78011,6 +78399,247 @@ func (r HostingToggleCachelessModeV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingToggleCachelessModeV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingDisableCDNV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingDisableCDNV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingDisableCDNV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingDisableCDNV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingDisableCDNV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingDisableCDNV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingDisableCDNV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingDisableCDNV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingDisableCDNV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingEnableCDNV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingEnableCDNV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingEnableCDNV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingEnableCDNV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingEnableCDNV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingEnableCDNV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingEnableCDNV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingEnableCDNV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingEnableCDNV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingPurgeCDNCacheV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingPurgeCDNCacheV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingPurgeCDNCacheV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingPurgeCDNCacheV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingPurgeCDNCacheV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingPurgeCDNCacheV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingPurgeCDNCacheV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingPurgeCDNCacheV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingPurgeCDNCacheV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingGetCDNStatusV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1CdnCdnStatusResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingGetCDNStatusV1Response) GetJSON200() *HostingV1CdnCdnStatusResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingGetCDNStatusV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingGetCDNStatusV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingGetCDNStatusV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingGetCDNStatusV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingGetCDNStatusV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingGetCDNStatusV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -97937,7 +98566,8 @@ func (c *ClientWithResponses) HostingGenerateGitSSHKeyV1WithResponse(ctx context
 // Permanently clears all server-side cache for the website at once. Use it when content was
 // updated and needs to be visible immediately, or after making major changes.
 //
-// Also purges the Hostinger CDN cache when CDN is enabled on the website. For a WordPress
+// Also purges the Hostinger CDN cache when CDN is enabled on the website. To purge only the CDN
+// cache and leave the server cache untouched, use `Purge CDN cache`. For a WordPress
 // installation living in a subdirectory, pass the directory query parameter to clear its cache.
 //
 // Returns a wrapper object for the known response body format(s).
@@ -98025,6 +98655,93 @@ func (c *ClientWithResponses) HostingToggleCachelessModeV1WithResponse(ctx conte
 		return nil, err
 	}
 	return ParseHostingToggleCachelessModeV1Response(rsp)
+}
+
+// HostingDisableCDNV1WithResponse Disable CDN
+//
+// Turns off the Hostinger CDN for the website domain. Once DNS propagation completes, the
+// website content is served directly from the origin server. Repeating the call is safe; when
+// CDN is already disabled, it applies the DNS change again.
+//
+// Returns 422 for platform-managed domains (for example `*.hostingersite.com` and
+// `*.app-preview.com`), where CDN cannot be disabled, even when CDN is already off. Also returns
+// 422 while the account is being moved to another server (retry after the move finishes), or
+// when the CDN provider rejects the change. Returns 404 when the domain is not a website on the
+// account.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/cdn/disable (the `HostingDisableCDNV1` operationId).
+func (c *ClientWithResponses) HostingDisableCDNV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingDisableCDNV1Response, error) {
+	rsp, err := c.HostingDisableCDNV1(ctx, username, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingDisableCDNV1Response(rsp)
+}
+
+// HostingEnableCDNV1WithResponse Enable CDN
+//
+// Turns on the Hostinger CDN for the website domain, which speeds up page loads and reduces the
+// load on the server. Works for the main domain, parked domains and subdomains of the account.
+//
+// Enabling changes the domain's DNS records and usually takes a few seconds. After that, DNS
+// propagation can take a few more minutes before visitors are served through the CDN.
+//
+// Repeating the call is safe, for example after a timeout. When CDN is already enabled, it
+// applies the DNS change again and refreshes the CDN SSL certificate.
+//
+// Returns 422 when the account is disabled, while the account is being moved to another
+// server (retry after the move finishes), or when the CDN provider rejects the change.
+// Returns 404 when the domain is not a website on the account.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/cdn/enable (the `HostingEnableCDNV1` operationId).
+func (c *ClientWithResponses) HostingEnableCDNV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingEnableCDNV1Response, error) {
+	rsp, err := c.HostingEnableCDNV1(ctx, username, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingEnableCDNV1Response(rsp)
+}
+
+// HostingPurgeCDNCacheV1WithResponse Purge CDN cache
+//
+// Purges the website's content from the Hostinger CDN edge cache only. The origin server cache
+// is not touched; to clear both, use `Clear website cache`.
+//
+// Returns 422 when CDN is not enabled on the website. Returns 404 when the domain is not a
+// website on the account.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/cdn/purge (the `HostingPurgeCDNCacheV1` operationId).
+func (c *ClientWithResponses) HostingPurgeCDNCacheV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingPurgeCDNCacheV1Response, error) {
+	rsp, err := c.HostingPurgeCDNCacheV1(ctx, username, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingPurgeCDNCacheV1Response(rsp)
+}
+
+// HostingGetCDNStatusV1WithResponse Get CDN status
+//
+// Returns whether the Hostinger CDN is enabled for the website domain. Works for the main
+// domain, parked domains and subdomains of the account.
+//
+// The domain must be the exact website name as listed on the account, without a `www.` prefix.
+// Returns 404 when the domain is not a website on the account.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/cdn/status (the `HostingGetCDNStatusV1` operationId).
+func (c *ClientWithResponses) HostingGetCDNStatusV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingGetCDNStatusV1Response, error) {
+	rsp, err := c.HostingGetCDNStatusV1(ctx, username, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingGetCDNStatusV1Response(rsp)
 }
 
 // HostingSetupWebsiteDatabaseV1WithBodyWithResponse Setup website database
@@ -111975,6 +112692,187 @@ func ParseHostingToggleCachelessModeV1Response(rsp *http.Response) (*HostingTogg
 			return nil, err
 		}
 		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingDisableCDNV1Response parses an HTTP response from a HostingDisableCDNV1WithResponse call
+func ParseHostingDisableCDNV1Response(rsp *http.Response) (*HostingDisableCDNV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingDisableCDNV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingEnableCDNV1Response parses an HTTP response from a HostingEnableCDNV1WithResponse call
+func ParseHostingEnableCDNV1Response(rsp *http.Response) (*HostingEnableCDNV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingEnableCDNV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingPurgeCDNCacheV1Response parses an HTTP response from a HostingPurgeCDNCacheV1WithResponse call
+func ParseHostingPurgeCDNCacheV1Response(rsp *http.Response) (*HostingPurgeCDNCacheV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingPurgeCDNCacheV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingGetCDNStatusV1Response parses an HTTP response from a HostingGetCDNStatusV1WithResponse call
+func ParseHostingGetCDNStatusV1Response(rsp *http.Response) (*HostingGetCDNStatusV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingGetCDNStatusV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1CdnCdnStatusResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse

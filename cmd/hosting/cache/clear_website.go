@@ -13,7 +13,7 @@ import (
 var ClearWebsiteCmd = &cobra.Command{
 	Use:   "clear-website <username> <domain>",
 	Short: "Clear website cache",
-	Long:  "Permanently clears all server-side cache for the website at once. Use it when content was\nupdated and needs to be visible immediately, or after making major changes.\n\nAlso purges the Hostinger CDN cache when CDN is enabled on the website. For a WordPress\ninstallation living in a subdirectory, pass the directory query parameter to clear its cache.",
+	Long:  "Permanently clears all server-side cache for the website at once. Use it when content was\nupdated and needs to be visible immediately, or after making major changes.\n\nAlso purges the Hostinger CDN cache when CDN is enabled on the website. To purge only the CDN\ncache and leave the server cache untouched, use `Purge CDN cache`. For a WordPress\ninstallation living in a subdirectory, pass the directory query parameter to clear its cache.",
 	Args:  cobra.MatchAll(cobra.ExactArgs(2)),
 	Run: func(cmd *cobra.Command, args []string) {
 		r, err := api.Request().HostingClearWebsiteCacheV1WithResponse(context.TODO(), args[0], args[1], clearWebsiteParams(cmd))

@@ -19,6 +19,7 @@ Hosting commands
 
 * [hostinger](hostinger.md)	 - Hostinger API Command Line Interface
 * [hostinger hosting cache](hostinger_hosting_cache.md)	 - Cache commands
+* [hostinger hosting cdn](hostinger_hosting_cdn.md)	 - CDN commands
 * [hostinger hosting cron-jobs](hostinger_hosting_cron-jobs.md)	 - Cron Jobs commands
 * [hostinger hosting databases](hostinger_hosting_databases.md)	 - Databases commands
 * [hostinger hosting datacenters](hostinger_hosting_datacenters.md)	 - Datacenters commands
