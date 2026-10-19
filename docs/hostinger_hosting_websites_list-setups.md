@@ -16,8 +16,9 @@ wait for `status: completed` before uploading files, deploying or creating datab
 `failed` means the setup stopped before finishing or has not reported progress for
 over an hour. Setups older than 24 hours are not listed.
 
-`type` is the website type the setup was started with (`wordpress`, `headless_wordpress`,
-`headless_ecommerce`, `headless_pocketbase`), or `null` for an empty website.
+`type` is the website type the setup was started with (`wordpress`, `headless_empty`,
+`headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`), or `null` for an empty
+website.
 
 ```
 hostinger hosting websites list-setups [flags]
