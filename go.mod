@@ -1,6 +1,8 @@
 module github.com/hostinger/api-cli
 
-go 1.26.0
+go 1.27.0
+
+toolchain go1.27.3
 
 require (
 	github.com/aquasecurity/table v1.11.0
