@@ -1794,6 +1794,11 @@
     "method": "PATCH",
     "path": "/api/mail/v1/webhooks/{webhookId}"
   },
+  "reach_addFormSubmitterTagsV1": {
+    "command": "hostinger reach forms add-submitter-tags",
+    "method": "POST",
+    "path": "/api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/tags"
+  },
   "reach_assignAContactToATagV1": {
     "command": "hostinger reach tags assign-contact-to",
     "method": "POST",
@@ -1849,6 +1854,11 @@
     "method": "POST",
     "path": "/api/reach/v1/profiles/{profileUuid}/contacts/bulk"
   },
+  "reach_createFormV1": {
+    "command": "hostinger reach forms create",
+    "method": "POST",
+    "path": "/api/reach/v1/profiles/{profileUuid}/forms"
+  },
   "reach_createNewContactsV1": {
     "command": "hostinger reach contacts create-bulk",
     "method": "POST",
@@ -1893,6 +1903,11 @@
     "command": "hostinger reach profiles delete-sending-domain",
     "method": "DELETE",
     "path": "/api/reach/v1/profiles/{profileUuid}/domains"
+  },
+  "reach_duplicateFormV1": {
+    "command": "hostinger reach forms duplicate",
+    "method": "POST",
+    "path": "/api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/duplicate"
   },
   "reach_getAutomationDetailsV1": {
     "command": "hostinger reach automations get",
@@ -2049,6 +2064,11 @@
     "method": "DELETE",
     "path": "/api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts"
   },
+  "reach_removeFormSubmitterTagV1": {
+    "command": "hostinger reach forms remove-submitter-tag",
+    "method": "DELETE",
+    "path": "/api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/tags"
+  },
   "reach_renameATagV1": {
     "command": "hostinger reach tags rename",
     "method": "PATCH",
@@ -2068,6 +2088,16 @@
     "command": "hostinger reach segments update-profile",
     "method": "PUT",
     "path": "/api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}"
+  },
+  "reach_updateFormTemplateV1": {
+    "command": "hostinger reach forms update-template",
+    "method": "PATCH",
+    "path": "/api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/template"
+  },
+  "reach_updateFormV1": {
+    "command": "hostinger reach forms update",
+    "method": "PATCH",
+    "path": "/api/reach/v1/profiles/{profileUuid}/forms/{formUuid}"
   },
   "reach_updateProfileSettingsV1": {
     "command": "hostinger reach profiles update-settings",

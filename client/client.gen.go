@@ -3864,6 +3864,45 @@ func (e ReachV1FormsFormTagResourceType) Valid() bool {
 	}
 }
 
+// Defines values for ReachV1FormsFormTemplateVersionResourceEditType.
+const (
+	ReachV1FormsFormTemplateVersionResourceEditTypeAi     ReachV1FormsFormTemplateVersionResourceEditType = "ai"
+	ReachV1FormsFormTemplateVersionResourceEditTypeManual ReachV1FormsFormTemplateVersionResourceEditType = "manual"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1FormsFormTemplateVersionResourceEditType enum.
+func (e ReachV1FormsFormTemplateVersionResourceEditType) Valid() bool {
+	switch e {
+	case ReachV1FormsFormTemplateVersionResourceEditTypeAi:
+		return true
+	case ReachV1FormsFormTemplateVersionResourceEditTypeManual:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1FormsUpdateRequestStatus.
+const (
+	ReachV1FormsUpdateRequestStatusActive ReachV1FormsUpdateRequestStatus = "active"
+	ReachV1FormsUpdateRequestStatusDraft  ReachV1FormsUpdateRequestStatus = "draft"
+	ReachV1FormsUpdateRequestStatusPaused ReachV1FormsUpdateRequestStatus = "paused"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1FormsUpdateRequestStatus enum.
+func (e ReachV1FormsUpdateRequestStatus) Valid() bool {
+	switch e {
+	case ReachV1FormsUpdateRequestStatusActive:
+		return true
+	case ReachV1FormsUpdateRequestStatusDraft:
+		return true
+	case ReachV1FormsUpdateRequestStatusPaused:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for ReachV1ProfilesDomainsSendingDomainResourceStatus.
 const (
 	ReachV1ProfilesDomainsSendingDomainResourceStatusActive   ReachV1ProfilesDomainsSendingDomainResourceStatus = "active"
@@ -5979,6 +6018,27 @@ func (e ReachListProfileContactsV1ParamsSubscriptionStatus) Valid() bool {
 	case ReachListProfileContactsV1ParamsSubscriptionStatusSubscribed:
 		return true
 	case ReachListProfileContactsV1ParamsSubscriptionStatusUnsubscribed:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachListFormsV1ParamsStatus.
+const (
+	ReachListFormsV1ParamsStatusActive ReachListFormsV1ParamsStatus = "active"
+	ReachListFormsV1ParamsStatusDraft  ReachListFormsV1ParamsStatus = "draft"
+	ReachListFormsV1ParamsStatusPaused ReachListFormsV1ParamsStatus = "paused"
+)
+
+// Valid indicates whether the value is a known member of the ReachListFormsV1ParamsStatus enum.
+func (e ReachListFormsV1ParamsStatus) Valid() bool {
+	switch e {
+	case ReachListFormsV1ParamsStatusActive:
+		return true
+	case ReachListFormsV1ParamsStatusDraft:
+		return true
+	case ReachListFormsV1ParamsStatusPaused:
 		return true
 	default:
 		return false
@@ -14793,6 +14853,12 @@ type ReachV1ContactsUpdateRequest struct {
 // ReachV1ContactsUpdateRequestSubscriptionStatus Example: subscribed
 type ReachV1ContactsUpdateRequestSubscriptionStatus string
 
+// ReachV1FormsAssignTagsRequest Tags every future submitter of the form receives
+type ReachV1FormsAssignTagsRequest struct {
+	// TagUuids Example: ["550e8400-e29b-41d4-a716-446655440000"]
+	TagUuids []string `json:"tag_uuids"`
+}
+
 // ReachV1FormsFormCollection Array of [`Reach.V1.Forms.FormResource`](#model/reachv1formsformresource)
 type ReachV1FormsFormCollection = []ReachV1FormsFormResource
 
@@ -14921,6 +14987,75 @@ type ReachV1FormsFormTemplateResource struct {
 
 	// Uuid Example: 2080cc86-e026-4f7b-9598-d4132f8c7c2f
 	Uuid *string `json:"uuid,omitempty"`
+}
+
+// ReachV1FormsFormTemplateVersionResource The stored version of a saved form design.
+type ReachV1FormsFormTemplateVersionResource struct {
+	// CreatedAt Example: 2025-02-27T11:54:22Z
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// EditType Whether the design was saved by hand or by the AI builder.
+	//
+	// Example: manual
+	EditType *ReachV1FormsFormTemplateVersionResourceEditType `json:"edit_type,omitempty"`
+
+	// Path Storage path of the template HTML, relative to the storage directory of this profile.
+	//
+	// Example: forms/8f2c1b9e-1f4a-4a1e-9a2b-2f3c4d5e6f70/9a1b2c3d.html
+	Path *string `json:"path,omitempty"`
+
+	// UpdatedAt Example: 2025-03-04T09:12:07Z
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+
+	// Uuid Example: 2080cc86-e026-4f7b-9598-d4132f8c7c2f
+	Uuid *string `json:"uuid,omitempty"`
+}
+
+// ReachV1FormsFormTemplateVersionResourceEditType Whether the design was saved by hand or by the AI builder.
+//
+// Example: manual
+type ReachV1FormsFormTemplateVersionResourceEditType string
+
+// ReachV1FormsRemoveTagRequest Tag the form stops applying to future submitters
+type ReachV1FormsRemoveTagRequest struct {
+	// TagUuid Example: 550e8400-e29b-41d4-a716-446655440000
+	TagUuid string `json:"tag_uuid"`
+}
+
+// ReachV1FormsStoreRequest Create a draft form
+type ReachV1FormsStoreRequest struct {
+	// Name Form name. Letters, digits, spaces and - . ' _ only.
+	//
+	// Example: Newsletter signup
+	Name string `json:"name"`
+}
+
+// ReachV1FormsUpdateRequest Rename a form and/or change its status. Send at least one field.
+type ReachV1FormsUpdateRequest struct {
+	// Name Form name. Letters, digits, spaces and - . ' _ only.
+	//
+	// Example: Newsletter signup
+	Name *string `json:"name,omitempty"`
+
+	// Status `active` takes the form live, `paused` and `draft` stop it accepting submissions.
+	//
+	// Example: active
+	Status *ReachV1FormsUpdateRequestStatus `json:"status,omitempty"`
+}
+
+// ReachV1FormsUpdateRequestStatus `active` takes the form live, `paused` and `draft` stop it accepting submissions.
+//
+// Example: active
+type ReachV1FormsUpdateRequestStatus string
+
+// ReachV1FormsUpdateTemplateRequest Save the design of a form
+type ReachV1FormsUpdateTemplateRequest struct {
+	// Content HTML of the form design. After sanitizing it must still contain a form container
+	// (`data-reach-form`), an email input (`data-reach-field="email"`) and a submit button
+	// (`data-reach-submit`).
+	//
+	// Example: <form data-reach-form><input type="email" name="email" data-reach-field="email" /><button type="submit" data-reach-submit>Subscribe</button></form>
+	Content string `json:"content"`
 }
 
 // ReachV1ProfilesDomainsConnectRequest Sending domain to connect to the profile
@@ -18536,7 +18671,13 @@ type ReachListFormsV1Params struct {
 
 	// PerPage Number of items per page
 	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
+
+	// Status Return only forms with this status.
+	Status *ReachListFormsV1ParamsStatus `form:"status,omitempty" json:"status,omitempty"`
 }
+
+// ReachListFormsV1ParamsStatus defines parameters for ReachListFormsV1.
+type ReachListFormsV1ParamsStatus string
 
 // ReachListProfileSegmentsV1Params defines parameters for ReachListProfileSegmentsV1.
 type ReachListProfileSegmentsV1Params struct {
@@ -18967,6 +19108,21 @@ type ReachDeleteSendingDomainV1JSONRequestBody = ReachV1ProfilesDomainsDisconnec
 
 // ReachConnectSendingDomainV1JSONRequestBody defines body for ReachConnectSendingDomainV1 for application/json ContentType.
 type ReachConnectSendingDomainV1JSONRequestBody = ReachV1ProfilesDomainsConnectRequest
+
+// ReachCreateFormV1JSONRequestBody defines body for ReachCreateFormV1 for application/json ContentType.
+type ReachCreateFormV1JSONRequestBody = ReachV1FormsStoreRequest
+
+// ReachUpdateFormV1JSONRequestBody defines body for ReachUpdateFormV1 for application/json ContentType.
+type ReachUpdateFormV1JSONRequestBody = ReachV1FormsUpdateRequest
+
+// ReachRemoveFormSubmitterTagV1JSONRequestBody defines body for ReachRemoveFormSubmitterTagV1 for application/json ContentType.
+type ReachRemoveFormSubmitterTagV1JSONRequestBody = ReachV1FormsRemoveTagRequest
+
+// ReachAddFormSubmitterTagsV1JSONRequestBody defines body for ReachAddFormSubmitterTagsV1 for application/json ContentType.
+type ReachAddFormSubmitterTagsV1JSONRequestBody = ReachV1FormsAssignTagsRequest
+
+// ReachUpdateFormTemplateV1JSONRequestBody defines body for ReachUpdateFormTemplateV1 for application/json ContentType.
+type ReachUpdateFormTemplateV1JSONRequestBody = ReachV1FormsUpdateTemplateRequest
 
 // ReachPreviewContactsMatchingConditionsV1JSONRequestBody defines body for ReachPreviewContactsMatchingConditionsV1 for application/json ContentType.
 type ReachPreviewContactsMatchingConditionsV1JSONRequestBody = ReachV1ContactsSegmentsProfileFilterContactsRequest
@@ -26118,6 +26274,32 @@ type ClientInterface interface {
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/forms (the `ReachListFormsV1` operationId).
 	ReachListFormsV1(ctx context.Context, profileUuid ProfileUuid, params *ReachListFormsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ReachCreateFormV1WithBody Create form
+	//
+	// Create an empty draft form.
+	//
+	// Reach also adds an automatic `form:{name}` tag that every submitter receives. A draft has no design
+	// and is not reachable by visitors: save a design with the update form template operation, then take
+	// the form live by setting its status to `active`. Creating a form does not consume AI credits.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/forms (the `ReachCreateFormV1` operationId).
+	ReachCreateFormV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachCreateFormV1 Create form
+	//
+	// Create an empty draft form.
+	//
+	// Reach also adds an automatic `form:{name}` tag that every submitter receives. A draft has no design
+	// and is not reachable by visitors: save a design with the update form template operation, then take
+	// the form live by setting its status to `active`. Creating a form does not consume AI credits.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/forms (the `ReachCreateFormV1` operationId).
+	ReachCreateFormV1(ctx context.Context, profileUuid ProfileUuid, body ReachCreateFormV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ReachDeleteFormV1 Delete form
 	//
 	// Permanently delete a form together with its template.
@@ -26139,6 +26321,136 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/forms/{formUuid} (the `ReachGetFormDetailsV1` operationId).
 	ReachGetFormDetailsV1(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachUpdateFormV1WithBody Update form
+	//
+	// Rename a form and/or change its status.
+	//
+	// Setting a `draft` or `paused` form to `active` takes it live: its latest saved design is published
+	// and visitors can submit it. `paused` and `draft` stop the form from accepting submissions. A form is
+	// not reachable by visitors until it is taken live. Design changes saved while the form is already
+	// `active` stay unpublished until the form is paused and set to `active` again. Renaming does not rename
+	// the automatic `form:{name}` tag.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/forms/{formUuid} (the `ReachUpdateFormV1` operationId).
+	ReachUpdateFormV1WithBody(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachUpdateFormV1 Update form
+	//
+	// Rename a form and/or change its status.
+	//
+	// Setting a `draft` or `paused` form to `active` takes it live: its latest saved design is published
+	// and visitors can submit it. `paused` and `draft` stop the form from accepting submissions. A form is
+	// not reachable by visitors until it is taken live. Design changes saved while the form is already
+	// `active` stay unpublished until the form is paused and set to `active` again. Renaming does not rename
+	// the automatic `form:{name}` tag.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/forms/{formUuid} (the `ReachUpdateFormV1` operationId).
+	ReachUpdateFormV1(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, body ReachUpdateFormV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachDuplicateFormV1 Duplicate form
+	//
+	// Copy a form into a new draft form with the same name and design.
+	//
+	// The copy shares the source's automatic `form:{name}` tag; other submitter tags are not copied. The
+	// copy is not live until its status is set to `active`.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/duplicate (the `ReachDuplicateFormV1` operationId).
+	ReachDuplicateFormV1(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachRemoveFormSubmitterTagV1WithBody Remove form submitter tag
+	//
+	// Stop a form from applying a tag to its future submitters.
+	//
+	// Succeeds also when the form did not have the tag. Contacts who already received the tag keep it, and
+	// the tag itself is not deleted. The automatic `form:{name}` tag cannot be removed and is rejected with
+	// a conflict.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/tags (the `ReachRemoveFormSubmitterTagV1` operationId).
+	ReachRemoveFormSubmitterTagV1WithBody(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachRemoveFormSubmitterTagV1 Remove form submitter tag
+	//
+	// Stop a form from applying a tag to its future submitters.
+	//
+	// Succeeds also when the form did not have the tag. Contacts who already received the tag keep it, and
+	// the tag itself is not deleted. The automatic `form:{name}` tag cannot be removed and is rejected with
+	// a conflict.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/tags (the `ReachRemoveFormSubmitterTagV1` operationId).
+	ReachRemoveFormSubmitterTagV1(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, body ReachRemoveFormSubmitterTagV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachAddFormSubmitterTagsV1WithBody Add form submitter tags
+	//
+	// Add tags to a form so that every contact who submits it from now on receives them.
+	//
+	// A tag the form already has is skipped; an unknown tag is rejected. Contacts who submitted earlier are
+	// not tagged.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/tags (the `ReachAddFormSubmitterTagsV1` operationId).
+	ReachAddFormSubmitterTagsV1WithBody(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachAddFormSubmitterTagsV1 Add form submitter tags
+	//
+	// Add tags to a form so that every contact who submits it from now on receives them.
+	//
+	// A tag the form already has is skipped; an unknown tag is rejected. Contacts who submitted earlier are
+	// not tagged.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/tags (the `ReachAddFormSubmitterTagsV1` operationId).
+	ReachAddFormSubmitterTagsV1(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, body ReachAddFormSubmitterTagsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachUpdateFormTemplateV1WithBody Update form template
+	//
+	// Save `content` as the latest design of a form and return the stored version.
+	//
+	// The HTML is sanitized and, unless the plan allows removing it, the Reach signature is added. Visitors
+	// submit the form with an `email` field (required) and optional `name`, `surname` and `phone`. After
+	// sanitizing, the design must contain a form container (`data-reach-form`), an email input
+	// (`data-reach-field="email"`) and a submit button (`data-reach-submit`); otherwise the request fails
+	// with `422` and `errors.content` lists `missing_form_container`, `missing_email_field` and/or
+	// `missing_submit_button`.
+	//
+	// A `draft` or `paused` form stays unreachable until its status is set to `active`, which publishes this
+	// design. On a form that is already `active` the saved design is not public until the form is paused and
+	// set to `active` again. Saving a design does not consume AI credits.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/template (the `ReachUpdateFormTemplateV1` operationId).
+	ReachUpdateFormTemplateV1WithBody(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachUpdateFormTemplateV1 Update form template
+	//
+	// Save `content` as the latest design of a form and return the stored version.
+	//
+	// The HTML is sanitized and, unless the plan allows removing it, the Reach signature is added. Visitors
+	// submit the form with an `email` field (required) and optional `name`, `surname` and `phone`. After
+	// sanitizing, the design must contain a form container (`data-reach-form`), an email input
+	// (`data-reach-field="email"`) and a submit button (`data-reach-submit`); otherwise the request fails
+	// with `422` and `errors.content` lists `missing_form_container`, `missing_email_field` and/or
+	// `missing_submit_button`.
+	//
+	// A `draft` or `paused` form stays unreachable until its status is set to `active`, which publishes this
+	// design. On a form that is already `active` the saved design is not public until the form is paused and
+	// set to `active` again. Saving a design does not consume AI credits.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/template (the `ReachUpdateFormTemplateV1` operationId).
+	ReachUpdateFormTemplateV1(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, body ReachUpdateFormTemplateV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReachGetRemainingPlanLimitsV1 Get remaining plan limits
 	//
@@ -38010,6 +38322,52 @@ func (c *Client) ReachListFormsV1(ctx context.Context, profileUuid ProfileUuid, 
 	return c.Client.Do(req)
 }
 
+// ReachCreateFormV1WithBody Create form
+//
+// Create an empty draft form.
+//
+// Reach also adds an automatic `form:{name}` tag that every submitter receives. A draft has no design
+// and is not reachable by visitors: save a design with the update form template operation, then take
+// the form live by setting its status to `active`. Creating a form does not consume AI credits.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/forms (the `ReachCreateFormV1` operationId).
+func (c *Client) ReachCreateFormV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachCreateFormV1RequestWithBody(c.Server, profileUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachCreateFormV1 Create form
+//
+// Create an empty draft form.
+//
+// Reach also adds an automatic `form:{name}` tag that every submitter receives. A draft has no design
+// and is not reachable by visitors: save a design with the update form template operation, then take
+// the form live by setting its status to `active`. Creating a form does not consume AI credits.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/forms (the `ReachCreateFormV1` operationId).
+func (c *Client) ReachCreateFormV1(ctx context.Context, profileUuid ProfileUuid, body ReachCreateFormV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachCreateFormV1Request(c.Server, profileUuid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // ReachDeleteFormV1 Delete form
 //
 // Permanently delete a form together with its template.
@@ -38042,6 +38400,226 @@ func (c *Client) ReachDeleteFormV1(ctx context.Context, profileUuid ProfileUuid,
 // Corresponds with GET /api/reach/v1/profiles/{profileUuid}/forms/{formUuid} (the `ReachGetFormDetailsV1` operationId).
 func (c *Client) ReachGetFormDetailsV1(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReachGetFormDetailsV1Request(c.Server, profileUuid, formUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachUpdateFormV1WithBody Update form
+//
+// Rename a form and/or change its status.
+//
+// Setting a `draft` or `paused` form to `active` takes it live: its latest saved design is published
+// and visitors can submit it. `paused` and `draft` stop the form from accepting submissions. A form is
+// not reachable by visitors until it is taken live. Design changes saved while the form is already
+// `active` stay unpublished until the form is paused and set to `active` again. Renaming does not rename
+// the automatic `form:{name}` tag.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/forms/{formUuid} (the `ReachUpdateFormV1` operationId).
+func (c *Client) ReachUpdateFormV1WithBody(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachUpdateFormV1RequestWithBody(c.Server, profileUuid, formUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachUpdateFormV1 Update form
+//
+// Rename a form and/or change its status.
+//
+// Setting a `draft` or `paused` form to `active` takes it live: its latest saved design is published
+// and visitors can submit it. `paused` and `draft` stop the form from accepting submissions. A form is
+// not reachable by visitors until it is taken live. Design changes saved while the form is already
+// `active` stay unpublished until the form is paused and set to `active` again. Renaming does not rename
+// the automatic `form:{name}` tag.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/forms/{formUuid} (the `ReachUpdateFormV1` operationId).
+func (c *Client) ReachUpdateFormV1(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, body ReachUpdateFormV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachUpdateFormV1Request(c.Server, profileUuid, formUuid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachDuplicateFormV1 Duplicate form
+//
+// Copy a form into a new draft form with the same name and design.
+//
+// The copy shares the source's automatic `form:{name}` tag; other submitter tags are not copied. The
+// copy is not live until its status is set to `active`.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/duplicate (the `ReachDuplicateFormV1` operationId).
+func (c *Client) ReachDuplicateFormV1(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachDuplicateFormV1Request(c.Server, profileUuid, formUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachRemoveFormSubmitterTagV1WithBody Remove form submitter tag
+//
+// Stop a form from applying a tag to its future submitters.
+//
+// Succeeds also when the form did not have the tag. Contacts who already received the tag keep it, and
+// the tag itself is not deleted. The automatic `form:{name}` tag cannot be removed and is rejected with
+// a conflict.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/tags (the `ReachRemoveFormSubmitterTagV1` operationId).
+func (c *Client) ReachRemoveFormSubmitterTagV1WithBody(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachRemoveFormSubmitterTagV1RequestWithBody(c.Server, profileUuid, formUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachRemoveFormSubmitterTagV1 Remove form submitter tag
+//
+// Stop a form from applying a tag to its future submitters.
+//
+// Succeeds also when the form did not have the tag. Contacts who already received the tag keep it, and
+// the tag itself is not deleted. The automatic `form:{name}` tag cannot be removed and is rejected with
+// a conflict.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/tags (the `ReachRemoveFormSubmitterTagV1` operationId).
+func (c *Client) ReachRemoveFormSubmitterTagV1(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, body ReachRemoveFormSubmitterTagV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachRemoveFormSubmitterTagV1Request(c.Server, profileUuid, formUuid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachAddFormSubmitterTagsV1WithBody Add form submitter tags
+//
+// Add tags to a form so that every contact who submits it from now on receives them.
+//
+// A tag the form already has is skipped; an unknown tag is rejected. Contacts who submitted earlier are
+// not tagged.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/tags (the `ReachAddFormSubmitterTagsV1` operationId).
+func (c *Client) ReachAddFormSubmitterTagsV1WithBody(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachAddFormSubmitterTagsV1RequestWithBody(c.Server, profileUuid, formUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachAddFormSubmitterTagsV1 Add form submitter tags
+//
+// Add tags to a form so that every contact who submits it from now on receives them.
+//
+// A tag the form already has is skipped; an unknown tag is rejected. Contacts who submitted earlier are
+// not tagged.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/tags (the `ReachAddFormSubmitterTagsV1` operationId).
+func (c *Client) ReachAddFormSubmitterTagsV1(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, body ReachAddFormSubmitterTagsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachAddFormSubmitterTagsV1Request(c.Server, profileUuid, formUuid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachUpdateFormTemplateV1WithBody Update form template
+//
+// Save `content` as the latest design of a form and return the stored version.
+//
+// The HTML is sanitized and, unless the plan allows removing it, the Reach signature is added. Visitors
+// submit the form with an `email` field (required) and optional `name`, `surname` and `phone`. After
+// sanitizing, the design must contain a form container (`data-reach-form`), an email input
+// (`data-reach-field="email"`) and a submit button (`data-reach-submit`); otherwise the request fails
+// with `422` and `errors.content` lists `missing_form_container`, `missing_email_field` and/or
+// `missing_submit_button`.
+//
+// A `draft` or `paused` form stays unreachable until its status is set to `active`, which publishes this
+// design. On a form that is already `active` the saved design is not public until the form is paused and
+// set to `active` again. Saving a design does not consume AI credits.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/template (the `ReachUpdateFormTemplateV1` operationId).
+func (c *Client) ReachUpdateFormTemplateV1WithBody(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachUpdateFormTemplateV1RequestWithBody(c.Server, profileUuid, formUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachUpdateFormTemplateV1 Update form template
+//
+// Save `content` as the latest design of a form and return the stored version.
+//
+// The HTML is sanitized and, unless the plan allows removing it, the Reach signature is added. Visitors
+// submit the form with an `email` field (required) and optional `name`, `surname` and `phone`. After
+// sanitizing, the design must contain a form container (`data-reach-form`), an email input
+// (`data-reach-field="email"`) and a submit button (`data-reach-submit`); otherwise the request fails
+// with `422` and `errors.content` lists `missing_form_container`, `missing_email_field` and/or
+// `missing_submit_button`.
+//
+// A `draft` or `paused` form stays unreachable until its status is set to `active`, which publishes this
+// design. On a form that is already `active` the saved design is not public until the form is paused and
+// set to `active` again. Saving a design does not consume AI credits.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/template (the `ReachUpdateFormTemplateV1` operationId).
+func (c *Client) ReachUpdateFormTemplateV1(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, body ReachUpdateFormTemplateV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachUpdateFormTemplateV1Request(c.Server, profileUuid, formUuid, body)
 	if err != nil {
 		return nil, err
 	}
@@ -57001,6 +57579,18 @@ func NewReachListFormsV1Request(server string, profileUuid ProfileUuid, params *
 
 		}
 
+		if params.Status != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "status", *params.Status, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
 		if encoded := queryValues.Encode(); encoded != "" {
 			rawQueryFragments = append(rawQueryFragments, encoded)
 		}
@@ -57011,6 +57601,53 @@ func NewReachListFormsV1Request(server string, profileUuid ProfileUuid, params *
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewReachCreateFormV1Request calls the generic ReachCreateFormV1 builder with application/json body
+func NewReachCreateFormV1Request(server string, profileUuid ProfileUuid, body ReachCreateFormV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachCreateFormV1RequestWithBody(server, profileUuid, "application/json", bodyReader)
+}
+
+// NewReachCreateFormV1RequestWithBody constructs an http.Request for the ReachCreateFormV1 method, with any body, and a specified content type
+func NewReachCreateFormV1RequestWithBody(server string, profileUuid ProfileUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/forms", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -57093,6 +57730,263 @@ func NewReachGetFormDetailsV1Request(server string, profileUuid ProfileUuid, for
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewReachUpdateFormV1Request calls the generic ReachUpdateFormV1 builder with application/json body
+func NewReachUpdateFormV1Request(server string, profileUuid ProfileUuid, formUuid FormUuid, body ReachUpdateFormV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachUpdateFormV1RequestWithBody(server, profileUuid, formUuid, "application/json", bodyReader)
+}
+
+// NewReachUpdateFormV1RequestWithBody constructs an http.Request for the ReachUpdateFormV1 method, with any body, and a specified content type
+func NewReachUpdateFormV1RequestWithBody(server string, profileUuid ProfileUuid, formUuid FormUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "formUuid", formUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/forms/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewReachDuplicateFormV1Request constructs an http.Request for the ReachDuplicateFormV1 method
+func NewReachDuplicateFormV1Request(server string, profileUuid ProfileUuid, formUuid FormUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "formUuid", formUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/forms/%s/duplicate", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachRemoveFormSubmitterTagV1Request calls the generic ReachRemoveFormSubmitterTagV1 builder with application/json body
+func NewReachRemoveFormSubmitterTagV1Request(server string, profileUuid ProfileUuid, formUuid FormUuid, body ReachRemoveFormSubmitterTagV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachRemoveFormSubmitterTagV1RequestWithBody(server, profileUuid, formUuid, "application/json", bodyReader)
+}
+
+// NewReachRemoveFormSubmitterTagV1RequestWithBody constructs an http.Request for the ReachRemoveFormSubmitterTagV1 method, with any body, and a specified content type
+func NewReachRemoveFormSubmitterTagV1RequestWithBody(server string, profileUuid ProfileUuid, formUuid FormUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "formUuid", formUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/forms/%s/tags", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewReachAddFormSubmitterTagsV1Request calls the generic ReachAddFormSubmitterTagsV1 builder with application/json body
+func NewReachAddFormSubmitterTagsV1Request(server string, profileUuid ProfileUuid, formUuid FormUuid, body ReachAddFormSubmitterTagsV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachAddFormSubmitterTagsV1RequestWithBody(server, profileUuid, formUuid, "application/json", bodyReader)
+}
+
+// NewReachAddFormSubmitterTagsV1RequestWithBody constructs an http.Request for the ReachAddFormSubmitterTagsV1 method, with any body, and a specified content type
+func NewReachAddFormSubmitterTagsV1RequestWithBody(server string, profileUuid ProfileUuid, formUuid FormUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "formUuid", formUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/forms/%s/tags", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewReachUpdateFormTemplateV1Request calls the generic ReachUpdateFormTemplateV1 builder with application/json body
+func NewReachUpdateFormTemplateV1Request(server string, profileUuid ProfileUuid, formUuid FormUuid, body ReachUpdateFormTemplateV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachUpdateFormTemplateV1RequestWithBody(server, profileUuid, formUuid, "application/json", bodyReader)
+}
+
+// NewReachUpdateFormTemplateV1RequestWithBody constructs an http.Request for the ReachUpdateFormTemplateV1 method, with any body, and a specified content type
+func NewReachUpdateFormTemplateV1RequestWithBody(server string, profileUuid ProfileUuid, formUuid FormUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "formUuid", formUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/forms/%s/template", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -67462,6 +68356,32 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/forms (the `ReachListFormsV1` operationId).
 	ReachListFormsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, params *ReachListFormsV1Params, reqEditors ...RequestEditorFn) (*ReachListFormsV1Response, error)
 
+	// ReachCreateFormV1WithBodyWithResponse Create form
+	//
+	// Create an empty draft form.
+	//
+	// Reach also adds an automatic `form:{name}` tag that every submitter receives. A draft has no design
+	// and is not reachable by visitors: save a design with the update form template operation, then take
+	// the form live by setting its status to `active`. Creating a form does not consume AI credits.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/forms (the `ReachCreateFormV1` operationId).
+	ReachCreateFormV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachCreateFormV1Response, error)
+
+	// ReachCreateFormV1WithResponse Create form
+	//
+	// Create an empty draft form.
+	//
+	// Reach also adds an automatic `form:{name}` tag that every submitter receives. A draft has no design
+	// and is not reachable by visitors: save a design with the update form template operation, then take
+	// the form live by setting its status to `active`. Creating a form does not consume AI credits.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/forms (the `ReachCreateFormV1` operationId).
+	ReachCreateFormV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachCreateFormV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachCreateFormV1Response, error)
+
 	// ReachDeleteFormV1WithResponse Delete form
 	//
 	// Permanently delete a form together with its template.
@@ -67487,6 +68407,138 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/forms/{formUuid} (the `ReachGetFormDetailsV1` operationId).
 	ReachGetFormDetailsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, reqEditors ...RequestEditorFn) (*ReachGetFormDetailsV1Response, error)
+
+	// ReachUpdateFormV1WithBodyWithResponse Update form
+	//
+	// Rename a form and/or change its status.
+	//
+	// Setting a `draft` or `paused` form to `active` takes it live: its latest saved design is published
+	// and visitors can submit it. `paused` and `draft` stop the form from accepting submissions. A form is
+	// not reachable by visitors until it is taken live. Design changes saved while the form is already
+	// `active` stay unpublished until the form is paused and set to `active` again. Renaming does not rename
+	// the automatic `form:{name}` tag.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/forms/{formUuid} (the `ReachUpdateFormV1` operationId).
+	ReachUpdateFormV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachUpdateFormV1Response, error)
+
+	// ReachUpdateFormV1WithResponse Update form
+	//
+	// Rename a form and/or change its status.
+	//
+	// Setting a `draft` or `paused` form to `active` takes it live: its latest saved design is published
+	// and visitors can submit it. `paused` and `draft` stop the form from accepting submissions. A form is
+	// not reachable by visitors until it is taken live. Design changes saved while the form is already
+	// `active` stay unpublished until the form is paused and set to `active` again. Renaming does not rename
+	// the automatic `form:{name}` tag.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/forms/{formUuid} (the `ReachUpdateFormV1` operationId).
+	ReachUpdateFormV1WithResponse(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, body ReachUpdateFormV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachUpdateFormV1Response, error)
+
+	// ReachDuplicateFormV1WithResponse Duplicate form
+	//
+	// Copy a form into a new draft form with the same name and design.
+	//
+	// The copy shares the source's automatic `form:{name}` tag; other submitter tags are not copied. The
+	// copy is not live until its status is set to `active`.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/duplicate (the `ReachDuplicateFormV1` operationId).
+	ReachDuplicateFormV1WithResponse(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, reqEditors ...RequestEditorFn) (*ReachDuplicateFormV1Response, error)
+
+	// ReachRemoveFormSubmitterTagV1WithBodyWithResponse Remove form submitter tag
+	//
+	// Stop a form from applying a tag to its future submitters.
+	//
+	// Succeeds also when the form did not have the tag. Contacts who already received the tag keep it, and
+	// the tag itself is not deleted. The automatic `form:{name}` tag cannot be removed and is rejected with
+	// a conflict.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/tags (the `ReachRemoveFormSubmitterTagV1` operationId).
+	ReachRemoveFormSubmitterTagV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachRemoveFormSubmitterTagV1Response, error)
+
+	// ReachRemoveFormSubmitterTagV1WithResponse Remove form submitter tag
+	//
+	// Stop a form from applying a tag to its future submitters.
+	//
+	// Succeeds also when the form did not have the tag. Contacts who already received the tag keep it, and
+	// the tag itself is not deleted. The automatic `form:{name}` tag cannot be removed and is rejected with
+	// a conflict.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/tags (the `ReachRemoveFormSubmitterTagV1` operationId).
+	ReachRemoveFormSubmitterTagV1WithResponse(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, body ReachRemoveFormSubmitterTagV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachRemoveFormSubmitterTagV1Response, error)
+
+	// ReachAddFormSubmitterTagsV1WithBodyWithResponse Add form submitter tags
+	//
+	// Add tags to a form so that every contact who submits it from now on receives them.
+	//
+	// A tag the form already has is skipped; an unknown tag is rejected. Contacts who submitted earlier are
+	// not tagged.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/tags (the `ReachAddFormSubmitterTagsV1` operationId).
+	ReachAddFormSubmitterTagsV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachAddFormSubmitterTagsV1Response, error)
+
+	// ReachAddFormSubmitterTagsV1WithResponse Add form submitter tags
+	//
+	// Add tags to a form so that every contact who submits it from now on receives them.
+	//
+	// A tag the form already has is skipped; an unknown tag is rejected. Contacts who submitted earlier are
+	// not tagged.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/tags (the `ReachAddFormSubmitterTagsV1` operationId).
+	ReachAddFormSubmitterTagsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, body ReachAddFormSubmitterTagsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachAddFormSubmitterTagsV1Response, error)
+
+	// ReachUpdateFormTemplateV1WithBodyWithResponse Update form template
+	//
+	// Save `content` as the latest design of a form and return the stored version.
+	//
+	// The HTML is sanitized and, unless the plan allows removing it, the Reach signature is added. Visitors
+	// submit the form with an `email` field (required) and optional `name`, `surname` and `phone`. After
+	// sanitizing, the design must contain a form container (`data-reach-form`), an email input
+	// (`data-reach-field="email"`) and a submit button (`data-reach-submit`); otherwise the request fails
+	// with `422` and `errors.content` lists `missing_form_container`, `missing_email_field` and/or
+	// `missing_submit_button`.
+	//
+	// A `draft` or `paused` form stays unreachable until its status is set to `active`, which publishes this
+	// design. On a form that is already `active` the saved design is not public until the form is paused and
+	// set to `active` again. Saving a design does not consume AI credits.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/template (the `ReachUpdateFormTemplateV1` operationId).
+	ReachUpdateFormTemplateV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachUpdateFormTemplateV1Response, error)
+
+	// ReachUpdateFormTemplateV1WithResponse Update form template
+	//
+	// Save `content` as the latest design of a form and return the stored version.
+	//
+	// The HTML is sanitized and, unless the plan allows removing it, the Reach signature is added. Visitors
+	// submit the form with an `email` field (required) and optional `name`, `surname` and `phone`. After
+	// sanitizing, the design must contain a form container (`data-reach-form`), an email input
+	// (`data-reach-field="email"`) and a submit button (`data-reach-submit`); otherwise the request fails
+	// with `422` and `errors.content` lists `missing_form_container`, `missing_email_field` and/or
+	// `missing_submit_button`.
+	//
+	// A `draft` or `paused` form stays unreachable until its status is set to `active`, which publishes this
+	// design. On a form that is already `active` the saved design is not public until the form is paused and
+	// set to `active` again. Saving a design does not consume AI credits.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/template (the `ReachUpdateFormTemplateV1` operationId).
+	ReachUpdateFormTemplateV1WithResponse(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, body ReachUpdateFormTemplateV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachUpdateFormTemplateV1Response, error)
 
 	// ReachGetRemainingPlanLimitsV1WithResponse Get remaining plan limits
 	//
@@ -88771,6 +89823,68 @@ func (r ReachListFormsV1Response) ContentType() string {
 	return ""
 }
 
+type ReachCreateFormV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1FormsFormResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachCreateFormV1Response) GetJSON200() *ReachV1FormsFormResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachCreateFormV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachCreateFormV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachCreateFormV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachCreateFormV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachCreateFormV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachCreateFormV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachCreateFormV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type ReachDeleteFormV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -88882,6 +89996,316 @@ func (r ReachGetFormDetailsV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r ReachGetFormDetailsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachUpdateFormV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1FormsFormResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachUpdateFormV1Response) GetJSON200() *ReachV1FormsFormResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachUpdateFormV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachUpdateFormV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachUpdateFormV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachUpdateFormV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachUpdateFormV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachUpdateFormV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachUpdateFormV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachDuplicateFormV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1FormsFormResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachDuplicateFormV1Response) GetJSON200() *ReachV1FormsFormResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachDuplicateFormV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachDuplicateFormV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachDuplicateFormV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachDuplicateFormV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachDuplicateFormV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachDuplicateFormV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachRemoveFormSubmitterTagV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON409 the response for an HTTP 409 `application/json` response
+	JSON409 *CommonResponseErrorResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachRemoveFormSubmitterTagV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachRemoveFormSubmitterTagV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON409 returns the response for an HTTP 409 `application/json` response
+func (r ReachRemoveFormSubmitterTagV1Response) GetJSON409() *CommonResponseErrorResponse {
+	return r.JSON409
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachRemoveFormSubmitterTagV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachRemoveFormSubmitterTagV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachRemoveFormSubmitterTagV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachRemoveFormSubmitterTagV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachRemoveFormSubmitterTagV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachRemoveFormSubmitterTagV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachAddFormSubmitterTagsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachAddFormSubmitterTagsV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachAddFormSubmitterTagsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachAddFormSubmitterTagsV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachAddFormSubmitterTagsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachAddFormSubmitterTagsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachAddFormSubmitterTagsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachAddFormSubmitterTagsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachAddFormSubmitterTagsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachUpdateFormTemplateV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1FormsFormTemplateVersionResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachUpdateFormTemplateV1Response) GetJSON200() *ReachV1FormsFormTemplateVersionResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachUpdateFormTemplateV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachUpdateFormTemplateV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachUpdateFormTemplateV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachUpdateFormTemplateV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachUpdateFormTemplateV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachUpdateFormTemplateV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachUpdateFormTemplateV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -103388,6 +104812,44 @@ func (c *ClientWithResponses) ReachListFormsV1WithResponse(ctx context.Context, 
 	return ParseReachListFormsV1Response(rsp)
 }
 
+// ReachCreateFormV1WithBodyWithResponse Create form
+//
+// Create an empty draft form.
+//
+// Reach also adds an automatic `form:{name}` tag that every submitter receives. A draft has no design
+// and is not reachable by visitors: save a design with the update form template operation, then take
+// the form live by setting its status to `active`. Creating a form does not consume AI credits.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/forms (the `ReachCreateFormV1` operationId).
+func (c *ClientWithResponses) ReachCreateFormV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachCreateFormV1Response, error) {
+	rsp, err := c.ReachCreateFormV1WithBody(ctx, profileUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachCreateFormV1Response(rsp)
+}
+
+// ReachCreateFormV1WithResponse Create form
+//
+// Create an empty draft form.
+//
+// Reach also adds an automatic `form:{name}` tag that every submitter receives. A draft has no design
+// and is not reachable by visitors: save a design with the update form template operation, then take
+// the form live by setting its status to `active`. Creating a form does not consume AI credits.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/forms (the `ReachCreateFormV1` operationId).
+func (c *ClientWithResponses) ReachCreateFormV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachCreateFormV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachCreateFormV1Response, error) {
+	rsp, err := c.ReachCreateFormV1(ctx, profileUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachCreateFormV1Response(rsp)
+}
+
 // ReachDeleteFormV1WithResponse Delete form
 //
 // Permanently delete a form together with its template.
@@ -103424,6 +104886,192 @@ func (c *ClientWithResponses) ReachGetFormDetailsV1WithResponse(ctx context.Cont
 		return nil, err
 	}
 	return ParseReachGetFormDetailsV1Response(rsp)
+}
+
+// ReachUpdateFormV1WithBodyWithResponse Update form
+//
+// Rename a form and/or change its status.
+//
+// Setting a `draft` or `paused` form to `active` takes it live: its latest saved design is published
+// and visitors can submit it. `paused` and `draft` stop the form from accepting submissions. A form is
+// not reachable by visitors until it is taken live. Design changes saved while the form is already
+// `active` stay unpublished until the form is paused and set to `active` again. Renaming does not rename
+// the automatic `form:{name}` tag.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/forms/{formUuid} (the `ReachUpdateFormV1` operationId).
+func (c *ClientWithResponses) ReachUpdateFormV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachUpdateFormV1Response, error) {
+	rsp, err := c.ReachUpdateFormV1WithBody(ctx, profileUuid, formUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachUpdateFormV1Response(rsp)
+}
+
+// ReachUpdateFormV1WithResponse Update form
+//
+// Rename a form and/or change its status.
+//
+// Setting a `draft` or `paused` form to `active` takes it live: its latest saved design is published
+// and visitors can submit it. `paused` and `draft` stop the form from accepting submissions. A form is
+// not reachable by visitors until it is taken live. Design changes saved while the form is already
+// `active` stay unpublished until the form is paused and set to `active` again. Renaming does not rename
+// the automatic `form:{name}` tag.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/forms/{formUuid} (the `ReachUpdateFormV1` operationId).
+func (c *ClientWithResponses) ReachUpdateFormV1WithResponse(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, body ReachUpdateFormV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachUpdateFormV1Response, error) {
+	rsp, err := c.ReachUpdateFormV1(ctx, profileUuid, formUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachUpdateFormV1Response(rsp)
+}
+
+// ReachDuplicateFormV1WithResponse Duplicate form
+//
+// Copy a form into a new draft form with the same name and design.
+//
+// The copy shares the source's automatic `form:{name}` tag; other submitter tags are not copied. The
+// copy is not live until its status is set to `active`.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/duplicate (the `ReachDuplicateFormV1` operationId).
+func (c *ClientWithResponses) ReachDuplicateFormV1WithResponse(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, reqEditors ...RequestEditorFn) (*ReachDuplicateFormV1Response, error) {
+	rsp, err := c.ReachDuplicateFormV1(ctx, profileUuid, formUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachDuplicateFormV1Response(rsp)
+}
+
+// ReachRemoveFormSubmitterTagV1WithBodyWithResponse Remove form submitter tag
+//
+// Stop a form from applying a tag to its future submitters.
+//
+// Succeeds also when the form did not have the tag. Contacts who already received the tag keep it, and
+// the tag itself is not deleted. The automatic `form:{name}` tag cannot be removed and is rejected with
+// a conflict.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/tags (the `ReachRemoveFormSubmitterTagV1` operationId).
+func (c *ClientWithResponses) ReachRemoveFormSubmitterTagV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachRemoveFormSubmitterTagV1Response, error) {
+	rsp, err := c.ReachRemoveFormSubmitterTagV1WithBody(ctx, profileUuid, formUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachRemoveFormSubmitterTagV1Response(rsp)
+}
+
+// ReachRemoveFormSubmitterTagV1WithResponse Remove form submitter tag
+//
+// Stop a form from applying a tag to its future submitters.
+//
+// Succeeds also when the form did not have the tag. Contacts who already received the tag keep it, and
+// the tag itself is not deleted. The automatic `form:{name}` tag cannot be removed and is rejected with
+// a conflict.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/tags (the `ReachRemoveFormSubmitterTagV1` operationId).
+func (c *ClientWithResponses) ReachRemoveFormSubmitterTagV1WithResponse(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, body ReachRemoveFormSubmitterTagV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachRemoveFormSubmitterTagV1Response, error) {
+	rsp, err := c.ReachRemoveFormSubmitterTagV1(ctx, profileUuid, formUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachRemoveFormSubmitterTagV1Response(rsp)
+}
+
+// ReachAddFormSubmitterTagsV1WithBodyWithResponse Add form submitter tags
+//
+// Add tags to a form so that every contact who submits it from now on receives them.
+//
+// A tag the form already has is skipped; an unknown tag is rejected. Contacts who submitted earlier are
+// not tagged.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/tags (the `ReachAddFormSubmitterTagsV1` operationId).
+func (c *ClientWithResponses) ReachAddFormSubmitterTagsV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachAddFormSubmitterTagsV1Response, error) {
+	rsp, err := c.ReachAddFormSubmitterTagsV1WithBody(ctx, profileUuid, formUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachAddFormSubmitterTagsV1Response(rsp)
+}
+
+// ReachAddFormSubmitterTagsV1WithResponse Add form submitter tags
+//
+// Add tags to a form so that every contact who submits it from now on receives them.
+//
+// A tag the form already has is skipped; an unknown tag is rejected. Contacts who submitted earlier are
+// not tagged.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/tags (the `ReachAddFormSubmitterTagsV1` operationId).
+func (c *ClientWithResponses) ReachAddFormSubmitterTagsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, body ReachAddFormSubmitterTagsV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachAddFormSubmitterTagsV1Response, error) {
+	rsp, err := c.ReachAddFormSubmitterTagsV1(ctx, profileUuid, formUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachAddFormSubmitterTagsV1Response(rsp)
+}
+
+// ReachUpdateFormTemplateV1WithBodyWithResponse Update form template
+//
+// Save `content` as the latest design of a form and return the stored version.
+//
+// The HTML is sanitized and, unless the plan allows removing it, the Reach signature is added. Visitors
+// submit the form with an `email` field (required) and optional `name`, `surname` and `phone`. After
+// sanitizing, the design must contain a form container (`data-reach-form`), an email input
+// (`data-reach-field="email"`) and a submit button (`data-reach-submit`); otherwise the request fails
+// with `422` and `errors.content` lists `missing_form_container`, `missing_email_field` and/or
+// `missing_submit_button`.
+//
+// A `draft` or `paused` form stays unreachable until its status is set to `active`, which publishes this
+// design. On a form that is already `active` the saved design is not public until the form is paused and
+// set to `active` again. Saving a design does not consume AI credits.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/template (the `ReachUpdateFormTemplateV1` operationId).
+func (c *ClientWithResponses) ReachUpdateFormTemplateV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachUpdateFormTemplateV1Response, error) {
+	rsp, err := c.ReachUpdateFormTemplateV1WithBody(ctx, profileUuid, formUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachUpdateFormTemplateV1Response(rsp)
+}
+
+// ReachUpdateFormTemplateV1WithResponse Update form template
+//
+// Save `content` as the latest design of a form and return the stored version.
+//
+// The HTML is sanitized and, unless the plan allows removing it, the Reach signature is added. Visitors
+// submit the form with an `email` field (required) and optional `name`, `surname` and `phone`. After
+// sanitizing, the design must contain a form container (`data-reach-form`), an email input
+// (`data-reach-field="email"`) and a submit button (`data-reach-submit`); otherwise the request fails
+// with `422` and `errors.content` lists `missing_form_container`, `missing_email_field` and/or
+// `missing_submit_button`.
+//
+// A `draft` or `paused` form stays unreachable until its status is set to `active`, which publishes this
+// design. On a form that is already `active` the saved design is not public until the form is paused and
+// set to `active` again. Saving a design does not consume AI credits.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/forms/{formUuid}/template (the `ReachUpdateFormTemplateV1` operationId).
+func (c *ClientWithResponses) ReachUpdateFormTemplateV1WithResponse(ctx context.Context, profileUuid ProfileUuid, formUuid FormUuid, body ReachUpdateFormTemplateV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachUpdateFormTemplateV1Response, error) {
+	rsp, err := c.ReachUpdateFormTemplateV1(ctx, profileUuid, formUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachUpdateFormTemplateV1Response(rsp)
 }
 
 // ReachGetRemainingPlanLimitsV1WithResponse Get remaining plan limits
@@ -120549,6 +122197,53 @@ func ParseReachListFormsV1Response(rsp *http.Response) (*ReachListFormsV1Respons
 	return response, nil
 }
 
+// ParseReachCreateFormV1Response parses an HTTP response from a ReachCreateFormV1WithResponse call
+func ParseReachCreateFormV1Response(rsp *http.Response) (*ReachCreateFormV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachCreateFormV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1FormsFormResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseReachDeleteFormV1Response parses an HTTP response from a ReachDeleteFormV1WithResponse call
 func ParseReachDeleteFormV1Response(rsp *http.Response) (*ReachDeleteFormV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -120623,6 +122318,241 @@ func ParseReachGetFormDetailsV1Response(rsp *http.Response) (*ReachGetFormDetail
 			return nil, err
 		}
 		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachUpdateFormV1Response parses an HTTP response from a ReachUpdateFormV1WithResponse call
+func ParseReachUpdateFormV1Response(rsp *http.Response) (*ReachUpdateFormV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachUpdateFormV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1FormsFormResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachDuplicateFormV1Response parses an HTTP response from a ReachDuplicateFormV1WithResponse call
+func ParseReachDuplicateFormV1Response(rsp *http.Response) (*ReachDuplicateFormV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachDuplicateFormV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1FormsFormResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachRemoveFormSubmitterTagV1Response parses an HTTP response from a ReachRemoveFormSubmitterTagV1WithResponse call
+func ParseReachRemoveFormSubmitterTagV1Response(rsp *http.Response) (*ReachRemoveFormSubmitterTagV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachRemoveFormSubmitterTagV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachAddFormSubmitterTagsV1Response parses an HTTP response from a ReachAddFormSubmitterTagsV1WithResponse call
+func ParseReachAddFormSubmitterTagsV1Response(rsp *http.Response) (*ReachAddFormSubmitterTagsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachAddFormSubmitterTagsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachUpdateFormTemplateV1Response parses an HTTP response from a ReachUpdateFormTemplateV1WithResponse call
+func ParseReachUpdateFormTemplateV1Response(rsp *http.Response) (*ReachUpdateFormTemplateV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachUpdateFormTemplateV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1FormsFormTemplateVersionResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse

@@ -16,9 +16,10 @@ hostinger reach forms list <profile-uuid> [flags]
 ### Options
 
 ```
-  -h, --help           help for list
-      --page int       Page number
-      --per-page int   Number of items per page (default 25)
+  -h, --help            help for list
+      --page int        Page number
+      --per-page int    Number of items per page (default 25)
+      --status string   Return only forms with this status. (one of: active, paused, draft)
 ```
 
 ### Options inherited from parent commands

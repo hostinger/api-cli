@@ -10,7 +10,13 @@ var GroupCmd = &cobra.Command{
 }
 
 func init() {
+	GroupCmd.AddCommand(AddSubmitterTagsCmd)
+	GroupCmd.AddCommand(CreateCmd)
 	GroupCmd.AddCommand(DeleteCmd)
+	GroupCmd.AddCommand(DuplicateCmd)
 	GroupCmd.AddCommand(GetCmd)
 	GroupCmd.AddCommand(ListCmd)
+	GroupCmd.AddCommand(RemoveSubmitterTagCmd)
+	GroupCmd.AddCommand(UpdateCmd)
+	GroupCmd.AddCommand(UpdateTemplateCmd)
 }
