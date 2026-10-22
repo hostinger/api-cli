@@ -18091,6 +18091,21 @@ type HostingGetNodeJsBuildSettingsFromArchiveV1Params struct {
 	ArchivePath string `form:"archive_path" json:"archive_path"`
 }
 
+// HostingGetNodeJsBuildSettingsFromRepositoryV1Params defines parameters for HostingGetNodeJsBuildSettingsFromRepositoryV1.
+type HostingGetNodeJsBuildSettingsFromRepositoryV1Params struct {
+	// Owner Repository owner login. GitLab group paths use slashes.
+	Owner string `form:"owner" json:"owner"`
+
+	// Repository Repository name without the .git suffix
+	Repository string `form:"repository" json:"repository"`
+
+	// Branch Branch whose package.json is inspected
+	Branch string `form:"branch" json:"branch"`
+
+	// InstallationUuid Git installation used to access the repository, taken from `List Git installations`
+	InstallationUuid openapi_types.UUID `form:"installation_uuid" json:"installation_uuid"`
+}
+
 // HostingGetNodeJSBuildLogsV1Params defines parameters for HostingGetNodeJSBuildLogsV1.
 type HostingGetNodeJSBuildLogsV1Params struct {
 	// FromLine Line from which to start retrieving logs
@@ -23543,6 +23558,21 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/from-archive (the `HostingGetNodeJsBuildSettingsFromArchiveV1` operationId).
 	HostingGetNodeJsBuildSettingsFromArchiveV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetNodeJsBuildSettingsFromArchiveV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingGetNodeJsBuildSettingsFromRepositoryV1 Get Node.js build settings from repository
+	//
+	// Determine the build settings for a Node.js application from the package.json file of a branch
+	// in a Git repository. Use before starting a Git-source build to find out the auto-detected
+	// settings instead of guessing them.
+	//
+	// The repository is read through a Git installation: take `installation_uuid` from
+	// `List Git installations` and `owner` and `repository` from `List Git installation repositories`.
+	//
+	// Returns 422 when the installation is not found, the repository or branch is not found, or
+	// the branch has no package.json.
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/from-repository (the `HostingGetNodeJsBuildSettingsFromRepositoryV1` operationId).
+	HostingGetNodeJsBuildSettingsFromRepositoryV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetNodeJsBuildSettingsFromRepositoryV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingGetNodeJsBuildDetailsV1 Get Node.js build details
 	//
@@ -33595,6 +33625,31 @@ func (c *Client) HostingReplaceNodeJsEnvironmentVariablesV1(ctx context.Context,
 // Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/from-archive (the `HostingGetNodeJsBuildSettingsFromArchiveV1` operationId).
 func (c *Client) HostingGetNodeJsBuildSettingsFromArchiveV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetNodeJsBuildSettingsFromArchiveV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHostingGetNodeJsBuildSettingsFromArchiveV1Request(c.Server, username, domain, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingGetNodeJsBuildSettingsFromRepositoryV1 Get Node.js build settings from repository
+//
+// Determine the build settings for a Node.js application from the package.json file of a branch
+// in a Git repository. Use before starting a Git-source build to find out the auto-detected
+// settings instead of guessing them.
+//
+// The repository is read through a Git installation: take `installation_uuid` from
+// `List Git installations` and `owner` and `repository` from `List Git installation repositories`.
+//
+// Returns 422 when the installation is not found, the repository or branch is not found, or
+// the branch has no package.json.
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/from-repository (the `HostingGetNodeJsBuildSettingsFromRepositoryV1` operationId).
+func (c *Client) HostingGetNodeJsBuildSettingsFromRepositoryV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetNodeJsBuildSettingsFromRepositoryV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingGetNodeJsBuildSettingsFromRepositoryV1Request(c.Server, username, domain, params)
 	if err != nil {
 		return nil, err
 	}
@@ -49530,6 +49585,94 @@ func NewHostingGetNodeJsBuildSettingsFromArchiveV1Request(server string, usernam
 	return req, nil
 }
 
+// NewHostingGetNodeJsBuildSettingsFromRepositoryV1Request constructs an http.Request for the HostingGetNodeJsBuildSettingsFromRepositoryV1 method
+func NewHostingGetNodeJsBuildSettingsFromRepositoryV1Request(server string, username UsernamePath, domain Domain, params *HostingGetNodeJsBuildSettingsFromRepositoryV1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/nodejs/builds/settings/from-repository", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "owner", params.Owner, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+			return nil, err
+		} else {
+			for _, qp := range strings.Split(queryFrag, "&") {
+				rawQueryFragments = append(rawQueryFragments, qp)
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "repository", params.Repository, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+			return nil, err
+		} else {
+			for _, qp := range strings.Split(queryFrag, "&") {
+				rawQueryFragments = append(rawQueryFragments, qp)
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "branch", params.Branch, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+			return nil, err
+		} else {
+			for _, qp := range strings.Split(queryFrag, "&") {
+				rawQueryFragments = append(rawQueryFragments, qp)
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "installation_uuid", params.InstallationUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: "uuid"}); err != nil {
+			return nil, err
+		} else {
+			for _, qp := range strings.Split(queryFrag, "&") {
+				rawQueryFragments = append(rawQueryFragments, qp)
+			}
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewHostingGetNodeJsBuildDetailsV1Request constructs an http.Request for the HostingGetNodeJsBuildDetailsV1 method
 func NewHostingGetNodeJsBuildDetailsV1Request(server string, username UsernamePath, domain Domain, uuid BuildUuidPath) (*http.Request, error) {
 	var err error
@@ -65440,6 +65583,23 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/from-archive (the `HostingGetNodeJsBuildSettingsFromArchiveV1` operationId).
 	HostingGetNodeJsBuildSettingsFromArchiveV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetNodeJsBuildSettingsFromArchiveV1Params, reqEditors ...RequestEditorFn) (*HostingGetNodeJsBuildSettingsFromArchiveV1Response, error)
 
+	// HostingGetNodeJsBuildSettingsFromRepositoryV1WithResponse Get Node.js build settings from repository
+	//
+	// Determine the build settings for a Node.js application from the package.json file of a branch
+	// in a Git repository. Use before starting a Git-source build to find out the auto-detected
+	// settings instead of guessing them.
+	//
+	// The repository is read through a Git installation: take `installation_uuid` from
+	// `List Git installations` and `owner` and `repository` from `List Git installation repositories`.
+	//
+	// Returns 422 when the installation is not found, the repository or branch is not found, or
+	// the branch has no package.json.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/from-repository (the `HostingGetNodeJsBuildSettingsFromRepositoryV1` operationId).
+	HostingGetNodeJsBuildSettingsFromRepositoryV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetNodeJsBuildSettingsFromRepositoryV1Params, reqEditors ...RequestEditorFn) (*HostingGetNodeJsBuildSettingsFromRepositoryV1Response, error)
+
 	// HostingGetNodeJsBuildDetailsV1WithResponse Get Node.js build details
 	//
 	// Returns one build by UUID: its state (`pending`, `running`, `completed`, `failed`), the
@@ -80526,6 +80686,68 @@ func (r HostingGetNodeJsBuildSettingsFromArchiveV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingGetNodeJsBuildSettingsFromArchiveV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingGetNodeJsBuildSettingsFromRepositoryV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1NodeJsBuildSettingsResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingGetNodeJsBuildSettingsFromRepositoryV1Response) GetJSON200() *HostingV1NodeJsBuildSettingsResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingGetNodeJsBuildSettingsFromRepositoryV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingGetNodeJsBuildSettingsFromRepositoryV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingGetNodeJsBuildSettingsFromRepositoryV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingGetNodeJsBuildSettingsFromRepositoryV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingGetNodeJsBuildSettingsFromRepositoryV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingGetNodeJsBuildSettingsFromRepositoryV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingGetNodeJsBuildSettingsFromRepositoryV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -100700,6 +100922,29 @@ func (c *ClientWithResponses) HostingGetNodeJsBuildSettingsFromArchiveV1WithResp
 	return ParseHostingGetNodeJsBuildSettingsFromArchiveV1Response(rsp)
 }
 
+// HostingGetNodeJsBuildSettingsFromRepositoryV1WithResponse Get Node.js build settings from repository
+//
+// Determine the build settings for a Node.js application from the package.json file of a branch
+// in a Git repository. Use before starting a Git-source build to find out the auto-detected
+// settings instead of guessing them.
+//
+// The repository is read through a Git installation: take `installation_uuid` from
+// `List Git installations` and `owner` and `repository` from `List Git installation repositories`.
+//
+// Returns 422 when the installation is not found, the repository or branch is not found, or
+// the branch has no package.json.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/from-repository (the `HostingGetNodeJsBuildSettingsFromRepositoryV1` operationId).
+func (c *ClientWithResponses) HostingGetNodeJsBuildSettingsFromRepositoryV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingGetNodeJsBuildSettingsFromRepositoryV1Params, reqEditors ...RequestEditorFn) (*HostingGetNodeJsBuildSettingsFromRepositoryV1Response, error) {
+	rsp, err := c.HostingGetNodeJsBuildSettingsFromRepositoryV1(ctx, username, domain, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingGetNodeJsBuildSettingsFromRepositoryV1Response(rsp)
+}
+
 // HostingGetNodeJsBuildDetailsV1WithResponse Get Node.js build details
 //
 // Returns one build by UUID: its state (`pending`, `running`, `completed`, `failed`), the
@@ -115116,6 +115361,53 @@ func ParseHostingGetNodeJsBuildSettingsFromArchiveV1Response(rsp *http.Response)
 	}
 
 	response := &HostingGetNodeJsBuildSettingsFromArchiveV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1NodeJsBuildSettingsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingGetNodeJsBuildSettingsFromRepositoryV1Response parses an HTTP response from a HostingGetNodeJsBuildSettingsFromRepositoryV1WithResponse call
+func ParseHostingGetNodeJsBuildSettingsFromRepositoryV1Response(rsp *http.Response) (*HostingGetNodeJsBuildSettingsFromRepositoryV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingGetNodeJsBuildSettingsFromRepositoryV1Response{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}

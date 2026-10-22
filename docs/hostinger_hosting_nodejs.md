@@ -31,6 +31,7 @@ hostinger hosting nodejs [flags]
 * [hostinger hosting nodejs build-logs](hostinger_hosting_nodejs_build-logs.md)	 - Get NodeJS build logs
 * [hostinger hosting nodejs build-settings](hostinger_hosting_nodejs_build-settings.md)	 - Get Node.js build settings
 * [hostinger hosting nodejs build-settings-from-archive](hostinger_hosting_nodejs_build-settings-from-archive.md)	 - Get Node.js build settings from archive
+* [hostinger hosting nodejs build-settings-from-repository](hostinger_hosting_nodejs_build-settings-from-repository.md)	 - Get Node.js build settings from repository
 * [hostinger hosting nodejs clear-runtime-logs](hostinger_hosting_nodejs_clear-runtime-logs.md)	 - Clear Node.js runtime logs
 * [hostinger hosting nodejs list-builds](hostinger_hosting_nodejs_list-builds.md)	 - List NodeJS builds
 * [hostinger hosting nodejs list-environment-variables](hostinger_hosting_nodejs_list-environment-variables.md)	 - List Node.js environment variables

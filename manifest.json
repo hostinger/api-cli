@@ -1239,6 +1239,11 @@
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/from-archive"
   },
+  "hosting_getNode.jsBuildSettingsFromRepositoryV1": {
+    "command": "hostinger hosting nodejs build-settings-from-repository",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds/settings/from-repository"
+  },
   "hosting_getNode.jsBuildSettingsV1": {
     "command": "hostinger hosting nodejs build-settings",
     "method": "GET",

@@ -18,6 +18,7 @@ func init() {
 	GroupCmd.AddCommand(BuildLogsCmd)
 	GroupCmd.AddCommand(BuildSettingsCmd)
 	GroupCmd.AddCommand(BuildSettingsFromArchiveCmd)
+	GroupCmd.AddCommand(BuildSettingsFromRepositoryCmd)
 	GroupCmd.AddCommand(ClearRuntimeLogsCmd)
 	GroupCmd.AddCommand(ListBuildsCmd)
 	GroupCmd.AddCommand(ListEnvironmentVariablesCmd)
