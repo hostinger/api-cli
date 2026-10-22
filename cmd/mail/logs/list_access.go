@@ -2,7 +2,6 @@ package logs
 
 import (
 	"context"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/client"
@@ -12,23 +11,63 @@ import (
 )
 
 var ListAccessCmd = &cobra.Command{
-	Use:   "list-access <order-id>",
-	Short: "List access logs",
-	Long:  "Retrieve paginated access logs for the domain attached to the given\nmail order. Supports filtering by account, date range, protocol,\nstatus, and deletion flag. Results are sorted by timestamp descending.",
-	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
-	Run: func(cmd *cobra.Command, args []string) {
-		utils.EnumCheck(cmd, "status", []string{"Successful", "Failed"})
-		utils.EnumCheck(cmd, "protocol", []string{"imap", "pop3", "smtp"})
-		r, err := api.Request().MailListAccessLogsV1WithResponse(context.TODO(), args[0], listAccessParams(cmd))
-		if err != nil {
-			log.Fatal(err)
+	Use:     "list-access <order-id>",
+	Short:   "List access logs",
+	Long:    "Retrieve paginated access logs for the domain attached to the given\nmail order. Supports filtering by account, date range, protocol,\nstatus, and deletion flag. Results are sorted by timestamp descending.",
+	Example: "  hostinger mail logs list-access OR1a2b3c4d5e6f7g",
+	ValidArgsFunction: utils.CompleteArgs(
+		&utils.ArgSource{
+			Value: "id",
+			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+				r, err := api.CompletionRequest().MailListOrdersV1WithResponse(ctx, nil)
+				if err != nil {
+					return nil, 0, err
+				}
+				return r.Body, r.StatusCode(), nil
+			},
+		},
+	),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		if err := utils.EnumCheck(cmd, "status", []string{"Successful", "Failed"}); err != nil {
+			return err
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		if err := utils.EnumCheck(cmd, "protocol", []string{"imap", "pop3", "smtp"}); err != nil {
+			return err
+		}
+		if err := utils.FormatCheck(cmd, "account", "email"); err != nil {
+			return err
+		}
+		if err := utils.FormatCheck(cmd, "date", "date"); err != nil {
+			return err
+		}
+		if err := utils.FormatCheck(cmd, "from-date", "date-time"); err != nil {
+			return err
+		}
+		if err := utils.FormatCheck(cmd, "to-date", "date-time"); err != nil {
+			return err
+		}
+		params := listAccessParams(cmd)
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().MailListAccessLogsV1WithResponse(ctx, args[0], params)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
+		}
+		if all, _ := cmd.Flags().GetBool("all"); all {
+			call = utils.AllPages(call, func(page int) { params.Page = &page })
+		}
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
 }
 
 func init() {
+	utils.RegisterArgs(ListAccessCmd, utils.StringArg("order-id"))
 	ListAccessCmd.Flags().StringP("account", "", "", "Filter log entries by a specific email account")
 	ListAccessCmd.Flags().StringP("date", "", "", "Exact date filter (YYYY-MM-DD). Takes precedence over `from_date`/`to_date` when both are given.")
 	ListAccessCmd.Flags().StringP("from-date", "", "", "Date range start (RFC 3339)")
@@ -38,6 +77,17 @@ func init() {
 	ListAccessCmd.Flags().BoolP("has-deletions", "", false, "Filter access log entries by whether the session had deletions")
 	ListAccessCmd.Flags().IntP("page", "", 0, "Page number")
 	ListAccessCmd.Flags().IntP("per-page", "", 25, "Number of items per page")
+	ListAccessCmd.RegisterFlagCompletionFunc("account", cobra.NoFileCompletions)
+	ListAccessCmd.RegisterFlagCompletionFunc("date", cobra.NoFileCompletions)
+	ListAccessCmd.RegisterFlagCompletionFunc("from-date", cobra.NoFileCompletions)
+	ListAccessCmd.RegisterFlagCompletionFunc("to-date", cobra.NoFileCompletions)
+	ListAccessCmd.RegisterFlagCompletionFunc("status", cobra.FixedCompletions([]cobra.Completion{"Successful", "Failed"}, cobra.ShellCompDirectiveNoFileComp))
+	ListAccessCmd.RegisterFlagCompletionFunc("protocol", cobra.FixedCompletions([]cobra.Completion{"imap", "pop3", "smtp"}, cobra.ShellCompDirectiveNoFileComp))
+	ListAccessCmd.RegisterFlagCompletionFunc("has-deletions", cobra.FixedCompletions([]cobra.Completion{"true", "false"}, cobra.ShellCompDirectiveNoFileComp))
+	ListAccessCmd.RegisterFlagCompletionFunc("page", cobra.NoFileCompletions)
+	ListAccessCmd.RegisterFlagCompletionFunc("per-page", cobra.NoFileCompletions)
+	ListAccessCmd.Flags().Bool("all", false, "Fetch every page and print all items")
+	ListAccessCmd.MarkFlagsMutuallyExclusive("all", "page")
 }
 
 func listAccessParams(cmd *cobra.Command) *client.MailListAccessLogsV1Params {

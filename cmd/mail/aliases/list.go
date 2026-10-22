@@ -2,32 +2,60 @@ package aliases
 
 import (
 	"context"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/client"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var ListCmd = &cobra.Command{
-	Use:   "list <order-id>",
-	Short: "List aliases",
-	Long:  "Retrieve a paginated list of aliases across all mailboxes of a mail\norder.",
-	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
-	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().MailListAliasesV1WithResponse(context.TODO(), args[0], listParams(cmd))
-		if err != nil {
-			log.Fatal(err)
+	Use:     "list <order-id>",
+	Short:   "List aliases",
+	Long:    "Retrieve a paginated list of aliases across all mailboxes of a mail\norder.",
+	Example: "  hostinger mail aliases list OR1a2b3c4d5e6f7g",
+	ValidArgsFunction: utils.CompleteArgs(
+		&utils.ArgSource{
+			Value: "id",
+			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+				r, err := api.CompletionRequest().MailListOrdersV1WithResponse(ctx, nil)
+				if err != nil {
+					return nil, 0, err
+				}
+				return r.Body, r.StatusCode(), nil
+			},
+		},
+	),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		params := listParams(cmd)
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().MailListAliasesV1WithResponse(ctx, args[0], params)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		if all, _ := cmd.Flags().GetBool("all"); all {
+			call = utils.AllPages(call, func(page int) { params.Page = &page })
+		}
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
 }
 
 func init() {
+	utils.RegisterArgs(ListCmd, utils.StringArg("order-id"))
 	ListCmd.Flags().IntP("page", "", 0, "Page number")
 	ListCmd.Flags().IntP("per-page", "", 25, "Number of items per page")
+	ListCmd.RegisterFlagCompletionFunc("page", cobra.NoFileCompletions)
+	ListCmd.RegisterFlagCompletionFunc("per-page", cobra.NoFileCompletions)
+	ListCmd.Flags().Bool("all", false, "Fetch every page and print all items")
+	ListCmd.MarkFlagsMutuallyExclusive("all", "page")
 }
 
 func listParams(cmd *cobra.Command) *client.MailListAliasesV1Params {

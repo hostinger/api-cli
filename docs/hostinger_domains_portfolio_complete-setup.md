@@ -32,15 +32,34 @@ only once it is registered.
 
 Use this endpoint to finish registering a domain that is awaiting setup on your account.
 
+JSON flags take inline JSON, @file.json, or - to read stdin. Example values:
+
+  --additional-details
+    {}
+
+  --domain-contacts
+    {
+      "admin_id": 546123,
+      "billing_id": 741288,
+      "owner_id": 741288,
+      "tech_id": 741288
+    }
+
 ```
 hostinger domains portfolio complete-setup <domain> [flags]
+```
+
+### Examples
+
+```
+  hostinger domains portfolio complete-setup mydomain.tld
 ```
 
 ### Options
 
 ```
-      --additional-details string   Additional registration data, possible values depends on TLD (JSON)
-      --domain-contacts string      Domain contact information (JSON)
+      --additional-details string   Additional registration data, possible values depends on TLD (JSON, @file or -; shape in the help above)
+      --domain-contacts string      Domain contact information (JSON, @file or -; shape in the help above)
   -h, --help                        help for complete-setup
 ```
 
@@ -48,7 +67,11 @@ hostinger domains portfolio complete-setup <domain> [flags]
 
 ```
       --config string   Config file (default is $HOME/.hostinger.yaml)
-      --format string   Output format type (json|table|tree), default: table
+      --dry-run         Print the request as a curl command instead of sending it
+  -o, --format string   Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string       Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input        Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose         Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

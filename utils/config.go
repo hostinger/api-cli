@@ -10,6 +10,13 @@ import (
 	"github.com/spf13/viper"
 )
 
+// ConfigFileName is the YAML config file in the user's home directory and
+// EnvPrefix the prefix of every environment variable the CLI reads.
+const (
+	ConfigFileName = ".hostinger.yaml"
+	EnvPrefix      = "HOSTINGER_"
+)
+
 // MigrateLegacyConfig returns the YAML config path the CLI should read and
 // whether a one-time migration (or legacy fallback) happened. When the new
 // ~/.hostinger.yaml is absent but a legacy ~/.hapi.yaml exists, it moves the old

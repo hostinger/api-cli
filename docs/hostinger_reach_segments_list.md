@@ -8,12 +8,18 @@ Get a list of all contact segments.
 
 This endpoint returns a list of contact segments that can be used to organize contacts.
 
-**Deprecated.** This endpoint cannot target a profile, so it always falls back to
+Deprecated. This endpoint cannot target a profile, so it always falls back to
 the client's default profile and cannot list the segments of any other profile. Use
 `GET /api/reach/v1/profiles/{profileUuid}/segmentation/segments` instead.
 
 ```
 hostinger reach segments list [flags]
+```
+
+### Examples
+
+```
+  hostinger reach segments list
 ```
 
 ### Options
@@ -26,7 +32,11 @@ hostinger reach segments list [flags]
 
 ```
       --config string   Config file (default is $HOME/.hostinger.yaml)
-      --format string   Output format type (json|table|tree), default: table
+      --dry-run         Print the request as a curl command instead of sending it
+  -o, --format string   Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string       Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input        Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose         Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

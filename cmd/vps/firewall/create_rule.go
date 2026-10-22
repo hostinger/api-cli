@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
@@ -13,27 +12,55 @@ import (
 )
 
 var CreateRuleCmd = &cobra.Command{
-	Use:   "create-rule <firewall-id>",
-	Short: "Create firewall rule",
-	Long:  "Create new firewall rule for a specified firewall.\n\nBy default, the firewall drops all incoming traffic,\nwhich means you must add accept rules for all ports you want to use.\n\nAny virtual machine that has this firewall activated will lose sync with the firewall\nand will have to be synced again manually.\n\nUse this endpoint to add new security rules to firewalls.",
-	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
-	Run: func(cmd *cobra.Command, args []string) {
-		utils.EnumCheck(cmd, "protocol", []string{"TCP", "UDP", "ICMP", "GRE", "any", "ESP", "AH", "ICMPv6", "SSH", "HTTP", "HTTPS", "MySQL", "PostgreSQL"})
-		utils.EnumCheck(cmd, "source", []string{"any", "custom"})
-		payload, err := json.Marshal(createRuleBody(cmd))
-		if err != nil {
-			log.Fatal(err)
+	Use:     "create-rule <firewall-id>",
+	Short:   "Create firewall rule",
+	Long:    "Create new firewall rule for a specified firewall.\n\nBy default, the firewall drops all incoming traffic,\nwhich means you must add accept rules for all ports you want to use.\n\nAny virtual machine that has this firewall activated will lose sync with the firewall\nand will have to be synced again manually.\n\nUse this endpoint to add new security rules to firewalls.",
+	Example: "  hostinger vps firewall create-rule 9449049 --port 443 --protocol TCP --source any --source-detail 351.15.24.0/24",
+	ValidArgsFunction: utils.CompleteArgs(
+		&utils.ArgSource{
+			Value: "id",
+			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+				r, err := api.CompletionRequest().VPSGetFirewallListV1WithResponse(ctx, nil)
+				if err != nil {
+					return nil, 0, err
+				}
+				return r.Body, r.StatusCode(), nil
+			},
+		},
+	),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		if err := utils.EnumCheck(cmd, "protocol", []string{"TCP", "UDP", "ICMP", "GRE", "any", "ESP", "AH", "ICMPv6", "SSH", "HTTP", "HTTPS", "MySQL", "PostgreSQL"}); err != nil {
+			return err
 		}
-		r, err := api.Request().VPSCreateFirewallRuleV1WithBodyWithResponse(context.TODO(), utils.StringToInt(args[0]), "application/json", bytes.NewReader(payload))
-		if err != nil {
-			log.Fatal(err)
+		if err := utils.EnumCheck(cmd, "source", []string{"any", "custom"}); err != nil {
+			return err
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		body, err := createRuleBody(cmd)
+		if err != nil {
+			return err
+		}
+		payload, err := json.Marshal(body)
+		if err != nil {
+			return err
+		}
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().VPSCreateFirewallRuleV1WithBodyWithResponse(ctx, utils.StringToInt(args[0]), "application/json", bytes.NewReader(payload))
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
+		}
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
 }
 
 func init() {
+	utils.RegisterArgs(CreateRuleCmd, utils.IntArg("firewall-id"))
 	CreateRuleCmd.Flags().StringP("port", "", "", "Port or port range, ex: 1024:2048")
 	CreateRuleCmd.Flags().StringP("protocol", "", "", "(one of: TCP, UDP, ICMP, GRE, any, ESP, AH, ICMPv6, SSH, HTTP, HTTPS, MySQL, PostgreSQL)")
 	CreateRuleCmd.Flags().StringP("source", "", "", "(one of: any, custom)")
@@ -42,9 +69,13 @@ func init() {
 	CreateRuleCmd.MarkFlagRequired("protocol")
 	CreateRuleCmd.MarkFlagRequired("source")
 	CreateRuleCmd.MarkFlagRequired("source-detail")
+	CreateRuleCmd.RegisterFlagCompletionFunc("port", cobra.NoFileCompletions)
+	CreateRuleCmd.RegisterFlagCompletionFunc("protocol", cobra.FixedCompletions([]cobra.Completion{"TCP", "UDP", "ICMP", "GRE", "any", "ESP", "AH", "ICMPv6", "SSH", "HTTP", "HTTPS", "MySQL", "PostgreSQL"}, cobra.ShellCompDirectiveNoFileComp))
+	CreateRuleCmd.RegisterFlagCompletionFunc("source", cobra.FixedCompletions([]cobra.Completion{"any", "custom"}, cobra.ShellCompDirectiveNoFileComp))
+	CreateRuleCmd.RegisterFlagCompletionFunc("source-detail", cobra.NoFileCompletions)
 }
 
-func createRuleBody(cmd *cobra.Command) map[string]any {
+func createRuleBody(cmd *cobra.Command) (map[string]any, error) {
 	body := map[string]any{}
 	portVal, _ := cmd.Flags().GetString("port")
 	body["port"] = portVal
@@ -54,5 +85,5 @@ func createRuleBody(cmd *cobra.Command) map[string]any {
 	body["source"] = sourceVal
 	sourceDetailVal, _ := cmd.Flags().GetString("source-detail")
 	body["source_detail"] = sourceDetailVal
-	return body
+	return body, nil
 }

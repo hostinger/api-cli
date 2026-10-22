@@ -1,12 +1,15 @@
 package forms
 
 import (
+	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var GroupCmd = &cobra.Command{
 	Use:   "forms",
 	Short: "Forms commands",
+	Args:  cobra.ArbitraryArgs,
+	RunE:  utils.GroupRunE,
 }
 
 func init() {

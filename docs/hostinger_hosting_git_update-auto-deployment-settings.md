@@ -20,17 +20,21 @@ settings stored for the website.
 hostinger hosting git update-auto-deployment-settings <username> <domain> [flags]
 ```
 
+### Examples
+
+```
+  hostinger hosting git update-auto-deployment-settings u123456789 mydomain.tld --branch main --installation-uuid 018f5e2a-1234-7890-abcd-1234567890ab --owner octocat --repository my-site
+```
+
 ### Options
 
 ```
       --branch string                              Branch to deploy
-      --directory string                           Subdirectory under the website document root to deploy into. Empty, null or omitted means
-                                                   the document root.
+      --directory string                           Subdirectory under the website document root to deploy into. Empty, null or omitted means the document root.
   -h, --help                                       help for update-auto-deployment-settings
       --installation-uuid List Git installations   Active Git installation from List Git installations
       --is-enabled                                 Whether pushes to the branch deploy automatically (default true)
-      --owner List Git installation repositories   Repository owner login, as returned by List Git installation repositories. GitLab group
-                                                   paths use slashes.
+      --owner List Git installation repositories   Repository owner login, as returned by List Git installation repositories. GitLab group paths use slashes.
       --repository string                          Repository name without the .git suffix
 ```
 
@@ -38,7 +42,11 @@ hostinger hosting git update-auto-deployment-settings <username> <domain> [flags
 
 ```
       --config string   Config file (default is $HOME/.hostinger.yaml)
-      --format string   Output format type (json|table|tree), default: table
+      --dry-run         Print the request as a curl command instead of sending it
+  -o, --format string   Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string       Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input        Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose         Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

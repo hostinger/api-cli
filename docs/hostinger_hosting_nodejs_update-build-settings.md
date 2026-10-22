@@ -18,26 +18,34 @@ apps.
 hostinger hosting nodejs update-build-settings <username> <domain> [flags]
 ```
 
+### Examples
+
+```
+  hostinger hosting nodejs update-build-settings u123456789 mydomain.tld --node-version 20
+```
+
 ### Options
 
 ```
       --app-type string           Node.js application framework. Set it explicitly when auto-detection picked the wrong one. (one of: create-react-app, gatsby, vite, angular, react, vue, parcel, next, nuxt, nest, express, fastify, astro, svelte, svelte-kit, hono, react-router, nitro, other)
       --build-script string       The package.json script that builds the application
-      --entry-file string         The main entry point file for the application
-                                  (required for express, fastify, nest, nuxt and hono app types)
+      --entry-file string         The main entry point file for the application (required for express, fastify, nest, nuxt and hono app types)
   -h, --help                      help for update-build-settings
       --node-version int          Node.js major version (one of: 18, 20, 22, 24)
       --output-directory string   Build output directory relative to the root directory
       --package-manager string    Package manager used to install dependencies (one of: npm, yarn, pnpm)
-      --root-directory string     Application root directory (where package.json is located) relative to public_html.
-                                  Omit it, or send ".", for public_html itself.
+      --root-directory string     Application root directory (where package.json is located) relative to public_html. Omit it, or send ".", for public_html itself.
 ```
 
 ### Options inherited from parent commands
 
 ```
       --config string   Config file (default is $HOME/.hostinger.yaml)
-      --format string   Output format type (json|table|tree), default: table
+      --dry-run         Print the request as a curl command instead of sending it
+  -o, --format string   Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string       Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input        Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose         Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

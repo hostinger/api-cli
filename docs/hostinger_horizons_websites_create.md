@@ -40,22 +40,42 @@ MAPS:\n
 - OpenStreetMap is the default provider.\n
 - Alternative providers (Google Maps, Mapbox) are allowed ONLY if explicitly requested by the user.\n
 
+JSON flags take inline JSON, @file.json, or - to read stdin. Example values:
+
+  --message
+    [
+      {
+        "text": "Create a landing page for a coffee shop with a hero section, menu, and contact form",
+        "type": "text"
+      }
+    ]
+
 ```
 hostinger horizons websites create [flags]
+```
+
+### Examples
+
+```
+  hostinger horizons websites create --message @message.json
 ```
 
 ### Options
 
 ```
   -h, --help             help for create
-      --message string    (JSON)
+      --message string   (JSON, @file or -; shape in the help above)
 ```
 
 ### Options inherited from parent commands
 
 ```
       --config string   Config file (default is $HOME/.hostinger.yaml)
-      --format string   Output format type (json|table|tree), default: table
+      --dry-run         Print the request as a curl command instead of sending it
+  -o, --format string   Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string       Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input        Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose         Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

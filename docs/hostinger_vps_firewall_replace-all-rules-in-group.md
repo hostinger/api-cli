@@ -10,15 +10,33 @@ in a single atomic operation, instead of creating or deleting rules one by one.
 Any virtual machine using this firewall group will need to be synchronized after replacing rules;
 pass the "sync" parameter to trigger synchronization immediately.
 
+JSON flags take inline JSON, @file.json, or - to read stdin. Example values:
+
+  --rules
+    [
+      {
+        "port": "443",
+        "protocol": "TCP",
+        "source": "any",
+        "source_detail": "351.15.24.0/24"
+      }
+    ]
+
 ```
 hostinger vps firewall replace-all-rules-in-group <firewall-id> [flags]
+```
+
+### Examples
+
+```
+  hostinger vps firewall replace-all-rules-in-group 9449049 --rules @rules.json
 ```
 
 ### Options
 
 ```
   -h, --help           help for replace-all-rules-in-group
-      --rules string   The complete set of firewall rules that atomically replaces all existing rules in the group (JSON)
+      --rules string   The complete set of firewall rules that atomically replaces all existing rules in the group (JSON, @file or -; shape in the help above)
       --sync           Synchronize the firewall group to all its virtual machines after replacing the rules
 ```
 
@@ -26,7 +44,11 @@ hostinger vps firewall replace-all-rules-in-group <firewall-id> [flags]
 
 ```
       --config string   Config file (default is $HOME/.hostinger.yaml)
-      --format string   Output format type (json|table|tree), default: table
+      --dry-run         Print the request as a curl command instead of sending it
+  -o, --format string   Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string       Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input        Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose         Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

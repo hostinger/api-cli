@@ -11,6 +11,12 @@ gateways available to install. Never exposes gateway credentials, secrets, or co
 hostinger ecommerce payments list-store-providers <store_id> [flags]
 ```
 
+### Examples
+
+```
+  hostinger ecommerce payments list-store-providers store_01J8Z5F8W9K8M4A7B3C2D1E0FG
+```
+
 ### Options
 
 ```
@@ -22,7 +28,11 @@ hostinger ecommerce payments list-store-providers <store_id> [flags]
 
 ```
       --config string   Config file (default is $HOME/.hostinger.yaml)
-      --format string   Output format type (json|table|tree), default: table
+      --dry-run         Print the request as a curl command instead of sending it
+  -o, --format string   Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string       Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input        Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose         Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

@@ -13,8 +13,19 @@ from; existing campaigns keep their own sender. `sender_email` is only the part 
 outside that domain cannot be set. Connecting a sending domain is a separate endpoint and
 a connected domain cannot be changed here. Returns the settings after the change.
 
+JSON flags take inline JSON, @file.json, or - to read stdin. Example values:
+
+  --socials
+    {}
+
 ```
 hostinger reach profiles update-settings <profile-uuid> [flags]
+```
+
+### Examples
+
+```
+  hostinger reach profiles update-settings 550e8400-e09b-41d4-a716-400055000000
 ```
 
 ### Options
@@ -36,11 +47,10 @@ hostinger reach profiles update-settings <profile-uuid> [flags]
       --logo-url string              Public image URL. Logo uploads are not supported.
       --privacy-policy-url string    
       --selling-points strings       
-      --sender-email @               Part of the default sender address before the @, for example `hello`. Never send a
-                                     full address: Reach adds the profile's connected sending domain itself.
+      --sender-email @               Part of the default sender address before the @, for example `hello`. Never send a full address: Reach adds the profile's connected sending domain itself.
       --sender-name string           Default sender name. Letters, numbers and spaces only.
       --social-links strings         
-      --socials string               Social profile links keyed by platform. (JSON)
+      --socials string               Social profile links keyed by platform. (JSON, @file or -; shape in the help above)
       --text-color string            
       --topics strings               
       --website-url string           
@@ -50,7 +60,11 @@ hostinger reach profiles update-settings <profile-uuid> [flags]
 
 ```
       --config string   Config file (default is $HOME/.hostinger.yaml)
-      --format string   Output format type (json|table|tree), default: table
+      --dry-run         Print the request as a curl command instead of sending it
+  -o, --format string   Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string       Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input        Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose         Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

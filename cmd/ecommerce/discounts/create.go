@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
@@ -13,27 +12,44 @@ import (
 )
 
 var CreateCmd = &cobra.Command{
-	Use:   "create <store_id>",
-	Short: "Create a discount",
-	Long:  "Create a discount for a store. Fixed discounts take an amount in the smallest currency\nunit (e.g. $10 is 1000); percentage discounts take a whole-number value between 1 and 100.\nFree-shipping discounts ignore value. Returns the created discount.",
-	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
-	Run: func(cmd *cobra.Command, args []string) {
-		utils.EnumCheck(cmd, "allocation", []string{"total", "item"})
-		utils.EnumCheck(cmd, "type", []string{"percentage", "fixed", "free_shipping"})
-		payload, err := json.Marshal(createBody(cmd))
-		if err != nil {
-			log.Fatal(err)
+	Use:               "create <store_id>",
+	Short:             "Create a discount",
+	Long:              "Create a discount for a store. Fixed discounts take an amount in the smallest currency\nunit (e.g. $10 is 1000); percentage discounts take a whole-number value between 1 and 100.\nFree-shipping discounts ignore value. Returns the created discount.",
+	Example:           "  hostinger ecommerce discounts create store_01J8Z5F8W9K8M4A7B3C2D1E0FG --code BLACKFRIDAY --type percentage --value 20",
+	ValidArgsFunction: cobra.NoFileCompletions,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		if err := utils.EnumCheck(cmd, "allocation", []string{"total", "item"}); err != nil {
+			return err
 		}
-		r, err := api.Request().EcommerceCreateADiscountV1WithBodyWithResponse(context.TODO(), args[0], "application/json", bytes.NewReader(payload))
-		if err != nil {
-			log.Fatal(err)
+		if err := utils.EnumCheck(cmd, "type", []string{"percentage", "fixed", "free_shipping"}); err != nil {
+			return err
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		body, err := createBody(cmd)
+		if err != nil {
+			return err
+		}
+		payload, err := json.Marshal(body)
+		if err != nil {
+			return err
+		}
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().EcommerceCreateADiscountV1WithBodyWithResponse(ctx, args[0], "application/json", bytes.NewReader(payload))
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
+		}
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
 }
 
 func init() {
+	utils.RegisterArgs(CreateCmd, utils.StringArg("store_id"))
 	CreateCmd.Flags().StringP("allocation", "", "", "Whether the discount applies to the cart total or to each eligible item. (one of: total, item)")
 	CreateCmd.Flags().StringP("code", "", "", "The discount code customers enter at checkout.")
 	CreateCmd.Flags().StringP("ends-at", "", "", "When the discount expires. A bare date runs to the end of that day in time_zone. Never expires when omitted.")
@@ -47,9 +63,19 @@ func init() {
 	CreateCmd.MarkFlagRequired("code")
 	CreateCmd.MarkFlagRequired("type")
 	CreateCmd.MarkFlagRequired("value")
+	CreateCmd.RegisterFlagCompletionFunc("allocation", cobra.FixedCompletions([]cobra.Completion{"total", "item"}, cobra.ShellCompDirectiveNoFileComp))
+	CreateCmd.RegisterFlagCompletionFunc("code", cobra.NoFileCompletions)
+	CreateCmd.RegisterFlagCompletionFunc("ends-at", cobra.NoFileCompletions)
+	CreateCmd.RegisterFlagCompletionFunc("min-cart-value", cobra.NoFileCompletions)
+	CreateCmd.RegisterFlagCompletionFunc("name", cobra.NoFileCompletions)
+	CreateCmd.RegisterFlagCompletionFunc("starts-at", cobra.NoFileCompletions)
+	CreateCmd.RegisterFlagCompletionFunc("time-zone", cobra.NoFileCompletions)
+	CreateCmd.RegisterFlagCompletionFunc("type", cobra.FixedCompletions([]cobra.Completion{"percentage", "fixed", "free_shipping"}, cobra.ShellCompDirectiveNoFileComp))
+	CreateCmd.RegisterFlagCompletionFunc("usage-limit", cobra.NoFileCompletions)
+	CreateCmd.RegisterFlagCompletionFunc("value", cobra.NoFileCompletions)
 }
 
-func createBody(cmd *cobra.Command) map[string]any {
+func createBody(cmd *cobra.Command) (map[string]any, error) {
 	body := map[string]any{}
 	if cmd.Flags().Changed("allocation") {
 		v, _ := cmd.Flags().GetString("allocation")
@@ -85,5 +111,5 @@ func createBody(cmd *cobra.Command) map[string]any {
 	}
 	valueVal, _ := cmd.Flags().GetInt("value")
 	body["value"] = valueVal
-	return body
+	return body, nil
 }

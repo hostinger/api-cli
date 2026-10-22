@@ -2,7 +2,6 @@ package backups
 
 import (
 	"context"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
@@ -11,16 +10,80 @@ import (
 )
 
 var RestoreCmd = &cobra.Command{
-	Use:   "restore <virtual-machine-id> <backup-id>",
-	Short: "Restore backup",
-	Long:  "Restore a backup for a specified virtual machine.\n\nThe system will then initiate the restore process, which may take some time depending on the size of the backup.\n\n**All data on the virtual machine will be overwritten with the data from the backup.**\n\nUse this endpoint to recover VPS data from backup points.",
-	Args:  cobra.MatchAll(cobra.ExactArgs(2)),
-	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().VPSRestoreBackupV1WithResponse(context.TODO(), utils.StringToInt(args[0]), utils.StringToInt(args[1]))
-		if err != nil {
-			log.Fatal(err)
+	Use:     "restore <virtual-machine-id> <backup-id>",
+	Short:   "Restore backup",
+	Long:    "Restore a backup for a specified virtual machine.\n\nThe system will then initiate the restore process, which may take some time depending on the size of the backup.\n\nAll data on the virtual machine will be overwritten with the data from the backup.\n\nUse this endpoint to recover VPS data from backup points.",
+	Example: "  hostinger vps backups restore 1268054 8676502",
+	ValidArgsFunction: utils.CompleteArgs(
+		&utils.ArgSource{
+			Value: "id",
+			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+				r, err := api.CompletionRequest().VPSGetVirtualMachinesV1WithResponse(ctx)
+				if err != nil {
+					return nil, 0, err
+				}
+				return r.Body, r.StatusCode(), nil
+			},
+		},
+		&utils.ArgSource{
+			Value: "id",
+			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+				a0, err := utils.ParseIntArg(args[0])
+				if err != nil {
+					return nil, 0, err
+				}
+				r, err := api.CompletionRequest().VPSGetBackupsV1WithResponse(ctx, a0, nil)
+				if err != nil {
+					return nil, 0, err
+				}
+				return r.Body, r.StatusCode(), nil
+			},
+		},
+	),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		// Last step before the request: every input check has passed.
+		if err := utils.Confirm(cmd, "Restore backup", args); err != nil {
+			return err
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().VPSRestoreBackupV1WithResponse(ctx, utils.StringToInt(args[0]), utils.StringToInt(args[1]))
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
+		}
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		var waitErr error
+		if wait, _ := cmd.Flags().GetBool("wait"); wait && status < 300 {
+			respBody, status, waitErr = utils.Wait(cmd, respBody, utils.WaitSpec{
+				IDField:    "id",
+				StateField: "state",
+				Done:       []string{"success"},
+				Failed:     []string{"error"},
+			}, func(ctx context.Context, id string) ([]byte, int, error) {
+				r, err := api.Request().VPSGetActionDetailsV1WithResponse(ctx, utils.StringToInt(args[0]), utils.StringToInt(id))
+				if err != nil {
+					return nil, 0, err
+				}
+				return r.Body, r.StatusCode(), nil
+			})
+			if respBody == nil {
+				return waitErr
+			}
+		}
+		if err := output.Format(cmd, respBody, status); err != nil {
+			return err
+		}
+		return waitErr
 	},
+}
+
+func init() {
+	utils.RegisterArgs(RestoreCmd, utils.IntArg("virtual-machine-id"), utils.IntArg("backup-id"))
+	RestoreCmd.Flags().BoolP("yes", "y", false, "Skip the confirmation prompt")
+	utils.RegisterWaitFlags(RestoreCmd)
 }

@@ -12,9 +12,16 @@ Use the domain and is_assigned filters to find databases assigned to a specific 
 hostinger hosting databases list <username> [flags]
 ```
 
+### Examples
+
+```
+  hostinger hosting databases list u123456789
+```
+
 ### Options
 
 ```
+      --all             Fetch every page and print all items
       --domain string   Filter by domain name (case-insensitive substring match)
   -h, --help            help for list
       --is-assigned     When used with domain, return only databases assigned to that domain.
@@ -27,7 +34,11 @@ hostinger hosting databases list <username> [flags]
 
 ```
       --config string   Config file (default is $HOME/.hostinger.yaml)
-      --format string   Output format type (json|table|tree), default: table
+      --dry-run         Print the request as a curl command instead of sending it
+  -o, --format string   Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string       Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input        Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose         Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

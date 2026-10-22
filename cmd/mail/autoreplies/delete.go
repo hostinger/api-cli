@@ -2,24 +2,41 @@ package autoreplies
 
 import (
 	"context"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var DeleteCmd = &cobra.Command{
-	Use:   "delete <autoreply-id>",
-	Short: "Delete autoreply",
-	Long:  "Delete the autoreply of a mailbox. The mailbox stops sending\nautomatic replies immediately.",
-	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
-	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().MailDeleteAutoreplyV1WithResponse(context.TODO(), args[0])
-		if err != nil {
-			log.Fatal(err)
+	Use:               "delete <autoreply-id>",
+	Short:             "Delete autoreply",
+	Long:              "Delete the autoreply of a mailbox. The mailbox stops sending\nautomatic replies immediately.",
+	Example:           "  hostinger mail autoreplies delete AR1a2b3c4d5e6f7g",
+	ValidArgsFunction: cobra.NoFileCompletions,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		// Last step before the request: every input check has passed.
+		if err := utils.Confirm(cmd, "Delete autoreply", args); err != nil {
+			return err
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().MailDeleteAutoreplyV1WithResponse(ctx, args[0])
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
+		}
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
+}
+
+func init() {
+	utils.RegisterArgs(DeleteCmd, utils.StringArg("autoreply-id"))
+	DeleteCmd.Flags().BoolP("yes", "y", false, "Skip the confirmation prompt")
 }

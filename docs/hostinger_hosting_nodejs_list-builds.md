@@ -14,9 +14,16 @@ Use the `uuid` from a build to poll its output via the `Get Node.js Build Logs` 
 hostinger hosting nodejs list-builds <username> <domain> [flags]
 ```
 
+### Examples
+
+```
+  hostinger hosting nodejs list-builds u123456789 mydomain.tld
+```
+
 ### Options
 
 ```
+      --all              Fetch every page and print all items
   -h, --help             help for list-builds
       --page int         Page number
       --per-page int     Number of items per page (default 25)
@@ -27,7 +34,11 @@ hostinger hosting nodejs list-builds <username> <domain> [flags]
 
 ```
       --config string   Config file (default is $HOME/.hostinger.yaml)
-      --format string   Output format type (json|table|tree), default: table
+      --dry-run         Print the request as a curl command instead of sending it
+  -o, --format string   Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string       Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input        Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose         Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

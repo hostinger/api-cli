@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
@@ -13,32 +12,61 @@ import (
 )
 
 var AcceptIncomingCmd = &cobra.Command{
-	Use:   "accept-incoming <domain>",
-	Short: "Accept incoming domain move",
-	Long:  "Accept an incoming move for a specified domain.\n\nThe provided WHOIS profiles become the contacts of the domain, so they must belong\nto your account and satisfy the requirements of the TLD. Only the contact types the\ndomain actually uses are applied, but all four profile IDs have to be provided.\n\nThe move has to still be waiting for your decision, already accepted moves\ncannot be accepted again.\n\nAccepting does not complete the move. A confirmation email is sent to the email address of\nthe new owner contact, and the domain changes hands only after the change is confirmed from it.\nUntil then the move stays in the `activating` status, which can be followed with the\n[incoming move endpoint](#tag/domains-move).\n\nUse this endpoint to take ownership of a domain offered to you.",
-	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
-	Run: func(cmd *cobra.Command, args []string) {
-		payload, err := json.Marshal(acceptIncomingBody(cmd))
+	Use:     "accept-incoming <domain>",
+	Short:   "Accept incoming domain move",
+	Long:    "Accept an incoming move for a specified domain.\n\nThe provided WHOIS profiles become the contacts of the domain, so they must belong\nto your account and satisfy the requirements of the TLD. Only the contact types the\ndomain actually uses are applied, but all four profile IDs have to be provided.\n\nThe move has to still be waiting for your decision, already accepted moves\ncannot be accepted again.\n\nAccepting does not complete the move. A confirmation email is sent to the email address of\nthe new owner contact, and the domain changes hands only after the change is confirmed from it.\nUntil then the move stays in the `activating` status, which can be followed with the\nincoming move endpoint (#tag/domains-move).\n\nUse this endpoint to take ownership of a domain offered to you.\n\nJSON flags take inline JSON, @file.json, or - to read stdin. Example values:\n\n  --domain-contacts\n    {\n      \"admin_id\": 114698,\n      \"billing_id\": 154698,\n      \"owner_id\": 614698,\n      \"tech_id\": 524248\n    }",
+	Example: "  hostinger domains move accept-incoming mydomain.tld --domain-contacts @domain-contacts.json",
+	ValidArgsFunction: utils.CompleteArgs(
+		&utils.ArgSource{
+			Value: "domain",
+			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+				r, err := api.CompletionRequest().DomainsGetDomainListV1WithResponse(ctx)
+				if err != nil {
+					return nil, 0, err
+				}
+				return r.Body, r.StatusCode(), nil
+			},
+		},
+	),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		body, err := acceptIncomingBody(cmd)
 		if err != nil {
-			log.Fatal(err)
+			return err
 		}
-		r, err := api.Request().DomainsAcceptIncomingDomainMoveV1WithBodyWithResponse(context.TODO(), args[0], "application/json", bytes.NewReader(payload))
+		payload, err := json.Marshal(body)
 		if err != nil {
-			log.Fatal(err)
+			return err
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().DomainsAcceptIncomingDomainMoveV1WithBodyWithResponse(ctx, args[0], "application/json", bytes.NewReader(payload))
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
+		}
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
 }
 
 func init() {
-	AcceptIncomingCmd.Flags().StringP("domain-contacts", "", "", "WHOIS profiles of the accepting account. Only the contact types required by the TLD are applied, but all four IDs must be provided. (JSON)")
+	utils.RegisterArgs(AcceptIncomingCmd, utils.StringArg("domain"))
+	AcceptIncomingCmd.Flags().StringP("domain-contacts", "", "", "WHOIS profiles of the accepting account. Only the contact types required by the TLD are applied, but all four IDs must be provided. (JSON, @file or -; shape in the help above)")
 	AcceptIncomingCmd.MarkFlagRequired("domain-contacts")
+	AcceptIncomingCmd.RegisterFlagCompletionFunc("domain-contacts", cobra.FixedCompletions(nil, cobra.ShellCompDirectiveDefault))
 }
 
-func acceptIncomingBody(cmd *cobra.Command) map[string]any {
+func acceptIncomingBody(cmd *cobra.Command) (map[string]any, error) {
 	body := map[string]any{}
 	domainContactsVal, _ := cmd.Flags().GetString("domain-contacts")
-	body["domain_contacts"] = utils.JSONValue(domainContactsVal, "domain-contacts")
-	return body
+	domainContactsValJSON, err := utils.JSONValue(domainContactsVal, "domain-contacts")
+	if err != nil {
+		return nil, err
+	}
+	body["domain_contacts"] = domainContactsValJSON
+	return body, nil
 }

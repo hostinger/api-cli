@@ -15,12 +15,15 @@ import (
 	"github.com/hostinger/api-cli/cmd/agency_hosting/websites"
 	"github.com/hostinger/api-cli/cmd/agency_hosting/wordpress"
 
+	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var GroupCmd = &cobra.Command{
 	Use:   "agency-hosting",
 	Short: "Agency Hosting commands",
+	Args:  cobra.ArbitraryArgs,
+	RunE:  utils.GroupRunE,
 }
 
 func init() {

@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
@@ -13,32 +12,79 @@ import (
 )
 
 var SetRootPasswordCmd = &cobra.Command{
-	Use:   "set-root-password <virtual-machine-id>",
-	Short: "Set root password",
-	Long:  "Set root password for a specified virtual machine.\n\nRequirements for password are same as in the [recreate virtual machine\nendpoint](/#tag/vps-virtual-machine/POST/api/vps/v1/virtual-machines/{virtualMachineId}/recreate).\n\nUse this endpoint to update administrator credentials for VPS instances.",
-	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
-	Run: func(cmd *cobra.Command, args []string) {
-		payload, err := json.Marshal(setRootPasswordBody(cmd))
+	Use:     "set-root-password <virtual-machine-id>",
+	Short:   "Set root password",
+	Long:    "Set root password for a specified virtual machine.\n\nRequirements for password are same as in the recreate virtual machine\nendpoint (/#tag/vps-virtual-machine/POST/api/vps/v1/virtual-machines/{virtualMachineId}/recreate).\n\nUse this endpoint to update administrator credentials for VPS instances.",
+	Example: "  hostinger vps virtual-machines set-root-password 1268054 --password oMeNRustosIO",
+	ValidArgsFunction: utils.CompleteArgs(
+		&utils.ArgSource{
+			Value: "id",
+			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+				r, err := api.CompletionRequest().VPSGetVirtualMachinesV1WithResponse(ctx)
+				if err != nil {
+					return nil, 0, err
+				}
+				return r.Body, r.StatusCode(), nil
+			},
+		},
+	),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		body, err := setRootPasswordBody(cmd)
 		if err != nil {
-			log.Fatal(err)
+			return err
 		}
-		r, err := api.Request().VPSSetRootPasswordV1WithBodyWithResponse(context.TODO(), utils.StringToInt(args[0]), "application/json", bytes.NewReader(payload))
+		payload, err := json.Marshal(body)
 		if err != nil {
-			log.Fatal(err)
+			return err
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().VPSSetRootPasswordV1WithBodyWithResponse(ctx, utils.StringToInt(args[0]), "application/json", bytes.NewReader(payload))
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
+		}
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		var waitErr error
+		if wait, _ := cmd.Flags().GetBool("wait"); wait && status < 300 {
+			respBody, status, waitErr = utils.Wait(cmd, respBody, utils.WaitSpec{
+				IDField:    "id",
+				StateField: "state",
+				Done:       []string{"success"},
+				Failed:     []string{"error"},
+			}, func(ctx context.Context, id string) ([]byte, int, error) {
+				r, err := api.Request().VPSGetActionDetailsV1WithResponse(ctx, utils.StringToInt(args[0]), utils.StringToInt(id))
+				if err != nil {
+					return nil, 0, err
+				}
+				return r.Body, r.StatusCode(), nil
+			})
+			if respBody == nil {
+				return waitErr
+			}
+		}
+		if err := output.Format(cmd, respBody, status); err != nil {
+			return err
+		}
+		return waitErr
 	},
 }
 
 func init() {
+	utils.RegisterArgs(SetRootPasswordCmd, utils.IntArg("virtual-machine-id"))
 	SetRootPasswordCmd.Flags().StringP("password", "", "", "Root password for the virtual machine")
 	SetRootPasswordCmd.MarkFlagRequired("password")
+	SetRootPasswordCmd.RegisterFlagCompletionFunc("password", cobra.NoFileCompletions)
+	utils.RegisterWaitFlags(SetRootPasswordCmd)
 }
 
-func setRootPasswordBody(cmd *cobra.Command) map[string]any {
+func setRootPasswordBody(cmd *cobra.Command) (map[string]any, error) {
 	body := map[string]any{}
 	passwordVal, _ := cmd.Flags().GetString("password")
 	body["password"] = passwordVal
-	return body
+	return body, nil
 }

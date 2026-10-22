@@ -2,32 +2,46 @@ package websites
 
 import (
 	"context"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/client"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var ListSetupsCmd = &cobra.Command{
-	Use:   "list-setups",
-	Short: "List website setups",
-	Long:  "Returns the website setups started in the last 24 hours for the hosting accounts\naccessible to the authenticated client, newest first. Narrow the list with the\n`order_id`, `subscription_id` or `domain` filters.\n\nMeant for polling right after creating a website or starting a website setup: the\nwebsite shows up in the websites list before its server-side setup has finished, and\nwhile the setup is `running` endpoints that operate on that website may respond with\n`404` or `409`. Poll this endpoint with the `domain` filter every 10 to 15 seconds and\nwait for `status: completed` before uploading files, deploying or creating databases.\n`failed` means the setup stopped before finishing or has not reported progress for\nover an hour. Setups older than 24 hours are not listed.\n\n`type` is the website type the setup was started with (`wordpress`, `headless_empty`,\n`headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`), or `null` for an empty\nwebsite.",
-	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().HostingListWebsiteSetupsV1WithResponse(context.TODO(), listSetupsParams(cmd))
-		if err != nil {
-			log.Fatal(err)
+	Use:               "list-setups",
+	Short:             "List website setups",
+	Long:              "Returns the website setups started in the last 24 hours for the hosting accounts\naccessible to the authenticated client, newest first. Narrow the list with the\n`order_id`, `subscription_id` or `domain` filters.\n\nMeant for polling right after creating a website or starting a website setup: the\nwebsite shows up in the websites list before its server-side setup has finished, and\nwhile the setup is `running` endpoints that operate on that website may respond with\n`404` or `409`. Poll this endpoint with the `domain` filter every 10 to 15 seconds and\nwait for `status: completed` before uploading files, deploying or creating databases.\n`failed` means the setup stopped before finishing or has not reported progress for\nover an hour. Setups older than 24 hours are not listed.\n\n`type` is the website type the setup was started with (`wordpress`, `headless_empty`,\n`headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`), or `null` for an empty\nwebsite.",
+	Example:           "  hostinger hosting websites list-setups",
+	ValidArgsFunction: cobra.NoFileCompletions,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		params := listSetupsParams(cmd)
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().HostingListWebsiteSetupsV1WithResponse(ctx, params)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
 }
 
 func init() {
+	utils.RegisterArgs(ListSetupsCmd)
 	ListSetupsCmd.Flags().IntP("order-id", "", 0, "Order ID")
 	ListSetupsCmd.Flags().StringP("subscription-id", "", "", "Filter by hosting order subscription ID")
 	ListSetupsCmd.Flags().StringP("domain", "", "", "Filter by domain name (exact match)")
+	ListSetupsCmd.RegisterFlagCompletionFunc("order-id", cobra.NoFileCompletions)
+	ListSetupsCmd.RegisterFlagCompletionFunc("subscription-id", cobra.NoFileCompletions)
+	ListSetupsCmd.RegisterFlagCompletionFunc("domain", cobra.NoFileCompletions)
 }
 
 func listSetupsParams(cmd *cobra.Command) *client.HostingListWebsiteSetupsV1Params {

@@ -4,39 +4,54 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var DirectCmd = &cobra.Command{
-	Use:   "direct",
-	Short: "Get domain verifications",
-	Long:  "Retrieve a list of pending and completed domain verifications.",
-	Run: func(cmd *cobra.Command, args []string) {
-		payload, err := json.Marshal(directBody(cmd))
+	Use:               "direct",
+	Short:             "Get domain verifications",
+	Long:              "Retrieve a list of pending and completed domain verifications.",
+	Example:           "  hostinger domains verifications direct --domains value",
+	ValidArgsFunction: cobra.NoFileCompletions,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		body, err := directBody(cmd)
 		if err != nil {
-			log.Fatal(err)
+			return err
 		}
-		r, err := api.Request().V2GetDomainVerificationsDIRECTWithBodyWithResponse(context.TODO(), "application/json", bytes.NewReader(payload))
+		payload, err := json.Marshal(body)
 		if err != nil {
-			log.Fatal(err)
+			return err
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().V2GetDomainVerificationsDIRECTWithBodyWithResponse(ctx, "application/json", bytes.NewReader(payload))
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
+		}
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
 }
 
 func init() {
+	utils.RegisterArgs(DirectCmd)
 	DirectCmd.Flags().StringSliceP("domains", "", nil, "The list of domains for which to get verification details for.")
 	DirectCmd.MarkFlagRequired("domains")
+	DirectCmd.RegisterFlagCompletionFunc("domains", cobra.NoFileCompletions)
 }
 
-func directBody(cmd *cobra.Command) map[string]any {
+func directBody(cmd *cobra.Command) (map[string]any, error) {
 	body := map[string]any{}
 	domainsVal, _ := cmd.Flags().GetStringSlice("domains")
 	body["domains"] = domainsVal
-	return body
+	return body, nil
 }

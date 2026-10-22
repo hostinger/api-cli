@@ -11,7 +11,20 @@ import (
 	"net/http"
 )
 
+// Request returns the API client for a command run. Without a static token it
+// signs in through OAuth, opening the browser when needed.
 func Request() client.ClientWithResponsesInterface {
+	return newClient(true)
+}
+
+// CompletionRequest returns an API client for shell completion: it uses the
+// static token or an already stored OAuth sign-in, and never starts an
+// interactive login.
+func CompletionRequest() client.ClientWithResponsesInterface {
+	return newClient(false)
+}
+
+func newClient(interactive bool) client.ClientWithResponsesInterface {
 	apiURL := viper.GetString("api_url")
 	if apiURL == "" {
 		apiURL = "https://developers.hostinger.com"
@@ -21,14 +34,22 @@ func Request() client.ClientWithResponsesInterface {
 		client.WithRequestEditorFn(addUserAgent),
 	}
 
-	if staticToken := viper.GetString("api_token"); staticToken != "" {
+	var doer client.HttpRequestDoer = &http.Client{}
+	if viper.GetBool("verbose") {
+		doer = &verboseDoer{base: doer}
+	}
+
+	if interactive && viper.GetBool("dry_run") {
+		// Print the request instead of sending it; no credentials are needed.
+		opts = append(opts, client.WithHTTPClient(&dryRunDoer{}))
+	} else if staticToken := viper.GetString("api_token"); staticToken != "" {
 		// Static token wins: use it unchanged. OAuth and 401 re-auth are skipped
 		// because there is no refresh source for a user-managed token.
 		bearer, err := securityprovider.NewSecurityProviderBearerToken(staticToken)
 		if err != nil {
 			panic(err)
 		}
-		opts = append(opts, client.WithRequestEditorFn(bearer.Intercept))
+		opts = append(opts, client.WithRequestEditorFn(bearer.Intercept), client.WithHTTPClient(doer))
 	} else {
 		// No static token: obtain the bearer via the OAuth service, and retry
 		// once on a 401 after forcing a fresh token.
@@ -37,8 +58,8 @@ func Request() client.ClientWithResponsesInterface {
 			log.Fatal(err)
 		}
 		opts = append(opts,
-			client.WithRequestEditorFn(oauthBearer(oauth)),
-			client.WithHTTPClient(&oauthRetryDoer{oauth: oauth, base: &http.Client{}}),
+			client.WithRequestEditorFn(oauthBearer(oauth, interactive)),
+			client.WithHTTPClient(&oauthRetryDoer{oauth: oauth, base: doer, interactive: interactive}),
 		)
 	}
 
@@ -51,10 +72,15 @@ func Request() client.ClientWithResponsesInterface {
 }
 
 // oauthBearer resolves a token (cached -> refresh -> interactive login) and
-// attaches it as the Authorization header before each request is sent.
-func oauthBearer(oauth *OAuthService) client.RequestEditorFn {
+// attaches it as the Authorization header before each request is sent. When
+// interactive is false the login step is skipped.
+func oauthBearer(oauth *OAuthService, interactive bool) client.RequestEditorFn {
 	return func(ctx context.Context, req *http.Request) error {
-		token, err := oauth.Token(ctx)
+		resolve := oauth.Token
+		if !interactive {
+			resolve = oauth.TokenNoLogin
+		}
+		token, err := resolve(ctx)
 		if err != nil {
 			return err
 		}
@@ -65,15 +91,17 @@ func oauthBearer(oauth *OAuthService) client.RequestEditorFn {
 
 // oauthRetryDoer performs API requests and, on a 401, forces a fresh token via
 // Reauthenticate and retries the request exactly once (spec §8). A second 401
-// is returned to the caller unchanged — it never loops.
+// is returned to the caller unchanged — it never loops. Non-interactive
+// clients return the first 401 as is.
 type oauthRetryDoer struct {
-	oauth *OAuthService
-	base  client.HttpRequestDoer
+	oauth       *OAuthService
+	base        client.HttpRequestDoer
+	interactive bool
 }
 
 func (d *oauthRetryDoer) Do(req *http.Request) (*http.Response, error) {
 	resp, err := d.base.Do(req)
-	if err != nil || resp.StatusCode != http.StatusUnauthorized {
+	if err != nil || resp.StatusCode != http.StatusUnauthorized || !d.interactive {
 		return resp, err
 	}
 

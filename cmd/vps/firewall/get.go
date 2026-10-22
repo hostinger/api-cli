@@ -2,7 +2,6 @@ package firewall
 
 import (
 	"context"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
@@ -11,16 +10,39 @@ import (
 )
 
 var GetCmd = &cobra.Command{
-	Use:   "get <firewall-id>",
-	Short: "Get firewall details",
-	Long:  "Retrieve firewall by its ID and rules associated with it.\n\nUse this endpoint to view specific firewall configuration and rules.",
-	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
-	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().VPSGetFirewallDetailsV1WithResponse(context.TODO(), utils.StringToInt(args[0]))
-		if err != nil {
-			log.Fatal(err)
+	Use:     "get <firewall-id>",
+	Short:   "Get firewall details",
+	Long:    "Retrieve firewall by its ID and rules associated with it.\n\nUse this endpoint to view specific firewall configuration and rules.",
+	Example: "  hostinger vps firewall get 9449049",
+	ValidArgsFunction: utils.CompleteArgs(
+		&utils.ArgSource{
+			Value: "id",
+			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+				r, err := api.CompletionRequest().VPSGetFirewallListV1WithResponse(ctx, nil)
+				if err != nil {
+					return nil, 0, err
+				}
+				return r.Body, r.StatusCode(), nil
+			},
+		},
+	),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().VPSGetFirewallDetailsV1WithResponse(ctx, utils.StringToInt(args[0]))
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
+}
+
+func init() {
+	utils.RegisterArgs(GetCmd, utils.IntArg("firewall-id"))
 }

@@ -2,7 +2,6 @@ package webhooks
 
 import (
 	"context"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/client"
@@ -12,26 +11,58 @@ import (
 )
 
 var ListCmd = &cobra.Command{
-	Use:   "list <order-id>",
-	Short: "List webhooks",
-	Long:  "Retrieve a paginated list of webhooks belonging to the given mail\norder. Supports filtering by mailbox and status. The webhook secret\nis never included; it is returned only when a webhook is created or\nits secret is regenerated.",
-	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
-	Run: func(cmd *cobra.Command, args []string) {
-		utils.EnumCheck(cmd, "status", []string{"active", "disabled", "paused"})
-		r, err := api.Request().MailListWebhooksV1WithResponse(context.TODO(), args[0], listParams(cmd))
-		if err != nil {
-			log.Fatal(err)
+	Use:     "list <order-id>",
+	Short:   "List webhooks",
+	Long:    "Retrieve a paginated list of webhooks belonging to the given mail\norder. Supports filtering by mailbox and status. The webhook secret\nis never included; it is returned only when a webhook is created or\nits secret is regenerated.",
+	Example: "  hostinger mail webhooks list OR1a2b3c4d5e6f7g",
+	ValidArgsFunction: utils.CompleteArgs(
+		&utils.ArgSource{
+			Value: "id",
+			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+				r, err := api.CompletionRequest().MailListOrdersV1WithResponse(ctx, nil)
+				if err != nil {
+					return nil, 0, err
+				}
+				return r.Body, r.StatusCode(), nil
+			},
+		},
+	),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		if err := utils.EnumCheck(cmd, "status", []string{"active", "disabled", "paused"}); err != nil {
+			return err
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		params := listParams(cmd)
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().MailListWebhooksV1WithResponse(ctx, args[0], params)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
+		}
+		if all, _ := cmd.Flags().GetBool("all"); all {
+			call = utils.AllPages(call, func(page int) { params.Page = &page })
+		}
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
 }
 
 func init() {
+	utils.RegisterArgs(ListCmd, utils.StringArg("order-id"))
 	ListCmd.Flags().StringP("mailbox-id", "", "", "Filter by the mailbox resource ID the webhooks are attached to")
 	ListCmd.Flags().StringP("status", "", "", "Filter webhooks by status (one of: active, disabled, paused)")
 	ListCmd.Flags().IntP("page", "", 0, "Page number")
 	ListCmd.Flags().IntP("per-page", "", 25, "Number of items per page")
+	ListCmd.RegisterFlagCompletionFunc("mailbox-id", cobra.NoFileCompletions)
+	ListCmd.RegisterFlagCompletionFunc("status", cobra.FixedCompletions([]cobra.Completion{"active", "disabled", "paused"}, cobra.ShellCompDirectiveNoFileComp))
+	ListCmd.RegisterFlagCompletionFunc("page", cobra.NoFileCompletions)
+	ListCmd.RegisterFlagCompletionFunc("per-page", cobra.NoFileCompletions)
+	ListCmd.Flags().Bool("all", false, "Fetch every page and print all items")
+	ListCmd.MarkFlagsMutuallyExclusive("all", "page")
 }
 
 func listParams(cmd *cobra.Command) *client.MailListWebhooksV1Params {

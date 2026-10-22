@@ -17,12 +17,15 @@ import (
 	"github.com/hostinger/api-cli/cmd/hosting/ssl"
 	"github.com/hostinger/api-cli/cmd/hosting/websites"
 
+	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var GroupCmd = &cobra.Command{
 	Use:   "hosting",
 	Short: "Hosting commands",
+	Args:  cobra.ArbitraryArgs,
+	RunE:  utils.GroupRunE,
 }
 
 func init() {

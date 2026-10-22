@@ -29,25 +29,29 @@ and `user` are identifiers, not secrets.
 hostinger hosting databases setup-website <username> <domain> [flags]
 ```
 
+### Examples
+
+```
+  hostinger hosting databases setup-website u123456789 mydomain.tld
+```
+
 ### Options
 
 ```
   -h, --help               help for setup-website
-      --name u123456789_   Optional database name. Generated when omitted. Letters, digits and underscores;
-                           must not start with an underscore. Up to 14 characters without the account username
-                           prefix (u123456789_), which is added automatically when missing. With the prefix
-                           the full name is 12 to 25 characters.
-      --user u123456789_   Optional database user. Generated when omitted. Letters, digits and underscores;
-                           must not start with an underscore. Up to 14 characters without the account username
-                           prefix (u123456789_), which is added automatically when missing. With the prefix
-                           the full user is 12 to 25 characters.
+      --name u123456789_   Optional database name. Generated when omitted. Letters, digits and underscores; must not start with an underscore. Up to 14 characters without the account username prefix (u123456789_), which is added automatically when missing. With the prefix the full name is 12 to 25 characters.
+      --user u123456789_   Optional database user. Generated when omitted. Letters, digits and underscores; must not start with an underscore. Up to 14 characters without the account username prefix (u123456789_), which is added automatically when missing. With the prefix the full user is 12 to 25 characters.
 ```
 
 ### Options inherited from parent commands
 
 ```
       --config string   Config file (default is $HOME/.hostinger.yaml)
-      --format string   Output format type (json|table|tree), default: table
+      --dry-run         Print the request as a curl command instead of sending it
+  -o, --format string   Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string       Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input        Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose         Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

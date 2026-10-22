@@ -8,7 +8,7 @@ Delete a contact with the specified UUID.
 
 This endpoint permanently removes a contact from the email marketing system.
 
-**Deprecated.** This endpoint cannot target a profile, so it always falls back to the
+Deprecated. This endpoint cannot target a profile, so it always falls back to the
 client's default profile and cannot delete contacts of any other profile. Use
 `DELETE /api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid}` instead.
 
@@ -16,17 +16,28 @@ client's default profile and cannot delete contacts of any other profile. Use
 hostinger reach contacts delete <uuid> [flags]
 ```
 
+### Examples
+
+```
+  hostinger reach contacts delete 9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d
+```
+
 ### Options
 
 ```
   -h, --help   help for delete
+  -y, --yes    Skip the confirmation prompt
 ```
 
 ### Options inherited from parent commands
 
 ```
       --config string   Config file (default is $HOME/.hostinger.yaml)
-      --format string   Output format type (json|table|tree), default: table
+      --dry-run         Print the request as a curl command instead of sending it
+  -o, --format string   Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string       Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input        Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose         Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

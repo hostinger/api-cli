@@ -2,7 +2,6 @@ package logs
 
 import (
 	"context"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/client"
@@ -12,22 +11,60 @@ import (
 )
 
 var ListInboundCmd = &cobra.Command{
-	Use:   "list-inbound <order-id>",
-	Short: "List inbound logs",
-	Long:  "Retrieve paginated inbound (received mail) delivery logs for the\ndomain attached to the given mail order. Supports filtering by\naccount, date range, status, sender, and recipient. Results are\nsorted by timestamp descending.",
-	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
-	Run: func(cmd *cobra.Command, args []string) {
-		utils.EnumCheck(cmd, "status", []string{"Successful", "Failed"})
-		r, err := api.Request().MailListInboundLogsV1WithResponse(context.TODO(), args[0], listInboundParams(cmd))
-		if err != nil {
-			log.Fatal(err)
+	Use:     "list-inbound <order-id>",
+	Short:   "List inbound logs",
+	Long:    "Retrieve paginated inbound (received mail) delivery logs for the\ndomain attached to the given mail order. Supports filtering by\naccount, date range, status, sender, and recipient. Results are\nsorted by timestamp descending.",
+	Example: "  hostinger mail logs list-inbound OR1a2b3c4d5e6f7g",
+	ValidArgsFunction: utils.CompleteArgs(
+		&utils.ArgSource{
+			Value: "id",
+			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+				r, err := api.CompletionRequest().MailListOrdersV1WithResponse(ctx, nil)
+				if err != nil {
+					return nil, 0, err
+				}
+				return r.Body, r.StatusCode(), nil
+			},
+		},
+	),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		if err := utils.EnumCheck(cmd, "status", []string{"Successful", "Failed"}); err != nil {
+			return err
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		if err := utils.FormatCheck(cmd, "account", "email"); err != nil {
+			return err
+		}
+		if err := utils.FormatCheck(cmd, "date", "date"); err != nil {
+			return err
+		}
+		if err := utils.FormatCheck(cmd, "from-date", "date-time"); err != nil {
+			return err
+		}
+		if err := utils.FormatCheck(cmd, "to-date", "date-time"); err != nil {
+			return err
+		}
+		params := listInboundParams(cmd)
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().MailListInboundLogsV1WithResponse(ctx, args[0], params)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
+		}
+		if all, _ := cmd.Flags().GetBool("all"); all {
+			call = utils.AllPages(call, func(page int) { params.Page = &page })
+		}
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
 }
 
 func init() {
+	utils.RegisterArgs(ListInboundCmd, utils.StringArg("order-id"))
 	ListInboundCmd.Flags().StringP("account", "", "", "Filter log entries by a specific email account")
 	ListInboundCmd.Flags().StringP("date", "", "", "Exact date filter (YYYY-MM-DD). Takes precedence over `from_date`/`to_date` when both are given.")
 	ListInboundCmd.Flags().StringP("from-date", "", "", "Date range start (RFC 3339)")
@@ -37,6 +74,17 @@ func init() {
 	ListInboundCmd.Flags().StringP("recipient", "", "", "Filter log entries by recipient. Accepts a full email address or a domain.")
 	ListInboundCmd.Flags().IntP("page", "", 0, "Page number")
 	ListInboundCmd.Flags().IntP("per-page", "", 25, "Number of items per page")
+	ListInboundCmd.RegisterFlagCompletionFunc("account", cobra.NoFileCompletions)
+	ListInboundCmd.RegisterFlagCompletionFunc("date", cobra.NoFileCompletions)
+	ListInboundCmd.RegisterFlagCompletionFunc("from-date", cobra.NoFileCompletions)
+	ListInboundCmd.RegisterFlagCompletionFunc("to-date", cobra.NoFileCompletions)
+	ListInboundCmd.RegisterFlagCompletionFunc("status", cobra.FixedCompletions([]cobra.Completion{"Successful", "Failed"}, cobra.ShellCompDirectiveNoFileComp))
+	ListInboundCmd.RegisterFlagCompletionFunc("sender", cobra.NoFileCompletions)
+	ListInboundCmd.RegisterFlagCompletionFunc("recipient", cobra.NoFileCompletions)
+	ListInboundCmd.RegisterFlagCompletionFunc("page", cobra.NoFileCompletions)
+	ListInboundCmd.RegisterFlagCompletionFunc("per-page", cobra.NoFileCompletions)
+	ListInboundCmd.Flags().Bool("all", false, "Fetch every page and print all items")
+	ListInboundCmd.MarkFlagsMutuallyExclusive("all", "page")
 }
 
 func listInboundParams(cmd *cobra.Command) *client.MailListInboundLogsV1Params {

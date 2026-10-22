@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
@@ -13,36 +12,66 @@ import (
 )
 
 var CreateCmd = &cobra.Command{
-	Use:   "create <order-id>",
-	Short: "Create API token",
-	Long:  "Create an API token for the given mail order. The token grants access\nto the [Hostinger Email API](https://api.mail.hostinger.com/), where\nyou can provision and manage the mailboxes it is scoped to.\n\nThe plaintext token is returned only in this response, never again.\nA maximum of 10 tokens can exist per order. Use\n`scope.has_all_mailboxes` to cover all current and future mailboxes,\nor list specific mailboxes in `scope.mailbox_ids`.",
-	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
-	Run: func(cmd *cobra.Command, args []string) {
-		payload, err := json.Marshal(createBody(cmd))
+	Use:     "create <order-id>",
+	Short:   "Create API token",
+	Long:    "Create an API token for the given mail order. The token grants access\nto the Hostinger Email API (https://api.mail.hostinger.com/), where\nyou can provision and manage the mailboxes it is scoped to.\n\nThe plaintext token is returned only in this response, never again.\nA maximum of 10 tokens can exist per order. Use\n`scope.has_all_mailboxes` to cover all current and future mailboxes,\nor list specific mailboxes in `scope.mailbox_ids`.\n\nJSON flags take inline JSON, @file.json, or - to read stdin. Example values:\n\n  --scope\n    {\n      \"has_all_mailboxes\": false,\n      \"mailbox_ids\": [\n        \"AC1a2b3c4d5e6f7g\"\n      ]\n    }",
+	Example: "  hostinger mail api-tokens create OR1a2b3c4d5e6f7g --name 'CRM integration' --scope @scope.json",
+	ValidArgsFunction: utils.CompleteArgs(
+		&utils.ArgSource{
+			Value: "id",
+			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+				r, err := api.CompletionRequest().MailListOrdersV1WithResponse(ctx, nil)
+				if err != nil {
+					return nil, 0, err
+				}
+				return r.Body, r.StatusCode(), nil
+			},
+		},
+	),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		body, err := createBody(cmd)
 		if err != nil {
-			log.Fatal(err)
+			return err
 		}
-		r, err := api.Request().MailCreateAPITokenV1WithBodyWithResponse(context.TODO(), args[0], "application/json", bytes.NewReader(payload))
+		payload, err := json.Marshal(body)
 		if err != nil {
-			log.Fatal(err)
+			return err
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().MailCreateAPITokenV1WithBodyWithResponse(ctx, args[0], "application/json", bytes.NewReader(payload))
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
+		}
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
 }
 
 func init() {
+	utils.RegisterArgs(CreateCmd, utils.StringArg("order-id"))
 	CreateCmd.Flags().StringP("name", "", "", "Human-readable label for this token")
-	CreateCmd.Flags().StringP("scope", "", "", "Mailbox scope this token can access (JSON)")
+	CreateCmd.Flags().StringP("scope", "", "", "Mailbox scope this token can access (JSON, @file or -; shape in the help above)")
 	CreateCmd.MarkFlagRequired("name")
 	CreateCmd.MarkFlagRequired("scope")
+	CreateCmd.RegisterFlagCompletionFunc("name", cobra.NoFileCompletions)
+	CreateCmd.RegisterFlagCompletionFunc("scope", cobra.FixedCompletions(nil, cobra.ShellCompDirectiveDefault))
 }
 
-func createBody(cmd *cobra.Command) map[string]any {
+func createBody(cmd *cobra.Command) (map[string]any, error) {
 	body := map[string]any{}
 	nameVal, _ := cmd.Flags().GetString("name")
 	body["name"] = nameVal
 	scopeVal, _ := cmd.Flags().GetString("scope")
-	body["scope"] = utils.JSONValue(scopeVal, "scope")
-	return body
+	scopeValJSON, err := utils.JSONValue(scopeVal, "scope")
+	if err != nil {
+		return nil, err
+	}
+	body["scope"] = scopeValJSON
+	return body, nil
 }

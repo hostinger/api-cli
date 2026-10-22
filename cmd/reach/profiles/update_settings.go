@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
@@ -13,25 +12,38 @@ import (
 )
 
 var UpdateSettingsCmd = &cobra.Command{
-	Use:   "update-settings <profile-uuid>",
-	Short: "Update profile settings",
-	Long:  "Change the profile's default sender and brand details.\n\nSend only the fields to change: every omitted field keeps its value, and `null` or an empty\nstring clears a text field. The default sender is what campaigns created afterwards start\nfrom; existing campaigns keep their own sender. `sender_email` is only the part before the\n`@`, because Reach combines it with the profile's connected sending domain, so an address\noutside that domain cannot be set. Connecting a sending domain is a separate endpoint and\na connected domain cannot be changed here. Returns the settings after the change.",
-	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
-	Run: func(cmd *cobra.Command, args []string) {
-		payload, err := json.Marshal(updateSettingsBody(cmd))
+	Use:               "update-settings <profile-uuid>",
+	Short:             "Update profile settings",
+	Long:              "Change the profile's default sender and brand details.\n\nSend only the fields to change: every omitted field keeps its value, and `null` or an empty\nstring clears a text field. The default sender is what campaigns created afterwards start\nfrom; existing campaigns keep their own sender. `sender_email` is only the part before the\n`@`, because Reach combines it with the profile's connected sending domain, so an address\noutside that domain cannot be set. Connecting a sending domain is a separate endpoint and\na connected domain cannot be changed here. Returns the settings after the change.\n\nJSON flags take inline JSON, @file.json, or - to read stdin. Example values:\n\n  --socials\n    {}",
+	Example:           "  hostinger reach profiles update-settings 550e8400-e09b-41d4-a716-400055000000",
+	ValidArgsFunction: cobra.NoFileCompletions,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		body, err := updateSettingsBody(cmd)
 		if err != nil {
-			log.Fatal(err)
+			return err
 		}
-		r, err := api.Request().ReachUpdateProfileSettingsV1WithBodyWithResponse(context.TODO(), args[0], "application/json", bytes.NewReader(payload))
+		payload, err := json.Marshal(body)
 		if err != nil {
-			log.Fatal(err)
+			return err
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().ReachUpdateProfileSettingsV1WithBodyWithResponse(ctx, args[0], "application/json", bytes.NewReader(payload))
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
+		}
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
 }
 
 func init() {
+	utils.RegisterArgs(UpdateSettingsCmd, utils.StringArg("profile-uuid"))
 	UpdateSettingsCmd.Flags().StringP("about", "", "", "")
 	UpdateSettingsCmd.Flags().StringP("accent-color", "", "", "")
 	UpdateSettingsCmd.Flags().StringP("background-color", "", "", "")
@@ -47,16 +59,38 @@ func init() {
 	UpdateSettingsCmd.Flags().StringP("logo-url", "", "", "Public image URL. Logo uploads are not supported.")
 	UpdateSettingsCmd.Flags().StringP("privacy-policy-url", "", "", "")
 	UpdateSettingsCmd.Flags().StringSliceP("selling-points", "", nil, "")
-	UpdateSettingsCmd.Flags().StringP("sender-email", "", "", "Part of the default sender address before the `@`, for example `hello`. Never send a\nfull address: Reach adds the profile's connected sending domain itself.")
+	UpdateSettingsCmd.Flags().StringP("sender-email", "", "", "Part of the default sender address before the `@`, for example `hello`. Never send a full address: Reach adds the profile's connected sending domain itself.")
 	UpdateSettingsCmd.Flags().StringP("sender-name", "", "", "Default sender name. Letters, numbers and spaces only.")
 	UpdateSettingsCmd.Flags().StringSliceP("social-links", "", nil, "")
-	UpdateSettingsCmd.Flags().StringP("socials", "", "", "Social profile links keyed by platform. (JSON)")
+	UpdateSettingsCmd.Flags().StringP("socials", "", "", "Social profile links keyed by platform. (JSON, @file or -; shape in the help above)")
 	UpdateSettingsCmd.Flags().StringP("text-color", "", "", "")
 	UpdateSettingsCmd.Flags().StringSliceP("topics", "", nil, "")
 	UpdateSettingsCmd.Flags().StringP("website-url", "", "", "")
+	UpdateSettingsCmd.RegisterFlagCompletionFunc("about", cobra.NoFileCompletions)
+	UpdateSettingsCmd.RegisterFlagCompletionFunc("accent-color", cobra.NoFileCompletions)
+	UpdateSettingsCmd.RegisterFlagCompletionFunc("background-color", cobra.NoFileCompletions)
+	UpdateSettingsCmd.RegisterFlagCompletionFunc("brand-name", cobra.NoFileCompletions)
+	UpdateSettingsCmd.RegisterFlagCompletionFunc("business-address", cobra.NoFileCompletions)
+	UpdateSettingsCmd.RegisterFlagCompletionFunc("button-color", cobra.NoFileCompletions)
+	UpdateSettingsCmd.RegisterFlagCompletionFunc("button-corners", cobra.NoFileCompletions)
+	UpdateSettingsCmd.RegisterFlagCompletionFunc("button-text", cobra.NoFileCompletions)
+	UpdateSettingsCmd.RegisterFlagCompletionFunc("font-family", cobra.NoFileCompletions)
+	UpdateSettingsCmd.RegisterFlagCompletionFunc("heading-font-family", cobra.NoFileCompletions)
+	UpdateSettingsCmd.RegisterFlagCompletionFunc("keywords", cobra.NoFileCompletions)
+	UpdateSettingsCmd.RegisterFlagCompletionFunc("links-color", cobra.NoFileCompletions)
+	UpdateSettingsCmd.RegisterFlagCompletionFunc("logo-url", cobra.NoFileCompletions)
+	UpdateSettingsCmd.RegisterFlagCompletionFunc("privacy-policy-url", cobra.NoFileCompletions)
+	UpdateSettingsCmd.RegisterFlagCompletionFunc("selling-points", cobra.NoFileCompletions)
+	UpdateSettingsCmd.RegisterFlagCompletionFunc("sender-email", cobra.NoFileCompletions)
+	UpdateSettingsCmd.RegisterFlagCompletionFunc("sender-name", cobra.NoFileCompletions)
+	UpdateSettingsCmd.RegisterFlagCompletionFunc("social-links", cobra.NoFileCompletions)
+	UpdateSettingsCmd.RegisterFlagCompletionFunc("socials", cobra.FixedCompletions(nil, cobra.ShellCompDirectiveDefault))
+	UpdateSettingsCmd.RegisterFlagCompletionFunc("text-color", cobra.NoFileCompletions)
+	UpdateSettingsCmd.RegisterFlagCompletionFunc("topics", cobra.NoFileCompletions)
+	UpdateSettingsCmd.RegisterFlagCompletionFunc("website-url", cobra.NoFileCompletions)
 }
 
-func updateSettingsBody(cmd *cobra.Command) map[string]any {
+func updateSettingsBody(cmd *cobra.Command) (map[string]any, error) {
 	body := map[string]any{}
 	if cmd.Flags().Changed("about") {
 		v, _ := cmd.Flags().GetString("about")
@@ -131,8 +165,12 @@ func updateSettingsBody(cmd *cobra.Command) map[string]any {
 		body["social_links"] = v
 	}
 	if cmd.Flags().Changed("socials") {
-		v, _ := cmd.Flags().GetString("socials")
-		body["socials"] = utils.JSONValue(v, "socials")
+		socialsVal, _ := cmd.Flags().GetString("socials")
+		socialsValJSON, err := utils.JSONValue(socialsVal, "socials")
+		if err != nil {
+			return nil, err
+		}
+		body["socials"] = socialsValJSON
 	}
 	if cmd.Flags().Changed("text-color") {
 		v, _ := cmd.Flags().GetString("text-color")
@@ -146,5 +184,5 @@ func updateSettingsBody(cmd *cobra.Command) map[string]any {
 		v, _ := cmd.Flags().GetString("website-url")
 		body["website_url"] = v
 	}
-	return body
+	return body, nil
 }

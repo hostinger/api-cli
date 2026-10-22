@@ -10,21 +10,33 @@ The campaign is created as a draft, so nothing is sent and no contact is touched
 audience yet either - targeting and scheduling are not part of this request, the draft is
 finished and sent from the Reach interface.
 
+JSON flags take inline JSON, @file.json, or - to read stdin. Example values:
+
+  --metadata
+    {
+      "preheader": "Our biggest deals of the year",
+      "source": "api"
+    }
+
 ```
 hostinger reach campaigns create-draft <profile-uuid> [flags]
+```
+
+### Examples
+
+```
+  hostinger reach campaigns create-draft 550e8400-e09b-41d4-a716-400055000000 --sender-email marketing@example.com --sender-name 'Marketing Team'
 ```
 
 ### Options
 
 ```
   -h, --help                   help for create-draft
-      --metadata string        Extra campaign fields. Any key outside the listed ones is rejected. (JSON)
-      --sender-email string    From address of the campaign. Its domain has to be verified on the profile before
-                               the campaign can be sent.
+      --metadata string        Extra campaign fields. Any key outside the listed ones is rejected. (JSON, @file or -; shape in the help above)
+      --sender-email string    From address of the campaign. Its domain has to be verified on the profile before the campaign can be sent.
       --sender-name string     From name shown to the recipients.
       --subject string         Subject line of the email.
-      --template-uuid string   Template to send, as returned by the template endpoints. Can be left out and
-                               attached later, but the campaign cannot be sent without one.
+      --template-uuid string   Template to send, as returned by the template endpoints. Can be left out and attached later, but the campaign cannot be sent without one.
       --title string           Name the campaign is listed under. Not shown to the recipients.
 ```
 
@@ -32,7 +44,11 @@ hostinger reach campaigns create-draft <profile-uuid> [flags]
 
 ```
       --config string   Config file (default is $HOME/.hostinger.yaml)
-      --format string   Output format type (json|table|tree), default: table
+      --dry-run         Print the request as a curl command instead of sending it
+  -o, --format string   Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string       Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input        Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose         Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

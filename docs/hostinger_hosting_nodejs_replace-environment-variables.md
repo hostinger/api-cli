@@ -19,15 +19,30 @@ The `List Node.js environment variables` endpoint returns masked values (`******
 never copy values from it into this request. Always send the full desired set with real
 values taken from the project `.env` file or the user prompt.
 
+JSON flags take inline JSON, @file.json, or - to read stdin. Example values:
+
+  --env-vars
+    [
+      {
+        "key": "API_URL",
+        "value": "https://api.example.com"
+      }
+    ]
+
 ```
 hostinger hosting nodejs replace-environment-variables <username> <domain> [flags]
+```
+
+### Examples
+
+```
+  hostinger hosting nodejs replace-environment-variables u123456789 mydomain.tld --env-vars '[{"key":"API_URL","value":"https://api.example.com"}]'
 ```
 
 ### Options
 
 ```
-      --env-vars string   Environment variables to set. This is the full desired set: any variable not in
-                          this list is deleted, and an empty array deletes every variable. (JSON)
+      --env-vars string   Environment variables to set. This is the full desired set: any variable not in this list is deleted, and an empty array deletes every variable. (JSON, @file or -; shape in the help above)
   -h, --help              help for replace-environment-variables
 ```
 
@@ -35,7 +50,11 @@ hostinger hosting nodejs replace-environment-variables <username> <domain> [flag
 
 ```
       --config string   Config file (default is $HOME/.hostinger.yaml)
-      --format string   Output format type (json|table|tree), default: table
+      --dry-run         Print the request as a curl command instead of sending it
+  -o, --format string   Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string       Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input        Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose         Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

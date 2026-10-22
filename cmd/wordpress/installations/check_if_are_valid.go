@@ -4,39 +4,65 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var CheckIfAreValidCmd = &cobra.Command{
-	Use:   "check-if-are-valid <username>",
-	Short: "Check if WordPress installations are valid",
-	Long:  "Check whether one or more WordPress installations are valid and working\ncorrectly. Detects broken installations caused by missing files, broken\nplugins, themes and similar issues.\n\nProvide the WordPress installation (software) identifiers in the body. They\ncan be obtained from GET /api/hosting/v1/wordpress/installations (the `id`\nfield).",
-	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
-	Run: func(cmd *cobra.Command, args []string) {
-		payload, err := json.Marshal(checkIfAreValidBody(cmd))
+	Use:     "check-if-are-valid <username>",
+	Short:   "Check if WordPress installations are valid",
+	Long:    "Check whether one or more WordPress installations are valid and working\ncorrectly. Detects broken installations caused by missing files, broken\nplugins, themes and similar issues.\n\nProvide the WordPress installation (software) identifiers in the body. They\ncan be obtained from GET /api/hosting/v1/wordpress/installations (the `id`\nfield).",
+	Example: "  hostinger wordpress installations check-if-are-valid u123456789 --software-ids 123,456",
+	ValidArgsFunction: utils.CompleteArgs(
+		&utils.ArgSource{
+			Value: "username",
+			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+				r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
+				if err != nil {
+					return nil, 0, err
+				}
+				return r.Body, r.StatusCode(), nil
+			},
+		},
+	),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		body, err := checkIfAreValidBody(cmd)
 		if err != nil {
-			log.Fatal(err)
+			return err
 		}
-		r, err := api.Request().HostingCheckIfWordPressInstallationsAreValidV1WithBodyWithResponse(context.TODO(), args[0], "application/json", bytes.NewReader(payload))
+		payload, err := json.Marshal(body)
 		if err != nil {
-			log.Fatal(err)
+			return err
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().HostingCheckIfWordPressInstallationsAreValidV1WithBodyWithResponse(ctx, args[0], "application/json", bytes.NewReader(payload))
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
+		}
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
 }
 
 func init() {
+	utils.RegisterArgs(CheckIfAreValidCmd, utils.StringArg("username"))
 	CheckIfAreValidCmd.Flags().BoolP("force", "", false, "Force fresh validation without cache. Preferable for troubleshooting purposes.")
 	CheckIfAreValidCmd.Flags().StringSliceP("software-ids", "", nil, "WordPress installation (software) identifiers to validate.")
 	CheckIfAreValidCmd.MarkFlagRequired("software-ids")
+	CheckIfAreValidCmd.RegisterFlagCompletionFunc("force", cobra.FixedCompletions([]cobra.Completion{"true", "false"}, cobra.ShellCompDirectiveNoFileComp))
+	CheckIfAreValidCmd.RegisterFlagCompletionFunc("software-ids", cobra.NoFileCompletions)
 }
 
-func checkIfAreValidBody(cmd *cobra.Command) map[string]any {
+func checkIfAreValidBody(cmd *cobra.Command) (map[string]any, error) {
 	body := map[string]any{}
 	if cmd.Flags().Changed("force") {
 		v, _ := cmd.Flags().GetBool("force")
@@ -44,5 +70,5 @@ func checkIfAreValidBody(cmd *cobra.Command) map[string]any {
 	}
 	softwareIdsVal, _ := cmd.Flags().GetStringSlice("software-ids")
 	body["software_ids"] = softwareIdsVal
-	return body
+	return body, nil
 }

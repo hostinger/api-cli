@@ -2,7 +2,6 @@ package discounts
 
 import (
 	"context"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/client"
@@ -12,25 +11,45 @@ import (
 )
 
 var ListCmd = &cobra.Command{
-	Use:   "list <store_id>",
-	Short: "List discounts",
-	Long:  "List a store's discounts. Filter by free text over code and name, or by disabled state.\nAmounts for fixed discounts are integers in the smallest currency unit; percentage\ndiscounts carry a whole-number value between 1 and 100.",
-	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
-	Run: func(cmd *cobra.Command, args []string) {
-		utils.EnumCheck(cmd, "is-disabled", []string{"true", "false"})
-		r, err := api.Request().EcommerceListDiscountsV1WithResponse(context.TODO(), args[0], listParams(cmd))
-		if err != nil {
-			log.Fatal(err)
+	Use:               "list <store_id>",
+	Short:             "List discounts",
+	Long:              "List a store's discounts. Filter by free text over code and name, or by disabled state.\nAmounts for fixed discounts are integers in the smallest currency unit; percentage\ndiscounts carry a whole-number value between 1 and 100.",
+	Example:           "  hostinger ecommerce discounts list store_01J8Z5F8W9K8M4A7B3C2D1E0FG",
+	ValidArgsFunction: cobra.NoFileCompletions,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		if err := utils.EnumCheck(cmd, "is-disabled", []string{"true", "false"}); err != nil {
+			return err
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		params := listParams(cmd)
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().EcommerceListDiscountsV1WithResponse(ctx, args[0], params)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
+		}
+		if all, _ := cmd.Flags().GetBool("all"); all {
+			call = utils.AllPages(call, func(page int) { params.Page = &page })
+		}
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
 }
 
 func init() {
+	utils.RegisterArgs(ListCmd, utils.StringArg("store_id"))
 	ListCmd.Flags().StringP("q", "", "", "Free-text search over discount code and name.")
 	ListCmd.Flags().StringP("is-disabled", "", "", "Filter by disabled state. (one of: true, false)")
 	ListCmd.Flags().IntP("page", "", 0, "Page number")
+	ListCmd.RegisterFlagCompletionFunc("q", cobra.NoFileCompletions)
+	ListCmd.RegisterFlagCompletionFunc("is-disabled", cobra.FixedCompletions([]cobra.Completion{"true", "false"}, cobra.ShellCompDirectiveNoFileComp))
+	ListCmd.RegisterFlagCompletionFunc("page", cobra.NoFileCompletions)
+	ListCmd.Flags().Bool("all", false, "Fetch every page and print all items")
+	ListCmd.MarkFlagsMutuallyExclusive("all", "page")
 }
 
 func listParams(cmd *cobra.Command) *client.EcommerceListDiscountsV1Params {

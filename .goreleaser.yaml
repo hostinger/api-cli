@@ -7,6 +7,7 @@ before:
     - sh -c 'go run . completion bash > completions/hostinger.bash'
     - sh -c 'go run . completion zsh  > completions/hostinger.zsh'
     - sh -c 'go run . completion fish > completions/hostinger.fish'
+    - go run ./tools/gendocs -man manpages
 
 builds:
   - main: ./main.go
@@ -30,6 +31,7 @@ archives:
   - name_template: "hostinger-{{ .Version }}-{{ .Os }}-{{ .Arch }}"
     files:
       - completions/*
+      - manpages/*
     wrap_in_directory: false
 
 source:
@@ -65,6 +67,7 @@ brews:
       bash_completion.install "completions/hostinger.bash" => "hostinger"
       zsh_completion.install  "completions/hostinger.zsh"  => "_hostinger"
       fish_completion.install "completions/hostinger.fish"
+      man1.install Dir["manpages/*.1"]
 
 changelog:
   disable: false

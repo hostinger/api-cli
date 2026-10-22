@@ -15,6 +15,12 @@ Use this endpoint to enable SSH key authentication for VPS instances.
 hostinger vps ssh-keys add-virtual-machine <virtual-machine-id> [flags]
 ```
 
+### Examples
+
+```
+  hostinger vps ssh-keys add-virtual-machine 1268054 --keys 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC0g... user@example.com'
+```
+
 ### Options
 
 ```
@@ -26,7 +32,11 @@ hostinger vps ssh-keys add-virtual-machine <virtual-machine-id> [flags]
 
 ```
       --config string   Config file (default is $HOME/.hostinger.yaml)
-      --format string   Output format type (json|table|tree), default: table
+      --dry-run         Print the request as a curl command instead of sending it
+  -o, --format string   Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string       Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input        Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose         Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

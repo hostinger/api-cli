@@ -2,34 +2,68 @@ package files
 
 import (
 	"context"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/client"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var WebsiteContentCmd = &cobra.Command{
-	Use:   "website-content <username> <domain>",
-	Short: "Get website file content",
-	Long:  "Get a single file's content, relative to a website's document root.\n\nRead-only; refuses symlinks, oversized files, non-text file types, and files identified as\ncontaining secrets (e.g. credential files) — none of these are returned by this endpoint.",
-	Args:  cobra.MatchAll(cobra.ExactArgs(2)),
-	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().HostingGetWebsiteFileContentV1WithResponse(context.TODO(), args[0], args[1], websiteContentParams(cmd))
-		if err != nil {
-			log.Fatal(err)
+	Use:     "website-content <username> <domain>",
+	Short:   "Get website file content",
+	Long:    "Get a single file's content, relative to a website's document root.\n\nRead-only; refuses symlinks, oversized files, non-text file types, and files identified as\ncontaining secrets (e.g. credential files) — none of these are returned by this endpoint.",
+	Example: "  hostinger hosting files website-content u123456789 mydomain.tld --path index.php",
+	ValidArgsFunction: utils.CompleteArgs(
+		&utils.ArgSource{
+			Value: "username",
+			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+				r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
+				if err != nil {
+					return nil, 0, err
+				}
+				return r.Body, r.StatusCode(), nil
+			},
+		},
+		&utils.ArgSource{
+			Value: "domain",
+			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+				r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
+				if err != nil {
+					return nil, 0, err
+				}
+				return r.Body, r.StatusCode(), nil
+			},
+		},
+	),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		params := websiteContentParams(cmd)
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().HostingGetWebsiteFileContentV1WithResponse(ctx, args[0], args[1], params)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
 }
 
 func init() {
+	utils.RegisterArgs(WebsiteContentCmd, utils.StringArg("username"), utils.StringArg("domain"))
 	WebsiteContentCmd.Flags().StringP("path", "", "", "File path, relative to the document root.")
 	WebsiteContentCmd.Flags().IntP("from-line", "", 0, "Line offset to start reading from.")
 	WebsiteContentCmd.Flags().IntP("max-lines", "", 5000, "Max number of lines to return.")
 	WebsiteContentCmd.MarkFlagRequired("path")
+	WebsiteContentCmd.RegisterFlagCompletionFunc("path", cobra.NoFileCompletions)
+	WebsiteContentCmd.RegisterFlagCompletionFunc("from-line", cobra.NoFileCompletions)
+	WebsiteContentCmd.RegisterFlagCompletionFunc("max-lines", cobra.NoFileCompletions)
 }
 
 func websiteContentParams(cmd *cobra.Command) *client.HostingGetWebsiteFileContentV1Params {

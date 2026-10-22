@@ -2,31 +2,44 @@ package themes
 
 import (
 	"context"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/client"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var ListCmd = &cobra.Command{
-	Use:   "list",
-	Short: "List WordPress themes",
-	Long:  "List WordPress themes available to install.\n\nUse the returned `slug` values with\nPOST /api/hosting/v1/accounts/{username}/wordpress/{software}/themes/install.",
-	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().HostingListWordPressThemesV1WithResponse(context.TODO(), listParams(cmd))
-		if err != nil {
-			log.Fatal(err)
+	Use:               "list",
+	Short:             "List WordPress themes",
+	Long:              "List WordPress themes available to install.\n\nUse the returned `slug` values with\nPOST /api/hosting/v1/accounts/{username}/wordpress/{software}/themes/install.",
+	Example:           "  hostinger wordpress themes list",
+	ValidArgsFunction: cobra.NoFileCompletions,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		params := listParams(cmd)
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().HostingListWordPressThemesV1WithResponse(ctx, params)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
 }
 
 func init() {
+	utils.RegisterArgs(ListCmd)
 	ListCmd.Flags().IntP("order-id", "", 0, "Optionally scope themes to a specific order.")
 	ListCmd.Flags().StringP("search", "", "", "Search term to match against theme names.")
+	ListCmd.RegisterFlagCompletionFunc("order-id", cobra.NoFileCompletions)
+	ListCmd.RegisterFlagCompletionFunc("search", cobra.NoFileCompletions)
 }
 
 func listParams(cmd *cobra.Command) *client.HostingListWordPressThemesV1Params {

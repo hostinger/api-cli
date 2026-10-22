@@ -13,14 +13,31 @@ and no contact is modified.
 Call the segment filter attributes endpoint first to discover the valid `attribute`,
 `operator` and `value` combinations.
 
+JSON flags take inline JSON, @file.json, or - to read stdin. Example values:
+
+  --conditions
+    [
+      {
+        "attribute": "email",
+        "operator": "equals",
+        "value": "example@example.com"
+      }
+    ]
+
 ```
 hostinger reach segments preview-contacts-matching-conditions <profile-uuid> [flags]
+```
+
+### Examples
+
+```
+  hostinger reach segments preview-contacts-matching-conditions 550e8400-e09b-41d4-a716-400055000000 --conditions @conditions.json --logic AND
 ```
 
 ### Options
 
 ```
-      --conditions string       Conditions a contact must satisfy to appear in the preview (JSON)
+      --conditions string       Conditions a contact must satisfy to appear in the preview (JSON, @file or -; shape in the help above)
   -h, --help                    help for preview-contacts-matching-conditions
       --logic string            How to combine multiple conditions (one of: AND, OR)
       --page int                Page number
@@ -34,7 +51,11 @@ hostinger reach segments preview-contacts-matching-conditions <profile-uuid> [fl
 
 ```
       --config string   Config file (default is $HOME/.hostinger.yaml)
-      --format string   Output format type (json|table|tree), default: table
+      --dry-run         Print the request as a curl command instead of sending it
+  -o, --format string   Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string       Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input        Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose         Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

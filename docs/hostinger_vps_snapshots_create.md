@@ -6,12 +6,12 @@ Create snapshot
 
 Create a snapshot of a specified virtual machine.
 
-A snapshot captures the state and data of the virtual machine at a specific point in time, 
-allowing users to restore the virtual machine to that state if needed. 
-This operation is useful for backup purposes, system recovery, 
+A snapshot captures the state and data of the virtual machine at a specific point in time,
+allowing users to restore the virtual machine to that state if needed.
+This operation is useful for backup purposes, system recovery,
 and testing changes without affecting the current state of the virtual machine.
 
-**Creating new snapshot will overwrite the existing snapshot!**
+Creating new snapshot will overwrite the existing snapshot!
 
 Use this endpoint to capture VPS state for backup and recovery purposes.
 
@@ -19,17 +19,29 @@ Use this endpoint to capture VPS state for backup and recovery purposes.
 hostinger vps snapshots create <virtual-machine-id> [flags]
 ```
 
+### Examples
+
+```
+  hostinger vps snapshots create 1268054
+```
+
 ### Options
 
 ```
-  -h, --help   help for create
+  -h, --help                    help for create
+      --wait                    Wait until the action finishes
+      --wait-timeout duration   Maximum time to wait with --wait (default 10m0s)
 ```
 
 ### Options inherited from parent commands
 
 ```
       --config string   Config file (default is $HOME/.hostinger.yaml)
-      --format string   Output format type (json|table|tree), default: table
+      --dry-run         Print the request as a curl command instead of sending it
+  -o, --format string   Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string       Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input        Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose         Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

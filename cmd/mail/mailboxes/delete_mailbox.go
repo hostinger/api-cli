@@ -2,24 +2,41 @@ package mailboxes
 
 import (
 	"context"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var DeleteMailboxCmd = &cobra.Command{
-	Use:   "delete-mailbox <mailbox-id>",
-	Short: "Delete mailbox",
-	Long:  "Delete a mailbox. The mailbox is soft-deleted and stays restorable\nfor a limited period before it is permanently removed.",
-	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
-	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().MailDeleteMailboxV1WithResponse(context.TODO(), args[0])
-		if err != nil {
-			log.Fatal(err)
+	Use:               "delete-mailbox <mailbox-id>",
+	Short:             "Delete mailbox",
+	Long:              "Delete a mailbox. The mailbox is soft-deleted and stays restorable\nfor a limited period before it is permanently removed.",
+	Example:           "  hostinger mail mailboxes delete-mailbox AC1a2b3c4d5e6f7g",
+	ValidArgsFunction: cobra.NoFileCompletions,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		// Last step before the request: every input check has passed.
+		if err := utils.Confirm(cmd, "Delete mailbox", args); err != nil {
+			return err
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().MailDeleteMailboxV1WithResponse(ctx, args[0])
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
+		}
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
+}
+
+func init() {
+	utils.RegisterArgs(DeleteMailboxCmd, utils.StringArg("mailbox-id"))
+	DeleteMailboxCmd.Flags().BoolP("yes", "y", false, "Skip the confirmation prompt")
 }

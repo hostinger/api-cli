@@ -7,12 +7,18 @@ Get payment method list
 Retrieve available payment methods that can be used for placing new orders.
 
 If you want to add new payment method,
-please use [hPanel](https://hpanel.hostinger.com/billing/payment-methods).
+please use hPanel (https://hpanel.hostinger.com/billing/payment-methods).
 
 Use this endpoint to view available payment options before creating orders.
 
 ```
 hostinger billing payment-methods list [flags]
+```
+
+### Examples
+
+```
+  hostinger billing payment-methods list
 ```
 
 ### Options
@@ -25,7 +31,11 @@ hostinger billing payment-methods list [flags]
 
 ```
       --config string   Config file (default is $HOME/.hostinger.yaml)
-      --format string   Output format type (json|table|tree), default: table
+      --dry-run         Print the request as a curl command instead of sending it
+  -o, --format string   Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string       Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input        Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose         Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

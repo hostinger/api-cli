@@ -138,6 +138,54 @@ func (s *OAuthService) Token(ctx context.Context) (string, error) {
 	return s.resolve(ctx)
 }
 
+// ErrNotSignedIn is returned by TokenNoLogin when only an interactive sign-in
+// could produce a token.
+var ErrNotSignedIn = errors.New("not signed in")
+
+// TokenNoLogin is Token without the interactive fallback: the cached token, or
+// a refresh, or ErrNotSignedIn. Shell completion uses it so a TAB press never
+// opens a browser.
+func (s *OAuthService) TokenNoLogin(ctx context.Context) (string, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	creds, _ := s.loadCredentials()
+	if creds.AccessToken != "" && creds.ExpiresAt != 0 && nowMillis() < creds.ExpiresAt {
+		return creds.AccessToken, nil
+	}
+	if creds.RefreshToken == "" || creds.ClientID == "" {
+		return "", ErrNotSignedIn
+	}
+	return s.refresh(ctx, creds)
+}
+
+// Status describes the stored sign-in without touching the network.
+type Status struct {
+	SignedIn   bool      // an access or refresh token is stored
+	Expired    bool      // the access token has expired (a refresh may still work)
+	CanRefresh bool      // a refresh token is stored
+	ExpiresAt  time.Time // access token expiry; zero when unknown
+	CredPath   string
+}
+
+// Status reports the stored sign-in state.
+func (s *OAuthService) Status() Status {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	creds, _ := s.loadCredentials()
+	st := Status{
+		SignedIn:   creds.AccessToken != "" || creds.RefreshToken != "",
+		CanRefresh: creds.RefreshToken != "" && creds.ClientID != "",
+		CredPath:   s.credPath,
+	}
+	if creds.ExpiresAt != 0 {
+		st.ExpiresAt = time.UnixMilli(creds.ExpiresAt)
+		st.Expired = nowMillis() >= creds.ExpiresAt
+	}
+	return st
+}
+
 // Login runs the full interactive PKCE flow regardless of cache state.
 func (s *OAuthService) Login(ctx context.Context) (string, error) {
 	s.mu.Lock()

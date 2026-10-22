@@ -34,16 +34,37 @@ progress. When the installation appears in that list, WordPress is ready.
 Returns 422 when the account already uses all the databases its plan allows,
 unless `database.name` is an existing database on the account.
 
+JSON flags take inline JSON, @file.json, or - to read stdin. Example values:
+
+  --credentials
+    {
+      "email": "owner@example.com",
+      "login": "admin",
+      "password": "********"
+    }
+
+  --database
+    {
+      "name": "mydb",
+      "password": "********"
+    }
+
 ```
 hostinger wordpress installations install <username> [flags]
+```
+
+### Examples
+
+```
+  hostinger wordpress installations install u123456789 --credentials @credentials.json --domain example.com --site-title 'My site'
 ```
 
 ### Options
 
 ```
       --auto-updates string        WordPress core auto-update policy (one of: all, none, minor)
-      --credentials string         WordPress admin credentials (JSON)
-      --database string            Optional. If the named database already exists on the account, it is used for this WordPress install. Otherwise a new database is created with this name, or with a generated name when database is omitted or null. A new database gets a random database user and counts toward the plan's database limit. (JSON)
+      --credentials string         WordPress admin credentials (JSON, @file or -; shape in the help above)
+      --database string            Optional. If the named database already exists on the account, it is used for this WordPress install. Otherwise a new database is created with this name, or with a generated name when database is omitted or null. A new database gets a random database user and counts toward the plan's database limit. (JSON, @file or -; shape in the help above)
       --directory type: headless   Installation subdirectory relative to the document root; omit for the root. Not allowed with type: headless, which always installs into `cms`.
       --domain string              Domain of the existing website where WordPress will be installed
   -h, --help                       help for install
@@ -58,7 +79,11 @@ hostinger wordpress installations install <username> [flags]
 
 ```
       --config string   Config file (default is $HOME/.hostinger.yaml)
-      --format string   Output format type (json|table|tree), default: table
+      --dry-run         Print the request as a curl command instead of sending it
+  -o, --format string   Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string       Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input        Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose         Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

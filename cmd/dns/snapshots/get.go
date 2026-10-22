@@ -2,7 +2,6 @@ package snapshots
 
 import (
 	"context"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
@@ -11,16 +10,49 @@ import (
 )
 
 var GetCmd = &cobra.Command{
-	Use:   "get <domain> <snapshot-id>",
-	Short: "Get DNS snapshot",
-	Long:  "Retrieve particular DNS snapshot with contents of DNS zone records.\n\nUse this endpoint to view historical DNS configurations for domains.",
-	Args:  cobra.MatchAll(cobra.ExactArgs(2)),
-	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().DNSGetDNSSnapshotV1WithResponse(context.TODO(), args[0], utils.StringToInt(args[1]))
-		if err != nil {
-			log.Fatal(err)
+	Use:     "get <domain> <snapshot-id>",
+	Short:   "Get DNS snapshot",
+	Long:    "Retrieve particular DNS snapshot with contents of DNS zone records.\n\nUse this endpoint to view historical DNS configurations for domains.",
+	Example: "  hostinger dns snapshots get mydomain.tld 53513053",
+	ValidArgsFunction: utils.CompleteArgs(
+		&utils.ArgSource{
+			Value: "domain",
+			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+				r, err := api.CompletionRequest().DomainsGetDomainListV1WithResponse(ctx)
+				if err != nil {
+					return nil, 0, err
+				}
+				return r.Body, r.StatusCode(), nil
+			},
+		},
+		&utils.ArgSource{
+			Value: "id",
+			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+				r, err := api.CompletionRequest().DNSGetDNSSnapshotListV1WithResponse(ctx, args[0])
+				if err != nil {
+					return nil, 0, err
+				}
+				return r.Body, r.StatusCode(), nil
+			},
+		},
+	),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().DNSGetDNSSnapshotV1WithResponse(ctx, args[0], utils.StringToInt(args[1]))
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
+}
+
+func init() {
+	utils.RegisterArgs(GetCmd, utils.StringArg("domain"), utils.IntArg("snapshot-id"))
 }

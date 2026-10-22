@@ -11,12 +11,15 @@ import (
 	"github.com/hostinger/api-cli/cmd/reach/tags"
 	"github.com/hostinger/api-cli/cmd/reach/templates"
 
+	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var GroupCmd = &cobra.Command{
 	Use:   "reach",
 	Short: "Reach commands",
+	Args:  cobra.ArbitraryArgs,
+	RunE:  utils.GroupRunE,
 }
 
 func init() {

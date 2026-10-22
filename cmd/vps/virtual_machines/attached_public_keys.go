@@ -2,7 +2,6 @@ package virtual_machines
 
 import (
 	"context"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/client"
@@ -12,22 +11,49 @@ import (
 )
 
 var AttachedPublicKeysCmd = &cobra.Command{
-	Use:   "attached-public-keys <virtual-machine-id>",
-	Short: "Get attached public keys",
-	Long:  "Deprecated: use `GET /api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys` instead.\n\nRetrieve public keys attached to a specified virtual machine.\n\nUse this endpoint to view SSH keys configured for specific VPS instances.",
-	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
-	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().VPSGetAttachedPublicKeysV1WithResponse(context.TODO(), utils.StringToInt(args[0]), attachedPublicKeysParams(cmd))
-		if err != nil {
-			log.Fatal(err)
+	Use:     "attached-public-keys <virtual-machine-id>",
+	Short:   "Get attached public keys",
+	Long:    "Deprecated: use `GET /api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys` instead.\n\nRetrieve public keys attached to a specified virtual machine.\n\nUse this endpoint to view SSH keys configured for specific VPS instances.",
+	Example: "  hostinger vps virtual-machines attached-public-keys 1268054",
+	ValidArgsFunction: utils.CompleteArgs(
+		&utils.ArgSource{
+			Value: "id",
+			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+				r, err := api.CompletionRequest().VPSGetVirtualMachinesV1WithResponse(ctx)
+				if err != nil {
+					return nil, 0, err
+				}
+				return r.Body, r.StatusCode(), nil
+			},
+		},
+	),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		params := attachedPublicKeysParams(cmd)
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().VPSGetAttachedPublicKeysV1WithResponse(ctx, utils.StringToInt(args[0]), params)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		if all, _ := cmd.Flags().GetBool("all"); all {
+			call = utils.AllPages(call, func(page int) { params.Page = &page })
+		}
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
 }
 
 func init() {
+	utils.RegisterArgs(AttachedPublicKeysCmd, utils.IntArg("virtual-machine-id"))
 	AttachedPublicKeysCmd.Flags().IntP("page", "", 0, "Page number")
+	AttachedPublicKeysCmd.RegisterFlagCompletionFunc("page", cobra.NoFileCompletions)
+	AttachedPublicKeysCmd.Flags().Bool("all", false, "Fetch every page and print all items")
+	AttachedPublicKeysCmd.MarkFlagsMutuallyExclusive("all", "page")
 }
 
 func attachedPublicKeysParams(cmd *cobra.Command) *client.VPSGetAttachedPublicKeysV1Params {

@@ -2,7 +2,6 @@ package orders
 
 import (
 	"context"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/client"
@@ -12,28 +11,54 @@ import (
 )
 
 var ListCmd = &cobra.Command{
-	Use:   "list",
-	Short: "List orders",
-	Long:  "Retrieve a paginated list of mail orders associated with your account.\n\nUse this endpoint to monitor your mail services, including their status,\nplan, attached domain, and expiration details.",
-	Run: func(cmd *cobra.Command, args []string) {
-		utils.EnumCheck(cmd, "status", []string{"pending_setup", "active", "suspended"})
-		utils.EnumCheck(cmd, "sort", []string{"created_at", "-created_at", "expires_at", "-expires_at"})
-		r, err := api.Request().MailListOrdersV1WithResponse(context.TODO(), listParams(cmd))
-		if err != nil {
-			log.Fatal(err)
+	Use:               "list",
+	Short:             "List orders",
+	Long:              "Retrieve a paginated list of mail orders associated with your account.\n\nUse this endpoint to monitor your mail services, including their status,\nplan, attached domain, and expiration details.",
+	Example:           "  hostinger mail orders list",
+	ValidArgsFunction: cobra.NoFileCompletions,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		if err := utils.EnumCheck(cmd, "status", []string{"pending_setup", "active", "suspended"}); err != nil {
+			return err
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		if err := utils.EnumCheck(cmd, "sort", []string{"created_at", "-created_at", "expires_at", "-expires_at"}); err != nil {
+			return err
+		}
+		params := listParams(cmd)
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().MailListOrdersV1WithResponse(ctx, params)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
+		}
+		if all, _ := cmd.Flags().GetBool("all"); all {
+			call = utils.AllPages(call, func(page int) { params.Page = &page })
+		}
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
 }
 
 func init() {
+	utils.RegisterArgs(ListCmd)
 	ListCmd.Flags().StringP("domain", "", "", "Filter orders by domain name (exact match)")
 	ListCmd.Flags().StringP("status", "", "", "Filter orders by status (one of: pending_setup, active, suspended)")
 	ListCmd.Flags().BoolP("is-trial", "", false, "Filter orders by trial state")
 	ListCmd.Flags().StringP("sort", "", "-created_at", "Sort orders by field. Prefix with `-` for descending order. (one of: created_at, -created_at, expires_at, -expires_at)")
 	ListCmd.Flags().IntP("page", "", 0, "Page number")
 	ListCmd.Flags().IntP("per-page", "", 25, "Number of items per page")
+	ListCmd.RegisterFlagCompletionFunc("domain", cobra.NoFileCompletions)
+	ListCmd.RegisterFlagCompletionFunc("status", cobra.FixedCompletions([]cobra.Completion{"pending_setup", "active", "suspended"}, cobra.ShellCompDirectiveNoFileComp))
+	ListCmd.RegisterFlagCompletionFunc("is-trial", cobra.FixedCompletions([]cobra.Completion{"true", "false"}, cobra.ShellCompDirectiveNoFileComp))
+	ListCmd.RegisterFlagCompletionFunc("sort", cobra.FixedCompletions([]cobra.Completion{"created_at", "-created_at", "expires_at", "-expires_at"}, cobra.ShellCompDirectiveNoFileComp))
+	ListCmd.RegisterFlagCompletionFunc("page", cobra.NoFileCompletions)
+	ListCmd.RegisterFlagCompletionFunc("per-page", cobra.NoFileCompletions)
+	ListCmd.Flags().Bool("all", false, "Fetch every page and print all items")
+	ListCmd.MarkFlagsMutuallyExclusive("all", "page")
 }
 
 func listParams(cmd *cobra.Command) *client.MailListOrdersV1Params {

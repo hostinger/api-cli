@@ -16,12 +16,15 @@ import (
 	"github.com/hostinger/api-cli/cmd/vps/templates"
 	"github.com/hostinger/api-cli/cmd/vps/virtual_machines"
 
+	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var GroupCmd = &cobra.Command{
 	Use:   "vps",
 	Short: "VPS commands",
+	Args:  cobra.ArbitraryArgs,
+	RunE:  utils.GroupRunE,
 }
 
 func init() {

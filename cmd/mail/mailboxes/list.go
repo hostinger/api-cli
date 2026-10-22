@@ -2,7 +2,6 @@ package mailboxes
 
 import (
 	"context"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/client"
@@ -12,26 +11,58 @@ import (
 )
 
 var ListCmd = &cobra.Command{
-	Use:   "list <order-id>",
-	Short: "List mailboxes",
-	Long:  "Retrieve a paginated list of mailboxes belonging to a mail order.\n\nUse this endpoint to monitor mailboxes of your mail service, including\ntheir status, enabled protocols, attached resource counts, and\nperiodically synced usage numbers (usage may lag behind live values).",
-	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
-	Run: func(cmd *cobra.Command, args []string) {
-		utils.EnumCheck(cmd, "sort", []string{"address", "-address"})
-		r, err := api.Request().MailListMailboxesV1WithResponse(context.TODO(), args[0], listParams(cmd))
-		if err != nil {
-			log.Fatal(err)
+	Use:     "list <order-id>",
+	Short:   "List mailboxes",
+	Long:    "Retrieve a paginated list of mailboxes belonging to a mail order.\n\nUse this endpoint to monitor mailboxes of your mail service, including\ntheir status, enabled protocols, attached resource counts, and\nperiodically synced usage numbers (usage may lag behind live values).",
+	Example: "  hostinger mail mailboxes list OR1a2b3c4d5e6f7g",
+	ValidArgsFunction: utils.CompleteArgs(
+		&utils.ArgSource{
+			Value: "id",
+			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+				r, err := api.CompletionRequest().MailListOrdersV1WithResponse(ctx, nil)
+				if err != nil {
+					return nil, 0, err
+				}
+				return r.Body, r.StatusCode(), nil
+			},
+		},
+	),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		if err := utils.EnumCheck(cmd, "sort", []string{"address", "-address"}); err != nil {
+			return err
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		params := listParams(cmd)
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().MailListMailboxesV1WithResponse(ctx, args[0], params)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
+		}
+		if all, _ := cmd.Flags().GetBool("all"); all {
+			call = utils.AllPages(call, func(page int) { params.Page = &page })
+		}
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
 }
 
 func init() {
+	utils.RegisterArgs(ListCmd, utils.StringArg("order-id"))
 	ListCmd.Flags().StringP("search", "", "", "Filter mailboxes whose email address contains the given string")
 	ListCmd.Flags().StringP("sort", "", "address", "Sort mailboxes by field. Prefix with `-` for descending order. (one of: address, -address)")
 	ListCmd.Flags().IntP("page", "", 0, "Page number")
 	ListCmd.Flags().IntP("per-page", "", 25, "Number of items per page")
+	ListCmd.RegisterFlagCompletionFunc("search", cobra.NoFileCompletions)
+	ListCmd.RegisterFlagCompletionFunc("sort", cobra.FixedCompletions([]cobra.Completion{"address", "-address"}, cobra.ShellCompDirectiveNoFileComp))
+	ListCmd.RegisterFlagCompletionFunc("page", cobra.NoFileCompletions)
+	ListCmd.RegisterFlagCompletionFunc("per-page", cobra.NoFileCompletions)
+	ListCmd.Flags().Bool("all", false, "Fetch every page and print all items")
+	ListCmd.MarkFlagsMutuallyExclusive("all", "page")
 }
 
 func listParams(cmd *cobra.Command) *client.MailListMailboxesV1Params {

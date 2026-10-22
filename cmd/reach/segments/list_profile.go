@@ -2,7 +2,6 @@ package segments
 
 import (
 	"context"
-	"log"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/client"
@@ -12,25 +11,45 @@ import (
 )
 
 var ListProfileCmd = &cobra.Command{
-	Use:   "list-profile <profile-uuid>",
-	Short: "List profile segments",
-	Long:  "Get a paginated list of the segments defined in a profile.\n\nEach entry carries the number of contacts currently matching it, which is recalculated on\nread rather than stored. Use `count_type` to count either every matching contact or only\nthe subscribed ones.",
-	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
-	Run: func(cmd *cobra.Command, args []string) {
-		utils.EnumCheck(cmd, "count-type", []string{"all", "subscribed"})
-		r, err := api.Request().ReachListProfileSegmentsV1WithResponse(context.TODO(), args[0], listProfileParams(cmd))
-		if err != nil {
-			log.Fatal(err)
+	Use:               "list-profile <profile-uuid>",
+	Short:             "List profile segments",
+	Long:              "Get a paginated list of the segments defined in a profile.\n\nEach entry carries the number of contacts currently matching it, which is recalculated on\nread rather than stored. Use `count_type` to count either every matching contact or only\nthe subscribed ones.",
+	Example:           "  hostinger reach segments list-profile 550e8400-e09b-41d4-a716-400055000000",
+	ValidArgsFunction: cobra.NoFileCompletions,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		if err := utils.EnumCheck(cmd, "count-type", []string{"all", "subscribed"}); err != nil {
+			return err
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		params := listProfileParams(cmd)
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().ReachListProfileSegmentsV1WithResponse(ctx, args[0], params)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
+		}
+		if all, _ := cmd.Flags().GetBool("all"); all {
+			call = utils.AllPages(call, func(page int) { params.Page = &page })
+		}
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
 }
 
 func init() {
+	utils.RegisterArgs(ListProfileCmd, utils.StringArg("profile-uuid"))
 	ListProfileCmd.Flags().StringP("count-type", "", "all", "Which matching contacts to count for each segment (one of: all, subscribed)")
 	ListProfileCmd.Flags().IntP("page", "", 0, "Page number")
 	ListProfileCmd.Flags().IntP("per-page", "", 25, "Number of items per page")
+	ListProfileCmd.RegisterFlagCompletionFunc("count-type", cobra.FixedCompletions([]cobra.Completion{"all", "subscribed"}, cobra.ShellCompDirectiveNoFileComp))
+	ListProfileCmd.RegisterFlagCompletionFunc("page", cobra.NoFileCompletions)
+	ListProfileCmd.RegisterFlagCompletionFunc("per-page", cobra.NoFileCompletions)
+	ListProfileCmd.Flags().Bool("all", false, "Fetch every page and print all items")
+	ListProfileCmd.MarkFlagsMutuallyExclusive("all", "page")
 }
 
 func listProfileParams(cmd *cobra.Command) *client.ReachListProfileSegmentsV1Params {

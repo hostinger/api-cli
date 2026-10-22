@@ -11,12 +11,15 @@ import (
 	"github.com/hostinger/api-cli/cmd/ecommerce/shipping"
 	"github.com/hostinger/api-cli/cmd/ecommerce/stores"
 
+	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var GroupCmd = &cobra.Command{
 	Use:   "ecommerce",
 	Short: "Ecommerce commands",
+	Args:  cobra.ArbitraryArgs,
+	RunE:  utils.GroupRunE,
 }
 
 func init() {

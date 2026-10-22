@@ -32,8 +32,27 @@ Returns 404 when the order does not exist or is not accessible to the authentica
 client, and 409 with a `Retry-After` header while a setup for the same domain is still
 running.
 
+JSON flags take inline JSON, @file.json, or - to read stdin. Example values:
+
+  --wordpress
+    {
+      "admin": {
+        "email": "admin@example.com",
+        "password": "S3curePass123",
+        "user": "site_admin"
+      },
+      "is_ai_builder": false,
+      "language": "en_US"
+    }
+
 ```
 hostinger hosting websites start-setup <order_id> [flags]
+```
+
+### Examples
+
+```
+  hostinger hosting websites start-setup 12345
 ```
 
 ### Options
@@ -43,14 +62,18 @@ hostinger hosting websites start-setup <order_id> [flags]
       --domain POST /api/hosting/v1/domains/free-subdomains   Customer-owned domain, or a free subdomain you generated through POST /api/hosting/v1/domains/free-subdomains (`hosting_domains_generate-free-subdomain`) in the last 24 hours. Cannot start with "www." and can have at most one subdomain level, e.g. `blog.example.com`. Omit or `null` to set the website up on a generated temporary free subdomain.
   -h, --help                                                  help for start-setup
       --type null                                             Website type. Omit or null for an empty website. `wordpress` installs WordPress in the website root and requires `wordpress`. The headless types (`headless_empty`, `headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`) create a headless website; `headless_wordpress` additionally installs WordPress into the `cms` directory with generated credentials. `headless_empty` installs nothing, so WordPress can be added later through `POST /api/hosting/v1/accounts/{username}/wordpress/installations` (`wordpress_installations_install`) with `type: headless`. (one of: wordpress, headless_empty, headless_wordpress, headless_ecommerce, headless_pocketbase)
-      --wordpress type                                        WordPress install settings. Required when type is `wordpress`, not allowed otherwise. The site title is the domain. (JSON)
+      --wordpress type                                        WordPress install settings. Required when type is `wordpress`, not allowed otherwise. The site title is the domain. (JSON, @file or -; shape in the help above)
 ```
 
 ### Options inherited from parent commands
 
 ```
       --config string   Config file (default is $HOME/.hostinger.yaml)
-      --format string   Output format type (json|table|tree), default: table
+      --dry-run         Print the request as a curl command instead of sending it
+  -o, --format string   Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string       Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input        Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose         Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

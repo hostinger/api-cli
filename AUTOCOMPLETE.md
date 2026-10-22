@@ -10,6 +10,22 @@ Auto-completion can be generated for multiple shells. The currently supported sh
 - fish
 - PowerShell
 
+Completion covers commands, flag values with a fixed set of choices (`--format`, enum flags) and IDs:
+where a command takes the ID or name of an existing resource, `<TAB>` lists yours (with a name or
+hostname next to each), fetched from the API with your configured credentials. Results are cached for
+two minutes, and completion never opens a browser sign-in.
+
+## Quick setup
+
+```bash
+hostinger completion install          # detects the shell from $SHELL
+hostinger completion install zsh      # or name it: bash, zsh, fish, powershell
+```
+
+It writes the script where the shell loads it from and prints any one-time setup step still needed.
+Run it again after upgrading to pick up new commands. Homebrew installs already include completions.
+The sections below set it up by hand instead.
+
 After adding shell auto-completion, remember to refresh your shell profile by logging out from the shell and log back in.
 
 ## Bash
