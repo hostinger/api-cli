@@ -14,7 +14,7 @@ import (
 var CreateBulkCmd = &cobra.Command{
 	Use:               "create-bulk <profile-uuid>",
 	Short:             "Create new contacts",
-	Long:              "Create a new contact in the email marketing system.\n\nThis endpoint allows you to create a new contact with basic information like name, email, and surname.\n\nIf double opt-in is enabled, the contact will be created with a pending status\nand a confirmation email will be sent.",
+	Long:              "Create a new contact in the email marketing system.\n\nThis endpoint allows you to create a new contact with basic information like name, email, and surname.\n\nIf double opt-in is enabled, the contact will be created with a pending status\nand a confirmation email will be sent.\n\nJSON flags take inline JSON, @file.json, or - to read stdin. Example values:\n\n  --fields\n    [\n      {\n        \"selected_option_uuids\": [\n          \"string\"\n        ],\n        \"uuid\": \"string\",\n        \"value\": \"string\"\n      }\n    ]",
 	Example:           "  hostinger reach contacts create-bulk 550e8400-e09b-41d4-a716-400055000000 --email john.doe@example.com",
 	ValidArgsFunction: cobra.NoFileCompletions,
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -45,6 +45,7 @@ var CreateBulkCmd = &cobra.Command{
 func init() {
 	utils.RegisterArgs(CreateBulkCmd, utils.StringArg("profile-uuid"))
 	CreateBulkCmd.Flags().StringP("email", "", "", "")
+	CreateBulkCmd.Flags().StringP("fields", "", "", "Custom field values to set on the contact. When a contact with this email already exists, only fields that have no value yet are filled. Unknown field UUIDs and values that do not match the field type are skipped. (JSON, @file or -; shape in the help above)")
 	CreateBulkCmd.Flags().StringP("name", "", "", "")
 	CreateBulkCmd.Flags().StringP("note", "", "", "")
 	CreateBulkCmd.Flags().StringP("phone", "", "", "Phone number in E.164 format (leading \"+\" then 7-15 digits)")
@@ -52,6 +53,7 @@ func init() {
 	CreateBulkCmd.Flags().StringSliceP("tag-uuids", "", nil, "Existing tags to attach to the created contact")
 	CreateBulkCmd.MarkFlagRequired("email")
 	CreateBulkCmd.RegisterFlagCompletionFunc("email", cobra.NoFileCompletions)
+	CreateBulkCmd.RegisterFlagCompletionFunc("fields", cobra.FixedCompletions(nil, cobra.ShellCompDirectiveDefault))
 	CreateBulkCmd.RegisterFlagCompletionFunc("name", cobra.NoFileCompletions)
 	CreateBulkCmd.RegisterFlagCompletionFunc("note", cobra.NoFileCompletions)
 	CreateBulkCmd.RegisterFlagCompletionFunc("phone", cobra.NoFileCompletions)
@@ -63,6 +65,14 @@ func createBulkBody(cmd *cobra.Command) (map[string]any, error) {
 	body := map[string]any{}
 	emailVal, _ := cmd.Flags().GetString("email")
 	body["email"] = emailVal
+	if cmd.Flags().Changed("fields") {
+		fieldsVal, _ := cmd.Flags().GetString("fields")
+		fieldsValJSON, err := utils.JSONValue(fieldsVal, "fields")
+		if err != nil {
+			return nil, err
+		}
+		body["fields"] = fieldsValJSON
+	}
 	if cmd.Flags().Changed("name") {
 		v, _ := cmd.Flags().GetString("name")
 		body["name"] = v

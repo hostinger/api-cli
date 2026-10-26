@@ -14087,6 +14087,18 @@ type ReachV1ContactsBulkStoreRequest struct {
 		// Email Example: john.doe@example.com
 		Email string `json:"email"`
 
+		// Fields Custom field values to set on the contact. For a contact whose email already
+		// exists, only fields that have no value yet are filled. Unknown field UUIDs and
+		// values that do not match the field type are skipped.
+		Fields *[]struct {
+			// SelectedOptionUuids For the choice field types
+			SelectedOptionUuids *[]string `json:"selected_option_uuids,omitempty"`
+			Uuid                string    `json:"uuid"`
+
+			// Value For the scalar field types
+			Value *string `json:"value,omitempty"`
+		} `json:"fields,omitempty"`
+
 		// Name Example: John
 		Name *string `json:"name,omitempty"`
 
@@ -14750,6 +14762,18 @@ type ReachV1ContactsSegmentsStoreRequestLogic string
 type ReachV1ContactsStoreRequest struct {
 	// Email Example: john.doe@example.com
 	Email string `json:"email"`
+
+	// Fields Custom field values to set on the contact. When a contact with this email already exists,
+	// only fields that have no value yet are filled. Unknown field UUIDs and values that do not
+	// match the field type are skipped.
+	Fields *[]struct {
+		// SelectedOptionUuids For the choice field types
+		SelectedOptionUuids *[]string `json:"selected_option_uuids,omitempty"`
+		Uuid                string    `json:"uuid"`
+
+		// Value For the scalar field types
+		Value *string `json:"value,omitempty"`
+	} `json:"fields,omitempty"`
 
 	// Name Example: John
 	Name *string `json:"name,omitempty"`
@@ -26040,9 +26064,10 @@ type ClientInterface interface {
 	// Create many contacts in a profile in a single call.
 	//
 	// The contacts are imported in the background, so a success response means the import was
-	// accepted rather than finished. Contacts whose email already exists in the profile are
-	// left as they are. If double opt-in is enabled, new contacts start off pending and are
-	// sent a confirmation email.
+	// accepted rather than finished. Contacts whose email already exists in the profile keep
+	// their current values; only the ones that are still empty, custom fields included, are
+	// filled in. If double opt-in is enabled, new contacts start off pending and are sent a
+	// confirmation email.
 	//
 	// Takes any type of body and a specified content type.
 	//
@@ -26054,9 +26079,10 @@ type ClientInterface interface {
 	// Create many contacts in a profile in a single call.
 	//
 	// The contacts are imported in the background, so a success response means the import was
-	// accepted rather than finished. Contacts whose email already exists in the profile are
-	// left as they are. If double opt-in is enabled, new contacts start off pending and are
-	// sent a confirmation email.
+	// accepted rather than finished. Contacts whose email already exists in the profile keep
+	// their current values; only the ones that are still empty, custom fields included, are
+	// filled in. If double opt-in is enabled, new contacts start off pending and are sent a
+	// confirmation email.
 	//
 	// Takes a body of the `application/json` content type.
 	//
@@ -37913,9 +37939,10 @@ func (c *Client) ReachCreateNewContactsV1(ctx context.Context, profileUuid Profi
 // Create many contacts in a profile in a single call.
 //
 // The contacts are imported in the background, so a success response means the import was
-// accepted rather than finished. Contacts whose email already exists in the profile are
-// left as they are. If double opt-in is enabled, new contacts start off pending and are
-// sent a confirmation email.
+// accepted rather than finished. Contacts whose email already exists in the profile keep
+// their current values; only the ones that are still empty, custom fields included, are
+// filled in. If double opt-in is enabled, new contacts start off pending and are sent a
+// confirmation email.
 //
 // Takes any type of body and a specified content type.
 //
@@ -37937,9 +37964,10 @@ func (c *Client) ReachCreateContactsInBulkV1WithBody(ctx context.Context, profil
 // Create many contacts in a profile in a single call.
 //
 // The contacts are imported in the background, so a success response means the import was
-// accepted rather than finished. Contacts whose email already exists in the profile are
-// left as they are. If double opt-in is enabled, new contacts start off pending and are
-// sent a confirmation email.
+// accepted rather than finished. Contacts whose email already exists in the profile keep
+// their current values; only the ones that are still empty, custom fields included, are
+// filled in. If double opt-in is enabled, new contacts start off pending and are sent a
+// confirmation email.
 //
 // Takes a body of the `application/json` content type.
 //
@@ -68236,9 +68264,10 @@ type ClientWithResponsesInterface interface {
 	// Create many contacts in a profile in a single call.
 	//
 	// The contacts are imported in the background, so a success response means the import was
-	// accepted rather than finished. Contacts whose email already exists in the profile are
-	// left as they are. If double opt-in is enabled, new contacts start off pending and are
-	// sent a confirmation email.
+	// accepted rather than finished. Contacts whose email already exists in the profile keep
+	// their current values; only the ones that are still empty, custom fields included, are
+	// filled in. If double opt-in is enabled, new contacts start off pending and are sent a
+	// confirmation email.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -68250,9 +68279,10 @@ type ClientWithResponsesInterface interface {
 	// Create many contacts in a profile in a single call.
 	//
 	// The contacts are imported in the background, so a success response means the import was
-	// accepted rather than finished. Contacts whose email already exists in the profile are
-	// left as they are. If double opt-in is enabled, new contacts start off pending and are
-	// sent a confirmation email.
+	// accepted rather than finished. Contacts whose email already exists in the profile keep
+	// their current values; only the ones that are still empty, custom fields included, are
+	// filled in. If double opt-in is enabled, new contacts start off pending and are sent a
+	// confirmation email.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -104657,9 +104687,10 @@ func (c *ClientWithResponses) ReachCreateNewContactsV1WithResponse(ctx context.C
 // Create many contacts in a profile in a single call.
 //
 // The contacts are imported in the background, so a success response means the import was
-// accepted rather than finished. Contacts whose email already exists in the profile are
-// left as they are. If double opt-in is enabled, new contacts start off pending and are
-// sent a confirmation email.
+// accepted rather than finished. Contacts whose email already exists in the profile keep
+// their current values; only the ones that are still empty, custom fields included, are
+// filled in. If double opt-in is enabled, new contacts start off pending and are sent a
+// confirmation email.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
@@ -104677,9 +104708,10 @@ func (c *ClientWithResponses) ReachCreateContactsInBulkV1WithBodyWithResponse(ct
 // Create many contacts in a profile in a single call.
 //
 // The contacts are imported in the background, so a success response means the import was
-// accepted rather than finished. Contacts whose email already exists in the profile are
-// left as they are. If double opt-in is enabled, new contacts start off pending and are
-// sent a confirmation email.
+// accepted rather than finished. Contacts whose email already exists in the profile keep
+// their current values; only the ones that are still empty, custom fields included, are
+// filled in. If double opt-in is enabled, new contacts start off pending and are sent a
+// confirmation email.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //

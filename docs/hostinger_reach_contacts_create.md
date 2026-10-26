@@ -11,6 +11,19 @@ This endpoint allows you to create a new contact with basic information like nam
 If double opt-in is enabled,
 the contact will be created with a pending status and a confirmation email will be sent.
 
+JSON flags take inline JSON, @file.json, or - to read stdin. Example values:
+
+  --fields
+    [
+      {
+        "selected_option_uuids": [
+          "string"
+        ],
+        "uuid": "string",
+        "value": "string"
+      }
+    ]
+
 ```
 hostinger reach contacts create [flags]
 ```
@@ -25,6 +38,7 @@ hostinger reach contacts create [flags]
 
 ```
       --email string        
+      --fields string       Custom field values to set on the contact. When a contact with this email already exists, only fields that have no value yet are filled. Unknown field UUIDs and values that do not match the field type are skipped. (JSON, @file or -; shape in the help above)
   -h, --help                help for create
       --name string         
       --note string         
