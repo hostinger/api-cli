@@ -134,6 +134,11 @@ func Save(dir string, p *Project) error {
 	if raw, err := os.ReadFile(Path(dir)); err == nil {
 		_ = json.Unmarshal(raw, &merged) // unreadable: start over
 	}
+	// Other tools' fields (website_uid...) describe the website the link named:
+	// keep them for that website only.
+	if old, _ := merged["domain"].(string); old != "" && !strings.EqualFold(old, p.Domain) {
+		merged = map[string]any{}
+	}
 	ours, err := json.Marshal(p)
 	if err != nil {
 		return err

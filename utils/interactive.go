@@ -212,6 +212,31 @@ func ConfirmScoped(cmd *cobra.Command, action string, args []string, typed bool)
 	return Confirm(cmd, action, args)
 }
 
+// FitWidth shortens s to width columns, ending in "…". A line wider than the
+// terminal wraps, and a spinner that redraws it with \r then adds a row per frame.
+func FitWidth(s string, width int) string {
+	if width <= 0 {
+		return s
+	}
+	r := []rune(s)
+	if len(r) <= width {
+		return s
+	}
+	if width == 1 {
+		return "…"
+	}
+	return string(r[:width-1]) + "…"
+}
+
+// StderrWidth is the terminal width of stderr, or 0 when unknown.
+func StderrWidth() int {
+	w, _, err := term.GetSize(int(os.Stderr.Fd()))
+	if err != nil {
+		return 0
+	}
+	return w
+}
+
 // flagBool reads a bool flag of cmd or one it inherits; false when absent.
 func flagBool(cmd *cobra.Command, name string) bool {
 	f := cmd.Flag(name)

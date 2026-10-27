@@ -116,6 +116,18 @@ func TestSaveMergesAgentFieldsAndReadsLegacy(t *testing.T) {
 	if got["urls"] == nil || got["orderId"] != float64(7) || got["domain"] != "example.com" {
 		t.Errorf("merged = %s", raw)
 	}
+	// Linked to another website: the agent's fields described the old one.
+	if err := Save(root, &Project{Kind: "website", Domain: "other.com"}); err != nil {
+		t.Fatal(err)
+	}
+	raw, _ = os.ReadFile(Path(root))
+	got = nil
+	if err := json.Unmarshal(raw, &got); err != nil {
+		t.Fatal(err)
+	}
+	if got["urls"] != nil || got["domain"] != "other.com" {
+		t.Errorf("after re-link to another website = %s", raw)
+	}
 
 	// A link written by an early build as project.json is still read, and replaced on save.
 	legacy := t.TempDir()

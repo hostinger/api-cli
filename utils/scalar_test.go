@@ -50,3 +50,21 @@ func TestScopeIntIsAFlagError(t *testing.T) {
 		t.Errorf("abc: %v", err)
 	}
 }
+
+func TestFitWidth(t *testing.T) {
+	for _, c := range []struct {
+		in    string
+		width int
+		want  string
+	}{
+		{"Uploading kombucha.zip", 0, "Uploading kombucha.zip"}, // unknown width: as is
+		{"Uploading kombucha.zip", 40, "Uploading kombucha.zip"},
+		{"Uploading kombucha.zip", 10, "Uploading…"},
+		{"Įkeliama ąžuolas", 8, "Įkeliam…"}, // runes, not bytes
+		{"abc", 1, "…"},
+	} {
+		if got := FitWidth(c.in, c.width); got != c.want {
+			t.Errorf("FitWidth(%q, %d) = %q, want %q", c.in, c.width, got, c.want)
+		}
+	}
+}

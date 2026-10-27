@@ -28,8 +28,9 @@ var cfgFile string
 
 // Command groups of the root help.
 const (
-	groupAPI   = "api"
-	groupSetup = "setup"
+	groupAPI    = "api"
+	groupDeploy = "deploy"
+	groupSetup  = "setup"
 )
 
 var RootCmd = &cobra.Command{
@@ -68,6 +69,8 @@ func isAPICommand(cmd *cobra.Command) bool {
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt)
+	// The first Ctrl-C cancels the command; a second one kills the process.
+	context.AfterFunc(ctx, stop)
 	cmd, err := RootCmd.ExecuteContextC(ctx)
 	stop()
 	if cmd == nil {
@@ -85,6 +88,7 @@ func init() {
 	RootCmd.SetUsageTemplate(utils.UsageTemplate)
 	RootCmd.AddGroup(
 		&cobra.Group{ID: groupAPI, Title: "API Commands:"},
+		&cobra.Group{ID: groupDeploy, Title: "Deploy Commands:"},
 		&cobra.Group{ID: groupSetup, Title: "Setup Commands:"},
 	)
 	RootCmd.SetHelpCommandGroupID(groupSetup)

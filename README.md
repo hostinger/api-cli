@@ -92,5 +92,49 @@ JSON accept inline JSON, `@file.json`, or `-` for stdin; the help shows the expe
 | 4    | Not found (HTTP 404)                          |
 | 5    | Validation failed (HTTP 422)                  |
 
+## Deploying a website
+
+`hostinger up` deploys the current directory (or a path) to a Web or Cloud
+hosting website, asking only for what it cannot work out: which plan, which
+website (or a new one with a free subdomain), and a confirmation of the detected
+type (static files or a Node.js app, built on the server). It remembers the
+answers in `.hostinger/site.json`, so the next `up` is one command. Inside a Git
+checkout `.hostinger/` is added to `.gitignore`, since the file names the hosting
+account; CI should pass `--domain` instead.
+
+```
+hostinger up                      # deploy the current directory, ask what is missing
+hostinger up ./dist               # deploy a folder; the link is written in the current directory
+hostinger up --type nodejs        # override the detected or remembered type
+hostinger up --settings           # review the Node.js build settings again
+hostinger up --source git         # deploy the pushed branch through a connected GitHub/GitLab account
+hostinger link                    # point this directory at another website
+hostinger unlink                  # forget it
+```
+
+Commands that act on a website, such as `hostinger hosting cdn status`, take the
+website from the same link when the domain is left out, or from `--domain`,
+`HOSTINGER_DOMAIN` and `default_domain` in the config.
+
+### From scripts and agents
+
+Without a terminal nothing is asked. Pass `--domain` for an existing website, or
+`--create` for a new one (`--order-id` when the account has several plans), and
+`--format json` for one JSON object on stdout; progress goes to stderr, failures
+exit non-zero (API errors with the exit codes above) and carry an `error` field. Prompts are also off when `CI` or
+`HOSTINGER_NONINTERACTIVE` is set, or with `--no-input`.
+
+```
+hostinger up ./dist --domain example.com --format json
+hostinger up --create --type nodejs --app-type express --entry-file server.js --format json
+hostinger up --dry-run --domain example.com      # the plan as JSON; changes nothing
+hostinger up --no-wait --domain example.com      # start the Node.js build and return its uuid
+hostinger hosting nodejs build example.com <uuid>  # poll it
+```
+
+`--dry-run` shows the resolved website, type and source, how many files would be
+packed and which are skipped, and `overwritesContent` when the first deploy would
+replace what the website serves (the real run then asks, or needs `--yes`). Every deploy replaces the website's current files.
+
 Command documentation lives in [docs/](docs/) and in the man pages, and `manifest.json` maps every
 API operation to its command. Shell autocompletion: see [AUTOCOMPLETE.md](AUTOCOMPLETE.md).
