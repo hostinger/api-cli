@@ -51,6 +51,15 @@ func (err *arrayIndexTooLargeError) Error() string {
 	return "array index too large: " + Preview(err.v)
 }
 
+type repeatStringTooLargeError struct {
+	s string
+	n float64
+}
+
+func (err *repeatStringTooLargeError) Error() string {
+	return "repeat string result too large: " + Preview(err.s) + " * " + Preview(err.n)
+}
+
 type objectKeyNotStringError struct {
 	v any
 }
@@ -210,14 +219,6 @@ type flattenDepthError struct {
 
 func (err *flattenDepthError) Error() string {
 	return "flatten depth should not be negative: " + Preview(err.v)
-}
-
-type joinTypeError struct {
-	v any
-}
-
-func (err *joinTypeError) Error() string {
-	return "join cannot be applied to an array including: " + typeErrorPreview(err.v)
 }
 
 type timeArrayError struct{}
