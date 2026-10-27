@@ -34,7 +34,11 @@ const maxChoices = 30
 // Interactive reports whether the CLI may prompt: stdin and stderr are
 // terminals and neither --no-input nor the no_input config/env key is set.
 func Interactive(cmd *cobra.Command) bool {
-	if flagBool(cmd, "no-input") || viper.GetBool("no_input") {
+	if flagBool(cmd, "no-input") || viper.GetBool("no_input") || os.Getenv(EnvPrefix+"NONINTERACTIVE") != "" {
+		return false
+	}
+	// Agents and CI runners often have a pseudo-terminal.
+	if ci := strings.ToLower(os.Getenv("CI")); ci != "" && ci != "false" && ci != "0" {
 		return false
 	}
 	return stdinIsTerminal() && stderrIsTerminal()
@@ -49,10 +53,10 @@ func PromptMissing(cmd *cobra.Command, args []string) error {
 	if !Interactive(cmd) {
 		return nil
 	}
-	specs := ArgSpecs(cmd)
-	if len(args) < len(specs) {
+	specs, scope := ArgSpecs(cmd), ArgScope(cmd)
+	if len(args) < len(specs)-scope {
 		full := append([]string{}, args...)
-		for i := len(args); i < len(specs); i++ {
+		for i := scope + len(args); i < len(specs); i++ {
 			v, err := promptArg(cmd, specs[i], full)
 			if err != nil {
 				return err
@@ -195,6 +199,17 @@ func Confirm(cmd *cobra.Command, action string, args []string) error {
 		return nil
 	}
 	return ErrAborted
+}
+
+// ConfirmScoped is Confirm for a command whose target can come from the link,
+// the environment or the config. Such a target is acted on only after a
+// question; with --yes or without a terminal it must be typed.
+func ConfirmScoped(cmd *cobra.Command, action string, args []string, typed bool) error {
+	dryRun := flagBool(cmd, "dry-run") || viper.GetBool("dry_run")
+	if !typed && !dryRun && (flagBool(cmd, "yes") || !Interactive(cmd)) && len(args) > 0 {
+		return FlagErrorf("%q would act on %s, which was not typed but came from --domain, the environment, the link or the config: pass it as an argument", cmd.CommandPath(), args[0])
+	}
+	return Confirm(cmd, action, args)
 }
 
 // flagBool reads a bool flag of cmd or one it inherits; false when absent.

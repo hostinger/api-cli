@@ -6,29 +6,32 @@ import (
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/client"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/site"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var ListMailboxActionCmd = &cobra.Command{
-	Use:     "list-mailbox-action <order-id>",
+	Use:     "list-mailbox-action [order-id]",
 	Short:   "List mailbox action logs",
-	Long:    "Retrieve paginated mailbox action logs (message and mailbox events)\nfor a mailbox in the given mail order. The mailbox email must belong\nto the order's domain. Supports date range and event type filters.\nResults are sorted by timestamp descending.",
+	Long:    "Retrieve paginated mailbox action logs (message and mailbox events)\nfor a mailbox in the given mail order. The mailbox email must belong\nto the order's domain. Supports date range and event type filters.\nResults are sorted by timestamp descending.\n\nThe order can be given as [order-id] or left out, in which case it comes from --order-id, HOSTINGER_ORDER_ID, the .hostinger/site.json written by `hostinger up` or `hostinger link` (hosting orders), or a prompt when run in a terminal (the only order is used without asking).",
 	Example: "  hostinger mail logs list-mailbox-action OR1a2b3c4d5e6f7g --email user@example.com",
-	ValidArgsFunction: utils.CompleteArgs(
-		&utils.ArgSource{
-			Value: "id",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().MailListOrdersV1WithResponse(ctx, nil)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
+	ValidArgsFunction: utils.CompleteArgs(&utils.ArgSource{
+		Value: "id",
+		Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+			r, err := api.CompletionRequest().MailListOrdersV1WithResponse(ctx, nil)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
 		},
-	),
+	}),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		args = utils.PromptedArgs(cmd, args)
+		orderID, args, err := site.ResolveOrder(cmd, args, 0, "mail")
+		if err != nil {
+			return api.CommandError(err)
+		}
 		if err := utils.EnumCheck(cmd, "event", []string{"MessageNew", "MessageRead", "MessageAppend", "MessageExpunge", "MailboxCreate", "MailboxDelete", "MailboxRename"}); err != nil {
 			return err
 		}
@@ -46,7 +49,7 @@ var ListMailboxActionCmd = &cobra.Command{
 		}
 		params := listMailboxActionParams(cmd)
 		call := func(ctx context.Context) ([]byte, int, error) {
-			r, err := api.Request().MailListMailboxActionLogsV1WithResponse(ctx, args[0], params)
+			r, err := api.Request().MailListMailboxActionLogsV1WithResponse(ctx, orderID, params)
 			if err != nil {
 				return nil, 0, err
 			}
@@ -64,7 +67,7 @@ var ListMailboxActionCmd = &cobra.Command{
 }
 
 func init() {
-	utils.RegisterArgs(ListMailboxActionCmd, utils.StringArg("order-id"))
+	utils.RegisterScopedArgs(ListMailboxActionCmd, 1, utils.StringArg("order-id"))
 	ListMailboxActionCmd.Flags().StringP("email", "", "", "Mailbox email address. Must belong to the order's domain.")
 	ListMailboxActionCmd.Flags().StringP("date", "", "", "Exact date filter (YYYY-MM-DD). Takes precedence over `from_date`/`to_date` when both are given.")
 	ListMailboxActionCmd.Flags().StringP("from-date", "", "", "Date range start (RFC 3339)")

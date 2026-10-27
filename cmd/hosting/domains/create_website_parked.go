@@ -7,39 +7,32 @@ import (
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/site"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var CreateWebsiteParkedCmd = &cobra.Command{
-	Use:     "create-website-parked <username> <domain>",
+	Use:     "create-website-parked [domain]",
 	Short:   "Create website parked domain",
-	Long:    "Create a parked or alias domain for the selected website.\n\nProvide a domain name or IP address to park on the website so it serves the same content\nas the parent domain.",
-	Example: "  hostinger hosting domains create-website-parked u123456789 mydomain.tld --parked-domain parked-domain.com",
-	ValidArgsFunction: utils.CompleteArgs(
-		&utils.ArgSource{
-			Value: "username",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
+	Long:    "Create a parked or alias domain for the selected website.\n\nProvide a domain name or IP address to park on the website so it serves the same content\nas the parent domain.\n\nThe website can be given as [domain] (the account username is looked up), as <username> <domain>, or left out, in which case it comes from --domain, HOSTINGER_DOMAIN, the .hostinger/site.json written by `hostinger up` or `hostinger link`, the default_domain in the config file, or a prompt when run in a terminal.",
+	Example: "  hostinger hosting domains create-website-parked mydomain.tld --parked-domain parked-domain.com",
+	ValidArgsFunction: utils.CompleteArgs(&utils.ArgSource{
+		Value: "domain",
+		Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+			r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
 		},
-		&utils.ArgSource{
-			Value: "domain",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
-		},
-	),
+	}),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		args = utils.PromptedArgs(cmd, args)
+		username, domain, args, err := site.Resolve(cmd, args, 0)
+		if err != nil {
+			return api.CommandError(err)
+		}
 		body, err := createWebsiteParkedBody(cmd)
 		if err != nil {
 			return err
@@ -49,7 +42,7 @@ var CreateWebsiteParkedCmd = &cobra.Command{
 			return err
 		}
 		call := func(ctx context.Context) ([]byte, int, error) {
-			r, err := api.Request().HostingCreateWebsiteParkedDomainV1WithBodyWithResponse(ctx, args[0], args[1], "application/json", bytes.NewReader(payload))
+			r, err := api.Request().HostingCreateWebsiteParkedDomainV1WithBodyWithResponse(ctx, username, domain, "application/json", bytes.NewReader(payload))
 			if err != nil {
 				return nil, 0, err
 			}
@@ -64,7 +57,7 @@ var CreateWebsiteParkedCmd = &cobra.Command{
 }
 
 func init() {
-	utils.RegisterArgs(CreateWebsiteParkedCmd, utils.StringArg("username"), utils.StringArg("domain"))
+	utils.RegisterScopedArgs(CreateWebsiteParkedCmd, 2, utils.StringArg("username"), utils.StringArg("domain"))
 	CreateWebsiteParkedCmd.Flags().StringP("parked-domain", "", "", "Domain name or IP address to park on the selected website")
 	CreateWebsiteParkedCmd.MarkFlagRequired("parked-domain")
 	CreateWebsiteParkedCmd.RegisterFlagCompletionFunc("parked-domain", cobra.NoFileCompletions)

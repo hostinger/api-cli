@@ -7,29 +7,32 @@ import (
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/site"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var CreateCmd = &cobra.Command{
-	Use:     "create <username>",
+	Use:     "create [username]",
 	Short:   "Create account database",
-	Long:    "Creates a database with a database user and password for the specified account.\n\nThe database name and user are automatically prefixed with the account username when needed.",
+	Long:    "Creates a database with a database user and password for the specified account.\n\nThe database name and user are automatically prefixed with the account username when needed.\n\nThe hosting account can be given as [username] or left out, in which case it comes from --username, HOSTINGER_USERNAME, the website named by --domain or HOSTINGER_DOMAIN, the .hostinger/site.json written by `hostinger up` or `hostinger link`, default_domain in the config file, or a prompt when run in a terminal.",
 	Example: "  hostinger hosting databases create u123456789 --name u123456789_test_db --password 'Str0ngP@ssword!' --user u123456789_admin --website-domain example.com",
-	ValidArgsFunction: utils.CompleteArgs(
-		&utils.ArgSource{
-			Value: "username",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
+	ValidArgsFunction: utils.CompleteArgs(&utils.ArgSource{
+		Value: "username",
+		Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+			r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
 		},
-	),
+	}),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		args = utils.PromptedArgs(cmd, args)
+		username, args, err := site.ResolveUsername(cmd, args, 0)
+		if err != nil {
+			return api.CommandError(err)
+		}
 		body, err := createBody(cmd)
 		if err != nil {
 			return err
@@ -39,7 +42,7 @@ var CreateCmd = &cobra.Command{
 			return err
 		}
 		call := func(ctx context.Context) ([]byte, int, error) {
-			r, err := api.Request().HostingCreateAccountDatabaseV1WithBodyWithResponse(ctx, args[0], "application/json", bytes.NewReader(payload))
+			r, err := api.Request().HostingCreateAccountDatabaseV1WithBodyWithResponse(ctx, username, "application/json", bytes.NewReader(payload))
 			if err != nil {
 				return nil, 0, err
 			}
@@ -54,7 +57,7 @@ var CreateCmd = &cobra.Command{
 }
 
 func init() {
-	utils.RegisterArgs(CreateCmd, utils.StringArg("username"))
+	utils.RegisterScopedArgs(CreateCmd, 1, utils.StringArg("username"))
 	CreateCmd.Flags().StringP("name", "", "", "Database name. If the account username prefix is omitted, it is added automatically.")
 	CreateCmd.Flags().StringP("password", "", "", "Database user password.")
 	CreateCmd.Flags().StringP("user", "", "", "Database user. If the account username prefix is omitted, it is added automatically.")

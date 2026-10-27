@@ -8,6 +8,16 @@ import (
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
+// ScopeInt parses an id resolved from a flag, the environment or the link,
+// which argument validation never saw.
+func ScopeInt(name, v string) (int, error) {
+	i, err := strconv.Atoi(v)
+	if err != nil {
+		return 0, FlagErrorf("invalid %s %q: expected a number", name, v)
+	}
+	return i, nil
+}
+
 func StringPtrOrNil(s string) *string {
 	if s == "" {
 		return nil

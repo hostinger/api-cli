@@ -5,31 +5,34 @@ import (
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/site"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var ListCmd = &cobra.Command{
-	Use:     "list <username>",
+	Use:     "list [username]",
 	Short:   "List account cron jobs",
-	Long:    "Returns the list of cron jobs configured for the specified account, including their schedule and command.",
+	Long:    "Returns the list of cron jobs configured for the specified account, including their schedule and command.\n\nThe hosting account can be given as [username] or left out, in which case it comes from --username, HOSTINGER_USERNAME, the website named by --domain or HOSTINGER_DOMAIN, the .hostinger/site.json written by `hostinger up` or `hostinger link`, default_domain in the config file, or a prompt when run in a terminal.",
 	Example: "  hostinger hosting cron-jobs list u123456789",
-	ValidArgsFunction: utils.CompleteArgs(
-		&utils.ArgSource{
-			Value: "username",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
+	ValidArgsFunction: utils.CompleteArgs(&utils.ArgSource{
+		Value: "username",
+		Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+			r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
 		},
-	),
+	}),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		args = utils.PromptedArgs(cmd, args)
+		username, args, err := site.ResolveUsername(cmd, args, 0)
+		if err != nil {
+			return api.CommandError(err)
+		}
 		call := func(ctx context.Context) ([]byte, int, error) {
-			r, err := api.Request().HostingListAccountCronJobsV1WithResponse(ctx, args[0])
+			r, err := api.Request().HostingListAccountCronJobsV1WithResponse(ctx, username)
 			if err != nil {
 				return nil, 0, err
 			}
@@ -44,5 +47,5 @@ var ListCmd = &cobra.Command{
 }
 
 func init() {
-	utils.RegisterArgs(ListCmd, utils.StringArg("username"))
+	utils.RegisterScopedArgs(ListCmd, 1, utils.StringArg("username"))
 }

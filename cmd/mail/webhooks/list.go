@@ -6,35 +6,38 @@ import (
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/client"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/site"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var ListCmd = &cobra.Command{
-	Use:     "list <order-id>",
+	Use:     "list [order-id]",
 	Short:   "List webhooks",
-	Long:    "Retrieve a paginated list of webhooks belonging to the given mail\norder. Supports filtering by mailbox and status. The webhook secret\nis never included; it is returned only when a webhook is created or\nits secret is regenerated.",
+	Long:    "Retrieve a paginated list of webhooks belonging to the given mail\norder. Supports filtering by mailbox and status. The webhook secret\nis never included; it is returned only when a webhook is created or\nits secret is regenerated.\n\nThe order can be given as [order-id] or left out, in which case it comes from --order-id, HOSTINGER_ORDER_ID, the .hostinger/site.json written by `hostinger up` or `hostinger link` (hosting orders), or a prompt when run in a terminal (the only order is used without asking).",
 	Example: "  hostinger mail webhooks list OR1a2b3c4d5e6f7g",
-	ValidArgsFunction: utils.CompleteArgs(
-		&utils.ArgSource{
-			Value: "id",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().MailListOrdersV1WithResponse(ctx, nil)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
+	ValidArgsFunction: utils.CompleteArgs(&utils.ArgSource{
+		Value: "id",
+		Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+			r, err := api.CompletionRequest().MailListOrdersV1WithResponse(ctx, nil)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
 		},
-	),
+	}),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		args = utils.PromptedArgs(cmd, args)
+		orderID, args, err := site.ResolveOrder(cmd, args, 0, "mail")
+		if err != nil {
+			return api.CommandError(err)
+		}
 		if err := utils.EnumCheck(cmd, "status", []string{"active", "disabled", "paused"}); err != nil {
 			return err
 		}
 		params := listParams(cmd)
 		call := func(ctx context.Context) ([]byte, int, error) {
-			r, err := api.Request().MailListWebhooksV1WithResponse(ctx, args[0], params)
+			r, err := api.Request().MailListWebhooksV1WithResponse(ctx, orderID, params)
 			if err != nil {
 				return nil, 0, err
 			}
@@ -52,7 +55,7 @@ var ListCmd = &cobra.Command{
 }
 
 func init() {
-	utils.RegisterArgs(ListCmd, utils.StringArg("order-id"))
+	utils.RegisterScopedArgs(ListCmd, 1, utils.StringArg("order-id"))
 	ListCmd.Flags().StringP("mailbox-id", "", "", "Filter by the mailbox resource ID the webhooks are attached to")
 	ListCmd.Flags().StringP("status", "", "", "Filter webhooks by status (one of: active, disabled, paused)")
 	ListCmd.Flags().IntP("page", "", 0, "Page number")

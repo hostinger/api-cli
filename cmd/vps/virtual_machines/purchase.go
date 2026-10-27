@@ -27,7 +27,8 @@ var PurchaseCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		// Last step before the request: every input check has passed.
+		// Last step before the request: every input check has passed. Name
+		// the target, which may have come from the link.
 		if err := utils.Confirm(cmd, "Purchase new virtual machine", args); err != nil {
 			return err
 		}

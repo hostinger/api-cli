@@ -7,39 +7,32 @@ import (
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/site"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var CreateWebsiteSubdomainCmd = &cobra.Command{
-	Use:     "create-website-subdomain <username> <domain>",
+	Use:     "create-website-subdomain [domain]",
 	Short:   "Create website subdomain",
-	Long:    "Create a new subdomain for the selected website.\n\nProvide a subdomain prefix and, optionally, a custom directory or the\nwebsite public directory to use as the subdomain root.",
-	Example: "  hostinger hosting domains create-website-subdomain u123456789 mydomain.tld --subdomain blog",
-	ValidArgsFunction: utils.CompleteArgs(
-		&utils.ArgSource{
-			Value: "username",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
+	Long:    "Create a new subdomain for the selected website.\n\nProvide a subdomain prefix and, optionally, a custom directory or the\nwebsite public directory to use as the subdomain root.\n\nThe website can be given as [domain] (the account username is looked up), as <username> <domain>, or left out, in which case it comes from --domain, HOSTINGER_DOMAIN, the .hostinger/site.json written by `hostinger up` or `hostinger link`, the default_domain in the config file, or a prompt when run in a terminal.",
+	Example: "  hostinger hosting domains create-website-subdomain mydomain.tld --subdomain blog",
+	ValidArgsFunction: utils.CompleteArgs(&utils.ArgSource{
+		Value: "domain",
+		Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+			r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
 		},
-		&utils.ArgSource{
-			Value: "domain",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
-		},
-	),
+	}),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		args = utils.PromptedArgs(cmd, args)
+		username, domain, args, err := site.Resolve(cmd, args, 0)
+		if err != nil {
+			return api.CommandError(err)
+		}
 		body, err := createWebsiteSubdomainBody(cmd)
 		if err != nil {
 			return err
@@ -49,7 +42,7 @@ var CreateWebsiteSubdomainCmd = &cobra.Command{
 			return err
 		}
 		call := func(ctx context.Context) ([]byte, int, error) {
-			r, err := api.Request().HostingCreateWebsiteSubdomainV1WithBodyWithResponse(ctx, args[0], args[1], "application/json", bytes.NewReader(payload))
+			r, err := api.Request().HostingCreateWebsiteSubdomainV1WithBodyWithResponse(ctx, username, domain, "application/json", bytes.NewReader(payload))
 			if err != nil {
 				return nil, 0, err
 			}
@@ -64,7 +57,7 @@ var CreateWebsiteSubdomainCmd = &cobra.Command{
 }
 
 func init() {
-	utils.RegisterArgs(CreateWebsiteSubdomainCmd, utils.StringArg("username"), utils.StringArg("domain"))
+	utils.RegisterScopedArgs(CreateWebsiteSubdomainCmd, 2, utils.StringArg("username"), utils.StringArg("domain"))
 	CreateWebsiteSubdomainCmd.Flags().StringP("directory", "", "", "Directory name for the subdomain relative to the website root")
 	CreateWebsiteSubdomainCmd.Flags().BoolP("is-using-public-directory", "", false, "Use the website public directory as the subdomain root directory")
 	CreateWebsiteSubdomainCmd.Flags().StringP("subdomain", "", "", "Subdomain prefix to create under the selected website")

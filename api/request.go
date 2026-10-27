@@ -25,6 +25,17 @@ func CompletionRequest() client.ClientWithResponsesInterface {
 }
 
 func newClient(interactive bool) client.ClientWithResponsesInterface {
+	apiURL, opts := clientOptions(interactive, interactive && viper.GetBool("dry_run"))
+	c, err := client.NewClientWithResponses(apiURL, opts...)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return c
+}
+
+// clientOptions are shared by the typed client and Raw. dryRun prints each
+// request instead of sending it.
+func clientOptions(interactive, dryRun bool) (string, []client.ClientOption) {
 	apiURL := viper.GetString("api_url")
 	if apiURL == "" {
 		apiURL = "https://developers.hostinger.com"
@@ -39,8 +50,9 @@ func newClient(interactive bool) client.ClientWithResponsesInterface {
 		doer = &verboseDoer{base: doer}
 	}
 
-	if interactive && viper.GetBool("dry_run") {
-		// Print the request instead of sending it; no credentials are needed.
+	if dryRun {
+		// Print the request instead of sending it; the request itself needs no
+		// credentials (lookups through Raw may, see Raw).
 		opts = append(opts, client.WithHTTPClient(&dryRunDoer{}))
 	} else if staticToken := viper.GetString("api_token"); staticToken != "" {
 		// Static token wins: use it unchanged. OAuth and 401 re-auth are skipped
@@ -63,12 +75,7 @@ func newClient(interactive bool) client.ClientWithResponsesInterface {
 		)
 	}
 
-	c, err := client.NewClientWithResponses(apiURL, opts...)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	return c
+	return apiURL, opts
 }
 
 // oauthBearer resolves a token (cached -> refresh -> interactive login) and

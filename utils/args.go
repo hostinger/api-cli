@@ -30,6 +30,8 @@ func UUIDArg(name string) ArgSpec   { return ArgSpec{Name: name, Kind: ArgUUID} 
 var (
 	argSpecsMu sync.Mutex
 	argSpecs   = map[*cobra.Command][]ArgSpec{}
+	// argScopes: leading args a command resolves from context when left out.
+	argScopes = map[*cobra.Command]int{}
 	// promptedArgs holds the full argument list after interactive prompting,
 	// which runs in the root's PersistentPreRunE where the slice cobra passes
 	// to RunE can no longer grow.
@@ -40,21 +42,35 @@ var (
 // len(specs) arguments, each parsing as its kind. Missing trailing arguments
 // are allowed in an interactive session; they are prompted for before RunE.
 func RegisterArgs(cmd *cobra.Command, specs ...ArgSpec) {
+	registerArgs(cmd, 0, specs)
+}
+
+// RegisterScopedArgs is RegisterArgs where the first scope args may be left
+// out (the resolver supplies them); given args fill the specs from the end.
+func RegisterScopedArgs(cmd *cobra.Command, scope int, specs ...ArgSpec) {
+	registerArgs(cmd, scope, specs)
+}
+
+func registerArgs(cmd *cobra.Command, scope int, specs []ArgSpec) {
 	argSpecsMu.Lock()
 	argSpecs[cmd] = specs
+	argScopes[cmd] = scope
 	argSpecsMu.Unlock()
 	cmd.Args = func(cmd *cobra.Command, args []string) error {
 		if len(args) > len(specs) {
 			if len(specs) == 0 {
 				return FlagErrorf("%q takes no arguments, got %q", cmd.CommandPath(), args)
 			}
+			if scope > 0 {
+				return FlagErrorf("%q takes at most %d argument(s) (%s), got %d", cmd.CommandPath(), len(specs), argNames(specs), len(args))
+			}
 			return FlagErrorf("%q takes %d argument(s) (%s), got %d", cmd.CommandPath(), len(specs), argNames(specs), len(args))
 		}
-		if len(args) < len(specs) && !Interactive(cmd) {
-			return FlagErrorf("missing argument <%s> (usage: %s)", specs[len(args)].Name, cmd.UseLine())
+		if len(args) < len(specs)-scope && !Interactive(cmd) {
+			return FlagErrorf("missing argument <%s> (usage: %s)", specs[scope+len(args)].Name, cmd.UseLine())
 		}
 		for i, a := range args {
-			if err := checkArg(specs[i], a); err != nil {
+			if err := checkArg(specs[argOffset(specs, scope, args)+i], a); err != nil {
 				return err
 			}
 		}
@@ -62,11 +78,22 @@ func RegisterArgs(cmd *cobra.Command, specs ...ArgSpec) {
 	}
 }
 
+// argOffset is the spec index of args[0].
+func argOffset(specs []ArgSpec, scope int, args []string) int {
+	return min(scope, len(specs)-len(args))
+}
+
 // ArgSpecs returns the positional arguments registered for cmd.
 func ArgSpecs(cmd *cobra.Command) []ArgSpec {
 	argSpecsMu.Lock()
 	defer argSpecsMu.Unlock()
 	return argSpecs[cmd]
+}
+
+func ArgScope(cmd *cobra.Command) int {
+	argSpecsMu.Lock()
+	defer argSpecsMu.Unlock()
+	return argScopes[cmd]
 }
 
 // PromptedArgs returns args extended with any values prompted for interactively.

@@ -18,7 +18,8 @@ var DeleteCmd = &cobra.Command{
 	ValidArgsFunction: cobra.NoFileCompletions,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		args = utils.PromptedArgs(cmd, args)
-		// Last step before the request: every input check has passed.
+		// Last step before the request: every input check has passed. Name
+		// the target, which may have come from the link.
 		if err := utils.Confirm(cmd, "Delete a tag", args); err != nil {
 			return err
 		}

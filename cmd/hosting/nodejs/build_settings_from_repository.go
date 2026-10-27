@@ -6,45 +6,38 @@ import (
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/client"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/site"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var BuildSettingsFromRepositoryCmd = &cobra.Command{
-	Use:     "build-settings-from-repository <username> <domain>",
+	Use:     "build-settings-from-repository [domain]",
 	Short:   "Get Node.js build settings from repository",
-	Long:    "Determine the build settings for a Node.js application from the package.json file of a branch\nin a Git repository. Use before starting a Git-source build to find out the auto-detected\nsettings instead of guessing them.\n\nThe repository is read through a Git installation: take `installation_uuid` from\n`List Git installations` and `owner` and `repository` from `List Git installation repositories`.\n\nReturns 422 when the installation is not found, the repository or branch is not found, or\nthe branch has no package.json.",
-	Example: "  hostinger hosting nodejs build-settings-from-repository u123456789 mydomain.tld --owner value --repository value --branch value --installation-uuid 9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
-	ValidArgsFunction: utils.CompleteArgs(
-		&utils.ArgSource{
-			Value: "username",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
+	Long:    "Determine the build settings for a Node.js application from the package.json file of a branch\nin a Git repository. Use before starting a Git-source build to find out the auto-detected\nsettings instead of guessing them.\n\nThe repository is read through a Git installation: take `installation_uuid` from\n`List Git installations` and `owner` and `repository` from `List Git installation repositories`.\n\nReturns 422 when the installation is not found, the repository or branch is not found, or\nthe branch has no package.json.\n\nThe website can be given as [domain] (the account username is looked up), as <username> <domain>, or left out, in which case it comes from --domain, HOSTINGER_DOMAIN, the .hostinger/site.json written by `hostinger up` or `hostinger link`, the default_domain in the config file, or a prompt when run in a terminal.",
+	Example: "  hostinger hosting nodejs build-settings-from-repository mydomain.tld --owner value --repository value --branch value --installation-uuid 9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
+	ValidArgsFunction: utils.CompleteArgs(&utils.ArgSource{
+		Value: "domain",
+		Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+			r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
 		},
-		&utils.ArgSource{
-			Value: "domain",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
-		},
-	),
+	}),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		args = utils.PromptedArgs(cmd, args)
+		username, domain, args, err := site.Resolve(cmd, args, 0)
+		if err != nil {
+			return api.CommandError(err)
+		}
 		if err := utils.FormatCheck(cmd, "installation-uuid", "uuid"); err != nil {
 			return err
 		}
 		params := buildSettingsFromRepositoryParams(cmd)
 		call := func(ctx context.Context) ([]byte, int, error) {
-			r, err := api.Request().HostingGetNodeJsBuildSettingsFromRepositoryV1WithResponse(ctx, args[0], args[1], params)
+			r, err := api.Request().HostingGetNodeJsBuildSettingsFromRepositoryV1WithResponse(ctx, username, domain, params)
 			if err != nil {
 				return nil, 0, err
 			}
@@ -59,7 +52,7 @@ var BuildSettingsFromRepositoryCmd = &cobra.Command{
 }
 
 func init() {
-	utils.RegisterArgs(BuildSettingsFromRepositoryCmd, utils.StringArg("username"), utils.StringArg("domain"))
+	utils.RegisterScopedArgs(BuildSettingsFromRepositoryCmd, 2, utils.StringArg("username"), utils.StringArg("domain"))
 	BuildSettingsFromRepositoryCmd.Flags().StringP("owner", "", "", "Repository owner login. GitLab group paths use slashes.")
 	BuildSettingsFromRepositoryCmd.Flags().StringP("repository", "", "", "Repository name without the .git suffix")
 	BuildSettingsFromRepositoryCmd.Flags().StringP("branch", "", "", "Branch whose package.json is inspected")

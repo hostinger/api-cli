@@ -7,29 +7,32 @@ import (
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/site"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var StartOutgoingCmd = &cobra.Command{
-	Use:     "start-outgoing <domain>",
+	Use:     "start-outgoing [domain]",
 	Short:   "Start outgoing domain move",
-	Long:    "Initiate a move of a specified domain to another Hostinger account.\n\nThe receiving account has to already exist and accept the move before the domain changes hands.\n\nThe domain must be active. The subscription it belongs to is resolved automatically,\nand the request is rejected with a 404 status code when the domain has no domain\nsubscription of its own.\n\nDomains protected by premium protection require an additional verification step,\nsuch requests are rejected with a 428 status code.\n\nUse this endpoint to hand a domain over to another Hostinger user.",
+	Long:    "Initiate a move of a specified domain to another Hostinger account.\n\nThe receiving account has to already exist and accept the move before the domain changes hands.\n\nThe domain must be active. The subscription it belongs to is resolved automatically,\nand the request is rejected with a 404 status code when the domain has no domain\nsubscription of its own.\n\nDomains protected by premium protection require an additional verification step,\nsuch requests are rejected with a 428 status code.\n\nUse this endpoint to hand a domain over to another Hostinger user.\n\nThe domain can be given as [domain] or left out, in which case it comes from --domain, HOSTINGER_DOMAIN, the .hostinger/site.json written by `hostinger up` or `hostinger link` when that website's domain belongs to the account, default_domain in the config file, or a prompt when run in a terminal.",
 	Example: "  hostinger domains move start-outgoing mydomain.tld --new-customer-email new-owner@example.com",
-	ValidArgsFunction: utils.CompleteArgs(
-		&utils.ArgSource{
-			Value: "domain",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().DomainsGetDomainListV1WithResponse(ctx)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
+	ValidArgsFunction: utils.CompleteArgs(&utils.ArgSource{
+		Value: "domain",
+		Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+			r, err := api.CompletionRequest().DomainsGetDomainListV1WithResponse(ctx)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
 		},
-	),
+	}),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		args = utils.PromptedArgs(cmd, args)
+		domain, args, err := site.ResolveDomain(cmd, args, 0, "domains")
+		if err != nil {
+			return api.CommandError(err)
+		}
 		body, err := startOutgoingBody(cmd)
 		if err != nil {
 			return err
@@ -39,7 +42,7 @@ var StartOutgoingCmd = &cobra.Command{
 			return err
 		}
 		call := func(ctx context.Context) ([]byte, int, error) {
-			r, err := api.Request().DomainsStartOutgoingDomainMoveV1WithBodyWithResponse(ctx, args[0], "application/json", bytes.NewReader(payload))
+			r, err := api.Request().DomainsStartOutgoingDomainMoveV1WithBodyWithResponse(ctx, domain, "application/json", bytes.NewReader(payload))
 			if err != nil {
 				return nil, 0, err
 			}
@@ -54,7 +57,7 @@ var StartOutgoingCmd = &cobra.Command{
 }
 
 func init() {
-	utils.RegisterArgs(StartOutgoingCmd, utils.StringArg("domain"))
+	utils.RegisterScopedArgs(StartOutgoingCmd, 1, utils.StringArg("domain"))
 	StartOutgoingCmd.Flags().StringP("new-customer-email", "", "", "Email address of the Hostinger account receiving the domain")
 	StartOutgoingCmd.MarkFlagRequired("new-customer-email")
 	StartOutgoingCmd.RegisterFlagCompletionFunc("new-customer-email", cobra.NoFileCompletions)

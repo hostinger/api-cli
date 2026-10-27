@@ -1,6 +1,8 @@
 package utils
 
 import (
+	"errors"
+	"strings"
 	"testing"
 
 	openapi_types "github.com/oapi-codegen/runtime/types"
@@ -36,4 +38,15 @@ func TestStringToUUIDPanicsOnGarbage(t *testing.T) {
 		}
 	}()
 	StringToUUID("not-a-uuid")
+}
+
+func TestScopeIntIsAFlagError(t *testing.T) {
+	if v, err := ScopeInt("order ID", "42"); err != nil || v != 42 {
+		t.Errorf("42: %d %v", v, err)
+	}
+	_, err := ScopeInt("order ID", "abc")
+	var fe *FlagError
+	if !errors.As(err, &fe) || !strings.Contains(err.Error(), `invalid order ID "abc"`) {
+		t.Errorf("abc: %v", err)
+	}
 }

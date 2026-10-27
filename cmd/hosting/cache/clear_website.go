@@ -6,46 +6,42 @@ import (
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/client"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/site"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var ClearWebsiteCmd = &cobra.Command{
-	Use:     "clear-website <username> <domain>",
+	Use:     "clear-website [domain]",
 	Short:   "Clear website cache",
-	Long:    "Permanently clears all server-side cache for the website at once. Use it when content was\nupdated and needs to be visible immediately, or after making major changes.\n\nAlso purges the Hostinger CDN cache when CDN is enabled on the website. To purge only the CDN\ncache and leave the server cache untouched, use `Purge CDN cache`. For a WordPress\ninstallation living in a subdirectory, pass the directory query parameter to clear its cache.",
-	Example: "  hostinger hosting cache clear-website u123456789 mydomain.tld",
-	ValidArgsFunction: utils.CompleteArgs(
-		&utils.ArgSource{
-			Value: "username",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
+	Long:    "Permanently clears all server-side cache for the website at once. Use it when content was\nupdated and needs to be visible immediately, or after making major changes.\n\nAlso purges the Hostinger CDN cache when CDN is enabled on the website. To purge only the CDN\ncache and leave the server cache untouched, use `Purge CDN cache`. For a WordPress\ninstallation living in a subdirectory, pass the directory query parameter to clear its cache.\n\nThe website can be given as [domain] (the account username is looked up), as <username> <domain>, or left out, in which case it comes from --domain, HOSTINGER_DOMAIN, the .hostinger/site.json written by `hostinger up` or `hostinger link`, the default_domain in the config file, or a prompt when run in a terminal.",
+	Example: "  hostinger hosting cache clear-website mydomain.tld",
+	ValidArgsFunction: utils.CompleteArgs(&utils.ArgSource{
+		Value: "domain",
+		Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+			r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
 		},
-		&utils.ArgSource{
-			Value: "domain",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
-		},
-	),
+	}),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		args = utils.PromptedArgs(cmd, args)
+		// A destructive command acts without a question only on a target that was typed.
+		typed := len(args) > 0
+		username, domain, args, err := site.Resolve(cmd, args, 0)
+		if err != nil {
+			return api.CommandError(err)
+		}
 		params := clearWebsiteParams(cmd)
-		// Last step before the request: every input check has passed.
-		if err := utils.Confirm(cmd, "Clear website cache", args); err != nil {
+		// Last step before the request: every input check has passed. Name
+		// the target, which may have come from the link.
+		if err := utils.ConfirmScoped(cmd, "Clear website cache", append([]string{domain}, args...), typed); err != nil {
 			return err
 		}
 		call := func(ctx context.Context) ([]byte, int, error) {
-			r, err := api.Request().HostingClearWebsiteCacheV1WithResponse(ctx, args[0], args[1], params)
+			r, err := api.Request().HostingClearWebsiteCacheV1WithResponse(ctx, username, domain, params)
 			if err != nil {
 				return nil, 0, err
 			}
@@ -60,7 +56,7 @@ var ClearWebsiteCmd = &cobra.Command{
 }
 
 func init() {
-	utils.RegisterArgs(ClearWebsiteCmd, utils.StringArg("username"), utils.StringArg("domain"))
+	utils.RegisterScopedArgs(ClearWebsiteCmd, 2, utils.StringArg("username"), utils.StringArg("domain"))
 	ClearWebsiteCmd.Flags().StringP("directory", "", "", "Directory of the website installation to clear, relative to the website root. Defaults to the website root.")
 	ClearWebsiteCmd.RegisterFlagCompletionFunc("directory", cobra.NoFileCompletions)
 	ClearWebsiteCmd.Flags().BoolP("yes", "y", false, "Skip the confirmation prompt")

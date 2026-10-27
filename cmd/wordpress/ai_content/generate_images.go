@@ -7,30 +7,32 @@ import (
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/site"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var GenerateImagesCmd = &cobra.Command{
-	Use:     "generate-images <username> <software>",
+	Use:     "generate-images [username] <software>",
 	Short:   "Generate images",
-	Long:    "Start generating one or more images from a prompt and an image type for the specified\nWordPress installation. The generation runs asynchronously: the response is returned\nright away with `status: in-progress` and a `generation_id`. Poll\nGET /api/hosting/v1/accounts/{username}/wordpress/{software}/content/generations/{generation_id}\nevery few seconds until `status` is `completed` or `failed`.\n\nA completed generation returns temporary image URLs together with the time they expire;\ndownload the images before then. Images match the requested aspect ratio and are never\nsmaller than the requested size; logos are transparent images cropped to the mark.\n\nOnly one image generation can run per installation at a time: while one is still in\nprogress the endpoint returns 409 without the ID of the running generation, so a caller\nthat did not receive the `202` has to wait for it to finish (up to a few minutes) before\nstarting a new one. The endpoint is limited to 10 requests per minute.\n\nProvide the WordPress installation (software) identifier in the path. It can\nbe obtained from GET /api/hosting/v1/wordpress/installations (the `id` field).",
+	Long:    "Start generating one or more images from a prompt and an image type for the specified\nWordPress installation. The generation runs asynchronously: the response is returned\nright away with `status: in-progress` and a `generation_id`. Poll\nGET /api/hosting/v1/accounts/{username}/wordpress/{software}/content/generations/{generation_id}\nevery few seconds until `status` is `completed` or `failed`.\n\nA completed generation returns temporary image URLs together with the time they expire;\ndownload the images before then. Images match the requested aspect ratio and are never\nsmaller than the requested size; logos are transparent images cropped to the mark.\n\nOnly one image generation can run per installation at a time: while one is still in\nprogress the endpoint returns 409 without the ID of the running generation, so a caller\nthat did not receive the `202` has to wait for it to finish (up to a few minutes) before\nstarting a new one. The endpoint is limited to 10 requests per minute.\n\nProvide the WordPress installation (software) identifier in the path. It can\nbe obtained from GET /api/hosting/v1/wordpress/installations (the `id` field).\n\nThe hosting account can be given as [username] or left out, in which case it comes from --username, HOSTINGER_USERNAME, the website named by --domain or HOSTINGER_DOMAIN, the .hostinger/site.json written by `hostinger up` or `hostinger link`, default_domain in the config file, or a prompt when run in a terminal.",
 	Example: "  hostinger wordpress ai-content generate-images u123456789 1232456789 --image-type hero --prompt 'A cozy artisan bakery interior at sunrise with fresh bread on wooden shelves'",
-	ValidArgsFunction: utils.CompleteArgs(
-		&utils.ArgSource{
-			Value: "username",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
+	ValidArgsFunction: utils.CompleteArgs(&utils.ArgSource{
+		Value: "username",
+		Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+			r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
 		},
-		nil,
-	),
+	}),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		args = utils.PromptedArgs(cmd, args)
+		username, args, err := site.ResolveUsername(cmd, args, 1)
+		if err != nil {
+			return api.CommandError(err)
+		}
 		if err := utils.EnumCheck(cmd, "image-type", []string{"hero", "background", "inline", "gallery", "product", "logo"}); err != nil {
 			return err
 		}
@@ -43,7 +45,7 @@ var GenerateImagesCmd = &cobra.Command{
 			return err
 		}
 		call := func(ctx context.Context) ([]byte, int, error) {
-			r, err := api.Request().HostingGenerateImagesV1WithBodyWithResponse(ctx, args[0], args[1], "application/json", bytes.NewReader(payload))
+			r, err := api.Request().HostingGenerateImagesV1WithBodyWithResponse(ctx, username, args[0], "application/json", bytes.NewReader(payload))
 			if err != nil {
 				return nil, 0, err
 			}
@@ -58,7 +60,7 @@ var GenerateImagesCmd = &cobra.Command{
 }
 
 func init() {
-	utils.RegisterArgs(GenerateImagesCmd, utils.StringArg("username"), utils.StringArg("software"))
+	utils.RegisterScopedArgs(GenerateImagesCmd, 1, utils.StringArg("username"), utils.StringArg("software"))
 	GenerateImagesCmd.Flags().StringP("color-guidance", "", "", "Colour direction for the logo type only. It is not rendered as text.")
 	GenerateImagesCmd.Flags().IntP("height", "", 0, "Output height in pixels. Defaults per image type and is ignored for the logo type.")
 	GenerateImagesCmd.Flags().StringP("image-type", "", "", "Kind of image to generate. It sets the default size and cropping. (one of: hero, background, inline, gallery, product, logo)")

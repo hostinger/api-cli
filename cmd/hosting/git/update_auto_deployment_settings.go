@@ -7,39 +7,32 @@ import (
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/site"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var UpdateAutoDeploymentSettingsCmd = &cobra.Command{
-	Use:     "update-auto-deployment-settings <username> <domain>",
+	Use:     "update-auto-deployment-settings [domain]",
 	Short:   "Update Git auto-deployment settings",
-	Long:    "Creates or replaces the Git auto-deployment settings of the website: repository, branch, the\ndirectory under the document root to deploy into, and `is_enabled`. Send the full set;\n`is_enabled` defaults to true and `directory` to the document root. `installation_uuid` must\nbe an installation from `List Git installations` that belongs to the same customer as the\nwebsite.\n\nFor PHP and static websites, saving with `is_enabled` true deploys the branch right away and\nevery later push to that branch deploys again. For Node.js and Website Builder websites saving\ndoes not clone anything. On a Node.js website start the first deploy with\n`Start Node.js build` using `source_type` `git`; pushes then trigger new builds with the build\nsettings stored for the website.",
-	Example: "  hostinger hosting git update-auto-deployment-settings u123456789 mydomain.tld --branch main --installation-uuid 018f5e2a-1234-7890-abcd-1234567890ab --owner octocat --repository my-site",
-	ValidArgsFunction: utils.CompleteArgs(
-		&utils.ArgSource{
-			Value: "username",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
+	Long:    "Creates or replaces the Git auto-deployment settings of the website: repository, branch, the\ndirectory under the document root to deploy into, and `is_enabled`. Send the full set;\n`is_enabled` defaults to true and `directory` to the document root. `installation_uuid` must\nbe an installation from `List Git installations` that belongs to the same customer as the\nwebsite.\n\nFor PHP and static websites, saving with `is_enabled` true deploys the branch right away and\nevery later push to that branch deploys again. For Node.js and Website Builder websites saving\ndoes not clone anything. On a Node.js website start the first deploy with\n`Start Node.js build` using `source_type` `git`; pushes then trigger new builds with the build\nsettings stored for the website.\n\nThe website can be given as [domain] (the account username is looked up), as <username> <domain>, or left out, in which case it comes from --domain, HOSTINGER_DOMAIN, the .hostinger/site.json written by `hostinger up` or `hostinger link`, the default_domain in the config file, or a prompt when run in a terminal.",
+	Example: "  hostinger hosting git update-auto-deployment-settings mydomain.tld --branch main --installation-uuid 018f5e2a-1234-7890-abcd-1234567890ab --owner octocat --repository my-site",
+	ValidArgsFunction: utils.CompleteArgs(&utils.ArgSource{
+		Value: "domain",
+		Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+			r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
 		},
-		&utils.ArgSource{
-			Value: "domain",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
-		},
-	),
+	}),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		args = utils.PromptedArgs(cmd, args)
+		username, domain, args, err := site.Resolve(cmd, args, 0)
+		if err != nil {
+			return api.CommandError(err)
+		}
 		body, err := updateAutoDeploymentSettingsBody(cmd)
 		if err != nil {
 			return err
@@ -49,7 +42,7 @@ var UpdateAutoDeploymentSettingsCmd = &cobra.Command{
 			return err
 		}
 		call := func(ctx context.Context) ([]byte, int, error) {
-			r, err := api.Request().HostingUpdateGitAutoDeploymentSettingsV1WithBodyWithResponse(ctx, args[0], args[1], "application/json", bytes.NewReader(payload))
+			r, err := api.Request().HostingUpdateGitAutoDeploymentSettingsV1WithBodyWithResponse(ctx, username, domain, "application/json", bytes.NewReader(payload))
 			if err != nil {
 				return nil, 0, err
 			}
@@ -64,7 +57,7 @@ var UpdateAutoDeploymentSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	utils.RegisterArgs(UpdateAutoDeploymentSettingsCmd, utils.StringArg("username"), utils.StringArg("domain"))
+	utils.RegisterScopedArgs(UpdateAutoDeploymentSettingsCmd, 2, utils.StringArg("username"), utils.StringArg("domain"))
 	UpdateAutoDeploymentSettingsCmd.Flags().StringP("branch", "", "", "Branch to deploy")
 	UpdateAutoDeploymentSettingsCmd.Flags().StringP("directory", "", "", "Subdirectory under the website document root to deploy into. Empty, null or omitted means the document root.")
 	UpdateAutoDeploymentSettingsCmd.Flags().StringP("installation-uuid", "", "", "Active Git installation from `List Git installations`")

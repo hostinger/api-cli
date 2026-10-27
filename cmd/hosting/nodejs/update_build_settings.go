@@ -7,39 +7,32 @@ import (
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/site"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var UpdateBuildSettingsCmd = &cobra.Command{
-	Use:     "update-build-settings <username> <domain>",
+	Use:     "update-build-settings [domain]",
 	Short:   "Update Node.js build settings",
-	Long:    "Replaces the build settings stored for the website. Send the full set: `node_version` is\nrequired and every nullable field you omit is stored as null. Creates the settings when\nnone exist yet.\n\nThis does not start a build. Stored settings drive Git auto-deployment builds; a build\nstarted through the API uses the values sent in that request, so to rebuild with corrected\nsettings call `Start Node.js build` with the same values. Typical fixes: a wrong `app_type`\nafter auto-detection, or a missing `entry_file` for express, fastify, nest, nuxt and hono\napps.",
-	Example: "  hostinger hosting nodejs update-build-settings u123456789 mydomain.tld --node-version 20",
-	ValidArgsFunction: utils.CompleteArgs(
-		&utils.ArgSource{
-			Value: "username",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
+	Long:    "Replaces the build settings stored for the website. Send the full set: `node_version` is\nrequired and every nullable field you omit is stored as null. Creates the settings when\nnone exist yet.\n\nThis does not start a build. Stored settings drive Git auto-deployment builds; a build\nstarted through the API uses the values sent in that request, so to rebuild with corrected\nsettings call `Start Node.js build` with the same values. Typical fixes: a wrong `app_type`\nafter auto-detection, or a missing `entry_file` for express, fastify, nest, nuxt and hono\napps.\n\nThe website can be given as [domain] (the account username is looked up), as <username> <domain>, or left out, in which case it comes from --domain, HOSTINGER_DOMAIN, the .hostinger/site.json written by `hostinger up` or `hostinger link`, the default_domain in the config file, or a prompt when run in a terminal.",
+	Example: "  hostinger hosting nodejs update-build-settings mydomain.tld --node-version 20",
+	ValidArgsFunction: utils.CompleteArgs(&utils.ArgSource{
+		Value: "domain",
+		Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+			r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
 		},
-		&utils.ArgSource{
-			Value: "domain",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
-		},
-	),
+	}),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		args = utils.PromptedArgs(cmd, args)
+		username, domain, args, err := site.Resolve(cmd, args, 0)
+		if err != nil {
+			return api.CommandError(err)
+		}
 		if err := utils.EnumCheck(cmd, "app-type", []string{"create-react-app", "gatsby", "vite", "angular", "react", "vue", "parcel", "next", "nuxt", "nest", "express", "fastify", "astro", "svelte", "svelte-kit", "hono", "react-router", "nitro", "other"}); err != nil {
 			return err
 		}
@@ -55,7 +48,7 @@ var UpdateBuildSettingsCmd = &cobra.Command{
 			return err
 		}
 		call := func(ctx context.Context) ([]byte, int, error) {
-			r, err := api.Request().HostingUpdateNodeJsBuildSettingsV1WithBodyWithResponse(ctx, args[0], args[1], "application/json", bytes.NewReader(payload))
+			r, err := api.Request().HostingUpdateNodeJsBuildSettingsV1WithBodyWithResponse(ctx, username, domain, "application/json", bytes.NewReader(payload))
 			if err != nil {
 				return nil, 0, err
 			}
@@ -70,7 +63,7 @@ var UpdateBuildSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	utils.RegisterArgs(UpdateBuildSettingsCmd, utils.StringArg("username"), utils.StringArg("domain"))
+	utils.RegisterScopedArgs(UpdateBuildSettingsCmd, 2, utils.StringArg("username"), utils.StringArg("domain"))
 	UpdateBuildSettingsCmd.Flags().StringP("app-type", "", "", "Node.js application framework. Set it explicitly when auto-detection picked the wrong one. (one of: create-react-app, gatsby, vite, angular, react, vue, parcel, next, nuxt, nest, express, fastify, astro, svelte, svelte-kit, hono, react-router, nitro, other)")
 	UpdateBuildSettingsCmd.Flags().StringP("build-script", "", "", "The package.json script that builds the application")
 	UpdateBuildSettingsCmd.Flags().StringP("entry-file", "", "", "The main entry point file for the application (required for express, fastify, nest, nuxt and hono app types)")

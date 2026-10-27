@@ -31,6 +31,9 @@ func newCmd() *cobra.Command {
 // fakeTTY makes the session look interactive and feeds input to prompts.
 func fakeTTY(t *testing.T, input string) *bytes.Buffer {
 	t.Helper()
+	// A person at a terminal, not a CI runner (which sets CI and turns prompts off).
+	t.Setenv("CI", "")
+	t.Setenv(EnvPrefix+"NONINTERACTIVE", "")
 	oldIn, oldErr, oldReader, oldOut := stdinIsTerminal, stderrIsTerminal, promptIn, promptOut
 	var out bytes.Buffer
 	stdinIsTerminal = func() bool { return true }

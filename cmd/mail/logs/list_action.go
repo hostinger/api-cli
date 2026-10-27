@@ -6,29 +6,32 @@ import (
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/client"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/site"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var ListActionCmd = &cobra.Command{
-	Use:     "list-action <order-id>",
+	Use:     "list-action [order-id]",
 	Short:   "List action logs",
-	Long:    "Retrieve paginated account action logs (administrative and user\nactions) for the given mail order. Supports filtering by account,\ndate range, and status. Results are sorted by timestamp descending.",
+	Long:    "Retrieve paginated account action logs (administrative and user\nactions) for the given mail order. Supports filtering by account,\ndate range, and status. Results are sorted by timestamp descending.\n\nThe order can be given as [order-id] or left out, in which case it comes from --order-id, HOSTINGER_ORDER_ID, the .hostinger/site.json written by `hostinger up` or `hostinger link` (hosting orders), or a prompt when run in a terminal (the only order is used without asking).",
 	Example: "  hostinger mail logs list-action OR1a2b3c4d5e6f7g",
-	ValidArgsFunction: utils.CompleteArgs(
-		&utils.ArgSource{
-			Value: "id",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().MailListOrdersV1WithResponse(ctx, nil)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
+	ValidArgsFunction: utils.CompleteArgs(&utils.ArgSource{
+		Value: "id",
+		Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+			r, err := api.CompletionRequest().MailListOrdersV1WithResponse(ctx, nil)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
 		},
-	),
+	}),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		args = utils.PromptedArgs(cmd, args)
+		orderID, args, err := site.ResolveOrder(cmd, args, 0, "mail")
+		if err != nil {
+			return api.CommandError(err)
+		}
 		if err := utils.EnumCheck(cmd, "status", []string{"Successful", "Failed"}); err != nil {
 			return err
 		}
@@ -46,7 +49,7 @@ var ListActionCmd = &cobra.Command{
 		}
 		params := listActionParams(cmd)
 		call := func(ctx context.Context) ([]byte, int, error) {
-			r, err := api.Request().MailListActionLogsV1WithResponse(ctx, args[0], params)
+			r, err := api.Request().MailListActionLogsV1WithResponse(ctx, orderID, params)
 			if err != nil {
 				return nil, 0, err
 			}
@@ -64,7 +67,7 @@ var ListActionCmd = &cobra.Command{
 }
 
 func init() {
-	utils.RegisterArgs(ListActionCmd, utils.StringArg("order-id"))
+	utils.RegisterScopedArgs(ListActionCmd, 1, utils.StringArg("order-id"))
 	ListActionCmd.Flags().StringP("account", "", "", "Filter log entries by a specific email account")
 	ListActionCmd.Flags().StringP("date", "", "", "Exact date filter (YYYY-MM-DD). Takes precedence over `from_date`/`to_date` when both are given.")
 	ListActionCmd.Flags().StringP("from-date", "", "", "Date range start (RFC 3339)")

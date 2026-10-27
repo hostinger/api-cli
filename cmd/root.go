@@ -100,6 +100,9 @@ func init() {
 	for key, flag := range map[string]string{"dry_run": "dry-run", "verbose": "verbose", "no_input": "no-input"} {
 		cobra.CheckErr(viper.BindPFlag(key, flags.Lookup(flag)))
 	}
+	flags.String("domain", "", "Website domain for commands that act on a website (default: HOSTINGER_DOMAIN, .hostinger/site.json, or default_domain in the config)")
+	flags.String("username", "", "Hosting account for commands that act on an account (default: HOSTINGER_USERNAME, the website from --domain, or .hostinger/site.json)")
+	flags.String("order-id", "", "Order for commands that act on an order (default: HOSTINGER_ORDER_ID, .hostinger/site.json for hosting, or a prompt)")
 
 	RootCmd.RegisterFlagCompletionFunc("format", cobra.FixedCompletions([]cobra.Completion{"table", "json", "yaml", "tree"}, cobra.ShellCompDirectiveNoFileComp))
 	RootCmd.RegisterFlagCompletionFunc("jq", cobra.NoFileCompletions)

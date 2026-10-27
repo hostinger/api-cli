@@ -7,39 +7,32 @@ import (
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/site"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var StartBuildCmd = &cobra.Command{
-	Use:     "start-build <username> <domain>",
+	Use:     "start-build [domain]",
 	Short:   "Start Node.js build",
-	Long:    "Start a Node.js build process using files already present on the website's file storage.\n\nWARNING: on success this overwrites the website's existing contents and cannot be\nundone — verify this is intended before calling this endpoint.\n\nWith `source_type` `archive`, `source_options.archive_path` must point to an existing\narchive file on the server (relative to the website document root). Use the\n`Generate Upload URL` endpoint to obtain credentials and upload the archive first. To\nauto-detect build settings from an archive before starting, first call the\n`Get Node.js Build Settings from Archive` endpoint.\n\nWith `source_type` `git`, `source_options` carries `owner`, `repository`, `branch` and\n`installation_uuid`. Take the installation from `List Git installations` and the owner and\nrepository from `List Git installation repositories`; the branch is cloned at its current\nhead. The installation must belong to the same customer as the website.\n\nThe returned build `uuid` can be used to poll progress and retrieve logs via\nthe `Get Node.js Build Logs` endpoint.\n\nJSON flags take inline JSON, @file.json, or - to read stdin. Example values:\n\n  --source-options\n    {\n      \"archive_path\": \"example.zip\",\n      \"branch\": \"main\",\n      \"installation_uuid\": \"018f5e2a-1234-7890-abcd-1234567890ab\",\n      \"owner\": \"octocat\",\n      \"repository\": \"my-site\"\n    }",
-	Example: "  hostinger hosting nodejs start-build u123456789 mydomain.tld --app-type vite --build-script build --node-version 20 --output-directory dist --root-directory webapp --source-options @source-options.json --source-type archive",
-	ValidArgsFunction: utils.CompleteArgs(
-		&utils.ArgSource{
-			Value: "username",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
+	Long:    "Start a Node.js build process using files already present on the website's file storage.\n\nWARNING: on success this overwrites the website's existing contents and cannot be\nundone — verify this is intended before calling this endpoint.\n\nWith `source_type` `archive`, `source_options.archive_path` must point to an existing\narchive file on the server (relative to the website document root). Use the\n`Generate Upload URL` endpoint to obtain credentials and upload the archive first. To\nauto-detect build settings from an archive before starting, first call the\n`Get Node.js Build Settings from Archive` endpoint.\n\nWith `source_type` `git`, `source_options` carries `owner`, `repository`, `branch` and\n`installation_uuid`. Take the installation from `List Git installations` and the owner and\nrepository from `List Git installation repositories`; the branch is cloned at its current\nhead. The installation must belong to the same customer as the website.\n\nThe returned build `uuid` can be used to poll progress and retrieve logs via\nthe `Get Node.js Build Logs` endpoint.\n\nThe website can be given as [domain] (the account username is looked up), as <username> <domain>, or left out, in which case it comes from --domain, HOSTINGER_DOMAIN, the .hostinger/site.json written by `hostinger up` or `hostinger link`, the default_domain in the config file, or a prompt when run in a terminal.\n\nJSON flags take inline JSON, @file.json, or - to read stdin. Example values:\n\n  --source-options\n    {\n      \"archive_path\": \"example.zip\",\n      \"branch\": \"main\",\n      \"installation_uuid\": \"018f5e2a-1234-7890-abcd-1234567890ab\",\n      \"owner\": \"octocat\",\n      \"repository\": \"my-site\"\n    }",
+	Example: "  hostinger hosting nodejs start-build mydomain.tld --app-type vite --build-script build --node-version 20 --output-directory dist --root-directory webapp --source-options @source-options.json --source-type archive",
+	ValidArgsFunction: utils.CompleteArgs(&utils.ArgSource{
+		Value: "domain",
+		Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+			r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
 		},
-		&utils.ArgSource{
-			Value: "domain",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
-		},
-	),
+	}),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		args = utils.PromptedArgs(cmd, args)
+		username, domain, args, err := site.Resolve(cmd, args, 0)
+		if err != nil {
+			return api.CommandError(err)
+		}
 		if err := utils.EnumCheck(cmd, "app-type", []string{"create-react-app", "gatsby", "vite", "angular", "react", "vue", "parcel", "next", "nuxt", "nest", "express", "fastify", "astro", "svelte", "svelte-kit", "hono", "react-router", "nitro", "other"}); err != nil {
 			return err
 		}
@@ -58,7 +51,7 @@ var StartBuildCmd = &cobra.Command{
 			return err
 		}
 		call := func(ctx context.Context) ([]byte, int, error) {
-			r, err := api.Request().HostingStartNodeJsBuildV1WithBodyWithResponse(ctx, args[0], args[1], "application/json", bytes.NewReader(payload))
+			r, err := api.Request().HostingStartNodeJsBuildV1WithBodyWithResponse(ctx, username, domain, "application/json", bytes.NewReader(payload))
 			if err != nil {
 				return nil, 0, err
 			}
@@ -73,7 +66,7 @@ var StartBuildCmd = &cobra.Command{
 }
 
 func init() {
-	utils.RegisterArgs(StartBuildCmd, utils.StringArg("username"), utils.StringArg("domain"))
+	utils.RegisterScopedArgs(StartBuildCmd, 2, utils.StringArg("username"), utils.StringArg("domain"))
 	StartBuildCmd.Flags().StringP("app-type", "", "", "Node.js application type (one of: create-react-app, gatsby, vite, angular, react, vue, parcel, next, nuxt, nest, express, fastify, astro, svelte, svelte-kit, hono, react-router, nitro, other)")
 	StartBuildCmd.Flags().StringP("build-script", "", "", "Build script that will be ran to build the application")
 	StartBuildCmd.Flags().StringP("entry-file", "", "", "The main entry point file for the application")

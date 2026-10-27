@@ -6,42 +6,35 @@ import (
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/client"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/site"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var ListWebsiteAndDirectoriesCmd = &cobra.Command{
-	Use:     "list-website-and-directories <username> <domain>",
+	Use:     "list-website-and-directories [domain]",
 	Short:   "List website files and directories",
-	Long:    "List files and directories under a website's document root.\n\nUse `directory` to browse a subdirectory relative to the document root. Symlinked entries\nare listed but never traversed into or resolved.",
-	Example: "  hostinger hosting files list-website-and-directories u123456789 mydomain.tld",
-	ValidArgsFunction: utils.CompleteArgs(
-		&utils.ArgSource{
-			Value: "username",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
+	Long:    "List files and directories under a website's document root.\n\nUse `directory` to browse a subdirectory relative to the document root. Symlinked entries\nare listed but never traversed into or resolved.\n\nThe website can be given as [domain] (the account username is looked up), as <username> <domain>, or left out, in which case it comes from --domain, HOSTINGER_DOMAIN, the .hostinger/site.json written by `hostinger up` or `hostinger link`, the default_domain in the config file, or a prompt when run in a terminal.",
+	Example: "  hostinger hosting files list-website-and-directories mydomain.tld",
+	ValidArgsFunction: utils.CompleteArgs(&utils.ArgSource{
+		Value: "domain",
+		Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+			r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
 		},
-		&utils.ArgSource{
-			Value: "domain",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
-		},
-	),
+	}),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		args = utils.PromptedArgs(cmd, args)
+		username, domain, args, err := site.Resolve(cmd, args, 0)
+		if err != nil {
+			return api.CommandError(err)
+		}
 		params := listWebsiteAndDirectoriesParams(cmd)
 		call := func(ctx context.Context) ([]byte, int, error) {
-			r, err := api.Request().HostingListWebsiteFilesAndDirectoriesV1WithResponse(ctx, args[0], args[1], params)
+			r, err := api.Request().HostingListWebsiteFilesAndDirectoriesV1WithResponse(ctx, username, domain, params)
 			if err != nil {
 				return nil, 0, err
 			}
@@ -56,7 +49,7 @@ var ListWebsiteAndDirectoriesCmd = &cobra.Command{
 }
 
 func init() {
-	utils.RegisterArgs(ListWebsiteAndDirectoriesCmd, utils.StringArg("username"), utils.StringArg("domain"))
+	utils.RegisterScopedArgs(ListWebsiteAndDirectoriesCmd, 2, utils.StringArg("username"), utils.StringArg("domain"))
 	ListWebsiteAndDirectoriesCmd.Flags().StringP("directory", "", "", "Directory path to check")
 	ListWebsiteAndDirectoriesCmd.Flags().IntP("max-depth", "", 5, "How many directory levels deep to recurse.")
 	ListWebsiteAndDirectoriesCmd.Flags().IntP("max-items", "", 1000, "Max number of entries to return in this page.")

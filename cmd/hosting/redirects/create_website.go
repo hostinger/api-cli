@@ -7,39 +7,32 @@ import (
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/site"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var CreateWebsiteCmd = &cobra.Command{
-	Use:     "create-website <username> <domain>",
+	Use:     "create-website [domain]",
 	Short:   "Create website redirect",
-	Long:    "Creates a redirect from a URL on the selected website to another URL or IP address.",
-	Example: "  hostinger hosting redirects create-website u123456789 mydomain.tld --from https://example.com/old-page --to https://example.com/new-page",
-	ValidArgsFunction: utils.CompleteArgs(
-		&utils.ArgSource{
-			Value: "username",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
+	Long:    "Creates a redirect from a URL on the selected website to another URL or IP address.\n\nThe website can be given as [domain] (the account username is looked up), as <username> <domain>, or left out, in which case it comes from --domain, HOSTINGER_DOMAIN, the .hostinger/site.json written by `hostinger up` or `hostinger link`, the default_domain in the config file, or a prompt when run in a terminal.",
+	Example: "  hostinger hosting redirects create-website mydomain.tld --from https://example.com/old-page --to https://example.com/new-page",
+	ValidArgsFunction: utils.CompleteArgs(&utils.ArgSource{
+		Value: "domain",
+		Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
+			r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
 		},
-		&utils.ArgSource{
-			Value: "domain",
-			Fetch: func(ctx context.Context, args []string) ([]byte, int, error) {
-				r, err := api.CompletionRequest().HostingListWebsitesV1WithResponse(ctx, nil)
-				if err != nil {
-					return nil, 0, err
-				}
-				return r.Body, r.StatusCode(), nil
-			},
-		},
-	),
+	}),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		args = utils.PromptedArgs(cmd, args)
+		username, domain, args, err := site.Resolve(cmd, args, 0)
+		if err != nil {
+			return api.CommandError(err)
+		}
 		body, err := createWebsiteBody(cmd)
 		if err != nil {
 			return err
@@ -49,7 +42,7 @@ var CreateWebsiteCmd = &cobra.Command{
 			return err
 		}
 		call := func(ctx context.Context) ([]byte, int, error) {
-			r, err := api.Request().HostingCreateWebsiteRedirectV1WithBodyWithResponse(ctx, args[0], args[1], "application/json", bytes.NewReader(payload))
+			r, err := api.Request().HostingCreateWebsiteRedirectV1WithBodyWithResponse(ctx, username, domain, "application/json", bytes.NewReader(payload))
 			if err != nil {
 				return nil, 0, err
 			}
@@ -64,7 +57,7 @@ var CreateWebsiteCmd = &cobra.Command{
 }
 
 func init() {
-	utils.RegisterArgs(CreateWebsiteCmd, utils.StringArg("username"), utils.StringArg("domain"))
+	utils.RegisterScopedArgs(CreateWebsiteCmd, 2, utils.StringArg("username"), utils.StringArg("domain"))
 	CreateWebsiteCmd.Flags().StringP("from", "", "", "Source URL on the selected website")
 	CreateWebsiteCmd.Flags().StringP("to", "", "", "Destination URL or IP address")
 	CreateWebsiteCmd.MarkFlagRequired("from")
