@@ -30,6 +30,7 @@ hostinger hosting cache [flags]
 
 * [hostinger hosting](hostinger_hosting.md)	 - Hosting commands
 * [hostinger hosting cache clear-website](hostinger_hosting_cache_clear-website.md)	 - Clear website cache
+* [hostinger hosting cache status](hostinger_hosting_cache_status.md)	 - Get cache status
 * [hostinger hosting cache toggle-cacheless](hostinger_hosting_cache_toggle-cacheless.md)	 - Toggle cacheless mode
 * [hostinger hosting cache toggle-website](hostinger_hosting_cache_toggle-website.md)	 - Toggle website cache
 

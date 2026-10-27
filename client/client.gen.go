@@ -10577,6 +10577,20 @@ type HorizonsV1WebsitesWebsiteUrlResource struct {
 	WebsiteUrl string `json:"website_url"`
 }
 
+// HostingV1CacheCacheStatusResource defines model for Hosting.V1.Cache.CacheStatusResource.
+type HostingV1CacheCacheStatusResource struct {
+	// IsCachelessModeEnabled Whether development (cacheless) mode is on. While it is on, caching is bypassed even when
+	// `is_enabled` is true. Can take a few minutes to follow a cacheless mode toggle.
+	//
+	// Example: false
+	IsCachelessModeEnabled bool `json:"is_cacheless_mode_enabled"`
+
+	// IsEnabled Whether server-side caching is enabled for the website
+	//
+	// Example: true
+	IsEnabled bool `json:"is_enabled"`
+}
+
 // HostingV1CacheToggleCacheRequest defines model for Hosting.V1.Cache.ToggleCacheRequest.
 type HostingV1CacheToggleCacheRequest struct {
 	// Enabled Turn server-side caching on (true) or off (false) for the website.
@@ -23270,6 +23284,24 @@ type ClientInterface interface {
 	// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/cache/clear (the `HostingClearWebsiteCacheV1` operationId).
 	HostingClearWebsiteCacheV1(ctx context.Context, username UsernamePath, domain Domain, params *HostingClearWebsiteCacheV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// HostingGetCacheStatusV1 Get cache status
+	//
+	// Returns the caching state of the website: whether server-side caching is enabled and whether
+	// development (cacheless) mode is on. Works for the main domain, addon websites, parked domains
+	// and subdomains of the account; each reports its own settings and does not inherit them from
+	// its parent website.
+	//
+	// `is_enabled` is the setting changed by `Toggle website cache` and reflects a toggle
+	// immediately. `is_cacheless_mode_enabled` is true while development mode is on; caching is then
+	// bypassed even when `is_enabled` is true. `Toggle cacheless mode` is applied in the background,
+	// so this flag can take a few minutes to follow it.
+	//
+	// The domain must be the exact website name as listed on the account, without a `www.` prefix.
+	// Returns 404 when the domain is not a website on the account.
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/cache/status (the `HostingGetCacheStatusV1` operationId).
+	HostingGetCacheStatusV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// HostingToggleWebsiteCacheV1WithBody Toggle website cache
 	//
 	// Turns server-side caching for the website on or off, based on the enabled flag. Enable it for
@@ -23277,7 +23309,8 @@ type ClientInterface interface {
 	// websites. Disabling may impact performance; to temporarily bypass caching while developing or
 	// debugging, prefer toggling cacheless mode instead.
 	//
-	// Does nothing if caching is already in the requested state.
+	// Does nothing if caching is already in the requested state. Use `Get cache status` to check the
+	// current state.
 	//
 	// Takes any type of body and a specified content type.
 	//
@@ -23291,7 +23324,8 @@ type ClientInterface interface {
 	// websites. Disabling may impact performance; to temporarily bypass caching while developing or
 	// debugging, prefer toggling cacheless mode instead.
 	//
-	// Does nothing if caching is already in the requested state.
+	// Does nothing if caching is already in the requested state. Use `Get cache status` to check the
+	// current state.
 	//
 	// Takes a body of the `application/json` content type.
 	//
@@ -23305,6 +23339,9 @@ type ClientInterface interface {
 	// testing changes, debugging issues, or when real-time updates must be visible. Disable it after
 	// finishing development work to restore the performance benefits of caching.
 	//
+	// The change is applied in the background and can take a few minutes. Use `Get cache status` to
+	// check the current state.
+	//
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /api/hosting/v1/accounts/{username}/websites/{domain}/cacheless-mode/toggle (the `HostingToggleCachelessModeV1` operationId).
@@ -23316,6 +23353,9 @@ type ClientInterface interface {
 	// is cached, effectively turning off all caching for the website; use it while actively developing,
 	// testing changes, debugging issues, or when real-time updates must be visible. Disable it after
 	// finishing development work to restore the performance benefits of caching.
+	//
+	// The change is applied in the background and can take a few minutes. Use `Get cache status` to
+	// check the current state.
 	//
 	// Takes a body of the `application/json` content type.
 	//
@@ -33205,6 +33245,34 @@ func (c *Client) HostingClearWebsiteCacheV1(ctx context.Context, username Userna
 	return c.Client.Do(req)
 }
 
+// HostingGetCacheStatusV1 Get cache status
+//
+// Returns the caching state of the website: whether server-side caching is enabled and whether
+// development (cacheless) mode is on. Works for the main domain, addon websites, parked domains
+// and subdomains of the account; each reports its own settings and does not inherit them from
+// its parent website.
+//
+// `is_enabled` is the setting changed by `Toggle website cache` and reflects a toggle
+// immediately. `is_cacheless_mode_enabled` is true while development mode is on; caching is then
+// bypassed even when `is_enabled` is true. `Toggle cacheless mode` is applied in the background,
+// so this flag can take a few minutes to follow it.
+//
+// The domain must be the exact website name as listed on the account, without a `www.` prefix.
+// Returns 404 when the domain is not a website on the account.
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/cache/status (the `HostingGetCacheStatusV1` operationId).
+func (c *Client) HostingGetCacheStatusV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingGetCacheStatusV1Request(c.Server, username, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // HostingToggleWebsiteCacheV1WithBody Toggle website cache
 //
 // Turns server-side caching for the website on or off, based on the enabled flag. Enable it for
@@ -33212,7 +33280,8 @@ func (c *Client) HostingClearWebsiteCacheV1(ctx context.Context, username Userna
 // websites. Disabling may impact performance; to temporarily bypass caching while developing or
 // debugging, prefer toggling cacheless mode instead.
 //
-// Does nothing if caching is already in the requested state.
+// Does nothing if caching is already in the requested state. Use `Get cache status` to check the
+// current state.
 //
 // Takes any type of body and a specified content type.
 //
@@ -33236,7 +33305,8 @@ func (c *Client) HostingToggleWebsiteCacheV1WithBody(ctx context.Context, userna
 // websites. Disabling may impact performance; to temporarily bypass caching while developing or
 // debugging, prefer toggling cacheless mode instead.
 //
-// Does nothing if caching is already in the requested state.
+// Does nothing if caching is already in the requested state. Use `Get cache status` to check the
+// current state.
 //
 // Takes a body of the `application/json` content type.
 //
@@ -33260,6 +33330,9 @@ func (c *Client) HostingToggleWebsiteCacheV1(ctx context.Context, username Usern
 // testing changes, debugging issues, or when real-time updates must be visible. Disable it after
 // finishing development work to restore the performance benefits of caching.
 //
+// The change is applied in the background and can take a few minutes. Use `Get cache status` to
+// check the current state.
+//
 // Takes any type of body and a specified content type.
 //
 // Corresponds with PATCH /api/hosting/v1/accounts/{username}/websites/{domain}/cacheless-mode/toggle (the `HostingToggleCachelessModeV1` operationId).
@@ -33281,6 +33354,9 @@ func (c *Client) HostingToggleCachelessModeV1WithBody(ctx context.Context, usern
 // is cached, effectively turning off all caching for the website; use it while actively developing,
 // testing changes, debugging issues, or when real-time updates must be visible. Disable it after
 // finishing development work to restore the performance benefits of caching.
+//
+// The change is applied in the background and can take a few minutes. Use `Get cache status` to
+// check the current state.
 //
 // Takes a body of the `application/json` content type.
 //
@@ -49175,6 +49251,47 @@ func NewHostingClearWebsiteCacheV1Request(server string, username UsernamePath, 
 	}
 
 	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingGetCacheStatusV1Request constructs an http.Request for the HostingGetCacheStatusV1 method
+func NewHostingGetCacheStatusV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/cache/status", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -65961,6 +66078,26 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/cache/clear (the `HostingClearWebsiteCacheV1` operationId).
 	HostingClearWebsiteCacheV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, params *HostingClearWebsiteCacheV1Params, reqEditors ...RequestEditorFn) (*HostingClearWebsiteCacheV1Response, error)
 
+	// HostingGetCacheStatusV1WithResponse Get cache status
+	//
+	// Returns the caching state of the website: whether server-side caching is enabled and whether
+	// development (cacheless) mode is on. Works for the main domain, addon websites, parked domains
+	// and subdomains of the account; each reports its own settings and does not inherit them from
+	// its parent website.
+	//
+	// `is_enabled` is the setting changed by `Toggle website cache` and reflects a toggle
+	// immediately. `is_cacheless_mode_enabled` is true while development mode is on; caching is then
+	// bypassed even when `is_enabled` is true. `Toggle cacheless mode` is applied in the background,
+	// so this flag can take a few minutes to follow it.
+	//
+	// The domain must be the exact website name as listed on the account, without a `www.` prefix.
+	// Returns 404 when the domain is not a website on the account.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/cache/status (the `HostingGetCacheStatusV1` operationId).
+	HostingGetCacheStatusV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingGetCacheStatusV1Response, error)
+
 	// HostingToggleWebsiteCacheV1WithBodyWithResponse Toggle website cache
 	//
 	// Turns server-side caching for the website on or off, based on the enabled flag. Enable it for
@@ -65968,7 +66105,8 @@ type ClientWithResponsesInterface interface {
 	// websites. Disabling may impact performance; to temporarily bypass caching while developing or
 	// debugging, prefer toggling cacheless mode instead.
 	//
-	// Does nothing if caching is already in the requested state.
+	// Does nothing if caching is already in the requested state. Use `Get cache status` to check the
+	// current state.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -65982,7 +66120,8 @@ type ClientWithResponsesInterface interface {
 	// websites. Disabling may impact performance; to temporarily bypass caching while developing or
 	// debugging, prefer toggling cacheless mode instead.
 	//
-	// Does nothing if caching is already in the requested state.
+	// Does nothing if caching is already in the requested state. Use `Get cache status` to check the
+	// current state.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -65996,6 +66135,9 @@ type ClientWithResponsesInterface interface {
 	// testing changes, debugging issues, or when real-time updates must be visible. Disable it after
 	// finishing development work to restore the performance benefits of caching.
 	//
+	// The change is applied in the background and can take a few minutes. Use `Get cache status` to
+	// check the current state.
+	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
 	// Corresponds with PATCH /api/hosting/v1/accounts/{username}/websites/{domain}/cacheless-mode/toggle (the `HostingToggleCachelessModeV1` operationId).
@@ -66007,6 +66149,9 @@ type ClientWithResponsesInterface interface {
 	// is cached, effectively turning off all caching for the website; use it while actively developing,
 	// testing changes, debugging issues, or when real-time updates must be visible. Disable it after
 	// finishing development work to restore the performance benefits of caching.
+	//
+	// The change is applied in the background and can take a few minutes. Use `Get cache status` to
+	// check the current state.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -80543,6 +80688,61 @@ func (r HostingClearWebsiteCacheV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingClearWebsiteCacheV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingGetCacheStatusV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1CacheCacheStatusResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingGetCacheStatusV1Response) GetJSON200() *HostingV1CacheCacheStatusResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingGetCacheStatusV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingGetCacheStatusV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingGetCacheStatusV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingGetCacheStatusV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingGetCacheStatusV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingGetCacheStatusV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -101689,6 +101889,32 @@ func (c *ClientWithResponses) HostingClearWebsiteCacheV1WithResponse(ctx context
 	return ParseHostingClearWebsiteCacheV1Response(rsp)
 }
 
+// HostingGetCacheStatusV1WithResponse Get cache status
+//
+// Returns the caching state of the website: whether server-side caching is enabled and whether
+// development (cacheless) mode is on. Works for the main domain, addon websites, parked domains
+// and subdomains of the account; each reports its own settings and does not inherit them from
+// its parent website.
+//
+// `is_enabled` is the setting changed by `Toggle website cache` and reflects a toggle
+// immediately. `is_cacheless_mode_enabled` is true while development mode is on; caching is then
+// bypassed even when `is_enabled` is true. `Toggle cacheless mode` is applied in the background,
+// so this flag can take a few minutes to follow it.
+//
+// The domain must be the exact website name as listed on the account, without a `www.` prefix.
+// Returns 404 when the domain is not a website on the account.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/cache/status (the `HostingGetCacheStatusV1` operationId).
+func (c *ClientWithResponses) HostingGetCacheStatusV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingGetCacheStatusV1Response, error) {
+	rsp, err := c.HostingGetCacheStatusV1(ctx, username, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingGetCacheStatusV1Response(rsp)
+}
+
 // HostingToggleWebsiteCacheV1WithBodyWithResponse Toggle website cache
 //
 // Turns server-side caching for the website on or off, based on the enabled flag. Enable it for
@@ -101696,7 +101922,8 @@ func (c *ClientWithResponses) HostingClearWebsiteCacheV1WithResponse(ctx context
 // websites. Disabling may impact performance; to temporarily bypass caching while developing or
 // debugging, prefer toggling cacheless mode instead.
 //
-// Does nothing if caching is already in the requested state.
+// Does nothing if caching is already in the requested state. Use `Get cache status` to check the
+// current state.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
@@ -101716,7 +101943,8 @@ func (c *ClientWithResponses) HostingToggleWebsiteCacheV1WithBodyWithResponse(ct
 // websites. Disabling may impact performance; to temporarily bypass caching while developing or
 // debugging, prefer toggling cacheless mode instead.
 //
-// Does nothing if caching is already in the requested state.
+// Does nothing if caching is already in the requested state. Use `Get cache status` to check the
+// current state.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
@@ -101736,6 +101964,9 @@ func (c *ClientWithResponses) HostingToggleWebsiteCacheV1WithResponse(ctx contex
 // testing changes, debugging issues, or when real-time updates must be visible. Disable it after
 // finishing development work to restore the performance benefits of caching.
 //
+// The change is applied in the background and can take a few minutes. Use `Get cache status` to
+// check the current state.
+//
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
 // Corresponds with PATCH /api/hosting/v1/accounts/{username}/websites/{domain}/cacheless-mode/toggle (the `HostingToggleCachelessModeV1` operationId).
@@ -101753,6 +101984,9 @@ func (c *ClientWithResponses) HostingToggleCachelessModeV1WithBodyWithResponse(c
 // is cached, effectively turning off all caching for the website; use it while actively developing,
 // testing changes, debugging issues, or when real-time updates must be visible. Disable it after
 // finishing development work to restore the performance benefits of caching.
+//
+// The change is applied in the background and can take a few minutes. Use `Get cache status` to
+// check the current state.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
@@ -116159,6 +116393,46 @@ func ParseHostingClearWebsiteCacheV1Response(rsp *http.Response) (*HostingClearW
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingGetCacheStatusV1Response parses an HTTP response from a HostingGetCacheStatusV1WithResponse call
+func ParseHostingGetCacheStatusV1Response(rsp *http.Response) (*HostingGetCacheStatusV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingGetCacheStatusV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1CacheCacheStatusResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

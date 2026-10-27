@@ -9,7 +9,8 @@ faster page loads, reduced server load, and improved user experience; recommende
 websites. Disabling may impact performance; to temporarily bypass caching while developing or
 debugging, prefer toggling cacheless mode instead.
 
-Does nothing if caching is already in the requested state.
+Does nothing if caching is already in the requested state. Use `Get cache status` to check the
+current state.
 
 The website can be given as [domain] (the account username is looked up), as <username> <domain>, or left out, in which case it comes from --domain, HOSTINGER_DOMAIN, the .hostinger/site.json written by `hostinger up` or `hostinger link`, the default_domain in the config file, or a prompt when run in a terminal.
 

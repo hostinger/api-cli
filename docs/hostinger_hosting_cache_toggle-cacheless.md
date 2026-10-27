@@ -9,6 +9,9 @@ is cached, effectively turning off all caching for the website; use it while act
 testing changes, debugging issues, or when real-time updates must be visible. Disable it after
 finishing development work to restore the performance benefits of caching.
 
+The change is applied in the background and can take a few minutes. Use `Get cache status` to
+check the current state.
+
 The website can be given as [domain] (the account username is looked up), as <username> <domain>, or left out, in which case it comes from --domain, HOSTINGER_DOMAIN, the .hostinger/site.json written by `hostinger up` or `hostinger link`, the default_domain in the config file, or a prompt when run in a terminal.
 
 ```

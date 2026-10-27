@@ -1204,6 +1204,11 @@
     "method": "GET",
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/cdn/status"
   },
+  "hosting_getCacheStatusV1": {
+    "command": "hostinger hosting cache status",
+    "method": "GET",
+    "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/cache/status"
+  },
   "hosting_getCronJobOutputV1": {
     "command": "hostinger hosting cron-jobs output",
     "method": "GET",
