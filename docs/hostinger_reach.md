@@ -31,6 +31,7 @@ hostinger reach [flags]
 * [hostinger reach contact-fields](hostinger_reach_contact-fields.md)	 - Contact Fields commands
 * [hostinger reach contacts](hostinger_reach_contacts.md)	 - Contacts commands
 * [hostinger reach forms](hostinger_reach_forms.md)	 - Forms commands
+* [hostinger reach integrations](hostinger_reach_integrations.md)	 - Integrations commands
 * [hostinger reach profiles](hostinger_reach_profiles.md)	 - Profiles commands
 * [hostinger reach segments](hostinger_reach_segments.md)	 - Segments commands
 * [hostinger reach tags](hostinger_reach_tags.md)	 - Tags commands

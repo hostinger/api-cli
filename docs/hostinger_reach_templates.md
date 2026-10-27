@@ -27,5 +27,6 @@ hostinger reach templates [flags]
 
 * [hostinger reach](hostinger_reach.md)	 - Reach commands
 * [hostinger reach templates create-email](hostinger_reach_templates_create-email.md)	 - Create an email template
+* [hostinger reach templates email](hostinger_reach_templates_email.md)	 - Get email template
 * [hostinger reach templates list-email](hostinger_reach_templates_list-email.md)	 - List email templates
 

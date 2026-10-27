@@ -12,7 +12,7 @@ import (
 var GetCmd = &cobra.Command{
 	Use:     "get <profile-uuid> <campaign-uuid>",
 	Short:   "Get campaign details",
-	Long:    "Get a single campaign with its sender, subject, template reference, targeting and delivery\nprogress.\n\nThis describes how the campaign was set up and how far it has got. For opens, clicks and\nunsubscribes use the campaign statistics endpoint.",
+	Long:    "Get a single campaign with its sender, subject, template reference, targeting and delivery\nprogress.\n\nThis describes how the campaign was set up and how far it has got. For opens, clicks and\nunsubscribes use the campaign statistics endpoint. The email content is not included: pass\n`template_uuid` to the get email template endpoint to read its HTML.",
 	Example: "  hostinger reach campaigns get 550e8400-e09b-41d4-a716-400055000000 550e8400-e09b-41d4-a716-400055000000",
 	ValidArgsFunction: utils.CompleteArgs(
 		nil,

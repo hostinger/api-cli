@@ -12,7 +12,7 @@ import (
 var ListEmailCmd = &cobra.Command{
 	Use:               "list-email <profile-uuid>",
 	Short:             "List email templates",
-	Long:              "Get a list of the email templates in a profile, most recently updated first.\n\nTemplates are the reusable email bodies a campaign is built from. The list is not paginated\nand only the metadata is returned - the template content itself is not exposed. Use the\n`uuid` of a template as the `template_uuid` when creating a campaign.",
+	Long:              "Get a list of the email templates in a profile, most recently updated first.\n\nTemplates are the reusable email bodies a campaign is built from. The list is not paginated\nand only the metadata is returned, without the HTML content. Use the `uuid` of a template\nas the `template_uuid` when creating a campaign. To read one template's HTML use the get\nemail template endpoint, and only when the content itself is needed.",
 	Example:           "  hostinger reach templates list-email 550e8400-e09b-41d4-a716-400055000000",
 	ValidArgsFunction: cobra.NoFileCompletions,
 	RunE: func(cmd *cobra.Command, args []string) error {

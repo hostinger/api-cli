@@ -14,5 +14,6 @@ var GroupCmd = &cobra.Command{
 
 func init() {
 	GroupCmd.AddCommand(CreateEmailCmd)
+	GroupCmd.AddCommand(EmailCmd)
 	GroupCmd.AddCommand(ListEmailCmd)
 }

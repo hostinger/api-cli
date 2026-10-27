@@ -6,6 +6,7 @@ import (
 	"github.com/hostinger/api-cli/cmd/reach/contact_fields"
 	"github.com/hostinger/api-cli/cmd/reach/contacts"
 	"github.com/hostinger/api-cli/cmd/reach/forms"
+	"github.com/hostinger/api-cli/cmd/reach/integrations"
 	"github.com/hostinger/api-cli/cmd/reach/profiles"
 	"github.com/hostinger/api-cli/cmd/reach/segments"
 	"github.com/hostinger/api-cli/cmd/reach/tags"
@@ -28,6 +29,7 @@ func init() {
 	GroupCmd.AddCommand(contact_fields.GroupCmd)
 	GroupCmd.AddCommand(contacts.GroupCmd)
 	GroupCmd.AddCommand(forms.GroupCmd)
+	GroupCmd.AddCommand(integrations.GroupCmd)
 	GroupCmd.AddCommand(profiles.GroupCmd)
 	GroupCmd.AddCommand(segments.GroupCmd)
 	GroupCmd.AddCommand(tags.GroupCmd)

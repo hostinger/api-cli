@@ -7,8 +7,9 @@ List email templates
 Get a list of the email templates in a profile, most recently updated first.
 
 Templates are the reusable email bodies a campaign is built from. The list is not paginated
-and only the metadata is returned - the template content itself is not exposed. Use the
-`uuid` of a template as the `template_uuid` when creating a campaign.
+and only the metadata is returned, without the HTML content. Use the `uuid` of a template
+as the `template_uuid` when creating a campaign. To read one template's HTML use the get
+email template endpoint, and only when the content itself is needed.
 
 ```
 hostinger reach templates list-email <profile-uuid> [flags]

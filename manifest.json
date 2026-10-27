@@ -1814,6 +1814,11 @@
     "method": "POST",
     "path": "/api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}/contacts"
   },
+  "reach_connectAIWebsiteBuilderSiteV1": {
+    "command": "hostinger reach integrations connect-ai-website-builder-site",
+    "method": "POST",
+    "path": "/api/reach/v1/profiles/{profileUuid}/websites/website-builder"
+  },
   "reach_connectSendingDomainV1": {
     "command": "hostinger reach profiles connect-sending-domain",
     "method": "POST",
@@ -1909,6 +1914,21 @@
     "method": "DELETE",
     "path": "/api/reach/v1/profiles/{profileUuid}/domains"
   },
+  "reach_disconnectAIWebsiteBuilderSiteV1": {
+    "command": "hostinger reach integrations disconnect-ai-website-builder-site",
+    "method": "DELETE",
+    "path": "/api/reach/v1/profiles/{profileUuid}/websites/website-builder"
+  },
+  "reach_disconnectEcommerceStoreV1": {
+    "command": "hostinger reach integrations disconnect-ecommerce-store",
+    "method": "DELETE",
+    "path": "/api/reach/v1/profiles/{profileUuid}/ecommerce/stores/{storeId}"
+  },
+  "reach_disconnectWordPressSiteV1": {
+    "command": "hostinger reach integrations disconnect-wordpress-site",
+    "method": "DELETE",
+    "path": "/api/reach/v1/profiles/{profileUuid}/websites/wordpress"
+  },
   "reach_duplicateFormV1": {
     "command": "hostinger reach forms duplicate",
     "method": "POST",
@@ -1938,6 +1958,11 @@
     "command": "hostinger reach contacts get",
     "method": "GET",
     "path": "/api/reach/v1/profiles/{profileUuid}/contacts/{contactUuid}"
+  },
+  "reach_getEmailTemplateV1": {
+    "command": "hostinger reach templates email",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/templates/{templateUuid}"
   },
   "reach_getFormDetailsV1": {
     "command": "hostinger reach forms get",
@@ -1984,6 +2009,11 @@
     "method": "GET",
     "path": "/api/reach/v1/profiles/{profileUuid}/campaigns"
   },
+  "reach_listConnectedWebsitesV1": {
+    "command": "hostinger reach integrations list-connected-websites",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/websites"
+  },
   "reach_listContactFieldsV1": {
     "command": "hostinger reach contact-fields list",
     "method": "GET",
@@ -1998,6 +2028,11 @@
     "command": "hostinger reach contacts list",
     "method": "GET",
     "path": "/api/reach/v1/contacts"
+  },
+  "reach_listEcommerceStoresV1": {
+    "command": "hostinger reach integrations list-ecommerce-stores",
+    "method": "GET",
+    "path": "/api/reach/v1/profiles/{profileUuid}/ecommerce/stores"
   },
   "reach_listEmailTemplatesV1": {
     "command": "hostinger reach templates list-email",

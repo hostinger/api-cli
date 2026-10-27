@@ -3960,6 +3960,63 @@ func (e ReachV1ProfilesFeaturesPlanFeatureResourceFeature) Valid() bool {
 	}
 }
 
+// Defines values for ReachV1StoresStoreResourceConnectionStatus.
+const (
+	ReachV1StoresStoreResourceConnectionStatusConnected               ReachV1StoresStoreResourceConnectionStatus = "connected"
+	ReachV1StoresStoreResourceConnectionStatusConnectedToOtherProfile ReachV1StoresStoreResourceConnectionStatus = "connected_to_other_profile"
+	ReachV1StoresStoreResourceConnectionStatusNotConnected            ReachV1StoresStoreResourceConnectionStatus = "not_connected"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1StoresStoreResourceConnectionStatus enum.
+func (e ReachV1StoresStoreResourceConnectionStatus) Valid() bool {
+	switch e {
+	case ReachV1StoresStoreResourceConnectionStatusConnected:
+		return true
+	case ReachV1StoresStoreResourceConnectionStatusConnectedToOtherProfile:
+		return true
+	case ReachV1StoresStoreResourceConnectionStatusNotConnected:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1StoresStoreResourceVersion.
+const (
+	V2Standalone ReachV1StoresStoreResourceVersion = "v2_standalone"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1StoresStoreResourceVersion enum.
+func (e ReachV1StoresStoreResourceVersion) Valid() bool {
+	switch e {
+	case V2Standalone:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ReachV1WebsitesWebsiteResourcePlatformType.
+const (
+	ReachV1WebsitesWebsiteResourcePlatformTypeHorizons       ReachV1WebsitesWebsiteResourcePlatformType = "horizons"
+	ReachV1WebsitesWebsiteResourcePlatformTypeWebsiteBuilder ReachV1WebsitesWebsiteResourcePlatformType = "website_builder"
+	ReachV1WebsitesWebsiteResourcePlatformTypeWordpress      ReachV1WebsitesWebsiteResourcePlatformType = "wordpress"
+)
+
+// Valid indicates whether the value is a known member of the ReachV1WebsitesWebsiteResourcePlatformType enum.
+func (e ReachV1WebsitesWebsiteResourcePlatformType) Valid() bool {
+	switch e {
+	case ReachV1WebsitesWebsiteResourcePlatformTypeHorizons:
+		return true
+	case ReachV1WebsitesWebsiteResourcePlatformTypeWebsiteBuilder:
+		return true
+	case ReachV1WebsitesWebsiteResourcePlatformTypeWordpress:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for VPSV1ActionActionResourceState.
 const (
 	VPSV1ActionActionResourceStateCreated VPSV1ActionActionResourceState = "created"
@@ -15424,6 +15481,57 @@ type ReachV1ProfilesSettingsUpdateRequest struct {
 	WebsiteUrl *string `json:"website_url,omitempty"`
 }
 
+// ReachV1StoresStoreCollection Array of [`Reach.V1.Stores.StoreResource`](#model/reachv1storesstoreresource)
+type ReachV1StoresStoreCollection = []ReachV1StoresStoreResource
+
+// ReachV1StoresStoreResource defines model for Reach.V1.Stores.StoreResource.
+type ReachV1StoresStoreResource struct {
+	// BusinessName Example: Bright Panda
+	BusinessName *string `json:"business_name,omitempty"`
+
+	// ConnectionStatus `connected` to the profile in the path, `connected_to_other_profile` when another profile of the account holds it, or `not_connected`.
+	//
+	// Example: connected
+	ConnectionStatus *ReachV1StoresStoreResourceConnectionStatus `json:"connection_status,omitempty"`
+
+	// Domain Example: store.example.com
+	Domain *string `json:"domain,omitempty"`
+
+	// LogoUrl Example: https://cdn.example.com/logo.png
+	LogoUrl *string `json:"logo_url,omitempty"`
+
+	// SalesChannels Storefronts of the store.
+	SalesChannels *[]struct {
+		// Domain Example: shop.example.com
+		Domain *string `json:"domain,omitempty"`
+
+		// Id Example: scha_01JXK3MA1B2C3D4E5F6G7H8J9K
+		Id *string `json:"id,omitempty"`
+
+		// Name Example: Online store
+		Name *string `json:"name,omitempty"`
+
+		// Type Example: builder
+		Type *string `json:"type,omitempty"`
+	} `json:"sales_channels,omitempty"`
+
+	// StoreId Pass this to the disconnect eCommerce store endpoint.
+	//
+	// Example: ec_123
+	StoreId *string `json:"store_id,omitempty"`
+
+	// Version Example: v2_standalone
+	Version *ReachV1StoresStoreResourceVersion `json:"version,omitempty"`
+}
+
+// ReachV1StoresStoreResourceConnectionStatus `connected` to the profile in the path, `connected_to_other_profile` when another profile of the account holds it, or `not_connected`.
+//
+// Example: connected
+type ReachV1StoresStoreResourceConnectionStatus string
+
+// ReachV1StoresStoreResourceVersion Example: v2_standalone
+type ReachV1StoresStoreResourceVersion string
+
 // ReachV1TemplatesStoreRequest Create a reusable email template
 type ReachV1TemplatesStoreRequest struct {
 	// TemplateContent The email body as HTML. It is sanitised before it is stored, so the saved template
@@ -15442,6 +15550,30 @@ type ReachV1TemplatesStoreRequest struct {
 // ReachV1TemplatesTemplateCollection Array of [`Reach.V1.Templates.TemplateResource`](#model/reachv1templatestemplateresource)
 type ReachV1TemplatesTemplateCollection = []ReachV1TemplatesTemplateResource
 
+// ReachV1TemplatesTemplateDetailsResource defines model for Reach.V1.Templates.TemplateDetailsResource.
+type ReachV1TemplatesTemplateDetailsResource struct {
+	// CreatedAt Example: 2025-02-27T11:54:22Z
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// TemplateContent Full HTML of the template, with personalization tags such as `{{name}}` unrendered. Null when the stored HTML cannot be read.
+	//
+	// Example: <html><body><h1>Hello {{name}}</h1></body></html>
+	TemplateContent *string `json:"template_content,omitempty"`
+
+	// Title Null for templates that were never named.
+	//
+	// Example: Newsletter Template
+	Title *string `json:"title,omitempty"`
+
+	// UpdatedAt Example: 2025-03-04T09:12:07Z
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+
+	// Uuid Pass this as the `template_uuid` of a campaign.
+	//
+	// Example: 550e8400-e29b-41d4-a716-446655440000
+	Uuid *string `json:"uuid,omitempty"`
+}
+
 // ReachV1TemplatesTemplateResource defines model for Reach.V1.Templates.TemplateResource.
 type ReachV1TemplatesTemplateResource struct {
 	// CreatedAt Example: 2025-02-27T11:54:22Z
@@ -15459,6 +15591,45 @@ type ReachV1TemplatesTemplateResource struct {
 	//
 	// Example: 550e8400-e29b-41d4-a716-446655440000
 	Uuid *string `json:"uuid,omitempty"`
+}
+
+// ReachV1WebsitesWebsiteBuilderConnectRequest AI Website Builder site to connect to the profile
+type ReachV1WebsitesWebsiteBuilderConnectRequest struct {
+	// Domain Example: example.com
+	Domain string `json:"domain"`
+}
+
+// ReachV1WebsitesWebsiteBuilderDisconnectRequest AI Website Builder site to disconnect from the profile
+type ReachV1WebsitesWebsiteBuilderDisconnectRequest struct {
+	// Domain Example: example.com
+	Domain string `json:"domain"`
+}
+
+// ReachV1WebsitesWebsiteCollection Array of [`Reach.V1.Websites.WebsiteResource`](#model/reachv1websiteswebsiteresource)
+type ReachV1WebsitesWebsiteCollection = []ReachV1WebsitesWebsiteResource
+
+// ReachV1WebsitesWebsiteResource defines model for Reach.V1.Websites.WebsiteResource.
+type ReachV1WebsitesWebsiteResource struct {
+	// Domain Pass this to the disconnect endpoint matching `platform_type`.
+	//
+	// Example: example.com
+	Domain *string `json:"domain,omitempty"`
+
+	// PlatformType `wordpress`, `website_builder` (AI Website Builder site built manually) or `horizons` (site built with the agentic AI Website Builder).
+	//
+	// Example: website_builder
+	PlatformType *ReachV1WebsitesWebsiteResourcePlatformType `json:"platform_type,omitempty"`
+}
+
+// ReachV1WebsitesWebsiteResourcePlatformType `wordpress`, `website_builder` (AI Website Builder site built manually) or `horizons` (site built with the agentic AI Website Builder).
+//
+// Example: website_builder
+type ReachV1WebsitesWebsiteResourcePlatformType string
+
+// ReachV1WebsitesWordPressDisconnectRequest WordPress site to disconnect from the profile
+type ReachV1WebsitesWordPressDisconnectRequest struct {
+	// Domain Example: example.com
+	Domain string `json:"domain"`
 }
 
 // VPSV1ActionActionCollection Array of [`VPS.V1.Action.ActionResource`](#model/vpsv1actionactionresource)
@@ -17712,6 +17883,9 @@ type Status string
 // Statuses Example: ["active","suspended"]
 type Statuses = []string
 
+// StoreId Example: ec_123
+type StoreId = string
+
 // SubdomainPath Example: blog
 type SubdomainPath = string
 
@@ -17726,6 +17900,9 @@ type TagUuid = openapi_types.UUID
 
 // TemplateId Example: 2868928
 type TemplateId = int
+
+// TemplateUuid Example: 550e8400-e29b-41d4-a716-446655440000
+type TemplateUuid = string
 
 // Tld Example: com
 type Tld = string
@@ -19189,6 +19366,15 @@ type ReachAssignContactsToATagV1JSONRequestBody = ReachV1ContactsTagsManageConta
 
 // ReachCreateAnEmailTemplateV1JSONRequestBody defines body for ReachCreateAnEmailTemplateV1 for application/json ContentType.
 type ReachCreateAnEmailTemplateV1JSONRequestBody = ReachV1TemplatesStoreRequest
+
+// ReachDisconnectAIWebsiteBuilderSiteV1JSONRequestBody defines body for ReachDisconnectAIWebsiteBuilderSiteV1 for application/json ContentType.
+type ReachDisconnectAIWebsiteBuilderSiteV1JSONRequestBody = ReachV1WebsitesWebsiteBuilderDisconnectRequest
+
+// ReachConnectAIWebsiteBuilderSiteV1JSONRequestBody defines body for ReachConnectAIWebsiteBuilderSiteV1 for application/json ContentType.
+type ReachConnectAIWebsiteBuilderSiteV1JSONRequestBody = ReachV1WebsitesWebsiteBuilderConnectRequest
+
+// ReachDisconnectWordPressSiteV1JSONRequestBody defines body for ReachDisconnectWordPressSiteV1 for application/json ContentType.
+type ReachDisconnectWordPressSiteV1JSONRequestBody = ReachV1WebsitesWordPressDisconnectRequest
 
 // ReachCreateANewContactSegmentV1JSONRequestBody defines body for ReachCreateANewContactSegmentV1 for application/json ContentType.
 //
@@ -26004,7 +26190,8 @@ type ClientInterface interface {
 	// progress.
 	//
 	// This describes how the campaign was set up and how far it has got. For opens, clicks and
-	// unsubscribes use the campaign statistics endpoint.
+	// unsubscribes use the campaign statistics endpoint. The email content is not included: pass
+	// `template_uuid` to the get email template endpoint to read its HTML.
 	//
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid} (the `ReachGetCampaignDetailsV1` operationId).
 	ReachGetCampaignDetailsV1(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -26305,6 +26492,33 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/domains/dns-status (the `ReachGetProfileDomainDNSStatusV1` operationId).
 	ReachGetProfileDomainDNSStatusV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachListEcommerceStoresV1 List Ecommerce stores
+	//
+	// Get all of the customer's Hostinger eCommerce stores, each with its `store_id` and
+	// `connection_status` for the profile in the path.
+	//
+	// A store is connected to at most one profile. `connected_to_other_profile` does not name that
+	// profile - call this for each profile to find it. The list is empty, not an error, when the
+	// eCommerce service cannot be reached. Pass `store_id` to the disconnect eCommerce store
+	// endpoint. Connecting an AI Website Builder site connects the store selling on it.
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/ecommerce/stores (the `ReachListEcommerceStoresV1` operationId).
+	ReachListEcommerceStoresV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachDisconnectEcommerceStoreV1 Disconnect Ecommerce store
+	//
+	// Disconnect an eCommerce store from the profile.
+	//
+	// Reach stops receiving the store's customers and orders, and its products and coupons are
+	// removed from Reach; contacts and past orders stay. Take `store_id` from the list eCommerce
+	// stores endpoint; for a store that is `connected_to_other_profile`, call this with that
+	// profile. Also succeeds when the store is not connected to this profile, so success is not
+	// proof that anything was disconnected. Confirm the store and the plan with the customer
+	// before calling.
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/ecommerce/stores/{storeId} (the `ReachDisconnectEcommerceStoreV1` operationId).
+	ReachDisconnectEcommerceStoreV1(ctx context.Context, profileUuid ProfileUuid, storeId StoreId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReachListPlanFeatureAccessV1 List plan feature access
 	//
@@ -26857,8 +27071,9 @@ type ClientInterface interface {
 	// Get a list of the email templates in a profile, most recently updated first.
 	//
 	// Templates are the reusable email bodies a campaign is built from. The list is not paginated
-	// and only the metadata is returned - the template content itself is not exposed. Use the
-	// `uuid` of a template as the `template_uuid` when creating a campaign.
+	// and only the metadata is returned, without the HTML content. Use the `uuid` of a template
+	// as the `template_uuid` when creating a campaign. To read one template's HTML use the get
+	// email template endpoint, and only when the content itself is needed.
 	//
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/templates (the `ReachListEmailTemplatesV1` operationId).
 	ReachListEmailTemplatesV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -26888,6 +27103,124 @@ type ClientInterface interface {
 	//
 	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/templates (the `ReachCreateAnEmailTemplateV1` operationId).
 	ReachCreateAnEmailTemplateV1(ctx context.Context, profileUuid ProfileUuid, body ReachCreateAnEmailTemplateV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachGetEmailTemplateV1 Get email template
+	//
+	// Get one email template of the profile with its full HTML in `template_content`.
+	//
+	// A campaign's email content is its template: to read what a campaign sends, get the campaign
+	// and pass its `template_uuid` here. The HTML can be large, so fetch it only when the content
+	// itself is needed, never to browse or pick templates - the list email templates endpoint does
+	// that without content. Personalization tags such as `{{name}}` come back unrendered.
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/templates/{templateUuid} (the `ReachGetEmailTemplateV1` operationId).
+	ReachGetEmailTemplateV1(ctx context.Context, profileUuid ProfileUuid, templateUuid TemplateUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachListConnectedWebsitesV1 List connected websites
+	//
+	// Get the websites connected to the profile, each with its `domain` and `platform_type`.
+	//
+	// A domain is connected to at most one profile, so to find which plan a site is on, call this
+	// for each profile. Only connected sites are listed, not every website the customer owns, and
+	// eCommerce stores are not included - use the list eCommerce stores endpoint for those. Pass
+	// `domain` to the disconnect WordPress site or disconnect AI Website Builder site endpoint.
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/websites (the `ReachListConnectedWebsitesV1` operationId).
+	ReachListConnectedWebsitesV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachDisconnectAIWebsiteBuilderSiteV1WithBody Disconnect AI Website Builder site
+	//
+	// Disconnect an AI Website Builder site from the profile; the site stops sending subscribers
+	// to Reach.
+	//
+	// Take `domain` from the list connected websites endpoint. Works for a site that was already
+	// deleted in the builder. Fails with not found when the domain is not connected to this
+	// profile. Contacts and any connected eCommerce store stay. The site stays disconnected until
+	// it is connected again, so confirm the site and the plan with the customer before calling.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/websites/website-builder (the `ReachDisconnectAIWebsiteBuilderSiteV1` operationId).
+	ReachDisconnectAIWebsiteBuilderSiteV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachDisconnectAIWebsiteBuilderSiteV1 Disconnect AI Website Builder site
+	//
+	// Disconnect an AI Website Builder site from the profile; the site stops sending subscribers
+	// to Reach.
+	//
+	// Take `domain` from the list connected websites endpoint. Works for a site that was already
+	// deleted in the builder. Fails with not found when the domain is not connected to this
+	// profile. Contacts and any connected eCommerce store stay. The site stays disconnected until
+	// it is connected again, so confirm the site and the plan with the customer before calling.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/websites/website-builder (the `ReachDisconnectAIWebsiteBuilderSiteV1` operationId).
+	ReachDisconnectAIWebsiteBuilderSiteV1(ctx context.Context, profileUuid ProfileUuid, body ReachDisconnectAIWebsiteBuilderSiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachConnectAIWebsiteBuilderSiteV1WithBody Connect AI Website Builder site
+	//
+	// Connect an AI Website Builder site the customer built manually to the profile, so its
+	// subscribers flow into Reach.
+	//
+	// Fails with not found when the customer owns no AI Website Builder site with that domain.
+	// Fails with `DOMAIN_ALREADY_EXISTS` when the domain is connected to any profile - to move a
+	// site to another plan, disconnect it from the old profile first - and with
+	// `WEBSITE_CONNECTION_ALREADY_EXISTS` when this profile already has an AI Website Builder site.
+	// The eCommerce store selling on the site, if it is not connected anywhere, is connected too.
+	// WordPress sites and sites made with the agentic AI Website Builder cannot be connected here.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/websites/website-builder (the `ReachConnectAIWebsiteBuilderSiteV1` operationId).
+	ReachConnectAIWebsiteBuilderSiteV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachConnectAIWebsiteBuilderSiteV1 Connect AI Website Builder site
+	//
+	// Connect an AI Website Builder site the customer built manually to the profile, so its
+	// subscribers flow into Reach.
+	//
+	// Fails with not found when the customer owns no AI Website Builder site with that domain.
+	// Fails with `DOMAIN_ALREADY_EXISTS` when the domain is connected to any profile - to move a
+	// site to another plan, disconnect it from the old profile first - and with
+	// `WEBSITE_CONNECTION_ALREADY_EXISTS` when this profile already has an AI Website Builder site.
+	// The eCommerce store selling on the site, if it is not connected anywhere, is connected too.
+	// WordPress sites and sites made with the agentic AI Website Builder cannot be connected here.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/websites/website-builder (the `ReachConnectAIWebsiteBuilderSiteV1` operationId).
+	ReachConnectAIWebsiteBuilderSiteV1(ctx context.Context, profileUuid ProfileUuid, body ReachConnectAIWebsiteBuilderSiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachDisconnectWordPressSiteV1WithBody Disconnect WordPress site
+	//
+	// Disconnect a WordPress site from the profile.
+	//
+	// The Reach plugin on the site stops sending subscribers and store data, and the site's
+	// products and coupons are removed from Reach; contacts and past orders stay. Take `domain`
+	// from the list connected websites endpoint. Fails with not found when the domain is not
+	// connected to this profile. This cannot be undone through the API - the customer reconnects
+	// from the WordPress plugin - so confirm the site and the plan with the customer before calling.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/websites/wordpress (the `ReachDisconnectWordPressSiteV1` operationId).
+	ReachDisconnectWordPressSiteV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachDisconnectWordPressSiteV1 Disconnect WordPress site
+	//
+	// Disconnect a WordPress site from the profile.
+	//
+	// The Reach plugin on the site stops sending subscribers and store data, and the site's
+	// products and coupons are removed from Reach; contacts and past orders stay. Take `domain`
+	// from the list connected websites endpoint. Fails with not found when the domain is not
+	// connected to this profile. This cannot be undone through the API - the customer reconnects
+	// from the WordPress plugin - so confirm the site and the plan with the customer before calling.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/websites/wordpress (the `ReachDisconnectWordPressSiteV1` operationId).
+	ReachDisconnectWordPressSiteV1(ctx context.Context, profileUuid ProfileUuid, body ReachDisconnectWordPressSiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReachListSegmentsV1 List segments
 	//
@@ -37829,7 +38162,8 @@ func (c *Client) ReachCreateADraftCampaignV1(ctx context.Context, profileUuid Pr
 // progress.
 //
 // This describes how the campaign was set up and how far it has got. For opens, clicks and
-// unsubscribes use the campaign statistics endpoint.
+// unsubscribes use the campaign statistics endpoint. The email content is not included: pass
+// `template_uuid` to the get email template endpoint to read its HTML.
 //
 // Corresponds with GET /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid} (the `ReachGetCampaignDetailsV1` operationId).
 func (c *Client) ReachGetCampaignDetailsV1(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -38351,6 +38685,53 @@ func (c *Client) ReachConnectSendingDomainV1(ctx context.Context, profileUuid Pr
 // Corresponds with GET /api/reach/v1/profiles/{profileUuid}/domains/dns-status (the `ReachGetProfileDomainDNSStatusV1` operationId).
 func (c *Client) ReachGetProfileDomainDNSStatusV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReachGetProfileDomainDNSStatusV1Request(c.Server, profileUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachListEcommerceStoresV1 List Ecommerce stores
+//
+// Get all of the customer's Hostinger eCommerce stores, each with its `store_id` and
+// `connection_status` for the profile in the path.
+//
+// A store is connected to at most one profile. `connected_to_other_profile` does not name that
+// profile - call this for each profile to find it. The list is empty, not an error, when the
+// eCommerce service cannot be reached. Pass `store_id` to the disconnect eCommerce store
+// endpoint. Connecting an AI Website Builder site connects the store selling on it.
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/ecommerce/stores (the `ReachListEcommerceStoresV1` operationId).
+func (c *Client) ReachListEcommerceStoresV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachListEcommerceStoresV1Request(c.Server, profileUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachDisconnectEcommerceStoreV1 Disconnect Ecommerce store
+//
+// Disconnect an eCommerce store from the profile.
+//
+// Reach stops receiving the store's customers and orders, and its products and coupons are
+// removed from Reach; contacts and past orders stay. Take `store_id` from the list eCommerce
+// stores endpoint; for a store that is `connected_to_other_profile`, call this with that
+// profile. Also succeeds when the store is not connected to this profile, so success is not
+// proof that anything was disconnected. Confirm the store and the plan with the customer
+// before calling.
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/ecommerce/stores/{storeId} (the `ReachDisconnectEcommerceStoreV1` operationId).
+func (c *Client) ReachDisconnectEcommerceStoreV1(ctx context.Context, profileUuid ProfileUuid, storeId StoreId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachDisconnectEcommerceStoreV1Request(c.Server, profileUuid, storeId)
 	if err != nil {
 		return nil, err
 	}
@@ -39342,8 +39723,9 @@ func (c *Client) ReachAssignAContactToATagV1(ctx context.Context, profileUuid Pr
 // Get a list of the email templates in a profile, most recently updated first.
 //
 // Templates are the reusable email bodies a campaign is built from. The list is not paginated
-// and only the metadata is returned - the template content itself is not exposed. Use the
-// `uuid` of a template as the `template_uuid` when creating a campaign.
+// and only the metadata is returned, without the HTML content. Use the `uuid` of a template
+// as the `template_uuid` when creating a campaign. To read one template's HTML use the get
+// email template endpoint, and only when the content itself is needed.
 //
 // Corresponds with GET /api/reach/v1/profiles/{profileUuid}/templates (the `ReachListEmailTemplatesV1` operationId).
 func (c *Client) ReachListEmailTemplatesV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -39394,6 +39776,204 @@ func (c *Client) ReachCreateAnEmailTemplateV1WithBody(ctx context.Context, profi
 // Corresponds with POST /api/reach/v1/profiles/{profileUuid}/templates (the `ReachCreateAnEmailTemplateV1` operationId).
 func (c *Client) ReachCreateAnEmailTemplateV1(ctx context.Context, profileUuid ProfileUuid, body ReachCreateAnEmailTemplateV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReachCreateAnEmailTemplateV1Request(c.Server, profileUuid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachGetEmailTemplateV1 Get email template
+//
+// Get one email template of the profile with its full HTML in `template_content`.
+//
+// A campaign's email content is its template: to read what a campaign sends, get the campaign
+// and pass its `template_uuid` here. The HTML can be large, so fetch it only when the content
+// itself is needed, never to browse or pick templates - the list email templates endpoint does
+// that without content. Personalization tags such as `{{name}}` come back unrendered.
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/templates/{templateUuid} (the `ReachGetEmailTemplateV1` operationId).
+func (c *Client) ReachGetEmailTemplateV1(ctx context.Context, profileUuid ProfileUuid, templateUuid TemplateUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachGetEmailTemplateV1Request(c.Server, profileUuid, templateUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachListConnectedWebsitesV1 List connected websites
+//
+// Get the websites connected to the profile, each with its `domain` and `platform_type`.
+//
+// A domain is connected to at most one profile, so to find which plan a site is on, call this
+// for each profile. Only connected sites are listed, not every website the customer owns, and
+// eCommerce stores are not included - use the list eCommerce stores endpoint for those. Pass
+// `domain` to the disconnect WordPress site or disconnect AI Website Builder site endpoint.
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/websites (the `ReachListConnectedWebsitesV1` operationId).
+func (c *Client) ReachListConnectedWebsitesV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachListConnectedWebsitesV1Request(c.Server, profileUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachDisconnectAIWebsiteBuilderSiteV1WithBody Disconnect AI Website Builder site
+//
+// Disconnect an AI Website Builder site from the profile; the site stops sending subscribers
+// to Reach.
+//
+// Take `domain` from the list connected websites endpoint. Works for a site that was already
+// deleted in the builder. Fails with not found when the domain is not connected to this
+// profile. Contacts and any connected eCommerce store stay. The site stays disconnected until
+// it is connected again, so confirm the site and the plan with the customer before calling.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/websites/website-builder (the `ReachDisconnectAIWebsiteBuilderSiteV1` operationId).
+func (c *Client) ReachDisconnectAIWebsiteBuilderSiteV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachDisconnectAIWebsiteBuilderSiteV1RequestWithBody(c.Server, profileUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachDisconnectAIWebsiteBuilderSiteV1 Disconnect AI Website Builder site
+//
+// Disconnect an AI Website Builder site from the profile; the site stops sending subscribers
+// to Reach.
+//
+// Take `domain` from the list connected websites endpoint. Works for a site that was already
+// deleted in the builder. Fails with not found when the domain is not connected to this
+// profile. Contacts and any connected eCommerce store stay. The site stays disconnected until
+// it is connected again, so confirm the site and the plan with the customer before calling.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/websites/website-builder (the `ReachDisconnectAIWebsiteBuilderSiteV1` operationId).
+func (c *Client) ReachDisconnectAIWebsiteBuilderSiteV1(ctx context.Context, profileUuid ProfileUuid, body ReachDisconnectAIWebsiteBuilderSiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachDisconnectAIWebsiteBuilderSiteV1Request(c.Server, profileUuid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachConnectAIWebsiteBuilderSiteV1WithBody Connect AI Website Builder site
+//
+// Connect an AI Website Builder site the customer built manually to the profile, so its
+// subscribers flow into Reach.
+//
+// Fails with not found when the customer owns no AI Website Builder site with that domain.
+// Fails with `DOMAIN_ALREADY_EXISTS` when the domain is connected to any profile - to move a
+// site to another plan, disconnect it from the old profile first - and with
+// `WEBSITE_CONNECTION_ALREADY_EXISTS` when this profile already has an AI Website Builder site.
+// The eCommerce store selling on the site, if it is not connected anywhere, is connected too.
+// WordPress sites and sites made with the agentic AI Website Builder cannot be connected here.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/websites/website-builder (the `ReachConnectAIWebsiteBuilderSiteV1` operationId).
+func (c *Client) ReachConnectAIWebsiteBuilderSiteV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachConnectAIWebsiteBuilderSiteV1RequestWithBody(c.Server, profileUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachConnectAIWebsiteBuilderSiteV1 Connect AI Website Builder site
+//
+// Connect an AI Website Builder site the customer built manually to the profile, so its
+// subscribers flow into Reach.
+//
+// Fails with not found when the customer owns no AI Website Builder site with that domain.
+// Fails with `DOMAIN_ALREADY_EXISTS` when the domain is connected to any profile - to move a
+// site to another plan, disconnect it from the old profile first - and with
+// `WEBSITE_CONNECTION_ALREADY_EXISTS` when this profile already has an AI Website Builder site.
+// The eCommerce store selling on the site, if it is not connected anywhere, is connected too.
+// WordPress sites and sites made with the agentic AI Website Builder cannot be connected here.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/websites/website-builder (the `ReachConnectAIWebsiteBuilderSiteV1` operationId).
+func (c *Client) ReachConnectAIWebsiteBuilderSiteV1(ctx context.Context, profileUuid ProfileUuid, body ReachConnectAIWebsiteBuilderSiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachConnectAIWebsiteBuilderSiteV1Request(c.Server, profileUuid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachDisconnectWordPressSiteV1WithBody Disconnect WordPress site
+//
+// Disconnect a WordPress site from the profile.
+//
+// The Reach plugin on the site stops sending subscribers and store data, and the site's
+// products and coupons are removed from Reach; contacts and past orders stay. Take `domain`
+// from the list connected websites endpoint. Fails with not found when the domain is not
+// connected to this profile. This cannot be undone through the API - the customer reconnects
+// from the WordPress plugin - so confirm the site and the plan with the customer before calling.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/websites/wordpress (the `ReachDisconnectWordPressSiteV1` operationId).
+func (c *Client) ReachDisconnectWordPressSiteV1WithBody(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachDisconnectWordPressSiteV1RequestWithBody(c.Server, profileUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachDisconnectWordPressSiteV1 Disconnect WordPress site
+//
+// Disconnect a WordPress site from the profile.
+//
+// The Reach plugin on the site stops sending subscribers and store data, and the site's
+// products and coupons are removed from Reach; contacts and past orders stay. Take `domain`
+// from the list connected websites endpoint. Fails with not found when the domain is not
+// connected to this profile. This cannot be undone through the API - the customer reconnects
+// from the WordPress plugin - so confirm the site and the plan with the customer before calling.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/websites/wordpress (the `ReachDisconnectWordPressSiteV1` operationId).
+func (c *Client) ReachDisconnectWordPressSiteV1(ctx context.Context, profileUuid ProfileUuid, body ReachDisconnectWordPressSiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachDisconnectWordPressSiteV1Request(c.Server, profileUuid, body)
 	if err != nil {
 		return nil, err
 	}
@@ -57657,6 +58237,81 @@ func NewReachGetProfileDomainDNSStatusV1Request(server string, profileUuid Profi
 	return req, nil
 }
 
+// NewReachListEcommerceStoresV1Request constructs an http.Request for the ReachListEcommerceStoresV1 method
+func NewReachListEcommerceStoresV1Request(server string, profileUuid ProfileUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/ecommerce/stores", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachDisconnectEcommerceStoreV1Request constructs an http.Request for the ReachDisconnectEcommerceStoreV1 method
+func NewReachDisconnectEcommerceStoreV1Request(server string, profileUuid ProfileUuid, storeId StoreId) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "storeId", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/ecommerce/stores/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewReachListPlanFeatureAccessV1Request constructs an http.Request for the ReachListPlanFeatureAccessV1 method
 func NewReachListPlanFeatureAccessV1Request(server string, profileUuid ProfileUuid) (*http.Request, error) {
 	var err error
@@ -59199,6 +59854,222 @@ func NewReachCreateAnEmailTemplateV1RequestWithBody(server string, profileUuid P
 	}
 
 	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewReachGetEmailTemplateV1Request constructs an http.Request for the ReachGetEmailTemplateV1 method
+func NewReachGetEmailTemplateV1Request(server string, profileUuid ProfileUuid, templateUuid TemplateUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "templateUuid", templateUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/templates/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachListConnectedWebsitesV1Request constructs an http.Request for the ReachListConnectedWebsitesV1 method
+func NewReachListConnectedWebsitesV1Request(server string, profileUuid ProfileUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/websites", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewReachDisconnectAIWebsiteBuilderSiteV1Request calls the generic ReachDisconnectAIWebsiteBuilderSiteV1 builder with application/json body
+func NewReachDisconnectAIWebsiteBuilderSiteV1Request(server string, profileUuid ProfileUuid, body ReachDisconnectAIWebsiteBuilderSiteV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachDisconnectAIWebsiteBuilderSiteV1RequestWithBody(server, profileUuid, "application/json", bodyReader)
+}
+
+// NewReachDisconnectAIWebsiteBuilderSiteV1RequestWithBody constructs an http.Request for the ReachDisconnectAIWebsiteBuilderSiteV1 method, with any body, and a specified content type
+func NewReachDisconnectAIWebsiteBuilderSiteV1RequestWithBody(server string, profileUuid ProfileUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/websites/website-builder", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewReachConnectAIWebsiteBuilderSiteV1Request calls the generic ReachConnectAIWebsiteBuilderSiteV1 builder with application/json body
+func NewReachConnectAIWebsiteBuilderSiteV1Request(server string, profileUuid ProfileUuid, body ReachConnectAIWebsiteBuilderSiteV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachConnectAIWebsiteBuilderSiteV1RequestWithBody(server, profileUuid, "application/json", bodyReader)
+}
+
+// NewReachConnectAIWebsiteBuilderSiteV1RequestWithBody constructs an http.Request for the ReachConnectAIWebsiteBuilderSiteV1 method, with any body, and a specified content type
+func NewReachConnectAIWebsiteBuilderSiteV1RequestWithBody(server string, profileUuid ProfileUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/websites/website-builder", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewReachDisconnectWordPressSiteV1Request calls the generic ReachDisconnectWordPressSiteV1 builder with application/json body
+func NewReachDisconnectWordPressSiteV1Request(server string, profileUuid ProfileUuid, body ReachDisconnectWordPressSiteV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachDisconnectWordPressSiteV1RequestWithBody(server, profileUuid, "application/json", bodyReader)
+}
+
+// NewReachDisconnectWordPressSiteV1RequestWithBody constructs an http.Request for the ReachDisconnectWordPressSiteV1 method, with any body, and a specified content type
+func NewReachDisconnectWordPressSiteV1RequestWithBody(server string, profileUuid ProfileUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/websites/wordpress", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -68198,7 +69069,8 @@ type ClientWithResponsesInterface interface {
 	// progress.
 	//
 	// This describes how the campaign was set up and how far it has got. For opens, clicks and
-	// unsubscribes use the campaign statistics endpoint.
+	// unsubscribes use the campaign statistics endpoint. The email content is not included: pass
+	// `template_uuid` to the get email template endpoint to read its HTML.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
@@ -68517,6 +69389,37 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/domains/dns-status (the `ReachGetProfileDomainDNSStatusV1` operationId).
 	ReachGetProfileDomainDNSStatusV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachGetProfileDomainDNSStatusV1Response, error)
+
+	// ReachListEcommerceStoresV1WithResponse List Ecommerce stores
+	//
+	// Get all of the customer's Hostinger eCommerce stores, each with its `store_id` and
+	// `connection_status` for the profile in the path.
+	//
+	// A store is connected to at most one profile. `connected_to_other_profile` does not name that
+	// profile - call this for each profile to find it. The list is empty, not an error, when the
+	// eCommerce service cannot be reached. Pass `store_id` to the disconnect eCommerce store
+	// endpoint. Connecting an AI Website Builder site connects the store selling on it.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/ecommerce/stores (the `ReachListEcommerceStoresV1` operationId).
+	ReachListEcommerceStoresV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachListEcommerceStoresV1Response, error)
+
+	// ReachDisconnectEcommerceStoreV1WithResponse Disconnect Ecommerce store
+	//
+	// Disconnect an eCommerce store from the profile.
+	//
+	// Reach stops receiving the store's customers and orders, and its products and coupons are
+	// removed from Reach; contacts and past orders stay. Take `store_id` from the list eCommerce
+	// stores endpoint; for a store that is `connected_to_other_profile`, call this with that
+	// profile. Also succeeds when the store is not connected to this profile, so success is not
+	// proof that anything was disconnected. Confirm the store and the plan with the customer
+	// before calling.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/ecommerce/stores/{storeId} (the `ReachDisconnectEcommerceStoreV1` operationId).
+	ReachDisconnectEcommerceStoreV1WithResponse(ctx context.Context, profileUuid ProfileUuid, storeId StoreId, reqEditors ...RequestEditorFn) (*ReachDisconnectEcommerceStoreV1Response, error)
 
 	// ReachListPlanFeatureAccessV1WithResponse List plan feature access
 	//
@@ -69103,8 +70006,9 @@ type ClientWithResponsesInterface interface {
 	// Get a list of the email templates in a profile, most recently updated first.
 	//
 	// Templates are the reusable email bodies a campaign is built from. The list is not paginated
-	// and only the metadata is returned - the template content itself is not exposed. Use the
-	// `uuid` of a template as the `template_uuid` when creating a campaign.
+	// and only the metadata is returned, without the HTML content. Use the `uuid` of a template
+	// as the `template_uuid` when creating a campaign. To read one template's HTML use the get
+	// email template endpoint, and only when the content itself is needed.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
@@ -69136,6 +70040,128 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/templates (the `ReachCreateAnEmailTemplateV1` operationId).
 	ReachCreateAnEmailTemplateV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachCreateAnEmailTemplateV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachCreateAnEmailTemplateV1Response, error)
+
+	// ReachGetEmailTemplateV1WithResponse Get email template
+	//
+	// Get one email template of the profile with its full HTML in `template_content`.
+	//
+	// A campaign's email content is its template: to read what a campaign sends, get the campaign
+	// and pass its `template_uuid` here. The HTML can be large, so fetch it only when the content
+	// itself is needed, never to browse or pick templates - the list email templates endpoint does
+	// that without content. Personalization tags such as `{{name}}` come back unrendered.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/templates/{templateUuid} (the `ReachGetEmailTemplateV1` operationId).
+	ReachGetEmailTemplateV1WithResponse(ctx context.Context, profileUuid ProfileUuid, templateUuid TemplateUuid, reqEditors ...RequestEditorFn) (*ReachGetEmailTemplateV1Response, error)
+
+	// ReachListConnectedWebsitesV1WithResponse List connected websites
+	//
+	// Get the websites connected to the profile, each with its `domain` and `platform_type`.
+	//
+	// A domain is connected to at most one profile, so to find which plan a site is on, call this
+	// for each profile. Only connected sites are listed, not every website the customer owns, and
+	// eCommerce stores are not included - use the list eCommerce stores endpoint for those. Pass
+	// `domain` to the disconnect WordPress site or disconnect AI Website Builder site endpoint.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/websites (the `ReachListConnectedWebsitesV1` operationId).
+	ReachListConnectedWebsitesV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachListConnectedWebsitesV1Response, error)
+
+	// ReachDisconnectAIWebsiteBuilderSiteV1WithBodyWithResponse Disconnect AI Website Builder site
+	//
+	// Disconnect an AI Website Builder site from the profile; the site stops sending subscribers
+	// to Reach.
+	//
+	// Take `domain` from the list connected websites endpoint. Works for a site that was already
+	// deleted in the builder. Fails with not found when the domain is not connected to this
+	// profile. Contacts and any connected eCommerce store stay. The site stays disconnected until
+	// it is connected again, so confirm the site and the plan with the customer before calling.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/websites/website-builder (the `ReachDisconnectAIWebsiteBuilderSiteV1` operationId).
+	ReachDisconnectAIWebsiteBuilderSiteV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachDisconnectAIWebsiteBuilderSiteV1Response, error)
+
+	// ReachDisconnectAIWebsiteBuilderSiteV1WithResponse Disconnect AI Website Builder site
+	//
+	// Disconnect an AI Website Builder site from the profile; the site stops sending subscribers
+	// to Reach.
+	//
+	// Take `domain` from the list connected websites endpoint. Works for a site that was already
+	// deleted in the builder. Fails with not found when the domain is not connected to this
+	// profile. Contacts and any connected eCommerce store stay. The site stays disconnected until
+	// it is connected again, so confirm the site and the plan with the customer before calling.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/websites/website-builder (the `ReachDisconnectAIWebsiteBuilderSiteV1` operationId).
+	ReachDisconnectAIWebsiteBuilderSiteV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachDisconnectAIWebsiteBuilderSiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachDisconnectAIWebsiteBuilderSiteV1Response, error)
+
+	// ReachConnectAIWebsiteBuilderSiteV1WithBodyWithResponse Connect AI Website Builder site
+	//
+	// Connect an AI Website Builder site the customer built manually to the profile, so its
+	// subscribers flow into Reach.
+	//
+	// Fails with not found when the customer owns no AI Website Builder site with that domain.
+	// Fails with `DOMAIN_ALREADY_EXISTS` when the domain is connected to any profile - to move a
+	// site to another plan, disconnect it from the old profile first - and with
+	// `WEBSITE_CONNECTION_ALREADY_EXISTS` when this profile already has an AI Website Builder site.
+	// The eCommerce store selling on the site, if it is not connected anywhere, is connected too.
+	// WordPress sites and sites made with the agentic AI Website Builder cannot be connected here.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/websites/website-builder (the `ReachConnectAIWebsiteBuilderSiteV1` operationId).
+	ReachConnectAIWebsiteBuilderSiteV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachConnectAIWebsiteBuilderSiteV1Response, error)
+
+	// ReachConnectAIWebsiteBuilderSiteV1WithResponse Connect AI Website Builder site
+	//
+	// Connect an AI Website Builder site the customer built manually to the profile, so its
+	// subscribers flow into Reach.
+	//
+	// Fails with not found when the customer owns no AI Website Builder site with that domain.
+	// Fails with `DOMAIN_ALREADY_EXISTS` when the domain is connected to any profile - to move a
+	// site to another plan, disconnect it from the old profile first - and with
+	// `WEBSITE_CONNECTION_ALREADY_EXISTS` when this profile already has an AI Website Builder site.
+	// The eCommerce store selling on the site, if it is not connected anywhere, is connected too.
+	// WordPress sites and sites made with the agentic AI Website Builder cannot be connected here.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/websites/website-builder (the `ReachConnectAIWebsiteBuilderSiteV1` operationId).
+	ReachConnectAIWebsiteBuilderSiteV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachConnectAIWebsiteBuilderSiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachConnectAIWebsiteBuilderSiteV1Response, error)
+
+	// ReachDisconnectWordPressSiteV1WithBodyWithResponse Disconnect WordPress site
+	//
+	// Disconnect a WordPress site from the profile.
+	//
+	// The Reach plugin on the site stops sending subscribers and store data, and the site's
+	// products and coupons are removed from Reach; contacts and past orders stay. Take `domain`
+	// from the list connected websites endpoint. Fails with not found when the domain is not
+	// connected to this profile. This cannot be undone through the API - the customer reconnects
+	// from the WordPress plugin - so confirm the site and the plan with the customer before calling.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/websites/wordpress (the `ReachDisconnectWordPressSiteV1` operationId).
+	ReachDisconnectWordPressSiteV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachDisconnectWordPressSiteV1Response, error)
+
+	// ReachDisconnectWordPressSiteV1WithResponse Disconnect WordPress site
+	//
+	// Disconnect a WordPress site from the profile.
+	//
+	// The Reach plugin on the site stops sending subscribers and store data, and the site's
+	// products and coupons are removed from Reach; contacts and past orders stay. Take `domain`
+	// from the list connected websites endpoint. Fails with not found when the domain is not
+	// connected to this profile. This cannot be undone through the API - the customer reconnects
+	// from the WordPress plugin - so confirm the site and the plan with the customer before calling.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/websites/wordpress (the `ReachDisconnectWordPressSiteV1` operationId).
+	ReachDisconnectWordPressSiteV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachDisconnectWordPressSiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachDisconnectWordPressSiteV1Response, error)
 
 	// ReachListSegmentsV1WithResponse List segments
 	//
@@ -89957,6 +90983,116 @@ func (r ReachGetProfileDomainDNSStatusV1Response) ContentType() string {
 	return ""
 }
 
+type ReachListEcommerceStoresV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1StoresStoreCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachListEcommerceStoresV1Response) GetJSON200() *ReachV1StoresStoreCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachListEcommerceStoresV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachListEcommerceStoresV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachListEcommerceStoresV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachListEcommerceStoresV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachListEcommerceStoresV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachListEcommerceStoresV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachDisconnectEcommerceStoreV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachDisconnectEcommerceStoreV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachDisconnectEcommerceStoreV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachDisconnectEcommerceStoreV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachDisconnectEcommerceStoreV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachDisconnectEcommerceStoreV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachDisconnectEcommerceStoreV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachDisconnectEcommerceStoreV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type ReachListPlanFeatureAccessV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -91855,6 +92991,302 @@ func (r ReachCreateAnEmailTemplateV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r ReachCreateAnEmailTemplateV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachGetEmailTemplateV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1TemplatesTemplateDetailsResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachGetEmailTemplateV1Response) GetJSON200() *ReachV1TemplatesTemplateDetailsResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachGetEmailTemplateV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachGetEmailTemplateV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachGetEmailTemplateV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachGetEmailTemplateV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachGetEmailTemplateV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachGetEmailTemplateV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachListConnectedWebsitesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1WebsitesWebsiteCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachListConnectedWebsitesV1Response) GetJSON200() *ReachV1WebsitesWebsiteCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachListConnectedWebsitesV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachListConnectedWebsitesV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachListConnectedWebsitesV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachListConnectedWebsitesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachListConnectedWebsitesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachListConnectedWebsitesV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachDisconnectAIWebsiteBuilderSiteV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachDisconnectAIWebsiteBuilderSiteV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachDisconnectAIWebsiteBuilderSiteV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachDisconnectAIWebsiteBuilderSiteV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachDisconnectAIWebsiteBuilderSiteV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachDisconnectAIWebsiteBuilderSiteV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachDisconnectAIWebsiteBuilderSiteV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachDisconnectAIWebsiteBuilderSiteV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachDisconnectAIWebsiteBuilderSiteV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachConnectAIWebsiteBuilderSiteV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachConnectAIWebsiteBuilderSiteV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachConnectAIWebsiteBuilderSiteV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachConnectAIWebsiteBuilderSiteV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachConnectAIWebsiteBuilderSiteV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachConnectAIWebsiteBuilderSiteV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachConnectAIWebsiteBuilderSiteV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachConnectAIWebsiteBuilderSiteV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachConnectAIWebsiteBuilderSiteV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachDisconnectWordPressSiteV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachDisconnectWordPressSiteV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachDisconnectWordPressSiteV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachDisconnectWordPressSiteV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachDisconnectWordPressSiteV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachDisconnectWordPressSiteV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachDisconnectWordPressSiteV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachDisconnectWordPressSiteV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachDisconnectWordPressSiteV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -104591,7 +106023,8 @@ func (c *ClientWithResponses) ReachCreateADraftCampaignV1WithResponse(ctx contex
 // progress.
 //
 // This describes how the campaign was set up and how far it has got. For opens, clicks and
-// unsubscribes use the campaign statistics endpoint.
+// unsubscribes use the campaign statistics endpoint. The email content is not included: pass
+// `template_uuid` to the get email template endpoint to read its HTML.
 //
 // Returns a wrapper object for the known response body format(s).
 //
@@ -105047,6 +106480,49 @@ func (c *ClientWithResponses) ReachGetProfileDomainDNSStatusV1WithResponse(ctx c
 		return nil, err
 	}
 	return ParseReachGetProfileDomainDNSStatusV1Response(rsp)
+}
+
+// ReachListEcommerceStoresV1WithResponse List Ecommerce stores
+//
+// Get all of the customer's Hostinger eCommerce stores, each with its `store_id` and
+// `connection_status` for the profile in the path.
+//
+// A store is connected to at most one profile. `connected_to_other_profile` does not name that
+// profile - call this for each profile to find it. The list is empty, not an error, when the
+// eCommerce service cannot be reached. Pass `store_id` to the disconnect eCommerce store
+// endpoint. Connecting an AI Website Builder site connects the store selling on it.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/ecommerce/stores (the `ReachListEcommerceStoresV1` operationId).
+func (c *ClientWithResponses) ReachListEcommerceStoresV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachListEcommerceStoresV1Response, error) {
+	rsp, err := c.ReachListEcommerceStoresV1(ctx, profileUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachListEcommerceStoresV1Response(rsp)
+}
+
+// ReachDisconnectEcommerceStoreV1WithResponse Disconnect Ecommerce store
+//
+// Disconnect an eCommerce store from the profile.
+//
+// Reach stops receiving the store's customers and orders, and its products and coupons are
+// removed from Reach; contacts and past orders stay. Take `store_id` from the list eCommerce
+// stores endpoint; for a store that is `connected_to_other_profile`, call this with that
+// profile. Also succeeds when the store is not connected to this profile, so success is not
+// proof that anything was disconnected. Confirm the store and the plan with the customer
+// before calling.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/ecommerce/stores/{storeId} (the `ReachDisconnectEcommerceStoreV1` operationId).
+func (c *ClientWithResponses) ReachDisconnectEcommerceStoreV1WithResponse(ctx context.Context, profileUuid ProfileUuid, storeId StoreId, reqEditors ...RequestEditorFn) (*ReachDisconnectEcommerceStoreV1Response, error) {
+	rsp, err := c.ReachDisconnectEcommerceStoreV1(ctx, profileUuid, storeId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachDisconnectEcommerceStoreV1Response(rsp)
 }
 
 // ReachListPlanFeatureAccessV1WithResponse List plan feature access
@@ -105892,8 +107368,9 @@ func (c *ClientWithResponses) ReachAssignAContactToATagV1WithResponse(ctx contex
 // Get a list of the email templates in a profile, most recently updated first.
 //
 // Templates are the reusable email bodies a campaign is built from. The list is not paginated
-// and only the metadata is returned - the template content itself is not exposed. Use the
-// `uuid` of a template as the `template_uuid` when creating a campaign.
+// and only the metadata is returned, without the HTML content. Use the `uuid` of a template
+// as the `template_uuid` when creating a campaign. To read one template's HTML use the get
+// email template endpoint, and only when the content itself is needed.
 //
 // Returns a wrapper object for the known response body format(s).
 //
@@ -105942,6 +107419,176 @@ func (c *ClientWithResponses) ReachCreateAnEmailTemplateV1WithResponse(ctx conte
 		return nil, err
 	}
 	return ParseReachCreateAnEmailTemplateV1Response(rsp)
+}
+
+// ReachGetEmailTemplateV1WithResponse Get email template
+//
+// Get one email template of the profile with its full HTML in `template_content`.
+//
+// A campaign's email content is its template: to read what a campaign sends, get the campaign
+// and pass its `template_uuid` here. The HTML can be large, so fetch it only when the content
+// itself is needed, never to browse or pick templates - the list email templates endpoint does
+// that without content. Personalization tags such as `{{name}}` come back unrendered.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/templates/{templateUuid} (the `ReachGetEmailTemplateV1` operationId).
+func (c *ClientWithResponses) ReachGetEmailTemplateV1WithResponse(ctx context.Context, profileUuid ProfileUuid, templateUuid TemplateUuid, reqEditors ...RequestEditorFn) (*ReachGetEmailTemplateV1Response, error) {
+	rsp, err := c.ReachGetEmailTemplateV1(ctx, profileUuid, templateUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachGetEmailTemplateV1Response(rsp)
+}
+
+// ReachListConnectedWebsitesV1WithResponse List connected websites
+//
+// Get the websites connected to the profile, each with its `domain` and `platform_type`.
+//
+// A domain is connected to at most one profile, so to find which plan a site is on, call this
+// for each profile. Only connected sites are listed, not every website the customer owns, and
+// eCommerce stores are not included - use the list eCommerce stores endpoint for those. Pass
+// `domain` to the disconnect WordPress site or disconnect AI Website Builder site endpoint.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/websites (the `ReachListConnectedWebsitesV1` operationId).
+func (c *ClientWithResponses) ReachListConnectedWebsitesV1WithResponse(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*ReachListConnectedWebsitesV1Response, error) {
+	rsp, err := c.ReachListConnectedWebsitesV1(ctx, profileUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachListConnectedWebsitesV1Response(rsp)
+}
+
+// ReachDisconnectAIWebsiteBuilderSiteV1WithBodyWithResponse Disconnect AI Website Builder site
+//
+// Disconnect an AI Website Builder site from the profile; the site stops sending subscribers
+// to Reach.
+//
+// Take `domain` from the list connected websites endpoint. Works for a site that was already
+// deleted in the builder. Fails with not found when the domain is not connected to this
+// profile. Contacts and any connected eCommerce store stay. The site stays disconnected until
+// it is connected again, so confirm the site and the plan with the customer before calling.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/websites/website-builder (the `ReachDisconnectAIWebsiteBuilderSiteV1` operationId).
+func (c *ClientWithResponses) ReachDisconnectAIWebsiteBuilderSiteV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachDisconnectAIWebsiteBuilderSiteV1Response, error) {
+	rsp, err := c.ReachDisconnectAIWebsiteBuilderSiteV1WithBody(ctx, profileUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachDisconnectAIWebsiteBuilderSiteV1Response(rsp)
+}
+
+// ReachDisconnectAIWebsiteBuilderSiteV1WithResponse Disconnect AI Website Builder site
+//
+// Disconnect an AI Website Builder site from the profile; the site stops sending subscribers
+// to Reach.
+//
+// Take `domain` from the list connected websites endpoint. Works for a site that was already
+// deleted in the builder. Fails with not found when the domain is not connected to this
+// profile. Contacts and any connected eCommerce store stay. The site stays disconnected until
+// it is connected again, so confirm the site and the plan with the customer before calling.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/websites/website-builder (the `ReachDisconnectAIWebsiteBuilderSiteV1` operationId).
+func (c *ClientWithResponses) ReachDisconnectAIWebsiteBuilderSiteV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachDisconnectAIWebsiteBuilderSiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachDisconnectAIWebsiteBuilderSiteV1Response, error) {
+	rsp, err := c.ReachDisconnectAIWebsiteBuilderSiteV1(ctx, profileUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachDisconnectAIWebsiteBuilderSiteV1Response(rsp)
+}
+
+// ReachConnectAIWebsiteBuilderSiteV1WithBodyWithResponse Connect AI Website Builder site
+//
+// Connect an AI Website Builder site the customer built manually to the profile, so its
+// subscribers flow into Reach.
+//
+// Fails with not found when the customer owns no AI Website Builder site with that domain.
+// Fails with `DOMAIN_ALREADY_EXISTS` when the domain is connected to any profile - to move a
+// site to another plan, disconnect it from the old profile first - and with
+// `WEBSITE_CONNECTION_ALREADY_EXISTS` when this profile already has an AI Website Builder site.
+// The eCommerce store selling on the site, if it is not connected anywhere, is connected too.
+// WordPress sites and sites made with the agentic AI Website Builder cannot be connected here.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/websites/website-builder (the `ReachConnectAIWebsiteBuilderSiteV1` operationId).
+func (c *ClientWithResponses) ReachConnectAIWebsiteBuilderSiteV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachConnectAIWebsiteBuilderSiteV1Response, error) {
+	rsp, err := c.ReachConnectAIWebsiteBuilderSiteV1WithBody(ctx, profileUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachConnectAIWebsiteBuilderSiteV1Response(rsp)
+}
+
+// ReachConnectAIWebsiteBuilderSiteV1WithResponse Connect AI Website Builder site
+//
+// Connect an AI Website Builder site the customer built manually to the profile, so its
+// subscribers flow into Reach.
+//
+// Fails with not found when the customer owns no AI Website Builder site with that domain.
+// Fails with `DOMAIN_ALREADY_EXISTS` when the domain is connected to any profile - to move a
+// site to another plan, disconnect it from the old profile first - and with
+// `WEBSITE_CONNECTION_ALREADY_EXISTS` when this profile already has an AI Website Builder site.
+// The eCommerce store selling on the site, if it is not connected anywhere, is connected too.
+// WordPress sites and sites made with the agentic AI Website Builder cannot be connected here.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/websites/website-builder (the `ReachConnectAIWebsiteBuilderSiteV1` operationId).
+func (c *ClientWithResponses) ReachConnectAIWebsiteBuilderSiteV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachConnectAIWebsiteBuilderSiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachConnectAIWebsiteBuilderSiteV1Response, error) {
+	rsp, err := c.ReachConnectAIWebsiteBuilderSiteV1(ctx, profileUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachConnectAIWebsiteBuilderSiteV1Response(rsp)
+}
+
+// ReachDisconnectWordPressSiteV1WithBodyWithResponse Disconnect WordPress site
+//
+// Disconnect a WordPress site from the profile.
+//
+// The Reach plugin on the site stops sending subscribers and store data, and the site's
+// products and coupons are removed from Reach; contacts and past orders stay. Take `domain`
+// from the list connected websites endpoint. Fails with not found when the domain is not
+// connected to this profile. This cannot be undone through the API - the customer reconnects
+// from the WordPress plugin - so confirm the site and the plan with the customer before calling.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/websites/wordpress (the `ReachDisconnectWordPressSiteV1` operationId).
+func (c *ClientWithResponses) ReachDisconnectWordPressSiteV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachDisconnectWordPressSiteV1Response, error) {
+	rsp, err := c.ReachDisconnectWordPressSiteV1WithBody(ctx, profileUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachDisconnectWordPressSiteV1Response(rsp)
+}
+
+// ReachDisconnectWordPressSiteV1WithResponse Disconnect WordPress site
+//
+// Disconnect a WordPress site from the profile.
+//
+// The Reach plugin on the site stops sending subscribers and store data, and the site's
+// products and coupons are removed from Reach; contacts and past orders stay. Take `domain`
+// from the list connected websites endpoint. Fails with not found when the domain is not
+// connected to this profile. This cannot be undone through the API - the customer reconnects
+// from the WordPress plugin - so confirm the site and the plan with the customer before calling.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/websites/wordpress (the `ReachDisconnectWordPressSiteV1` operationId).
+func (c *ClientWithResponses) ReachDisconnectWordPressSiteV1WithResponse(ctx context.Context, profileUuid ProfileUuid, body ReachDisconnectWordPressSiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachDisconnectWordPressSiteV1Response, error) {
+	rsp, err := c.ReachDisconnectWordPressSiteV1(ctx, profileUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachDisconnectWordPressSiteV1Response(rsp)
 }
 
 // ReachListSegmentsV1WithResponse List segments
@@ -122437,6 +124084,86 @@ func ParseReachGetProfileDomainDNSStatusV1Response(rsp *http.Response) (*ReachGe
 	return response, nil
 }
 
+// ParseReachListEcommerceStoresV1Response parses an HTTP response from a ReachListEcommerceStoresV1WithResponse call
+func ParseReachListEcommerceStoresV1Response(rsp *http.Response) (*ReachListEcommerceStoresV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachListEcommerceStoresV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1StoresStoreCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachDisconnectEcommerceStoreV1Response parses an HTTP response from a ReachDisconnectEcommerceStoreV1WithResponse call
+func ParseReachDisconnectEcommerceStoreV1Response(rsp *http.Response) (*ReachDisconnectEcommerceStoreV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachDisconnectEcommerceStoreV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseReachListPlanFeatureAccessV1Response parses an HTTP response from a ReachListPlanFeatureAccessV1WithResponse call
 func ParseReachListPlanFeatureAccessV1Response(rsp *http.Response) (*ReachListPlanFeatureAccessV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -123814,6 +125541,227 @@ func ParseReachCreateAnEmailTemplateV1Response(rsp *http.Response) (*ReachCreate
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest ReachV1TemplatesTemplateResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachGetEmailTemplateV1Response parses an HTTP response from a ReachGetEmailTemplateV1WithResponse call
+func ParseReachGetEmailTemplateV1Response(rsp *http.Response) (*ReachGetEmailTemplateV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachGetEmailTemplateV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1TemplatesTemplateDetailsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachListConnectedWebsitesV1Response parses an HTTP response from a ReachListConnectedWebsitesV1WithResponse call
+func ParseReachListConnectedWebsitesV1Response(rsp *http.Response) (*ReachListConnectedWebsitesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachListConnectedWebsitesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1WebsitesWebsiteCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachDisconnectAIWebsiteBuilderSiteV1Response parses an HTTP response from a ReachDisconnectAIWebsiteBuilderSiteV1WithResponse call
+func ParseReachDisconnectAIWebsiteBuilderSiteV1Response(rsp *http.Response) (*ReachDisconnectAIWebsiteBuilderSiteV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachDisconnectAIWebsiteBuilderSiteV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachConnectAIWebsiteBuilderSiteV1Response parses an HTTP response from a ReachConnectAIWebsiteBuilderSiteV1WithResponse call
+func ParseReachConnectAIWebsiteBuilderSiteV1Response(rsp *http.Response) (*ReachConnectAIWebsiteBuilderSiteV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachConnectAIWebsiteBuilderSiteV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachDisconnectWordPressSiteV1Response parses an HTTP response from a ReachDisconnectWordPressSiteV1WithResponse call
+func ParseReachDisconnectWordPressSiteV1Response(rsp *http.Response) (*ReachDisconnectWordPressSiteV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachDisconnectWordPressSiteV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
