@@ -47,7 +47,8 @@ type Build struct {
 type API interface {
 	ListOrders(ctx context.Context) ([]Order, error)
 	ListWebsites(ctx context.Context, domain string) ([]site.Website, error)
-	StartSetup(ctx context.Context, orderID int, domain, datacenter string) (Setup, error)
+	// StartSetup creates a website; websiteType "" is an empty one.
+	StartSetup(ctx context.Context, orderID int, domain, datacenter, websiteType string) (Setup, error)
 	// ListDatacenters lists the best match first.
 	ListDatacenters(ctx context.Context, orderID int) ([]Datacenter, error)
 	ListSetups(ctx context.Context, domain string) ([]Setup, error)
@@ -95,8 +96,11 @@ func (a *client) ListWebsites(ctx context.Context, domain string) ([]site.Websit
 	return site.ListWebsitesWith(ctx, a.c, domain)
 }
 
-func (a *client) StartSetup(ctx context.Context, orderID int, domain, datacenter string) (Setup, error) {
+func (a *client) StartSetup(ctx context.Context, orderID int, domain, datacenter, websiteType string) (Setup, error) {
 	body := map[string]any{}
+	if websiteType != "" {
+		body["type"] = websiteType
+	}
 	if domain != "" {
 		body["domain"] = domain
 	}

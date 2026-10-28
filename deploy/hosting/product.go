@@ -15,6 +15,7 @@ var flags struct {
 	yes        bool
 	settings   bool
 	source     string
+	headless   string
 	dryRun     bool
 	noWait     bool
 	node       NodeOverrides
@@ -24,6 +25,7 @@ func AddFlags(f *pflag.FlagSet) {
 	f.IntVar(&flags.orderID, "order-id", 0, "Hosting plan (order ID) a new website is created on")
 	f.StringVar(&flags.datacenter, "datacenter", "", "Where the first website on a plan is hosted, a code from hostinger hosting datacenters list (default: asked, or the API's best match)")
 	f.BoolVar(&flags.create, "create", false, "Create a new website instead of deploying to an existing one")
+	f.StringVar(&flags.headless, "headless", "", "Create a headless website for a Node.js frontend: empty, wordpress (installed in /cms), ecommerce or pocketbase. A new website unless the linked website or --domain is already headless")
 	f.StringVar(&flags.typ, "type", "", "What to deploy as: static or nodejs (default: detected, or remembered)")
 	f.BoolVarP(&flags.yes, "yes", "y", false, "Accept the detected type, and replace a website's content or deploy static files onto a Node.js site without asking (required for those without a terminal)")
 	f.StringVar(&flags.source, "source", "", "Where the files come from: upload (pack this directory) or git (the pushed branch, through a connected Git account); default: remembered, else asked")
@@ -48,6 +50,13 @@ func Deploy(ctx context.Context, ui UI, path, domain string) (*Outcome, error) {
 			return nil, err
 		}
 		opts.Type = t
+	}
+	if flags.headless != "" {
+		kind, err := ParseHeadless(flags.headless)
+		if err != nil {
+			return nil, err
+		}
+		opts.Headless = kind
 	}
 	if flags.source != "" {
 		src, err := ParseSource(flags.source)

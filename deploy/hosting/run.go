@@ -31,6 +31,8 @@ type Options struct {
 	DryRun     bool
 	NoWait     bool
 	Node       NodeOverrides
+	// Headless is the kind of headless website to create (see HeadlessKinds).
+	Headless string
 }
 
 // Result is what a deploy produced. Fields Outcome already reports
@@ -42,6 +44,7 @@ type Result struct {
 	Type       Type   `json:"type"`
 	URL        string `json:"-"`
 	Created    bool   `json:"created"`
+	Headless   bool   `json:"headless,omitempty"`
 	Source     Source `json:"source"`
 	Repository string `json:"repository,omitempty"`
 	Branch     string `json:"branch,omitempty"`
@@ -62,6 +65,9 @@ type Result struct {
 	// OverwritesContent is set by a dry run when the first deploy to this
 	// website would replace content: the real run asks, or needs --yes.
 	OverwritesContent bool `json:"overwritesContent,omitempty"`
+	// SuggestedHeadless is the headless website a dry run would offer to create
+	// in a terminal (pass it as --headless); "" is a regular one.
+	SuggestedHeadless string `json:"suggestedHeadless,omitempty"`
 	// Reachable is false when https://Domain has no DNS yet.
 	Reachable     bool   `json:"-"`
 	ReachableNote string `json:"-"`
@@ -122,9 +128,10 @@ type deployment struct {
 	src     string // the directory or archive to deploy
 	isDir   bool
 
-	website *site.Website
-	created bool
-	typ     Type
+	website  *site.Website
+	created  bool
+	headless bool // from the website, or the link: a built headless site can report nodejs
+	typ      Type
 
 	source           Source
 	repo             *Repo
@@ -194,6 +201,10 @@ func (d *deployment) locate() error {
 			return errors.New("an archive cannot be inspected: pass --type static or --type nodejs")
 		}
 	}
+	if d.opts.Headless != "" {
+		// Before a headless website is created for a folder that cannot go there.
+		return checkHeadless(d.src, d.isDir, d.opts.Type, "a headless website")
+	}
 	return nil
 }
 
@@ -224,12 +235,21 @@ func (d *deployment) detect() (Type, error) {
 // target picks the website and the type, and asks before replacing content.
 func (d *deployment) target(detected Type) error {
 	opts, project := d.opts, d.project
-	website, created, err := resolveWebsite(d.ctx, d.a, d.ui, opts, project, detected)
+	suggested := ""
+	if d.isDir {
+		suggested = SuggestHeadless(d.src)
+	}
+	website, created, err := resolveWebsite(d.ctx, d.a, d.ui, opts, project, detected, suggested)
 	if err != nil {
 		return err
 	}
 	d.website, d.created = website, created
-	d.result = &Result{Domain: website.Domain, Username: website.Username, OrderID: website.OrderID, URL: "https://" + website.Domain, Created: created, Reachable: true}
+	linked := project != nil && strings.EqualFold(project.Domain, website.Domain)
+	d.headless = website.IsHeadless() || (linked && project.Headless)
+	if opts.Headless != "" && !d.headless {
+		return fmt.Errorf("%s already exists and is not a headless website: pass --create for a new headless website, or leave --headless out", website.Domain)
+	}
+	d.result = &Result{Domain: website.Domain, Username: website.Username, OrderID: website.OrderID, URL: "https://" + website.Domain, Created: created, Headless: d.headless, Reachable: true}
 	if !opts.DryRun {
 		if err := waitForSetup(d.ctx, d.a, d.ui, website.Domain, created); err != nil {
 			return err
@@ -238,19 +258,39 @@ func (d *deployment) target(detected Type) error {
 
 	fromLink := opts.Domain == "" && !opts.Create && project != nil && strings.EqualFold(project.Domain, website.Domain)
 	d.typ = opts.Type
-	if d.typ == "" {
+	switch {
+	case d.headless:
+		// Static files would land in the document root, next to the backend.
+		if err := checkHeadless(d.src, d.isDir, d.typ, website.Domain); err != nil {
+			return err
+		}
+		d.typ = NodeJS
+	case d.typ == "":
 		if d.typ, err = chooseType(d.src, d.ui, opts, project, website.Domain); err != nil {
 			return err
 		}
 	}
+	if created && opts.DryRun && opts.Headless == "" && d.typ == NodeJS {
+		d.result.SuggestedHeadless = suggested
+	}
 	line := "Deploying to " + website.Domain + " as " + string(d.typ)
+	var notes []string
+	if d.headless {
+		notes = append(notes, "headless")
+	}
 	switch {
 	case fromLink:
-		line += " (linked)"
+		notes = append(notes, "linked")
 	case created:
-		line += " (new)"
+		notes = append(notes, "new")
+	}
+	if len(notes) > 0 {
+		line += " (" + strings.Join(notes, ", ") + ")"
 	}
 	d.ui.Info(line)
+	if d.headless && !created {
+		d.ui.Info("This deploys the website's frontend; its backend (such as WordPress in /cms) is left alone")
+	}
 	if project != nil && !strings.EqualFold(project.Domain, website.Domain) && !shouldLink(project, website, opts) {
 		d.ui.Info("One-off deploy: this directory stays linked to " + project.Domain)
 	}
@@ -260,9 +300,9 @@ func (d *deployment) target(detected Type) error {
 		return confirmStaticOverApp(d.ui, website, opts)
 	case !fromLink && !created && opts.DryRun:
 		// The plan says what the real run would ask, or need --yes for without a terminal.
-		d.result.OverwritesContent, _ = hasContent(d.ctx, d.a, website)
+		d.result.OverwritesContent, _ = hasContent(d.ctx, d.a, website, d.headless)
 	case !fromLink && !created:
-		return confirmOverwrite(d.ctx, d.a, d.ui, website, opts)
+		return confirmOverwrite(d.ctx, d.a, d.ui, website, opts, d.headless)
 	}
 	return nil
 }
@@ -342,7 +382,7 @@ func (d *deployment) link(node *site.NodeSettings, source Source) {
 		if build == nil && d.project != nil && strings.EqualFold(d.project.Domain, d.website.Domain) {
 			build = d.project.Build // this run started none: keep the last one
 		}
-		d.result.ProjectFile = saveLink(d.linkDir, d.src, d.website, d.typ, node, source, build, d.ui)
+		d.result.ProjectFile = saveLink(d.linkDir, d.src, d.website, d.typ, d.headless, node, source, build, d.ui)
 		d.result.NewLink = d.result.ProjectFile != "" && (d.project == nil || !strings.EqualFold(d.project.Domain, d.website.Domain))
 	}
 }
@@ -525,7 +565,7 @@ func (d *deployment) finishBuild(build Build, used *NodeSettings, err error) (*R
 }
 
 // saveLink writes the link and returns its path, or "" when it failed.
-func saveLink(linkDir, src string, website *site.Website, typ Type, node *site.NodeSettings, source Source, build *site.BuildRef, ui UI) string {
+func saveLink(linkDir, src string, website *site.Website, typ Type, headless bool, node *site.NodeSettings, source Source, build *site.BuildRef, ui UI) string {
 	rel := ""
 	r, err := filepath.Rel(linkDir, src)
 	if err != nil || escapes(r) || filepath.IsAbs(r) {
@@ -536,7 +576,7 @@ func saveLink(linkDir, src string, website *site.Website, typ Type, node *site.N
 	if r != "." {
 		rel = filepath.ToSlash(r)
 	}
-	p := &site.Project{Kind: "website", Path: rel, OrderID: website.OrderID, Domain: website.Domain, Username: website.Username, Type: string(typ), Node: node, Source: string(source), Build: build}
+	p := &site.Project{Kind: "website", Path: rel, OrderID: website.OrderID, Domain: website.Domain, Username: website.Username, Type: string(typ), Headless: headless, Node: node, Source: string(source), Build: build}
 	if err := site.Save(linkDir, p); err != nil {
 		ui.Info("Could not write " + site.Path(linkDir) + ": " + err.Error())
 		return ""
@@ -606,6 +646,21 @@ func rememberedOrDetected(src string, ui UI, opts Options, remembered Type) (Typ
 		return detected, nil
 	}
 	return remembered, nil
+}
+
+// checkHeadless refuses what cannot go onto a headless website (target names
+// it): it serves a Node.js frontend, so a folder needs a package.json.
+func checkHeadless(src string, isDir bool, typ Type, target string) error {
+	if typ == Static {
+		return fmt.Errorf("%s serves a Node.js frontend, so it takes no static deploy (its document root holds the backend, such as WordPress in /cms): leave --type out, or pass --type nodejs", target)
+	}
+	if !isDir {
+		return nil
+	}
+	if _, err := os.Stat(filepath.Join(src, "package.json")); err != nil {
+		return fmt.Errorf("%s serves a Node.js frontend, and %s has no package.json: deploy a Node.js project (such as Next.js, Nuxt, Astro or Vite), or deploy these files to a website that is not headless", target, src)
+	}
+	return nil
 }
 
 func undeployable(src string, detected Type) error {

@@ -23,3 +23,17 @@ func ParseType(s string) (Type, error) {
 	}
 	return "", fmt.Errorf("unknown type %q (one of: static, nodejs)", s)
 }
+
+// HeadlessKinds are the headless websites up creates: empty installs nothing,
+// wordpress installs WordPress in /cms, ecommerce and pocketbase are hosts for
+// a Hostinger Ecommerce store or a PocketBase backend.
+var HeadlessKinds = []string{"empty", "wordpress", "ecommerce", "pocketbase"}
+
+func ParseHeadless(s string) (string, error) {
+	for _, k := range HeadlessKinds {
+		if k == s {
+			return k, nil
+		}
+	}
+	return "", fmt.Errorf("unknown headless website %q (one of: empty, wordpress, ecommerce, pocketbase)", s)
+}

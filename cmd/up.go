@@ -36,6 +36,13 @@ app, which is built on the server, from an uploaded copy of the directory or fro
 pushed Git branch (--source git, asked once and remembered, which also redeploys on
 every push). Deploying overwrites the website's current files.
 
+A headless website (--headless creates one: empty, wordpress with WordPress in /cms,
+ecommerce or pocketbase) serves a Node.js frontend, so a folder with a package.json
+is deployed there as a Node.js app and its backend is left alone. In a terminal, a new
+website is confirmed as a regular one, or as the headless website its package.json
+points to: a PocketBase or WordPress client, else an empty one for a web frontend
+(Next.js, Nuxt, Astro, Vite and similar); --headless skips that.
+
 The directory is linked to the website in .hostinger/site.json, written in the
 current directory with the deployed folder recorded, so ` + "`hostinger up`" + ` from the
 project root redeploys the same folder. --domain on a linked directory deploys there
@@ -48,6 +55,7 @@ already has content. up never deploys to default_domain from the config file: on
 linked website, --domain or HOSTINGER_DOMAIN.`,
 	Example: `  hostinger up
   hostinger up ./dist --domain example.com
+  hostinger up --headless wordpress
   hostinger up --create --order-id 123 --type nodejs --format json`,
 	Args:         cobra.MaximumNArgs(1),
 	SilenceUsage: true,
@@ -70,6 +78,7 @@ func init() {
 	for name, values := range map[string][]string{
 		"type":            {string(hosting.Static), string(hosting.NodeJS)},
 		"source":          {string(hosting.SourceUpload), string(hosting.SourceGit)},
+		"headless":        hosting.HeadlessKinds,
 		"app-type":        hosting.AppTypes,
 		"package-manager": hosting.PackageManagers,
 		"node-version":    versions,

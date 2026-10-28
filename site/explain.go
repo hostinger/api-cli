@@ -97,8 +97,12 @@ func (c *Context) Lines() []string {
 		if folder == "" {
 			folder = "."
 		}
+		typ := c.Link.Type
+		if c.Link.Headless {
+			typ += " (headless website)"
+		}
 		out = append(out,
-			row("Type", c.Link.Type, fromLink(c.Link.Type)),
+			row("Type", typ, fromLink(c.Link.Type)),
 			row("Source", c.Link.Source, fromLink(c.Link.Source)),
 			row("Folder", folder, ""),
 		)

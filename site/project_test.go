@@ -202,3 +202,13 @@ func TestLinkSearchStaysInTheProject(t *testing.T) {
 		t.Errorf("repository link: %+v %s %v", p, dir, err)
 	}
 }
+
+func TestHeadlessLinkIsShown(t *testing.T) {
+	if !(Website{WebsiteType: "headless"}).IsHeadless() || (Website{WebsiteType: "nodejs"}).IsHeadless() {
+		t.Error("IsHeadless")
+	}
+	c := &Context{Domain: "cms.example.com", DomainSource: "link", Link: &Project{Domain: "cms.example.com", Type: "nodejs", Headless: true}}
+	if lines := strings.Join(c.Lines(), "\n"); !strings.Contains(lines, "nodejs (headless website)") {
+		t.Errorf("lines:\n%s", lines)
+	}
+}

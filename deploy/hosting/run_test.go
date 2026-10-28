@@ -64,8 +64,11 @@ func (f *fakeAPI) ListDatacenters(_ context.Context, orderID int) ([]Datacenter,
 	f.log("datacenters %d", orderID)
 	return f.datacenters, nil
 }
-func (f *fakeAPI) StartSetup(_ context.Context, orderID int, domain, datacenter string) (Setup, error) {
+func (f *fakeAPI) StartSetup(_ context.Context, orderID int, domain, datacenter, websiteType string) (Setup, error) {
 	f.log("setup %d %q dc=%s", orderID, domain, datacenter)
+	if websiteType != "" {
+		f.log("setup-type %s", websiteType)
+	}
 	if domain == "" {
 		domain = "fresh-site.hostingersite.com"
 	}

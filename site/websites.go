@@ -20,6 +20,12 @@ type Website struct {
 	IsEnabled   bool   `json:"is_enabled"`
 }
 
+// IsHeadless reports a headless website: a Node.js frontend whose backend
+// (WordPress, a store, PocketBase) lives in its own folder, such as /cms.
+func (w Website) IsHeadless() bool {
+	return w.WebsiteType == "headless"
+}
+
 // Tests replace Client.
 var Client = func() *api.RawClient { return api.Raw() }
 

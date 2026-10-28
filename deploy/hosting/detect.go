@@ -92,6 +92,48 @@ func Detect(dir string) (typ Type, note string, err error) {
 	return Static, "", nil
 }
 
+// headlessDependencies suggest a headless website (see HeadlessKinds): a client
+// for its backend first, else a web frontend framework, which gets an empty one
+// (many frontends only fetch their backend's API). Only the question to create
+// a website uses them; the build settings come from the server.
+var headlessDependencies = []struct{ dep, kind string }{
+	{"pocketbase", "pocketbase"},
+	{"@faustwp/core", "wordpress"},
+	{"@wordpress/api-fetch", "wordpress"},
+	{"next", "empty"},
+	{"nuxt", "empty"},
+	{"astro", "empty"},
+	{"@sveltejs/kit", "empty"},
+	{"@remix-run/react", "empty"},
+	{"gatsby", "empty"},
+	{"@angular/core", "empty"},
+	{"vite", "empty"},
+}
+
+// SuggestHeadless is the headless website a folder's package.json suggests,
+// or "" for a regular one.
+func SuggestHeadless(dir string) string {
+	raw, err := os.ReadFile(filepath.Join(dir, "package.json"))
+	if err != nil {
+		return ""
+	}
+	var pkg struct {
+		Dependencies    map[string]string `json:"dependencies"`
+		DevDependencies map[string]string `json:"devDependencies"`
+	}
+	if json.Unmarshal(raw, &pkg) != nil {
+		return ""
+	}
+	for _, b := range headlessDependencies {
+		_, dep := pkg.Dependencies[b.dep]
+		_, dev := pkg.DevDependencies[b.dep]
+		if dep || dev {
+			return b.kind
+		}
+	}
+	return ""
+}
+
 func joinTypes(ts []Type) string {
 	parts := make([]string, len(ts))
 	for i, t := range ts {

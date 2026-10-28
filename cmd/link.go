@@ -97,12 +97,13 @@ config file).`,
 		if err != nil {
 			return err
 		}
-		p := &site.Project{Kind: "website", OrderID: w.OrderID, Domain: w.Domain, Username: w.Username}
+		p := &site.Project{Kind: "website", OrderID: w.OrderID, Domain: w.Domain, Username: w.Username, Headless: w.IsHeadless()}
 		// Re-linking the same website updates its link where it lives, here or in a
 		// parent, and keeps what deploys remembered; another website is linked here.
 		if old, oldDir, err := site.Find(dir); err == nil && old != nil && strings.EqualFold(old.Domain, w.Domain) {
 			dir = oldDir
 			p.Path, p.Type, p.Source, p.Node, p.Build = old.Path, old.Type, old.Source, old.Node, old.Build
+			p.Headless = p.Headless || old.Headless
 		}
 		if err := site.Save(dir, p); err != nil {
 			return err

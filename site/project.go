@@ -29,6 +29,8 @@ type Project struct {
 	Domain   string `json:"domain"`
 	Username string `json:"username,omitempty"`
 	Type     string `json:"type,omitempty"`
+	// Headless is set for a headless website, which only takes Node.js deploys.
+	Headless bool `json:"headless,omitempty"`
 	// Source is "upload" or "git".
 	Source string `json:"source,omitempty"`
 	// Node is only written after a successful build.

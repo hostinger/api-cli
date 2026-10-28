@@ -11,13 +11,19 @@ import (
 	"github.com/hostinger/api-cli/site"
 )
 
-func resolveWebsite(ctx context.Context, a API, ui UI, opts Options, project *site.Project, hint Type) (*site.Website, bool, error) {
+// suggested is the headless kind the folder suggests (SuggestHeadless).
+func resolveWebsite(ctx context.Context, a API, ui UI, opts Options, project *site.Project, hint Type, suggested string) (*site.Website, bool, error) {
+	// Creating a website from the picker reuses the lists the picker loaded.
+	a = &listed{API: a}
 	domain := opts.Domain
 	if domain == "" && !opts.Create && project != nil {
 		domain = project.Domain
 	}
-	if opts.Create {
-		w, err := createWebsite(ctx, a, ui, opts, domain)
+	// Only a Node.js app is offered a headless website.
+	nodeApp := hint == NodeJS || opts.Type == NodeJS
+	// --headless names a new website, unless the website given already is one.
+	if opts.Create || (opts.Headless != "" && domain == "") {
+		w, err := createWebsite(ctx, a, ui, opts, domain, nodeApp, suggested)
 		return w, true, err
 	}
 	if domain != "" {
@@ -28,17 +34,20 @@ func resolveWebsite(ctx context.Context, a API, ui UI, opts Options, project *si
 		if w != nil {
 			return w, false, nil
 		}
-		if !ui.Interactive() {
+		switch {
+		case opts.Headless != "":
+		case !ui.Interactive():
 			return nil, false, fmt.Errorf("no website named %q on this account: pass --create to create it", domain)
+		default:
+			ok, err := ui.Confirm(fmt.Sprintf("No website named %s on your account. Create it?", domain), true)
+			if err != nil {
+				return nil, false, err
+			}
+			if !ok {
+				return nil, false, errors.New("no website to deploy to")
+			}
 		}
-		ok, err := ui.Confirm(fmt.Sprintf("No website named %s on your account. Create it?", domain), true)
-		if err != nil {
-			return nil, false, err
-		}
-		if !ok {
-			return nil, false, errors.New("no website to deploy to")
-		}
-		w, err = createWebsite(ctx, a, ui, opts, domain)
+		w, err = createWebsite(ctx, a, ui, opts, domain, nodeApp, suggested)
 		return w, true, err
 	}
 	if !ui.Interactive() {
@@ -52,7 +61,7 @@ func resolveWebsite(ctx context.Context, a API, ui UI, opts Options, project *si
 	}
 	if len(sites) == 0 {
 		step.Done("No websites yet; creating one")
-		w, err := createWebsite(ctx, a, ui, opts, "")
+		w, err := createWebsite(ctx, a, ui, opts, "", nodeApp, suggested)
 		return w, true, err
 	}
 	plans := planNames(ctx, a, sites)
@@ -64,7 +73,7 @@ func resolveWebsite(ctx context.Context, a API, ui UI, opts Options, project *si
 	def := 0
 	for i, s := range sites {
 		options = append(options, site.PlanOption(s, plans))
-		if def == 0 && ((hint == NodeJS && s.WebsiteType == "nodejs") || (hint == Static && (s.WebsiteType == "other" || s.WebsiteType == ""))) {
+		if def == 0 && ((hint == NodeJS && (s.WebsiteType == "nodejs" || s.IsHeadless())) || (hint == Static && (s.WebsiteType == "other" || s.WebsiteType == ""))) {
 			def = i + 1
 		}
 	}
@@ -73,10 +82,43 @@ func resolveWebsite(ctx context.Context, a API, ui UI, opts Options, project *si
 		return nil, false, err
 	}
 	if idx == 0 {
-		w, err := createWebsite(ctx, a, ui, opts, "")
+		w, err := createWebsite(ctx, a, ui, opts, "", nodeApp, suggested)
 		return w, true, err
 	}
 	return &sites[idx-1], false, nil
+}
+
+// listed lists the orders and all websites once; a failed list is not kept.
+type listed struct {
+	API
+	orders      []Order
+	sites       []site.Website
+	sitesListed bool
+}
+
+func (l *listed) ListOrders(ctx context.Context) ([]Order, error) {
+	if l.orders != nil {
+		return l.orders, nil
+	}
+	orders, err := l.API.ListOrders(ctx)
+	if err == nil {
+		l.orders = orders
+	}
+	return orders, err
+}
+
+func (l *listed) ListWebsites(ctx context.Context, domain string) ([]site.Website, error) {
+	if domain != "" {
+		return l.API.ListWebsites(ctx, domain)
+	}
+	if l.sitesListed {
+		return l.sites, nil
+	}
+	sites, err := l.API.ListWebsites(ctx, "")
+	if err == nil {
+		l.sites, l.sitesListed = sites, true
+	}
+	return sites, err
 }
 
 func websitesSummary(sites []site.Website) string {
@@ -113,8 +155,13 @@ func planNames(ctx context.Context, a API, sites []site.Website) map[int]string 
 	return site.PlanLabels(sites, site.PlanNames(orders))
 }
 
-// createWebsite sets up a website; an empty domain gets a free subdomain.
-func createWebsite(ctx context.Context, a API, ui UI, opts Options, domain string) (*site.Website, error) {
+// createWebsite sets up a website; an empty domain gets a free subdomain. A
+// Node.js app is asked whether it should be headless.
+func createWebsite(ctx context.Context, a API, ui UI, opts Options, domain string, nodeApp bool, suggested string) (*site.Website, error) {
+	websiteType := ""
+	if opts.Headless != "" {
+		websiteType = "headless"
+	}
 	if opts.DryRun {
 		if opts.OrderID != 0 {
 			orders, err := a.ListOrders(ctx)
@@ -128,7 +175,7 @@ func createWebsite(ctx context.Context, a API, ui UI, opts Options, domain strin
 		if domain == "" {
 			domain = "<free subdomain>"
 		}
-		return &site.Website{Domain: domain, OrderID: opts.OrderID}, nil
+		return &site.Website{Domain: domain, OrderID: opts.OrderID, WebsiteType: websiteType}, nil
 	}
 	orderID := opts.OrderID
 	if orderID == 0 {
@@ -136,7 +183,7 @@ func createWebsite(ctx context.Context, a API, ui UI, opts Options, domain strin
 		if err != nil {
 			return nil, err
 		}
-		active := orders[:0]
+		var active []Order
 		for _, o := range orders {
 			if o.Status == "" || o.Status == "active" {
 				active = append(active, o)
@@ -162,6 +209,10 @@ func createWebsite(ctx context.Context, a API, ui UI, opts Options, domain strin
 			orderID = active[idx].ID
 		}
 	}
+	kind, err := chooseKind(ui, opts, nodeApp, suggested)
+	if err != nil {
+		return nil, err
+	}
 	if domain == "" && ui.Interactive() {
 		v, err := ui.Input("Domain for the new website (leave empty for a free subdomain)", "")
 		if err != nil {
@@ -186,7 +237,11 @@ func createWebsite(ctx context.Context, a API, ui UI, opts Options, domain strin
 		return nil, err
 	}
 	step := ui.Start("Creating website")
-	setup, err := a.StartSetup(ctx, orderID, domain, datacenter)
+	setupType := ""
+	if kind != "" {
+		setupType, websiteType = "headless_"+kind, "headless"
+	}
+	setup, err := a.StartSetup(ctx, orderID, domain, datacenter, setupType)
 	if err != nil {
 		step.Fail("Could not create website")
 		var apiErr *api.Error
@@ -196,7 +251,52 @@ func createWebsite(ctx context.Context, a API, ui UI, opts Options, domain strin
 		return nil, err
 	}
 	step.Done("Created " + setup.Domain)
-	return &site.Website{Domain: setup.Domain, Username: setup.Username, OrderID: orderID}, nil
+	return &site.Website{Domain: setup.Domain, Username: setup.Username, OrderID: orderID, WebsiteType: websiteType}, nil
+}
+
+// chooseKind confirms the kind of a new website for a Node.js app: the headless
+// website it looks like a frontend for, else a regular one. Declining asks the
+// full question. Without a terminal it never guesses: --headless chooses.
+func chooseKind(ui UI, opts Options, nodeApp bool, suggested string) (string, error) {
+	if opts.Headless != "" || !nodeApp {
+		return opts.Headless, nil
+	}
+	s, known := suggestions[suggested]
+	if !ui.Interactive() {
+		if known {
+			ui.Info("This looks like " + s.looks + "; pass --headless " + suggested + " to create a headless website for it")
+		}
+		return "", nil
+	}
+	question, def := "Create a regular website?", 1 // declined: offer headless first
+	if known {
+		question, def = "This looks like "+s.looks+". "+s.create+"?", 0
+	}
+	ok, err := ui.Confirm(question, true)
+	if err != nil || ok {
+		return suggested, err
+	}
+	idx, err := ui.Select("What kind of website?", headlessChoices, def)
+	if err != nil || idx == 0 {
+		return "", err
+	}
+	return HeadlessKinds[idx-1], nil
+}
+
+// suggestions word chooseKind's question for what SuggestHeadless finds.
+var suggestions = map[string]struct{ looks, create string }{
+	"empty":      {"a web frontend", "Create a headless website (frontend only, add a backend later)"},
+	"wordpress":  {"a headless WordPress frontend", "Create a headless website with WordPress in /cms"},
+	"pocketbase": {"a frontend for PocketBase", "Create a headless website for a PocketBase backend"},
+}
+
+// headlessChoices follow HeadlessKinds, after a regular website.
+var headlessChoices = []string{
+	"Regular website",
+	"Headless, frontend only (add a backend later)",
+	"Headless with WordPress (installed in /cms)",
+	"Headless for a Hostinger Ecommerce store",
+	"Headless for a PocketBase backend",
 }
 
 // chooseDatacenter matters only for a plan's first website; later ones share its server.
@@ -295,30 +395,34 @@ func waitForSetup(ctx context.Context, a API, ui UI, domain string, created bool
 
 // confirmOverwrite asks before the first deploy to an unlinked website, since
 // a deploy replaces its content. A site with content defaults to no and, without
-// a terminal, needs --yes.
-func confirmOverwrite(ctx context.Context, a API, ui UI, w *site.Website, opts Options) error {
-	has, checkErr := hasContent(ctx, a, w)
+// a terminal, needs --yes. On a headless website only the frontend is replaced.
+func confirmOverwrite(ctx context.Context, a API, ui UI, w *site.Website, opts Options, headless bool) error {
+	has, checkErr := hasContent(ctx, a, w, headless)
+	what, frontend, kept := "content", "", ""
+	if headless {
+		what, frontend, kept = "a frontend", "frontend ", " (its backend, such as WordPress in /cms, is kept)"
+	}
 	if opts.Yes {
 		switch {
 		case checkErr != nil:
-			ui.Info("Could not check whether " + w.Domain + " has content; this deploy replaces whatever it serves")
+			ui.Info("Could not check whether " + w.Domain + " has " + what + "; this deploy replaces whatever " + frontend + "it serves" + kept)
 		case has:
-			ui.Info(w.Domain + " already has content; this deploy replaces it")
+			ui.Info(w.Domain + " already has " + what + "; this deploy replaces it" + kept)
 		}
 		return nil
 	}
 	if !ui.Interactive() {
 		switch {
 		case checkErr != nil:
-			return fmt.Errorf("could not check whether %s has content (%v): pass --yes to replace it", w.Domain, checkErr)
+			return fmt.Errorf("could not check whether %s has %s (%v): pass --yes to replace it", w.Domain, what, checkErr)
 		case has:
-			return errors.New(w.Domain + " already has content, which this deploy replaces: pass --yes to replace it")
+			return errors.New(w.Domain + " already has " + what + ", which this deploy replaces" + kept + ": pass --yes to replace it")
 		}
 		return nil
 	}
-	question, def := "Deploying replaces whatever "+w.Domain+" serves now. Continue?", true
+	question, def := "Deploying replaces whatever "+frontend+w.Domain+" serves now"+kept+". Continue?", true
 	if has {
-		question, def = w.Domain+" already has content, which this deploy replaces. Continue?", false
+		question, def = w.Domain+" already has "+what+", which this deploy replaces"+kept+". Continue?", false
 	}
 	ok, err := ui.Confirm(question, def)
 	if err != nil {
@@ -331,8 +435,13 @@ func confirmOverwrite(ctx context.Context, a API, ui UI, w *site.Website, opts O
 }
 
 // hasContent reports whether a deploy would replace something; content that
-// cannot be checked counts, and checkErr says why.
-func hasContent(ctx context.Context, a API, w *site.Website) (has bool, checkErr error) {
+// cannot be checked counts, and checkErr says why. A headless website's
+// document root holds its backend, so only a built frontend counts there.
+func hasContent(ctx context.Context, a API, w *site.Website, headless bool) (has bool, checkErr error) {
+	if headless {
+		stored, err := a.BuildSettings(ctx, w.Username, w.Domain)
+		return stored != nil || err != nil, err
+	}
 	if w.WebsiteType == "nodejs" { // a Node.js app lives outside the document root
 		return true, nil
 	}
