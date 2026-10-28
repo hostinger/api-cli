@@ -12,7 +12,7 @@ import (
 var ListEcommerceStoresCmd = &cobra.Command{
 	Use:               "list-ecommerce-stores <profile-uuid>",
 	Short:             "List Ecommerce stores",
-	Long:              "Get all of the customer's Hostinger eCommerce stores, each with its `store_id` and\n`connection_status` for the profile in the path.\n\nA store is connected to at most one profile. `connected_to_other_profile` does not name that\nprofile - call this for each profile to find it. The list is empty, not an error, when the\neCommerce service cannot be reached. Pass `store_id` to the disconnect eCommerce store\nendpoint. Connecting an AI Website Builder site connects the store selling on it.",
+	Long:              "Get all of the customer's Hostinger eCommerce stores, each with its `store_id` and\n`connection_status` for the profile in the path.\n\nA store is connected to at most one profile. `connected_to_other_profile` does not name that\nprofile - call this for each profile to find it. The list is empty, not an error, when the\neCommerce service cannot be reached. Pass `store_id` to the connect or disconnect eCommerce\nstore endpoint.",
 	Example:           "  hostinger reach integrations list-ecommerce-stores 550e8400-e09b-41d4-a716-400055000000",
 	ValidArgsFunction: cobra.NoFileCompletions,
 	RunE: func(cmd *cobra.Command, args []string) error {

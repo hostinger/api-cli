@@ -1824,6 +1824,11 @@
     "method": "POST",
     "path": "/api/reach/v1/profiles/{profileUuid}/websites/website-builder"
   },
+  "reach_connectEcommerceStoreV1": {
+    "command": "hostinger reach integrations connect-ecommerce-store",
+    "method": "POST",
+    "path": "/api/reach/v1/profiles/{profileUuid}/ecommerce/stores/{storeId}"
+  },
   "reach_connectSendingDomainV1": {
     "command": "hostinger reach profiles connect-sending-domain",
     "method": "POST",

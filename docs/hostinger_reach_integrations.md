@@ -30,6 +30,7 @@ hostinger reach integrations [flags]
 
 * [hostinger reach](hostinger_reach.md)	 - Reach commands
 * [hostinger reach integrations connect-ai-website-builder-site](hostinger_reach_integrations_connect-ai-website-builder-site.md)	 - Connect AI Website Builder site
+* [hostinger reach integrations connect-ecommerce-store](hostinger_reach_integrations_connect-ecommerce-store.md)	 - Connect Ecommerce store
 * [hostinger reach integrations disconnect-ai-website-builder-site](hostinger_reach_integrations_disconnect-ai-website-builder-site.md)	 - Disconnect AI Website Builder site
 * [hostinger reach integrations disconnect-ecommerce-store](hostinger_reach_integrations_disconnect-ecommerce-store.md)	 - Disconnect Ecommerce store
 * [hostinger reach integrations disconnect-wordpress-site](hostinger_reach_integrations_disconnect-wordpress-site.md)	 - Disconnect WordPress site

@@ -12,7 +12,7 @@ import (
 var DisconnectEcommerceStoreCmd = &cobra.Command{
 	Use:               "disconnect-ecommerce-store <profile-uuid> <store-id>",
 	Short:             "Disconnect Ecommerce store",
-	Long:              "Disconnect an eCommerce store from the profile.\n\nReach stops receiving the store's customers and orders, and its products and coupons are\nremoved from Reach; contacts and past orders stay. Take `store_id` from the list eCommerce\nstores endpoint; for a store that is `connected_to_other_profile`, call this with that\nprofile. Also succeeds when the store is not connected to this profile, so success is not\nproof that anything was disconnected. Confirm the store and the plan with the customer\nbefore calling.",
+	Long:              "Disconnect an eCommerce store from the profile.\n\nReach stops receiving the store's customers and orders, and its products and coupons are\nremoved from Reach; contacts and past orders stay. Take `store_id` from the list eCommerce\nstores endpoint; for a store that is `connected_to_other_profile`, call this with that\nprofile. Also succeeds when the store is not connected to this profile, so success is not\nproof that anything was disconnected. To move the store to another plan, connect it to the\nnew profile afterwards. Confirm the store and the plan with the customer before calling.",
 	Example:           "  hostinger reach integrations disconnect-ecommerce-store 550e8400-e09b-41d4-a716-400055000000 ec_123",
 	ValidArgsFunction: cobra.NoFileCompletions,
 	RunE: func(cmd *cobra.Command, args []string) error {

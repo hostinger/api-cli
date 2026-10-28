@@ -15495,6 +15495,29 @@ type ReachV1ProfilesSettingsUpdateRequest struct {
 	WebsiteUrl *string `json:"website_url,omitempty"`
 }
 
+// ReachV1StoresConnectionResource defines model for Reach.V1.Stores.ConnectionResource.
+type ReachV1StoresConnectionResource struct {
+	// Store Reach store created for the connection.
+	Store *struct {
+		// Currency Example: EUR
+		Currency *string `json:"currency,omitempty"`
+
+		// SyncedAt Example: 2025-01-15T10:30:00Z
+		SyncedAt *time.Time `json:"synced_at,omitempty"`
+
+		// Uuid Example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+		Uuid *string `json:"uuid,omitempty"`
+	} `json:"store,omitempty"`
+
+	// StoreId Example: ec_123
+	StoreId *string `json:"store_id,omitempty"`
+
+	// Uuid UUID of the connection between the store and the profile.
+	//
+	// Example: 550e8400-e29b-41d4-a716-446655440000
+	Uuid *string `json:"uuid,omitempty"`
+}
+
 // ReachV1StoresStoreCollection Array of [`Reach.V1.Stores.StoreResource`](#model/reachv1storesstoreresource)
 type ReachV1StoresStoreCollection = []ReachV1StoresStoreResource
 
@@ -26540,8 +26563,8 @@ type ClientInterface interface {
 	//
 	// A store is connected to at most one profile. `connected_to_other_profile` does not name that
 	// profile - call this for each profile to find it. The list is empty, not an error, when the
-	// eCommerce service cannot be reached. Pass `store_id` to the disconnect eCommerce store
-	// endpoint. Connecting an AI Website Builder site connects the store selling on it.
+	// eCommerce service cannot be reached. Pass `store_id` to the connect or disconnect eCommerce
+	// store endpoint.
 	//
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/ecommerce/stores (the `ReachListEcommerceStoresV1` operationId).
 	ReachListEcommerceStoresV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -26554,11 +26577,26 @@ type ClientInterface interface {
 	// removed from Reach; contacts and past orders stay. Take `store_id` from the list eCommerce
 	// stores endpoint; for a store that is `connected_to_other_profile`, call this with that
 	// profile. Also succeeds when the store is not connected to this profile, so success is not
-	// proof that anything was disconnected. Confirm the store and the plan with the customer
-	// before calling.
+	// proof that anything was disconnected. To move the store to another plan, connect it to the
+	// new profile afterwards. Confirm the store and the plan with the customer before calling.
 	//
 	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/ecommerce/stores/{storeId} (the `ReachDisconnectEcommerceStoreV1` operationId).
 	ReachDisconnectEcommerceStoreV1(ctx context.Context, profileUuid ProfileUuid, storeId StoreId, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachConnectEcommerceStoreV1 Connect Ecommerce store
+	//
+	// Connect one of the customer's eCommerce stores to the profile, so Reach receives its
+	// customers and orders.
+	//
+	// Take `store_id` from the list eCommerce stores endpoint. Fails with not found
+	// (`ECOMMERCE_STORE_NOT_FOUND`) when the store is not one of the customer's own stores, also
+	// when the eCommerce service cannot be reached. Fails with a conflict
+	// (`ECOMMERCE_CONNECTION_ALREADY_EXISTS`) when the store is connected to any profile or this
+	// profile already has a store - to move a store to another plan, disconnect it from the
+	// profile that holds it first.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/ecommerce/stores/{storeId} (the `ReachConnectEcommerceStoreV1` operationId).
+	ReachConnectEcommerceStoreV1(ctx context.Context, profileUuid ProfileUuid, storeId StoreId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReachListPlanFeatureAccessV1 List plan feature access
 	//
@@ -38778,8 +38816,8 @@ func (c *Client) ReachGetProfileDomainDNSStatusV1(ctx context.Context, profileUu
 //
 // A store is connected to at most one profile. `connected_to_other_profile` does not name that
 // profile - call this for each profile to find it. The list is empty, not an error, when the
-// eCommerce service cannot be reached. Pass `store_id` to the disconnect eCommerce store
-// endpoint. Connecting an AI Website Builder site connects the store selling on it.
+// eCommerce service cannot be reached. Pass `store_id` to the connect or disconnect eCommerce
+// store endpoint.
 //
 // Corresponds with GET /api/reach/v1/profiles/{profileUuid}/ecommerce/stores (the `ReachListEcommerceStoresV1` operationId).
 func (c *Client) ReachListEcommerceStoresV1(ctx context.Context, profileUuid ProfileUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -38802,12 +38840,37 @@ func (c *Client) ReachListEcommerceStoresV1(ctx context.Context, profileUuid Pro
 // removed from Reach; contacts and past orders stay. Take `store_id` from the list eCommerce
 // stores endpoint; for a store that is `connected_to_other_profile`, call this with that
 // profile. Also succeeds when the store is not connected to this profile, so success is not
-// proof that anything was disconnected. Confirm the store and the plan with the customer
-// before calling.
+// proof that anything was disconnected. To move the store to another plan, connect it to the
+// new profile afterwards. Confirm the store and the plan with the customer before calling.
 //
 // Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/ecommerce/stores/{storeId} (the `ReachDisconnectEcommerceStoreV1` operationId).
 func (c *Client) ReachDisconnectEcommerceStoreV1(ctx context.Context, profileUuid ProfileUuid, storeId StoreId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReachDisconnectEcommerceStoreV1Request(c.Server, profileUuid, storeId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachConnectEcommerceStoreV1 Connect Ecommerce store
+//
+// Connect one of the customer's eCommerce stores to the profile, so Reach receives its
+// customers and orders.
+//
+// Take `store_id` from the list eCommerce stores endpoint. Fails with not found
+// (`ECOMMERCE_STORE_NOT_FOUND`) when the store is not one of the customer's own stores, also
+// when the eCommerce service cannot be reached. Fails with a conflict
+// (`ECOMMERCE_CONNECTION_ALREADY_EXISTS`) when the store is connected to any profile or this
+// profile already has a store - to move a store to another plan, disconnect it from the
+// profile that holds it first.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/ecommerce/stores/{storeId} (the `ReachConnectEcommerceStoreV1` operationId).
+func (c *Client) ReachConnectEcommerceStoreV1(ctx context.Context, profileUuid ProfileUuid, storeId StoreId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachConnectEcommerceStoreV1Request(c.Server, profileUuid, storeId)
 	if err != nil {
 		return nil, err
 	}
@@ -58429,6 +58492,47 @@ func NewReachDisconnectEcommerceStoreV1Request(server string, profileUuid Profil
 	return req, nil
 }
 
+// NewReachConnectEcommerceStoreV1Request constructs an http.Request for the ReachConnectEcommerceStoreV1 method
+func NewReachConnectEcommerceStoreV1Request(server string, profileUuid ProfileUuid, storeId StoreId) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "storeId", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/ecommerce/stores/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewReachListPlanFeatureAccessV1Request constructs an http.Request for the ReachListPlanFeatureAccessV1 method
 func NewReachListPlanFeatureAccessV1Request(server string, profileUuid ProfileUuid) (*http.Request, error) {
 	var err error
@@ -69542,8 +69646,8 @@ type ClientWithResponsesInterface interface {
 	//
 	// A store is connected to at most one profile. `connected_to_other_profile` does not name that
 	// profile - call this for each profile to find it. The list is empty, not an error, when the
-	// eCommerce service cannot be reached. Pass `store_id` to the disconnect eCommerce store
-	// endpoint. Connecting an AI Website Builder site connects the store selling on it.
+	// eCommerce service cannot be reached. Pass `store_id` to the connect or disconnect eCommerce
+	// store endpoint.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
@@ -69558,13 +69662,30 @@ type ClientWithResponsesInterface interface {
 	// removed from Reach; contacts and past orders stay. Take `store_id` from the list eCommerce
 	// stores endpoint; for a store that is `connected_to_other_profile`, call this with that
 	// profile. Also succeeds when the store is not connected to this profile, so success is not
-	// proof that anything was disconnected. Confirm the store and the plan with the customer
-	// before calling.
+	// proof that anything was disconnected. To move the store to another plan, connect it to the
+	// new profile afterwards. Confirm the store and the plan with the customer before calling.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
 	// Corresponds with DELETE /api/reach/v1/profiles/{profileUuid}/ecommerce/stores/{storeId} (the `ReachDisconnectEcommerceStoreV1` operationId).
 	ReachDisconnectEcommerceStoreV1WithResponse(ctx context.Context, profileUuid ProfileUuid, storeId StoreId, reqEditors ...RequestEditorFn) (*ReachDisconnectEcommerceStoreV1Response, error)
+
+	// ReachConnectEcommerceStoreV1WithResponse Connect Ecommerce store
+	//
+	// Connect one of the customer's eCommerce stores to the profile, so Reach receives its
+	// customers and orders.
+	//
+	// Take `store_id` from the list eCommerce stores endpoint. Fails with not found
+	// (`ECOMMERCE_STORE_NOT_FOUND`) when the store is not one of the customer's own stores, also
+	// when the eCommerce service cannot be reached. Fails with a conflict
+	// (`ECOMMERCE_CONNECTION_ALREADY_EXISTS`) when the store is connected to any profile or this
+	// profile already has a store - to move a store to another plan, disconnect it from the
+	// profile that holds it first.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/ecommerce/stores/{storeId} (the `ReachConnectEcommerceStoreV1` operationId).
+	ReachConnectEcommerceStoreV1WithResponse(ctx context.Context, profileUuid ProfileUuid, storeId StoreId, reqEditors ...RequestEditorFn) (*ReachConnectEcommerceStoreV1Response, error)
 
 	// ReachListPlanFeatureAccessV1WithResponse List plan feature access
 	//
@@ -91293,6 +91414,75 @@ func (r ReachDisconnectEcommerceStoreV1Response) ContentType() string {
 	return ""
 }
 
+// ReachConnectEcommerceStoreV1Response409Headers the declared response headers of an HTTP 409 response for ReachConnectEcommerceStoreV1
+type ReachConnectEcommerceStoreV1Response409Headers struct {
+	RetryAfter *int
+}
+
+type ReachConnectEcommerceStoreV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1StoresConnectionResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON409 the response for an HTTP 409 `application/json` response
+	JSON409 *CommonResponseConflictResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+	// Headers409 the parsed response headers for an HTTP 409 response
+	Headers409 *ReachConnectEcommerceStoreV1Response409Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachConnectEcommerceStoreV1Response) GetJSON200() *ReachV1StoresConnectionResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachConnectEcommerceStoreV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON409 returns the response for an HTTP 409 `application/json` response
+func (r ReachConnectEcommerceStoreV1Response) GetJSON409() *CommonResponseConflictResponse {
+	return r.JSON409
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachConnectEcommerceStoreV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachConnectEcommerceStoreV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachConnectEcommerceStoreV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachConnectEcommerceStoreV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachConnectEcommerceStoreV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type ReachListPlanFeatureAccessV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -106723,8 +106913,8 @@ func (c *ClientWithResponses) ReachGetProfileDomainDNSStatusV1WithResponse(ctx c
 //
 // A store is connected to at most one profile. `connected_to_other_profile` does not name that
 // profile - call this for each profile to find it. The list is empty, not an error, when the
-// eCommerce service cannot be reached. Pass `store_id` to the disconnect eCommerce store
-// endpoint. Connecting an AI Website Builder site connects the store selling on it.
+// eCommerce service cannot be reached. Pass `store_id` to the connect or disconnect eCommerce
+// store endpoint.
 //
 // Returns a wrapper object for the known response body format(s).
 //
@@ -106745,8 +106935,8 @@ func (c *ClientWithResponses) ReachListEcommerceStoresV1WithResponse(ctx context
 // removed from Reach; contacts and past orders stay. Take `store_id` from the list eCommerce
 // stores endpoint; for a store that is `connected_to_other_profile`, call this with that
 // profile. Also succeeds when the store is not connected to this profile, so success is not
-// proof that anything was disconnected. Confirm the store and the plan with the customer
-// before calling.
+// proof that anything was disconnected. To move the store to another plan, connect it to the
+// new profile afterwards. Confirm the store and the plan with the customer before calling.
 //
 // Returns a wrapper object for the known response body format(s).
 //
@@ -106757,6 +106947,29 @@ func (c *ClientWithResponses) ReachDisconnectEcommerceStoreV1WithResponse(ctx co
 		return nil, err
 	}
 	return ParseReachDisconnectEcommerceStoreV1Response(rsp)
+}
+
+// ReachConnectEcommerceStoreV1WithResponse Connect Ecommerce store
+//
+// Connect one of the customer's eCommerce stores to the profile, so Reach receives its
+// customers and orders.
+//
+// Take `store_id` from the list eCommerce stores endpoint. Fails with not found
+// (`ECOMMERCE_STORE_NOT_FOUND`) when the store is not one of the customer's own stores, also
+// when the eCommerce service cannot be reached. Fails with a conflict
+// (`ECOMMERCE_CONNECTION_ALREADY_EXISTS`) when the store is connected to any profile or this
+// profile already has a store - to move a store to another plan, disconnect it from the
+// profile that holds it first.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/ecommerce/stores/{storeId} (the `ReachConnectEcommerceStoreV1` operationId).
+func (c *ClientWithResponses) ReachConnectEcommerceStoreV1WithResponse(ctx context.Context, profileUuid ProfileUuid, storeId StoreId, reqEditors ...RequestEditorFn) (*ReachConnectEcommerceStoreV1Response, error) {
+	rsp, err := c.ReachConnectEcommerceStoreV1(ctx, profileUuid, storeId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachConnectEcommerceStoreV1Response(rsp)
 }
 
 // ReachListPlanFeatureAccessV1WithResponse List plan feature access
@@ -124433,6 +124646,66 @@ func ParseReachDisconnectEcommerceStoreV1Response(rsp *http.Response) (*ReachDis
 		}
 		response.JSON500 = &dest
 
+	}
+
+	return response, nil
+}
+
+// ParseReachConnectEcommerceStoreV1Response parses an HTTP response from a ReachConnectEcommerceStoreV1WithResponse call
+func ParseReachConnectEcommerceStoreV1Response(rsp *http.Response) (*ReachConnectEcommerceStoreV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachConnectEcommerceStoreV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1StoresConnectionResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest CommonResponseConflictResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 409:
+		var headers ReachConnectEcommerceStoreV1Response409Headers
+		if values := rsp.Header.Values("Retry-After"); len(values) > 0 {
+			var value int
+			if err := runtime.BindStyledParameterWithOptions("simple", "Retry-After", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.RetryAfter = &value
+		}
+		response.Headers409 = &headers
 	}
 
 	return response, nil

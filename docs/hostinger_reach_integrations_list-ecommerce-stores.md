@@ -9,8 +9,8 @@ Get all of the customer's Hostinger eCommerce stores, each with its `store_id` a
 
 A store is connected to at most one profile. `connected_to_other_profile` does not name that
 profile - call this for each profile to find it. The list is empty, not an error, when the
-eCommerce service cannot be reached. Pass `store_id` to the disconnect eCommerce store
-endpoint. Connecting an AI Website Builder site connects the store selling on it.
+eCommerce service cannot be reached. Pass `store_id` to the connect or disconnect eCommerce
+store endpoint.
 
 ```
 hostinger reach integrations list-ecommerce-stores <profile-uuid> [flags]

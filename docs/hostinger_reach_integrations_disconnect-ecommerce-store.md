@@ -10,8 +10,8 @@ Reach stops receiving the store's customers and orders, and its products and cou
 removed from Reach; contacts and past orders stay. Take `store_id` from the list eCommerce
 stores endpoint; for a store that is `connected_to_other_profile`, call this with that
 profile. Also succeeds when the store is not connected to this profile, so success is not
-proof that anything was disconnected. Confirm the store and the plan with the customer
-before calling.
+proof that anything was disconnected. To move the store to another plan, connect it to the
+new profile afterwards. Confirm the store and the plan with the customer before calling.
 
 ```
 hostinger reach integrations disconnect-ecommerce-store <profile-uuid> <store-id> [flags]

@@ -14,6 +14,7 @@ var GroupCmd = &cobra.Command{
 
 func init() {
 	GroupCmd.AddCommand(ConnectAiWebsiteBuilderSiteCmd)
+	GroupCmd.AddCommand(ConnectEcommerceStoreCmd)
 	GroupCmd.AddCommand(DisconnectAiWebsiteBuilderSiteCmd)
 	GroupCmd.AddCommand(DisconnectEcommerceStoreCmd)
 	GroupCmd.AddCommand(DisconnectWordpressSiteCmd)
