@@ -156,7 +156,129 @@ func (s *OAuthService) TokenNoLogin(ctx context.Context) (string, error) {
 	if creds.RefreshToken == "" || creds.ClientID == "" {
 		return "", ErrNotSignedIn
 	}
-	return s.refresh(ctx, creds)
+	token, err := s.lockedRefresh(ctx, creds.AccessToken)
+	if errors.Is(err, errNoRefreshToken) {
+		return "", ErrNotSignedIn
+	}
+	return token, err
+}
+
+// CachedToken is the cross-process safe, non-interactive way to get a token,
+// for callers that may run in parallel (several `preview` runs started by an
+// agent at once). It returns the stored access token while it is valid, and
+// otherwise refreshes it under an exclusive lock on a sibling lock file, so
+// that only one process uses a refresh token the server may rotate. Every
+// refresh path (Token, TokenNoLogin, Refresh, Reauthenticate) and the sign-in
+// and logout writes take the same lock. It never signs in.
+//
+//  1. The stored token is returned without locking while it is valid. Writes
+//     are atomic renames, so a read never sees a half-written file.
+//  2. Otherwise it locks <credentials>.lock, waiting no longer than ctx allows,
+//     and re-reads the file: another process may have refreshed meanwhile.
+//  3. Still expired: it refreshes, writes the file atomically, and unlocks.
+//     The refresh is not cut short by ctx (see lockedRefresh), so a call can
+//     return after its deadline, by at most httpTimeout.
+//
+// "Valid" means the stored expiry has not passed. That expiry is already
+// expiryBufferSeconds (60 s) before the server's, so a returned token is good
+// for at least another 60 s.
+//
+// No stored refresh token, or one the server rejects (4xx), returns an error
+// matching ErrNotSignedIn. Any other failure (lock wait past the deadline,
+// network, 5xx) returns a plain error. On every failure the stored
+// credentials are left as they were.
+func (s *OAuthService) CachedToken(ctx context.Context) (string, error) {
+	return s.cachedToken(ctx, "")
+}
+
+// ReplaceToken is CachedToken for a token the server rejected (401) while its
+// stored expiry says it is valid: it returns a different stored token, or
+// refreshes past the rejected one. It never signs in.
+func (s *OAuthService) ReplaceToken(ctx context.Context, rejected string) (string, error) {
+	return s.cachedToken(ctx, rejected)
+}
+
+func (s *OAuthService) cachedToken(ctx context.Context, rejected string) (string, error) {
+	ctx, cancel := withTimeout(ctx, httpTimeout)
+	defer cancel()
+
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	creds, err := s.loadCredentials()
+	if err != nil {
+		return "", err
+	}
+	if accessTokenValid(creds) && creds.AccessToken != rejected {
+		return creds.AccessToken, nil
+	}
+	if creds.RefreshToken == "" || creds.ClientID == "" {
+		return "", ErrNotSignedIn
+	}
+
+	if rejected == "" {
+		rejected = creds.AccessToken
+	}
+	token, err := s.lockedRefresh(ctx, rejected)
+	switch {
+	case errors.Is(err, errNoRefreshToken):
+		return "", ErrNotSignedIn
+	case errors.Is(err, errRefreshTokenDead):
+		return "", fmt.Errorf("%w: %w", ErrNotSignedIn, err)
+	}
+	return token, err
+}
+
+// errNoRefreshToken is lockedRefresh's answer when the file, re-read under the
+// lock, holds no refresh token (another process logged out meanwhile).
+var errNoRefreshToken = errors.New("no refresh token stored")
+
+// lockedRefresh refreshes under the cross-process lock on <credentials>.lock.
+// Once the lock is held it re-reads the file and returns the stored access
+// token instead when another process refreshed meanwhile: valid and different
+// from stale, the token the caller already holds (for Reauthenticate, the one
+// the server just rejected).
+//
+// Only the lock wait follows ctx. The refresh grant and the save run under
+// httpTimeout even when ctx ends first: the server may rotate the refresh
+// token, and dropping its answer would leave a dead one on disk. Callers must
+// hold s.mu.
+func (s *OAuthService) lockedRefresh(ctx context.Context, stale string) (string, error) {
+	unlock, err := s.lockCredentials(ctx)
+	if err != nil {
+		return "", err
+	}
+	defer unlock()
+
+	creds, err := s.loadCredentials()
+	if err != nil {
+		return "", err
+	}
+	if accessTokenValid(creds) && creds.AccessToken != stale {
+		return creds.AccessToken, nil
+	}
+	if creds.RefreshToken == "" || creds.ClientID == "" {
+		return "", errNoRefreshToken
+	}
+	rctx, cancel := context.WithTimeout(context.WithoutCancel(ctx), httpTimeout)
+	defer cancel()
+	return s.refresh(rctx, creds)
+}
+
+// lockCredentials takes the cross-process lock on <credentials>.lock that
+// every credentials write except the first sign-in's client registration
+// happens under. The wait follows ctx, bounded by httpTimeout when ctx has no
+// deadline.
+func (s *OAuthService) lockCredentials(ctx context.Context) (unlock func(), err error) {
+	ctx, cancel := withTimeout(ctx, httpTimeout)
+	defer cancel()
+	return lockFile(ctx, s.credPath+".lock")
+}
+
+// accessTokenValid reports whether creds hold an access token whose stored
+// (already buffered) expiry is still ahead.
+func accessTokenValid(creds credentials) bool {
+	return creds.AccessToken != "" && creds.ExpiresAt != 0 && nowMillis() < creds.ExpiresAt
 }
 
 // Status describes the stored sign-in without touching the network.
@@ -205,7 +327,11 @@ func (s *OAuthService) Refresh(ctx context.Context) (string, error) {
 	if creds.RefreshToken == "" || creds.ClientID == "" {
 		return "", errors.New("no refresh token available; run an interactive login first")
 	}
-	return s.refresh(ctx, creds)
+	token, err := s.lockedRefresh(ctx, creds.AccessToken)
+	if errors.Is(err, errNoRefreshToken) {
+		return "", errors.New("no refresh token available; run an interactive login first")
+	}
+	return token, err
 }
 
 // Reauthenticate forces a fresh token, bypassing the cached-token fast path. It
@@ -224,6 +350,14 @@ func (s *OAuthService) Reauthenticate(ctx context.Context) (string, error) {
 func (s *OAuthService) Logout(ctx context.Context) error {
 	s.mu.Lock()
 	defer s.mu.Unlock()
+
+	// Under the lock, so a refresh in flight in another process cannot write
+	// its tokens back after the wipe, and the token revoked is the latest.
+	unlock, err := s.lockCredentials(ctx)
+	if err != nil {
+		return err
+	}
+	defer unlock()
 
 	creds, _ := s.loadCredentials()
 	if creds.ClientID == "" && creds.AccessToken == "" {
@@ -256,17 +390,19 @@ func (s *OAuthService) resolve(ctx context.Context) (string, error) {
 // refreshOrLogin attempts a proactive refresh and falls back to a full
 // interactive login when there is no usable refresh token or the refresh token
 // is dead (4xx). A transient refresh failure (5xx/network) is surfaced as-is so
-// it never spuriously launches a browser. Callers must hold s.mu.
+// it never spuriously launches a browser. The refresh runs under the
+// cross-process lock (lockedRefresh); the login does not, since it waits on
+// the user. Callers must hold s.mu.
 func (s *OAuthService) refreshOrLogin(ctx context.Context, creds credentials) (string, error) {
 	if creds.RefreshToken != "" && creds.ClientID != "" {
-		token, err := s.refresh(ctx, creds)
+		token, err := s.lockedRefresh(ctx, creds.AccessToken)
 		if err == nil {
 			return token, nil
 		}
-		if !errors.Is(err, errRefreshTokenDead) {
+		if !errors.Is(err, errRefreshTokenDead) && !errors.Is(err, errNoRefreshToken) {
 			return "", err
 		}
-		// 4xx: refresh token is dead, fall through to a full login.
+		// 4xx, or signed out meanwhile: fall through to a full login.
 	}
 	return s.login(ctx)
 }
@@ -373,6 +509,14 @@ func (s *OAuthService) exchangeCode(ctx context.Context, clientID, code, verifie
 	if err != nil {
 		return "", err
 	}
+
+	// Under the lock, so a refresh of the previous token chain in another
+	// process cannot overwrite the new sign-in.
+	unlock, err := s.lockCredentials(ctx)
+	if err != nil {
+		return "", err
+	}
+	defer unlock()
 
 	creds, _ := s.loadCredentials()
 	creds.ClientID = clientID
@@ -589,7 +733,20 @@ func (s *OAuthService) saveCredentials(creds credentials) error {
 	if err := tmp.Close(); err != nil {
 		return err
 	}
-	return os.Rename(tmpName, s.credPath)
+	return replaceFile(tmpName, s.credPath)
+}
+
+// replaceFile renames from over to. On Windows the rename fails while another
+// process has the target open, such as a parallel run's lock-free read in
+// CachedToken, so it retries briefly there: giving up would drop a refresh
+// token the server has just rotated.
+func replaceFile(from, to string) error {
+	err := os.Rename(from, to)
+	for i := 0; err != nil && runtime.GOOS == "windows" && i < 10; i++ {
+		time.Sleep(10 * time.Millisecond)
+		err = os.Rename(from, to)
+	}
+	return err
 }
 
 // --- helpers ---------------------------------------------------------------

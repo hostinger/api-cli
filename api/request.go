@@ -24,6 +24,19 @@ func CompletionRequest() client.ClientWithResponsesInterface {
 	return newClient(false)
 }
 
+// BaseURL returns the configured api_url, or the API's default base URL.
+func BaseURL() string {
+	if apiURL := viper.GetString("api_url"); apiURL != "" {
+		return apiURL
+	}
+	return "https://developers.hostinger.com"
+}
+
+// UserAgent is the User-Agent header value of every API request.
+func UserAgent() string {
+	return fmt.Sprintf("hostinger-cli/%s", utils.CLIVersion.String(false))
+}
+
 func newClient(interactive bool) client.ClientWithResponsesInterface {
 	apiURL, opts := clientOptions(interactive, interactive && viper.GetBool("dry_run"))
 	c, err := client.NewClientWithResponses(apiURL, opts...)
@@ -36,10 +49,7 @@ func newClient(interactive bool) client.ClientWithResponsesInterface {
 // clientOptions are shared by the typed client and Raw. dryRun prints each
 // request instead of sending it.
 func clientOptions(interactive, dryRun bool) (string, []client.ClientOption) {
-	apiURL := viper.GetString("api_url")
-	if apiURL == "" {
-		apiURL = "https://developers.hostinger.com"
-	}
+	apiURL := BaseURL()
 
 	opts := []client.ClientOption{
 		client.WithRequestEditorFn(addUserAgent),
@@ -138,6 +148,6 @@ func (d *oauthRetryDoer) Do(req *http.Request) (*http.Response, error) {
 }
 
 func addUserAgent(ctx context.Context, req *http.Request) error {
-	req.Header.Set("User-Agent", fmt.Sprintf("hostinger-cli/%s", utils.CLIVersion.String(false)))
+	req.Header.Set("User-Agent", UserAgent())
 	return nil
 }
