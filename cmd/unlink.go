@@ -1,10 +1,7 @@
 package cmd
 
 import (
-	"errors"
-	"io/fs"
 	"os"
-	"path/filepath"
 
 	"github.com/hostinger/api-cli/site"
 	"github.com/hostinger/api-cli/utils"
@@ -52,7 +49,7 @@ config file instead.`,
 			if broken == "" {
 				return err
 			}
-			if err := removeLink(broken); err != nil {
+			if err := site.Remove(broken); err != nil {
 				return err
 			}
 			return printResult(cmd, "Removed the unreadable link in "+broken, map[string]any{"unlinked": true, "linkFile": site.Path(broken)})
@@ -60,7 +57,7 @@ config file instead.`,
 		if p == nil {
 			return printResult(cmd, "This directory is not linked to a website", map[string]any{"unlinked": false})
 		}
-		if err := removeLink(linkedDir); err != nil {
+		if err := site.Remove(linkedDir); err != nil {
 			return err
 		}
 		return printResult(cmd, "Unlinked "+linkedDir+" from "+p.Domain, map[string]any{"unlinked": true, "domain": p.Domain, "linkFile": site.Path(linkedDir)})
@@ -80,21 +77,6 @@ func configHasKey(path, key string) bool {
 	}
 	_, ok := m[key]
 	return ok
-}
-
-// removeLink deletes the link files only: .hostinger/ can also hold other
-// tools' files (the headless skill's workspaces under ~/.hostinger).
-func removeLink(dir string) error {
-	for _, name := range []string{site.File, "project.json"} {
-		if err := os.Remove(filepath.Join(dir, site.Dir, name)); err != nil && !errors.Is(err, fs.ErrNotExist) {
-			return err
-		}
-	}
-	// Only when nothing else is left; a symlinked folder is shared, so it stays.
-	if info, err := os.Lstat(filepath.Join(dir, site.Dir)); err == nil && info.Mode()&fs.ModeSymlink == 0 {
-		_ = os.Remove(filepath.Join(dir, site.Dir))
-	}
-	return nil
 }
 
 // brokenLink is the nearest directory from start up whose link cannot be read.

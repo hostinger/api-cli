@@ -396,7 +396,8 @@ func waitForSetup(ctx context.Context, a API, ui UI, domain string, created bool
 // confirmOverwrite asks before the first deploy to an unlinked website, since
 // a deploy replaces its content. A site with content defaults to no and, without
 // a terminal, needs --yes. On a headless website only the frontend is replaced.
-func confirmOverwrite(ctx context.Context, a API, ui UI, w *site.Website, opts Options, headless bool) error {
+// why, when set, explains why the run asks although a link names the website.
+func confirmOverwrite(ctx context.Context, a API, ui UI, w *site.Website, opts Options, headless bool, why string) error {
 	has, checkErr := hasContent(ctx, a, w, headless)
 	what, frontend, kept := "content", "", ""
 	if headless {
@@ -414,15 +415,15 @@ func confirmOverwrite(ctx context.Context, a API, ui UI, w *site.Website, opts O
 	if !ui.Interactive() {
 		switch {
 		case checkErr != nil:
-			return fmt.Errorf("could not check whether %s has %s (%v): pass --yes to replace it", w.Domain, what, checkErr)
+			return fmt.Errorf("could not check whether %s has %s (%v)%s: pass --yes to replace it", w.Domain, what, checkErr, why)
 		case has:
-			return errors.New(w.Domain + " already has " + what + ", which this deploy replaces" + kept + ": pass --yes to replace it")
+			return errors.New(w.Domain + " already has " + what + ", which this deploy replaces" + kept + why + ": pass --yes to replace it")
 		}
 		return nil
 	}
-	question, def := "Deploying replaces whatever "+frontend+w.Domain+" serves now"+kept+". Continue?", true
+	question, def := "Deploying replaces whatever "+frontend+w.Domain+" serves now"+kept+why+". Continue?", true
 	if has {
-		question, def = w.Domain+" already has "+what+", which this deploy replaces"+kept+". Continue?", false
+		question, def = w.Domain+" already has "+what+", which this deploy replaces"+kept+why+". Continue?", false
 	}
 	ok, err := ui.Confirm(question, def)
 	if err != nil {

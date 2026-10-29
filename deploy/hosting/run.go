@@ -123,10 +123,11 @@ type deployment struct {
 	ui   UI
 	opts Options
 
-	project *site.Project // the link found from the current directory, if any
-	linkDir string
-	src     string // the directory or archive to deploy
-	isDir   bool
+	project   *site.Project // the link found from the current directory, if any
+	linkDir   string
+	committed string // the link file when Git tracks it: it may have come with a clone
+	src       string // the directory or archive to deploy
+	isDir     bool
 
 	website  *site.Website
 	created  bool
@@ -158,6 +159,7 @@ func (d *deployment) locate() error {
 	}
 	if project != nil {
 		linkDir = projectDir
+		d.committed = site.CommittedLink(projectDir)
 	}
 	d.project, d.linkDir = project, linkDir
 	path, fromLink := d.opts.Path, ""
@@ -244,7 +246,7 @@ func (d *deployment) target(detected Type) error {
 		return err
 	}
 	d.website, d.created = website, created
-	linked := project != nil && strings.EqualFold(project.Domain, website.Domain)
+	linked := project != nil && d.committed == "" && strings.EqualFold(project.Domain, website.Domain)
 	d.headless = website.IsHeadless() || (linked && project.Headless)
 	if opts.Headless != "" && !d.headless {
 		return fmt.Errorf("%s already exists and is not a headless website: pass --create for a new headless website, or leave --headless out", website.Domain)
@@ -256,7 +258,7 @@ func (d *deployment) target(detected Type) error {
 		}
 	}
 
-	fromLink := opts.Domain == "" && !opts.Create && project != nil && strings.EqualFold(project.Domain, website.Domain)
+	fromLink := opts.Domain == "" && !opts.Create && linked
 	d.typ = opts.Type
 	switch {
 	case d.headless:
@@ -302,7 +304,11 @@ func (d *deployment) target(detected Type) error {
 		// The plan says what the real run would ask, or need --yes for without a terminal.
 		d.result.OverwritesContent, _ = hasContent(d.ctx, d.a, website, d.headless)
 	case !fromLink && !created:
-		return confirmOverwrite(d.ctx, d.a, d.ui, website, opts, d.headless)
+		why := ""
+		if d.committed != "" && opts.Domain == "" && !opts.Create {
+			why = " (the link file " + d.committed + " is committed to this repository, so it is not taken as consent; run `git rm --cached " + d.committed + "` to keep the link local)"
+		}
+		return confirmOverwrite(d.ctx, d.a, d.ui, website, opts, d.headless, why)
 	}
 	return nil
 }

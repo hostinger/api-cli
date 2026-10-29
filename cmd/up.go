@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
-	"regexp"
 	"strconv"
 	"syscall"
 
@@ -138,15 +137,15 @@ func runUp(cmd *cobra.Command, path string) error {
 	}
 	switch {
 	case out.Note != "":
-		pterm.Info.Printfln("Not finished yet: %s", out.Note)
+		pterm.Info.Printfln("Not finished yet: %s", utils.SafeText(out.Note))
 	case out.Reachable:
-		pterm.Success.Printfln("Live at %s", out.URL)
+		pterm.Success.Printfln("Live at %s", utils.SafeText(out.URL))
 	default:
-		pterm.Success.Printfln("Deployed to %s", out.Target)
-		pterm.Info.Println(out.ReachableNote)
+		pterm.Success.Printfln("Deployed to %s", utils.SafeText(out.Target))
+		pterm.Info.Println(utils.SafeText(out.ReachableNote))
 	}
 	if out.NewLink {
-		pterm.Info.Printfln("Linked this directory to %s; `hostinger up` now redeploys there. %s", out.Target, hosting.RelinkHint)
+		pterm.Info.Printfln("Linked this directory to %s; `hostinger up` now redeploys there. %s", utils.SafeText(out.Target), hosting.RelinkHint)
 	}
 	return nil
 }
@@ -163,13 +162,8 @@ func withError(out *hosting.Outcome, err error) map[string]any {
 	return m
 }
 
-var ansiEscape = regexp.MustCompile(`\x1b\[[0-9;?]*[ -/]*[@-~]`)
-
-// plainLogs strips colour codes when they would show as text.
+// plainLogs keeps build-tool colours only where they show as colours.
 func plainLogs(logs string) string {
 	_, noColor := os.LookupEnv("NO_COLOR")
-	if noColor || !term.IsTerminal(int(os.Stderr.Fd())) {
-		return ansiEscape.ReplaceAllString(logs, "")
-	}
-	return logs
+	return utils.SafeLog(logs, !noColor && term.IsTerminal(int(os.Stderr.Fd())))
 }

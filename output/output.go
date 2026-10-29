@@ -86,7 +86,8 @@ func SelectedFormat(cmd *cobra.Command) (string, error) {
 }
 
 // printJQ applies a jq expression to the response. Strings print raw (like
-// jq -r); every other result prints as compact JSON, one per line.
+// jq -r); every other result prints as compact JSON, one per line. On a
+// terminal raw strings lose control characters; piped, they stay byte-exact.
 func printJQ(expr string, body []byte) error {
 	q, err := gojq.Parse(expr)
 	if err != nil {
@@ -101,6 +102,7 @@ func printJQ(expr string, body []byte) error {
 	iter := q.Run(normalizeNumbers(input))
 	enc := json.NewEncoder(out())
 	enc.SetEscapeHTML(false) // print & < > like jq does
+	terminal := stdoutIsTerminal()
 	for {
 		v, ok := iter.Next()
 		if !ok {
@@ -110,6 +112,9 @@ func printJQ(expr string, body []byte) error {
 			return fmt.Errorf("--jq: %w", err)
 		}
 		if s, ok := v.(string); ok {
+			if terminal {
+				s = utils.SafeText(s)
+			}
 			fmt.Fprintln(out(), s)
 			continue
 		}
@@ -136,6 +141,27 @@ func normalizeNumbers(v any) any {
 	case []any:
 		for i, x := range t {
 			t[i] = normalizeNumbers(x)
+		}
+	}
+	return v
+}
+
+// safeJSON strips terminal control characters from every key and string of a
+// decoded response before table/tree rendering, so text written by other
+// people (form submissions, orders) cannot drive the terminal.
+func safeJSON(v any) any {
+	switch t := v.(type) {
+	case string:
+		return utils.SafeText(t)
+	case map[string]any:
+		m := make(map[string]any, len(t))
+		for k, x := range t {
+			m[utils.SafeText(k)] = safeJSON(x)
+		}
+		return m
+	case []any:
+		for i, x := range t {
+			t[i] = safeJSON(x)
 		}
 	}
 	return v

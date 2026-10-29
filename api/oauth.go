@@ -5,6 +5,7 @@ import (
 	"context"
 	"crypto/rand"
 	"crypto/sha256"
+	"crypto/subtle"
 	"embed"
 	"encoding/base64"
 	"encoding/hex"
@@ -594,15 +595,17 @@ func (s *OAuthService) awaitCallback(ctx context.Context, listener net.Listener,
 		}
 		q := r.URL.Query()
 
-		if e := q.Get("error"); e != "" {
-			renderPage(w, http.StatusBadRequest, errorTemplate, e)
-			reply(result{err: fmt.Errorf("authorization failed: %s", e)})
+		// CSRF guard, checked first: a request without our state is a forgery or
+		// a stray hit. It gets an error page but does not end the flow, so it
+		// can neither abort sign-in nor put its own text in front of the user.
+		if subtle.ConstantTimeCompare([]byte(q.Get("state")), []byte(expectedState)) != 1 {
+			renderPage(w, http.StatusBadRequest, errorTemplate, "invalid_state")
 			return
 		}
-		// CSRF guard: the state must match byte-for-byte what we generated.
-		if q.Get("state") != expectedState {
-			renderPage(w, http.StatusBadRequest, errorTemplate, "state mismatch")
-			reply(result{err: errors.New("oauth state mismatch")})
+		if e := q.Get("error"); e != "" {
+			code := oauthErrorCode(e)
+			renderPage(w, http.StatusBadRequest, errorTemplate, code)
+			reply(result{err: fmt.Errorf("authorization failed: %s", code)})
 			return
 		}
 		code := q.Get("code")
@@ -629,6 +632,26 @@ func (s *OAuthService) awaitCallback(ctx context.Context, listener net.Listener,
 	case res := <-done:
 		return res.code, res.err
 	}
+}
+
+// oauthErrorCodes are the RFC 6749 §4.1.2.1 authorization error codes.
+var oauthErrorCodes = map[string]bool{
+	"invalid_request":           true,
+	"unauthorized_client":       true,
+	"access_denied":             true,
+	"unsupported_response_type": true,
+	"invalid_scope":             true,
+	"server_error":              true,
+	"temporarily_unavailable":   true,
+}
+
+// oauthErrorCode maps an ?error= value onto a known code so arbitrary callback
+// input never reaches the terminal or the page.
+func oauthErrorCode(e string) string {
+	if oauthErrorCodes[e] {
+		return e
+	}
+	return "unknown_error"
 }
 
 func (s *OAuthService) authorizeURL(clientID, redirectURI, state, challenge string) string {

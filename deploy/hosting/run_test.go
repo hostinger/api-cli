@@ -661,6 +661,9 @@ func TestPlainText(t *testing.T) {
 	if PlainText("") != "" {
 		t.Error("empty stays empty")
 	}
+	if got, want := PlainText("<b>Fix</b>\x1b]52;c;aGk=\x07 now\r"), "Fix\uFFFD]52;c;aGk=\uFFFD now\uFFFD"; got != want {
+		t.Errorf("PlainText = %q, want %q", got, want)
+	}
 }
 
 func TestReviewReasksUntilSettingsFit(t *testing.T) {

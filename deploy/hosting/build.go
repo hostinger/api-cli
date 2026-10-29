@@ -15,6 +15,7 @@ import (
 	"time"
 
 	"github.com/hostinger/api-cli/site"
+	"github.com/hostinger/api-cli/utils"
 )
 
 // BuildError is a failed Node.js build with the server's logs and analysis.
@@ -262,7 +263,7 @@ func sortedKeys(m map[string]string) []string {
 
 var htmlTag = regexp.MustCompile(`<[^>]+>`)
 
-// PlainText renders the build analysis HTML for a terminal.
+// PlainText renders the build analysis HTML for a terminal, without control characters.
 func PlainText(html string) string {
 	if html == "" {
 		return ""
@@ -281,7 +282,7 @@ func PlainText(html string) string {
 			lines = append(lines, line)
 		}
 	}
-	return strings.Join(lines, "\n")
+	return utils.SafeText(strings.Join(lines, "\n"))
 }
 
 // NodeVersions, AppTypes and PackageManagers are what the build API accepts.

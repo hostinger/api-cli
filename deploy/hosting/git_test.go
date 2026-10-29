@@ -497,3 +497,82 @@ func TestCheckoutBehindOriginIsNotUnpushed(t *testing.T) {
 		t.Errorf("behind origin reported as %q", work)
 	}
 }
+
+// committedLink ships a link naming example.com in linkDir, force-added to a
+// repository at root, as a cloned repository can.
+func committedLink(t *testing.T, root, linkDir string) {
+	t.Helper()
+	write(t, linkDir, filepath.Join(site.Dir, site.File), `{"domain":"example.com","type":"static"}`)
+	repo, err := git.PlainInit(root, false)
+	if err != nil {
+		t.Fatal(err)
+	}
+	wt, err := repo.Worktree()
+	if err != nil {
+		t.Fatal(err)
+	}
+	rel, err := filepath.Rel(root, site.Path(linkDir))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := wt.Add(filepath.ToSlash(rel)); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCommittedLinkIsNotConsent(t *testing.T) {
+	fastPolling(t)
+	api := newFake(t)
+	api.content = true
+	dir := staticProject(t)
+	committedLink(t, dir, dir)
+
+	// Interactive: asked, saying why, and "no" uploads nothing.
+	ui := &fakeUI{t: t, interactive: true, confirms: []bool{false}}
+	_, err := Run(context.Background(), api, ui, Options{Path: dir})
+	if err == nil || !strings.Contains(err.Error(), "cancelled") {
+		t.Errorf("err = %v", err)
+	}
+	if len(ui.asked) != 1 || !strings.Contains(ui.asked[0], "is committed to this repository") || !strings.Contains(ui.asked[0], "run `git rm --cached "+site.Path(dir)+"` to keep the link local") {
+		t.Errorf("asked = %q", ui.asked)
+	}
+	if strings.Contains(strings.Join(api.calls, "\n"), "creds") {
+		t.Error("uploaded after a refused overwrite")
+	}
+
+	// Without a terminal it needs --yes.
+	_, err = Run(context.Background(), api, &fakeUI{t: t}, Options{Path: dir})
+	if err == nil || !strings.Contains(err.Error(), "pass --yes") || !strings.Contains(err.Error(), "is committed to this repository") {
+		t.Errorf("err = %v", err)
+	}
+
+	// A dry run reports the overwrite.
+	res, err := Run(context.Background(), api, &fakeUI{t: t}, Options{Path: dir, DryRun: true})
+	if err != nil || !res.OverwritesContent {
+		t.Errorf("dry run = %+v, %v", res, err)
+	}
+
+	// --yes deploys.
+	if _, err := Run(context.Background(), api, &fakeUI{t: t}, Options{Path: dir, Yes: true}); err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(strings.Join(api.calls, "\n"), "creds") {
+		t.Error("--yes did not deploy")
+	}
+}
+
+func TestCommittedLinkInParentIsNotConsent(t *testing.T) {
+	fastPolling(t)
+	api := newFake(t)
+	api.content = true
+	root := t.TempDir()
+	app := filepath.Join(root, "app")
+	write(t, app, "index.html", "<h1>hi</h1>")
+	committedLink(t, root, root)
+	linkHere(t, app)
+
+	_, err := Run(context.Background(), api, &fakeUI{t: t}, Options{Path: app})
+	if err == nil || !strings.Contains(err.Error(), "pass --yes") || !strings.Contains(err.Error(), site.Path(root)) {
+		t.Errorf("err = %v", err)
+	}
+}

@@ -99,6 +99,25 @@ func TestFormatReturnsAPIError(t *testing.T) {
 	}
 }
 
+func TestFormatJQRawStringsOnTerminal(t *testing.T) {
+	body := []byte(`{"name":"a\u001b]52;c;aGk=\u0007b"}`)
+	for _, c := range []struct {
+		terminal bool
+		want     string
+	}{
+		{true, "a\uFFFD]52;c;aGk=\uFFFDb\n"},
+		{false, "a\x1b]52;c;aGk=\x07b\n"},
+	} {
+		buf := capture(t, c.terminal)
+		if err := Format(newCmd(t, map[string]string{"jq": ".name"}), body, 200); err != nil {
+			t.Fatal(err)
+		}
+		if buf.String() != c.want {
+			t.Errorf("terminal=%v: %q, want %q", c.terminal, buf.String(), c.want)
+		}
+	}
+}
+
 func TestFormatJQOnEmptyBodyPrintsNothing(t *testing.T) {
 	out := capture(t, false)
 	if err := Format(newCmd(t, map[string]string{"jq": "."}), nil, 204); err != nil {

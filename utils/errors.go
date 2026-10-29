@@ -87,6 +87,7 @@ func HandleError(w io.Writer, cmd *cobra.Command, err error) int {
 	if err == nil || errors.Is(err, ErrDryRun) {
 		return ExitOK
 	}
+	w = safeWriter{w} // messages, field errors and correlation IDs come from the server
 	if errors.Is(err, ErrAborted) {
 		fmt.Fprintln(w, "Aborted.")
 		return ExitError

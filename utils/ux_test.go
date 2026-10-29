@@ -345,6 +345,10 @@ func TestHandleError(t *testing.T) {
 		{NewAPIError(422, []byte(`{"message":"Invalid","errors":{"redirect_url":["must be a URL"],"setup.hostname":["is taken"],"other":["x"]}}`)), ExitValidation,
 			[]string{"  --redirect-url: must be a URL", "  --setup (hostname): is taken", "  other: x"}},
 		{NewAPIError(500, []byte(`oops`)), ExitError, []string{"Error: oops (HTTP 500)"}},
+		{NewAPIError(500, []byte("\x1b]52;c;aGk=\x07oops\x1b[2K")), ExitError, []string{"oops\uFFFD[2K (HTTP 500)"}},
+		{NewAPIError(422, []byte(`{"message":"Bad\u001b[2K","errors":{"x\u001b]0;t\u0007":["m\u001b[2K"]},"correlation_id":"c\u0007"}`)), ExitValidation,
+			[]string{"Error: Bad\uFFFD[2K", "  x\uFFFD]0;t\uFFFD: m\uFFFD[2K", "Correlation ID: c\uFFFD"}},
+		{errors.New("dial \x1b[2Kfailed"), ExitError, []string{"Error: dial \uFFFD[2Kfailed"}},
 	}
 	for _, c := range cases {
 		var w bytes.Buffer
@@ -355,6 +359,9 @@ func TestHandleError(t *testing.T) {
 			if !strings.Contains(w.String(), want) {
 				t.Errorf("%v: output missing %q:\n%s", c.err, want, w.String())
 			}
+		}
+		if strings.ContainsAny(w.String(), "\x1b\x07") {
+			t.Errorf("%v: control characters in output: %q", c.err, w.String())
 		}
 	}
 }

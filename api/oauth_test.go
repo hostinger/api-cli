@@ -415,10 +415,48 @@ func TestAwaitCallback_Success(t *testing.T) {
 	}
 }
 
-func TestAwaitCallback_StateMismatch(t *testing.T) {
-	code, err := runCallback(t, "expected-state", "/oauth/callback?code=abc&state=wrong")
-	if err == nil || !strings.Contains(err.Error(), "state mismatch") {
-		t.Fatalf("err = %v, want state mismatch", err)
+func TestAwaitCallback_WrongStateIsIgnored(t *testing.T) {
+	code, err, pages := runCallbacks(t, "expected-state", 5*time.Second,
+		"/oauth/callback?code=forged&state=wrong",
+		"/oauth/callback?code=abc&state=expected-state",
+	)
+	if err != nil || code != "abc" {
+		t.Fatalf("awaitCallback = (%q, %v), want (abc, nil)", code, err)
+	}
+	assertInvalidStatePage(t, pages[0])
+}
+
+func TestAwaitCallback_MissingStateIsIgnored(t *testing.T) {
+	code, err, pages := runCallbacks(t, "expected-state", 5*time.Second,
+		"/oauth/callback?code=forged",
+		"/oauth/callback?code=abc&state=expected-state",
+	)
+	if err != nil || code != "abc" {
+		t.Fatalf("awaitCallback = (%q, %v), want (abc, nil)", code, err)
+	}
+	assertInvalidStatePage(t, pages[0])
+}
+
+func TestAwaitCallback_ForgedErrorIsIgnored(t *testing.T) {
+	code, err, pages := runCallbacks(t, "s", 5*time.Second,
+		"/oauth/callback?error=access_denied",
+		"/oauth/callback?error=access_denied&state=wrong",
+		"/oauth/callback?code=abc&state=s",
+	)
+	if err != nil || code != "abc" {
+		t.Fatalf("awaitCallback = (%q, %v), want (abc, nil)", code, err)
+	}
+	assertInvalidStatePage(t, pages[0])
+	assertInvalidStatePage(t, pages[1])
+}
+
+func TestAwaitCallback_OnlyIgnoredRequestsTimesOut(t *testing.T) {
+	code, err, _ := runCallbacks(t, "s", 300*time.Millisecond,
+		"/oauth/callback?error=access_denied",
+		"/oauth/callback?code=forged&state=wrong",
+	)
+	if !errors.Is(err, context.DeadlineExceeded) {
+		t.Fatalf("err = %v, want context.DeadlineExceeded", err)
 	}
 	if code != "" {
 		t.Errorf("code = %q, want empty", code)
@@ -426,17 +464,96 @@ func TestAwaitCallback_StateMismatch(t *testing.T) {
 }
 
 func TestAwaitCallback_AuthServerError(t *testing.T) {
-	code, err := runCallback(t, "s", "/oauth/callback?error=access_denied&state=s")
+	code, err, pages := runCallbacks(t, "s", 5*time.Second, "/oauth/callback?error=access_denied&state=s")
 	if err == nil || !strings.Contains(err.Error(), "access_denied") {
 		t.Fatalf("err = %v, want access_denied", err)
 	}
 	if code != "" {
 		t.Errorf("code = %q, want empty", code)
 	}
+	if pages[0].status != http.StatusBadRequest || !strings.Contains(pages[0].body, "access_denied") {
+		t.Errorf("page = %d %q, want 400 with access_denied", pages[0].status, pages[0].body)
+	}
 }
 
-// runCallback drives awaitCallback through a single GET and returns its result.
-func runCallback(t *testing.T, expectedState, requestPath string) (string, error) {
+func TestAwaitCallback_UnknownErrorIsNotEchoed(t *testing.T) {
+	code, err, pages := runCallbacks(t, "s", 5*time.Second, "/oauth/callback?error=%1b[31mpwned&state=s")
+	if err == nil || !strings.Contains(err.Error(), "unknown_error") {
+		t.Fatalf("err = %v, want unknown_error", err)
+	}
+	if strings.Contains(err.Error(), "\x1b") || strings.Contains(err.Error(), "pwned") {
+		t.Errorf("err = %q echoes the attacker-supplied error", err)
+	}
+	if code != "" {
+		t.Errorf("code = %q, want empty", code)
+	}
+	if strings.Contains(pages[0].body, "pwned") || !strings.Contains(pages[0].body, "unknown_error") {
+		t.Errorf("page body = %q, want unknown_error without the raw value", pages[0].body)
+	}
+}
+
+func TestAwaitCallback_MissingCode(t *testing.T) {
+	code, err, pages := runCallbacks(t, "s", 5*time.Second, "/oauth/callback?state=s")
+	if err == nil || !strings.Contains(err.Error(), "missing authorization code") {
+		t.Fatalf("err = %v, want missing authorization code", err)
+	}
+	if code != "" {
+		t.Errorf("code = %q, want empty", code)
+	}
+	if pages[0].status != http.StatusBadRequest {
+		t.Errorf("status = %d, want 400", pages[0].status)
+	}
+}
+
+func TestAwaitCallback_NonGetIs404(t *testing.T) {
+	s := newTestService(t, "http://unused")
+	ln, err := net.Listen("tcp", "127.0.0.1:0")
+	if err != nil {
+		t.Fatal(err)
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 300*time.Millisecond)
+	defer cancel()
+	out := make(chan error, 1)
+	go func() {
+		_, err := s.awaitCallback(ctx, ln, "s")
+		out <- err
+	}()
+
+	resp, err := http.Post(fmt.Sprintf("http://%s/oauth/callback?code=abc&state=s", ln.Addr()), "text/plain", nil)
+	if err != nil {
+		t.Fatalf("post: %v", err)
+	}
+	resp.Body.Close()
+	if resp.StatusCode != http.StatusNotFound {
+		t.Errorf("POST status = %d, want 404", resp.StatusCode)
+	}
+	if err := <-out; !errors.Is(err, context.DeadlineExceeded) {
+		t.Errorf("err = %v, want context.DeadlineExceeded", err)
+	}
+}
+
+func assertInvalidStatePage(t *testing.T, p callbackPage) {
+	t.Helper()
+	if p.status != http.StatusBadRequest {
+		t.Errorf("status = %d, want 400", p.status)
+	}
+	if !strings.Contains(p.body, "invalid_state") {
+		t.Errorf("body = %q, want invalid_state", p.body)
+	}
+	if strings.Contains(p.body, "access_denied") {
+		t.Errorf("body = %q echoes the forged error", p.body)
+	}
+}
+
+type callbackPage struct {
+	status int
+	body   string
+}
+
+// runCallbacks drives awaitCallback through the given GETs, in order, and
+// returns its result plus each response. The flow must still be waiting
+// before every request, so only the last one may resolve it.
+func runCallbacks(t *testing.T, expectedState string, timeout time.Duration, requestPaths ...string) (string, error, []callbackPage) {
 	t.Helper()
 	s := newTestService(t, "http://unused")
 	ln, err := net.Listen("tcp", "127.0.0.1:0")
@@ -450,22 +567,26 @@ func runCallback(t *testing.T, expectedState, requestPath string) (string, error
 		err  error
 	}
 	out := make(chan res, 1)
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	defer cancel()
 	go func() {
 		code, err := s.awaitCallback(ctx, ln, expectedState)
 		out <- res{code, err}
 	}()
 
-	resp, err := http.Get(fmt.Sprintf("http://127.0.0.1:%d%s", port, requestPath))
-	if err != nil {
-		t.Fatalf("get: %v", err)
+	pages := make([]callbackPage, 0, len(requestPaths))
+	for _, p := range requestPaths {
+		resp, err := http.Get(fmt.Sprintf("http://127.0.0.1:%d%s", port, p))
+		if err != nil {
+			t.Fatalf("get %s: %v", p, err)
+		}
+		body, _ := io.ReadAll(resp.Body)
+		resp.Body.Close()
+		pages = append(pages, callbackPage{resp.StatusCode, string(body)})
 	}
-	io.Copy(io.Discard, resp.Body)
-	resp.Body.Close()
 
 	r := <-out
-	return r.code, r.err
+	return r.code, r.err, pages
 }
 
 func TestErrorTemplate_EscapesUntrustedInput(t *testing.T) {

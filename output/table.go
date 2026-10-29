@@ -25,6 +25,7 @@ func displayJSONAsTables(body []byte) error {
 	if err := json.Unmarshal(body, &data); err != nil {
 		return fmt.Errorf("failed to unmarshal JSON: %w", err)
 	}
+	data = safeJSON(data)
 
 	switch v := data.(type) {
 	case []interface{}:

@@ -14,7 +14,7 @@ func printTreeEnhanced(body []byte) {
 		return
 	}
 
-	tree := createTreeNodeEnhanced("JSON", data)
+	tree := createTreeNodeEnhanced("JSON", safeJSON(data))
 	pterm.DefaultTree.WithRoot(tree).Render()
 }
 
