@@ -38,7 +38,11 @@ func IsArchive(path string) bool {
 // so no ignore file can bring them back.
 func isSecretFile(name string) bool {
 	switch name {
-	case ".env", ".envrc", ".netrc", ".git-credentials", ".pgpass": // .envrc: direnv
+	case ".env", ".envrc", ".netrc", ".git-credentials", ".pgpass", "auth.json", ".my.cnf", ".pypirc", ".vault-token": // .envrc: direnv
+		return true
+	}
+	// Shell and REPL histories, and Terraform state (it stores secrets in plain text).
+	if strings.HasSuffix(name, "_history") || strings.HasSuffix(name, ".tfstate") || strings.HasSuffix(name, ".tfstate.backup") {
 		return true
 	}
 	for _, key := range []string{"id_rsa", "id_dsa", "id_ecdsa", "id_ed25519"} {

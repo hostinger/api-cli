@@ -15,7 +15,7 @@ import (
 
 func TestListFilesSkipsJunkAndSecrets(t *testing.T) {
 	dir := t.TempDir()
-	for _, name := range []string{"index.html", "css/app.css", "node_modules/x/index.js", ".git/HEAD", ".hostinger/project.json", ".DS_Store", ".env", ".env.production", ".env.example", "src/.env.local", ".envrc", "sub/.git", ".netrc", ".git-credentials", "keys/id_ed25519", "certs/server.pem", "tls.key", ".svn/entries", ".hg/store"} {
+	for _, name := range []string{"index.html", "css/app.css", "node_modules/x/index.js", ".git/HEAD", ".hostinger/project.json", ".DS_Store", ".env", ".env.production", ".env.example", "src/.env.local", ".envrc", "sub/.git", ".netrc", ".git-credentials", "keys/id_ed25519", "certs/server.pem", "tls.key", ".svn/entries", ".hg/store", "auth.json", ".my.cnf", ".pypirc", ".vault-token", ".zsh_history", "infra/x.tfstate", "infra/x.tfstate.backup"} {
 		write(t, dir, name, "x")
 	}
 	if err := os.Symlink(filepath.Join(dir, "index.html"), filepath.Join(dir, "link.html")); err != nil {
@@ -26,7 +26,7 @@ func TestListFilesSkipsJunkAndSecrets(t *testing.T) {
 		t.Fatal(err)
 	}
 	wantFiles := []string{".env.example", "css/app.css", "index.html"}
-	wantSkipped := []string{".env", ".env.production", ".envrc", ".git-credentials", ".netrc", "certs/server.pem", "keys/id_ed25519", "src/.env.local", "tls.key"}
+	wantSkipped := []string{".env", ".env.production", ".envrc", ".git-credentials", ".my.cnf", ".netrc", ".pypirc", ".vault-token", ".zsh_history", "auth.json", "certs/server.pem", "infra/x.tfstate", "infra/x.tfstate.backup", "keys/id_ed25519", "src/.env.local", "tls.key"}
 	if !reflect.DeepEqual(l.Files, wantFiles) {
 		t.Errorf("files = %v, want %v", l.Files, wantFiles)
 	}
