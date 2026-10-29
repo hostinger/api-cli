@@ -18,7 +18,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-// The owner ticket errors. They map 1:1 to hcdn-connector's pkg/connector
+// The owner ticket errors. They map 1:1 to the connector library's
 // errors of the same names; replace them with those when the connector
 // dependency lands.
 var (
@@ -39,7 +39,7 @@ const (
 	maxOwnerResponse = 64 << 10
 )
 
-// OwnerTicketFunc is the shape of hcdn-connector's QuickOptions.OwnerTicket.
+// OwnerTicketFunc is the shape of the connector library's owner ticket callback.
 type OwnerTicketFunc func(ctx context.Context, tunnelID string, notAfter time.Time) (string, error)
 
 // TokenSource returns the bearer token for the owner ticket call. rejected is
@@ -226,7 +226,7 @@ type cachedTokener interface {
 	ReplaceToken(ctx context.Context, rejected string) (string, error)
 }
 
-// CLIToken is the CLI's token source for the owner ticket (OT10). The order
+// CLIToken is the CLI's token source for the owner ticket. The order
 // matches api/request.go:
 //  1. api_token as viper resolves it (HOSTINGER_API_TOKEN, then the legacy
 //     HAPI_API_TOKEN, then the config file), sent as is;
