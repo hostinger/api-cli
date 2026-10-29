@@ -9197,7 +9197,8 @@ type EcommerceV1OrderOrderDetailResource struct {
 	// MerchantNote Internal note visible only to the merchant.
 	//
 	// Example: Ship in a gift box.
-	MerchantNote *string `json:"merchant_note,omitempty"`
+	MerchantNote *string                                `json:"merchant_note,omitempty"`
+	Metadata     *EcommerceV1OrderOrderMetadataResource `json:"metadata,omitempty"`
 
 	// PaidTotal Amount paid in the smallest currency unit.
 	//
@@ -9269,6 +9270,14 @@ type EcommerceV1OrderOrderDetailResource struct {
 // EcommerceV1OrderOrderDetailResponseResource defines model for Ecommerce.V1.Order.OrderDetailResponseResource.
 type EcommerceV1OrderOrderDetailResponseResource struct {
 	Data *EcommerceV1OrderOrderDetailResource `json:"data,omitempty"`
+}
+
+// EcommerceV1OrderOrderMetadataResource defines model for Ecommerce.V1.Order.OrderMetadataResource.
+type EcommerceV1OrderOrderMetadataResource struct {
+	// Attributes Custom attributes collected at checkout, keyed by attribute name, or null.
+	//
+	// Example: {"gift_message":"Happy birthday!"}
+	Attributes *map[string]string `json:"attributes,omitempty"`
 }
 
 // EcommerceV1OrderOrderResource defines model for Ecommerce.V1.Order.OrderResource.
