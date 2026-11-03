@@ -192,7 +192,8 @@ func Confirm(cmd *cobra.Command, action string, args []string) error {
 	}
 	target := ""
 	if len(args) > 0 {
-		target = " " + strings.Join(args, " ")
+		// The target can come from a link a cloned repository shipped.
+		target = " " + strings.ReplaceAll(SafeText(strings.Join(args, " ")), "\n", " ")
 	}
 	fmt.Fprintf(promptOut, "%s%s? [y/N]: ", strings.TrimSuffix(action, "."), target)
 	line, _ := promptIn.ReadString('\n')
@@ -209,7 +210,7 @@ func Confirm(cmd *cobra.Command, action string, args []string) error {
 func ConfirmScoped(cmd *cobra.Command, action string, args []string, typed bool) error {
 	dryRun := flagBool(cmd, "dry-run") || viper.GetBool("dry_run")
 	if !typed && !dryRun && (flagBool(cmd, "yes") || !Interactive(cmd)) && len(args) > 0 {
-		return FlagErrorf("%q would act on %s, which was not typed but came from --domain, the environment, the link or the config: pass it as an argument", cmd.CommandPath(), args[0])
+		return FlagErrorf("%q would act on %s, which was not typed but came from --domain, the environment, the link or the config: pass it as an argument", cmd.CommandPath(), strings.ReplaceAll(SafeText(args[0]), "\n", " "))
 	}
 	return Confirm(cmd, action, args)
 }

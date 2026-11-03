@@ -153,6 +153,25 @@ func TestConfirm(t *testing.T) {
 	}
 }
 
+func TestConfirmStripsControlCharacters(t *testing.T) {
+	// A link file from a cloned repository can carry the username.
+	hostile := "u123\x1b[2K\r\nDelete nothing\u009b2K"
+	out := fakeTTY(t, "n\n")
+	c := newCmd()
+	c.Flags().BoolP("yes", "y", false, "")
+	_ = Confirm(c, "Delete website", []string{hostile})
+	if strings.ContainsAny(out.String(), "\x1b\r\n\u009b") || !strings.Contains(out.String(), "u123") {
+		t.Errorf("prompt = %q", out.String())
+	}
+
+	c = newCmd()
+	c.Flags().BoolP("yes", "y", false, "")
+	_ = c.Flags().Set("yes", "true")
+	if err := ConfirmScoped(c, "Delete website", []string{hostile}, false); err == nil || strings.ContainsAny(err.Error(), "\x1b\r\n\u009b") {
+		t.Errorf("error = %v", err)
+	}
+}
+
 func TestJSONValueSources(t *testing.T) {
 	if v, err := JSONValue(`{"a":1}`, "setup"); err != nil || v.(map[string]any)["a"] != float64(1) {
 		t.Errorf("inline: %v %v", v, err)
