@@ -4785,6 +4785,165 @@ func (e CountType) Valid() bool {
 	}
 }
 
+// Defines values for GpuCurrencyQuery.
+const (
+	GpuCurrencyQueryAMD GpuCurrencyQuery = "AMD"
+	GpuCurrencyQueryARS GpuCurrencyQuery = "ARS"
+	GpuCurrencyQueryAUD GpuCurrencyQuery = "AUD"
+	GpuCurrencyQueryAZN GpuCurrencyQuery = "AZN"
+	GpuCurrencyQueryBDT GpuCurrencyQuery = "BDT"
+	GpuCurrencyQueryBRL GpuCurrencyQuery = "BRL"
+	GpuCurrencyQueryBTC GpuCurrencyQuery = "BTC"
+	GpuCurrencyQueryBYN GpuCurrencyQuery = "BYN"
+	GpuCurrencyQueryCAD GpuCurrencyQuery = "CAD"
+	GpuCurrencyQueryCHF GpuCurrencyQuery = "CHF"
+	GpuCurrencyQueryCLP GpuCurrencyQuery = "CLP"
+	GpuCurrencyQueryCNY GpuCurrencyQuery = "CNY"
+	GpuCurrencyQueryCOP GpuCurrencyQuery = "COP"
+	GpuCurrencyQueryCZK GpuCurrencyQuery = "CZK"
+	GpuCurrencyQueryDKK GpuCurrencyQuery = "DKK"
+	GpuCurrencyQueryEGP GpuCurrencyQuery = "EGP"
+	GpuCurrencyQueryEUR GpuCurrencyQuery = "EUR"
+	GpuCurrencyQueryGBP GpuCurrencyQuery = "GBP"
+	GpuCurrencyQueryGEL GpuCurrencyQuery = "GEL"
+	GpuCurrencyQueryHKD GpuCurrencyQuery = "HKD"
+	GpuCurrencyQueryHRK GpuCurrencyQuery = "HRK"
+	GpuCurrencyQueryHUF GpuCurrencyQuery = "HUF"
+	GpuCurrencyQueryIDR GpuCurrencyQuery = "IDR"
+	GpuCurrencyQueryILS GpuCurrencyQuery = "ILS"
+	GpuCurrencyQueryINR GpuCurrencyQuery = "INR"
+	GpuCurrencyQueryJPY GpuCurrencyQuery = "JPY"
+	GpuCurrencyQueryKGS GpuCurrencyQuery = "KGS"
+	GpuCurrencyQueryKRW GpuCurrencyQuery = "KRW"
+	GpuCurrencyQueryKZT GpuCurrencyQuery = "KZT"
+	GpuCurrencyQueryMAD GpuCurrencyQuery = "MAD"
+	GpuCurrencyQueryMXN GpuCurrencyQuery = "MXN"
+	GpuCurrencyQueryMYR GpuCurrencyQuery = "MYR"
+	GpuCurrencyQueryNGN GpuCurrencyQuery = "NGN"
+	GpuCurrencyQueryNOK GpuCurrencyQuery = "NOK"
+	GpuCurrencyQueryNZD GpuCurrencyQuery = "NZD"
+	GpuCurrencyQueryPEN GpuCurrencyQuery = "PEN"
+	GpuCurrencyQueryPHP GpuCurrencyQuery = "PHP"
+	GpuCurrencyQueryPKR GpuCurrencyQuery = "PKR"
+	GpuCurrencyQueryPLN GpuCurrencyQuery = "PLN"
+	GpuCurrencyQuerySEK GpuCurrencyQuery = "SEK"
+	GpuCurrencyQuerySGD GpuCurrencyQuery = "SGD"
+	GpuCurrencyQueryTHB GpuCurrencyQuery = "THB"
+	GpuCurrencyQueryTJS GpuCurrencyQuery = "TJS"
+	GpuCurrencyQueryTRY GpuCurrencyQuery = "TRY"
+	GpuCurrencyQueryTWD GpuCurrencyQuery = "TWD"
+	GpuCurrencyQueryUAH GpuCurrencyQuery = "UAH"
+	GpuCurrencyQueryUSD GpuCurrencyQuery = "USD"
+	GpuCurrencyQueryVND GpuCurrencyQuery = "VND"
+	GpuCurrencyQueryZAR GpuCurrencyQuery = "ZAR"
+)
+
+// Valid indicates whether the value is a known member of the GpuCurrencyQuery enum.
+func (e GpuCurrencyQuery) Valid() bool {
+	switch e {
+	case GpuCurrencyQueryAMD:
+		return true
+	case GpuCurrencyQueryARS:
+		return true
+	case GpuCurrencyQueryAUD:
+		return true
+	case GpuCurrencyQueryAZN:
+		return true
+	case GpuCurrencyQueryBDT:
+		return true
+	case GpuCurrencyQueryBRL:
+		return true
+	case GpuCurrencyQueryBTC:
+		return true
+	case GpuCurrencyQueryBYN:
+		return true
+	case GpuCurrencyQueryCAD:
+		return true
+	case GpuCurrencyQueryCHF:
+		return true
+	case GpuCurrencyQueryCLP:
+		return true
+	case GpuCurrencyQueryCNY:
+		return true
+	case GpuCurrencyQueryCOP:
+		return true
+	case GpuCurrencyQueryCZK:
+		return true
+	case GpuCurrencyQueryDKK:
+		return true
+	case GpuCurrencyQueryEGP:
+		return true
+	case GpuCurrencyQueryEUR:
+		return true
+	case GpuCurrencyQueryGBP:
+		return true
+	case GpuCurrencyQueryGEL:
+		return true
+	case GpuCurrencyQueryHKD:
+		return true
+	case GpuCurrencyQueryHRK:
+		return true
+	case GpuCurrencyQueryHUF:
+		return true
+	case GpuCurrencyQueryIDR:
+		return true
+	case GpuCurrencyQueryILS:
+		return true
+	case GpuCurrencyQueryINR:
+		return true
+	case GpuCurrencyQueryJPY:
+		return true
+	case GpuCurrencyQueryKGS:
+		return true
+	case GpuCurrencyQueryKRW:
+		return true
+	case GpuCurrencyQueryKZT:
+		return true
+	case GpuCurrencyQueryMAD:
+		return true
+	case GpuCurrencyQueryMXN:
+		return true
+	case GpuCurrencyQueryMYR:
+		return true
+	case GpuCurrencyQueryNGN:
+		return true
+	case GpuCurrencyQueryNOK:
+		return true
+	case GpuCurrencyQueryNZD:
+		return true
+	case GpuCurrencyQueryPEN:
+		return true
+	case GpuCurrencyQueryPHP:
+		return true
+	case GpuCurrencyQueryPKR:
+		return true
+	case GpuCurrencyQueryPLN:
+		return true
+	case GpuCurrencyQuerySEK:
+		return true
+	case GpuCurrencyQuerySGD:
+		return true
+	case GpuCurrencyQueryTHB:
+		return true
+	case GpuCurrencyQueryTJS:
+		return true
+	case GpuCurrencyQueryTRY:
+		return true
+	case GpuCurrencyQueryTWD:
+		return true
+	case GpuCurrencyQueryUAH:
+		return true
+	case GpuCurrencyQueryUSD:
+		return true
+	case GpuCurrencyQueryVND:
+		return true
+	case GpuCurrencyQueryZAR:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for MailAccessLogProtocol.
 const (
 	MailAccessLogProtocolImap MailAccessLogProtocol = "imap"
@@ -5418,6 +5577,165 @@ func (e EcommerceListProductsV1ParamsInclude) Valid() bool {
 	case Media:
 		return true
 	case Variants:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for GPUGetPoolGroupsV1ParamsCurrency.
+const (
+	GPUGetPoolGroupsV1ParamsCurrencyAMD GPUGetPoolGroupsV1ParamsCurrency = "AMD"
+	GPUGetPoolGroupsV1ParamsCurrencyARS GPUGetPoolGroupsV1ParamsCurrency = "ARS"
+	GPUGetPoolGroupsV1ParamsCurrencyAUD GPUGetPoolGroupsV1ParamsCurrency = "AUD"
+	GPUGetPoolGroupsV1ParamsCurrencyAZN GPUGetPoolGroupsV1ParamsCurrency = "AZN"
+	GPUGetPoolGroupsV1ParamsCurrencyBDT GPUGetPoolGroupsV1ParamsCurrency = "BDT"
+	GPUGetPoolGroupsV1ParamsCurrencyBRL GPUGetPoolGroupsV1ParamsCurrency = "BRL"
+	GPUGetPoolGroupsV1ParamsCurrencyBTC GPUGetPoolGroupsV1ParamsCurrency = "BTC"
+	GPUGetPoolGroupsV1ParamsCurrencyBYN GPUGetPoolGroupsV1ParamsCurrency = "BYN"
+	GPUGetPoolGroupsV1ParamsCurrencyCAD GPUGetPoolGroupsV1ParamsCurrency = "CAD"
+	GPUGetPoolGroupsV1ParamsCurrencyCHF GPUGetPoolGroupsV1ParamsCurrency = "CHF"
+	GPUGetPoolGroupsV1ParamsCurrencyCLP GPUGetPoolGroupsV1ParamsCurrency = "CLP"
+	GPUGetPoolGroupsV1ParamsCurrencyCNY GPUGetPoolGroupsV1ParamsCurrency = "CNY"
+	GPUGetPoolGroupsV1ParamsCurrencyCOP GPUGetPoolGroupsV1ParamsCurrency = "COP"
+	GPUGetPoolGroupsV1ParamsCurrencyCZK GPUGetPoolGroupsV1ParamsCurrency = "CZK"
+	GPUGetPoolGroupsV1ParamsCurrencyDKK GPUGetPoolGroupsV1ParamsCurrency = "DKK"
+	GPUGetPoolGroupsV1ParamsCurrencyEGP GPUGetPoolGroupsV1ParamsCurrency = "EGP"
+	GPUGetPoolGroupsV1ParamsCurrencyEUR GPUGetPoolGroupsV1ParamsCurrency = "EUR"
+	GPUGetPoolGroupsV1ParamsCurrencyGBP GPUGetPoolGroupsV1ParamsCurrency = "GBP"
+	GPUGetPoolGroupsV1ParamsCurrencyGEL GPUGetPoolGroupsV1ParamsCurrency = "GEL"
+	GPUGetPoolGroupsV1ParamsCurrencyHKD GPUGetPoolGroupsV1ParamsCurrency = "HKD"
+	GPUGetPoolGroupsV1ParamsCurrencyHRK GPUGetPoolGroupsV1ParamsCurrency = "HRK"
+	GPUGetPoolGroupsV1ParamsCurrencyHUF GPUGetPoolGroupsV1ParamsCurrency = "HUF"
+	GPUGetPoolGroupsV1ParamsCurrencyIDR GPUGetPoolGroupsV1ParamsCurrency = "IDR"
+	GPUGetPoolGroupsV1ParamsCurrencyILS GPUGetPoolGroupsV1ParamsCurrency = "ILS"
+	GPUGetPoolGroupsV1ParamsCurrencyINR GPUGetPoolGroupsV1ParamsCurrency = "INR"
+	GPUGetPoolGroupsV1ParamsCurrencyJPY GPUGetPoolGroupsV1ParamsCurrency = "JPY"
+	GPUGetPoolGroupsV1ParamsCurrencyKGS GPUGetPoolGroupsV1ParamsCurrency = "KGS"
+	GPUGetPoolGroupsV1ParamsCurrencyKRW GPUGetPoolGroupsV1ParamsCurrency = "KRW"
+	GPUGetPoolGroupsV1ParamsCurrencyKZT GPUGetPoolGroupsV1ParamsCurrency = "KZT"
+	GPUGetPoolGroupsV1ParamsCurrencyMAD GPUGetPoolGroupsV1ParamsCurrency = "MAD"
+	GPUGetPoolGroupsV1ParamsCurrencyMXN GPUGetPoolGroupsV1ParamsCurrency = "MXN"
+	GPUGetPoolGroupsV1ParamsCurrencyMYR GPUGetPoolGroupsV1ParamsCurrency = "MYR"
+	GPUGetPoolGroupsV1ParamsCurrencyNGN GPUGetPoolGroupsV1ParamsCurrency = "NGN"
+	GPUGetPoolGroupsV1ParamsCurrencyNOK GPUGetPoolGroupsV1ParamsCurrency = "NOK"
+	GPUGetPoolGroupsV1ParamsCurrencyNZD GPUGetPoolGroupsV1ParamsCurrency = "NZD"
+	GPUGetPoolGroupsV1ParamsCurrencyPEN GPUGetPoolGroupsV1ParamsCurrency = "PEN"
+	GPUGetPoolGroupsV1ParamsCurrencyPHP GPUGetPoolGroupsV1ParamsCurrency = "PHP"
+	GPUGetPoolGroupsV1ParamsCurrencyPKR GPUGetPoolGroupsV1ParamsCurrency = "PKR"
+	GPUGetPoolGroupsV1ParamsCurrencyPLN GPUGetPoolGroupsV1ParamsCurrency = "PLN"
+	GPUGetPoolGroupsV1ParamsCurrencySEK GPUGetPoolGroupsV1ParamsCurrency = "SEK"
+	GPUGetPoolGroupsV1ParamsCurrencySGD GPUGetPoolGroupsV1ParamsCurrency = "SGD"
+	GPUGetPoolGroupsV1ParamsCurrencyTHB GPUGetPoolGroupsV1ParamsCurrency = "THB"
+	GPUGetPoolGroupsV1ParamsCurrencyTJS GPUGetPoolGroupsV1ParamsCurrency = "TJS"
+	GPUGetPoolGroupsV1ParamsCurrencyTRY GPUGetPoolGroupsV1ParamsCurrency = "TRY"
+	GPUGetPoolGroupsV1ParamsCurrencyTWD GPUGetPoolGroupsV1ParamsCurrency = "TWD"
+	GPUGetPoolGroupsV1ParamsCurrencyUAH GPUGetPoolGroupsV1ParamsCurrency = "UAH"
+	GPUGetPoolGroupsV1ParamsCurrencyUSD GPUGetPoolGroupsV1ParamsCurrency = "USD"
+	GPUGetPoolGroupsV1ParamsCurrencyVND GPUGetPoolGroupsV1ParamsCurrency = "VND"
+	GPUGetPoolGroupsV1ParamsCurrencyZAR GPUGetPoolGroupsV1ParamsCurrency = "ZAR"
+)
+
+// Valid indicates whether the value is a known member of the GPUGetPoolGroupsV1ParamsCurrency enum.
+func (e GPUGetPoolGroupsV1ParamsCurrency) Valid() bool {
+	switch e {
+	case GPUGetPoolGroupsV1ParamsCurrencyAMD:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyARS:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyAUD:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyAZN:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyBDT:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyBRL:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyBTC:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyBYN:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyCAD:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyCHF:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyCLP:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyCNY:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyCOP:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyCZK:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyDKK:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyEGP:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyEUR:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyGBP:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyGEL:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyHKD:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyHRK:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyHUF:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyIDR:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyILS:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyINR:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyJPY:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyKGS:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyKRW:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyKZT:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyMAD:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyMXN:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyMYR:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyNGN:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyNOK:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyNZD:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyPEN:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyPHP:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyPKR:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyPLN:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencySEK:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencySGD:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyTHB:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyTJS:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyTRY:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyTWD:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyUAH:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyUSD:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyVND:
+		return true
+	case GPUGetPoolGroupsV1ParamsCurrencyZAR:
 		return true
 	default:
 		return false
@@ -10425,6 +10743,167 @@ type EcommerceV1VariantVariantResource struct {
 // EcommerceV1VariantVariantResponseResource defines model for Ecommerce.V1.Variant.VariantResponseResource.
 type EcommerceV1VariantVariantResponseResource struct {
 	Data *EcommerceV1VariantVariantResource `json:"data,omitempty"`
+}
+
+// GPUV1OsTemplateOsTemplateCollection Array of [`GPU.V1.OsTemplate.OsTemplateResource`](#model/gpuv1ostemplateostemplateresource)
+type GPUV1OsTemplateOsTemplateCollection = []GPUV1OsTemplateOsTemplateResource
+
+// GPUV1OsTemplateOsTemplateResource defines model for GPU.V1.OsTemplate.OsTemplateResource.
+type GPUV1OsTemplateOsTemplateResource struct {
+	// DarkImageId Dark theme icon image ID
+	//
+	// Example: hgpu-app-icon-ubuntu-dark
+	DarkImageId *string `json:"dark_image_id,omitempty"`
+
+	// Id OS template ID
+	//
+	// Example: 23
+	Id *int `json:"id,omitempty"`
+
+	// Image Icon image ID
+	//
+	// Example: hgpu-app-icon-ubuntu
+	Image *string `json:"image,omitempty"`
+
+	// KbUrl Knowledge base article about the template
+	//
+	// Example: https://support.hostinger.com/os-templates/ubuntu-cuda
+	KbUrl *string `json:"kb_url,omitempty"`
+
+	// LightImageId Light theme icon image ID
+	//
+	// Example: hgpu-app-icon-ubuntu-light
+	LightImageId *string `json:"light_image_id,omitempty"`
+
+	// Name Example: Ubuntu 24.04 with CUDA
+	Name *string `json:"name,omitempty"`
+}
+
+// GPUV1PoolPoolCollection Array of [`GPU.V1.Pool.PoolResource`](#model/gpuv1poolpoolresource)
+type GPUV1PoolPoolCollection = []GPUV1PoolPoolResource
+
+// GPUV1PoolPoolGroupCollection Array of [`GPU.V1.Pool.PoolGroupResource`](#model/gpuv1poolpoolgroupresource)
+type GPUV1PoolPoolGroupCollection = []GPUV1PoolPoolGroupResource
+
+// GPUV1PoolPoolGroupResource defines model for GPU.V1.Pool.PoolGroupResource.
+type GPUV1PoolPoolGroupResource struct {
+	// Id GPU pool group ID
+	//
+	// Example: 4
+	Id *int `json:"id,omitempty"`
+
+	// IsAvailable Whether the group has any available pools
+	//
+	// Example: true
+	IsAvailable *bool `json:"is_available,omitempty"`
+
+	// MinPricePerHour Lowest hourly price of the group instance types, in the requested currency
+	//
+	// Example: 0.65
+	MinPricePerHour *float32 `json:"min_price_per_hour,omitempty"`
+
+	// Name Example: NVIDIA H100
+	Name *string `json:"name,omitempty"`
+
+	// Pools Array of [`GPU.V1.Pool.PoolResource`](#model/gpuv1poolpoolresource)
+	Pools *GPUV1PoolPoolCollection `json:"pools,omitempty"`
+
+	// Vram Total VRAM in bytes
+	//
+	// Example: 80000000000
+	Vram *int `json:"vram,omitempty"`
+}
+
+// GPUV1PoolPoolInstanceCollection Array of [`GPU.V1.Pool.PoolInstanceResource`](#model/gpuv1poolpoolinstanceresource)
+type GPUV1PoolPoolInstanceCollection = []GPUV1PoolPoolInstanceResource
+
+// GPUV1PoolPoolInstanceResource defines model for GPU.V1.Pool.PoolInstanceResource.
+type GPUV1PoolPoolInstanceResource struct {
+	// CpuCores Number of CPU cores
+	//
+	// Example: 16
+	CpuCores *int `json:"cpu_cores,omitempty"`
+
+	// Description Example: Instance description
+	Description *string `json:"description,omitempty"`
+
+	// Id GPU pool instance type ID
+	//
+	// Example: 232
+	Id *int `json:"id,omitempty"`
+
+	// Name Example: small
+	Name *string `json:"name,omitempty"`
+
+	// PricePerHour Hourly price in cents (USD)
+	//
+	// Example: 35
+	PricePerHour *int `json:"price_per_hour,omitempty"`
+
+	// Ram Total RAM in bytes
+	//
+	// Example: 137438953472
+	Ram *int `json:"ram,omitempty"`
+
+	// Storage Total storage in bytes
+	//
+	// Example: 549755813888
+	Storage *int `json:"storage,omitempty"`
+}
+
+// GPUV1PoolPoolResource defines model for GPU.V1.Pool.PoolResource.
+type GPUV1PoolPoolResource struct {
+	// Gpus Number of GPUs
+	//
+	// Example: 1
+	Gpus *int `json:"gpus,omitempty"`
+
+	// Id GPU pool ID
+	//
+	// Example: 12
+	Id *int `json:"id,omitempty"`
+
+	// IsAvailable Whether the pool has available instances for booking
+	//
+	// Example: true
+	IsAvailable *bool `json:"is_available,omitempty"`
+
+	// Name Example: NVIDIA H100 Pool
+	Name *string `json:"name,omitempty"`
+
+	// Region Region the pool is served from
+	Region *GPUV1PoolPoolResource_Region `json:"region,omitempty"`
+
+	// Vram Total VRAM in bytes
+	//
+	// Example: 80000000000
+	Vram *int `json:"vram,omitempty"`
+}
+
+// GPUV1PoolPoolResource_Region Region the pool is served from
+type GPUV1PoolPoolResource_Region struct {
+	union json.RawMessage
+}
+
+// GPUV1RegionRegionResource defines model for GPU.V1.Region.RegionResource.
+type GPUV1RegionRegionResource struct {
+	// City Example: Vilnius
+	City *string `json:"city,omitempty"`
+
+	// Country ISO 3166-1 alpha-2 country code
+	//
+	// Example: LT
+	Country *string `json:"country,omitempty"`
+
+	// Id Region ID
+	//
+	// Example: 3
+	Id *int `json:"id,omitempty"`
+
+	// Name Region name
+	//
+	// Example: eu-north-1
+	Name *string `json:"name,omitempty"`
 }
 
 // HorizonsV1WebsitesCreateWebsiteRequest defines model for Horizons.V1.Websites.CreateWebsiteRequest.
@@ -17746,6 +18225,9 @@ type GenerationIdPath = openapi_types.UUID
 // GitInstallationUuidPath Example: 018f5e2a-1234-7890-abcd-1234567890ab
 type GitInstallationUuidPath = openapi_types.UUID
 
+// GpuCurrencyQuery Example: EUR
+type GpuCurrencyQuery string
+
 // GroupUuid Example: 550e8400-e29b-41d4-a716-446655440000
 type GroupUuid = string
 
@@ -17874,6 +18356,12 @@ type PaymentMethodId = int
 
 // PerPage Example: 25
 type PerPage = int
+
+// PoolId Example: 12
+type PoolId = int
+
+// PoolInstanceId Example: 232
+type PoolInstanceId = int
 
 // PostInstallScriptId Example: 9568314
 type PostInstallScriptId = int
@@ -18244,6 +18732,15 @@ type EcommerceListProductVariantsV1Params struct {
 	// Page Page number
 	Page *Page `form:"page,omitempty" json:"page,omitempty"`
 }
+
+// GPUGetPoolGroupsV1Params defines parameters for GPUGetPoolGroupsV1.
+type GPUGetPoolGroupsV1Params struct {
+	// Currency Currency of the returned prices, `USD` by default
+	Currency *GPUGetPoolGroupsV1ParamsCurrency `form:"currency,omitempty" json:"currency,omitempty"`
+}
+
+// GPUGetPoolGroupsV1ParamsCurrency defines parameters for GPUGetPoolGroupsV1.
+type GPUGetPoolGroupsV1ParamsCurrency string
 
 // HostingListAccountDatabasesV1Params defines parameters for HostingListAccountDatabasesV1.
 type HostingListAccountDatabasesV1Params struct {
@@ -19866,6 +20363,42 @@ func (t AgentReadinessV1ScansScanResource_Categories) MarshalJSON() ([]byte, err
 }
 
 func (t *AgentReadinessV1ScansScanResource_Categories) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsGPUV1RegionRegionResource returns the union data inside the GPUV1PoolPoolResource_Region as a GPUV1RegionRegionResource
+func (t GPUV1PoolPoolResource_Region) AsGPUV1RegionRegionResource() (GPUV1RegionRegionResource, error) {
+	var body GPUV1RegionRegionResource
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromGPUV1RegionRegionResource overwrites any union data inside the GPUV1PoolPoolResource_Region as the provided GPUV1RegionRegionResource
+func (t *GPUV1PoolPoolResource_Region) FromGPUV1RegionRegionResource(v GPUV1RegionRegionResource) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeGPUV1RegionRegionResource performs a merge with any union data inside the GPUV1PoolPoolResource_Region, using the provided GPUV1RegionRegionResource
+func (t *GPUV1PoolPoolResource_Region) MergeGPUV1RegionRegionResource(v GPUV1RegionRegionResource) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t GPUV1PoolPoolResource_Region) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *GPUV1PoolPoolResource_Region) UnmarshalJSON(b []byte) error {
 	err := t.union.UnmarshalJSON(b)
 	return err
 }
@@ -22889,6 +23422,51 @@ type ClientInterface interface {
 	//
 	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/shipping (the `EcommerceSetStoreShippingV1` operationId).
 	EcommerceSetStoreShippingV1(ctx context.Context, storeId string, body EcommerceSetStoreShippingV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GPUGetPoolListV1 Get pool list
+	//
+	// Retrieve all available GPU pools, ordered by name.
+	//
+	// A pool serves GPU accelerators of one model from a single region.
+	//
+	// Use this endpoint to choose a pool before listing its instance types.
+	//
+	// Corresponds with GET /api/gpu/v1/pools (the `GPUGetPoolListV1` operationId).
+	GPUGetPoolListV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GPUGetPoolGroupsV1 Get pool groups
+	//
+	// Retrieve GPU pool groups, ordered by name.
+	//
+	// Each group bundles the pools of one GPU model and lists its currently available pools,
+	// whether any of them is available and the lowest hourly price among its instance types.
+	// The price is returned even when the group is out of stock.
+	//
+	// Use this endpoint to show which GPU models can be ordered and from what price.
+	//
+	// Corresponds with GET /api/gpu/v1/pools/groups (the `GPUGetPoolGroupsV1` operationId).
+	GPUGetPoolGroupsV1(ctx context.Context, params *GPUGetPoolGroupsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GPUGetPoolInstanceTypesV1 Get pool instance types
+	//
+	// Retrieve the instance types offered by a specified GPU pool, ordered by CPU core count.
+	//
+	// Each instance type describes its CPU, memory and storage, and its hourly price.
+	// Only instance types that can currently be ordered are returned.
+	//
+	// Use this endpoint to choose the `pool_instance_id` for a new GPU instance.
+	//
+	// Corresponds with GET /api/gpu/v1/pools/{poolId}/instances (the `GPUGetPoolInstanceTypesV1` operationId).
+	GPUGetPoolInstanceTypesV1(ctx context.Context, poolId PoolId, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GPUGetPoolOSTemplatesV1 Get pool OS templates
+	//
+	// Retrieve the OS templates that can be installed on a specified GPU pool instance type.
+	//
+	// Use this endpoint to choose the `os_template_id` for a new GPU instance.
+	//
+	// Corresponds with GET /api/gpu/v1/pools/{poolId}/instances/{poolInstanceId}/os-templates (the `GPUGetPoolOSTemplatesV1` operationId).
+	GPUGetPoolOSTemplatesV1(ctx context.Context, poolId PoolId, poolInstanceId PoolInstanceId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HorizonsGetWebsiteListV1 Get website list
 	//
@@ -32546,6 +33124,91 @@ func (c *Client) EcommerceSetStoreShippingV1WithBody(ctx context.Context, storeI
 // Corresponds with POST /api/ecommerce/v1/stores/{store_id}/shipping (the `EcommerceSetStoreShippingV1` operationId).
 func (c *Client) EcommerceSetStoreShippingV1(ctx context.Context, storeId string, body EcommerceSetStoreShippingV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewEcommerceSetStoreShippingV1Request(c.Server, storeId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GPUGetPoolListV1 Get pool list
+//
+// Retrieve all available GPU pools, ordered by name.
+//
+// A pool serves GPU accelerators of one model from a single region.
+//
+// Use this endpoint to choose a pool before listing its instance types.
+//
+// Corresponds with GET /api/gpu/v1/pools (the `GPUGetPoolListV1` operationId).
+func (c *Client) GPUGetPoolListV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGPUGetPoolListV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GPUGetPoolGroupsV1 Get pool groups
+//
+// Retrieve GPU pool groups, ordered by name.
+//
+// Each group bundles the pools of one GPU model and lists its currently available pools,
+// whether any of them is available and the lowest hourly price among its instance types.
+// The price is returned even when the group is out of stock.
+//
+// Use this endpoint to show which GPU models can be ordered and from what price.
+//
+// Corresponds with GET /api/gpu/v1/pools/groups (the `GPUGetPoolGroupsV1` operationId).
+func (c *Client) GPUGetPoolGroupsV1(ctx context.Context, params *GPUGetPoolGroupsV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGPUGetPoolGroupsV1Request(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GPUGetPoolInstanceTypesV1 Get pool instance types
+//
+// Retrieve the instance types offered by a specified GPU pool, ordered by CPU core count.
+//
+// Each instance type describes its CPU, memory and storage, and its hourly price.
+// Only instance types that can currently be ordered are returned.
+//
+// Use this endpoint to choose the `pool_instance_id` for a new GPU instance.
+//
+// Corresponds with GET /api/gpu/v1/pools/{poolId}/instances (the `GPUGetPoolInstanceTypesV1` operationId).
+func (c *Client) GPUGetPoolInstanceTypesV1(ctx context.Context, poolId PoolId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGPUGetPoolInstanceTypesV1Request(c.Server, poolId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GPUGetPoolOSTemplatesV1 Get pool OS templates
+//
+// Retrieve the OS templates that can be installed on a specified GPU pool instance type.
+//
+// Use this endpoint to choose the `os_template_id` for a new GPU instance.
+//
+// Corresponds with GET /api/gpu/v1/pools/{poolId}/instances/{poolInstanceId}/os-templates (the `GPUGetPoolOSTemplatesV1` operationId).
+func (c *Client) GPUGetPoolOSTemplatesV1(ctx context.Context, poolId PoolId, poolInstanceId PoolInstanceId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGPUGetPoolOSTemplatesV1Request(c.Server, poolId, poolInstanceId)
 	if err != nil {
 		return nil, err
 	}
@@ -48082,6 +48745,162 @@ func NewEcommerceSetStoreShippingV1RequestWithBody(server string, storeId string
 	}
 
 	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGPUGetPoolListV1Request constructs an http.Request for the GPUGetPoolListV1 method
+func NewGPUGetPoolListV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/gpu/v1/pools")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGPUGetPoolGroupsV1Request constructs an http.Request for the GPUGetPoolGroupsV1 method
+func NewGPUGetPoolGroupsV1Request(server string, params *GPUGetPoolGroupsV1Params) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/gpu/v1/pools/groups")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Currency != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "currency", *params.Currency, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGPUGetPoolInstanceTypesV1Request constructs an http.Request for the GPUGetPoolInstanceTypesV1 method
+func NewGPUGetPoolInstanceTypesV1Request(server string, poolId PoolId) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "poolId", poolId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/gpu/v1/pools/%s/instances", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGPUGetPoolOSTemplatesV1Request constructs an http.Request for the GPUGetPoolOSTemplatesV1 method
+func NewGPUGetPoolOSTemplatesV1Request(server string, poolId PoolId, poolInstanceId PoolInstanceId) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "poolId", poolId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "poolInstanceId", poolInstanceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/gpu/v1/pools/%s/instances/%s/os-templates", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 
 	return req, nil
 }
@@ -65731,6 +66550,59 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/shipping (the `EcommerceSetStoreShippingV1` operationId).
 	EcommerceSetStoreShippingV1WithResponse(ctx context.Context, storeId string, body EcommerceSetStoreShippingV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceSetStoreShippingV1Response, error)
 
+	// GPUGetPoolListV1WithResponse Get pool list
+	//
+	// Retrieve all available GPU pools, ordered by name.
+	//
+	// A pool serves GPU accelerators of one model from a single region.
+	//
+	// Use this endpoint to choose a pool before listing its instance types.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/gpu/v1/pools (the `GPUGetPoolListV1` operationId).
+	GPUGetPoolListV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GPUGetPoolListV1Response, error)
+
+	// GPUGetPoolGroupsV1WithResponse Get pool groups
+	//
+	// Retrieve GPU pool groups, ordered by name.
+	//
+	// Each group bundles the pools of one GPU model and lists its currently available pools,
+	// whether any of them is available and the lowest hourly price among its instance types.
+	// The price is returned even when the group is out of stock.
+	//
+	// Use this endpoint to show which GPU models can be ordered and from what price.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/gpu/v1/pools/groups (the `GPUGetPoolGroupsV1` operationId).
+	GPUGetPoolGroupsV1WithResponse(ctx context.Context, params *GPUGetPoolGroupsV1Params, reqEditors ...RequestEditorFn) (*GPUGetPoolGroupsV1Response, error)
+
+	// GPUGetPoolInstanceTypesV1WithResponse Get pool instance types
+	//
+	// Retrieve the instance types offered by a specified GPU pool, ordered by CPU core count.
+	//
+	// Each instance type describes its CPU, memory and storage, and its hourly price.
+	// Only instance types that can currently be ordered are returned.
+	//
+	// Use this endpoint to choose the `pool_instance_id` for a new GPU instance.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/gpu/v1/pools/{poolId}/instances (the `GPUGetPoolInstanceTypesV1` operationId).
+	GPUGetPoolInstanceTypesV1WithResponse(ctx context.Context, poolId PoolId, reqEditors ...RequestEditorFn) (*GPUGetPoolInstanceTypesV1Response, error)
+
+	// GPUGetPoolOSTemplatesV1WithResponse Get pool OS templates
+	//
+	// Retrieve the OS templates that can be installed on a specified GPU pool instance type.
+	//
+	// Use this endpoint to choose the `os_template_id` for a new GPU instance.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/gpu/v1/pools/{poolId}/instances/{poolInstanceId}/os-templates (the `GPUGetPoolOSTemplatesV1` operationId).
+	GPUGetPoolOSTemplatesV1WithResponse(ctx context.Context, poolId PoolId, poolInstanceId PoolInstanceId, reqEditors ...RequestEditorFn) (*GPUGetPoolOSTemplatesV1Response, error)
+
 	// HorizonsGetWebsiteListV1WithResponse Get website list
 	//
 	// List the Hostinger Horizons websites the user owns.\n
@@ -79420,6 +80292,226 @@ func (r EcommerceSetStoreShippingV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r EcommerceSetStoreShippingV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GPUGetPoolListV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GPUV1PoolPoolCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GPUGetPoolListV1Response) GetJSON200() *GPUV1PoolPoolCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GPUGetPoolListV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GPUGetPoolListV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GPUGetPoolListV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GPUGetPoolListV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GPUGetPoolListV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GPUGetPoolListV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GPUGetPoolGroupsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GPUV1PoolPoolGroupCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GPUGetPoolGroupsV1Response) GetJSON200() *GPUV1PoolPoolGroupCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GPUGetPoolGroupsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GPUGetPoolGroupsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GPUGetPoolGroupsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GPUGetPoolGroupsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GPUGetPoolGroupsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GPUGetPoolGroupsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GPUGetPoolInstanceTypesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GPUV1PoolPoolInstanceCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GPUGetPoolInstanceTypesV1Response) GetJSON200() *GPUV1PoolPoolInstanceCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GPUGetPoolInstanceTypesV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GPUGetPoolInstanceTypesV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GPUGetPoolInstanceTypesV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GPUGetPoolInstanceTypesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GPUGetPoolInstanceTypesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GPUGetPoolInstanceTypesV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GPUGetPoolOSTemplatesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GPUV1OsTemplateOsTemplateCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GPUGetPoolOSTemplatesV1Response) GetJSON200() *GPUV1OsTemplateOsTemplateCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GPUGetPoolOSTemplatesV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GPUGetPoolOSTemplatesV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GPUGetPoolOSTemplatesV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GPUGetPoolOSTemplatesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GPUGetPoolOSTemplatesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GPUGetPoolOSTemplatesV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -101442,6 +102534,83 @@ func (c *ClientWithResponses) EcommerceSetStoreShippingV1WithResponse(ctx contex
 	return ParseEcommerceSetStoreShippingV1Response(rsp)
 }
 
+// GPUGetPoolListV1WithResponse Get pool list
+//
+// Retrieve all available GPU pools, ordered by name.
+//
+// A pool serves GPU accelerators of one model from a single region.
+//
+// Use this endpoint to choose a pool before listing its instance types.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/gpu/v1/pools (the `GPUGetPoolListV1` operationId).
+func (c *ClientWithResponses) GPUGetPoolListV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GPUGetPoolListV1Response, error) {
+	rsp, err := c.GPUGetPoolListV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGPUGetPoolListV1Response(rsp)
+}
+
+// GPUGetPoolGroupsV1WithResponse Get pool groups
+//
+// Retrieve GPU pool groups, ordered by name.
+//
+// Each group bundles the pools of one GPU model and lists its currently available pools,
+// whether any of them is available and the lowest hourly price among its instance types.
+// The price is returned even when the group is out of stock.
+//
+// Use this endpoint to show which GPU models can be ordered and from what price.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/gpu/v1/pools/groups (the `GPUGetPoolGroupsV1` operationId).
+func (c *ClientWithResponses) GPUGetPoolGroupsV1WithResponse(ctx context.Context, params *GPUGetPoolGroupsV1Params, reqEditors ...RequestEditorFn) (*GPUGetPoolGroupsV1Response, error) {
+	rsp, err := c.GPUGetPoolGroupsV1(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGPUGetPoolGroupsV1Response(rsp)
+}
+
+// GPUGetPoolInstanceTypesV1WithResponse Get pool instance types
+//
+// Retrieve the instance types offered by a specified GPU pool, ordered by CPU core count.
+//
+// Each instance type describes its CPU, memory and storage, and its hourly price.
+// Only instance types that can currently be ordered are returned.
+//
+// Use this endpoint to choose the `pool_instance_id` for a new GPU instance.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/gpu/v1/pools/{poolId}/instances (the `GPUGetPoolInstanceTypesV1` operationId).
+func (c *ClientWithResponses) GPUGetPoolInstanceTypesV1WithResponse(ctx context.Context, poolId PoolId, reqEditors ...RequestEditorFn) (*GPUGetPoolInstanceTypesV1Response, error) {
+	rsp, err := c.GPUGetPoolInstanceTypesV1(ctx, poolId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGPUGetPoolInstanceTypesV1Response(rsp)
+}
+
+// GPUGetPoolOSTemplatesV1WithResponse Get pool OS templates
+//
+// Retrieve the OS templates that can be installed on a specified GPU pool instance type.
+//
+// Use this endpoint to choose the `os_template_id` for a new GPU instance.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/gpu/v1/pools/{poolId}/instances/{poolInstanceId}/os-templates (the `GPUGetPoolOSTemplatesV1` operationId).
+func (c *ClientWithResponses) GPUGetPoolOSTemplatesV1WithResponse(ctx context.Context, poolId PoolId, poolInstanceId PoolInstanceId, reqEditors ...RequestEditorFn) (*GPUGetPoolOSTemplatesV1Response, error) {
+	rsp, err := c.GPUGetPoolOSTemplatesV1(ctx, poolId, poolInstanceId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGPUGetPoolOSTemplatesV1Response(rsp)
+}
+
 // HorizonsGetWebsiteListV1WithResponse Get website list
 //
 // List the Hostinger Horizons websites the user owns.\n
@@ -115592,6 +116761,166 @@ func ParseEcommerceSetStoreShippingV1Response(rsp *http.Response) (*EcommerceSet
 			return nil, err
 		}
 		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGPUGetPoolListV1Response parses an HTTP response from a GPUGetPoolListV1WithResponse call
+func ParseGPUGetPoolListV1Response(rsp *http.Response) (*GPUGetPoolListV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GPUGetPoolListV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GPUV1PoolPoolCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGPUGetPoolGroupsV1Response parses an HTTP response from a GPUGetPoolGroupsV1WithResponse call
+func ParseGPUGetPoolGroupsV1Response(rsp *http.Response) (*GPUGetPoolGroupsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GPUGetPoolGroupsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GPUV1PoolPoolGroupCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGPUGetPoolInstanceTypesV1Response parses an HTTP response from a GPUGetPoolInstanceTypesV1WithResponse call
+func ParseGPUGetPoolInstanceTypesV1Response(rsp *http.Response) (*GPUGetPoolInstanceTypesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GPUGetPoolInstanceTypesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GPUV1PoolPoolInstanceCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGPUGetPoolOSTemplatesV1Response parses an HTTP response from a GPUGetPoolOSTemplatesV1WithResponse call
+func ParseGPUGetPoolOSTemplatesV1Response(rsp *http.Response) (*GPUGetPoolOSTemplatesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GPUGetPoolOSTemplatesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GPUV1OsTemplateOsTemplateCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse
