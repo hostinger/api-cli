@@ -20,11 +20,11 @@ nothing: WordPress can be added later through
 `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
 (`wordpress_installations_install`) with `type: headless`.
 
-Omit `domain` to set the website up on a generated temporary free subdomain. To know the
-free subdomain before the call, so a timed-out call can be looked up and retried on the
-same domain, generate one through `POST /api/hosting/v1/domains/free-subdomains`
-(`hosting_domains_generate-free-subdomain`) and send it as `domain`. It is accepted for
-24 hours, only from the client that generated it.
+Omit `domain` to set the website up on a generated temporary free subdomain; the created
+setup returns it as `domain`. REST clients that need to know the free subdomain before the
+call, so a timed-out call can be looked up and retried on the same domain, can generate
+one through `POST /api/hosting/v1/domains/free-subdomains` and send it as `domain`. It is
+accepted for 24 hours, only from the client that generated it.
 
 When the order has no hosting account yet, the setup creates one first, in the datacenter
 given by `datacenter_code` or the order's default datacenter when it is omitted.
@@ -60,11 +60,11 @@ hostinger hosting websites create [order-id] [flags]
 ### Options
 
 ```
-      --datacenter-code string                                Datacenter for the hosting account when the order does not have one yet. Omit to use the order's default datacenter. Ignored when the order already has a hosting account. List available datacenters to find valid codes.
-      --domain POST /api/hosting/v1/domains/free-subdomains   Customer-owned domain, or a free subdomain you generated through POST /api/hosting/v1/domains/free-subdomains (`hosting_domains_generate-free-subdomain`) in the last 24 hours. Cannot start with "www." and can have at most one subdomain level, e.g. `blog.example.com`. Omit or `null` to set the website up on a generated temporary free subdomain.
-  -h, --help                                                  help for create
-      --type null                                             Website type. Omit or null for an empty website. `wordpress` installs WordPress in the website root and requires `wordpress`. The headless types (`headless_empty`, `headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`) create a headless website; `headless_wordpress` additionally installs WordPress into the `cms` directory with generated credentials. `headless_empty` installs nothing, so WordPress can be added later through `POST /api/hosting/v1/accounts/{username}/wordpress/installations` (`wordpress_installations_install`) with `type: headless`. (one of: wordpress, headless_empty, headless_wordpress, headless_ecommerce, headless_pocketbase)
-      --wordpress type                                        WordPress install settings. Required when type is `wordpress`, not allowed otherwise. The site title is the domain. (JSON, @file or -; shape in the help above)
+      --datacenter-code string   Datacenter for the hosting account when the order does not have one yet. Omit to use the order's default datacenter. Ignored when the order already has a hosting account. List available datacenters to find valid codes.
+      --domain null              Customer-owned domain. Omit or null to set the website up on a generated temporary free subdomain. Cannot start with "www." and can have at most one subdomain level, e.g. `blog.example.com`. A free subdomain generated through `POST /api/hosting/v1/domains/free-subdomains` in the last 24 hours is also accepted.
+  -h, --help                     help for create
+      --type null                Website type. Omit or null for an empty website. `wordpress` installs WordPress in the website root and requires `wordpress`. The headless types (`headless_empty`, `headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`) create a headless website; `headless_wordpress` additionally installs WordPress into the `cms` directory with generated credentials. `headless_empty` installs nothing, so WordPress can be added later through `POST /api/hosting/v1/accounts/{username}/wordpress/installations` (`wordpress_installations_install`) with `type: headless`. (one of: wordpress, headless_empty, headless_wordpress, headless_ecommerce, headless_pocketbase)
+      --wordpress type           WordPress install settings. Required when type is `wordpress`, not allowed otherwise. The site title is the domain. (JSON, @file or -; shape in the help above)
 ```
 
 ### Options inherited from parent commands

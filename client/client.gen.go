@@ -12193,7 +12193,7 @@ type HostingV1OnboardingsStartOnboardingRequest struct {
 	// Example: us-east-1
 	DatacenterCode *string `json:"datacenter_code,omitempty"`
 
-	// Domain Customer-owned domain, or a free subdomain you generated through `POST /api/hosting/v1/domains/free-subdomains` (`hosting_domains_generate-free-subdomain`) in the last 24 hours. Cannot start with "www." and can have at most one subdomain level, e.g. `blog.example.com`. Omit or `null` to set the website up on a generated temporary free subdomain.
+	// Domain Customer-owned domain. Omit or `null` to set the website up on a generated temporary free subdomain. Cannot start with "www." and can have at most one subdomain level, e.g. `blog.example.com`. A free subdomain generated through `POST /api/hosting/v1/domains/free-subdomains` in the last 24 hours is also accepted.
 	//
 	// Example: example.com
 	Domain *string `json:"domain,omitempty"`
@@ -16986,7 +16986,7 @@ type WordPressV1InstallationsInstallWordPressRequest struct {
 	// Example: My site
 	SiteTitle string `json:"site_title"`
 
-	// Type Installation kind; `default` when omitted. `headless` installs WordPress into the `cms` directory with the Hostinger headless MU plugin and marks the website as a headless WordPress website. Accepted only for a website that is already headless, e.g. one created by `POST /api/hosting/v1/orders/{order_id}/onboardings` (`hosting_websites_start-setup`) with `type: headless_empty`; any other website is rejected with 422.
+	// Type Installation kind; `default` when omitted. `headless` installs WordPress into the `cms` directory with the Hostinger headless MU plugin and marks the website as a headless WordPress website. Accepted only for a website that is already headless, e.g. one created by `POST /api/hosting/v1/orders/{order_id}/onboardings` (`hosting_websites_create`) with `type: headless_empty`; any other website is rejected with 422.
 	//
 	// Example: default
 	Type *WordPressV1InstallationsInstallWordPressRequestType `json:"type,omitempty"`
@@ -17002,7 +17002,7 @@ type WordPressV1InstallationsInstallWordPressRequest struct {
 // Example: minor
 type WordPressV1InstallationsInstallWordPressRequestAutoUpdates string
 
-// WordPressV1InstallationsInstallWordPressRequestType Installation kind; `default` when omitted. `headless` installs WordPress into the `cms` directory with the Hostinger headless MU plugin and marks the website as a headless WordPress website. Accepted only for a website that is already headless, e.g. one created by `POST /api/hosting/v1/orders/{order_id}/onboardings` (`hosting_websites_start-setup`) with `type: headless_empty`; any other website is rejected with 422.
+// WordPressV1InstallationsInstallWordPressRequestType Installation kind; `default` when omitted. `headless` installs WordPress into the `cms` directory with the Hostinger headless MU plugin and marks the website as a headless WordPress website. Accepted only for a website that is already headless, e.g. one created by `POST /api/hosting/v1/orders/{order_id}/onboardings` (`hosting_websites_create`) with `type: headless_empty`; any other website is rejected with 422.
 //
 // Example: default
 type WordPressV1InstallationsInstallWordPressRequestType string
@@ -24371,12 +24371,12 @@ type ClientInterface interface {
 	//
 	// The website must already exist before calling this endpoint. To create a new
 	// website first, use POST /api/hosting/v1/orders/{order_id}/onboardings
-	// (`hosting_websites_start-setup`) and poll GET /api/hosting/v1/onboardings
+	// (`hosting_websites_create`) and poll GET /api/hosting/v1/onboardings
 	// (`hosting_websites_list-setups`) with the `domain` filter until its `status` is
 	// `completed`.
 	//
 	// Send `type: headless` to turn a headless website (for example one created by
-	// `hosting_websites_start-setup` with `type: headless_empty`) into a headless WordPress
+	// `hosting_websites_create` with `type: headless_empty`) into a headless WordPress
 	// website: WordPress is installed into the `cms` directory with the Hostinger headless
 	// MU plugin and the website is marked as a headless WordPress website. `directory` is
 	// not allowed with it. The target website must already be headless: the headless
@@ -24408,12 +24408,12 @@ type ClientInterface interface {
 	//
 	// The website must already exist before calling this endpoint. To create a new
 	// website first, use POST /api/hosting/v1/orders/{order_id}/onboardings
-	// (`hosting_websites_start-setup`) and poll GET /api/hosting/v1/onboardings
+	// (`hosting_websites_create`) and poll GET /api/hosting/v1/onboardings
 	// (`hosting_websites_list-setups`) with the `domain` filter until its `status` is
 	// `completed`.
 	//
 	// Send `type: headless` to turn a headless website (for example one created by
-	// `hosting_websites_start-setup` with `type: headless_empty`) into a headless WordPress
+	// `hosting_websites_create` with `type: headless_empty`) into a headless WordPress
 	// website: WordPress is installed into the `cms` directory with the Hostinger headless
 	// MU plugin and the website is marked as a headless WordPress website. `directory` is
 	// not allowed with it. The target website must already be headless: the headless
@@ -25402,11 +25402,11 @@ type ClientInterface interface {
 	// `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
 	// (`wordpress_installations_install`) with `type: headless`.
 	//
-	// Omit `domain` to set the website up on a generated temporary free subdomain. To know the
-	// free subdomain before the call, so a timed-out call can be looked up and retried on the
-	// same domain, generate one through `POST /api/hosting/v1/domains/free-subdomains`
-	// (`hosting_domains_generate-free-subdomain`) and send it as `domain`. It is accepted for
-	// 24 hours, only from the client that generated it.
+	// Omit `domain` to set the website up on a generated temporary free subdomain; the created
+	// setup returns it as `domain`. REST clients that need to know the free subdomain before the
+	// call, so a timed-out call can be looked up and retried on the same domain, can generate
+	// one through `POST /api/hosting/v1/domains/free-subdomains` and send it as `domain`. It is
+	// accepted for 24 hours, only from the client that generated it.
 	//
 	// When the order has no hosting account yet, the setup creates one first, in the datacenter
 	// given by `datacenter_code` or the order's default datacenter when it is omitted.
@@ -25437,11 +25437,11 @@ type ClientInterface interface {
 	// `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
 	// (`wordpress_installations_install`) with `type: headless`.
 	//
-	// Omit `domain` to set the website up on a generated temporary free subdomain. To know the
-	// free subdomain before the call, so a timed-out call can be looked up and retried on the
-	// same domain, generate one through `POST /api/hosting/v1/domains/free-subdomains`
-	// (`hosting_domains_generate-free-subdomain`) and send it as `domain`. It is accepted for
-	// 24 hours, only from the client that generated it.
+	// Omit `domain` to set the website up on a generated temporary free subdomain; the created
+	// setup returns it as `domain`. REST clients that need to know the free subdomain before the
+	// call, so a timed-out call can be looked up and retried on the same domain, can generate
+	// one through `POST /api/hosting/v1/domains/free-subdomains` and send it as `domain`. It is
+	// accepted for 24 hours, only from the client that generated it.
 	//
 	// When the order has no hosting account yet, the setup creates one first, in the datacenter
 	// given by `datacenter_code` or the order's default datacenter when it is omitted.
@@ -35067,12 +35067,12 @@ func (c *Client) HostingDeployWordPressThemeV1(ctx context.Context, username Use
 //
 // The website must already exist before calling this endpoint. To create a new
 // website first, use POST /api/hosting/v1/orders/{order_id}/onboardings
-// (`hosting_websites_start-setup`) and poll GET /api/hosting/v1/onboardings
+// (`hosting_websites_create`) and poll GET /api/hosting/v1/onboardings
 // (`hosting_websites_list-setups`) with the `domain` filter until its `status` is
 // `completed`.
 //
 // Send `type: headless` to turn a headless website (for example one created by
-// `hosting_websites_start-setup` with `type: headless_empty`) into a headless WordPress
+// `hosting_websites_create` with `type: headless_empty`) into a headless WordPress
 // website: WordPress is installed into the `cms` directory with the Hostinger headless
 // MU plugin and the website is marked as a headless WordPress website. `directory` is
 // not allowed with it. The target website must already be headless: the headless
@@ -35114,12 +35114,12 @@ func (c *Client) HostingInstallWordPressV1WithBody(ctx context.Context, username
 //
 // The website must already exist before calling this endpoint. To create a new
 // website first, use POST /api/hosting/v1/orders/{order_id}/onboardings
-// (`hosting_websites_start-setup`) and poll GET /api/hosting/v1/onboardings
+// (`hosting_websites_create`) and poll GET /api/hosting/v1/onboardings
 // (`hosting_websites_list-setups`) with the `domain` filter until its `status` is
 // `completed`.
 //
 // Send `type: headless` to turn a headless website (for example one created by
-// `hosting_websites_start-setup` with `type: headless_empty`) into a headless WordPress
+// `hosting_websites_create` with `type: headless_empty`) into a headless WordPress
 // website: WordPress is installed into the `cms` directory with the Hostinger headless
 // MU plugin and the website is marked as a headless WordPress website. `directory` is
 // not allowed with it. The target website must already be headless: the headless
@@ -36722,11 +36722,11 @@ func (c *Client) HostingListOrdersV1(ctx context.Context, params *HostingListOrd
 // `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
 // (`wordpress_installations_install`) with `type: headless`.
 //
-// Omit `domain` to set the website up on a generated temporary free subdomain. To know the
-// free subdomain before the call, so a timed-out call can be looked up and retried on the
-// same domain, generate one through `POST /api/hosting/v1/domains/free-subdomains`
-// (`hosting_domains_generate-free-subdomain`) and send it as `domain`. It is accepted for
-// 24 hours, only from the client that generated it.
+// Omit `domain` to set the website up on a generated temporary free subdomain; the created
+// setup returns it as `domain`. REST clients that need to know the free subdomain before the
+// call, so a timed-out call can be looked up and retried on the same domain, can generate
+// one through `POST /api/hosting/v1/domains/free-subdomains` and send it as `domain`. It is
+// accepted for 24 hours, only from the client that generated it.
 //
 // When the order has no hosting account yet, the setup creates one first, in the datacenter
 // given by `datacenter_code` or the order's default datacenter when it is omitted.
@@ -36767,11 +36767,11 @@ func (c *Client) HostingStartWebsiteSetupV1WithBody(ctx context.Context, orderId
 // `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
 // (`wordpress_installations_install`) with `type: headless`.
 //
-// Omit `domain` to set the website up on a generated temporary free subdomain. To know the
-// free subdomain before the call, so a timed-out call can be looked up and retried on the
-// same domain, generate one through `POST /api/hosting/v1/domains/free-subdomains`
-// (`hosting_domains_generate-free-subdomain`) and send it as `domain`. It is accepted for
-// 24 hours, only from the client that generated it.
+// Omit `domain` to set the website up on a generated temporary free subdomain; the created
+// setup returns it as `domain`. REST clients that need to know the free subdomain before the
+// call, so a timed-out call can be looked up and retried on the same domain, can generate
+// one through `POST /api/hosting/v1/domains/free-subdomains` and send it as `domain`. It is
+// accepted for 24 hours, only from the client that generated it.
 //
 // When the order has no hosting account yet, the setup creates one first, in the datacenter
 // given by `datacenter_code` or the order's default datacenter when it is omitted.
@@ -67310,12 +67310,12 @@ type ClientWithResponsesInterface interface {
 	//
 	// The website must already exist before calling this endpoint. To create a new
 	// website first, use POST /api/hosting/v1/orders/{order_id}/onboardings
-	// (`hosting_websites_start-setup`) and poll GET /api/hosting/v1/onboardings
+	// (`hosting_websites_create`) and poll GET /api/hosting/v1/onboardings
 	// (`hosting_websites_list-setups`) with the `domain` filter until its `status` is
 	// `completed`.
 	//
 	// Send `type: headless` to turn a headless website (for example one created by
-	// `hosting_websites_start-setup` with `type: headless_empty`) into a headless WordPress
+	// `hosting_websites_create` with `type: headless_empty`) into a headless WordPress
 	// website: WordPress is installed into the `cms` directory with the Hostinger headless
 	// MU plugin and the website is marked as a headless WordPress website. `directory` is
 	// not allowed with it. The target website must already be headless: the headless
@@ -67347,12 +67347,12 @@ type ClientWithResponsesInterface interface {
 	//
 	// The website must already exist before calling this endpoint. To create a new
 	// website first, use POST /api/hosting/v1/orders/{order_id}/onboardings
-	// (`hosting_websites_start-setup`) and poll GET /api/hosting/v1/onboardings
+	// (`hosting_websites_create`) and poll GET /api/hosting/v1/onboardings
 	// (`hosting_websites_list-setups`) with the `domain` filter until its `status` is
 	// `completed`.
 	//
 	// Send `type: headless` to turn a headless website (for example one created by
-	// `hosting_websites_start-setup` with `type: headless_empty`) into a headless WordPress
+	// `hosting_websites_create` with `type: headless_empty`) into a headless WordPress
 	// website: WordPress is installed into the `cms` directory with the Hostinger headless
 	// MU plugin and the website is marked as a headless WordPress website. `directory` is
 	// not allowed with it. The target website must already be headless: the headless
@@ -68381,11 +68381,11 @@ type ClientWithResponsesInterface interface {
 	// `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
 	// (`wordpress_installations_install`) with `type: headless`.
 	//
-	// Omit `domain` to set the website up on a generated temporary free subdomain. To know the
-	// free subdomain before the call, so a timed-out call can be looked up and retried on the
-	// same domain, generate one through `POST /api/hosting/v1/domains/free-subdomains`
-	// (`hosting_domains_generate-free-subdomain`) and send it as `domain`. It is accepted for
-	// 24 hours, only from the client that generated it.
+	// Omit `domain` to set the website up on a generated temporary free subdomain; the created
+	// setup returns it as `domain`. REST clients that need to know the free subdomain before the
+	// call, so a timed-out call can be looked up and retried on the same domain, can generate
+	// one through `POST /api/hosting/v1/domains/free-subdomains` and send it as `domain`. It is
+	// accepted for 24 hours, only from the client that generated it.
 	//
 	// When the order has no hosting account yet, the setup creates one first, in the datacenter
 	// given by `datacenter_code` or the order's default datacenter when it is omitted.
@@ -68416,11 +68416,11 @@ type ClientWithResponsesInterface interface {
 	// `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
 	// (`wordpress_installations_install`) with `type: headless`.
 	//
-	// Omit `domain` to set the website up on a generated temporary free subdomain. To know the
-	// free subdomain before the call, so a timed-out call can be looked up and retried on the
-	// same domain, generate one through `POST /api/hosting/v1/domains/free-subdomains`
-	// (`hosting_domains_generate-free-subdomain`) and send it as `domain`. It is accepted for
-	// 24 hours, only from the client that generated it.
+	// Omit `domain` to set the website up on a generated temporary free subdomain; the created
+	// setup returns it as `domain`. REST clients that need to know the free subdomain before the
+	// call, so a timed-out call can be looked up and retried on the same domain, can generate
+	// one through `POST /api/hosting/v1/domains/free-subdomains` and send it as `domain`. It is
+	// accepted for 24 hours, only from the client that generated it.
 	//
 	// When the order has no hosting account yet, the setup creates one first, in the datacenter
 	// given by `datacenter_code` or the order's default datacenter when it is omitted.
@@ -103639,12 +103639,12 @@ func (c *ClientWithResponses) HostingDeployWordPressThemeV1WithResponse(ctx cont
 //
 // The website must already exist before calling this endpoint. To create a new
 // website first, use POST /api/hosting/v1/orders/{order_id}/onboardings
-// (`hosting_websites_start-setup`) and poll GET /api/hosting/v1/onboardings
+// (`hosting_websites_create`) and poll GET /api/hosting/v1/onboardings
 // (`hosting_websites_list-setups`) with the `domain` filter until its `status` is
 // `completed`.
 //
 // Send `type: headless` to turn a headless website (for example one created by
-// `hosting_websites_start-setup` with `type: headless_empty`) into a headless WordPress
+// `hosting_websites_create` with `type: headless_empty`) into a headless WordPress
 // website: WordPress is installed into the `cms` directory with the Hostinger headless
 // MU plugin and the website is marked as a headless WordPress website. `directory` is
 // not allowed with it. The target website must already be headless: the headless
@@ -103682,12 +103682,12 @@ func (c *ClientWithResponses) HostingInstallWordPressV1WithBodyWithResponse(ctx 
 //
 // The website must already exist before calling this endpoint. To create a new
 // website first, use POST /api/hosting/v1/orders/{order_id}/onboardings
-// (`hosting_websites_start-setup`) and poll GET /api/hosting/v1/onboardings
+// (`hosting_websites_create`) and poll GET /api/hosting/v1/onboardings
 // (`hosting_websites_list-setups`) with the `domain` filter until its `status` is
 // `completed`.
 //
 // Send `type: headless` to turn a headless website (for example one created by
-// `hosting_websites_start-setup` with `type: headless_empty`) into a headless WordPress
+// `hosting_websites_create` with `type: headless_empty`) into a headless WordPress
 // website: WordPress is installed into the `cms` directory with the Hostinger headless
 // MU plugin and the website is marked as a headless WordPress website. `directory` is
 // not allowed with it. The target website must already be headless: the headless
@@ -105086,11 +105086,11 @@ func (c *ClientWithResponses) HostingListOrdersV1WithResponse(ctx context.Contex
 // `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
 // (`wordpress_installations_install`) with `type: headless`.
 //
-// Omit `domain` to set the website up on a generated temporary free subdomain. To know the
-// free subdomain before the call, so a timed-out call can be looked up and retried on the
-// same domain, generate one through `POST /api/hosting/v1/domains/free-subdomains`
-// (`hosting_domains_generate-free-subdomain`) and send it as `domain`. It is accepted for
-// 24 hours, only from the client that generated it.
+// Omit `domain` to set the website up on a generated temporary free subdomain; the created
+// setup returns it as `domain`. REST clients that need to know the free subdomain before the
+// call, so a timed-out call can be looked up and retried on the same domain, can generate
+// one through `POST /api/hosting/v1/domains/free-subdomains` and send it as `domain`. It is
+// accepted for 24 hours, only from the client that generated it.
 //
 // When the order has no hosting account yet, the setup creates one first, in the datacenter
 // given by `datacenter_code` or the order's default datacenter when it is omitted.
@@ -105127,11 +105127,11 @@ func (c *ClientWithResponses) HostingStartWebsiteSetupV1WithBodyWithResponse(ctx
 // `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
 // (`wordpress_installations_install`) with `type: headless`.
 //
-// Omit `domain` to set the website up on a generated temporary free subdomain. To know the
-// free subdomain before the call, so a timed-out call can be looked up and retried on the
-// same domain, generate one through `POST /api/hosting/v1/domains/free-subdomains`
-// (`hosting_domains_generate-free-subdomain`) and send it as `domain`. It is accepted for
-// 24 hours, only from the client that generated it.
+// Omit `domain` to set the website up on a generated temporary free subdomain; the created
+// setup returns it as `domain`. REST clients that need to know the free subdomain before the
+// call, so a timed-out call can be looked up and retried on the same domain, can generate
+// one through `POST /api/hosting/v1/domains/free-subdomains` and send it as `domain`. It is
+// accepted for 24 hours, only from the client that generated it.
 //
 // When the order has no hosting account yet, the setup creates one first, in the datacenter
 // given by `datacenter_code` or the order's default datacenter when it is omitted.

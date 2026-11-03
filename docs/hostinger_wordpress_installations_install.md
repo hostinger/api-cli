@@ -8,12 +8,12 @@ Install WordPress on an existing website.
 
 The website must already exist before calling this endpoint. To create a new
 website first, use POST /api/hosting/v1/orders/{order_id}/onboardings
-(`hosting_websites_start-setup`) and poll GET /api/hosting/v1/onboardings
+(`hosting_websites_create`) and poll GET /api/hosting/v1/onboardings
 (`hosting_websites_list-setups`) with the `domain` filter until its `status` is
 `completed`.
 
 Send `type: headless` to turn a headless website (for example one created by
-`hosting_websites_start-setup` with `type: headless_empty`) into a headless WordPress
+`hosting_websites_create` with `type: headless_empty`) into a headless WordPress
 website: WordPress is installed into the `cms` directory with the Hostinger headless
 MU plugin and the website is marked as a headless WordPress website. `directory` is
 not allowed with it. The target website must already be headless: the headless
@@ -73,7 +73,7 @@ hostinger wordpress installations install [username] [flags]
       --language string            WordPress locale. Defaults to en_US when omitted.
       --overwrite                  When false (default), does not replace an existing installation. If WordPress is already installed on the domain/path, the async install job fails unless true.
       --site-title string          Title of the WordPress site
-      --type default               Installation kind; default when omitted. `headless` installs WordPress into the `cms` directory with the Hostinger headless MU plugin and marks the website as a headless WordPress website. Accepted only for a website that is already headless, e.g. one created by `POST /api/hosting/v1/orders/{order_id}/onboardings` (`hosting_websites_start-setup`) with `type: headless_empty`; any other website is rejected with 422. (one of: default, headless)
+      --type default               Installation kind; default when omitted. `headless` installs WordPress into the `cms` directory with the Hostinger headless MU plugin and marks the website as a headless WordPress website. Accepted only for a website that is already headless, e.g. one created by `POST /api/hosting/v1/orders/{order_id}/onboardings` (`hosting_websites_create`) with `type: headless_empty`; any other website is rejected with 422. (one of: default, headless)
       --version string             WordPress core version to install. If omitted, the latest core version compatible with the account vhost PHP version is selected.
 ```
 
