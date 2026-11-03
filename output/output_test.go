@@ -137,3 +137,22 @@ func TestFormatJQDoesNotEscapeHTML(t *testing.T) {
 		t.Errorf("got %q, want %q", got, want)
 	}
 }
+
+func TestFormatJQObjectsOnTerminal(t *testing.T) {
+	body := []byte(`{"data":[{"name":"a\u009b2Kb"}]}`)
+	for _, c := range []struct {
+		terminal bool
+		want     string
+	}{
+		{true, "{\"name\":\"a�2Kb\"}\n"},
+		{false, "{\"name\":\"a\u009b2Kb\"}\n"},
+	} {
+		out := capture(t, c.terminal)
+		if err := Format(newCmd(t, map[string]string{"jq": ".data[0]"}), body, 200); err != nil {
+			t.Fatal(err)
+		}
+		if out.String() != c.want {
+			t.Errorf("terminal=%v: %q, want %q", c.terminal, out.String(), c.want)
+		}
+	}
+}

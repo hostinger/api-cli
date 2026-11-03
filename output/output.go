@@ -118,6 +118,10 @@ func printJQ(expr string, body []byte) error {
 			fmt.Fprintln(out(), s)
 			continue
 		}
+		if terminal {
+			// The encoder escapes C0 but prints C1 controls such as U+009B CSI.
+			v = safeJSON(v)
+		}
 		if err := enc.Encode(v); err != nil {
 			return err
 		}

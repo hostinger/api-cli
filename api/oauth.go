@@ -65,9 +65,9 @@ var openBrowser = func(rawURL string) error {
 	case "darwin":
 		return exec.Command("open", rawURL).Start()
 	case "windows":
-		// The empty quoted string is cmd.exe's required first "title" arg so
-		// that it interprets the URL as the target rather than the title.
-		return exec.Command("cmd", "/c", "start", "", rawURL).Start()
+		// Not cmd /c start: cmd.exe splits the URL at each & and runs the
+		// pieces as commands, found in the working directory first.
+		return exec.Command("rundll32", "url.dll,FileProtocolHandler", rawURL).Start()
 	default:
 		return exec.Command("xdg-open", rawURL).Start()
 	}

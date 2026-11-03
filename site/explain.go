@@ -6,6 +6,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -78,7 +79,9 @@ func Explain(cmd *cobra.Command) (*Context, error) {
 }
 
 func (c *Context) Lines() []string {
+	// The link can come with a cloned repository: its fields reach the terminal.
 	row := func(label, value, from string) string {
+		value = utils.SafeText(value)
 		if value == "" {
 			value = "-"
 		}

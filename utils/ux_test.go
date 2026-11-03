@@ -457,3 +457,14 @@ func TestWaitStoppedEarlyKeepsLastState(t *testing.T) {
 		t.Errorf("deadline: body %s err %v", body, err)
 	}
 }
+
+func TestAskStripsControlCharactersFromChoices(t *testing.T) {
+	out := fakeTTY(t, "1\n")
+	got, err := ask("<id>", "", []string{"7\tEve\x1b[2K\x1b]0;x\x07\n   2) 42  Bob"})
+	if err != nil || got != "7" {
+		t.Errorf("got %q, %v", got, err)
+	}
+	if s := out.String(); strings.ContainsAny(s, "\x1b\x07") || !strings.Contains(s, "Eve") || strings.Count(s, "\n") != 2 {
+		t.Errorf("menu %q", s)
+	}
+}

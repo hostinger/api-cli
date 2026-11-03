@@ -568,3 +568,11 @@ func TestRemoveSymlinks(t *testing.T) {
 		t.Errorf("link target changed: %q", raw)
 	}
 }
+
+func TestLinesStripControlCharacters(t *testing.T) {
+	c := &Context{Domain: "example.com", DomainSource: "link", Link: &Project{Domain: "example.com", Type: "static\x1b]0;x\x07", Source: "git\x1b[2K", Path: "web\u009b2K", Node: &NodeSettings{AppType: "next\x1b]52;c;aGk=\x07"}}}
+	lines := strings.Join(c.Lines(), "\n")
+	if strings.ContainsAny(lines, "\x1b\x07\u009b") || !strings.Contains(lines, "static") {
+		t.Errorf("lines %q", lines)
+	}
+}

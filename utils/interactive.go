@@ -139,7 +139,9 @@ func ask(label, help string, choices []string) (string, error) {
 		shown = shown[:maxChoices]
 	}
 	for i, c := range shown {
-		value, desc, _ := strings.Cut(c, "\t")
+		// Choices come from the API, e.g. contact names others typed in: a
+		// newline in one would print a fake menu line.
+		value, desc, _ := strings.Cut(strings.ReplaceAll(SafeText(c), "\n", " "), "\t")
 		if desc != "" {
 			fmt.Fprintf(promptOut, "  %2d) %s  %s\n", i+1, value, desc)
 		} else {
