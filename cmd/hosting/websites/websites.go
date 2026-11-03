@@ -14,9 +14,9 @@ var GroupCmd = &cobra.Command{
 
 func init() {
 	GroupCmd.AddCommand(CreateCmd)
+	GroupCmd.AddCommand(CreateDeprecatedCmd)
 	GroupCmd.AddCommand(DeleteCmd)
 	GroupCmd.AddCommand(DeployStaticSiteArchiveCmd)
 	GroupCmd.AddCommand(ListCmd)
 	GroupCmd.AddCommand(ListSetupsCmd)
-	GroupCmd.AddCommand(StartSetupCmd)
 }

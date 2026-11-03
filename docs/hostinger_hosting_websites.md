@@ -29,10 +29,10 @@ hostinger hosting websites [flags]
 ### SEE ALSO
 
 * [hostinger hosting](hostinger_hosting.md)	 - Hosting commands
-* [hostinger hosting websites create](hostinger_hosting_websites_create.md)	 - Create website
+* [hostinger hosting websites create](hostinger_hosting_websites_create.md)	 - Start website setup
+* [hostinger hosting websites create-deprecated](hostinger_hosting_websites_create-deprecated.md)	 - Create website
 * [hostinger hosting websites delete](hostinger_hosting_websites_delete.md)	 - Delete website
 * [hostinger hosting websites deploy-static-site-archive](hostinger_hosting_websites_deploy-static-site-archive.md)	 - Deploy static site archive
 * [hostinger hosting websites list](hostinger_hosting_websites_list.md)	 - List websites
 * [hostinger hosting websites list-setups](hostinger_hosting_websites_list-setups.md)	 - List website setups
-* [hostinger hosting websites start-setup](hostinger_hosting_websites_start-setup.md)	 - Start website setup
 

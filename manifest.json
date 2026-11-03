@@ -1090,7 +1090,7 @@
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/subdomains"
   },
   "hosting_createWebsiteV1": {
-    "command": "hostinger hosting websites create",
+    "command": "hostinger hosting websites create-deprecated",
     "method": "POST",
     "path": "/api/hosting/v1/websites"
   },
@@ -1515,7 +1515,7 @@
     "path": "/api/hosting/v1/accounts/{username}/websites/{domain}/nodejs/builds"
   },
   "hosting_startWebsiteSetupV1": {
-    "command": "hostinger hosting websites start-setup",
+    "command": "hostinger hosting websites create",
     "method": "POST",
     "path": "/api/hosting/v1/orders/{order_id}/onboardings"
   },

@@ -7,18 +7,31 @@ import (
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/output"
+	"github.com/hostinger/api-cli/site"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var CreateCmd = &cobra.Command{
-	Use:               "create",
-	Short:             "Create website",
-	Long:              "Deprecated: use `POST /api/hosting/v1/orders/{order_id}/onboardings` (start website setup)\ninstead. It takes the same `domain` and `datacenter_code`, can also install WordPress, and\nreturns the created setup.\n\nCreate a new website for the authenticated client.\n\nYou must choose which hosting order to create this website on. Pass that\norder as `order_id` together with the domain name. List orders to see\navailable IDs; the website is provisioned on that order's hosting plan.\n\nOnly Web and Cloud hosting orders are accepted. To create a website on an Agency\nPlan order, use `POST /api/agency-hosting/v1/orders/{order_id}/websites/setups`.\n\nWhen the order has no hosting account yet, a new hosting account is set up first, in the\ndatacenter given by `datacenter_code` or the order's default datacenter when it is omitted.\nSubsequent websites will be hosted on the same datacenter automatically.\n\nWebsite creation is asynchronous and takes up to a few minutes. Poll the list website\nsetups endpoint with the `domain` filter every 10 to 15 seconds and wait for `status:\ncompleted` before uploading files, deploying or creating databases. While the setup is\n`running`, endpoints that operate on the website may respond with `404` or `409`.\n`is_enabled` on the websites list reflects suspension, not readiness.",
-	Example:           "  hostinger hosting websites create --domain example.com --order-id 12345",
+	Use:               "create [order-id]",
+	Aliases:           []string{"start-setup"},
+	Short:             "Start website setup",
+	Long:              "Starts a website setup on a Web or Cloud hosting order and returns the created setup\nright away; the website itself is provisioned asynchronously. Poll the list website\nsetups endpoint (`hosting_websites_list-setups`) with the `domain` filter every 10 to 15\nseconds and wait for `status: completed` before uploading files, deploying or creating\ndatabases.\n\nOmit `type` for an empty website. `type: wordpress` installs WordPress in the website\nroot with the admin user, email and password from `wordpress`, the domain as the site\ntitle, and `en_US` when `wordpress.language` is omitted. The headless types\n(`headless_empty`, `headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`)\ncreate a headless website; `headless_wordpress` additionally installs WordPress into the\n`cms` directory of the website root with generated credentials. `headless_empty` installs\nnothing: WordPress can be added later through\n`POST /api/hosting/v1/accounts/{username}/wordpress/installations`\n(`wordpress_installations_install`) with `type: headless`.\n\nOmit `domain` to set the website up on a generated temporary free subdomain. To know the\nfree subdomain before the call, so a timed-out call can be looked up and retried on the\nsame domain, generate one through `POST /api/hosting/v1/domains/free-subdomains`\n(`hosting_domains_generate-free-subdomain`) and send it as `domain`. It is accepted for\n24 hours, only from the client that generated it.\n\nWhen the order has no hosting account yet, the setup creates one first, in the datacenter\ngiven by `datacenter_code` or the order's default datacenter when it is omitted.\nReturns 404 when the order does not exist or is not accessible to the authenticated\nclient, and 409 with a `Retry-After` header while a setup for the same domain is still\nrunning.\n\nThe order can be given as [order-id] or left out, in which case it comes from --order-id, HOSTINGER_ORDER_ID, the .hostinger/site.json written by `hostinger up` or `hostinger link` (hosting orders), or a prompt when run in a terminal (the only order is used without asking).\n\nJSON flags take inline JSON, @file.json, or - to read stdin. Example values:\n\n  --wordpress\n    {\n      \"admin\": {\n        \"email\": \"admin@example.com\",\n        \"password\": \"S3curePass123\",\n        \"user\": \"site_admin\"\n      },\n      \"is_ai_builder\": false,\n      \"language\": \"en_US\"\n    }",
+	Example:           "  hostinger hosting websites create 12345",
 	ValidArgsFunction: cobra.NoFileCompletions,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		args = utils.PromptedArgs(cmd, args)
+		orderID, args, err := site.ResolveOrder(cmd, args, 0, "hosting")
+		if err != nil {
+			return api.CommandError(err)
+		}
+		orderIDInt, err := utils.ScopeInt("order ID", orderID)
+		if err != nil {
+			return err
+		}
+		if err := utils.EnumCheck(cmd, "type", []string{"wordpress", "headless_empty", "headless_wordpress", "headless_ecommerce", "headless_pocketbase"}); err != nil {
+			return err
+		}
 		body, err := createBody(cmd)
 		if err != nil {
 			return err
@@ -28,7 +41,7 @@ var CreateCmd = &cobra.Command{
 			return err
 		}
 		call := func(ctx context.Context) ([]byte, int, error) {
-			r, err := api.Request().HostingCreateWebsiteV1WithBodyWithResponse(ctx, "application/json", bytes.NewReader(payload))
+			r, err := api.Request().HostingStartWebsiteSetupV1WithBodyWithResponse(ctx, orderIDInt, "application/json", bytes.NewReader(payload))
 			if err != nil {
 				return nil, 0, err
 			}
@@ -43,15 +56,15 @@ var CreateCmd = &cobra.Command{
 }
 
 func init() {
-	utils.RegisterArgs(CreateCmd)
-	CreateCmd.Flags().StringP("datacenter-code", "", "", "Datacenter for the hosting account when the order does not have one yet. Omit to use the order's default datacenter. Ignored when the order already has a hosting account. Must be an available datacenter; list available datacenters to find valid codes.")
-	CreateCmd.Flags().StringP("domain", "", "", "Domain name for the website. Cannot start with \"www.\" and can have at most one subdomain level, e.g. `blog.example.com`.")
-	CreateCmd.Flags().IntP("order-id", "", 0, "Hosting order ID to create this website on. Choose the order whose hosting plan should host the new website. List orders to find available IDs.")
-	CreateCmd.MarkFlagRequired("domain")
-	CreateCmd.MarkFlagRequired("order-id")
+	utils.RegisterScopedArgs(CreateCmd, 1, utils.IntArg("order_id"))
+	CreateCmd.Flags().StringP("datacenter-code", "", "", "Datacenter for the hosting account when the order does not have one yet. Omit to use the order's default datacenter. Ignored when the order already has a hosting account. List available datacenters to find valid codes.")
+	CreateCmd.Flags().StringP("domain", "", "", "Customer-owned domain, or a free subdomain you generated through `POST /api/hosting/v1/domains/free-subdomains` (`hosting_domains_generate-free-subdomain`) in the last 24 hours. Cannot start with \"www.\" and can have at most one subdomain level, e.g. `blog.example.com`. Omit or `null` to set the website up on a generated temporary free subdomain.")
+	CreateCmd.Flags().StringP("type", "", "", "Website type. Omit or `null` for an empty website. `wordpress` installs WordPress in the website root and requires `wordpress`. The headless types (`headless_empty`, `headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`) create a headless website; `headless_wordpress` additionally installs WordPress into the `cms` directory with generated credentials. `headless_empty` installs nothing, so WordPress can be added later through `POST /api/hosting/v1/accounts/{username}/wordpress/installations` (`wordpress_installations_install`) with `type: headless`. (one of: wordpress, headless_empty, headless_wordpress, headless_ecommerce, headless_pocketbase)")
+	CreateCmd.Flags().StringP("wordpress", "", "", "WordPress install settings. Required when `type` is `wordpress`, not allowed otherwise. The site title is the domain. (JSON, @file or -; shape in the help above)")
 	CreateCmd.RegisterFlagCompletionFunc("datacenter-code", cobra.NoFileCompletions)
 	CreateCmd.RegisterFlagCompletionFunc("domain", cobra.NoFileCompletions)
-	CreateCmd.RegisterFlagCompletionFunc("order-id", cobra.NoFileCompletions)
+	CreateCmd.RegisterFlagCompletionFunc("type", cobra.FixedCompletions([]cobra.Completion{"wordpress", "headless_empty", "headless_wordpress", "headless_ecommerce", "headless_pocketbase"}, cobra.ShellCompDirectiveNoFileComp))
+	CreateCmd.RegisterFlagCompletionFunc("wordpress", cobra.FixedCompletions(nil, cobra.ShellCompDirectiveDefault))
 }
 
 func createBody(cmd *cobra.Command) (map[string]any, error) {
@@ -60,9 +73,21 @@ func createBody(cmd *cobra.Command) (map[string]any, error) {
 		v, _ := cmd.Flags().GetString("datacenter-code")
 		body["datacenter_code"] = v
 	}
-	domainVal, _ := cmd.Flags().GetString("domain")
-	body["domain"] = domainVal
-	orderIdVal, _ := cmd.Flags().GetInt("order-id")
-	body["order_id"] = orderIdVal
+	if cmd.Flags().Changed("domain") {
+		v, _ := cmd.Flags().GetString("domain")
+		body["domain"] = v
+	}
+	if cmd.Flags().Changed("type") {
+		v, _ := cmd.Flags().GetString("type")
+		body["type"] = v
+	}
+	if cmd.Flags().Changed("wordpress") {
+		wordpressVal, _ := cmd.Flags().GetString("wordpress")
+		wordpressValJSON, err := utils.JSONValue(wordpressVal, "wordpress")
+		if err != nil {
+			return nil, err
+		}
+		body["wordpress"] = wordpressValJSON
+	}
 	return body, nil
 }
