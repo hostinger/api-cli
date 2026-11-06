@@ -11036,10 +11036,23 @@ type HorizonsV1WebsitesWebsiteResourceStatus string
 
 // HorizonsV1WebsitesWebsiteUrlResource defines model for Horizons.V1.Websites.WebsiteUrlResource.
 type HorizonsV1WebsitesWebsiteUrlResource struct {
+	// ActionsInProgress What is running on the website right now: `website_publish` while it is being published right now,
+	// when publishing is refused; empty otherwise. An unfinished template migration also refuses publishing,
+	// with its own error, without appearing here.
+	//
+	// Example: []
+	ActionsInProgress *[]string `json:"actions_in_progress,omitempty"`
+
 	// HasEcommerceStore Whether the website has an ecommerce store
 	//
 	// Example: false
 	HasEcommerceStore *bool `json:"has_ecommerce_store,omitempty"`
+
+	// IsGenerating Whether Hostinger Horizons is generating changes to the website. Editing and publishing are refused
+	// while it is true
+	//
+	// Example: false
+	IsGenerating *bool `json:"is_generating,omitempty"`
 
 	// IsInProgress Whether Hostinger Horizons is still generating changes or publishing the website.
 	// Publishing is refused while it is true, and editing while changes are being generated.
@@ -23572,7 +23585,9 @@ type ClientInterface interface {
 	// Use this tool when the user wants the link to an existing website, or when you need its
 	// website URL before or after editing it.\n
 	// `is_in_progress` is true while changes are being generated or the website is being published;
-	// wait until it is false before publishing. `published_at` is when the website was last published,
+	// wait until it is false before publishing. `is_generating` is true while changes are being generated,
+	// and `actions_in_progress` has `website_publish` while the website is being published.
+	// `published_at` is when the website was last published,
 	// `is_template` is whether its published pages show the "Use template" banner, and
 	// `has_ecommerce_store` is whether it has an online store.\n
 	// Websites can be edited with the `Edit website` tool, or by the user in Hostinger Horizons
@@ -33353,7 +33368,9 @@ func (c *Client) HorizonsCreateWebsiteV1(ctx context.Context, body HorizonsCreat
 // Use this tool when the user wants the link to an existing website, or when you need its
 // website URL before or after editing it.\n
 // `is_in_progress` is true while changes are being generated or the website is being published;
-// wait until it is false before publishing. `published_at` is when the website was last published,
+// wait until it is false before publishing. `is_generating` is true while changes are being generated,
+// and `actions_in_progress` has `website_publish` while the website is being published.
+// `published_at` is when the website was last published,
 // `is_template` is whether its published pages show the "Use template" banner, and
 // `has_ecommerce_store` is whether it has an online store.\n
 // Websites can be edited with the `Edit website` tool, or by the user in Hostinger Horizons
@@ -66709,7 +66726,9 @@ type ClientWithResponsesInterface interface {
 	// Use this tool when the user wants the link to an existing website, or when you need its
 	// website URL before or after editing it.\n
 	// `is_in_progress` is true while changes are being generated or the website is being published;
-	// wait until it is false before publishing. `published_at` is when the website was last published,
+	// wait until it is false before publishing. `is_generating` is true while changes are being generated,
+	// and `actions_in_progress` has `website_publish` while the website is being published.
+	// `published_at` is when the website was last published,
 	// `is_template` is whether its published pages show the "Use template" banner, and
 	// `has_ecommerce_store` is whether it has an online store.\n
 	// Websites can be edited with the `Edit website` tool, or by the user in Hostinger Horizons
@@ -102735,7 +102754,9 @@ func (c *ClientWithResponses) HorizonsCreateWebsiteV1WithResponse(ctx context.Co
 // Use this tool when the user wants the link to an existing website, or when you need its
 // website URL before or after editing it.\n
 // `is_in_progress` is true while changes are being generated or the website is being published;
-// wait until it is false before publishing. `published_at` is when the website was last published,
+// wait until it is false before publishing. `is_generating` is true while changes are being generated,
+// and `actions_in_progress` has `website_publish` while the website is being published.
+// `published_at` is when the website was last published,
 // `is_template` is whether its published pages show the "Use template" banner, and
 // `has_ecommerce_store` is whether it has an online store.\n
 // Websites can be edited with the `Edit website` tool, or by the user in Hostinger Horizons
