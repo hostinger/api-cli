@@ -13,7 +13,7 @@ import (
 var GetCmd = &cobra.Command{
 	Use:     "get [domain]",
 	Short:   "Get domain forwarding",
-	Long:    "Retrieve domain forwarding data.\n\nUse this endpoint to view current redirect configuration for domains.\n\nThe domain can be given as [domain] or left out, in which case it comes from --domain, HOSTINGER_DOMAIN, the .hostinger/site.json written by `hostinger up` or `hostinger link` when that website's domain belongs to the account, default_domain in the config file, or a prompt when run in a terminal.",
+	Long:    "Retrieve domain forwarding data.\n\nReturns 404 when the domain has no forwarding.\n\nUse this endpoint to view current redirect configuration for domains.\n\nThe domain can be given as [domain] or left out, in which case it comes from --domain, HOSTINGER_DOMAIN, the .hostinger/site.json written by `hostinger up` or `hostinger link` when that website's domain belongs to the account, default_domain in the config file, or a prompt when run in a terminal.",
 	Example: "  hostinger domains forwarding get mydomain.tld",
 	ValidArgsFunction: utils.CompleteArgs(&utils.ArgSource{
 		Value: "domain",

@@ -22305,6 +22305,8 @@ type ClientInterface interface {
 	//
 	// Retrieve domain forwarding data.
 	//
+	// Returns 404 when the domain has no forwarding.
+	//
 	// Use this endpoint to view current redirect configuration for domains.
 	//
 	// Corresponds with GET /api/domains/v1/forwarding/{domain} (the `DomainsGetDomainForwardingV1` operationId).
@@ -31149,6 +31151,8 @@ func (c *Client) DomainsDeleteDomainForwardingV1(ctx context.Context, domain Dom
 // DomainsGetDomainForwardingV1 Get domain forwarding
 //
 // Retrieve domain forwarding data.
+//
+// Returns 404 when the domain has no forwarding.
 //
 // Use this endpoint to view current redirect configuration for domains.
 //
@@ -65419,6 +65423,8 @@ type ClientWithResponsesInterface interface {
 	// DomainsGetDomainForwardingV1WithResponse Get domain forwarding
 	//
 	// Retrieve domain forwarding data.
+	//
+	// Returns 404 when the domain has no forwarding.
 	//
 	// Use this endpoint to view current redirect configuration for domains.
 	//
@@ -100897,6 +100903,8 @@ func (c *ClientWithResponses) DomainsDeleteDomainForwardingV1WithResponse(ctx co
 // DomainsGetDomainForwardingV1WithResponse Get domain forwarding
 //
 // Retrieve domain forwarding data.
+//
+// Returns 404 when the domain has no forwarding.
 //
 // Use this endpoint to view current redirect configuration for domains.
 //

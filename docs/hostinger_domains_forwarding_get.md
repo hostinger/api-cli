@@ -6,6 +6,8 @@ Get domain forwarding
 
 Retrieve domain forwarding data.
 
+Returns 404 when the domain has no forwarding.
+
 Use this endpoint to view current redirect configuration for domains.
 
 The domain can be given as [domain] or left out, in which case it comes from --domain, HOSTINGER_DOMAIN, the .hostinger/site.json written by `hostinger up` or `hostinger link` when that website's domain belongs to the account, default_domain in the config file, or a prompt when run in a terminal.
