@@ -12,7 +12,7 @@ import (
 var ListCmd = &cobra.Command{
 	Use:               "list",
 	Short:             "Get domain list",
-	Long:              "Retrieve all domains associated with your account.\n\nUse this endpoint to view user's domain portfolio.",
+	Long:              "Retrieve all domains associated with your account.\n\nA plan can include both a free domain (`type: free_domain`) and a free domain\ntransfer (`type: free_domain_transfer`). They are alternatives: claiming one\nremoves the other, which may still be listed for a short time after the claim.\n\nUse this endpoint to view user's domain portfolio.",
 	Example:           "  hostinger domains portfolio list",
 	ValidArgsFunction: cobra.NoFileCompletions,
 	RunE: func(cmd *cobra.Command, args []string) error {

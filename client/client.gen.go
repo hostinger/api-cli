@@ -22511,6 +22511,10 @@ type ClientInterface interface {
 	//
 	// Retrieve all domains associated with your account.
 	//
+	// A plan can include both a free domain (`type: free_domain`) and a free domain
+	// transfer (`type: free_domain_transfer`). They are alternatives: claiming one
+	// removes the other, which may still be listed for a short time after the claim.
+	//
 	// Use this endpoint to view user's domain portfolio.
 	//
 	// Corresponds with GET /api/domains/v1/portfolio (the `DomainsGetDomainListV1` operationId).
@@ -22571,6 +22575,13 @@ type ClientInterface interface {
 	// Unlike purchasing a domain, this consumes a free domain you already have,
 	// so no payment method is required.
 	//
+	// A free domain and a free domain transfer from the same plan are alternatives:
+	// claiming the free domain removes the plan's free domain transfer
+	// (`type: free_domain_transfer`). Before making request, confirm with the user which
+	// of the two they want. Right after a claim, the removed free domain transfer may
+	// still appear in the [domain list endpoint](#tag/domains-portfolio) for a short
+	// time; do not claim it.
+	//
 	// A successful response means the domain is registered. If registration fails, login to
 	// [hPanel](https://hpanel.hostinger.com/) and check domain registration status.
 	//
@@ -22595,6 +22606,13 @@ type ClientInterface interface {
 	//
 	// Unlike purchasing a domain, this consumes a free domain you already have,
 	// so no payment method is required.
+	//
+	// A free domain and a free domain transfer from the same plan are alternatives:
+	// claiming the free domain removes the plan's free domain transfer
+	// (`type: free_domain_transfer`). Before making request, confirm with the user which
+	// of the two they want. Right after a claim, the removed free domain transfer may
+	// still appear in the [domain list endpoint](#tag/domains-portfolio) for a short
+	// time; do not claim it.
 	//
 	// A successful response means the domain is registered. If registration fails, login to
 	// [hPanel](https://hpanel.hostinger.com/) and check domain registration status.
@@ -22846,6 +22864,12 @@ type ClientInterface interface {
 	// Unlike purchasing a transfer, this consumes a free domain transfer you already have,
 	// so no payment method is required.
 	//
+	// A free domain and a free domain transfer from the same plan are alternatives:
+	// claiming the free domain transfer removes the plan's free domain
+	// (`type: free_domain`). Before making request, confirm with the user which of the
+	// two they want. Right after a claim, the removed free domain may still appear in
+	// the [domain list endpoint](#tag/domains-portfolio) for a short time; do not claim it.
+	//
 	// Before making request, unlock the domain at the current registrar and get its authorization
 	// code. The transfer is validated first, so domains which cannot be transferred are rejected
 	// before the free domain transfer is consumed.
@@ -22871,6 +22895,12 @@ type ClientInterface interface {
 	//
 	// Unlike purchasing a transfer, this consumes a free domain transfer you already have,
 	// so no payment method is required.
+	//
+	// A free domain and a free domain transfer from the same plan are alternatives:
+	// claiming the free domain transfer removes the plan's free domain
+	// (`type: free_domain`). Before making request, confirm with the user which of the
+	// two they want. Right after a claim, the removed free domain may still appear in
+	// the [domain list endpoint](#tag/domains-portfolio) for a short time; do not claim it.
 	//
 	// Before making request, unlock the domain at the current registrar and get its authorization
 	// code. The transfer is validated first, so domains which cannot be transferred are rejected
@@ -31474,6 +31504,10 @@ func (c *Client) DomainsStartOutgoingDomainMoveV1(ctx context.Context, domain Do
 //
 // Retrieve all domains associated with your account.
 //
+// A plan can include both a free domain (`type: free_domain`) and a free domain
+// transfer (`type: free_domain_transfer`). They are alternatives: claiming one
+// removes the other, which may still be listed for a short time after the claim.
+//
 // Use this endpoint to view user's domain portfolio.
 //
 // Corresponds with GET /api/domains/v1/portfolio (the `DomainsGetDomainListV1` operationId).
@@ -31564,6 +31598,13 @@ func (c *Client) DomainsPurchaseNewDomainV1(ctx context.Context, body DomainsPur
 // Unlike purchasing a domain, this consumes a free domain you already have,
 // so no payment method is required.
 //
+// A free domain and a free domain transfer from the same plan are alternatives:
+// claiming the free domain removes the plan's free domain transfer
+// (`type: free_domain_transfer`). Before making request, confirm with the user which
+// of the two they want. Right after a claim, the removed free domain transfer may
+// still appear in the [domain list endpoint](#tag/domains-portfolio) for a short
+// time; do not claim it.
+//
 // A successful response means the domain is registered. If registration fails, login to
 // [hPanel](https://hpanel.hostinger.com/) and check domain registration status.
 //
@@ -31598,6 +31639,13 @@ func (c *Client) DomainsClaimFreeDomainV1WithBody(ctx context.Context, contentTy
 //
 // Unlike purchasing a domain, this consumes a free domain you already have,
 // so no payment method is required.
+//
+// A free domain and a free domain transfer from the same plan are alternatives:
+// claiming the free domain removes the plan's free domain transfer
+// (`type: free_domain_transfer`). Before making request, confirm with the user which
+// of the two they want. Right after a claim, the removed free domain transfer may
+// still appear in the [domain list endpoint](#tag/domains-portfolio) for a short
+// time; do not claim it.
 //
 // A successful response means the domain is registered. If registration fails, login to
 // [hPanel](https://hpanel.hostinger.com/) and check domain registration status.
@@ -31999,6 +32047,12 @@ func (c *Client) DomainsStartDomainTransferV1(ctx context.Context, body DomainsS
 // Unlike purchasing a transfer, this consumes a free domain transfer you already have,
 // so no payment method is required.
 //
+// A free domain and a free domain transfer from the same plan are alternatives:
+// claiming the free domain transfer removes the plan's free domain
+// (`type: free_domain`). Before making request, confirm with the user which of the
+// two they want. Right after a claim, the removed free domain may still appear in
+// the [domain list endpoint](#tag/domains-portfolio) for a short time; do not claim it.
+//
 // Before making request, unlock the domain at the current registrar and get its authorization
 // code. The transfer is validated first, so domains which cannot be transferred are rejected
 // before the free domain transfer is consumed.
@@ -32034,6 +32088,12 @@ func (c *Client) DomainsClaimFreeDomainTransferV1WithBody(ctx context.Context, c
 //
 // Unlike purchasing a transfer, this consumes a free domain transfer you already have,
 // so no payment method is required.
+//
+// A free domain and a free domain transfer from the same plan are alternatives:
+// claiming the free domain transfer removes the plan's free domain
+// (`type: free_domain`). Before making request, confirm with the user which of the
+// two they want. Right after a claim, the removed free domain may still appear in
+// the [domain list endpoint](#tag/domains-portfolio) for a short time; do not claim it.
 //
 // Before making request, unlock the domain at the current registrar and get its authorization
 // code. The transfer is validated first, so domains which cannot be transferred are rejected
@@ -65580,6 +65640,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Retrieve all domains associated with your account.
 	//
+	// A plan can include both a free domain (`type: free_domain`) and a free domain
+	// transfer (`type: free_domain_transfer`). They are alternatives: claiming one
+	// removes the other, which may still be listed for a short time after the claim.
+	//
 	// Use this endpoint to view user's domain portfolio.
 	//
 	// Returns a wrapper object for the known response body format(s).
@@ -65642,6 +65706,13 @@ type ClientWithResponsesInterface interface {
 	// Unlike purchasing a domain, this consumes a free domain you already have,
 	// so no payment method is required.
 	//
+	// A free domain and a free domain transfer from the same plan are alternatives:
+	// claiming the free domain removes the plan's free domain transfer
+	// (`type: free_domain_transfer`). Before making request, confirm with the user which
+	// of the two they want. Right after a claim, the removed free domain transfer may
+	// still appear in the [domain list endpoint](#tag/domains-portfolio) for a short
+	// time; do not claim it.
+	//
 	// A successful response means the domain is registered. If registration fails, login to
 	// [hPanel](https://hpanel.hostinger.com/) and check domain registration status.
 	//
@@ -65666,6 +65737,13 @@ type ClientWithResponsesInterface interface {
 	//
 	// Unlike purchasing a domain, this consumes a free domain you already have,
 	// so no payment method is required.
+	//
+	// A free domain and a free domain transfer from the same plan are alternatives:
+	// claiming the free domain removes the plan's free domain transfer
+	// (`type: free_domain_transfer`). Before making request, confirm with the user which
+	// of the two they want. Right after a claim, the removed free domain transfer may
+	// still appear in the [domain list endpoint](#tag/domains-portfolio) for a short
+	// time; do not claim it.
 	//
 	// A successful response means the domain is registered. If registration fails, login to
 	// [hPanel](https://hpanel.hostinger.com/) and check domain registration status.
@@ -65933,6 +66011,12 @@ type ClientWithResponsesInterface interface {
 	// Unlike purchasing a transfer, this consumes a free domain transfer you already have,
 	// so no payment method is required.
 	//
+	// A free domain and a free domain transfer from the same plan are alternatives:
+	// claiming the free domain transfer removes the plan's free domain
+	// (`type: free_domain`). Before making request, confirm with the user which of the
+	// two they want. Right after a claim, the removed free domain may still appear in
+	// the [domain list endpoint](#tag/domains-portfolio) for a short time; do not claim it.
+	//
 	// Before making request, unlock the domain at the current registrar and get its authorization
 	// code. The transfer is validated first, so domains which cannot be transferred are rejected
 	// before the free domain transfer is consumed.
@@ -65958,6 +66042,12 @@ type ClientWithResponsesInterface interface {
 	//
 	// Unlike purchasing a transfer, this consumes a free domain transfer you already have,
 	// so no payment method is required.
+	//
+	// A free domain and a free domain transfer from the same plan are alternatives:
+	// claiming the free domain transfer removes the plan's free domain
+	// (`type: free_domain`). Before making request, confirm with the user which of the
+	// two they want. Right after a claim, the removed free domain may still appear in
+	// the [domain list endpoint](#tag/domains-portfolio) for a short time; do not claim it.
 	//
 	// Before making request, unlock the domain at the current registrar and get its authorization
 	// code. The transfer is validated first, so domains which cannot be transferred are rejected
@@ -101116,6 +101206,10 @@ func (c *ClientWithResponses) DomainsStartOutgoingDomainMoveV1WithResponse(ctx c
 //
 // Retrieve all domains associated with your account.
 //
+// A plan can include both a free domain (`type: free_domain`) and a free domain
+// transfer (`type: free_domain_transfer`). They are alternatives: claiming one
+// removes the other, which may still be listed for a short time after the claim.
+//
 // Use this endpoint to view user's domain portfolio.
 //
 // Returns a wrapper object for the known response body format(s).
@@ -101196,6 +101290,13 @@ func (c *ClientWithResponses) DomainsPurchaseNewDomainV1WithResponse(ctx context
 // Unlike purchasing a domain, this consumes a free domain you already have,
 // so no payment method is required.
 //
+// A free domain and a free domain transfer from the same plan are alternatives:
+// claiming the free domain removes the plan's free domain transfer
+// (`type: free_domain_transfer`). Before making request, confirm with the user which
+// of the two they want. Right after a claim, the removed free domain transfer may
+// still appear in the [domain list endpoint](#tag/domains-portfolio) for a short
+// time; do not claim it.
+//
 // A successful response means the domain is registered. If registration fails, login to
 // [hPanel](https://hpanel.hostinger.com/) and check domain registration status.
 //
@@ -101226,6 +101327,13 @@ func (c *ClientWithResponses) DomainsClaimFreeDomainV1WithBodyWithResponse(ctx c
 //
 // Unlike purchasing a domain, this consumes a free domain you already have,
 // so no payment method is required.
+//
+// A free domain and a free domain transfer from the same plan are alternatives:
+// claiming the free domain removes the plan's free domain transfer
+// (`type: free_domain_transfer`). Before making request, confirm with the user which
+// of the two they want. Right after a claim, the removed free domain transfer may
+// still appear in the [domain list endpoint](#tag/domains-portfolio) for a short
+// time; do not claim it.
 //
 // A successful response means the domain is registered. If registration fails, login to
 // [hPanel](https://hpanel.hostinger.com/) and check domain registration status.
@@ -101583,6 +101691,12 @@ func (c *ClientWithResponses) DomainsStartDomainTransferV1WithResponse(ctx conte
 // Unlike purchasing a transfer, this consumes a free domain transfer you already have,
 // so no payment method is required.
 //
+// A free domain and a free domain transfer from the same plan are alternatives:
+// claiming the free domain transfer removes the plan's free domain
+// (`type: free_domain`). Before making request, confirm with the user which of the
+// two they want. Right after a claim, the removed free domain may still appear in
+// the [domain list endpoint](#tag/domains-portfolio) for a short time; do not claim it.
+//
 // Before making request, unlock the domain at the current registrar and get its authorization
 // code. The transfer is validated first, so domains which cannot be transferred are rejected
 // before the free domain transfer is consumed.
@@ -101614,6 +101728,12 @@ func (c *ClientWithResponses) DomainsClaimFreeDomainTransferV1WithBodyWithRespon
 //
 // Unlike purchasing a transfer, this consumes a free domain transfer you already have,
 // so no payment method is required.
+//
+// A free domain and a free domain transfer from the same plan are alternatives:
+// claiming the free domain transfer removes the plan's free domain
+// (`type: free_domain`). Before making request, confirm with the user which of the
+// two they want. Right after a claim, the removed free domain may still appear in
+// the [domain list endpoint](#tag/domains-portfolio) for a short time; do not claim it.
 //
 // Before making request, unlock the domain at the current registrar and get its authorization
 // code. The transfer is validated first, so domains which cannot be transferred are rejected

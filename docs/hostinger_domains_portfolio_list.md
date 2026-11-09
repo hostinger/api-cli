@@ -6,6 +6,10 @@ Get domain list
 
 Retrieve all domains associated with your account.
 
+A plan can include both a free domain (`type: free_domain`) and a free domain
+transfer (`type: free_domain_transfer`). They are alternatives: claiming one
+removes the other, which may still be listed for a short time after the claim.
+
 Use this endpoint to view user's domain portfolio.
 
 ```

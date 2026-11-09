@@ -9,6 +9,13 @@ Claim a free domain available on your account and register it.
 Unlike purchasing a domain, this consumes a free domain you already have,
 so no payment method is required.
 
+A free domain and a free domain transfer from the same plan are alternatives:
+claiming the free domain removes the plan's free domain transfer
+(`type: free_domain_transfer`). Before making request, confirm with the user which
+of the two they want. Right after a claim, the removed free domain transfer may
+still appear in the domain list endpoint (#tag/domains-portfolio) for a short
+time; do not claim it.
+
 A successful response means the domain is registered. If registration fails, login to
 hPanel (https://hpanel.hostinger.com/) and check domain registration status.
 
