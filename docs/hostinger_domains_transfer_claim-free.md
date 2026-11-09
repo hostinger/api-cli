@@ -15,9 +15,10 @@ claiming the free domain transfer removes the plan's free domain
 two they want. Right after a claim, the removed free domain may still appear in
 the domain list endpoint (#tag/domains-portfolio) for a short time; do not claim it.
 
-Before making request, unlock the domain at the current registrar and get its authorization
-code. The transfer is validated first, so domains which cannot be transferred are rejected
-before the free domain transfer is consumed.
+Before making request, unlock the domain at the current registrar and, if its TLD uses one,
+get its authorization code. The transfer is validated first, so domains which cannot be
+transferred, or are missing a required authorization code, are rejected before the free
+domain transfer is consumed.
 
 A successful response means the transfer has been started. Completion depends on the current
 registrar and can be followed with the transfer list endpoint (#tag/domains-transfer).
@@ -46,13 +47,13 @@ hostinger domains transfer claim-free [flags]
 ### Examples
 
 ```
-  hostinger domains transfer claim-free --auth-code Auth123Code456 --domain my-new-domain.tld
+  hostinger domains transfer claim-free --domain my-new-domain.tld
 ```
 
 ### Options
 
 ```
-      --auth-code string         Authorization code from the current registrar
+      --auth-code string         EPP code that authorizes this transfer, which the domain owner gets from the current registrar. Required only for TLDs whose transfers use one.
       --domain string            Domain name
       --domain-contacts string   Domain contact information (JSON, @file or -; shape in the help above)
   -h, --help                     help for claim-free

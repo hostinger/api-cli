@@ -14,8 +14,8 @@ import (
 var StartCmd = &cobra.Command{
 	Use:               "start",
 	Short:             "Start domain transfer",
-	Long:              "Transfer a domain from another registrar to your account.\n\nThe transfer runs on a domain transfer service you have already purchased.\n\nBefore making request, unlock the domain at the current registrar and get its authorization\ncode.\n\nA successful response means the transfer has been started. Completion depends on the current\nregistrar and can be followed with the transfer list endpoint (#tag/domains-transfer).\n\nIf no WHOIS information is provided, default contact information for that TLD will be used.\nBefore making request, ensure WHOIS information for desired TLD exists in your account.\n\nUse this endpoint to bring domains registered elsewhere into your account.\n\nJSON flags take inline JSON, @file.json, or - to read stdin. Example values:\n\n  --domain-contacts\n    {\n      \"admin_id\": 546123,\n      \"billing_id\": 741288,\n      \"owner_id\": 741288,\n      \"tech_id\": 741288\n    }",
-	Example:           "  hostinger domains transfer start --auth-code Auth123Code456 --domain my-new-domain.tld",
+	Long:              "Transfer a domain from another registrar to your account.\n\nThe transfer runs on a domain transfer service you have already purchased.\n\nBefore making request, unlock the domain at the current registrar and, if its TLD uses one,\nget its authorization code.\n\nA successful response means the transfer has been started. Completion depends on the current\nregistrar and can be followed with the transfer list endpoint (#tag/domains-transfer).\n\nIf no WHOIS information is provided, default contact information for that TLD will be used.\nBefore making request, ensure WHOIS information for desired TLD exists in your account.\n\nUse this endpoint to bring domains registered elsewhere into your account.\n\nJSON flags take inline JSON, @file.json, or - to read stdin. Example values:\n\n  --domain-contacts\n    {\n      \"admin_id\": 546123,\n      \"billing_id\": 741288,\n      \"owner_id\": 741288,\n      \"tech_id\": 741288\n    }",
+	Example:           "  hostinger domains transfer start --domain my-new-domain.tld",
 	ValidArgsFunction: cobra.NoFileCompletions,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		args = utils.PromptedArgs(cmd, args)
@@ -44,11 +44,10 @@ var StartCmd = &cobra.Command{
 
 func init() {
 	utils.RegisterArgs(StartCmd)
-	StartCmd.Flags().StringP("auth-code", "", "", "Authorization code from the current registrar")
+	StartCmd.Flags().StringP("auth-code", "", "", "EPP code that authorizes this transfer, which the domain owner gets from the current registrar. Required only for TLDs whose transfers use one.")
 	StartCmd.Flags().StringP("domain", "", "", "Domain name")
 	StartCmd.Flags().StringP("domain-contacts", "", "", "Domain contact information (JSON, @file or -; shape in the help above)")
 	StartCmd.Flags().BoolP("should-keep-ns", "", true, "Keep the existing nameservers of the domain")
-	StartCmd.MarkFlagRequired("auth-code")
 	StartCmd.MarkFlagRequired("domain")
 	StartCmd.RegisterFlagCompletionFunc("auth-code", cobra.NoFileCompletions)
 	StartCmd.RegisterFlagCompletionFunc("domain", cobra.NoFileCompletions)
@@ -58,8 +57,10 @@ func init() {
 
 func startBody(cmd *cobra.Command) (map[string]any, error) {
 	body := map[string]any{}
-	authCodeVal, _ := cmd.Flags().GetString("auth-code")
-	body["auth_code"] = authCodeVal
+	if cmd.Flags().Changed("auth-code") {
+		v, _ := cmd.Flags().GetString("auth-code")
+		body["auth_code"] = v
+	}
 	domainVal, _ := cmd.Flags().GetString("domain")
 	body["domain"] = domainVal
 	if cmd.Flags().Changed("domain-contacts") {
