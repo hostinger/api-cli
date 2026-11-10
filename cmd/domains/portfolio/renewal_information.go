@@ -13,7 +13,7 @@ import (
 var RenewalInformationCmd = &cobra.Command{
 	Use:     "renewal-information [domain]",
 	Short:   "Get domain renewal information",
-	Long:    "Retrieve renewal information for a specified domain, including its status and current\nexpiration date.\n\nUse this endpoint to build renewal automation and expiry monitoring for a single domain.\n\nThe domain can be given as [domain] or left out, in which case it comes from --domain, HOSTINGER_DOMAIN, the .hostinger/site.json written by `hostinger up` or `hostinger link` when that website's domain belongs to the account, default_domain in the config file, or a prompt when run in a terminal.",
+	Long:    "Retrieve renewal information for a specified domain, including its status, current\nexpiration date, whether it can be renewed, whether it is in its grace or redemption period,\nand when each of those periods ends.\n\nUse this endpoint to build renewal automation and expiry monitoring for a single domain.\n\nThe domain can be given as [domain] or left out, in which case it comes from --domain, HOSTINGER_DOMAIN, the .hostinger/site.json written by `hostinger up` or `hostinger link` when that website's domain belongs to the account, default_domain in the config file, or a prompt when run in a terminal.",
 	Example: "  hostinger domains portfolio renewal-information mydomain.tld",
 	ValidArgsFunction: utils.CompleteArgs(&utils.ArgSource{
 		Value: "domain",

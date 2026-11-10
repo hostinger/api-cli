@@ -8903,8 +8903,33 @@ type DomainsV1PortfolioRenewalRenewalInformationResource struct {
 
 	// ExpiresAt Domain expiration date
 	//
-	// Example: 2027-05-25 13:53:04
+	// Example: 2027-05-25T13:53:04Z
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
+
+	// GracePeriodEndsAt When the grace period ends, set even when the domain is not in it
+	//
+	// Example: 2027-06-24T13:53:04Z
+	GracePeriodEndsAt *time.Time `json:"grace_period_ends_at,omitempty"`
+
+	// IsGracePeriod Whether the domain is in its post-expiration grace period
+	//
+	// Example: false
+	IsGracePeriod *bool `json:"is_grace_period,omitempty"`
+
+	// IsRedemptionPeriod Whether the domain is in its redemption period
+	//
+	// Example: false
+	IsRedemptionPeriod *bool `json:"is_redemption_period,omitempty"`
+
+	// IsRenewable Whether the domain can be renewed
+	//
+	// Example: true
+	IsRenewable *bool `json:"is_renewable,omitempty"`
+
+	// RedemptionPeriodEndsAt When the redemption period ends, set even when the domain is not in it
+	//
+	// Example: 2027-07-24T13:53:04Z
+	RedemptionPeriodEndsAt *time.Time `json:"redemption_period_ends_at,omitempty"`
 
 	// Status Domain status
 	//
@@ -22728,8 +22753,9 @@ type ClientInterface interface {
 
 	// DomainsGetDomainRenewalInformationV1 Get domain renewal information
 	//
-	// Retrieve renewal information for a specified domain, including its status and current
-	// expiration date.
+	// Retrieve renewal information for a specified domain, including its status, current
+	// expiration date, whether it can be renewed, whether it is in its grace or redemption period,
+	// and when each of those periods ends.
 	//
 	// Use this endpoint to build renewal automation and expiry monitoring for a single domain.
 	//
@@ -31855,8 +31881,9 @@ func (c *Client) DomainsEnablePrivacyProtectionV1(ctx context.Context, domain Do
 
 // DomainsGetDomainRenewalInformationV1 Get domain renewal information
 //
-// Retrieve renewal information for a specified domain, including its status and current
-// expiration date.
+// Retrieve renewal information for a specified domain, including its status, current
+// expiration date, whether it can be renewed, whether it is in its grace or redemption period,
+// and when each of those periods ends.
 //
 // Use this endpoint to build renewal automation and expiry monitoring for a single domain.
 //
@@ -65879,8 +65906,9 @@ type ClientWithResponsesInterface interface {
 
 	// DomainsGetDomainRenewalInformationV1WithResponse Get domain renewal information
 	//
-	// Retrieve renewal information for a specified domain, including its status and current
-	// expiration date.
+	// Retrieve renewal information for a specified domain, including its status, current
+	// expiration date, whether it can be renewed, whether it is in its grace or redemption period,
+	// and when each of those periods ends.
 	//
 	// Use this endpoint to build renewal automation and expiry monitoring for a single domain.
 	//
@@ -101527,8 +101555,9 @@ func (c *ClientWithResponses) DomainsEnablePrivacyProtectionV1WithResponse(ctx c
 
 // DomainsGetDomainRenewalInformationV1WithResponse Get domain renewal information
 //
-// Retrieve renewal information for a specified domain, including its status and current
-// expiration date.
+// Retrieve renewal information for a specified domain, including its status, current
+// expiration date, whether it can be renewed, whether it is in its grace or redemption period,
+// and when each of those periods ends.
 //
 // Use this endpoint to build renewal automation and expiry monitoring for a single domain.
 //
