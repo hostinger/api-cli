@@ -6,6 +6,10 @@ Get domain details
 
 Retrieve detailed information for specified domain.
 
+A domain is found here only once it is registered. Until then, `Get domain list` shows it, and
+its `verification` field says what registration waits for when the domain is held for
+verification.
+
 Use this endpoint to view comprehensive domain configuration and status.
 
 The domain can be given as [domain] or left out, in which case it comes from --domain, HOSTINGER_DOMAIN, the .hostinger/site.json written by `hostinger up` or `hostinger link` when that website's domain belongs to the account, default_domain in the config file, or a prompt when run in a terminal.

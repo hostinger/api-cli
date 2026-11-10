@@ -627,6 +627,27 @@ func (e DomainsV1DomainDomainResourceType) Valid() bool {
 	}
 }
 
+// Defines values for DomainsV1DomainDomainVerificationResourceType.
+const (
+	ContactVerification DomainsV1DomainDomainVerificationResourceType = "contact_verification"
+	ManualReview        DomainsV1DomainDomainVerificationResourceType = "manual_review"
+	SmsCode             DomainsV1DomainDomainVerificationResourceType = "sms_code"
+)
+
+// Valid indicates whether the value is a known member of the DomainsV1DomainDomainVerificationResourceType enum.
+func (e DomainsV1DomainDomainVerificationResourceType) Valid() bool {
+	switch e {
+	case ContactVerification:
+		return true
+	case ManualReview:
+		return true
+	case SmsCode:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for DomainsV1ForwardingForwardingResourceRedirectType.
 const (
 	DomainsV1ForwardingForwardingResourceRedirectTypeN301 DomainsV1ForwardingForwardingResourceRedirectType = "301"
@@ -8607,6 +8628,11 @@ type DomainsV1DomainDomainResource struct {
 
 	// Type Example: domain
 	Type *DomainsV1DomainDomainResourceType `json:"type,omitempty"`
+
+	// Verification What registration of this domain waits for. Set only when `type` is `domain` and `status` is
+	// `pending_verification`; `null` otherwise, including for a `domain_transfer` in
+	// `pending_verification`.
+	Verification *DomainsV1DomainDomainResource_Verification `json:"verification,omitempty"`
 }
 
 // DomainsV1DomainDomainResourceStatus Example: active
@@ -8614,6 +8640,40 @@ type DomainsV1DomainDomainResourceStatus string
 
 // DomainsV1DomainDomainResourceType Example: domain
 type DomainsV1DomainDomainResourceType string
+
+// DomainsV1DomainDomainResource_Verification What registration of this domain waits for. Set only when `type` is `domain` and `status` is
+// `pending_verification`; `null` otherwise, including for a `domain_transfer` in
+// `pending_verification`.
+type DomainsV1DomainDomainResource_Verification struct {
+	union json.RawMessage
+}
+
+// DomainsV1DomainDomainVerificationResource defines model for Domains.V1.Domain.DomainVerificationResource.
+type DomainsV1DomainDomainVerificationResource struct {
+	// Type What registration waits for:
+	// - `manual_review`: a check you cannot complete yourself, such as a review of the order by
+	//   Hostinger. You have nothing to do.
+	// - `sms_code`: a code was sent by SMS to the phone number of the owner WHOIS profile. Enter it
+	//   in [hPanel](https://hpanel.hostinger.com/).
+	// - `contact_verification`: the registry requires the owner WHOIS profile to be verified first,
+	//   by email, phone number or contact name. Complete it in
+	//   [hPanel](https://hpanel.hostinger.com/); registration resumes once the profile is verified.
+	//
+	// Example: contact_verification
+	Type *DomainsV1DomainDomainVerificationResourceType `json:"type,omitempty"`
+}
+
+// DomainsV1DomainDomainVerificationResourceType What registration waits for:
+//   - `manual_review`: a check you cannot complete yourself, such as a review of the order by
+//     Hostinger. You have nothing to do.
+//   - `sms_code`: a code was sent by SMS to the phone number of the owner WHOIS profile. Enter it
+//     in [hPanel](https://hpanel.hostinger.com/).
+//   - `contact_verification`: the registry requires the owner WHOIS profile to be verified first,
+//     by email, phone number or contact name. Complete it in
+//     [hPanel](https://hpanel.hostinger.com/); registration resumes once the profile is verified.
+//
+// Example: contact_verification
+type DomainsV1DomainDomainVerificationResourceType string
 
 // DomainsV1ForwardingForwardingResource defines model for Domains.V1.Forwarding.ForwardingResource.
 type DomainsV1ForwardingForwardingResource struct {
@@ -20410,6 +20470,42 @@ func (t *AgentReadinessV1ScansScanResource_Categories) UnmarshalJSON(b []byte) e
 	return err
 }
 
+// AsDomainsV1DomainDomainVerificationResource returns the union data inside the DomainsV1DomainDomainResource_Verification as a DomainsV1DomainDomainVerificationResource
+func (t DomainsV1DomainDomainResource_Verification) AsDomainsV1DomainDomainVerificationResource() (DomainsV1DomainDomainVerificationResource, error) {
+	var body DomainsV1DomainDomainVerificationResource
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromDomainsV1DomainDomainVerificationResource overwrites any union data inside the DomainsV1DomainDomainResource_Verification as the provided DomainsV1DomainDomainVerificationResource
+func (t *DomainsV1DomainDomainResource_Verification) FromDomainsV1DomainDomainVerificationResource(v DomainsV1DomainDomainVerificationResource) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeDomainsV1DomainDomainVerificationResource performs a merge with any union data inside the DomainsV1DomainDomainResource_Verification, using the provided DomainsV1DomainDomainVerificationResource
+func (t *DomainsV1DomainDomainResource_Verification) MergeDomainsV1DomainDomainVerificationResource(v DomainsV1DomainDomainVerificationResource) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t DomainsV1DomainDomainResource_Verification) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *DomainsV1DomainDomainResource_Verification) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
 // AsGPUV1RegionRegionResource returns the union data inside the GPUV1PoolPoolResource_Region as a GPUV1RegionRegionResource
 func (t GPUV1PoolPoolResource_Region) AsGPUV1RegionRegionResource() (GPUV1RegionRegionResource, error) {
 	var body GPUV1RegionRegionResource
@@ -22575,6 +22671,10 @@ type ClientInterface interface {
 	// transfer (`type: free_domain_transfer`). They are alternatives: claiming one
 	// removes the other, which may still be listed for a short time after the claim.
 	//
+	// A domain held for verification before it is registered has `status: pending_verification`,
+	// and its `verification` field says what registration waits for: a manual review, an SMS code,
+	// or owner contact verification.
+	//
 	// Use this endpoint to view user's domain portfolio.
 	//
 	// Corresponds with GET /api/domains/v1/portfolio (the `DomainsGetDomainListV1` operationId).
@@ -22695,6 +22795,10 @@ type ClientInterface interface {
 	// DomainsGetDomainDetailsV1 Get domain details
 	//
 	// Retrieve detailed information for specified domain.
+	//
+	// A domain is found here only once it is registered. Until then, `Get domain list` shows it, and
+	// its `verification` field says what registration waits for when the domain is held for
+	// verification.
 	//
 	// Use this endpoint to view comprehensive domain configuration and status.
 	//
@@ -22821,7 +22925,8 @@ type ClientInterface interface {
 	//
 	// A successful response means the setup request was accepted, not that the domain is already
 	// registered. Poll `Get domain list` for the outcome, the domain appears in `Get domain details`
-	// only once it is registered.
+	// only once it is registered. When the domain is held for verification, its `verification` field
+	// in `Get domain list` says what registration waits for.
 	//
 	// Use this endpoint to finish registering a domain that is awaiting setup on your account.
 	//
@@ -22856,7 +22961,8 @@ type ClientInterface interface {
 	//
 	// A successful response means the setup request was accepted, not that the domain is already
 	// registered. Poll `Get domain list` for the outcome, the domain appears in `Get domain details`
-	// only once it is registered.
+	// only once it is registered. When the domain is held for verification, its `verification` field
+	// in `Get domain list` says what registration waits for.
 	//
 	// Use this endpoint to finish registering a domain that is awaiting setup on your account.
 	//
@@ -31601,6 +31707,10 @@ func (c *Client) DomainsStartOutgoingDomainMoveV1(ctx context.Context, domain Do
 // transfer (`type: free_domain_transfer`). They are alternatives: claiming one
 // removes the other, which may still be listed for a short time after the claim.
 //
+// A domain held for verification before it is registered has `status: pending_verification`,
+// and its `verification` field says what registration waits for: a manual review, an SMS code,
+// or owner contact verification.
+//
 // Use this endpoint to view user's domain portfolio.
 //
 // Corresponds with GET /api/domains/v1/portfolio (the `DomainsGetDomainListV1` operationId).
@@ -31771,6 +31881,10 @@ func (c *Client) DomainsClaimFreeDomainV1(ctx context.Context, body DomainsClaim
 // DomainsGetDomainDetailsV1 Get domain details
 //
 // Retrieve detailed information for specified domain.
+//
+// A domain is found here only once it is registered. Until then, `Get domain list` shows it, and
+// its `verification` field says what registration waits for when the domain is held for
+// verification.
 //
 // Use this endpoint to view comprehensive domain configuration and status.
 //
@@ -31987,7 +32101,8 @@ func (c *Client) DomainsGetDomainRenewalInformationV1(ctx context.Context, domai
 //
 // A successful response means the setup request was accepted, not that the domain is already
 // registered. Poll `Get domain list` for the outcome, the domain appears in `Get domain details`
-// only once it is registered.
+// only once it is registered. When the domain is held for verification, its `verification` field
+// in `Get domain list` says what registration waits for.
 //
 // Use this endpoint to finish registering a domain that is awaiting setup on your account.
 //
@@ -32032,7 +32147,8 @@ func (c *Client) DomainsCompleteDomainSetupV1WithBody(ctx context.Context, domai
 //
 // A successful response means the setup request was accepted, not that the domain is already
 // registered. Poll `Get domain list` for the outcome, the domain appears in `Get domain details`
-// only once it is registered.
+// only once it is registered. When the domain is held for verification, its `verification` field
+// in `Get domain list` says what registration waits for.
 //
 // Use this endpoint to finish registering a domain that is awaiting setup on your account.
 //
@@ -65770,6 +65886,10 @@ type ClientWithResponsesInterface interface {
 	// transfer (`type: free_domain_transfer`). They are alternatives: claiming one
 	// removes the other, which may still be listed for a short time after the claim.
 	//
+	// A domain held for verification before it is registered has `status: pending_verification`,
+	// and its `verification` field says what registration waits for: a manual review, an SMS code,
+	// or owner contact verification.
+	//
 	// Use this endpoint to view user's domain portfolio.
 	//
 	// Returns a wrapper object for the known response body format(s).
@@ -65892,6 +66012,10 @@ type ClientWithResponsesInterface interface {
 	// DomainsGetDomainDetailsV1WithResponse Get domain details
 	//
 	// Retrieve detailed information for specified domain.
+	//
+	// A domain is found here only once it is registered. Until then, `Get domain list` shows it, and
+	// its `verification` field says what registration waits for when the domain is held for
+	// verification.
 	//
 	// Use this endpoint to view comprehensive domain configuration and status.
 	//
@@ -66032,7 +66156,8 @@ type ClientWithResponsesInterface interface {
 	//
 	// A successful response means the setup request was accepted, not that the domain is already
 	// registered. Poll `Get domain list` for the outcome, the domain appears in `Get domain details`
-	// only once it is registered.
+	// only once it is registered. When the domain is held for verification, its `verification` field
+	// in `Get domain list` says what registration waits for.
 	//
 	// Use this endpoint to finish registering a domain that is awaiting setup on your account.
 	//
@@ -66067,7 +66192,8 @@ type ClientWithResponsesInterface interface {
 	//
 	// A successful response means the setup request was accepted, not that the domain is already
 	// registered. Poll `Get domain list` for the outcome, the domain appears in `Get domain details`
-	// only once it is registered.
+	// only once it is registered. When the domain is held for verification, its `verification` field
+	// in `Get domain list` says what registration waits for.
 	//
 	// Use this endpoint to finish registering a domain that is awaiting setup on your account.
 	//
@@ -101369,6 +101495,10 @@ func (c *ClientWithResponses) DomainsStartOutgoingDomainMoveV1WithResponse(ctx c
 // transfer (`type: free_domain_transfer`). They are alternatives: claiming one
 // removes the other, which may still be listed for a short time after the claim.
 //
+// A domain held for verification before it is registered has `status: pending_verification`,
+// and its `verification` field says what registration waits for: a manual review, an SMS code,
+// or owner contact verification.
+//
 // Use this endpoint to view user's domain portfolio.
 //
 // Returns a wrapper object for the known response body format(s).
@@ -101521,6 +101651,10 @@ func (c *ClientWithResponses) DomainsClaimFreeDomainV1WithResponse(ctx context.C
 // DomainsGetDomainDetailsV1WithResponse Get domain details
 //
 // Retrieve detailed information for specified domain.
+//
+// A domain is found here only once it is registered. Until then, `Get domain list` shows it, and
+// its `verification` field says what registration waits for when the domain is held for
+// verification.
 //
 // Use this endpoint to view comprehensive domain configuration and status.
 //
@@ -101715,7 +101849,8 @@ func (c *ClientWithResponses) DomainsGetDomainRenewalInformationV1WithResponse(c
 //
 // A successful response means the setup request was accepted, not that the domain is already
 // registered. Poll `Get domain list` for the outcome, the domain appears in `Get domain details`
-// only once it is registered.
+// only once it is registered. When the domain is held for verification, its `verification` field
+// in `Get domain list` says what registration waits for.
 //
 // Use this endpoint to finish registering a domain that is awaiting setup on your account.
 //
@@ -101756,7 +101891,8 @@ func (c *ClientWithResponses) DomainsCompleteDomainSetupV1WithBodyWithResponse(c
 //
 // A successful response means the setup request was accepted, not that the domain is already
 // registered. Poll `Get domain list` for the outcome, the domain appears in `Get domain details`
-// only once it is registered.
+// only once it is registered. When the domain is held for verification, its `verification` field
+// in `Get domain list` says what registration waits for.
 //
 // Use this endpoint to finish registering a domain that is awaiting setup on your account.
 //

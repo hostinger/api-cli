@@ -10,6 +10,10 @@ A plan can include both a free domain (`type: free_domain`) and a free domain
 transfer (`type: free_domain_transfer`). They are alternatives: claiming one
 removes the other, which may still be listed for a short time after the claim.
 
+A domain held for verification before it is registered has `status: pending_verification`,
+and its `verification` field says what registration waits for: a manual review, an SMS code,
+or owner contact verification.
+
 Use this endpoint to view user's domain portfolio.
 
 ```

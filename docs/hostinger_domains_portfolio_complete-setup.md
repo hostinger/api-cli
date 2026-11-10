@@ -28,7 +28,8 @@ The domain is set up with the default nameservers and with privacy protection. U
 
 A successful response means the setup request was accepted, not that the domain is already
 registered. Poll `Get domain list` for the outcome, the domain appears in `Get domain details`
-only once it is registered.
+only once it is registered. When the domain is held for verification, its `verification` field
+in `Get domain list` says what registration waits for.
 
 Use this endpoint to finish registering a domain that is awaiting setup on your account.
 
