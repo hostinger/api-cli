@@ -15,16 +15,16 @@ import (
 	"time"
 
 	"github.com/hostinger/api-cli/api"
+	"github.com/hostinger/hcdn-connector/pkg/connector"
 	"github.com/spf13/viper"
 )
 
-// The owner ticket errors. They map 1:1 to the connector library's
-// errors of the same names; replace them with those when the connector
-// dependency lands.
+// The owner ticket errors are the connector's own: it classifies the
+// callback's error with errors.Is against these values.
 var (
-	ErrOwnerNoToken   = errors.New("no Hostinger API token or sign-in")
-	ErrOwnerOptedOut  = errors.New("owner link turned off with --no-owner")
-	ErrOwnerTemporary = errors.New("owner ticket request failed temporarily")
+	ErrOwnerNoToken   = connector.ErrOwnerNoToken
+	ErrOwnerOptedOut  = connector.ErrOwnerOptedOut
+	ErrOwnerTemporary = connector.ErrOwnerTemporary
 )
 
 // OwnerTicketPath is public-api's internal owner ticket operation. Released
@@ -39,8 +39,8 @@ const (
 	maxOwnerResponse = 64 << 10
 )
 
-// OwnerTicketFunc is the shape of the connector library's owner ticket callback.
-type OwnerTicketFunc func(ctx context.Context, tunnelID string, notAfter time.Time) (string, error)
+// OwnerTicketFunc is the connector's owner ticket callback.
+type OwnerTicketFunc = connector.OwnerTicketFunc
 
 // TokenSource returns the bearer token for the owner ticket call. rejected is
 // "" on the first call; after a 401 it is the token public-api refused, and

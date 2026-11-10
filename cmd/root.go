@@ -13,6 +13,7 @@ import (
 	"github.com/hostinger/api-cli/cmd/horizons"
 	"github.com/hostinger/api-cli/cmd/hosting"
 	"github.com/hostinger/api-cli/cmd/mail"
+	"github.com/hostinger/api-cli/cmd/preview"
 	"github.com/hostinger/api-cli/cmd/reach"
 	"github.com/hostinger/api-cli/cmd/vps"
 	"github.com/hostinger/api-cli/cmd/wordpress"
@@ -141,6 +142,8 @@ func init() {
 	VersionCmd.GroupID = groupSetup
 	RootCmd.AddCommand(AuthCmd, ConfigCmd, VersionCmd)
 	registerCompletionInstall(RootCmd)
+	preview.Cmd.GroupID = groupAPI
+	RootCmd.AddCommand(preview.Cmd)
 }
 
 func initConfig() {

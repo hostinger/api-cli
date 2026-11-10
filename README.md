@@ -91,6 +91,8 @@ JSON accept inline JSON, `@file.json`, or `-` for stdin; the help shows the expe
 | 3    | No credentials, or authentication failed (HTTP 401/403) |
 | 4    | Not found (HTTP 404)                          |
 | 5    | Validation failed (HTTP 422)                  |
+| 77   | `preview`: the service requires a signed-in account |
+| 78   | `preview`: the Preview was taken down         |
 
 ## Deploying a website
 
@@ -135,6 +137,30 @@ hostinger hosting nodejs build example.com <uuid>  # poll it
 `--dry-run` shows the resolved website, type and source, how many files would be
 packed and which are skipped, and `overwritesContent` when the first deploy would
 replace what the website serves (the real run then asks, or needs `--yes`). Every deploy replaces the website's current files.
+
+## Sharing a local dev server
+
+`hostinger preview` shares a web server running on your computer at a temporary
+public https URL until you press Ctrl+C or its time runs out. Without a port it looks
+for a dev server on the usual ports (5173, 3000, 4321, 8080, 8000, 5000, 4200, 8888).
+
+```
+hostinger preview                                  # find the dev server and share it
+hostinger preview 3000                             # share http://localhost:3000
+hostinger preview 8080 --host-header shop.test     # for a server that serves by host name
+hostinger preview --url https://localhost:8443     # share another origin
+hostinger preview --json                           # one JSON event per line: ready, reachable, paused, ended
+```
+
+Anyone with the URL can reach the server, including its debug consoles and dev tools,
+so ports of databases, debuggers and other system services are never shared from your
+computer. A dev server that checks the Host header must allow `.hostingerpreview.com`
+(in Vite, `server.allowedHosts: ['.hostingerpreview.com']`); `--host-header localhost`
+bypasses that check and makes its debug consoles public.
+
+When the service asks for an owner, the Preview is linked to the account you signed in
+with; when it requires one, run `hostinger auth login` or set `HOSTINGER_API_TOKEN`.
+The Preview needs outbound TCP port 7844.
 
 Command documentation lives in [docs/](docs/) and in the man pages, and `manifest.json` maps every
 API operation to its command. Shell autocompletion: see [AUTOCOMPLETE.md](AUTOCOMPLETE.md).

@@ -368,11 +368,17 @@ func TestHandleError(t *testing.T) {
 		{NewAPIError(422, []byte(`{"message":"Bad\u001b[2K","errors":{"x\u001b]0;t\u0007":["m\u001b[2K"]},"correlation_id":"c\u0007"}`)), ExitValidation,
 			[]string{"Error: Bad\uFFFD[2K", "  x\uFFFD]0;t\uFFFD: m\uFFFD[2K", "Correlation ID: c\uFFFD"}},
 		{errors.New("dial \x1b[2Kfailed"), ExitError, []string{"Error: dial \uFFFD[2Kfailed"}},
+		{&ExitCodeError{Code: 78, Message: "taken down"}, 78, []string{"Error: taken down"}},
+		{fmt.Errorf("wrapped: %w", &ExitCodeError{Code: 77}), 77, nil},
+		{&ExitCodeError{Code: ExitOK}, ExitOK, nil},
 	}
 	for _, c := range cases {
 		var w bytes.Buffer
 		if got := HandleError(&w, cmd, c.err); got != c.code {
 			t.Errorf("%v: exit %d, want %d", c.err, got, c.code)
+		}
+		if c.want == nil && c.code != ExitOK && strings.Contains(fmt.Sprint(c.err), "exit status") && w.Len() > 0 {
+			t.Errorf("%v: a silent exit printed %q", c.err, w.String())
 		}
 		for _, want := range c.want {
 			if !strings.Contains(w.String(), want) {

@@ -32,6 +32,21 @@ var ErrDryRun = errors.New("dry run")
 // token (or sign-in) is configured. It exits with ExitAuth.
 var ErrNoCredentials = errors.New("no credentials configured")
 
+// ExitCodeError ends a command with a specific exit code. Message, when set, is
+// printed as the error; a command that already reported the failure itself
+// (for example as JSON on stdout) leaves it empty.
+type ExitCodeError struct {
+	Code    int
+	Message string
+}
+
+func (e *ExitCodeError) Error() string {
+	if e.Message == "" {
+		return fmt.Sprintf("exit status %d", e.Code)
+	}
+	return e.Message
+}
+
 // APIError is an HTTP error response from the API.
 type APIError struct {
 	Status        int
@@ -91,6 +106,13 @@ func HandleError(w io.Writer, cmd *cobra.Command, err error) int {
 	if errors.Is(err, ErrAborted) {
 		fmt.Fprintln(w, "Aborted.")
 		return ExitError
+	}
+	var exitErr *ExitCodeError
+	if errors.As(err, &exitErr) {
+		if exitErr.Message != "" {
+			fmt.Fprintln(w, "Error:", exitErr.Message)
+		}
+		return exitErr.Code
 	}
 	if errors.Is(err, ErrNoCredentials) {
 		fmt.Fprintln(w, "Error:", err)

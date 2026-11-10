@@ -49,6 +49,7 @@ Documentation: https://github.com/hostinger/api-cli/tree/main/docs
 * [hostinger hosting](hostinger_hosting.md)	 - Hosting commands
 * [hostinger link](hostinger_link.md)	 - Link this directory to a website
 * [hostinger mail](hostinger_mail.md)	 - Mail commands
+* [hostinger preview](hostinger_preview.md)	 - Share a local dev server at a temporary public URL
 * [hostinger reach](hostinger_reach.md)	 - Reach commands
 * [hostinger unlink](hostinger_unlink.md)	 - Forget the website this directory is linked to
 * [hostinger up](hostinger_up.md)	 - Deploy a directory
