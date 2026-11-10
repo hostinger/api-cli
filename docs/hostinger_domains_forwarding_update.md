@@ -6,6 +6,14 @@ Update domain forwarding
 
 Update domain forwarding configuration.
 
+Updating a forwarding changes the domain's DNS. If the domain does not use Hostinger nameservers, they are
+switched to Hostinger's nameservers automatically, so website, email and other services whose DNS is hosted
+elsewhere stop working. The root (@) A and AAAA records in the domain's Hostinger DNS zone are also replaced
+with records pointing to Hostinger, even when the domain already uses Hostinger nameservers. The domain's
+current nameservers are returned by the domain details endpoint (#tag/domains-portfolio); confirm with the
+user before updating a forwarding on a domain that uses other nameservers. DNS changes can take some time to
+propagate.
+
 Use this endpoint to modify existing redirect configuration for domains.
 
 The domain can be given as [domain] or left out, in which case it comes from --domain, HOSTINGER_DOMAIN, the .hostinger/site.json written by `hostinger up` or `hostinger link` when that website's domain belongs to the account, default_domain in the config file, or a prompt when run in a terminal.

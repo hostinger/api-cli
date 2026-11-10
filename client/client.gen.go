@@ -22402,6 +22402,14 @@ type ClientInterface interface {
 	//
 	// Create domain forwarding configuration.
 	//
+	// Creating a forwarding changes the domain's DNS. If the domain does not use Hostinger nameservers, they are
+	// switched to Hostinger's nameservers automatically, so website, email and other services whose DNS is hosted
+	// elsewhere stop working. The root (@) A and AAAA records in the domain's Hostinger DNS zone are also replaced
+	// with records pointing to Hostinger, even when the domain already uses Hostinger nameservers. The domain's
+	// current nameservers are returned by the [domain details endpoint](#tag/domains-portfolio); confirm with the
+	// user before creating a forwarding on a domain that uses other nameservers. DNS changes can take some time to
+	// propagate.
+	//
 	// Use this endpoint to set up domain redirects to other URLs.
 	//
 	// Takes any type of body and a specified content type.
@@ -22412,6 +22420,14 @@ type ClientInterface interface {
 	// DomainsCreateDomainForwardingV1 Create domain forwarding
 	//
 	// Create domain forwarding configuration.
+	//
+	// Creating a forwarding changes the domain's DNS. If the domain does not use Hostinger nameservers, they are
+	// switched to Hostinger's nameservers automatically, so website, email and other services whose DNS is hosted
+	// elsewhere stop working. The root (@) A and AAAA records in the domain's Hostinger DNS zone are also replaced
+	// with records pointing to Hostinger, even when the domain already uses Hostinger nameservers. The domain's
+	// current nameservers are returned by the [domain details endpoint](#tag/domains-portfolio); confirm with the
+	// user before creating a forwarding on a domain that uses other nameservers. DNS changes can take some time to
+	// propagate.
 	//
 	// Use this endpoint to set up domain redirects to other URLs.
 	//
@@ -22444,6 +22460,14 @@ type ClientInterface interface {
 	//
 	// Update domain forwarding configuration.
 	//
+	// Updating a forwarding changes the domain's DNS. If the domain does not use Hostinger nameservers, they are
+	// switched to Hostinger's nameservers automatically, so website, email and other services whose DNS is hosted
+	// elsewhere stop working. The root (@) A and AAAA records in the domain's Hostinger DNS zone are also replaced
+	// with records pointing to Hostinger, even when the domain already uses Hostinger nameservers. The domain's
+	// current nameservers are returned by the [domain details endpoint](#tag/domains-portfolio); confirm with the
+	// user before updating a forwarding on a domain that uses other nameservers. DNS changes can take some time to
+	// propagate.
+	//
 	// Use this endpoint to modify existing redirect configuration for domains.
 	//
 	// Takes any type of body and a specified content type.
@@ -22454,6 +22478,14 @@ type ClientInterface interface {
 	// DomainsUpdateDomainForwardingV1 Update domain forwarding
 	//
 	// Update domain forwarding configuration.
+	//
+	// Updating a forwarding changes the domain's DNS. If the domain does not use Hostinger nameservers, they are
+	// switched to Hostinger's nameservers automatically, so website, email and other services whose DNS is hosted
+	// elsewhere stop working. The root (@) A and AAAA records in the domain's Hostinger DNS zone are also replaced
+	// with records pointing to Hostinger, even when the domain already uses Hostinger nameservers. The domain's
+	// current nameservers are returned by the [domain details endpoint](#tag/domains-portfolio); confirm with the
+	// user before updating a forwarding on a domain that uses other nameservers. DNS changes can take some time to
+	// propagate.
 	//
 	// Use this endpoint to modify existing redirect configuration for domains.
 	//
@@ -31258,6 +31290,14 @@ func (c *Client) DomainsSuggestDomainNamesFromADomainV1(ctx context.Context, bod
 //
 // Create domain forwarding configuration.
 //
+// Creating a forwarding changes the domain's DNS. If the domain does not use Hostinger nameservers, they are
+// switched to Hostinger's nameservers automatically, so website, email and other services whose DNS is hosted
+// elsewhere stop working. The root (@) A and AAAA records in the domain's Hostinger DNS zone are also replaced
+// with records pointing to Hostinger, even when the domain already uses Hostinger nameservers. The domain's
+// current nameservers are returned by the [domain details endpoint](#tag/domains-portfolio); confirm with the
+// user before creating a forwarding on a domain that uses other nameservers. DNS changes can take some time to
+// propagate.
+//
 // Use this endpoint to set up domain redirects to other URLs.
 //
 // Takes any type of body and a specified content type.
@@ -31278,6 +31318,14 @@ func (c *Client) DomainsCreateDomainForwardingV1WithBody(ctx context.Context, co
 // DomainsCreateDomainForwardingV1 Create domain forwarding
 //
 // Create domain forwarding configuration.
+//
+// Creating a forwarding changes the domain's DNS. If the domain does not use Hostinger nameservers, they are
+// switched to Hostinger's nameservers automatically, so website, email and other services whose DNS is hosted
+// elsewhere stop working. The root (@) A and AAAA records in the domain's Hostinger DNS zone are also replaced
+// with records pointing to Hostinger, even when the domain already uses Hostinger nameservers. The domain's
+// current nameservers are returned by the [domain details endpoint](#tag/domains-portfolio); confirm with the
+// user before creating a forwarding on a domain that uses other nameservers. DNS changes can take some time to
+// propagate.
 //
 // Use this endpoint to set up domain redirects to other URLs.
 //
@@ -31340,6 +31388,14 @@ func (c *Client) DomainsGetDomainForwardingV1(ctx context.Context, domain Domain
 //
 // Update domain forwarding configuration.
 //
+// Updating a forwarding changes the domain's DNS. If the domain does not use Hostinger nameservers, they are
+// switched to Hostinger's nameservers automatically, so website, email and other services whose DNS is hosted
+// elsewhere stop working. The root (@) A and AAAA records in the domain's Hostinger DNS zone are also replaced
+// with records pointing to Hostinger, even when the domain already uses Hostinger nameservers. The domain's
+// current nameservers are returned by the [domain details endpoint](#tag/domains-portfolio); confirm with the
+// user before updating a forwarding on a domain that uses other nameservers. DNS changes can take some time to
+// propagate.
+//
 // Use this endpoint to modify existing redirect configuration for domains.
 //
 // Takes any type of body and a specified content type.
@@ -31360,6 +31416,14 @@ func (c *Client) DomainsUpdateDomainForwardingV1WithBody(ctx context.Context, do
 // DomainsUpdateDomainForwardingV1 Update domain forwarding
 //
 // Update domain forwarding configuration.
+//
+// Updating a forwarding changes the domain's DNS. If the domain does not use Hostinger nameservers, they are
+// switched to Hostinger's nameservers automatically, so website, email and other services whose DNS is hosted
+// elsewhere stop working. The root (@) A and AAAA records in the domain's Hostinger DNS zone are also replaced
+// with records pointing to Hostinger, even when the domain already uses Hostinger nameservers. The domain's
+// current nameservers are returned by the [domain details endpoint](#tag/domains-portfolio); confirm with the
+// user before updating a forwarding on a domain that uses other nameservers. DNS changes can take some time to
+// propagate.
 //
 // Use this endpoint to modify existing redirect configuration for domains.
 //
@@ -65597,6 +65661,14 @@ type ClientWithResponsesInterface interface {
 	//
 	// Create domain forwarding configuration.
 	//
+	// Creating a forwarding changes the domain's DNS. If the domain does not use Hostinger nameservers, they are
+	// switched to Hostinger's nameservers automatically, so website, email and other services whose DNS is hosted
+	// elsewhere stop working. The root (@) A and AAAA records in the domain's Hostinger DNS zone are also replaced
+	// with records pointing to Hostinger, even when the domain already uses Hostinger nameservers. The domain's
+	// current nameservers are returned by the [domain details endpoint](#tag/domains-portfolio); confirm with the
+	// user before creating a forwarding on a domain that uses other nameservers. DNS changes can take some time to
+	// propagate.
+	//
 	// Use this endpoint to set up domain redirects to other URLs.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
@@ -65607,6 +65679,14 @@ type ClientWithResponsesInterface interface {
 	// DomainsCreateDomainForwardingV1WithResponse Create domain forwarding
 	//
 	// Create domain forwarding configuration.
+	//
+	// Creating a forwarding changes the domain's DNS. If the domain does not use Hostinger nameservers, they are
+	// switched to Hostinger's nameservers automatically, so website, email and other services whose DNS is hosted
+	// elsewhere stop working. The root (@) A and AAAA records in the domain's Hostinger DNS zone are also replaced
+	// with records pointing to Hostinger, even when the domain already uses Hostinger nameservers. The domain's
+	// current nameservers are returned by the [domain details endpoint](#tag/domains-portfolio); confirm with the
+	// user before creating a forwarding on a domain that uses other nameservers. DNS changes can take some time to
+	// propagate.
 	//
 	// Use this endpoint to set up domain redirects to other URLs.
 	//
@@ -65643,6 +65723,14 @@ type ClientWithResponsesInterface interface {
 	//
 	// Update domain forwarding configuration.
 	//
+	// Updating a forwarding changes the domain's DNS. If the domain does not use Hostinger nameservers, they are
+	// switched to Hostinger's nameservers automatically, so website, email and other services whose DNS is hosted
+	// elsewhere stop working. The root (@) A and AAAA records in the domain's Hostinger DNS zone are also replaced
+	// with records pointing to Hostinger, even when the domain already uses Hostinger nameservers. The domain's
+	// current nameservers are returned by the [domain details endpoint](#tag/domains-portfolio); confirm with the
+	// user before updating a forwarding on a domain that uses other nameservers. DNS changes can take some time to
+	// propagate.
+	//
 	// Use this endpoint to modify existing redirect configuration for domains.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
@@ -65653,6 +65741,14 @@ type ClientWithResponsesInterface interface {
 	// DomainsUpdateDomainForwardingV1WithResponse Update domain forwarding
 	//
 	// Update domain forwarding configuration.
+	//
+	// Updating a forwarding changes the domain's DNS. If the domain does not use Hostinger nameservers, they are
+	// switched to Hostinger's nameservers automatically, so website, email and other services whose DNS is hosted
+	// elsewhere stop working. The root (@) A and AAAA records in the domain's Hostinger DNS zone are also replaced
+	// with records pointing to Hostinger, even when the domain already uses Hostinger nameservers. The domain's
+	// current nameservers are returned by the [domain details endpoint](#tag/domains-portfolio); confirm with the
+	// user before updating a forwarding on a domain that uses other nameservers. DNS changes can take some time to
+	// propagate.
 	//
 	// Use this endpoint to modify existing redirect configuration for domains.
 	//
@@ -101098,6 +101194,14 @@ func (c *ClientWithResponses) DomainsSuggestDomainNamesFromADomainV1WithResponse
 //
 // Create domain forwarding configuration.
 //
+// Creating a forwarding changes the domain's DNS. If the domain does not use Hostinger nameservers, they are
+// switched to Hostinger's nameservers automatically, so website, email and other services whose DNS is hosted
+// elsewhere stop working. The root (@) A and AAAA records in the domain's Hostinger DNS zone are also replaced
+// with records pointing to Hostinger, even when the domain already uses Hostinger nameservers. The domain's
+// current nameservers are returned by the [domain details endpoint](#tag/domains-portfolio); confirm with the
+// user before creating a forwarding on a domain that uses other nameservers. DNS changes can take some time to
+// propagate.
+//
 // Use this endpoint to set up domain redirects to other URLs.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
@@ -101114,6 +101218,14 @@ func (c *ClientWithResponses) DomainsCreateDomainForwardingV1WithBodyWithRespons
 // DomainsCreateDomainForwardingV1WithResponse Create domain forwarding
 //
 // Create domain forwarding configuration.
+//
+// Creating a forwarding changes the domain's DNS. If the domain does not use Hostinger nameservers, they are
+// switched to Hostinger's nameservers automatically, so website, email and other services whose DNS is hosted
+// elsewhere stop working. The root (@) A and AAAA records in the domain's Hostinger DNS zone are also replaced
+// with records pointing to Hostinger, even when the domain already uses Hostinger nameservers. The domain's
+// current nameservers are returned by the [domain details endpoint](#tag/domains-portfolio); confirm with the
+// user before creating a forwarding on a domain that uses other nameservers. DNS changes can take some time to
+// propagate.
 //
 // Use this endpoint to set up domain redirects to other URLs.
 //
@@ -101168,6 +101280,14 @@ func (c *ClientWithResponses) DomainsGetDomainForwardingV1WithResponse(ctx conte
 //
 // Update domain forwarding configuration.
 //
+// Updating a forwarding changes the domain's DNS. If the domain does not use Hostinger nameservers, they are
+// switched to Hostinger's nameservers automatically, so website, email and other services whose DNS is hosted
+// elsewhere stop working. The root (@) A and AAAA records in the domain's Hostinger DNS zone are also replaced
+// with records pointing to Hostinger, even when the domain already uses Hostinger nameservers. The domain's
+// current nameservers are returned by the [domain details endpoint](#tag/domains-portfolio); confirm with the
+// user before updating a forwarding on a domain that uses other nameservers. DNS changes can take some time to
+// propagate.
+//
 // Use this endpoint to modify existing redirect configuration for domains.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
@@ -101184,6 +101304,14 @@ func (c *ClientWithResponses) DomainsUpdateDomainForwardingV1WithBodyWithRespons
 // DomainsUpdateDomainForwardingV1WithResponse Update domain forwarding
 //
 // Update domain forwarding configuration.
+//
+// Updating a forwarding changes the domain's DNS. If the domain does not use Hostinger nameservers, they are
+// switched to Hostinger's nameservers automatically, so website, email and other services whose DNS is hosted
+// elsewhere stop working. The root (@) A and AAAA records in the domain's Hostinger DNS zone are also replaced
+// with records pointing to Hostinger, even when the domain already uses Hostinger nameservers. The domain's
+// current nameservers are returned by the [domain details endpoint](#tag/domains-portfolio); confirm with the
+// user before updating a forwarding on a domain that uses other nameservers. DNS changes can take some time to
+// propagate.
 //
 // Use this endpoint to modify existing redirect configuration for domains.
 //

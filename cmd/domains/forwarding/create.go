@@ -14,7 +14,7 @@ import (
 var CreateCmd = &cobra.Command{
 	Use:               "create",
 	Short:             "Create domain forwarding",
-	Long:              "Create domain forwarding configuration.\n\nUse this endpoint to set up domain redirects to other URLs.",
+	Long:              "Create domain forwarding configuration.\n\nCreating a forwarding changes the domain's DNS. If the domain does not use Hostinger nameservers, they are\nswitched to Hostinger's nameservers automatically, so website, email and other services whose DNS is hosted\nelsewhere stop working. The root (@) A and AAAA records in the domain's Hostinger DNS zone are also replaced\nwith records pointing to Hostinger, even when the domain already uses Hostinger nameservers. The domain's\ncurrent nameservers are returned by the domain details endpoint (#tag/domains-portfolio); confirm with the\nuser before creating a forwarding on a domain that uses other nameservers. DNS changes can take some time to\npropagate.\n\nUse this endpoint to set up domain redirects to other URLs.",
 	Example:           "  hostinger domains forwarding create --domain mydomain.tld --redirect-type 301 --redirect-url https://forward.to.my.url",
 	ValidArgsFunction: cobra.NoFileCompletions,
 	RunE: func(cmd *cobra.Command, args []string) error {
