@@ -9341,10 +9341,10 @@ type DomainsV1WHOISStoreRequest struct {
 	// Example: com
 	Tld string `json:"tld"`
 
-	// TldDetails TLD details
+	// TldDetails TLD-specific details. The required keys depend on the TLD, country and entity type.
 	TldDetails *map[string]interface{} `json:"tld_details,omitempty"`
 
-	// WhoisDetails WHOIS details
+	// WhoisDetails WHOIS contact details. The required keys depend on the TLD, country and entity type, and can be country-specific (e.g. `state_lt` and `zip_lt` instead of `state` and `zip` for Lithuania).
 	WhoisDetails map[string]interface{} `json:"whois_details"`
 }
 
@@ -23382,6 +23382,13 @@ type ClientInterface interface {
 	//
 	// Use this endpoint to add new contact information for domain registration.
 	//
+	// The keys required in `whois_details` and `tld_details` depend on the TLD, country and entity type, and can be
+	// country-specific: for Lithuania, for example, `state_lt` and `zip_lt` are required instead of `state` and
+	// `zip`. A 422 response lists every required key that is missing or has an invalid value under
+	// `errors.whois_details`, and under `errors.tld_details` when `tld_details` is sent. Each error states the
+	// key's constraint and, where the key takes a fixed set of values, the allowed values, so all of them can be
+	// corrected in one retry.
+	//
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /api/domains/v1/whois (the `DomainsCreateWHOISProfileV1` operationId).
@@ -23392,6 +23399,13 @@ type ClientInterface interface {
 	// Create WHOIS contact profile.
 	//
 	// Use this endpoint to add new contact information for domain registration.
+	//
+	// The keys required in `whois_details` and `tld_details` depend on the TLD, country and entity type, and can be
+	// country-specific: for Lithuania, for example, `state_lt` and `zip_lt` are required instead of `state` and
+	// `zip`. A 422 response lists every required key that is missing or has an invalid value under
+	// `errors.whois_details`, and under `errors.tld_details` when `tld_details` is sent. Each error states the
+	// key's constraint and, where the key takes a fixed set of values, the allowed values, so all of them can be
+	// corrected in one retry.
 	//
 	// Takes a body of the `application/json` content type.
 	//
@@ -32688,6 +32702,13 @@ func (c *Client) DomainsGetWHOISProfileListV1(ctx context.Context, params *Domai
 //
 // Use this endpoint to add new contact information for domain registration.
 //
+// The keys required in `whois_details` and `tld_details` depend on the TLD, country and entity type, and can be
+// country-specific: for Lithuania, for example, `state_lt` and `zip_lt` are required instead of `state` and
+// `zip`. A 422 response lists every required key that is missing or has an invalid value under
+// `errors.whois_details`, and under `errors.tld_details` when `tld_details` is sent. Each error states the
+// key's constraint and, where the key takes a fixed set of values, the allowed values, so all of them can be
+// corrected in one retry.
+//
 // Takes any type of body and a specified content type.
 //
 // Corresponds with POST /api/domains/v1/whois (the `DomainsCreateWHOISProfileV1` operationId).
@@ -32708,6 +32729,13 @@ func (c *Client) DomainsCreateWHOISProfileV1WithBody(ctx context.Context, conten
 // Create WHOIS contact profile.
 //
 // Use this endpoint to add new contact information for domain registration.
+//
+// The keys required in `whois_details` and `tld_details` depend on the TLD, country and entity type, and can be
+// country-specific: for Lithuania, for example, `state_lt` and `zip_lt` are required instead of `state` and
+// `zip`. A 422 response lists every required key that is missing or has an invalid value under
+// `errors.whois_details`, and under `errors.tld_details` when `tld_details` is sent. Each error states the
+// key's constraint and, where the key takes a fixed set of values, the allowed values, so all of them can be
+// corrected in one retry.
 //
 // Takes a body of the `application/json` content type.
 //
@@ -66699,6 +66727,13 @@ type ClientWithResponsesInterface interface {
 	//
 	// Use this endpoint to add new contact information for domain registration.
 	//
+	// The keys required in `whois_details` and `tld_details` depend on the TLD, country and entity type, and can be
+	// country-specific: for Lithuania, for example, `state_lt` and `zip_lt` are required instead of `state` and
+	// `zip`. A 422 response lists every required key that is missing or has an invalid value under
+	// `errors.whois_details`, and under `errors.tld_details` when `tld_details` is sent. Each error states the
+	// key's constraint and, where the key takes a fixed set of values, the allowed values, so all of them can be
+	// corrected in one retry.
+	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
 	// Corresponds with POST /api/domains/v1/whois (the `DomainsCreateWHOISProfileV1` operationId).
@@ -66709,6 +66744,13 @@ type ClientWithResponsesInterface interface {
 	// Create WHOIS contact profile.
 	//
 	// Use this endpoint to add new contact information for domain registration.
+	//
+	// The keys required in `whois_details` and `tld_details` depend on the TLD, country and entity type, and can be
+	// country-specific: for Lithuania, for example, `state_lt` and `zip_lt` are required instead of `state` and
+	// `zip`. A 422 response lists every required key that is missing or has an invalid value under
+	// `errors.whois_details`, and under `errors.tld_details` when `tld_details` is sent. Each error states the
+	// key's constraint and, where the key takes a fixed set of values, the allowed values, so all of them can be
+	// corrected in one retry.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -102493,6 +102535,13 @@ func (c *ClientWithResponses) DomainsGetWHOISProfileListV1WithResponse(ctx conte
 //
 // Use this endpoint to add new contact information for domain registration.
 //
+// The keys required in `whois_details` and `tld_details` depend on the TLD, country and entity type, and can be
+// country-specific: for Lithuania, for example, `state_lt` and `zip_lt` are required instead of `state` and
+// `zip`. A 422 response lists every required key that is missing or has an invalid value under
+// `errors.whois_details`, and under `errors.tld_details` when `tld_details` is sent. Each error states the
+// key's constraint and, where the key takes a fixed set of values, the allowed values, so all of them can be
+// corrected in one retry.
+//
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
 // Corresponds with POST /api/domains/v1/whois (the `DomainsCreateWHOISProfileV1` operationId).
@@ -102509,6 +102558,13 @@ func (c *ClientWithResponses) DomainsCreateWHOISProfileV1WithBodyWithResponse(ct
 // Create WHOIS contact profile.
 //
 // Use this endpoint to add new contact information for domain registration.
+//
+// The keys required in `whois_details` and `tld_details` depend on the TLD, country and entity type, and can be
+// country-specific: for Lithuania, for example, `state_lt` and `zip_lt` are required instead of `state` and
+// `zip`. A 422 response lists every required key that is missing or has an invalid value under
+// `errors.whois_details`, and under `errors.tld_details` when `tld_details` is sent. Each error states the
+// key's constraint and, where the key takes a fixed set of values, the allowed values, so all of them can be
+// corrected in one retry.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //

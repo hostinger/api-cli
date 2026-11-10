@@ -8,6 +8,13 @@ Create WHOIS contact profile.
 
 Use this endpoint to add new contact information for domain registration.
 
+The keys required in `whois_details` and `tld_details` depend on the TLD, country and entity type, and can be
+country-specific: for Lithuania, for example, `state_lt` and `zip_lt` are required instead of `state` and
+`zip`. A 422 response lists every required key that is missing or has an invalid value under
+`errors.whois_details`, and under `errors.tld_details` when `tld_details` is sent. Each error states the
+key's constraint and, where the key takes a fixed set of values, the allowed values, so all of them can be
+corrected in one retry.
+
 JSON flags take inline JSON, @file.json, or - to read stdin. Example values:
 
   --tld-details
@@ -29,12 +36,12 @@ hostinger domains whois create [flags]
 ### Options
 
 ```
-      --country string         ISO 3166 2-letter country code
-      --entity-type string     Legal entity type (one of: individual, organization)
-  -h, --help                   help for create
-      --tld string             TLD of the domain (without leading dot)
-      --tld-details string     TLD details (JSON, @file or -; shape in the help above)
-      --whois-details string   WHOIS details (JSON, @file or -; shape in the help above)
+      --country string           ISO 3166 2-letter country code
+      --entity-type string       Legal entity type (one of: individual, organization)
+  -h, --help                     help for create
+      --tld string               TLD of the domain (without leading dot)
+      --tld-details string       TLD-specific details. The required keys depend on the TLD, country and entity type. (JSON, @file or -; shape in the help above)
+      --whois-details state_lt   WHOIS contact details. The required keys depend on the TLD, country and entity type, and can be country-specific (e.g. state_lt and `zip_lt` instead of `state` and `zip` for Lithuania). (JSON, @file or -; shape in the help above)
 ```
 
 ### Options inherited from parent commands

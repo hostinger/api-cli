@@ -14,7 +14,7 @@ import (
 var CreateCmd = &cobra.Command{
 	Use:               "create",
 	Short:             "Create WHOIS profile",
-	Long:              "Create WHOIS contact profile.\n\nUse this endpoint to add new contact information for domain registration.\n\nJSON flags take inline JSON, @file.json, or - to read stdin. Example values:\n\n  --tld-details\n    {}\n\n  --whois-details\n    {}",
+	Long:              "Create WHOIS contact profile.\n\nUse this endpoint to add new contact information for domain registration.\n\nThe keys required in `whois_details` and `tld_details` depend on the TLD, country and entity type, and can be\ncountry-specific: for Lithuania, for example, `state_lt` and `zip_lt` are required instead of `state` and\n`zip`. A 422 response lists every required key that is missing or has an invalid value under\n`errors.whois_details`, and under `errors.tld_details` when `tld_details` is sent. Each error states the\nkey's constraint and, where the key takes a fixed set of values, the allowed values, so all of them can be\ncorrected in one retry.\n\nJSON flags take inline JSON, @file.json, or - to read stdin. Example values:\n\n  --tld-details\n    {}\n\n  --whois-details\n    {}",
 	Example:           "  hostinger domains whois create --country NL --entity-type individual --tld com --whois-details '{}'",
 	ValidArgsFunction: cobra.NoFileCompletions,
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -50,8 +50,8 @@ func init() {
 	CreateCmd.Flags().StringP("country", "", "", "ISO 3166 2-letter country code")
 	CreateCmd.Flags().StringP("entity-type", "", "", "Legal entity type (one of: individual, organization)")
 	CreateCmd.Flags().StringP("tld", "", "", "TLD of the domain (without leading dot)")
-	CreateCmd.Flags().StringP("tld-details", "", "", "TLD details (JSON, @file or -; shape in the help above)")
-	CreateCmd.Flags().StringP("whois-details", "", "", "WHOIS details (JSON, @file or -; shape in the help above)")
+	CreateCmd.Flags().StringP("tld-details", "", "", "TLD-specific details. The required keys depend on the TLD, country and entity type. (JSON, @file or -; shape in the help above)")
+	CreateCmd.Flags().StringP("whois-details", "", "", "WHOIS contact details. The required keys depend on the TLD, country and entity type, and can be country-specific (e.g. `state_lt` and `zip_lt` instead of `state` and `zip` for Lithuania). (JSON, @file or -; shape in the help above)")
 	CreateCmd.MarkFlagRequired("country")
 	CreateCmd.MarkFlagRequired("entity-type")
 	CreateCmd.MarkFlagRequired("tld")
