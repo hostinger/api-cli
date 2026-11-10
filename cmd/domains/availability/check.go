@@ -14,7 +14,7 @@ import (
 var CheckCmd = &cobra.Command{
 	Use:               "check",
 	Short:             "Check domain availability",
-	Long:              "Check availability of domain names across multiple TLDs.\n\nMultiple TLDs can be checked at once.\nIf you want alternative domains with response, provide only one TLD and set `with_alternatives` to `true`.\nTLDs should be provided without leading dot (e.g. `com`, `net`, `org`).\n\nEndpoint has rate limit of 90 requests per minute.\n\nUse this endpoint to verify domain availability before purchase.",
+	Long:              "Check availability of domain names across multiple TLDs.\n\nMultiple TLDs can be checked at once.\nIf you want alternative domains with response, provide only one TLD and set `with_alternatives` to `true`.\nTLDs should be provided without leading dot (e.g. `com`, `net`, `org`).\nPremium domains are included: an available premium domain has `is_available` and `is_premium` set to `true`.\n\nEndpoint has rate limit of 90 requests per minute.\n\nUse this endpoint to verify domain availability before purchase.",
 	Example:           "  hostinger domains availability check --domain mydomain --tlds com,net,org",
 	ValidArgsFunction: cobra.NoFileCompletions,
 	RunE: func(cmd *cobra.Command, args []string) error {

@@ -8475,6 +8475,11 @@ type DomainsV1AvailabilityAvailabilityResource struct {
 	// Example: true
 	IsAvailable *bool `json:"is_available,omitempty"`
 
+	// IsPremium `true` if domain is premium and is charged at a premium price
+	//
+	// Example: false
+	IsPremium *bool `json:"is_premium,omitempty"`
+
 	// Restriction Special rules and/or restrictions applied for registering TLD
 	Restriction *string `json:"restriction,omitempty"`
 }
@@ -22208,6 +22213,7 @@ type ClientInterface interface {
 	// Multiple TLDs can be checked at once.
 	// If you want alternative domains with response, provide only one TLD and set `with_alternatives` to `true`.
 	// TLDs should be provided without leading dot (e.g. `com`, `net`, `org`).
+	// Premium domains are included: an available premium domain has `is_available` and `is_premium` set to `true`.
 	//
 	// Endpoint has rate limit of 90 requests per minute.
 	//
@@ -22225,6 +22231,7 @@ type ClientInterface interface {
 	// Multiple TLDs can be checked at once.
 	// If you want alternative domains with response, provide only one TLD and set `with_alternatives` to `true`.
 	// TLDs should be provided without leading dot (e.g. `com`, `net`, `org`).
+	// Premium domains are included: an available premium domain has `is_available` and `is_premium` set to `true`.
 	//
 	// Endpoint has rate limit of 90 requests per minute.
 	//
@@ -30966,6 +30973,7 @@ func (c *Client) DNSValidateDNSRecordsV1(ctx context.Context, domain Domain, bod
 // Multiple TLDs can be checked at once.
 // If you want alternative domains with response, provide only one TLD and set `with_alternatives` to `true`.
 // TLDs should be provided without leading dot (e.g. `com`, `net`, `org`).
+// Premium domains are included: an available premium domain has `is_available` and `is_premium` set to `true`.
 //
 // Endpoint has rate limit of 90 requests per minute.
 //
@@ -30993,6 +31001,7 @@ func (c *Client) DomainsCheckDomainAvailabilityV1WithBody(ctx context.Context, c
 // Multiple TLDs can be checked at once.
 // If you want alternative domains with response, provide only one TLD and set `with_alternatives` to `true`.
 // TLDs should be provided without leading dot (e.g. `com`, `net`, `org`).
+// Premium domains are included: an available premium domain has `is_available` and `is_premium` set to `true`.
 //
 // Endpoint has rate limit of 90 requests per minute.
 //
@@ -65327,6 +65336,7 @@ type ClientWithResponsesInterface interface {
 	// Multiple TLDs can be checked at once.
 	// If you want alternative domains with response, provide only one TLD and set `with_alternatives` to `true`.
 	// TLDs should be provided without leading dot (e.g. `com`, `net`, `org`).
+	// Premium domains are included: an available premium domain has `is_available` and `is_premium` set to `true`.
 	//
 	// Endpoint has rate limit of 90 requests per minute.
 	//
@@ -65344,6 +65354,7 @@ type ClientWithResponsesInterface interface {
 	// Multiple TLDs can be checked at once.
 	// If you want alternative domains with response, provide only one TLD and set `with_alternatives` to `true`.
 	// TLDs should be provided without leading dot (e.g. `com`, `net`, `org`).
+	// Premium domains are included: an available premium domain has `is_available` and `is_premium` set to `true`.
 	//
 	// Endpoint has rate limit of 90 requests per minute.
 	//
@@ -100754,6 +100765,7 @@ func (c *ClientWithResponses) DNSValidateDNSRecordsV1WithResponse(ctx context.Co
 // Multiple TLDs can be checked at once.
 // If you want alternative domains with response, provide only one TLD and set `with_alternatives` to `true`.
 // TLDs should be provided without leading dot (e.g. `com`, `net`, `org`).
+// Premium domains are included: an available premium domain has `is_available` and `is_premium` set to `true`.
 //
 // Endpoint has rate limit of 90 requests per minute.
 //
@@ -100777,6 +100789,7 @@ func (c *ClientWithResponses) DomainsCheckDomainAvailabilityV1WithBodyWithRespon
 // Multiple TLDs can be checked at once.
 // If you want alternative domains with response, provide only one TLD and set `with_alternatives` to `true`.
 // TLDs should be provided without leading dot (e.g. `com`, `net`, `org`).
+// Premium domains are included: an available premium domain has `is_available` and `is_premium` set to `true`.
 //
 // Endpoint has rate limit of 90 requests per minute.
 //
