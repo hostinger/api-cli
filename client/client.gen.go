@@ -531,6 +531,27 @@ func (e DNSV1ZoneUpdateRequestZoneType) Valid() bool {
 	}
 }
 
+// Defines values for DomainsV1DomainDomainContactVerificationChannelResourceStatus.
+const (
+	DomainsV1DomainDomainContactVerificationChannelResourceStatusPending   DomainsV1DomainDomainContactVerificationChannelResourceStatus = "pending"
+	DomainsV1DomainDomainContactVerificationChannelResourceStatusSuspended DomainsV1DomainDomainContactVerificationChannelResourceStatus = "suspended"
+	DomainsV1DomainDomainContactVerificationChannelResourceStatusVerified  DomainsV1DomainDomainContactVerificationChannelResourceStatus = "verified"
+)
+
+// Valid indicates whether the value is a known member of the DomainsV1DomainDomainContactVerificationChannelResourceStatus enum.
+func (e DomainsV1DomainDomainContactVerificationChannelResourceStatus) Valid() bool {
+	switch e {
+	case DomainsV1DomainDomainContactVerificationChannelResourceStatusPending:
+		return true
+	case DomainsV1DomainDomainContactVerificationChannelResourceStatusSuspended:
+		return true
+	case DomainsV1DomainDomainContactVerificationChannelResourceStatusVerified:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for DomainsV1DomainDomainExtendedResourceStatus.
 const (
 	DomainsV1DomainDomainExtendedResourceStatusActive              DomainsV1DomainDomainExtendedResourceStatus = "active"
@@ -8508,6 +8529,61 @@ type DomainsV1AvailabilityAvailabilityResource struct {
 // DomainsV1DomainDomainCollection Array of [`Domains.V1.Domain.DomainResource`](#model/domainsv1domaindomainresource)
 type DomainsV1DomainDomainCollection = []DomainsV1DomainDomainResource
 
+// DomainsV1DomainDomainContactVerificationChannelResource defines model for Domains.V1.Domain.DomainContactVerificationChannelResource.
+type DomainsV1DomainDomainContactVerificationChannelResource struct {
+	// EndsAt Deadline to verify by while `status` is `pending`, after which the domain is suspended. It can
+	// still hold the past deadline once the channel is `verified` or `suspended`.
+	//
+	// Example: 2025-03-14T23:59:59Z
+	EndsAt *time.Time `json:"ends_at,omitempty"`
+
+	// Status - `pending`: not verified yet. Verify it in [hPanel](https://hpanel.hostinger.com/) before
+	//   `ends_at`.
+	// - `verified`: verified, or never required for this TLD. Nothing to do.
+	// - `suspended`: not verified in time, so the domain is suspended until the owner contact is
+	//   verified in [hPanel](https://hpanel.hostinger.com/).
+	//
+	// Example: pending
+	Status *DomainsV1DomainDomainContactVerificationChannelResourceStatus `json:"status,omitempty"`
+}
+
+// DomainsV1DomainDomainContactVerificationChannelResourceStatus - `pending`: not verified yet. Verify it in [hPanel](https://hpanel.hostinger.com/) before
+//
+//		`ends_at`.
+//	  - `verified`: verified, or never required for this TLD. Nothing to do.
+//	  - `suspended`: not verified in time, so the domain is suspended until the owner contact is
+//	    verified in [hPanel](https://hpanel.hostinger.com/).
+//
+// Example: pending
+type DomainsV1DomainDomainContactVerificationChannelResourceStatus string
+
+// DomainsV1DomainDomainContactVerificationResource defines model for Domains.V1.Domain.DomainContactVerificationResource.
+type DomainsV1DomainDomainContactVerificationResource struct {
+	// ContactName Verification of the owner contact name. `null` when it reports no verification status.
+	ContactName *DomainsV1DomainDomainContactVerificationResource_ContactName `json:"contact_name,omitempty"`
+
+	// Email Verification of the owner email address. `null` when it reports no verification status.
+	Email *DomainsV1DomainDomainContactVerificationResource_Email `json:"email,omitempty"`
+
+	// Phone Verification of the owner phone number. `null` when it reports no verification status.
+	Phone *DomainsV1DomainDomainContactVerificationResource_Phone `json:"phone,omitempty"`
+}
+
+// DomainsV1DomainDomainContactVerificationResource_ContactName Verification of the owner contact name. `null` when it reports no verification status.
+type DomainsV1DomainDomainContactVerificationResource_ContactName struct {
+	union json.RawMessage
+}
+
+// DomainsV1DomainDomainContactVerificationResource_Email Verification of the owner email address. `null` when it reports no verification status.
+type DomainsV1DomainDomainContactVerificationResource_Email struct {
+	union json.RawMessage
+}
+
+// DomainsV1DomainDomainContactVerificationResource_Phone Verification of the owner phone number. `null` when it reports no verification status.
+type DomainsV1DomainDomainContactVerificationResource_Phone struct {
+	union json.RawMessage
+}
+
 // DomainsV1DomainDomainExtendedResource defines model for Domains.V1.Domain.DomainExtendedResource.
 type DomainsV1DomainDomainExtendedResource struct {
 	// N60DaysLockExpiresAt Example: 2025-04-27T11:54:22Z
@@ -8517,6 +8593,10 @@ type DomainsV1DomainDomainExtendedResource struct {
 	//
 	// Example: {"ns1.example.tld":["258.231.55.321","258.231.55.322"]}
 	ChildNameServers *[][]string `json:"child_name_servers,omitempty"`
+
+	// ContactVerification Owner contact verification after registration, per channel. `null` when no channel reports a
+	// verification status.
+	ContactVerification *DomainsV1DomainDomainExtendedResource_ContactVerification `json:"contact_verification,omitempty"`
 
 	// CreatedAt Example: 2025-02-27T11:54:22Z
 	CreatedAt *time.Time `json:"created_at,omitempty"`
@@ -8598,6 +8678,12 @@ type DomainsV1DomainDomainExtendedResource struct {
 
 	// UpdatedAt Example: 2025-02-27T11:54:22Z
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+}
+
+// DomainsV1DomainDomainExtendedResource_ContactVerification Owner contact verification after registration, per channel. `null` when no channel reports a
+// verification status.
+type DomainsV1DomainDomainExtendedResource_ContactVerification struct {
+	union json.RawMessage
 }
 
 // DomainsV1DomainDomainExtendedResourceStatus Status of the domain
@@ -20470,6 +20556,150 @@ func (t *AgentReadinessV1ScansScanResource_Categories) UnmarshalJSON(b []byte) e
 	return err
 }
 
+// AsDomainsV1DomainDomainContactVerificationChannelResource returns the union data inside the DomainsV1DomainDomainContactVerificationResource_ContactName as a DomainsV1DomainDomainContactVerificationChannelResource
+func (t DomainsV1DomainDomainContactVerificationResource_ContactName) AsDomainsV1DomainDomainContactVerificationChannelResource() (DomainsV1DomainDomainContactVerificationChannelResource, error) {
+	var body DomainsV1DomainDomainContactVerificationChannelResource
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromDomainsV1DomainDomainContactVerificationChannelResource overwrites any union data inside the DomainsV1DomainDomainContactVerificationResource_ContactName as the provided DomainsV1DomainDomainContactVerificationChannelResource
+func (t *DomainsV1DomainDomainContactVerificationResource_ContactName) FromDomainsV1DomainDomainContactVerificationChannelResource(v DomainsV1DomainDomainContactVerificationChannelResource) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeDomainsV1DomainDomainContactVerificationChannelResource performs a merge with any union data inside the DomainsV1DomainDomainContactVerificationResource_ContactName, using the provided DomainsV1DomainDomainContactVerificationChannelResource
+func (t *DomainsV1DomainDomainContactVerificationResource_ContactName) MergeDomainsV1DomainDomainContactVerificationChannelResource(v DomainsV1DomainDomainContactVerificationChannelResource) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t DomainsV1DomainDomainContactVerificationResource_ContactName) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *DomainsV1DomainDomainContactVerificationResource_ContactName) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsDomainsV1DomainDomainContactVerificationChannelResource returns the union data inside the DomainsV1DomainDomainContactVerificationResource_Email as a DomainsV1DomainDomainContactVerificationChannelResource
+func (t DomainsV1DomainDomainContactVerificationResource_Email) AsDomainsV1DomainDomainContactVerificationChannelResource() (DomainsV1DomainDomainContactVerificationChannelResource, error) {
+	var body DomainsV1DomainDomainContactVerificationChannelResource
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromDomainsV1DomainDomainContactVerificationChannelResource overwrites any union data inside the DomainsV1DomainDomainContactVerificationResource_Email as the provided DomainsV1DomainDomainContactVerificationChannelResource
+func (t *DomainsV1DomainDomainContactVerificationResource_Email) FromDomainsV1DomainDomainContactVerificationChannelResource(v DomainsV1DomainDomainContactVerificationChannelResource) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeDomainsV1DomainDomainContactVerificationChannelResource performs a merge with any union data inside the DomainsV1DomainDomainContactVerificationResource_Email, using the provided DomainsV1DomainDomainContactVerificationChannelResource
+func (t *DomainsV1DomainDomainContactVerificationResource_Email) MergeDomainsV1DomainDomainContactVerificationChannelResource(v DomainsV1DomainDomainContactVerificationChannelResource) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t DomainsV1DomainDomainContactVerificationResource_Email) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *DomainsV1DomainDomainContactVerificationResource_Email) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsDomainsV1DomainDomainContactVerificationChannelResource returns the union data inside the DomainsV1DomainDomainContactVerificationResource_Phone as a DomainsV1DomainDomainContactVerificationChannelResource
+func (t DomainsV1DomainDomainContactVerificationResource_Phone) AsDomainsV1DomainDomainContactVerificationChannelResource() (DomainsV1DomainDomainContactVerificationChannelResource, error) {
+	var body DomainsV1DomainDomainContactVerificationChannelResource
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromDomainsV1DomainDomainContactVerificationChannelResource overwrites any union data inside the DomainsV1DomainDomainContactVerificationResource_Phone as the provided DomainsV1DomainDomainContactVerificationChannelResource
+func (t *DomainsV1DomainDomainContactVerificationResource_Phone) FromDomainsV1DomainDomainContactVerificationChannelResource(v DomainsV1DomainDomainContactVerificationChannelResource) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeDomainsV1DomainDomainContactVerificationChannelResource performs a merge with any union data inside the DomainsV1DomainDomainContactVerificationResource_Phone, using the provided DomainsV1DomainDomainContactVerificationChannelResource
+func (t *DomainsV1DomainDomainContactVerificationResource_Phone) MergeDomainsV1DomainDomainContactVerificationChannelResource(v DomainsV1DomainDomainContactVerificationChannelResource) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t DomainsV1DomainDomainContactVerificationResource_Phone) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *DomainsV1DomainDomainContactVerificationResource_Phone) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsDomainsV1DomainDomainContactVerificationResource returns the union data inside the DomainsV1DomainDomainExtendedResource_ContactVerification as a DomainsV1DomainDomainContactVerificationResource
+func (t DomainsV1DomainDomainExtendedResource_ContactVerification) AsDomainsV1DomainDomainContactVerificationResource() (DomainsV1DomainDomainContactVerificationResource, error) {
+	var body DomainsV1DomainDomainContactVerificationResource
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromDomainsV1DomainDomainContactVerificationResource overwrites any union data inside the DomainsV1DomainDomainExtendedResource_ContactVerification as the provided DomainsV1DomainDomainContactVerificationResource
+func (t *DomainsV1DomainDomainExtendedResource_ContactVerification) FromDomainsV1DomainDomainContactVerificationResource(v DomainsV1DomainDomainContactVerificationResource) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeDomainsV1DomainDomainContactVerificationResource performs a merge with any union data inside the DomainsV1DomainDomainExtendedResource_ContactVerification, using the provided DomainsV1DomainDomainContactVerificationResource
+func (t *DomainsV1DomainDomainExtendedResource_ContactVerification) MergeDomainsV1DomainDomainContactVerificationResource(v DomainsV1DomainDomainContactVerificationResource) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t DomainsV1DomainDomainExtendedResource_ContactVerification) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *DomainsV1DomainDomainExtendedResource_ContactVerification) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
 // AsDomainsV1DomainDomainVerificationResource returns the union data inside the DomainsV1DomainDomainResource_Verification as a DomainsV1DomainDomainVerificationResource
 func (t DomainsV1DomainDomainResource_Verification) AsDomainsV1DomainDomainVerificationResource() (DomainsV1DomainDomainVerificationResource, error) {
 	var body DomainsV1DomainDomainVerificationResource
@@ -22833,6 +23063,10 @@ type ClientInterface interface {
 	// A domain is found here only once it is registered. Until then, `Get domain list` shows it, and
 	// its `verification` field says what registration waits for when the domain is held for
 	// verification.
+	//
+	// After registration, the registry may require the owner contact to be verified by email, phone
+	// number or contact name before a deadline, after which the domain is suspended. The
+	// `contact_verification` field shows what needs verifying, its state and the deadline.
 	//
 	// Use this endpoint to view comprehensive domain configuration and status.
 	//
@@ -31955,6 +32189,10 @@ func (c *Client) DomainsClaimFreeDomainV1(ctx context.Context, body DomainsClaim
 // A domain is found here only once it is registered. Until then, `Get domain list` shows it, and
 // its `verification` field says what registration waits for when the domain is held for
 // verification.
+//
+// After registration, the registry may require the owner contact to be verified by email, phone
+// number or contact name before a deadline, after which the domain is suspended. The
+// `contact_verification` field shows what needs verifying, its state and the deadline.
 //
 // Use this endpoint to view comprehensive domain configuration and status.
 //
@@ -66122,6 +66360,10 @@ type ClientWithResponsesInterface interface {
 	// A domain is found here only once it is registered. Until then, `Get domain list` shows it, and
 	// its `verification` field says what registration waits for when the domain is held for
 	// verification.
+	//
+	// After registration, the registry may require the owner contact to be verified by email, phone
+	// number or contact name before a deadline, after which the domain is suspended. The
+	// `contact_verification` field shows what needs verifying, its state and the deadline.
 	//
 	// Use this endpoint to view comprehensive domain configuration and status.
 	//
@@ -101804,6 +102046,10 @@ func (c *ClientWithResponses) DomainsClaimFreeDomainV1WithResponse(ctx context.C
 // A domain is found here only once it is registered. Until then, `Get domain list` shows it, and
 // its `verification` field says what registration waits for when the domain is held for
 // verification.
+//
+// After registration, the registry may require the owner contact to be verified by email, phone
+// number or contact name before a deadline, after which the domain is suspended. The
+// `contact_verification` field shows what needs verifying, its state and the deadline.
 //
 // Use this endpoint to view comprehensive domain configuration and status.
 //
