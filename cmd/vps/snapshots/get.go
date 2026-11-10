@@ -12,7 +12,7 @@ import (
 var GetCmd = &cobra.Command{
 	Use:     "get <virtual-machine-id>",
 	Short:   "Get snapshot",
-	Long:    "Retrieve snapshot for a specified virtual machine.\n\nUse this endpoint to view current VPS snapshot information.",
+	Long:    "Retrieve snapshot for a specified virtual machine.\n\nUse this endpoint to view current VPS snapshot information.\n\nReturns 404 when the virtual machine has no snapshot.",
 	Example: "  hostinger vps snapshots get 1268054",
 	ValidArgsFunction: utils.CompleteArgs(
 		&utils.ArgSource{

@@ -22510,6 +22510,8 @@ type ClientInterface interface {
 	//
 	// Both the old and new registrant must confirm it before the WHOIS change takes effect.
 	//
+	// Returns 404 when the domain has no pending IRTP verification.
+	//
 	// Use this endpoint to check the status of a WHOIS change awaiting registrant confirmation.
 	//
 	// Corresponds with GET /api/domains/v1/irtp/{domain} (the `DomainsGetPendingIRTPVerificationV1` operationId).
@@ -29254,6 +29256,8 @@ type ClientInterface interface {
 	//
 	// Use this endpoint to view current VPS snapshot information.
 	//
+	// Returns 404 when the virtual machine has no snapshot.
+	//
 	// Corresponds with GET /api/vps/v1/virtual-machines/{virtualMachineId}/snapshot (the `VPSGetSnapshotV1` operationId).
 	VPSGetSnapshotV1(ctx context.Context, virtualMachineId VirtualMachineId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -31467,6 +31471,8 @@ func (c *Client) DomainsCancelPendingIRTPVerificationV1(ctx context.Context, dom
 // Retrieve a pending IRTP verification for a domain.
 //
 // Both the old and new registrant must confirm it before the WHOIS change takes effect.
+//
+// Returns 404 when the domain has no pending IRTP verification.
 //
 // Use this endpoint to check the status of a WHOIS change awaiting registrant confirmation.
 //
@@ -43095,6 +43101,8 @@ func (c *Client) VPSDeleteSnapshotV1(ctx context.Context, virtualMachineId Virtu
 // Retrieve snapshot for a specified virtual machine.
 //
 // Use this endpoint to view current VPS snapshot information.
+//
+// Returns 404 when the virtual machine has no snapshot.
 //
 // Corresponds with GET /api/vps/v1/virtual-machines/{virtualMachineId}/snapshot (the `VPSGetSnapshotV1` operationId).
 func (c *Client) VPSGetSnapshotV1(ctx context.Context, virtualMachineId VirtualMachineId, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -65775,6 +65783,8 @@ type ClientWithResponsesInterface interface {
 	//
 	// Both the old and new registrant must confirm it before the WHOIS change takes effect.
 	//
+	// Returns 404 when the domain has no pending IRTP verification.
+	//
 	// Use this endpoint to check the status of a WHOIS change awaiting registrant confirmation.
 	//
 	// Returns a wrapper object for the known response body format(s).
@@ -72978,6 +72988,8 @@ type ClientWithResponsesInterface interface {
 	// Retrieve snapshot for a specified virtual machine.
 	//
 	// Use this endpoint to view current VPS snapshot information.
+	//
+	// Returns 404 when the virtual machine has no snapshot.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
@@ -99093,6 +99105,8 @@ type VPSGetSnapshotV1Response struct {
 	JSON200 *VPSV1SnapshotSnapshotResource
 	// JSON401 the response for an HTTP 401 `application/json` response
 	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseErrorResponse
 	// JSON500 the response for an HTTP 500 `application/json` response
 	JSON500 *CommonResponseErrorResponse
 }
@@ -99105,6 +99119,11 @@ func (r VPSGetSnapshotV1Response) GetJSON200() *VPSV1SnapshotSnapshotResource {
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
 func (r VPSGetSnapshotV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r VPSGetSnapshotV1Response) GetJSON404() *CommonResponseErrorResponse {
+	return r.JSON404
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
@@ -101349,6 +101368,8 @@ func (c *ClientWithResponses) DomainsCancelPendingIRTPVerificationV1WithResponse
 // Retrieve a pending IRTP verification for a domain.
 //
 // Both the old and new registrant must confirm it before the WHOIS change takes effect.
+//
+// Returns 404 when the domain has no pending IRTP verification.
 //
 // Use this endpoint to check the status of a WHOIS change awaiting registrant confirmation.
 //
@@ -111492,6 +111513,8 @@ func (c *ClientWithResponses) VPSDeleteSnapshotV1WithResponse(ctx context.Contex
 // Retrieve snapshot for a specified virtual machine.
 //
 // Use this endpoint to view current VPS snapshot information.
+//
+// Returns 404 when the virtual machine has no snapshot.
 //
 // Returns a wrapper object for the known response body format(s).
 //
@@ -131126,6 +131149,13 @@ func ParseVPSGetSnapshotV1Response(rsp *http.Response) (*VPSGetSnapshotV1Respons
 			return nil, err
 		}
 		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse

@@ -8,6 +8,8 @@ Retrieve snapshot for a specified virtual machine.
 
 Use this endpoint to view current VPS snapshot information.
 
+Returns 404 when the virtual machine has no snapshot.
+
 ```
 hostinger vps snapshots get <virtual-machine-id> [flags]
 ```
