@@ -118,6 +118,10 @@ func setPromptedArgs(cmd *cobra.Command, args []string) {
 }
 
 func checkArg(spec ArgSpec, v string) error {
+	// Arguments fill URL path segments; the client resolves dot segments away, which would call another endpoint.
+	if v == "" || v == "." || v == ".." {
+		return FlagErrorf("invalid <%s> %q", spec.Name, v)
+	}
 	switch spec.Kind {
 	case ArgInt:
 		if _, err := strconv.Atoi(v); err != nil {

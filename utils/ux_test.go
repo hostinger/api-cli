@@ -64,6 +64,19 @@ func TestRegisterArgsValidates(t *testing.T) {
 		}
 	}
 
+	// A dot segment or empty value would be resolved out of the URL path and reach another endpoint.
+	str := newCmd()
+	RegisterArgs(str, StringArg("domain"))
+	if err := str.Args(str, []string{"example.com"}); err != nil {
+		t.Fatalf("valid string arg rejected: %v", err)
+	}
+	for _, v := range []string{"..", ".", ""} {
+		var fe *FlagError
+		if err := str.Args(str, []string{v}); !errors.As(err, &fe) {
+			t.Errorf("string arg %q: want FlagError, got %v", v, err)
+		}
+	}
+
 	none := newCmd()
 	RegisterArgs(none)
 	if err := none.Args(none, []string{"x"}); err == nil || !strings.Contains(err.Error(), "takes no arguments") {
