@@ -176,7 +176,18 @@ func configPath() string {
 
 // writeConfig applies change to the file's own settings only (never values
 // that came from the environment or flags) and writes it back with mode 0600.
+// It writes a fresh 0600 temp file and renames it over the target, so the token
+// never lands in an inode another user could already read or hold open. A
+// symlinked config (dotfiles) is followed and its target replaced.
 func writeConfig(path string, change func(m map[string]any)) error {
+	if real, err := filepath.EvalSymlinks(path); err == nil {
+		path = real
+	} else if target, lerr := os.Readlink(path); lerr == nil { // dangling: create its target
+		if !filepath.IsAbs(target) {
+			target = filepath.Join(filepath.Dir(path), target)
+		}
+		path = target
+	}
 	m := map[string]any{}
 	raw, err := os.ReadFile(path)
 	if err != nil && !errors.Is(err, fs.ErrNotExist) {
@@ -196,10 +207,25 @@ func writeConfig(path string, change func(m map[string]any)) error {
 	if err := os.MkdirAll(filepath.Dir(path), 0o700); err != nil {
 		return err
 	}
-	if err := os.WriteFile(path, out, 0o600); err != nil {
+	tmp, err := os.CreateTemp(filepath.Dir(path), "."+filepath.Base(path)+".*") // created 0600
+	if err != nil {
 		return fmt.Errorf("writing %s: %w", path, err)
 	}
-	return os.Chmod(path, 0o600)
+	defer os.Remove(tmp.Name()) // a no-op once renamed
+	_, err = tmp.Write(out)
+	if err == nil {
+		err = tmp.Sync() // data on disk before the rename, or a crash can leave it empty
+	}
+	if cerr := tmp.Close(); err == nil {
+		err = cerr
+	}
+	if err == nil {
+		err = os.Rename(tmp.Name(), path)
+	}
+	if err != nil {
+		return fmt.Errorf("writing %s: %w", path, err)
+	}
+	return nil
 }
 
 func checkConfigKey(key string) error {
