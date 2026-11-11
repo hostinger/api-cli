@@ -50,34 +50,34 @@ hostinger up [path] [flags]
 ```
       --app-type string           Node.js framework, e.g. express, next, vite, nest, other
       --build-script string       npm script that builds the app
-      --create                    Create a new website instead of deploying to an existing one
+      --create[=true|false]       Create a new website instead of deploying to an existing one
       --datacenter string         Where the first website on a plan is hosted, a code from hostinger hosting datacenters list (default: asked, or the API's best match)
-      --dry-run                   Show what would be deployed where, as JSON, without creating, uploading or building anything
+      --dry-run[=true|false]      Show what would be deployed where, as JSON, without creating, uploading or building anything
       --entry-file string         Entry file of the server (compiled apps)
       --headless string           Create a headless website for a Node.js frontend: empty, wordpress (installed in /cms), ecommerce or pocketbase. A new website unless the linked website or --domain is already headless
-  -h, --help                      help for up
-      --no-wait                   Return as soon as a Node.js build is started instead of waiting for it
+  -h, --help[=true|false]         help for up
+      --no-wait[=true|false]      Return as soon as a Node.js build is started instead of waiting for it
       --node-version int          Node.js major version (18, 20, 22, 24)
       --order-id int              Hosting plan (order ID) a new website is created on
       --output-directory string   Build output directory, relative to the root directory
       --package-manager string    npm, yarn or pnpm
       --root-directory string     Directory holding package.json, relative to the archive root
-      --settings                  Review the Node.js build settings before building (a first deploy in a terminal reviews them anyway; without a terminal the detected settings and flags are used)
+      --settings[=true|false]     Review the Node.js build settings before building (a first deploy in a terminal reviews them anyway; without a terminal the detected settings and flags are used)
       --source string             Where the files come from: upload (pack this directory) or git (the pushed branch, through a connected Git account); default: remembered, else asked
       --type string               What to deploy as: static or nodejs (default: detected, or remembered)
-  -y, --yes                       Accept the detected type, and replace a website's content or deploy static files onto a Node.js site without asking (required for those without a terminal)
+  -y, --yes[=true|false]          Accept the detected type, and replace a website's content or deploy static files onto a Node.js site without asking (required for those without a terminal)
 ```
 
 ### Options inherited from parent commands
 
 ```
-      --config string     Config file (default is $HOME/.hostinger.yaml)
-      --domain string     Website domain for commands that act on a website (default: HOSTINGER_DOMAIN, .hostinger/site.json, or default_domain in the config)
-  -o, --format string     Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
-      --jq string         Filter the JSON response with a jq expression, e.g. '.data[].id'
-      --no-input          Never prompt; fail when an argument, flag or confirmation is missing
-      --username string   Hosting account for commands that act on an account (default: HOSTINGER_USERNAME, the website from --domain, or .hostinger/site.json)
-      --verbose           Print the config file used and each HTTP request to stderr
+      --config string           Config file (default is $HOME/.hostinger.yaml)
+      --domain string           Website domain for commands that act on a website (default: HOSTINGER_DOMAIN, .hostinger/site.json, or default_domain in the config)
+  -o, --format string           Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string               Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input[=true|false]   Never prompt; fail when an argument, flag or confirmation is missing
+      --username string         Hosting account for commands that act on an account (default: HOSTINGER_USERNAME, the website from --domain, or .hostinger/site.json)
+      --verbose[=true|false]    Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

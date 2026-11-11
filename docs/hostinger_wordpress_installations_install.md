@@ -69,9 +69,9 @@ hostinger wordpress installations install [username] [flags]
       --database string            Optional. If the named database already exists on the account, it is used for this WordPress install. Otherwise a new database is created with this name, or with a generated name when database is omitted or null. A new database gets a random database user and counts toward the plan's database limit. (JSON, @file or -; shape in the help above)
       --directory type: headless   Installation subdirectory relative to the document root; omit for the root. Not allowed with type: headless, which always installs into `cms`.
       --domain string              Domain of the existing website where WordPress will be installed
-  -h, --help                       help for install
+  -h, --help[=true|false]          help for install
       --language string            WordPress locale. Defaults to en_US when omitted.
-      --overwrite                  When false (default), does not replace an existing installation. If WordPress is already installed on the domain/path, the async install job fails unless true.
+      --overwrite[=true|false]     When false (default), does not replace an existing installation. If WordPress is already installed on the domain/path, the async install job fails unless true.
       --site-title string          Title of the WordPress site
       --type default               Installation kind; default when omitted. `headless` installs WordPress into the `cms` directory with the Hostinger headless MU plugin and marks the website as a headless WordPress website. Accepted only for a website that is already headless, e.g. one created by `POST /api/hosting/v1/orders/{order_id}/onboardings` (`hosting_websites_create`) with `type: headless_empty`; any other website is rejected with 422. (one of: default, headless)
       --version string             WordPress core version to install. If omitted, the latest core version compatible with the account vhost PHP version is selected.
@@ -80,14 +80,14 @@ hostinger wordpress installations install [username] [flags]
 ### Options inherited from parent commands
 
 ```
-      --config string     Config file (default is $HOME/.hostinger.yaml)
-      --dry-run           Print the request as a curl command instead of sending it
-  -o, --format string     Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
-      --jq string         Filter the JSON response with a jq expression, e.g. '.data[].id'
-      --no-input          Never prompt; fail when an argument, flag or confirmation is missing
-      --order-id string   Order for commands that act on an order (default: HOSTINGER_ORDER_ID, .hostinger/site.json for hosting, or a prompt)
-      --username string   Hosting account for commands that act on an account (default: HOSTINGER_USERNAME, the website from --domain, or .hostinger/site.json)
-      --verbose           Print the config file used and each HTTP request to stderr
+      --config string           Config file (default is $HOME/.hostinger.yaml)
+      --dry-run[=true|false]    Print the request as a curl command instead of sending it
+  -o, --format string           Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string               Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input[=true|false]   Never prompt; fail when an argument, flag or confirmation is missing
+      --order-id string         Order for commands that act on an order (default: HOSTINGER_ORDER_ID, .hostinger/site.json for hosting, or a prompt)
+      --username string         Hosting account for commands that act on an account (default: HOSTINGER_USERNAME, the website from --domain, or .hostinger/site.json)
+      --verbose[=true|false]    Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

@@ -41,27 +41,27 @@ hostinger ecommerce product-variants create <store_id> <product_id> [flags]
 ### Options
 
 ```
-  -h, --help                     help for create
-      --inventory-quantity int   Units in stock. Defaults to 0.
-      --manage-inventory         Whether stock is tracked for this variant. Defaults to false.
-      --options string           Option name/value pairs that distinguish this variant, e.g. [{name: Size, value: M}]. Options missing from the product are created; provide a value for every option the product already has. (JSON, @file or -; shape in the help above)
-      --prices string            Prices per currency. Amounts are integers in the smallest currency unit. A free item is amount: 0. (JSON, @file or -; shape in the help above)
-      --sku string               The variant SKU.
-      --title string             The variant title. Defaults to the option values joined with ' / ' (e.g. 'Red / L').
+  -h, --help[=true|false]               help for create
+      --inventory-quantity int          Units in stock. Defaults to 0.
+      --manage-inventory[=true|false]   Whether stock is tracked for this variant. Defaults to false.
+      --options string                  Option name/value pairs that distinguish this variant, e.g. [{name: Size, value: M}]. Options missing from the product are created; provide a value for every option the product already has. (JSON, @file or -; shape in the help above)
+      --prices string                   Prices per currency. Amounts are integers in the smallest currency unit. A free item is amount: 0. (JSON, @file or -; shape in the help above)
+      --sku string                      The variant SKU.
+      --title string                    The variant title. Defaults to the option values joined with ' / ' (e.g. 'Red / L').
 ```
 
 ### Options inherited from parent commands
 
 ```
-      --config string     Config file (default is $HOME/.hostinger.yaml)
-      --domain string     Website domain for commands that act on a website (default: HOSTINGER_DOMAIN, .hostinger/site.json, or default_domain in the config)
-      --dry-run           Print the request as a curl command instead of sending it
-  -o, --format string     Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
-      --jq string         Filter the JSON response with a jq expression, e.g. '.data[].id'
-      --no-input          Never prompt; fail when an argument, flag or confirmation is missing
-      --order-id string   Order for commands that act on an order (default: HOSTINGER_ORDER_ID, .hostinger/site.json for hosting, or a prompt)
-      --username string   Hosting account for commands that act on an account (default: HOSTINGER_USERNAME, the website from --domain, or .hostinger/site.json)
-      --verbose           Print the config file used and each HTTP request to stderr
+      --config string           Config file (default is $HOME/.hostinger.yaml)
+      --domain string           Website domain for commands that act on a website (default: HOSTINGER_DOMAIN, .hostinger/site.json, or default_domain in the config)
+      --dry-run[=true|false]    Print the request as a curl command instead of sending it
+  -o, --format string           Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string               Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input[=true|false]   Never prompt; fail when an argument, flag or confirmation is missing
+      --order-id string         Order for commands that act on an order (default: HOSTINGER_ORDER_ID, .hostinger/site.json for hosting, or a prompt)
+      --username string         Hosting account for commands that act on an account (default: HOSTINGER_USERNAME, the website from --domain, or .hostinger/site.json)
+      --verbose[=true|false]    Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

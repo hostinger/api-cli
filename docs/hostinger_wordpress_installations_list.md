@@ -35,22 +35,22 @@ hostinger wordpress installations list [flags]
 ### Options
 
 ```
-      --domain string      Filter by domain name (case-insensitive substring match)
-  -h, --help               help for list
-      --ownership string   Filter by ownership type. Defaults to "owned". Use "all" to include both owned and managed installations. (one of: owned, managed, all)
-      --username string    Filter by specific username
+      --domain string       Filter by domain name (case-insensitive substring match)
+  -h, --help[=true|false]   help for list
+      --ownership string    Filter by ownership type. Defaults to "owned". Use "all" to include both owned and managed installations. (one of: owned, managed, all)
+      --username string     Filter by specific username
 ```
 
 ### Options inherited from parent commands
 
 ```
-      --config string     Config file (default is $HOME/.hostinger.yaml)
-      --dry-run           Print the request as a curl command instead of sending it
-  -o, --format string     Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
-      --jq string         Filter the JSON response with a jq expression, e.g. '.data[].id'
-      --no-input          Never prompt; fail when an argument, flag or confirmation is missing
-      --order-id string   Order for commands that act on an order (default: HOSTINGER_ORDER_ID, .hostinger/site.json for hosting, or a prompt)
-      --verbose           Print the config file used and each HTTP request to stderr
+      --config string           Config file (default is $HOME/.hostinger.yaml)
+      --dry-run[=true|false]    Print the request as a curl command instead of sending it
+  -o, --format string           Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string               Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input[=true|false]   Never prompt; fail when an argument, flag or confirmation is missing
+      --order-id string         Order for commands that act on an order (default: HOSTINGER_ORDER_ID, .hostinger/site.json for hosting, or a prompt)
+      --verbose[=true|false]    Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

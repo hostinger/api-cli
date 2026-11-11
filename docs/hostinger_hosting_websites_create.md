@@ -62,7 +62,7 @@ hostinger hosting websites create [order-id] [flags]
 ```
       --datacenter-code string   Datacenter for the hosting account when the order does not have one yet. Omit to use the order's default datacenter. Ignored when the order already has a hosting account. List available datacenters to find valid codes.
       --domain null              Customer-owned domain. Omit or null to set the website up on a generated temporary free subdomain. Cannot start with "www." and can have at most one subdomain level, e.g. `blog.example.com`. A free subdomain generated through `POST /api/hosting/v1/domains/free-subdomains` in the last 24 hours is also accepted.
-  -h, --help                     help for create
+  -h, --help[=true|false]        help for create
       --type null                Website type. Omit or null for an empty website. `wordpress` installs WordPress in the website root and requires `wordpress`. The headless types (`headless_empty`, `headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`) create a headless website; `headless_wordpress` additionally installs WordPress into the `cms` directory with generated credentials. `headless_empty` installs nothing, so WordPress can be added later through `POST /api/hosting/v1/accounts/{username}/wordpress/installations` (`wordpress_installations_install`) with `type: headless`. (one of: wordpress, headless_empty, headless_wordpress, headless_ecommerce, headless_pocketbase)
       --wordpress type           WordPress install settings. Required when type is `wordpress`, not allowed otherwise. The site title is the domain. (JSON, @file or -; shape in the help above)
 ```
@@ -70,14 +70,14 @@ hostinger hosting websites create [order-id] [flags]
 ### Options inherited from parent commands
 
 ```
-      --config string     Config file (default is $HOME/.hostinger.yaml)
-      --dry-run           Print the request as a curl command instead of sending it
-  -o, --format string     Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
-      --jq string         Filter the JSON response with a jq expression, e.g. '.data[].id'
-      --no-input          Never prompt; fail when an argument, flag or confirmation is missing
-      --order-id string   Order for commands that act on an order (default: HOSTINGER_ORDER_ID, .hostinger/site.json for hosting, or a prompt)
-      --username string   Hosting account for commands that act on an account (default: HOSTINGER_USERNAME, the website from --domain, or .hostinger/site.json)
-      --verbose           Print the config file used and each HTTP request to stderr
+      --config string           Config file (default is $HOME/.hostinger.yaml)
+      --dry-run[=true|false]    Print the request as a curl command instead of sending it
+  -o, --format string           Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string               Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input[=true|false]   Never prompt; fail when an argument, flag or confirmation is missing
+      --order-id string         Order for commands that act on an order (default: HOSTINGER_ORDER_ID, .hostinger/site.json for hosting, or a prompt)
+      --username string         Hosting account for commands that act on an account (default: HOSTINGER_USERNAME, the website from --domain, or .hostinger/site.json)
+      --verbose[=true|false]    Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

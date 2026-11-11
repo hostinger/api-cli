@@ -48,7 +48,7 @@ hostinger ecommerce products update <store_id> <product_id> [flags]
 ```
       --collection-changes string   Adds the product to or removes it from collections without touching its other collections. Send at least one collection in add or remove. (JSON, @file or -; shape in the help above)
       --description string          The product description.
-  -h, --help                        help for update
+  -h, --help[=true|false]           help for update
       --name string                 The product name.
       --seo-settings string         Search-engine settings to change. Send at least one field; omitted fields keep their current values. (JSON, @file or -; shape in the help above)
       --status string               Set "published" to make the product buyable, "draft" to hide it, or "archived" to retire it. (one of: draft, published, archived)
@@ -57,15 +57,15 @@ hostinger ecommerce products update <store_id> <product_id> [flags]
 ### Options inherited from parent commands
 
 ```
-      --config string     Config file (default is $HOME/.hostinger.yaml)
-      --domain string     Website domain for commands that act on a website (default: HOSTINGER_DOMAIN, .hostinger/site.json, or default_domain in the config)
-      --dry-run           Print the request as a curl command instead of sending it
-  -o, --format string     Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
-      --jq string         Filter the JSON response with a jq expression, e.g. '.data[].id'
-      --no-input          Never prompt; fail when an argument, flag or confirmation is missing
-      --order-id string   Order for commands that act on an order (default: HOSTINGER_ORDER_ID, .hostinger/site.json for hosting, or a prompt)
-      --username string   Hosting account for commands that act on an account (default: HOSTINGER_USERNAME, the website from --domain, or .hostinger/site.json)
-      --verbose           Print the config file used and each HTTP request to stderr
+      --config string           Config file (default is $HOME/.hostinger.yaml)
+      --domain string           Website domain for commands that act on a website (default: HOSTINGER_DOMAIN, .hostinger/site.json, or default_domain in the config)
+      --dry-run[=true|false]    Print the request as a curl command instead of sending it
+  -o, --format string           Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string               Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input[=true|false]   Never prompt; fail when an argument, flag or confirmation is missing
+      --order-id string         Order for commands that act on an order (default: HOSTINGER_ORDER_ID, .hostinger/site.json for hosting, or a prompt)
+      --username string         Hosting account for commands that act on an account (default: HOSTINGER_USERNAME, the website from --domain, or .hostinger/site.json)
+      --verbose[=true|false]    Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

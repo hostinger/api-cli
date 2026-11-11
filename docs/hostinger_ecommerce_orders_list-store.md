@@ -21,13 +21,13 @@ hostinger ecommerce orders list-store <store_id> [flags]
 ### Options
 
 ```
-      --all                          Fetch every page and print all items
+      --all[=true|false]             Fetch every page and print all items
       --created-at-from string       Earliest creation time to include, inclusive. Accepts a date or ISO date-time (UTC).
       --created-at-to string         Latest creation time to include, inclusive. A bare date covers that whole day.
       --display-id string            The order number the merchant and customer see.
       --email string                 Customer email, matched exactly.
       --fulfillment-status strings   Fulfilment statuses to include. (one of: not_fulfilled, partially_fulfilled, fulfilled, partially_shipped, shipped, partially_returned, returned, canceled, requires_action)
-  -h, --help                         help for list-store
+  -h, --help[=true|false]            help for list-store
       --page int                     Page number
       --payment-status strings       Payment statuses to include. A paid order is "captured". (one of: not_paid, awaiting, captured, partially_refunded, refunded, canceled, requires_action, not_required)
       --q string                     Free-text search over customer name, email, order number and line items.
@@ -37,15 +37,15 @@ hostinger ecommerce orders list-store <store_id> [flags]
 ### Options inherited from parent commands
 
 ```
-      --config string     Config file (default is $HOME/.hostinger.yaml)
-      --domain string     Website domain for commands that act on a website (default: HOSTINGER_DOMAIN, .hostinger/site.json, or default_domain in the config)
-      --dry-run           Print the request as a curl command instead of sending it
-  -o, --format string     Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
-      --jq string         Filter the JSON response with a jq expression, e.g. '.data[].id'
-      --no-input          Never prompt; fail when an argument, flag or confirmation is missing
-      --order-id string   Order for commands that act on an order (default: HOSTINGER_ORDER_ID, .hostinger/site.json for hosting, or a prompt)
-      --username string   Hosting account for commands that act on an account (default: HOSTINGER_USERNAME, the website from --domain, or .hostinger/site.json)
-      --verbose           Print the config file used and each HTTP request to stderr
+      --config string           Config file (default is $HOME/.hostinger.yaml)
+      --domain string           Website domain for commands that act on a website (default: HOSTINGER_DOMAIN, .hostinger/site.json, or default_domain in the config)
+      --dry-run[=true|false]    Print the request as a curl command instead of sending it
+  -o, --format string           Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string               Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input[=true|false]   Never prompt; fail when an argument, flag or confirmation is missing
+      --order-id string         Order for commands that act on an order (default: HOSTINGER_ORDER_ID, .hostinger/site.json for hosting, or a prompt)
+      --username string         Hosting account for commands that act on an account (default: HOSTINGER_USERNAME, the website from --domain, or .hostinger/site.json)
+      --verbose[=true|false]    Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO
