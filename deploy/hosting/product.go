@@ -12,6 +12,7 @@ var flags struct {
 	datacenter string
 	create     bool
 	typ        string
+	sql        string
 	yes        bool
 	settings   bool
 	source     string
@@ -26,8 +27,9 @@ func AddFlags(f *pflag.FlagSet) {
 	f.StringVar(&flags.datacenter, "datacenter", "", "Where the first website on a plan is hosted, a code from hostinger hosting datacenters list (default: asked, or the API's best match)")
 	f.BoolVar(&flags.create, "create", false, "Create a new website instead of deploying to an existing one")
 	f.StringVar(&flags.headless, "headless", "", "Create a headless website for a Node.js frontend: empty, wordpress (installed in /cms), ecommerce or pocketbase. A new website unless the linked website or --domain is already headless")
-	f.StringVar(&flags.typ, "type", "", "What to deploy as: static or nodejs (default: detected, or remembered)")
-	f.BoolVarP(&flags.yes, "yes", "y", false, "Accept the detected type, and replace a website's content or deploy static files onto a Node.js site without asking (required for those without a terminal)")
+	f.StringVar(&flags.typ, "type", "", "What to deploy as: static, nodejs or wordpress-site (default: detected, or remembered)")
+	f.StringVar(&flags.sql, "sql", "", "Database dump (.sql or .sql.gz) imported with a WordPress site (default: the one .sql or .sql.gz file at the top of the folder, else of the project)")
+	f.BoolVarP(&flags.yes, "yes", "y", false, "Accept the detected type, and replace a website's content (a WordPress import: also its database) or deploy static files onto a Node.js site without asking (required for those without a terminal)")
 	f.StringVar(&flags.source, "source", "", "Where the files come from: upload (pack this directory) or git (the pushed branch, through a connected Git account); default: remembered, else asked")
 	f.BoolVar(&flags.dryRun, "dry-run", false, "Show what would be deployed where, as JSON, without creating, uploading or building anything")
 	f.BoolVar(&flags.noWait, "no-wait", false, "Return as soon as a Node.js build is started instead of waiting for it")
@@ -43,7 +45,7 @@ func AddFlags(f *pflag.FlagSet) {
 
 // Deploy runs Run with the up command's flags.
 func Deploy(ctx context.Context, ui UI, path, domain string) (*Outcome, error) {
-	opts := Options{Path: path, Domain: domain, Create: flags.create, OrderID: flags.orderID, Datacenter: flags.datacenter, Yes: flags.yes, Settings: flags.settings, Node: flags.node, DryRun: flags.dryRun, NoWait: flags.noWait}
+	opts := Options{Path: path, Domain: domain, Create: flags.create, OrderID: flags.orderID, Datacenter: flags.datacenter, SQL: flags.sql, Yes: flags.yes, Settings: flags.settings, Node: flags.node, DryRun: flags.dryRun, NoWait: flags.noWait}
 	if flags.typ != "" {
 		t, err := ParseType(flags.typ)
 		if err != nil {

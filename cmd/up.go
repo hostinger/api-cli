@@ -35,6 +35,16 @@ app, which is built on the server, from an uploaded copy of the directory or fro
 pushed Git branch (--source git, asked once and remembered, which also redeploys on
 every push). Deploying overwrites the website's current files.
 
+A WordPress site (a folder with wp-config.php or wp-content, or an archive with
+--type wordpress-site) is imported with its database dump: --sql, else the one .sql or
+.sql.gz file at the top of the folder, else of the project around it (where
+.hostinger/site.json is). A folder whose WordPress site is in one subfolder deploys
+that subfolder. The dump is uploaded next to the archive rather than in it (a .sql.gz
+decompressed). The import replaces the website's
+files and database and finishes on the server a few minutes later. Since it replaces
+the database, every import to a website with content is confirmed, or needs --yes,
+even when the directory is linked to it.
+
 A headless website (--headless creates one: empty, wordpress with WordPress in /cms,
 ecommerce or pocketbase) serves a Node.js frontend, so a folder with a package.json
 is deployed there as a Node.js app and its backend is left alone. In a terminal, a new
@@ -55,6 +65,7 @@ linked website, --domain or HOSTINGER_DOMAIN.`,
 	Example: `  hostinger up
   hostinger up ./dist --domain example.com
   hostinger up --headless wordpress
+  hostinger up ./my-wp-site --domain example.com --sql backup.sql
   hostinger up --create --order-id 123 --type nodejs --format json`,
 	Args:         cobra.MaximumNArgs(1),
 	SilenceUsage: true,
@@ -75,7 +86,7 @@ func init() {
 		versions[i] = strconv.Itoa(v)
 	}
 	for name, values := range map[string][]string{
-		"type":            {string(hosting.Static), string(hosting.NodeJS)},
+		"type":            {string(hosting.Static), string(hosting.NodeJS), string(hosting.WordPressSite)},
 		"source":          {string(hosting.SourceUpload), string(hosting.SourceGit)},
 		"headless":        hosting.HeadlessKinds,
 		"app-type":        hosting.AppTypes,

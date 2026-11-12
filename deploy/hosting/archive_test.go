@@ -222,7 +222,12 @@ func TestUploadNameIsUnique(t *testing.T) {
 	old := randomSuffix
 	randomSuffix = func() string { return "r4nd" }
 	t.Cleanup(func() { randomSuffix = old })
-	for in, want := range map[string]string{"/x/site.zip": "site_r4nd.zip", "/x/App.tar.gz": "App_r4nd.tar.gz", "/x/b.tgz": "b_r4nd.tgz"} {
+	for in, want := range map[string]string{
+		"/x/site.zip": "site_r4nd.zip", "/x/App.tar.gz": "App_r4nd.tar.gz", "/x/b.tgz": "b_r4nd.tgz",
+		// The API refuses "..", and paths over 255 characters.
+		"/x/site..2024.sql":                       "site.2024_r4nd.sql",
+		"/x/" + strings.Repeat("a", 300) + ".sql": strings.Repeat("a", 100) + "_r4nd.sql",
+	} {
 		if got := uploadName(in); got != want {
 			t.Errorf("uploadName(%s) = %s, want %s", in, got, want)
 		}

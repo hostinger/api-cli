@@ -92,6 +92,33 @@ func Detect(dir string) (typ Type, note string, err error) {
 	return Static, "", nil
 }
 
+// wordPressSubdir returns the one subfolder holding a WordPress site (a project
+// that keeps it in wordpress/ next to docker-compose.yml and backups), or "".
+// A folder with its own index.html or index.php is a site itself.
+func wordPressSubdir(dir string) string {
+	entries, err := os.ReadDir(dir)
+	if err != nil {
+		return ""
+	}
+	var found []string
+	for _, e := range entries {
+		name := strings.ToLower(e.Name())
+		if !e.IsDir() && (name == "index.html" || name == "index.php") {
+			return ""
+		}
+		if !e.IsDir() || strings.HasPrefix(name, ".") || name == "node_modules" {
+			continue
+		}
+		if typ, _, err := Detect(filepath.Join(dir, e.Name())); err == nil && typ == WordPressSite {
+			found = append(found, filepath.Join(dir, e.Name()))
+		}
+	}
+	if len(found) != 1 {
+		return ""
+	}
+	return found[0]
+}
+
 // headlessDependencies suggest a headless website (see HeadlessKinds): a client
 // for its backend first, else a web frontend framework, which gets an empty one
 // (many frontends only fetch their backend's API). Only the question to create

@@ -1,12 +1,17 @@
 package hosting
 
 import (
+	"compress/gzip"
 	"context"
 	"errors"
 	"fmt"
+	"io"
 	"io/fs"
 	"os"
+	"path"
 	"path/filepath"
+	"slices"
+	"sort"
 	"strings"
 	"time"
 
@@ -33,6 +38,8 @@ type Options struct {
 	Node       NodeOverrides
 	// Headless is the kind of headless website to create (see HeadlessKinds).
 	Headless string
+	// SQL is the database dump a WordPress site is imported with.
+	SQL string
 }
 
 // Result is what a deploy produced. Fields Outcome already reports
@@ -49,6 +56,7 @@ type Result struct {
 	Repository string `json:"repository,omitempty"`
 	Branch     string `json:"branch,omitempty"`
 	Archive    string `json:"archive,omitempty"`
+	Database   string `json:"database,omitempty"` // the dump a WordPress import uploads, as named on the server
 	BuildUUID  string `json:"buildUuid,omitempty"`
 	BuildState string `json:"buildState,omitempty"`
 	// Settings are what the build ran with. In a dry run, only what is known
@@ -71,7 +79,7 @@ type Result struct {
 	// Reachable is false when https://Domain has no DNS yet.
 	Reachable     bool   `json:"-"`
 	ReachableNote string `json:"-"`
-	// Next says how to follow a build left running (--no-wait).
+	// Next says how to follow a build left running (--no-wait), or an import.
 	Next string `json:"-"`
 }
 
@@ -89,6 +97,11 @@ var (
 // deploy or build, and link the directory to the website.
 func Run(ctx context.Context, a API, ui UI, opts Options) (*Result, error) {
 	d := &deployment{ctx: ctx, a: a, ui: ui, opts: opts}
+	defer func() {
+		for _, t := range d.temps {
+			os.Remove(t)
+		}
+	}()
 	if err := d.locate(); err != nil {
 		return nil, err
 	}
@@ -128,6 +141,10 @@ type deployment struct {
 	committed string // the link file when Git tracks it: it may have come with a clone
 	src       string // the directory or archive to deploy
 	isDir     bool
+	outer     string // the folder passed, when the WordPress site was found in a subfolder of it
+	dump      string
+	plainDump string   // what is uploaded: dump, or a decompressed copy of a .sql.gz
+	temps     []string // removed when Run returns
 
 	website  *site.Website
 	created  bool
@@ -190,6 +207,10 @@ func (d *deployment) locate() error {
 	if err := checkNodeOverrides(d.opts.Node); err != nil {
 		return err
 	}
+	if d.opts.SQL != "" && d.opts.Type != "" && d.opts.Type != WordPressSite {
+		// Before --create makes a website; a detected type is checked in prepare.
+		return errors.New("--sql is only for a WordPress import (--type wordpress-site)")
+	}
 	info, err := os.Stat(d.src)
 	if err != nil {
 		return fmt.Errorf("path not found: %s%s", d.src, fromLink)
@@ -200,7 +221,7 @@ func (d *deployment) locate() error {
 			return fmt.Errorf("%s is neither a directory nor an archive (zip, tar, tar.gz, tgz, 7z, gz)%s", d.src, fromLink)
 		}
 		if d.opts.Type == "" {
-			return errors.New("an archive cannot be inspected: pass --type static or --type nodejs")
+			return errors.New("an archive cannot be inspected: pass --type static, nodejs or wordpress-site")
 		}
 	}
 	if d.opts.Headless != "" {
@@ -213,6 +234,9 @@ func (d *deployment) locate() error {
 // detect runs before the website is chosen: an undeployable folder must fail
 // before a website is created. The result is a hint for the website picker.
 func (d *deployment) detect() (Type, error) {
+	if d.opts.Type == WordPressSite {
+		return "", d.loadDump()
+	}
 	if !d.isDir || d.opts.Type != "" {
 		return "", nil
 	}
@@ -227,6 +251,17 @@ func (d *deployment) detect() (Type, error) {
 	}
 	if err := undeployable(d.src, detected); err != nil {
 		return "", err
+	}
+	if detected == Static && note == "" {
+		if sub := wordPressSubdir(d.src); sub != "" {
+			d.ui.Info("The WordPress site is in " + filepath.Base(sub) + "/: deploying that folder (pass a path to deploy another)")
+			d.outer, d.src, detected = d.src, sub, WordPressSite
+		}
+	}
+	if detected == WordPressSite {
+		if err := d.loadDump(); err != nil {
+			return "", err
+		}
 	}
 	if note != "" {
 		d.ui.Info(note)
@@ -263,7 +298,11 @@ func (d *deployment) target(detected Type) error {
 	switch {
 	case d.headless:
 		// Static files would land in the document root, next to the backend.
-		if err := checkHeadless(d.src, d.isDir, d.typ, website.Domain); err != nil {
+		typ := d.typ
+		if typ == "" && detected == WordPressSite {
+			typ = detected // refused below, not quietly built as Node.js
+		}
+		if err := checkHeadless(d.src, d.isDir, typ, website.Domain); err != nil {
 			return err
 		}
 		d.typ = NodeJS
@@ -296,19 +335,26 @@ func (d *deployment) target(detected Type) error {
 	if project != nil && !strings.EqualFold(project.Domain, website.Domain) && !shouldLink(project, website, opts) {
 		d.ui.Info("One-off deploy: this directory stays linked to " + project.Domain)
 	}
+	// An import also replaces the database, so the link is no consent to it.
+	asks := !created && (!fromLink || d.typ == WordPressSite)
 	switch {
 	case website.WebsiteType == "nodejs" && d.typ == Static:
 		// Checked even when linked: the app keeps running whatever the link says.
 		return confirmStaticOverApp(d.ui, website, opts)
-	case !fromLink && !created && opts.DryRun:
+	case website.WebsiteType == "nodejs" && d.typ == WordPressSite:
+		return errors.New(website.Domain + " runs a Node.js app, which keeps answering in front of an imported WordPress site: import it into another website, or pass --create for a new one")
+	case asks && opts.DryRun:
 		// The plan says what the real run would ask, or need --yes for without a terminal.
 		d.result.OverwritesContent, _ = hasContent(d.ctx, d.a, website, d.headless)
-	case !fromLink && !created:
+		if d.typ == WordPressSite && d.result.OverwritesContent {
+			d.ui.Info(wordPressLoss)
+		}
+	case asks:
 		why := ""
 		if d.committed != "" && opts.Domain == "" && !opts.Create {
 			why = " (the link file " + d.committed + " is committed to this repository, so it is not taken as consent; run `git rm --cached " + d.committed + "` to keep the link local)"
 		}
-		return confirmOverwrite(d.ctx, d.a, d.ui, website, opts, d.headless, why)
+		return confirmOverwrite(d.ctx, d.a, d.ui, website, opts, d.headless, d.typ, why)
 	}
 	return nil
 }
@@ -323,8 +369,17 @@ func (d *deployment) prepare() error {
 	if d.project != nil && strings.EqualFold(d.project.Domain, w.Domain) {
 		d.remembered, d.rememberedSource = d.project.Node, Source(d.project.Source)
 	}
+	if d.typ == WordPressSite {
+		if err := d.prepareImport(); err != nil {
+			return err
+		}
+	} else if d.opts.SQL != "" {
+		return errors.New("--sql is only for a WordPress import (--type wordpress-site)")
+	}
 	var err error
-	if d.source, d.repo, err = chooseSource(d.ctx, d.a, d.ui, d.opts, d.src, d.isDir, d.rememberedSource); err != nil {
+	if d.typ == WordPressSite {
+		d.source = SourceUpload
+	} else if d.source, d.repo, err = chooseSource(d.ctx, d.a, d.ui, d.opts, d.src, d.isDir, d.rememberedSource); err != nil {
 		return err
 	}
 	d.result.Source = d.source
@@ -335,7 +390,8 @@ func (d *deployment) prepare() error {
 	if !d.isDir {
 		return nil
 	}
-	if d.typ == Static {
+	if d.typ == Static || d.typ == WordPressSite {
+		// An imported WordPress site is served from the document root too.
 		d.packed.leaveOutStatic()
 	}
 	d.result.Files, d.result.SkippedFiles, d.result.IgnoredFiles = len(d.packed.Files), d.packed.Skipped, d.packed.Ignored
@@ -344,6 +400,258 @@ func (d *deployment) prepare() error {
 		return d.packed.nonEmpty()
 	}
 	return nil
+}
+
+// prepareImport finds the database dump, which is uploaded next to the
+// archive rather than in it, and names it on the server.
+func (d *deployment) prepareImport() error {
+	if d.opts.Source == SourceGit {
+		return errors.New("a WordPress site is imported from an upload, with its database: leave --source git out")
+	}
+	if err := d.loadDump(); err != nil {
+		return err
+	}
+	if d.isDir {
+		if d.packed.IgnoreSource == ".gitignore" {
+			listing, err := listWordPress(d.ctx, d.src)
+			if err != nil {
+				return err
+			}
+			listing.Dir = d.src
+			d.packed = listing
+			if r := listing.Restored; len(r) > 0 {
+				shown := strings.Join(r[:min(3, len(r))], ", ")
+				if len(r) > 3 {
+					shown += fmt.Sprintf(" and %d more", len(r)-3)
+				}
+				d.ui.Info("Packing what the site needs although .gitignore leaves it out: " + shown)
+			}
+		}
+		// Whatever is packed is served from the document root once imported.
+		dump, _ := filepath.Rel(d.src, d.dump)
+		var dumps, dev []string
+		d.packed.Files = slices.DeleteFunc(d.packed.Files, func(f string) bool {
+			switch name := path.Base(f); {
+			case isDump(name) && !shipsWithCode(f):
+				if f != filepath.ToSlash(dump) {
+					dumps = append(dumps, f)
+				}
+			case isDevFile(name):
+				dev = append(dev, f)
+			default:
+				return false
+			}
+			return true
+		})
+		if len(dumps) > 0 {
+			d.ui.Info("Left out (database dumps would be served publicly): " + strings.Join(dumps, ", "))
+		}
+		if len(dev) > 0 {
+			d.ui.Info("Left out (local development files, which often hold database passwords): " + strings.Join(dev, ", "))
+		}
+		d.packed.Skipped = append(append(d.packed.Skipped, dumps...), dev...)
+		sort.Strings(d.packed.Skipped)
+	}
+	// A name of its own, like the archive's: a dump in the document root must not be guessed.
+	// A .sql.gz is uploaded decompressed.
+	name := d.dump
+	if strings.HasSuffix(strings.ToLower(name), ".gz") {
+		name = name[:len(name)-len(".gz")]
+	}
+	d.result.Database = uploadName(name)
+	return nil
+}
+
+// loadDump finds the dump and checks it. detect calls it before a website is
+// created; prepareImport again for a type picked from the menu.
+func (d *deployment) loadDump() error {
+	if err := d.findDump(); err != nil {
+		return err
+	}
+	return d.checkDump()
+}
+
+// shipsWithCode: plugins and themes may ship .sql files (install.sql,
+// schema.sql) that they read at runtime. Those are code, not dumps.
+func shipsWithCode(rel string) bool {
+	lower := strings.ToLower(rel)
+	for _, dir := range []string{"wp-content/plugins/", "wp-content/mu-plugins/", "wp-content/themes/"} {
+		if strings.HasPrefix(lower, dir) {
+			return true
+		}
+	}
+	return false
+}
+
+// checkDump reads the whole dump before anything is uploaded, dry run included:
+// the API cannot delete files, so a dump failing after the archive upload would
+// leave the archive, wp-config.php and all, in the document root.
+func (d *deployment) checkDump() error {
+	if d.plainDump != "" {
+		return nil
+	}
+	if !strings.HasSuffix(strings.ToLower(d.dump), ".gz") {
+		if info, err := os.Stat(d.dump); err != nil || info.Size() == 0 {
+			return fmt.Errorf("the database dump %s is missing or empty", d.dump)
+		}
+		d.plainDump = d.dump
+		return nil
+	}
+	in, err := os.Open(d.dump)
+	if err != nil {
+		return err
+	}
+	defer in.Close()
+	zr, err := gzip.NewReader(in)
+	if err != nil {
+		return fmt.Errorf("%s is not a gzip file: %w", d.dump, err)
+	}
+	tmp, err := os.CreateTemp("", "hostinger-dump-*.sql")
+	if err != nil {
+		return err
+	}
+	d.temps = append(d.temps, tmp.Name())
+	n, err := io.Copy(tmp, zr)
+	if cerr := tmp.Close(); err == nil {
+		err = cerr
+	}
+	switch {
+	case err != nil:
+		return fmt.Errorf("%s is damaged (%v): export the database again", d.dump, err)
+	case n == 0:
+		return fmt.Errorf("the database dump %s is empty", d.dump)
+	}
+	d.plainDump = tmp.Name()
+	return nil
+}
+
+// isDump matches database dumps, compressed ones too.
+// Any name with a .sql part (x.sql, x.sql.gz, x.sql.bak, x.sql~), not mysql.php.
+func isDump(name string) bool {
+	parts := strings.Split(strings.TrimRight(strings.ToLower(name), "~"), ".")
+	for _, p := range parts[1:] {
+		if p == "sql" {
+			return true
+		}
+	}
+	return false
+}
+
+// isDevFile matches Docker setups, which a live site never needs and whose
+// compose files often hold database passwords.
+func isDevFile(name string) bool {
+	name = strings.ToLower(name)
+	if name == "dockerfile" || name == ".dockerignore" || strings.HasPrefix(name, "dockerfile.") {
+		return true
+	}
+	ext := path.Ext(name)
+	if ext != ".yml" && ext != ".yaml" {
+		return false
+	}
+	base := strings.TrimSuffix(name, ext)
+	return base == "compose" || base == "docker-compose" || strings.HasPrefix(base, "docker-compose.") || strings.HasPrefix(base, "compose.")
+}
+
+// findDump takes --sql, else the one .sql or .sql.gz at the top of the folder,
+// else of the folder passed when the site was found in a subfolder, else of
+// the linked project around it. Never the current directory as such: an
+// unrelated dump there would replace the live database.
+func (d *deployment) findDump() error {
+	if d.dump != "" {
+		return nil
+	}
+	if d.opts.SQL != "" {
+		p, err := filepath.Abs(d.opts.SQL)
+		if err != nil {
+			return err
+		}
+		if info, err := os.Stat(p); err != nil || info.IsDir() {
+			return fmt.Errorf("database dump not found: %s", p)
+		}
+		if !isImportableDump(p) {
+			return fmt.Errorf("%s is not a .sql or .sql.gz file: pass the WordPress database dump with --sql", p)
+		}
+		d.dump = p
+		return nil
+	}
+	export := "export the database with `wp db export database.sql` (or mysqldump) and pass --sql database.sql"
+	if !d.isDir {
+		return errors.New("a WordPress site is imported with its database: " + export)
+	}
+	// The site's folder first, then the folder around it, where exports and
+	// docker-compose setups keep the dump next to the site's folder.
+	dirs := []string{d.src}
+	if d.outer != "" {
+		dirs = append(dirs, d.outer)
+	}
+	if d.project != nil && !slices.Contains(dirs, filepath.Clean(d.linkDir)) && !escapes(relPath(d.linkDir, d.src)) {
+		dirs = append(dirs, filepath.Clean(d.linkDir))
+	}
+	for _, dir := range dirs {
+		matches, err := dumpsIn(dir)
+		if err != nil {
+			return err
+		}
+		switch len(matches) {
+		case 0:
+			continue
+		case 1:
+			d.dump = matches[0]
+			shown := d.dump
+			if r := relPath(d.linkDir, d.dump); !escapes(r) {
+				shown = r
+			}
+			d.ui.Info("Importing the database from " + shown)
+			return nil
+		}
+		names := make([]string, len(matches))
+		for i, m := range matches {
+			names[i] = filepath.Base(m)
+		}
+		return fmt.Errorf("%s has several database dumps (%s): pass the one to import with --sql", dir, strings.Join(names, ", "))
+	}
+	return fmt.Errorf("%s has no database dump (.sql or .sql.gz) to import with the WordPress site: %s; or pass --type static if this is a static copy of a site (Simply Static, WP2Static, a wget mirror)", strings.Join(dirs, " or "), export)
+}
+
+// dumpsIn lists the dumps at the top of dir. A .sql.gz next to the same .sql
+// is the same dump: the .sql is taken.
+func dumpsIn(dir string) ([]string, error) {
+	entries, err := os.ReadDir(dir)
+	if err != nil {
+		return nil, err
+	}
+	plain := map[string]bool{}
+	for _, e := range entries {
+		if e.Type().IsRegular() && strings.EqualFold(filepath.Ext(e.Name()), ".sql") {
+			plain[strings.ToLower(e.Name())] = true
+		}
+	}
+	var out []string
+	for _, e := range entries {
+		name := e.Name()
+		if !e.Type().IsRegular() || !isImportableDump(name) {
+			continue
+		}
+		if lower := strings.ToLower(name); strings.HasSuffix(lower, ".gz") && plain[strings.TrimSuffix(lower, ".gz")] {
+			continue
+		}
+		out = append(out, filepath.Join(dir, name))
+	}
+	return out, nil
+}
+
+// isImportableDump: a .sql dump, or a gzipped one, which is decompressed before upload.
+func isImportableDump(name string) bool {
+	lower := strings.ToLower(name)
+	return strings.HasSuffix(lower, ".sql") || strings.HasSuffix(lower, ".sql.gz")
+}
+
+func relPath(base, target string) string {
+	r, err := filepath.Rel(base, target)
+	if err != nil {
+		return ".."
+	}
+	return r
 }
 
 // list packs the file list before any website is created: an empty folder
@@ -496,10 +804,19 @@ func (d *deployment) deployUpload() (*Result, error) {
 			return nil, err
 		}
 		step.Done(packedSummary(d.packed))
-		if skipped := d.packed.Skipped; len(skipped) > 0 {
+		// Only secrets: a WordPress import's left-out dumps and Docker files were
+		// announced when packing.
+		skipped := slices.DeleteFunc(slices.Clone(d.packed.Skipped), func(f string) bool {
+			name := path.Base(f)
+			return !isSecretFile(name) && name != ".npmrc"
+		})
+		if len(skipped) > 0 {
 			hint := "A static site cannot read them; keep secrets out of the document root."
-			if d.typ == NodeJS {
+			switch d.typ {
+			case NodeJS:
 				hint = "Set them with `hostinger hosting nodejs replace-environment-variables`."
+			case WordPressSite:
+				hint = "Put what the site needs from them in wp-config.php, which is uploaded."
 			}
 			ui.Info("Left out (secrets): " + strings.Join(skipped, ", ") + ". " + hint)
 		}
@@ -526,6 +843,9 @@ func (d *deployment) deployUpload() (*Result, error) {
 	}
 	step.Done("Uploaded " + result.Archive)
 
+	if d.typ == WordPressSite {
+		return d.importWordPress(creds)
+	}
 	if d.typ == NodeJS {
 		step := ui.Start("Reading build settings from the archive")
 		detected, err := a.BuildSettingsFromArchive(ctx, w.Username, w.Domain, result.Archive)
@@ -545,6 +865,35 @@ func (d *deployment) deployUpload() (*Result, error) {
 		return nil, err
 	}
 	step.Done("Files deployed")
+	d.link(nil, d.source)
+	return result, nil
+}
+
+// importWordPress uploads the database dump next to the archive and starts the
+// import, which the server finishes a few minutes later.
+func (d *deployment) importWordPress(creds Credentials) (*Result, error) {
+	ctx, ui, w, result := d.ctx, d.ui, d.website, d.result
+	step := ui.Start("Uploading the database " + filepath.Base(d.dump))
+	err := Upload(ctx, creds, d.plainDump, result.Database, func(sent, total int64) {
+		step.Update(fmt.Sprintf("Uploading the database %s (%d%%)", filepath.Base(d.dump), sent*100/max(total, 1)))
+	})
+	if err != nil {
+		step.Fail("Upload failed")
+		// The archive holds wp-config.php: say where it was left.
+		return nil, fmt.Errorf("%w (the site archive was uploaded as %s; delete it if you do not retry)", err, result.Archive)
+	}
+	step.Done("Uploaded the database")
+	step = ui.Start("Starting the WordPress import")
+	if err := d.a.ImportWordPress(ctx, w.Username, w.Domain, result.Archive, result.Database); err != nil {
+		step.Fail("Import failed")
+		// The dump holds user emails and password hashes: say where it was left.
+		return nil, fmt.Errorf("%w (the database dump was uploaded as %s next to %s; delete it if you do not retry)", err, result.Database, result.Archive)
+	}
+	step.Done("WordPress import started")
+	result.Next = "WordPress is being imported on the server; " + result.URL + " serves it in a few minutes"
+	if !result.Reachable {
+		result.Next += ". " + result.ReachableNote
+	}
 	d.link(nil, d.source)
 	return result, nil
 }
@@ -657,6 +1006,9 @@ func rememberedOrDetected(src string, ui UI, opts Options, remembered Type) (Typ
 // checkHeadless refuses what cannot go onto a headless website (target names
 // it): it serves a Node.js frontend, so a folder needs a package.json.
 func checkHeadless(src string, isDir bool, typ Type, target string) error {
+	if typ == WordPressSite {
+		return fmt.Errorf("%s serves a Node.js frontend, so it takes no WordPress import (its WordPress, if any, lives in /cms): import it into another website, or pass --create for a new one", target)
+	}
 	if typ == Static {
 		return fmt.Errorf("%s serves a Node.js frontend, so it takes no static deploy (its document root holds the backend, such as WordPress in /cms): leave --type out, or pass --type nodejs", target)
 	}
@@ -671,7 +1023,7 @@ func checkHeadless(src string, isDir bool, typ Type, target string) error {
 
 func undeployable(src string, detected Type) error {
 	switch detected {
-	case WordPressSite, WordPressPlugin, WordPressTheme:
+	case WordPressPlugin, WordPressTheme:
 		return fmt.Errorf("%s looks like a %s, which this command cannot deploy yet; use the hostinger wordpress commands", src, detected)
 	}
 	return nil
@@ -702,9 +1054,9 @@ func chooseType(src string, ui UI, opts Options, project *site.Project, domain s
 	if ok {
 		return detected, nil
 	}
-	labels := []string{"static (HTML, CSS, JavaScript, PHP served as files)", "nodejs (built and run by Node.js)"}
+	labels := []string{"static (HTML, CSS, JavaScript, PHP served as files)", "nodejs (built and run by Node.js)", "wordpress-site (imported with its database, which it replaces)"}
 	def := 0
-	if other(detected) == NodeJS {
+	if detected == Static {
 		def = 1 // the person said no: offer the other one first
 	}
 	idx, err := ui.Select("Deploy as", labels, def)
@@ -714,16 +1066,12 @@ func chooseType(src string, ui UI, opts Options, project *site.Project, domain s
 	return DeployableTypes[idx], nil
 }
 
-func other(t Type) Type {
-	if t == NodeJS {
-		return Static
-	}
-	return NodeJS
-}
-
 func typeLabel(t Type) string {
-	if t == NodeJS {
+	switch t {
+	case NodeJS:
 		return "Node.js app"
+	case WordPressSite:
+		return "WordPress site"
 	}
 	return "static site"
 }

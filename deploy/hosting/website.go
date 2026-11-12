@@ -393,15 +393,24 @@ func waitForSetup(ctx context.Context, a API, ui UI, domain string, created bool
 	}
 }
 
+// wordPressLoss is shown before an import replaces a website that has content.
+const wordPressLoss = "A WordPress import replaces the live database with the dump: everything changed on the site since the dump was exported (posts, pages, comments, orders, users, settings) is lost. It moves a whole site; it is not a way to ship theme or plugin changes."
+
 // confirmOverwrite asks before the first deploy to an unlinked website, since
 // a deploy replaces its content. A site with content defaults to no and, without
 // a terminal, needs --yes. On a headless website only the frontend is replaced.
 // why, when set, explains why the run asks although a link names the website.
-func confirmOverwrite(ctx context.Context, a API, ui UI, w *site.Website, opts Options, headless bool, why string) error {
+func confirmOverwrite(ctx context.Context, a API, ui UI, w *site.Website, opts Options, headless bool, typ Type, why string) error {
 	has, checkErr := hasContent(ctx, a, w, headless)
+	if typ == WordPressSite && (has || checkErr != nil) {
+		ui.Info(wordPressLoss)
+	}
 	what, frontend, kept := "content", "", ""
-	if headless {
+	switch {
+	case headless:
 		what, frontend, kept = "a frontend", "frontend ", " (its backend, such as WordPress in /cms, is kept)"
+	case typ == WordPressSite:
+		kept = ", along with its database"
 	}
 	if opts.Yes {
 		switch {

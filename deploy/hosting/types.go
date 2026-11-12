@@ -6,14 +6,14 @@ import "fmt"
 type Type string
 
 const (
-	Static          Type = "static" // HTML, CSS, JavaScript and PHP served as files
-	NodeJS          Type = "nodejs" // built and run by the Node.js runtime
-	WordPressSite   Type = "wordpress-site"
+	Static          Type = "static"         // HTML, CSS, JavaScript and PHP served as files
+	NodeJS          Type = "nodejs"         // built and run by the Node.js runtime
+	WordPressSite   Type = "wordpress-site" // imported with its database dump
 	WordPressPlugin Type = "wordpress-plugin"
 	WordPressTheme  Type = "wordpress-theme"
 )
 
-var DeployableTypes = []Type{Static, NodeJS}
+var DeployableTypes = []Type{Static, NodeJS, WordPressSite}
 
 func ParseType(s string) (Type, error) {
 	for _, t := range DeployableTypes {
@@ -21,7 +21,7 @@ func ParseType(s string) (Type, error) {
 			return t, nil
 		}
 	}
-	return "", fmt.Errorf("unknown type %q (one of: static, nodejs)", s)
+	return "", fmt.Errorf("unknown type %q (one of: static, nodejs, wordpress-site)", s)
 }
 
 // HeadlessKinds are the headless websites up creates: empty installs nothing,

@@ -43,6 +43,7 @@ type fakeAPI struct {
 	content         bool
 	contentErr      error
 	datacenters     []Datacenter
+	importErr       error
 }
 
 func (f *fakeAPI) log(format string, args ...any) {
@@ -99,6 +100,10 @@ func (f *fakeAPI) UploadCredentials(_ context.Context, username, domain string) 
 func (f *fakeAPI) DeployArchive(_ context.Context, username, domain, archive string) error {
 	f.log("deploy %s %s %s", username, domain, archive)
 	return nil
+}
+func (f *fakeAPI) ImportWordPress(_ context.Context, username, domain, archive, sql string) error {
+	f.log("import %s %s %s %s", username, domain, archive, sql)
+	return f.importErr
 }
 func (f *fakeAPI) BuildSettingsFromArchive(_ context.Context, username, domain, archive string) (NodeSettings, error) {
 	f.log("settings %s", archive)
@@ -443,11 +448,11 @@ func TestRunNodeBuildFailureCarriesLogs(t *testing.T) {
 	}
 }
 
-func TestRunRefusesWordPressAndArchivesWithoutType(t *testing.T) {
+func TestRunRefusesWordPressPluginsAndArchivesWithoutType(t *testing.T) {
 	api := newFake(t)
 	dir := t.TempDir()
 	linkHere(t, dir)
-	write(t, dir, "wp-config.php", "")
+	write(t, dir, "my-plugin.php", "<?php\n/*\n * Plugin Name: Mine\n */")
 	if _, err := Run(context.Background(), api, &fakeUI{t: t}, Options{Path: dir, Domain: "example.com"}); err == nil || !strings.Contains(err.Error(), "wordpress") {
 		t.Errorf("err = %v", err)
 	}
@@ -1086,7 +1091,8 @@ func TestFirstWebsiteOnPlanPicksDatacenter(t *testing.T) {
 func TestUndeployableDirectoryFailsBeforeAnythingIsCreated(t *testing.T) {
 	fastPolling(t)
 	for name, files := range map[string]map[string]string{
-		"wordpress site": {"wp-config.php": "<?php", "index.php": "<?php"},
+		"wordpress plugin":              {"my-plugin.php": "<?php\n/* Plugin Name: Mine */"},
+		"wordpress site without a dump": {"wp-config.php": "<?php", "index.php": "<?php"},
 	} {
 		t.Run(name, func(t *testing.T) {
 			api := newFake(t)
@@ -1397,13 +1403,13 @@ func TestUndeployableFolderFailsEvenWithARememberedType(t *testing.T) {
 	api := newFake(t)
 	dir := t.TempDir()
 	linkHere(t, dir)
-	write(t, dir, "wp-config.php", "<?php")
+	write(t, dir, "wp-config.php", "<?php") // a WordPress site without its database dump
 	if err := site.Save(dir, &site.Project{Kind: "website", Domain: "example.com", Username: "u1", Type: "static"}); err != nil {
 		t.Fatal(err)
 	}
 	// --create means the link does not pick the website, so its type does not apply.
 	_, err := Run(context.Background(), api, &fakeUI{t: t}, Options{Path: dir, Create: true, OrderID: 11})
-	if err == nil || !strings.Contains(err.Error(), "cannot deploy yet") {
+	if err == nil || !strings.Contains(err.Error(), "no database dump") {
 		t.Errorf("err = %v", err)
 	}
 	if strings.Contains(strings.Join(api.calls, "\n"), "setup ") {

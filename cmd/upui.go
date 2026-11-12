@@ -79,7 +79,7 @@ func (u *termUI) Start(msg string) hosting.Step {
 		fmt.Fprintln(os.Stderr, msg)
 		return &plainStep{}
 	}
-	sp, err := pterm.DefaultSpinner.WithWriter(os.Stderr).Start(spinnerText(msg))
+	sp, err := pterm.DefaultSpinner.WithWriter(os.Stderr).WithRemoveWhenDone(true).Start(spinnerText(msg))
 	if err != nil {
 		return &plainStep{}
 	}
@@ -98,8 +98,18 @@ func spinnerText(msg string) string {
 type spinnerStep struct{ sp *pterm.SpinnerPrinter }
 
 func (s *spinnerStep) Update(msg string) { s.sp.UpdateText(spinnerText(utils.SafeText(msg))) }
-func (s *spinnerStep) Done(msg string)   { s.sp.Success(utils.SafeText(msg)) }
-func (s *spinnerStep) Fail(msg string)   { s.sp.Fail(utils.SafeText(msg)) }
+
+// Done and Fail stop the spinner first: pterm's Success and Fail stop it after
+// printing, so a late frame can overwrite the result line.
+func (s *spinnerStep) Done(msg string) {
+	_ = s.sp.Stop()
+	pterm.Success.WithWriter(s.sp.Writer).Println(utils.SafeText(msg))
+}
+
+func (s *spinnerStep) Fail(msg string) {
+	_ = s.sp.Stop()
+	pterm.Error.WithWriter(s.sp.Writer).Println(utils.SafeText(msg))
+}
 
 // plainStep prints one line per state, for logs and pipes.
 type plainStep struct{}

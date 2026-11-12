@@ -54,6 +54,7 @@ type API interface {
 	ListSetups(ctx context.Context, domain string) ([]Setup, error)
 	UploadCredentials(ctx context.Context, username, domain string) (Credentials, error)
 	DeployArchive(ctx context.Context, username, domain, archivePath string) error
+	ImportWordPress(ctx context.Context, username, domain, archivePath, sqlPath string) error
 	BuildSettingsFromArchive(ctx context.Context, username, domain, archivePath string) (NodeSettings, error)
 	BuildSettingsFromRepository(ctx context.Context, username, domain string, r *Repo) (NodeSettings, error)
 	StartBuild(ctx context.Context, username, domain string, settings NodeSettings, archivePath string) (Build, error)
@@ -199,6 +200,10 @@ func (a *client) OwnsDomain(ctx context.Context, domain string) (bool, error) {
 
 func (a *client) DeployArchive(ctx context.Context, username, domain, archivePath string) error {
 	return a.c.JSON(ctx, http.MethodPost, sitePath(username, domain, "/deploy"), nil, map[string]string{"archive_path": archivePath}, nil)
+}
+
+func (a *client) ImportWordPress(ctx context.Context, username, domain, archivePath, sqlPath string) error {
+	return a.c.JSON(ctx, http.MethodPost, sitePath(username, domain, "/wordpress/import"), nil, map[string]string{"archive_path": archivePath, "sql_path": sqlPath}, nil)
 }
 
 func (a *client) BuildSettingsFromArchive(ctx context.Context, username, domain, archivePath string) (NodeSettings, error) {
