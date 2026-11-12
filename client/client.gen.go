@@ -2049,6 +2049,114 @@ func (e HostingV1OnboardingsStartOnboardingRequestType) Valid() bool {
 	}
 }
 
+// Defines values for HostingV1PocketBaseBackendCreatedResourceState.
+const (
+	HostingV1PocketBaseBackendCreatedResourceStateAsleep       HostingV1PocketBaseBackendCreatedResourceState = "asleep"
+	HostingV1PocketBaseBackendCreatedResourceStateFailed       HostingV1PocketBaseBackendCreatedResourceState = "failed"
+	HostingV1PocketBaseBackendCreatedResourceStateMissing      HostingV1PocketBaseBackendCreatedResourceState = "missing"
+	HostingV1PocketBaseBackendCreatedResourceStateRunning      HostingV1PocketBaseBackendCreatedResourceState = "running"
+	HostingV1PocketBaseBackendCreatedResourceStateStarting     HostingV1PocketBaseBackendCreatedResourceState = "starting"
+	HostingV1PocketBaseBackendCreatedResourceStateStopping     HostingV1PocketBaseBackendCreatedResourceState = "stopping"
+	HostingV1PocketBaseBackendCreatedResourceStateUnknown      HostingV1PocketBaseBackendCreatedResourceState = "unknown"
+	HostingV1PocketBaseBackendCreatedResourceStateUnregistered HostingV1PocketBaseBackendCreatedResourceState = "unregistered"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1PocketBaseBackendCreatedResourceState enum.
+func (e HostingV1PocketBaseBackendCreatedResourceState) Valid() bool {
+	switch e {
+	case HostingV1PocketBaseBackendCreatedResourceStateAsleep:
+		return true
+	case HostingV1PocketBaseBackendCreatedResourceStateFailed:
+		return true
+	case HostingV1PocketBaseBackendCreatedResourceStateMissing:
+		return true
+	case HostingV1PocketBaseBackendCreatedResourceStateRunning:
+		return true
+	case HostingV1PocketBaseBackendCreatedResourceStateStarting:
+		return true
+	case HostingV1PocketBaseBackendCreatedResourceStateStopping:
+		return true
+	case HostingV1PocketBaseBackendCreatedResourceStateUnknown:
+		return true
+	case HostingV1PocketBaseBackendCreatedResourceStateUnregistered:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingV1PocketBaseBackendResourceState.
+const (
+	HostingV1PocketBaseBackendResourceStateAsleep       HostingV1PocketBaseBackendResourceState = "asleep"
+	HostingV1PocketBaseBackendResourceStateFailed       HostingV1PocketBaseBackendResourceState = "failed"
+	HostingV1PocketBaseBackendResourceStateMissing      HostingV1PocketBaseBackendResourceState = "missing"
+	HostingV1PocketBaseBackendResourceStateRunning      HostingV1PocketBaseBackendResourceState = "running"
+	HostingV1PocketBaseBackendResourceStateStarting     HostingV1PocketBaseBackendResourceState = "starting"
+	HostingV1PocketBaseBackendResourceStateStopping     HostingV1PocketBaseBackendResourceState = "stopping"
+	HostingV1PocketBaseBackendResourceStateUnknown      HostingV1PocketBaseBackendResourceState = "unknown"
+	HostingV1PocketBaseBackendResourceStateUnregistered HostingV1PocketBaseBackendResourceState = "unregistered"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1PocketBaseBackendResourceState enum.
+func (e HostingV1PocketBaseBackendResourceState) Valid() bool {
+	switch e {
+	case HostingV1PocketBaseBackendResourceStateAsleep:
+		return true
+	case HostingV1PocketBaseBackendResourceStateFailed:
+		return true
+	case HostingV1PocketBaseBackendResourceStateMissing:
+		return true
+	case HostingV1PocketBaseBackendResourceStateRunning:
+		return true
+	case HostingV1PocketBaseBackendResourceStateStarting:
+		return true
+	case HostingV1PocketBaseBackendResourceStateStopping:
+		return true
+	case HostingV1PocketBaseBackendResourceStateUnknown:
+		return true
+	case HostingV1PocketBaseBackendResourceStateUnregistered:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingV1PocketBaseInstanceResourceState.
+const (
+	HostingV1PocketBaseInstanceResourceStateAsleep       HostingV1PocketBaseInstanceResourceState = "asleep"
+	HostingV1PocketBaseInstanceResourceStateFailed       HostingV1PocketBaseInstanceResourceState = "failed"
+	HostingV1PocketBaseInstanceResourceStateMissing      HostingV1PocketBaseInstanceResourceState = "missing"
+	HostingV1PocketBaseInstanceResourceStateRunning      HostingV1PocketBaseInstanceResourceState = "running"
+	HostingV1PocketBaseInstanceResourceStateStarting     HostingV1PocketBaseInstanceResourceState = "starting"
+	HostingV1PocketBaseInstanceResourceStateStopping     HostingV1PocketBaseInstanceResourceState = "stopping"
+	HostingV1PocketBaseInstanceResourceStateUnknown      HostingV1PocketBaseInstanceResourceState = "unknown"
+	HostingV1PocketBaseInstanceResourceStateUnregistered HostingV1PocketBaseInstanceResourceState = "unregistered"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1PocketBaseInstanceResourceState enum.
+func (e HostingV1PocketBaseInstanceResourceState) Valid() bool {
+	switch e {
+	case HostingV1PocketBaseInstanceResourceStateAsleep:
+		return true
+	case HostingV1PocketBaseInstanceResourceStateFailed:
+		return true
+	case HostingV1PocketBaseInstanceResourceStateMissing:
+		return true
+	case HostingV1PocketBaseInstanceResourceStateRunning:
+		return true
+	case HostingV1PocketBaseInstanceResourceStateStarting:
+		return true
+	case HostingV1PocketBaseInstanceResourceStateStopping:
+		return true
+	case HostingV1PocketBaseInstanceResourceStateUnknown:
+		return true
+	case HostingV1PocketBaseInstanceResourceStateUnregistered:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for HostingV1SslSslStatusResourceProvider.
 const (
 	HostingV1SslSslStatusResourceProviderCustom      HostingV1SslSslStatusResourceProvider = "custom"
@@ -12866,7 +12974,7 @@ type HostingV1OnboardingsStartOnboardingRequest struct {
 	// Example: example.com
 	Domain *string `json:"domain,omitempty"`
 
-	// Type Website type. Omit or `null` for an empty website. `wordpress` installs WordPress in the website root and requires `wordpress`. The headless types (`headless_empty`, `headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`) create a headless website; `headless_wordpress` additionally installs WordPress into the `cms` directory with generated credentials. `headless_empty` installs nothing, so WordPress can be added later through `POST /api/hosting/v1/accounts/{username}/wordpress/installations` (`wordpress_installations_install`) with `type: headless`.
+	// Type Website type. Omit or `null` for an empty website. `wordpress` installs WordPress in the website root and requires `wordpress`. The headless types (`headless_empty`, `headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`) create a headless website; `headless_wordpress` additionally installs WordPress into the `cms` directory with generated credentials. `headless_pocketbase` only marks the website as a headless PocketBase website: create the backend afterwards with `Create PocketBase backend` (`POST /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase`). `headless_empty` installs nothing, so WordPress can be added later through `POST /api/hosting/v1/accounts/{username}/wordpress/installations` (`wordpress_installations_install`) with `type: headless`, or a PocketBase backend through the PocketBase endpoint.
 	//
 	// Example: wordpress
 	Type *HostingV1OnboardingsStartOnboardingRequestType `json:"type,omitempty"`
@@ -12903,7 +13011,7 @@ type HostingV1OnboardingsStartOnboardingRequest struct {
 	} `json:"wordpress,omitempty"`
 }
 
-// HostingV1OnboardingsStartOnboardingRequestType Website type. Omit or `null` for an empty website. `wordpress` installs WordPress in the website root and requires `wordpress`. The headless types (`headless_empty`, `headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`) create a headless website; `headless_wordpress` additionally installs WordPress into the `cms` directory with generated credentials. `headless_empty` installs nothing, so WordPress can be added later through `POST /api/hosting/v1/accounts/{username}/wordpress/installations` (`wordpress_installations_install`) with `type: headless`.
+// HostingV1OnboardingsStartOnboardingRequestType Website type. Omit or `null` for an empty website. `wordpress` installs WordPress in the website root and requires `wordpress`. The headless types (`headless_empty`, `headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`) create a headless website; `headless_wordpress` additionally installs WordPress into the `cms` directory with generated credentials. `headless_pocketbase` only marks the website as a headless PocketBase website: create the backend afterwards with `Create PocketBase backend` (`POST /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase`). `headless_empty` installs nothing, so WordPress can be added later through `POST /api/hosting/v1/accounts/{username}/wordpress/installations` (`wordpress_installations_install`) with `type: headless`, or a PocketBase backend through the PocketBase endpoint.
 //
 // Example: wordpress
 type HostingV1OnboardingsStartOnboardingRequestType string
@@ -13065,6 +13173,198 @@ type HostingV1PhpUpdatePhpVersionRequest struct {
 	//
 	// Example: 8.1
 	Version string `json:"version"`
+}
+
+// HostingV1PocketBaseBackendCreatedResource defines model for Hosting.V1.PocketBase.BackendCreatedResource.
+type HostingV1PocketBaseBackendCreatedResource struct {
+	// AdminUrl URL of the PocketBase dashboard
+	//
+	// Example: https://example.com/_/
+	AdminUrl string `json:"admin_url"`
+
+	// ApiUrl Base URL of the PocketBase REST API
+	//
+	// Example: https://example.com/api/
+	ApiUrl string `json:"api_url"`
+
+	// Domain Website domain that serves the PocketBase API
+	//
+	// Example: example.com
+	Domain string `json:"domain"`
+
+	// InstanceId PocketBase instance ID
+	//
+	// Example: pb-u123456789-k3x9q2m7a1zdw8n4c5
+	InstanceId string `json:"instance_id"`
+
+	// NextSteps What to do next with this backend
+	NextSteps []string `json:"next_steps"`
+
+	// State Live process state. The instance sleeps when idle and wakes on the first request.
+	// Usually null right after creation.
+	//
+	// Example: asleep
+	State *HostingV1PocketBaseBackendCreatedResourceState `json:"state"`
+
+	// SuperuserEmail Email of the superuser set up when the backend was created
+	//
+	// Example: owner@example.com
+	SuperuserEmail *string `json:"superuser_email"`
+
+	// SuperuserPassword Password of that superuser, generated when the request had none. Returned only here:
+	// Hostinger does not store it, so save it right away.
+	//
+	// Example: Xk7mQ2pRt9vNw4LhZc8sYb3D
+	SuperuserPassword *string `json:"superuser_password"`
+
+	// Version PocketBase version
+	//
+	// Example: 0.30.0
+	Version *string `json:"version"`
+}
+
+// HostingV1PocketBaseBackendCreatedResourceState Live process state. The instance sleeps when idle and wakes on the first request.
+// Usually null right after creation.
+//
+// Example: asleep
+type HostingV1PocketBaseBackendCreatedResourceState string
+
+// HostingV1PocketBaseBackendResource defines model for Hosting.V1.PocketBase.BackendResource.
+type HostingV1PocketBaseBackendResource struct {
+	// AdminUrl URL of the PocketBase dashboard
+	//
+	// Example: https://example.com/_/
+	AdminUrl string `json:"admin_url"`
+
+	// ApiUrl Base URL of the PocketBase REST API
+	//
+	// Example: https://example.com/api/
+	ApiUrl string `json:"api_url"`
+
+	// Domain Website domain that serves the PocketBase API
+	//
+	// Example: example.com
+	Domain string `json:"domain"`
+
+	// InstanceId PocketBase instance ID
+	//
+	// Example: pb-u123456789-k3x9q2m7a1zdw8n4c5
+	InstanceId string `json:"instance_id"`
+
+	// NextSteps What to do next with this backend
+	NextSteps []string `json:"next_steps"`
+
+	// State Live process state. The instance sleeps when idle and wakes on the first request.
+	// Null when the server could not be reached.
+	//
+	// Example: asleep
+	State *HostingV1PocketBaseBackendResourceState `json:"state"`
+
+	// Version PocketBase version
+	//
+	// Example: 0.30.0
+	Version *string `json:"version"`
+}
+
+// HostingV1PocketBaseBackendResourceState Live process state. The instance sleeps when idle and wakes on the first request.
+// Null when the server could not be reached.
+//
+// Example: asleep
+type HostingV1PocketBaseBackendResourceState string
+
+// HostingV1PocketBaseCreateBackendRequest defines model for Hosting.V1.PocketBase.CreateBackendRequest.
+type HostingV1PocketBaseCreateBackendRequest struct {
+	// SuperuserEmail Email of the PocketBase superuser. Defaults to the email of the website owner.
+	//
+	// Example: owner@example.com
+	SuperuserEmail *string `json:"superuser_email,omitempty"`
+
+	// SuperuserPassword Password for the PocketBase superuser, 10-128 characters. Leave it out to have a strong one
+	// generated. Either way it is returned once in the response and never stored.
+	//
+	// Example: Str0ng-Superuser-P4ss
+	SuperuserPassword *string `json:"superuser_password,omitempty"`
+}
+
+// HostingV1PocketBaseInstanceCollection Array of [`Hosting.V1.PocketBase.InstanceResource`](#model/hostingv1pocketbaseinstanceresource)
+type HostingV1PocketBaseInstanceCollection = []HostingV1PocketBaseInstanceResource
+
+// HostingV1PocketBaseInstanceResource defines model for Hosting.V1.PocketBase.InstanceResource.
+type HostingV1PocketBaseInstanceResource struct {
+	// AdminUrl URL of the PocketBase dashboard
+	//
+	// Example: https://example.com/_/
+	AdminUrl string `json:"admin_url"`
+
+	// ApiUrl Base URL of the PocketBase REST API
+	//
+	// Example: https://example.com/api/
+	ApiUrl string `json:"api_url"`
+
+	// DiskUsageKb Disk space used by the instance data, in KB
+	//
+	// Example: 1024
+	DiskUsageKb *int `json:"disk_usage_kb"`
+
+	// Domain Website domain that serves the PocketBase API
+	//
+	// Example: example.com
+	Domain string `json:"domain"`
+
+	// InstanceId PocketBase instance ID
+	//
+	// Example: pb-u123456789-k3x9q2m7a1zdw8n4c5
+	InstanceId string `json:"instance_id"`
+
+	// State Live process state. The instance sleeps when idle and wakes on the first request.
+	// Null when the server could not be reached.
+	//
+	// Example: asleep
+	State *HostingV1PocketBaseInstanceResourceState `json:"state"`
+
+	// Version PocketBase version
+	//
+	// Example: 0.30.0
+	Version *string `json:"version"`
+}
+
+// HostingV1PocketBaseInstanceResourceState Live process state. The instance sleeps when idle and wakes on the first request.
+// Null when the server could not be reached.
+//
+// Example: asleep
+type HostingV1PocketBaseInstanceResourceState string
+
+// HostingV1PocketBaseSuperuserResource defines model for Hosting.V1.PocketBase.SuperuserResource.
+type HostingV1PocketBaseSuperuserResource struct {
+	// Domain Website domain that serves the PocketBase API
+	//
+	// Example: example.com
+	Domain string `json:"domain"`
+
+	// SuperuserEmail Email of the superuser that was created or got the new password
+	//
+	// Example: owner@example.com
+	SuperuserEmail string `json:"superuser_email"`
+
+	// SuperuserPassword The new password of that superuser, generated when the request had none. Hostinger does not
+	// store it and will not show it again, so save it right away.
+	//
+	// Example: Xk7mQ2pRt9vNw4LhZc8sYb3D
+	SuperuserPassword string `json:"superuser_password"`
+}
+
+// HostingV1PocketBaseUpdateSuperuserRequest defines model for Hosting.V1.PocketBase.UpdateSuperuserRequest.
+type HostingV1PocketBaseUpdateSuperuserRequest struct {
+	// SuperuserEmail Email of the superuser to create or update. Defaults to the email of the website owner.
+	//
+	// Example: owner@example.com
+	SuperuserEmail *string `json:"superuser_email,omitempty"`
+
+	// SuperuserPassword New password of the PocketBase superuser, 10-128 characters. Leave it out to have a strong
+	// one generated. Either way it is returned once in the response and never stored.
+	//
+	// Example: Str0ng-Superuser-P4ss
+	SuperuserPassword *string `json:"superuser_password,omitempty"`
 }
 
 // HostingV1RedirectsCreateRedirectRequest defines model for Hosting.V1.Redirects.CreateRedirectRequest.
@@ -17654,7 +17954,7 @@ type WordPressV1InstallationsInstallWordPressRequest struct {
 	// Example: My site
 	SiteTitle string `json:"site_title"`
 
-	// Type Installation kind; `default` when omitted. `headless` installs WordPress into the `cms` directory with the Hostinger headless MU plugin and marks the website as a headless WordPress website. Accepted only for a website that is already headless, e.g. one created by `POST /api/hosting/v1/orders/{order_id}/onboardings` (`hosting_websites_create`) with `type: headless_empty`; any other website is rejected with 422.
+	// Type Installation kind; `default` when omitted. `headless` installs WordPress into the `cms` directory with the Hostinger headless MU plugin and marks the website as a headless WordPress website. Accepted only for an empty headless website, e.g. one created by `POST /api/hosting/v1/orders/{order_id}/onboardings` (`hosting_websites_create`) with `type: headless_empty`; any other website, including a headless website that already has WordPress or a PocketBase backend, is rejected with 422.
 	//
 	// Example: default
 	Type *WordPressV1InstallationsInstallWordPressRequestType `json:"type,omitempty"`
@@ -17670,7 +17970,7 @@ type WordPressV1InstallationsInstallWordPressRequest struct {
 // Example: minor
 type WordPressV1InstallationsInstallWordPressRequestAutoUpdates string
 
-// WordPressV1InstallationsInstallWordPressRequestType Installation kind; `default` when omitted. `headless` installs WordPress into the `cms` directory with the Hostinger headless MU plugin and marks the website as a headless WordPress website. Accepted only for a website that is already headless, e.g. one created by `POST /api/hosting/v1/orders/{order_id}/onboardings` (`hosting_websites_create`) with `type: headless_empty`; any other website is rejected with 422.
+// WordPressV1InstallationsInstallWordPressRequestType Installation kind; `default` when omitted. `headless` installs WordPress into the `cms` directory with the Hostinger headless MU plugin and marks the website as a headless WordPress website. Accepted only for an empty headless website, e.g. one created by `POST /api/hosting/v1/orders/{order_id}/onboardings` (`hosting_websites_create`) with `type: headless_empty`; any other website, including a headless website that already has WordPress or a PocketBase backend, is rejected with 422.
 //
 // Example: default
 type WordPressV1InstallationsInstallWordPressRequestType string
@@ -19908,6 +20208,12 @@ type HostingUpdatePHPOptionsV1JSONRequestBody = HostingV1PhpUpdatePhpOptionsRequ
 
 // HostingUpdatePHPVersionV1JSONRequestBody defines body for HostingUpdatePHPVersionV1 for application/json ContentType.
 type HostingUpdatePHPVersionV1JSONRequestBody = HostingV1PhpUpdatePhpVersionRequest
+
+// HostingCreatePocketBaseBackendV1JSONRequestBody defines body for HostingCreatePocketBaseBackendV1 for application/json ContentType.
+type HostingCreatePocketBaseBackendV1JSONRequestBody = HostingV1PocketBaseCreateBackendRequest
+
+// HostingSetPocketBaseSuperuserV1JSONRequestBody defines body for HostingSetPocketBaseSuperuserV1 for application/json ContentType.
+type HostingSetPocketBaseSuperuserV1JSONRequestBody = HostingV1PocketBaseUpdateSuperuserRequest
 
 // HostingCreateWebsiteRedirectV1JSONRequestBody defines body for HostingCreateWebsiteRedirectV1 for application/json ContentType.
 type HostingCreateWebsiteRedirectV1JSONRequestBody = HostingV1RedirectsCreateRedirectRequest
@@ -24378,6 +24684,24 @@ type ClientInterface interface {
 	// Corresponds with POST /api/hosting/v1/accounts/{username}/git/ssh-key (the `HostingGenerateGitSSHKeyV1` operationId).
 	HostingGenerateGitSSHKeyV1(ctx context.Context, username UsernamePath, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// HostingListAccountPocketBaseBackendsV1 List account PocketBase backends
+	//
+	// Lists the PocketBase backends of all websites of a hosting account with their URLs, live
+	// state, version and disk usage. A PocketBase backend gives a website a database,
+	// authentication, file storage and a realtime REST API, served from the website's own
+	// domain. An empty list means no website of the account has a PocketBase backend.
+	//
+	// States: `asleep` is normal (the instance sleeps when idle and wakes on the first request);
+	// `starting`, `running` and `stopping` are healthy; `failed` or `unregistered` mean the
+	// instance is broken; `missing` means its files are gone from the server, and creating the
+	// PocketBase backend again sets up a new, empty one. `state` is null when the server could
+	// not be reached; retry later.
+	//
+	// PocketBase is rolling out gradually: an account without access yet gets 422.
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/pocketbase (the `HostingListAccountPocketBaseBackendsV1` operationId).
+	HostingListAccountPocketBaseBackendsV1(ctx context.Context, username UsernamePath, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// HostingClearWebsiteCacheV1 Clear website cache
 	//
 	// Permanently clears all server-side cache for the website at once. Use it when content was
@@ -25216,6 +25540,161 @@ type ClientInterface interface {
 	// Corresponds with PATCH /api/hosting/v1/accounts/{username}/websites/{domain}/php/version (the `HostingUpdatePHPVersionV1` operationId).
 	HostingUpdatePHPVersionV1(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdatePHPVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// HostingDeletePocketBaseBackendV1 Delete PocketBase backend
+	//
+	// Permanently deletes the PocketBase backend of a website with all its data (collections,
+	// records, users and uploaded files) and gives the `/api` and `/_` paths back to the website;
+	// a `headless_pocketbase` website becomes `headless_empty`. This cannot be undone and every
+	// app using this backend stops working, so confirm with the user before calling it and
+	// export the data you need from the dashboard (`admin_url`) first.
+	//
+	// Returns success also when the website has no PocketBase backend; then it only clears a
+	// `headless_pocketbase` mark. To regain access after losing the superuser password, use the
+	// `Set PocketBase superuser` endpoint instead of deleting the backend.
+	//
+	// PocketBase is rolling out gradually: an account without access yet gets 422; an unknown
+	// website gets 404.
+	//
+	// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase (the `HostingDeletePocketBaseBackendV1` operationId).
+	HostingDeletePocketBaseBackendV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingGetPocketBaseBackendV1 Get PocketBase backend
+	//
+	// Returns the PocketBase backend of a website: its REST API and dashboard URLs, live state
+	// and version. A PocketBase backend gives the website a database, authentication, file
+	// storage and a realtime REST API, served from the website's own domain under `/api` and
+	// `/_`. Returns 404 when the website has no PocketBase backend.
+	//
+	// The superuser password is only shown once, when it is set, and is never returned here. If it
+	// is lost, set a new one with the `Set PocketBase superuser` endpoint.
+	//
+	// The instance sleeps when idle and wakes on the first request, so `asleep` is a normal state
+	// and the first call to a sleeping instance can take a few seconds. `starting`, `running` and
+	// `stopping` are healthy; `failed` or `unregistered` mean the instance is broken; `missing`
+	// means its files are gone from the server, and creating the PocketBase backend again sets up
+	// a new, empty one. `state` is null when the server could not be reached; retry later.
+	//
+	// PocketBase is rolling out gradually: an account without access yet gets 422.
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase (the `HostingGetPocketBaseBackendV1` operationId).
+	HostingGetPocketBaseBackendV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingCreatePocketBaseBackendV1WithBody Create PocketBase backend
+	//
+	// Creates a PocketBase backend for a website: a database, authentication, file storage and a
+	// realtime REST API, served from the website's own domain. A website has at most one
+	// PocketBase backend. Creation usually takes a few seconds.
+	//
+	// The backend takes over the `/api` and `/_` paths of the website: from then on requests to
+	// these paths and everything below them go to PocketBase, while every other path keeps
+	// serving the website. Do not create a backend for a website that serves its own `/api` or
+	// `/_` paths, because they stop working; confirm with the user before calling it. Deleting
+	// the backend gives both paths back to the website. Headless WordPress websites and parked
+	// domains are not supported; for a parked domain, use the website it is parked on. A website
+	// that already has a backend is rejected with 422, unless that backend is in state
+	// `missing`: then it is replaced with a new, empty one. A website set up with
+	// `type: headless_empty` becomes `headless_pocketbase`; any other website keeps its type.
+	//
+	// `superuser_password` is optional: leave it out to get a strong generated password, or send
+	// your own (10-128 characters). The response returns it in `superuser_password` once and
+	// Hostinger never stores it, so save it in your app secrets right away; you need it to manage
+	// the backend through the PocketBase REST API. If it is lost, set a new one with the
+	// `Set PocketBase superuser` endpoint. `superuser_email` defaults to the email of the
+	// website owner.
+	//
+	// The instance sleeps when idle and wakes on the first request, so the first call after a
+	// quiet period can take a few seconds. `next_steps` in the response lists what to do next.
+	//
+	// PocketBase is rolling out gradually: an account without access yet gets 422.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase (the `HostingCreatePocketBaseBackendV1` operationId).
+	HostingCreatePocketBaseBackendV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingCreatePocketBaseBackendV1 Create PocketBase backend
+	//
+	// Creates a PocketBase backend for a website: a database, authentication, file storage and a
+	// realtime REST API, served from the website's own domain. A website has at most one
+	// PocketBase backend. Creation usually takes a few seconds.
+	//
+	// The backend takes over the `/api` and `/_` paths of the website: from then on requests to
+	// these paths and everything below them go to PocketBase, while every other path keeps
+	// serving the website. Do not create a backend for a website that serves its own `/api` or
+	// `/_` paths, because they stop working; confirm with the user before calling it. Deleting
+	// the backend gives both paths back to the website. Headless WordPress websites and parked
+	// domains are not supported; for a parked domain, use the website it is parked on. A website
+	// that already has a backend is rejected with 422, unless that backend is in state
+	// `missing`: then it is replaced with a new, empty one. A website set up with
+	// `type: headless_empty` becomes `headless_pocketbase`; any other website keeps its type.
+	//
+	// `superuser_password` is optional: leave it out to get a strong generated password, or send
+	// your own (10-128 characters). The response returns it in `superuser_password` once and
+	// Hostinger never stores it, so save it in your app secrets right away; you need it to manage
+	// the backend through the PocketBase REST API. If it is lost, set a new one with the
+	// `Set PocketBase superuser` endpoint. `superuser_email` defaults to the email of the
+	// website owner.
+	//
+	// The instance sleeps when idle and wakes on the first request, so the first call after a
+	// quiet period can take a few seconds. `next_steps` in the response lists what to do next.
+	//
+	// PocketBase is rolling out gradually: an account without access yet gets 422.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase (the `HostingCreatePocketBaseBackendV1` operationId).
+	HostingCreatePocketBaseBackendV1(ctx context.Context, username UsernamePath, domain Domain, body HostingCreatePocketBaseBackendV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingSetPocketBaseSuperuserV1WithBody Set PocketBase superuser
+	//
+	// Sets the password of a superuser of the website's PocketBase backend, and creates that
+	// superuser when there is none with the given email. The old password of that superuser stops
+	// working at once, so apps and scripts still using it lose superuser access; confirm with the
+	// user before calling it.
+	//
+	// Use it when the superuser password is lost (Hostinger never stores it), when it leaked and
+	// must be rotated, or to add another superuser with a different email. Returns 404 when the
+	// website has no PocketBase backend; create one first. App user accounts are managed through
+	// the PocketBase REST API, not here.
+	//
+	// `superuser_password` is optional: leave it out to get a strong generated password, or send
+	// your own (10-128 characters). The response returns it in `superuser_password` once and
+	// Hostinger never stores it, so save it in your app secrets right away, then authenticate
+	// again with `pb.collection('_superusers').authWithPassword`. `superuser_email` defaults to
+	// the email of the website owner.
+	//
+	// PocketBase is rolling out gradually: an account without access yet gets 422.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase/superuser (the `HostingSetPocketBaseSuperuserV1` operationId).
+	HostingSetPocketBaseSuperuserV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HostingSetPocketBaseSuperuserV1 Set PocketBase superuser
+	//
+	// Sets the password of a superuser of the website's PocketBase backend, and creates that
+	// superuser when there is none with the given email. The old password of that superuser stops
+	// working at once, so apps and scripts still using it lose superuser access; confirm with the
+	// user before calling it.
+	//
+	// Use it when the superuser password is lost (Hostinger never stores it), when it leaked and
+	// must be rotated, or to add another superuser with a different email. Returns 404 when the
+	// website has no PocketBase backend; create one first. App user accounts are managed through
+	// the PocketBase REST API, not here.
+	//
+	// `superuser_password` is optional: leave it out to get a strong generated password, or send
+	// your own (10-128 characters). The response returns it in `superuser_password` once and
+	// Hostinger never stores it, so save it in your app secrets right away, then authenticate
+	// again with `pb.collection('_superusers').authWithPassword`. `superuser_email` defaults to
+	// the email of the website owner.
+	//
+	// PocketBase is rolling out gradually: an account without access yet gets 422.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase/superuser (the `HostingSetPocketBaseSuperuserV1` operationId).
+	HostingSetPocketBaseSuperuserV1(ctx context.Context, username UsernamePath, domain Domain, body HostingSetPocketBaseSuperuserV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// HostingDeleteWebsiteRedirectV1 Delete website redirect
 	//
 	// Permanently deletes the redirect identified by its source URL.
@@ -25453,9 +25932,11 @@ type ClientInterface interface {
 	// `hosting_websites_create` with `type: headless_empty`) into a headless WordPress
 	// website: WordPress is installed into the `cms` directory with the Hostinger headless
 	// MU plugin and the website is marked as a headless WordPress website. `directory` is
-	// not allowed with it. The target website must already be headless: the headless
-	// install rewrites the root `.htaccess`, so on any other website the request is
-	// rejected with 422.
+	// not allowed with it. The target website must be an empty headless website
+	// (`headless_empty`): the headless install rewrites the root `.htaccess`, so any other
+	// website, including a headless website that already has WordPress or a PocketBase
+	// backend, is rejected with 422. To replace a PocketBase backend with WordPress, delete
+	// it first with `Delete PocketBase backend`.
 	//
 	// Call GET /api/hosting/v1/wordpress/installations (`wordpress_installations_list`)
 	// filtered by username and domain before proceeding to check whether WordPress is
@@ -25490,9 +25971,11 @@ type ClientInterface interface {
 	// `hosting_websites_create` with `type: headless_empty`) into a headless WordPress
 	// website: WordPress is installed into the `cms` directory with the Hostinger headless
 	// MU plugin and the website is marked as a headless WordPress website. `directory` is
-	// not allowed with it. The target website must already be headless: the headless
-	// install rewrites the root `.htaccess`, so on any other website the request is
-	// rejected with 422.
+	// not allowed with it. The target website must be an empty headless website
+	// (`headless_empty`): the headless install rewrites the root `.htaccess`, so any other
+	// website, including a headless website that already has WordPress or a PocketBase
+	// backend, is rejected with 422. To replace a PocketBase backend with WordPress, delete
+	// it first with `Delete PocketBase backend`.
 	//
 	// Call GET /api/hosting/v1/wordpress/installations (`wordpress_installations_list`)
 	// filtered by username and domain before proceeding to check whether WordPress is
@@ -26471,10 +26954,14 @@ type ClientInterface interface {
 	// title, and `en_US` when `wordpress.language` is omitted. The headless types
 	// (`headless_empty`, `headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`)
 	// create a headless website; `headless_wordpress` additionally installs WordPress into the
-	// `cms` directory of the website root with generated credentials. `headless_empty` installs
-	// nothing: WordPress can be added later through
-	// `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
-	// (`wordpress_installations_install`) with `type: headless`.
+	// `cms` directory of the website root with generated credentials. `headless_pocketbase`
+	// marks the website as a headless PocketBase website but installs nothing: create its
+	// PocketBase backend with `Create PocketBase backend`
+	// (`POST /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase`) once the setup
+	// is `completed`. `headless_empty` installs nothing either: WordPress can be added later
+	// through `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
+	// (`wordpress_installations_install`) with `type: headless`, or a PocketBase backend through
+	// the same PocketBase endpoint.
 	//
 	// Omit `domain` to set the website up on a generated temporary free subdomain; the created
 	// setup returns it as `domain`. REST clients that need to know the free subdomain before the
@@ -26506,10 +26993,14 @@ type ClientInterface interface {
 	// title, and `en_US` when `wordpress.language` is omitted. The headless types
 	// (`headless_empty`, `headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`)
 	// create a headless website; `headless_wordpress` additionally installs WordPress into the
-	// `cms` directory of the website root with generated credentials. `headless_empty` installs
-	// nothing: WordPress can be added later through
-	// `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
-	// (`wordpress_installations_install`) with `type: headless`.
+	// `cms` directory of the website root with generated credentials. `headless_pocketbase`
+	// marks the website as a headless PocketBase website but installs nothing: create its
+	// PocketBase backend with `Create PocketBase backend`
+	// (`POST /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase`) once the setup
+	// is `completed`. `headless_empty` installs nothing either: WordPress can be added later
+	// through `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
+	// (`wordpress_installations_install`) with `type: headless`, or a PocketBase backend through
+	// the same PocketBase endpoint.
 	//
 	// Omit `domain` to set the website up on a generated temporary free subdomain; the created
 	// setup returns it as `domain`. REST clients that need to know the free subdomain before the
@@ -34558,6 +35049,34 @@ func (c *Client) HostingGenerateGitSSHKeyV1(ctx context.Context, username Userna
 	return c.Client.Do(req)
 }
 
+// HostingListAccountPocketBaseBackendsV1 List account PocketBase backends
+//
+// Lists the PocketBase backends of all websites of a hosting account with their URLs, live
+// state, version and disk usage. A PocketBase backend gives a website a database,
+// authentication, file storage and a realtime REST API, served from the website's own
+// domain. An empty list means no website of the account has a PocketBase backend.
+//
+// States: `asleep` is normal (the instance sleeps when idle and wakes on the first request);
+// `starting`, `running` and `stopping` are healthy; `failed` or `unregistered` mean the
+// instance is broken; `missing` means its files are gone from the server, and creating the
+// PocketBase backend again sets up a new, empty one. `state` is null when the server could
+// not be reached; retry later.
+//
+// PocketBase is rolling out gradually: an account without access yet gets 422.
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/pocketbase (the `HostingListAccountPocketBaseBackendsV1` operationId).
+func (c *Client) HostingListAccountPocketBaseBackendsV1(ctx context.Context, username UsernamePath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingListAccountPocketBaseBackendsV1Request(c.Server, username)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // HostingClearWebsiteCacheV1 Clear website cache
 //
 // Permanently clears all server-side cache for the website at once. Use it when content was
@@ -35936,6 +36455,221 @@ func (c *Client) HostingUpdatePHPVersionV1(ctx context.Context, username Usernam
 	return c.Client.Do(req)
 }
 
+// HostingDeletePocketBaseBackendV1 Delete PocketBase backend
+//
+// Permanently deletes the PocketBase backend of a website with all its data (collections,
+// records, users and uploaded files) and gives the `/api` and `/_` paths back to the website;
+// a `headless_pocketbase` website becomes `headless_empty`. This cannot be undone and every
+// app using this backend stops working, so confirm with the user before calling it and
+// export the data you need from the dashboard (`admin_url`) first.
+//
+// Returns success also when the website has no PocketBase backend; then it only clears a
+// `headless_pocketbase` mark. To regain access after losing the superuser password, use the
+// `Set PocketBase superuser` endpoint instead of deleting the backend.
+//
+// PocketBase is rolling out gradually: an account without access yet gets 422; an unknown
+// website gets 404.
+//
+// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase (the `HostingDeletePocketBaseBackendV1` operationId).
+func (c *Client) HostingDeletePocketBaseBackendV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingDeletePocketBaseBackendV1Request(c.Server, username, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingGetPocketBaseBackendV1 Get PocketBase backend
+//
+// Returns the PocketBase backend of a website: its REST API and dashboard URLs, live state
+// and version. A PocketBase backend gives the website a database, authentication, file
+// storage and a realtime REST API, served from the website's own domain under `/api` and
+// `/_`. Returns 404 when the website has no PocketBase backend.
+//
+// The superuser password is only shown once, when it is set, and is never returned here. If it
+// is lost, set a new one with the `Set PocketBase superuser` endpoint.
+//
+// The instance sleeps when idle and wakes on the first request, so `asleep` is a normal state
+// and the first call to a sleeping instance can take a few seconds. `starting`, `running` and
+// `stopping` are healthy; `failed` or `unregistered` mean the instance is broken; `missing`
+// means its files are gone from the server, and creating the PocketBase backend again sets up
+// a new, empty one. `state` is null when the server could not be reached; retry later.
+//
+// PocketBase is rolling out gradually: an account without access yet gets 422.
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase (the `HostingGetPocketBaseBackendV1` operationId).
+func (c *Client) HostingGetPocketBaseBackendV1(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingGetPocketBaseBackendV1Request(c.Server, username, domain)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingCreatePocketBaseBackendV1WithBody Create PocketBase backend
+//
+// Creates a PocketBase backend for a website: a database, authentication, file storage and a
+// realtime REST API, served from the website's own domain. A website has at most one
+// PocketBase backend. Creation usually takes a few seconds.
+//
+// The backend takes over the `/api` and `/_` paths of the website: from then on requests to
+// these paths and everything below them go to PocketBase, while every other path keeps
+// serving the website. Do not create a backend for a website that serves its own `/api` or
+// `/_` paths, because they stop working; confirm with the user before calling it. Deleting
+// the backend gives both paths back to the website. Headless WordPress websites and parked
+// domains are not supported; for a parked domain, use the website it is parked on. A website
+// that already has a backend is rejected with 422, unless that backend is in state
+// `missing`: then it is replaced with a new, empty one. A website set up with
+// `type: headless_empty` becomes `headless_pocketbase`; any other website keeps its type.
+//
+// `superuser_password` is optional: leave it out to get a strong generated password, or send
+// your own (10-128 characters). The response returns it in `superuser_password` once and
+// Hostinger never stores it, so save it in your app secrets right away; you need it to manage
+// the backend through the PocketBase REST API. If it is lost, set a new one with the
+// `Set PocketBase superuser` endpoint. `superuser_email` defaults to the email of the
+// website owner.
+//
+// The instance sleeps when idle and wakes on the first request, so the first call after a
+// quiet period can take a few seconds. `next_steps` in the response lists what to do next.
+//
+// PocketBase is rolling out gradually: an account without access yet gets 422.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase (the `HostingCreatePocketBaseBackendV1` operationId).
+func (c *Client) HostingCreatePocketBaseBackendV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingCreatePocketBaseBackendV1RequestWithBody(c.Server, username, domain, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingCreatePocketBaseBackendV1 Create PocketBase backend
+//
+// Creates a PocketBase backend for a website: a database, authentication, file storage and a
+// realtime REST API, served from the website's own domain. A website has at most one
+// PocketBase backend. Creation usually takes a few seconds.
+//
+// The backend takes over the `/api` and `/_` paths of the website: from then on requests to
+// these paths and everything below them go to PocketBase, while every other path keeps
+// serving the website. Do not create a backend for a website that serves its own `/api` or
+// `/_` paths, because they stop working; confirm with the user before calling it. Deleting
+// the backend gives both paths back to the website. Headless WordPress websites and parked
+// domains are not supported; for a parked domain, use the website it is parked on. A website
+// that already has a backend is rejected with 422, unless that backend is in state
+// `missing`: then it is replaced with a new, empty one. A website set up with
+// `type: headless_empty` becomes `headless_pocketbase`; any other website keeps its type.
+//
+// `superuser_password` is optional: leave it out to get a strong generated password, or send
+// your own (10-128 characters). The response returns it in `superuser_password` once and
+// Hostinger never stores it, so save it in your app secrets right away; you need it to manage
+// the backend through the PocketBase REST API. If it is lost, set a new one with the
+// `Set PocketBase superuser` endpoint. `superuser_email` defaults to the email of the
+// website owner.
+//
+// The instance sleeps when idle and wakes on the first request, so the first call after a
+// quiet period can take a few seconds. `next_steps` in the response lists what to do next.
+//
+// PocketBase is rolling out gradually: an account without access yet gets 422.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase (the `HostingCreatePocketBaseBackendV1` operationId).
+func (c *Client) HostingCreatePocketBaseBackendV1(ctx context.Context, username UsernamePath, domain Domain, body HostingCreatePocketBaseBackendV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingCreatePocketBaseBackendV1Request(c.Server, username, domain, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingSetPocketBaseSuperuserV1WithBody Set PocketBase superuser
+//
+// Sets the password of a superuser of the website's PocketBase backend, and creates that
+// superuser when there is none with the given email. The old password of that superuser stops
+// working at once, so apps and scripts still using it lose superuser access; confirm with the
+// user before calling it.
+//
+// Use it when the superuser password is lost (Hostinger never stores it), when it leaked and
+// must be rotated, or to add another superuser with a different email. Returns 404 when the
+// website has no PocketBase backend; create one first. App user accounts are managed through
+// the PocketBase REST API, not here.
+//
+// `superuser_password` is optional: leave it out to get a strong generated password, or send
+// your own (10-128 characters). The response returns it in `superuser_password` once and
+// Hostinger never stores it, so save it in your app secrets right away, then authenticate
+// again with `pb.collection('_superusers').authWithPassword`. `superuser_email` defaults to
+// the email of the website owner.
+//
+// PocketBase is rolling out gradually: an account without access yet gets 422.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase/superuser (the `HostingSetPocketBaseSuperuserV1` operationId).
+func (c *Client) HostingSetPocketBaseSuperuserV1WithBody(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingSetPocketBaseSuperuserV1RequestWithBody(c.Server, username, domain, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HostingSetPocketBaseSuperuserV1 Set PocketBase superuser
+//
+// Sets the password of a superuser of the website's PocketBase backend, and creates that
+// superuser when there is none with the given email. The old password of that superuser stops
+// working at once, so apps and scripts still using it lose superuser access; confirm with the
+// user before calling it.
+//
+// Use it when the superuser password is lost (Hostinger never stores it), when it leaked and
+// must be rotated, or to add another superuser with a different email. Returns 404 when the
+// website has no PocketBase backend; create one first. App user accounts are managed through
+// the PocketBase REST API, not here.
+//
+// `superuser_password` is optional: leave it out to get a strong generated password, or send
+// your own (10-128 characters). The response returns it in `superuser_password` once and
+// Hostinger never stores it, so save it in your app secrets right away, then authenticate
+// again with `pb.collection('_superusers').authWithPassword`. `superuser_email` defaults to
+// the email of the website owner.
+//
+// PocketBase is rolling out gradually: an account without access yet gets 422.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase/superuser (the `HostingSetPocketBaseSuperuserV1` operationId).
+func (c *Client) HostingSetPocketBaseSuperuserV1(ctx context.Context, username UsernamePath, domain Domain, body HostingSetPocketBaseSuperuserV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHostingSetPocketBaseSuperuserV1Request(c.Server, username, domain, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // HostingDeleteWebsiteRedirectV1 Delete website redirect
 //
 // Permanently deletes the redirect identified by its source URL.
@@ -36363,9 +37097,11 @@ func (c *Client) HostingDeployWordPressThemeV1(ctx context.Context, username Use
 // `hosting_websites_create` with `type: headless_empty`) into a headless WordPress
 // website: WordPress is installed into the `cms` directory with the Hostinger headless
 // MU plugin and the website is marked as a headless WordPress website. `directory` is
-// not allowed with it. The target website must already be headless: the headless
-// install rewrites the root `.htaccess`, so on any other website the request is
-// rejected with 422.
+// not allowed with it. The target website must be an empty headless website
+// (`headless_empty`): the headless install rewrites the root `.htaccess`, so any other
+// website, including a headless website that already has WordPress or a PocketBase
+// backend, is rejected with 422. To replace a PocketBase backend with WordPress, delete
+// it first with `Delete PocketBase backend`.
 //
 // Call GET /api/hosting/v1/wordpress/installations (`wordpress_installations_list`)
 // filtered by username and domain before proceeding to check whether WordPress is
@@ -36410,9 +37146,11 @@ func (c *Client) HostingInstallWordPressV1WithBody(ctx context.Context, username
 // `hosting_websites_create` with `type: headless_empty`) into a headless WordPress
 // website: WordPress is installed into the `cms` directory with the Hostinger headless
 // MU plugin and the website is marked as a headless WordPress website. `directory` is
-// not allowed with it. The target website must already be headless: the headless
-// install rewrites the root `.htaccess`, so on any other website the request is
-// rejected with 422.
+// not allowed with it. The target website must be an empty headless website
+// (`headless_empty`): the headless install rewrites the root `.htaccess`, so any other
+// website, including a headless website that already has WordPress or a PocketBase
+// backend, is rejected with 422. To replace a PocketBase backend with WordPress, delete
+// it first with `Delete PocketBase backend`.
 //
 // Call GET /api/hosting/v1/wordpress/installations (`wordpress_installations_list`)
 // filtered by username and domain before proceeding to check whether WordPress is
@@ -38005,10 +38743,14 @@ func (c *Client) HostingListOrdersV1(ctx context.Context, params *HostingListOrd
 // title, and `en_US` when `wordpress.language` is omitted. The headless types
 // (`headless_empty`, `headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`)
 // create a headless website; `headless_wordpress` additionally installs WordPress into the
-// `cms` directory of the website root with generated credentials. `headless_empty` installs
-// nothing: WordPress can be added later through
-// `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
-// (`wordpress_installations_install`) with `type: headless`.
+// `cms` directory of the website root with generated credentials. `headless_pocketbase`
+// marks the website as a headless PocketBase website but installs nothing: create its
+// PocketBase backend with `Create PocketBase backend`
+// (`POST /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase`) once the setup
+// is `completed`. `headless_empty` installs nothing either: WordPress can be added later
+// through `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
+// (`wordpress_installations_install`) with `type: headless`, or a PocketBase backend through
+// the same PocketBase endpoint.
 //
 // Omit `domain` to set the website up on a generated temporary free subdomain; the created
 // setup returns it as `domain`. REST clients that need to know the free subdomain before the
@@ -38050,10 +38792,14 @@ func (c *Client) HostingStartWebsiteSetupV1WithBody(ctx context.Context, orderId
 // title, and `en_US` when `wordpress.language` is omitted. The headless types
 // (`headless_empty`, `headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`)
 // create a headless website; `headless_wordpress` additionally installs WordPress into the
-// `cms` directory of the website root with generated credentials. `headless_empty` installs
-// nothing: WordPress can be added later through
-// `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
-// (`wordpress_installations_install`) with `type: headless`.
+// `cms` directory of the website root with generated credentials. `headless_pocketbase`
+// marks the website as a headless PocketBase website but installs nothing: create its
+// PocketBase backend with `Create PocketBase backend`
+// (`POST /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase`) once the setup
+// is `completed`. `headless_empty` installs nothing either: WordPress can be added later
+// through `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
+// (`wordpress_installations_install`) with `type: headless`, or a PocketBase backend through
+// the same PocketBase endpoint.
 //
 // Omit `domain` to set the website up on a generated temporary free subdomain; the created
 // setup returns it as `domain`. REST clients that need to know the free subdomain before the
@@ -50708,6 +51454,40 @@ func NewHostingGenerateGitSSHKeyV1Request(server string, username UsernamePath) 
 	return req, nil
 }
 
+// NewHostingListAccountPocketBaseBackendsV1Request constructs an http.Request for the HostingListAccountPocketBaseBackendsV1 method
+func NewHostingListAccountPocketBaseBackendsV1Request(server string, username UsernamePath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/pocketbase", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewHostingClearWebsiteCacheV1Request constructs an http.Request for the HostingClearWebsiteCacheV1 method
 func NewHostingClearWebsiteCacheV1Request(server string, username UsernamePath, domain Domain, params *HostingClearWebsiteCacheV1Params) (*http.Request, error) {
 	var err error
@@ -52814,6 +53594,196 @@ func NewHostingUpdatePHPVersionV1RequestWithBody(server string, username Usernam
 	}
 
 	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingDeletePocketBaseBackendV1Request constructs an http.Request for the HostingDeletePocketBaseBackendV1 method
+func NewHostingDeletePocketBaseBackendV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/pocketbase", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingGetPocketBaseBackendV1Request constructs an http.Request for the HostingGetPocketBaseBackendV1 method
+func NewHostingGetPocketBaseBackendV1Request(server string, username UsernamePath, domain Domain) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/pocketbase", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewHostingCreatePocketBaseBackendV1Request calls the generic HostingCreatePocketBaseBackendV1 builder with application/json body
+func NewHostingCreatePocketBaseBackendV1Request(server string, username UsernamePath, domain Domain, body HostingCreatePocketBaseBackendV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingCreatePocketBaseBackendV1RequestWithBody(server, username, domain, "application/json", bodyReader)
+}
+
+// NewHostingCreatePocketBaseBackendV1RequestWithBody constructs an http.Request for the HostingCreatePocketBaseBackendV1 method, with any body, and a specified content type
+func NewHostingCreatePocketBaseBackendV1RequestWithBody(server string, username UsernamePath, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/pocketbase", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHostingSetPocketBaseSuperuserV1Request calls the generic HostingSetPocketBaseSuperuserV1 builder with application/json body
+func NewHostingSetPocketBaseSuperuserV1Request(server string, username UsernamePath, domain Domain, body HostingSetPocketBaseSuperuserV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewHostingSetPocketBaseSuperuserV1RequestWithBody(server, username, domain, "application/json", bodyReader)
+}
+
+// NewHostingSetPocketBaseSuperuserV1RequestWithBody constructs an http.Request for the HostingSetPocketBaseSuperuserV1 method, with any body, and a specified content type
+func NewHostingSetPocketBaseSuperuserV1RequestWithBody(server string, username UsernamePath, domain Domain, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "username", username, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/hosting/v1/accounts/%s/websites/%s/pocketbase/superuser", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -67803,6 +68773,26 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /api/hosting/v1/accounts/{username}/git/ssh-key (the `HostingGenerateGitSSHKeyV1` operationId).
 	HostingGenerateGitSSHKeyV1WithResponse(ctx context.Context, username UsernamePath, reqEditors ...RequestEditorFn) (*HostingGenerateGitSSHKeyV1Response, error)
 
+	// HostingListAccountPocketBaseBackendsV1WithResponse List account PocketBase backends
+	//
+	// Lists the PocketBase backends of all websites of a hosting account with their URLs, live
+	// state, version and disk usage. A PocketBase backend gives a website a database,
+	// authentication, file storage and a realtime REST API, served from the website's own
+	// domain. An empty list means no website of the account has a PocketBase backend.
+	//
+	// States: `asleep` is normal (the instance sleeps when idle and wakes on the first request);
+	// `starting`, `running` and `stopping` are healthy; `failed` or `unregistered` mean the
+	// instance is broken; `missing` means its files are gone from the server, and creating the
+	// PocketBase backend again sets up a new, empty one. `state` is null when the server could
+	// not be reached; retry later.
+	//
+	// PocketBase is rolling out gradually: an account without access yet gets 422.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/pocketbase (the `HostingListAccountPocketBaseBackendsV1` operationId).
+	HostingListAccountPocketBaseBackendsV1WithResponse(ctx context.Context, username UsernamePath, reqEditors ...RequestEditorFn) (*HostingListAccountPocketBaseBackendsV1Response, error)
+
 	// HostingClearWebsiteCacheV1WithResponse Clear website cache
 	//
 	// Permanently clears all server-side cache for the website at once. Use it when content was
@@ -68693,6 +69683,165 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with PATCH /api/hosting/v1/accounts/{username}/websites/{domain}/php/version (the `HostingUpdatePHPVersionV1` operationId).
 	HostingUpdatePHPVersionV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingUpdatePHPVersionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingUpdatePHPVersionV1Response, error)
 
+	// HostingDeletePocketBaseBackendV1WithResponse Delete PocketBase backend
+	//
+	// Permanently deletes the PocketBase backend of a website with all its data (collections,
+	// records, users and uploaded files) and gives the `/api` and `/_` paths back to the website;
+	// a `headless_pocketbase` website becomes `headless_empty`. This cannot be undone and every
+	// app using this backend stops working, so confirm with the user before calling it and
+	// export the data you need from the dashboard (`admin_url`) first.
+	//
+	// Returns success also when the website has no PocketBase backend; then it only clears a
+	// `headless_pocketbase` mark. To regain access after losing the superuser password, use the
+	// `Set PocketBase superuser` endpoint instead of deleting the backend.
+	//
+	// PocketBase is rolling out gradually: an account without access yet gets 422; an unknown
+	// website gets 404.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase (the `HostingDeletePocketBaseBackendV1` operationId).
+	HostingDeletePocketBaseBackendV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingDeletePocketBaseBackendV1Response, error)
+
+	// HostingGetPocketBaseBackendV1WithResponse Get PocketBase backend
+	//
+	// Returns the PocketBase backend of a website: its REST API and dashboard URLs, live state
+	// and version. A PocketBase backend gives the website a database, authentication, file
+	// storage and a realtime REST API, served from the website's own domain under `/api` and
+	// `/_`. Returns 404 when the website has no PocketBase backend.
+	//
+	// The superuser password is only shown once, when it is set, and is never returned here. If it
+	// is lost, set a new one with the `Set PocketBase superuser` endpoint.
+	//
+	// The instance sleeps when idle and wakes on the first request, so `asleep` is a normal state
+	// and the first call to a sleeping instance can take a few seconds. `starting`, `running` and
+	// `stopping` are healthy; `failed` or `unregistered` mean the instance is broken; `missing`
+	// means its files are gone from the server, and creating the PocketBase backend again sets up
+	// a new, empty one. `state` is null when the server could not be reached; retry later.
+	//
+	// PocketBase is rolling out gradually: an account without access yet gets 422.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase (the `HostingGetPocketBaseBackendV1` operationId).
+	HostingGetPocketBaseBackendV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingGetPocketBaseBackendV1Response, error)
+
+	// HostingCreatePocketBaseBackendV1WithBodyWithResponse Create PocketBase backend
+	//
+	// Creates a PocketBase backend for a website: a database, authentication, file storage and a
+	// realtime REST API, served from the website's own domain. A website has at most one
+	// PocketBase backend. Creation usually takes a few seconds.
+	//
+	// The backend takes over the `/api` and `/_` paths of the website: from then on requests to
+	// these paths and everything below them go to PocketBase, while every other path keeps
+	// serving the website. Do not create a backend for a website that serves its own `/api` or
+	// `/_` paths, because they stop working; confirm with the user before calling it. Deleting
+	// the backend gives both paths back to the website. Headless WordPress websites and parked
+	// domains are not supported; for a parked domain, use the website it is parked on. A website
+	// that already has a backend is rejected with 422, unless that backend is in state
+	// `missing`: then it is replaced with a new, empty one. A website set up with
+	// `type: headless_empty` becomes `headless_pocketbase`; any other website keeps its type.
+	//
+	// `superuser_password` is optional: leave it out to get a strong generated password, or send
+	// your own (10-128 characters). The response returns it in `superuser_password` once and
+	// Hostinger never stores it, so save it in your app secrets right away; you need it to manage
+	// the backend through the PocketBase REST API. If it is lost, set a new one with the
+	// `Set PocketBase superuser` endpoint. `superuser_email` defaults to the email of the
+	// website owner.
+	//
+	// The instance sleeps when idle and wakes on the first request, so the first call after a
+	// quiet period can take a few seconds. `next_steps` in the response lists what to do next.
+	//
+	// PocketBase is rolling out gradually: an account without access yet gets 422.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase (the `HostingCreatePocketBaseBackendV1` operationId).
+	HostingCreatePocketBaseBackendV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingCreatePocketBaseBackendV1Response, error)
+
+	// HostingCreatePocketBaseBackendV1WithResponse Create PocketBase backend
+	//
+	// Creates a PocketBase backend for a website: a database, authentication, file storage and a
+	// realtime REST API, served from the website's own domain. A website has at most one
+	// PocketBase backend. Creation usually takes a few seconds.
+	//
+	// The backend takes over the `/api` and `/_` paths of the website: from then on requests to
+	// these paths and everything below them go to PocketBase, while every other path keeps
+	// serving the website. Do not create a backend for a website that serves its own `/api` or
+	// `/_` paths, because they stop working; confirm with the user before calling it. Deleting
+	// the backend gives both paths back to the website. Headless WordPress websites and parked
+	// domains are not supported; for a parked domain, use the website it is parked on. A website
+	// that already has a backend is rejected with 422, unless that backend is in state
+	// `missing`: then it is replaced with a new, empty one. A website set up with
+	// `type: headless_empty` becomes `headless_pocketbase`; any other website keeps its type.
+	//
+	// `superuser_password` is optional: leave it out to get a strong generated password, or send
+	// your own (10-128 characters). The response returns it in `superuser_password` once and
+	// Hostinger never stores it, so save it in your app secrets right away; you need it to manage
+	// the backend through the PocketBase REST API. If it is lost, set a new one with the
+	// `Set PocketBase superuser` endpoint. `superuser_email` defaults to the email of the
+	// website owner.
+	//
+	// The instance sleeps when idle and wakes on the first request, so the first call after a
+	// quiet period can take a few seconds. `next_steps` in the response lists what to do next.
+	//
+	// PocketBase is rolling out gradually: an account without access yet gets 422.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase (the `HostingCreatePocketBaseBackendV1` operationId).
+	HostingCreatePocketBaseBackendV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingCreatePocketBaseBackendV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingCreatePocketBaseBackendV1Response, error)
+
+	// HostingSetPocketBaseSuperuserV1WithBodyWithResponse Set PocketBase superuser
+	//
+	// Sets the password of a superuser of the website's PocketBase backend, and creates that
+	// superuser when there is none with the given email. The old password of that superuser stops
+	// working at once, so apps and scripts still using it lose superuser access; confirm with the
+	// user before calling it.
+	//
+	// Use it when the superuser password is lost (Hostinger never stores it), when it leaked and
+	// must be rotated, or to add another superuser with a different email. Returns 404 when the
+	// website has no PocketBase backend; create one first. App user accounts are managed through
+	// the PocketBase REST API, not here.
+	//
+	// `superuser_password` is optional: leave it out to get a strong generated password, or send
+	// your own (10-128 characters). The response returns it in `superuser_password` once and
+	// Hostinger never stores it, so save it in your app secrets right away, then authenticate
+	// again with `pb.collection('_superusers').authWithPassword`. `superuser_email` defaults to
+	// the email of the website owner.
+	//
+	// PocketBase is rolling out gradually: an account without access yet gets 422.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase/superuser (the `HostingSetPocketBaseSuperuserV1` operationId).
+	HostingSetPocketBaseSuperuserV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingSetPocketBaseSuperuserV1Response, error)
+
+	// HostingSetPocketBaseSuperuserV1WithResponse Set PocketBase superuser
+	//
+	// Sets the password of a superuser of the website's PocketBase backend, and creates that
+	// superuser when there is none with the given email. The old password of that superuser stops
+	// working at once, so apps and scripts still using it lose superuser access; confirm with the
+	// user before calling it.
+	//
+	// Use it when the superuser password is lost (Hostinger never stores it), when it leaked and
+	// must be rotated, or to add another superuser with a different email. Returns 404 when the
+	// website has no PocketBase backend; create one first. App user accounts are managed through
+	// the PocketBase REST API, not here.
+	//
+	// `superuser_password` is optional: leave it out to get a strong generated password, or send
+	// your own (10-128 characters). The response returns it in `superuser_password` once and
+	// Hostinger never stores it, so save it in your app secrets right away, then authenticate
+	// again with `pb.collection('_superusers').authWithPassword`. `superuser_email` defaults to
+	// the email of the website owner.
+	//
+	// PocketBase is rolling out gradually: an account without access yet gets 422.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase/superuser (the `HostingSetPocketBaseSuperuserV1` operationId).
+	HostingSetPocketBaseSuperuserV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingSetPocketBaseSuperuserV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingSetPocketBaseSuperuserV1Response, error)
+
 	// HostingDeleteWebsiteRedirectV1WithResponse Delete website redirect
 	//
 	// Permanently deletes the redirect identified by its source URL.
@@ -68944,9 +70093,11 @@ type ClientWithResponsesInterface interface {
 	// `hosting_websites_create` with `type: headless_empty`) into a headless WordPress
 	// website: WordPress is installed into the `cms` directory with the Hostinger headless
 	// MU plugin and the website is marked as a headless WordPress website. `directory` is
-	// not allowed with it. The target website must already be headless: the headless
-	// install rewrites the root `.htaccess`, so on any other website the request is
-	// rejected with 422.
+	// not allowed with it. The target website must be an empty headless website
+	// (`headless_empty`): the headless install rewrites the root `.htaccess`, so any other
+	// website, including a headless website that already has WordPress or a PocketBase
+	// backend, is rejected with 422. To replace a PocketBase backend with WordPress, delete
+	// it first with `Delete PocketBase backend`.
 	//
 	// Call GET /api/hosting/v1/wordpress/installations (`wordpress_installations_list`)
 	// filtered by username and domain before proceeding to check whether WordPress is
@@ -68981,9 +70132,11 @@ type ClientWithResponsesInterface interface {
 	// `hosting_websites_create` with `type: headless_empty`) into a headless WordPress
 	// website: WordPress is installed into the `cms` directory with the Hostinger headless
 	// MU plugin and the website is marked as a headless WordPress website. `directory` is
-	// not allowed with it. The target website must already be headless: the headless
-	// install rewrites the root `.htaccess`, so on any other website the request is
-	// rejected with 422.
+	// not allowed with it. The target website must be an empty headless website
+	// (`headless_empty`): the headless install rewrites the root `.htaccess`, so any other
+	// website, including a headless website that already has WordPress or a PocketBase
+	// backend, is rejected with 422. To replace a PocketBase backend with WordPress, delete
+	// it first with `Delete PocketBase backend`.
 	//
 	// Call GET /api/hosting/v1/wordpress/installations (`wordpress_installations_list`)
 	// filtered by username and domain before proceeding to check whether WordPress is
@@ -70002,10 +71155,14 @@ type ClientWithResponsesInterface interface {
 	// title, and `en_US` when `wordpress.language` is omitted. The headless types
 	// (`headless_empty`, `headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`)
 	// create a headless website; `headless_wordpress` additionally installs WordPress into the
-	// `cms` directory of the website root with generated credentials. `headless_empty` installs
-	// nothing: WordPress can be added later through
-	// `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
-	// (`wordpress_installations_install`) with `type: headless`.
+	// `cms` directory of the website root with generated credentials. `headless_pocketbase`
+	// marks the website as a headless PocketBase website but installs nothing: create its
+	// PocketBase backend with `Create PocketBase backend`
+	// (`POST /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase`) once the setup
+	// is `completed`. `headless_empty` installs nothing either: WordPress can be added later
+	// through `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
+	// (`wordpress_installations_install`) with `type: headless`, or a PocketBase backend through
+	// the same PocketBase endpoint.
 	//
 	// Omit `domain` to set the website up on a generated temporary free subdomain; the created
 	// setup returns it as `domain`. REST clients that need to know the free subdomain before the
@@ -70037,10 +71194,14 @@ type ClientWithResponsesInterface interface {
 	// title, and `en_US` when `wordpress.language` is omitted. The headless types
 	// (`headless_empty`, `headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`)
 	// create a headless website; `headless_wordpress` additionally installs WordPress into the
-	// `cms` directory of the website root with generated credentials. `headless_empty` installs
-	// nothing: WordPress can be added later through
-	// `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
-	// (`wordpress_installations_install`) with `type: headless`.
+	// `cms` directory of the website root with generated credentials. `headless_pocketbase`
+	// marks the website as a headless PocketBase website but installs nothing: create its
+	// PocketBase backend with `Create PocketBase backend`
+	// (`POST /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase`) once the setup
+	// is `completed`. `headless_empty` installs nothing either: WordPress can be added later
+	// through `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
+	// (`wordpress_installations_install`) with `type: headless`, or a PocketBase backend through
+	// the same PocketBase endpoint.
 	//
 	// Omit `domain` to set the website up on a generated temporary free subdomain; the created
 	// setup returns it as `domain`. REST clients that need to know the free subdomain before the
@@ -82617,6 +83778,75 @@ func (r HostingGenerateGitSSHKeyV1Response) ContentType() string {
 	return ""
 }
 
+type HostingListAccountPocketBaseBackendsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1PocketBaseInstanceCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseErrorResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingListAccountPocketBaseBackendsV1Response) GetJSON200() *HostingV1PocketBaseInstanceCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingListAccountPocketBaseBackendsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r HostingListAccountPocketBaseBackendsV1Response) GetJSON404() *CommonResponseErrorResponse {
+	return r.JSON404
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingListAccountPocketBaseBackendsV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingListAccountPocketBaseBackendsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingListAccountPocketBaseBackendsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingListAccountPocketBaseBackendsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingListAccountPocketBaseBackendsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingListAccountPocketBaseBackendsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type HostingClearWebsiteCacheV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -84973,6 +86203,310 @@ func (r HostingUpdatePHPVersionV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HostingUpdatePHPVersionV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingDeletePocketBaseBackendV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseErrorResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+	// JSON503 the response for an HTTP 503 `application/json` response
+	JSON503 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingDeletePocketBaseBackendV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingDeletePocketBaseBackendV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r HostingDeletePocketBaseBackendV1Response) GetJSON404() *CommonResponseErrorResponse {
+	return r.JSON404
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingDeletePocketBaseBackendV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingDeletePocketBaseBackendV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON503 returns the response for an HTTP 503 `application/json` response
+func (r HostingDeletePocketBaseBackendV1Response) GetJSON503() *CommonResponseErrorResponse {
+	return r.JSON503
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingDeletePocketBaseBackendV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingDeletePocketBaseBackendV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingDeletePocketBaseBackendV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingDeletePocketBaseBackendV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingGetPocketBaseBackendV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1PocketBaseBackendResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseErrorResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingGetPocketBaseBackendV1Response) GetJSON200() *HostingV1PocketBaseBackendResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingGetPocketBaseBackendV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r HostingGetPocketBaseBackendV1Response) GetJSON404() *CommonResponseErrorResponse {
+	return r.JSON404
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingGetPocketBaseBackendV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingGetPocketBaseBackendV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingGetPocketBaseBackendV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingGetPocketBaseBackendV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingGetPocketBaseBackendV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingGetPocketBaseBackendV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingCreatePocketBaseBackendV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON201 the response for an HTTP 201 `application/json` response
+	JSON201 *HostingV1PocketBaseBackendCreatedResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseErrorResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON429 the response for an HTTP 429 `application/json` response
+	JSON429 *CommonResponseErrorResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+	// JSON503 the response for an HTTP 503 `application/json` response
+	JSON503 *CommonResponseErrorResponse
+}
+
+// GetJSON201 returns the response for an HTTP 201 `application/json` response
+func (r HostingCreatePocketBaseBackendV1Response) GetJSON201() *HostingV1PocketBaseBackendCreatedResource {
+	return r.JSON201
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingCreatePocketBaseBackendV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r HostingCreatePocketBaseBackendV1Response) GetJSON404() *CommonResponseErrorResponse {
+	return r.JSON404
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingCreatePocketBaseBackendV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON429 returns the response for an HTTP 429 `application/json` response
+func (r HostingCreatePocketBaseBackendV1Response) GetJSON429() *CommonResponseErrorResponse {
+	return r.JSON429
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingCreatePocketBaseBackendV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON503 returns the response for an HTTP 503 `application/json` response
+func (r HostingCreatePocketBaseBackendV1Response) GetJSON503() *CommonResponseErrorResponse {
+	return r.JSON503
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingCreatePocketBaseBackendV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingCreatePocketBaseBackendV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingCreatePocketBaseBackendV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingCreatePocketBaseBackendV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HostingSetPocketBaseSuperuserV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HostingV1PocketBaseSuperuserResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseErrorResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON429 the response for an HTTP 429 `application/json` response
+	JSON429 *CommonResponseErrorResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HostingSetPocketBaseSuperuserV1Response) GetJSON200() *HostingV1PocketBaseSuperuserResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HostingSetPocketBaseSuperuserV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r HostingSetPocketBaseSuperuserV1Response) GetJSON404() *CommonResponseErrorResponse {
+	return r.JSON404
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r HostingSetPocketBaseSuperuserV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON429 returns the response for an HTTP 429 `application/json` response
+func (r HostingSetPocketBaseSuperuserV1Response) GetJSON429() *CommonResponseErrorResponse {
+	return r.JSON429
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HostingSetPocketBaseSuperuserV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HostingSetPocketBaseSuperuserV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HostingSetPocketBaseSuperuserV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HostingSetPocketBaseSuperuserV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HostingSetPocketBaseSuperuserV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -104127,6 +105661,32 @@ func (c *ClientWithResponses) HostingGenerateGitSSHKeyV1WithResponse(ctx context
 	return ParseHostingGenerateGitSSHKeyV1Response(rsp)
 }
 
+// HostingListAccountPocketBaseBackendsV1WithResponse List account PocketBase backends
+//
+// Lists the PocketBase backends of all websites of a hosting account with their URLs, live
+// state, version and disk usage. A PocketBase backend gives a website a database,
+// authentication, file storage and a realtime REST API, served from the website's own
+// domain. An empty list means no website of the account has a PocketBase backend.
+//
+// States: `asleep` is normal (the instance sleeps when idle and wakes on the first request);
+// `starting`, `running` and `stopping` are healthy; `failed` or `unregistered` mean the
+// instance is broken; `missing` means its files are gone from the server, and creating the
+// PocketBase backend again sets up a new, empty one. `state` is null when the server could
+// not be reached; retry later.
+//
+// PocketBase is rolling out gradually: an account without access yet gets 422.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/pocketbase (the `HostingListAccountPocketBaseBackendsV1` operationId).
+func (c *ClientWithResponses) HostingListAccountPocketBaseBackendsV1WithResponse(ctx context.Context, username UsernamePath, reqEditors ...RequestEditorFn) (*HostingListAccountPocketBaseBackendsV1Response, error) {
+	rsp, err := c.HostingListAccountPocketBaseBackendsV1(ctx, username, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingListAccountPocketBaseBackendsV1Response(rsp)
+}
+
 // HostingClearWebsiteCacheV1WithResponse Clear website cache
 //
 // Permanently clears all server-side cache for the website at once. Use it when content was
@@ -105341,6 +106901,201 @@ func (c *ClientWithResponses) HostingUpdatePHPVersionV1WithResponse(ctx context.
 	return ParseHostingUpdatePHPVersionV1Response(rsp)
 }
 
+// HostingDeletePocketBaseBackendV1WithResponse Delete PocketBase backend
+//
+// Permanently deletes the PocketBase backend of a website with all its data (collections,
+// records, users and uploaded files) and gives the `/api` and `/_` paths back to the website;
+// a `headless_pocketbase` website becomes `headless_empty`. This cannot be undone and every
+// app using this backend stops working, so confirm with the user before calling it and
+// export the data you need from the dashboard (`admin_url`) first.
+//
+// Returns success also when the website has no PocketBase backend; then it only clears a
+// `headless_pocketbase` mark. To regain access after losing the superuser password, use the
+// `Set PocketBase superuser` endpoint instead of deleting the backend.
+//
+// PocketBase is rolling out gradually: an account without access yet gets 422; an unknown
+// website gets 404.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase (the `HostingDeletePocketBaseBackendV1` operationId).
+func (c *ClientWithResponses) HostingDeletePocketBaseBackendV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingDeletePocketBaseBackendV1Response, error) {
+	rsp, err := c.HostingDeletePocketBaseBackendV1(ctx, username, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingDeletePocketBaseBackendV1Response(rsp)
+}
+
+// HostingGetPocketBaseBackendV1WithResponse Get PocketBase backend
+//
+// Returns the PocketBase backend of a website: its REST API and dashboard URLs, live state
+// and version. A PocketBase backend gives the website a database, authentication, file
+// storage and a realtime REST API, served from the website's own domain under `/api` and
+// `/_`. Returns 404 when the website has no PocketBase backend.
+//
+// The superuser password is only shown once, when it is set, and is never returned here. If it
+// is lost, set a new one with the `Set PocketBase superuser` endpoint.
+//
+// The instance sleeps when idle and wakes on the first request, so `asleep` is a normal state
+// and the first call to a sleeping instance can take a few seconds. `starting`, `running` and
+// `stopping` are healthy; `failed` or `unregistered` mean the instance is broken; `missing`
+// means its files are gone from the server, and creating the PocketBase backend again sets up
+// a new, empty one. `state` is null when the server could not be reached; retry later.
+//
+// PocketBase is rolling out gradually: an account without access yet gets 422.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase (the `HostingGetPocketBaseBackendV1` operationId).
+func (c *ClientWithResponses) HostingGetPocketBaseBackendV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, reqEditors ...RequestEditorFn) (*HostingGetPocketBaseBackendV1Response, error) {
+	rsp, err := c.HostingGetPocketBaseBackendV1(ctx, username, domain, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingGetPocketBaseBackendV1Response(rsp)
+}
+
+// HostingCreatePocketBaseBackendV1WithBodyWithResponse Create PocketBase backend
+//
+// Creates a PocketBase backend for a website: a database, authentication, file storage and a
+// realtime REST API, served from the website's own domain. A website has at most one
+// PocketBase backend. Creation usually takes a few seconds.
+//
+// The backend takes over the `/api` and `/_` paths of the website: from then on requests to
+// these paths and everything below them go to PocketBase, while every other path keeps
+// serving the website. Do not create a backend for a website that serves its own `/api` or
+// `/_` paths, because they stop working; confirm with the user before calling it. Deleting
+// the backend gives both paths back to the website. Headless WordPress websites and parked
+// domains are not supported; for a parked domain, use the website it is parked on. A website
+// that already has a backend is rejected with 422, unless that backend is in state
+// `missing`: then it is replaced with a new, empty one. A website set up with
+// `type: headless_empty` becomes `headless_pocketbase`; any other website keeps its type.
+//
+// `superuser_password` is optional: leave it out to get a strong generated password, or send
+// your own (10-128 characters). The response returns it in `superuser_password` once and
+// Hostinger never stores it, so save it in your app secrets right away; you need it to manage
+// the backend through the PocketBase REST API. If it is lost, set a new one with the
+// `Set PocketBase superuser` endpoint. `superuser_email` defaults to the email of the
+// website owner.
+//
+// The instance sleeps when idle and wakes on the first request, so the first call after a
+// quiet period can take a few seconds. `next_steps` in the response lists what to do next.
+//
+// PocketBase is rolling out gradually: an account without access yet gets 422.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase (the `HostingCreatePocketBaseBackendV1` operationId).
+func (c *ClientWithResponses) HostingCreatePocketBaseBackendV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingCreatePocketBaseBackendV1Response, error) {
+	rsp, err := c.HostingCreatePocketBaseBackendV1WithBody(ctx, username, domain, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingCreatePocketBaseBackendV1Response(rsp)
+}
+
+// HostingCreatePocketBaseBackendV1WithResponse Create PocketBase backend
+//
+// Creates a PocketBase backend for a website: a database, authentication, file storage and a
+// realtime REST API, served from the website's own domain. A website has at most one
+// PocketBase backend. Creation usually takes a few seconds.
+//
+// The backend takes over the `/api` and `/_` paths of the website: from then on requests to
+// these paths and everything below them go to PocketBase, while every other path keeps
+// serving the website. Do not create a backend for a website that serves its own `/api` or
+// `/_` paths, because they stop working; confirm with the user before calling it. Deleting
+// the backend gives both paths back to the website. Headless WordPress websites and parked
+// domains are not supported; for a parked domain, use the website it is parked on. A website
+// that already has a backend is rejected with 422, unless that backend is in state
+// `missing`: then it is replaced with a new, empty one. A website set up with
+// `type: headless_empty` becomes `headless_pocketbase`; any other website keeps its type.
+//
+// `superuser_password` is optional: leave it out to get a strong generated password, or send
+// your own (10-128 characters). The response returns it in `superuser_password` once and
+// Hostinger never stores it, so save it in your app secrets right away; you need it to manage
+// the backend through the PocketBase REST API. If it is lost, set a new one with the
+// `Set PocketBase superuser` endpoint. `superuser_email` defaults to the email of the
+// website owner.
+//
+// The instance sleeps when idle and wakes on the first request, so the first call after a
+// quiet period can take a few seconds. `next_steps` in the response lists what to do next.
+//
+// PocketBase is rolling out gradually: an account without access yet gets 422.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase (the `HostingCreatePocketBaseBackendV1` operationId).
+func (c *ClientWithResponses) HostingCreatePocketBaseBackendV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingCreatePocketBaseBackendV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingCreatePocketBaseBackendV1Response, error) {
+	rsp, err := c.HostingCreatePocketBaseBackendV1(ctx, username, domain, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingCreatePocketBaseBackendV1Response(rsp)
+}
+
+// HostingSetPocketBaseSuperuserV1WithBodyWithResponse Set PocketBase superuser
+//
+// Sets the password of a superuser of the website's PocketBase backend, and creates that
+// superuser when there is none with the given email. The old password of that superuser stops
+// working at once, so apps and scripts still using it lose superuser access; confirm with the
+// user before calling it.
+//
+// Use it when the superuser password is lost (Hostinger never stores it), when it leaked and
+// must be rotated, or to add another superuser with a different email. Returns 404 when the
+// website has no PocketBase backend; create one first. App user accounts are managed through
+// the PocketBase REST API, not here.
+//
+// `superuser_password` is optional: leave it out to get a strong generated password, or send
+// your own (10-128 characters). The response returns it in `superuser_password` once and
+// Hostinger never stores it, so save it in your app secrets right away, then authenticate
+// again with `pb.collection('_superusers').authWithPassword`. `superuser_email` defaults to
+// the email of the website owner.
+//
+// PocketBase is rolling out gradually: an account without access yet gets 422.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase/superuser (the `HostingSetPocketBaseSuperuserV1` operationId).
+func (c *ClientWithResponses) HostingSetPocketBaseSuperuserV1WithBodyWithResponse(ctx context.Context, username UsernamePath, domain Domain, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HostingSetPocketBaseSuperuserV1Response, error) {
+	rsp, err := c.HostingSetPocketBaseSuperuserV1WithBody(ctx, username, domain, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingSetPocketBaseSuperuserV1Response(rsp)
+}
+
+// HostingSetPocketBaseSuperuserV1WithResponse Set PocketBase superuser
+//
+// Sets the password of a superuser of the website's PocketBase backend, and creates that
+// superuser when there is none with the given email. The old password of that superuser stops
+// working at once, so apps and scripts still using it lose superuser access; confirm with the
+// user before calling it.
+//
+// Use it when the superuser password is lost (Hostinger never stores it), when it leaked and
+// must be rotated, or to add another superuser with a different email. Returns 404 when the
+// website has no PocketBase backend; create one first. App user accounts are managed through
+// the PocketBase REST API, not here.
+//
+// `superuser_password` is optional: leave it out to get a strong generated password, or send
+// your own (10-128 characters). The response returns it in `superuser_password` once and
+// Hostinger never stores it, so save it in your app secrets right away, then authenticate
+// again with `pb.collection('_superusers').authWithPassword`. `superuser_email` defaults to
+// the email of the website owner.
+//
+// PocketBase is rolling out gradually: an account without access yet gets 422.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase/superuser (the `HostingSetPocketBaseSuperuserV1` operationId).
+func (c *ClientWithResponses) HostingSetPocketBaseSuperuserV1WithResponse(ctx context.Context, username UsernamePath, domain Domain, body HostingSetPocketBaseSuperuserV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HostingSetPocketBaseSuperuserV1Response, error) {
+	rsp, err := c.HostingSetPocketBaseSuperuserV1(ctx, username, domain, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHostingSetPocketBaseSuperuserV1Response(rsp)
+}
+
 // HostingDeleteWebsiteRedirectV1WithResponse Delete website redirect
 //
 // Permanently deletes the redirect identified by its source URL.
@@ -105706,9 +107461,11 @@ func (c *ClientWithResponses) HostingDeployWordPressThemeV1WithResponse(ctx cont
 // `hosting_websites_create` with `type: headless_empty`) into a headless WordPress
 // website: WordPress is installed into the `cms` directory with the Hostinger headless
 // MU plugin and the website is marked as a headless WordPress website. `directory` is
-// not allowed with it. The target website must already be headless: the headless
-// install rewrites the root `.htaccess`, so on any other website the request is
-// rejected with 422.
+// not allowed with it. The target website must be an empty headless website
+// (`headless_empty`): the headless install rewrites the root `.htaccess`, so any other
+// website, including a headless website that already has WordPress or a PocketBase
+// backend, is rejected with 422. To replace a PocketBase backend with WordPress, delete
+// it first with `Delete PocketBase backend`.
 //
 // Call GET /api/hosting/v1/wordpress/installations (`wordpress_installations_list`)
 // filtered by username and domain before proceeding to check whether WordPress is
@@ -105749,9 +107506,11 @@ func (c *ClientWithResponses) HostingInstallWordPressV1WithBodyWithResponse(ctx 
 // `hosting_websites_create` with `type: headless_empty`) into a headless WordPress
 // website: WordPress is installed into the `cms` directory with the Hostinger headless
 // MU plugin and the website is marked as a headless WordPress website. `directory` is
-// not allowed with it. The target website must already be headless: the headless
-// install rewrites the root `.htaccess`, so on any other website the request is
-// rejected with 422.
+// not allowed with it. The target website must be an empty headless website
+// (`headless_empty`): the headless install rewrites the root `.htaccess`, so any other
+// website, including a headless website that already has WordPress or a PocketBase
+// backend, is rejected with 422. To replace a PocketBase backend with WordPress, delete
+// it first with `Delete PocketBase backend`.
 //
 // Call GET /api/hosting/v1/wordpress/installations (`wordpress_installations_list`)
 // filtered by username and domain before proceeding to check whether WordPress is
@@ -107140,10 +108899,14 @@ func (c *ClientWithResponses) HostingListOrdersV1WithResponse(ctx context.Contex
 // title, and `en_US` when `wordpress.language` is omitted. The headless types
 // (`headless_empty`, `headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`)
 // create a headless website; `headless_wordpress` additionally installs WordPress into the
-// `cms` directory of the website root with generated credentials. `headless_empty` installs
-// nothing: WordPress can be added later through
-// `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
-// (`wordpress_installations_install`) with `type: headless`.
+// `cms` directory of the website root with generated credentials. `headless_pocketbase`
+// marks the website as a headless PocketBase website but installs nothing: create its
+// PocketBase backend with `Create PocketBase backend`
+// (`POST /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase`) once the setup
+// is `completed`. `headless_empty` installs nothing either: WordPress can be added later
+// through `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
+// (`wordpress_installations_install`) with `type: headless`, or a PocketBase backend through
+// the same PocketBase endpoint.
 //
 // Omit `domain` to set the website up on a generated temporary free subdomain; the created
 // setup returns it as `domain`. REST clients that need to know the free subdomain before the
@@ -107181,10 +108944,14 @@ func (c *ClientWithResponses) HostingStartWebsiteSetupV1WithBodyWithResponse(ctx
 // title, and `en_US` when `wordpress.language` is omitted. The headless types
 // (`headless_empty`, `headless_wordpress`, `headless_ecommerce`, `headless_pocketbase`)
 // create a headless website; `headless_wordpress` additionally installs WordPress into the
-// `cms` directory of the website root with generated credentials. `headless_empty` installs
-// nothing: WordPress can be added later through
-// `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
-// (`wordpress_installations_install`) with `type: headless`.
+// `cms` directory of the website root with generated credentials. `headless_pocketbase`
+// marks the website as a headless PocketBase website but installs nothing: create its
+// PocketBase backend with `Create PocketBase backend`
+// (`POST /api/hosting/v1/accounts/{username}/websites/{domain}/pocketbase`) once the setup
+// is `completed`. `headless_empty` installs nothing either: WordPress can be added later
+// through `POST /api/hosting/v1/accounts/{username}/wordpress/installations`
+// (`wordpress_installations_install`) with `type: headless`, or a PocketBase backend through
+// the same PocketBase endpoint.
 //
 // Omit `domain` to set the website up on a generated temporary free subdomain; the created
 // setup returns it as `domain`. REST clients that need to know the free subdomain before the
@@ -118820,6 +120587,60 @@ func ParseHostingGenerateGitSSHKeyV1Response(rsp *http.Response) (*HostingGenera
 	return response, nil
 }
 
+// ParseHostingListAccountPocketBaseBackendsV1Response parses an HTTP response from a HostingListAccountPocketBaseBackendsV1WithResponse call
+func ParseHostingListAccountPocketBaseBackendsV1Response(rsp *http.Response) (*HostingListAccountPocketBaseBackendsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingListAccountPocketBaseBackendsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1PocketBaseInstanceCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseHostingClearWebsiteCacheV1Response parses an HTTP response from a HostingClearWebsiteCacheV1WithResponse call
 func ParseHostingClearWebsiteCacheV1Response(rsp *http.Response) (*HostingClearWebsiteCacheV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -120565,6 +122386,250 @@ func ParseHostingUpdatePHPVersionV1Response(rsp *http.Response) (*HostingUpdateP
 			return nil, err
 		}
 		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingDeletePocketBaseBackendV1Response parses an HTTP response from a HostingDeletePocketBaseBackendV1WithResponse call
+func ParseHostingDeletePocketBaseBackendV1Response(rsp *http.Response) (*HostingDeletePocketBaseBackendV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingDeletePocketBaseBackendV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 503:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON503 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingGetPocketBaseBackendV1Response parses an HTTP response from a HostingGetPocketBaseBackendV1WithResponse call
+func ParseHostingGetPocketBaseBackendV1Response(rsp *http.Response) (*HostingGetPocketBaseBackendV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingGetPocketBaseBackendV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1PocketBaseBackendResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingCreatePocketBaseBackendV1Response parses an HTTP response from a HostingCreatePocketBaseBackendV1WithResponse call
+func ParseHostingCreatePocketBaseBackendV1Response(rsp *http.Response) (*HostingCreatePocketBaseBackendV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingCreatePocketBaseBackendV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest HostingV1PocketBaseBackendCreatedResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 503:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON503 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHostingSetPocketBaseSuperuserV1Response parses an HTTP response from a HostingSetPocketBaseSuperuserV1WithResponse call
+func ParseHostingSetPocketBaseSuperuserV1Response(rsp *http.Response) (*HostingSetPocketBaseSuperuserV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HostingSetPocketBaseSuperuserV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HostingV1PocketBaseSuperuserResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse
