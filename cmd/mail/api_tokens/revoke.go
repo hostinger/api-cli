@@ -12,7 +12,7 @@ import (
 var RevokeCmd = &cobra.Command{
 	Use:               "revoke <token-id>",
 	Short:             "Revoke API token",
-	Long:              "Revoke an API token. The token immediately loses access to the\nHostinger Email API (https://api.mail.hostinger.com/). This action\ncannot be undone.",
+	Long:              "Revoke an API token. The token immediately loses access to the\nHostinger Mail API (https://api.mail.hostinger.com/). This action\ncannot be undone.",
 	Example:           "  hostinger mail api-tokens revoke 019683f8-1234-7abc-8def-0123456789ab",
 	ValidArgsFunction: cobra.NoFileCompletions,
 	RunE: func(cmd *cobra.Command, args []string) error {

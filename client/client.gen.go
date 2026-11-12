@@ -13611,7 +13611,7 @@ type MailV1ApiTokensApiTokenCreatedResource struct {
 	Name  *string                               `json:"name,omitempty"`
 	Scope *MailV1ApiTokensApiTokenScopeResource `json:"scope,omitempty"`
 
-	// Token Plaintext API token, returned only in this response. Grants access to the [Hostinger Email API](https://api.mail.hostinger.com/) for mailbox provisioning and management.
+	// Token Plaintext API token, returned only in this response. Grants access to the mailboxes it is scoped to through the [Hostinger Mail API](https://api.mail.hostinger.com/).
 	//
 	// Example: 4a6f8b2d1e9c3f7a0b5d8e2c4f1a7b3d9e6c2f8a1b4d7e0c3f6a9b2d5e8c1f4a
 	Token *string `json:"token,omitempty"`
@@ -27207,7 +27207,7 @@ type ClientInterface interface {
 	// MailListAPITokensV1 List API tokens
 	//
 	// Retrieve a paginated list of
-	// [Hostinger Email API](https://api.mail.hostinger.com/) tokens across
+	// [Hostinger Mail API](https://api.mail.hostinger.com/) tokens across
 	// all your mail orders, optionally filtered by order. Plaintext tokens
 	// are never included; they are returned only when a token is created.
 	//
@@ -27217,7 +27217,7 @@ type ClientInterface interface {
 	// MailRevokeAPITokenV1 Revoke API token
 	//
 	// Revoke an API token. The token immediately loses access to the
-	// [Hostinger Email API](https://api.mail.hostinger.com/). This action
+	// [Hostinger Mail API](https://api.mail.hostinger.com/). This action
 	// cannot be undone.
 	//
 	// Corresponds with DELETE /api/mail/v1/api-tokens/{tokenId} (the `MailRevokeAPITokenV1` operationId).
@@ -27451,14 +27451,20 @@ type ClientInterface interface {
 
 	// MailCreateAPITokenV1WithBody Create API token
 	//
-	// Create an API token for the given mail order. The token grants access
-	// to the [Hostinger Email API](https://api.mail.hostinger.com/), where
-	// you can provision and manage the mailboxes it is scoped to.
+	// Create an API token for the given mail order. Through the
+	// [Hostinger Mail API](https://api.mail.hostinger.com/), the token
+	// grants access to the mailboxes it is scoped to (for example, to read,
+	// search, send and organise email messages), without signing in with a
+	// mailbox password over IMAP, SMTP or webmail.
+	//
+	// A token covers either all mailboxes of the order or only the ones you
+	// choose. Set `scope.has_all_mailboxes` to `true` to cover all current
+	// and future mailboxes, or to `false` and list specific mailboxes in
+	// `scope.mailbox_ids`.
 	//
 	// The plaintext token is returned only in this response, never again.
-	// A maximum of 10 tokens can exist per order. Use
-	// `scope.has_all_mailboxes` to cover all current and future mailboxes,
-	// or list specific mailboxes in `scope.mailbox_ids`.
+	// Store it securely, because anyone who has it gets the same access. A
+	// maximum of 10 tokens can exist per order.
 	//
 	// Takes any type of body and a specified content type.
 	//
@@ -27467,14 +27473,20 @@ type ClientInterface interface {
 
 	// MailCreateAPITokenV1 Create API token
 	//
-	// Create an API token for the given mail order. The token grants access
-	// to the [Hostinger Email API](https://api.mail.hostinger.com/), where
-	// you can provision and manage the mailboxes it is scoped to.
+	// Create an API token for the given mail order. Through the
+	// [Hostinger Mail API](https://api.mail.hostinger.com/), the token
+	// grants access to the mailboxes it is scoped to (for example, to read,
+	// search, send and organise email messages), without signing in with a
+	// mailbox password over IMAP, SMTP or webmail.
+	//
+	// A token covers either all mailboxes of the order or only the ones you
+	// choose. Set `scope.has_all_mailboxes` to `true` to cover all current
+	// and future mailboxes, or to `false` and list specific mailboxes in
+	// `scope.mailbox_ids`.
 	//
 	// The plaintext token is returned only in this response, never again.
-	// A maximum of 10 tokens can exist per order. Use
-	// `scope.has_all_mailboxes` to cover all current and future mailboxes,
-	// or list specific mailboxes in `scope.mailbox_ids`.
+	// Store it securely, because anyone who has it gets the same access. A
+	// maximum of 10 tokens can exist per order.
 	//
 	// Takes a body of the `application/json` content type.
 	//
@@ -39114,7 +39126,7 @@ func (c *Client) MailDeleteAliasV1(ctx context.Context, aliasId MailAliasIdPath,
 // MailListAPITokensV1 List API tokens
 //
 // Retrieve a paginated list of
-// [Hostinger Email API](https://api.mail.hostinger.com/) tokens across
+// [Hostinger Mail API](https://api.mail.hostinger.com/) tokens across
 // all your mail orders, optionally filtered by order. Plaintext tokens
 // are never included; they are returned only when a token is created.
 //
@@ -39134,7 +39146,7 @@ func (c *Client) MailListAPITokensV1(ctx context.Context, params *MailListAPITok
 // MailRevokeAPITokenV1 Revoke API token
 //
 // Revoke an API token. The token immediately loses access to the
-// [Hostinger Email API](https://api.mail.hostinger.com/). This action
+// [Hostinger Mail API](https://api.mail.hostinger.com/). This action
 // cannot be undone.
 //
 // Corresponds with DELETE /api/mail/v1/api-tokens/{tokenId} (the `MailRevokeAPITokenV1` operationId).
@@ -39608,14 +39620,20 @@ func (c *Client) MailListAliasesV1(ctx context.Context, orderId MailOrderIdPath,
 
 // MailCreateAPITokenV1WithBody Create API token
 //
-// Create an API token for the given mail order. The token grants access
-// to the [Hostinger Email API](https://api.mail.hostinger.com/), where
-// you can provision and manage the mailboxes it is scoped to.
+// Create an API token for the given mail order. Through the
+// [Hostinger Mail API](https://api.mail.hostinger.com/), the token
+// grants access to the mailboxes it is scoped to (for example, to read,
+// search, send and organise email messages), without signing in with a
+// mailbox password over IMAP, SMTP or webmail.
+//
+// A token covers either all mailboxes of the order or only the ones you
+// choose. Set `scope.has_all_mailboxes` to `true` to cover all current
+// and future mailboxes, or to `false` and list specific mailboxes in
+// `scope.mailbox_ids`.
 //
 // The plaintext token is returned only in this response, never again.
-// A maximum of 10 tokens can exist per order. Use
-// `scope.has_all_mailboxes` to cover all current and future mailboxes,
-// or list specific mailboxes in `scope.mailbox_ids`.
+// Store it securely, because anyone who has it gets the same access. A
+// maximum of 10 tokens can exist per order.
 //
 // Takes any type of body and a specified content type.
 //
@@ -39634,14 +39652,20 @@ func (c *Client) MailCreateAPITokenV1WithBody(ctx context.Context, orderId MailO
 
 // MailCreateAPITokenV1 Create API token
 //
-// Create an API token for the given mail order. The token grants access
-// to the [Hostinger Email API](https://api.mail.hostinger.com/), where
-// you can provision and manage the mailboxes it is scoped to.
+// Create an API token for the given mail order. Through the
+// [Hostinger Mail API](https://api.mail.hostinger.com/), the token
+// grants access to the mailboxes it is scoped to (for example, to read,
+// search, send and organise email messages), without signing in with a
+// mailbox password over IMAP, SMTP or webmail.
+//
+// A token covers either all mailboxes of the order or only the ones you
+// choose. Set `scope.has_all_mailboxes` to `true` to cover all current
+// and future mailboxes, or to `false` and list specific mailboxes in
+// `scope.mailbox_ids`.
 //
 // The plaintext token is returned only in this response, never again.
-// A maximum of 10 tokens can exist per order. Use
-// `scope.has_all_mailboxes` to cover all current and future mailboxes,
-// or list specific mailboxes in `scope.mailbox_ids`.
+// Store it securely, because anyone who has it gets the same access. A
+// maximum of 10 tokens can exist per order.
 //
 // Takes a body of the `application/json` content type.
 //
@@ -71424,7 +71448,7 @@ type ClientWithResponsesInterface interface {
 	// MailListAPITokensV1WithResponse List API tokens
 	//
 	// Retrieve a paginated list of
-	// [Hostinger Email API](https://api.mail.hostinger.com/) tokens across
+	// [Hostinger Mail API](https://api.mail.hostinger.com/) tokens across
 	// all your mail orders, optionally filtered by order. Plaintext tokens
 	// are never included; they are returned only when a token is created.
 	//
@@ -71436,7 +71460,7 @@ type ClientWithResponsesInterface interface {
 	// MailRevokeAPITokenV1WithResponse Revoke API token
 	//
 	// Revoke an API token. The token immediately loses access to the
-	// [Hostinger Email API](https://api.mail.hostinger.com/). This action
+	// [Hostinger Mail API](https://api.mail.hostinger.com/). This action
 	// cannot be undone.
 	//
 	// Returns a wrapper object for the known response body format(s).
@@ -71690,14 +71714,20 @@ type ClientWithResponsesInterface interface {
 
 	// MailCreateAPITokenV1WithBodyWithResponse Create API token
 	//
-	// Create an API token for the given mail order. The token grants access
-	// to the [Hostinger Email API](https://api.mail.hostinger.com/), where
-	// you can provision and manage the mailboxes it is scoped to.
+	// Create an API token for the given mail order. Through the
+	// [Hostinger Mail API](https://api.mail.hostinger.com/), the token
+	// grants access to the mailboxes it is scoped to (for example, to read,
+	// search, send and organise email messages), without signing in with a
+	// mailbox password over IMAP, SMTP or webmail.
+	//
+	// A token covers either all mailboxes of the order or only the ones you
+	// choose. Set `scope.has_all_mailboxes` to `true` to cover all current
+	// and future mailboxes, or to `false` and list specific mailboxes in
+	// `scope.mailbox_ids`.
 	//
 	// The plaintext token is returned only in this response, never again.
-	// A maximum of 10 tokens can exist per order. Use
-	// `scope.has_all_mailboxes` to cover all current and future mailboxes,
-	// or list specific mailboxes in `scope.mailbox_ids`.
+	// Store it securely, because anyone who has it gets the same access. A
+	// maximum of 10 tokens can exist per order.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -71706,14 +71736,20 @@ type ClientWithResponsesInterface interface {
 
 	// MailCreateAPITokenV1WithResponse Create API token
 	//
-	// Create an API token for the given mail order. The token grants access
-	// to the [Hostinger Email API](https://api.mail.hostinger.com/), where
-	// you can provision and manage the mailboxes it is scoped to.
+	// Create an API token for the given mail order. Through the
+	// [Hostinger Mail API](https://api.mail.hostinger.com/), the token
+	// grants access to the mailboxes it is scoped to (for example, to read,
+	// search, send and organise email messages), without signing in with a
+	// mailbox password over IMAP, SMTP or webmail.
+	//
+	// A token covers either all mailboxes of the order or only the ones you
+	// choose. Set `scope.has_all_mailboxes` to `true` to cover all current
+	// and future mailboxes, or to `false` and list specific mailboxes in
+	// `scope.mailbox_ids`.
 	//
 	// The plaintext token is returned only in this response, never again.
-	// A maximum of 10 tokens can exist per order. Use
-	// `scope.has_all_mailboxes` to cover all current and future mailboxes,
-	// or list specific mailboxes in `scope.mailbox_ids`.
+	// Store it securely, because anyone who has it gets the same access. A
+	// maximum of 10 tokens can exist per order.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -109239,7 +109275,7 @@ func (c *ClientWithResponses) MailDeleteAliasV1WithResponse(ctx context.Context,
 // MailListAPITokensV1WithResponse List API tokens
 //
 // Retrieve a paginated list of
-// [Hostinger Email API](https://api.mail.hostinger.com/) tokens across
+// [Hostinger Mail API](https://api.mail.hostinger.com/) tokens across
 // all your mail orders, optionally filtered by order. Plaintext tokens
 // are never included; they are returned only when a token is created.
 //
@@ -109257,7 +109293,7 @@ func (c *ClientWithResponses) MailListAPITokensV1WithResponse(ctx context.Contex
 // MailRevokeAPITokenV1WithResponse Revoke API token
 //
 // Revoke an API token. The token immediately loses access to the
-// [Hostinger Email API](https://api.mail.hostinger.com/). This action
+// [Hostinger Mail API](https://api.mail.hostinger.com/). This action
 // cannot be undone.
 //
 // Returns a wrapper object for the known response body format(s).
@@ -109655,14 +109691,20 @@ func (c *ClientWithResponses) MailListAliasesV1WithResponse(ctx context.Context,
 
 // MailCreateAPITokenV1WithBodyWithResponse Create API token
 //
-// Create an API token for the given mail order. The token grants access
-// to the [Hostinger Email API](https://api.mail.hostinger.com/), where
-// you can provision and manage the mailboxes it is scoped to.
+// Create an API token for the given mail order. Through the
+// [Hostinger Mail API](https://api.mail.hostinger.com/), the token
+// grants access to the mailboxes it is scoped to (for example, to read,
+// search, send and organise email messages), without signing in with a
+// mailbox password over IMAP, SMTP or webmail.
+//
+// A token covers either all mailboxes of the order or only the ones you
+// choose. Set `scope.has_all_mailboxes` to `true` to cover all current
+// and future mailboxes, or to `false` and list specific mailboxes in
+// `scope.mailbox_ids`.
 //
 // The plaintext token is returned only in this response, never again.
-// A maximum of 10 tokens can exist per order. Use
-// `scope.has_all_mailboxes` to cover all current and future mailboxes,
-// or list specific mailboxes in `scope.mailbox_ids`.
+// Store it securely, because anyone who has it gets the same access. A
+// maximum of 10 tokens can exist per order.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
@@ -109677,14 +109719,20 @@ func (c *ClientWithResponses) MailCreateAPITokenV1WithBodyWithResponse(ctx conte
 
 // MailCreateAPITokenV1WithResponse Create API token
 //
-// Create an API token for the given mail order. The token grants access
-// to the [Hostinger Email API](https://api.mail.hostinger.com/), where
-// you can provision and manage the mailboxes it is scoped to.
+// Create an API token for the given mail order. Through the
+// [Hostinger Mail API](https://api.mail.hostinger.com/), the token
+// grants access to the mailboxes it is scoped to (for example, to read,
+// search, send and organise email messages), without signing in with a
+// mailbox password over IMAP, SMTP or webmail.
+//
+// A token covers either all mailboxes of the order or only the ones you
+// choose. Set `scope.has_all_mailboxes` to `true` to cover all current
+// and future mailboxes, or to `false` and list specific mailboxes in
+// `scope.mailbox_ids`.
 //
 // The plaintext token is returned only in this response, never again.
-// A maximum of 10 tokens can exist per order. Use
-// `scope.has_all_mailboxes` to cover all current and future mailboxes,
-// or list specific mailboxes in `scope.mailbox_ids`.
+// Store it securely, because anyone who has it gets the same access. A
+// maximum of 10 tokens can exist per order.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //

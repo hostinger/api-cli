@@ -5,7 +5,7 @@ Revoke API token
 ### Synopsis
 
 Revoke an API token. The token immediately loses access to the
-Hostinger Email API (https://api.mail.hostinger.com/). This action
+Hostinger Mail API (https://api.mail.hostinger.com/). This action
 cannot be undone.
 
 ```

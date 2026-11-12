@@ -4,14 +4,20 @@ Create API token
 
 ### Synopsis
 
-Create an API token for the given mail order. The token grants access
-to the Hostinger Email API (https://api.mail.hostinger.com/), where
-you can provision and manage the mailboxes it is scoped to.
+Create an API token for the given mail order. Through the
+Hostinger Mail API (https://api.mail.hostinger.com/), the token
+grants access to the mailboxes it is scoped to (for example, to read,
+search, send and organise email messages), without signing in with a
+mailbox password over IMAP, SMTP or webmail.
+
+A token covers either all mailboxes of the order or only the ones you
+choose. Set `scope.has_all_mailboxes` to `true` to cover all current
+and future mailboxes, or to `false` and list specific mailboxes in
+`scope.mailbox_ids`.
 
 The plaintext token is returned only in this response, never again.
-A maximum of 10 tokens can exist per order. Use
-`scope.has_all_mailboxes` to cover all current and future mailboxes,
-or list specific mailboxes in `scope.mailbox_ids`.
+Store it securely, because anyone who has it gets the same access. A
+maximum of 10 tokens can exist per order.
 
 The order can be given as [order-id] or left out, in which case it comes from --order-id, HOSTINGER_ORDER_ID, the .hostinger/site.json written by `hostinger up` or `hostinger link` (hosting orders), or a prompt when run in a terminal (the only order is used without asking).
 

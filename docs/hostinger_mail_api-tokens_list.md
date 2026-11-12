@@ -5,7 +5,7 @@ List API tokens
 ### Synopsis
 
 Retrieve a paginated list of
-Hostinger Email API (https://api.mail.hostinger.com/) tokens across
+Hostinger Mail API (https://api.mail.hostinger.com/) tokens across
 all your mail orders, optionally filtered by order. Plaintext tokens
 are never included; they are returned only when a token is created.
 

@@ -13,7 +13,7 @@ import (
 var ListCmd = &cobra.Command{
 	Use:               "list",
 	Short:             "List API tokens",
-	Long:              "Retrieve a paginated list of\nHostinger Email API (https://api.mail.hostinger.com/) tokens across\nall your mail orders, optionally filtered by order. Plaintext tokens\nare never included; they are returned only when a token is created.",
+	Long:              "Retrieve a paginated list of\nHostinger Mail API (https://api.mail.hostinger.com/) tokens across\nall your mail orders, optionally filtered by order. Plaintext tokens\nare never included; they are returned only when a token is created.",
 	Example:           "  hostinger mail api-tokens list",
 	ValidArgsFunction: cobra.NoFileCompletions,
 	RunE: func(cmd *cobra.Command, args []string) error {
