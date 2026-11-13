@@ -39,6 +39,31 @@
     "method": "POST",
     "path": "/api/dns/v1/zones/{domain}/validate"
   },
+  "GPU_createInstanceV1": {
+    "command": "hostinger gpu instances create",
+    "method": "POST",
+    "path": "/api/gpu/v1/instances"
+  },
+  "GPU_deleteInstanceV1": {
+    "command": "hostinger gpu instances delete",
+    "method": "DELETE",
+    "path": "/api/gpu/v1/instances/{instanceId}"
+  },
+  "GPU_getInstanceDetailsV1": {
+    "command": "hostinger gpu instances get",
+    "method": "GET",
+    "path": "/api/gpu/v1/instances/{instanceId}"
+  },
+  "GPU_getInstanceMetricsV1": {
+    "command": "hostinger gpu instances metrics",
+    "method": "GET",
+    "path": "/api/gpu/v1/instances/{instanceId}/metrics"
+  },
+  "GPU_getInstancesV1": {
+    "command": "hostinger gpu instances list",
+    "method": "GET",
+    "path": "/api/gpu/v1/instances"
+  },
   "GPU_getPoolGroupsV1": {
     "command": "hostinger gpu catalog pool-groups",
     "method": "GET",

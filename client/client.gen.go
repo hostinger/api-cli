@@ -1182,6 +1182,120 @@ func (e EcommerceV1StoreStoreRequestSalesChannelType) Valid() bool {
 	}
 }
 
+// Defines values for GPUV1InstanceInstanceListResourceActionLock.
+const (
+	GPUV1InstanceInstanceListResourceActionLockLocked   GPUV1InstanceInstanceListResourceActionLock = "locked"
+	GPUV1InstanceInstanceListResourceActionLockUnlocked GPUV1InstanceInstanceListResourceActionLock = "unlocked"
+)
+
+// Valid indicates whether the value is a known member of the GPUV1InstanceInstanceListResourceActionLock enum.
+func (e GPUV1InstanceInstanceListResourceActionLock) Valid() bool {
+	switch e {
+	case GPUV1InstanceInstanceListResourceActionLockLocked:
+		return true
+	case GPUV1InstanceInstanceListResourceActionLockUnlocked:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for GPUV1InstanceInstanceListResourceStatus.
+const (
+	GPUV1InstanceInstanceListResourceStatusAbuse             GPUV1InstanceInstanceListResourceStatus = "abuse"
+	GPUV1InstanceInstanceListResourceStatusCreated           GPUV1InstanceInstanceListResourceStatus = "created"
+	GPUV1InstanceInstanceListResourceStatusCreating          GPUV1InstanceInstanceListResourceStatus = "creating"
+	GPUV1InstanceInstanceListResourceStatusDestroyed         GPUV1InstanceInstanceListResourceStatus = "destroyed"
+	GPUV1InstanceInstanceListResourceStatusDestroying        GPUV1InstanceInstanceListResourceStatus = "destroying"
+	GPUV1InstanceInstanceListResourceStatusError             GPUV1InstanceInstanceListResourceStatus = "error"
+	GPUV1InstanceInstanceListResourceStatusInsufficientFunds GPUV1InstanceInstanceListResourceStatus = "insufficient_funds"
+	GPUV1InstanceInstanceListResourceStatusRunning           GPUV1InstanceInstanceListResourceStatus = "running"
+	GPUV1InstanceInstanceListResourceStatusStopped           GPUV1InstanceInstanceListResourceStatus = "stopped"
+)
+
+// Valid indicates whether the value is a known member of the GPUV1InstanceInstanceListResourceStatus enum.
+func (e GPUV1InstanceInstanceListResourceStatus) Valid() bool {
+	switch e {
+	case GPUV1InstanceInstanceListResourceStatusAbuse:
+		return true
+	case GPUV1InstanceInstanceListResourceStatusCreated:
+		return true
+	case GPUV1InstanceInstanceListResourceStatusCreating:
+		return true
+	case GPUV1InstanceInstanceListResourceStatusDestroyed:
+		return true
+	case GPUV1InstanceInstanceListResourceStatusDestroying:
+		return true
+	case GPUV1InstanceInstanceListResourceStatusError:
+		return true
+	case GPUV1InstanceInstanceListResourceStatusInsufficientFunds:
+		return true
+	case GPUV1InstanceInstanceListResourceStatusRunning:
+		return true
+	case GPUV1InstanceInstanceListResourceStatusStopped:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for GPUV1InstanceInstanceResourceActionLock.
+const (
+	GPUV1InstanceInstanceResourceActionLockLocked   GPUV1InstanceInstanceResourceActionLock = "locked"
+	GPUV1InstanceInstanceResourceActionLockUnlocked GPUV1InstanceInstanceResourceActionLock = "unlocked"
+)
+
+// Valid indicates whether the value is a known member of the GPUV1InstanceInstanceResourceActionLock enum.
+func (e GPUV1InstanceInstanceResourceActionLock) Valid() bool {
+	switch e {
+	case GPUV1InstanceInstanceResourceActionLockLocked:
+		return true
+	case GPUV1InstanceInstanceResourceActionLockUnlocked:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for GPUV1InstanceInstanceResourceStatus.
+const (
+	GPUV1InstanceInstanceResourceStatusAbuse             GPUV1InstanceInstanceResourceStatus = "abuse"
+	GPUV1InstanceInstanceResourceStatusCreated           GPUV1InstanceInstanceResourceStatus = "created"
+	GPUV1InstanceInstanceResourceStatusCreating          GPUV1InstanceInstanceResourceStatus = "creating"
+	GPUV1InstanceInstanceResourceStatusDestroyed         GPUV1InstanceInstanceResourceStatus = "destroyed"
+	GPUV1InstanceInstanceResourceStatusDestroying        GPUV1InstanceInstanceResourceStatus = "destroying"
+	GPUV1InstanceInstanceResourceStatusError             GPUV1InstanceInstanceResourceStatus = "error"
+	GPUV1InstanceInstanceResourceStatusInsufficientFunds GPUV1InstanceInstanceResourceStatus = "insufficient_funds"
+	GPUV1InstanceInstanceResourceStatusRunning           GPUV1InstanceInstanceResourceStatus = "running"
+	GPUV1InstanceInstanceResourceStatusStopped           GPUV1InstanceInstanceResourceStatus = "stopped"
+)
+
+// Valid indicates whether the value is a known member of the GPUV1InstanceInstanceResourceStatus enum.
+func (e GPUV1InstanceInstanceResourceStatus) Valid() bool {
+	switch e {
+	case GPUV1InstanceInstanceResourceStatusAbuse:
+		return true
+	case GPUV1InstanceInstanceResourceStatusCreated:
+		return true
+	case GPUV1InstanceInstanceResourceStatusCreating:
+		return true
+	case GPUV1InstanceInstanceResourceStatusDestroyed:
+		return true
+	case GPUV1InstanceInstanceResourceStatusDestroying:
+		return true
+	case GPUV1InstanceInstanceResourceStatusError:
+		return true
+	case GPUV1InstanceInstanceResourceStatusInsufficientFunds:
+		return true
+	case GPUV1InstanceInstanceResourceStatusRunning:
+		return true
+	case GPUV1InstanceInstanceResourceStatusStopped:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for HorizonsV1WebsitesCreateWebsiteRequestMessageType.
 const (
 	HorizonsV1WebsitesCreateWebsiteRequestMessageTypeText HorizonsV1WebsitesCreateWebsiteRequestMessageType = "text"
@@ -11065,6 +11179,129 @@ type EcommerceV1VariantVariantResponseResource struct {
 	Data *EcommerceV1VariantVariantResource `json:"data,omitempty"`
 }
 
+// GPUV1InstanceInstanceListCollection Array of [`GPU.V1.Instance.InstanceListResource`](#model/gpuv1instanceinstancelistresource)
+type GPUV1InstanceInstanceListCollection = []GPUV1InstanceInstanceListResource
+
+// GPUV1InstanceInstanceListResource defines model for GPU.V1.Instance.InstanceListResource.
+type GPUV1InstanceInstanceListResource struct {
+	// ActionLock Whether an action is in progress on the instance
+	//
+	// Example: unlocked
+	ActionLock *GPUV1InstanceInstanceListResourceActionLock `json:"action_lock,omitempty"`
+
+	// Id GPU instance ID
+	//
+	// Example: 6325
+	Id *int `json:"id,omitempty"`
+
+	// Name Example: my-instance-1
+	Name         *string                            `json:"name,omitempty"`
+	OsTemplate   *GPUV1OsTemplateOsTemplateResource `json:"os_template,omitempty"`
+	Pool         *GPUV1PoolPoolResource             `json:"pool,omitempty"`
+	PoolInstance *GPUV1PoolPoolInstanceResource     `json:"pool_instance,omitempty"`
+
+	// Status Example: running
+	Status *GPUV1InstanceInstanceListResourceStatus `json:"status,omitempty"`
+}
+
+// GPUV1InstanceInstanceListResourceActionLock Whether an action is in progress on the instance
+//
+// Example: unlocked
+type GPUV1InstanceInstanceListResourceActionLock string
+
+// GPUV1InstanceInstanceListResourceStatus Example: running
+type GPUV1InstanceInstanceListResourceStatus string
+
+// GPUV1InstanceInstanceResource defines model for GPU.V1.Instance.InstanceResource.
+type GPUV1InstanceInstanceResource struct {
+	// ActionLock Whether an action is in progress on the instance
+	//
+	// Example: unlocked
+	ActionLock *GPUV1InstanceInstanceResourceActionLock `json:"action_lock,omitempty"`
+
+	// Id GPU instance ID
+	//
+	// Example: 6325
+	Id *int `json:"id,omitempty"`
+
+	// Name Example: my-instance-1
+	Name         *string                            `json:"name,omitempty"`
+	OsTemplate   *GPUV1OsTemplateOsTemplateResource `json:"os_template,omitempty"`
+	Pool         *GPUV1PoolPoolResource             `json:"pool,omitempty"`
+	PoolInstance *GPUV1PoolPoolInstanceResource     `json:"pool_instance,omitempty"`
+
+	// SshKeys Array of [`GPU.V1.SshKey.SshKeyResource`](#model/gpuv1sshkeysshkeyresource)
+	SshKeys *GPUV1SshKeySshKeyCollection `json:"ssh_keys,omitempty"`
+
+	// Status Example: running
+	Status *GPUV1InstanceInstanceResourceStatus `json:"status,omitempty"`
+}
+
+// GPUV1InstanceInstanceResourceActionLock Whether an action is in progress on the instance
+//
+// Example: unlocked
+type GPUV1InstanceInstanceResourceActionLock string
+
+// GPUV1InstanceInstanceResourceStatus Example: running
+type GPUV1InstanceInstanceResourceStatus string
+
+// GPUV1InstanceStoreRequest defines model for GPU.V1.Instance.StoreRequest.
+type GPUV1InstanceStoreRequest struct {
+	// Name Instance name, unique among your instances. Letters, numbers, dashes and underscores only
+	//
+	// Example: my-instance-1
+	Name string `json:"name"`
+
+	// OsTemplateId OS template ID available for the selected instance type
+	//
+	// Example: 23
+	OsTemplateId int `json:"os_template_id"`
+
+	// PoolInstanceId Instance type ID from the pool instance types list
+	//
+	// Example: 232
+	PoolInstanceId int `json:"pool_instance_id"`
+
+	// PublicKeys SSH public keys to add to the instance
+	PublicKeys *[]string `json:"public_keys,omitempty"`
+}
+
+// GPUV1MetricsMetricsCollection Array of [`GPU.V1.Metrics.MetricsResource`](#model/gpuv1metricsmetricsresource)
+type GPUV1MetricsMetricsCollection = []GPUV1MetricsMetricsResource
+
+// GPUV1MetricsMetricsResource defines model for GPU.V1.Metrics.MetricsResource.
+type GPUV1MetricsMetricsResource struct {
+	// CpuPercentage CPU utilisation in percent
+	//
+	// Example: 42.5
+	CpuPercentage *float32 `json:"cpu_percentage,omitempty"`
+
+	// GpuMemoryUsed Used GPU memory in bytes
+	//
+	// Example: 42949672960
+	GpuMemoryUsed *float32 `json:"gpu_memory_used,omitempty"`
+
+	// GpuPercentage GPU utilisation in percent
+	//
+	// Example: 87.3
+	GpuPercentage *float32 `json:"gpu_percentage,omitempty"`
+
+	// GpuTflops GPU throughput in TFLOPS
+	//
+	// Example: 312
+	GpuTflops *float32 `json:"gpu_tflops,omitempty"`
+
+	// MemoryUsed Used memory in bytes
+	//
+	// Example: 8589934592
+	MemoryUsed *float32 `json:"memory_used,omitempty"`
+
+	// Timestamp Unix timestamp of the measurement
+	//
+	// Example: 1718000000
+	Timestamp *int `json:"timestamp,omitempty"`
+}
+
 // GPUV1OsTemplateOsTemplateCollection Array of [`GPU.V1.OsTemplate.OsTemplateResource`](#model/gpuv1ostemplateostemplateresource)
 type GPUV1OsTemplateOsTemplateCollection = []GPUV1OsTemplateOsTemplateResource
 
@@ -11224,6 +11461,23 @@ type GPUV1RegionRegionResource struct {
 	//
 	// Example: eu-north-1
 	Name *string `json:"name,omitempty"`
+}
+
+// GPUV1SshKeySshKeyCollection Array of [`GPU.V1.SshKey.SshKeyResource`](#model/gpuv1sshkeysshkeyresource)
+type GPUV1SshKeySshKeyCollection = []GPUV1SshKeySshKeyResource
+
+// GPUV1SshKeySshKeyResource defines model for GPU.V1.SshKey.SshKeyResource.
+type GPUV1SshKeySshKeyResource struct {
+	// Id SSH key ID
+	//
+	// Example: 12
+	Id *int `json:"id,omitempty"`
+
+	// Name Example: user@laptop
+	Name *string `json:"name,omitempty"`
+
+	// PublicKey Example: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA user@laptop
+	PublicKey *string `json:"public_key,omitempty"`
 }
 
 // HorizonsV1WebsitesCreateWebsiteRequest defines model for Horizons.V1.Websites.CreateWebsiteRequest.
@@ -18805,6 +19059,9 @@ type HostingSubscriptionId = string
 // HostingWebsiteTypes Example: ["wordpress","nodejs"]
 type HostingWebsiteTypes = []string
 
+// InstanceId Example: 6325
+type InstanceId = int
+
 // IpAddressId Example: 246547
 type IpAddressId = int
 
@@ -20221,6 +20478,9 @@ type EcommerceUpdateSalesChannelV1JSONRequestBody = EcommerceV1SalesChannelUpdat
 
 // EcommerceSetStoreShippingV1JSONRequestBody defines body for EcommerceSetStoreShippingV1 for application/json ContentType.
 type EcommerceSetStoreShippingV1JSONRequestBody = EcommerceV1ShippingSetShippingRequest
+
+// GPUCreateInstanceV1JSONRequestBody defines body for GPUCreateInstanceV1 for application/json ContentType.
+type GPUCreateInstanceV1JSONRequestBody = GPUV1InstanceStoreRequest
 
 // HorizonsCreateWebsiteV1JSONRequestBody defines body for HorizonsCreateWebsiteV1 for application/json ContentType.
 type HorizonsCreateWebsiteV1JSONRequestBody = HorizonsV1WebsitesCreateWebsiteRequest
@@ -24298,6 +24558,85 @@ type ClientInterface interface {
 	//
 	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/shipping (the `EcommerceSetStoreShippingV1` operationId).
 	EcommerceSetStoreShippingV1(ctx context.Context, storeId string, body EcommerceSetStoreShippingV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GPUGetInstancesV1 Get instances
+	//
+	// Retrieve all GPU instances of your account.
+	//
+	// Use this endpoint to view your GPU instances with their status, pool, instance type and OS template.
+	//
+	// Corresponds with GET /api/gpu/v1/instances (the `GPUGetInstancesV1` operationId).
+	GPUGetInstancesV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GPUCreateInstanceV1WithBody Create instance
+	//
+	// Create a new GPU instance.
+	//
+	// Pick `pool_instance_id` from the pool instance types list and `os_template_id` from the OS templates
+	// available for that instance type. Your account must have enough credits to run the instance for its
+	// first hour.
+	//
+	// The instance is created asynchronously: a successful request returns immediately, and the instance
+	// appears in the instance list while its `status` moves from `created` through `creating` to `running`.
+	//
+	// Use this endpoint to provision GPU compute.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/gpu/v1/instances (the `GPUCreateInstanceV1` operationId).
+	GPUCreateInstanceV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GPUCreateInstanceV1 Create instance
+	//
+	// Create a new GPU instance.
+	//
+	// Pick `pool_instance_id` from the pool instance types list and `os_template_id` from the OS templates
+	// available for that instance type. Your account must have enough credits to run the instance for its
+	// first hour.
+	//
+	// The instance is created asynchronously: a successful request returns immediately, and the instance
+	// appears in the instance list while its `status` moves from `created` through `creating` to `running`.
+	//
+	// Use this endpoint to provision GPU compute.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/gpu/v1/instances (the `GPUCreateInstanceV1` operationId).
+	GPUCreateInstanceV1(ctx context.Context, body GPUCreateInstanceV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GPUDeleteInstanceV1 Delete instance
+	//
+	// Delete a specified GPU instance.
+	//
+	// The instance is destroyed asynchronously: a successful request returns immediately and the instance
+	// `status` moves to `destroying`. Deleting fails while the instance is in `created`, `destroying`,
+	// `destroyed` or `abuse` status, or while another action is in progress on it.
+	//
+	// Use this endpoint to stop billing for a GPU instance you no longer need.
+	//
+	// Corresponds with DELETE /api/gpu/v1/instances/{instanceId} (the `GPUDeleteInstanceV1` operationId).
+	GPUDeleteInstanceV1(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GPUGetInstanceDetailsV1 Get instance details
+	//
+	// Retrieve detailed information about a specified GPU instance, including its SSH keys.
+	//
+	// Use this endpoint to follow the instance `status` after creating or deleting it.
+	//
+	// Corresponds with GET /api/gpu/v1/instances/{instanceId} (the `GPUGetInstanceDetailsV1` operationId).
+	GPUGetInstanceDetailsV1(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GPUGetInstanceMetricsV1 Get instance metrics
+	//
+	// Retrieve utilisation metrics of a specified GPU instance for the last hour.
+	//
+	// Each data point contains CPU, memory and GPU utilisation, used GPU memory and GPU throughput.
+	// The list is empty until the instance is provisioned.
+	//
+	// Use this endpoint to monitor GPU instance load.
+	//
+	// Corresponds with GET /api/gpu/v1/instances/{instanceId}/metrics (the `GPUGetInstanceMetricsV1` operationId).
+	GPUGetInstanceMetricsV1(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GPUGetPoolListV1 Get pool list
 	//
@@ -34339,6 +34678,145 @@ func (c *Client) EcommerceSetStoreShippingV1WithBody(ctx context.Context, storeI
 // Corresponds with POST /api/ecommerce/v1/stores/{store_id}/shipping (the `EcommerceSetStoreShippingV1` operationId).
 func (c *Client) EcommerceSetStoreShippingV1(ctx context.Context, storeId string, body EcommerceSetStoreShippingV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewEcommerceSetStoreShippingV1Request(c.Server, storeId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GPUGetInstancesV1 Get instances
+//
+// Retrieve all GPU instances of your account.
+//
+// Use this endpoint to view your GPU instances with their status, pool, instance type and OS template.
+//
+// Corresponds with GET /api/gpu/v1/instances (the `GPUGetInstancesV1` operationId).
+func (c *Client) GPUGetInstancesV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGPUGetInstancesV1Request(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GPUCreateInstanceV1WithBody Create instance
+//
+// Create a new GPU instance.
+//
+// Pick `pool_instance_id` from the pool instance types list and `os_template_id` from the OS templates
+// available for that instance type. Your account must have enough credits to run the instance for its
+// first hour.
+//
+// The instance is created asynchronously: a successful request returns immediately, and the instance
+// appears in the instance list while its `status` moves from `created` through `creating` to `running`.
+//
+// Use this endpoint to provision GPU compute.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/gpu/v1/instances (the `GPUCreateInstanceV1` operationId).
+func (c *Client) GPUCreateInstanceV1WithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGPUCreateInstanceV1RequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GPUCreateInstanceV1 Create instance
+//
+// Create a new GPU instance.
+//
+// Pick `pool_instance_id` from the pool instance types list and `os_template_id` from the OS templates
+// available for that instance type. Your account must have enough credits to run the instance for its
+// first hour.
+//
+// The instance is created asynchronously: a successful request returns immediately, and the instance
+// appears in the instance list while its `status` moves from `created` through `creating` to `running`.
+//
+// Use this endpoint to provision GPU compute.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/gpu/v1/instances (the `GPUCreateInstanceV1` operationId).
+func (c *Client) GPUCreateInstanceV1(ctx context.Context, body GPUCreateInstanceV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGPUCreateInstanceV1Request(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GPUDeleteInstanceV1 Delete instance
+//
+// Delete a specified GPU instance.
+//
+// The instance is destroyed asynchronously: a successful request returns immediately and the instance
+// `status` moves to `destroying`. Deleting fails while the instance is in `created`, `destroying`,
+// `destroyed` or `abuse` status, or while another action is in progress on it.
+//
+// Use this endpoint to stop billing for a GPU instance you no longer need.
+//
+// Corresponds with DELETE /api/gpu/v1/instances/{instanceId} (the `GPUDeleteInstanceV1` operationId).
+func (c *Client) GPUDeleteInstanceV1(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGPUDeleteInstanceV1Request(c.Server, instanceId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GPUGetInstanceDetailsV1 Get instance details
+//
+// Retrieve detailed information about a specified GPU instance, including its SSH keys.
+//
+// Use this endpoint to follow the instance `status` after creating or deleting it.
+//
+// Corresponds with GET /api/gpu/v1/instances/{instanceId} (the `GPUGetInstanceDetailsV1` operationId).
+func (c *Client) GPUGetInstanceDetailsV1(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGPUGetInstanceDetailsV1Request(c.Server, instanceId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GPUGetInstanceMetricsV1 Get instance metrics
+//
+// Retrieve utilisation metrics of a specified GPU instance for the last hour.
+//
+// Each data point contains CPU, memory and GPU utilisation, used GPU memory and GPU throughput.
+// The list is empty until the instance is provisioned.
+//
+// Use this endpoint to monitor GPU instance load.
+//
+// Corresponds with GET /api/gpu/v1/instances/{instanceId}/metrics (the `GPUGetInstanceMetricsV1` operationId).
+func (c *Client) GPUGetInstanceMetricsV1(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGPUGetInstanceMetricsV1Request(c.Server, instanceId)
 	if err != nil {
 		return nil, err
 	}
@@ -50244,6 +50722,175 @@ func NewEcommerceSetStoreShippingV1RequestWithBody(server string, storeId string
 	}
 
 	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGPUGetInstancesV1Request constructs an http.Request for the GPUGetInstancesV1 method
+func NewGPUGetInstancesV1Request(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/gpu/v1/instances")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGPUCreateInstanceV1Request calls the generic GPUCreateInstanceV1 builder with application/json body
+func NewGPUCreateInstanceV1Request(server string, body GPUCreateInstanceV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGPUCreateInstanceV1RequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewGPUCreateInstanceV1RequestWithBody constructs an http.Request for the GPUCreateInstanceV1 method, with any body, and a specified content type
+func NewGPUCreateInstanceV1RequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/gpu/v1/instances")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGPUDeleteInstanceV1Request constructs an http.Request for the GPUDeleteInstanceV1 method
+func NewGPUDeleteInstanceV1Request(server string, instanceId InstanceId) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "instanceId", instanceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/gpu/v1/instances/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGPUGetInstanceDetailsV1Request constructs an http.Request for the GPUGetInstanceDetailsV1 method
+func NewGPUGetInstanceDetailsV1Request(server string, instanceId InstanceId) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "instanceId", instanceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/gpu/v1/instances/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGPUGetInstanceMetricsV1Request constructs an http.Request for the GPUGetInstanceMetricsV1 method
+func NewGPUGetInstanceMetricsV1Request(server string, instanceId InstanceId) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "instanceId", instanceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/gpu/v1/instances/%s/metrics", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 
 	return req, nil
 }
@@ -68398,6 +69045,93 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/shipping (the `EcommerceSetStoreShippingV1` operationId).
 	EcommerceSetStoreShippingV1WithResponse(ctx context.Context, storeId string, body EcommerceSetStoreShippingV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceSetStoreShippingV1Response, error)
 
+	// GPUGetInstancesV1WithResponse Get instances
+	//
+	// Retrieve all GPU instances of your account.
+	//
+	// Use this endpoint to view your GPU instances with their status, pool, instance type and OS template.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/gpu/v1/instances (the `GPUGetInstancesV1` operationId).
+	GPUGetInstancesV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GPUGetInstancesV1Response, error)
+
+	// GPUCreateInstanceV1WithBodyWithResponse Create instance
+	//
+	// Create a new GPU instance.
+	//
+	// Pick `pool_instance_id` from the pool instance types list and `os_template_id` from the OS templates
+	// available for that instance type. Your account must have enough credits to run the instance for its
+	// first hour.
+	//
+	// The instance is created asynchronously: a successful request returns immediately, and the instance
+	// appears in the instance list while its `status` moves from `created` through `creating` to `running`.
+	//
+	// Use this endpoint to provision GPU compute.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/gpu/v1/instances (the `GPUCreateInstanceV1` operationId).
+	GPUCreateInstanceV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GPUCreateInstanceV1Response, error)
+
+	// GPUCreateInstanceV1WithResponse Create instance
+	//
+	// Create a new GPU instance.
+	//
+	// Pick `pool_instance_id` from the pool instance types list and `os_template_id` from the OS templates
+	// available for that instance type. Your account must have enough credits to run the instance for its
+	// first hour.
+	//
+	// The instance is created asynchronously: a successful request returns immediately, and the instance
+	// appears in the instance list while its `status` moves from `created` through `creating` to `running`.
+	//
+	// Use this endpoint to provision GPU compute.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/gpu/v1/instances (the `GPUCreateInstanceV1` operationId).
+	GPUCreateInstanceV1WithResponse(ctx context.Context, body GPUCreateInstanceV1JSONRequestBody, reqEditors ...RequestEditorFn) (*GPUCreateInstanceV1Response, error)
+
+	// GPUDeleteInstanceV1WithResponse Delete instance
+	//
+	// Delete a specified GPU instance.
+	//
+	// The instance is destroyed asynchronously: a successful request returns immediately and the instance
+	// `status` moves to `destroying`. Deleting fails while the instance is in `created`, `destroying`,
+	// `destroyed` or `abuse` status, or while another action is in progress on it.
+	//
+	// Use this endpoint to stop billing for a GPU instance you no longer need.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/gpu/v1/instances/{instanceId} (the `GPUDeleteInstanceV1` operationId).
+	GPUDeleteInstanceV1WithResponse(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*GPUDeleteInstanceV1Response, error)
+
+	// GPUGetInstanceDetailsV1WithResponse Get instance details
+	//
+	// Retrieve detailed information about a specified GPU instance, including its SSH keys.
+	//
+	// Use this endpoint to follow the instance `status` after creating or deleting it.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/gpu/v1/instances/{instanceId} (the `GPUGetInstanceDetailsV1` operationId).
+	GPUGetInstanceDetailsV1WithResponse(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*GPUGetInstanceDetailsV1Response, error)
+
+	// GPUGetInstanceMetricsV1WithResponse Get instance metrics
+	//
+	// Retrieve utilisation metrics of a specified GPU instance for the last hour.
+	//
+	// Each data point contains CPU, memory and GPU utilisation, used GPU memory and GPU throughput.
+	// The list is empty until the instance is provisioned.
+	//
+	// Use this endpoint to monitor GPU instance load.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/gpu/v1/instances/{instanceId}/metrics (the `GPUGetInstanceMetricsV1` operationId).
+	GPUGetInstanceMetricsV1WithResponse(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*GPUGetInstanceMetricsV1Response, error)
+
 	// GPUGetPoolListV1WithResponse Get pool list
 	//
 	// Retrieve all available GPU pools, ordered by name.
@@ -82360,6 +83094,288 @@ func (r EcommerceSetStoreShippingV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r EcommerceSetStoreShippingV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GPUGetInstancesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GPUV1InstanceInstanceListCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GPUGetInstancesV1Response) GetJSON200() *GPUV1InstanceInstanceListCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GPUGetInstancesV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GPUGetInstancesV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GPUGetInstancesV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GPUGetInstancesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GPUGetInstancesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GPUGetInstancesV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GPUCreateInstanceV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GPUCreateInstanceV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GPUCreateInstanceV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r GPUCreateInstanceV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GPUCreateInstanceV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GPUCreateInstanceV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GPUCreateInstanceV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GPUCreateInstanceV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GPUCreateInstanceV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GPUDeleteInstanceV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GPUDeleteInstanceV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GPUDeleteInstanceV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GPUDeleteInstanceV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GPUDeleteInstanceV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GPUDeleteInstanceV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GPUDeleteInstanceV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GPUDeleteInstanceV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GPUGetInstanceDetailsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GPUV1InstanceInstanceResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GPUGetInstanceDetailsV1Response) GetJSON200() *GPUV1InstanceInstanceResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GPUGetInstanceDetailsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GPUGetInstanceDetailsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GPUGetInstanceDetailsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GPUGetInstanceDetailsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GPUGetInstanceDetailsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GPUGetInstanceDetailsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GPUGetInstanceMetricsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GPUV1MetricsMetricsCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GPUGetInstanceMetricsV1Response) GetJSON200() *GPUV1MetricsMetricsCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GPUGetInstanceMetricsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GPUGetInstanceMetricsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GPUGetInstanceMetricsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GPUGetInstanceMetricsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GPUGetInstanceMetricsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GPUGetInstanceMetricsV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -105107,6 +106123,129 @@ func (c *ClientWithResponses) EcommerceSetStoreShippingV1WithResponse(ctx contex
 	return ParseEcommerceSetStoreShippingV1Response(rsp)
 }
 
+// GPUGetInstancesV1WithResponse Get instances
+//
+// Retrieve all GPU instances of your account.
+//
+// Use this endpoint to view your GPU instances with their status, pool, instance type and OS template.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/gpu/v1/instances (the `GPUGetInstancesV1` operationId).
+func (c *ClientWithResponses) GPUGetInstancesV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GPUGetInstancesV1Response, error) {
+	rsp, err := c.GPUGetInstancesV1(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGPUGetInstancesV1Response(rsp)
+}
+
+// GPUCreateInstanceV1WithBodyWithResponse Create instance
+//
+// Create a new GPU instance.
+//
+// Pick `pool_instance_id` from the pool instance types list and `os_template_id` from the OS templates
+// available for that instance type. Your account must have enough credits to run the instance for its
+// first hour.
+//
+// The instance is created asynchronously: a successful request returns immediately, and the instance
+// appears in the instance list while its `status` moves from `created` through `creating` to `running`.
+//
+// Use this endpoint to provision GPU compute.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/gpu/v1/instances (the `GPUCreateInstanceV1` operationId).
+func (c *ClientWithResponses) GPUCreateInstanceV1WithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GPUCreateInstanceV1Response, error) {
+	rsp, err := c.GPUCreateInstanceV1WithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGPUCreateInstanceV1Response(rsp)
+}
+
+// GPUCreateInstanceV1WithResponse Create instance
+//
+// Create a new GPU instance.
+//
+// Pick `pool_instance_id` from the pool instance types list and `os_template_id` from the OS templates
+// available for that instance type. Your account must have enough credits to run the instance for its
+// first hour.
+//
+// The instance is created asynchronously: a successful request returns immediately, and the instance
+// appears in the instance list while its `status` moves from `created` through `creating` to `running`.
+//
+// Use this endpoint to provision GPU compute.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/gpu/v1/instances (the `GPUCreateInstanceV1` operationId).
+func (c *ClientWithResponses) GPUCreateInstanceV1WithResponse(ctx context.Context, body GPUCreateInstanceV1JSONRequestBody, reqEditors ...RequestEditorFn) (*GPUCreateInstanceV1Response, error) {
+	rsp, err := c.GPUCreateInstanceV1(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGPUCreateInstanceV1Response(rsp)
+}
+
+// GPUDeleteInstanceV1WithResponse Delete instance
+//
+// Delete a specified GPU instance.
+//
+// The instance is destroyed asynchronously: a successful request returns immediately and the instance
+// `status` moves to `destroying`. Deleting fails while the instance is in `created`, `destroying`,
+// `destroyed` or `abuse` status, or while another action is in progress on it.
+//
+// Use this endpoint to stop billing for a GPU instance you no longer need.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/gpu/v1/instances/{instanceId} (the `GPUDeleteInstanceV1` operationId).
+func (c *ClientWithResponses) GPUDeleteInstanceV1WithResponse(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*GPUDeleteInstanceV1Response, error) {
+	rsp, err := c.GPUDeleteInstanceV1(ctx, instanceId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGPUDeleteInstanceV1Response(rsp)
+}
+
+// GPUGetInstanceDetailsV1WithResponse Get instance details
+//
+// Retrieve detailed information about a specified GPU instance, including its SSH keys.
+//
+// Use this endpoint to follow the instance `status` after creating or deleting it.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/gpu/v1/instances/{instanceId} (the `GPUGetInstanceDetailsV1` operationId).
+func (c *ClientWithResponses) GPUGetInstanceDetailsV1WithResponse(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*GPUGetInstanceDetailsV1Response, error) {
+	rsp, err := c.GPUGetInstanceDetailsV1(ctx, instanceId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGPUGetInstanceDetailsV1Response(rsp)
+}
+
+// GPUGetInstanceMetricsV1WithResponse Get instance metrics
+//
+// Retrieve utilisation metrics of a specified GPU instance for the last hour.
+//
+// Each data point contains CPU, memory and GPU utilisation, used GPU memory and GPU throughput.
+// The list is empty until the instance is provisioned.
+//
+// Use this endpoint to monitor GPU instance load.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/gpu/v1/instances/{instanceId}/metrics (the `GPUGetInstanceMetricsV1` operationId).
+func (c *ClientWithResponses) GPUGetInstanceMetricsV1WithResponse(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*GPUGetInstanceMetricsV1Response, error) {
+	rsp, err := c.GPUGetInstanceMetricsV1(ctx, instanceId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGPUGetInstanceMetricsV1Response(rsp)
+}
+
 // GPUGetPoolListV1WithResponse Get pool list
 //
 // Retrieve all available GPU pools, ordered by name.
@@ -119596,6 +120735,213 @@ func ParseEcommerceSetStoreShippingV1Response(rsp *http.Response) (*EcommerceSet
 			return nil, err
 		}
 		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGPUGetInstancesV1Response parses an HTTP response from a GPUGetInstancesV1WithResponse call
+func ParseGPUGetInstancesV1Response(rsp *http.Response) (*GPUGetInstancesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GPUGetInstancesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GPUV1InstanceInstanceListCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGPUCreateInstanceV1Response parses an HTTP response from a GPUCreateInstanceV1WithResponse call
+func ParseGPUCreateInstanceV1Response(rsp *http.Response) (*GPUCreateInstanceV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GPUCreateInstanceV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGPUDeleteInstanceV1Response parses an HTTP response from a GPUDeleteInstanceV1WithResponse call
+func ParseGPUDeleteInstanceV1Response(rsp *http.Response) (*GPUDeleteInstanceV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GPUDeleteInstanceV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGPUGetInstanceDetailsV1Response parses an HTTP response from a GPUGetInstanceDetailsV1WithResponse call
+func ParseGPUGetInstanceDetailsV1Response(rsp *http.Response) (*GPUGetInstanceDetailsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GPUGetInstanceDetailsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GPUV1InstanceInstanceResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGPUGetInstanceMetricsV1Response parses an HTTP response from a GPUGetInstanceMetricsV1WithResponse call
+func ParseGPUGetInstanceMetricsV1Response(rsp *http.Response) (*GPUGetInstanceMetricsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GPUGetInstanceMetricsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GPUV1MetricsMetricsCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse
