@@ -2085,6 +2085,24 @@ func (e HostingV1PocketBaseBackendCreatedResourceState) Valid() bool {
 	}
 }
 
+// Defines values for HostingV1PocketBaseBackendResourceFailureReason.
+const (
+	HostingV1PocketBaseBackendResourceFailureReasonProcessLimit HostingV1PocketBaseBackendResourceFailureReason = "process_limit"
+	HostingV1PocketBaseBackendResourceFailureReasonStartFailed  HostingV1PocketBaseBackendResourceFailureReason = "start_failed"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1PocketBaseBackendResourceFailureReason enum.
+func (e HostingV1PocketBaseBackendResourceFailureReason) Valid() bool {
+	switch e {
+	case HostingV1PocketBaseBackendResourceFailureReasonProcessLimit:
+		return true
+	case HostingV1PocketBaseBackendResourceFailureReasonStartFailed:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for HostingV1PocketBaseBackendResourceState.
 const (
 	HostingV1PocketBaseBackendResourceStateAsleep       HostingV1PocketBaseBackendResourceState = "asleep"
@@ -2115,6 +2133,24 @@ func (e HostingV1PocketBaseBackendResourceState) Valid() bool {
 	case HostingV1PocketBaseBackendResourceStateUnknown:
 		return true
 	case HostingV1PocketBaseBackendResourceStateUnregistered:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HostingV1PocketBaseInstanceResourceFailureReason.
+const (
+	HostingV1PocketBaseInstanceResourceFailureReasonProcessLimit HostingV1PocketBaseInstanceResourceFailureReason = "process_limit"
+	HostingV1PocketBaseInstanceResourceFailureReasonStartFailed  HostingV1PocketBaseInstanceResourceFailureReason = "start_failed"
+)
+
+// Valid indicates whether the value is a known member of the HostingV1PocketBaseInstanceResourceFailureReason enum.
+func (e HostingV1PocketBaseInstanceResourceFailureReason) Valid() bool {
+	switch e {
+	case HostingV1PocketBaseInstanceResourceFailureReasonProcessLimit:
+		return true
+	case HostingV1PocketBaseInstanceResourceFailureReasonStartFailed:
 		return true
 	default:
 		return false
@@ -13246,6 +13282,13 @@ type HostingV1PocketBaseBackendResource struct {
 	// Example: example.com
 	Domain string `json:"domain"`
 
+	// FailureReason Why the last start did not succeed, set only while `state` is `failed`. `process_limit` means the
+	// hosting account has no free process slots, usually because its Node.js apps are running;
+	// `start_failed` is any other cause.
+	//
+	// Example: process_limit
+	FailureReason *HostingV1PocketBaseBackendResourceFailureReason `json:"failure_reason"`
+
 	// InstanceId PocketBase instance ID
 	//
 	// Example: pb-u123456789-k3x9q2m7a1zdw8n4c5
@@ -13253,6 +13296,12 @@ type HostingV1PocketBaseBackendResource struct {
 
 	// NextSteps What to do next with this backend
 	NextSteps []string `json:"next_steps"`
+
+	// RetryAfterSeconds Seconds until Hostinger tries to start the instance again, set only while `state` is `failed`.
+	// Null when the next try is due now.
+	//
+	// Example: 300
+	RetryAfterSeconds *int `json:"retry_after_seconds"`
 
 	// State Live process state. The instance sleeps when idle and wakes on the first request.
 	// Null when the server could not be reached.
@@ -13265,6 +13314,13 @@ type HostingV1PocketBaseBackendResource struct {
 	// Example: 0.30.0
 	Version *string `json:"version"`
 }
+
+// HostingV1PocketBaseBackendResourceFailureReason Why the last start did not succeed, set only while `state` is `failed`. `process_limit` means the
+// hosting account has no free process slots, usually because its Node.js apps are running;
+// `start_failed` is any other cause.
+//
+// Example: process_limit
+type HostingV1PocketBaseBackendResourceFailureReason string
 
 // HostingV1PocketBaseBackendResourceState Live process state. The instance sleeps when idle and wakes on the first request.
 // Null when the server could not be reached.
@@ -13311,10 +13367,23 @@ type HostingV1PocketBaseInstanceResource struct {
 	// Example: example.com
 	Domain string `json:"domain"`
 
+	// FailureReason Why the last start did not succeed, set only while `state` is `failed`. `process_limit` means the
+	// hosting account has no free process slots, usually because its Node.js apps are running;
+	// `start_failed` is any other cause.
+	//
+	// Example: process_limit
+	FailureReason *HostingV1PocketBaseInstanceResourceFailureReason `json:"failure_reason"`
+
 	// InstanceId PocketBase instance ID
 	//
 	// Example: pb-u123456789-k3x9q2m7a1zdw8n4c5
 	InstanceId string `json:"instance_id"`
+
+	// RetryAfterSeconds Seconds until Hostinger tries to start the instance again, set only while `state` is `failed`.
+	// Null when the next try is due now.
+	//
+	// Example: 300
+	RetryAfterSeconds *int `json:"retry_after_seconds"`
 
 	// State Live process state. The instance sleeps when idle and wakes on the first request.
 	// Null when the server could not be reached.
@@ -13327,6 +13396,13 @@ type HostingV1PocketBaseInstanceResource struct {
 	// Example: 0.30.0
 	Version *string `json:"version"`
 }
+
+// HostingV1PocketBaseInstanceResourceFailureReason Why the last start did not succeed, set only while `state` is `failed`. `process_limit` means the
+// hosting account has no free process slots, usually because its Node.js apps are running;
+// `start_failed` is any other cause.
+//
+// Example: process_limit
+type HostingV1PocketBaseInstanceResourceFailureReason string
 
 // HostingV1PocketBaseInstanceResourceState Live process state. The instance sleeps when idle and wakes on the first request.
 // Null when the server could not be reached.
@@ -24692,10 +24768,16 @@ type ClientInterface interface {
 	// domain. An empty list means no website of the account has a PocketBase backend.
 	//
 	// States: `asleep` is normal (the instance sleeps when idle and wakes on the first request);
-	// `starting`, `running` and `stopping` are healthy; `failed` or `unregistered` mean the
-	// instance is broken; `missing` means its files are gone from the server, and creating the
-	// PocketBase backend again sets up a new, empty one. `state` is null when the server could
-	// not be reached; retry later.
+	// `starting`, `running` and `stopping` are healthy.
+	//
+	// `failed` means the last start did not succeed. Hostinger starts it again on its own after
+	// `retry_after_seconds`, and the data is intact: wait and call again, do not delete the
+	// backend. `failure_reason` says why: `process_limit` means the hosting account has no free
+	// process slots, usually because its Node.js apps are running.
+	//
+	// `unregistered` means the instance is broken. `missing` means its files are gone from the
+	// server, and creating the PocketBase backend again sets up a new, empty one. `state` is null
+	// when the server could not be reached; retry later.
 	//
 	// PocketBase is rolling out gradually: an account without access yet gets 422.
 	//
@@ -25570,9 +25652,16 @@ type ClientInterface interface {
 	//
 	// The instance sleeps when idle and wakes on the first request, so `asleep` is a normal state
 	// and the first call to a sleeping instance can take a few seconds. `starting`, `running` and
-	// `stopping` are healthy; `failed` or `unregistered` mean the instance is broken; `missing`
-	// means its files are gone from the server, and creating the PocketBase backend again sets up
-	// a new, empty one. `state` is null when the server could not be reached; retry later.
+	// `stopping` are healthy.
+	//
+	// `failed` means the last start did not succeed. Hostinger starts it again on its own after
+	// `retry_after_seconds`, and the data is intact: wait and call again, do not delete the
+	// backend. `failure_reason` says why: `process_limit` means the hosting account has no free
+	// process slots, usually because its Node.js apps are running.
+	//
+	// `unregistered` means the instance is broken. `missing` means its files are gone from the
+	// server, and creating the PocketBase backend again sets up a new, empty one. `state` is null
+	// when the server could not be reached; retry later.
 	//
 	// PocketBase is rolling out gradually: an account without access yet gets 422.
 	//
@@ -35069,10 +35158,16 @@ func (c *Client) HostingGenerateGitSSHKeyV1(ctx context.Context, username Userna
 // domain. An empty list means no website of the account has a PocketBase backend.
 //
 // States: `asleep` is normal (the instance sleeps when idle and wakes on the first request);
-// `starting`, `running` and `stopping` are healthy; `failed` or `unregistered` mean the
-// instance is broken; `missing` means its files are gone from the server, and creating the
-// PocketBase backend again sets up a new, empty one. `state` is null when the server could
-// not be reached; retry later.
+// `starting`, `running` and `stopping` are healthy.
+//
+// `failed` means the last start did not succeed. Hostinger starts it again on its own after
+// `retry_after_seconds`, and the data is intact: wait and call again, do not delete the
+// backend. `failure_reason` says why: `process_limit` means the hosting account has no free
+// process slots, usually because its Node.js apps are running.
+//
+// `unregistered` means the instance is broken. `missing` means its files are gone from the
+// server, and creating the PocketBase backend again sets up a new, empty one. `state` is null
+// when the server could not be reached; retry later.
 //
 // PocketBase is rolling out gradually: an account without access yet gets 422.
 //
@@ -36507,9 +36602,16 @@ func (c *Client) HostingDeletePocketBaseBackendV1(ctx context.Context, username 
 //
 // The instance sleeps when idle and wakes on the first request, so `asleep` is a normal state
 // and the first call to a sleeping instance can take a few seconds. `starting`, `running` and
-// `stopping` are healthy; `failed` or `unregistered` mean the instance is broken; `missing`
-// means its files are gone from the server, and creating the PocketBase backend again sets up
-// a new, empty one. `state` is null when the server could not be reached; retry later.
+// `stopping` are healthy.
+//
+// `failed` means the last start did not succeed. Hostinger starts it again on its own after
+// `retry_after_seconds`, and the data is intact: wait and call again, do not delete the
+// backend. `failure_reason` says why: `process_limit` means the hosting account has no free
+// process slots, usually because its Node.js apps are running.
+//
+// `unregistered` means the instance is broken. `missing` means its files are gone from the
+// server, and creating the PocketBase backend again sets up a new, empty one. `state` is null
+// when the server could not be reached; retry later.
 //
 // PocketBase is rolling out gradually: an account without access yet gets 422.
 //
@@ -68805,10 +68907,16 @@ type ClientWithResponsesInterface interface {
 	// domain. An empty list means no website of the account has a PocketBase backend.
 	//
 	// States: `asleep` is normal (the instance sleeps when idle and wakes on the first request);
-	// `starting`, `running` and `stopping` are healthy; `failed` or `unregistered` mean the
-	// instance is broken; `missing` means its files are gone from the server, and creating the
-	// PocketBase backend again sets up a new, empty one. `state` is null when the server could
-	// not be reached; retry later.
+	// `starting`, `running` and `stopping` are healthy.
+	//
+	// `failed` means the last start did not succeed. Hostinger starts it again on its own after
+	// `retry_after_seconds`, and the data is intact: wait and call again, do not delete the
+	// backend. `failure_reason` says why: `process_limit` means the hosting account has no free
+	// process slots, usually because its Node.js apps are running.
+	//
+	// `unregistered` means the instance is broken. `missing` means its files are gone from the
+	// server, and creating the PocketBase backend again sets up a new, empty one. `state` is null
+	// when the server could not be reached; retry later.
 	//
 	// PocketBase is rolling out gradually: an account without access yet gets 422.
 	//
@@ -69739,9 +69847,16 @@ type ClientWithResponsesInterface interface {
 	//
 	// The instance sleeps when idle and wakes on the first request, so `asleep` is a normal state
 	// and the first call to a sleeping instance can take a few seconds. `starting`, `running` and
-	// `stopping` are healthy; `failed` or `unregistered` mean the instance is broken; `missing`
-	// means its files are gone from the server, and creating the PocketBase backend again sets up
-	// a new, empty one. `state` is null when the server could not be reached; retry later.
+	// `stopping` are healthy.
+	//
+	// `failed` means the last start did not succeed. Hostinger starts it again on its own after
+	// `retry_after_seconds`, and the data is intact: wait and call again, do not delete the
+	// backend. `failure_reason` says why: `process_limit` means the hosting account has no free
+	// process slots, usually because its Node.js apps are running.
+	//
+	// `unregistered` means the instance is broken. `missing` means its files are gone from the
+	// server, and creating the PocketBase backend again sets up a new, empty one. `state` is null
+	// when the server could not be reached; retry later.
 	//
 	// PocketBase is rolling out gradually: an account without access yet gets 422.
 	//
@@ -105705,10 +105820,16 @@ func (c *ClientWithResponses) HostingGenerateGitSSHKeyV1WithResponse(ctx context
 // domain. An empty list means no website of the account has a PocketBase backend.
 //
 // States: `asleep` is normal (the instance sleeps when idle and wakes on the first request);
-// `starting`, `running` and `stopping` are healthy; `failed` or `unregistered` mean the
-// instance is broken; `missing` means its files are gone from the server, and creating the
-// PocketBase backend again sets up a new, empty one. `state` is null when the server could
-// not be reached; retry later.
+// `starting`, `running` and `stopping` are healthy.
+//
+// `failed` means the last start did not succeed. Hostinger starts it again on its own after
+// `retry_after_seconds`, and the data is intact: wait and call again, do not delete the
+// backend. `failure_reason` says why: `process_limit` means the hosting account has no free
+// process slots, usually because its Node.js apps are running.
+//
+// `unregistered` means the instance is broken. `missing` means its files are gone from the
+// server, and creating the PocketBase backend again sets up a new, empty one. `state` is null
+// when the server could not be reached; retry later.
 //
 // PocketBase is rolling out gradually: an account without access yet gets 422.
 //
@@ -106975,9 +107096,16 @@ func (c *ClientWithResponses) HostingDeletePocketBaseBackendV1WithResponse(ctx c
 //
 // The instance sleeps when idle and wakes on the first request, so `asleep` is a normal state
 // and the first call to a sleeping instance can take a few seconds. `starting`, `running` and
-// `stopping` are healthy; `failed` or `unregistered` mean the instance is broken; `missing`
-// means its files are gone from the server, and creating the PocketBase backend again sets up
-// a new, empty one. `state` is null when the server could not be reached; retry later.
+// `stopping` are healthy.
+//
+// `failed` means the last start did not succeed. Hostinger starts it again on its own after
+// `retry_after_seconds`, and the data is intact: wait and call again, do not delete the
+// backend. `failure_reason` says why: `process_limit` means the hosting account has no free
+// process slots, usually because its Node.js apps are running.
+//
+// `unregistered` means the instance is broken. `missing` means its files are gone from the
+// server, and creating the PocketBase backend again sets up a new, empty one. `state` is null
+// when the server could not be reached; retry later.
 //
 // PocketBase is rolling out gradually: an account without access yet gets 422.
 //
