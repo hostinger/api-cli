@@ -15522,7 +15522,7 @@ type ReachV1CampaignsCreatedCampaignResource struct {
 	// SenderName Example: Marketing Team
 	SenderName *string `json:"sender_name,omitempty"`
 
-	// Status Always `draft` for a campaign that was just created.
+	// Status Always `draft` for a campaign that was just created; the current status after an update.
 	//
 	// Example: draft
 	Status *ReachV1CampaignsCreatedCampaignResourceStatus `json:"status,omitempty"`
@@ -15546,7 +15546,7 @@ type ReachV1CampaignsCreatedCampaignResource struct {
 	Uuid *string `json:"uuid,omitempty"`
 }
 
-// ReachV1CampaignsCreatedCampaignResourceStatus Always `draft` for a campaign that was just created.
+// ReachV1CampaignsCreatedCampaignResourceStatus Always `draft` for a campaign that was just created; the current status after an update.
 //
 // Example: draft
 type ReachV1CampaignsCreatedCampaignResourceStatus string
@@ -15587,6 +15587,64 @@ type ReachV1CampaignsStoreRequest struct {
 
 	// TemplateUuid Template to send, as returned by the template endpoints. Can be left out and
 	// attached later, but the campaign cannot be sent without one.
+	//
+	// Example: 550e8400-e29b-41d4-a716-446655440000
+	TemplateUuid *string `json:"template_uuid,omitempty"`
+
+	// Title Name the campaign is listed under. Not shown to the recipients.
+	//
+	// Example: Black Friday Campaign
+	Title *string `json:"title,omitempty"`
+}
+
+// ReachV1CampaignsUpdateRequest Update a campaign. Send at least one field; fields left out keep their current value.
+type ReachV1CampaignsUpdateRequest struct {
+	// AllContacts `true` targets every contact of the profile, `false` targets only `segment_uuids`.
+	// Required when `segment_uuids` or `excluded_segment_uuids` is sent.
+	//
+	// Example: false
+	AllContacts *bool `json:"all_contacts,omitempty"`
+
+	// ExcludedSegmentUuids Segments to leave out. Only allowed together with `all_contacts: true`.
+	//
+	// Example: []
+	ExcludedSegmentUuids *[]openapi_types.UUID `json:"excluded_segment_uuids,omitempty"`
+
+	// Metadata Extra campaign fields. Any key outside the listed ones is rejected.
+	Metadata *struct {
+		// Preheader Preview text shown after the subject line in the inbox.
+		//
+		// Example: Our biggest deals of the year
+		Preheader *string `json:"preheader,omitempty"`
+
+		// Source Where the campaign was created from.
+		//
+		// Example: api
+		Source *string `json:"source,omitempty"`
+	} `json:"metadata,omitempty"`
+
+	// SegmentUuids Segments to target. Replaces the segments currently targeted.
+	//
+	// Example: ["2080cc86-e026-4f7b-9598-d4132f8c7c2f"]
+	SegmentUuids *[]openapi_types.UUID `json:"segment_uuids,omitempty"`
+
+	// SenderEmail From address of the campaign. Its domain has to be verified on the profile before
+	// the campaign can be sent.
+	//
+	// Example: marketing@example.com
+	SenderEmail *string `json:"sender_email,omitempty"`
+
+	// SenderName From name shown to the recipients.
+	//
+	// Example: Marketing Team
+	SenderName *string `json:"sender_name,omitempty"`
+
+	// Subject Subject line of the email.
+	//
+	// Example: Don't miss our Black Friday deals!
+	Subject *string `json:"subject,omitempty"`
+
+	// TemplateUuid Template to send, as returned by the template endpoints.
 	//
 	// Example: 550e8400-e29b-41d4-a716-446655440000
 	TemplateUuid *string `json:"template_uuid,omitempty"`
@@ -20821,6 +20879,9 @@ type ReachCreateANewContactV1JSONRequestBody = ReachV1ContactsStoreRequest
 
 // ReachCreateADraftCampaignV1JSONRequestBody defines body for ReachCreateADraftCampaignV1 for application/json ContentType.
 type ReachCreateADraftCampaignV1JSONRequestBody = ReachV1CampaignsStoreRequest
+
+// ReachUpdateCampaignV1JSONRequestBody defines body for ReachUpdateCampaignV1 for application/json ContentType.
+type ReachUpdateCampaignV1JSONRequestBody = ReachV1CampaignsUpdateRequest
 
 // ReachCreateNewContactsV1JSONRequestBody defines body for ReachCreateNewContactsV1 for application/json ContentType.
 type ReachCreateNewContactsV1JSONRequestBody = ReachV1ContactsStoreRequest
@@ -28469,6 +28530,50 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid} (the `ReachGetCampaignDetailsV1` operationId).
 	ReachGetCampaignDetailsV1(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachUpdateCampaignV1WithBody Update campaign
+	//
+	// Update a campaign's content, sender, template and audience.
+	//
+	// Only `draft`, `scheduled` and `failed` campaigns can be updated; a campaign that is sending or
+	// already sent is rejected. Updating a `failed` campaign moves it back to `draft`. Audience changes
+	// replace rather than merge: `all_contacts: true` targets every contact of the profile, while
+	// `segment_uuids` replaces the segments currently targeted. Leave both out to keep the audience as
+	// it is. This does not send the campaign - use the send endpoint for that.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid} (the `ReachUpdateCampaignV1` operationId).
+	ReachUpdateCampaignV1WithBody(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachUpdateCampaignV1 Update campaign
+	//
+	// Update a campaign's content, sender, template and audience.
+	//
+	// Only `draft`, `scheduled` and `failed` campaigns can be updated; a campaign that is sending or
+	// already sent is rejected. Updating a `failed` campaign moves it back to `draft`. Audience changes
+	// replace rather than merge: `all_contacts: true` targets every contact of the profile, while
+	// `segment_uuids` replaces the segments currently targeted. Leave both out to keep the audience as
+	// it is. This does not send the campaign - use the send endpoint for that.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid} (the `ReachUpdateCampaignV1` operationId).
+	ReachUpdateCampaignV1(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, body ReachUpdateCampaignV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReachSendCampaignV1 Send campaign
+	//
+	// Send a campaign now to the audience stored on it.
+	//
+	// This is irreversible: once accepted, the emails go out and cannot be recalled. Confirm with the
+	// customer before calling. The campaign needs a subject, sender, template and audience first - set
+	// them with the update endpoint. Delivery is asynchronous, so success means accepted, not delivered:
+	// the campaign moves to `sending` and later to `publish`, or to `failed`. Read the campaign to follow
+	// it. The request is rejected when the campaign has no recipients, its sender domain is not verified
+	// or is blocked, the plan's sending limits would be exceeded, or the campaign is already being sent.
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid}/send (the `ReachSendCampaignV1` operationId).
+	ReachSendCampaignV1(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReachGetCampaignPerformanceV1 Get campaign performance
 	//
@@ -41219,6 +41324,80 @@ func (c *Client) ReachCreateADraftCampaignV1(ctx context.Context, profileUuid Pr
 // Corresponds with GET /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid} (the `ReachGetCampaignDetailsV1` operationId).
 func (c *Client) ReachGetCampaignDetailsV1(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReachGetCampaignDetailsV1Request(c.Server, profileUuid, campaignUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachUpdateCampaignV1WithBody Update campaign
+//
+// Update a campaign's content, sender, template and audience.
+//
+// Only `draft`, `scheduled` and `failed` campaigns can be updated; a campaign that is sending or
+// already sent is rejected. Updating a `failed` campaign moves it back to `draft`. Audience changes
+// replace rather than merge: `all_contacts: true` targets every contact of the profile, while
+// `segment_uuids` replaces the segments currently targeted. Leave both out to keep the audience as
+// it is. This does not send the campaign - use the send endpoint for that.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid} (the `ReachUpdateCampaignV1` operationId).
+func (c *Client) ReachUpdateCampaignV1WithBody(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachUpdateCampaignV1RequestWithBody(c.Server, profileUuid, campaignUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachUpdateCampaignV1 Update campaign
+//
+// Update a campaign's content, sender, template and audience.
+//
+// Only `draft`, `scheduled` and `failed` campaigns can be updated; a campaign that is sending or
+// already sent is rejected. Updating a `failed` campaign moves it back to `draft`. Audience changes
+// replace rather than merge: `all_contacts: true` targets every contact of the profile, while
+// `segment_uuids` replaces the segments currently targeted. Leave both out to keep the audience as
+// it is. This does not send the campaign - use the send endpoint for that.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid} (the `ReachUpdateCampaignV1` operationId).
+func (c *Client) ReachUpdateCampaignV1(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, body ReachUpdateCampaignV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachUpdateCampaignV1Request(c.Server, profileUuid, campaignUuid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReachSendCampaignV1 Send campaign
+//
+// Send a campaign now to the audience stored on it.
+//
+// This is irreversible: once accepted, the emails go out and cannot be recalled. Confirm with the
+// customer before calling. The campaign needs a subject, sender, template and audience first - set
+// them with the update endpoint. Delivery is asynchronous, so success means accepted, not delivered:
+// the campaign moves to `sending` and later to `publish`, or to `failed`. Read the campaign to follow
+// it. The request is rejected when the campaign has no recipients, its sender domain is not verified
+// or is blocked, the plan's sending limits would be exceeded, or the campaign is already being sent.
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid}/send (the `ReachSendCampaignV1` operationId).
+func (c *Client) ReachSendCampaignV1(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReachSendCampaignV1Request(c.Server, profileUuid, campaignUuid)
 	if err != nil {
 		return nil, err
 	}
@@ -61309,6 +61488,101 @@ func NewReachGetCampaignDetailsV1Request(server string, profileUuid ProfileUuid,
 	return req, nil
 }
 
+// NewReachUpdateCampaignV1Request calls the generic ReachUpdateCampaignV1 builder with application/json body
+func NewReachUpdateCampaignV1Request(server string, profileUuid ProfileUuid, campaignUuid CampaignUuid, body ReachUpdateCampaignV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReachUpdateCampaignV1RequestWithBody(server, profileUuid, campaignUuid, "application/json", bodyReader)
+}
+
+// NewReachUpdateCampaignV1RequestWithBody constructs an http.Request for the ReachUpdateCampaignV1 method, with any body, and a specified content type
+func NewReachUpdateCampaignV1RequestWithBody(server string, profileUuid ProfileUuid, campaignUuid CampaignUuid, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "campaignUuid", campaignUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/campaigns/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewReachSendCampaignV1Request constructs an http.Request for the ReachSendCampaignV1 method
+func NewReachSendCampaignV1Request(server string, profileUuid ProfileUuid, campaignUuid CampaignUuid) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "profileUuid", profileUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "campaignUuid", campaignUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/reach/v1/profiles/%s/campaigns/%s/send", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewReachGetCampaignPerformanceV1Request constructs an http.Request for the ReachGetCampaignPerformanceV1 method
 func NewReachGetCampaignPerformanceV1Request(server string, profileUuid ProfileUuid, campaignUuid CampaignUuid) (*http.Request, error) {
 	var err error
@@ -73475,6 +73749,52 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with GET /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid} (the `ReachGetCampaignDetailsV1` operationId).
 	ReachGetCampaignDetailsV1WithResponse(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, reqEditors ...RequestEditorFn) (*ReachGetCampaignDetailsV1Response, error)
+
+	// ReachUpdateCampaignV1WithBodyWithResponse Update campaign
+	//
+	// Update a campaign's content, sender, template and audience.
+	//
+	// Only `draft`, `scheduled` and `failed` campaigns can be updated; a campaign that is sending or
+	// already sent is rejected. Updating a `failed` campaign moves it back to `draft`. Audience changes
+	// replace rather than merge: `all_contacts: true` targets every contact of the profile, while
+	// `segment_uuids` replaces the segments currently targeted. Leave both out to keep the audience as
+	// it is. This does not send the campaign - use the send endpoint for that.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid} (the `ReachUpdateCampaignV1` operationId).
+	ReachUpdateCampaignV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachUpdateCampaignV1Response, error)
+
+	// ReachUpdateCampaignV1WithResponse Update campaign
+	//
+	// Update a campaign's content, sender, template and audience.
+	//
+	// Only `draft`, `scheduled` and `failed` campaigns can be updated; a campaign that is sending or
+	// already sent is rejected. Updating a `failed` campaign moves it back to `draft`. Audience changes
+	// replace rather than merge: `all_contacts: true` targets every contact of the profile, while
+	// `segment_uuids` replaces the segments currently targeted. Leave both out to keep the audience as
+	// it is. This does not send the campaign - use the send endpoint for that.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid} (the `ReachUpdateCampaignV1` operationId).
+	ReachUpdateCampaignV1WithResponse(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, body ReachUpdateCampaignV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachUpdateCampaignV1Response, error)
+
+	// ReachSendCampaignV1WithResponse Send campaign
+	//
+	// Send a campaign now to the audience stored on it.
+	//
+	// This is irreversible: once accepted, the emails go out and cannot be recalled. Confirm with the
+	// customer before calling. The campaign needs a subject, sender, template and audience first - set
+	// them with the update endpoint. Delivery is asynchronous, so success means accepted, not delivered:
+	// the campaign moves to `sending` and later to `publish`, or to `failed`. Read the campaign to follow
+	// it. The request is rejected when the campaign has no recipients, its sender domain is not verified
+	// or is blocked, the plan's sending limits would be exceeded, or the campaign is already being sent.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid}/send (the `ReachSendCampaignV1` operationId).
+	ReachSendCampaignV1WithResponse(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, reqEditors ...RequestEditorFn) (*ReachSendCampaignV1Response, error)
 
 	// ReachGetCampaignPerformanceV1WithResponse Get campaign performance
 	//
@@ -95607,6 +95927,123 @@ func (r ReachGetCampaignDetailsV1Response) ContentType() string {
 	return ""
 }
 
+type ReachUpdateCampaignV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *ReachV1CampaignsCreatedCampaignResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachUpdateCampaignV1Response) GetJSON200() *ReachV1CampaignsCreatedCampaignResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachUpdateCampaignV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReachUpdateCampaignV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachUpdateCampaignV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachUpdateCampaignV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachUpdateCampaignV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachUpdateCampaignV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachUpdateCampaignV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReachSendCampaignV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReachSendCampaignV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReachSendCampaignV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReachSendCampaignV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r ReachSendCampaignV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReachSendCampaignV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReachSendCampaignV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReachSendCampaignV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type ReachGetCampaignPerformanceV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -112331,6 +112768,70 @@ func (c *ClientWithResponses) ReachGetCampaignDetailsV1WithResponse(ctx context.
 		return nil, err
 	}
 	return ParseReachGetCampaignDetailsV1Response(rsp)
+}
+
+// ReachUpdateCampaignV1WithBodyWithResponse Update campaign
+//
+// Update a campaign's content, sender, template and audience.
+//
+// Only `draft`, `scheduled` and `failed` campaigns can be updated; a campaign that is sending or
+// already sent is rejected. Updating a `failed` campaign moves it back to `draft`. Audience changes
+// replace rather than merge: `all_contacts: true` targets every contact of the profile, while
+// `segment_uuids` replaces the segments currently targeted. Leave both out to keep the audience as
+// it is. This does not send the campaign - use the send endpoint for that.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid} (the `ReachUpdateCampaignV1` operationId).
+func (c *ClientWithResponses) ReachUpdateCampaignV1WithBodyWithResponse(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReachUpdateCampaignV1Response, error) {
+	rsp, err := c.ReachUpdateCampaignV1WithBody(ctx, profileUuid, campaignUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachUpdateCampaignV1Response(rsp)
+}
+
+// ReachUpdateCampaignV1WithResponse Update campaign
+//
+// Update a campaign's content, sender, template and audience.
+//
+// Only `draft`, `scheduled` and `failed` campaigns can be updated; a campaign that is sending or
+// already sent is rejected. Updating a `failed` campaign moves it back to `draft`. Audience changes
+// replace rather than merge: `all_contacts: true` targets every contact of the profile, while
+// `segment_uuids` replaces the segments currently targeted. Leave both out to keep the audience as
+// it is. This does not send the campaign - use the send endpoint for that.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid} (the `ReachUpdateCampaignV1` operationId).
+func (c *ClientWithResponses) ReachUpdateCampaignV1WithResponse(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, body ReachUpdateCampaignV1JSONRequestBody, reqEditors ...RequestEditorFn) (*ReachUpdateCampaignV1Response, error) {
+	rsp, err := c.ReachUpdateCampaignV1(ctx, profileUuid, campaignUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachUpdateCampaignV1Response(rsp)
+}
+
+// ReachSendCampaignV1WithResponse Send campaign
+//
+// Send a campaign now to the audience stored on it.
+//
+// This is irreversible: once accepted, the emails go out and cannot be recalled. Confirm with the
+// customer before calling. The campaign needs a subject, sender, template and audience first - set
+// them with the update endpoint. Delivery is asynchronous, so success means accepted, not delivered:
+// the campaign moves to `sending` and later to `publish`, or to `failed`. Read the campaign to follow
+// it. The request is rejected when the campaign has no recipients, its sender domain is not verified
+// or is blocked, the plan's sending limits would be exceeded, or the campaign is already being sent.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid}/send (the `ReachSendCampaignV1` operationId).
+func (c *ClientWithResponses) ReachSendCampaignV1WithResponse(ctx context.Context, profileUuid ProfileUuid, campaignUuid CampaignUuid, reqEditors ...RequestEditorFn) (*ReachSendCampaignV1Response, error) {
+	rsp, err := c.ReachSendCampaignV1(ctx, profileUuid, campaignUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReachSendCampaignV1Response(rsp)
 }
 
 // ReachGetCampaignPerformanceV1WithResponse Get campaign performance
@@ -130540,6 +131041,93 @@ func ParseReachGetCampaignDetailsV1Response(rsp *http.Response) (*ReachGetCampai
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest ReachV1CampaignsCampaignDetailsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachUpdateCampaignV1Response parses an HTTP response from a ReachUpdateCampaignV1WithResponse call
+func ParseReachUpdateCampaignV1Response(rsp *http.Response) (*ReachUpdateCampaignV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachUpdateCampaignV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ReachV1CampaignsCreatedCampaignResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReachSendCampaignV1Response parses an HTTP response from a ReachSendCampaignV1WithResponse call
+func ParseReachSendCampaignV1Response(rsp *http.Response) (*ReachSendCampaignV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReachSendCampaignV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

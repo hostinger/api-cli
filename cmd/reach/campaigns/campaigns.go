@@ -17,4 +17,6 @@ func init() {
 	GroupCmd.AddCommand(GetCmd)
 	GroupCmd.AddCommand(ListCmd)
 	GroupCmd.AddCommand(PerformanceCmd)
+	GroupCmd.AddCommand(SendCmd)
+	GroupCmd.AddCommand(UpdateCmd)
 }

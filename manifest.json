@@ -2209,6 +2209,11 @@
     "method": "PATCH",
     "path": "/api/reach/v1/profiles/{profileUuid}/tags/{tagUuid}"
   },
+  "reach_sendCampaignV1": {
+    "command": "hostinger reach campaigns send",
+    "method": "POST",
+    "path": "/api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid}/send"
+  },
   "reach_updateAContactFieldV1": {
     "command": "hostinger reach contact-fields update",
     "method": "PATCH",
@@ -2223,6 +2228,11 @@
     "command": "hostinger reach segments update-profile",
     "method": "PUT",
     "path": "/api/reach/v1/profiles/{profileUuid}/segmentation/segments/{segmentUuid}"
+  },
+  "reach_updateCampaignV1": {
+    "command": "hostinger reach campaigns update",
+    "method": "PATCH",
+    "path": "/api/reach/v1/profiles/{profileUuid}/campaigns/{campaignUuid}"
   },
   "reach_updateFormTemplateV1": {
     "command": "hostinger reach forms update-template",

@@ -33,4 +33,6 @@ hostinger reach campaigns [flags]
 * [hostinger reach campaigns get](hostinger_reach_campaigns_get.md)	 - Get campaign details
 * [hostinger reach campaigns list](hostinger_reach_campaigns_list.md)	 - List campaigns
 * [hostinger reach campaigns performance](hostinger_reach_campaigns_performance.md)	 - Get campaign performance
+* [hostinger reach campaigns send](hostinger_reach_campaigns_send.md)	 - Send campaign
+* [hostinger reach campaigns update](hostinger_reach_campaigns_update.md)	 - Update campaign
 
