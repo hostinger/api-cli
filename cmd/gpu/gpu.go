@@ -2,6 +2,7 @@ package gpu
 
 import (
 	"github.com/hostinger/api-cli/cmd/gpu/catalog"
+	"github.com/hostinger/api-cli/cmd/gpu/exposed_services"
 	"github.com/hostinger/api-cli/cmd/gpu/instances"
 
 	"github.com/hostinger/api-cli/utils"
@@ -17,5 +18,6 @@ var GroupCmd = &cobra.Command{
 
 func init() {
 	GroupCmd.AddCommand(catalog.GroupCmd)
+	GroupCmd.AddCommand(exposed_services.GroupCmd)
 	GroupCmd.AddCommand(instances.GroupCmd)
 }

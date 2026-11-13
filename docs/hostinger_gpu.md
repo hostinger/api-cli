@@ -30,5 +30,6 @@ hostinger gpu [flags]
 
 * [hostinger](hostinger.md)	 - Hostinger API Command Line Interface
 * [hostinger gpu catalog](hostinger_gpu_catalog.md)	 - Catalog commands
+* [hostinger gpu exposed-services](hostinger_gpu_exposed-services.md)	 - Exposed services commands
 * [hostinger gpu instances](hostinger_gpu_instances.md)	 - Instances commands
 

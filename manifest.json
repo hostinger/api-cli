@@ -39,15 +39,30 @@
     "method": "POST",
     "path": "/api/dns/v1/zones/{domain}/validate"
   },
+  "GPU_createExposedServiceV1": {
+    "command": "hostinger gpu exposed-services create",
+    "method": "POST",
+    "path": "/api/gpu/v1/instances/{instanceId}/exposed-services"
+  },
   "GPU_createInstanceV1": {
     "command": "hostinger gpu instances create",
     "method": "POST",
     "path": "/api/gpu/v1/instances"
   },
+  "GPU_deleteExposedServiceV1": {
+    "command": "hostinger gpu exposed-services delete",
+    "method": "DELETE",
+    "path": "/api/gpu/v1/instances/{instanceId}/exposed-services/{exposedServiceId}"
+  },
   "GPU_deleteInstanceV1": {
     "command": "hostinger gpu instances delete",
     "method": "DELETE",
     "path": "/api/gpu/v1/instances/{instanceId}"
+  },
+  "GPU_getExposedServicesV1": {
+    "command": "hostinger gpu exposed-services list",
+    "method": "GET",
+    "path": "/api/gpu/v1/instances/{instanceId}/exposed-services"
   },
   "GPU_getInstanceDetailsV1": {
     "command": "hostinger gpu instances get",

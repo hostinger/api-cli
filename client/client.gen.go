@@ -1182,6 +1182,78 @@ func (e EcommerceV1StoreStoreRequestSalesChannelType) Valid() bool {
 	}
 }
 
+// Defines values for GPUV1ExposedServiceExposedServiceResourceProtocol.
+const (
+	GPUV1ExposedServiceExposedServiceResourceProtocolTcp GPUV1ExposedServiceExposedServiceResourceProtocol = "tcp"
+	GPUV1ExposedServiceExposedServiceResourceProtocolUdp GPUV1ExposedServiceExposedServiceResourceProtocol = "udp"
+)
+
+// Valid indicates whether the value is a known member of the GPUV1ExposedServiceExposedServiceResourceProtocol enum.
+func (e GPUV1ExposedServiceExposedServiceResourceProtocol) Valid() bool {
+	switch e {
+	case GPUV1ExposedServiceExposedServiceResourceProtocolTcp:
+		return true
+	case GPUV1ExposedServiceExposedServiceResourceProtocolUdp:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for GPUV1ExposedServiceExposedServiceResourceType.
+const (
+	GPUV1ExposedServiceExposedServiceResourceTypeHttp  GPUV1ExposedServiceExposedServiceResourceType = "http"
+	GPUV1ExposedServiceExposedServiceResourceTypeHttps GPUV1ExposedServiceExposedServiceResourceType = "https"
+)
+
+// Valid indicates whether the value is a known member of the GPUV1ExposedServiceExposedServiceResourceType enum.
+func (e GPUV1ExposedServiceExposedServiceResourceType) Valid() bool {
+	switch e {
+	case GPUV1ExposedServiceExposedServiceResourceTypeHttp:
+		return true
+	case GPUV1ExposedServiceExposedServiceResourceTypeHttps:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for GPUV1ExposedServiceStoreRequestProtocol.
+const (
+	GPUV1ExposedServiceStoreRequestProtocolTcp GPUV1ExposedServiceStoreRequestProtocol = "tcp"
+	GPUV1ExposedServiceStoreRequestProtocolUdp GPUV1ExposedServiceStoreRequestProtocol = "udp"
+)
+
+// Valid indicates whether the value is a known member of the GPUV1ExposedServiceStoreRequestProtocol enum.
+func (e GPUV1ExposedServiceStoreRequestProtocol) Valid() bool {
+	switch e {
+	case GPUV1ExposedServiceStoreRequestProtocolTcp:
+		return true
+	case GPUV1ExposedServiceStoreRequestProtocolUdp:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for GPUV1ExposedServiceStoreRequestType.
+const (
+	GPUV1ExposedServiceStoreRequestTypeHttp  GPUV1ExposedServiceStoreRequestType = "http"
+	GPUV1ExposedServiceStoreRequestTypeHttps GPUV1ExposedServiceStoreRequestType = "https"
+)
+
+// Valid indicates whether the value is a known member of the GPUV1ExposedServiceStoreRequestType enum.
+func (e GPUV1ExposedServiceStoreRequestType) Valid() bool {
+	switch e {
+	case GPUV1ExposedServiceStoreRequestTypeHttp:
+		return true
+	case GPUV1ExposedServiceStoreRequestTypeHttps:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for GPUV1InstanceInstanceListResourceActionLock.
 const (
 	GPUV1InstanceInstanceListResourceActionLockLocked   GPUV1InstanceInstanceListResourceActionLock = "locked"
@@ -4346,16 +4418,16 @@ func (e VPSV1ActionActionResourceState) Valid() bool {
 
 // Defines values for VPSV1DockerManagerContainerPortResourceProtocol.
 const (
-	Tcp VPSV1DockerManagerContainerPortResourceProtocol = "tcp"
-	Udp VPSV1DockerManagerContainerPortResourceProtocol = "udp"
+	VPSV1DockerManagerContainerPortResourceProtocolTcp VPSV1DockerManagerContainerPortResourceProtocol = "tcp"
+	VPSV1DockerManagerContainerPortResourceProtocolUdp VPSV1DockerManagerContainerPortResourceProtocol = "udp"
 )
 
 // Valid indicates whether the value is a known member of the VPSV1DockerManagerContainerPortResourceProtocol enum.
 func (e VPSV1DockerManagerContainerPortResourceProtocol) Valid() bool {
 	switch e {
-	case Tcp:
+	case VPSV1DockerManagerContainerPortResourceProtocolTcp:
 		return true
-	case Udp:
+	case VPSV1DockerManagerContainerPortResourceProtocolUdp:
 		return true
 	default:
 		return false
@@ -11178,6 +11250,72 @@ type EcommerceV1VariantVariantResource struct {
 type EcommerceV1VariantVariantResponseResource struct {
 	Data *EcommerceV1VariantVariantResource `json:"data,omitempty"`
 }
+
+// GPUV1ExposedServiceExposedServiceCollection Array of [`GPU.V1.ExposedService.ExposedServiceResource`](#model/gpuv1exposedserviceexposedserviceresource)
+type GPUV1ExposedServiceExposedServiceCollection = []GPUV1ExposedServiceExposedServiceResource
+
+// GPUV1ExposedServiceExposedServiceResource defines model for GPU.V1.ExposedService.ExposedServiceResource.
+type GPUV1ExposedServiceExposedServiceResource struct {
+	// ExternalPort Public port the service is reachable on
+	//
+	// Example: 20000
+	ExternalPort *int `json:"external_port,omitempty"`
+
+	// Hostname Public hostname or IP address of the service
+	//
+	// Example: 1.2.3.4
+	Hostname *string `json:"hostname,omitempty"`
+
+	// Id Exposed service ID
+	//
+	// Example: 5
+	Id *int `json:"id,omitempty"`
+
+	// InternalPort Port the service listens on inside the instance
+	//
+	// Example: 8088
+	InternalPort *int `json:"internal_port,omitempty"`
+
+	// Name Example: Ollama
+	Name *string `json:"name,omitempty"`
+
+	// Protocol Example: tcp
+	Protocol *GPUV1ExposedServiceExposedServiceResourceProtocol `json:"protocol,omitempty"`
+
+	// Type Example: http
+	Type *GPUV1ExposedServiceExposedServiceResourceType `json:"type,omitempty"`
+}
+
+// GPUV1ExposedServiceExposedServiceResourceProtocol Example: tcp
+type GPUV1ExposedServiceExposedServiceResourceProtocol string
+
+// GPUV1ExposedServiceExposedServiceResourceType Example: http
+type GPUV1ExposedServiceExposedServiceResourceType string
+
+// GPUV1ExposedServiceStoreRequest defines model for GPU.V1.ExposedService.StoreRequest.
+type GPUV1ExposedServiceStoreRequest struct {
+	// InternalPort Port the service listens on inside the instance, unique within the instance
+	//
+	// Example: 8000
+	InternalPort int `json:"internal_port"`
+
+	// Name Service name, unique within the instance
+	//
+	// Example: Ollama
+	Name string `json:"name"`
+
+	// Protocol Example: tcp
+	Protocol GPUV1ExposedServiceStoreRequestProtocol `json:"protocol"`
+
+	// Type Example: http
+	Type GPUV1ExposedServiceStoreRequestType `json:"type"`
+}
+
+// GPUV1ExposedServiceStoreRequestProtocol Example: tcp
+type GPUV1ExposedServiceStoreRequestProtocol string
+
+// GPUV1ExposedServiceStoreRequestType Example: http
+type GPUV1ExposedServiceStoreRequestType string
 
 // GPUV1InstanceInstanceListCollection Array of [`GPU.V1.Instance.InstanceListResource`](#model/gpuv1instanceinstancelistresource)
 type GPUV1InstanceInstanceListCollection = []GPUV1InstanceInstanceListResource
@@ -19023,6 +19161,9 @@ type Domain = string
 // DomainFilter Example: example.com
 type DomainFilter = string
 
+// ExposedServiceId Example: 3621
+type ExposedServiceId = int
+
 // FieldUuid Example: 550e8400-e29b-41d4-a716-446655440000
 type FieldUuid = openapi_types.UUID
 
@@ -20481,6 +20622,9 @@ type EcommerceSetStoreShippingV1JSONRequestBody = EcommerceV1ShippingSetShipping
 
 // GPUCreateInstanceV1JSONRequestBody defines body for GPUCreateInstanceV1 for application/json ContentType.
 type GPUCreateInstanceV1JSONRequestBody = GPUV1InstanceStoreRequest
+
+// GPUCreateExposedServiceV1JSONRequestBody defines body for GPUCreateExposedServiceV1 for application/json ContentType.
+type GPUCreateExposedServiceV1JSONRequestBody = GPUV1ExposedServiceStoreRequest
 
 // HorizonsCreateWebsiteV1JSONRequestBody defines body for HorizonsCreateWebsiteV1 for application/json ContentType.
 type HorizonsCreateWebsiteV1JSONRequestBody = HorizonsV1WebsitesCreateWebsiteRequest
@@ -24625,6 +24769,59 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/gpu/v1/instances/{instanceId} (the `GPUGetInstanceDetailsV1` operationId).
 	GPUGetInstanceDetailsV1(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GPUGetExposedServicesV1 Get exposed services
+	//
+	// Retrieve the services exposed on a specified GPU instance.
+	//
+	// A newly created service is listed once it gets its public hostname and external port.
+	//
+	// Use this endpoint to find the public address of services running on your GPU instance.
+	//
+	// Corresponds with GET /api/gpu/v1/instances/{instanceId}/exposed-services (the `GPUGetExposedServicesV1` operationId).
+	GPUGetExposedServicesV1(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GPUCreateExposedServiceV1WithBody Create exposed service
+	//
+	// Expose a service running on a specified GPU instance to the internet.
+	//
+	// The service is exposed asynchronously: a successful request returns immediately, and the service
+	// appears in the exposed services list once it gets its public hostname and external port.
+	// Fails when the instance already has the maximum of 4 exposed services.
+	//
+	// Use this endpoint to make an application on your GPU instance publicly reachable.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/gpu/v1/instances/{instanceId}/exposed-services (the `GPUCreateExposedServiceV1` operationId).
+	GPUCreateExposedServiceV1WithBody(ctx context.Context, instanceId InstanceId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GPUCreateExposedServiceV1 Create exposed service
+	//
+	// Expose a service running on a specified GPU instance to the internet.
+	//
+	// The service is exposed asynchronously: a successful request returns immediately, and the service
+	// appears in the exposed services list once it gets its public hostname and external port.
+	// Fails when the instance already has the maximum of 4 exposed services.
+	//
+	// Use this endpoint to make an application on your GPU instance publicly reachable.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/gpu/v1/instances/{instanceId}/exposed-services (the `GPUCreateExposedServiceV1` operationId).
+	GPUCreateExposedServiceV1(ctx context.Context, instanceId InstanceId, body GPUCreateExposedServiceV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GPUDeleteExposedServiceV1 Delete exposed service
+	//
+	// Delete a specified exposed service of a GPU instance.
+	//
+	// The service is removed asynchronously: a successful request returns immediately and the service
+	// stops being reachable from the internet shortly after.
+	//
+	// Use this endpoint to close public access to a service on your GPU instance.
+	//
+	// Corresponds with DELETE /api/gpu/v1/instances/{instanceId}/exposed-services/{exposedServiceId} (the `GPUDeleteExposedServiceV1` operationId).
+	GPUDeleteExposedServiceV1(ctx context.Context, instanceId InstanceId, exposedServiceId ExposedServiceId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GPUGetInstanceMetricsV1 Get instance metrics
 	//
@@ -34795,6 +34992,99 @@ func (c *Client) GPUDeleteInstanceV1(ctx context.Context, instanceId InstanceId,
 // Corresponds with GET /api/gpu/v1/instances/{instanceId} (the `GPUGetInstanceDetailsV1` operationId).
 func (c *Client) GPUGetInstanceDetailsV1(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGPUGetInstanceDetailsV1Request(c.Server, instanceId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GPUGetExposedServicesV1 Get exposed services
+//
+// Retrieve the services exposed on a specified GPU instance.
+//
+// A newly created service is listed once it gets its public hostname and external port.
+//
+// Use this endpoint to find the public address of services running on your GPU instance.
+//
+// Corresponds with GET /api/gpu/v1/instances/{instanceId}/exposed-services (the `GPUGetExposedServicesV1` operationId).
+func (c *Client) GPUGetExposedServicesV1(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGPUGetExposedServicesV1Request(c.Server, instanceId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GPUCreateExposedServiceV1WithBody Create exposed service
+//
+// Expose a service running on a specified GPU instance to the internet.
+//
+// The service is exposed asynchronously: a successful request returns immediately, and the service
+// appears in the exposed services list once it gets its public hostname and external port.
+// Fails when the instance already has the maximum of 4 exposed services.
+//
+// Use this endpoint to make an application on your GPU instance publicly reachable.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/gpu/v1/instances/{instanceId}/exposed-services (the `GPUCreateExposedServiceV1` operationId).
+func (c *Client) GPUCreateExposedServiceV1WithBody(ctx context.Context, instanceId InstanceId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGPUCreateExposedServiceV1RequestWithBody(c.Server, instanceId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GPUCreateExposedServiceV1 Create exposed service
+//
+// Expose a service running on a specified GPU instance to the internet.
+//
+// The service is exposed asynchronously: a successful request returns immediately, and the service
+// appears in the exposed services list once it gets its public hostname and external port.
+// Fails when the instance already has the maximum of 4 exposed services.
+//
+// Use this endpoint to make an application on your GPU instance publicly reachable.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/gpu/v1/instances/{instanceId}/exposed-services (the `GPUCreateExposedServiceV1` operationId).
+func (c *Client) GPUCreateExposedServiceV1(ctx context.Context, instanceId InstanceId, body GPUCreateExposedServiceV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGPUCreateExposedServiceV1Request(c.Server, instanceId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GPUDeleteExposedServiceV1 Delete exposed service
+//
+// Delete a specified exposed service of a GPU instance.
+//
+// The service is removed asynchronously: a successful request returns immediately and the service
+// stops being reachable from the internet shortly after.
+//
+// Use this endpoint to close public access to a service on your GPU instance.
+//
+// Corresponds with DELETE /api/gpu/v1/instances/{instanceId}/exposed-services/{exposedServiceId} (the `GPUDeleteExposedServiceV1` operationId).
+func (c *Client) GPUDeleteExposedServiceV1(ctx context.Context, instanceId InstanceId, exposedServiceId ExposedServiceId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGPUDeleteExposedServiceV1Request(c.Server, instanceId, exposedServiceId)
 	if err != nil {
 		return nil, err
 	}
@@ -50854,6 +51144,128 @@ func NewGPUGetInstanceDetailsV1Request(server string, instanceId InstanceId) (*h
 	}
 
 	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGPUGetExposedServicesV1Request constructs an http.Request for the GPUGetExposedServicesV1 method
+func NewGPUGetExposedServicesV1Request(server string, instanceId InstanceId) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "instanceId", instanceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/gpu/v1/instances/%s/exposed-services", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGPUCreateExposedServiceV1Request calls the generic GPUCreateExposedServiceV1 builder with application/json body
+func NewGPUCreateExposedServiceV1Request(server string, instanceId InstanceId, body GPUCreateExposedServiceV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGPUCreateExposedServiceV1RequestWithBody(server, instanceId, "application/json", bodyReader)
+}
+
+// NewGPUCreateExposedServiceV1RequestWithBody constructs an http.Request for the GPUCreateExposedServiceV1 method, with any body, and a specified content type
+func NewGPUCreateExposedServiceV1RequestWithBody(server string, instanceId InstanceId, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "instanceId", instanceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/gpu/v1/instances/%s/exposed-services", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGPUDeleteExposedServiceV1Request constructs an http.Request for the GPUDeleteExposedServiceV1 method
+func NewGPUDeleteExposedServiceV1Request(server string, instanceId InstanceId, exposedServiceId ExposedServiceId) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "instanceId", instanceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "exposedServiceId", exposedServiceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/gpu/v1/instances/%s/exposed-services/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -69118,6 +69530,63 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /api/gpu/v1/instances/{instanceId} (the `GPUGetInstanceDetailsV1` operationId).
 	GPUGetInstanceDetailsV1WithResponse(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*GPUGetInstanceDetailsV1Response, error)
 
+	// GPUGetExposedServicesV1WithResponse Get exposed services
+	//
+	// Retrieve the services exposed on a specified GPU instance.
+	//
+	// A newly created service is listed once it gets its public hostname and external port.
+	//
+	// Use this endpoint to find the public address of services running on your GPU instance.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/gpu/v1/instances/{instanceId}/exposed-services (the `GPUGetExposedServicesV1` operationId).
+	GPUGetExposedServicesV1WithResponse(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*GPUGetExposedServicesV1Response, error)
+
+	// GPUCreateExposedServiceV1WithBodyWithResponse Create exposed service
+	//
+	// Expose a service running on a specified GPU instance to the internet.
+	//
+	// The service is exposed asynchronously: a successful request returns immediately, and the service
+	// appears in the exposed services list once it gets its public hostname and external port.
+	// Fails when the instance already has the maximum of 4 exposed services.
+	//
+	// Use this endpoint to make an application on your GPU instance publicly reachable.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/gpu/v1/instances/{instanceId}/exposed-services (the `GPUCreateExposedServiceV1` operationId).
+	GPUCreateExposedServiceV1WithBodyWithResponse(ctx context.Context, instanceId InstanceId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GPUCreateExposedServiceV1Response, error)
+
+	// GPUCreateExposedServiceV1WithResponse Create exposed service
+	//
+	// Expose a service running on a specified GPU instance to the internet.
+	//
+	// The service is exposed asynchronously: a successful request returns immediately, and the service
+	// appears in the exposed services list once it gets its public hostname and external port.
+	// Fails when the instance already has the maximum of 4 exposed services.
+	//
+	// Use this endpoint to make an application on your GPU instance publicly reachable.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/gpu/v1/instances/{instanceId}/exposed-services (the `GPUCreateExposedServiceV1` operationId).
+	GPUCreateExposedServiceV1WithResponse(ctx context.Context, instanceId InstanceId, body GPUCreateExposedServiceV1JSONRequestBody, reqEditors ...RequestEditorFn) (*GPUCreateExposedServiceV1Response, error)
+
+	// GPUDeleteExposedServiceV1WithResponse Delete exposed service
+	//
+	// Delete a specified exposed service of a GPU instance.
+	//
+	// The service is removed asynchronously: a successful request returns immediately and the service
+	// stops being reachable from the internet shortly after.
+	//
+	// Use this endpoint to close public access to a service on your GPU instance.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/gpu/v1/instances/{instanceId}/exposed-services/{exposedServiceId} (the `GPUDeleteExposedServiceV1` operationId).
+	GPUDeleteExposedServiceV1WithResponse(ctx context.Context, instanceId InstanceId, exposedServiceId ExposedServiceId, reqEditors ...RequestEditorFn) (*GPUDeleteExposedServiceV1Response, error)
+
 	// GPUGetInstanceMetricsV1WithResponse Get instance metrics
 	//
 	// Retrieve utilisation metrics of a specified GPU instance for the last hour.
@@ -83321,6 +83790,178 @@ func (r GPUGetInstanceDetailsV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r GPUGetInstanceDetailsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GPUGetExposedServicesV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GPUV1ExposedServiceExposedServiceCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GPUGetExposedServicesV1Response) GetJSON200() *GPUV1ExposedServiceExposedServiceCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GPUGetExposedServicesV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GPUGetExposedServicesV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GPUGetExposedServicesV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GPUGetExposedServicesV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GPUGetExposedServicesV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GPUGetExposedServicesV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GPUCreateExposedServiceV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GPUCreateExposedServiceV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GPUCreateExposedServiceV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r GPUCreateExposedServiceV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GPUCreateExposedServiceV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GPUCreateExposedServiceV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GPUCreateExposedServiceV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GPUCreateExposedServiceV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GPUCreateExposedServiceV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GPUDeleteExposedServiceV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GPUDeleteExposedServiceV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GPUDeleteExposedServiceV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GPUDeleteExposedServiceV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GPUDeleteExposedServiceV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GPUDeleteExposedServiceV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GPUDeleteExposedServiceV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GPUDeleteExposedServiceV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -106226,6 +106867,87 @@ func (c *ClientWithResponses) GPUGetInstanceDetailsV1WithResponse(ctx context.Co
 	return ParseGPUGetInstanceDetailsV1Response(rsp)
 }
 
+// GPUGetExposedServicesV1WithResponse Get exposed services
+//
+// Retrieve the services exposed on a specified GPU instance.
+//
+// A newly created service is listed once it gets its public hostname and external port.
+//
+// Use this endpoint to find the public address of services running on your GPU instance.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/gpu/v1/instances/{instanceId}/exposed-services (the `GPUGetExposedServicesV1` operationId).
+func (c *ClientWithResponses) GPUGetExposedServicesV1WithResponse(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*GPUGetExposedServicesV1Response, error) {
+	rsp, err := c.GPUGetExposedServicesV1(ctx, instanceId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGPUGetExposedServicesV1Response(rsp)
+}
+
+// GPUCreateExposedServiceV1WithBodyWithResponse Create exposed service
+//
+// Expose a service running on a specified GPU instance to the internet.
+//
+// The service is exposed asynchronously: a successful request returns immediately, and the service
+// appears in the exposed services list once it gets its public hostname and external port.
+// Fails when the instance already has the maximum of 4 exposed services.
+//
+// Use this endpoint to make an application on your GPU instance publicly reachable.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/gpu/v1/instances/{instanceId}/exposed-services (the `GPUCreateExposedServiceV1` operationId).
+func (c *ClientWithResponses) GPUCreateExposedServiceV1WithBodyWithResponse(ctx context.Context, instanceId InstanceId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GPUCreateExposedServiceV1Response, error) {
+	rsp, err := c.GPUCreateExposedServiceV1WithBody(ctx, instanceId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGPUCreateExposedServiceV1Response(rsp)
+}
+
+// GPUCreateExposedServiceV1WithResponse Create exposed service
+//
+// Expose a service running on a specified GPU instance to the internet.
+//
+// The service is exposed asynchronously: a successful request returns immediately, and the service
+// appears in the exposed services list once it gets its public hostname and external port.
+// Fails when the instance already has the maximum of 4 exposed services.
+//
+// Use this endpoint to make an application on your GPU instance publicly reachable.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/gpu/v1/instances/{instanceId}/exposed-services (the `GPUCreateExposedServiceV1` operationId).
+func (c *ClientWithResponses) GPUCreateExposedServiceV1WithResponse(ctx context.Context, instanceId InstanceId, body GPUCreateExposedServiceV1JSONRequestBody, reqEditors ...RequestEditorFn) (*GPUCreateExposedServiceV1Response, error) {
+	rsp, err := c.GPUCreateExposedServiceV1(ctx, instanceId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGPUCreateExposedServiceV1Response(rsp)
+}
+
+// GPUDeleteExposedServiceV1WithResponse Delete exposed service
+//
+// Delete a specified exposed service of a GPU instance.
+//
+// The service is removed asynchronously: a successful request returns immediately and the service
+// stops being reachable from the internet shortly after.
+//
+// Use this endpoint to close public access to a service on your GPU instance.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/gpu/v1/instances/{instanceId}/exposed-services/{exposedServiceId} (the `GPUDeleteExposedServiceV1` operationId).
+func (c *ClientWithResponses) GPUDeleteExposedServiceV1WithResponse(ctx context.Context, instanceId InstanceId, exposedServiceId ExposedServiceId, reqEditors ...RequestEditorFn) (*GPUDeleteExposedServiceV1Response, error) {
+	rsp, err := c.GPUDeleteExposedServiceV1(ctx, instanceId, exposedServiceId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGPUDeleteExposedServiceV1Response(rsp)
+}
+
 // GPUGetInstanceMetricsV1WithResponse Get instance metrics
 //
 // Retrieve utilisation metrics of a specified GPU instance for the last hour.
@@ -120891,6 +121613,133 @@ func ParseGPUGetInstanceDetailsV1Response(rsp *http.Response) (*GPUGetInstanceDe
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest GPUV1InstanceInstanceResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGPUGetExposedServicesV1Response parses an HTTP response from a GPUGetExposedServicesV1WithResponse call
+func ParseGPUGetExposedServicesV1Response(rsp *http.Response) (*GPUGetExposedServicesV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GPUGetExposedServicesV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GPUV1ExposedServiceExposedServiceCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGPUCreateExposedServiceV1Response parses an HTTP response from a GPUCreateExposedServiceV1WithResponse call
+func ParseGPUCreateExposedServiceV1Response(rsp *http.Response) (*GPUCreateExposedServiceV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GPUCreateExposedServiceV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGPUDeleteExposedServiceV1Response parses an HTTP response from a GPUDeleteExposedServiceV1WithResponse call
+func ParseGPUDeleteExposedServiceV1Response(rsp *http.Response) (*GPUDeleteExposedServiceV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GPUDeleteExposedServiceV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
