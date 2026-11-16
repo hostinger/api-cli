@@ -81,8 +81,8 @@ var RecreateCmd = &cobra.Command{
 
 func init() {
 	utils.RegisterArgs(RecreateCmd, utils.IntArg("virtual-machine-id"))
-	RecreateCmd.Flags().StringP("panel-password", "", "", "Panel password for the panel-based OS template. If not provided, random password will be generated. If OS does not support panel_password this field will be ignored. Password will not be shown in the response.")
-	RecreateCmd.Flags().StringP("password", "", "", "Root password for the virtual machine. If not provided, random password will be generated. Password will not be shown in the response.")
+	RecreateCmd.Flags().StringP("panel-password", "", "", "Panel password for the panel-based OS template. If not provided, random password will be generated. If OS does not support panel_password this field will be ignored. Password will not be shown in the response. 12 to 50 characters with an uppercase letter, a lowercase letter, a number and at least one of #%+:?@ (no other symbols). Known compromised passwords are rejected.")
+	RecreateCmd.Flags().StringP("password", "", "", "Root password for the virtual machine. If not provided, random password will be generated. Password will not be shown in the response. 12 to 50 characters with an uppercase letter, a lowercase letter, a number and at least one of -().&@?'#;/,+ (no other symbols). Known compromised passwords are rejected.")
 	RecreateCmd.Flags().IntP("post-install-script-id", "", 0, "Post-install script to execute after virtual machine was recreated")
 	RecreateCmd.Flags().IntP("template-id", "", 0, "Template ID")
 	RecreateCmd.MarkFlagRequired("template-id")

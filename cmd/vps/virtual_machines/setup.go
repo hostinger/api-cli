@@ -61,7 +61,7 @@ func init() {
 	SetupCmd.Flags().BoolP("install-monarx", "", false, "Install Monarx malware scanner (if supported)")
 	SetupCmd.Flags().StringP("ns1", "", "", "Name server 1")
 	SetupCmd.Flags().StringP("ns2", "", "", "Name server 2")
-	SetupCmd.Flags().StringP("password", "", "", "Password for the virtual machine. If not provided, random password will be generated. Password will not be shown in the response.")
+	SetupCmd.Flags().StringP("password", "", "", "Password for the virtual machine. If not provided, random password will be generated. Password will not be shown in the response. Used as both the root and the panel password, so it must pass both rules: 12 to 50 characters with an uppercase letter, a lowercase letter, a number and at least one of # + ? @ (no other symbols). Known compromised passwords are rejected.")
 	SetupCmd.Flags().IntP("post-install-script-id", "", 0, "Post-install script ID")
 	SetupCmd.Flags().StringP("public-key", "", "", "Use SSH key (JSON, @file or -; shape in the help above)")
 	SetupCmd.Flags().IntP("template-id", "", 0, "Template ID")

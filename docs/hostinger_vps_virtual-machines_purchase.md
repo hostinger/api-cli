@@ -32,7 +32,7 @@ JSON flags take inline JSON, @file.json, or - to read stdin. Example values:
       "install_monarx": false,
       "ns1": "4.3.2.1",
       "ns2": "1.2.3.4",
-      "password": "oMeNRustosIO",
+      "password": "oMeNRustosIO7#",
       "post_install_script_id": 6324,
       "public_key": {
         "key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC2X...",

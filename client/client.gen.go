@@ -4493,16 +4493,20 @@ func (e ReachV1WebsitesWebsiteResourcePlatformType) Valid() bool {
 
 // Defines values for VPSV1ActionActionResourceState.
 const (
-	VPSV1ActionActionResourceStateCreated VPSV1ActionActionResourceState = "created"
-	VPSV1ActionActionResourceStateDelayed VPSV1ActionActionResourceState = "delayed"
-	VPSV1ActionActionResourceStateError   VPSV1ActionActionResourceState = "error"
-	VPSV1ActionActionResourceStateSent    VPSV1ActionActionResourceState = "sent"
-	VPSV1ActionActionResourceStateSuccess VPSV1ActionActionResourceState = "success"
+	VPSV1ActionActionResourceStateCancelled VPSV1ActionActionResourceState = "cancelled"
+	VPSV1ActionActionResourceStateCreated   VPSV1ActionActionResourceState = "created"
+	VPSV1ActionActionResourceStateDelayed   VPSV1ActionActionResourceState = "delayed"
+	VPSV1ActionActionResourceStateError     VPSV1ActionActionResourceState = "error"
+	VPSV1ActionActionResourceStateSent      VPSV1ActionActionResourceState = "sent"
+	VPSV1ActionActionResourceStateStarted   VPSV1ActionActionResourceState = "started"
+	VPSV1ActionActionResourceStateSuccess   VPSV1ActionActionResourceState = "success"
 )
 
 // Valid indicates whether the value is a known member of the VPSV1ActionActionResourceState enum.
 func (e VPSV1ActionActionResourceState) Valid() bool {
 	switch e {
+	case VPSV1ActionActionResourceStateCancelled:
+		return true
 	case VPSV1ActionActionResourceStateCreated:
 		return true
 	case VPSV1ActionActionResourceStateDelayed:
@@ -4510,6 +4514,8 @@ func (e VPSV1ActionActionResourceState) Valid() bool {
 	case VPSV1ActionActionResourceStateError:
 		return true
 	case VPSV1ActionActionResourceStateSent:
+		return true
+	case VPSV1ActionActionResourceStateStarted:
 		return true
 	case VPSV1ActionActionResourceStateSuccess:
 		return true
@@ -17678,7 +17684,7 @@ type VPSV1SnapshotSnapshotResource struct {
 	// CreatedAt Example: 2025-02-27T11:54:22Z
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 
-	// ExpiresAt Example: 2025-03-19T11:54:22Z
+	// ExpiresAt Example: 2025-02-28T11:54:22Z
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
 
 	// Id Snapshot ID
@@ -17802,9 +17808,11 @@ type VPSV1VirtualMachinePTRStoreRequest struct {
 
 // VPSV1VirtualMachinePanelPasswordUpdateRequest defines model for VPS.V1.VirtualMachine.PanelPasswordUpdateRequest.
 type VPSV1VirtualMachinePanelPasswordUpdateRequest struct {
-	// Password Panel password for the virtual machine
+	// Password Panel password for the virtual machine.
+	// 12 to 50 characters with an uppercase letter, a lowercase letter, a number and at least one of
+	// #%+:?@ (no other symbols). Known compromised passwords are rejected.
 	//
-	// Example: oMeNRustosIO
+	// Example: oMeNRustosIO7#
 	Password string `json:"password"`
 }
 
@@ -17829,7 +17837,7 @@ type VPSV1VirtualMachinePurchaseRequest struct {
 type VPSV1VirtualMachineRecoveryStartRequest struct {
 	// RootPassword Temporary root password for recovery mode
 	//
-	// Example: oMeNRustosIO
+	// Example: oMeNRustosIO7#
 	RootPassword string `json:"root_password"`
 }
 
@@ -17838,14 +17846,18 @@ type VPSV1VirtualMachineRecreateRequest struct {
 	// PanelPassword Panel password for the panel-based OS template. If not provided, random password will be generated.
 	// If OS does not support panel_password this field will be ignored.
 	// Password will not be shown in the response.
+	// 12 to 50 characters with an uppercase letter, a lowercase letter, a number and at least one of
+	// #%+:?@ (no other symbols). Known compromised passwords are rejected.
 	//
-	// Example: Mna58c17a4d
+	// Example: Mna58c17a4d#
 	PanelPassword *string `json:"panel_password,omitempty"`
 
 	// Password Root password for the virtual machine. If not provided, random password will be generated.
 	// Password will not be shown in the response.
+	// 12 to 50 characters with an uppercase letter, a lowercase letter, a number and at least one of
+	// -().&@?'#;/,+ (no other symbols). Known compromised passwords are rejected.
 	//
-	// Example: oMeNRustosIO
+	// Example: oMeNRustosIO7#
 	Password *string `json:"password,omitempty"`
 
 	// PostInstallScriptId Post-install script to execute after virtual machine was recreated
@@ -17861,9 +17873,11 @@ type VPSV1VirtualMachineRecreateRequest struct {
 
 // VPSV1VirtualMachineRootPasswordUpdateRequest defines model for VPS.V1.VirtualMachine.RootPasswordUpdateRequest.
 type VPSV1VirtualMachineRootPasswordUpdateRequest struct {
-	// Password Root password for the virtual machine
+	// Password Root password for the virtual machine.
+	// 12 to 50 characters with an uppercase letter, a lowercase letter, a number and at least one of
+	// -().&@?'#;/,+ (no other symbols). Known compromised passwords are rejected.
 	//
-	// Example: oMeNRustosIO
+	// Example: oMeNRustosIO7#
 	Password string `json:"password"`
 }
 
@@ -17901,8 +17915,11 @@ type VPSV1VirtualMachineSetupRequest struct {
 
 	// Password Password for the virtual machine. If not provided, random password will be generated.
 	// Password will not be shown in the response.
+	// Used as both the root and the panel password, so it must pass both rules: 12 to 50 characters
+	// with an uppercase letter, a lowercase letter, a number and at least one of # + ? @ (no other symbols).
+	// Known compromised passwords are rejected.
 	//
-	// Example: oMeNRustosIO
+	// Example: oMeNRustosIO7#
 	Password *string `json:"password,omitempty"`
 
 	// PostInstallScriptId Post-install script ID

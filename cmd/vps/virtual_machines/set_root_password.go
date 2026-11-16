@@ -15,7 +15,7 @@ var SetRootPasswordCmd = &cobra.Command{
 	Use:     "set-root-password <virtual-machine-id>",
 	Short:   "Set root password",
 	Long:    "Set root password for a specified virtual machine.\n\nRequirements for password are same as in the recreate virtual machine\nendpoint (/#tag/vps-virtual-machine/POST/api/vps/v1/virtual-machines/{virtualMachineId}/recreate).\n\nUse this endpoint to update administrator credentials for VPS instances.",
-	Example: "  hostinger vps virtual-machines set-root-password 1268054 --password oMeNRustosIO",
+	Example: "  hostinger vps virtual-machines set-root-password 1268054 --password 'oMeNRustosIO7#'",
 	ValidArgsFunction: utils.CompleteArgs(
 		&utils.ArgSource{
 			Value: "id",
@@ -76,7 +76,7 @@ var SetRootPasswordCmd = &cobra.Command{
 
 func init() {
 	utils.RegisterArgs(SetRootPasswordCmd, utils.IntArg("virtual-machine-id"))
-	SetRootPasswordCmd.Flags().StringP("password", "", "", "Root password for the virtual machine")
+	SetRootPasswordCmd.Flags().StringP("password", "", "", "Root password for the virtual machine. 12 to 50 characters with an uppercase letter, a lowercase letter, a number and at least one of -().&@?'#;/,+ (no other symbols). Known compromised passwords are rejected.")
 	SetRootPasswordCmd.MarkFlagRequired("password")
 	SetRootPasswordCmd.RegisterFlagCompletionFunc("password", cobra.NoFileCompletions)
 	utils.RegisterWaitFlags(SetRootPasswordCmd)

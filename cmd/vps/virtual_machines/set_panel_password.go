@@ -15,7 +15,7 @@ var SetPanelPasswordCmd = &cobra.Command{
 	Use:     "set-panel-password <virtual-machine-id>",
 	Short:   "Set panel password",
 	Long:    "Set panel password for a specified virtual machine.\n\nIf virtual machine does not use panel OS, the request will still be processed without any effect.\nRequirements for password are same as in the recreate virtual machine\nendpoint (/#tag/vps-virtual-machine/POST/api/vps/v1/virtual-machines/{virtualMachineId}/recreate).\n\nUse this endpoint to configure control panel access credentials for VPS instances.",
-	Example: "  hostinger vps virtual-machines set-panel-password 1268054 --password oMeNRustosIO",
+	Example: "  hostinger vps virtual-machines set-panel-password 1268054 --password 'oMeNRustosIO7#'",
 	ValidArgsFunction: utils.CompleteArgs(
 		&utils.ArgSource{
 			Value: "id",
@@ -76,7 +76,7 @@ var SetPanelPasswordCmd = &cobra.Command{
 
 func init() {
 	utils.RegisterArgs(SetPanelPasswordCmd, utils.IntArg("virtual-machine-id"))
-	SetPanelPasswordCmd.Flags().StringP("password", "", "", "Panel password for the virtual machine")
+	SetPanelPasswordCmd.Flags().StringP("password", "", "", "Panel password for the virtual machine. 12 to 50 characters with an uppercase letter, a lowercase letter, a number and at least one of #%+:?@ (no other symbols). Known compromised passwords are rejected.")
 	SetPanelPasswordCmd.MarkFlagRequired("password")
 	SetPanelPasswordCmd.RegisterFlagCompletionFunc("password", cobra.NoFileCompletions)
 	utils.RegisterWaitFlags(SetPanelPasswordCmd)

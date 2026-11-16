@@ -19,14 +19,14 @@ hostinger vps virtual-machines set-panel-password <virtual-machine-id> [flags]
 ### Examples
 
 ```
-  hostinger vps virtual-machines set-panel-password 1268054 --password oMeNRustosIO
+  hostinger vps virtual-machines set-panel-password 1268054 --password 'oMeNRustosIO7#'
 ```
 
 ### Options
 
 ```
   -h, --help[=true|false]       help for set-panel-password
-      --password string         Panel password for the virtual machine
+      --password string         Panel password for the virtual machine. 12 to 50 characters with an uppercase letter, a lowercase letter, a number and at least one of #%+:?@ (no other symbols). Known compromised passwords are rejected.
       --wait[=true|false]       Wait until the action finishes
       --wait-timeout duration   Maximum time to wait with --wait (default 10m0s)
 ```

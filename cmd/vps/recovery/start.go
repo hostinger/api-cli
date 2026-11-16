@@ -15,7 +15,7 @@ var StartCmd = &cobra.Command{
 	Use:     "start <virtual-machine-id>",
 	Short:   "Start recovery mode",
 	Long:    "Initiate recovery mode for a specified virtual machine.\n\nRecovery mode is a special state that allows users to perform system rescue operations,\nsuch as repairing file systems, recovering data, or troubleshooting issues that prevent the virtual machine\nfrom booting normally.\n\nVirtual machine will boot recovery disk image and original disk image will be mounted in `/mnt` directory.\n\nUse this endpoint to enable system rescue operations on VPS instances.",
-	Example: "  hostinger vps recovery start 1268054 --root-password oMeNRustosIO",
+	Example: "  hostinger vps recovery start 1268054 --root-password 'oMeNRustosIO7#'",
 	ValidArgsFunction: utils.CompleteArgs(
 		&utils.ArgSource{
 			Value: "id",

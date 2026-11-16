@@ -21,7 +21,7 @@ hostinger vps recovery start <virtual-machine-id> [flags]
 ### Examples
 
 ```
-  hostinger vps recovery start 1268054 --root-password oMeNRustosIO
+  hostinger vps recovery start 1268054 --root-password 'oMeNRustosIO7#'
 ```
 
 ### Options

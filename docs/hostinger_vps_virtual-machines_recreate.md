@@ -37,8 +37,8 @@ hostinger vps virtual-machines recreate <virtual-machine-id> [flags]
 
 ```
   -h, --help[=true|false]            help for recreate
-      --panel-password string        Panel password for the panel-based OS template. If not provided, random password will be generated. If OS does not support panel_password this field will be ignored. Password will not be shown in the response.
-      --password string              Root password for the virtual machine. If not provided, random password will be generated. Password will not be shown in the response.
+      --panel-password string        Panel password for the panel-based OS template. If not provided, random password will be generated. If OS does not support panel_password this field will be ignored. Password will not be shown in the response. 12 to 50 characters with an uppercase letter, a lowercase letter, a number and at least one of #%+:?@ (no other symbols). Known compromised passwords are rejected.
+      --password string              Root password for the virtual machine. If not provided, random password will be generated. Password will not be shown in the response. 12 to 50 characters with an uppercase letter, a lowercase letter, a number and at least one of -().&@?'#;/,+ (no other symbols). Known compromised passwords are rejected.
       --post-install-script-id int   Post-install script to execute after virtual machine was recreated
       --template-id int              Template ID
       --wait[=true|false]            Wait until the action finishes
