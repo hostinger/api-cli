@@ -1,9 +1,10 @@
 package types
 
 import (
-	"encoding/json"
 	"errors"
 	"net/mail"
+
+	"github.com/oapi-codegen/runtime/internal/jsoncodec"
 )
 
 // ErrValidationEmail is the sentinel error returned when an email fails validation
@@ -20,7 +21,7 @@ func (e Email) MarshalJSON() ([]byte, error) {
 		return nil, ErrValidationEmail
 	}
 
-	return json.Marshal(m.Address)
+	return jsoncodec.Marshal(m.Address)
 }
 
 func (e *Email) UnmarshalJSON(data []byte) error {
@@ -29,7 +30,7 @@ func (e *Email) UnmarshalJSON(data []byte) error {
 	}
 
 	var s string
-	if err := json.Unmarshal(data, &s); err != nil {
+	if err := jsoncodec.Unmarshal(data, &s); err != nil {
 		return err
 	}
 

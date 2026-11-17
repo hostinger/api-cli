@@ -212,9 +212,10 @@ github.com/munnerz/goautoneg
 # github.com/oapi-codegen/oapi-codegen/v2 v2.8.2
 ## explicit; go 1.25.0
 github.com/oapi-codegen/oapi-codegen/v2/pkg/securityprovider
-# github.com/oapi-codegen/runtime v1.8.0
-## explicit; go 1.24.0
+# github.com/oapi-codegen/runtime v1.9.0
+## explicit; go 1.26.0
 github.com/oapi-codegen/runtime
+github.com/oapi-codegen/runtime/internal/jsoncodec
 github.com/oapi-codegen/runtime/types
 # github.com/pelletier/go-toml/v2 v2.2.4
 ## explicit; go 1.21.0
@@ -342,7 +343,7 @@ golang.org/x/sys/execabs
 golang.org/x/sys/plan9
 golang.org/x/sys/unix
 golang.org/x/sys/windows
-# golang.org/x/term v0.47.0
+# golang.org/x/term v0.48.0
 ## explicit; go 1.26.0
 golang.org/x/term
 # golang.org/x/text v0.43.0

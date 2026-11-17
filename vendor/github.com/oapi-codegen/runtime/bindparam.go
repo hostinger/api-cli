@@ -15,7 +15,6 @@ package runtime
 
 import (
 	"encoding"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"net/url"
@@ -191,19 +190,36 @@ func BindStyledParameterWithOptions(style string, paramName string, value string
 		return bindSplitPartsToDestinationArray(parts, dest)
 	}
 
-	// For primitive types, only label and matrix styles need prefix stripping
-	// via splitStyledParameter. Simple and form styles can bind the raw value
-	// directly — splitting on commas would incorrectly reject primitive values
-	// that contain commas (see https://github.com/oapi-codegen/runtime/issues/114).
-	if style == "label" || style == "matrix" {
-		parts, err := splitStyledParameter(style, opts.Explode, false, paramName, value)
-		if err != nil {
-			return fmt.Errorf("error splitting parameter '%s': %w", paramName, err)
+	// For primitive types, only label and matrix styles carry a prefix that
+	// has to be stripped. The value is never split: a scalar's value is data,
+	// so a delimiter inside it (which the encoder percent-escapes and the
+	// router decodes before we see it) must survive binding. Splitting here
+	// rejected valid values such as "big,red" or "big.red", see
+	// https://github.com/oapi-codegen/runtime/issues/114 and
+	// https://github.com/oapi-codegen/runtime/issues/175.
+	switch style {
+	case "label":
+		// Both exploded and non-exploded labels are ".value".
+		if !strings.HasPrefix(value, ".") {
+			return fmt.Errorf("error splitting parameter '%s': invalid format for label parameter '%s', should start with '.'", paramName, paramName)
 		}
-		if len(parts) != 1 {
-			return fmt.Errorf("parameter '%s': expected single value, got %d parts", paramName, len(parts))
+		value = value[1:]
+	case "matrix":
+		// Both exploded and non-exploded matrix scalars are ";name=value".
+		prefix := ";" + paramName + "="
+		if opts.Explode {
+			// The exploded splitter has always tolerated a missing "name="
+			// on a value, so only the leading ';' is required here.
+			if !strings.HasPrefix(value, ";") {
+				return fmt.Errorf("error splitting parameter '%s': invalid format for matrix parameter '%s', should start with ';'", paramName, paramName)
+			}
+			value = strings.TrimPrefix(value[1:], paramName+"=")
+		} else {
+			if !strings.HasPrefix(value, prefix) {
+				return fmt.Errorf("error splitting parameter '%s': expected parameter '%s' to start with %s", paramName, paramName, prefix)
+			}
+			value = strings.TrimPrefix(value, prefix)
 		}
-		value = parts[0]
 	}
 	return BindStringToObjectWithOptions(value, dest, BindStringToObjectOptions{
 		Type:   opts.Type,
@@ -363,7 +379,7 @@ func bindSplitPartsToDestinationStruct(paramName string, parts []string, explode
 		}
 	}
 	jsonParam := "{" + strings.Join(fields, ",") + "}"
-	err := json.Unmarshal([]byte(jsonParam), dest)
+	err := JSONUnmarshal([]byte(jsonParam), dest)
 	if err != nil {
 		return fmt.Errorf("error binding parameter %s fields: %w", paramName, err)
 	}

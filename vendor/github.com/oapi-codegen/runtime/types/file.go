@@ -2,9 +2,10 @@ package types
 
 import (
 	"bytes"
-	"encoding/json"
 	"io"
 	"mime/multipart"
+
+	"github.com/oapi-codegen/runtime/internal/jsoncodec"
 )
 
 type File struct {
@@ -30,11 +31,11 @@ func (file File) MarshalJSON() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	return json.Marshal(b)
+	return jsoncodec.Marshal(b)
 }
 
 func (file *File) UnmarshalJSON(data []byte) error {
-	return json.Unmarshal(data, &file.data)
+	return jsoncodec.Unmarshal(data, &file.data)
 }
 
 func (file File) Bytes() ([]byte, error) {

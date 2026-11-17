@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"net/http"
 	"reflect"
 	"strconv"
@@ -31,17 +32,22 @@ type validatedBody interface {
 // case-insensitively, and the body is not decoded a second time.
 //
 // Without a validated value, or when the value cannot be bound into v, the
-// body is decoded with encoding/json exactly as before, so error behaviour
-// (including io.EOF for an empty body) is unchanged.
+// body is decoded with JSONUnmarshalRead: the current JSONCodec (see
+// SetJSONCodec), as a stream when it implements StreamingJSONCodec. With the
+// default codec that is encoding/json's Decoder, so its error behaviour is
+// unchanged. A body that is empty, or only white space, is io.EOF whichever
+// codec is in use: generated handlers take that as an optional body left out.
 func BindJSONBody(r *http.Request, v any) error {
+	var body io.Reader
 	if r != nil && r.Body != nil {
 		if b, ok := r.Body.(validatedBody); ok {
 			if err := BindJSONValue(b.ValidatedValue(), v); err == nil {
 				return nil
 			}
 		}
+		body = r.Body
 	}
-	return json.NewDecoder(r.Body).Decode(v)
+	return JSONUnmarshalRead(body, v)
 }
 
 // BindJSONValue binds a decoded JSON value into v, which must be a non-nil
@@ -80,7 +86,7 @@ var (
 )
 
 // errUnsupportedJSONDestination is returned for destination types the binder
-// does not handle; BindJSONBody then falls back to encoding/json.
+// does not handle; BindJSONBody then decodes the body with the JSONCodec.
 var errUnsupportedJSONDestination = errors.New("unsupported destination type")
 
 func bindJSONValue(value any, dst reflect.Value) error {
@@ -102,7 +108,7 @@ func bindJSONValue(value any, dst reflect.Value) error {
 	}
 
 	if u := jsonUnmarshalerOf(dst); u != nil {
-		data, err := json.Marshal(value)
+		data, err := JSONMarshal(value)
 		if err != nil {
 			return err
 		}
@@ -295,7 +301,7 @@ func bindQuotedJSONValue(value any, dst reflect.Value) error {
 	if !ok || !dst.CanAddr() {
 		return jsonTypeError(value, dst.Type())
 	}
-	return json.Unmarshal([]byte(s), dst.Addr().Interface())
+	return JSONUnmarshal([]byte(s), dst.Addr().Interface())
 }
 
 func jsonUnmarshalerOf(v reflect.Value) json.Unmarshaler {

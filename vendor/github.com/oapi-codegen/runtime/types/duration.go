@@ -1,12 +1,13 @@
 package types
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/oapi-codegen/runtime/internal/jsoncodec"
 )
 
 // Duration represents an RFC 3339 duration (the ISO 8601 duration grammar
@@ -241,12 +242,12 @@ func FromTimeDuration(td time.Duration) (Duration, error) {
 }
 
 func (d Duration) MarshalJSON() ([]byte, error) {
-	return json.Marshal(d.String())
+	return jsoncodec.Marshal(d.String())
 }
 
 func (d *Duration) UnmarshalJSON(data []byte) error {
 	var s string
-	if err := json.Unmarshal(data, &s); err != nil {
+	if err := jsoncodec.Unmarshal(data, &s); err != nil {
 		return err
 	}
 	parsed, err := ParseDuration(s)

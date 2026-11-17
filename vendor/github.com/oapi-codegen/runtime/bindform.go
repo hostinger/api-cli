@@ -1,7 +1,6 @@
 package runtime
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
 	"mime/multipart"
@@ -69,7 +68,7 @@ func BindForm(ptr interface{}, form map[string][]string, files map[string][]*mul
 			value := values[0]
 			if encoding.ContentType != "" {
 				if strings.HasPrefix(encoding.ContentType, jsonContentType) {
-					if err := json.Unmarshal([]byte(value), ptr); err != nil {
+					if err := JSONUnmarshal([]byte(value), ptr); err != nil {
 						return err
 					}
 				}
@@ -122,7 +121,7 @@ func MarshalForm(ptr interface{}, encodings map[string]RequestBodyEncoding) (url
 		tag = strings.Split(tag, ",")[0] // extract the name of the tag
 		if encoding, ok := encodings[tag]; ok && encoding.ContentType != "" {
 			if strings.HasPrefix(encoding.ContentType, jsonContentType) {
-				if data, err := json.Marshal(field); err != nil { //nolint:staticcheck
+				if data, err := JSONMarshal(field); err != nil { //nolint:staticcheck
 					return nil, err
 				} else {
 					result[tag] = append(result[tag], string(data))
