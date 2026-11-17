@@ -65,6 +65,8 @@ func classify(expired bool, err error, binary, tokenEnv string) ending {
 		return ending{endSignInRequired, ExitSignInRequired, msg}
 	case errors.Is(kind, connector.ErrEdgeUnreachable):
 		return ending{endUnreachable, utils.ExitError, "outbound TCP 7844 is blocked on this network"}
+	case errors.Is(kind, connector.ErrLifetimeRefused):
+		return ending{endError, utils.ExitError, "this Preview service does not allow Previews that long yet; run the command again with a shorter --ttl, such as 24h"}
 	case errors.Is(kind, connector.ErrQuickRefused):
 		return ending{endError, utils.ExitError, "the Preview service refused the tunnel: " + cause(qe, err)}
 	case errors.Is(kind, connector.ErrQuickNotOffered):
@@ -276,16 +278,21 @@ func (p *printer) ended(e ending) error {
 	return &utils.ExitCodeError{Code: e.code, Message: e.message}
 }
 
-// roughDuration is d to the minute: "23h59m", "45m", "under a minute".
+// roughDuration is d to the minute: "2d23h55m", "23h59m", "45m", "under a minute".
 func roughDuration(d time.Duration) string {
 	d = d.Round(time.Minute)
-	switch {
-	case d < time.Minute:
+	if d < time.Minute {
 		return "under a minute"
-	case d < time.Hour:
-		return fmt.Sprintf("%dm", int(d.Minutes()))
-	case d%time.Hour == 0:
-		return fmt.Sprintf("%dh", int(d.Hours()))
 	}
-	return fmt.Sprintf("%dh%dm", int(d.Hours()), int(d.Minutes())%60)
+	var out string
+	if days := d / (24 * time.Hour); d > 24*time.Hour {
+		out, d = fmt.Sprintf("%dd", days), d-days*24*time.Hour
+	}
+	if h := d / time.Hour; h > 0 {
+		out += fmt.Sprintf("%dh", h)
+	}
+	if m := (d % time.Hour) / time.Minute; m > 0 {
+		out += fmt.Sprintf("%dm", m)
+	}
+	return out
 }

@@ -41,13 +41,17 @@ var (
 	// ErrCertRejected: goaway unknown_serial; the edge no longer accepts the
 	// tunnel certificate (*ExitError Code 78). A new run gets a new URL.
 	ErrCertRejected = errors.New("connector: the edge no longer accepts the tunnel certificate")
+	// ErrLifetimeRefused: the edge refused a quick certificate whose
+	// QuickOptions.Lifetime is over creds.DefaultQuickLifetime, and accepts
+	// one of the default lifetime: it allows shorter quick tunnels.
+	ErrLifetimeRefused = errors.New("connector: the edge refused the quick tunnel's lifetime")
 )
 
 // QuickError is a RunQuick failure with a known cause. errors.Is matches
 // Kind and errors.As reaches Err, for example the *ExitError of a goaway.
 type QuickError struct {
-	// Kind is ErrEdgeUnreachable, ErrQuickRefused, ErrQuickNotOffered,
-	// ErrOwnerRequired, ErrTakenDown or ErrCertRejected.
+	// Kind is ErrEdgeUnreachable, ErrQuickRefused, ErrLifetimeRefused,
+	// ErrQuickNotOffered, ErrOwnerRequired, ErrTakenDown or ErrCertRejected.
 	Kind error
 	// Err is the cause: the whoami or LinkOwner error, the class the edge
 	// reported, or the *ExitError of the goaway.
@@ -107,6 +111,12 @@ type QuickOptions struct {
 	Bootstrap    []string // nil: DefaultQuickBootstrap()
 	Ports        []int    // nil: 7844 only, as `hcdn-connector quick`
 	ServerCAFile string   // "": the system roots
+	// Lifetime is the certificate's validity window (NotAfter - NotBefore):
+	// 0 means creds.DefaultQuickLifetime (24 h), otherwise
+	// creds.MinQuickLifetime to creds.MaxQuickLifetime (1 h to 7 d). The
+	// tunnel runs until 1 min before NotAfter. An edge may allow less
+	// (ErrLifetimeRefused).
+	Lifetime time.Duration
 	// Version goes into hcdn-connector-version of every hello and the
 	// User-Agent hcdn-connector/<Version>; "": the module version.
 	Version string
@@ -144,7 +154,7 @@ var quickStopAt = func(notAfter time.Time) time.Time { return notAfter.Add(-time
 const quickWhoamiTimeout = 20 * time.Second
 
 // RunQuick runs one anonymous quick tunnel: a key in memory, a random host
-// name, at most 24 h, no file, no admin socket and no metrics. It calls
+// name, for QuickOptions.Lifetime (24 h by default), no file, no admin socket and no metrics. It calls
 // whoami (20 s for whoami and LinkOwner together), links the owner and runs
 // up to 3 home PoPs until ctx ends or 1 min before the certificate expires.
 // It calls OnReady once the tunnel is reachable (Connector.WaitReachable),
@@ -154,7 +164,8 @@ const quickWhoamiTimeout = 20 * time.Second
 // It returns expired true and a nil error when the tunnel reached its stop
 // time, and false with a nil error when ctx ended. A *QuickError tells the
 // known failures apart (errors.Is with ErrEdgeUnreachable, ErrQuickRefused,
-// ErrQuickNotOffered, ErrOwnerRequired, ErrTakenDown or ErrCertRejected);
+// ErrLifetimeRefused, ErrQuickNotOffered, ErrOwnerRequired, ErrTakenDown or
+// ErrCertRejected);
 // another goaway exit returns the *ExitError as is. A URL that reaches a
 // sensitive port on this machine (localguard.CheckContext) returns a
 // *localguard.BlockedError before any edge call, and every dial to the
@@ -179,15 +190,23 @@ func RunQuick(ctx context.Context, o QuickOptions) (expired bool, err error) {
 	if len(ports) == 0 {
 		ports = []int{proto.PortDirect}
 	}
-	c, err := creds.NewQuick(bootstrap, time.Now())
+	lifetime := o.Lifetime
+	if lifetime == 0 {
+		lifetime = creds.DefaultQuickLifetime
+	}
+	lifetime = lifetime.Truncate(time.Second)
+	if lifetime < creds.MinQuickLifetime || lifetime > creds.MaxQuickLifetime {
+		return false, fmt.Errorf("connector: QuickOptions.Lifetime %s: want %s to %s",
+			lifetime, creds.MinQuickLifetime, creds.MaxQuickLifetime)
+	}
+	c, err := creds.NewQuickLifetime(bootstrap, time.Now(), lifetime)
 	if err != nil {
 		return false, err
 	}
-	store, err := creds.NewMemoryStore(c, log, nil)
+	store, err := quickStore(c, log)
 	if err != nil {
 		return false, err
 	}
-	store.SetWarnDays(0)
 
 	wctx, wcancel := context.WithTimeout(ctx, quickWhoamiTimeout)
 	defer wcancel()
@@ -198,6 +217,8 @@ func RunQuick(ctx context.Context, o QuickOptions) (expired bool, err error) {
 		return false, nil
 	case err != nil && isDialFailure(err):
 		return false, &QuickError{Kind: ErrEdgeUnreachable, Err: err}
+	case err != nil && lifetime > creds.DefaultQuickLifetime && acceptsDefaultLifetime(wctx, bootstrap, wopts, log):
+		return false, &QuickError{Kind: ErrLifetimeRefused, Err: err}
 	case err != nil:
 		return false, &QuickError{Kind: ErrQuickRefused, Err: err}
 	case w.Class != ClassQuick || w.Hostname == "":
@@ -349,6 +370,33 @@ func watchCapExceeded(c *Connector, fn func(QuickPause)) (stop func()) {
 		}
 	}()
 	return func() { close(done); wg.Wait() }
+}
+
+// quickStore holds quick credentials in memory, without expiry warnings.
+func quickStore(c *creds.Credentials, log *slog.Logger) (*creds.Store, error) {
+	store, err := creds.NewMemoryStore(c, log, nil)
+	if err != nil {
+		return nil, err
+	}
+	store.SetWarnDays(0)
+	return store, nil
+}
+
+// acceptsDefaultLifetime asks whether the edge that refused a long-lived
+// quick certificate accepts one of the default lifetime: a whoami with fresh
+// default credentials. tunneld refuses an over-long window in the TLS
+// handshake, with the same alert as any other refused leaf, so only this
+// second try tells the lifetime apart.
+func acceptsDefaultLifetime(ctx context.Context, bootstrap []string, wopts WhoamiOptions, log *slog.Logger) bool {
+	c, err := creds.NewQuick(bootstrap, time.Now())
+	if err != nil {
+		return false
+	}
+	if wopts.Credentials, err = quickStore(c, log); err != nil {
+		return false
+	}
+	_, err = Whoami(ctx, wopts)
+	return err == nil
 }
 
 // isDialFailure: a TCP dial error, or a timeout (a firewall that drops SYN).

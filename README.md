@@ -147,6 +147,7 @@ for a dev server on the usual ports (5173, 3000, 4321, 8080, 8000, 5000, 4200, 8
 ```
 hostinger preview                                  # find the dev server and share it
 hostinger preview 3000                             # share http://localhost:3000
+hostinger preview 3000 --ttl 3d                    # keep it for 3 days (default 24h, at most 7d)
 hostinger preview 8080 --host-header shop.test     # for a server that serves by host name
 hostinger preview --url https://localhost:8443     # share another origin
 hostinger preview --json                           # one JSON event per line: ready, reachable, paused, ended

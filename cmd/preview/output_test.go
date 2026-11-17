@@ -257,13 +257,17 @@ func TestEnded(t *testing.T) {
 
 func TestRoughDuration(t *testing.T) {
 	for d, want := range map[time.Duration]string{
-		20 * time.Second:              "under a minute",
-		45 * time.Minute:              "45m",
-		time.Hour:                     "1h",
-		24*time.Hour - 30*time.Second: "24h",
-		23*time.Hour + 59*time.Minute: "23h59m",
-		-time.Minute:                  "under a minute",
-		2*time.Hour + 5*time.Minute:   "2h5m",
+		20 * time.Second:                "under a minute",
+		45 * time.Minute:                "45m",
+		time.Hour:                       "1h",
+		24*time.Hour - 30*time.Second:   "24h",
+		23*time.Hour + 59*time.Minute:   "23h59m",
+		-time.Minute:                    "under a minute",
+		2*time.Hour + 5*time.Minute:     "2h5m",
+		25 * time.Hour:                  "1d1h",
+		48 * time.Hour:                  "2d",
+		72*time.Hour - 5*time.Minute:    "2d23h55m",
+		7*24*time.Hour + 30*time.Second: "7d1m",
 	} {
 		if got := roughDuration(d); got != want {
 			t.Errorf("roughDuration(%s) = %q, want %q", d, got, want)

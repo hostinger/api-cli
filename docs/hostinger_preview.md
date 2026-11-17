@@ -23,6 +23,9 @@ server.allowedHosts: ['.hostingerpreview.com'] in vite.config.js. --host-header 
 the Host header instead. Avoid localhost or an IP address there: it bypasses the dev
 server's host check, and its debug consoles become public.
 
+--ttl sets how long the Preview lasts: 24h by default, from 1h to 7d, such as 90m, 12h,
+3d or 1d12h. It ends a few minutes before that, and the expiry is printed with the URL.
+
 A Preview needs a Hostinger account: sign in with auth login, or set an API token. In a
 terminal, preview opens the browser to sign in when you are not signed in. Elsewhere,
 and with --json, it exits with code 77 instead. The Preview is linked to that account.
@@ -49,6 +52,7 @@ hostinger preview [port] [flags]
 ```
   hostinger preview
   hostinger preview 3000
+  hostinger preview 3000 --ttl 3d
   hostinger preview 8080 --host-header shop.test
   hostinger preview --url https://localhost:8443
   hostinger preview --json
@@ -60,6 +64,7 @@ hostinger preview [port] [flags]
   -h, --help[=true|false]    help for preview
       --host-header string   Host header sent to the server (default: the Preview's host name; prefer allowing .hostingerpreview.com in the dev server)
       --json[=true|false]    Print one JSON object per event on stdout
+      --ttl string           How long the Preview lasts, from 1h to 7d (e.g. 90m, 12h, 3d) (default "24h")
       --url string           Share this origin instead of a local port, e.g. http://192.168.1.20:8080 (http or https)
 ```
 

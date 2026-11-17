@@ -16,6 +16,7 @@ import (
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/hostinger/hcdn-connector/pkg/connector"
+	"github.com/hostinger/hcdn-connector/pkg/creds"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -45,6 +46,9 @@ server.allowedHosts: ['.hostingerpreview.com'] in vite.config.js. --host-header 
 the Host header instead. Avoid localhost or an IP address there: it bypasses the dev
 server's host check, and its debug consoles become public.
 
+--ttl sets how long the Preview lasts: 24h by default, from 1h to 7d, such as 90m, 12h,
+3d or 1d12h. It ends a few minutes before that, and the expiry is printed with the URL.
+
 A Preview needs a Hostinger account: sign in with auth login, or set an API token. In a
 terminal, preview opens the browser to sign in when you are not signed in. Elsewhere,
 and with --json, it exits with code 77 instead. The Preview is linked to that account.
@@ -63,6 +67,7 @@ when no account is signed in or the service refuses it, 78 when the Preview was 
 down, and 1 for any other failure.`,
 	Example: `  hostinger preview
   hostinger preview 3000
+  hostinger preview 3000 --ttl 3d
   hostinger preview 8080 --host-header shop.test
   hostinger preview --url https://localhost:8443
   hostinger preview --json`,
@@ -88,6 +93,7 @@ type options struct {
 	serverCAFile string
 	ports        []int
 	noOwner      bool
+	ttl          string
 }
 
 var flags options
@@ -97,6 +103,7 @@ func init() {
 	f.StringVar(&flags.url, "url", "", "Share this origin instead of a local port, e.g. http://192.168.1.20:8080 (http or https)")
 	f.StringVar(&flags.hostHeader, "host-header", "", "Host header sent to the server (default: the Preview's host name; prefer allowing .hostingerpreview.com in the dev server)")
 	f.BoolVar(&flags.json, "json", false, "Print one JSON object per event on stdout")
+	f.StringVar(&flags.ttl, "ttl", "24h", "How long the Preview lasts, from 1h to 7d (e.g. 90m, 12h, 3d)")
 
 	f.StringSliceVar(&flags.bootstrap, "bootstrap", nil, "Tunnel endpoints to connect to (comma separated)")
 	f.StringVar(&flags.serverCAFile, "server-ca-file", "", "CA bundle that signs the tunnel endpoints' certificates")
@@ -147,6 +154,10 @@ func chooseServer(labels []string) (int, error) {
 func runPreview(cmd *cobra.Command, args []string) error {
 	o := flags
 	jsonOut := o.json || formatJSON(cmd)
+	lifetime, err := parseTTL(o.ttl)
+	if err != nil {
+		return err
+	}
 
 	base := cmd.Context()
 	if base == nil {
@@ -195,6 +206,7 @@ func runPreview(cmd *cobra.Command, args []string) error {
 		Bootstrap:    o.bootstrap,
 		Ports:        o.ports,
 		ServerCAFile: o.serverCAFile,
+		Lifetime:     lifetime,
 		Version:      api.UserAgent(),
 		Logger:       slog.New(slog.NewTextHandler(stderr, &slog.HandlerOptions{Level: level})),
 		Owner:        NewOwnerTicketFunc(DefaultOwnerOptions(o.noOwner)),
@@ -255,6 +267,35 @@ func parseOrigin(raw string) (*url.URL, error) {
 	u.Path = ""
 	u.Host = strings.ToLower(u.Host)
 	return u, nil
+}
+
+// parseTTL reads --ttl: a Go duration such as 90m or 12h, optionally after
+// a whole number of days (3d, 1d12h), within the connector's
+// creds.MinQuickLifetime and creds.MaxQuickLifetime. The help text names
+// that range too; TestTTLHelpMatchesTheConnector keeps it in step.
+func parseTTL(raw string) (time.Duration, error) {
+	invalid := utils.FlagErrorf("invalid --ttl %q: want a duration from %s to %s, such as 90m, 12h or 3d",
+		raw, roughDuration(creds.MinQuickLifetime), roughDuration(creds.MaxQuickLifetime))
+	s := strings.ToLower(strings.TrimSpace(raw))
+	var d time.Duration
+	if i := strings.IndexByte(s, 'd'); i >= 0 {
+		days, err := strconv.Atoi(s[:i])
+		if err != nil || days < 0 || days > int(creds.MaxQuickLifetime/(24*time.Hour)) {
+			return 0, invalid
+		}
+		d, s = time.Duration(days)*24*time.Hour, s[i+1:]
+	}
+	if s != "" {
+		rest, err := time.ParseDuration(s)
+		if err != nil || rest < 0 {
+			return 0, invalid
+		}
+		d += rest
+	}
+	if d < creds.MinQuickLifetime || d > creds.MaxQuickLifetime {
+		return 0, invalid
+	}
+	return d, nil
 }
 
 // formatJSON reports an explicit --format json, which selects JSON lines as

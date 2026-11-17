@@ -167,7 +167,7 @@ github.com/golang/groupcache/lru
 # github.com/google/uuid v1.6.0
 ## explicit
 github.com/google/uuid
-# github.com/hostinger/hcdn-connector v0.2.0
+# github.com/hostinger/hcdn-connector v0.4.0
 ## explicit; go 1.27.0
 github.com/hostinger/hcdn-connector/internal/fileguard
 github.com/hostinger/hcdn-connector/internal/h2srv

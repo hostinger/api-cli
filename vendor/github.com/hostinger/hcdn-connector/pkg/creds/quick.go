@@ -18,8 +18,18 @@ import (
 )
 
 const (
-	// QuickLifetime is the longest validity window tunneld accepts for a quick leaf.
-	QuickLifetime = 24 * time.Hour
+	// DefaultQuickLifetime is the validity window (NotAfter - NotBefore) of
+	// a quick leaf unless the caller asks for another.
+	DefaultQuickLifetime = 24 * time.Hour
+	// MinQuickLifetime and MaxQuickLifetime bound the window a caller may ask
+	// for. An edge may allow less: tunneld refuses a window longer than its
+	// quick.max_lifetime_secs.
+	MinQuickLifetime = time.Hour
+	MaxQuickLifetime = 7 * 24 * time.Hour
+	// QuickLifetime is DefaultQuickLifetime under its earlier name.
+	//
+	// Deprecated: use DefaultQuickLifetime.
+	QuickLifetime = DefaultQuickLifetime
 	quickBackdate = 5 * time.Minute
 )
 
@@ -52,15 +62,31 @@ func IsQuickID(id string) bool {
 	return id[14] == '8' && strings.IndexByte("89ab", id[19]) >= 0
 }
 
-// QuickHostname is the public hostname of a quick tunnel in zone.
+// QuickHostname is the hex form of a quick tunnel's hostname in zone:
+// <id without dashes>.<zone>. The edge may serve a word label instead
+// (docs/protocol.md section 8), so the hostname a tunnel actually has comes
+// from whoami, never from this function.
 func QuickHostname(id, zone string) string {
 	return strings.ReplaceAll(strings.ToLower(id), "-", "") + "." + zone
 }
 
 // NewQuick creates anonymous quick tunnel credentials: a P-256 key and a
-// self-signed client leaf whose id binds the key and NotBefore. The key
-// stays in memory. Quick credentials cannot be renewed: a new leaf is a new id.
+// self-signed client leaf whose id binds the key and NotBefore, valid for
+// DefaultQuickLifetime. The key stays in memory. Quick credentials cannot be
+// renewed: a new leaf is a new id.
 func NewQuick(bootstrap []string, now time.Time) (*Credentials, error) {
+	return NewQuickLifetime(bootstrap, now, DefaultQuickLifetime)
+}
+
+// NewQuickLifetime is NewQuick with a validity window (NotAfter - NotBefore)
+// of lifetime, in whole seconds from MinQuickLifetime to MaxQuickLifetime.
+// NotBefore is 5 minutes before now (clock skew), so the leaf is valid for
+// lifetime minus 5 minutes from now.
+func NewQuickLifetime(bootstrap []string, now time.Time, lifetime time.Duration) (*Credentials, error) {
+	lifetime = lifetime.Truncate(time.Second)
+	if lifetime < MinQuickLifetime || lifetime > MaxQuickLifetime {
+		return nil, fmt.Errorf("quick lifetime %s: want %s to %s", lifetime, MinQuickLifetime, MaxQuickLifetime)
+	}
 	key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
 	if err != nil {
 		return nil, err
@@ -78,7 +104,7 @@ func NewQuick(bootstrap []string, now time.Time) (*Credentials, error) {
 	tmpl := &x509.Certificate{
 		SerialNumber:          serial,
 		NotBefore:             nb,
-		NotAfter:              nb.Add(QuickLifetime),
+		NotAfter:              nb.Add(lifetime),
 		KeyUsage:              x509.KeyUsageDigitalSignature,
 		ExtKeyUsage:           []x509.ExtKeyUsage{x509.ExtKeyUsageClientAuth},
 		URIs:                  []*url.URL{{Scheme: strings.TrimSuffix(SANScheme, ":"), Opaque: id}},

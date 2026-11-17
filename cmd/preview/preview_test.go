@@ -13,6 +13,7 @@ import (
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/hostinger/hcdn-connector/pkg/connector"
+	"github.com/hostinger/hcdn-connector/pkg/creds"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 )
@@ -165,13 +166,10 @@ func TestPreviewHiddenFlags(t *testing.T) {
 			t.Errorf("--%s should exist and be hidden", name)
 		}
 	}
-	for _, name := range []string{"url", "host-header", "json"} {
+	for _, name := range []string{"url", "host-header", "json", "ttl"} {
 		if f := Cmd.Flags().Lookup(name); f == nil || f.Hidden {
 			t.Errorf("--%s should be visible", name)
 		}
-	}
-	if Cmd.Flags().Lookup("ttl") != nil {
-		t.Error("--ttl is not supported yet")
 	}
 }
 
@@ -426,5 +424,69 @@ func TestPreviewRunJSONConnectingThenReachable(t *testing.T) {
 		`{"event":"ended","reason":"stopped"}` + "\n"
 	if code != 0 || stdout != want || stderr != "" {
 		t.Errorf("exit %d stderr %q\nstdout:\n%s\nwant:\n%s", code, stderr, stdout, want)
+	}
+}
+
+func TestParseTTL(t *testing.T) {
+	for raw, want := range map[string]time.Duration{
+		"1h":    time.Hour,
+		"90m":   90 * time.Minute,
+		"24h":   24 * time.Hour,
+		"3d":    72 * time.Hour,
+		"1d12h": 36 * time.Hour,
+		" 7D ":  7 * 24 * time.Hour,
+		"6d23h": 6*24*time.Hour + 23*time.Hour,
+		"0d2h":  2 * time.Hour,
+		"1h30m": 90 * time.Minute,
+	} {
+		if got, err := parseTTL(raw); err != nil || got != want {
+			t.Errorf("parseTTL(%q) = %s, %v; want %s", raw, got, err, want)
+		}
+	}
+	for _, raw := range []string{"", "59m", "7d1m", "8d", "d", "1.5d", "-1d", "-2h", "1w", "3 days", "1d-2h", "12"} {
+		if _, err := parseTTL(raw); err == nil {
+			t.Errorf("parseTTL(%q): no error", raw)
+		}
+	}
+}
+
+func TestPreviewTTL(t *testing.T) {
+	_, _, code, got := execute(t, nil, nil, "3000")
+	if code != 0 || got == nil || got.Lifetime != 24*time.Hour {
+		t.Fatalf("default: exit %d, options %+v", code, got)
+	}
+	_, _, code, got = execute(t, nil, nil, "3000", "--ttl", "3d")
+	if code != 0 || got == nil || got.Lifetime != 72*time.Hour {
+		t.Fatalf("--ttl 3d: exit %d, options %+v", code, got)
+	}
+	_, stderr, code, got := execute(t, nil, nil, "3000", "--ttl", "8d")
+	want := "invalid --ttl \"8d\": want a duration from 1h to 7d, such as 90m, 12h or 3d"
+	if code != 2 || got != nil || !strings.Contains(stderr, want) {
+		t.Fatalf("--ttl 8d: exit %d, started %v, stderr %q", code, got != nil, stderr)
+	}
+}
+
+// A service that allows shorter Previews refuses a long --ttl; the message
+// says what to do.
+func TestPreviewTTLRefused(t *testing.T) {
+	fake := func(context.Context, connector.QuickOptions) (bool, error) {
+		return false, &connector.QuickError{Kind: connector.ErrLifetimeRefused, Err: errors.New("remote error: tls: access denied")}
+	}
+	_, stderr, code, _ := execute(t, fake, nil, "3000", "--ttl", "7d")
+	want := "Error: this Preview service does not allow Previews that long yet; run the command again with a shorter --ttl, such as 24h\n"
+	if code != 1 || stderr != want {
+		t.Errorf("exit %d stderr %q; want 1 and %q", code, stderr, want)
+	}
+}
+
+// The help text and the flag usage name the --ttl range as literals; they
+// must match the connector's bounds that parseTTL checks.
+func TestTTLHelpMatchesTheConnector(t *testing.T) {
+	span := roughDuration(creds.MinQuickLifetime) + " to " + roughDuration(creds.MaxQuickLifetime)
+	if !strings.Contains(Cmd.Long, "from "+span) {
+		t.Errorf("Long help does not say %q", span)
+	}
+	if u := Cmd.Flags().Lookup("ttl").Usage; !strings.Contains(u, "from "+span) {
+		t.Errorf("--ttl usage %q does not say %q", u, span)
 	}
 }
