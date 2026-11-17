@@ -29,12 +29,28 @@ func (o HostingOrder) name() string {
 	return o.Plan.Name
 }
 
+// Label leaves out the order id, which means nothing to most people.
 func (o HostingOrder) Label() string {
-	name := o.name()
-	if name == "" {
-		name = "Hosting plan"
+	if name := o.name(); name != "" {
+		return name
 	}
-	return fmt.Sprintf("%s (order %d)", name, o.ID)
+	return "Hosting plan"
+}
+
+// PlanOptions add the order id only to tell same-named plans apart.
+func PlanOptions(orders []HostingOrder) []string {
+	seen := map[string]int{}
+	for _, o := range orders {
+		seen[o.Label()]++
+	}
+	options := make([]string, len(orders))
+	for i, o := range orders {
+		options[i] = o.Label()
+		if seen[options[i]] > 1 {
+			options[i] = fmt.Sprintf("%s (order %d)", options[i], o.ID)
+		}
+	}
+	return options
 }
 
 // HostingOrders names each order after its billing subscription, since the

@@ -1,10 +1,13 @@
 package cmd
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"os"
 
+	"github.com/hostinger/api-cli/api"
+	"github.com/hostinger/api-cli/brand"
 	"github.com/hostinger/api-cli/deploy/hosting"
 	"github.com/hostinger/api-cli/site"
 	"github.com/hostinger/api-cli/utils"
@@ -16,11 +19,66 @@ import (
 // build settings from its package.json and API errors all reach it.
 type termUI struct {
 	interactive bool
+	brand       *brandView // nil: pterm's plain look
 }
 
 func newTermUI(jsonOutput bool) *termUI {
 	pterm.SetDefaultOutput(os.Stderr)
-	return &termUI{interactive: site.Interactive() && !jsonOutput}
+	u := &termUI{interactive: site.Interactive() && !jsonOutput}
+	if u.interactive && brand.Supported(os.Stderr) {
+		u.brand = newBrandView(os.Stderr)
+		api.SetDiagnostics(u.brand.logWriter())
+	}
+	return u
+}
+
+// Close must come before printing anything else (JSON); a second call does nothing.
+func (u *termUI) Close() {
+	if u.brand != nil {
+		u.brand.stop()
+		api.SetDiagnostics(nil)
+	}
+}
+
+func (u *termUI) Finish(out *hosting.Outcome) {
+	if u.brand != nil {
+		u.brand.finish(out)
+		return
+	}
+	switch {
+	case out.Note != "":
+		pterm.Info.Printfln("Not finished yet: %s", utils.SafeText(out.Note))
+	case out.Reachable:
+		pterm.Success.Printfln("Live at %s", utils.SafeText(out.URL))
+	default:
+		pterm.Success.Printfln("Deployed to %s", utils.SafeText(out.Target))
+		pterm.Info.Println(utils.SafeText(out.ReachableNote))
+	}
+	if out.NewLink {
+		pterm.Info.Printfln("Linked this directory to %s; `hostinger up` now redeploys there. %s", utils.SafeText(out.Target), hosting.RelinkHint)
+	}
+}
+
+func (u *termUI) Fail(err error) {
+	if u.brand != nil {
+		u.brand.fail(errors.Is(err, context.Canceled))
+	}
+}
+
+func (u *termUI) prompt() func() {
+	if u.brand == nil {
+		return func() {}
+	}
+	u.brand.hide()
+	return u.brand.show
+}
+
+func (u *termUI) question(title string) string {
+	title = utils.SafeText(title)
+	if u.brand != nil {
+		return "  " + title
+	}
+	return title
 }
 
 var errNotInteractive = errors.New("a prompt was needed but the session is not interactive")
@@ -31,12 +89,13 @@ func (u *termUI) Select(title string, options []string, def int) (int, error) {
 	if !u.interactive {
 		return 0, errNotInteractive
 	}
+	defer u.prompt()()
 	options = safeAll(options)
 	sel := pterm.DefaultInteractiveSelect.WithOptions(options).WithFilter(len(options) > 8).WithMaxHeight(site.SelectHeight(len(options)))
 	if def >= 0 && def < len(options) {
 		sel = sel.WithDefaultOption(options[def])
 	}
-	picked, err := sel.Show(utils.SafeText(title))
+	picked, err := sel.Show(u.question(title))
 	if err != nil {
 		return 0, err
 	}
@@ -52,7 +111,8 @@ func (u *termUI) Input(title, def string) (string, error) {
 	if !u.interactive {
 		return "", errNotInteractive
 	}
-	v, err := pterm.DefaultInteractiveTextInput.WithDefaultValue(utils.SafeText(def)).Show(utils.SafeText(title))
+	defer u.prompt()()
+	v, err := pterm.DefaultInteractiveTextInput.WithDefaultValue(utils.SafeText(def)).Show(u.question(title))
 	if err != nil {
 		return "", err
 	}
@@ -66,10 +126,15 @@ func (u *termUI) Confirm(title string, def bool) (bool, error) {
 	if !u.interactive {
 		return false, errNotInteractive
 	}
-	return pterm.DefaultInteractiveConfirm.WithDefaultValue(def).Show(utils.SafeText(title))
+	defer u.prompt()()
+	return pterm.DefaultInteractiveConfirm.WithDefaultValue(def).Show(u.question(title))
 }
 
 func (u *termUI) Info(msg string) {
+	if u.brand != nil {
+		u.brand.info(msg)
+		return
+	}
 	pterm.Info.Println(utils.SafeText(msg))
 }
 
@@ -78,6 +143,9 @@ func (u *termUI) Start(msg string) hosting.Step {
 	if !u.interactive {
 		fmt.Fprintln(os.Stderr, msg)
 		return &plainStep{}
+	}
+	if u.brand != nil {
+		return u.brand.start(msg)
 	}
 	sp, err := pterm.DefaultSpinner.WithWriter(os.Stderr).WithRemoveWhenDone(true).Start(spinnerText(msg))
 	if err != nil {

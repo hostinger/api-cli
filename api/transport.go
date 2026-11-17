@@ -13,12 +13,15 @@ import (
 	"github.com/hostinger/api-cli/utils"
 )
 
-// Streams for --dry-run (the command's output) and --verbose (diagnostics);
-// package vars for tests. nil means os.Stdout / os.Stderr at write time.
+// nil means os.Stdout / os.Stderr at write time.
 var (
-	dryRunOut  io.Writer
-	verboseOut io.Writer
+	dryRunOut io.Writer
+	diagOut   io.Writer
 )
+
+// SetDiagnostics routes --verbose lines and the sign-in URL through w, so a
+// command that redraws a live view can print them above it; nil is stderr.
+func SetDiagnostics(w io.Writer) { diagOut = w }
 
 func writerOr(w, fallback io.Writer) io.Writer {
 	if w != nil {
@@ -68,15 +71,15 @@ type verboseDoer struct {
 }
 
 func (d *verboseDoer) Do(req *http.Request) (*http.Response, error) {
-	fmt.Fprintf(writerOr(verboseOut, os.Stderr), "> %s %s\n", req.Method, req.URL.String())
+	fmt.Fprintf(writerOr(diagOut, os.Stderr), "> %s %s\n", req.Method, req.URL.String())
 	start := time.Now()
 	resp, err := d.base.Do(req)
 	elapsed := time.Since(start).Round(time.Millisecond)
 	if err != nil {
-		fmt.Fprintf(writerOr(verboseOut, os.Stderr), "< error after %s: %v\n", elapsed, err)
+		fmt.Fprintf(writerOr(diagOut, os.Stderr), "< error after %s: %v\n", elapsed, err)
 		return resp, err
 	}
-	fmt.Fprintf(writerOr(verboseOut, os.Stderr), "< %s (%s)\n", resp.Status, elapsed)
+	fmt.Fprintf(writerOr(diagOut, os.Stderr), "< %s (%s)\n", resp.Status, elapsed)
 	return resp, nil
 }
 

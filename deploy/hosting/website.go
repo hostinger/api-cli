@@ -69,7 +69,7 @@ func resolveWebsite(ctx context.Context, a API, ui UI, opts Options, project *si
 	step.Done(websitesSummary(sites))
 	// Preselect the first site matching the folder's type, else "Create".
 	options := make([]string, 0, len(sites)+1)
-	options = append(options, "Create a new website")
+	options = append(options, "+ Create a new website")
 	def := 0
 	for i, s := range sites {
 		options = append(options, site.PlanOption(s, plans))
@@ -198,11 +198,7 @@ func createWebsite(ctx context.Context, a API, ui UI, opts Options, domain strin
 		case !ui.Interactive():
 			return nil, fmt.Errorf("several hosting plans: pass --order-id (hostinger hosting orders list shows them)")
 		default:
-			options := make([]string, len(active))
-			for i, o := range active {
-				options[i] = o.Label()
-			}
-			idx, err := ui.Select("Which hosting plan should host the new website?", options, 0)
+			idx, err := ui.Select("Which hosting plan should host the new website?", site.PlanOptions(active), 0)
 			if err != nil {
 				return nil, err
 			}

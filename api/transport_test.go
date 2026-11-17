@@ -48,9 +48,9 @@ func TestVerboseDoerLogsRequestAndStatus(t *testing.T) {
 	defer srv.Close()
 
 	var out bytes.Buffer
-	old := verboseOut
-	verboseOut = &out
-	defer func() { verboseOut = old }()
+	old := diagOut
+	diagOut = &out
+	defer func() { diagOut = old }()
 
 	req, _ := http.NewRequest(http.MethodGet, srv.URL+"/v1/items", nil)
 	req.Header.Set("Authorization", "Bearer secret-token")

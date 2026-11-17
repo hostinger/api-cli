@@ -8,6 +8,7 @@ import (
 	"net/http/httptest"
 	"os"
 	"path/filepath"
+	"slices"
 	"strings"
 	"testing"
 	"time"
@@ -361,6 +362,26 @@ func TestRunNonInteractiveNeedsADomain(t *testing.T) {
 	_, err = Run(context.Background(), api, &fakeUI{t: t}, Options{Path: staticProject(t), Domain: "missing.com"})
 	if err == nil || !strings.Contains(err.Error(), "--create") {
 		t.Errorf("err = %v", err)
+	}
+}
+
+// One plan is used without a question, named without its order id; one
+// with no name must still read as a sentence.
+func TestRunNamesTheOnlyPlan(t *testing.T) {
+	fastPolling(t)
+	api := newFake(t) // one active plan, with no name
+	ui := &fakeUI{t: t, interactive: true, confirms: []bool{true /* detected type */},
+		selects: []int{0 /* create new */}, inputs: []string{"" /* free subdomain */}}
+	if _, err := Run(context.Background(), api, ui, Options{Path: staticProject(t)}); err != nil {
+		t.Fatal(err)
+	}
+	if !slices.Contains(ui.infos, "Using Hosting plan") {
+		t.Errorf("infos = %q", ui.infos)
+	}
+	for _, m := range ui.infos {
+		if strings.Contains(m, "order 11") || strings.Contains(m, "plan plan") {
+			t.Errorf("info %q", m)
+		}
 	}
 }
 
@@ -765,15 +786,22 @@ func TestTypeConfirmationThenOverride(t *testing.T) {
 func TestOrderLabels(t *testing.T) {
 	o := Order{ID: 7}
 	o.Plan.Name = "hostinger_unlimited_v6"
-	if got := o.Label(); got != "hostinger_unlimited_v6 (order 7)" {
+	if got := o.Label(); got != "hostinger_unlimited_v6" {
 		t.Errorf("plan key: %q", got)
 	}
 	o.DisplayName = "Unlimited Web Hosting"
-	if got := o.Label(); got != "Unlimited Web Hosting (order 7)" {
+	if got := o.Label(); got != "Unlimited Web Hosting" {
 		t.Errorf("display name: %q", got)
 	}
-	if got := (Order{ID: 1}).Label(); got != "Hosting plan (order 1)" {
+	if got := (Order{ID: 1}).Label(); got != "Hosting plan" {
 		t.Errorf("empty: %q", got)
+	}
+	twin := Order{ID: 9, DisplayName: "Unlimited Web Hosting"}
+	single := Order{ID: 3, DisplayName: "Business Web Hosting"}
+	got := site.PlanOptions([]Order{o, single, twin})
+	want := []string{"Unlimited Web Hosting (order 7)", "Business Web Hosting", "Unlimited Web Hosting (order 9)"}
+	if !slices.Equal(got, want) {
+		t.Errorf("PlanOptions = %q, want %q", got, want)
 	}
 }
 
@@ -882,7 +910,7 @@ func TestSitePickerGroupsWebsitesByPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	want := []string{
-		"Create a new website",
+		"+ Create a new website",
 		"Order 99: e.example.com",
 		"Single Web Hosting (order 11): b.example.com",
 		"Single Web Hosting (order 13): d.example.com",

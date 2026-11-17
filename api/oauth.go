@@ -445,7 +445,7 @@ func (s *OAuthService) login(ctx context.Context) (string, error) {
 
 	authURL := s.authorizeURL(creds.ClientID, redirectURI, state, challenge)
 	if err := openBrowser(authURL); err != nil {
-		fmt.Fprintf(os.Stderr, "Could not open a browser automatically.\nOpen this URL to continue signing in:\n\n%s\n\n", authURL)
+		fmt.Fprintf(writerOr(diagOut, os.Stderr), "Could not open a browser automatically.\nOpen this URL to continue signing in:\n\n%s\n\n", authURL)
 	}
 
 	waitCtx, cancel := withTimeout(ctx, LoginTimeout)

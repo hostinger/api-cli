@@ -11,6 +11,7 @@ require (
 	github.com/hostinger/hcdn-connector v0.4.0
 	github.com/itchyny/gojq v0.12.20
 	github.com/liamg/tml v0.7.1
+	github.com/mattn/go-runewidth v0.0.31
 	github.com/oapi-codegen/oapi-codegen/v2 v2.8.2
 	github.com/oapi-codegen/runtime v1.9.0
 	github.com/pterm/pterm v0.12.84
@@ -48,7 +49,6 @@ require (
 	github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99 // indirect
 	github.com/kevinburke/ssh_config v1.2.0 // indirect
 	github.com/lithammer/fuzzysearch v1.1.8 // indirect
-	github.com/mattn/go-runewidth v0.0.31 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.4 // indirect
 	github.com/pjbgf/sha1cd v0.7.0 // indirect

@@ -15,7 +15,6 @@ import (
 	"github.com/hostinger/api-cli/output"
 	"github.com/hostinger/api-cli/site"
 	"github.com/hostinger/api-cli/utils"
-	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"golang.org/x/term"
@@ -112,6 +111,7 @@ func runUp(cmd *cobra.Command, path string) error {
 	domain = site.NormalizeDomain(domain)
 
 	ui := newTermUI(jsonOutput)
+	defer ui.Close()
 	// default_domain is too easy to deploy over by accident: name it, don't use it.
 	create, _ := cmd.Flags().GetBool("create")
 	if def := viper.GetString("default_domain"); domain == "" && def != "" && !create {
@@ -130,6 +130,7 @@ func runUp(cmd *cobra.Command, path string) error {
 	context.AfterFunc(ctx, stop)
 	out, err := hosting.Deploy(ctx, ui, path, domain)
 	if err != nil {
+		ui.Fail(err)
 		if errors.Is(err, context.Canceled) {
 			err = errors.New("cancelled")
 		}
@@ -143,21 +144,11 @@ func runUp(cmd *cobra.Command, path string) error {
 		return api.CommandError(err)
 	}
 	if jsonOutput || out.DryRun {
+		ui.Close()
 		printJSON(out)
 		return nil
 	}
-	switch {
-	case out.Note != "":
-		pterm.Info.Printfln("Not finished yet: %s", utils.SafeText(out.Note))
-	case out.Reachable:
-		pterm.Success.Printfln("Live at %s", utils.SafeText(out.URL))
-	default:
-		pterm.Success.Printfln("Deployed to %s", utils.SafeText(out.Target))
-		pterm.Info.Println(utils.SafeText(out.ReachableNote))
-	}
-	if out.NewLink {
-		pterm.Info.Printfln("Linked this directory to %s; `hostinger up` now redeploys there. %s", utils.SafeText(out.Target), hosting.RelinkHint)
-	}
+	ui.Finish(out)
 	return nil
 }
 
