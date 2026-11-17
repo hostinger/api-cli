@@ -4,11 +4,13 @@ import (
 	"bytes"
 	"context"
 	"errors"
+	"fmt"
 	"reflect"
 	"strings"
 	"testing"
 	"time"
 
+	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/hostinger/hcdn-connector/pkg/connector"
 	"github.com/spf13/cobra"
@@ -21,8 +23,13 @@ func execute(t *testing.T, fake func(context.Context, connector.QuickOptions) (b
 	t.Helper()
 	resetCmdFlags(t)
 	var got *connector.QuickOptions
-	oldRun, oldDetector := runQuick, newDetector
-	t.Cleanup(func() { runQuick, newDetector = oldRun, oldDetector })
+	oldRun, oldDetector, oldInteractive := runQuick, newDetector, interactive
+	t.Cleanup(func() { runQuick, newDetector, interactive = oldRun, oldDetector, oldInteractive })
+	isInteractive := testInteractive
+	if !sourcesStubbed {
+		stubSources(t, "test-token", &fakeOAuth{}, nil)
+	}
+	interactive = func(*cobra.Command) bool { return isInteractive }
 	runQuick = func(ctx context.Context, o connector.QuickOptions) (bool, error) {
 		got = &o
 		if fake == nil {
@@ -48,6 +55,16 @@ func execute(t *testing.T, fake func(context.Context, connector.QuickOptions) (b
 	}
 	code := utils.HandleError(&errOut, cmd, err)
 	return out.String(), errOut.String(), code, got
+}
+
+// testInteractive is what interactive reports to execute; see asPerson.
+var testInteractive bool
+
+// asPerson makes the next execute run as if a person were at a terminal.
+func asPerson(t *testing.T) {
+	t.Helper()
+	testInteractive = true
+	t.Cleanup(func() { testInteractive = false })
 }
 
 func resetCmdFlags(t *testing.T) {
@@ -225,6 +242,121 @@ func TestPreviewRunTextSignInRequired(t *testing.T) {
 	want := "Error: Sign in to start a Preview: run \"preview auth login\" or set HOSTINGER_API_TOKEN\n"
 	if code != ExitSignInRequired || stderr != want || stdout != "" {
 		t.Errorf("exit %d stdout %q stderr %q; want %d, %q", code, stdout, stderr, ExitSignInRequired, want)
+	}
+}
+
+// A person at a terminal who is not signed in signs in through the browser
+// before the Preview starts, so the owner ticket has a token.
+func TestPreviewSignsInFirst(t *testing.T) {
+	oauth := fakeOAuth{err: fmt.Errorf("%w: refresh token rejected (status 400)", api.ErrNotSignedIn)}
+	stubSources(t, "", &oauth, nil)
+	asPerson(t)
+	var loginsAtStart int
+	fake := func(context.Context, connector.QuickOptions) (bool, error) {
+		loginsAtStart = oauth.logins
+		return false, nil
+	}
+	_, stderr, code, got := execute(t, fake, nil, "3000")
+	if code != 0 || got == nil || loginsAtStart != 1 {
+		t.Fatalf("exit %d, started %v, logins before the Preview %d; stderr %q", code, got != nil, loginsAtStart, stderr)
+	}
+	if !strings.HasPrefix(stderr, "Sign in to your Hostinger account to share your site. Opening your browser...\nSigned in.\n") {
+		t.Errorf("stderr %q", stderr)
+	}
+}
+
+// Without an account, scripts and --json end with exit 77 before any
+// Preview and never open a browser.
+func TestPreviewNotSignedInWithoutAPerson(t *testing.T) {
+	const msg = `Sign in to start a Preview: run "preview auth login" or set HOSTINGER_API_TOKEN`
+	cases := []struct {
+		name   string
+		person bool
+		args   []string
+		stdout string
+		stderr string
+	}{
+		{"not a terminal", false, []string{"3000"}, "", "Error: " + msg + "\n"},
+		{"json", true, []string{"3000", "--json"},
+			`{"event":"ended","reason":"sign_in_required","message":"` + strings.ReplaceAll(msg, `"`, `\"`) + `"}` + "\n", ""},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			oauth := fakeOAuth{err: api.ErrNotSignedIn}
+			stubSources(t, "", &oauth, nil)
+			if tc.person {
+				asPerson(t)
+			}
+			stdout, stderr, code, got := execute(t, nil, nil, tc.args...)
+			if code != ExitSignInRequired || got != nil || oauth.logins != 0 || stdout != tc.stdout || stderr != tc.stderr {
+				t.Errorf("exit %d, started %v, logins %d, stdout %q, stderr %q; want %d, %q, %q",
+					code, got != nil, oauth.logins, stdout, stderr, ExitSignInRequired, tc.stdout, tc.stderr)
+			}
+		})
+	}
+}
+
+// The hidden --no-owner flag skips the account check, for testing the service.
+func TestPreviewNoOwnerSkipsSignIn(t *testing.T) {
+	oauth := fakeOAuth{err: api.ErrNotSignedIn}
+	stubSources(t, "", &oauth, nil)
+	asPerson(t)
+	_, _, code, got := execute(t, nil, nil, "3000", "--no-owner")
+	if code != 0 || got == nil || oauth.called || oauth.logins != 0 {
+		t.Errorf("exit %d, started %v, token checked %v, logins %d", code, got != nil, oauth.called, oauth.logins)
+	}
+}
+
+// A sign-in that does not finish, as over SSH, ends with exit 77 before any
+// Preview and names the API token as the way around the browser.
+func TestPreviewSignInFails(t *testing.T) {
+	oauth := fakeOAuth{err: api.ErrNotSignedIn, loginErr: errors.New("authorization denied")}
+	stubSources(t, "", &oauth, nil)
+	asPerson(t)
+	_, stderr, code, got := execute(t, nil, nil, "3000")
+	want := "Sign in to your Hostinger account to share your site. Opening your browser...\n" +
+		"Error: Sign-in did not finish (authorization denied). Run the same command to try again, or set HOSTINGER_API_TOKEN to use an API token\n"
+	if code != ExitSignInRequired || got != nil || stderr != want {
+		t.Errorf("exit %d, started %v, stderr %q; want %d and %q", code, got != nil, stderr, ExitSignInRequired, want)
+	}
+}
+
+// Ctrl+C during the sign-in stops the run with exit 0, as it would a
+// Preview, and names the API token as the way around the browser.
+func TestPreviewSignInCanceled(t *testing.T) {
+	oauth := fakeOAuth{err: api.ErrNotSignedIn, loginErr: context.Canceled}
+	stubSources(t, "", &oauth, nil)
+	asPerson(t)
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel()
+	Cmd.SetContext(ctx)
+	t.Cleanup(func() { Cmd.SetContext(context.Background()) })
+	_, stderr, code, got := execute(t, nil, nil, "3000")
+	const want = "Sign-in canceled. To skip the browser, set HOSTINGER_API_TOKEN\n"
+	if code != 0 || got != nil || oauth.logins != 1 || !strings.HasSuffix(stderr, want) {
+		t.Errorf("exit %d, started %v, logins %d, stderr %q; want 0, not started, 1, %q", code, got != nil, oauth.logins, stderr, want)
+	}
+}
+
+// A sign-in that waits out its time says so instead of "context deadline
+// exceeded"; an auth-server request that timed out keeps its own message.
+func TestNotSignedInTimeout(t *testing.T) {
+	cases := []struct {
+		name string
+		err  error
+		why  string
+	}{
+		{"browser wait", context.DeadlineExceeded, "timed out after 5 minutes"},
+		{"auth server", fmt.Errorf("token exchange: %w", context.DeadlineExceeded), "token exchange: context deadline exceeded"},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			e := notSignedIn(context.Background(), &signInError{tc.err}, "hostinger", "HOSTINGER_API_TOKEN")
+			want := "Sign-in did not finish (" + tc.why + "). Run the same command to try again, or set HOSTINGER_API_TOKEN to use an API token"
+			if e.code != ExitSignInRequired || e.message != want {
+				t.Errorf("ending %+v, want exit %d and %q", e, ExitSignInRequired, want)
+			}
+		})
 	}
 }
 

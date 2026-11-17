@@ -91,7 +91,7 @@ JSON accept inline JSON, `@file.json`, or `-` for stdin; the help shows the expe
 | 3    | No credentials, or authentication failed (HTTP 401/403) |
 | 4    | Not found (HTTP 404)                          |
 | 5    | Validation failed (HTTP 422)                  |
-| 77   | `preview`: the service requires a signed-in account |
+| 77   | `preview`: no account is signed in, or the service refuses it |
 | 78   | `preview`: the Preview was taken down         |
 
 ## Deploying a website
@@ -158,8 +158,8 @@ computer. A dev server that checks the Host header must allow `.hostingerpreview
 (in Vite, `server.allowedHosts: ['.hostingerpreview.com']`); `--host-header localhost`
 bypasses that check and makes its debug consoles public.
 
-When the service asks for an owner, the Preview is linked to the account you signed in
-with; when it requires one, run `hostinger auth login` or set `HOSTINGER_API_TOKEN`.
+A Preview needs a Hostinger account and is linked to it: run `hostinger auth login`
+or set `HOSTINGER_API_TOKEN`. In a terminal, `preview` opens the browser to sign in when needed.
 The Preview needs outbound TCP port 7844.
 
 Command documentation lives in [docs/](docs/) and in the man pages, and `manifest.json` maps every

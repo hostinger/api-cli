@@ -10,6 +10,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/hostinger/hcdn-connector/pkg/connector"
 )
@@ -72,6 +73,33 @@ func classify(expired bool, err error, binary, tokenEnv string) ending {
 		return ending{endError, utils.ExitError, "the Preview service no longer accepts this tunnel; run the command again for a new URL"}
 	}
 	return ending{endError, utils.ExitError, "Preview failed: " + err.Error()}
+}
+
+// notSignedIn is the ending of a run stopped before the Preview for want of
+// an account. Ctrl+C stops it as it would a Preview, with exit 0; during the
+// browser sign-in it names the API token, the way around a browser that
+// cannot finish, as over SSH. A failed sign-in and no sign-in at all end as
+// sign-in required.
+func notSignedIn(ctx context.Context, err error, binary, tokenEnv string) ending {
+	var se *signInError
+	failed := errors.As(err, &se)
+	switch {
+	case ctx.Err() != nil && failed:
+		return ending{endStopped, utils.ExitOK, "Sign-in canceled. To skip the browser, set " + tokenEnv}
+	case ctx.Err() != nil:
+		return classify(false, ctx.Err(), binary, tokenEnv)
+	case !failed:
+		return classify(false, connector.ErrOwnerRequired, binary, tokenEnv)
+	}
+	why := utils.SafeText(se.err.Error())
+	// Login returns its own wait's deadline as is; an auth-server request that
+	// timed out comes wrapped, and keeps its own message.
+	if se.err == context.DeadlineExceeded { //nolint:errorlint // see above
+		why = fmt.Sprintf("timed out after %d minutes", int(api.LoginTimeout.Minutes()))
+	}
+	return ending{endSignInRequired, ExitSignInRequired, fmt.Sprintf(
+		"Sign-in did not finish (%s). Run the same command to try again, or set %s to use an API token",
+		why, tokenEnv)}
 }
 
 // cause is the underlying error of a QuickError, or err itself.

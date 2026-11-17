@@ -41,11 +41,11 @@ const (
 
 	callbackPath = "/oauth/callback"
 
-	// httpTimeout bounds a single auth-server round trip; loginTimeout bounds
+	// httpTimeout bounds a single auth-server round trip; LoginTimeout bounds
 	// the interactive wait for the user to finish in their browser. Both are
 	// applied only when the caller's context carries no deadline of its own.
 	httpTimeout  = 30 * time.Second
-	loginTimeout = 5 * time.Minute
+	LoginTimeout = 5 * time.Minute
 
 	// expiryBufferSeconds is subtracted from the server-reported lifetime so we
 	// treat a token as expired slightly early and avoid a mid-request expiry.
@@ -448,7 +448,7 @@ func (s *OAuthService) login(ctx context.Context) (string, error) {
 		fmt.Fprintf(os.Stderr, "Could not open a browser automatically.\nOpen this URL to continue signing in:\n\n%s\n\n", authURL)
 	}
 
-	waitCtx, cancel := withTimeout(ctx, loginTimeout)
+	waitCtx, cancel := withTimeout(ctx, LoginTimeout)
 	defer cancel()
 	code, err := s.awaitCallback(waitCtx, listener, state)
 	if err != nil {

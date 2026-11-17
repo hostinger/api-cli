@@ -224,6 +224,45 @@ var (
 type cachedTokener interface {
 	CachedToken(ctx context.Context) (string, error)
 	ReplaceToken(ctx context.Context, rejected string) (string, error)
+	Login(ctx context.Context) (string, error)
+}
+
+// signInError is a browser sign-in that did not finish.
+type signInError struct{ err error }
+
+func (e *signInError) Error() string { return "sign-in did not finish: " + e.err.Error() }
+func (e *signInError) Unwrap() error { return e.err }
+
+// ensureSignedIn makes sure a Preview starts with an account: an API token,
+// or a stored sign-in that works, refreshing it when needed. Without either it
+// opens the browser sign-in when browser is true (a person at a terminal) and
+// returns ErrOwnerNoToken otherwise. The owner ticket callback cannot sign in
+// itself: the connector gives it 2 to 3 seconds. A failure other than "not
+// signed in", such as a 5xx from the token refresh, passes: the callback
+// reports it. A browser sign-in that fails returns a *signInError; Login prints the URL to open when it cannot start a browser.
+func ensureSignedIn(ctx context.Context, w io.Writer, browser bool) error {
+	if StaticToken() != "" {
+		return nil
+	}
+	oauth, err := newOAuthFunc()
+	if err != nil {
+		return fmt.Errorf("%w: %w", ErrOwnerNoToken, err)
+	}
+	tok, err := oauth.CachedToken(ctx)
+	switch {
+	case err == nil && tok != "":
+		return nil
+	case err != nil && !errors.Is(err, api.ErrNotSignedIn):
+		return nil
+	case !browser:
+		return ErrOwnerNoToken
+	}
+	fmt.Fprintln(w, "Sign in to your Hostinger account to share your site. Opening your browser...")
+	if _, err := oauth.Login(ctx); err != nil {
+		return &signInError{err}
+	}
+	fmt.Fprintln(w, "Signed in.")
+	return nil
 }
 
 // CLIToken is the CLI's token source for the owner ticket. The order

@@ -45,9 +45,9 @@ server.allowedHosts: ['.hostingerpreview.com'] in vite.config.js. --host-header 
 the Host header instead. Avoid localhost or an IP address there: it bypasses the dev
 server's host check, and its debug consoles become public.
 
-When the Preview service asks for an owner, the Preview is linked to the account you
-signed in with (auth login, or an API token); it works without one when the service
-allows it.
+A Preview needs a Hostinger account: sign in with auth login, or set an API token. In a
+terminal, preview opens the browser to sign in when you are not signed in. Elsewhere,
+and with --json, it exits with code 77 instead. The Preview is linked to that account.
 
 The URL is printed once the Preview answers. If that takes longer than a few seconds,
 the URL is printed early with a note that it may answer 530 for a few seconds, and
@@ -59,8 +59,8 @@ Preview starts to answer, {"event":"paused",...} and {"event":"ended",...}, whic
 carries a "message" when the Preview failed. Logs go to stderr.
 
 Exit codes: 0 when stopped or expired, 2 for a usage error such as a refused port, 77
-when the service requires a signed-in account, 78 when the Preview was taken down, and 1
-for any other failure.`,
+when no account is signed in or the service refuses it, 78 when the Preview was taken
+down, and 1 for any other failure.`,
 	Example: `  hostinger preview
   hostinger preview 3000
   hostinger preview 8080 --host-header shop.test
@@ -107,8 +107,16 @@ func init() {
 	}
 }
 
+// tokenEnv is the environment variable of the API token, named in the sign-in
+// messages.
+var tokenEnv = utils.EnvPrefix + "API_TOKEN"
+
 // runQuick is connector.RunQuick; tests replace it.
 var runQuick = connector.RunQuick
+
+// interactive reports whether a person can answer prompts and the browser
+// sign-in; tests replace it.
+var interactive = utils.Interactive
 
 // newDetector builds the dev server detector for cmd; tests replace it.
 var newDetector = func(cmd *cobra.Command, jsonOut bool) detector {
@@ -169,6 +177,14 @@ func runPreview(cmd *cobra.Command, args []string) error {
 		now:    time.Now,
 		loc:    time.Local,
 	}
+	// A Preview needs an account. Sign in first: the connector's owner ticket
+	// callback has no time to wait for a browser.
+	if !o.noOwner {
+		browser := !jsonOut && interactive(cmd)
+		if err := ensureSignedIn(ctx, stderr, browser); err != nil {
+			return p.ended(notSignedIn(ctx, err, cmd.Root().Name(), tokenEnv))
+		}
+	}
 	level := slog.LevelWarn
 	if viper.GetBool("verbose") {
 		level = slog.LevelDebug
@@ -186,7 +202,7 @@ func runPreview(cmd *cobra.Command, args []string) error {
 		OnReachable:  p.reachable,
 		OnPause:      p.paused,
 	})
-	return p.ended(classify(expired, err, cmd.Root().Name(), utils.EnvPrefix+"API_TOKEN"))
+	return p.ended(classify(expired, err, cmd.Root().Name(), tokenEnv))
 }
 
 // resolveTarget picks the origin to share: the port argument, --url, or a

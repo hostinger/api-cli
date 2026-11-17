@@ -193,12 +193,23 @@ func TestOwnerTicket_TokenSourceErrorPassesThrough(t *testing.T) {
 	}
 }
 
-// fakeOAuth stands in for api.OAuthService's CachedToken and ReplaceToken.
+// fakeOAuth stands in for api.OAuthService's CachedToken, ReplaceToken and
+// Login.
 type fakeOAuth struct {
 	tok      string
 	err      error
 	called   bool
 	replaced string // the token ReplaceToken was given
+	loginErr error
+	logins   int
+}
+
+func (f *fakeOAuth) Login(context.Context) (string, error) {
+	f.logins++
+	if f.loginErr != nil {
+		return "", f.loginErr
+	}
+	return "at-login", nil
 }
 
 func (f *fakeOAuth) CachedToken(context.Context) (string, error) {
@@ -212,10 +223,14 @@ func (f *fakeOAuth) ReplaceToken(_ context.Context, rejected string) (string, er
 	return f.tok, f.err
 }
 
+// sourcesStubbed: the test chose its token sources; execute leaves them.
+var sourcesStubbed bool
+
 func stubSources(t *testing.T, cfgToken string, oauth *fakeOAuth, oauthErr error) {
 	t.Helper()
 	prevCfg, prevOAuth := configToken, newOAuthFunc
-	t.Cleanup(func() { configToken, newOAuthFunc = prevCfg, prevOAuth })
+	sourcesStubbed = true
+	t.Cleanup(func() { configToken, newOAuthFunc, sourcesStubbed = prevCfg, prevOAuth, false })
 	configToken = func() string { return cfgToken }
 	newOAuthFunc = func() (cachedTokener, error) {
 		if oauthErr != nil {
@@ -402,3 +417,52 @@ func TestOwnerTicket_401RetriesOnceWithAnotherToken(t *testing.T) {
 		})
 	}
 }
+
+func TestEnsureSignedIn(t *testing.T) {
+	dead := fmt.Errorf("%w: refresh token rejected (status 400)", api.ErrNotSignedIn)
+	const opening = "Sign in to your Hostinger account to share your site. Opening your browser...\n"
+	cases := []struct {
+		name      string
+		cfg       string
+		oauth     fakeOAuth
+		buildErr  error
+		browser   bool
+		wantLogin bool
+		wantErr   error // matched with errors.Is; signInFailed for a *signInError
+		wantOut   string
+	}{
+		{"API token configured", "cfg", fakeOAuth{err: api.ErrNotSignedIn}, nil, true, false, nil, ""},
+		{"signed in", "", fakeOAuth{tok: "at"}, nil, false, false, nil, ""},
+		{"refresh 5xx passes", "", fakeOAuth{err: errors.New("token refresh failed (status 503)")}, nil, false, false, nil, ""},
+		{"never signed in, browser", "", fakeOAuth{err: api.ErrNotSignedIn}, nil, true, true, nil, opening + "Signed in.\n"},
+		{"dead refresh token, browser", "", fakeOAuth{err: dead}, nil, true, true, nil, opening + "Signed in.\n"},
+		{"empty token, browser", "", fakeOAuth{}, nil, true, true, nil, opening + "Signed in.\n"},
+		{"never signed in, no browser", "", fakeOAuth{err: api.ErrNotSignedIn}, nil, false, false, ErrOwnerNoToken, ""},
+		{"no credentials path", "", fakeOAuth{}, errors.New("no home directory"), true, false, ErrOwnerNoToken, ""},
+		{"sign-in fails", "", fakeOAuth{err: api.ErrNotSignedIn, loginErr: errors.New("access_denied")}, nil, true, true, signInFailed, opening},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			oauth := tc.oauth
+			stubSources(t, tc.cfg, &oauth, tc.buildErr)
+			var w strings.Builder
+			err := ensureSignedIn(context.Background(), &w, tc.browser)
+			var se *signInError
+			switch {
+			case tc.wantErr == nil && err != nil,
+				tc.wantErr == signInFailed && !errors.As(err, &se),
+				tc.wantErr != nil && tc.wantErr != signInFailed && !errors.Is(err, tc.wantErr):
+				t.Fatalf("err = %v, want %v", err, tc.wantErr)
+			}
+			if (oauth.logins == 1) != tc.wantLogin || oauth.logins > 1 {
+				t.Fatalf("Login called %d times, want login %v", oauth.logins, tc.wantLogin)
+			}
+			if w.String() != tc.wantOut {
+				t.Errorf("output %q, want %q", w.String(), tc.wantOut)
+			}
+		})
+	}
+}
+
+// signInFailed stands for a *signInError in TestEnsureSignedIn.
+var signInFailed = errors.New("a *signInError")
