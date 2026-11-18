@@ -40,6 +40,8 @@ type Options struct {
 	Headless string
 	// SQL is the database dump a WordPress site is imported with.
 	SQL string
+	// Message describes a Node.js build from an upload in the deployment history.
+	Message string
 }
 
 // Result is what a deploy produced. Fields Outcome already reports
@@ -855,7 +857,7 @@ func (d *deployment) deployUpload() (*Result, error) {
 		}
 		step.Done("Build settings read")
 		start := func(s NodeSettings) (Build, error) {
-			return a.StartBuild(ctx, w.Username, w.Domain, s, result.Archive)
+			return a.StartBuild(ctx, w.Username, w.Domain, s, result.Archive, d.opts.Message)
 		}
 		return d.finishBuild(runBuild(ctx, a, ui, w, detected, start, d.opts, d.remembered, d.packed))
 	}

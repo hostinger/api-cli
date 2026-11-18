@@ -32,7 +32,9 @@ hosting plan (--order-id, or a prompt), with a free subdomain when no domain is 
 The directory is deployed as a static site (HTML, CSS, JavaScript, PHP) or a Node.js
 app, which is built on the server, from an uploaded copy of the directory or from its
 pushed Git branch (--source git, asked once and remembered, which also redeploys on
-every push). Deploying overwrites the website's current files.
+every push). Deploying overwrites the website's current files. --message describes a
+Node.js build from an upload in the deployment history, as a commit message does for
+a Git build.
 
 A WordPress site (a folder with wp-config.php or wp-content, or an archive with
 --type wordpress-site) is imported with its database dump: --sql, else the one .sql or
@@ -63,6 +65,7 @@ already has content. up never deploys to default_domain from the config file: on
 linked website, --domain or HOSTINGER_DOMAIN.`,
 	Example: `  hostinger up
   hostinger up ./dist --domain example.com
+  hostinger up --domain example.com --message "Add the contact form"
   hostinger up --headless wordpress
   hostinger up ./my-wp-site --domain example.com --sql backup.sql
   hostinger up --create --order-id 123 --type nodejs --format json`,

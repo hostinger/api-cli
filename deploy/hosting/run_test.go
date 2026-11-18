@@ -26,6 +26,7 @@ type fakeAPI struct {
 	calls    []string
 	upload   *httptest.Server
 	started  NodeSettings
+	message  string
 
 	fromRepo    NodeSettings // what BuildSettingsFromRepository returns
 	fromRepoErr error
@@ -114,9 +115,10 @@ func (f *fakeAPI) BuildSettingsFromRepository(_ context.Context, username, domai
 	f.log("settings-from-repo %s@%s %s", r.FullName(), r.Branch, r.installUID)
 	return f.fromRepo, f.fromRepoErr
 }
-func (f *fakeAPI) StartBuild(_ context.Context, username, domain string, s NodeSettings, archive string) (Build, error) {
+func (f *fakeAPI) StartBuild(_ context.Context, username, domain string, s NodeSettings, archive, message string) (Build, error) {
 	f.log("build %s %s %s", username, domain, archive)
 	f.started = s
+	f.message = message
 	return Build{UUID: "b-1", State: "pending"}, nil
 }
 func (f *fakeAPI) BuildDetails(context.Context, string, string, string) (Build, error) {
@@ -435,12 +437,15 @@ func TestRunNodeBuildWithOverrides(t *testing.T) {
 	write(t, dir, "package.json", `{"scripts":{"start":"node index.js","build":"echo"}}`)
 	write(t, dir, "index.js", "")
 
-	res, err := Run(context.Background(), api, &fakeUI{t: t}, Options{Path: dir, Domain: "example.com", Node: NodeOverrides{NodeVersion: 22, BuildScript: "build"}})
+	res, err := Run(context.Background(), api, &fakeUI{t: t}, Options{Path: dir, Domain: "example.com", Node: NodeOverrides{NodeVersion: 22, BuildScript: "build"}, Message: "Add the contact form"})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if res.Type != NodeJS || res.BuildUUID != "b-1" || res.BuildState != "completed" {
 		t.Errorf("result = %+v", res)
+	}
+	if api.message != "Add the contact form" {
+		t.Errorf("build message = %q", api.message)
 	}
 	if api.started.NodeVersion != 22 || api.started.AppType != "express" || api.started.BuildScript == nil || *api.started.BuildScript != "build" || api.started.OutputDirectory != nil {
 		t.Errorf("started settings = %+v", api.started)

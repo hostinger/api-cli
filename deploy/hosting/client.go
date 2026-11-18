@@ -57,7 +57,7 @@ type API interface {
 	ImportWordPress(ctx context.Context, username, domain, archivePath, sqlPath string) error
 	BuildSettingsFromArchive(ctx context.Context, username, domain, archivePath string) (NodeSettings, error)
 	BuildSettingsFromRepository(ctx context.Context, username, domain string, r *Repo) (NodeSettings, error)
-	StartBuild(ctx context.Context, username, domain string, settings NodeSettings, archivePath string) (Build, error)
+	StartBuild(ctx context.Context, username, domain string, settings NodeSettings, archivePath, message string) (Build, error)
 	BuildDetails(ctx context.Context, username, domain, uuid string) (Build, error)
 	BuildLogs(ctx context.Context, username, domain, uuid string) (string, error)
 	BuildAnalysis(ctx context.Context, username, domain, uuid string) (analysis, solution string, err error)
@@ -219,10 +219,14 @@ func (a *client) BuildSettingsFromRepository(ctx context.Context, username, doma
 	return s, err
 }
 
-func (a *client) StartBuild(ctx context.Context, username, domain string, settings NodeSettings, archivePath string) (Build, error) {
+func (a *client) StartBuild(ctx context.Context, username, domain string, settings NodeSettings, archivePath, message string) (Build, error) {
 	body := buildBody(settings)
 	body["source_type"] = "archive"
-	body["source_options"] = map[string]string{"archive_path": archivePath}
+	options := map[string]string{"archive_path": archivePath}
+	if message = strings.TrimSpace(message); message != "" {
+		options["message"] = message
+	}
+	body["source_options"] = options
 	var b Build
 	err := a.c.JSON(ctx, http.MethodPost, sitePath(username, domain, "/nodejs/builds"), nil, body, &b)
 	return b, err

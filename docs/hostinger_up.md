@@ -12,7 +12,9 @@ hosting plan (--order-id, or a prompt), with a free subdomain when no domain is 
 The directory is deployed as a static site (HTML, CSS, JavaScript, PHP) or a Node.js
 app, which is built on the server, from an uploaded copy of the directory or from its
 pushed Git branch (--source git, asked once and remembered, which also redeploys on
-every push). Deploying overwrites the website's current files.
+every push). Deploying overwrites the website's current files. --message describes a
+Node.js build from an upload in the deployment history, as a commit message does for
+a Git build.
 
 A WordPress site (a folder with wp-config.php or wp-content, or an archive with
 --type wordpress-site) is imported with its database dump: --sql, else the one .sql or
@@ -51,6 +53,7 @@ hostinger up [path] [flags]
 ```
   hostinger up
   hostinger up ./dist --domain example.com
+  hostinger up --domain example.com --message "Add the contact form"
   hostinger up --headless wordpress
   hostinger up ./my-wp-site --domain example.com --sql backup.sql
   hostinger up --create --order-id 123 --type nodejs --format json
@@ -67,6 +70,7 @@ hostinger up [path] [flags]
       --entry-file string         Entry file of the server (compiled apps)
       --headless string           Create a headless website for a Node.js frontend: empty, wordpress (installed in /cms), ecommerce or pocketbase. A new website unless the linked website or --domain is already headless
   -h, --help[=true|false]         help for up
+  -m, --message string            What this deploy changes, like a commit message, shown in the Node.js deployment history (an upload only; at most 500 characters)
       --no-wait[=true|false]      Return as soon as a Node.js build is started instead of waiting for it
       --node-version int          Node.js major version (18, 20, 22, 24)
       --order-id int              Hosting plan (order ID) a new website is created on

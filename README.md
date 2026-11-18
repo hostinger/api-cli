@@ -131,6 +131,7 @@ hostinger up ./dist --domain example.com --format json
 hostinger up --create --type nodejs --app-type express --entry-file server.js --format json
 hostinger up --dry-run --domain example.com      # the plan as JSON; changes nothing
 hostinger up --no-wait --domain example.com      # start the Node.js build and return its uuid
+hostinger up --domain example.com -m "Add the contact form"  # shown in the Node.js deployment history
 hostinger hosting nodejs build example.com <uuid>  # poll it
 ```
 

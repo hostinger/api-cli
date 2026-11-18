@@ -2,6 +2,9 @@ package hosting
 
 import (
 	"context"
+	"fmt"
+	"strings"
+	"unicode/utf8"
 
 	"github.com/hostinger/api-cli/api"
 	"github.com/spf13/pflag"
@@ -19,8 +22,12 @@ var flags struct {
 	headless   string
 	dryRun     bool
 	noWait     bool
+	message    string
 	node       NodeOverrides
 }
+
+// MaxMessageLength is the most characters the API keeps for a deploy message.
+const MaxMessageLength = 500
 
 func AddFlags(f *pflag.FlagSet) {
 	f.IntVar(&flags.orderID, "order-id", 0, "Hosting plan (order ID) a new website is created on")
@@ -33,6 +40,7 @@ func AddFlags(f *pflag.FlagSet) {
 	f.StringVar(&flags.source, "source", "", "Where the files come from: upload (pack this directory) or git (the pushed branch, through a connected Git account); default: remembered, else asked")
 	f.BoolVar(&flags.dryRun, "dry-run", false, "Show what would be deployed where, as JSON, without creating, uploading or building anything")
 	f.BoolVar(&flags.noWait, "no-wait", false, "Return as soon as a Node.js build is started instead of waiting for it")
+	f.StringVarP(&flags.message, "message", "m", "", "What this deploy changes, like a commit message, shown in the Node.js deployment history (an upload only; at most 500 characters)")
 	f.BoolVar(&flags.settings, "settings", false, "Review the Node.js build settings before building (a first deploy in a terminal reviews them anyway; without a terminal the detected settings and flags are used)")
 	f.IntVar(&flags.node.NodeVersion, "node-version", 0, "Node.js major version (18, 20, 22, 24)")
 	f.StringVar(&flags.node.AppType, "app-type", "", "Node.js framework, e.g. express, next, vite, nest, other")
@@ -43,9 +51,23 @@ func AddFlags(f *pflag.FlagSet) {
 	f.StringVar(&flags.node.PackageManager, "package-manager", "", "npm, yarn or pnpm")
 }
 
+// ParseMessage trims a deploy message and rejects one the API would not keep.
+func ParseMessage(s string) (string, error) {
+	s = strings.TrimSpace(s)
+	if n := utf8.RuneCountInString(s); n > MaxMessageLength {
+		return "", fmt.Errorf("--message has %d characters; the limit is %d", n, MaxMessageLength)
+	}
+	return s, nil
+}
+
 // Deploy runs Run with the up command's flags.
 func Deploy(ctx context.Context, ui UI, path, domain string) (*Outcome, error) {
 	opts := Options{Path: path, Domain: domain, Create: flags.create, OrderID: flags.orderID, Datacenter: flags.datacenter, SQL: flags.sql, Yes: flags.yes, Settings: flags.settings, Node: flags.node, DryRun: flags.dryRun, NoWait: flags.noWait}
+	message, err := ParseMessage(flags.message)
+	if err != nil {
+		return nil, err
+	}
+	opts.Message = message
 	if flags.typ != "" {
 		t, err := ParseType(flags.typ)
 		if err != nil {
