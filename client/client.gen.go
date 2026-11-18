@@ -12895,6 +12895,11 @@ type HostingV1NodeJsSourceOptionsResource struct {
 	// Example: 018f5e2a-1234-7890-abcd-1234567890ab
 	InstallationUuid *string `json:"installation_uuid"`
 
+	// Message Summary of the deployment given when it was started (present if source_type is "archive" and one was sent)
+	//
+	// Example: Add contact form and fix mobile navigation
+	Message *string `json:"message,omitempty"`
+
 	// Owner Repository owner login (present if source_type is "git")
 	//
 	// Example: octocat
@@ -12949,9 +12954,9 @@ type HostingV1NodeJsStartBuildRequest struct {
 	// Example: webapp
 	RootDirectory *string `json:"root_directory"`
 
-	// SourceOptions Source-specific options. For `archive` send `archive_path`. For `git` send `owner`,
-	// `repository`, `branch` and `installation_uuid`, taken from `List Git installations`
-	// and `List Git installation repositories`.
+	// SourceOptions Source-specific options. For `archive` send `archive_path` and a `message` describing the
+	// change. For `git` send `owner`, `repository`, `branch` and `installation_uuid`, taken from
+	// `List Git installations` and `List Git installation repositories`.
 	SourceOptions *struct {
 		// ArchivePath The path to the archive file relative to the document root of the vhost (required if source is "archive")
 		//
@@ -12967,6 +12972,14 @@ type HostingV1NodeJsStartBuildRequest struct {
 		//
 		// Example: 018f5e2a-1234-7890-abcd-1234567890ab
 		InstallationUuid *string `json:"installation_uuid,omitempty"`
+
+		// Message Short summary of what this deployment changes, shown in the website's deployment
+		// history the way a commit message is for git deployments. Without it the history only
+		// shows the archive file name, so always send one: keep the first line under 72
+		// characters and describe the change, not the upload. Only used if source is "archive".
+		//
+		// Example: Add contact form and fix mobile navigation
+		Message *string `json:"message,omitempty"`
 
 		// Owner Repository owner login (required if source is "git"). GitLab group paths use
 		// slashes.
@@ -25641,7 +25654,9 @@ type ClientInterface interface {
 	// archive file on the server (relative to the website document root). Use the
 	// `Generate Upload URL` endpoint to obtain credentials and upload the archive first. To
 	// auto-detect build settings from an archive before starting, first call the
-	// `Get Node.js Build Settings from Archive` endpoint.
+	// `Get Node.js Build Settings from Archive` endpoint. Send `source_options.message` with a
+	// short summary of what changed; it labels the deployment in the website's deployment
+	// history, which otherwise shows only the archive file name.
 	//
 	// With `source_type` `git`, `source_options` carries `owner`, `repository`, `branch` and
 	// `installation_uuid`. Take the installation from `List Git installations` and the owner and
@@ -25667,7 +25682,9 @@ type ClientInterface interface {
 	// archive file on the server (relative to the website document root). Use the
 	// `Generate Upload URL` endpoint to obtain credentials and upload the archive first. To
 	// auto-detect build settings from an archive before starting, first call the
-	// `Get Node.js Build Settings from Archive` endpoint.
+	// `Get Node.js Build Settings from Archive` endpoint. Send `source_options.message` with a
+	// short summary of what changed; it labels the deployment in the website's deployment
+	// history, which otherwise shows only the archive file name.
 	//
 	// With `source_type` `git`, `source_options` carries `owner`, `repository`, `branch` and
 	// `installation_uuid`. Take the installation from `List Git installations` and the owner and
@@ -36537,7 +36554,9 @@ func (c *Client) HostingListNodeJSBuildsV1(ctx context.Context, username Usernam
 // archive file on the server (relative to the website document root). Use the
 // `Generate Upload URL` endpoint to obtain credentials and upload the archive first. To
 // auto-detect build settings from an archive before starting, first call the
-// `Get Node.js Build Settings from Archive` endpoint.
+// `Get Node.js Build Settings from Archive` endpoint. Send `source_options.message` with a
+// short summary of what changed; it labels the deployment in the website's deployment
+// history, which otherwise shows only the archive file name.
 //
 // With `source_type` `git`, `source_options` carries `owner`, `repository`, `branch` and
 // `installation_uuid`. Take the installation from `List Git installations` and the owner and
@@ -36573,7 +36592,9 @@ func (c *Client) HostingStartNodeJsBuildV1WithBody(ctx context.Context, username
 // archive file on the server (relative to the website document root). Use the
 // `Generate Upload URL` endpoint to obtain credentials and upload the archive first. To
 // auto-detect build settings from an archive before starting, first call the
-// `Get Node.js Build Settings from Archive` endpoint.
+// `Get Node.js Build Settings from Archive` endpoint. Send `source_options.message` with a
+// short summary of what changed; it labels the deployment in the website's deployment
+// history, which otherwise shows only the archive file name.
 //
 // With `source_type` `git`, `source_options` carries `owner`, `repository`, `branch` and
 // `installation_uuid`. Take the installation from `List Git installations` and the owner and
@@ -70655,7 +70676,9 @@ type ClientWithResponsesInterface interface {
 	// archive file on the server (relative to the website document root). Use the
 	// `Generate Upload URL` endpoint to obtain credentials and upload the archive first. To
 	// auto-detect build settings from an archive before starting, first call the
-	// `Get Node.js Build Settings from Archive` endpoint.
+	// `Get Node.js Build Settings from Archive` endpoint. Send `source_options.message` with a
+	// short summary of what changed; it labels the deployment in the website's deployment
+	// history, which otherwise shows only the archive file name.
 	//
 	// With `source_type` `git`, `source_options` carries `owner`, `repository`, `branch` and
 	// `installation_uuid`. Take the installation from `List Git installations` and the owner and
@@ -70681,7 +70704,9 @@ type ClientWithResponsesInterface interface {
 	// archive file on the server (relative to the website document root). Use the
 	// `Generate Upload URL` endpoint to obtain credentials and upload the archive first. To
 	// auto-detect build settings from an archive before starting, first call the
-	// `Get Node.js Build Settings from Archive` endpoint.
+	// `Get Node.js Build Settings from Archive` endpoint. Send `source_options.message` with a
+	// short summary of what changed; it labels the deployment in the website's deployment
+	// history, which otherwise shows only the archive file name.
 	//
 	// With `source_type` `git`, `source_options` carries `owner`, `repository`, `branch` and
 	// `installation_uuid`. Take the installation from `List Git installations` and the owner and
@@ -108583,7 +108608,9 @@ func (c *ClientWithResponses) HostingListNodeJSBuildsV1WithResponse(ctx context.
 // archive file on the server (relative to the website document root). Use the
 // `Generate Upload URL` endpoint to obtain credentials and upload the archive first. To
 // auto-detect build settings from an archive before starting, first call the
-// `Get Node.js Build Settings from Archive` endpoint.
+// `Get Node.js Build Settings from Archive` endpoint. Send `source_options.message` with a
+// short summary of what changed; it labels the deployment in the website's deployment
+// history, which otherwise shows only the archive file name.
 //
 // With `source_type` `git`, `source_options` carries `owner`, `repository`, `branch` and
 // `installation_uuid`. Take the installation from `List Git installations` and the owner and
@@ -108615,7 +108642,9 @@ func (c *ClientWithResponses) HostingStartNodeJsBuildV1WithBodyWithResponse(ctx 
 // archive file on the server (relative to the website document root). Use the
 // `Generate Upload URL` endpoint to obtain credentials and upload the archive first. To
 // auto-detect build settings from an archive before starting, first call the
-// `Get Node.js Build Settings from Archive` endpoint.
+// `Get Node.js Build Settings from Archive` endpoint. Send `source_options.message` with a
+// short summary of what changed; it labels the deployment in the website's deployment
+// history, which otherwise shows only the archive file name.
 //
 // With `source_type` `git`, `source_options` carries `owner`, `repository`, `branch` and
 // `installation_uuid`. Take the installation from `List Git installations` and the owner and

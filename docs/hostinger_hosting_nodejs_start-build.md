@@ -13,7 +13,9 @@ With `source_type` `archive`, `source_options.archive_path` must point to an exi
 archive file on the server (relative to the website document root). Use the
 `Generate Upload URL` endpoint to obtain credentials and upload the archive first. To
 auto-detect build settings from an archive before starting, first call the
-`Get Node.js Build Settings from Archive` endpoint.
+`Get Node.js Build Settings from Archive` endpoint. Send `source_options.message` with a
+short summary of what changed; it labels the deployment in the website's deployment
+history, which otherwise shows only the archive file name.
 
 With `source_type` `git`, `source_options` carries `owner`, `repository`, `branch` and
 `installation_uuid`. Take the installation from `List Git installations` and the owner and
@@ -32,6 +34,7 @@ JSON flags take inline JSON, @file.json, or - to read stdin. Example values:
       "archive_path": "example.zip",
       "branch": "main",
       "installation_uuid": "018f5e2a-1234-7890-abcd-1234567890ab",
+      "message": "Add contact form and fix mobile navigation",
       "owner": "octocat",
       "repository": "my-site"
     }
@@ -57,7 +60,7 @@ hostinger hosting nodejs start-build [domain] [flags]
       --output-directory string   Build output directory relative to the root directory
       --package-manager string    Package manager (one of: npm, yarn, pnpm)
       --root-directory string     Application root directory (where package.json is located) relative to public_html
-      --source-options archive    Source-specific options. For archive send `archive_path`. For `git` send `owner`, `repository`, `branch` and `installation_uuid`, taken from `List Git installations` and `List Git installation repositories`. (JSON, @file or -; shape in the help above)
+      --source-options archive    Source-specific options. For archive send `archive_path` and a `message` describing the change. For `git` send `owner`, `repository`, `branch` and `installation_uuid`, taken from `List Git installations` and `List Git installation repositories`. (JSON, @file or -; shape in the help above)
       --source-type archive       Where the files come from: archive (an uploaded archive on the website) or `git` (a branch of a repository reachable through a Git installation). (one of: archive, git)
 ```
 
