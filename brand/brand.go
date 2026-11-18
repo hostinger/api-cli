@@ -102,15 +102,15 @@ func Supported(f *os.File) bool {
 	if f == nil || !term.IsTerminal(int(f.Fd())) {
 		return false
 	}
-	if _, noColor := os.LookupEnv("NO_COLOR"); noColor || os.Getenv("TERM") == "dumb" || agentShell() {
+	if _, noColor := os.LookupEnv("NO_COLOR"); noColor || os.Getenv("TERM") == "dumb" || AgentShell() {
 		return false
 	}
 	return enableEscapes(f)
 }
 
-// agentShell reports a shell started by an AI agent, which may still have a
+// AgentShell reports a shell started by an AI agent, which may still have a
 // pseudo-terminal: a redrawn view there only costs it tokens.
-func agentShell() bool {
+func AgentShell() bool {
 	return os.Getenv("AI_AGENT") != "" || os.Getenv("CLAUDECODE") != ""
 }
 

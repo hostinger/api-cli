@@ -182,6 +182,7 @@ github.com/hostinger/hcdn-connector/pkg/config
 github.com/hostinger/hcdn-connector/pkg/connector
 github.com/hostinger/hcdn-connector/pkg/creds
 github.com/hostinger/hcdn-connector/pkg/localguard
+github.com/hostinger/hcdn-connector/pkg/quickview
 # github.com/inconshreveable/mousetrap v1.1.0
 ## explicit; go 1.18
 github.com/inconshreveable/mousetrap

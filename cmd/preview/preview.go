@@ -14,9 +14,11 @@ import (
 	"time"
 
 	"github.com/hostinger/api-cli/api"
+	"github.com/hostinger/api-cli/brand"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/hostinger/hcdn-connector/pkg/connector"
 	"github.com/hostinger/hcdn-connector/pkg/creds"
+	"github.com/hostinger/hcdn-connector/pkg/quickview"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -55,7 +57,9 @@ and with --json, it exits with code 77 instead. The Preview is linked to that ac
 
 The URL is printed once the Preview answers. If that takes longer than a few seconds,
 the URL is printed early with a note that it may answer 530 for a few seconds, and
-"Preview ready." follows once it answers.
+"Preview ready." follows once it answers. In a terminal, a live view shows the same
+steps and redraws in place. Piped output, --json, --no-input, CI, AI agents (AI_AGENT or
+CLAUDECODE set) and NO_COLOR keep plain lines.
 
 --json prints one JSON object per line on stdout: {"event":"ready",...} with the URL and
 "reachable" (false while it may still answer 530), {"event":"reachable"} when such a
@@ -125,6 +129,16 @@ var runQuick = connector.RunQuick
 // sign-in; tests replace it.
 var interactive = utils.Interactive
 
+// newView returns the live view when w is a terminal that can show it, or
+// nil for plain lines; tests replace it.
+var newView = func(w io.Writer, o quickview.Options) *quickview.View {
+	f, ok := w.(*os.File)
+	if !ok || !quickview.Supported(f) {
+		return nil
+	}
+	return quickview.New(f, o)
+}
+
 // newDetector builds the dev server detector for cmd; tests replace it.
 var newDetector = func(cmd *cobra.Command, jsonOut bool) detector {
 	d := &net.Dialer{}
@@ -173,11 +187,24 @@ func runPreview(cmd *cobra.Command, args []string) error {
 		return err
 	}
 	stderr := cmd.ErrOrStderr()
-	if len(args) == 0 && o.url == "" && !jsonOut {
+	detected := len(args) == 0 && o.url == ""
+	// A person at a terminal gets the live view. CI, --no-input and AI agents
+	// keep plain lines: agents often have a pseudo-terminal, and a view that
+	// redraws for the whole Preview only fills their transcript.
+	var view *quickview.View
+	if !jsonOut && interactive(cmd) && !brand.AgentShell() {
+		view = newView(cmd.OutOrStdout(), quickview.Options{Target: target, Detected: detected})
+	}
+	if detected && !jsonOut && view == nil {
 		fmt.Fprintf(stderr, "Found a server at %s\n", target)
 	}
-	warnSharedPort(ctx, stderr, target)
-	warnHostHeader(stderr, o.hostHeader)
+	warn := func(w io.Writer) {
+		warnSharedPort(ctx, w, target)
+		warnHostHeader(w, o.hostHeader)
+	}
+	if view == nil {
+		warn(stderr)
+	}
 
 	p := &printer{
 		stdout: cmd.OutOrStdout(),
@@ -200,6 +227,16 @@ func runPreview(cmd *cobra.Command, args []string) error {
 	if viper.GetBool("verbose") {
 		level = slog.LevelDebug
 	}
+	logOut := stderr
+	if view != nil {
+		view.Start()
+		p.view, logOut = view, view.LogWriter(stderr)
+		// --verbose request lines print above the view too.
+		api.SetDiagnostics(logOut)
+		defer api.SetDiagnostics(nil)
+		// Below the logo, where the view cannot push them off screen.
+		warn(logOut)
+	}
 	expired, err := runQuick(ctx, connector.QuickOptions{
 		URL:          target,
 		HostHeader:   o.hostHeader,
@@ -208,7 +245,7 @@ func runPreview(cmd *cobra.Command, args []string) error {
 		ServerCAFile: o.serverCAFile,
 		Lifetime:     lifetime,
 		Version:      api.UserAgent(),
-		Logger:       slog.New(slog.NewTextHandler(stderr, &slog.HandlerOptions{Level: level})),
+		Logger:       slog.New(slog.NewTextHandler(logOut, &slog.HandlerOptions{Level: level})),
 		Owner:        NewOwnerTicketFunc(DefaultOwnerOptions(o.noOwner)),
 		OnReady:      p.ready,
 		OnReachable:  p.reachable,

@@ -143,6 +143,8 @@ replace what the website serves (the real run then asks, or needs `--yes`). Ever
 `hostinger preview` shares a web server running on your computer at a temporary
 public https URL until you press Ctrl+C or its time runs out. Without a port it looks
 for a dev server on the usual ports (5173, 3000, 4321, 8080, 8000, 5000, 4200, 8888).
+In a terminal it shows a live view that redraws in place. Piped output, `--json`,
+`--no-input`, `CI`, AI agents (`AI_AGENT` or `CLAUDECODE` set) and `NO_COLOR` keep plain lines.
 
 ```
 hostinger preview                                  # find the dev server and share it

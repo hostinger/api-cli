@@ -102,16 +102,16 @@ func TestBox(t *testing.T) {
 func TestAgentShell(t *testing.T) {
 	t.Setenv("AI_AGENT", "")
 	t.Setenv("CLAUDECODE", "")
-	if agentShell() {
+	if AgentShell() {
 		t.Error("agent shell without the variables")
 	}
 	t.Setenv("AI_AGENT", "claude-code_2-1-326_agent")
-	if !agentShell() {
+	if !AgentShell() {
 		t.Error("AI_AGENT not seen")
 	}
 	t.Setenv("AI_AGENT", "")
 	t.Setenv("CLAUDECODE", "1")
-	if !agentShell() {
+	if !AgentShell() {
 		t.Error("CLAUDECODE not seen")
 	}
 }

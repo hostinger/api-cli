@@ -13,6 +13,7 @@ import (
 	"github.com/hostinger/api-cli/api"
 	"github.com/hostinger/api-cli/utils"
 	"github.com/hostinger/hcdn-connector/pkg/connector"
+	"github.com/hostinger/hcdn-connector/pkg/quickview"
 )
 
 // Exit codes of a Preview that the service ended. They follow sysexits.h,
@@ -148,15 +149,29 @@ func ownerOf(l connector.OwnerLink) *owner {
 	return &owner{Reason: "not_verified", text: "ticket not verified"}
 }
 
-// printer writes the Preview's progress: text for a person, or one JSON
-// object per line on stdout. OnPause calls it from another goroutine.
+// accountLine is the owner line of a Preview, or "" when the service did not
+// ask for an owner.
+func accountLine(o *owner) string {
+	switch {
+	case o == nil:
+		return ""
+	case o.Linked:
+		return "Linked to your Hostinger account"
+	}
+	return "Not linked to an account (" + o.text + ")"
+}
+
+// printer writes the Preview's progress: the live view or text for a person,
+// or one JSON object per line on stdout. OnPause calls it from another
+// goroutine.
 type printer struct {
 	mu        sync.Mutex
 	reachDone bool // the "reachable" line is out
 	stdout    io.Writer
 	stderr    io.Writer
 	json      bool
-	bold      bool // emphasise the URL (a terminal with styling on)
+	view      *quickview.View // set once the live view runs; nil: plain lines
+	bold      bool            // emphasise the URL (a terminal with styling on)
 	target    string
 	now       func() time.Time
 	loc       *time.Location
@@ -201,6 +216,10 @@ func (p *printer) ready(t connector.QuickTunnel) {
 			ExpiresAt: t.ExpiresAt.UTC().Format(time.RFC3339), Reachable: t.Reachable, Owner: o})
 		return
 	}
+	if p.view != nil {
+		p.view.Ready(t, accountLine(o))
+		return
+	}
 	url := utils.SafeText(t.URL)
 	if p.bold {
 		url = "\x1b[1m" + url + "\x1b[0m"
@@ -214,12 +233,8 @@ func (p *printer) ready(t connector.QuickTunnel) {
 	fmt.Fprintf(w, "  Forwarding to  %s\n", utils.SafeText(p.target))
 	fmt.Fprintf(w, "  Expires        %s (in %s)\n", t.ExpiresAt.In(p.loc).Format("2006-01-02 15:04 MST"),
 		roughDuration(t.ExpiresAt.Sub(p.now())))
-	switch {
-	case o == nil:
-	case o.Linked:
-		fmt.Fprintln(w, "  Linked to your Hostinger account")
-	default:
-		fmt.Fprintf(w, "  Not linked to an account (%s)\n", utils.SafeText(o.text))
+	if line := accountLine(o); line != "" {
+		fmt.Fprintf(w, "  %s\n", utils.SafeText(line))
 	}
 	fmt.Fprintln(w, "\nAnyone with the URL can reach this server, including debug consoles and dev tools.")
 	fmt.Fprintln(w, "Press Ctrl+C to stop.")
@@ -238,6 +253,10 @@ func (p *printer) reachable(connector.QuickTunnel) {
 		p.emit(reachableEvent{Event: "reachable"})
 		return
 	}
+	if p.view != nil {
+		p.view.Reachable()
+		return
+	}
 	fmt.Fprintln(p.stdout, "Preview ready.")
 }
 
@@ -250,6 +269,14 @@ func (p *printer) paused(q connector.QuickPause) {
 		return
 	}
 	at := q.RetryAt.In(p.loc).Format("15:04")
+	if p.view != nil {
+		why := "Preview paused (" + q.Reason + "). Retrying at " + at + "."
+		if q.Reason == connector.PauseCapExceeded {
+			why = "Too many Previews from your network. Retrying at " + at + "."
+		}
+		p.view.Paused(why, q.RetryAt)
+		return
+	}
 	if q.Reason == connector.PauseCapExceeded {
 		fmt.Fprintf(p.stderr, "too many Previews from your network; retrying at %s\n", at)
 		return
@@ -270,6 +297,21 @@ func (p *printer) ended(e ending) error {
 		// stdout stays JSON only: the reason travels in the event, not on stderr.
 		p.emit(endedEvent{Event: "ended", Reason: e.reason, Message: e.message})
 		return &utils.ExitCodeError{Code: e.code}
+	}
+	if p.view != nil {
+		// The view's last line says how it ended; a failure's reason follows
+		// it on stderr, as without the view.
+		switch e.reason {
+		case endStopped:
+			p.view.End(quickview.Stopped)
+		case endExpired:
+			p.view.End(quickview.Expired)
+		default:
+			p.view.End(quickview.Failed)
+		}
+		if e.code == utils.ExitOK {
+			return nil
+		}
 	}
 	if e.code == utils.ExitOK {
 		fmt.Fprintln(p.stderr, e.message)

@@ -32,7 +32,9 @@ and with --json, it exits with code 77 instead. The Preview is linked to that ac
 
 The URL is printed once the Preview answers. If that takes longer than a few seconds,
 the URL is printed early with a note that it may answer 530 for a few seconds, and
-"Preview ready." follows once it answers.
+"Preview ready." follows once it answers. In a terminal, a live view shows the same
+steps and redraws in place. Piped output, --json, --no-input, CI, AI agents (AI_AGENT or
+CLAUDECODE set) and NO_COLOR keep plain lines.
 
 --json prints one JSON object per line on stdout: {"event":"ready",...} with the URL and
 "reachable" (false while it may still answer 530), {"event":"reachable"} when such a
