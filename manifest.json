@@ -1,4 +1,9 @@
 {
+  "DNS_checkDNSRecordPropagationV1": {
+    "command": "hostinger dns propagation check-record",
+    "method": "GET",
+    "path": "/api/dns/v1/propagation/{domain}/{type}"
+  },
   "DNS_deleteDNSRecordsV1": {
     "command": "hostinger dns records delete",
     "method": "DELETE",

@@ -1,6 +1,7 @@
 package dns
 
 import (
+	"github.com/hostinger/api-cli/cmd/dns/propagation"
 	"github.com/hostinger/api-cli/cmd/dns/records"
 	"github.com/hostinger/api-cli/cmd/dns/snapshots"
 
@@ -16,6 +17,7 @@ var GroupCmd = &cobra.Command{
 }
 
 func init() {
+	GroupCmd.AddCommand(propagation.GroupCmd)
 	GroupCmd.AddCommand(records.GroupCmd)
 	GroupCmd.AddCommand(snapshots.GroupCmd)
 }

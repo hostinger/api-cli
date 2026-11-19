@@ -29,6 +29,7 @@ hostinger dns [flags]
 ### SEE ALSO
 
 * [hostinger](hostinger.md)	 - Hostinger API Command Line Interface
+* [hostinger dns propagation](hostinger_dns_propagation.md)	 - Propagation commands
 * [hostinger dns records](hostinger_dns_records.md)	 - Zone commands
 * [hostinger dns snapshots](hostinger_dns_snapshots.md)	 - Snapshot commands
 

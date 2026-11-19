@@ -8356,6 +8356,83 @@ type CommonSuccessEmptyResource struct {
 	Message *string `json:"message,omitempty"`
 }
 
+// DNSV1PropagationAuthoritativeAnswerResource What the authoritative nameservers serve now: the best signal of the current record value
+type DNSV1PropagationAuthoritativeAnswerResource struct {
+	// Nameservers Answer of each authoritative nameserver of the zone
+	Nameservers *[]DNSV1PropagationNameserverAnswerResource `json:"nameservers,omitempty"`
+
+	// Zone DNS zone that holds the record
+	//
+	// Example: mydomain.tld
+	Zone *string `json:"zone,omitempty"`
+}
+
+// DNSV1PropagationNameserverAnswerResource defines model for DNS.V1.Propagation.NameserverAnswerResource.
+type DNSV1PropagationNameserverAnswerResource struct {
+	// Nameserver Authoritative nameserver
+	//
+	// Example: ns1.dns-parking.com
+	Nameserver *string `json:"nameserver,omitempty"`
+
+	// Records Records the nameserver serves; null or empty when it serves none
+	Records *[]string `json:"records,omitempty"`
+
+	// Ttl TTL in seconds: how long resolvers may keep serving a previously cached value
+	//
+	// Example: 14400
+	Ttl *int `json:"ttl,omitempty"`
+}
+
+// DNSV1PropagationPropagationReportResource defines model for DNS.V1.Propagation.PropagationReportResource.
+type DNSV1PropagationPropagationReportResource struct {
+	// Authoritative What the authoritative nameservers serve now: the best signal of the current record value
+	Authoritative *DNSV1PropagationAuthoritativeAnswerResource `json:"authoritative,omitempty"`
+
+	// VantagePoints Answers of public resolvers at locations around the world
+	VantagePoints *[]DNSV1PropagationVantagePointResource `json:"vantage_points,omitempty"`
+}
+
+// DNSV1PropagationVantagePointResource Answer of a public resolver at one location
+type DNSV1PropagationVantagePointResource struct {
+	// Country Country code of the resolver
+	//
+	// Example: US
+	Country *string `json:"country,omitempty"`
+
+	// Ip IP address of the resolver
+	//
+	// Example: 8.8.8.8
+	Ip *string `json:"ip,omitempty"`
+
+	// IsPropagated Whether this location returns the same records as the authoritative nameservers.
+	// For GeoDNS domains, whose nameservers answer differently by region, true means the location
+	// returned a record. A records served from the Hostinger CDN count as propagated when the location
+	// also returns CDN addresses. True when every responding authoritative nameserver returns no
+	// records. Null when the location could not be queried or no authoritative answer could be compared.
+	//
+	// Example: true
+	IsPropagated *bool `json:"is_propagated,omitempty"`
+
+	// Latitude Example: 37.386
+	Latitude *float32 `json:"latitude,omitempty"`
+
+	// Location Location of the resolver
+	//
+	// Example: Mountain View
+	Location *string `json:"location,omitempty"`
+
+	// Longitude Example: -122.0838
+	Longitude *float32 `json:"longitude,omitempty"`
+
+	// Provider Resolver provider
+	//
+	// Example: Google
+	Provider *string `json:"provider,omitempty"`
+
+	// Records Records the resolver returned; null when it returned none or could not be queried
+	Records *[]string `json:"records,omitempty"`
+}
+
 // DNSV1SnapshotSnapshotCollection Array of [`DNS.V1.Snapshot.SnapshotResource`](#model/dnsv1snapshotsnapshotresource)
 type DNSV1SnapshotSnapshotCollection = []DNSV1SnapshotSnapshotResource
 
@@ -19086,6 +19163,12 @@ type DatabaseSearch = string
 // Directory Example: blog
 type Directory = string
 
+// DnsHostNamePath Example: www.mydomain.tld
+type DnsHostNamePath = string
+
+// DnsRecordTypePath Example: A
+type DnsRecordTypePath = string
+
 // Domain Example: mydomain.tld
 type Domain = string
 
@@ -23127,6 +23210,27 @@ type ClientInterface interface {
 	//
 	// Corresponds with POST /api/billing/v1/subscriptions/{subscriptionId}/renew (the `BillingRenewSubscriptionV1` operationId).
 	BillingRenewSubscriptionV1(ctx context.Context, subscriptionId SubscriptionId, body BillingRenewSubscriptionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DNSCheckDNSRecordPropagationV1 Check DNS record propagation
+	//
+	// Check whether a DNS record of a domain or host name has propagated to public resolvers around the world.
+	//
+	// `authoritative` shows what the domain's authoritative nameservers serve now. It is the best signal
+	// of the current record value. Its TTL tells how long resolvers may keep serving the old value.
+	//
+	// `vantage_points` shows what public resolvers at different locations return. `is_propagated` is true
+	// when the location returns the same records as the authoritative nameservers. For GeoDNS domains,
+	// whose nameservers answer differently by region, true means the location returned a record.
+	// A records served from the Hostinger CDN count as propagated. When every responding authoritative
+	// nameserver returns no records, `is_propagated` is true.
+	//
+	// Works for any domain or host name, either a domain or a subdomain. Read-only: it changes nothing.
+	//
+	// A 404 response with error code 2025 can also mean the check could not be completed, for example
+	// when the DNS checker is busy or timed out. It is safe to retry after a short delay.
+	//
+	// Corresponds with GET /api/dns/v1/propagation/{domain}/{type} (the `DNSCheckDNSRecordPropagationV1` operationId).
+	DNSCheckDNSRecordPropagationV1(ctx context.Context, domain DnsHostNamePath, pType DnsRecordTypePath, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DNSGetDNSSnapshotListV1 Get DNS snapshot list
 	//
@@ -32238,6 +32342,37 @@ func (c *Client) BillingRenewSubscriptionV1WithBody(ctx context.Context, subscri
 // Corresponds with POST /api/billing/v1/subscriptions/{subscriptionId}/renew (the `BillingRenewSubscriptionV1` operationId).
 func (c *Client) BillingRenewSubscriptionV1(ctx context.Context, subscriptionId SubscriptionId, body BillingRenewSubscriptionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewBillingRenewSubscriptionV1Request(c.Server, subscriptionId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DNSCheckDNSRecordPropagationV1 Check DNS record propagation
+//
+// Check whether a DNS record of a domain or host name has propagated to public resolvers around the world.
+//
+// `authoritative` shows what the domain's authoritative nameservers serve now. It is the best signal
+// of the current record value. Its TTL tells how long resolvers may keep serving the old value.
+//
+// `vantage_points` shows what public resolvers at different locations return. `is_propagated` is true
+// when the location returns the same records as the authoritative nameservers. For GeoDNS domains,
+// whose nameservers answer differently by region, true means the location returned a record.
+// A records served from the Hostinger CDN count as propagated. When every responding authoritative
+// nameserver returns no records, `is_propagated` is true.
+//
+// Works for any domain or host name, either a domain or a subdomain. Read-only: it changes nothing.
+//
+// A 404 response with error code 2025 can also mean the check could not be completed, for example
+// when the DNS checker is busy or timed out. It is safe to retry after a short delay.
+//
+// Corresponds with GET /api/dns/v1/propagation/{domain}/{type} (the `DNSCheckDNSRecordPropagationV1` operationId).
+func (c *Client) DNSCheckDNSRecordPropagationV1(ctx context.Context, domain DnsHostNamePath, pType DnsRecordTypePath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDNSCheckDNSRecordPropagationV1Request(c.Server, domain, pType)
 	if err != nil {
 		return nil, err
 	}
@@ -47645,6 +47780,47 @@ func NewBillingRenewSubscriptionV1RequestWithBody(server string, subscriptionId 
 	}
 
 	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDNSCheckDNSRecordPropagationV1Request constructs an http.Request for the DNSCheckDNSRecordPropagationV1 method
+func NewDNSCheckDNSRecordPropagationV1Request(server string, domain DnsHostNamePath, pType DnsRecordTypePath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "domain", domain, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "type", pType, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/dns/v1/propagation/%s/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 
 	return req, nil
 }
@@ -67986,6 +68162,29 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /api/billing/v1/subscriptions/{subscriptionId}/renew (the `BillingRenewSubscriptionV1` operationId).
 	BillingRenewSubscriptionV1WithResponse(ctx context.Context, subscriptionId SubscriptionId, body BillingRenewSubscriptionV1JSONRequestBody, reqEditors ...RequestEditorFn) (*BillingRenewSubscriptionV1Response, error)
 
+	// DNSCheckDNSRecordPropagationV1WithResponse Check DNS record propagation
+	//
+	// Check whether a DNS record of a domain or host name has propagated to public resolvers around the world.
+	//
+	// `authoritative` shows what the domain's authoritative nameservers serve now. It is the best signal
+	// of the current record value. Its TTL tells how long resolvers may keep serving the old value.
+	//
+	// `vantage_points` shows what public resolvers at different locations return. `is_propagated` is true
+	// when the location returns the same records as the authoritative nameservers. For GeoDNS domains,
+	// whose nameservers answer differently by region, true means the location returned a record.
+	// A records served from the Hostinger CDN count as propagated. When every responding authoritative
+	// nameserver returns no records, `is_propagated` is true.
+	//
+	// Works for any domain or host name, either a domain or a subdomain. Read-only: it changes nothing.
+	//
+	// A 404 response with error code 2025 can also mean the check could not be completed, for example
+	// when the DNS checker is busy or timed out. It is safe to retry after a short delay.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/dns/v1/propagation/{domain}/{type} (the `DNSCheckDNSRecordPropagationV1` operationId).
+	DNSCheckDNSRecordPropagationV1WithResponse(ctx context.Context, domain DnsHostNamePath, pType DnsRecordTypePath, reqEditors ...RequestEditorFn) (*DNSCheckDNSRecordPropagationV1Response, error)
+
 	// DNSGetDNSSnapshotListV1WithResponse Get DNS snapshot list
 	//
 	// Retrieve DNS snapshots for a domain.
@@ -79176,6 +79375,75 @@ func (r BillingRenewSubscriptionV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r BillingRenewSubscriptionV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DNSCheckDNSRecordPropagationV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *DNSV1PropagationPropagationReportResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseErrorResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r DNSCheckDNSRecordPropagationV1Response) GetJSON200() *DNSV1PropagationPropagationReportResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DNSCheckDNSRecordPropagationV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r DNSCheckDNSRecordPropagationV1Response) GetJSON404() *CommonResponseErrorResponse {
+	return r.JSON404
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r DNSCheckDNSRecordPropagationV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DNSCheckDNSRecordPropagationV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r DNSCheckDNSRecordPropagationV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DNSCheckDNSRecordPropagationV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DNSCheckDNSRecordPropagationV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DNSCheckDNSRecordPropagationV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -104850,6 +105118,35 @@ func (c *ClientWithResponses) BillingRenewSubscriptionV1WithResponse(ctx context
 	return ParseBillingRenewSubscriptionV1Response(rsp)
 }
 
+// DNSCheckDNSRecordPropagationV1WithResponse Check DNS record propagation
+//
+// Check whether a DNS record of a domain or host name has propagated to public resolvers around the world.
+//
+// `authoritative` shows what the domain's authoritative nameservers serve now. It is the best signal
+// of the current record value. Its TTL tells how long resolvers may keep serving the old value.
+//
+// `vantage_points` shows what public resolvers at different locations return. `is_propagated` is true
+// when the location returns the same records as the authoritative nameservers. For GeoDNS domains,
+// whose nameservers answer differently by region, true means the location returned a record.
+// A records served from the Hostinger CDN count as propagated. When every responding authoritative
+// nameserver returns no records, `is_propagated` is true.
+//
+// Works for any domain or host name, either a domain or a subdomain. Read-only: it changes nothing.
+//
+// A 404 response with error code 2025 can also mean the check could not be completed, for example
+// when the DNS checker is busy or timed out. It is safe to retry after a short delay.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/dns/v1/propagation/{domain}/{type} (the `DNSCheckDNSRecordPropagationV1` operationId).
+func (c *ClientWithResponses) DNSCheckDNSRecordPropagationV1WithResponse(ctx context.Context, domain DnsHostNamePath, pType DnsRecordTypePath, reqEditors ...RequestEditorFn) (*DNSCheckDNSRecordPropagationV1Response, error) {
+	rsp, err := c.DNSCheckDNSRecordPropagationV1(ctx, domain, pType, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDNSCheckDNSRecordPropagationV1Response(rsp)
+}
+
 // DNSGetDNSSnapshotListV1WithResponse Get DNS snapshot list
 //
 // Retrieve DNS snapshots for a domain.
@@ -118494,6 +118791,60 @@ func ParseBillingRenewSubscriptionV1Response(rsp *http.Response) (*BillingRenewS
 			return nil, err
 		}
 		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDNSCheckDNSRecordPropagationV1Response parses an HTTP response from a DNSCheckDNSRecordPropagationV1WithResponse call
+func ParseDNSCheckDNSRecordPropagationV1Response(rsp *http.Response) (*DNSCheckDNSRecordPropagationV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DNSCheckDNSRecordPropagationV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest DNSV1PropagationPropagationReportResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
 		var dest CommonResponseUnprocessableContentResponse
