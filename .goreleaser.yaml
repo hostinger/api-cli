@@ -8,6 +8,7 @@ before:
     - sh -c 'go run . completion zsh  > completions/hostinger.zsh'
     - sh -c 'go run . completion fish > completions/hostinger.fish'
     - go run ./tools/gendocs -man manpages
+    - sh -c 'mkdir -p dist-install && for f in install.sh install.ps1; do sed "s/__INSTALL_VERSION__/{{ .Version }}/" "install/$f" > "dist-install/$f"; done'
 
 builds:
   - main: ./main.go
@@ -40,6 +41,9 @@ source:
 
 checksum:
   name_template: "hostinger-{{ .Version }}-checksums.sha256"
+  extra_files:
+    - glob: ./dist-install/install.sh
+    - glob: ./dist-install/install.ps1
 
 #dockers:
 #  - dockerfile: Dockerfile.goreleaser
@@ -52,6 +56,9 @@ release:
   github:
     owner: hostinger
     name: api-cli
+  extra_files:
+    - glob: ./dist-install/install.sh
+    - glob: ./dist-install/install.ps1
 
 brews:
   - repository:

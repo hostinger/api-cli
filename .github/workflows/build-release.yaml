@@ -37,25 +37,67 @@ jobs:
     with:
       tag: ${{ needs.tag.outputs.new_tag }}
 
-  notify-failure:
+  install-check:
     needs: [tag, release]
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      BINARY: hostinger
+      SCRIPT_URL: https://github.com/${{ github.repository }}/releases/download/${{ needs.tag.outputs.new_tag }}
+      TAG: ${{ needs.tag.outputs.new_tag }}
+    steps:
+      - name: Install with install.sh
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          curl -fsSL "$SCRIPT_URL/install.sh" | sh
+          "$HOME/.local/bin/$BINARY" version | grep -F "${TAG#v} "
+
+      - name: Install with install.ps1 in Windows PowerShell
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: |
+          irm "$env:SCRIPT_URL/install.ps1" | iex
+          $installDir = Join-Path $env:LOCALAPPDATA "Programs\$env:BINARY"
+          if (((Get-ItemProperty HKCU:\Environment).Path -split ';') -notcontains $installDir) { throw "$installDir is not on the user PATH" }
+          $version = & $env:BINARY version
+          if ($version -notlike "$($env:TAG.TrimStart('v')) *") { throw "Installed $version, expected $env:TAG" }
+
+      - name: Reinstall with install.ps1 in PowerShell 7
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          irm "$env:SCRIPT_URL/install.ps1" | iex
+          $installDir = Join-Path $env:LOCALAPPDATA "Programs\$env:BINARY"
+          $entries = (Get-ItemProperty HKCU:\Environment).Path -split ';' | Where-Object { $_ -eq $installDir }
+          if (@($entries).Count -ne 1) { throw "$installDir is on the user PATH $(@($entries).Count) times" }
+          $version = & $env:BINARY version
+          if ($version -notlike "$($env:TAG.TrimStart('v')) *") { throw "Installed $version, expected $env:TAG" }
+
+  notify-failure:
+    needs: [tag, release, install-check]
     if: failure()
     runs-on: ubuntu-latest
     steps:
-      - name: Notify Slack on release failure
+      - name: Notify Slack on release or install check failure
         uses: slackapi/slack-github-action@dcb1066f776dd043e64d0e8ba94ca15cc7e1875d # v4.0.0
         with:
           errors: true
           webhook: ${{ secrets.PLATFORM_INCIDENT_SLACK_CHANNEL_WEBHOOK }}
           webhook-type: incoming-webhook
           payload: |
-            text: ":rotating_light: Release failed in ${{ github.repository }}"
+            text: ":rotating_light: Release or install check failed in ${{ github.repository }}"
             blocks:
               - type: section
                 text:
                   type: mrkdwn
                   text: |
-                    :rotating_light: *Release failed:* `${{ github.repository }}`
+                    :rotating_light: *Release or install check failed:* `${{ github.repository }}`
                     *Commit:* <${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha }}>
               - type: actions
                 elements:

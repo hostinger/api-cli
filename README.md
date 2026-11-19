@@ -10,6 +10,25 @@
 
 ## Installation
 
+### Install script
+
+macOS and Linux:
+
+```sh
+curl -fsSL https://github.com/hostinger/api-cli/releases/latest/download/install.sh | sh
+```
+
+Windows (PowerShell):
+
+```powershell
+irm https://github.com/hostinger/api-cli/releases/latest/download/install.ps1 | iex
+```
+
+The script downloads the latest release for your system, checks it against the published
+checksums and installs `hostinger` to `~/.local/bin` (Windows:
+`%LOCALAPPDATA%\Programs\hostinger`, added to your user `PATH`). Run it again to upgrade. Set
+`HOSTINGER_INSTALL_DIR` to install somewhere else, or `HOSTINGER_VERSION` to install a specific version.
+
 ### Homebrew (macOS & Linux)
 
 ```sh
