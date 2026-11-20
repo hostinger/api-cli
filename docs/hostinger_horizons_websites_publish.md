@@ -4,7 +4,7 @@ Publish website
 
 ### Synopsis
 
-Publish a Hostinger Horizons website so its latest changes go live.\n
+Publish a Hostinger AI Builder website so its latest changes go live.\n
 Use this tool when the user asks to publish, deploy or make their website live.\n
 This tool starts the publish process and returns the URL the website will be live on.
 Publishing happens asynchronously and takes a few minutes.\n

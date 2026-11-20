@@ -4,11 +4,11 @@ Get website list
 
 ### Synopsis
 
-List the Hostinger Horizons websites the user owns.\n
+List the Hostinger AI Builder websites the user owns.\n
 Use this tool when the user asks which websites they have, or when you need a website ID
 before editing, publishing or cloning a website.\n
 Each website is returned with its ID, status, domain and the URL to open it
-in Hostinger Horizons interface.\n
+in Hostinger AI Builder interface.\n
 The complete list of websites is returned in a single response - it is not paginated.
 
 ```

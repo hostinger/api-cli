@@ -11569,9 +11569,9 @@ type HorizonsV1WebsitesCreatedWebsiteResource struct {
 	// Example: 123e4567-e89b-12d3-a456-426614174000
 	WebsiteId string `json:"website_id"`
 
-	// WebsiteUrl The website URL for the user to access their website in Hostinger Horizons interface
+	// WebsiteUrl The website URL for the user to access their website in Hostinger AI Builder interface
 	//
-	// Example: https://horizons.hostinger.com/123e4567-e89b-12d3-a456-426614174000?location=chatgpt
+	// Example: https://ai-builder.hostinger.com/123e4567-e89b-12d3-a456-426614174000?location=chatgpt
 	WebsiteUrl string `json:"website_url"`
 }
 
@@ -11620,9 +11620,9 @@ type HorizonsV1WebsitesPublishedWebsiteResource struct {
 	// Example: 123e4567-e89b-12d3-a456-426614174000
 	WebsiteId string `json:"website_id"`
 
-	// WebsiteUrl The website URL for the user to track progress in Hostinger Horizons interface
+	// WebsiteUrl The website URL for the user to track progress in Hostinger AI Builder interface
 	//
-	// Example: https://horizons.hostinger.com/123e4567-e89b-12d3-a456-426614174000?location=chatgpt
+	// Example: https://ai-builder.hostinger.com/123e4567-e89b-12d3-a456-426614174000?location=chatgpt
 	WebsiteUrl string `json:"website_url"`
 }
 
@@ -11661,9 +11661,9 @@ type HorizonsV1WebsitesWebsiteResource struct {
 	// Example: 123e4567-e89b-12d3-a456-426614174000
 	WebsiteId string `json:"website_id"`
 
-	// WebsiteUrl The website URL for the user to access their website in Hostinger Horizons interface
+	// WebsiteUrl The website URL for the user to access their website in Hostinger AI Builder interface
 	//
-	// Example: https://horizons.hostinger.com/123e4567-e89b-12d3-a456-426614174000
+	// Example: https://ai-builder.hostinger.com/123e4567-e89b-12d3-a456-426614174000
 	WebsiteUrl string `json:"website_url"`
 }
 
@@ -11686,13 +11686,13 @@ type HorizonsV1WebsitesWebsiteUrlResource struct {
 	// Example: false
 	HasEcommerceStore *bool `json:"has_ecommerce_store,omitempty"`
 
-	// IsGenerating Whether Hostinger Horizons is generating changes to the website. Editing and publishing are refused
+	// IsGenerating Whether Hostinger AI Builder is generating changes to the website. Editing and publishing are refused
 	// while it is true
 	//
 	// Example: false
 	IsGenerating *bool `json:"is_generating,omitempty"`
 
-	// IsInProgress Whether Hostinger Horizons is still generating changes or publishing the website.
+	// IsInProgress Whether Hostinger AI Builder is still generating changes or publishing the website.
 	// Publishing is refused while it is true, and editing while changes are being generated.
 	// An unfinished template migration also refuses publishing, with its own error,
 	// without setting this flag.
@@ -11710,9 +11710,9 @@ type HorizonsV1WebsitesWebsiteUrlResource struct {
 	// Example: 2026-01-15T10:30:45Z
 	PublishedAt *time.Time `json:"published_at,omitempty"`
 
-	// WebsiteUrl The website URL for the user to access their website in Hostinger Horizons interface
+	// WebsiteUrl The website URL for the user to access their website in Hostinger AI Builder interface
 	//
-	// Example: https://horizons.hostinger.com/123e4567-e89b-12d3-a456-426614174000?location=chatgpt
+	// Example: https://ai-builder.hostinger.com/123e4567-e89b-12d3-a456-426614174000?location=chatgpt
 	WebsiteUrl string `json:"website_url"`
 }
 
@@ -24944,11 +24944,11 @@ type ClientInterface interface {
 
 	// HorizonsGetWebsiteListV1 Get website list
 	//
-	// List the Hostinger Horizons websites the user owns.\n
+	// List the Hostinger AI Builder websites the user owns.\n
 	// Use this tool when the user asks which websites they have, or when you need a website ID
 	// before editing, publishing or cloning a website.\n
 	// Each website is returned with its ID, status, domain and the URL to open it
-	// in Hostinger Horizons interface.\n
+	// in Hostinger AI Builder interface.\n
 	// The complete list of websites is returned in a single response - it is not paginated.
 	//
 	// Corresponds with GET /api/horizons/v1/websites (the `HorizonsGetWebsiteListV1` operationId).
@@ -24956,16 +24956,16 @@ type ClientInterface interface {
 
 	// HorizonsCreateWebsiteV1WithBody Create website
 	//
-	// Create new Hostinger Horizons website from the given message.\n
+	// Create new Hostinger AI Builder website from the given message.\n
 	// Use this tool when user asks you to create a website, landing page, blog
 	// or any other type of application.\n
 	// This tool initiates the website creation process and returns a website URL and ID.
 	// The generation happens asynchronously.\n
 	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
-	// that Hostinger Horizons is now creating their website and it will be ready in a few minutes
+	// that Hostinger AI Builder is now creating their website and it will be ready in a few minutes
 	// and you should provide the website URL to the user immediately
 	// Do not write code.\n\nTo edit afterwards, use the `Edit website` tool with the returned
-	// website ID, or the user can go to Hostinger Horizons interface in the provided website URL.
+	// website ID, or the user can go to Hostinger AI Builder interface in the provided website URL.
 	// If the tool call fails with an error, you should provide a clear explanation of the error
 	// and do not generate code yourself in the chat.
 	// \n
@@ -24983,7 +24983,7 @@ type ClientInterface interface {
 	// - Animations: Framer Motion.\n
 	// \n
 	// BACKEND & DATA STORAGE:\n
-	// - Horizons integrated backend is the EXCLUSIVE solution for persistent data storage,
+	// - Hostinger AI Builder integrated backend is the EXCLUSIVE solution for persistent data storage,
 	// authentication, and database needs.\n
 	// - Local databases (SQLite, MySQL, etc.) are STRICTLY PROHIBITED.\n
 	// - Third-party services (Firebase, AWS Amplify) are allowed ONLY if explicitly requested by the user.\n
@@ -24999,16 +24999,16 @@ type ClientInterface interface {
 
 	// HorizonsCreateWebsiteV1 Create website
 	//
-	// Create new Hostinger Horizons website from the given message.\n
+	// Create new Hostinger AI Builder website from the given message.\n
 	// Use this tool when user asks you to create a website, landing page, blog
 	// or any other type of application.\n
 	// This tool initiates the website creation process and returns a website URL and ID.
 	// The generation happens asynchronously.\n
 	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
-	// that Hostinger Horizons is now creating their website and it will be ready in a few minutes
+	// that Hostinger AI Builder is now creating their website and it will be ready in a few minutes
 	// and you should provide the website URL to the user immediately
 	// Do not write code.\n\nTo edit afterwards, use the `Edit website` tool with the returned
-	// website ID, or the user can go to Hostinger Horizons interface in the provided website URL.
+	// website ID, or the user can go to Hostinger AI Builder interface in the provided website URL.
 	// If the tool call fails with an error, you should provide a clear explanation of the error
 	// and do not generate code yourself in the chat.
 	// \n
@@ -25026,7 +25026,7 @@ type ClientInterface interface {
 	// - Animations: Framer Motion.\n
 	// \n
 	// BACKEND & DATA STORAGE:\n
-	// - Horizons integrated backend is the EXCLUSIVE solution for persistent data storage,
+	// - Hostinger AI Builder integrated backend is the EXCLUSIVE solution for persistent data storage,
 	// authentication, and database needs.\n
 	// - Local databases (SQLite, MySQL, etc.) are STRICTLY PROHIBITED.\n
 	// - Third-party services (Firebase, AWS Amplify) are allowed ONLY if explicitly requested by the user.\n
@@ -25042,7 +25042,7 @@ type ClientInterface interface {
 
 	// HorizonsGetWebsiteV1 Get website
 	//
-	// Get the link for the user to open their website in Hostinger Horizons interface.\n
+	// Get the link for the user to open their website in Hostinger AI Builder interface.\n
 	// Use this tool when the user wants the link to an existing website, or when you need its
 	// website URL before or after editing it.\n
 	// `is_in_progress` is true while changes are being generated or the website is being published;
@@ -25051,7 +25051,7 @@ type ClientInterface interface {
 	// `published_at` is when the website was last published,
 	// `is_template` is whether its published pages show the "Use template" banner, and
 	// `has_ecommerce_store` is whether it has an online store.\n
-	// Websites can be edited with the `Edit website` tool, or by the user in Hostinger Horizons
+	// Websites can be edited with the `Edit website` tool, or by the user in Hostinger AI Builder
 	// interface in the provided website URL.
 	//
 	// Corresponds with GET /api/horizons/v1/websites/{websiteId} (the `HorizonsGetWebsiteV1` operationId).
@@ -25059,25 +25059,25 @@ type ClientInterface interface {
 
 	// HorizonsCloneWebsiteV1 Clone website
 	//
-	// Clone a Hostinger Horizons website into a new website.\n
+	// Clone a Hostinger AI Builder website into a new website.\n
 	// Use this tool when the user wants a copy of an existing website, for example to try out
 	// changes without touching the original.\n
 	// This tool returns the ID and URL of the newly created copy.
 	// The original website is left untouched.\n
 	// To edit the copy, use the `Edit website` tool with the returned website ID, or the user can
-	// open the provided website URL in Hostinger Horizons interface.
+	// open the provided website URL in Hostinger AI Builder interface.
 	//
 	// Corresponds with POST /api/horizons/v1/websites/{websiteId}/clone (the `HorizonsCloneWebsiteV1` operationId).
 	HorizonsCloneWebsiteV1(ctx context.Context, websiteId WebsiteIdPath, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HorizonsEditWebsiteV1WithBody Edit website
 	//
-	// Edit an existing Hostinger Horizons website with a follow-up message.\n
+	// Edit an existing Hostinger AI Builder website with a follow-up message.\n
 	// Use this tool when the user wants to change, extend or fix a website that already exists.\n
 	// This tool queues the requested changes and returns the website URL and ID.
 	// The changes are applied asynchronously.\n
 	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
-	// that Hostinger Horizons is now applying the requested changes and they will be ready
+	// that Hostinger AI Builder is now applying the requested changes and they will be ready
 	// in a few minutes, and you should provide the website URL to the user immediately.
 	// Do not write code.\n
 	// If the tool call fails with an error, you should provide a clear explanation of the error
@@ -25090,12 +25090,12 @@ type ClientInterface interface {
 
 	// HorizonsEditWebsiteV1 Edit website
 	//
-	// Edit an existing Hostinger Horizons website with a follow-up message.\n
+	// Edit an existing Hostinger AI Builder website with a follow-up message.\n
 	// Use this tool when the user wants to change, extend or fix a website that already exists.\n
 	// This tool queues the requested changes and returns the website URL and ID.
 	// The changes are applied asynchronously.\n
 	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
-	// that Hostinger Horizons is now applying the requested changes and they will be ready
+	// that Hostinger AI Builder is now applying the requested changes and they will be ready
 	// in a few minutes, and you should provide the website URL to the user immediately.
 	// Do not write code.\n
 	// If the tool call fails with an error, you should provide a clear explanation of the error
@@ -25108,7 +25108,7 @@ type ClientInterface interface {
 
 	// HorizonsPublishWebsiteV1WithBody Publish website
 	//
-	// Publish a Hostinger Horizons website so its latest changes go live.\n
+	// Publish a Hostinger AI Builder website so its latest changes go live.\n
 	// Use this tool when the user asks to publish, deploy or make their website live.\n
 	// This tool starts the publish process and returns the URL the website will be live on.
 	// Publishing happens asynchronously and takes a few minutes.\n
@@ -25125,7 +25125,7 @@ type ClientInterface interface {
 
 	// HorizonsPublishWebsiteV1 Publish website
 	//
-	// Publish a Hostinger Horizons website so its latest changes go live.\n
+	// Publish a Hostinger AI Builder website so its latest changes go live.\n
 	// Use this tool when the user asks to publish, deploy or make their website live.\n
 	// This tool starts the publish process and returns the URL the website will be live on.
 	// Publishing happens asynchronously and takes a few minutes.\n
@@ -35345,11 +35345,11 @@ func (c *Client) GPUGetPoolOSTemplatesV1(ctx context.Context, poolId PoolId, poo
 
 // HorizonsGetWebsiteListV1 Get website list
 //
-// List the Hostinger Horizons websites the user owns.\n
+// List the Hostinger AI Builder websites the user owns.\n
 // Use this tool when the user asks which websites they have, or when you need a website ID
 // before editing, publishing or cloning a website.\n
 // Each website is returned with its ID, status, domain and the URL to open it
-// in Hostinger Horizons interface.\n
+// in Hostinger AI Builder interface.\n
 // The complete list of websites is returned in a single response - it is not paginated.
 //
 // Corresponds with GET /api/horizons/v1/websites (the `HorizonsGetWebsiteListV1` operationId).
@@ -35367,16 +35367,16 @@ func (c *Client) HorizonsGetWebsiteListV1(ctx context.Context, reqEditors ...Req
 
 // HorizonsCreateWebsiteV1WithBody Create website
 //
-// Create new Hostinger Horizons website from the given message.\n
+// Create new Hostinger AI Builder website from the given message.\n
 // Use this tool when user asks you to create a website, landing page, blog
 // or any other type of application.\n
 // This tool initiates the website creation process and returns a website URL and ID.
 // The generation happens asynchronously.\n
 // After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
-// that Hostinger Horizons is now creating their website and it will be ready in a few minutes
+// that Hostinger AI Builder is now creating their website and it will be ready in a few minutes
 // and you should provide the website URL to the user immediately
 // Do not write code.\n\nTo edit afterwards, use the `Edit website` tool with the returned
-// website ID, or the user can go to Hostinger Horizons interface in the provided website URL.
+// website ID, or the user can go to Hostinger AI Builder interface in the provided website URL.
 // If the tool call fails with an error, you should provide a clear explanation of the error
 // and do not generate code yourself in the chat.
 // \n
@@ -35394,7 +35394,7 @@ func (c *Client) HorizonsGetWebsiteListV1(ctx context.Context, reqEditors ...Req
 // - Animations: Framer Motion.\n
 // \n
 // BACKEND & DATA STORAGE:\n
-// - Horizons integrated backend is the EXCLUSIVE solution for persistent data storage,
+// - Hostinger AI Builder integrated backend is the EXCLUSIVE solution for persistent data storage,
 // authentication, and database needs.\n
 // - Local databases (SQLite, MySQL, etc.) are STRICTLY PROHIBITED.\n
 // - Third-party services (Firebase, AWS Amplify) are allowed ONLY if explicitly requested by the user.\n
@@ -35420,16 +35420,16 @@ func (c *Client) HorizonsCreateWebsiteV1WithBody(ctx context.Context, contentTyp
 
 // HorizonsCreateWebsiteV1 Create website
 //
-// Create new Hostinger Horizons website from the given message.\n
+// Create new Hostinger AI Builder website from the given message.\n
 // Use this tool when user asks you to create a website, landing page, blog
 // or any other type of application.\n
 // This tool initiates the website creation process and returns a website URL and ID.
 // The generation happens asynchronously.\n
 // After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
-// that Hostinger Horizons is now creating their website and it will be ready in a few minutes
+// that Hostinger AI Builder is now creating their website and it will be ready in a few minutes
 // and you should provide the website URL to the user immediately
 // Do not write code.\n\nTo edit afterwards, use the `Edit website` tool with the returned
-// website ID, or the user can go to Hostinger Horizons interface in the provided website URL.
+// website ID, or the user can go to Hostinger AI Builder interface in the provided website URL.
 // If the tool call fails with an error, you should provide a clear explanation of the error
 // and do not generate code yourself in the chat.
 // \n
@@ -35447,7 +35447,7 @@ func (c *Client) HorizonsCreateWebsiteV1WithBody(ctx context.Context, contentTyp
 // - Animations: Framer Motion.\n
 // \n
 // BACKEND & DATA STORAGE:\n
-// - Horizons integrated backend is the EXCLUSIVE solution for persistent data storage,
+// - Hostinger AI Builder integrated backend is the EXCLUSIVE solution for persistent data storage,
 // authentication, and database needs.\n
 // - Local databases (SQLite, MySQL, etc.) are STRICTLY PROHIBITED.\n
 // - Third-party services (Firebase, AWS Amplify) are allowed ONLY if explicitly requested by the user.\n
@@ -35473,7 +35473,7 @@ func (c *Client) HorizonsCreateWebsiteV1(ctx context.Context, body HorizonsCreat
 
 // HorizonsGetWebsiteV1 Get website
 //
-// Get the link for the user to open their website in Hostinger Horizons interface.\n
+// Get the link for the user to open their website in Hostinger AI Builder interface.\n
 // Use this tool when the user wants the link to an existing website, or when you need its
 // website URL before or after editing it.\n
 // `is_in_progress` is true while changes are being generated or the website is being published;
@@ -35482,7 +35482,7 @@ func (c *Client) HorizonsCreateWebsiteV1(ctx context.Context, body HorizonsCreat
 // `published_at` is when the website was last published,
 // `is_template` is whether its published pages show the "Use template" banner, and
 // `has_ecommerce_store` is whether it has an online store.\n
-// Websites can be edited with the `Edit website` tool, or by the user in Hostinger Horizons
+// Websites can be edited with the `Edit website` tool, or by the user in Hostinger AI Builder
 // interface in the provided website URL.
 //
 // Corresponds with GET /api/horizons/v1/websites/{websiteId} (the `HorizonsGetWebsiteV1` operationId).
@@ -35500,13 +35500,13 @@ func (c *Client) HorizonsGetWebsiteV1(ctx context.Context, websiteId WebsiteIdPa
 
 // HorizonsCloneWebsiteV1 Clone website
 //
-// Clone a Hostinger Horizons website into a new website.\n
+// Clone a Hostinger AI Builder website into a new website.\n
 // Use this tool when the user wants a copy of an existing website, for example to try out
 // changes without touching the original.\n
 // This tool returns the ID and URL of the newly created copy.
 // The original website is left untouched.\n
 // To edit the copy, use the `Edit website` tool with the returned website ID, or the user can
-// open the provided website URL in Hostinger Horizons interface.
+// open the provided website URL in Hostinger AI Builder interface.
 //
 // Corresponds with POST /api/horizons/v1/websites/{websiteId}/clone (the `HorizonsCloneWebsiteV1` operationId).
 func (c *Client) HorizonsCloneWebsiteV1(ctx context.Context, websiteId WebsiteIdPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -35523,12 +35523,12 @@ func (c *Client) HorizonsCloneWebsiteV1(ctx context.Context, websiteId WebsiteId
 
 // HorizonsEditWebsiteV1WithBody Edit website
 //
-// Edit an existing Hostinger Horizons website with a follow-up message.\n
+// Edit an existing Hostinger AI Builder website with a follow-up message.\n
 // Use this tool when the user wants to change, extend or fix a website that already exists.\n
 // This tool queues the requested changes and returns the website URL and ID.
 // The changes are applied asynchronously.\n
 // After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
-// that Hostinger Horizons is now applying the requested changes and they will be ready
+// that Hostinger AI Builder is now applying the requested changes and they will be ready
 // in a few minutes, and you should provide the website URL to the user immediately.
 // Do not write code.\n
 // If the tool call fails with an error, you should provide a clear explanation of the error
@@ -35551,12 +35551,12 @@ func (c *Client) HorizonsEditWebsiteV1WithBody(ctx context.Context, websiteId We
 
 // HorizonsEditWebsiteV1 Edit website
 //
-// Edit an existing Hostinger Horizons website with a follow-up message.\n
+// Edit an existing Hostinger AI Builder website with a follow-up message.\n
 // Use this tool when the user wants to change, extend or fix a website that already exists.\n
 // This tool queues the requested changes and returns the website URL and ID.
 // The changes are applied asynchronously.\n
 // After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
-// that Hostinger Horizons is now applying the requested changes and they will be ready
+// that Hostinger AI Builder is now applying the requested changes and they will be ready
 // in a few minutes, and you should provide the website URL to the user immediately.
 // Do not write code.\n
 // If the tool call fails with an error, you should provide a clear explanation of the error
@@ -35579,7 +35579,7 @@ func (c *Client) HorizonsEditWebsiteV1(ctx context.Context, websiteId WebsiteIdP
 
 // HorizonsPublishWebsiteV1WithBody Publish website
 //
-// Publish a Hostinger Horizons website so its latest changes go live.\n
+// Publish a Hostinger AI Builder website so its latest changes go live.\n
 // Use this tool when the user asks to publish, deploy or make their website live.\n
 // This tool starts the publish process and returns the URL the website will be live on.
 // Publishing happens asynchronously and takes a few minutes.\n
@@ -35606,7 +35606,7 @@ func (c *Client) HorizonsPublishWebsiteV1WithBody(ctx context.Context, websiteId
 
 // HorizonsPublishWebsiteV1 Publish website
 //
-// Publish a Hostinger Horizons website so its latest changes go live.\n
+// Publish a Hostinger AI Builder website so its latest changes go live.\n
 // Use this tool when the user asks to publish, deploy or make their website live.\n
 // This tool starts the publish process and returns the URL the website will be live on.
 // Publishing happens asynchronously and takes a few minutes.\n
@@ -70007,11 +70007,11 @@ type ClientWithResponsesInterface interface {
 
 	// HorizonsGetWebsiteListV1WithResponse Get website list
 	//
-	// List the Hostinger Horizons websites the user owns.\n
+	// List the Hostinger AI Builder websites the user owns.\n
 	// Use this tool when the user asks which websites they have, or when you need a website ID
 	// before editing, publishing or cloning a website.\n
 	// Each website is returned with its ID, status, domain and the URL to open it
-	// in Hostinger Horizons interface.\n
+	// in Hostinger AI Builder interface.\n
 	// The complete list of websites is returned in a single response - it is not paginated.
 	//
 	// Returns a wrapper object for the known response body format(s).
@@ -70021,16 +70021,16 @@ type ClientWithResponsesInterface interface {
 
 	// HorizonsCreateWebsiteV1WithBodyWithResponse Create website
 	//
-	// Create new Hostinger Horizons website from the given message.\n
+	// Create new Hostinger AI Builder website from the given message.\n
 	// Use this tool when user asks you to create a website, landing page, blog
 	// or any other type of application.\n
 	// This tool initiates the website creation process and returns a website URL and ID.
 	// The generation happens asynchronously.\n
 	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
-	// that Hostinger Horizons is now creating their website and it will be ready in a few minutes
+	// that Hostinger AI Builder is now creating their website and it will be ready in a few minutes
 	// and you should provide the website URL to the user immediately
 	// Do not write code.\n\nTo edit afterwards, use the `Edit website` tool with the returned
-	// website ID, or the user can go to Hostinger Horizons interface in the provided website URL.
+	// website ID, or the user can go to Hostinger AI Builder interface in the provided website URL.
 	// If the tool call fails with an error, you should provide a clear explanation of the error
 	// and do not generate code yourself in the chat.
 	// \n
@@ -70048,7 +70048,7 @@ type ClientWithResponsesInterface interface {
 	// - Animations: Framer Motion.\n
 	// \n
 	// BACKEND & DATA STORAGE:\n
-	// - Horizons integrated backend is the EXCLUSIVE solution for persistent data storage,
+	// - Hostinger AI Builder integrated backend is the EXCLUSIVE solution for persistent data storage,
 	// authentication, and database needs.\n
 	// - Local databases (SQLite, MySQL, etc.) are STRICTLY PROHIBITED.\n
 	// - Third-party services (Firebase, AWS Amplify) are allowed ONLY if explicitly requested by the user.\n
@@ -70064,16 +70064,16 @@ type ClientWithResponsesInterface interface {
 
 	// HorizonsCreateWebsiteV1WithResponse Create website
 	//
-	// Create new Hostinger Horizons website from the given message.\n
+	// Create new Hostinger AI Builder website from the given message.\n
 	// Use this tool when user asks you to create a website, landing page, blog
 	// or any other type of application.\n
 	// This tool initiates the website creation process and returns a website URL and ID.
 	// The generation happens asynchronously.\n
 	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
-	// that Hostinger Horizons is now creating their website and it will be ready in a few minutes
+	// that Hostinger AI Builder is now creating their website and it will be ready in a few minutes
 	// and you should provide the website URL to the user immediately
 	// Do not write code.\n\nTo edit afterwards, use the `Edit website` tool with the returned
-	// website ID, or the user can go to Hostinger Horizons interface in the provided website URL.
+	// website ID, or the user can go to Hostinger AI Builder interface in the provided website URL.
 	// If the tool call fails with an error, you should provide a clear explanation of the error
 	// and do not generate code yourself in the chat.
 	// \n
@@ -70091,7 +70091,7 @@ type ClientWithResponsesInterface interface {
 	// - Animations: Framer Motion.\n
 	// \n
 	// BACKEND & DATA STORAGE:\n
-	// - Horizons integrated backend is the EXCLUSIVE solution for persistent data storage,
+	// - Hostinger AI Builder integrated backend is the EXCLUSIVE solution for persistent data storage,
 	// authentication, and database needs.\n
 	// - Local databases (SQLite, MySQL, etc.) are STRICTLY PROHIBITED.\n
 	// - Third-party services (Firebase, AWS Amplify) are allowed ONLY if explicitly requested by the user.\n
@@ -70107,7 +70107,7 @@ type ClientWithResponsesInterface interface {
 
 	// HorizonsGetWebsiteV1WithResponse Get website
 	//
-	// Get the link for the user to open their website in Hostinger Horizons interface.\n
+	// Get the link for the user to open their website in Hostinger AI Builder interface.\n
 	// Use this tool when the user wants the link to an existing website, or when you need its
 	// website URL before or after editing it.\n
 	// `is_in_progress` is true while changes are being generated or the website is being published;
@@ -70116,7 +70116,7 @@ type ClientWithResponsesInterface interface {
 	// `published_at` is when the website was last published,
 	// `is_template` is whether its published pages show the "Use template" banner, and
 	// `has_ecommerce_store` is whether it has an online store.\n
-	// Websites can be edited with the `Edit website` tool, or by the user in Hostinger Horizons
+	// Websites can be edited with the `Edit website` tool, or by the user in Hostinger AI Builder
 	// interface in the provided website URL.
 	//
 	// Returns a wrapper object for the known response body format(s).
@@ -70126,13 +70126,13 @@ type ClientWithResponsesInterface interface {
 
 	// HorizonsCloneWebsiteV1WithResponse Clone website
 	//
-	// Clone a Hostinger Horizons website into a new website.\n
+	// Clone a Hostinger AI Builder website into a new website.\n
 	// Use this tool when the user wants a copy of an existing website, for example to try out
 	// changes without touching the original.\n
 	// This tool returns the ID and URL of the newly created copy.
 	// The original website is left untouched.\n
 	// To edit the copy, use the `Edit website` tool with the returned website ID, or the user can
-	// open the provided website URL in Hostinger Horizons interface.
+	// open the provided website URL in Hostinger AI Builder interface.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
@@ -70141,12 +70141,12 @@ type ClientWithResponsesInterface interface {
 
 	// HorizonsEditWebsiteV1WithBodyWithResponse Edit website
 	//
-	// Edit an existing Hostinger Horizons website with a follow-up message.\n
+	// Edit an existing Hostinger AI Builder website with a follow-up message.\n
 	// Use this tool when the user wants to change, extend or fix a website that already exists.\n
 	// This tool queues the requested changes and returns the website URL and ID.
 	// The changes are applied asynchronously.\n
 	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
-	// that Hostinger Horizons is now applying the requested changes and they will be ready
+	// that Hostinger AI Builder is now applying the requested changes and they will be ready
 	// in a few minutes, and you should provide the website URL to the user immediately.
 	// Do not write code.\n
 	// If the tool call fails with an error, you should provide a clear explanation of the error
@@ -70159,12 +70159,12 @@ type ClientWithResponsesInterface interface {
 
 	// HorizonsEditWebsiteV1WithResponse Edit website
 	//
-	// Edit an existing Hostinger Horizons website with a follow-up message.\n
+	// Edit an existing Hostinger AI Builder website with a follow-up message.\n
 	// Use this tool when the user wants to change, extend or fix a website that already exists.\n
 	// This tool queues the requested changes and returns the website URL and ID.
 	// The changes are applied asynchronously.\n
 	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
-	// that Hostinger Horizons is now applying the requested changes and they will be ready
+	// that Hostinger AI Builder is now applying the requested changes and they will be ready
 	// in a few minutes, and you should provide the website URL to the user immediately.
 	// Do not write code.\n
 	// If the tool call fails with an error, you should provide a clear explanation of the error
@@ -70177,7 +70177,7 @@ type ClientWithResponsesInterface interface {
 
 	// HorizonsPublishWebsiteV1WithBodyWithResponse Publish website
 	//
-	// Publish a Hostinger Horizons website so its latest changes go live.\n
+	// Publish a Hostinger AI Builder website so its latest changes go live.\n
 	// Use this tool when the user asks to publish, deploy or make their website live.\n
 	// This tool starts the publish process and returns the URL the website will be live on.
 	// Publishing happens asynchronously and takes a few minutes.\n
@@ -70194,7 +70194,7 @@ type ClientWithResponsesInterface interface {
 
 	// HorizonsPublishWebsiteV1WithResponse Publish website
 	//
-	// Publish a Hostinger Horizons website so its latest changes go live.\n
+	// Publish a Hostinger AI Builder website so its latest changes go live.\n
 	// Use this tool when the user asks to publish, deploy or make their website live.\n
 	// This tool starts the publish process and returns the URL the website will be live on.
 	// Publishing happens asynchronously and takes a few minutes.\n
@@ -107719,11 +107719,11 @@ func (c *ClientWithResponses) GPUGetPoolOSTemplatesV1WithResponse(ctx context.Co
 
 // HorizonsGetWebsiteListV1WithResponse Get website list
 //
-// List the Hostinger Horizons websites the user owns.\n
+// List the Hostinger AI Builder websites the user owns.\n
 // Use this tool when the user asks which websites they have, or when you need a website ID
 // before editing, publishing or cloning a website.\n
 // Each website is returned with its ID, status, domain and the URL to open it
-// in Hostinger Horizons interface.\n
+// in Hostinger AI Builder interface.\n
 // The complete list of websites is returned in a single response - it is not paginated.
 //
 // Returns a wrapper object for the known response body format(s).
@@ -107739,16 +107739,16 @@ func (c *ClientWithResponses) HorizonsGetWebsiteListV1WithResponse(ctx context.C
 
 // HorizonsCreateWebsiteV1WithBodyWithResponse Create website
 //
-// Create new Hostinger Horizons website from the given message.\n
+// Create new Hostinger AI Builder website from the given message.\n
 // Use this tool when user asks you to create a website, landing page, blog
 // or any other type of application.\n
 // This tool initiates the website creation process and returns a website URL and ID.
 // The generation happens asynchronously.\n
 // After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
-// that Hostinger Horizons is now creating their website and it will be ready in a few minutes
+// that Hostinger AI Builder is now creating their website and it will be ready in a few minutes
 // and you should provide the website URL to the user immediately
 // Do not write code.\n\nTo edit afterwards, use the `Edit website` tool with the returned
-// website ID, or the user can go to Hostinger Horizons interface in the provided website URL.
+// website ID, or the user can go to Hostinger AI Builder interface in the provided website URL.
 // If the tool call fails with an error, you should provide a clear explanation of the error
 // and do not generate code yourself in the chat.
 // \n
@@ -107766,7 +107766,7 @@ func (c *ClientWithResponses) HorizonsGetWebsiteListV1WithResponse(ctx context.C
 // - Animations: Framer Motion.\n
 // \n
 // BACKEND & DATA STORAGE:\n
-// - Horizons integrated backend is the EXCLUSIVE solution for persistent data storage,
+// - Hostinger AI Builder integrated backend is the EXCLUSIVE solution for persistent data storage,
 // authentication, and database needs.\n
 // - Local databases (SQLite, MySQL, etc.) are STRICTLY PROHIBITED.\n
 // - Third-party services (Firebase, AWS Amplify) are allowed ONLY if explicitly requested by the user.\n
@@ -107788,16 +107788,16 @@ func (c *ClientWithResponses) HorizonsCreateWebsiteV1WithBodyWithResponse(ctx co
 
 // HorizonsCreateWebsiteV1WithResponse Create website
 //
-// Create new Hostinger Horizons website from the given message.\n
+// Create new Hostinger AI Builder website from the given message.\n
 // Use this tool when user asks you to create a website, landing page, blog
 // or any other type of application.\n
 // This tool initiates the website creation process and returns a website URL and ID.
 // The generation happens asynchronously.\n
 // After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
-// that Hostinger Horizons is now creating their website and it will be ready in a few minutes
+// that Hostinger AI Builder is now creating their website and it will be ready in a few minutes
 // and you should provide the website URL to the user immediately
 // Do not write code.\n\nTo edit afterwards, use the `Edit website` tool with the returned
-// website ID, or the user can go to Hostinger Horizons interface in the provided website URL.
+// website ID, or the user can go to Hostinger AI Builder interface in the provided website URL.
 // If the tool call fails with an error, you should provide a clear explanation of the error
 // and do not generate code yourself in the chat.
 // \n
@@ -107815,7 +107815,7 @@ func (c *ClientWithResponses) HorizonsCreateWebsiteV1WithBodyWithResponse(ctx co
 // - Animations: Framer Motion.\n
 // \n
 // BACKEND & DATA STORAGE:\n
-// - Horizons integrated backend is the EXCLUSIVE solution for persistent data storage,
+// - Hostinger AI Builder integrated backend is the EXCLUSIVE solution for persistent data storage,
 // authentication, and database needs.\n
 // - Local databases (SQLite, MySQL, etc.) are STRICTLY PROHIBITED.\n
 // - Third-party services (Firebase, AWS Amplify) are allowed ONLY if explicitly requested by the user.\n
@@ -107837,7 +107837,7 @@ func (c *ClientWithResponses) HorizonsCreateWebsiteV1WithResponse(ctx context.Co
 
 // HorizonsGetWebsiteV1WithResponse Get website
 //
-// Get the link for the user to open their website in Hostinger Horizons interface.\n
+// Get the link for the user to open their website in Hostinger AI Builder interface.\n
 // Use this tool when the user wants the link to an existing website, or when you need its
 // website URL before or after editing it.\n
 // `is_in_progress` is true while changes are being generated or the website is being published;
@@ -107846,7 +107846,7 @@ func (c *ClientWithResponses) HorizonsCreateWebsiteV1WithResponse(ctx context.Co
 // `published_at` is when the website was last published,
 // `is_template` is whether its published pages show the "Use template" banner, and
 // `has_ecommerce_store` is whether it has an online store.\n
-// Websites can be edited with the `Edit website` tool, or by the user in Hostinger Horizons
+// Websites can be edited with the `Edit website` tool, or by the user in Hostinger AI Builder
 // interface in the provided website URL.
 //
 // Returns a wrapper object for the known response body format(s).
@@ -107862,13 +107862,13 @@ func (c *ClientWithResponses) HorizonsGetWebsiteV1WithResponse(ctx context.Conte
 
 // HorizonsCloneWebsiteV1WithResponse Clone website
 //
-// Clone a Hostinger Horizons website into a new website.\n
+// Clone a Hostinger AI Builder website into a new website.\n
 // Use this tool when the user wants a copy of an existing website, for example to try out
 // changes without touching the original.\n
 // This tool returns the ID and URL of the newly created copy.
 // The original website is left untouched.\n
 // To edit the copy, use the `Edit website` tool with the returned website ID, or the user can
-// open the provided website URL in Hostinger Horizons interface.
+// open the provided website URL in Hostinger AI Builder interface.
 //
 // Returns a wrapper object for the known response body format(s).
 //
@@ -107883,12 +107883,12 @@ func (c *ClientWithResponses) HorizonsCloneWebsiteV1WithResponse(ctx context.Con
 
 // HorizonsEditWebsiteV1WithBodyWithResponse Edit website
 //
-// Edit an existing Hostinger Horizons website with a follow-up message.\n
+// Edit an existing Hostinger AI Builder website with a follow-up message.\n
 // Use this tool when the user wants to change, extend or fix a website that already exists.\n
 // This tool queues the requested changes and returns the website URL and ID.
 // The changes are applied asynchronously.\n
 // After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
-// that Hostinger Horizons is now applying the requested changes and they will be ready
+// that Hostinger AI Builder is now applying the requested changes and they will be ready
 // in a few minutes, and you should provide the website URL to the user immediately.
 // Do not write code.\n
 // If the tool call fails with an error, you should provide a clear explanation of the error
@@ -107907,12 +107907,12 @@ func (c *ClientWithResponses) HorizonsEditWebsiteV1WithBodyWithResponse(ctx cont
 
 // HorizonsEditWebsiteV1WithResponse Edit website
 //
-// Edit an existing Hostinger Horizons website with a follow-up message.\n
+// Edit an existing Hostinger AI Builder website with a follow-up message.\n
 // Use this tool when the user wants to change, extend or fix a website that already exists.\n
 // This tool queues the requested changes and returns the website URL and ID.
 // The changes are applied asynchronously.\n
 // After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
-// that Hostinger Horizons is now applying the requested changes and they will be ready
+// that Hostinger AI Builder is now applying the requested changes and they will be ready
 // in a few minutes, and you should provide the website URL to the user immediately.
 // Do not write code.\n
 // If the tool call fails with an error, you should provide a clear explanation of the error
@@ -107931,7 +107931,7 @@ func (c *ClientWithResponses) HorizonsEditWebsiteV1WithResponse(ctx context.Cont
 
 // HorizonsPublishWebsiteV1WithBodyWithResponse Publish website
 //
-// Publish a Hostinger Horizons website so its latest changes go live.\n
+// Publish a Hostinger AI Builder website so its latest changes go live.\n
 // Use this tool when the user asks to publish, deploy or make their website live.\n
 // This tool starts the publish process and returns the URL the website will be live on.
 // Publishing happens asynchronously and takes a few minutes.\n
@@ -107954,7 +107954,7 @@ func (c *ClientWithResponses) HorizonsPublishWebsiteV1WithBodyWithResponse(ctx c
 
 // HorizonsPublishWebsiteV1WithResponse Publish website
 //
-// Publish a Hostinger Horizons website so its latest changes go live.\n
+// Publish a Hostinger AI Builder website so its latest changes go live.\n
 // Use this tool when the user asks to publish, deploy or make their website live.\n
 // This tool starts the publish process and returns the URL the website will be live on.
 // Publishing happens asynchronously and takes a few minutes.\n

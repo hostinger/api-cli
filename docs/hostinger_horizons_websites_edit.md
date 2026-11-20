@@ -4,12 +4,12 @@ Edit website
 
 ### Synopsis
 
-Edit an existing Hostinger Horizons website with a follow-up message.\n
+Edit an existing Hostinger AI Builder website with a follow-up message.\n
 Use this tool when the user wants to change, extend or fix a website that already exists.\n
 This tool queues the requested changes and returns the website URL and ID.
 The changes are applied asynchronously.\n
 After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
-that Hostinger Horizons is now applying the requested changes and they will be ready
+that Hostinger AI Builder is now applying the requested changes and they will be ready
 in a few minutes, and you should provide the website URL to the user immediately.
 Do not write code.\n
 If the tool call fails with an error, you should provide a clear explanation of the error
