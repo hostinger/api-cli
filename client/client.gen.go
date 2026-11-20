@@ -17731,14 +17731,6 @@ type VPSV1PostInstallScriptStoreRequest struct {
 	Name string `json:"name"`
 }
 
-// VPSV1PublicKeyAttachRequest defines model for VPS.V1.PublicKey.AttachRequest.
-type VPSV1PublicKeyAttachRequest struct {
-	// Ids Public Key IDs to attach
-	//
-	// Example: [18232,10230230]
-	Ids []int `json:"ids"`
-}
-
 // VPSV1PublicKeyPublicKeyCollection Array of [`VPS.V1.PublicKey.PublicKeyResource`](#model/vpsv1publickeypublickeyresource)
 type VPSV1PublicKeyPublicKeyCollection = []VPSV1PublicKeyPublicKeyResource
 
@@ -20472,12 +20464,6 @@ type VPSGetMetricsV1Params struct {
 	DateTo   time.Time `form:"date_to" json:"date_to"`
 }
 
-// VPSGetAttachedPublicKeysV1Params defines parameters for VPSGetAttachedPublicKeysV1.
-type VPSGetAttachedPublicKeysV1Params struct {
-	// Page Page number
-	Page *Page `form:"page,omitempty" json:"page,omitempty"`
-}
-
 // AgencyHostingCreateANewWebsiteV1JSONRequestBody defines body for AgencyHostingCreateANewWebsiteV1 for application/json ContentType.
 type AgencyHostingCreateANewWebsiteV1JSONRequestBody = AgencyHostingV1SetupsCreateSetupRequest
 
@@ -20929,11 +20915,6 @@ type VPSUpdatePostInstallScriptV1JSONRequestBody = VPSV1PostInstallScriptStoreRe
 //
 // Deprecated: this type has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 type VPSCreatePublicKeyV1JSONRequestBody = VPSV1PublicKeyStoreRequest
-
-// VPSAttachPublicKeyV1JSONRequestBody defines body for VPSAttachPublicKeyV1 for application/json ContentType.
-//
-// Deprecated: this type has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-type VPSAttachPublicKeyV1JSONRequestBody = VPSV1PublicKeyAttachRequest
 
 // VPSPurchaseNewVirtualMachineV1JSONRequestBody defines body for VPSPurchaseNewVirtualMachineV1 for application/json ContentType.
 type VPSPurchaseNewVirtualMachineV1JSONRequestBody = VPSV1VirtualMachinePurchaseRequest
@@ -30054,40 +30035,6 @@ type ClientInterface interface {
 	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	VPSCreatePublicKeyV1(ctx context.Context, body VPSCreatePublicKeyV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// VPSAttachPublicKeyV1WithBody Attach public key
-	//
-	// Deprecated: use `POST /api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys` instead.
-	//
-	// Attach existing public keys from your account to a specified virtual machine.
-	//
-	// Multiple keys can be attached to a single virtual machine.
-	//
-	// Use this endpoint to enable SSH key authentication for VPS instances.
-	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with POST /api/vps/v1/public-keys/attach/{virtualMachineId} (the `VPSAttachPublicKeyV1` operationId).
-	//
-	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	VPSAttachPublicKeyV1WithBody(ctx context.Context, virtualMachineId VirtualMachineId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// VPSAttachPublicKeyV1 Attach public key
-	//
-	// Deprecated: use `POST /api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys` instead.
-	//
-	// Attach existing public keys from your account to a specified virtual machine.
-	//
-	// Multiple keys can be attached to a single virtual machine.
-	//
-	// Use this endpoint to enable SSH key authentication for VPS instances.
-	//
-	// Takes a body of the `application/json` content type.
-	//
-	// Corresponds with POST /api/vps/v1/public-keys/attach/{virtualMachineId} (the `VPSAttachPublicKeyV1` operationId).
-	//
-	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	VPSAttachPublicKeyV1(ctx context.Context, virtualMachineId VirtualMachineId, body VPSAttachPublicKeyV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
 	// VPSDeletePublicKeyV1 Delete public key
 	//
 	// Deprecated: account-level public keys have no direct replacement. Root SSH keys are now managed per
@@ -30555,19 +30502,6 @@ type ClientInterface interface {
 	//
 	// Corresponds with POST /api/vps/v1/virtual-machines/{virtualMachineId}/ptr/{ipAddressId} (the `VPSCreatePTRRecordV1` operationId).
 	VPSCreatePTRRecordV1(ctx context.Context, virtualMachineId VirtualMachineId, ipAddressId IpAddressId, body VPSCreatePTRRecordV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// VPSGetAttachedPublicKeysV1 Get attached public keys
-	//
-	// Deprecated: use `GET /api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys` instead.
-	//
-	// Retrieve public keys attached to a specified virtual machine.
-	//
-	// Use this endpoint to view SSH keys configured for specific VPS instances.
-	//
-	// Corresponds with GET /api/vps/v1/virtual-machines/{virtualMachineId}/public-keys (the `VPSGetAttachedPublicKeysV1` operationId).
-	//
-	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	VPSGetAttachedPublicKeysV1(ctx context.Context, virtualMachineId VirtualMachineId, params *VPSGetAttachedPublicKeysV1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// VPSStopRecoveryModeV1 Stop recovery mode
 	//
@@ -44043,58 +43977,6 @@ func (c *Client) VPSCreatePublicKeyV1(ctx context.Context, body VPSCreatePublicK
 	return c.Client.Do(req)
 }
 
-// VPSAttachPublicKeyV1WithBody Attach public key
-//
-// Deprecated: use `POST /api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys` instead.
-//
-// Attach existing public keys from your account to a specified virtual machine.
-//
-// Multiple keys can be attached to a single virtual machine.
-//
-// Use this endpoint to enable SSH key authentication for VPS instances.
-//
-// Takes any type of body and a specified content type.
-//
-// Corresponds with POST /api/vps/v1/public-keys/attach/{virtualMachineId} (the `VPSAttachPublicKeyV1` operationId).
-// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-func (c *Client) VPSAttachPublicKeyV1WithBody(ctx context.Context, virtualMachineId VirtualMachineId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewVPSAttachPublicKeyV1RequestWithBody(c.Server, virtualMachineId, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// VPSAttachPublicKeyV1 Attach public key
-//
-// Deprecated: use `POST /api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys` instead.
-//
-// Attach existing public keys from your account to a specified virtual machine.
-//
-// Multiple keys can be attached to a single virtual machine.
-//
-// Use this endpoint to enable SSH key authentication for VPS instances.
-//
-// Takes a body of the `application/json` content type.
-//
-// Corresponds with POST /api/vps/v1/public-keys/attach/{virtualMachineId} (the `VPSAttachPublicKeyV1` operationId).
-// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-func (c *Client) VPSAttachPublicKeyV1(ctx context.Context, virtualMachineId VirtualMachineId, body VPSAttachPublicKeyV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewVPSAttachPublicKeyV1Request(c.Server, virtualMachineId, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
 // VPSDeletePublicKeyV1 Delete public key
 //
 // Deprecated: account-level public keys have no direct replacement. Root SSH keys are now managed per
@@ -44912,28 +44794,6 @@ func (c *Client) VPSCreatePTRRecordV1WithBody(ctx context.Context, virtualMachin
 // Corresponds with POST /api/vps/v1/virtual-machines/{virtualMachineId}/ptr/{ipAddressId} (the `VPSCreatePTRRecordV1` operationId).
 func (c *Client) VPSCreatePTRRecordV1(ctx context.Context, virtualMachineId VirtualMachineId, ipAddressId IpAddressId, body VPSCreatePTRRecordV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewVPSCreatePTRRecordV1Request(c.Server, virtualMachineId, ipAddressId, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// VPSGetAttachedPublicKeysV1 Get attached public keys
-//
-// Deprecated: use `GET /api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys` instead.
-//
-// Retrieve public keys attached to a specified virtual machine.
-//
-// Use this endpoint to view SSH keys configured for specific VPS instances.
-//
-// Corresponds with GET /api/vps/v1/virtual-machines/{virtualMachineId}/public-keys (the `VPSGetAttachedPublicKeysV1` operationId).
-// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-func (c *Client) VPSGetAttachedPublicKeysV1(ctx context.Context, virtualMachineId VirtualMachineId, params *VPSGetAttachedPublicKeysV1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewVPSGetAttachedPublicKeysV1Request(c.Server, virtualMachineId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -65290,53 +65150,6 @@ func NewVPSCreatePublicKeyV1RequestWithBody(server string, contentType string, b
 	return req, nil
 }
 
-// NewVPSAttachPublicKeyV1Request calls the generic VPSAttachPublicKeyV1 builder with application/json body
-func NewVPSAttachPublicKeyV1Request(server string, virtualMachineId VirtualMachineId, body VPSAttachPublicKeyV1JSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewVPSAttachPublicKeyV1RequestWithBody(server, virtualMachineId, "application/json", bodyReader)
-}
-
-// NewVPSAttachPublicKeyV1RequestWithBody constructs an http.Request for the VPSAttachPublicKeyV1 method, with any body, and a specified content type
-func NewVPSAttachPublicKeyV1RequestWithBody(server string, virtualMachineId VirtualMachineId, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "virtualMachineId", virtualMachineId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/vps/v1/public-keys/attach/%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
 // NewVPSDeletePublicKeyV1Request constructs an http.Request for the VPSDeletePublicKeyV1 method
 func NewVPSDeletePublicKeyV1Request(server string, publicKeyId PublicKeyId) (*http.Request, error) {
 	var err error
@@ -66579,67 +66392,6 @@ func NewVPSCreatePTRRecordV1RequestWithBody(server string, virtualMachineId Virt
 	}
 
 	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewVPSGetAttachedPublicKeysV1Request constructs an http.Request for the VPSGetAttachedPublicKeysV1 method
-func NewVPSGetAttachedPublicKeysV1Request(server string, virtualMachineId VirtualMachineId, params *VPSGetAttachedPublicKeysV1Params) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "virtualMachineId", virtualMachineId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/vps/v1/virtual-machines/%s/public-keys", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if params.Page != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page", *params.Page, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
-	}
-
-	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
 
 	return req, nil
 }
@@ -75445,40 +75197,6 @@ type ClientWithResponsesInterface interface {
 	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	VPSCreatePublicKeyV1WithResponse(ctx context.Context, body VPSCreatePublicKeyV1JSONRequestBody, reqEditors ...RequestEditorFn) (*VPSCreatePublicKeyV1Response, error)
 
-	// VPSAttachPublicKeyV1WithBodyWithResponse Attach public key
-	//
-	// Deprecated: use `POST /api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys` instead.
-	//
-	// Attach existing public keys from your account to a specified virtual machine.
-	//
-	// Multiple keys can be attached to a single virtual machine.
-	//
-	// Use this endpoint to enable SSH key authentication for VPS instances.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /api/vps/v1/public-keys/attach/{virtualMachineId} (the `VPSAttachPublicKeyV1` operationId).
-	//
-	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	VPSAttachPublicKeyV1WithBodyWithResponse(ctx context.Context, virtualMachineId VirtualMachineId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*VPSAttachPublicKeyV1Response, error)
-
-	// VPSAttachPublicKeyV1WithResponse Attach public key
-	//
-	// Deprecated: use `POST /api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys` instead.
-	//
-	// Attach existing public keys from your account to a specified virtual machine.
-	//
-	// Multiple keys can be attached to a single virtual machine.
-	//
-	// Use this endpoint to enable SSH key authentication for VPS instances.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /api/vps/v1/public-keys/attach/{virtualMachineId} (the `VPSAttachPublicKeyV1` operationId).
-	//
-	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	VPSAttachPublicKeyV1WithResponse(ctx context.Context, virtualMachineId VirtualMachineId, body VPSAttachPublicKeyV1JSONRequestBody, reqEditors ...RequestEditorFn) (*VPSAttachPublicKeyV1Response, error)
-
 	// VPSDeletePublicKeyV1WithResponse Delete public key
 	//
 	// Deprecated: account-level public keys have no direct replacement. Root SSH keys are now managed per
@@ -75994,21 +75712,6 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with POST /api/vps/v1/virtual-machines/{virtualMachineId}/ptr/{ipAddressId} (the `VPSCreatePTRRecordV1` operationId).
 	VPSCreatePTRRecordV1WithResponse(ctx context.Context, virtualMachineId VirtualMachineId, ipAddressId IpAddressId, body VPSCreatePTRRecordV1JSONRequestBody, reqEditors ...RequestEditorFn) (*VPSCreatePTRRecordV1Response, error)
-
-	// VPSGetAttachedPublicKeysV1WithResponse Get attached public keys
-	//
-	// Deprecated: use `GET /api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys` instead.
-	//
-	// Retrieve public keys attached to a specified virtual machine.
-	//
-	// Use this endpoint to view SSH keys configured for specific VPS instances.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /api/vps/v1/virtual-machines/{virtualMachineId}/public-keys (the `VPSGetAttachedPublicKeysV1` operationId).
-	//
-	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	VPSGetAttachedPublicKeysV1WithResponse(ctx context.Context, virtualMachineId VirtualMachineId, params *VPSGetAttachedPublicKeysV1Params, reqEditors ...RequestEditorFn) (*VPSGetAttachedPublicKeysV1Response, error)
 
 	// VPSStopRecoveryModeV1WithResponse Stop recovery mode
 	//
@@ -101023,68 +100726,6 @@ func (r VPSCreatePublicKeyV1Response) ContentType() string {
 	return ""
 }
 
-type VPSAttachPublicKeyV1Response struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *VPSV1ActionActionResource
-	// JSON401 the response for an HTTP 401 `application/json` response
-	JSON401 *CommonResponseUnauthorizedResponse
-	// JSON422 the response for an HTTP 422 `application/json` response
-	JSON422 *CommonResponseUnprocessableContentResponse
-	// JSON500 the response for an HTTP 500 `application/json` response
-	JSON500 *CommonResponseErrorResponse
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r VPSAttachPublicKeyV1Response) GetJSON200() *VPSV1ActionActionResource {
-	return r.JSON200
-}
-
-// GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r VPSAttachPublicKeyV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
-	return r.JSON401
-}
-
-// GetJSON422 returns the response for an HTTP 422 `application/json` response
-func (r VPSAttachPublicKeyV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
-	return r.JSON422
-}
-
-// GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r VPSAttachPublicKeyV1Response) GetJSON500() *CommonResponseErrorResponse {
-	return r.JSON500
-}
-
-// GetBody returns the raw response body bytes
-func (r VPSAttachPublicKeyV1Response) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r VPSAttachPublicKeyV1Response) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r VPSAttachPublicKeyV1Response) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r VPSAttachPublicKeyV1Response) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
 type VPSDeletePublicKeyV1Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -102885,69 +102526,6 @@ func (r VPSCreatePTRRecordV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r VPSCreatePTRRecordV1Response) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type VPSGetAttachedPublicKeysV1Response struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *struct {
-		// Data Array of [`VPS.V1.PublicKey.PublicKeyResource`](#model/vpsv1publickeypublickeyresource)
-		Data *VPSV1PublicKeyPublicKeyCollection `json:"data,omitempty"`
-		Meta *CommonSchemaPaginationMetaSchema  `json:"meta,omitempty"`
-	}
-	// JSON401 the response for an HTTP 401 `application/json` response
-	JSON401 *CommonResponseUnauthorizedResponse
-	// JSON500 the response for an HTTP 500 `application/json` response
-	JSON500 *CommonResponseErrorResponse
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r VPSGetAttachedPublicKeysV1Response) GetJSON200() *struct {
-	// Data Array of [`VPS.V1.PublicKey.PublicKeyResource`](#model/vpsv1publickeypublickeyresource)
-	Data *VPSV1PublicKeyPublicKeyCollection `json:"data,omitempty"`
-	Meta *CommonSchemaPaginationMetaSchema  `json:"meta,omitempty"`
-} {
-	return r.JSON200
-}
-
-// GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r VPSGetAttachedPublicKeysV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
-	return r.JSON401
-}
-
-// GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r VPSGetAttachedPublicKeysV1Response) GetJSON500() *CommonResponseErrorResponse {
-	return r.JSON500
-}
-
-// GetBody returns the raw response body bytes
-func (r VPSGetAttachedPublicKeysV1Response) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r VPSGetAttachedPublicKeysV1Response) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r VPSGetAttachedPublicKeysV1Response) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r VPSGetAttachedPublicKeysV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -115317,51 +114895,6 @@ func (c *ClientWithResponses) VPSCreatePublicKeyV1WithResponse(ctx context.Conte
 	return ParseVPSCreatePublicKeyV1Response(rsp)
 }
 
-// VPSAttachPublicKeyV1WithBodyWithResponse Attach public key
-//
-// Deprecated: use `POST /api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys` instead.
-//
-// Attach existing public keys from your account to a specified virtual machine.
-//
-// Multiple keys can be attached to a single virtual machine.
-//
-// Use this endpoint to enable SSH key authentication for VPS instances.
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /api/vps/v1/public-keys/attach/{virtualMachineId} (the `VPSAttachPublicKeyV1` operationId).
-//
-// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-func (c *ClientWithResponses) VPSAttachPublicKeyV1WithBodyWithResponse(ctx context.Context, virtualMachineId VirtualMachineId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*VPSAttachPublicKeyV1Response, error) {
-	rsp, err := c.VPSAttachPublicKeyV1WithBody(ctx, virtualMachineId, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseVPSAttachPublicKeyV1Response(rsp)
-}
-
-// VPSAttachPublicKeyV1WithResponse Attach public key
-//
-// Deprecated: use `POST /api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys` instead.
-//
-// Attach existing public keys from your account to a specified virtual machine.
-//
-// Multiple keys can be attached to a single virtual machine.
-//
-// Use this endpoint to enable SSH key authentication for VPS instances.
-//
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /api/vps/v1/public-keys/attach/{virtualMachineId} (the `VPSAttachPublicKeyV1` operationId).
-// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-func (c *ClientWithResponses) VPSAttachPublicKeyV1WithResponse(ctx context.Context, virtualMachineId VirtualMachineId, body VPSAttachPublicKeyV1JSONRequestBody, reqEditors ...RequestEditorFn) (*VPSAttachPublicKeyV1Response, error) {
-	rsp, err := c.VPSAttachPublicKeyV1(ctx, virtualMachineId, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseVPSAttachPublicKeyV1Response(rsp)
-}
-
 // VPSDeletePublicKeyV1WithResponse Delete public key
 //
 // Deprecated: account-level public keys have no direct replacement. Root SSH keys are now managed per
@@ -116092,27 +115625,6 @@ func (c *ClientWithResponses) VPSCreatePTRRecordV1WithResponse(ctx context.Conte
 		return nil, err
 	}
 	return ParseVPSCreatePTRRecordV1Response(rsp)
-}
-
-// VPSGetAttachedPublicKeysV1WithResponse Get attached public keys
-//
-// Deprecated: use `GET /api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys` instead.
-//
-// Retrieve public keys attached to a specified virtual machine.
-//
-// Use this endpoint to view SSH keys configured for specific VPS instances.
-//
-// Returns a wrapper object for the known response body format(s).
-//
-// Corresponds with GET /api/vps/v1/virtual-machines/{virtualMachineId}/public-keys (the `VPSGetAttachedPublicKeysV1` operationId).
-//
-// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-func (c *ClientWithResponses) VPSGetAttachedPublicKeysV1WithResponse(ctx context.Context, virtualMachineId VirtualMachineId, params *VPSGetAttachedPublicKeysV1Params, reqEditors ...RequestEditorFn) (*VPSGetAttachedPublicKeysV1Response, error) {
-	rsp, err := c.VPSGetAttachedPublicKeysV1(ctx, virtualMachineId, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseVPSGetAttachedPublicKeysV1Response(rsp)
 }
 
 // VPSStopRecoveryModeV1WithResponse Stop recovery mode
@@ -135050,53 +134562,6 @@ func ParseVPSCreatePublicKeyV1Response(rsp *http.Response) (*VPSCreatePublicKeyV
 	return response, nil
 }
 
-// ParseVPSAttachPublicKeyV1Response parses an HTTP response from a VPSAttachPublicKeyV1WithResponse call
-func ParseVPSAttachPublicKeyV1Response(rsp *http.Response) (*VPSAttachPublicKeyV1Response, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &VPSAttachPublicKeyV1Response{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest VPSV1ActionActionResource
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest CommonResponseUnauthorizedResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest CommonResponseUnprocessableContentResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON422 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest CommonResponseErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
 // ParseVPSDeletePublicKeyV1Response parses an HTTP response from a VPSDeletePublicKeyV1WithResponse call
 func ParseVPSDeletePublicKeyV1Response(rsp *http.Response) (*VPSDeletePublicKeyV1Response, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -136432,50 +135897,6 @@ func ParseVPSCreatePTRRecordV1Response(rsp *http.Response) (*VPSCreatePTRRecordV
 			return nil, err
 		}
 		response.JSON422 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest CommonResponseErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseVPSGetAttachedPublicKeysV1Response parses an HTTP response from a VPSGetAttachedPublicKeysV1WithResponse call
-func ParseVPSGetAttachedPublicKeysV1Response(rsp *http.Response) (*VPSGetAttachedPublicKeysV1Response, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &VPSGetAttachedPublicKeysV1Response{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			// Data Array of [`VPS.V1.PublicKey.PublicKeyResource`](#model/vpsv1publickeypublickeyresource)
-			Data *VPSV1PublicKeyPublicKeyCollection `json:"data,omitempty"`
-			Meta *CommonSchemaPaginationMetaSchema  `json:"meta,omitempty"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest CommonResponseUnauthorizedResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse

@@ -29,7 +29,6 @@ hostinger vps public-keys [flags]
 ### SEE ALSO
 
 * [hostinger vps](hostinger_vps.md)	 - VPS commands
-* [hostinger vps public-keys attach](hostinger_vps_public-keys_attach.md)	 - Attach public key
 * [hostinger vps public-keys create](hostinger_vps_public-keys_create.md)	 - Create public key
 * [hostinger vps public-keys delete](hostinger_vps_public-keys_delete.md)	 - Delete public key
 * [hostinger vps public-keys list](hostinger_vps_public-keys_list.md)	 - Get public keys

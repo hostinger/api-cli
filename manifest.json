@@ -114,11 +114,6 @@
     "method": "POST",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/ssh-keys"
   },
-  "VPS_attachPublicKeyV1": {
-    "command": "hostinger vps public-keys attach",
-    "method": "POST",
-    "path": "/api/vps/v1/public-keys/attach/{virtualMachineId}"
-  },
   "VPS_createFirewallRuleV1": {
     "command": "hostinger vps firewall create-rule",
     "method": "POST",
@@ -203,11 +198,6 @@
     "command": "hostinger vps actions list",
     "method": "GET",
     "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/actions"
-  },
-  "VPS_getAttachedPublicKeysV1": {
-    "command": "hostinger vps virtual-machines attached-public-keys",
-    "method": "GET",
-    "path": "/api/vps/v1/virtual-machines/{virtualMachineId}/public-keys"
   },
   "VPS_getBackupsV1": {
     "command": "hostinger vps backups list",

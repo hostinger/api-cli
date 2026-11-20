@@ -29,7 +29,6 @@ hostinger vps virtual-machines [flags]
 ### SEE ALSO
 
 * [hostinger vps](hostinger_vps.md)	 - VPS commands
-* [hostinger vps virtual-machines attached-public-keys](hostinger_vps_virtual-machines_attached-public-keys.md)	 - Get attached public keys
 * [hostinger vps virtual-machines get](hostinger_vps_virtual-machines_get.md)	 - Get virtual machine details
 * [hostinger vps virtual-machines list](hostinger_vps_virtual-machines_list.md)	 - Get virtual machines
 * [hostinger vps virtual-machines metrics](hostinger_vps_virtual-machines_metrics.md)	 - Get metrics
