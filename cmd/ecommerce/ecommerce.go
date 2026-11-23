@@ -10,6 +10,7 @@ import (
 	"github.com/hostinger/api-cli/cmd/ecommerce/sales_channels"
 	"github.com/hostinger/api-cli/cmd/ecommerce/shipping"
 	"github.com/hostinger/api-cli/cmd/ecommerce/stores"
+	"github.com/hostinger/api-cli/cmd/ecommerce/webhooks"
 
 	"github.com/hostinger/api-cli/utils"
 	"github.com/spf13/cobra"
@@ -32,4 +33,5 @@ func init() {
 	GroupCmd.AddCommand(sales_channels.GroupCmd)
 	GroupCmd.AddCommand(shipping.GroupCmd)
 	GroupCmd.AddCommand(stores.GroupCmd)
+	GroupCmd.AddCommand(webhooks.GroupCmd)
 }

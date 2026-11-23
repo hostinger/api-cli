@@ -924,6 +924,11 @@
     "method": "POST",
     "path": "/api/ecommerce/v1/stores/{store_id}/sales-channels"
   },
+  "ecommerce_createAnEcommerceWebhookV1": {
+    "command": "hostinger ecommerce webhooks create",
+    "method": "POST",
+    "path": "/api/ecommerce/v1/stores/{store_id}/webhooks"
+  },
   "ecommerce_createDigitalProductV1": {
     "command": "hostinger ecommerce products create-digital",
     "method": "POST",
@@ -949,6 +954,11 @@
     "method": "DELETE",
     "path": "/api/ecommerce/v1/stores/{store_id}/products/{product_id}/variants/{variant_id}"
   },
+  "ecommerce_deleteAnEcommerceWebhookV1": {
+    "command": "hostinger ecommerce webhooks delete",
+    "method": "DELETE",
+    "path": "/api/ecommerce/v1/stores/{store_id}/webhooks/{endpoint_id}"
+  },
   "ecommerce_deleteStoreV1": {
     "command": "hostinger ecommerce stores delete",
     "method": "DELETE",
@@ -963,6 +973,11 @@
     "command": "hostinger ecommerce orders fulfil",
     "method": "POST",
     "path": "/api/ecommerce/v1/stores/{store_id}/orders/{order_id}/fulfill"
+  },
+  "ecommerce_getAnEcommerceWebhookV1": {
+    "command": "hostinger ecommerce webhooks get",
+    "method": "GET",
+    "path": "/api/ecommerce/v1/stores/{store_id}/webhooks/{endpoint_id}"
   },
   "ecommerce_getCustomStorefrontSetupInstructionsV1": {
     "command": "hostinger ecommerce miscellaneous custom-storefront-setup-instructions",
@@ -983,6 +998,11 @@
     "command": "hostinger ecommerce discounts list",
     "method": "GET",
     "path": "/api/ecommerce/v1/stores/{store_id}/discounts"
+  },
+  "ecommerce_listEcommerceWebhooksV1": {
+    "command": "hostinger ecommerce webhooks list",
+    "method": "GET",
+    "path": "/api/ecommerce/v1/stores/{store_id}/webhooks"
   },
   "ecommerce_listProductVariantsV1": {
     "command": "hostinger ecommerce product-variants list",
@@ -1014,6 +1034,11 @@
     "method": "GET",
     "path": "/api/ecommerce/v1/stores/{store_id}/orders/{order_id}"
   },
+  "ecommerce_rotateAnEcommerceWebhookSecretV1": {
+    "command": "hostinger ecommerce webhooks rotate-secret",
+    "method": "POST",
+    "path": "/api/ecommerce/v1/stores/{store_id}/webhooks/{endpoint_id}/rotate-secret"
+  },
   "ecommerce_setStoreShippingV1": {
     "command": "hostinger ecommerce shipping set-store",
     "method": "POST",
@@ -1023,6 +1048,11 @@
     "command": "hostinger ecommerce products update",
     "method": "PATCH",
     "path": "/api/ecommerce/v1/stores/{store_id}/products/{product_id}"
+  },
+  "ecommerce_updateAnEcommerceWebhookV1": {
+    "command": "hostinger ecommerce webhooks update",
+    "method": "PATCH",
+    "path": "/api/ecommerce/v1/stores/{store_id}/webhooks/{endpoint_id}"
   },
   "ecommerce_updateProductVariantsInBatchV1": {
     "command": "hostinger ecommerce product-variants update-in-batch",

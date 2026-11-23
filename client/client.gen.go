@@ -1182,6 +1182,171 @@ func (e EcommerceV1StoreStoreRequestSalesChannelType) Valid() bool {
 	}
 }
 
+// Defines values for EcommerceV1WebhookStoreRequestEvents.
+const (
+	EcommerceV1WebhookStoreRequestEventsFulfillmentCancelled EcommerceV1WebhookStoreRequestEvents = "fulfillment.cancelled"
+	EcommerceV1WebhookStoreRequestEventsFulfillmentCreated   EcommerceV1WebhookStoreRequestEvents = "fulfillment.created"
+	EcommerceV1WebhookStoreRequestEventsFulfillmentUpdated   EcommerceV1WebhookStoreRequestEvents = "fulfillment.updated"
+	EcommerceV1WebhookStoreRequestEventsOrderCancelled       EcommerceV1WebhookStoreRequestEvents = "order.cancelled"
+	EcommerceV1WebhookStoreRequestEventsOrderFulfilled       EcommerceV1WebhookStoreRequestEvents = "order.fulfilled"
+	EcommerceV1WebhookStoreRequestEventsOrderPaid            EcommerceV1WebhookStoreRequestEvents = "order.paid"
+	EcommerceV1WebhookStoreRequestEventsOrderPlaced          EcommerceV1WebhookStoreRequestEvents = "order.placed"
+	EcommerceV1WebhookStoreRequestEventsOrderRefunded        EcommerceV1WebhookStoreRequestEvents = "order.refunded"
+	EcommerceV1WebhookStoreRequestEventsProductCreated       EcommerceV1WebhookStoreRequestEvents = "product.created"
+	EcommerceV1WebhookStoreRequestEventsProductDeleted       EcommerceV1WebhookStoreRequestEvents = "product.deleted"
+	EcommerceV1WebhookStoreRequestEventsProductUpdated       EcommerceV1WebhookStoreRequestEvents = "product.updated"
+)
+
+// Valid indicates whether the value is a known member of the EcommerceV1WebhookStoreRequestEvents enum.
+func (e EcommerceV1WebhookStoreRequestEvents) Valid() bool {
+	switch e {
+	case EcommerceV1WebhookStoreRequestEventsFulfillmentCancelled:
+		return true
+	case EcommerceV1WebhookStoreRequestEventsFulfillmentCreated:
+		return true
+	case EcommerceV1WebhookStoreRequestEventsFulfillmentUpdated:
+		return true
+	case EcommerceV1WebhookStoreRequestEventsOrderCancelled:
+		return true
+	case EcommerceV1WebhookStoreRequestEventsOrderFulfilled:
+		return true
+	case EcommerceV1WebhookStoreRequestEventsOrderPaid:
+		return true
+	case EcommerceV1WebhookStoreRequestEventsOrderPlaced:
+		return true
+	case EcommerceV1WebhookStoreRequestEventsOrderRefunded:
+		return true
+	case EcommerceV1WebhookStoreRequestEventsProductCreated:
+		return true
+	case EcommerceV1WebhookStoreRequestEventsProductDeleted:
+		return true
+	case EcommerceV1WebhookStoreRequestEventsProductUpdated:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for EcommerceV1WebhookUpdateRequestEvents.
+const (
+	EcommerceV1WebhookUpdateRequestEventsFulfillmentCancelled EcommerceV1WebhookUpdateRequestEvents = "fulfillment.cancelled"
+	EcommerceV1WebhookUpdateRequestEventsFulfillmentCreated   EcommerceV1WebhookUpdateRequestEvents = "fulfillment.created"
+	EcommerceV1WebhookUpdateRequestEventsFulfillmentUpdated   EcommerceV1WebhookUpdateRequestEvents = "fulfillment.updated"
+	EcommerceV1WebhookUpdateRequestEventsOrderCancelled       EcommerceV1WebhookUpdateRequestEvents = "order.cancelled"
+	EcommerceV1WebhookUpdateRequestEventsOrderFulfilled       EcommerceV1WebhookUpdateRequestEvents = "order.fulfilled"
+	EcommerceV1WebhookUpdateRequestEventsOrderPaid            EcommerceV1WebhookUpdateRequestEvents = "order.paid"
+	EcommerceV1WebhookUpdateRequestEventsOrderPlaced          EcommerceV1WebhookUpdateRequestEvents = "order.placed"
+	EcommerceV1WebhookUpdateRequestEventsOrderRefunded        EcommerceV1WebhookUpdateRequestEvents = "order.refunded"
+	EcommerceV1WebhookUpdateRequestEventsProductCreated       EcommerceV1WebhookUpdateRequestEvents = "product.created"
+	EcommerceV1WebhookUpdateRequestEventsProductDeleted       EcommerceV1WebhookUpdateRequestEvents = "product.deleted"
+	EcommerceV1WebhookUpdateRequestEventsProductUpdated       EcommerceV1WebhookUpdateRequestEvents = "product.updated"
+)
+
+// Valid indicates whether the value is a known member of the EcommerceV1WebhookUpdateRequestEvents enum.
+func (e EcommerceV1WebhookUpdateRequestEvents) Valid() bool {
+	switch e {
+	case EcommerceV1WebhookUpdateRequestEventsFulfillmentCancelled:
+		return true
+	case EcommerceV1WebhookUpdateRequestEventsFulfillmentCreated:
+		return true
+	case EcommerceV1WebhookUpdateRequestEventsFulfillmentUpdated:
+		return true
+	case EcommerceV1WebhookUpdateRequestEventsOrderCancelled:
+		return true
+	case EcommerceV1WebhookUpdateRequestEventsOrderFulfilled:
+		return true
+	case EcommerceV1WebhookUpdateRequestEventsOrderPaid:
+		return true
+	case EcommerceV1WebhookUpdateRequestEventsOrderPlaced:
+		return true
+	case EcommerceV1WebhookUpdateRequestEventsOrderRefunded:
+		return true
+	case EcommerceV1WebhookUpdateRequestEventsProductCreated:
+		return true
+	case EcommerceV1WebhookUpdateRequestEventsProductDeleted:
+		return true
+	case EcommerceV1WebhookUpdateRequestEventsProductUpdated:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for EcommerceV1WebhookWebhookEndpointResourceDisabledReason.
+const (
+	MerchantDisabled EcommerceV1WebhookWebhookEndpointResourceDisabledReason = "merchant_disabled"
+	ReceiverFailing  EcommerceV1WebhookWebhookEndpointResourceDisabledReason = "receiver_failing"
+	ReceiverGone     EcommerceV1WebhookWebhookEndpointResourceDisabledReason = "receiver_gone"
+	StoreDeleted     EcommerceV1WebhookWebhookEndpointResourceDisabledReason = "store_deleted"
+	StoreSuspended   EcommerceV1WebhookWebhookEndpointResourceDisabledReason = "store_suspended"
+	StoreTransferred EcommerceV1WebhookWebhookEndpointResourceDisabledReason = "store_transferred"
+)
+
+// Valid indicates whether the value is a known member of the EcommerceV1WebhookWebhookEndpointResourceDisabledReason enum.
+func (e EcommerceV1WebhookWebhookEndpointResourceDisabledReason) Valid() bool {
+	switch e {
+	case MerchantDisabled:
+		return true
+	case ReceiverFailing:
+		return true
+	case ReceiverGone:
+		return true
+	case StoreDeleted:
+		return true
+	case StoreSuspended:
+		return true
+	case StoreTransferred:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for EcommerceV1WebhookWebhookEndpointResourceEvents.
+const (
+	EcommerceV1WebhookWebhookEndpointResourceEventsFulfillmentCancelled EcommerceV1WebhookWebhookEndpointResourceEvents = "fulfillment.cancelled"
+	EcommerceV1WebhookWebhookEndpointResourceEventsFulfillmentCreated   EcommerceV1WebhookWebhookEndpointResourceEvents = "fulfillment.created"
+	EcommerceV1WebhookWebhookEndpointResourceEventsFulfillmentUpdated   EcommerceV1WebhookWebhookEndpointResourceEvents = "fulfillment.updated"
+	EcommerceV1WebhookWebhookEndpointResourceEventsOrderCancelled       EcommerceV1WebhookWebhookEndpointResourceEvents = "order.cancelled"
+	EcommerceV1WebhookWebhookEndpointResourceEventsOrderFulfilled       EcommerceV1WebhookWebhookEndpointResourceEvents = "order.fulfilled"
+	EcommerceV1WebhookWebhookEndpointResourceEventsOrderPaid            EcommerceV1WebhookWebhookEndpointResourceEvents = "order.paid"
+	EcommerceV1WebhookWebhookEndpointResourceEventsOrderPlaced          EcommerceV1WebhookWebhookEndpointResourceEvents = "order.placed"
+	EcommerceV1WebhookWebhookEndpointResourceEventsOrderRefunded        EcommerceV1WebhookWebhookEndpointResourceEvents = "order.refunded"
+	EcommerceV1WebhookWebhookEndpointResourceEventsProductCreated       EcommerceV1WebhookWebhookEndpointResourceEvents = "product.created"
+	EcommerceV1WebhookWebhookEndpointResourceEventsProductDeleted       EcommerceV1WebhookWebhookEndpointResourceEvents = "product.deleted"
+	EcommerceV1WebhookWebhookEndpointResourceEventsProductUpdated       EcommerceV1WebhookWebhookEndpointResourceEvents = "product.updated"
+)
+
+// Valid indicates whether the value is a known member of the EcommerceV1WebhookWebhookEndpointResourceEvents enum.
+func (e EcommerceV1WebhookWebhookEndpointResourceEvents) Valid() bool {
+	switch e {
+	case EcommerceV1WebhookWebhookEndpointResourceEventsFulfillmentCancelled:
+		return true
+	case EcommerceV1WebhookWebhookEndpointResourceEventsFulfillmentCreated:
+		return true
+	case EcommerceV1WebhookWebhookEndpointResourceEventsFulfillmentUpdated:
+		return true
+	case EcommerceV1WebhookWebhookEndpointResourceEventsOrderCancelled:
+		return true
+	case EcommerceV1WebhookWebhookEndpointResourceEventsOrderFulfilled:
+		return true
+	case EcommerceV1WebhookWebhookEndpointResourceEventsOrderPaid:
+		return true
+	case EcommerceV1WebhookWebhookEndpointResourceEventsOrderPlaced:
+		return true
+	case EcommerceV1WebhookWebhookEndpointResourceEventsOrderRefunded:
+		return true
+	case EcommerceV1WebhookWebhookEndpointResourceEventsProductCreated:
+		return true
+	case EcommerceV1WebhookWebhookEndpointResourceEventsProductDeleted:
+		return true
+	case EcommerceV1WebhookWebhookEndpointResourceEventsProductUpdated:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for GPUV1ExposedServiceExposedServiceResourceProtocol.
 const (
 	GPUV1ExposedServiceExposedServiceResourceProtocolTcp GPUV1ExposedServiceExposedServiceResourceProtocol = "tcp"
@@ -11118,6 +11283,179 @@ type EcommerceV1VariantVariantResponseResource struct {
 	Data *EcommerceV1VariantVariantResource `json:"data,omitempty"`
 }
 
+// EcommerceV1WebhookStoreRequest defines model for Ecommerce.V1.Webhook.StoreRequest.
+type EcommerceV1WebhookStoreRequest struct {
+	// Events Event types to subscribe to.
+	//
+	// - `order.placed`: a customer places an order, before any online payment is completed. Orders paid online
+	//   may not have an order number yet.
+	// - `order.paid`: an order becomes fully paid: an online payment is captured, a free order is placed or the
+	//   merchant marks it as paid. Partial payments don't send it.
+	// - `order.cancelled`: an unpaid order is canceled, for example by the merchant, a connected sales channel or
+	//   after a delayed payment fails. Paid orders can't be canceled, so a cancellation never involves a refund.
+	// - `order.refunded`: each time a full or partial refund is recorded, through the payment provider or
+	//   manually.
+	// - `order.fulfilled`: a fulfillment leaves every item in the order fulfilled. Partial fulfillments send
+	//   `fulfillment.created` instead.
+	// - `fulfillment.created`: each time items in an order are fulfilled, including partial fulfillments and
+	//   digital items fulfilled automatically after payment.
+	// - `fulfillment.updated`: a fulfillment's tracking details change, or a connected shipping service or sales
+	//   channel reports progress such as delivery.
+	// - `fulfillment.cancelled`: a fulfillment is canceled before it ships, for example when it is canceled or
+	//   its shipping label is voided.
+	// - `product.created`: a product is added to the store, including drafts and products created in bulk.
+	// - `product.updated`: a product changes, including its details, variants, prices, stock, visibility or
+	//   collections. Stock changes from orders also send it, so expect frequent events.
+	// - `product.deleted`: a product is deleted, individually or in bulk.
+	//
+	// Example: ["order.placed","product.updated"]
+	Events []EcommerceV1WebhookStoreRequestEvents `json:"events"`
+
+	// SalesChannelIds Omit for store-wide delivery. IDs must belong to this store; empty arrays are invalid.
+	//
+	// Example: ["scha_01J8Z5F8W9K8M4A7B3C2D1E0FG"]
+	SalesChannelIds *[]string `json:"sales_channel_ids,omitempty"`
+
+	// Url HTTPS receiver on port 443, without credentials or a fragment. Must be a public destination: localhost, single-label and local-network names (.local, .home.arpa, .internal), Hostinger service domains and loopback, private, link-local or reserved IP addresses are rejected. Merchant-owned domains hosted by Hostinger are allowed.
+	//
+	// Example: https://example.com/webhooks/hostinger
+	Url string `json:"url"`
+}
+
+// EcommerceV1WebhookStoreRequestEvents defines model for EcommerceV1WebhookStoreRequest.Events.
+type EcommerceV1WebhookStoreRequestEvents string
+
+// EcommerceV1WebhookUpdateRequest defines model for Ecommerce.V1.Webhook.UpdateRequest.
+type EcommerceV1WebhookUpdateRequest struct {
+	// Enabled Merchant-disabled endpoints can be enabled again; lifecycle-revoked endpoints cannot.
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// Events Replacement event types. Omit to preserve.
+	//
+	// - `order.placed`: a customer places an order, before any online payment is completed. Orders paid online
+	//   may not have an order number yet.
+	// - `order.paid`: an order becomes fully paid: an online payment is captured, a free order is placed or the
+	//   merchant marks it as paid. Partial payments don't send it.
+	// - `order.cancelled`: an unpaid order is canceled, for example by the merchant, a connected sales channel or
+	//   after a delayed payment fails. Paid orders can't be canceled, so a cancellation never involves a refund.
+	// - `order.refunded`: each time a full or partial refund is recorded, through the payment provider or
+	//   manually.
+	// - `order.fulfilled`: a fulfillment leaves every item in the order fulfilled. Partial fulfillments send
+	//   `fulfillment.created` instead.
+	// - `fulfillment.created`: each time items in an order are fulfilled, including partial fulfillments and
+	//   digital items fulfilled automatically after payment.
+	// - `fulfillment.updated`: a fulfillment's tracking details change, or a connected shipping service or sales
+	//   channel reports progress such as delivery.
+	// - `fulfillment.cancelled`: a fulfillment is canceled before it ships, for example when it is canceled or
+	//   its shipping label is voided.
+	// - `product.created`: a product is added to the store, including drafts and products created in bulk.
+	// - `product.updated`: a product changes, including its details, variants, prices, stock, visibility or
+	//   collections. Stock changes from orders also send it, so expect frequent events.
+	// - `product.deleted`: a product is deleted, individually or in bulk.
+	Events *[]EcommerceV1WebhookUpdateRequestEvents `json:"events,omitempty"`
+
+	// SalesChannelIds Omit to preserve; null restores store-wide delivery. Empty or foreign-store IDs are invalid.
+	SalesChannelIds *[]string `json:"sales_channel_ids,omitempty"`
+
+	// Url HTTPS receiver on port 443, without credentials or a fragment. Omit to preserve. A changed URL must be a public destination under the same rules as creation; resending the saved URL unchanged is accepted.
+	//
+	// Example: https://example.com/webhooks/hostinger
+	Url *string `json:"url,omitempty"`
+}
+
+// EcommerceV1WebhookUpdateRequestEvents defines model for EcommerceV1WebhookUpdateRequest.Events.
+type EcommerceV1WebhookUpdateRequestEvents string
+
+// EcommerceV1WebhookWebhookCreationResource defines model for Ecommerce.V1.Webhook.WebhookCreationResource.
+type EcommerceV1WebhookWebhookCreationResource struct {
+	Endpoint EcommerceV1WebhookWebhookEndpointResource `json:"endpoint"`
+
+	// Secret New whsec_ signing secret. Save securely.
+	Secret string `json:"secret"`
+}
+
+// EcommerceV1WebhookWebhookEndpointResource defines model for Ecommerce.V1.Webhook.WebhookEndpointResource.
+type EcommerceV1WebhookWebhookEndpointResource struct {
+	CreatedAt  time.Time  `json:"created_at"`
+	DisabledAt *time.Time `json:"disabled_at"`
+
+	// DisabledReason Reason delivery was disabled. receiver_gone and receiver_failing are automatic health disables that can be resumed with enabled: true; store_* reasons are permanent revocations.
+	DisabledReason *EcommerceV1WebhookWebhookEndpointResourceDisabledReason `json:"disabled_reason"`
+
+	// Enabled Whether delivery is enabled.
+	Enabled bool `json:"enabled"`
+
+	// Events Subscribed event types.
+	//
+	// - `order.placed`: a customer places an order, before any online payment is completed. Orders paid online
+	//   may not have an order number yet.
+	// - `order.paid`: an order becomes fully paid: an online payment is captured, a free order is placed or the
+	//   merchant marks it as paid. Partial payments don't send it.
+	// - `order.cancelled`: an unpaid order is canceled, for example by the merchant, a connected sales channel or
+	//   after a delayed payment fails. Paid orders can't be canceled, so a cancellation never involves a refund.
+	// - `order.refunded`: each time a full or partial refund is recorded, through the payment provider or
+	//   manually.
+	// - `order.fulfilled`: a fulfillment leaves every item in the order fulfilled. Partial fulfillments send
+	//   `fulfillment.created` instead.
+	// - `fulfillment.created`: each time items in an order are fulfilled, including partial fulfillments and
+	//   digital items fulfilled automatically after payment.
+	// - `fulfillment.updated`: a fulfillment's tracking details change, or a connected shipping service or sales
+	//   channel reports progress such as delivery.
+	// - `fulfillment.cancelled`: a fulfillment is canceled before it ships, for example when it is canceled or
+	//   its shipping label is voided.
+	// - `product.created`: a product is added to the store, including drafts and products created in bulk.
+	// - `product.updated`: a product changes, including its details, variants, prices, stock, visibility or
+	//   collections. Stock changes from orders also send it, so expect frequent events.
+	// - `product.deleted`: a product is deleted, individually or in bulk.
+	Events []EcommerceV1WebhookWebhookEndpointResourceEvents `json:"events"`
+
+	// FailingSince Start of the current failure streak; null after a successful delivery attempt, a URL change or re-enabling.
+	FailingSince *time.Time `json:"failing_since"`
+
+	// Id Webhook endpoint ID.
+	Id string `json:"id"`
+
+	// LastAttemptedAt When the latest delivery attempt started, whether or not it reached the receiver; null before any attempt.
+	LastAttemptedAt *time.Time `json:"last_attempted_at"`
+
+	// LastSucceededAt When the latest successful delivery completed; null before any success.
+	LastSucceededAt *time.Time `json:"last_succeeded_at"`
+
+	// SalesChannelIds Channel filter; null means store-wide.
+	SalesChannelIds *[]string `json:"sales_channel_ids"`
+
+	// StoreId Owning store ID.
+	StoreId   string    `json:"store_id"`
+	UpdatedAt time.Time `json:"updated_at"`
+
+	// Url HTTPS receiver URL.
+	Url string `json:"url"`
+}
+
+// EcommerceV1WebhookWebhookEndpointResourceDisabledReason Reason delivery was disabled. receiver_gone and receiver_failing are automatic health disables that can be resumed with enabled: true; store_* reasons are permanent revocations.
+type EcommerceV1WebhookWebhookEndpointResourceDisabledReason string
+
+// EcommerceV1WebhookWebhookEndpointResourceEvents defines model for EcommerceV1WebhookWebhookEndpointResource.Events.
+type EcommerceV1WebhookWebhookEndpointResourceEvents string
+
+// EcommerceV1WebhookWebhookListResource defines model for Ecommerce.V1.Webhook.WebhookListResource.
+type EcommerceV1WebhookWebhookListResource struct {
+	Endpoints []EcommerceV1WebhookWebhookEndpointResource `json:"endpoints"`
+}
+
+// EcommerceV1WebhookWebhookResource defines model for Ecommerce.V1.Webhook.WebhookResource.
+type EcommerceV1WebhookWebhookResource struct {
+	Endpoint EcommerceV1WebhookWebhookEndpointResource `json:"endpoint"`
+}
+
+// EcommerceV1WebhookWebhookSecretResource defines model for Ecommerce.V1.Webhook.WebhookSecretResource.
+type EcommerceV1WebhookWebhookSecretResource struct {
+	Endpoint EcommerceV1WebhookWebhookEndpointResource `json:"endpoint"`
+
+	// Secret New whsec_ signing secret, returned only on create or rotation. Save securely.
+	Secret string `json:"secret"`
+}
+
 // GPUV1ExposedServiceExposedServiceCollection Array of [`GPU.V1.ExposedService.ExposedServiceResource`](#model/gpuv1exposedserviceexposedserviceresource)
 type GPUV1ExposedServiceExposedServiceCollection = []GPUV1ExposedServiceExposedServiceResource
 
@@ -20608,6 +20946,12 @@ type EcommerceUpdateSalesChannelV1JSONRequestBody = EcommerceV1SalesChannelUpdat
 // EcommerceSetStoreShippingV1JSONRequestBody defines body for EcommerceSetStoreShippingV1 for application/json ContentType.
 type EcommerceSetStoreShippingV1JSONRequestBody = EcommerceV1ShippingSetShippingRequest
 
+// EcommerceCreateAnEcommerceWebhookV1JSONRequestBody defines body for EcommerceCreateAnEcommerceWebhookV1 for application/json ContentType.
+type EcommerceCreateAnEcommerceWebhookV1JSONRequestBody = EcommerceV1WebhookStoreRequest
+
+// EcommerceUpdateAnEcommerceWebhookV1JSONRequestBody defines body for EcommerceUpdateAnEcommerceWebhookV1 for application/json ContentType.
+type EcommerceUpdateAnEcommerceWebhookV1JSONRequestBody = EcommerceV1WebhookUpdateRequest
+
 // GPUCreateInstanceV1JSONRequestBody defines body for GPUCreateInstanceV1 for application/json ContentType.
 type GPUCreateInstanceV1JSONRequestBody = GPUV1InstanceStoreRequest
 
@@ -24745,6 +25089,113 @@ type ClientInterface interface {
 	//
 	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/shipping (the `EcommerceSetStoreShippingV1` operationId).
 	EcommerceSetStoreShippingV1(ctx context.Context, storeId string, body EcommerceSetStoreShippingV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceListEcommerceWebhooksV1 List ecommerce webhooks
+	//
+	// List your store's subscriptions for external automation systems, without signing secrets.
+	//
+	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/webhooks (the `EcommerceListEcommerceWebhooksV1` operationId).
+	EcommerceListEcommerceWebhooksV1(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceCreateAnEcommerceWebhookV1WithBody Create an ecommerce webhook
+	//
+	// Create an enabled subscription for your store to receive ecommerce events in external automation
+	// systems. Save the whsec_ signing secret securely; it is returned once. Up to ten endpoints, including
+	// disabled endpoints, may exist per store. Deliveries follow Standard Webhooks: verify the webhook-id,
+	// webhook-timestamp and webhook-signature headers against the raw body with an official Standard Webhooks
+	// library before parsing. Events can arrive out of order or more than once; deduplicate by event id.
+	//
+	// 400: the URL is not a public destination, or webhook_sales_channel_invalid (a channel ID does not
+	// belong to this store). 409 codes: webhook_endpoint_limit_reached, webhook_store_inactive,
+	// webhook_endpoint_catalog_busy (a catalog change is in progress; retry). Errors return the upstream code in
+	// `message`, as `[Ecommerce:<code>] <reason>`.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/webhooks (the `EcommerceCreateAnEcommerceWebhookV1` operationId).
+	EcommerceCreateAnEcommerceWebhookV1WithBody(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceCreateAnEcommerceWebhookV1 Create an ecommerce webhook
+	//
+	// Create an enabled subscription for your store to receive ecommerce events in external automation
+	// systems. Save the whsec_ signing secret securely; it is returned once. Up to ten endpoints, including
+	// disabled endpoints, may exist per store. Deliveries follow Standard Webhooks: verify the webhook-id,
+	// webhook-timestamp and webhook-signature headers against the raw body with an official Standard Webhooks
+	// library before parsing. Events can arrive out of order or more than once; deduplicate by event id.
+	//
+	// 400: the URL is not a public destination, or webhook_sales_channel_invalid (a channel ID does not
+	// belong to this store). 409 codes: webhook_endpoint_limit_reached, webhook_store_inactive,
+	// webhook_endpoint_catalog_busy (a catalog change is in progress; retry). Errors return the upstream code in
+	// `message`, as `[Ecommerce:<code>] <reason>`.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/webhooks (the `EcommerceCreateAnEcommerceWebhookV1` operationId).
+	EcommerceCreateAnEcommerceWebhookV1(ctx context.Context, storeId string, body EcommerceCreateAnEcommerceWebhookV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceDeleteAnEcommerceWebhookV1 Delete an ecommerce webhook
+	//
+	// Delete a subscription owned by your store, retaining delivery audit records.
+	//
+	// Corresponds with DELETE /api/ecommerce/v1/stores/{store_id}/webhooks/{endpoint_id} (the `EcommerceDeleteAnEcommerceWebhookV1` operationId).
+	EcommerceDeleteAnEcommerceWebhookV1(ctx context.Context, storeId string, endpointId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceGetAnEcommerceWebhookV1 Get an ecommerce webhook
+	//
+	// Get a subscription owned by your store, without signing secrets.
+	//
+	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/webhooks/{endpoint_id} (the `EcommerceGetAnEcommerceWebhookV1` operationId).
+	EcommerceGetAnEcommerceWebhookV1(ctx context.Context, storeId string, endpointId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceUpdateAnEcommerceWebhookV1WithBody Update an ecommerce webhook
+	//
+	// Change the receiver, events, channel filter or enabled state. Omitted fields are preserved; a null
+	// channel filter restores store-wide delivery. Endpoints disabled automatically after a 410 Gone
+	// (receiver_gone) or persistent delivery failures (receiver_failing) resume with enabled: true; events
+	// from the disabled period are not sent. Lifecycle-revoked endpoints cannot be enabled again: delete
+	// them and create fresh subscriptions after recovery.
+	//
+	// 400 codes: webhook_destination_not_allowed (the new URL, or the saved URL when enabling, is not a public
+	// destination), webhook_sales_channel_invalid. 409 codes: webhook_endpoint_revoked, webhook_store_inactive,
+	// webhook_endpoint_catalog_busy (retry). Errors return the upstream code in `message`, as
+	// `[Ecommerce:<code>] <reason>`.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PATCH /api/ecommerce/v1/stores/{store_id}/webhooks/{endpoint_id} (the `EcommerceUpdateAnEcommerceWebhookV1` operationId).
+	EcommerceUpdateAnEcommerceWebhookV1WithBody(ctx context.Context, storeId string, endpointId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceUpdateAnEcommerceWebhookV1 Update an ecommerce webhook
+	//
+	// Change the receiver, events, channel filter or enabled state. Omitted fields are preserved; a null
+	// channel filter restores store-wide delivery. Endpoints disabled automatically after a 410 Gone
+	// (receiver_gone) or persistent delivery failures (receiver_failing) resume with enabled: true; events
+	// from the disabled period are not sent. Lifecycle-revoked endpoints cannot be enabled again: delete
+	// them and create fresh subscriptions after recovery.
+	//
+	// 400 codes: webhook_destination_not_allowed (the new URL, or the saved URL when enabling, is not a public
+	// destination), webhook_sales_channel_invalid. 409 codes: webhook_endpoint_revoked, webhook_store_inactive,
+	// webhook_endpoint_catalog_busy (retry). Errors return the upstream code in `message`, as
+	// `[Ecommerce:<code>] <reason>`.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PATCH /api/ecommerce/v1/stores/{store_id}/webhooks/{endpoint_id} (the `EcommerceUpdateAnEcommerceWebhookV1` operationId).
+	EcommerceUpdateAnEcommerceWebhookV1(ctx context.Context, storeId string, endpointId string, body EcommerceUpdateAnEcommerceWebhookV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EcommerceRotateAnEcommerceWebhookSecretV1 Rotate an ecommerce webhook secret
+	//
+	// Explicitly rotate the signing secret of an enabled endpoint on an active store. Save the new secret
+	// securely. Prior secrets retain their original 24-hour overlap deadlines. Repeated calls create
+	// distinct secrets, up to five live secrets. Wait for an old secret to expire at the limit. After a lost
+	// response, explicitly rotate again; stored secrets cannot be retrieved. No daily renewal is required.
+	//
+	// 409 codes: webhook_endpoint_disabled (endpoint is disabled or revoked), webhook_store_inactive,
+	// webhook_secret_rotation_limit_reached (five live secrets). Errors return the upstream code in
+	// `message`, as `[Ecommerce:<code>] <reason>`.
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/webhooks/{endpoint_id}/rotate-secret (the `EcommerceRotateAnEcommerceWebhookSecretV1` operationId).
+	EcommerceRotateAnEcommerceWebhookSecretV1(ctx context.Context, storeId string, endpointId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GPUGetInstancesV1 Get instances
 	//
@@ -34950,6 +35401,193 @@ func (c *Client) EcommerceSetStoreShippingV1WithBody(ctx context.Context, storeI
 // Corresponds with POST /api/ecommerce/v1/stores/{store_id}/shipping (the `EcommerceSetStoreShippingV1` operationId).
 func (c *Client) EcommerceSetStoreShippingV1(ctx context.Context, storeId string, body EcommerceSetStoreShippingV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewEcommerceSetStoreShippingV1Request(c.Server, storeId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceListEcommerceWebhooksV1 List ecommerce webhooks
+//
+// List your store's subscriptions for external automation systems, without signing secrets.
+//
+// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/webhooks (the `EcommerceListEcommerceWebhooksV1` operationId).
+func (c *Client) EcommerceListEcommerceWebhooksV1(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceListEcommerceWebhooksV1Request(c.Server, storeId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceCreateAnEcommerceWebhookV1WithBody Create an ecommerce webhook
+//
+// Create an enabled subscription for your store to receive ecommerce events in external automation
+// systems. Save the whsec_ signing secret securely; it is returned once. Up to ten endpoints, including
+// disabled endpoints, may exist per store. Deliveries follow Standard Webhooks: verify the webhook-id,
+// webhook-timestamp and webhook-signature headers against the raw body with an official Standard Webhooks
+// library before parsing. Events can arrive out of order or more than once; deduplicate by event id.
+//
+// 400: the URL is not a public destination, or webhook_sales_channel_invalid (a channel ID does not
+// belong to this store). 409 codes: webhook_endpoint_limit_reached, webhook_store_inactive,
+// webhook_endpoint_catalog_busy (a catalog change is in progress; retry). Errors return the upstream code in
+// `message`, as `[Ecommerce:<code>] <reason>`.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/webhooks (the `EcommerceCreateAnEcommerceWebhookV1` operationId).
+func (c *Client) EcommerceCreateAnEcommerceWebhookV1WithBody(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceCreateAnEcommerceWebhookV1RequestWithBody(c.Server, storeId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceCreateAnEcommerceWebhookV1 Create an ecommerce webhook
+//
+// Create an enabled subscription for your store to receive ecommerce events in external automation
+// systems. Save the whsec_ signing secret securely; it is returned once. Up to ten endpoints, including
+// disabled endpoints, may exist per store. Deliveries follow Standard Webhooks: verify the webhook-id,
+// webhook-timestamp and webhook-signature headers against the raw body with an official Standard Webhooks
+// library before parsing. Events can arrive out of order or more than once; deduplicate by event id.
+//
+// 400: the URL is not a public destination, or webhook_sales_channel_invalid (a channel ID does not
+// belong to this store). 409 codes: webhook_endpoint_limit_reached, webhook_store_inactive,
+// webhook_endpoint_catalog_busy (a catalog change is in progress; retry). Errors return the upstream code in
+// `message`, as `[Ecommerce:<code>] <reason>`.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/webhooks (the `EcommerceCreateAnEcommerceWebhookV1` operationId).
+func (c *Client) EcommerceCreateAnEcommerceWebhookV1(ctx context.Context, storeId string, body EcommerceCreateAnEcommerceWebhookV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceCreateAnEcommerceWebhookV1Request(c.Server, storeId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceDeleteAnEcommerceWebhookV1 Delete an ecommerce webhook
+//
+// Delete a subscription owned by your store, retaining delivery audit records.
+//
+// Corresponds with DELETE /api/ecommerce/v1/stores/{store_id}/webhooks/{endpoint_id} (the `EcommerceDeleteAnEcommerceWebhookV1` operationId).
+func (c *Client) EcommerceDeleteAnEcommerceWebhookV1(ctx context.Context, storeId string, endpointId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceDeleteAnEcommerceWebhookV1Request(c.Server, storeId, endpointId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceGetAnEcommerceWebhookV1 Get an ecommerce webhook
+//
+// Get a subscription owned by your store, without signing secrets.
+//
+// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/webhooks/{endpoint_id} (the `EcommerceGetAnEcommerceWebhookV1` operationId).
+func (c *Client) EcommerceGetAnEcommerceWebhookV1(ctx context.Context, storeId string, endpointId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceGetAnEcommerceWebhookV1Request(c.Server, storeId, endpointId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceUpdateAnEcommerceWebhookV1WithBody Update an ecommerce webhook
+//
+// Change the receiver, events, channel filter or enabled state. Omitted fields are preserved; a null
+// channel filter restores store-wide delivery. Endpoints disabled automatically after a 410 Gone
+// (receiver_gone) or persistent delivery failures (receiver_failing) resume with enabled: true; events
+// from the disabled period are not sent. Lifecycle-revoked endpoints cannot be enabled again: delete
+// them and create fresh subscriptions after recovery.
+//
+// 400 codes: webhook_destination_not_allowed (the new URL, or the saved URL when enabling, is not a public
+// destination), webhook_sales_channel_invalid. 409 codes: webhook_endpoint_revoked, webhook_store_inactive,
+// webhook_endpoint_catalog_busy (retry). Errors return the upstream code in `message`, as
+// `[Ecommerce:<code>] <reason>`.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PATCH /api/ecommerce/v1/stores/{store_id}/webhooks/{endpoint_id} (the `EcommerceUpdateAnEcommerceWebhookV1` operationId).
+func (c *Client) EcommerceUpdateAnEcommerceWebhookV1WithBody(ctx context.Context, storeId string, endpointId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceUpdateAnEcommerceWebhookV1RequestWithBody(c.Server, storeId, endpointId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceUpdateAnEcommerceWebhookV1 Update an ecommerce webhook
+//
+// Change the receiver, events, channel filter or enabled state. Omitted fields are preserved; a null
+// channel filter restores store-wide delivery. Endpoints disabled automatically after a 410 Gone
+// (receiver_gone) or persistent delivery failures (receiver_failing) resume with enabled: true; events
+// from the disabled period are not sent. Lifecycle-revoked endpoints cannot be enabled again: delete
+// them and create fresh subscriptions after recovery.
+//
+// 400 codes: webhook_destination_not_allowed (the new URL, or the saved URL when enabling, is not a public
+// destination), webhook_sales_channel_invalid. 409 codes: webhook_endpoint_revoked, webhook_store_inactive,
+// webhook_endpoint_catalog_busy (retry). Errors return the upstream code in `message`, as
+// `[Ecommerce:<code>] <reason>`.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PATCH /api/ecommerce/v1/stores/{store_id}/webhooks/{endpoint_id} (the `EcommerceUpdateAnEcommerceWebhookV1` operationId).
+func (c *Client) EcommerceUpdateAnEcommerceWebhookV1(ctx context.Context, storeId string, endpointId string, body EcommerceUpdateAnEcommerceWebhookV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceUpdateAnEcommerceWebhookV1Request(c.Server, storeId, endpointId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// EcommerceRotateAnEcommerceWebhookSecretV1 Rotate an ecommerce webhook secret
+//
+// Explicitly rotate the signing secret of an enabled endpoint on an active store. Save the new secret
+// securely. Prior secrets retain their original 24-hour overlap deadlines. Repeated calls create
+// distinct secrets, up to five live secrets. Wait for an old secret to expire at the limit. After a lost
+// response, explicitly rotate again; stored secrets cannot be retrieved. No daily renewal is required.
+//
+// 409 codes: webhook_endpoint_disabled (endpoint is disabled or revoked), webhook_store_inactive,
+// webhook_secret_rotation_limit_reached (five live secrets). Errors return the upstream code in
+// `message`, as `[Ecommerce:<code>] <reason>`.
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/webhooks/{endpoint_id}/rotate-secret (the `EcommerceRotateAnEcommerceWebhookSecretV1` operationId).
+func (c *Client) EcommerceRotateAnEcommerceWebhookSecretV1(ctx context.Context, storeId string, endpointId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEcommerceRotateAnEcommerceWebhookSecretV1Request(c.Server, storeId, endpointId)
 	if err != nil {
 		return nil, err
 	}
@@ -51132,6 +51770,264 @@ func NewEcommerceSetStoreShippingV1RequestWithBody(server string, storeId string
 	}
 
 	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewEcommerceListEcommerceWebhooksV1Request constructs an http.Request for the EcommerceListEcommerceWebhooksV1 method
+func NewEcommerceListEcommerceWebhooksV1Request(server string, storeId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/webhooks", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewEcommerceCreateAnEcommerceWebhookV1Request calls the generic EcommerceCreateAnEcommerceWebhookV1 builder with application/json body
+func NewEcommerceCreateAnEcommerceWebhookV1Request(server string, storeId string, body EcommerceCreateAnEcommerceWebhookV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewEcommerceCreateAnEcommerceWebhookV1RequestWithBody(server, storeId, "application/json", bodyReader)
+}
+
+// NewEcommerceCreateAnEcommerceWebhookV1RequestWithBody constructs an http.Request for the EcommerceCreateAnEcommerceWebhookV1 method, with any body, and a specified content type
+func NewEcommerceCreateAnEcommerceWebhookV1RequestWithBody(server string, storeId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/webhooks", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewEcommerceDeleteAnEcommerceWebhookV1Request constructs an http.Request for the EcommerceDeleteAnEcommerceWebhookV1 method
+func NewEcommerceDeleteAnEcommerceWebhookV1Request(server string, storeId string, endpointId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "endpoint_id", endpointId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/webhooks/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewEcommerceGetAnEcommerceWebhookV1Request constructs an http.Request for the EcommerceGetAnEcommerceWebhookV1 method
+func NewEcommerceGetAnEcommerceWebhookV1Request(server string, storeId string, endpointId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "endpoint_id", endpointId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/webhooks/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewEcommerceUpdateAnEcommerceWebhookV1Request calls the generic EcommerceUpdateAnEcommerceWebhookV1 builder with application/json body
+func NewEcommerceUpdateAnEcommerceWebhookV1Request(server string, storeId string, endpointId string, body EcommerceUpdateAnEcommerceWebhookV1JSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewEcommerceUpdateAnEcommerceWebhookV1RequestWithBody(server, storeId, endpointId, "application/json", bodyReader)
+}
+
+// NewEcommerceUpdateAnEcommerceWebhookV1RequestWithBody constructs an http.Request for the EcommerceUpdateAnEcommerceWebhookV1 method, with any body, and a specified content type
+func NewEcommerceUpdateAnEcommerceWebhookV1RequestWithBody(server string, storeId string, endpointId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "endpoint_id", endpointId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/webhooks/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewEcommerceRotateAnEcommerceWebhookSecretV1Request constructs an http.Request for the EcommerceRotateAnEcommerceWebhookSecretV1 method
+func NewEcommerceRotateAnEcommerceWebhookSecretV1Request(server string, storeId string, endpointId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "store_id", storeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "endpoint_id", endpointId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/ecommerce/v1/stores/%s/webhooks/%s/rotate-secret", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 
 	return req, nil
 }
@@ -69560,6 +70456,121 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/shipping (the `EcommerceSetStoreShippingV1` operationId).
 	EcommerceSetStoreShippingV1WithResponse(ctx context.Context, storeId string, body EcommerceSetStoreShippingV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceSetStoreShippingV1Response, error)
 
+	// EcommerceListEcommerceWebhooksV1WithResponse List ecommerce webhooks
+	//
+	// List your store's subscriptions for external automation systems, without signing secrets.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/webhooks (the `EcommerceListEcommerceWebhooksV1` operationId).
+	EcommerceListEcommerceWebhooksV1WithResponse(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*EcommerceListEcommerceWebhooksV1Response, error)
+
+	// EcommerceCreateAnEcommerceWebhookV1WithBodyWithResponse Create an ecommerce webhook
+	//
+	// Create an enabled subscription for your store to receive ecommerce events in external automation
+	// systems. Save the whsec_ signing secret securely; it is returned once. Up to ten endpoints, including
+	// disabled endpoints, may exist per store. Deliveries follow Standard Webhooks: verify the webhook-id,
+	// webhook-timestamp and webhook-signature headers against the raw body with an official Standard Webhooks
+	// library before parsing. Events can arrive out of order or more than once; deduplicate by event id.
+	//
+	// 400: the URL is not a public destination, or webhook_sales_channel_invalid (a channel ID does not
+	// belong to this store). 409 codes: webhook_endpoint_limit_reached, webhook_store_inactive,
+	// webhook_endpoint_catalog_busy (a catalog change is in progress; retry). Errors return the upstream code in
+	// `message`, as `[Ecommerce:<code>] <reason>`.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/webhooks (the `EcommerceCreateAnEcommerceWebhookV1` operationId).
+	EcommerceCreateAnEcommerceWebhookV1WithBodyWithResponse(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceCreateAnEcommerceWebhookV1Response, error)
+
+	// EcommerceCreateAnEcommerceWebhookV1WithResponse Create an ecommerce webhook
+	//
+	// Create an enabled subscription for your store to receive ecommerce events in external automation
+	// systems. Save the whsec_ signing secret securely; it is returned once. Up to ten endpoints, including
+	// disabled endpoints, may exist per store. Deliveries follow Standard Webhooks: verify the webhook-id,
+	// webhook-timestamp and webhook-signature headers against the raw body with an official Standard Webhooks
+	// library before parsing. Events can arrive out of order or more than once; deduplicate by event id.
+	//
+	// 400: the URL is not a public destination, or webhook_sales_channel_invalid (a channel ID does not
+	// belong to this store). 409 codes: webhook_endpoint_limit_reached, webhook_store_inactive,
+	// webhook_endpoint_catalog_busy (a catalog change is in progress; retry). Errors return the upstream code in
+	// `message`, as `[Ecommerce:<code>] <reason>`.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/webhooks (the `EcommerceCreateAnEcommerceWebhookV1` operationId).
+	EcommerceCreateAnEcommerceWebhookV1WithResponse(ctx context.Context, storeId string, body EcommerceCreateAnEcommerceWebhookV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceCreateAnEcommerceWebhookV1Response, error)
+
+	// EcommerceDeleteAnEcommerceWebhookV1WithResponse Delete an ecommerce webhook
+	//
+	// Delete a subscription owned by your store, retaining delivery audit records.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/ecommerce/v1/stores/{store_id}/webhooks/{endpoint_id} (the `EcommerceDeleteAnEcommerceWebhookV1` operationId).
+	EcommerceDeleteAnEcommerceWebhookV1WithResponse(ctx context.Context, storeId string, endpointId string, reqEditors ...RequestEditorFn) (*EcommerceDeleteAnEcommerceWebhookV1Response, error)
+
+	// EcommerceGetAnEcommerceWebhookV1WithResponse Get an ecommerce webhook
+	//
+	// Get a subscription owned by your store, without signing secrets.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/webhooks/{endpoint_id} (the `EcommerceGetAnEcommerceWebhookV1` operationId).
+	EcommerceGetAnEcommerceWebhookV1WithResponse(ctx context.Context, storeId string, endpointId string, reqEditors ...RequestEditorFn) (*EcommerceGetAnEcommerceWebhookV1Response, error)
+
+	// EcommerceUpdateAnEcommerceWebhookV1WithBodyWithResponse Update an ecommerce webhook
+	//
+	// Change the receiver, events, channel filter or enabled state. Omitted fields are preserved; a null
+	// channel filter restores store-wide delivery. Endpoints disabled automatically after a 410 Gone
+	// (receiver_gone) or persistent delivery failures (receiver_failing) resume with enabled: true; events
+	// from the disabled period are not sent. Lifecycle-revoked endpoints cannot be enabled again: delete
+	// them and create fresh subscriptions after recovery.
+	//
+	// 400 codes: webhook_destination_not_allowed (the new URL, or the saved URL when enabling, is not a public
+	// destination), webhook_sales_channel_invalid. 409 codes: webhook_endpoint_revoked, webhook_store_inactive,
+	// webhook_endpoint_catalog_busy (retry). Errors return the upstream code in `message`, as
+	// `[Ecommerce:<code>] <reason>`.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/ecommerce/v1/stores/{store_id}/webhooks/{endpoint_id} (the `EcommerceUpdateAnEcommerceWebhookV1` operationId).
+	EcommerceUpdateAnEcommerceWebhookV1WithBodyWithResponse(ctx context.Context, storeId string, endpointId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceUpdateAnEcommerceWebhookV1Response, error)
+
+	// EcommerceUpdateAnEcommerceWebhookV1WithResponse Update an ecommerce webhook
+	//
+	// Change the receiver, events, channel filter or enabled state. Omitted fields are preserved; a null
+	// channel filter restores store-wide delivery. Endpoints disabled automatically after a 410 Gone
+	// (receiver_gone) or persistent delivery failures (receiver_failing) resume with enabled: true; events
+	// from the disabled period are not sent. Lifecycle-revoked endpoints cannot be enabled again: delete
+	// them and create fresh subscriptions after recovery.
+	//
+	// 400 codes: webhook_destination_not_allowed (the new URL, or the saved URL when enabling, is not a public
+	// destination), webhook_sales_channel_invalid. 409 codes: webhook_endpoint_revoked, webhook_store_inactive,
+	// webhook_endpoint_catalog_busy (retry). Errors return the upstream code in `message`, as
+	// `[Ecommerce:<code>] <reason>`.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/ecommerce/v1/stores/{store_id}/webhooks/{endpoint_id} (the `EcommerceUpdateAnEcommerceWebhookV1` operationId).
+	EcommerceUpdateAnEcommerceWebhookV1WithResponse(ctx context.Context, storeId string, endpointId string, body EcommerceUpdateAnEcommerceWebhookV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceUpdateAnEcommerceWebhookV1Response, error)
+
+	// EcommerceRotateAnEcommerceWebhookSecretV1WithResponse Rotate an ecommerce webhook secret
+	//
+	// Explicitly rotate the signing secret of an enabled endpoint on an active store. Save the new secret
+	// securely. Prior secrets retain their original 24-hour overlap deadlines. Repeated calls create
+	// distinct secrets, up to five live secrets. Wait for an old secret to expire at the limit. After a lost
+	// response, explicitly rotate again; stored secrets cannot be retrieved. No daily renewal is required.
+	//
+	// 409 codes: webhook_endpoint_disabled (endpoint is disabled or revoked), webhook_store_inactive,
+	// webhook_secret_rotation_limit_reached (five live secrets). Errors return the upstream code in
+	// `message`, as `[Ecommerce:<code>] <reason>`.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/webhooks/{endpoint_id}/rotate-secret (the `EcommerceRotateAnEcommerceWebhookSecretV1` operationId).
+	EcommerceRotateAnEcommerceWebhookSecretV1WithResponse(ctx context.Context, storeId string, endpointId string, reqEditors ...RequestEditorFn) (*EcommerceRotateAnEcommerceWebhookSecretV1Response, error)
+
 	// GPUGetInstancesV1WithResponse Get instances
 	//
 	// Retrieve all GPU instances of your account.
@@ -83736,6 +84747,434 @@ func (r EcommerceSetStoreShippingV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r EcommerceSetStoreShippingV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type EcommerceListEcommerceWebhooksV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *EcommerceV1WebhookWebhookListResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r EcommerceListEcommerceWebhooksV1Response) GetJSON200() *EcommerceV1WebhookWebhookListResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r EcommerceListEcommerceWebhooksV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r EcommerceListEcommerceWebhooksV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r EcommerceListEcommerceWebhooksV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceListEcommerceWebhooksV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceListEcommerceWebhooksV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceListEcommerceWebhooksV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// EcommerceCreateAnEcommerceWebhookV1Response409Headers the declared response headers of an HTTP 409 response for EcommerceCreateAnEcommerceWebhookV1
+type EcommerceCreateAnEcommerceWebhookV1Response409Headers struct {
+	RetryAfter *int
+}
+
+type EcommerceCreateAnEcommerceWebhookV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON201 the response for an HTTP 201 `application/json` response
+	JSON201 *EcommerceV1WebhookWebhookCreationResource
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *CommonResponseErrorResponse
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON409 the response for an HTTP 409 `application/json` response
+	JSON409 *CommonResponseConflictResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+	// Headers409 the parsed response headers for an HTTP 409 response
+	Headers409 *EcommerceCreateAnEcommerceWebhookV1Response409Headers
+}
+
+// GetJSON201 returns the response for an HTTP 201 `application/json` response
+func (r EcommerceCreateAnEcommerceWebhookV1Response) GetJSON201() *EcommerceV1WebhookWebhookCreationResource {
+	return r.JSON201
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r EcommerceCreateAnEcommerceWebhookV1Response) GetJSON400() *CommonResponseErrorResponse {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r EcommerceCreateAnEcommerceWebhookV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON409 returns the response for an HTTP 409 `application/json` response
+func (r EcommerceCreateAnEcommerceWebhookV1Response) GetJSON409() *CommonResponseConflictResponse {
+	return r.JSON409
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r EcommerceCreateAnEcommerceWebhookV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r EcommerceCreateAnEcommerceWebhookV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r EcommerceCreateAnEcommerceWebhookV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceCreateAnEcommerceWebhookV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceCreateAnEcommerceWebhookV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceCreateAnEcommerceWebhookV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type EcommerceDeleteAnEcommerceWebhookV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *CommonSuccessEmptyResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseErrorResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r EcommerceDeleteAnEcommerceWebhookV1Response) GetJSON200() *CommonSuccessEmptyResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r EcommerceDeleteAnEcommerceWebhookV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r EcommerceDeleteAnEcommerceWebhookV1Response) GetJSON404() *CommonResponseErrorResponse {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r EcommerceDeleteAnEcommerceWebhookV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r EcommerceDeleteAnEcommerceWebhookV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceDeleteAnEcommerceWebhookV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceDeleteAnEcommerceWebhookV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceDeleteAnEcommerceWebhookV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type EcommerceGetAnEcommerceWebhookV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *EcommerceV1WebhookWebhookResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseErrorResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r EcommerceGetAnEcommerceWebhookV1Response) GetJSON200() *EcommerceV1WebhookWebhookResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r EcommerceGetAnEcommerceWebhookV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r EcommerceGetAnEcommerceWebhookV1Response) GetJSON404() *CommonResponseErrorResponse {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r EcommerceGetAnEcommerceWebhookV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r EcommerceGetAnEcommerceWebhookV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceGetAnEcommerceWebhookV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceGetAnEcommerceWebhookV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceGetAnEcommerceWebhookV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// EcommerceUpdateAnEcommerceWebhookV1Response409Headers the declared response headers of an HTTP 409 response for EcommerceUpdateAnEcommerceWebhookV1
+type EcommerceUpdateAnEcommerceWebhookV1Response409Headers struct {
+	RetryAfter *int
+}
+
+type EcommerceUpdateAnEcommerceWebhookV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *EcommerceV1WebhookWebhookResource
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *CommonResponseErrorResponse
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseErrorResponse
+	// JSON409 the response for an HTTP 409 `application/json` response
+	JSON409 *CommonResponseConflictResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+	// Headers409 the parsed response headers for an HTTP 409 response
+	Headers409 *EcommerceUpdateAnEcommerceWebhookV1Response409Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r EcommerceUpdateAnEcommerceWebhookV1Response) GetJSON200() *EcommerceV1WebhookWebhookResource {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r EcommerceUpdateAnEcommerceWebhookV1Response) GetJSON400() *CommonResponseErrorResponse {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r EcommerceUpdateAnEcommerceWebhookV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r EcommerceUpdateAnEcommerceWebhookV1Response) GetJSON404() *CommonResponseErrorResponse {
+	return r.JSON404
+}
+
+// GetJSON409 returns the response for an HTTP 409 `application/json` response
+func (r EcommerceUpdateAnEcommerceWebhookV1Response) GetJSON409() *CommonResponseConflictResponse {
+	return r.JSON409
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r EcommerceUpdateAnEcommerceWebhookV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r EcommerceUpdateAnEcommerceWebhookV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r EcommerceUpdateAnEcommerceWebhookV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceUpdateAnEcommerceWebhookV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceUpdateAnEcommerceWebhookV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceUpdateAnEcommerceWebhookV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// EcommerceRotateAnEcommerceWebhookSecretV1Response409Headers the declared response headers of an HTTP 409 response for EcommerceRotateAnEcommerceWebhookSecretV1
+type EcommerceRotateAnEcommerceWebhookSecretV1Response409Headers struct {
+	RetryAfter *int
+}
+
+type EcommerceRotateAnEcommerceWebhookSecretV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *EcommerceV1WebhookWebhookSecretResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseErrorResponse
+	// JSON409 the response for an HTTP 409 `application/json` response
+	JSON409 *CommonResponseConflictResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+	// Headers409 the parsed response headers for an HTTP 409 response
+	Headers409 *EcommerceRotateAnEcommerceWebhookSecretV1Response409Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r EcommerceRotateAnEcommerceWebhookSecretV1Response) GetJSON200() *EcommerceV1WebhookWebhookSecretResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r EcommerceRotateAnEcommerceWebhookSecretV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r EcommerceRotateAnEcommerceWebhookSecretV1Response) GetJSON404() *CommonResponseErrorResponse {
+	return r.JSON404
+}
+
+// GetJSON409 returns the response for an HTTP 409 `application/json` response
+func (r EcommerceRotateAnEcommerceWebhookSecretV1Response) GetJSON409() *CommonResponseConflictResponse {
+	return r.JSON409
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r EcommerceRotateAnEcommerceWebhookSecretV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r EcommerceRotateAnEcommerceWebhookSecretV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r EcommerceRotateAnEcommerceWebhookSecretV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EcommerceRotateAnEcommerceWebhookSecretV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r EcommerceRotateAnEcommerceWebhookSecretV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -107014,6 +108453,169 @@ func (c *ClientWithResponses) EcommerceSetStoreShippingV1WithResponse(ctx contex
 	return ParseEcommerceSetStoreShippingV1Response(rsp)
 }
 
+// EcommerceListEcommerceWebhooksV1WithResponse List ecommerce webhooks
+//
+// List your store's subscriptions for external automation systems, without signing secrets.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/webhooks (the `EcommerceListEcommerceWebhooksV1` operationId).
+func (c *ClientWithResponses) EcommerceListEcommerceWebhooksV1WithResponse(ctx context.Context, storeId string, reqEditors ...RequestEditorFn) (*EcommerceListEcommerceWebhooksV1Response, error) {
+	rsp, err := c.EcommerceListEcommerceWebhooksV1(ctx, storeId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceListEcommerceWebhooksV1Response(rsp)
+}
+
+// EcommerceCreateAnEcommerceWebhookV1WithBodyWithResponse Create an ecommerce webhook
+//
+// Create an enabled subscription for your store to receive ecommerce events in external automation
+// systems. Save the whsec_ signing secret securely; it is returned once. Up to ten endpoints, including
+// disabled endpoints, may exist per store. Deliveries follow Standard Webhooks: verify the webhook-id,
+// webhook-timestamp and webhook-signature headers against the raw body with an official Standard Webhooks
+// library before parsing. Events can arrive out of order or more than once; deduplicate by event id.
+//
+// 400: the URL is not a public destination, or webhook_sales_channel_invalid (a channel ID does not
+// belong to this store). 409 codes: webhook_endpoint_limit_reached, webhook_store_inactive,
+// webhook_endpoint_catalog_busy (a catalog change is in progress; retry). Errors return the upstream code in
+// `message`, as `[Ecommerce:<code>] <reason>`.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/webhooks (the `EcommerceCreateAnEcommerceWebhookV1` operationId).
+func (c *ClientWithResponses) EcommerceCreateAnEcommerceWebhookV1WithBodyWithResponse(ctx context.Context, storeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceCreateAnEcommerceWebhookV1Response, error) {
+	rsp, err := c.EcommerceCreateAnEcommerceWebhookV1WithBody(ctx, storeId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceCreateAnEcommerceWebhookV1Response(rsp)
+}
+
+// EcommerceCreateAnEcommerceWebhookV1WithResponse Create an ecommerce webhook
+//
+// Create an enabled subscription for your store to receive ecommerce events in external automation
+// systems. Save the whsec_ signing secret securely; it is returned once. Up to ten endpoints, including
+// disabled endpoints, may exist per store. Deliveries follow Standard Webhooks: verify the webhook-id,
+// webhook-timestamp and webhook-signature headers against the raw body with an official Standard Webhooks
+// library before parsing. Events can arrive out of order or more than once; deduplicate by event id.
+//
+// 400: the URL is not a public destination, or webhook_sales_channel_invalid (a channel ID does not
+// belong to this store). 409 codes: webhook_endpoint_limit_reached, webhook_store_inactive,
+// webhook_endpoint_catalog_busy (a catalog change is in progress; retry). Errors return the upstream code in
+// `message`, as `[Ecommerce:<code>] <reason>`.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/webhooks (the `EcommerceCreateAnEcommerceWebhookV1` operationId).
+func (c *ClientWithResponses) EcommerceCreateAnEcommerceWebhookV1WithResponse(ctx context.Context, storeId string, body EcommerceCreateAnEcommerceWebhookV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceCreateAnEcommerceWebhookV1Response, error) {
+	rsp, err := c.EcommerceCreateAnEcommerceWebhookV1(ctx, storeId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceCreateAnEcommerceWebhookV1Response(rsp)
+}
+
+// EcommerceDeleteAnEcommerceWebhookV1WithResponse Delete an ecommerce webhook
+//
+// Delete a subscription owned by your store, retaining delivery audit records.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/ecommerce/v1/stores/{store_id}/webhooks/{endpoint_id} (the `EcommerceDeleteAnEcommerceWebhookV1` operationId).
+func (c *ClientWithResponses) EcommerceDeleteAnEcommerceWebhookV1WithResponse(ctx context.Context, storeId string, endpointId string, reqEditors ...RequestEditorFn) (*EcommerceDeleteAnEcommerceWebhookV1Response, error) {
+	rsp, err := c.EcommerceDeleteAnEcommerceWebhookV1(ctx, storeId, endpointId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceDeleteAnEcommerceWebhookV1Response(rsp)
+}
+
+// EcommerceGetAnEcommerceWebhookV1WithResponse Get an ecommerce webhook
+//
+// Get a subscription owned by your store, without signing secrets.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/ecommerce/v1/stores/{store_id}/webhooks/{endpoint_id} (the `EcommerceGetAnEcommerceWebhookV1` operationId).
+func (c *ClientWithResponses) EcommerceGetAnEcommerceWebhookV1WithResponse(ctx context.Context, storeId string, endpointId string, reqEditors ...RequestEditorFn) (*EcommerceGetAnEcommerceWebhookV1Response, error) {
+	rsp, err := c.EcommerceGetAnEcommerceWebhookV1(ctx, storeId, endpointId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceGetAnEcommerceWebhookV1Response(rsp)
+}
+
+// EcommerceUpdateAnEcommerceWebhookV1WithBodyWithResponse Update an ecommerce webhook
+//
+// Change the receiver, events, channel filter or enabled state. Omitted fields are preserved; a null
+// channel filter restores store-wide delivery. Endpoints disabled automatically after a 410 Gone
+// (receiver_gone) or persistent delivery failures (receiver_failing) resume with enabled: true; events
+// from the disabled period are not sent. Lifecycle-revoked endpoints cannot be enabled again: delete
+// them and create fresh subscriptions after recovery.
+//
+// 400 codes: webhook_destination_not_allowed (the new URL, or the saved URL when enabling, is not a public
+// destination), webhook_sales_channel_invalid. 409 codes: webhook_endpoint_revoked, webhook_store_inactive,
+// webhook_endpoint_catalog_busy (retry). Errors return the upstream code in `message`, as
+// `[Ecommerce:<code>] <reason>`.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/ecommerce/v1/stores/{store_id}/webhooks/{endpoint_id} (the `EcommerceUpdateAnEcommerceWebhookV1` operationId).
+func (c *ClientWithResponses) EcommerceUpdateAnEcommerceWebhookV1WithBodyWithResponse(ctx context.Context, storeId string, endpointId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EcommerceUpdateAnEcommerceWebhookV1Response, error) {
+	rsp, err := c.EcommerceUpdateAnEcommerceWebhookV1WithBody(ctx, storeId, endpointId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceUpdateAnEcommerceWebhookV1Response(rsp)
+}
+
+// EcommerceUpdateAnEcommerceWebhookV1WithResponse Update an ecommerce webhook
+//
+// Change the receiver, events, channel filter or enabled state. Omitted fields are preserved; a null
+// channel filter restores store-wide delivery. Endpoints disabled automatically after a 410 Gone
+// (receiver_gone) or persistent delivery failures (receiver_failing) resume with enabled: true; events
+// from the disabled period are not sent. Lifecycle-revoked endpoints cannot be enabled again: delete
+// them and create fresh subscriptions after recovery.
+//
+// 400 codes: webhook_destination_not_allowed (the new URL, or the saved URL when enabling, is not a public
+// destination), webhook_sales_channel_invalid. 409 codes: webhook_endpoint_revoked, webhook_store_inactive,
+// webhook_endpoint_catalog_busy (retry). Errors return the upstream code in `message`, as
+// `[Ecommerce:<code>] <reason>`.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/ecommerce/v1/stores/{store_id}/webhooks/{endpoint_id} (the `EcommerceUpdateAnEcommerceWebhookV1` operationId).
+func (c *ClientWithResponses) EcommerceUpdateAnEcommerceWebhookV1WithResponse(ctx context.Context, storeId string, endpointId string, body EcommerceUpdateAnEcommerceWebhookV1JSONRequestBody, reqEditors ...RequestEditorFn) (*EcommerceUpdateAnEcommerceWebhookV1Response, error) {
+	rsp, err := c.EcommerceUpdateAnEcommerceWebhookV1(ctx, storeId, endpointId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceUpdateAnEcommerceWebhookV1Response(rsp)
+}
+
+// EcommerceRotateAnEcommerceWebhookSecretV1WithResponse Rotate an ecommerce webhook secret
+//
+// Explicitly rotate the signing secret of an enabled endpoint on an active store. Save the new secret
+// securely. Prior secrets retain their original 24-hour overlap deadlines. Repeated calls create
+// distinct secrets, up to five live secrets. Wait for an old secret to expire at the limit. After a lost
+// response, explicitly rotate again; stored secrets cannot be retrieved. No daily renewal is required.
+//
+// 409 codes: webhook_endpoint_disabled (endpoint is disabled or revoked), webhook_store_inactive,
+// webhook_secret_rotation_limit_reached (five live secrets). Errors return the upstream code in
+// `message`, as `[Ecommerce:<code>] <reason>`.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/ecommerce/v1/stores/{store_id}/webhooks/{endpoint_id}/rotate-secret (the `EcommerceRotateAnEcommerceWebhookSecretV1` operationId).
+func (c *ClientWithResponses) EcommerceRotateAnEcommerceWebhookSecretV1WithResponse(ctx context.Context, storeId string, endpointId string, reqEditors ...RequestEditorFn) (*EcommerceRotateAnEcommerceWebhookSecretV1Response, error) {
+	rsp, err := c.EcommerceRotateAnEcommerceWebhookSecretV1(ctx, storeId, endpointId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEcommerceRotateAnEcommerceWebhookSecretV1Response(rsp)
+}
+
 // GPUGetInstancesV1WithResponse Get instances
 //
 // Retrieve all GPU instances of your account.
@@ -121771,6 +123373,362 @@ func ParseEcommerceSetStoreShippingV1Response(rsp *http.Response) (*EcommerceSet
 		}
 		response.JSON500 = &dest
 
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceListEcommerceWebhooksV1Response parses an HTTP response from a EcommerceListEcommerceWebhooksV1WithResponse call
+func ParseEcommerceListEcommerceWebhooksV1Response(rsp *http.Response) (*EcommerceListEcommerceWebhooksV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceListEcommerceWebhooksV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest EcommerceV1WebhookWebhookListResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceCreateAnEcommerceWebhookV1Response parses an HTTP response from a EcommerceCreateAnEcommerceWebhookV1WithResponse call
+func ParseEcommerceCreateAnEcommerceWebhookV1Response(rsp *http.Response) (*EcommerceCreateAnEcommerceWebhookV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceCreateAnEcommerceWebhookV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest EcommerceV1WebhookWebhookCreationResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest CommonResponseConflictResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 409:
+		var headers EcommerceCreateAnEcommerceWebhookV1Response409Headers
+		if values := rsp.Header.Values("Retry-After"); len(values) > 0 {
+			var value int
+			if err := runtime.BindStyledParameterWithOptions("simple", "Retry-After", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.RetryAfter = &value
+		}
+		response.Headers409 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceDeleteAnEcommerceWebhookV1Response parses an HTTP response from a EcommerceDeleteAnEcommerceWebhookV1WithResponse call
+func ParseEcommerceDeleteAnEcommerceWebhookV1Response(rsp *http.Response) (*EcommerceDeleteAnEcommerceWebhookV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceDeleteAnEcommerceWebhookV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest CommonSuccessEmptyResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceGetAnEcommerceWebhookV1Response parses an HTTP response from a EcommerceGetAnEcommerceWebhookV1WithResponse call
+func ParseEcommerceGetAnEcommerceWebhookV1Response(rsp *http.Response) (*EcommerceGetAnEcommerceWebhookV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceGetAnEcommerceWebhookV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest EcommerceV1WebhookWebhookResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceUpdateAnEcommerceWebhookV1Response parses an HTTP response from a EcommerceUpdateAnEcommerceWebhookV1WithResponse call
+func ParseEcommerceUpdateAnEcommerceWebhookV1Response(rsp *http.Response) (*EcommerceUpdateAnEcommerceWebhookV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceUpdateAnEcommerceWebhookV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest EcommerceV1WebhookWebhookResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest CommonResponseConflictResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 409:
+		var headers EcommerceUpdateAnEcommerceWebhookV1Response409Headers
+		if values := rsp.Header.Values("Retry-After"); len(values) > 0 {
+			var value int
+			if err := runtime.BindStyledParameterWithOptions("simple", "Retry-After", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.RetryAfter = &value
+		}
+		response.Headers409 = &headers
+	}
+
+	return response, nil
+}
+
+// ParseEcommerceRotateAnEcommerceWebhookSecretV1Response parses an HTTP response from a EcommerceRotateAnEcommerceWebhookSecretV1WithResponse call
+func ParseEcommerceRotateAnEcommerceWebhookSecretV1Response(rsp *http.Response) (*EcommerceRotateAnEcommerceWebhookSecretV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EcommerceRotateAnEcommerceWebhookSecretV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest EcommerceV1WebhookWebhookSecretResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest CommonResponseConflictResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 409:
+		var headers EcommerceRotateAnEcommerceWebhookSecretV1Response409Headers
+		if values := rsp.Header.Values("Retry-After"); len(values) > 0 {
+			var value int
+			if err := runtime.BindStyledParameterWithOptions("simple", "Retry-After", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.RetryAfter = &value
+		}
+		response.Headers409 = &headers
 	}
 
 	return response, nil

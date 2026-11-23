@@ -38,4 +38,5 @@ hostinger ecommerce [flags]
 * [hostinger ecommerce sales-channels](hostinger_ecommerce_sales-channels.md)	 - Sales channels commands
 * [hostinger ecommerce shipping](hostinger_ecommerce_shipping.md)	 - Shipping commands
 * [hostinger ecommerce stores](hostinger_ecommerce_stores.md)	 - Stores commands
+* [hostinger ecommerce webhooks](hostinger_ecommerce_webhooks.md)	 - Webhooks commands
 
