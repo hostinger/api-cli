@@ -42,6 +42,11 @@ type Options struct {
 	SQL string
 	// Message describes a Node.js build from an upload in the deployment history.
 	Message string
+	// Remote is a deploy asked for from elsewhere, such as hPanel through a
+	// running Preview, with a UI that asks nothing. What a person would have
+	// to confirm is refused with a *RefusedError instead: a WordPress import,
+	// static files onto a Node.js app, and, unless Yes, replacing content.
+	Remote bool
 }
 
 // Result is what a deploy produced. Fields Outcome already reports
@@ -340,6 +345,8 @@ func (d *deployment) target(detected Type) error {
 	// An import also replaces the database, so the link is no consent to it.
 	asks := !created && (!fromLink || d.typ == WordPressSite)
 	switch {
+	case opts.Remote && d.typ == WordPressSite:
+		return &RefusedError{Reason: ReasonUnsupportedType, Message: "a WordPress import replaces the database, so it is only run from the terminal"}
 	case website.WebsiteType == "nodejs" && d.typ == Static:
 		// Checked even when linked: the app keeps running whatever the link says.
 		return confirmStaticOverApp(d.ui, website, opts)
@@ -753,7 +760,7 @@ func (d *deployment) deployFromGit() (*Result, error) {
 		step := ui.Start("Linking Git " + repo.FullName() + "@" + repo.Branch)
 		err := a.UpdateGitAutoDeploy(ctx, w.Username, w.Domain, GitSettings{InstallationUUID: repo.installUID, Owner: repo.Owner, Repository: repo.Name, Branch: repo.Branch, IsEnabled: true})
 		if err != nil {
-			step.Fail("Could not set up the Git deploy")
+			step.Fail(failText(ctx, "Could not set up the Git deploy"))
 			return nil, err
 		}
 		step.Done("Deployed from Git; every push to " + repo.Branch + " redeploys")
@@ -833,15 +840,15 @@ func (d *deployment) deployUpload() (*Result, error) {
 	step := ui.Start("Uploading " + result.Archive)
 	creds, err := a.UploadCredentials(ctx, w.Username, w.Domain)
 	if err != nil {
-		step.Fail("Upload failed")
-		return nil, err
+		step.Fail(failText(ctx, "Upload failed"))
+		return nil, &uploadError{err}
 	}
 	err = Upload(ctx, creds, archive, result.Archive, func(sent, total int64) {
 		step.Update(fmt.Sprintf("Uploading %s (%d%%)", result.Archive, sent*100/max(total, 1)))
 	})
 	if err != nil {
-		step.Fail("Upload failed")
-		return nil, err
+		step.Fail(failText(ctx, "Upload failed"))
+		return nil, &uploadError{err}
 	}
 	step.Done("Uploaded " + result.Archive)
 
@@ -852,7 +859,7 @@ func (d *deployment) deployUpload() (*Result, error) {
 		step := ui.Start("Reading build settings from the archive")
 		detected, err := a.BuildSettingsFromArchive(ctx, w.Username, w.Domain, result.Archive)
 		if err != nil {
-			step.Fail("Could not detect build settings")
+			step.Fail(failText(ctx, "Could not detect build settings"))
 			return nil, err
 		}
 		step.Done("Build settings read")
@@ -863,7 +870,7 @@ func (d *deployment) deployUpload() (*Result, error) {
 	}
 	step = ui.Start("Deploying files")
 	if err := a.DeployArchive(ctx, w.Username, w.Domain, result.Archive); err != nil {
-		step.Fail("Deploy failed")
+		step.Fail(failText(ctx, "Deploy failed"))
 		return nil, err
 	}
 	step.Done("Files deployed")
@@ -880,7 +887,7 @@ func (d *deployment) importWordPress(creds Credentials) (*Result, error) {
 		step.Update(fmt.Sprintf("Uploading the database %s (%d%%)", filepath.Base(d.dump), sent*100/max(total, 1)))
 	})
 	if err != nil {
-		step.Fail("Upload failed")
+		step.Fail(failText(ctx, "Upload failed"))
 		// The archive holds wp-config.php: say where it was left.
 		return nil, fmt.Errorf("%w (the site archive was uploaded as %s; delete it if you do not retry)", err, result.Archive)
 	}
@@ -968,6 +975,16 @@ func insideReal(root, path string) bool {
 	return err == nil && !escapes(rel) && !filepath.IsAbs(rel)
 }
 
+// otherKind is static or nodejs when the folder now looks like that, and
+// remembered is the other one; else "".
+func otherKind(src string, remembered Type) Type {
+	detected, _, err := Detect(src)
+	if err != nil || detected == remembered || (detected != Static && detected != NodeJS) {
+		return ""
+	}
+	return detected
+}
+
 // Tests replace Getwd.
 var Getwd = os.Getwd
 
@@ -983,13 +1000,13 @@ func shouldLink(project *site.Project, website *site.Website, opts Options) bool
 // rememberedOrDetected keeps the remembered type unless the folder now looks
 // like the other kind: a Node.js app deployed as static publishes its source.
 func rememberedOrDetected(src string, ui UI, opts Options, remembered Type) (Type, error) {
-	detected, _, err := Detect(src)
-	if err != nil || detected == remembered || (detected != Static && detected != NodeJS) {
+	detected := otherKind(src, remembered)
+	if detected == "" {
 		return remembered, nil
 	}
 	msg := "This folder looks like a " + typeLabel(detected) + ", but it was last deployed as " + string(remembered)
 	switch {
-	case opts.Yes:
+	case opts.Yes || opts.Remote:
 		ui.Info(msg + "; deploying it as " + string(detected))
 		return detected, nil
 	case !ui.Interactive():
@@ -1076,4 +1093,13 @@ func typeLabel(t Type) string {
 		return "WordPress site"
 	}
 	return "static site"
+}
+
+// failText is what a failed step shows: "Interrupted" when Ctrl+C cancelled
+// ctx, so a cancelled deploy doesn't read as an error, else msg.
+func failText(ctx context.Context, msg string) string {
+	if errors.Is(ctx.Err(), context.Canceled) {
+		return "Interrupted"
+	}
+	return msg
 }

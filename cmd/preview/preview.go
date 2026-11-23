@@ -32,8 +32,9 @@ var Cmd = &cobra.Command{
 	Long: `Share a web server running on this computer at a temporary public https URL, for
 example to show work in progress or to test a webhook. Anyone with the URL can open it.
 
-The Preview runs in the foreground until Ctrl+C, or until its time runs out. Nothing is
-uploaded: requests go through an encrypted tunnel to the server while the command runs.
+The Preview runs in the foreground until Ctrl+C, or until its time runs out. Requests go
+through an encrypted tunnel to the server while the command runs; nothing is uploaded
+unless hPanel asks to deploy this folder (see below).
 
 Without a port, preview looks for a dev server on localhost ports 5173, 3000, 4321,
 8080, 8000, 5000, 4200 and 8888 (Jupyter's port, shared with a warning). With several, it
@@ -61,10 +62,21 @@ the URL is printed early with a note that it may answer 530 for a few seconds, a
 steps and redraws in place. Piped output, --json, --no-input, CI, AI agents (AI_AGENT or
 CLAUDECODE set) and NO_COLOR keep plain lines.
 
+hPanel's Previews page can deploy the folder a Preview runs in, as ` + "`hostinger up`" + ` would:
+a folder linked to a website (by an earlier up or ` + "`hostinger link`" + `) goes to that website,
+and a Node.js project not linked to one goes to the website picked in hPanel, and is
+linked to it. hPanel shows the linked website, the project type and the folder's name.
+The terminal shows the deploy, and Ctrl+C cancels it while the Preview keeps running. A
+WordPress import and static files onto a Node.js app are only deployed from the
+terminal. Remote deploys are off with --no-remote-deploy or --url, and in a folder that
+is neither linked to a website nor a Node.js project.
+
 --json prints one JSON object per line on stdout: {"event":"ready",...} with the URL and
 "reachable" (false while it may still answer 530), {"event":"reachable"} when such a
-Preview starts to answer, {"event":"paused",...} and {"event":"ended",...}, which
-carries a "message" when the Preview failed. Logs go to stderr.
+Preview starts to answer, {"event":"paused",...}, {"event":"deploy",...} with "state"
+accepted, succeeded or failed (with a "reason") for a deploy from hPanel, and
+{"event":"ended",...}, which carries a "message" when the Preview failed. Logs go to
+stderr.
 
 Exit codes: 0 when stopped or expired, 2 for a usage error such as a refused port, 77
 when no account is signed in or the service refuses it, 78 when the Preview was taken
@@ -98,6 +110,7 @@ type options struct {
 	ports        []int
 	noOwner      bool
 	ttl          string
+	noRemote     bool
 }
 
 var flags options
@@ -108,6 +121,7 @@ func init() {
 	f.StringVar(&flags.hostHeader, "host-header", "", "Host header sent to the server (default: the Preview's host name; prefer allowing .hostingerpreview.com in the dev server)")
 	f.BoolVar(&flags.json, "json", false, "Print one JSON object per event on stdout")
 	f.StringVar(&flags.ttl, "ttl", "24h", "How long the Preview lasts, from 1h to 7d (e.g. 90m, 12h, 3d)")
+	f.BoolVar(&flags.noRemote, "no-remote-deploy", false, "Never deploy this folder when asked from hPanel")
 
 	f.StringSliceVar(&flags.bootstrap, "bootstrap", nil, "Tunnel endpoints to connect to (comma separated)")
 	f.StringVar(&flags.serverCAFile, "server-ca-file", "", "CA bundle that signs the tunnel endpoints' certificates")
@@ -177,16 +191,33 @@ func runPreview(cmd *cobra.Command, args []string) error {
 	if base == nil {
 		base = context.Background()
 	}
-	// The first signal ends the Preview cleanly; a second one kills the process.
-	ctx, stop := signal.NotifyContext(base, stopSignals...)
+	// The root command's context ends on the first Ctrl+C. notifyStop
+	// decides what each stop signal does here: the first one cancels a
+	// deploy from hPanel, when one runs, and leaves the Preview running.
+	base = context.WithoutCancel(base)
+	stderr := cmd.ErrOrStderr()
+	p := &printer{
+		stdout: cmd.OutOrStdout(),
+		stderr: stderr,
+		log:    stderr,
+		json:   jsonOut,
+		bold:   styled(cmd.OutOrStdout()),
+		now:    time.Now,
+		loc:    time.Local,
+	}
+	rd := newRemote(base, o, p)
+	var interrupt func() bool
+	if rd != nil {
+		interrupt = rd.cancelDeploy
+	}
+	ctx, stop := notifyStop(base, interrupt)
 	defer stop()
-	context.AfterFunc(ctx, stop)
 
 	target, err := resolveTarget(ctx, args, o, func() detector { return newDetector(cmd, jsonOut) })
 	if err != nil {
 		return err
 	}
-	stderr := cmd.ErrOrStderr()
+	p.target = target
 	detected := len(args) == 0 && o.url == ""
 	// A person at a terminal gets the live view. CI, --no-input and AI agents
 	// keep plain lines: agents often have a pseudo-terminal, and a view that
@@ -206,15 +237,6 @@ func runPreview(cmd *cobra.Command, args []string) error {
 		warn(stderr)
 	}
 
-	p := &printer{
-		stdout: cmd.OutOrStdout(),
-		stderr: stderr,
-		json:   jsonOut,
-		bold:   styled(cmd.OutOrStdout()),
-		target: target,
-		now:    time.Now,
-		loc:    time.Local,
-	}
 	// A Preview needs an account. Sign in first: the connector's owner ticket
 	// callback has no time to wait for a browser.
 	if !o.noOwner {
@@ -231,13 +253,14 @@ func runPreview(cmd *cobra.Command, args []string) error {
 	if view != nil {
 		view.Start()
 		p.view, logOut = view, view.LogWriter(stderr)
+		p.log = logOut
 		// --verbose request lines print above the view too.
 		api.SetDiagnostics(logOut)
 		defer api.SetDiagnostics(nil)
 		// Below the logo, where the view cannot push them off screen.
 		warn(logOut)
 	}
-	expired, err := runQuick(ctx, connector.QuickOptions{
+	qo := connector.QuickOptions{
 		URL:          target,
 		HostHeader:   o.hostHeader,
 		Bootstrap:    o.bootstrap,
@@ -250,8 +273,41 @@ func runPreview(cmd *cobra.Command, args []string) error {
 		OnReady:      p.ready,
 		OnReachable:  p.reachable,
 		OnPause:      p.paused,
-	})
+	}
+	if rd != nil {
+		rd.attach(&qo, DefaultOwnerOptions(o.noOwner))
+	}
+	expired, err := runQuick(ctx, qo)
+	if rd != nil {
+		rd.close()
+	}
 	return p.ended(classify(expired, err, cmd.Root().Name(), tokenEnv))
+}
+
+// notifyStop returns a context that the first stop signal ends, as
+// signal.NotifyContext does, and a second one kills the process. Ctrl+C
+// first goes to interrupt, when set: it returns true when it took the signal,
+// as a running deploy from hPanel does, and the Preview keeps running.
+func notifyStop(base context.Context, interrupt func() bool) (context.Context, context.CancelFunc) {
+	ctx, cancel := context.WithCancel(base)
+	sigs := make(chan os.Signal, 1)
+	signal.Notify(sigs, stopSignals...)
+	go func() {
+		defer signal.Stop(sigs)
+		for {
+			select {
+			case s := <-sigs:
+				if s == os.Interrupt && interrupt != nil && interrupt() {
+					continue
+				}
+				cancel()
+				return
+			case <-ctx.Done():
+				return
+			}
+		}
+	}()
+	return ctx, cancel
 }
 
 // resolveTarget picks the origin to share: the port argument, --url, or a

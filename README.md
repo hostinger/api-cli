@@ -172,7 +172,7 @@ hostinger preview 3000                             # share http://localhost:3000
 hostinger preview 3000 --ttl 3d                    # keep it for 3 days (default 24h, at most 7d)
 hostinger preview 8080 --host-header shop.test     # for a server that serves by host name
 hostinger preview --url https://localhost:8443     # share another origin
-hostinger preview --json                           # one JSON event per line: ready, reachable, paused, ended
+hostinger preview --json                           # one JSON event per line: ready, reachable, paused, deploy, ended
 ```
 
 Anyone with the URL can reach the server, including its debug consoles and dev tools,
@@ -184,6 +184,11 @@ bypasses that check and makes its debug consoles public.
 A Preview needs a Hostinger account and is linked to it: run `hostinger auth login`
 or set `HOSTINGER_API_TOKEN`. In a terminal, `preview` opens the browser to sign in when needed.
 The Preview needs outbound TCP port 7844.
+
+hPanel's Previews page can deploy the folder a Preview runs in, as `hostinger up` would:
+a folder linked to a website goes there, and a Node.js project not linked to one goes to
+the website picked in hPanel. The terminal shows the deploy, and Ctrl+C cancels it while
+the Preview keeps running. `--no-remote-deploy` turns this off.
 
 Command documentation lives in [docs/](docs/) and in the man pages, and `manifest.json` maps every
 API operation to its command. Shell autocompletion: see [AUTOCOMPLETE.md](AUTOCOMPLETE.md).

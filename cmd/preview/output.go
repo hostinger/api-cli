@@ -171,6 +171,7 @@ type printer struct {
 	stderr    io.Writer
 	json      bool
 	view      *quickview.View // set once the live view runs; nil: plain lines
+	log       io.Writer       // lines besides the Preview's own: stderr, or above the live view
 	bold      bool            // emphasise the URL (a terminal with styling on)
 	target    string
 	now       func() time.Time
@@ -193,6 +194,15 @@ type pausedEvent struct {
 	Event      string `json:"event"`
 	Reason     string `json:"reason"`
 	RetryAfter int64  `json:"retry_after"`
+}
+
+// deployEvent is a deploy asked for from hPanel: state is accepted,
+// succeeded or failed, with a reason.
+type deployEvent struct {
+	Event  string `json:"event"`
+	State  string `json:"state"`
+	Domain string `json:"domain"`
+	Reason string `json:"reason,omitempty"`
 }
 
 type endedEvent struct {
@@ -282,6 +292,23 @@ func (p *printer) paused(q connector.QuickPause) {
 		return
 	}
 	fmt.Fprintf(p.stderr, "Preview paused (%s); retrying at %s\n", utils.SafeText(q.Reason), at)
+}
+
+// say prints a line for a person, in every mode: JSON lines keep stdout.
+func (p *printer) say(msg string) {
+	p.mu.Lock()
+	defer p.mu.Unlock()
+	fmt.Fprintln(p.log, utils.SafeText(msg))
+}
+
+// deploy prints the JSON event of a deploy from hPanel; a person reads
+// say's lines instead.
+func (p *printer) deploy(state, domain, reason string) {
+	p.mu.Lock()
+	defer p.mu.Unlock()
+	if p.json {
+		p.emit(deployEvent{Event: "deploy", State: state, Domain: domain, Reason: reason})
+	}
 }
 
 // ended reports the end of the run and returns the error that sets the exit

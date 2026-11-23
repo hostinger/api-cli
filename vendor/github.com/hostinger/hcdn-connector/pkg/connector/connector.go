@@ -34,6 +34,7 @@ import (
 	"time"
 
 	"github.com/hostinger/hcdn-connector/internal/fileguard"
+	"github.com/hostinger/hcdn-connector/internal/h2srv"
 	"github.com/hostinger/hcdn-connector/internal/ingress"
 	"github.com/hostinger/hcdn-connector/internal/logging"
 	"github.com/hostinger/hcdn-connector/internal/metrics"
@@ -146,6 +147,31 @@ type Options struct {
 	// signal after a session is ready on an edge that advertises it.
 	// 0: DefaultVisibleWait.
 	VisibleWait time.Duration
+	// AppMeta goes out in every hello answer as hcdn-app-meta, for the edge
+	// to record with the session: printable ASCII, at most MaxAppMetaBytes,
+	// no leading or trailing space. "": none.
+	AppMeta string
+	// OnCommand handles the commands the edge relays and adds command to
+	// hcdn-features. nil: no command feature, so the edge sends none.
+	OnCommand CommandFunc
+}
+
+// MaxAppMetaBytes caps Options.AppMeta and QuickOptions.AppMeta.
+const MaxAppMetaBytes = proto.MaxAppMetaBytes
+
+// checkAppMeta accepts printable ASCII up to MaxAppMetaBytes, without
+// leading or trailing space ("" is fine: no hcdn-app-meta). field names the
+// option in the error.
+func checkAppMeta(field, s string) error {
+	ok := len(s) <= MaxAppMetaBytes && strings.TrimSpace(s) == s
+	for _, c := range []byte(s) {
+		ok = ok && c >= 0x20 && c <= 0x7e
+	}
+	if !ok {
+		return fmt.Errorf("connector: %s: want printable ASCII, at most %d bytes, no leading or trailing space",
+			field, MaxAppMetaBytes)
+	}
+	return nil
 }
 
 // Connector is one tunnel connector. Create it with New.
@@ -179,6 +205,9 @@ func New(o Options) (*Connector, error) {
 		return nil, err
 	}
 	if err := o.Owner.validate(); err != nil {
+		return nil, err
+	}
+	if err := checkAppMeta("Options.AppMeta", o.AppMeta); err != nil {
 		return nil, err
 	}
 	for _, p := range o.AllowLocalPorts {
@@ -252,7 +281,7 @@ func New(o Options) (*Connector, error) {
 		Config: cfg, Creds: cs, Dialer: d, Discovery: disc, Handler: ingress.NewHandler(table, cfg.TunnelID, log, m),
 		Metrics: m, Log: log, Version: version, ConnectorID: o.ConnectorID, Errors: ring,
 		DrainTimeout: o.DrainTimeout, RevokedHint: revokedHint,
-		OwnerTicket: o.Owner.Ticket, OwnerAbsent: o.Owner.Absent,
+		Caller: h2srv.Caller{OwnerTicket: o.Owner.Ticket, OwnerAbsent: o.Owner.Absent, AppMeta: o.AppMeta, OnCommand: o.OnCommand},
 		Exit: func(code int) {
 			log.Error("exiting", "code", code)
 			if o.OnExit != nil {

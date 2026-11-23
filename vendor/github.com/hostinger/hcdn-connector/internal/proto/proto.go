@@ -12,6 +12,7 @@ const (
 	PathPops    = "/_hcdn/v1/pops"
 	PathPing    = "/_hcdn/v1/ping"
 	PathWhoami  = "/_hcdn/v1/whoami"
+	PathCommand = "/_hcdn/v1/command"
 	PathConnect = "/_tunnel/v1/connect"
 
 	ALPNSession = "hcdn-tunnel/1"
@@ -53,10 +54,14 @@ const (
 	HdrOwnerAbsent    = "Hcdn-Owner-Absent"
 	HdrEdgeFeatures   = "Hcdn-Edge-Features"
 	HdrVisibleScope   = "Hcdn-Visible-Scope"
+	HdrAppMeta        = "Hcdn-App-Meta"
 	HdrControlPrefix  = "Hcdn-"
 	HdrXControlPrefix = "X-Hcdn-"
 
 	Features = "ws,owner,visible"
+
+	// MaxAppMetaBytes caps hcdn-app-meta in the hello answer.
+	MaxAppMetaBytes = 1024
 
 	// EdgeFeatureVisible in hcdn-edge-features: the edge sends a visible
 	// control request once the tunnel is in its presence.
@@ -113,6 +118,19 @@ var KnownReasons = map[string]bool{
 	ReasonProtocolError:   true,
 	ReasonOwnerRequired:   true,
 }
+
+// Command (docs/protocol.md section 11).
+const (
+	// FeatureCommand in hcdn-features: the connector answers the command
+	// control request. Only a connector with a command handler sends it.
+	FeatureCommand = "command"
+
+	MaxCommandBytes   = 8 << 10
+	MaxErrorCodeBytes = 64
+
+	// ErrRefused is the hcdn-error of a refusal without a valid reason.
+	ErrRefused = "refused"
+)
 
 // Owner ticket (docs/protocol.md section 9). The whoami owner.mode values that
 // ask for a ticket; tunneld omits the object in mode off.

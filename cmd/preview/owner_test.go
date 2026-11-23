@@ -8,6 +8,7 @@ import (
 	"io"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"strings"
 	"sync/atomic"
 	"testing"
@@ -202,10 +203,19 @@ type fakeOAuth struct {
 	replaced string // the token ReplaceToken was given
 	loginErr error
 	logins   int
+	// interrupt, when set, presses Ctrl+C during the sign-in, which then
+	// waits for it to end the run.
+	interrupt bool
 }
 
-func (f *fakeOAuth) Login(context.Context) (string, error) {
+func (f *fakeOAuth) Login(ctx context.Context) (string, error) {
 	f.logins++
+	if f.interrupt {
+		p, _ := os.FindProcess(os.Getpid())
+		_ = p.Signal(os.Interrupt)
+		<-ctx.Done()
+		return "", ctx.Err()
+	}
 	if f.loginErr != nil {
 		return "", f.loginErr
 	}

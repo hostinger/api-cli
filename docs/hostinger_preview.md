@@ -7,8 +7,9 @@ Share a local dev server at a temporary public URL
 Share a web server running on this computer at a temporary public https URL, for
 example to show work in progress or to test a webhook. Anyone with the URL can open it.
 
-The Preview runs in the foreground until Ctrl+C, or until its time runs out. Nothing is
-uploaded: requests go through an encrypted tunnel to the server while the command runs.
+The Preview runs in the foreground until Ctrl+C, or until its time runs out. Requests go
+through an encrypted tunnel to the server while the command runs; nothing is uploaded
+unless hPanel asks to deploy this folder (see below).
 
 Without a port, preview looks for a dev server on localhost ports 5173, 3000, 4321,
 8080, 8000, 5000, 4200 and 8888 (Jupyter's port, shared with a warning). With several, it
@@ -36,10 +37,21 @@ the URL is printed early with a note that it may answer 530 for a few seconds, a
 steps and redraws in place. Piped output, --json, --no-input, CI, AI agents (AI_AGENT or
 CLAUDECODE set) and NO_COLOR keep plain lines.
 
+hPanel's Previews page can deploy the folder a Preview runs in, as `hostinger up` would:
+a folder linked to a website (by an earlier up or `hostinger link`) goes to that website,
+and a Node.js project not linked to one goes to the website picked in hPanel, and is
+linked to it. hPanel shows the linked website, the project type and the folder's name.
+The terminal shows the deploy, and Ctrl+C cancels it while the Preview keeps running. A
+WordPress import and static files onto a Node.js app are only deployed from the
+terminal. Remote deploys are off with --no-remote-deploy or --url, and in a folder that
+is neither linked to a website nor a Node.js project.
+
 --json prints one JSON object per line on stdout: {"event":"ready",...} with the URL and
 "reachable" (false while it may still answer 530), {"event":"reachable"} when such a
-Preview starts to answer, {"event":"paused",...} and {"event":"ended",...}, which
-carries a "message" when the Preview failed. Logs go to stderr.
+Preview starts to answer, {"event":"paused",...}, {"event":"deploy",...} with "state"
+accepted, succeeded or failed (with a "reason") for a deploy from hPanel, and
+{"event":"ended",...}, which carries a "message" when the Preview failed. Logs go to
+stderr.
 
 Exit codes: 0 when stopped or expired, 2 for a usage error such as a refused port, 77
 when no account is signed in or the service refuses it, 78 when the Preview was taken
@@ -63,11 +75,12 @@ hostinger preview [port] [flags]
 ### Options
 
 ```
-  -h, --help[=true|false]    help for preview
-      --host-header string   Host header sent to the server (default: the Preview's host name; prefer allowing .hostingerpreview.com in the dev server)
-      --json[=true|false]    Print one JSON object per event on stdout
-      --ttl string           How long the Preview lasts, from 1h to 7d (e.g. 90m, 12h, 3d) (default "24h")
-      --url string           Share this origin instead of a local port, e.g. http://192.168.1.20:8080 (http or https)
+  -h, --help[=true|false]               help for preview
+      --host-header string              Host header sent to the server (default: the Preview's host name; prefer allowing .hostingerpreview.com in the dev server)
+      --json[=true|false]               Print one JSON object per event on stdout
+      --no-remote-deploy[=true|false]   Never deploy this folder when asked from hPanel
+      --ttl string                      How long the Preview lasts, from 1h to 7d (e.g. 90m, 12h, 3d) (default "24h")
+      --url string                      Share this origin instead of a local port, e.g. http://192.168.1.20:8080 (http or https)
 ```
 
 ### Options inherited from parent commands

@@ -106,9 +106,8 @@ type Manager struct {
 	DrainTimeout time.Duration
 	// RevokedHint ends the "tunnel revoked" log line.
 	RevokedHint string
-	// OwnerTicket and OwnerAbsent go out in every hello answer (h2srv.Options).
-	OwnerTicket string
-	OwnerAbsent string
+	// Caller goes to every session; its commands carry the PoP of the session.
+	Caller h2srv.Caller
 
 	initOnce   sync.Once
 	ctrl       *Controller
@@ -370,6 +369,13 @@ func (m *Manager) connectedPops(with string) []string {
 }
 
 func (m *Manager) sessionOptions(sup *Supervisor, _ int, conn *Conn) h2srv.Options {
+	caller := m.Caller
+	if on := caller.OnCommand; on != nil {
+		caller.OnCommand = func(ctx context.Context, c h2srv.Command) error {
+			c.Pop = sup.Pop
+			return on(ctx, c)
+		}
+	}
 	return h2srv.Options{
 		Handler:       m.Handler,
 		Version:       m.Version,
@@ -379,8 +385,7 @@ func (m *Manager) sessionOptions(sup *Supervisor, _ int, conn *Conn) h2srv.Optio
 		Log:           m.Log.With("pop", sup.Pop),
 		// Never below the h2srv default: other drains (pop removal, rotation) keep their budget.
 		DrainTimeout: max(m.drainTimeout(), drainBudget),
-		OwnerTicket:  m.OwnerTicket,
-		OwnerAbsent:  m.OwnerAbsent,
+		Caller:       caller,
 		OnHello: func(h h2srv.Hello) {
 			m.noteHello(sup.Pop, h)
 			if h.PopsGen != "" {

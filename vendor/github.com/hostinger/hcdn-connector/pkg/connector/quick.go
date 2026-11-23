@@ -132,6 +132,8 @@ type QuickOptions struct {
 	// session is ready on an edge that advertises it (Options.VisibleWait).
 	// 0: DefaultVisibleWait.
 	VisibleWait time.Duration
+	// AppMeta goes out in every hello answer (Options.AppMeta).
+	AppMeta string
 	// OnReady runs once, from the RunQuick goroutine, when the tunnel is
 	// reachable or after ReadyTimeout; RunQuick keeps running the sessions
 	// meanwhile. It does not run when the run ends first, for example on a
@@ -140,6 +142,8 @@ type QuickOptions struct {
 	// OnReachable runs once, from the RunQuick goroutine, when the tunnel
 	// becomes reachable after an OnReady with Reachable false.
 	OnReachable func(QuickTunnel)
+	// OnCommand handles the commands the edge relays (Options.OnCommand).
+	OnCommand CommandFunc
 	// OnPause runs once per cap_exceeded pause (one call when several PoPs
 	// pause until the same time), from another goroutine. It may run before
 	// OnReady. No call follows the return of RunQuick.
@@ -174,6 +178,9 @@ const quickWhoamiTimeout = 20 * time.Second
 func RunQuick(ctx context.Context, o QuickOptions) (expired bool, err error) {
 	if o.URL == "" {
 		return false, errors.New("connector: QuickOptions.URL is required")
+	}
+	if err := checkAppMeta("QuickOptions.AppMeta", o.AppMeta); err != nil {
+		return false, err
 	}
 	if err := localguard.CheckContext(ctx, o.URL); err != nil {
 		return false, err
@@ -251,6 +258,7 @@ func RunQuick(ctx context.Context, o QuickOptions) (expired bool, err error) {
 	conn, err := New(Options{
 		Config: cfg, Credentials: store, Version: o.Version, Log: log,
 		Hints: &Hints{Revoked: "This tunnel was taken down."}, Owner: link, VisibleWait: o.VisibleWait,
+		AppMeta: o.AppMeta, OnCommand: o.OnCommand,
 	})
 	if err != nil {
 		return false, err

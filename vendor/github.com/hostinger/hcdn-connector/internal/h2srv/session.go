@@ -1,12 +1,13 @@
 // Package h2srv serves reverse HTTP/2 on a dialed connection: the edge is
-// the h2 client, the connector the server. It owns the hello, goaway and
-// visible control routes and the per-session request checks.
+// the h2 client, the connector the server. It owns the hello, goaway,
+// visible and command control routes and the per-session request checks.
 package h2srv
 
 import (
 	"context"
 	"errors"
 	"fmt"
+	"io"
 	"log/slog"
 	"net"
 	"net/http"
@@ -54,6 +55,46 @@ type Visible struct {
 	At       time.Time
 }
 
+// Command is a command control request (docs/protocol.md section 11).
+type Command struct {
+	// Body is the request body as the edge relayed it, at most
+	// proto.MaxCommandBytes. The connector does not parse it.
+	Body []byte
+	// Pop is the PoP the connector dialed for this session (set by the
+	// session's owner); EdgeNode is the edge node from the hello.
+	Pop      string
+	EdgeNode string
+}
+
+// CommandError refuses a command: Status (400 to 499, else 400) and Code in
+// hcdn-error (lower-case letters, digits and _, at most
+// proto.MaxErrorCodeBytes, else proto.ErrRefused).
+type CommandError struct {
+	Status int
+	Code   string
+}
+
+func (e *CommandError) Error() string {
+	return fmt.Sprintf("command refused: %d %s", e.Status, e.Code)
+}
+
+// Caller holds what the program running the connector gives every session.
+type Caller struct {
+	// OwnerTicket goes out in every hello answer as hcdn-owner-ticket. Without
+	// one, OwnerAbsent goes out as hcdn-owner-absent ("": not_requested).
+	OwnerTicket string
+	OwnerAbsent string
+	// AppMeta goes out in every hello answer as hcdn-app-meta ("": none).
+	AppMeta string
+	// OnCommand answers a command control request: nil accepts it (202), a
+	// *CommandError refuses it with its status and code, any other error
+	// with 400 and proto.ErrRefused. It adds command to hcdn-features.
+	// nil: no command feature, and the route answers 404. Its ctx is the
+	// request's: it ends when OnCommand returns, the edge drops the request,
+	// or the session closes.
+	OnCommand func(context.Context, Command) error
+}
+
 // Goaway is a decoded goaway control request.
 type Goaway struct {
 	Reason     string
@@ -78,10 +119,7 @@ type Options struct {
 	ReadIdle       time.Duration
 	DrainTimeout   time.Duration
 	MaxInflightDef int
-	// OwnerTicket goes out in every hello answer as hcdn-owner-ticket. Without
-	// one, OwnerAbsent goes out as hcdn-owner-absent ("": not_requested).
-	OwnerTicket string
-	OwnerAbsent string
+	Caller
 }
 
 // Session is one reverse-h2 connection to an edge node.
@@ -233,21 +271,18 @@ func (s *Session) LastGoaway() *Goaway {
 
 // ServeHTTP matches control routes on path first; a control path that carries
 // hcdn-request-id is a relayed visitor request and gets 404, never proxied.
+// A control route takes POST only.
 func (s *Session) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodConnect && isControlPath(r.URL.Path) {
-		if r.Header.Get(proto.HdrRequestID) != "" {
+	if serve := s.controlRoute(r); serve != nil {
+		switch {
+		case r.Header.Get(proto.HdrRequestID) != "":
 			w.Header().Set("Content-Length", "0")
 			w.WriteHeader(http.StatusNotFound)
 			s.report("rejected")
-			return
-		}
-		switch r.URL.Path {
-		case proto.PathHello:
-			s.serveHello(w, r)
-		case proto.PathGoaway:
-			s.serveGoaway(w, r)
+		case r.Method != http.MethodPost:
+			w.WriteHeader(http.StatusMethodNotAllowed)
 		default:
-			s.serveVisible(w, r)
+			serve(w, r)
 		}
 		return
 	}
@@ -267,8 +302,22 @@ func (s *Session) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	s.opts.Handler.ServeHTTP(w, r)
 }
 
-func isControlPath(p string) bool {
-	return p == proto.PathHello || p == proto.PathGoaway || p == proto.PathVisible
+// controlRoute returns the handler of a control route, or nil.
+func (s *Session) controlRoute(r *http.Request) http.HandlerFunc {
+	if r.Method == http.MethodConnect {
+		return nil
+	}
+	switch r.URL.Path {
+	case proto.PathHello:
+		return s.serveHello
+	case proto.PathGoaway:
+		return s.serveGoaway
+	case proto.PathVisible:
+		return s.serveVisible
+	case proto.PathCommand:
+		return s.serveCommand
+	}
+	return nil
 }
 
 func (s *Session) report(result string) {
@@ -278,10 +327,6 @@ func (s *Session) report(result string) {
 }
 
 func (s *Session) serveHello(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		w.WriteHeader(http.StatusMethodNotAllowed)
-		return
-	}
 	if r.Header.Get(proto.HdrProtocol) != proto.Version {
 		s.rejectHello(w, "unsupported hcdn-protocol")
 		return
@@ -315,7 +360,11 @@ func (s *Session) serveHello(w http.ResponseWriter, r *http.Request) {
 	out := w.Header()
 	out.Set(proto.HdrConnVersion, s.opts.Version)
 	out.Set(proto.HdrConnID, s.opts.ConnectorID)
-	out.Set(proto.HdrFeatures, proto.Features)
+	features := proto.Features
+	if s.opts.OnCommand != nil {
+		features += "," + proto.FeatureCommand
+	}
+	out.Set(proto.HdrFeatures, features)
 	if pops := s.opts.ConnectedPops(); len(pops) > 0 {
 		out.Set(proto.HdrConnectedPops, strings.Join(pops, ","))
 	}
@@ -324,6 +373,9 @@ func (s *Session) serveHello(w http.ResponseWriter, r *http.Request) {
 		out.Set(proto.HdrOwnerTicket, s.opts.OwnerTicket)
 	} else {
 		out.Set(proto.HdrOwnerAbsent, s.opts.OwnerAbsent)
+	}
+	if s.opts.AppMeta != "" {
+		out.Set(proto.HdrAppMeta, s.opts.AppMeta)
 	}
 	out.Set("Content-Length", "0")
 	w.WriteHeader(http.StatusOK)
@@ -344,10 +396,6 @@ func (s *Session) rejectHello(w http.ResponseWriter, why string) {
 }
 
 func (s *Session) serveGoaway(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		w.WriteHeader(http.StatusMethodNotAllowed)
-		return
-	}
 	g := Goaway{Reason: strings.ToLower(r.Header.Get(proto.HdrReason))}
 	if !proto.KnownReasons[g.Reason] {
 		s.opts.Log.Warn("goaway with unknown reason; treating as protocol_error")
@@ -376,10 +424,6 @@ func (s *Session) serveGoaway(w http.ResponseWriter, r *http.Request) {
 // the first valid request of a session reaches OnVisible; a repeat gets 204
 // too, so a retrying edge never sees an error.
 func (s *Session) serveVisible(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		w.WriteHeader(http.StatusMethodNotAllowed)
-		return
-	}
 	h := s.hello.Load()
 	scope := strings.ToLower(strings.TrimSpace(r.Header.Get(proto.HdrVisibleScope)))
 	if h == nil || (scope != proto.VisibleScopePop && scope != proto.VisibleScopeNode) {
@@ -400,6 +444,72 @@ func (s *Session) serveVisible(w http.ResponseWriter, r *http.Request) {
 	if first && s.opts.OnVisible != nil {
 		s.opts.OnVisible(Visible{Scope: scope, EdgeNode: h.EdgeNode, At: time.Now()})
 	}
+}
+
+// serveCommand hands the body of a command to OnCommand and answers with its
+// verdict (commandAnswer). Without OnCommand the route answers 404; a command
+// before the hello, or with a body over proto.MaxCommandBytes or unreadable,
+// never reaches it.
+func (s *Session) serveCommand(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Length", "0")
+	if s.opts.OnCommand == nil {
+		w.WriteHeader(http.StatusNotFound)
+		return
+	}
+	h := s.hello.Load()
+	if h == nil {
+		s.opts.Log.Warn("command before hello; ignored")
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	body, err := io.ReadAll(http.MaxBytesReader(w, r.Body, proto.MaxCommandBytes))
+	if err != nil {
+		var tooLarge *http.MaxBytesError
+		if errors.As(err, &tooLarge) {
+			s.opts.Log.Warn("command over the size cap; ignored")
+			w.WriteHeader(http.StatusRequestEntityTooLarge)
+		} else {
+			w.WriteHeader(http.StatusBadRequest)
+		}
+		return
+	}
+	status, code := commandAnswer(s.opts.OnCommand(r.Context(), Command{Body: body, EdgeNode: h.EdgeNode}))
+	if code != "" {
+		w.Header().Set(proto.HdrError, code)
+	}
+	w.WriteHeader(status)
+}
+
+// commandAnswer maps an OnCommand result to the status and hcdn-error of the
+// answer: 202 and none, or a 4xx and a valid reason.
+func commandAnswer(err error) (status int, code string) {
+	if err == nil {
+		return http.StatusAccepted, ""
+	}
+	var ce *CommandError
+	if !errors.As(err, &ce) {
+		return http.StatusBadRequest, proto.ErrRefused
+	}
+	status, code = ce.Status, ce.Code
+	if status < 400 || status > 499 {
+		status = http.StatusBadRequest
+	}
+	if !isErrCode(code) {
+		code = proto.ErrRefused
+	}
+	return status, code
+}
+
+func isErrCode(s string) bool {
+	if s == "" || len(s) > proto.MaxErrorCodeBytes {
+		return false
+	}
+	for _, c := range []byte(s) {
+		if (c < 'a' || c > 'z') && (c < '0' || c > '9') && c != '_' {
+			return false
+		}
+	}
+	return true
 }
 
 // parseFeatures splits comma lists, trims and lower-cases each item, and

@@ -56,7 +56,7 @@ func resolveWebsite(ctx context.Context, a API, ui UI, opts Options, project *si
 	step := ui.Start("Looking up your websites")
 	sites, err := a.ListWebsites(ctx, "")
 	if err != nil {
-		step.Fail("Could not list your websites")
+		step.Fail(failText(ctx, "Could not list your websites"))
 		return nil, false, err
 	}
 	if len(sites) == 0 {
@@ -239,7 +239,7 @@ func createWebsite(ctx context.Context, a API, ui UI, opts Options, domain strin
 	}
 	setup, err := a.StartSetup(ctx, orderID, domain, datacenter, setupType)
 	if err != nil {
-		step.Fail("Could not create website")
+		step.Fail(failText(ctx, "Could not create website"))
 		var apiErr *api.Error
 		if errors.As(err, &apiErr) && apiErr.Status == 404 {
 			return nil, fmt.Errorf("hosting order %d was not found on this account (`hostinger hosting orders list` shows them)", orderID)
@@ -303,7 +303,7 @@ func chooseDatacenter(ctx context.Context, a API, ui UI, opts Options, orderID i
 	step := ui.Start("Checking the plan")
 	sites, err := a.ListWebsites(ctx, "")
 	if err != nil {
-		step.Fail("Could not list your websites")
+		step.Fail(failText(ctx, "Could not list your websites"))
 		return "", err
 	}
 	for _, s := range sites {
@@ -408,6 +408,9 @@ func confirmOverwrite(ctx context.Context, a API, ui UI, w *site.Website, opts O
 	case typ == WordPressSite:
 		kept = ", along with its database"
 	}
+	if opts.Remote && !opts.Yes && has {
+		return &RefusedError{Reason: ReasonWouldOverwrite, Message: w.Domain + " already has " + what + ", which this deploy replaces" + kept}
+	}
 	if opts.Yes {
 		switch {
 		case checkErr != nil:
@@ -461,6 +464,8 @@ func confirmStaticOverApp(ui UI, w *site.Website, opts Options) error {
 	msg := w.Domain + " runs a Node.js app. A static deploy only adds files to its document root: " +
 		"the app keeps running and still answers every path that is not one of those files"
 	switch {
+	case opts.Remote:
+		return &RefusedError{Reason: ReasonUnsupportedType, Message: msg + ", so static files are only deployed onto it from the terminal"}
 	case opts.Yes || opts.DryRun:
 		ui.Info(msg + ".")
 		return nil

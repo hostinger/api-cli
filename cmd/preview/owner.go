@@ -57,6 +57,9 @@ type OwnerOptions struct {
 	Token      TokenSource  // credentials; see CLIToken
 	HTTPClient *http.Client // nil means a plain http.Client
 	UserAgent  string
+	// OnTicket, when set, gets the owner's client id and the command keys of
+	// every ticket fetched.
+	OnTicket func(clientID string, keys []CommandKey)
 }
 
 // DefaultOwnerOptions builds the options from the CLI configuration: the
@@ -134,9 +137,10 @@ type ownerTicketRequest struct {
 // ownerTicketResponse is public-api's 201 body. public-api resources are not
 // wrapped in a "data" envelope (JsonResource::withoutWrapping).
 type ownerTicketResponse struct {
-	Ticket    string `json:"ticket"`
-	ExpiresAt string `json:"expires_at"`
-	ClientID  string `json:"client_id"`
+	Ticket      string       `json:"ticket"`
+	ExpiresAt   string       `json:"expires_at"`
+	ClientID    string       `json:"client_id"`
+	CommandKeys []CommandKey `json:"command_keys"`
 }
 
 func (o OwnerOptions) fetch(ctx context.Context, token, tunnelID string, notAfter time.Time) (string, error) {
@@ -185,6 +189,9 @@ func (o OwnerOptions) fetch(ctx context.Context, token, tunnelID string, notAfte
 	}
 	if out.Ticket == "" {
 		return "", errors.New("owner ticket: response has no ticket")
+	}
+	if o.OnTicket != nil {
+		o.OnTicket(out.ClientID, out.CommandKeys)
 	}
 	return out.Ticket, nil
 }

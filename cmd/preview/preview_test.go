@@ -5,7 +5,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"path/filepath"
 	"reflect"
+	"runtime"
 	"strings"
 	"testing"
 	"time"
@@ -29,6 +31,9 @@ func execute(t *testing.T, fake func(context.Context, connector.QuickOptions) (b
 	isInteractive := testInteractive
 	if !sourcesStubbed {
 		stubSources(t, "test-token", &fakeOAuth{}, nil)
+	}
+	if !projectStubbed {
+		inProject(t, t.TempDir()) // never the test's own folder
 	}
 	interactive = func(*cobra.Command) bool { return isInteractive }
 	runQuick = func(ctx context.Context, o connector.QuickOptions) (bool, error) {
@@ -322,13 +327,12 @@ func TestPreviewSignInFails(t *testing.T) {
 // Ctrl+C during the sign-in stops the run with exit 0, as it would a
 // Preview, and names the API token as the way around the browser.
 func TestPreviewSignInCanceled(t *testing.T) {
-	oauth := fakeOAuth{err: api.ErrNotSignedIn, loginErr: context.Canceled}
+	if runtime.GOOS == "windows" {
+		t.Skip("sends itself SIGINT")
+	}
+	oauth := fakeOAuth{err: api.ErrNotSignedIn, interrupt: true}
 	stubSources(t, "", &oauth, nil)
 	asPerson(t)
-	ctx, cancel := context.WithCancel(context.Background())
-	cancel()
-	Cmd.SetContext(ctx)
-	t.Cleanup(func() { Cmd.SetContext(context.Background()) })
 	_, stderr, code, got := execute(t, nil, nil, "3000")
 	const want = "Sign-in canceled. To skip the browser, set HOSTINGER_API_TOKEN\n"
 	if code != 0 || got != nil || oauth.logins != 1 || !strings.HasSuffix(stderr, want) {
@@ -488,5 +492,53 @@ func TestTTLHelpMatchesTheConnector(t *testing.T) {
 	}
 	if u := Cmd.Flags().Lookup("ttl").Usage; !strings.Contains(u, "from "+span) {
 		t.Errorf("--ttl usage %q does not say %q", u, span)
+	}
+}
+
+func TestPreviewTakesRemoteDeploys(t *testing.T) {
+	dir := nodeFolder(t)
+	inProject(t, dir)
+	_, _, code, got := execute(t, nil, nil, "3000")
+	if code != 0 || got.OnCommand == nil {
+		t.Fatalf("exit %d, OnCommand set: %v", code, got != nil && got.OnCommand != nil)
+	}
+	if want := `{"type":"nodejs","folder":"` + filepath.Base(dir) + `"}`; got.AppMeta != want {
+		t.Errorf("AppMeta = %s, want %s", got.AppMeta, want)
+	}
+	for _, args := range [][]string{
+		{"3000", "--no-remote-deploy"},
+		{"--url", "http://localhost:3000"}, // shares an origin, not this folder
+		{"3000", "--no-owner"},             // no keys to check a command with
+	} {
+		_, _, _, got := execute(t, nil, nil, args...)
+		if got.OnCommand != nil || got.AppMeta != "" {
+			t.Errorf("%v: OnCommand set, AppMeta %q", args, got.AppMeta)
+		}
+	}
+}
+
+func TestPreviewOutsideAProjectTakesNoRemoteDeploys(t *testing.T) {
+	_, _, _, got := execute(t, nil, nil, "3000")
+	if got.OnCommand != nil || got.AppMeta != "" {
+		t.Errorf("OnCommand set, AppMeta %q", got.AppMeta)
+	}
+}
+
+// The root command cancels its context on the first Ctrl+C; the Preview
+// handles its stop signals itself, so a Ctrl+C that cancels a deploy from
+// hPanel leaves it running.
+func TestPreviewOutlivesTheRootCommandsInterrupt(t *testing.T) {
+	root, cancel := context.WithCancel(context.Background())
+	cancel()
+	Cmd.SetContext(root)
+	t.Cleanup(func() { Cmd.SetContext(context.Background()) })
+	_, _, code, _ := execute(t, func(ctx context.Context, _ connector.QuickOptions) (bool, error) {
+		if ctx.Err() != nil {
+			t.Error("the root command's interrupt ended the Preview")
+		}
+		return false, nil
+	}, nil, "3000")
+	if code != 0 {
+		t.Errorf("exit %d", code)
 	}
 }

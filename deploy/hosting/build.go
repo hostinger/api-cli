@@ -133,7 +133,7 @@ func startAndWait(ctx context.Context, a API, ui UI, w *site.Website, start func
 	step := ui.Start("Starting build")
 	build, err := start(settings)
 	if err != nil {
-		step.Fail("Could not start build")
+		step.Fail(failText(ctx, "Could not start build"))
 		return Build{}, err
 	}
 	if noWait {
