@@ -1084,6 +1084,11 @@
     "method": "POST",
     "path": "/api/horizons/v1/websites/{websiteId}/messages"
   },
+  "horizons_getWebsiteBuildTaskV1": {
+    "command": "hostinger horizons websites build-task",
+    "method": "GET",
+    "path": "/api/horizons/v1/websites/{websiteId}/tasks/{taskId}"
+  },
   "horizons_getWebsiteListV1": {
     "command": "hostinger horizons websites list",
     "method": "GET",

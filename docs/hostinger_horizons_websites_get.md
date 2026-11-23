@@ -10,6 +10,8 @@ website URL before or after editing it.\n
 `is_in_progress` is true while changes are being generated or the website is being published;
 wait until it is false before publishing. `is_generating` is true while changes are being generated,
 and `actions_in_progress` has `website_publish` while the website is being published.
+`is_generating` turns false whether the build completed or failed: use the `Get website build task`
+tool to learn its outcome.
 `published_at` is when the website was last published,
 `is_template` is whether its published pages show the "Use template" banner, and
 `has_ecommerce_store` is whether it has an online store.\n

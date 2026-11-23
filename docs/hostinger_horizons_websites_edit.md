@@ -6,8 +6,10 @@ Edit website
 
 Edit an existing Hostinger AI Builder website with a follow-up message.\n
 Use this tool when the user wants to change, extend or fix a website that already exists.\n
-This tool queues the requested changes and returns the website URL and ID.
-The changes are applied asynchronously.\n
+This tool queues the requested changes and returns the website URL, ID and build `task`.
+The changes are applied asynchronously. To learn whether they were applied, poll the
+`Get website build task` tool with `task.id`; `is_generating` turning false on `Get website`
+happens whether the build completed or failed.\n
 After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 that Hostinger AI Builder is now applying the requested changes and they will be ready
 in a few minutes, and you should provide the website URL to the user immediately.

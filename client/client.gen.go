@@ -1635,6 +1635,60 @@ func (e GPUV1LlmModelVariantLlmModelVariantResourceCapabilities) Valid() bool {
 	}
 }
 
+// Defines values for HorizonsV1WebsitesBuildTaskResourceReasonCode.
+const (
+	ExecutionError      HorizonsV1WebsitesBuildTaskResourceReasonCode = "execution_error"
+	InsufficientCredits HorizonsV1WebsitesBuildTaskResourceReasonCode = "insufficient_credits"
+	IterationLimit      HorizonsV1WebsitesBuildTaskResourceReasonCode = "iteration_limit"
+	MissingResult       HorizonsV1WebsitesBuildTaskResourceReasonCode = "missing_result"
+)
+
+// Valid indicates whether the value is a known member of the HorizonsV1WebsitesBuildTaskResourceReasonCode enum.
+func (e HorizonsV1WebsitesBuildTaskResourceReasonCode) Valid() bool {
+	switch e {
+	case ExecutionError:
+		return true
+	case InsufficientCredits:
+		return true
+	case IterationLimit:
+		return true
+	case MissingResult:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for HorizonsV1WebsitesBuildTaskResourceState.
+const (
+	TASKSTATECANCELED  HorizonsV1WebsitesBuildTaskResourceState = "TASK_STATE_CANCELED"
+	TASKSTATECOMPLETED HorizonsV1WebsitesBuildTaskResourceState = "TASK_STATE_COMPLETED"
+	TASKSTATEFAILED    HorizonsV1WebsitesBuildTaskResourceState = "TASK_STATE_FAILED"
+	TASKSTATEREJECTED  HorizonsV1WebsitesBuildTaskResourceState = "TASK_STATE_REJECTED"
+	TASKSTATESUBMITTED HorizonsV1WebsitesBuildTaskResourceState = "TASK_STATE_SUBMITTED"
+	TASKSTATEWORKING   HorizonsV1WebsitesBuildTaskResourceState = "TASK_STATE_WORKING"
+)
+
+// Valid indicates whether the value is a known member of the HorizonsV1WebsitesBuildTaskResourceState enum.
+func (e HorizonsV1WebsitesBuildTaskResourceState) Valid() bool {
+	switch e {
+	case TASKSTATECANCELED:
+		return true
+	case TASKSTATECOMPLETED:
+		return true
+	case TASKSTATEFAILED:
+		return true
+	case TASKSTATEREJECTED:
+		return true
+	case TASKSTATESUBMITTED:
+		return true
+	case TASKSTATEWORKING:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for HorizonsV1WebsitesCreateWebsiteRequestMessageType.
 const (
 	HorizonsV1WebsitesCreateWebsiteRequestMessageTypeText HorizonsV1WebsitesCreateWebsiteRequestMessageType = "text"
@@ -11882,6 +11936,60 @@ type GPUV1SshKeySshKeyResource struct {
 	PublicKey *string `json:"public_key,omitempty"`
 }
 
+// HorizonsV1WebsitesBuildTaskResource defines model for Horizons.V1.Websites.BuildTaskResource.
+type HorizonsV1WebsitesBuildTaskResource struct {
+	// Id The build task ID, used with the `Get website build task` tool
+	//
+	// Example: 223e4567-e89b-12d3-a456-426614174000
+	Id string `json:"id"`
+
+	// Message Guidance to tell the user about the build outcome, or null
+	//
+	// Example: You have run out of credits. Top up to continue building.
+	Message *string `json:"message,omitempty"`
+
+	// ReasonCode Why the build stopped, or null. `insufficient_credits`: the user has no credits left;
+	// `execution_error` or `missing_result`: the build broke; `iteration_limit`: the build stopped early
+	// and kept the work done so far.
+	//
+	// Example: insufficient_credits
+	ReasonCode *HorizonsV1WebsitesBuildTaskResourceReasonCode `json:"reason_code,omitempty"`
+
+	// State The build state. `TASK_STATE_SUBMITTED` and `TASK_STATE_WORKING` mean the build is still running.
+	// `TASK_STATE_COMPLETED` means it finished. `TASK_STATE_FAILED` means it broke, and
+	// `TASK_STATE_REJECTED` means it never started: the website does not contain the requested changes.
+	// `TASK_STATE_CANCELED` means the user stopped it; changes made before that may be kept.
+	//
+	// Example: TASK_STATE_WORKING
+	State HorizonsV1WebsitesBuildTaskResourceState `json:"state"`
+
+	// Summary An internal changelog entry describing what the build changed, or null until the build ends.
+	// Rewrite it in plain language before showing it to the user.
+	//
+	// Example: Added a contact form to the homepage.
+	Summary *string `json:"summary,omitempty"`
+
+	// UpdatedAt When the build last changed state
+	//
+	// Example: 2026-11-23T10:00:00Z
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+}
+
+// HorizonsV1WebsitesBuildTaskResourceReasonCode Why the build stopped, or null. `insufficient_credits`: the user has no credits left;
+// `execution_error` or `missing_result`: the build broke; `iteration_limit`: the build stopped early
+// and kept the work done so far.
+//
+// Example: insufficient_credits
+type HorizonsV1WebsitesBuildTaskResourceReasonCode string
+
+// HorizonsV1WebsitesBuildTaskResourceState The build state. `TASK_STATE_SUBMITTED` and `TASK_STATE_WORKING` mean the build is still running.
+// `TASK_STATE_COMPLETED` means it finished. `TASK_STATE_FAILED` means it broke, and
+// `TASK_STATE_REJECTED` means it never started: the website does not contain the requested changes.
+// `TASK_STATE_CANCELED` means the user stopped it; changes made before that may be kept.
+//
+// Example: TASK_STATE_WORKING
+type HorizonsV1WebsitesBuildTaskResourceState string
+
 // HorizonsV1WebsitesCreateWebsiteRequest defines model for Horizons.V1.Websites.CreateWebsiteRequest.
 type HorizonsV1WebsitesCreateWebsiteRequest struct {
 	Message []struct {
@@ -11902,6 +12010,10 @@ type HorizonsV1WebsitesCreateWebsiteRequestMessageType string
 
 // HorizonsV1WebsitesCreatedWebsiteResource defines model for Horizons.V1.Websites.CreatedWebsiteResource.
 type HorizonsV1WebsitesCreatedWebsiteResource struct {
+	// Task The build this call started. Poll it with the `Get website build task` tool to learn whether
+	// the build completed or failed. Null when the call started no build.
+	Task *HorizonsV1WebsitesCreatedWebsiteResource_Task `json:"task,omitempty"`
+
 	// WebsiteId The website ID
 	//
 	// Example: 123e4567-e89b-12d3-a456-426614174000
@@ -11911,6 +12023,12 @@ type HorizonsV1WebsitesCreatedWebsiteResource struct {
 	//
 	// Example: https://ai-builder.hostinger.com/123e4567-e89b-12d3-a456-426614174000?location=chatgpt
 	WebsiteUrl string `json:"website_url"`
+}
+
+// HorizonsV1WebsitesCreatedWebsiteResource_Task The build this call started. Poll it with the `Get website build task` tool to learn whether
+// the build completed or failed. Null when the call started no build.
+type HorizonsV1WebsitesCreatedWebsiteResource_Task struct {
+	union json.RawMessage
 }
 
 // HorizonsV1WebsitesEditWebsiteRequest defines model for Horizons.V1.Websites.EditWebsiteRequest.
@@ -19736,6 +19854,9 @@ type SubscriptionStatus string
 // TagUuid Example: 550e8400-e29b-41d4-a716-446655440000
 type TagUuid = openapi_types.UUID
 
+// TaskIdPath Example: 223e4567-e89b-12d3-a456-426614174000
+type TaskIdPath = string
+
 // TemplateId Example: 2868928
 type TemplateId = int
 
@@ -21920,6 +22041,42 @@ func (t GPUV1PoolPoolResource_Region) MarshalJSON() ([]byte, error) {
 }
 
 func (t *GPUV1PoolPoolResource_Region) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsHorizonsV1WebsitesBuildTaskResource returns the union data inside the HorizonsV1WebsitesCreatedWebsiteResource_Task as a HorizonsV1WebsitesBuildTaskResource
+func (t HorizonsV1WebsitesCreatedWebsiteResource_Task) AsHorizonsV1WebsitesBuildTaskResource() (HorizonsV1WebsitesBuildTaskResource, error) {
+	var body HorizonsV1WebsitesBuildTaskResource
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromHorizonsV1WebsitesBuildTaskResource overwrites any union data inside the HorizonsV1WebsitesCreatedWebsiteResource_Task as the provided HorizonsV1WebsitesBuildTaskResource
+func (t *HorizonsV1WebsitesCreatedWebsiteResource_Task) FromHorizonsV1WebsitesBuildTaskResource(v HorizonsV1WebsitesBuildTaskResource) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeHorizonsV1WebsitesBuildTaskResource performs a merge with any union data inside the HorizonsV1WebsitesCreatedWebsiteResource_Task, using the provided HorizonsV1WebsitesBuildTaskResource
+func (t *HorizonsV1WebsitesCreatedWebsiteResource_Task) MergeHorizonsV1WebsitesBuildTaskResource(v HorizonsV1WebsitesBuildTaskResource) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t HorizonsV1WebsitesCreatedWebsiteResource_Task) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *HorizonsV1WebsitesCreatedWebsiteResource_Task) UnmarshalJSON(b []byte) error {
 	err := t.union.UnmarshalJSON(b)
 	return err
 }
@@ -25391,8 +25548,10 @@ type ClientInterface interface {
 	// Create new Hostinger AI Builder website from the given message.\n
 	// Use this tool when user asks you to create a website, landing page, blog
 	// or any other type of application.\n
-	// This tool initiates the website creation process and returns a website URL and ID.
-	// The generation happens asynchronously.\n
+	// This tool initiates the website creation process and returns a website URL, ID and build `task`.
+	// The generation happens asynchronously. To learn whether it succeeded, poll the
+	// `Get website build task` tool with `task.id`; `is_generating` turning false on `Get website`
+	// happens whether the build completed or failed.\n
 	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 	// that Hostinger AI Builder is now creating their website and it will be ready in a few minutes
 	// and you should provide the website URL to the user immediately
@@ -25434,8 +25593,10 @@ type ClientInterface interface {
 	// Create new Hostinger AI Builder website from the given message.\n
 	// Use this tool when user asks you to create a website, landing page, blog
 	// or any other type of application.\n
-	// This tool initiates the website creation process and returns a website URL and ID.
-	// The generation happens asynchronously.\n
+	// This tool initiates the website creation process and returns a website URL, ID and build `task`.
+	// The generation happens asynchronously. To learn whether it succeeded, poll the
+	// `Get website build task` tool with `task.id`; `is_generating` turning false on `Get website`
+	// happens whether the build completed or failed.\n
 	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 	// that Hostinger AI Builder is now creating their website and it will be ready in a few minutes
 	// and you should provide the website URL to the user immediately
@@ -25480,6 +25641,8 @@ type ClientInterface interface {
 	// `is_in_progress` is true while changes are being generated or the website is being published;
 	// wait until it is false before publishing. `is_generating` is true while changes are being generated,
 	// and `actions_in_progress` has `website_publish` while the website is being published.
+	// `is_generating` turns false whether the build completed or failed: use the `Get website build task`
+	// tool to learn its outcome.
 	// `published_at` is when the website was last published,
 	// `is_template` is whether its published pages show the "Use template" banner, and
 	// `has_ecommerce_store` is whether it has an online store.\n
@@ -25506,8 +25669,10 @@ type ClientInterface interface {
 	//
 	// Edit an existing Hostinger AI Builder website with a follow-up message.\n
 	// Use this tool when the user wants to change, extend or fix a website that already exists.\n
-	// This tool queues the requested changes and returns the website URL and ID.
-	// The changes are applied asynchronously.\n
+	// This tool queues the requested changes and returns the website URL, ID and build `task`.
+	// The changes are applied asynchronously. To learn whether they were applied, poll the
+	// `Get website build task` tool with `task.id`; `is_generating` turning false on `Get website`
+	// happens whether the build completed or failed.\n
 	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 	// that Hostinger AI Builder is now applying the requested changes and they will be ready
 	// in a few minutes, and you should provide the website URL to the user immediately.
@@ -25524,8 +25689,10 @@ type ClientInterface interface {
 	//
 	// Edit an existing Hostinger AI Builder website with a follow-up message.\n
 	// Use this tool when the user wants to change, extend or fix a website that already exists.\n
-	// This tool queues the requested changes and returns the website URL and ID.
-	// The changes are applied asynchronously.\n
+	// This tool queues the requested changes and returns the website URL, ID and build `task`.
+	// The changes are applied asynchronously. To learn whether they were applied, poll the
+	// `Get website build task` tool with `task.id`; `is_generating` turning false on `Get website`
+	// happens whether the build completed or failed.\n
 	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 	// that Hostinger AI Builder is now applying the requested changes and they will be ready
 	// in a few minutes, and you should provide the website URL to the user immediately.
@@ -25542,6 +25709,9 @@ type ClientInterface interface {
 	//
 	// Publish a Hostinger AI Builder website so its latest changes go live.\n
 	// Use this tool when the user asks to publish, deploy or make their website live.\n
+	// If you created or edited the website in this conversation, first check its build with the
+	// `Get website build task` tool and publish only when its `state` is `TASK_STATE_COMPLETED`.
+	// After a failed build, tell the user instead of publishing.\n
 	// This tool starts the publish process and returns the URL the website will be live on.
 	// Publishing happens asynchronously and takes a few minutes.\n
 	// Set `is_template` only when the user explicitly asks to share the website as a template:
@@ -25559,6 +25729,9 @@ type ClientInterface interface {
 	//
 	// Publish a Hostinger AI Builder website so its latest changes go live.\n
 	// Use this tool when the user asks to publish, deploy or make their website live.\n
+	// If you created or edited the website in this conversation, first check its build with the
+	// `Get website build task` tool and publish only when its `state` is `TASK_STATE_COMPLETED`.
+	// After a failed build, tell the user instead of publishing.\n
 	// This tool starts the publish process and returns the URL the website will be live on.
 	// Publishing happens asynchronously and takes a few minutes.\n
 	// Set `is_template` only when the user explicitly asks to share the website as a template:
@@ -25571,6 +25744,22 @@ type ClientInterface interface {
 	//
 	// Corresponds with POST /api/horizons/v1/websites/{websiteId}/publish (the `HorizonsPublishWebsiteV1` operationId).
 	HorizonsPublishWebsiteV1(ctx context.Context, websiteId WebsiteIdPath, body HorizonsPublishWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// HorizonsGetWebsiteBuildTaskV1 Get website build task
+	//
+	// Get the state and outcome of a website build started by the `Create website` or `Edit website` tool.\n
+	// Use this tool with the `task.id` those tools return to find out whether the build completed or failed.
+	// Poll it every 30 seconds or so while `state` is `TASK_STATE_SUBMITTED` or `TASK_STATE_WORKING`.\n
+	// When `state` is `TASK_STATE_FAILED` or `TASK_STATE_REJECTED`, the website does not contain the requested
+	// changes: tell the user, using `message` and `reason_code`, and do not publish it.
+	// When `state` is `TASK_STATE_CANCELED`, the user stopped the build and changes made before that may be kept:
+	// publish only if the user asks to.
+	// `reason_code` `insufficient_credits` means the user must get more credits before building again.\n
+	// When `state` is `TASK_STATE_COMPLETED`, the website can be published. A `reason_code` of
+	// `iteration_limit` on a completed build means it stopped early and kept the work done so far.
+	//
+	// Corresponds with GET /api/horizons/v1/websites/{websiteId}/tasks/{taskId} (the `HorizonsGetWebsiteBuildTaskV1` operationId).
+	HorizonsGetWebsiteBuildTaskV1(ctx context.Context, websiteId WebsiteIdPath, taskId TaskIdPath, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// HostingListAccountCronJobsV1 List account cron jobs
 	//
@@ -35942,8 +36131,10 @@ func (c *Client) HorizonsGetWebsiteListV1(ctx context.Context, reqEditors ...Req
 // Create new Hostinger AI Builder website from the given message.\n
 // Use this tool when user asks you to create a website, landing page, blog
 // or any other type of application.\n
-// This tool initiates the website creation process and returns a website URL and ID.
-// The generation happens asynchronously.\n
+// This tool initiates the website creation process and returns a website URL, ID and build `task`.
+// The generation happens asynchronously. To learn whether it succeeded, poll the
+// `Get website build task` tool with `task.id`; `is_generating` turning false on `Get website`
+// happens whether the build completed or failed.\n
 // After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 // that Hostinger AI Builder is now creating their website and it will be ready in a few minutes
 // and you should provide the website URL to the user immediately
@@ -35995,8 +36186,10 @@ func (c *Client) HorizonsCreateWebsiteV1WithBody(ctx context.Context, contentTyp
 // Create new Hostinger AI Builder website from the given message.\n
 // Use this tool when user asks you to create a website, landing page, blog
 // or any other type of application.\n
-// This tool initiates the website creation process and returns a website URL and ID.
-// The generation happens asynchronously.\n
+// This tool initiates the website creation process and returns a website URL, ID and build `task`.
+// The generation happens asynchronously. To learn whether it succeeded, poll the
+// `Get website build task` tool with `task.id`; `is_generating` turning false on `Get website`
+// happens whether the build completed or failed.\n
 // After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 // that Hostinger AI Builder is now creating their website and it will be ready in a few minutes
 // and you should provide the website URL to the user immediately
@@ -36051,6 +36244,8 @@ func (c *Client) HorizonsCreateWebsiteV1(ctx context.Context, body HorizonsCreat
 // `is_in_progress` is true while changes are being generated or the website is being published;
 // wait until it is false before publishing. `is_generating` is true while changes are being generated,
 // and `actions_in_progress` has `website_publish` while the website is being published.
+// `is_generating` turns false whether the build completed or failed: use the `Get website build task`
+// tool to learn its outcome.
 // `published_at` is when the website was last published,
 // `is_template` is whether its published pages show the "Use template" banner, and
 // `has_ecommerce_store` is whether it has an online store.\n
@@ -36097,8 +36292,10 @@ func (c *Client) HorizonsCloneWebsiteV1(ctx context.Context, websiteId WebsiteId
 //
 // Edit an existing Hostinger AI Builder website with a follow-up message.\n
 // Use this tool when the user wants to change, extend or fix a website that already exists.\n
-// This tool queues the requested changes and returns the website URL and ID.
-// The changes are applied asynchronously.\n
+// This tool queues the requested changes and returns the website URL, ID and build `task`.
+// The changes are applied asynchronously. To learn whether they were applied, poll the
+// `Get website build task` tool with `task.id`; `is_generating` turning false on `Get website`
+// happens whether the build completed or failed.\n
 // After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 // that Hostinger AI Builder is now applying the requested changes and they will be ready
 // in a few minutes, and you should provide the website URL to the user immediately.
@@ -36125,8 +36322,10 @@ func (c *Client) HorizonsEditWebsiteV1WithBody(ctx context.Context, websiteId We
 //
 // Edit an existing Hostinger AI Builder website with a follow-up message.\n
 // Use this tool when the user wants to change, extend or fix a website that already exists.\n
-// This tool queues the requested changes and returns the website URL and ID.
-// The changes are applied asynchronously.\n
+// This tool queues the requested changes and returns the website URL, ID and build `task`.
+// The changes are applied asynchronously. To learn whether they were applied, poll the
+// `Get website build task` tool with `task.id`; `is_generating` turning false on `Get website`
+// happens whether the build completed or failed.\n
 // After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 // that Hostinger AI Builder is now applying the requested changes and they will be ready
 // in a few minutes, and you should provide the website URL to the user immediately.
@@ -36153,6 +36352,9 @@ func (c *Client) HorizonsEditWebsiteV1(ctx context.Context, websiteId WebsiteIdP
 //
 // Publish a Hostinger AI Builder website so its latest changes go live.\n
 // Use this tool when the user asks to publish, deploy or make their website live.\n
+// If you created or edited the website in this conversation, first check its build with the
+// `Get website build task` tool and publish only when its `state` is `TASK_STATE_COMPLETED`.
+// After a failed build, tell the user instead of publishing.\n
 // This tool starts the publish process and returns the URL the website will be live on.
 // Publishing happens asynchronously and takes a few minutes.\n
 // Set `is_template` only when the user explicitly asks to share the website as a template:
@@ -36180,6 +36382,9 @@ func (c *Client) HorizonsPublishWebsiteV1WithBody(ctx context.Context, websiteId
 //
 // Publish a Hostinger AI Builder website so its latest changes go live.\n
 // Use this tool when the user asks to publish, deploy or make their website live.\n
+// If you created or edited the website in this conversation, first check its build with the
+// `Get website build task` tool and publish only when its `state` is `TASK_STATE_COMPLETED`.
+// After a failed build, tell the user instead of publishing.\n
 // This tool starts the publish process and returns the URL the website will be live on.
 // Publishing happens asynchronously and takes a few minutes.\n
 // Set `is_template` only when the user explicitly asks to share the website as a template:
@@ -36193,6 +36398,32 @@ func (c *Client) HorizonsPublishWebsiteV1WithBody(ctx context.Context, websiteId
 // Corresponds with POST /api/horizons/v1/websites/{websiteId}/publish (the `HorizonsPublishWebsiteV1` operationId).
 func (c *Client) HorizonsPublishWebsiteV1(ctx context.Context, websiteId WebsiteIdPath, body HorizonsPublishWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewHorizonsPublishWebsiteV1Request(c.Server, websiteId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// HorizonsGetWebsiteBuildTaskV1 Get website build task
+//
+// Get the state and outcome of a website build started by the `Create website` or `Edit website` tool.\n
+// Use this tool with the `task.id` those tools return to find out whether the build completed or failed.
+// Poll it every 30 seconds or so while `state` is `TASK_STATE_SUBMITTED` or `TASK_STATE_WORKING`.\n
+// When `state` is `TASK_STATE_FAILED` or `TASK_STATE_REJECTED`, the website does not contain the requested
+// changes: tell the user, using `message` and `reason_code`, and do not publish it.
+// When `state` is `TASK_STATE_CANCELED`, the user stopped the build and changes made before that may be kept:
+// publish only if the user asks to.
+// `reason_code` `insufficient_credits` means the user must get more credits before building again.\n
+// When `state` is `TASK_STATE_COMPLETED`, the website can be published. A `reason_code` of
+// `iteration_limit` on a completed build means it stopped early and kept the work done so far.
+//
+// Corresponds with GET /api/horizons/v1/websites/{websiteId}/tasks/{taskId} (the `HorizonsGetWebsiteBuildTaskV1` operationId).
+func (c *Client) HorizonsGetWebsiteBuildTaskV1(ctx context.Context, websiteId WebsiteIdPath, taskId TaskIdPath, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewHorizonsGetWebsiteBuildTaskV1Request(c.Server, websiteId, taskId)
 	if err != nil {
 		return nil, err
 	}
@@ -52677,6 +52908,47 @@ func NewHorizonsPublishWebsiteV1RequestWithBody(server string, websiteId Website
 	}
 
 	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewHorizonsGetWebsiteBuildTaskV1Request constructs an http.Request for the HorizonsGetWebsiteBuildTaskV1 method
+func NewHorizonsGetWebsiteBuildTaskV1Request(server string, websiteId WebsiteIdPath, taskId TaskIdPath) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "websiteId", websiteId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "taskId", taskId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/horizons/v1/websites/%s/tasks/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 
 	return req, nil
 }
@@ -70787,8 +71059,10 @@ type ClientWithResponsesInterface interface {
 	// Create new Hostinger AI Builder website from the given message.\n
 	// Use this tool when user asks you to create a website, landing page, blog
 	// or any other type of application.\n
-	// This tool initiates the website creation process and returns a website URL and ID.
-	// The generation happens asynchronously.\n
+	// This tool initiates the website creation process and returns a website URL, ID and build `task`.
+	// The generation happens asynchronously. To learn whether it succeeded, poll the
+	// `Get website build task` tool with `task.id`; `is_generating` turning false on `Get website`
+	// happens whether the build completed or failed.\n
 	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 	// that Hostinger AI Builder is now creating their website and it will be ready in a few minutes
 	// and you should provide the website URL to the user immediately
@@ -70830,8 +71104,10 @@ type ClientWithResponsesInterface interface {
 	// Create new Hostinger AI Builder website from the given message.\n
 	// Use this tool when user asks you to create a website, landing page, blog
 	// or any other type of application.\n
-	// This tool initiates the website creation process and returns a website URL and ID.
-	// The generation happens asynchronously.\n
+	// This tool initiates the website creation process and returns a website URL, ID and build `task`.
+	// The generation happens asynchronously. To learn whether it succeeded, poll the
+	// `Get website build task` tool with `task.id`; `is_generating` turning false on `Get website`
+	// happens whether the build completed or failed.\n
 	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 	// that Hostinger AI Builder is now creating their website and it will be ready in a few minutes
 	// and you should provide the website URL to the user immediately
@@ -70876,6 +71152,8 @@ type ClientWithResponsesInterface interface {
 	// `is_in_progress` is true while changes are being generated or the website is being published;
 	// wait until it is false before publishing. `is_generating` is true while changes are being generated,
 	// and `actions_in_progress` has `website_publish` while the website is being published.
+	// `is_generating` turns false whether the build completed or failed: use the `Get website build task`
+	// tool to learn its outcome.
 	// `published_at` is when the website was last published,
 	// `is_template` is whether its published pages show the "Use template" banner, and
 	// `has_ecommerce_store` is whether it has an online store.\n
@@ -70906,8 +71184,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Edit an existing Hostinger AI Builder website with a follow-up message.\n
 	// Use this tool when the user wants to change, extend or fix a website that already exists.\n
-	// This tool queues the requested changes and returns the website URL and ID.
-	// The changes are applied asynchronously.\n
+	// This tool queues the requested changes and returns the website URL, ID and build `task`.
+	// The changes are applied asynchronously. To learn whether they were applied, poll the
+	// `Get website build task` tool with `task.id`; `is_generating` turning false on `Get website`
+	// happens whether the build completed or failed.\n
 	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 	// that Hostinger AI Builder is now applying the requested changes and they will be ready
 	// in a few minutes, and you should provide the website URL to the user immediately.
@@ -70924,8 +71204,10 @@ type ClientWithResponsesInterface interface {
 	//
 	// Edit an existing Hostinger AI Builder website with a follow-up message.\n
 	// Use this tool when the user wants to change, extend or fix a website that already exists.\n
-	// This tool queues the requested changes and returns the website URL and ID.
-	// The changes are applied asynchronously.\n
+	// This tool queues the requested changes and returns the website URL, ID and build `task`.
+	// The changes are applied asynchronously. To learn whether they were applied, poll the
+	// `Get website build task` tool with `task.id`; `is_generating` turning false on `Get website`
+	// happens whether the build completed or failed.\n
 	// After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 	// that Hostinger AI Builder is now applying the requested changes and they will be ready
 	// in a few minutes, and you should provide the website URL to the user immediately.
@@ -70942,6 +71224,9 @@ type ClientWithResponsesInterface interface {
 	//
 	// Publish a Hostinger AI Builder website so its latest changes go live.\n
 	// Use this tool when the user asks to publish, deploy or make their website live.\n
+	// If you created or edited the website in this conversation, first check its build with the
+	// `Get website build task` tool and publish only when its `state` is `TASK_STATE_COMPLETED`.
+	// After a failed build, tell the user instead of publishing.\n
 	// This tool starts the publish process and returns the URL the website will be live on.
 	// Publishing happens asynchronously and takes a few minutes.\n
 	// Set `is_template` only when the user explicitly asks to share the website as a template:
@@ -70959,6 +71244,9 @@ type ClientWithResponsesInterface interface {
 	//
 	// Publish a Hostinger AI Builder website so its latest changes go live.\n
 	// Use this tool when the user asks to publish, deploy or make their website live.\n
+	// If you created or edited the website in this conversation, first check its build with the
+	// `Get website build task` tool and publish only when its `state` is `TASK_STATE_COMPLETED`.
+	// After a failed build, tell the user instead of publishing.\n
 	// This tool starts the publish process and returns the URL the website will be live on.
 	// Publishing happens asynchronously and takes a few minutes.\n
 	// Set `is_template` only when the user explicitly asks to share the website as a template:
@@ -70971,6 +71259,24 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with POST /api/horizons/v1/websites/{websiteId}/publish (the `HorizonsPublishWebsiteV1` operationId).
 	HorizonsPublishWebsiteV1WithResponse(ctx context.Context, websiteId WebsiteIdPath, body HorizonsPublishWebsiteV1JSONRequestBody, reqEditors ...RequestEditorFn) (*HorizonsPublishWebsiteV1Response, error)
+
+	// HorizonsGetWebsiteBuildTaskV1WithResponse Get website build task
+	//
+	// Get the state and outcome of a website build started by the `Create website` or `Edit website` tool.\n
+	// Use this tool with the `task.id` those tools return to find out whether the build completed or failed.
+	// Poll it every 30 seconds or so while `state` is `TASK_STATE_SUBMITTED` or `TASK_STATE_WORKING`.\n
+	// When `state` is `TASK_STATE_FAILED` or `TASK_STATE_REJECTED`, the website does not contain the requested
+	// changes: tell the user, using `message` and `reason_code`, and do not publish it.
+	// When `state` is `TASK_STATE_CANCELED`, the user stopped the build and changes made before that may be kept:
+	// publish only if the user asks to.
+	// `reason_code` `insufficient_credits` means the user must get more credits before building again.\n
+	// When `state` is `TASK_STATE_COMPLETED`, the website can be published. A `reason_code` of
+	// `iteration_limit` on a completed build means it stopped early and kept the work done so far.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/horizons/v1/websites/{websiteId}/tasks/{taskId} (the `HorizonsGetWebsiteBuildTaskV1` operationId).
+	HorizonsGetWebsiteBuildTaskV1WithResponse(ctx context.Context, websiteId WebsiteIdPath, taskId TaskIdPath, reqEditors ...RequestEditorFn) (*HorizonsGetWebsiteBuildTaskV1Response, error)
 
 	// HostingListAccountCronJobsV1WithResponse List account cron jobs
 	//
@@ -86256,6 +86562,61 @@ func (r HorizonsPublishWebsiteV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r HorizonsPublishWebsiteV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type HorizonsGetWebsiteBuildTaskV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *HorizonsV1WebsitesBuildTaskResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r HorizonsGetWebsiteBuildTaskV1Response) GetJSON200() *HorizonsV1WebsitesBuildTaskResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r HorizonsGetWebsiteBuildTaskV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r HorizonsGetWebsiteBuildTaskV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r HorizonsGetWebsiteBuildTaskV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r HorizonsGetWebsiteBuildTaskV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r HorizonsGetWebsiteBuildTaskV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r HorizonsGetWebsiteBuildTaskV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -108922,8 +109283,10 @@ func (c *ClientWithResponses) HorizonsGetWebsiteListV1WithResponse(ctx context.C
 // Create new Hostinger AI Builder website from the given message.\n
 // Use this tool when user asks you to create a website, landing page, blog
 // or any other type of application.\n
-// This tool initiates the website creation process and returns a website URL and ID.
-// The generation happens asynchronously.\n
+// This tool initiates the website creation process and returns a website URL, ID and build `task`.
+// The generation happens asynchronously. To learn whether it succeeded, poll the
+// `Get website build task` tool with `task.id`; `is_generating` turning false on `Get website`
+// happens whether the build completed or failed.\n
 // After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 // that Hostinger AI Builder is now creating their website and it will be ready in a few minutes
 // and you should provide the website URL to the user immediately
@@ -108971,8 +109334,10 @@ func (c *ClientWithResponses) HorizonsCreateWebsiteV1WithBodyWithResponse(ctx co
 // Create new Hostinger AI Builder website from the given message.\n
 // Use this tool when user asks you to create a website, landing page, blog
 // or any other type of application.\n
-// This tool initiates the website creation process and returns a website URL and ID.
-// The generation happens asynchronously.\n
+// This tool initiates the website creation process and returns a website URL, ID and build `task`.
+// The generation happens asynchronously. To learn whether it succeeded, poll the
+// `Get website build task` tool with `task.id`; `is_generating` turning false on `Get website`
+// happens whether the build completed or failed.\n
 // After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 // that Hostinger AI Builder is now creating their website and it will be ready in a few minutes
 // and you should provide the website URL to the user immediately
@@ -109023,6 +109388,8 @@ func (c *ClientWithResponses) HorizonsCreateWebsiteV1WithResponse(ctx context.Co
 // `is_in_progress` is true while changes are being generated or the website is being published;
 // wait until it is false before publishing. `is_generating` is true while changes are being generated,
 // and `actions_in_progress` has `website_publish` while the website is being published.
+// `is_generating` turns false whether the build completed or failed: use the `Get website build task`
+// tool to learn its outcome.
 // `published_at` is when the website was last published,
 // `is_template` is whether its published pages show the "Use template" banner, and
 // `has_ecommerce_store` is whether it has an online store.\n
@@ -109065,8 +109432,10 @@ func (c *ClientWithResponses) HorizonsCloneWebsiteV1WithResponse(ctx context.Con
 //
 // Edit an existing Hostinger AI Builder website with a follow-up message.\n
 // Use this tool when the user wants to change, extend or fix a website that already exists.\n
-// This tool queues the requested changes and returns the website URL and ID.
-// The changes are applied asynchronously.\n
+// This tool queues the requested changes and returns the website URL, ID and build `task`.
+// The changes are applied asynchronously. To learn whether they were applied, poll the
+// `Get website build task` tool with `task.id`; `is_generating` turning false on `Get website`
+// happens whether the build completed or failed.\n
 // After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 // that Hostinger AI Builder is now applying the requested changes and they will be ready
 // in a few minutes, and you should provide the website URL to the user immediately.
@@ -109089,8 +109458,10 @@ func (c *ClientWithResponses) HorizonsEditWebsiteV1WithBodyWithResponse(ctx cont
 //
 // Edit an existing Hostinger AI Builder website with a follow-up message.\n
 // Use this tool when the user wants to change, extend or fix a website that already exists.\n
-// This tool queues the requested changes and returns the website URL and ID.
-// The changes are applied asynchronously.\n
+// This tool queues the requested changes and returns the website URL, ID and build `task`.
+// The changes are applied asynchronously. To learn whether they were applied, poll the
+// `Get website build task` tool with `task.id`; `is_generating` turning false on `Get website`
+// happens whether the build completed or failed.\n
 // After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 // that Hostinger AI Builder is now applying the requested changes and they will be ready
 // in a few minutes, and you should provide the website URL to the user immediately.
@@ -109113,6 +109484,9 @@ func (c *ClientWithResponses) HorizonsEditWebsiteV1WithResponse(ctx context.Cont
 //
 // Publish a Hostinger AI Builder website so its latest changes go live.\n
 // Use this tool when the user asks to publish, deploy or make their website live.\n
+// If you created or edited the website in this conversation, first check its build with the
+// `Get website build task` tool and publish only when its `state` is `TASK_STATE_COMPLETED`.
+// After a failed build, tell the user instead of publishing.\n
 // This tool starts the publish process and returns the URL the website will be live on.
 // Publishing happens asynchronously and takes a few minutes.\n
 // Set `is_template` only when the user explicitly asks to share the website as a template:
@@ -109136,6 +109510,9 @@ func (c *ClientWithResponses) HorizonsPublishWebsiteV1WithBodyWithResponse(ctx c
 //
 // Publish a Hostinger AI Builder website so its latest changes go live.\n
 // Use this tool when the user asks to publish, deploy or make their website live.\n
+// If you created or edited the website in this conversation, first check its build with the
+// `Get website build task` tool and publish only when its `state` is `TASK_STATE_COMPLETED`.
+// After a failed build, tell the user instead of publishing.\n
 // This tool starts the publish process and returns the URL the website will be live on.
 // Publishing happens asynchronously and takes a few minutes.\n
 // Set `is_template` only when the user explicitly asks to share the website as a template:
@@ -109153,6 +109530,30 @@ func (c *ClientWithResponses) HorizonsPublishWebsiteV1WithResponse(ctx context.C
 		return nil, err
 	}
 	return ParseHorizonsPublishWebsiteV1Response(rsp)
+}
+
+// HorizonsGetWebsiteBuildTaskV1WithResponse Get website build task
+//
+// Get the state and outcome of a website build started by the `Create website` or `Edit website` tool.\n
+// Use this tool with the `task.id` those tools return to find out whether the build completed or failed.
+// Poll it every 30 seconds or so while `state` is `TASK_STATE_SUBMITTED` or `TASK_STATE_WORKING`.\n
+// When `state` is `TASK_STATE_FAILED` or `TASK_STATE_REJECTED`, the website does not contain the requested
+// changes: tell the user, using `message` and `reason_code`, and do not publish it.
+// When `state` is `TASK_STATE_CANCELED`, the user stopped the build and changes made before that may be kept:
+// publish only if the user asks to.
+// `reason_code` `insufficient_credits` means the user must get more credits before building again.\n
+// When `state` is `TASK_STATE_COMPLETED`, the website can be published. A `reason_code` of
+// `iteration_limit` on a completed build means it stopped early and kept the work done so far.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/horizons/v1/websites/{websiteId}/tasks/{taskId} (the `HorizonsGetWebsiteBuildTaskV1` operationId).
+func (c *ClientWithResponses) HorizonsGetWebsiteBuildTaskV1WithResponse(ctx context.Context, websiteId WebsiteIdPath, taskId TaskIdPath, reqEditors ...RequestEditorFn) (*HorizonsGetWebsiteBuildTaskV1Response, error) {
+	rsp, err := c.HorizonsGetWebsiteBuildTaskV1(ctx, websiteId, taskId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseHorizonsGetWebsiteBuildTaskV1Response(rsp)
 }
 
 // HostingListAccountCronJobsV1WithResponse List account cron jobs
@@ -124532,6 +124933,46 @@ func ParseHorizonsPublishWebsiteV1Response(rsp *http.Response) (*HorizonsPublish
 			return nil, err
 		}
 		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseHorizonsGetWebsiteBuildTaskV1Response parses an HTTP response from a HorizonsGetWebsiteBuildTaskV1WithResponse call
+func ParseHorizonsGetWebsiteBuildTaskV1Response(rsp *http.Response) (*HorizonsGetWebsiteBuildTaskV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &HorizonsGetWebsiteBuildTaskV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest HorizonsV1WebsitesBuildTaskResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse

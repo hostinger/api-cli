@@ -7,8 +7,10 @@ Create website
 Create new Hostinger AI Builder website from the given message.\n
 Use this tool when user asks you to create a website, landing page, blog
 or any other type of application.\n
-This tool initiates the website creation process and returns a website URL and ID.
-The generation happens asynchronously.\n
+This tool initiates the website creation process and returns a website URL, ID and build `task`.
+The generation happens asynchronously. To learn whether it succeeded, poll the
+`Get website build task` tool with `task.id`; `is_generating` turning false on `Get website`
+happens whether the build completed or failed.\n
 After invoking this tool, your chat reply must be EXACTLY 1 sentence summarizing
 that Hostinger AI Builder is now creating their website and it will be ready in a few minutes
 and you should provide the website URL to the user immediately

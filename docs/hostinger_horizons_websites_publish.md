@@ -6,6 +6,9 @@ Publish website
 
 Publish a Hostinger AI Builder website so its latest changes go live.\n
 Use this tool when the user asks to publish, deploy or make their website live.\n
+If you created or edited the website in this conversation, first check its build with the
+`Get website build task` tool and publish only when its `state` is `TASK_STATE_COMPLETED`.
+After a failed build, tell the user instead of publishing.\n
 This tool starts the publish process and returns the URL the website will be live on.
 Publishing happens asynchronously and takes a few minutes.\n
 Set `is_template` only when the user explicitly asks to share the website as a template:

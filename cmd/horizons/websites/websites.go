@@ -13,6 +13,7 @@ var GroupCmd = &cobra.Command{
 }
 
 func init() {
+	GroupCmd.AddCommand(BuildTaskCmd)
 	GroupCmd.AddCommand(CloneCmd)
 	GroupCmd.AddCommand(CreateCmd)
 	GroupCmd.AddCommand(EditCmd)
