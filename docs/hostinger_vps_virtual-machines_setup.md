@@ -38,7 +38,8 @@ hostinger vps virtual-machines setup <virtual-machine-id> [flags]
       --ns2 string                    Name server 2
       --password string               Password for the virtual machine. If not provided, random password will be generated. Password will not be shown in the response. Used as both the root and the panel password, so it must pass both rules: 12 to 50 characters with an uppercase letter, a lowercase letter, a number and at least one of # + ? @ (no other symbols). Known compromised passwords are rejected.
       --post-install-script-id int    Post-install script ID
-      --public-key string             Use SSH key (JSON, @file or -; shape in the help above)
+      --public-key string             Use SSH key. Deprecated: use ssh_keys instead (JSON, @file or -; shape in the help above)
+      --ssh-keys strings              SSH public keys to add to the virtual machine
       --template-id int               Template ID
 ```
 

@@ -18403,6 +18403,11 @@ type VPSV1VirtualMachineRecreateRequest struct {
 	// Example: 6324
 	PostInstallScriptId *int `json:"post_install_script_id,omitempty"`
 
+	// SshKeys SSH public keys to add to the recreated virtual machine
+	//
+	// Example: ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIExampleKeyDataExampleKeyData admin@localhost"]
+	SshKeys *[]string `json:"ssh_keys,omitempty"`
+
 	// TemplateId Template ID
 	//
 	// Example: 1130
@@ -18465,7 +18470,8 @@ type VPSV1VirtualMachineSetupRequest struct {
 	// Example: 6324
 	PostInstallScriptId *int `json:"post_install_script_id,omitempty"`
 
-	// PublicKey Use SSH key
+	// PublicKey Use SSH key. Deprecated: use ssh_keys instead
+	// Deprecated: this property has been marked as deprecated upstream, but no `x-deprecated-reason` was set
 	PublicKey *struct {
 		// Key Contents of the SSH key
 		//
@@ -18477,6 +18483,11 @@ type VPSV1VirtualMachineSetupRequest struct {
 		// Example: my-key
 		Name *string `json:"name,omitempty"`
 	} `json:"public_key,omitempty"`
+
+	// SshKeys SSH public keys to add to the virtual machine
+	//
+	// Example: ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIExampleKeyDataExampleKeyData admin@localhost"]
+	SshKeys *[]string `json:"ssh_keys,omitempty"`
 
 	// TemplateId Template ID
 	//

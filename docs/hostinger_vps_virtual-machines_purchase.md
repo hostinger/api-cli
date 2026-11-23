@@ -38,6 +38,9 @@ JSON flags take inline JSON, @file.json, or - to read stdin. Example values:
         "key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC2X...",
         "name": "my-key"
       },
+      "ssh_keys": [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIExampleKeyDataExampleKeyData admin@localhost"
+      ],
       "template_id": 1130
     }
 

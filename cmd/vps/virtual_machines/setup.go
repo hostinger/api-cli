@@ -63,7 +63,8 @@ func init() {
 	SetupCmd.Flags().StringP("ns2", "", "", "Name server 2")
 	SetupCmd.Flags().StringP("password", "", "", "Password for the virtual machine. If not provided, random password will be generated. Password will not be shown in the response. Used as both the root and the panel password, so it must pass both rules: 12 to 50 characters with an uppercase letter, a lowercase letter, a number and at least one of # + ? @ (no other symbols). Known compromised passwords are rejected.")
 	SetupCmd.Flags().IntP("post-install-script-id", "", 0, "Post-install script ID")
-	SetupCmd.Flags().StringP("public-key", "", "", "Use SSH key (JSON, @file or -; shape in the help above)")
+	SetupCmd.Flags().StringP("public-key", "", "", "Use SSH key. Deprecated: use ssh_keys instead (JSON, @file or -; shape in the help above)")
+	SetupCmd.Flags().StringSliceP("ssh-keys", "", nil, "SSH public keys to add to the virtual machine")
 	SetupCmd.Flags().IntP("template-id", "", 0, "Template ID")
 	SetupCmd.MarkFlagRequired("data-center-id")
 	SetupCmd.MarkFlagRequired("template-id")
@@ -76,6 +77,7 @@ func init() {
 	SetupCmd.RegisterFlagCompletionFunc("password", cobra.NoFileCompletions)
 	SetupCmd.RegisterFlagCompletionFunc("post-install-script-id", cobra.NoFileCompletions)
 	SetupCmd.RegisterFlagCompletionFunc("public-key", cobra.FixedCompletions(nil, cobra.ShellCompDirectiveDefault))
+	SetupCmd.RegisterFlagCompletionFunc("ssh-keys", cobra.NoFileCompletions)
 	SetupCmd.RegisterFlagCompletionFunc("template-id", cobra.NoFileCompletions)
 }
 
@@ -118,6 +120,10 @@ func setupBody(cmd *cobra.Command) (map[string]any, error) {
 			return nil, err
 		}
 		body["public_key"] = publicKeyValJSON
+	}
+	if cmd.Flags().Changed("ssh-keys") {
+		v, _ := cmd.Flags().GetStringSlice("ssh-keys")
+		body["ssh_keys"] = v
 	}
 	templateIdVal, _ := cmd.Flags().GetInt("template-id")
 	body["template_id"] = templateIdVal

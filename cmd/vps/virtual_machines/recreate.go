@@ -84,11 +84,13 @@ func init() {
 	RecreateCmd.Flags().StringP("panel-password", "", "", "Panel password for the panel-based OS template. If not provided, random password will be generated. If OS does not support panel_password this field will be ignored. Password will not be shown in the response. 12 to 50 characters with an uppercase letter, a lowercase letter, a number and at least one of #%+:?@ (no other symbols). Known compromised passwords are rejected.")
 	RecreateCmd.Flags().StringP("password", "", "", "Root password for the virtual machine. If not provided, random password will be generated. Password will not be shown in the response. 12 to 50 characters with an uppercase letter, a lowercase letter, a number and at least one of -().&@?'#;/,+ (no other symbols). Known compromised passwords are rejected.")
 	RecreateCmd.Flags().IntP("post-install-script-id", "", 0, "Post-install script to execute after virtual machine was recreated")
+	RecreateCmd.Flags().StringSliceP("ssh-keys", "", nil, "SSH public keys to add to the recreated virtual machine")
 	RecreateCmd.Flags().IntP("template-id", "", 0, "Template ID")
 	RecreateCmd.MarkFlagRequired("template-id")
 	RecreateCmd.RegisterFlagCompletionFunc("panel-password", cobra.NoFileCompletions)
 	RecreateCmd.RegisterFlagCompletionFunc("password", cobra.NoFileCompletions)
 	RecreateCmd.RegisterFlagCompletionFunc("post-install-script-id", cobra.NoFileCompletions)
+	RecreateCmd.RegisterFlagCompletionFunc("ssh-keys", cobra.NoFileCompletions)
 	RecreateCmd.RegisterFlagCompletionFunc("template-id", cobra.NoFileCompletions)
 	RecreateCmd.Flags().BoolP("yes", "y", false, "Skip the confirmation prompt")
 	utils.RegisterWaitFlags(RecreateCmd)
@@ -107,6 +109,10 @@ func recreateBody(cmd *cobra.Command) (map[string]any, error) {
 	if cmd.Flags().Changed("post-install-script-id") {
 		v, _ := cmd.Flags().GetInt("post-install-script-id")
 		body["post_install_script_id"] = v
+	}
+	if cmd.Flags().Changed("ssh-keys") {
+		v, _ := cmd.Flags().GetStringSlice("ssh-keys")
+		body["ssh_keys"] = v
 	}
 	templateIdVal, _ := cmd.Flags().GetInt("template-id")
 	body["template_id"] = templateIdVal
