@@ -286,7 +286,7 @@ func (s *Session) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
-	if r.Header.Get(proto.HdrRequestID) == "" {
+	if r.Header.Get(proto.HdrRequestID) == "" || !originForm(r) {
 		w.Header().Set("Content-Length", "0")
 		w.WriteHeader(http.StatusBadRequest)
 		s.report("rejected")
@@ -300,6 +300,22 @@ func (s *Session) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	s.opts.Handler.ServeHTTP(w, r)
+}
+
+// originForm reports whether r's request-target (the :path) is origin-form,
+// "/path", or "*" for OPTIONS. The reverse proxy would send an opaque target
+// ("host:80/x") to the service as a malformed request line. An absolute-form
+// target ("http://host/x") names a host the ingress rule did not match; the
+// proxy replaces it today, but the session refuses it instead of relying on
+// that. A WebSocket CONNECT carries no :path; the bridge checks its hcdn-path.
+func originForm(r *http.Request) bool {
+	switch {
+	case r.Method == http.MethodConnect:
+		return true
+	case r.Method == http.MethodOptions && r.RequestURI == "*":
+		return true
+	}
+	return strings.HasPrefix(r.RequestURI, "/")
 }
 
 // controlRoute returns the handler of a control route, or nil.

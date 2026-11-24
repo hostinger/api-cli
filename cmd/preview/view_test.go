@@ -92,17 +92,19 @@ func TestPreviewViewExpired(t *testing.T) {
 	}
 }
 
-// A failure ends the view, then prints its reason as without the view.
+// A failure ends the view, then prints its reason as without the view. A
+// revoked Preview with an owner gets the owner-stop message.
 func TestPreviewViewFailed(t *testing.T) {
 	withView(t)
 	fake := func(_ context.Context, o connector.QuickOptions) (bool, error) {
 		o.OnReady(connector.QuickTunnel{URL: testURL, ExpiresAt: time.Now().Add(time.Hour)})
 		o.OnPause(connector.QuickPause{Reason: connector.PauseCapExceeded, RetryAt: time.Now().Add(time.Hour)})
-		return false, &connector.QuickError{Kind: connector.ErrTakenDown, Err: connector.ErrTakenDown}
+		return false, &connector.QuickError{Kind: connector.ErrTakenDown, Err: connector.ErrTakenDown,
+			Owner: connector.OwnerLink{Ticket: "ticket"}}
 	}
 	stdout, stderr, code, _ := execute(t, fake, nil, "3000")
 	screen := escapes.ReplaceAllString(stdout, "")
-	if code != ExitTakenDown || stderr != "Error: this Preview was taken down\n" {
+	if code != ExitTakenDown || stderr != "Error: "+ownerStopped+"\n" {
 		t.Errorf("exit %d stderr %q", code, stderr)
 	}
 	for _, want := range []string{"Too many Previews from your network. Retrying at", "Preview stopped"} {

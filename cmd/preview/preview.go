@@ -78,9 +78,9 @@ accepted, succeeded or failed (with a "reason") for a deploy from hPanel, and
 {"event":"ended",...}, which carries a "message" when the Preview failed. Logs go to
 stderr.
 
-Exit codes: 0 when stopped or expired, 2 for a usage error such as a refused port, 77
-when no account is signed in or the service refuses it, 78 when the Preview was taken
-down, and 1 for any other failure.`,
+Exit codes: 0 when stopped here (Ctrl+C or a stop signal) or expired, 2 for a usage
+error such as a refused port, 77 when no account is signed in or the service refuses it,
+78 when the Preview was stopped remotely or taken down, and 1 for any other failure.`,
 	Example: `  hostinger preview
   hostinger preview 3000
   hostinger preview 3000 --ttl 3d

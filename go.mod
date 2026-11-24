@@ -8,7 +8,7 @@ require (
 	github.com/aquasecurity/table v1.11.0
 	github.com/go-git/go-git/v5 v5.19.3
 	github.com/google/uuid v1.6.0
-	github.com/hostinger/hcdn-connector v0.5.0
+	github.com/hostinger/hcdn-connector v0.6.0
 	github.com/itchyny/gojq v0.12.20
 	github.com/liamg/tml v0.7.1
 	github.com/mattn/go-runewidth v0.0.31

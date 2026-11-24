@@ -51,16 +51,21 @@ func classify(expired bool, err error, binary, tokenEnv string) ending {
 		return ending{endStopped, utils.ExitOK, "Preview ended"}
 	}
 	var qe *connector.QuickError
-	kind := err
+	kind, link := err, connector.OwnerLink{}
 	if errors.As(err, &qe) {
-		kind = qe.Kind
+		kind, link = qe.Kind, qe.Owner
 	}
 	switch {
+	// A goaway revoked is an owner stop or a takedown, which look the same,
+	// so a run that sent an owner ticket gets a neutral message. Without one
+	// it can only be a takedown. --json keeps taken_down and exit 78.
+	case errors.Is(kind, connector.ErrTakenDown) && link.Ticket != "":
+		return ending{endTakenDown, ExitTakenDown, "this Preview was stopped; run the command again for a new link"}
 	case errors.Is(kind, connector.ErrTakenDown):
 		return ending{endTakenDown, ExitTakenDown, "this Preview was taken down"}
 	case errors.Is(kind, connector.ErrOwnerRequired):
 		msg := fmt.Sprintf(`Sign in to start a Preview: run "%s auth login" or set %s`, binary, tokenEnv)
-		if qe != nil && qe.Owner.OtherEnvironment {
+		if link.OtherEnvironment {
 			msg += "; the owner ticket comes from another environment"
 		}
 		return ending{endSignInRequired, ExitSignInRequired, msg}

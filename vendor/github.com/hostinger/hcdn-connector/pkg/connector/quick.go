@@ -36,8 +36,9 @@ var (
 	// ErrQuickNotOffered: whoami answered without class quick or without a
 	// hostname (an edge older than tunneld 0.3.0).
 	ErrQuickNotOffered = errors.New("connector: the edge does not offer quick tunnels")
-	// ErrTakenDown: goaway revoked; the tunnel was taken down (*ExitError Code 78).
-	ErrTakenDown = errors.New("connector: the quick tunnel was taken down")
+	// ErrTakenDown: goaway revoked; the owner stopped the tunnel or it was
+	// taken down, which the edge does not tell apart (*ExitError Code 78).
+	ErrTakenDown = errors.New("connector: the quick tunnel was stopped or taken down")
 	// ErrCertRejected: goaway unknown_serial; the edge no longer accepts the
 	// tunnel certificate (*ExitError Code 78). A new run gets a new URL.
 	ErrCertRejected = errors.New("connector: the edge no longer accepts the tunnel certificate")
@@ -56,8 +57,9 @@ type QuickError struct {
 	// Err is the cause: the whoami or LinkOwner error, the class the edge
 	// reported, or the *ExitError of the goaway.
 	Err error
-	// Owner is the outcome of LinkOwner when Kind is ErrOwnerRequired, for
-	// example OtherEnvironment for the message.
+	// Owner is the outcome of LinkOwner, zero when the run failed before it.
+	// With ErrOwnerRequired, OtherEnvironment explains the refusal. With
+	// ErrTakenDown, a Ticket means the owner may have stopped the tunnel.
 	Owner OwnerLink
 }
 
@@ -154,6 +156,25 @@ type QuickOptions struct {
 // A var so tests can shorten it.
 var quickStopAt = func(notAfter time.Time) time.Time { return notAfter.Add(-time.Minute) }
 
+// quickRevokedHint ends the "tunnel revoked" log line. A run whose hellos
+// carry an owner ticket may have an owner on the edge, even when the whoami
+// check of the ticket failed, and the edge sends goaway revoked for an owner
+// stop and a takedown alike, so its hint is neutral. Without a ticket nobody
+// owns the tunnel: revoked is a takedown.
+func quickRevokedHint(link OwnerLink) string {
+	if link.Ticket != "" {
+		return "This Preview was stopped; run the command again for a new link."
+	}
+	return "This tunnel was taken down."
+}
+
+// quickGoawayKinds is the QuickError Kind of each goaway that ends a run.
+var quickGoawayKinds = map[string]error{
+	proto.ReasonRevoked:       ErrTakenDown,
+	proto.ReasonOwnerRequired: ErrOwnerRequired,
+	proto.ReasonUnknownSerial: ErrCertRejected,
+}
+
 // quickWhoamiTimeout bounds the first whoami and LinkOwner.
 const quickWhoamiTimeout = 20 * time.Second
 
@@ -240,7 +261,7 @@ func RunQuick(ctx context.Context, o QuickOptions) (expired bool, err error) {
 	case errors.Is(err, ErrOwnerRequired):
 		return false, &QuickError{Kind: ErrOwnerRequired, Err: err, Owner: link}
 	case err != nil:
-		return false, &QuickError{Kind: ErrQuickRefused, Err: err}
+		return false, &QuickError{Kind: ErrQuickRefused, Err: err, Owner: link}
 	}
 
 	cfg := config.Default()
@@ -257,7 +278,7 @@ func RunQuick(ctx context.Context, o QuickOptions) (expired bool, err error) {
 	cfg.ServerCAFile = o.ServerCAFile
 	conn, err := New(Options{
 		Config: cfg, Credentials: store, Version: o.Version, Log: log,
-		Hints: &Hints{Revoked: "This tunnel was taken down."}, Owner: link, VisibleWait: o.VisibleWait,
+		Hints: &Hints{Revoked: quickRevokedHint(link)}, Owner: link, VisibleWait: o.VisibleWait,
 		AppMeta: o.AppMeta, OnCommand: o.OnCommand,
 	})
 	if err != nil {
@@ -277,18 +298,12 @@ func RunQuick(ctx context.Context, o QuickOptions) (expired bool, err error) {
 	err = runAnnounced(rctx, conn, tunnel, o, log, linked)
 	stopWatch()
 	var ee *ExitError
-	switch {
-	case errors.As(err, &ee):
-		switch ee.Reason {
-		case proto.ReasonRevoked:
-			return false, &QuickError{Kind: ErrTakenDown, Err: ee}
-		case proto.ReasonOwnerRequired:
-			return false, &QuickError{Kind: ErrOwnerRequired, Err: ee, Owner: link}
-		case proto.ReasonUnknownSerial:
-			return false, &QuickError{Kind: ErrCertRejected, Err: ee}
+	if errors.As(err, &ee) {
+		if kind, ok := quickGoawayKinds[ee.Reason]; ok {
+			return false, &QuickError{Kind: kind, Err: ee, Owner: link}
 		}
-		return false, err
-	case err != nil:
+	}
+	if err != nil {
 		return false, err
 	}
 	return ctx.Err() == nil && errors.Is(rctx.Err(), context.DeadlineExceeded), nil

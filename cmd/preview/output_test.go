@@ -179,43 +179,49 @@ func quickErr(kind, cause error) error {
 	return &connector.QuickError{Kind: kind, Err: cause}
 }
 
+// ownerStopped is the message of a Preview with an owner that the service
+// ended with goaway revoked.
+const ownerStopped = "this Preview was stopped; run the command again for a new link"
+
 func TestClassify(t *testing.T) {
 	signIn := `Sign in to start a Preview: run "hostinger auth login" or set HOSTINGER_API_TOKEN`
 	cases := []struct {
-		name     string
-		expired  bool
-		err      error
-		reason   string
-		code     int
-		message  string
-		contains bool // message is a prefix only
+		name    string
+		expired bool
+		err     error
+		reason  string
+		code    int
+		message string
 	}{
-		{"stopped", false, nil, "stopped", 0, "Preview ended", false},
-		{"expired", true, nil, "expired", 0, "Preview ended", false},
-		{"cancelled", false, context.Canceled, "stopped", 0, "Preview ended", false},
+		{"stopped", false, nil, "stopped", 0, "Preview ended"},
+		{"expired", true, nil, "expired", 0, "Preview ended"},
+		{"cancelled", false, context.Canceled, "stopped", 0, "Preview ended"},
 		{"taken down", false, quickErr(connector.ErrTakenDown, &connector.ExitError{Code: 78, Reason: "revoked"}),
-			"taken_down", 78, "this Preview was taken down", false},
+			"taken_down", 78, "this Preview was taken down"},
+		{"stopped by its owner", false, &connector.QuickError{Kind: connector.ErrTakenDown,
+			Err: &connector.ExitError{Code: 78, Reason: "revoked"}, Owner: connector.OwnerLink{Ticket: "ticket"}},
+			"taken_down", 78, ownerStopped},
 		{"sign-in required", false, &connector.QuickError{Kind: connector.ErrOwnerRequired,
 			Err: fmt.Errorf("%w: no owner ticket (no_token)", connector.ErrOwnerRequired)},
-			"sign_in_required", 77, signIn, false},
+			"sign_in_required", 77, signIn},
 		{"sign-in required, goaway", false, &connector.QuickError{Kind: connector.ErrOwnerRequired,
 			Err: &connector.ExitError{Code: 77, Reason: "owner_required"}},
-			"sign_in_required", 77, signIn, false},
+			"sign_in_required", 77, signIn},
 		{"sign-in required, other environment", false, &connector.QuickError{Kind: connector.ErrOwnerRequired,
 			Err: connector.ErrOwnerRequired, Owner: connector.OwnerLink{Mode: "require", OtherEnvironment: true}},
-			"sign_in_required", 77, signIn + "; the owner ticket comes from another environment", false},
+			"sign_in_required", 77, signIn + "; the owner ticket comes from another environment"},
 		{"unreachable", false, quickErr(connector.ErrEdgeUnreachable, errors.New("dial tcp: i/o timeout")),
-			"unreachable", 1, "outbound TCP 7844 is blocked on this network", false},
+			"unreachable", 1, "outbound TCP 7844 is blocked on this network"},
 		{"refused", false, quickErr(connector.ErrQuickRefused, errors.New("remote error: tls: bad certificate")),
-			"error", 1, "the Preview service refused the tunnel: remote error: tls: bad certificate", false},
+			"error", 1, "the Preview service refused the tunnel: remote error: tls: bad certificate"},
 		{"not offered", false, quickErr(connector.ErrQuickNotOffered, errors.New(`class "named"`)),
-			"error", 1, `the Preview service does not offer Previews to this client: class "named"`, false},
+			"error", 1, `the Preview service does not offer Previews to this client: class "named"`},
 		{"cert rejected", false, quickErr(connector.ErrCertRejected, &connector.ExitError{Code: 78, Reason: "unknown_serial"}),
-			"error", 1, "the Preview service no longer accepts this tunnel; run the command again for a new URL", false},
+			"error", 1, "the Preview service no longer accepts this tunnel; run the command again for a new URL"},
 		{"other goaway", false, &connector.ExitError{Code: 75, Reason: "protocol_error"},
-			"error", 1, "Preview failed: exit 75 (protocol_error)", false},
+			"error", 1, "Preview failed: exit 75 (protocol_error)"},
 		{"bad option", false, errors.New("connector: invalid URL"),
-			"error", 1, "Preview failed: connector: invalid URL", false},
+			"error", 1, "Preview failed: connector: invalid URL"},
 	}
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
@@ -237,8 +243,8 @@ func TestEnded(t *testing.T) {
 	}{
 		{ending{"stopped", 0, "Preview ended"}, false, "", "Preview ended\n", 0},
 		{ending{"expired", 0, "Preview ended"}, true, `{"event":"ended","reason":"expired"}` + "\n", "", 0},
-		{ending{"taken_down", 78, "this Preview was taken down"}, false, "", "Error: this Preview was taken down\n", 78},
-		{ending{"taken_down", 78, "this Preview was taken down"}, true, `{"event":"ended","reason":"taken_down","message":"this Preview was taken down"}` + "\n", "", 78},
+		{ending{"taken_down", 78, ownerStopped}, false, "", "Error: " + ownerStopped + "\n", 78},
+		{ending{"taken_down", 78, ownerStopped}, true, `{"event":"ended","reason":"taken_down","message":"` + ownerStopped + `"}` + "\n", "", 78},
 		{ending{"sign_in_required", 77, "Sign in"}, true, `{"event":"ended","reason":"sign_in_required","message":"Sign in"}` + "\n", "", 77},
 		{ending{"unreachable", 1, "blocked"}, false, "", "Error: blocked\n", 1},
 		{ending{"error", 1, "boom"}, true, `{"event":"ended","reason":"error","message":"boom"}` + "\n", "", 1},

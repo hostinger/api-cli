@@ -111,7 +111,7 @@ JSON accept inline JSON, `@file.json`, or `-` for stdin; the help shows the expe
 | 4    | Not found (HTTP 404)                          |
 | 5    | Validation failed (HTTP 422)                  |
 | 77   | `preview`: no account is signed in, or the service refuses it |
-| 78   | `preview`: the Preview was taken down         |
+| 78   | `preview`: the Preview was stopped remotely or taken down |
 
 ## Deploying a website
 

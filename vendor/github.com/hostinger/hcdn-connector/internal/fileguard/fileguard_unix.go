@@ -20,9 +20,11 @@ const maxLinks = 40
 // there the file and the directory must belong to root or to this user.
 //
 // The directory is the one the file is really in, found by following path as
-// the open did. Each symlink on the way can be replaced or planted like the
-// file, so the same rules apply to it in its own directory. If path no longer
-// leads to f, f is refused.
+// the open did. Each directory and symlink on the way can be replaced or
+// planted like the file, so the same rules apply to it in its own directory: a
+// directory another account made in /tmp is refused like a file it made there.
+// A relative path is walked from the working directory, which is checked the
+// same way. If path no longer leads to f, f is refused.
 //
 // Owners are not checked otherwise: a bind mount or a user namespace shows a
 // host uid that is neither root nor the container user. Group write is allowed:
@@ -50,13 +52,19 @@ func Check(path string, f *os.File) error {
 }
 
 // resolve follows path component by component, as open does, and returns the
-// path it leads to with no symlink left in it. Every symlink it follows must
-// pass checkIn in the directory that holds the link.
+// path it leads to with no symlink left in it. Every directory it walks through
+// and every symlink it follows must pass checkIn in the directory that holds
+// it. A relative path starts at the working directory, so that is walked too.
 func resolve(path string) (string, error) {
-	var dir string // the part walked so far, free of symlinks; "" is "."
-	if filepath.IsAbs(path) {
-		dir = "/"
+	if !filepath.IsAbs(path) {
+		wd, err := os.Getwd()
+		if err != nil {
+			return "", err
+		}
+		// Not filepath.Join: it would take ".." lexically, before symlinks.
+		path = wd + "/" + path
 	}
+	dir := "/" // the part walked so far, free of symlinks
 	rest := path
 	for links := 0; rest != ""; {
 		var name string
@@ -65,12 +73,8 @@ func resolve(path string) (string, error) {
 		case "", ".":
 			continue
 		case "..":
-			// dir has no symlinks, so its parent is the lexical one.
-			if dir == "" || filepath.Base(dir) == ".." {
-				dir = filepath.Join(dir, "..")
-			} else if dir = filepath.Dir(dir); dir == "." {
-				dir = ""
-			}
+			// dir has no symlinks, so its parent is the lexical one ("/" for "/").
+			dir = filepath.Dir(dir)
 			continue
 		}
 		p := filepath.Join(dir, name)
@@ -79,6 +83,11 @@ func resolve(path string) (string, error) {
 			return "", err
 		}
 		if fi.Mode()&fs.ModeSymlink == 0 {
+			if fi.IsDir() {
+				if err := checkIn(dir, fi); err != nil {
+					return "", fmt.Errorf("directory %s: %w", p, err)
+				}
+			}
 			dir = p
 			continue
 		}
@@ -97,13 +106,10 @@ func resolve(path string) (string, error) {
 		}
 		rest = target + "/" + rest
 	}
-	if dir == "" {
-		dir = "."
-	}
 	return dir, nil
 }
 
-// checkIn refuses an object (a file or a symlink) with info st in dir when dir
+// checkIn refuses an object (a file, a directory or a symlink) with info st in dir when dir
 // is world-writable without the sticky bit, or when dir is sticky and
 // world-writable and dir or the object belongs to another account.
 func checkIn(dir string, st fs.FileInfo) error {

@@ -34,6 +34,11 @@ const (
 	maxAPIBody     = 1 << 20
 	stormWindow    = 60 * time.Second
 	stormThreshold = 3
+	// MaxPops bounds a /pops reply: each allowed PoP is probed with TLS
+	// handshakes, so the list sets how much work one refresh does.
+	MaxPops = 64
+	// ProbeConcurrency is how many PoPs Probe measures at once.
+	ProbeConcurrency = 8
 )
 
 // refreshMinGap rate-limits forced pop-list refreshes; a var so tests can shorten it.
@@ -202,6 +207,9 @@ func (d *Discovery) fetchPops(ctx context.Context) (*PopsReply, error) {
 func validatePops(r *PopsReply, bootstrap []string, privateCA bool) error {
 	if len(r.Pops) == 0 {
 		return errors.New("empty pop list")
+	}
+	if len(r.Pops) > MaxPops || len(r.PinnedPops) > MaxPops {
+		return fmt.Errorf("%d pops and %d pinned, more than %d", len(r.Pops), len(r.PinnedPops), MaxPops)
 	}
 	var domains []string
 	for _, b := range bootstrap {
@@ -386,15 +394,17 @@ func (d *Discovery) getOnPort(ctx context.Context, endpoint string, port int, pa
 	return nil
 }
 
-// Probe measures every PoP in parallel: three TLS handshakes each followed by
-// GET /_hcdn/v1/ping, median RTT, 3 s timeout per sample.
+// Probe measures every PoP, ProbeConcurrency at a time: three TLS handshakes
+// each followed by GET /_hcdn/v1/ping, median RTT, 3 s timeout per sample.
 func (d *Discovery) Probe(ctx context.Context, pops []Pop) []ProbeResult {
 	out := make([]ProbeResult, len(pops))
+	slots := make(chan struct{}, ProbeConcurrency)
 	var wg sync.WaitGroup
 	for i, p := range pops {
 		wg.Add(1)
+		slots <- struct{}{}
 		go func(i int, p Pop) {
-			defer wg.Done()
+			defer func() { <-slots; wg.Done() }()
 			out[i] = d.probeOne(ctx, p)
 		}(i, p)
 	}
