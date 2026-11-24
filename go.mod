@@ -13,7 +13,7 @@ require (
 	github.com/liamg/tml v0.7.1
 	github.com/mattn/go-runewidth v0.0.31
 	github.com/oapi-codegen/oapi-codegen/v2 v2.8.2
-	github.com/oapi-codegen/runtime v1.9.0
+	github.com/oapi-codegen/runtime v1.9.1
 	github.com/pterm/pterm v0.12.84
 	github.com/spf13/cobra v1.10.2
 	github.com/spf13/pflag v1.1.0

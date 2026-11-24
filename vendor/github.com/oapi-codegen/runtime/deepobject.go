@@ -421,6 +421,9 @@ func assignPathValues(dst interface{}, pathValues fieldOrValue) error {
 		if err != nil {
 			return fmt.Errorf("expected a valid int, got %s", pathValues.value)
 		}
+		if iv.OverflowInt(val) {
+			return fmt.Errorf("value '%s' overflows destination of type: %s", pathValues.value, it.Kind())
+		}
 		iv.SetInt(val)
 		return nil
 	case reflect.String:

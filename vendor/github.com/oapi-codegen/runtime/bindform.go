@@ -1,6 +1,9 @@
 package runtime
 
 import (
+	"bytes"
+	"encoding"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"mime/multipart"
@@ -101,6 +104,24 @@ func BindForm(ptr interface{}, form map[string][]string, files map[string][]*mul
 	return nil
 }
 
+// MarshalForm serializes a struct into application/x-www-form-urlencoded
+// values.
+//
+// Properties are written in bracketed form by default: an array becomes
+// name[0]=a&name[1]=b and a nested object becomes name[key]=value. A property
+// with an entry in encodings follows that entry instead, mirroring the OpenAPI
+// Encoding Object:
+//
+//   - ContentType: the value is serialized as a single field in that media
+//     type. Only application/json is supported.
+//   - Style and Explode: arrays and flat objects are serialized as a query
+//     parameter of that style would be. "form" (the default when only Explode
+//     is set), "spaceDelimited" and "pipeDelimited" write repeated keys
+//     (name=a&name=b) when exploded and one delimited value (name=a,b)
+//     otherwise; "deepObject" is the bracketed default. Explode defaults to
+//     true for "form" and false for the other styles, as in the specification.
+//
+// An entry which sets none of those leaves the default in place.
 func MarshalForm(ptr interface{}, encodings map[string]RequestBodyEncoding) (url.Values, error) {
 	ptrVal := reflect.Indirect(reflect.ValueOf(ptr))
 	if ptrVal.Kind() != reflect.Struct {
@@ -119,16 +140,25 @@ func MarshalForm(ptr interface{}, encodings map[string]RequestBodyEncoding) (url
 			continue
 		}
 		tag = strings.Split(tag, ",")[0] // extract the name of the tag
-		if encoding, ok := encodings[tag]; ok && encoding.ContentType != "" {
-			if strings.HasPrefix(encoding.ContentType, jsonContentType) {
-				if data, err := JSONMarshal(field); err != nil { //nolint:staticcheck
-					return nil, err
-				} else {
-					result[tag] = append(result[tag], string(data))
-				}
+		encoding, hasEncoding := encodings[tag]
+		switch {
+		case hasEncoding && encoding.ContentType != "":
+			if !strings.HasPrefix(encoding.ContentType, jsonContentType) {
+				return nil, errors.New("unsupported encoding, only application/json is supported")
 			}
-			return nil, errors.New("unsupported encoding, only application/json is supported")
-		} else {
+			if (field.Kind() == reflect.Pointer || field.Kind() == reflect.Interface) && field.IsNil() {
+				continue
+			}
+			data, err := JSONMarshal(field.Interface())
+			if err != nil {
+				return nil, err
+			}
+			result[tag] = append(result[tag], string(data))
+		case hasEncoding && (encoding.Style != "" || encoding.Explode != nil):
+			if err := marshalFormStyled(field, result, tag, encoding); err != nil {
+				return nil, err
+			}
+		default:
 			marshalFormImpl(field, result, tag)
 		}
 	}
@@ -413,4 +443,118 @@ func marshalFormImpl(v reflect.Value, result url.Values, name string) {
 	default:
 		result[name] = append(result[name], fmt.Sprint(v.Interface()))
 	}
+}
+
+// marshalFormStyled writes one top-level property according to the style and
+// explode of its encoding. See MarshalForm.
+func marshalFormStyled(v reflect.Value, result url.Values, name string, enc RequestBodyEncoding) error {
+	style := enc.Style
+	if style == "" {
+		style = "form"
+	}
+	explode := style == "form"
+	if enc.Explode != nil {
+		explode = *enc.Explode
+	}
+
+	var separator string
+	switch style {
+	case "form":
+		separator = ","
+	case "spaceDelimited":
+		separator = " "
+	case "pipeDelimited":
+		separator = "|"
+	case "deepObject":
+		// The bracketed default is the deepObject serialization.
+		marshalFormImpl(v, result, name)
+		return nil
+	default:
+		return fmt.Errorf("unsupported style '%s' for form property '%s'", style, name)
+	}
+
+	for v.Kind() == reflect.Pointer || v.Kind() == reflect.Interface {
+		if v.IsNil() {
+			return nil
+		}
+		v = v.Elem()
+	}
+	value := v.Interface()
+
+	// Types which serialize to a single string are primitives, whatever
+	// their kind.
+	if str, ok := marshalKnownTypes(value); ok {
+		result[name] = append(result[name], str)
+		return nil
+	}
+	if tm, ok := value.(encoding.TextMarshaler); ok {
+		b, err := tm.MarshalText()
+		if err != nil {
+			return fmt.Errorf("error marshaling '%s' as text: %w", name, err)
+		}
+		result[name] = append(result[name], string(b))
+		return nil
+	}
+
+	var fieldDict map[string]string
+	var err error
+	switch v.Kind() {
+	case reflect.Slice:
+		parts := make([]string, v.Len())
+		for i := range parts {
+			if parts[i], err = primitiveToString(v.Index(i).Interface()); err != nil {
+				return fmt.Errorf("error formatting '%s': %w", name, err)
+			}
+		}
+		if explode {
+			result[name] = append(result[name], parts...)
+		} else {
+			result[name] = append(result[name], strings.Join(parts, separator))
+		}
+		return nil
+	case reflect.Struct:
+		// A struct with a Marshaler, such as one with additional properties,
+		// is styled from its JSON form.
+		if m, ok := value.(json.Marshaler); ok {
+			buf, err := m.MarshalJSON()
+			if err != nil {
+				return fmt.Errorf("failed to marshal '%s' to JSON: %w", name, err)
+			}
+			d := json.NewDecoder(bytes.NewReader(buf))
+			d.UseNumber()
+			var decoded interface{}
+			if err := d.Decode(&decoded); err != nil {
+				return fmt.Errorf("failed to unmarshal JSON for '%s': %w", name, err)
+			}
+			return marshalFormStyled(reflect.ValueOf(&decoded).Elem(), result, name, enc)
+		}
+		fieldDict, err = structFieldDict(name, value)
+	case reflect.Map:
+		fieldDict, err = mapFieldDict(name, value)
+	default:
+		str, err := primitiveToString(value)
+		if err != nil {
+			return fmt.Errorf("error formatting '%s': %w", name, err)
+		}
+		result[name] = append(result[name], str)
+		return nil
+	}
+	if err != nil {
+		return err
+	}
+
+	// An exploded object contributes each property as a field of its own.
+	keys := sortedKeys(fieldDict)
+	if explode {
+		for _, k := range keys {
+			result[k] = append(result[k], fieldDict[k])
+		}
+		return nil
+	}
+	parts := make([]string, 0, 2*len(keys))
+	for _, k := range keys {
+		parts = append(parts, k, fieldDict[k])
+	}
+	result[name] = append(result[name], strings.Join(parts, separator))
+	return nil
 }

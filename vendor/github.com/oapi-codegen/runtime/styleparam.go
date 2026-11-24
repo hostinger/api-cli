@@ -282,8 +282,16 @@ func styleStruct(style string, explode bool, paramName string, paramLocation Par
 		return s, nil
 	}
 
-	// Otherwise, we need to build a dictionary of the struct's fields. Each
-	// field may only be a primitive value.
+	fieldDict, err := structFieldDict(paramName, value)
+	if err != nil {
+		return "", err
+	}
+	return processFieldDict(style, explode, paramName, paramLocation, allowReserved, fieldDict)
+}
+
+// structFieldDict flattens a struct into a dictionary of its property names
+// and stringified values. Each field may only be a primitive value.
+func structFieldDict(paramName string, value interface{}) (map[string]string, error) {
 	v := reflect.ValueOf(value)
 	t := reflect.TypeOf(value)
 	fieldDict := make(map[string]string)
@@ -309,12 +317,11 @@ func styleStruct(style string, explode bool, paramName string, paramLocation Par
 		}
 		str, err := primitiveToString(f.Interface())
 		if err != nil {
-			return "", fmt.Errorf("error formatting '%s': %w", paramName, err)
+			return nil, fmt.Errorf("error formatting '%s': %w", paramName, err)
 		}
 		fieldDict[fieldName] = str
 	}
-
-	return processFieldDict(style, explode, paramName, paramLocation, allowReserved, fieldDict)
+	return fieldDict, nil
 }
 
 func styleMap(style string, explode bool, paramName string, paramLocation ParamLocation, allowReserved bool, value interface{}) (string, error) {
@@ -324,17 +331,27 @@ func styleMap(style string, explode bool, paramName string, paramLocation ParamL
 		}
 		return MarshalDeepObject(value, paramName)
 	}
+	fieldDict, err := mapFieldDict(paramName, value)
+	if err != nil {
+		return "", err
+	}
+	return processFieldDict(style, explode, paramName, paramLocation, allowReserved, fieldDict)
+}
+
+// mapFieldDict flattens a map into a dictionary of its keys and stringified
+// values. Each value may only be a primitive.
+func mapFieldDict(paramName string, value interface{}) (map[string]string, error) {
 	v := reflect.ValueOf(value)
 
 	fieldDict := make(map[string]string)
 	for _, fieldName := range v.MapKeys() {
 		str, err := primitiveToString(v.MapIndex(fieldName).Interface())
 		if err != nil {
-			return "", fmt.Errorf("error formatting '%s': %w", paramName, err)
+			return nil, fmt.Errorf("error formatting '%s': %w", paramName, err)
 		}
 		fieldDict[fieldName.String()] = str
 	}
-	return processFieldDict(style, explode, paramName, paramLocation, allowReserved, fieldDict)
+	return fieldDict, nil
 }
 
 func processFieldDict(style string, explode bool, paramName string, paramLocation ParamLocation, allowReserved bool, fieldDict map[string]string) (string, error) {
