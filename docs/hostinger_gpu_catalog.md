@@ -30,7 +30,6 @@ hostinger gpu catalog [flags]
 
 * [hostinger gpu](hostinger_gpu.md)	 - GPU commands
 * [hostinger gpu catalog pool](hostinger_gpu_catalog_pool.md)	 - Get pool list
-* [hostinger gpu catalog pool-groups](hostinger_gpu_catalog_pool-groups.md)	 - Get pool groups
 * [hostinger gpu catalog pool-instance-types](hostinger_gpu_catalog_pool-instance-types.md)	 - Get pool instance types
 * [hostinger gpu catalog pool-os-templates](hostinger_gpu_catalog_pool-os-templates.md)	 - Get pool OS templates
 

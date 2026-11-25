@@ -14,7 +14,6 @@ var GroupCmd = &cobra.Command{
 
 func init() {
 	GroupCmd.AddCommand(PoolCmd)
-	GroupCmd.AddCommand(PoolGroupsCmd)
 	GroupCmd.AddCommand(PoolInstanceTypesCmd)
 	GroupCmd.AddCommand(PoolOsTemplatesCmd)
 }

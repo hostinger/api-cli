@@ -11785,11 +11785,6 @@ type GPUV1OsTemplateOsTemplateCollection = []GPUV1OsTemplateOsTemplateResource
 
 // GPUV1OsTemplateOsTemplateResource defines model for GPU.V1.OsTemplate.OsTemplateResource.
 type GPUV1OsTemplateOsTemplateResource struct {
-	// DarkImageId Dark theme icon image ID
-	//
-	// Example: hgpu-app-icon-ubuntu-dark
-	DarkImageId *string `json:"dark_image_id,omitempty"`
-
 	// Id OS template ID
 	//
 	// Example: 23
@@ -11800,55 +11795,12 @@ type GPUV1OsTemplateOsTemplateResource struct {
 	// Example: https://support.hostinger.com/os-templates/ubuntu-cuda
 	KbUrl *string `json:"kb_url,omitempty"`
 
-	// LightImageId Light theme icon image ID
-	//
-	// Example: hgpu-app-icon-ubuntu-light
-	LightImageId *string `json:"light_image_id,omitempty"`
-
 	// Name Example: Ubuntu 24.04 with CUDA
 	Name *string `json:"name,omitempty"`
 }
 
 // GPUV1PoolPoolCollection Array of [`GPU.V1.Pool.PoolResource`](#model/gpuv1poolpoolresource)
 type GPUV1PoolPoolCollection = []GPUV1PoolPoolResource
-
-// GPUV1PoolPoolGroupCollection Array of [`GPU.V1.Pool.PoolGroupResource`](#model/gpuv1poolpoolgroupresource)
-type GPUV1PoolPoolGroupCollection = []GPUV1PoolPoolGroupResource
-
-// GPUV1PoolPoolGroupResource defines model for GPU.V1.Pool.PoolGroupResource.
-type GPUV1PoolPoolGroupResource struct {
-	// Description Example: Built for high-performance AI training
-	Description *string `json:"description,omitempty"`
-
-	// Feature Example: NVLink support
-	Feature *string `json:"feature,omitempty"`
-
-	// Id GPU pool group ID
-	//
-	// Example: 4
-	Id *int `json:"id,omitempty"`
-
-	// IsAvailable Whether the group has any available pools
-	//
-	// Example: true
-	IsAvailable *bool `json:"is_available,omitempty"`
-
-	// MinPricePerHour Lowest hourly price of the group instance types, in credits
-	//
-	// Example: 65
-	MinPricePerHour *int `json:"min_price_per_hour,omitempty"`
-
-	// Name Example: NVIDIA H100
-	Name *string `json:"name,omitempty"`
-
-	// Pools Array of [`GPU.V1.Pool.PoolResource`](#model/gpuv1poolpoolresource)
-	Pools *GPUV1PoolPoolCollection `json:"pools,omitempty"`
-
-	// Vram Total VRAM in bytes
-	//
-	// Example: 80000000000
-	Vram *int `json:"vram,omitempty"`
-}
 
 // GPUV1PoolPoolInstanceCollection Array of [`GPU.V1.Pool.PoolInstanceResource`](#model/gpuv1poolpoolinstanceresource)
 type GPUV1PoolPoolInstanceCollection = []GPUV1PoolPoolInstanceResource
@@ -25543,19 +25495,6 @@ type ClientInterface interface {
 	// Corresponds with GET /api/gpu/v1/pools (the `GPUGetPoolListV1` operationId).
 	GPUGetPoolListV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GPUGetPoolGroupsV1 Get pool groups
-	//
-	// Retrieve GPU pool groups, ordered by name.
-	//
-	// Each group bundles the pools of one GPU model and lists its currently available pools,
-	// whether any of them is available and the lowest hourly price, in credits, among its instance types.
-	// The price is returned even when the group is out of stock.
-	//
-	// Use this endpoint to show which GPU models can be ordered and from what price.
-	//
-	// Corresponds with GET /api/gpu/v1/pools/groups (the `GPUGetPoolGroupsV1` operationId).
-	GPUGetPoolGroupsV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
-
 	// GPUGetPoolInstanceTypesV1 Get pool instance types
 	//
 	// Retrieve the instance types offered by a specified GPU pool, ordered by CPU core count.
@@ -36098,29 +36037,6 @@ func (c *Client) GPUGetInstanceMetricsV1(ctx context.Context, instanceId Instanc
 // Corresponds with GET /api/gpu/v1/pools (the `GPUGetPoolListV1` operationId).
 func (c *Client) GPUGetPoolListV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGPUGetPoolListV1Request(c.Server)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GPUGetPoolGroupsV1 Get pool groups
-//
-// Retrieve GPU pool groups, ordered by name.
-//
-// Each group bundles the pools of one GPU model and lists its currently available pools,
-// whether any of them is available and the lowest hourly price, in credits, among its instance types.
-// The price is returned even when the group is out of stock.
-//
-// Use this endpoint to show which GPU models can be ordered and from what price.
-//
-// Corresponds with GET /api/gpu/v1/pools/groups (the `GPUGetPoolGroupsV1` operationId).
-func (c *Client) GPUGetPoolGroupsV1(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGPUGetPoolGroupsV1Request(c.Server)
 	if err != nil {
 		return nil, err
 	}
@@ -52666,33 +52582,6 @@ func NewGPUGetPoolListV1Request(server string) (*http.Request, error) {
 	}
 
 	operationPath := fmt.Sprintf("/api/gpu/v1/pools")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGPUGetPoolGroupsV1Request constructs an http.Request for the GPUGetPoolGroupsV1 method
-func NewGPUGetPoolGroupsV1Request(server string) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api/gpu/v1/pools/groups")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -71116,21 +71005,6 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /api/gpu/v1/pools (the `GPUGetPoolListV1` operationId).
 	GPUGetPoolListV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GPUGetPoolListV1Response, error)
 
-	// GPUGetPoolGroupsV1WithResponse Get pool groups
-	//
-	// Retrieve GPU pool groups, ordered by name.
-	//
-	// Each group bundles the pools of one GPU model and lists its currently available pools,
-	// whether any of them is available and the lowest hourly price, in credits, among its instance types.
-	// The price is returned even when the group is out of stock.
-	//
-	// Use this endpoint to show which GPU models can be ordered and from what price.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /api/gpu/v1/pools/groups (the `GPUGetPoolGroupsV1` operationId).
-	GPUGetPoolGroupsV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GPUGetPoolGroupsV1Response, error)
-
 	// GPUGetPoolInstanceTypesV1WithResponse Get pool instance types
 	//
 	// Retrieve the instance types offered by a specified GPU pool, ordered by CPU core count.
@@ -86224,61 +86098,6 @@ func (r GPUGetPoolListV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r GPUGetPoolListV1Response) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GPUGetPoolGroupsV1Response struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GPUV1PoolPoolGroupCollection
-	// JSON401 the response for an HTTP 401 `application/json` response
-	JSON401 *CommonResponseUnauthorizedResponse
-	// JSON500 the response for an HTTP 500 `application/json` response
-	JSON500 *CommonResponseErrorResponse
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GPUGetPoolGroupsV1Response) GetJSON200() *GPUV1PoolPoolGroupCollection {
-	return r.JSON200
-}
-
-// GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r GPUGetPoolGroupsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
-	return r.JSON401
-}
-
-// GetJSON500 returns the response for an HTTP 500 `application/json` response
-func (r GPUGetPoolGroupsV1Response) GetJSON500() *CommonResponseErrorResponse {
-	return r.JSON500
-}
-
-// GetBody returns the raw response body bytes
-func (r GPUGetPoolGroupsV1Response) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GPUGetPoolGroupsV1Response) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GPUGetPoolGroupsV1Response) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GPUGetPoolGroupsV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -109412,27 +109231,6 @@ func (c *ClientWithResponses) GPUGetPoolListV1WithResponse(ctx context.Context, 
 	return ParseGPUGetPoolListV1Response(rsp)
 }
 
-// GPUGetPoolGroupsV1WithResponse Get pool groups
-//
-// Retrieve GPU pool groups, ordered by name.
-//
-// Each group bundles the pools of one GPU model and lists its currently available pools,
-// whether any of them is available and the lowest hourly price, in credits, among its instance types.
-// The price is returned even when the group is out of stock.
-//
-// Use this endpoint to show which GPU models can be ordered and from what price.
-//
-// Returns a wrapper object for the known response body format(s).
-//
-// Corresponds with GET /api/gpu/v1/pools/groups (the `GPUGetPoolGroupsV1` operationId).
-func (c *ClientWithResponses) GPUGetPoolGroupsV1WithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GPUGetPoolGroupsV1Response, error) {
-	rsp, err := c.GPUGetPoolGroupsV1(ctx, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGPUGetPoolGroupsV1Response(rsp)
-}
-
 // GPUGetPoolInstanceTypesV1WithResponse Get pool instance types
 //
 // Retrieve the instance types offered by a specified GPU pool, ordered by CPU core count.
@@ -124806,46 +124604,6 @@ func ParseGPUGetPoolListV1Response(rsp *http.Response) (*GPUGetPoolListV1Respons
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest GPUV1PoolPoolCollection
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest CommonResponseUnauthorizedResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest CommonResponseErrorResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGPUGetPoolGroupsV1Response parses an HTTP response from a GPUGetPoolGroupsV1WithResponse call
-func ParseGPUGetPoolGroupsV1Response(rsp *http.Response) (*GPUGetPoolGroupsV1Response, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GPUGetPoolGroupsV1Response{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GPUV1PoolPoolGroupCollection
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

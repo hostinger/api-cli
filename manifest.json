@@ -89,11 +89,6 @@
     "method": "GET",
     "path": "/api/gpu/v1/instances"
   },
-  "GPU_getPoolGroupsV1": {
-    "command": "hostinger gpu catalog pool-groups",
-    "method": "GET",
-    "path": "/api/gpu/v1/pools/groups"
-  },
   "GPU_getPoolInstanceTypesV1": {
     "command": "hostinger gpu catalog pool-instance-types",
     "method": "GET",
