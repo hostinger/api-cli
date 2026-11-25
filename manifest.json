@@ -69,6 +69,11 @@
     "method": "GET",
     "path": "/api/gpu/v1/instances/{instanceId}/exposed-services"
   },
+  "GPU_getInstanceCredentialsV1": {
+    "command": "hostinger gpu instances credentials",
+    "method": "GET",
+    "path": "/api/gpu/v1/instances/{instanceId}/credentials"
+  },
   "GPU_getInstanceDetailsV1": {
     "command": "hostinger gpu instances get",
     "method": "GET",

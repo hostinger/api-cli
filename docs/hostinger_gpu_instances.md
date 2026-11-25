@@ -30,6 +30,7 @@ hostinger gpu instances [flags]
 
 * [hostinger gpu](hostinger_gpu.md)	 - GPU commands
 * [hostinger gpu instances create](hostinger_gpu_instances_create.md)	 - Create instance
+* [hostinger gpu instances credentials](hostinger_gpu_instances_credentials.md)	 - Get instance credentials
 * [hostinger gpu instances delete](hostinger_gpu_instances_delete.md)	 - Delete instance
 * [hostinger gpu instances get](hostinger_gpu_instances_get.md)	 - Get instance details
 * [hostinger gpu instances list](hostinger_gpu_instances_list.md)	 - Get instances

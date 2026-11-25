@@ -11576,6 +11576,29 @@ type GPUV1ExposedServiceStoreRequestProtocol string
 // GPUV1ExposedServiceStoreRequestType Example: http
 type GPUV1ExposedServiceStoreRequestType string
 
+// GPUV1InstanceCredentialsResource defines model for GPU.V1.Instance.CredentialsResource.
+type GPUV1InstanceCredentialsResource struct {
+	// Hostname SSH host
+	//
+	// Example: instance1.hstgr.cloud
+	Hostname *string `json:"hostname,omitempty"`
+
+	// Password SSH password
+	//
+	// Example: MExrrK.LEmNS
+	Password *string `json:"password,omitempty"`
+
+	// Port SSH port
+	//
+	// Example: 32091
+	Port *int `json:"port,omitempty"`
+
+	// Username SSH username
+	//
+	// Example: ubuntu
+	Username *string `json:"username,omitempty"`
+}
+
 // GPUV1InstanceInstanceListCollection Array of [`GPU.V1.Instance.InstanceListResource`](#model/gpuv1instanceinstancelistresource)
 type GPUV1InstanceInstanceListCollection = []GPUV1InstanceInstanceListResource
 
@@ -25432,6 +25455,18 @@ type ClientInterface interface {
 	// Corresponds with GET /api/gpu/v1/instances/{instanceId} (the `GPUGetInstanceDetailsV1` operationId).
 	GPUGetInstanceDetailsV1(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// GPUGetInstanceCredentialsV1 Get instance credentials
+	//
+	// Retrieve SSH connection credentials (hostname, port, username and password) of a specified GPU instance.
+	//
+	// Credentials become available once the instance is provisioned; until then the endpoint responds with
+	// `409 Conflict`, so retry later.
+	//
+	// Use this endpoint to connect to a GPU instance over SSH.
+	//
+	// Corresponds with GET /api/gpu/v1/instances/{instanceId}/credentials (the `GPUGetInstanceCredentialsV1` operationId).
+	GPUGetInstanceCredentialsV1(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// GPUGetExposedServicesV1 Get exposed services
 	//
 	// Retrieve the services exposed on a specified GPU instance.
@@ -35905,6 +35940,28 @@ func (c *Client) GPUDeleteInstanceV1(ctx context.Context, instanceId InstanceId,
 // Corresponds with GET /api/gpu/v1/instances/{instanceId} (the `GPUGetInstanceDetailsV1` operationId).
 func (c *Client) GPUGetInstanceDetailsV1(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGPUGetInstanceDetailsV1Request(c.Server, instanceId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GPUGetInstanceCredentialsV1 Get instance credentials
+//
+// Retrieve SSH connection credentials (hostname, port, username and password) of a specified GPU instance.
+//
+// Credentials become available once the instance is provisioned; until then the endpoint responds with
+// `409 Conflict`, so retry later.
+//
+// Use this endpoint to connect to a GPU instance over SSH.
+//
+// Corresponds with GET /api/gpu/v1/instances/{instanceId}/credentials (the `GPUGetInstanceCredentialsV1` operationId).
+func (c *Client) GPUGetInstanceCredentialsV1(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGPUGetInstanceCredentialsV1Request(c.Server, instanceId)
 	if err != nil {
 		return nil, err
 	}
@@ -52392,6 +52449,40 @@ func NewGPUGetInstanceDetailsV1Request(server string, instanceId InstanceId) (*h
 	}
 
 	operationPath := fmt.Sprintf("/api/gpu/v1/instances/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGPUGetInstanceCredentialsV1Request constructs an http.Request for the GPUGetInstanceCredentialsV1 method
+func NewGPUGetInstanceCredentialsV1Request(server string, instanceId InstanceId) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "instanceId", instanceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "integer", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/gpu/v1/instances/%s/credentials", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -70927,6 +71018,20 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /api/gpu/v1/instances/{instanceId} (the `GPUGetInstanceDetailsV1` operationId).
 	GPUGetInstanceDetailsV1WithResponse(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*GPUGetInstanceDetailsV1Response, error)
 
+	// GPUGetInstanceCredentialsV1WithResponse Get instance credentials
+	//
+	// Retrieve SSH connection credentials (hostname, port, username and password) of a specified GPU instance.
+	//
+	// Credentials become available once the instance is provisioned; until then the endpoint responds with
+	// `409 Conflict`, so retry later.
+	//
+	// Use this endpoint to connect to a GPU instance over SSH.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/gpu/v1/instances/{instanceId}/credentials (the `GPUGetInstanceCredentialsV1` operationId).
+	GPUGetInstanceCredentialsV1WithResponse(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*GPUGetInstanceCredentialsV1Response, error)
+
 	// GPUGetExposedServicesV1WithResponse Get exposed services
 	//
 	// Retrieve the services exposed on a specified GPU instance.
@@ -85733,6 +85838,82 @@ func (r GPUGetInstanceDetailsV1Response) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r GPUGetInstanceDetailsV1Response) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+// GPUGetInstanceCredentialsV1Response409Headers the declared response headers of an HTTP 409 response for GPUGetInstanceCredentialsV1
+type GPUGetInstanceCredentialsV1Response409Headers struct {
+	RetryAfter *int
+}
+
+type GPUGetInstanceCredentialsV1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GPUV1InstanceCredentialsResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseErrorResponse
+	// JSON409 the response for an HTTP 409 `application/json` response
+	JSON409 *CommonResponseConflictResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseErrorResponse
+	// Headers409 the parsed response headers for an HTTP 409 response
+	Headers409 *GPUGetInstanceCredentialsV1Response409Headers
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GPUGetInstanceCredentialsV1Response) GetJSON200() *GPUV1InstanceCredentialsResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GPUGetInstanceCredentialsV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GPUGetInstanceCredentialsV1Response) GetJSON404() *CommonResponseErrorResponse {
+	return r.JSON404
+}
+
+// GetJSON409 returns the response for an HTTP 409 `application/json` response
+func (r GPUGetInstanceCredentialsV1Response) GetJSON409() *CommonResponseConflictResponse {
+	return r.JSON409
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GPUGetInstanceCredentialsV1Response) GetJSON500() *CommonResponseErrorResponse {
+	return r.JSON500
+}
+
+// GetBody returns the raw response body bytes
+func (r GPUGetInstanceCredentialsV1Response) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GPUGetInstanceCredentialsV1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GPUGetInstanceCredentialsV1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GPUGetInstanceCredentialsV1Response) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -109091,6 +109272,26 @@ func (c *ClientWithResponses) GPUGetInstanceDetailsV1WithResponse(ctx context.Co
 	return ParseGPUGetInstanceDetailsV1Response(rsp)
 }
 
+// GPUGetInstanceCredentialsV1WithResponse Get instance credentials
+//
+// Retrieve SSH connection credentials (hostname, port, username and password) of a specified GPU instance.
+//
+// Credentials become available once the instance is provisioned; until then the endpoint responds with
+// `409 Conflict`, so retry later.
+//
+// Use this endpoint to connect to a GPU instance over SSH.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/gpu/v1/instances/{instanceId}/credentials (the `GPUGetInstanceCredentialsV1` operationId).
+func (c *ClientWithResponses) GPUGetInstanceCredentialsV1WithResponse(ctx context.Context, instanceId InstanceId, reqEditors ...RequestEditorFn) (*GPUGetInstanceCredentialsV1Response, error) {
+	rsp, err := c.GPUGetInstanceCredentialsV1(ctx, instanceId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGPUGetInstanceCredentialsV1Response(rsp)
+}
+
 // GPUGetExposedServicesV1WithResponse Get exposed services
 //
 // Retrieve the services exposed on a specified GPU instance.
@@ -124322,6 +124523,73 @@ func ParseGPUGetInstanceDetailsV1Response(rsp *http.Response) (*GPUGetInstanceDe
 		}
 		response.JSON500 = &dest
 
+	}
+
+	return response, nil
+}
+
+// ParseGPUGetInstanceCredentialsV1Response parses an HTTP response from a GPUGetInstanceCredentialsV1WithResponse call
+func ParseGPUGetInstanceCredentialsV1Response(rsp *http.Response) (*GPUGetInstanceCredentialsV1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GPUGetInstanceCredentialsV1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GPUV1InstanceCredentialsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest CommonResponseConflictResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	switch {
+	case rsp.StatusCode == 409:
+		var headers GPUGetInstanceCredentialsV1Response409Headers
+		if values := rsp.Header.Values("Retry-After"); len(values) > 0 {
+			var value int
+			if err := runtime.BindStyledParameterWithOptions("simple", "Retry-After", values[0], &value, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationHeader, Explode: false, Required: false, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			}
+			headers.RetryAfter = &value
+		}
+		response.Headers409 = &headers
 	}
 
 	return response, nil
