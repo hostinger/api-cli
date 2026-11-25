@@ -24196,7 +24196,7 @@ type ClientInterface interface {
 	// - is not a premium domain
 	// - is not still processing a recent renewal
 	//
-	// A move refused for one of these rules is rejected with a 404 status code and error code 2048,
+	// A move refused for one of these rules is rejected with a 422 status code and error code 2048,
 	// with a message naming the rule. The receiving account is checked first, and when it cannot
 	// be used the message stays generic.
 	//
@@ -24229,7 +24229,7 @@ type ClientInterface interface {
 	// - is not a premium domain
 	// - is not still processing a recent renewal
 	//
-	// A move refused for one of these rules is rejected with a 404 status code and error code 2048,
+	// A move refused for one of these rules is rejected with a 422 status code and error code 2048,
 	// with a message naming the rule. The receiving account is checked first, and when it cannot
 	// be used the message stays generic.
 	//
@@ -33778,7 +33778,7 @@ func (c *Client) DomainsGetOutgoingDomainMoveV1(ctx context.Context, domain Doma
 // - is not a premium domain
 // - is not still processing a recent renewal
 //
-// A move refused for one of these rules is rejected with a 404 status code and error code 2048,
+// A move refused for one of these rules is rejected with a 422 status code and error code 2048,
 // with a message naming the rule. The receiving account is checked first, and when it cannot
 // be used the message stays generic.
 //
@@ -33821,7 +33821,7 @@ func (c *Client) DomainsStartOutgoingDomainMoveV1WithBody(ctx context.Context, d
 // - is not a premium domain
 // - is not still processing a recent renewal
 //
-// A move refused for one of these rules is rejected with a 404 status code and error code 2048,
+// A move refused for one of these rules is rejected with a 422 status code and error code 2048,
 // with a message naming the rule. The receiving account is checked first, and when it cannot
 // be used the message stays generic.
 //
@@ -69620,7 +69620,7 @@ type ClientWithResponsesInterface interface {
 	// - is not a premium domain
 	// - is not still processing a recent renewal
 	//
-	// A move refused for one of these rules is rejected with a 404 status code and error code 2048,
+	// A move refused for one of these rules is rejected with a 422 status code and error code 2048,
 	// with a message naming the rule. The receiving account is checked first, and when it cannot
 	// be used the message stays generic.
 	//
@@ -69653,7 +69653,7 @@ type ClientWithResponsesInterface interface {
 	// - is not a premium domain
 	// - is not still processing a recent renewal
 	//
-	// A move refused for one of these rules is rejected with a 404 status code and error code 2048,
+	// A move refused for one of these rules is rejected with a 422 status code and error code 2048,
 	// with a message naming the rule. The receiving account is checked first, and when it cannot
 	// be used the message stays generic.
 	//
@@ -81520,6 +81520,8 @@ type DomainsRejectIncomingDomainMoveV1Response struct {
 	JSON200 *CommonSuccessEmptyResource
 	// JSON401 the response for an HTTP 401 `application/json` response
 	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
 	// JSON500 the response for an HTTP 500 `application/json` response
 	JSON500 *CommonResponseErrorResponse
 }
@@ -81532,6 +81534,11 @@ func (r DomainsRejectIncomingDomainMoveV1Response) GetJSON200() *CommonSuccessEm
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
 func (r DomainsRejectIncomingDomainMoveV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r DomainsRejectIncomingDomainMoveV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
@@ -81747,6 +81754,8 @@ type DomainsCancelOutgoingDomainMoveV1Response struct {
 	JSON200 *CommonSuccessEmptyResource
 	// JSON401 the response for an HTTP 401 `application/json` response
 	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseUnprocessableContentResponse
 	// JSON500 the response for an HTTP 500 `application/json` response
 	JSON500 *CommonResponseErrorResponse
 }
@@ -81759,6 +81768,11 @@ func (r DomainsCancelOutgoingDomainMoveV1Response) GetJSON200() *CommonSuccessEm
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
 func (r DomainsCancelOutgoingDomainMoveV1Response) GetJSON401() *CommonResponseUnauthorizedResponse {
 	return r.JSON401
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r DomainsCancelOutgoingDomainMoveV1Response) GetJSON422() *CommonResponseUnprocessableContentResponse {
+	return r.JSON422
 }
 
 // GetJSON500 returns the response for an HTTP 500 `application/json` response
@@ -107264,7 +107278,7 @@ func (c *ClientWithResponses) DomainsGetOutgoingDomainMoveV1WithResponse(ctx con
 // - is not a premium domain
 // - is not still processing a recent renewal
 //
-// A move refused for one of these rules is rejected with a 404 status code and error code 2048,
+// A move refused for one of these rules is rejected with a 422 status code and error code 2048,
 // with a message naming the rule. The receiving account is checked first, and when it cannot
 // be used the message stays generic.
 //
@@ -107303,7 +107317,7 @@ func (c *ClientWithResponses) DomainsStartOutgoingDomainMoveV1WithBodyWithRespon
 // - is not a premium domain
 // - is not still processing a recent renewal
 //
-// A move refused for one of these rules is rejected with a 404 status code and error code 2048,
+// A move refused for one of these rules is rejected with a 422 status code and error code 2048,
 // with a message naming the rule. The receiving account is checked first, and when it cannot
 // be used the message stays generic.
 //
@@ -121201,6 +121215,13 @@ func ParseDomainsRejectIncomingDomainMoveV1Response(rsp *http.Response) (*Domain
 		}
 		response.JSON401 = &dest
 
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -121367,6 +121388,13 @@ func ParseDomainsCancelOutgoingDomainMoveV1Response(rsp *http.Response) (*Domain
 			return nil, err
 		}
 		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseUnprocessableContentResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest CommonResponseErrorResponse
