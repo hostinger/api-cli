@@ -20,6 +20,8 @@ func TestDryRunDoerPrintsCurlWithoutToken(t *testing.T) {
 	req, _ := http.NewRequest(http.MethodPost, "https://api.example.com/v1/items?x=1", strings.NewReader(`{"name":"it's"}`))
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Authorization", "Bearer secret-token")
+	req.Header.Set("User-Agent", "cli/1.0")
+	req.Header.Set("If-Match", `"abc"`)
 
 	resp, err := dryRunDoer{}.Do(req)
 	if resp != nil || !errors.Is(err, utils.ErrDryRun) {
@@ -29,7 +31,8 @@ func TestDryRunDoerPrintsCurlWithoutToken(t *testing.T) {
 	for _, want := range []string{
 		`curl -X POST 'https://api.example.com/v1/items?x=1'`,
 		`-H "Authorization: Bearer $` + utils.EnvPrefix + `API_TOKEN"`,
-		`-H 'Content-Type: application/json'`,
+		`-H 'Content-Type: application/json' \
+  -H 'If-Match: "abc"'`,
 		`-d '{"name":"it'\''s"}'`,
 	} {
 		if !strings.Contains(got, want) {
@@ -38,6 +41,9 @@ func TestDryRunDoerPrintsCurlWithoutToken(t *testing.T) {
 	}
 	if strings.Contains(got, "secret-token") {
 		t.Errorf("dry run leaked the token:\n%s", got)
+	}
+	if strings.Contains(got, "User-Agent") {
+		t.Errorf("dry run printed User-Agent:\n%s", got)
 	}
 }
 

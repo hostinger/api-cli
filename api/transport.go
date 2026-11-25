@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 	"time"
 
@@ -39,8 +40,20 @@ func (dryRunDoer) Do(req *http.Request) (*http.Response, error) {
 	var b strings.Builder
 	fmt.Fprintf(&b, "curl -X %s %s", req.Method, shellQuote(req.URL.String()))
 	fmt.Fprintf(&b, " \\\n  -H \"Authorization: Bearer $%sAPI_TOKEN\"", utils.EnvPrefix)
-	if ct := req.Header.Get("Content-Type"); ct != "" {
-		fmt.Fprintf(&b, " \\\n  -H %s", shellQuote("Content-Type: "+ct))
+	// Every other header the request carries (Content-Type, header
+	// parameters such as If-Match), sorted so the output is stable.
+	// User-Agent is left to curl.
+	names := make([]string, 0, len(req.Header))
+	for k := range req.Header {
+		if k != "Authorization" && k != "User-Agent" {
+			names = append(names, k)
+		}
+	}
+	sort.Strings(names)
+	for _, k := range names {
+		for _, v := range req.Header[k] {
+			fmt.Fprintf(&b, " \\\n  -H %s", shellQuote(k+": "+v))
+		}
 	}
 	if req.Body != nil && req.Body != http.NoBody {
 		body, err := io.ReadAll(req.Body)
