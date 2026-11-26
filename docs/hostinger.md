@@ -45,7 +45,6 @@ Documentation: https://github.com/hostinger/api-cli/tree/main/docs
 * [hostinger domains](hostinger_domains.md)	 - Domains commands
 * [hostinger ecommerce](hostinger_ecommerce.md)	 - Ecommerce commands
 * [hostinger gpu](hostinger_gpu.md)	 - GPU commands
-* [hostinger horizons](hostinger_horizons.md)	 - Horizons commands
 * [hostinger hosting](hostinger_hosting.md)	 - Hosting commands
 * [hostinger link](hostinger_link.md)	 - Link this directory to a website
 * [hostinger mail](hostinger_mail.md)	 - Mail commands

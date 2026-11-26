@@ -10,7 +10,6 @@ import (
 	"github.com/hostinger/api-cli/cmd/domains"
 	"github.com/hostinger/api-cli/cmd/ecommerce"
 	"github.com/hostinger/api-cli/cmd/gpu"
-	"github.com/hostinger/api-cli/cmd/horizons"
 	"github.com/hostinger/api-cli/cmd/hosting"
 	"github.com/hostinger/api-cli/cmd/mail"
 	"github.com/hostinger/api-cli/cmd/preview"
@@ -127,8 +126,6 @@ func init() {
 	RootCmd.AddCommand(ecommerce.GroupCmd)
 	gpu.GroupCmd.GroupID = groupAPI
 	RootCmd.AddCommand(gpu.GroupCmd)
-	horizons.GroupCmd.GroupID = groupAPI
-	RootCmd.AddCommand(horizons.GroupCmd)
 	hosting.GroupCmd.GroupID = groupAPI
 	RootCmd.AddCommand(hosting.GroupCmd)
 	mail.GroupCmd.GroupID = groupAPI
