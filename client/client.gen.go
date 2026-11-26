@@ -8925,7 +8925,7 @@ type DomainsV1DomainDomainExtendedResource struct {
 	// ExpiresAt Example: 2025-03-27T11:54:22Z
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
 
-	// IsLockable Is domain allowed to be locked
+	// IsLockable Whether the domain's TLD supports domain lock
 	//
 	// Example: true
 	IsLockable *bool `json:"is_lockable,omitempty"`
@@ -8940,7 +8940,7 @@ type DomainsV1DomainDomainExtendedResource struct {
 	// Example: false
 	IsPrivacyProtected *bool `json:"is_privacy_protected,omitempty"`
 
-	// IsPrivacyProtectionAllowed Is privacy protection allowed for the domain
+	// IsPrivacyProtectionAllowed Whether the domain's TLD supports privacy protection
 	//
 	// Example: true
 	IsPrivacyProtectionAllowed *bool   `json:"is_privacy_protection_allowed,omitempty"`
