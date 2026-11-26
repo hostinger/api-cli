@@ -554,14 +554,15 @@ func (e DomainsV1DomainDomainContactVerificationChannelResourceStatus) Valid() b
 
 // Defines values for DomainsV1DomainDomainExtendedResourceStatus.
 const (
-	DomainsV1DomainDomainExtendedResourceStatusActive              DomainsV1DomainDomainExtendedResourceStatus = "active"
-	DomainsV1DomainDomainExtendedResourceStatusDeleted             DomainsV1DomainDomainExtendedResourceStatus = "deleted"
-	DomainsV1DomainDomainExtendedResourceStatusExpired             DomainsV1DomainDomainExtendedResourceStatus = "expired"
-	DomainsV1DomainDomainExtendedResourceStatusFailed              DomainsV1DomainDomainExtendedResourceStatus = "failed"
-	DomainsV1DomainDomainExtendedResourceStatusPendingSetup        DomainsV1DomainDomainExtendedResourceStatus = "pending_setup"
-	DomainsV1DomainDomainExtendedResourceStatusPendingVerification DomainsV1DomainDomainExtendedResourceStatus = "pending_verification"
-	DomainsV1DomainDomainExtendedResourceStatusRequested           DomainsV1DomainDomainExtendedResourceStatus = "requested"
-	DomainsV1DomainDomainExtendedResourceStatusSuspended           DomainsV1DomainDomainExtendedResourceStatus = "suspended"
+	DomainsV1DomainDomainExtendedResourceStatusActive        DomainsV1DomainDomainExtendedResourceStatus = "active"
+	DomainsV1DomainDomainExtendedResourceStatusExpired       DomainsV1DomainDomainExtendedResourceStatus = "expired"
+	DomainsV1DomainDomainExtendedResourceStatusFailed        DomainsV1DomainDomainExtendedResourceStatus = "failed"
+	DomainsV1DomainDomainExtendedResourceStatusPendingDelete DomainsV1DomainDomainExtendedResourceStatus = "pending_delete"
+	DomainsV1DomainDomainExtendedResourceStatusRequested     DomainsV1DomainDomainExtendedResourceStatus = "requested"
+	DomainsV1DomainDomainExtendedResourceStatusRestoring     DomainsV1DomainDomainExtendedResourceStatus = "restoring"
+	DomainsV1DomainDomainExtendedResourceStatusSuspended     DomainsV1DomainDomainExtendedResourceStatus = "suspended"
+	DomainsV1DomainDomainExtendedResourceStatusTransferring  DomainsV1DomainDomainExtendedResourceStatus = "transferring"
+	DomainsV1DomainDomainExtendedResourceStatusUnknown       DomainsV1DomainDomainExtendedResourceStatus = "unknown"
 )
 
 // Valid indicates whether the value is a known member of the DomainsV1DomainDomainExtendedResourceStatus enum.
@@ -569,19 +570,21 @@ func (e DomainsV1DomainDomainExtendedResourceStatus) Valid() bool {
 	switch e {
 	case DomainsV1DomainDomainExtendedResourceStatusActive:
 		return true
-	case DomainsV1DomainDomainExtendedResourceStatusDeleted:
-		return true
 	case DomainsV1DomainDomainExtendedResourceStatusExpired:
 		return true
 	case DomainsV1DomainDomainExtendedResourceStatusFailed:
 		return true
-	case DomainsV1DomainDomainExtendedResourceStatusPendingSetup:
-		return true
-	case DomainsV1DomainDomainExtendedResourceStatusPendingVerification:
+	case DomainsV1DomainDomainExtendedResourceStatusPendingDelete:
 		return true
 	case DomainsV1DomainDomainExtendedResourceStatusRequested:
 		return true
+	case DomainsV1DomainDomainExtendedResourceStatusRestoring:
+		return true
 	case DomainsV1DomainDomainExtendedResourceStatusSuspended:
+		return true
+	case DomainsV1DomainDomainExtendedResourceStatusTransferring:
+		return true
+	case DomainsV1DomainDomainExtendedResourceStatusUnknown:
 		return true
 	default:
 		return false
@@ -795,6 +798,33 @@ func (e DomainsV1PortfolioClaimResourceStatus) Valid() bool {
 	case DomainsV1PortfolioClaimResourceStatusRequested:
 		return true
 	case DomainsV1PortfolioClaimResourceStatusSuspended:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for DomainsV1TransferTransferResourceStatus.
+const (
+	DomainsV1TransferTransferResourceStatusCancelled           DomainsV1TransferTransferResourceStatus = "cancelled"
+	DomainsV1TransferTransferResourceStatusCompleted           DomainsV1TransferTransferResourceStatus = "completed"
+	DomainsV1TransferTransferResourceStatusError               DomainsV1TransferTransferResourceStatus = "error"
+	DomainsV1TransferTransferResourceStatusPendingVerification DomainsV1TransferTransferResourceStatus = "pending_verification"
+	DomainsV1TransferTransferResourceStatusTransferring        DomainsV1TransferTransferResourceStatus = "transferring"
+)
+
+// Valid indicates whether the value is a known member of the DomainsV1TransferTransferResourceStatus enum.
+func (e DomainsV1TransferTransferResourceStatus) Valid() bool {
+	switch e {
+	case DomainsV1TransferTransferResourceStatusCancelled:
+		return true
+	case DomainsV1TransferTransferResourceStatusCompleted:
+		return true
+	case DomainsV1TransferTransferResourceStatusError:
+		return true
+	case DomainsV1TransferTransferResourceStatusPendingVerification:
+		return true
+	case DomainsV1TransferTransferResourceStatusTransferring:
 		return true
 	default:
 		return false
@@ -9537,9 +9567,14 @@ type DomainsV1TransferTransferResource struct {
 
 	// Status Transfer status
 	//
-	// Example: Completed
-	Status *string `json:"status,omitempty"`
+	// Example: completed
+	Status *DomainsV1TransferTransferResourceStatus `json:"status,omitempty"`
 }
+
+// DomainsV1TransferTransferResourceStatus Transfer status
+//
+// Example: completed
+type DomainsV1TransferTransferResourceStatus string
 
 // DomainsV1WHOISChangeUpdateRequest defines model for Domains.V1.WHOIS.Change.UpdateRequest.
 type DomainsV1WHOISChangeUpdateRequest struct {
